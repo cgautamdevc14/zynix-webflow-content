@@ -1,0 +1,554 @@
+<style>
+        :root {
+            --zynblue: #20449B;
+            --zynorange: #F16529;
+            --black: #000000;
+            --zyngray: #EDEDEF;
+            --zyncare: #FBC4B0;
+            --white: #FFFFFF;
+            --gray-900: #202021;
+            --gray-800: #3A3A3C;
+            --gray-700: #54545A;
+            --gray-600: #6E6E76;
+            --gray-500: #88888F;
+            --gray-400: #A2A2AA;
+            --gray-300: #C5C5CC;
+            --gray-200: #D9D9E3;
+            --gray-100: #FAFAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--gray-900);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background-color: transparent;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-zynix {
+            color: var(--zynblue);
+        }
+
+        .logo-ai {
+            color: var(--zynorange);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray-900);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--zynorange);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 5rem;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f8f9fc 0%, #f0f2f8 100%);
+            text-align: center;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--zynblue);
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease 0.2s forwards;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--zyngray);
+            background-color: var(--white);
+            color: var(--gray-900);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--zynorange);
+            color: var(--zynorange);
+        }
+
+        .filter-btn.active {
+            background-color: var(--zynorange);
+            border-color: var(--zynorange);
+            color: var(--white);
+        }
+
+        /* Case Study Grid */
+        .case-studies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease 0.3s forwards;
+        }
+
+        .case-study-card {
+            background-color: var(--white);
+            border: 2px solid var(--zyngray);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .case-study-card.hidden {
+            display: none;
+        }
+
+        .case-study-card:hover {
+            border-color: var(--zynorange);
+            box-shadow: 0 8px 24px rgba(241, 101, 41, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .case-study-card.visible {
+            opacity: 1;
+        }
+
+        .card-segment-badge {
+            display: inline-block;
+            background-color: var(--zyncare);
+            color: var(--gray-900);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--zynblue);
+            margin-bottom: 0.75rem;
+        }
+
+        .card-description {
+            color: var(--gray-700);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            line-height: 1.7;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--zynorange);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .card-link:hover {
+            gap: 1rem;
+        }
+
+        .card-link-arrow {
+            font-size: 1.2rem;
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            background-color: var(--gray-100);
+            border-left: 4px solid var(--zynorange);
+            padding: 1.5rem;
+            border-radius: 6px;
+            text-align: center;
+            color: var(--gray-700);
+            font-size: 0.9rem;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease 0.4s forwards;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--zynblue);
+            color: var(--white);
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--zynorange);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .filter-tabs {
+                justify-content: flex-start;
+            }
+
+            .case-studies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+<!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">
+            <span class="logo-zynix">Zynix</span><span class="logo-ai">AI</span>
+        </div>
+        <ul>
+            <li><a href="#platform">Platform</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="company-about.html">About</a></li>
+            <li><a href="contact.html" class="btn-primary" style="padding: 0.5rem 1.5rem; background: var(--zynorange); color: var(--white); border-radius: 6px; border: none; cursor: pointer; font-weight: 600;">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>See How Healthcare Organizations Transform Operations with Zynix</h1>
+        <p>Real-world examples of improved workflows, better patient outcomes, and measurable ROI across healthcare segments.</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <button class="filter-btn active" onclick="filterCards('all')">All Segments</button>
+            <button class="filter-btn" onclick="filterCards('independent-practices')">Independent Practices</button>
+            <button class="filter-btn" onclick="filterCards('ascs')">ASCs</button>
+            <button class="filter-btn" onclick="filterCards('health-plans')">Health Plans</button>
+            <button class="filter-btn" onclick="filterCards('health-systems')">Health Systems</button>
+            <button class="filter-btn" onclick="filterCards('acos-msos')">ACOs/MSOs</button>
+            <button class="filter-btn" onclick="filterCards('fqhcs')">FQHCs</button>
+        </div>
+
+        <!-- Case Study Cards Grid -->
+        <div class="case-studies-grid">
+            <!-- Independent Practices -->
+            <div class="case-study-card" data-segment="independent-practices">
+                <span class="card-segment-badge">Independent Practice</span>
+                <h3 class="card-title">Pine Street Medical Group</h3>
+                <p class="card-description">How a 12-provider practice reduced scheduling conflicts and improved same-day appointment availability by 34% using Zynix AI's intelligent scheduling and patient communication agents.</p>
+                <a href="#" class="card-link">Read Case Study <span class="card-link-arrow">â</span></a>
+            </div>
+
+            <div class="case-study-card" data-segment="independent-practices">
+                <span class="card-segment-badge">Independent Practice</span>
+                <h3 class="card-title">HarborPoint Family Practice</h3>
+                <p class="card-description">Reducing no-show rates by 28% in a 6-provider family medicine practice through AI-powered patient reminders, appointment rescheduling, and personalized outreach campaigns.</p>
+                <a href="#" class="card-link">Read Case Study <span class="card-link-arrow">â</span></a>
+            </div>
+
+            <!-- ASCs -->
+            <div class="case-study-card" data-segment="ascs">
+                <span class="card-segment-badge">ASC Network</span>
+                <h3 class="card-title">Clearview ASC Network</h3>
+                <p class="card-description">Streamlined prior authorization processing across 8 ASCs, reducing authorization time from 5 days to 24 hours while improving payer relationships and cash flow.</p>
+                <a href="#" class="card-link">Read Case Study <span class="card-link-arrow">â</span></a>
+            </div>
+
+            <div class="case-study-card" data-segment="ascs">
+                <span class="card-segment-badge">ASC Network</span>
+                <h3 class="card-title">Lakefront Surgery Centers</h3>
+                <p class="card-description">Optimized pre- and post-operative workflows with automated patient education, medication reconciliation, and follow-up care coordination across 5 surgical centers.</p>
+                <a href="#" class="card-link">Read Case Study <span class="card-link-arrow">â</span></a>
+            </div>
+
+            <!-- Health Plans -->
+            <div class="case-study-card" data-segment="health-plans">
+                <span class="card-segment-badge">Health Plan</span>
+                <h3 class="card-title">BlueOak Health Plan</h3>
+                <p class="card-description">Achieved $8M in quality incentive bonuses by closing HCC documentation gaps at scale. Zynix AI identified 15,000+ missing diagnoses and coordinated care delivery to ensure proper coding and risk adjustment.</p>
+                <a href="#" class="card-link">Read Case Study <span class="card-link-arrow">â</span></a>
+            </div>
+
+            <div class="case-study-card" data-segment="health-plans">
+                <span class="card-segment-badge">Health Plan</span>
+                <h3 class="card-title">Crescent Ridge Health Plan</h3>
+                <p class="card-description">Improved quality measure performance across 12 metrics by orchestrating coordinated care for high-risk members. Reduced ER utilization by 18% in diabetes and COPD populations.</p>
+                <a href="#" class="card-link">Read Case Study <span class="card-link-arrow">â</span></a>
+            </div>
+
+            <!-- Health Systems -->
+            <div class="case-study-card" data-segment="health-systems">
+                <span class="card-segment-badge">Health System</span>
+                <h3 class="card-title">NorthBridge Health System</h3>
+                <p class="card-description">Deployed automated 30-day post-discharge monitoring for 2,000+ monthly discharges. Reduced 30-day readmission rate by 22% through coordinated follow-up care, medication reconciliation, and escalation workflows.</p>
+                <a href="#" class="card-link">Read Case Study <span class="card-link-arrow">â</span></a>
+            </div>
+
+            <div class="case-study-card" data-segment="health-systems">
+                <span class="card-segment-badge">Health System</span>
+                <h3 class="card-title">Cedar Valley Health Network</h3>
+                <p class="card-description">Reduced medication reconciliation errors by 65% and improved documentation completeness to 94% through AI-assisted clinical workflows integrated across 6 hospitals and urgent care centers.</p>
+                <a href="#" class="card-link">Read Case Study <span class="card-link-arrow">â</span></a>
+            </div>
+
+            <!-- ACOs/MSOs -->
+            <div class="case-study-card" data-segment="acos-msos">
+                <span class="card-segment-badge">ACO/MSO</span>
+                <h3 class="card-title">SummitCare MSO</h3>
+                <p class="card-description">Standardized transitional care management across 22 affiliated practices. Implemented consistent 30-day post-discharge protocol resulting in $4.2M in shared savings and improved quality metrics across 156,000 covered lives.</p>
+                <a href="#" class="card-link">Read Case Study <span class="card-link-arrow">â</span></a>
+            </div>
+
+            <!-- FQHCs -->
+            <div class="case-study-card" data-segment="fqhcs">
+                <span class="card-segment-badge">FQHC</span>
+                <h3 class="card-title">Riverside Community Health</h3>
+                <p class="card-description">Improved preventive screening completion rates by 31% through AI-powered outreach, patient education, and appointment coordination. Increased mammography, colonoscopy, and diabetes screening across underserved populations.</p>
+                <a href="#" class="card-link">Read Case Study <span class="card-link-arrow">â</span></a>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+            <p>Case studies use illustrative examples based on typical implementations. Contact us for verified results and performance data specific to your organization type and use case.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#platform">Platform</a></li>
+                    <li><a href="products-ai-agents.html">AI Agents</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="resources-faq.html">FAQ</a></li>
+                    <li><a href="resources-case-studies.html">Case Studies</a></li>
+                    <li><a href="resources-blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="company-about.html">About</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="#press">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="company-privacy.html">Privacy</a></li>
+                    <li><a href="company-terms.html">Terms</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Zynix AI. All rights reserved. | 3535 Little Rd, Trinity, FL 34655</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll behavior
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Filter functionality
+        function filterCards(segment) {
+            const cards = document.querySelectorAll('.case-study-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter and animate cards
+            cards.forEach((card, index) => {
+                const cardSegment = card.getAttribute('data-segment');
+                if (segment === 'all' || cardSegment === segment) {
+                    card.classList.remove('hidden');
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                    }, index * 50);
+                } else {
+                    card.classList.add('hidden');
+                    card.classList.remove('visible');
+                }
+            });
+        }
+
+        // Intersection Observer for initial card animations
+        const observerOptions = {
+            threshold: 0.05,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 50);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.case-study-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
