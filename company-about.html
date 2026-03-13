@@ -1,0 +1,613 @@
+<style>
+        :root {
+            --zynblue: #20449B;
+            --zynorange: #F16529;
+            --black: #000000;
+            --zyngray: #EDEDEF;
+            --zyncare: #FBC4B0;
+            --white: #FFFFFF;
+            --gray-900: #202021;
+            --gray-800: #2F2F31;
+            --gray-700: #3D3D40;
+            --gray-600: #4E4E52;
+            --gray-500: #62626B;
+            --gray-400: #767680;
+            --gray-300: #8E8E96;
+            --gray-200: #B0B0B8;
+            --gray-100: #FAFAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--gray-900);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            backdrop-filter: blur(0px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-zynix {
+            color: var(--zynblue);
+        }
+
+        .logo-ai {
+            color: var(--zynorange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-900);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--zynorange);
+        }
+
+        .btn-primary {
+            background-color: var(--zynorange);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #E64A1F;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(241, 101, 41, 0.25);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--zynorange);
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--zynorange);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--zynorange);
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 6rem;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #F8FAFB 0%, #EEF2F7 100%);
+            text-align: center;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--gray-900);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Opening Section */
+        .opening {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .opening p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--gray-700);
+        }
+
+        .opening .highlight {
+            color: var(--zynorange);
+            font-weight: 600;
+        }
+
+        /* Manifesto Section */
+        .manifesto {
+            background-color: var(--gray-900);
+            color: var(--white);
+            padding: 5rem 2rem;
+            margin: 4rem 0;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .manifesto-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .manifesto h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+        }
+
+        .manifesto p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #E0E0E0;
+        }
+
+        /* Section */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        .section-intro {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        /* Differentiators Grid */
+        .differentiators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .diff-card {
+            background: var(--gray-100);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--zynorange);
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .diff-card:nth-child(1) { animation-delay: 0.2s; }
+        .diff-card:nth-child(2) { animation-delay: 0.3s; }
+        .diff-card:nth-child(3) { animation-delay: 0.4s; }
+        .diff-card:nth-child(4) { animation-delay: 0.5s; }
+
+        .diff-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--zynorange);
+            font-weight: 600;
+        }
+
+        .diff-card p {
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        /* Mission & Vision */
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .mission-card, .vision-card {
+            background: var(--gray-100);
+            padding: 2.5rem;
+            border-radius: 12px;
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        .mission-card {
+            animation-delay: 0.2s;
+        }
+
+        .vision-card {
+            animation-delay: 0.3s;
+        }
+
+        .mission-card h3, .vision-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--zynorange);
+        }
+
+        .mission-card p, .vision-card p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--gray-700);
+        }
+
+        @media (max-width: 768px) {
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--zynorange) 0%, #E64A1F 100%);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 5rem 0 0 0;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--gray-900);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--zynorange);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #B0B0B8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--zynorange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-700);
+            padding-top: 2rem;
+            text-align: center;
+            color: #767680;
+            font-size: 0.85rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Intersection Observer */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+<!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">
+            <span class="logo-zynix">Zynix</span><span class="logo-ai">AI</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#products">Products</a></li>
+            <li><a href="#solutions">Solutions</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#company" class="active">Company</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><button class="btn-primary">Start Free Trial</button></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>We Are Not Building Another Healthcare AI Tool. We Are Building Healthcare's Intelligence.</h1>
+        <p class="subtitle">Purpose-built intelligence for medicine, native to healthcare.</p>
+    </section>
+
+    <!-- Opening -->
+    <section class="opening fade-in">
+        <p>While big tech retrofits general-purpose AI for healthcare, Zynix builds intelligence native to medicine from the ground up. This is a fundamental difference in philosophy and capability.</p>
+        <p><span class="highlight">ZynixLLM is a foundation model purpose-built for healthcare</span>âtrained on millions of de-identified clinical conversations, medical protocols, and the messy reality of care delivery. Every architectural decision prioritizes what matters in medicine: safety, certainty, and action.</p>
+        <p>Unlike everyone else selling AI dashboards and chatbots, Zynix agents take action: they call patients, schedule appointments, close gaps, document visits. They operate at the friction points where healthcare breaks down.</p>
+        <p style="font-size: 1.25rem; font-weight: 600; color: var(--zynorange); margin-top: 3rem;">This is not artificial intelligence for healthcare. This is healthcare intelligence.</p>
+    </section>
+
+    <!-- Manifesto Section -->
+    <section class="manifesto fade-in">
+        <div class="manifesto-content">
+            <h2>Healthcare Is Broken, But Not For The Reason You Think</h2>
+            <p>Healthcare is broken not because we lack knowledge but because we can't execute at scale. Care coordinators stare at worklists they'll never complete. Nurses burn out making calls. Doctors spend 2 hours documenting for every hour with patients. The industry spent billions on analytics that tell you what to do.</p>
+            <p style="margin-bottom: 2.5rem;"><strong>But knowing is not doing.</strong></p>
+            <p>Analytics show which patients need follow-up. But who calls them? Knowledge bases contain best practices. But who enforces them? Dashboards flag gaps in care. But who fills them? The gap between knowledge and action is where healthcare drowns.</p>
+            <p>Zynix exists to close that gap. We build agents that don't just suggest actionsâthey execute them. Not autonomously. Intelligently. In partnership with humans who understand the complexity of medicine.</p>
+        </div>
+    </section>
+
+    <!-- Why Healthcare Needs Its Own AI -->
+    <section class="section fade-in">
+        <h2>Why Healthcare Needs Its Own AI Foundation Model</h2>
+        <p class="section-intro">General-purpose AI was not built for life-or-death decisions. It has not seen the data that matters most. And it has not been architected for the constraints that define medicine.</p>
+
+        <div class="differentiators-grid">
+            <div class="diff-card">
+                <h3>Trained on the Right Data</h3>
+                <p>ChatGPT was trained to write poetry and essays. Claude was optimized for general conversation. ZynixLLM was trained on millions of de-identified clinical conversations, complete medical literature, and real-world care coordination workflows. It learned from what matters in healthcare.</p>
+            </div>
+            <div class="diff-card">
+                <h3>Architected for Certainty</h3>
+                <p>General AI confidently generates plausible-sounding but incorrect answers. In healthcare, certainty matters. Our architecture calibrates confidence, flags uncertainty, and escalates to humans when confidence is low. We don't gamble with patient care.</p>
+            </div>
+            <div class="diff-card">
+                <h3>Built For Safety From the Foundation</h3>
+                <p>Safety in general AI is a layer bolted on top. In ZynixLLM, safety is woven into every layer. We validate against clinical protocols, detect edge cases, and trigger human review when stakes are high. Safety first is not a featureâit's the architecture.</p>
+            </div>
+            <div class="diff-card">
+                <h3>Designed for the Regulatory Environment</h3>
+                <p>Healthcare operates under HIPAA, state regulations, and evolving AI governance. General-purpose models are not designed with these constraints in mind. ZynixLLM was built with healthcare's regulatory reality as a core design principle.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ZynixLLM Difference -->
+    <section class="section fade-in">
+        <h2>The ZynixLLM Difference: Architecture Built for Medicine</h2>
+        <p class="section-intro">Every component of ZynixLLM is optimized for healthcare intelligence. Here's what sets it apart:</p>
+
+        <div class="differentiators-grid">
+            <div class="diff-card">
+                <h3>Clinical Reasoning Engine</h3>
+                <p>Understands medical context, triage protocols, and clinical workflows. Can reason about patient histories, medication interactions, and standard of care. Not just pattern matchingâactual medical reasoning.</p>
+            </div>
+            <div class="diff-card">
+                <h3>Safety Constellation</h3>
+                <p>Multiple systems work together to catch errors: protocol validators, consistency checkers, and confidence evaluators. When one system flags concern, others weigh in. Safety through redundancy and rigor.</p>
+            </div>
+            <div class="diff-card">
+                <h3>Certainty Calibration</h3>
+                <p>ZynixLLM doesn't just generate outputsâit quantifies how certain it is about them. When confidence is low, we flag it for human review. This prevents false confidence in critical situations.</p>
+            </div>
+            <div class="diff-card">
+                <h3>Multimodal Medical Understanding</h3>
+                <p>Understands text, structured medical data, and the relationships between them. Can integrate EHR records, lab results, imaging notes, and conversation context into coherent clinical understanding.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="section fade-in">
+        <h2>Our Mission & Vision</h2>
+        <div class="mission-vision">
+            <div class="mission-card">
+                <h3>Our Mission</h3>
+                <p>To empower healthcare organizations with AI intelligence that closes the gap between medical knowledge and execution at scale. We build agents that free humans from administrative burden and let them focus on what they do best: care.</p>
+            </div>
+            <div class="vision-card">
+                <h3>Our Vision</h3>
+                <p>A healthcare system where no patient falls through the cracks due to administrative friction. Where care coordinators focus on complex cases. Where clinicians spend their time healing, not documenting. Where AI enables human excellence, not replaces it.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Quote -->
+    <section class="section fade-in" style="text-align: center; padding: 5rem 2rem;">
+        <blockquote style="font-size: 1.8rem; font-weight: 600; color: var(--zynorange); font-style: italic; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+            "Zynix is not about replacing doctors. It's about multiplying the impact of every person in healthcare by eliminating the busywork that keeps them from their real work: caring for patients."
+        </blockquote>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Experience Healthcare Intelligence?</h2>
+        <p>See how Zynix agents can close gaps, reduce burden, and let your team focus on care. Start with a 30-minute readiness conversation.</p>
+        <button class="btn-secondary" style="background-color: var(--white); color: var(--zynorange); border: none;">Schedule a Demo</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Brand</h4>
+                <ul>
+                    <li><a href="company-about.html">About Us</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="resources-blog.html">Blog</a></li>
+                    <li><a href="#press">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="company-zynixllm.html">ZynixLLM</a></li>
+                    <li><a href="#agents">Care Agents</a></li>
+                    <li><a href="#platform">Platform</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Solutions</h4>
+                <ul>
+                    <li><a href="#coordination">Care Coordination</a></li>
+                    <li><a href="#documentation">Clinical Documentation</a></li>
+                    <li><a href="#engagement">Patient Engagement</a></li>
+                    <li><a href="#gaps">Gap Closure</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="company-privacy.html">Privacy</a></li>
+                    <li><a href="company-trust-center.html">Trust Center</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="company-terms.html">Terms</a></li>
+               </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Zynix AI, Inc. All rights reserved. | Crafted for healthcare intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScrollTop = 0;
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+                                </script>
