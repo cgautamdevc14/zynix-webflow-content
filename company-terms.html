@@ -1,0 +1,560 @@
+<style>
+        :root {
+            --zynblue: #20449B;
+            --zynorange: #F16529;
+            --black: #000000;
+            --zyngray: #EDEDEF;
+            --zyncare: #FBC4B0;
+            --white: #FFFFFF;
+            --gray-900: #202021;
+            --gray-800: #2F2F31;
+            --gray-700: #3D3D40;
+            --gray-600: #4E4E52;
+            --gray-500: #62626B;
+            --gray-400: #767680;
+            --gray-300: #8E8E96;
+            --gray-200: #B0B0B8;
+            --gray-100: #FAFAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--gray-900);
+            background-color: var(--white);
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            backdrop-filter: blur(0px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-zynix {
+            color: var(--zynblue);
+        }
+
+        .logo-ai {
+            color: var(--zynorange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-900);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--zynorange);
+        }
+
+        .btn-primary {
+            background-color: var(--zynorange);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #E64A1F;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(241, 101, 41, 0.25);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Header */
+        .terms-header {
+            margin-top: 6rem;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #F8FAFB 0%, #EEF2F7 100%);
+            text-align: center;
+        }
+
+        .terms-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
+        }
+
+        .terms-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            flex-wrap: wrap;
+        }
+
+        .terms-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Content */
+        .terms-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .terms-section {
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .terms-section:nth-child(1) { animation-delay: 0.1s; }
+        .terms-section:nth-child(2) { animation-delay: 0.15s; }
+        .terms-section:nth-child(3) { animation-delay: 0.2s; }
+        .terms-section:nth-child(n+4) { animation-delay: 0.25s; }
+
+        .terms-section h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            color: var(--zynorange);
+            border-bottom: 2px solid var(--zyngray);
+            padding-bottom: 0.8rem;
+        }
+
+        .terms-section h3 {
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--gray-900);
+            font-weight: 700;
+        }
+
+        .terms-section p {
+            margin-bottom: 1rem;
+            color: var(--gray-700);
+            line-height: 1.8;
+        }
+
+        .terms-section ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            margin-left: 0;
+        }
+
+        .terms-section ul li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--gray-700);
+        }
+
+        .terms-section ul li::before {
+            content: "â¢";
+            position: absolute;
+            left: 0;
+            color: var(--zynorange);
+            font-weight: 700;
+        }
+
+        .terms-section ol {
+            margin-bottom: 1.5rem;
+            margin-left: 1.5rem;
+            color: var(--gray-700);
+        }
+
+        .terms-section ol li {
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: #FEF4F1;
+            padding: 1.5rem;
+            border-left: 4px solid var(--zynorange);
+            margin: 1.5rem 0;
+            border-radius: 6px;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: var(--gray-700);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--gray-900);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--zynorange);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #B0B0B8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--zynorange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-700);
+            padding-top: 2rem;
+            text-align: center;
+            color: #767680;
+            font-size: 0.85rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+<!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">
+            <span class="logo-zynix">Zynix</span><span class="logo-ai">AI</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#products">Products</a></li>
+            <li><a href="#solutions">Solutions</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#company">Company</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><button class="btn-primary">Start Free Trial</button></li>
+        </ul>
+    </nav>
+
+    <!-- Terms Header -->
+    <div class="terms-header">
+        <h1>Terms of Use</h1>
+        <div class="terms-meta">
+            <span><strong>Effective Date:</strong> January 1, 2026</span>
+            <span><strong>Last Updated:</strong> January 1, 2026</span>
+        </div>
+    </div>
+
+    <!-- Terms Content -->
+    <div class="terms-container">
+        <!-- Section 1 -->
+        <div class="terms-section fade-in">
+            <h2>1. Who We Are and These Terms</h2>
+            <p>These Terms of Use ("Terms") are a binding agreement between you ("User," "you," or "your") and Zynix AI, Inc. and its subsidiaries (collectively, "Zynix," "we," "us," or "our"). These Terms govern your access to and use of:</p>
+            <ul>
+                <li>Our websites (including zynix.ai)</li>
+                <li>Our mobile applications</li>
+                <li>Our products and services</li>
+                <li>Any content, features, or functionality we provide</li>
+            </ul>
+            <p style="margin-top: 1.5rem;"><strong>Acceptance of Terms:</strong> By accessing or using our services, you agree to be bound by these Terms. If you do not agree, do not access or use our services. We reserve the right to modify these Terms at any time. Material changes will be notified. Your continued use constitutes acceptance.</p>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="terms-section fade-in">
+            <h2>2. Permitted Use</h2>
+            <p>You agree to use our services only for lawful purposes and in ways that do not:</p>
+            <ul>
+                <li>Violate any law, regulation, or third-party rights</li>
+                <li>Infringe intellectual property rights</li>
+                <li>Harass, threaten, defame, or abuse others</li>
+                <li>Transmit malware, viruses, or harmful code</li>
+                <li>Attempt to gain unauthorized access to systems</li>
+                <li>Interfere with service operations or security</li>
+                <li>Impersonate others or misrepresent affiliation</li>
+                <li>Spam or send unsolicited communications</li>
+                <li>Engage in any form of automated data scraping</li>
+                <li>Reverse engineer, decompile, or disassemble</li>
+            </ul>
+            <p style="margin-top: 1.5rem;"><strong>Account Responsibility:</strong> You are responsible for all activity under your account. You agree to keep your password confidential and notify us of unauthorized access. We recommend strong, unique passwords.</p>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="terms-section fade-in">
+            <h2>3. No Medical Advice</h2>
+            <div class="highlight-box">
+                <p><strong>Important Medical Disclaimer:</strong> Zynix services are designed to provide operational support and decision support to healthcare professionals. They are not intended to provide medical advice, diagnoses, treatment recommendations, or autonomous medical decision-making.</p>
+            </div>
+            <p style="margin-top: 1.5rem;">Our services are tools to augment human judgment, not replace it. All clinical decisions must be made by licensed healthcare providers based on their professional judgment, patient assessment, and applicable standards of care.</p>
+            <p><strong>No Warranty:</strong> We do not warrant that our services are appropriate or suitable for any particular medical purpose. Users assume all risk and responsibility for clinical decisions.</p>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="terms-section fade-in">
+            <h2>4. Intellectual Property Rights</h2>
+
+            <h3>Our Intellectual Property</h3>
+            <p>All content, features, and functionality on our services (including text, graphics, logos, images, software, code) are owned by Zynix or our licensors and are protected by copyright, trademark, and other intellectual property laws.</p>
+
+            <h3>Limited License</h3>
+            <p>We grant you a limited, non-exclusive, non-transferable license to access and use our services for lawful purposes. This license does not include rights to:</p>
+            <ul>
+                <li>Modify or create derivative works</li>
+                <li>Sublicense, transfer, or sell access</li>
+                <li>Use for commercial purposes (except authorized customers)</li>
+                <li>Remove or alter proprietary notices</li>
+            </ul>
+
+            <h3>Your Content</h3>
+            <p>You retain ownership of content you create or upload ("Your Content"). By uploading, you grant Zynix a worldwide, royalty-free, perpetual license to use Your Content to provide and improve services. You represent and warrant that Your Content does not infringe third-party rights and that you have necessary permissions.</p>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="terms-section fade-in">
+            <h2>5. Third-Party Links and Content</h2>
+            <p>Our services may contain links to third-party websites and resources. We do not endorse, control, or assume responsibility for third-party content. Your use of third-party sites is governed by their terms and policies. We disclaim liability for third-party content.</p>
+        </div>
+
+        <!-- Section 6 -->
+        <div class="terms-section fade-in">
+            <h2>6. Disclaimers</h2>
+            <div class="highlight-box">
+                <p><strong>AS-IS Disclaimer:</strong> Our services are provided "as is" and "as available" without warranties of any kind, express or implied. We disclaim all warranties including merchantability, fitness for purpose, non-infringement, and accuracy.</p>
+            </div>
+            <p style="margin-top: 1.5rem;"><strong>No Guarantee of Uptime:</strong> While we strive for high availability, we do not guarantee uninterrupted service, no errors, or that all functions will work without issues. Service interruptions may occur for updates, maintenance, or technical issues.</p>
+            <p><strong>No Professional Advice:</strong> Our services are not medical, legal, financial, or professional advice. Consult qualified professionals for advice specific to your situation.</p>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="terms-section fade-in">
+            <h2>7. Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law, Zynix is not liable for:</p>
+            <ul>
+                <li>Indirect, incidental, consequential, special, or punitive damages</li>
+                <li>Loss of profits, revenue, data, or business interruption</li>
+                <li>Any damages arising from service use or inability to use</li>
+                <li>Damages from third-party content or unauthorized access</li>
+                <li>Lost business opportunities or lost savings</li>
+            </ul>
+            <p style="margin-top: 1rem;"><strong>Liability Cap:</strong> Our total liability is limited to the lesser of: (a) the amount you paid us in the past 12 months, or (b) $100. Some jurisdictions do not allow liability limitations for certain claims.</p>
+        </div>
+
+        <!-- Section 8 -->
+        <div class="terms-section fade-in">
+            <h2>8. Indemnification</h2>
+            <p>You agree to defend, indemnify, and hold harmless Zynix, our officers, directors, employees, and agents from all claims, damages, losses, costs, and liabilities (including attorney fees) arising from:</p>
+            <ul>
+                <li>Your violation of these Terms</li>
+                <li>Your use of our services</li>
+                <li>Your violation of law or third-party rights</li>
+                <li>Content you create or upload</li>
+                <li>Clinical decisions or reliance on our services</li>
+            </ul>
+        </div>
+
+        <!-- Section 9 -->
+        <div class="terms-section fade-in">
+            <h2>9. Changes and Termination</h2>
+
+            <h3>Service Changes</h3>
+            <p>We may modify, suspend, or discontinue services (in whole or in part) at any time with or without notice. We are not liable for any modification, suspension, or discontinuance.</p>
+
+            <h3>Account Termination</h3>
+            <p>We may terminate or suspend your account at any time, with or without cause, without notice (except where required by law). Upon termination, your right to use services ceases immediately.</p>
+
+            <h3>Effect of Termination</h3>
+            <p>Upon termination, we may delete Your Content. Provisions that should survive termination (liability limitations, indemnification, intellectual property) will survive.</p>
+        </div>
+
+        <!-- Section 10 -->
+        <div class="terms-section fade-in">
+            <h2>10. Governing Law and Dispute Resolution</h2>
+
+            <h3>Governing Law</h3>
+            <p>These Terms are governed by and construed in accordance with the laws of the State of Florida, without regard to conflicts of law principles.</p>
+
+            <h3>Jurisdiction and Venue</h3>
+            <p>You agree to the exclusive jurisdiction and venue of the federal and state courts located in Hillsborough County, Florida. You consent to personal jurisdiction in these courts and waive any objection to venue.</p>
+
+            <h3>Arbitration</h3>
+            <p>For enterprise customers with written agreements, disputes may be subject to binding arbitration as specified in those agreements. Otherwise, these Terms shall be governed by the courts of Florida.</p>
+        </div>
+
+        <!-- Section 11 -->
+        <div class="terms-section fade-in">
+            <h2>11. Contact Information</h2>
+            <p>For questions about these Terms, to report violations, or to exercise legal rights, contact us:</p>
+            <p style="margin-top: 1.5rem;">
+                <strong>Zynix AI, Inc.</strong><br>
+                Legal Department<br>
+                <a href="mailto:info@zynix.ai" style="color: var(--zynorange); text-decoration: none;">info@zynix.ai</a><br>
+                3535 Little Rd<br>
+                Trinity, FL 34655<br>
+                United States
+            </p>
+            <p style="margin-top: 1.5rem;"><strong>Last Updated:</strong> January 1, 2026. These Terms are effective as of the date listed above. We reserve the right to modify these Terms at any time. Please review periodically for updates.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Brand</h4>
+                <ul>
+                    <li><a href="company-about.html">About Us</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="resources-blog.html">Blog</a></li>
+                    <li><a href="#press">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="company-zynixllm.html">ZynixLLM</a></li>
+                    <li><a href="#agents">Care Agents</a></li>
+                    <li><a href="#platform">Platform</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Solutions</h4>
+                <ul>
+                    <li><a href="#coordination">Care Coordination</a></li>
+                    <li><a href="#documentation">Clinical Documentation</a></li>
+                    <li><a href="#engagement">Patient Engagement</a></li>
+                    <li><a href="#gaps">Gap Closure</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="company-privacy.html">Privacy</a></li>
+                    <li><a href="company-trust-center.html">Trust Center</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="company-terms.html">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Zynix AI, Inc. All rights reserved. | Terms and conditions apply.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+                  </script>
