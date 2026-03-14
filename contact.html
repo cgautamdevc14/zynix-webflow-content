@@ -1,0 +1,793 @@
+<style>
+        :root {
+            --zynblue: #20449B;
+            --zynorange: #F16529;
+            --black: #000000;
+            --zyngray: #EDEDEF;
+            --zyncare: #FBC4B0;
+            --white: #FFFFFF;
+            --gray-900: #202021;
+            --gray-800: #3A3A3C;
+            --gray-700: #54545A;
+            --gray-600: #6E6E76;
+            --gray-500: #88888F;
+            --gray-400: #A2A2AA;
+            --gray-300: #C5C5CC;
+            --gray-200: #D9D9E3;
+            --gray-100: #FAFAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--gray-900);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background-color: transparent;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-zynix {
+            color: var(--zynblue);
+        }
+
+        .logo-ai {
+            color: var(--zynorange);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray-900);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--zynorange);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 5rem;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f8f9fc 0%, #f0f2f8 100%);
+            text-align: center;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--zynblue);
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Two Column Layout */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease 0.2s forwards;
+        }
+
+        /* Form Section */
+        .form-section h2 {
+            font-size: 1.8rem;
+            color: var(--zynblue);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid var(--zyngray);
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--gray-900);
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--zynorange);
+            box-shadow: 0 0 0 3px rgba(241, 101, 41, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-error {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-error.show {
+            display: block;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background-color: var(--zynorange);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #e55a1f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(241, 101, 41, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Info Section */
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .info-section h2 {
+            font-size: 1.8rem;
+            color: var(--zynblue);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .contact-info-block {
+            background-color: var(--gray-100);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--zynorange);
+        }
+
+        .contact-info-block h3 {
+            font-size: 1rem;
+            color: var(--gray-900);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-info-block p {
+            color: var(--gray-700);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info-block a {
+            color: var(--zynorange);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info-block a:hover {
+            color: var(--zynblue);
+        }
+
+        /* What to Expect Section */
+        .what-to-expect {
+            background-color: var(--white);
+            padding: 2rem;
+            border: 2px solid var(--zyngray);
+            border-radius: 12px;
+        }
+
+        .what-to-expect h3 {
+            font-size: 1.1rem;
+            color: var(--zynblue);
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+
+        .expect-list {
+            list-style: none;
+        }
+
+        .expect-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--zyngray);
+        }
+
+        .expect-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .expect-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: var(--zynorange);
+            color: var(--white);
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .expect-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .expect-text strong {
+            color: var(--gray-900);
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .expect-text p {
+            color: var(--gray-700);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--zynblue) 0%, #1a3478 100%);
+            color: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease 0.3s forwards;
+        }
+
+        .cta-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--zynorange);
+            color: var(--white);
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-btn:hover {
+            background-color: #e55a1f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Success Message */
+        .form-success {
+            display: none;
+            background-color: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            padding: 1.25rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .form-success.show {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--zynblue);
+            color: var(--white);
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--zynorange);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .contact-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                padding: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+<!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">
+            <span class="logo-zynix">Zynix</span><span class="logo-ai">AI</span>
+        </div>
+        <ul>
+            <li><a href="#platform">Platform</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="company-about.html">About</a></li>
+            <li><a href="contact.html" class="btn-primary" style="padding: 0.5rem 1.5rem; background: var(--zynorange); color: var(--white); border-radius: 6px; border: none; cursor: pointer; font-weight: 600;">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Let's Talk About Transforming Your Healthcare Operations</h1>
+        <p>Get in touch to schedule a demo, ask questions, or explore partnership opportunities with Zynix AI.</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Contact Layout -->
+        <div class="contact-layout">
+            <!-- Form Section -->
+            <div class="form-section">
+                <h2>Send us a Message</h2>
+
+                <div class="form-success" id="formSuccess">
+                    <strong>Thank you!</strong> We've received your message and will be in touch within 48 hours.
+                </div>
+
+                <form id="contactForm" onsubmit="handleSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                            <div class="form-error" id="firstNameError">First name is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                            <div class="form-error" id="lastNameError">Last name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Work Email *</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="form-error" id="emailError">Valid email is required</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="organization">Organization Name *</label>
+                        <input type="text" id="organization" name="organization" required>
+                        <div class="form-error" id="organizationError">Organization name is required</div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="segment">Healthcare Segment *</label>
+                            <select id="segment" name="segment" required>
+                                <option value="">Select your segment</option>
+                                <option value="independent-practice">Independent Group Practice</option>
+                                <option value="asc">Ambulatory Surgery Center (ASC)</option>
+                                <option value="health-plan">Health Plan</option>
+                                <option value="health-system">Health System</option>
+                                <option value="aco-mso">ACO / Medical Services Organization (MSO)</option>
+                                <option value="fqhc">Federally Qualified Health Center (FQHC)</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="form-error" id="segmentError">Please select a segment</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interest">Interest *</label>
+                            <select id="interest" name="interest" required>
+                                <option value="">Select your interest</option>
+                                <option value="demo">Schedule Demo</option>
+                                <option value="product-info">Product Information</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="general">General Inquiry</option>
+                            </select>
+                            <div class="form-error" id="interestError">Please select an interest</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-row full">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" placeholder="Tell us more about your organization, challenges, and what you'd like to explore with Zynix AI..." required></textarea>
+                        <div class="form-error" id="messageError">Message is required</div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Info Section -->
+            <div class="info-section">
+                <div>
+                    <h2>Get in Touch</h2>
+                    <p style="color: var(--gray-700); margin-bottom: 1.5rem;">Have questions? We're here to help. Reach out via email or contact information below.</p>
+                </div>
+
+                <div class="contact-info-block">
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@zynix.ai">info@zynix.ai</a></p>
+                </div>
+
+                <div class="contact-info-block">
+                    <h3>Mailing Address</h3>
+                    <p>3535 Little Rd<br>Trinity, FL 34655<br>USA</p>
+                </div>
+
+                <div class="what-to-expect">
+                    <h3>What to Expect</h3>
+                    <ul class="expect-list">
+                        <li class="expect-item">
+                            <div class="expect-number">1</div>
+                            <div class="expect-text">
+                                <strong>Submit Your Information</strong>
+                                <p>Fill out the contact form with details about your organization and needs.</p>
+                            </div>
+                        </li>
+                        <li class="expect-item">
+                            <div class="expect-number">2</div>
+                            <div class="expect-text">
+                                <strong>Discovery Call</strong>
+                                <p>Our team will reach out within 48 hours to schedule a conversation.</p>
+                            </div>
+                        </li>
+                        <li class="expect-item">
+                            <div class="expect-number">3</div>
+                            <div class="expect-text">
+                                <strong>Personalized Demo</strong>
+                                <p>We'll walk through Zynix AI tailored to your use cases and challenges.</p>
+                            </div>
+                        </li>
+                        <li class="expect-item">
+                            <div class="expect-number">4</div>
+                            <div class="expect-text">
+                                <strong>Implementation Roadmap</strong>
+                                <p>Discuss timeline, workflows, and next steps to get started.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Ready to Transform Your Operations?</h2>
+            <p>See how healthcare organizations like yours are improving workflows, reducing costs, and delivering better patient outcomes with Zynix AI.</p>
+            <button class="cta-btn" onclick="scrollToForm()">Schedule a Demo</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#platform">Platform</a></li>
+                    <li><a href="products-ai-agents.html">AI Agents</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="resources-faq.html">FAQ</a></li>
+                    <li><a href="resources-case-studies.html">Case Studies</a></li>
+                    <li><a href="resources-blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="company-about.html">About</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="#press">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="company-privacy.html">Privacy</a></li>
+                    <li><a href="company-terms.html">Terms</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Zynix AI. All rights reserved. | 3535 Little Rd, Trinity, FL 34655</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll behavior
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Form validation
+        function validateForm() {
+            const form = document.getElementById('contactForm');
+            const fields = {
+                firstName: 'firstNameError',
+                lastName: 'lastNameError',
+                email: 'emailError',
+                organization: 'organizationError',
+                segment: 'segmentError',
+                interest: 'interestError',
+                message: 'messageError'
+            };
+
+            let isValid = true;
+
+            // Reset errors
+            Object.values(fields).forEach(errorId => {
+                document.getElementById(errorId).classList.remove('show');
+            });
+
+            // Validate each field
+            for (const [fieldId, errorId] of Object.entries(fields)) {
+                const field = document.getElementById(fieldId);
+
+                if (!field.value.trim()) {
+                    document.getElementById(errorId).classList.add('show');
+                    isValid = false;
+                }
+
+                if (fieldId === 'email' && field.value.trim()) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(field.value)) {
+                        document.getElementById(errorId).classList.add('show');
+                        isValid = false;
+                    }
+                }
+            }
+
+            return isValid;
+        }
+
+        // Handle form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            if (!validateForm()) {
+                return;
+            }
+
+            // Simulate form submission
+            const form = document.getElementById('contactForm');
+            const successMessage = document.getElementById('formSuccess');
+
+            // Show success message
+            successMessage.classList.add('show');
+
+            // Reset form
+            form.reset();
+
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+        }
+
+        // Scroll to form function
+        function scrollToForm() {
+            const formSection = document.querySelector('.form-section');
+            formSection.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('firstName').focus();
+        }
+
+        // Add input focus handlers for better UX
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => {
+                if (input.value.trim()) {
+                    const errorId = input.id + 'Error';
+                    const errorElement = document.getElementById(errorId);
+                    if (errorElement) {
+                        errorElement.classList.remove('show');
+                    }
+                }
+            });
+        });
+    </script>
