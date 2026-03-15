@@ -8,22 +8,25 @@
 
   var CALENDLY = 'https://calendly.com/david-zynix-ai-calendar/30min';
 
-  // ── Image URLs ──
+  // ── Image URLs (GitHub raw) ──
+  var GH = 'https://raw.githubusercontent.com/cgautamdevc14/zynix-webflow-content/main/images/';
   var IMG = {
-    hero: 'https://files.catbox.moe/l8lgb8.png',
-    doctor: 'https://files.catbox.moe/faluo2.png',
-    patient: 'https://files.catbox.moe/xg6g4w.png',
-    analytics: 'https://files.catbox.moe/ko2qst.png',
-    data: 'https://files.catbox.moe/rhb9oc.png',
-    care: 'https://files.catbox.moe/39uax4.png',
-    scribe: 'https://files.catbox.moe/eo8r75.png',
-    patients: 'https://files.catbox.moe/l10936.png',
-    enterprise: 'https://files.catbox.moe/93ecaf.png',
-    mesh: 'https://files.catbox.moe/vo5biu.png',
-    logo: 'https://files.catbox.moe/d7rq25.png',
+    hero: GH + 'hero-dashboard.png',
+    doctor: GH + 'doctor-voice-agent.png',
+    patient: GH + 'patient-engagement.png',
+    analytics: GH + 'analytics-dashboard.png',
+    data: GH + 'data-platform.png',
+    care: GH + 'care-team-insights.png',
+    scribe: GH + 'zynscribe-ambient.png',
+    patients: GH + 'patients-modern-clinic.png',
+    enterprise: GH + 'enterprise-command-center.png',
+    mesh: GH + 'abstract-data-mesh.png',
+    logo: GH + 'logo-horizontal.png',
     logoWhite: 'https://files.catbox.moe/hthre9.png',
-    symbol: 'https://files.catbox.moe/qw9hwf.png',
-    // Portal Screenshots
+    symbol: GH + 'logo-symbol.png',
+    favicon: GH + 'favicon-32.png',
+    appleTouchIcon: GH + 'apple-touch-icon.png',
+    // Portal Screenshots (still on catbox — not in local images folder)
     portalACO: 'https://files.catbox.moe/ymjdj1.png',
     portalProvider: 'https://files.catbox.moe/sem2y4.png',
     portalChatbot: 'https://files.catbox.moe/mbj7sl.png',
@@ -168,6 +171,11 @@
     var link = document.querySelector('link[rel="canonical"]');
     if (!link) { link = document.createElement('link'); link.rel = 'canonical'; document.head.appendChild(link); }
     link.href = canonical;
+    // Favicon
+    if (!document.querySelector('link[rel="icon"]')) {
+      var fi = document.createElement('link'); fi.rel = 'icon'; fi.type = 'image/png'; fi.sizes = '32x32'; fi.href = IMG.favicon; document.head.appendChild(fi);
+      var ati = document.createElement('link'); ati.rel = 'apple-touch-icon'; ati.sizes = '180x180'; ati.href = IMG.appleTouchIcon; document.head.appendChild(ati);
+    }
     injectJSONLD(pagePath, seo);
   }
 
