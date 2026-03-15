@@ -95,41 +95,42 @@
   // ── SEO Data ──
   var SITE_DOMAIN = (window.location.hostname.indexOf('zynix.ai') > -1) ? 'https://www.zynix.ai' : window.location.origin;
   var PAGE_SEO = {
-    '': { title: 'Zynix AI | The AI Operating System for Value-Based Healthcare', desc: 'Zynix unifies data, analytics, and AI agents into one platform\u2014purpose-built for value-based healthcare. 1 million VBC patients onboarded. Trusted by 16+ healthcare organizations across Florida.', img: IMG.hero, schema: 'Organization' },
-    '/products-zynix-os': { title: 'Zynix OS | AI Operating System for Healthcare', desc: 'The integrated AI platform where agents work together to deliver measurable patient and financial outcomes. Serving 1M+ VBC patients across Florida ACOs and health systems.', img: IMG.enterprise, schema: 'Product' },
-    '/products-data-platform': { title: 'Zynix Data Platform | Unified Healthcare Data Layer', desc: 'Ingest, clean, and normalize data from every clinical and administrative source. Real-time ADT processing, 97%+ patient matching. Trusted by Florida healthcare organizations.', img: IMG.data, schema: 'Product' },
-    '/products-analytics': { title: 'Zynix Analytics | Population Health Intelligence', desc: 'AI-powered analytics for HCC gap closure, risk prediction, and clinical decision support. 40% improvement in gap closure rates. Deployed across Florida ACOs.', img: IMG.analytics, schema: 'Product' },
-    '/products-ai-agents': { title: 'Zynix AI Agents | 7 Specialized Healthcare Agents', desc: 'AI agents for outreach, scheduling, triage, documentation, reminders, prior auth, and fax processing. 1M+ patient interactions handled across Florida.', img: IMG.doctor, schema: 'Product' },
-    '/products-zynscribe': { title: 'ZynScribe | AI Clinical Documentation', desc: 'Ambient AI documentation that captures structured clinical notes in real-time. Reduce documentation burden by 70%. Serving physicians across Florida health systems.', img: IMG.scribe, schema: 'Product' },
-    '/products-care-plans': { title: 'Zynix Care Plans | Orchestrated AI Workflows', desc: 'Deployable care plans for TCM, CCM, AWV, HEDIS, and HCC closure\u2014executed by AI agents. 85%+ TCM contact rates. Deployed by Florida ACOs.', img: IMG.care, schema: 'Product' },
+    '': { title: 'Zynix AI | The AI Operating System for Value-Based Healthcare', desc: 'Zynix unifies data, analytics, and AI agents into one platform\u2014purpose-built for value-based healthcare. 1 million VBC patients onboarded. Trusted by 16+ healthcare organizations across 30 states.', img: IMG.hero, schema: 'Organization' },
+    '/products-zynix-os': { title: 'Zynix OS | AI Operating System for Healthcare', desc: 'The integrated AI platform where agents work together to deliver measurable patient and financial outcomes. Serving 1M+ VBC patients across ACOs and health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
+    '/products-data-platform': { title: 'Zynix Data Platform | Unified Healthcare Data Layer', desc: 'Ingest, clean, and normalize data from every clinical and administrative source. Real-time ADT processing, 97%+ patient matching. Trusted by healthcare organizations across 30 states.', img: IMG.data, schema: 'Product' },
+    '/products-analytics': { title: 'Zynix Analytics | Population Health Intelligence', desc: 'AI-powered analytics for HCC gap closure, risk prediction, and clinical decision support. 40% improvement in gap closure rates. Deployed across ACOs nationwide.', img: IMG.analytics, schema: 'Product' },
+    '/products-ai-agents': { title: 'Zynix AI Agents | 7 Specialized Healthcare Agents', desc: 'AI agents for outreach, scheduling, triage, documentation, reminders, prior auth, and fax processing. 1M+ patient interactions handled across 30 states.', img: IMG.doctor, schema: 'Product' },
+    '/products-zynscribe': { title: 'ZynScribe | AI Clinical Documentation', desc: 'Ambient AI documentation that captures structured clinical notes in real-time. Reduce documentation burden by 70%. Serving physicians across health systems nationwide.', img: IMG.scribe, schema: 'Product' },
+    '/products-care-plans': { title: 'Zynix Care Plans | Orchestrated AI Workflows', desc: 'Deployable care plans for TCM, CCM, AWV, HEDIS, and HCC closure\u2014executed by AI agents. 85%+ TCM contact rates. Deployed by ACOs nationwide.', img: IMG.care, schema: 'Product' },
     '/company-zynixllm': { title: 'ZynixLLM | Purpose-Built Healthcare Language Model', desc: 'Healthcare-native language model powering the Zynix platform. Lower hallucination rates than general-purpose models. Gets smarter with every patient interaction.', img: IMG.mesh, schema: 'Product' },
-    '/products-ai-agents-zynafterhours': { title: 'ZynAfterHours | 24/7 AI Triage & After-Hours Call Agent', desc: 'AI-powered patient triage handling inbound calls 24/7 in 15+ languages. 97.3% triage accuracy, 20-30% ER diversion. Trusted by Florida healthcare organizations.', img: IMG.doctor, schema: 'Product' },
-    '/products-ai-agents-zynschedule': { title: 'ZynSchedule | AI Appointment Scheduling Agent', desc: 'Always-on scheduling that captures every slot, reduces no-shows, and books appointments 24/7. Deployed across Florida practices and ACOs.', img: IMG.patient, schema: 'Product' },
-    '/products-ai-agents-post-discharge': { title: 'Post-Discharge Follow-Up Agent | Zynix AI', desc: 'Automated post-discharge outreach for TCM workflows. 85%+ contact rates vs. 30-40% industry average. Used by Florida ACOs and health systems.', img: IMG.care, schema: 'Product' },
+    '/products-ai-agents-zynafterhours': { title: 'ZynAfterHours | 24/7 AI Triage & After-Hours Call Agent', desc: 'AI-powered patient triage handling inbound calls 24/7 in 15+ languages. 97.3% triage accuracy, 20-30% ER diversion. Trusted by healthcare organizations across 30 states.', img: IMG.doctor, schema: 'Product' },
+    '/products-ai-agents-zynschedule': { title: 'ZynSchedule | AI Appointment Scheduling Agent', desc: 'Always-on scheduling that captures every slot, reduces no-shows, and books appointments 24/7. Deployed across practices and ACOs nationwide.', img: IMG.patient, schema: 'Product' },
+    '/products-ai-agents-post-discharge': { title: 'Post-Discharge Follow-Up Agent | Zynix AI', desc: 'Automated post-discharge outreach for TCM workflows. 85%+ contact rates vs. 30-40% industry average. Used by ACOs and health systems nationwide.', img: IMG.care, schema: 'Product' },
     '/products-ai-agents-med-rec': { title: 'Medication Reconciliation Agent | Zynix AI', desc: 'AI-powered medication reconciliation for discharge and high-risk transitions. Identify discrepancies, capture confirmations, route issues for follow-up.', img: IMG.care, schema: 'Product' },
-    '/products-ai-agents-zynreminder': { title: 'ZynReminder | AI Appointment Reminder Agent', desc: 'Reduce no-shows by 40% with personalized reminders and patient confirmation workflows. Serving Florida practices and community health centers.', img: IMG.patient, schema: 'Product' },
-    '/products-ai-agents-zynfax': { title: 'ZynFax | AI Fax Processing Agent', desc: 'Intelligent fax classification, data extraction, and routing for healthcare. Eliminate manual fax processing. Deployed by Florida health systems.', img: IMG.enterprise, schema: 'Product' },
-    '/products-ai-agents-zynauth': { title: 'ZynAuth | AI Prior Authorization Agent', desc: 'Streamline prior auth with AI-powered submission, tracking, and follow-up. Reduce auth turnaround by 60%. Used by ASCs and health systems in Florida.', img: IMG.enterprise, schema: 'Product' },
-    '/solutions-acos': { title: 'Zynix for ACOs & MSOs | Hit Shared Savings with AI', desc: 'Maximize AWV completion, achieve 85% TCM contact rates, and close HCC gaps. Trusted by Palm Beach ACO, West Florida ACO, Space Coast ACO, and 7+ Florida ACOs.', img: IMG.care, schema: 'Product' },
-    '/solutions-health-systems': { title: 'Zynix for Health Systems | Reduce Readmissions with AI', desc: 'Unified patient engagement, post-discharge coordination, and documentation at scale. Serving Health Vision Institute, CLSCFL, and Florida health networks.', img: IMG.enterprise, schema: 'Product' },
-    '/solutions-health-plans': { title: 'Zynix for Health Plans | Improve Stars & Close Gaps', desc: 'Stars ratings improvement, HCC gap closure, member engagement at scale. Trusted by eTernal Health and value-based payers across Florida.', img: IMG.analytics, schema: 'Product' },
-    '/solutions-fqhcs': { title: 'Zynix for FQHCs | Multilingual AI for Community Health', desc: 'Multilingual AI for underserved populations, quality payments maximization, care management at scale. Serving AMISTAD CHC and Florida community health centers.', img: IMG.patients, schema: 'Product' },
-    '/solutions-independent-practices': { title: 'Zynix for Independent Practices | Reduce No-Shows & Burnout', desc: 'After-hours coverage, appointment scheduling, no-show reduction, documentation savings. Serving Cardio & Vascular Consultants, Professional Radiology Group, and Florida practices.', img: IMG.doctor, schema: 'Product' },
-    '/solutions-ascs': { title: 'Zynix for ASCs | Prior Auth & Patient Coordination', desc: 'Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination. Serving Pain Rehab Surgery Center and Florida ASCs.', img: IMG.enterprise, schema: 'Product' },
-    '/solutions-use-case-tcm': { title: 'Transitional Care Management (TCM) | AI-Powered Workflow', desc: 'Automate the 30-day post-discharge TCM workflow. 85%+ contact rates vs. 30-40% industry average. Deployed by Florida ACOs and health systems.', img: IMG.care, schema: 'Product' },
-    '/solutions-use-case-gap-closure': { title: 'HCC & Quality Gap Closure | AI-Prioritized Worklists', desc: 'Close HCC and quality gaps 40% faster with AI-prioritized worklists and automated outreach. Deployed across Florida ACOs and health plans.', img: IMG.analytics, schema: 'Product' },
-    '/solutions-use-case-after-hours': { title: 'After-Hours Triage & Access | AI Call Handling', desc: '24/7 AI after-hours call handling with intelligent triage. 97.3% accuracy, 20-30% ER diversion rate. Serving Florida practices and FQHCs.', img: IMG.doctor, schema: 'Product' },
-    '/solutions-use-case-prior-auth': { title: 'Prior Authorization Automation | AI Workflow', desc: 'Reduce prior auth turnaround by 60% with AI-powered submission, tracking, and approval workflows. Used by Florida ASCs and health systems.', img: IMG.enterprise, schema: 'Product' },
-    '/solutions-use-case-preventive-screening': { title: 'Preventive Screening Completion | AI Outreach', desc: 'Increase preventive screening completion with targeted outreach and scheduling. Deployed by Florida FQHCs, ACOs, and health plans.', img: IMG.patients, schema: 'Product' },
+    '/products-ai-agents-zynreminder': { title: 'ZynReminder | AI Appointment Reminder Agent', desc: 'Reduce no-shows by 40% with personalized reminders and patient confirmation workflows. Serving practices and community health centers nationwide.', img: IMG.patient, schema: 'Product' },
+    '/products-ai-agents-zynfax': { title: 'ZynFax | AI Fax Processing Agent', desc: 'Intelligent fax classification, data extraction, and routing for healthcare. Eliminate manual fax processing. Deployed by health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
+    '/products-ai-agents-zynauth': { title: 'ZynAuth | AI Prior Authorization Agent', desc: 'Streamline prior auth with AI-powered submission, tracking, and follow-up. Reduce auth turnaround by 60%. Used by ASCs and health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
+    '/solutions-acos': { title: 'Zynix for ACOs & MSOs | Hit Shared Savings with AI', desc: 'Maximize AWV completion, achieve 85% TCM contact rates, and close HCC gaps. Trusted by Palm Beach ACO, West Florida ACO, Space Coast ACO, and 7+ ACOs nationwide.', img: IMG.care, schema: 'Product' },
+    '/solutions-health-systems': { title: 'Zynix for Health Systems | Reduce Readmissions with AI', desc: 'Unified patient engagement, post-discharge coordination, and documentation at scale. Serving Health Vision Institute, CLSCFL, and health networks nationwide.', img: IMG.enterprise, schema: 'Product' },
+    '/solutions-health-plans': { title: 'Zynix for Health Plans | Improve Stars & Close Gaps', desc: 'Stars ratings improvement, HCC gap closure, member engagement at scale. Trusted by eTernal Health and value-based payers nationwide.', img: IMG.analytics, schema: 'Product' },
+    '/solutions-fqhcs': { title: 'Zynix for FQHCs | Multilingual AI for Community Health', desc: 'Multilingual AI for underserved populations, quality payments maximization, care management at scale. Serving AMISTAD CHC and community health centers nationwide.', img: IMG.patients, schema: 'Product' },
+    '/solutions-independent-practices': { title: 'Zynix for Independent Practices | Reduce No-Shows & Burnout', desc: 'After-hours coverage, appointment scheduling, no-show reduction, documentation savings. Serving Cardio & Vascular Consultants, Professional Radiology Group, and practices nationwide.', img: IMG.doctor, schema: 'Product' },
+    '/solutions-ascs': { title: 'Zynix for ASCs | Prior Auth & Patient Coordination', desc: 'Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination. Serving Pain Rehab Surgery Center and ASCs nationwide.', img: IMG.enterprise, schema: 'Product' },
+    '/solutions-use-case-tcm': { title: 'Transitional Care Management (TCM) | AI-Powered Workflow', desc: 'Automate the 30-day post-discharge TCM workflow. 85%+ contact rates vs. 30-40% industry average. Deployed by ACOs and health systems nationwide.', img: IMG.care, schema: 'Product' },
+    '/solutions-use-case-gap-closure': { title: 'HCC & Quality Gap Closure | AI-Prioritized Worklists', desc: 'Close HCC and quality gaps 40% faster with AI-prioritized worklists and automated outreach. Deployed across ACOs and health plans nationwide.', img: IMG.analytics, schema: 'Product' },
+    '/solutions-use-case-after-hours': { title: 'After-Hours Triage & Access | AI Call Handling', desc: '24/7 AI after-hours call handling with intelligent triage. 97.3% accuracy, 20-30% ER diversion rate. Serving practices and FQHCs nationwide.', img: IMG.doctor, schema: 'Product' },
+    '/solutions-use-case-prior-auth': { title: 'Prior Authorization Automation | AI Workflow', desc: 'Reduce prior auth turnaround by 60% with AI-powered submission, tracking, and approval workflows. Used by ASCs and health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
+    '/solutions-use-case-preventive-screening': { title: 'Preventive Screening Completion | AI Outreach', desc: 'Increase preventive screening completion with targeted outreach and scheduling. Deployed by FQHCs, ACOs, and health plans nationwide.', img: IMG.patients, schema: 'Product' },
     '/solutions-use-case-readmission-prevention': { title: 'Readmission Prevention | AI Post-Discharge Intervention', desc: 'Reduce hospital readmissions with AI-driven risk stratification and automated post-discharge intervention. 25% reduction in avoidable readmissions.', img: IMG.care, schema: 'Product' },
-    '/company-about': { title: 'About Zynix AI | Healthcare AI Built in Florida', desc: 'Purpose-built AI for value-based care. 1 million VBC patients onboarded. Headquartered in Trinity, FL. Serving ACOs, health systems, health plans, and FQHCs.', img: IMG.patients, schema: 'MedicalBusiness' },
+    '/company-about': { title: 'About Zynix AI | Healthcare AI Built for America', desc: 'Purpose-built AI for value-based care. 1 million VBC patients onboarded. Headquartered in Trinity, FL. Serving ACOs, health systems, health plans, and FQHCs.', img: IMG.patients, schema: 'MedicalBusiness' },
     '/company-careers': { title: 'Careers at Zynix AI | Join the Healthcare AI Revolution', desc: 'Join the team building healthcare\u2019s AI operating system. Engineering, clinical, and operations roles in Trinity, FL and remote.', img: IMG.hero, schema: 'Organization' },
     '/company-press': { title: 'Press & News | Zynix AI', desc: 'Latest news, press releases, and media coverage about Zynix AI\u2014the operating system for value-based healthcare.', img: IMG.hero, schema: 'Organization' },
     '/company-trust-center': { title: 'Trust Center | Zynix AI Security & Compliance', desc: 'HIPAA compliant, SOC 2 Type II, HITRUST ready. Learn about Zynix AI\u2019s security practices, data governance, and compliance certifications.', img: IMG.enterprise, schema: 'Organization' },
     '/contact': { title: 'Contact Zynix AI | Request a Demo', desc: 'Schedule a 30-minute demo with the Zynix AI team. See how AI can transform your healthcare operations. Based in Trinity, FL.', img: IMG.hero, schema: 'MedicalBusiness' },
     '/resources-faq': { title: 'FAQ | Zynix AI Healthcare Platform', desc: 'Answers to common questions about Zynix AI implementation, HIPAA compliance, EHR integration, pricing, and support for healthcare organizations.', img: IMG.hero, schema: 'FAQPage' },
     '/resources-blog': { title: 'Blog | Zynix AI Healthcare Insights', desc: 'Insights on healthcare AI, value-based care, population health, and operational transformation from the Zynix AI team.', img: IMG.hero, schema: 'Organization' },
-    '/resources-case-studies': { title: 'Case Studies | Zynix AI Customer Results', desc: 'See how Florida ACOs, health systems, and practices use Zynix AI to improve outcomes. 1M+ VBC patients served.', img: IMG.care, schema: 'Organization' },
+    '/resources-blog-1m-patients': { title: 'Zynix AI Surpasses 1 Million VBC Patients | Zynix AI', desc: 'Zynix AI announces 1 million value-based care patients onboarded across healthcare organizations in 30 states. Read about our milestone in AI-powered healthcare.', img: IMG.hero, schema: 'Article' },
+    '/resources-case-studies': { title: 'Case Studies | Zynix AI Customer Results', desc: 'See how ACOs, health systems, and practices nationwide use Zynix AI to improve outcomes. 1M+ VBC patients served.', img: IMG.care, schema: 'Organization' },
     '/resources-glossary': { title: 'Healthcare AI Glossary | Zynix AI', desc: 'Comprehensive glossary of healthcare AI, value-based care, interoperability, coding, claims, and compliance terminology.', img: IMG.hero, schema: 'Organization' },
     '/resources-webinars': { title: 'Webinars & Events | Zynix AI', desc: 'Upcoming and on-demand webinars on healthcare AI, value-based care operations, and care management best practices.', img: IMG.hero, schema: 'Organization' },
     '/resources-whitepapers': { title: 'Whitepapers & Reports | Zynix AI', desc: 'Research on healthcare AI, VBC outcomes, population health analytics, and operational transformation in healthcare.', img: IMG.hero, schema: 'Organization' },
@@ -177,7 +178,7 @@
       description:'The AI operating system for value-based healthcare. 1 million VBC patients onboarded across 16+ healthcare organizations.',
       address:{'@type':'PostalAddress',streetAddress:'3535 Little Rd',addressLocality:'Trinity',addressRegion:'FL',postalCode:'34655',addressCountry:'US'},
       contactPoint:{'@type':'ContactPoint',email:'info@zynix.ai',contactType:'sales'},
-      areaServed:{'@type':'State',name:'Florida'},
+      areaServed:{'@type':'Country',name:'United States'},
       numberOfEmployees:{'@type':'QuantitativeValue',value:'50-100'},
       foundingDate:'2023',
       sameAs:['https://www.linkedin.com/company/zynix-ai']
@@ -187,7 +188,7 @@
       schemas.push({'@context':'https://schema.org','@type':'SoftwareApplication',name:seo.title.split('|')[0].trim(),description:seo.desc,applicationCategory:'HealthcareApplication',operatingSystem:'Web',offers:{'@type':'Offer',price:'0',priceCurrency:'USD',description:'Contact for pricing'},brand:{'@type':'Organization',name:'Zynix AI'}});
     }
     if (seo.schema === 'MedicalBusiness') {
-      schemas.push({'@context':'https://schema.org','@type':'MedicalBusiness',name:'Zynix AI',description:seo.desc,address:orgSchema.address,geo:{'@type':'GeoCoordinates',latitude:28.1856,longitude:-82.6800},areaServed:'Florida',medicalSpecialty:'Value-Based Care',url:'https://www.zynix.ai'});
+      schemas.push({'@context':'https://schema.org','@type':'MedicalBusiness',name:'Zynix AI',description:seo.desc,address:orgSchema.address,geo:{'@type':'GeoCoordinates',latitude:28.1856,longitude:-82.6800},areaServed:'United States',medicalSpecialty:'Value-Based Care',url:'https://www.zynix.ai'});
     }
     if (seo.schema === 'FAQPage') {
       var faqEls = document.querySelectorAll('.zynix-faq-item');
@@ -263,7 +264,7 @@
     for (var i = 0; i < bodyChildren.length; i++) {
       var child = bodyChildren[i];
       if (child.tagName === 'SCRIPT' || child.tagName === 'STYLE' || child.tagName === 'LINK') continue;
-      if (child.classList.contains('zynix-injected') || child.classList.contains('zynix-mega-nav') || child.classList.contains('zynix-mobile-menu')) continue;
+      if (child.classList.contains('zynix-injected') || child.classList.contains('zynix-mega-nav') || child.classList.contains('zynix-mobile-menu') || child.classList.contains('zynix-announcement-bar')) continue;
       child.style.display = 'none';
     }
     // Also hide main/header/footer from Webflow template
@@ -1104,6 +1105,7 @@
   // ── PAGE: Blog ──
   function renderBlog() {
     var posts = [
+      { title: 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States', cat: 'Company News', date: 'Mar 15, 2026', slug: '/resources-blog-1m-patients', featured: true },
       { title: 'Prior Authorization Delays: What They Actually Cost And How to Fix Them', cat: 'Prior Authorization & RCM', date: 'Mar 3, 2026' },
       { title: 'Your EHR Is Not Broken. It Was Just Never Built to Think.', cat: 'AI Implementation', date: 'Mar 3, 2026' },
       { title: 'Harnessing Generative AI Applications for Healthcare Innovation', cat: 'AI Implementation', date: 'Mar 2, 2026' },
@@ -1135,7 +1137,13 @@
     ];
     var html = '<div class="zynix-blog-grid">';
     posts.forEach(function(p) {
-      html += '<div class="zynix-blog-card fade-in-up"><span class="zynix-blog-cat">' + p.cat + '</span><h3>' + p.title + '</h3><span class="zynix-blog-date">' + p.date + '</span></div>';
+      var featuredClass = p.featured ? ' zynix-blog-featured' : '';
+      var cardInner = '<span class="zynix-blog-cat">' + p.cat + '</span><h3>' + p.title + '</h3><span class="zynix-blog-date">' + p.date + '</span>';
+      if (p.slug) {
+        html += '<a href="' + p.slug + '" class="zynix-blog-card fade-in-up' + featuredClass + '" style="text-decoration:none;color:inherit;display:block">' + cardInner + '</a>';
+      } else {
+        html += '<div class="zynix-blog-card fade-in-up' + featuredClass + '">' + cardInner + '</div>';
+      }
     });
     html += '</div>';
 
@@ -1147,20 +1155,44 @@
     renderFooter();
   }
 
+  // ── PAGE: Blog Post — 1M VBC Patients ──
+  function renderBlog1MPatients() {
+    return renderInnerHero('COMPANY NEWS', 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States',
+      'March 15, 2026 — A milestone in healthcare AI adoption as healthcare organizations across 30 states trust Zynix to manage over one million value-based care patients.',
+      null, '') +
+    '<section class="zynix-blog-post-section"><div class="zynix-container" style="max-width:780px;margin:0 auto">' +
+    '<article class="zynix-blog-post-content">' +
+    '<p style="font-size:18px;line-height:1.9;color:var(--z-text)"><strong>Trinity, FL</strong> — Zynix AI, the AI operating system for value-based healthcare, today announced that its platform has surpassed one million patients onboarded across value-based care organizations in 30 states. This milestone represents the rapid adoption of AI-powered clinical and operational intelligence among ACOs, health systems, FQHCs, and independent practices.</p>' +
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">From Data Chaos to Coordinated Care</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">When Zynix launched its platform, the healthcare industry was drowning in fragmented data and manual workflows. Clinicians spent more time documenting than caring. ACOs struggled to close quality gaps before measurement periods ended. Prior authorization delays cost practices revenue and patients their health.</p>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">The Zynix platform was built to solve these problems with a fundamentally different approach: an integrated operating system where AI agents work together like a coordinated workforce — ingesting data, identifying risks, executing outreach, completing documentation, and closing care gaps automatically.</p>' +
+    '<div class="zynix-metrics-bar" style="margin:40px 0"><div class="zynix-metric"><span class="zynix-metric-value">1M+</span><span class="zynix-metric-label">VBC Patients Onboarded</span></div><div class="zynix-metric"><span class="zynix-metric-value">85%+</span><span class="zynix-metric-label">Quality Score Improvement</span></div><div class="zynix-metric"><span class="zynix-metric-value">40%</span><span class="zynix-metric-label">Admin Time Reduction</span></div><div class="zynix-metric"><span class="zynix-metric-value">2\u20133x</span><span class="zynix-metric-label">ROI in Year One</span></div></div>' +
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">What 1 Million Patients Means</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">Reaching one million patients is more than a number. It represents millions of AI-completed tasks: risk assessments generated, care gaps identified and closed, after-hours calls triaged, appointments scheduled, and clinical notes documented in real time.</p>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">For participating organizations, the impact is measurable: shared savings targets met, readmission rates reduced, HEDIS measures improved, and clinician burnout reduced through ambient AI documentation.</p>' +
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">Purpose-Built for American Healthcare</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">Zynix was built in Trinity, Florida, with a deep understanding of the complex U.S. healthcare landscape — from Medicare Advantage-heavy markets to rural FQHCs, serving organizations in 30 states. The platform integrates with every major EHR (Epic, Cerner, athena, eCW, NextGen) and processes claims, ADT feeds, labs, pharmacy data, and SDOH signals in real time.</p>' +
+    '<blockquote style="border-left:4px solid var(--z-blue);padding:20px 24px;margin:32px 0;background:var(--z-blue-light);border-radius:0 8px 8px 0"><p style="font-size:16px;line-height:1.8;color:var(--z-text);margin:0;font-style:italic">"We didn\u2019t set out to build another analytics tool. We built an operating system that does the work — the calls, the documentation, the follow-ups, the gap closures. One million patients is proof that healthcare organizations want AI that acts, not just AI that reports."</p><cite style="display:block;margin-top:12px;font-size:14px;color:var(--z-text-secondary);font-style:normal"><strong>— Gautamdev Chowdary</strong>, CTO & Co-Founder, Zynix AI</cite></blockquote>' +
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">Looking Ahead</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">With the one-million-patient milestone behind it, Zynix is focused on expanding its platform capabilities with new AI agents, deeper EHR integrations, and its proprietary ZynixLLM — a healthcare-specific language model that improves with every patient interaction. The company plans to continue expanding to serve healthcare organizations in all 50 states.</p>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">To learn more about how Zynix can transform your organization\u2019s value-based care performance, visit <a href="/" style="color:var(--z-blue);font-weight:600">zynix.ai</a> or <a href="/contact" style="color:var(--z-blue);font-weight:600">request a demo</a>.</p>' +
+    '</article></div></section>' +
+    renderCTA('Ready to Join the 1 Million?', 'See how Zynix can transform your organization\u2019s value-based care performance.', 'Request a Demo') +
+    renderFooter();
+  }
+
   // ── PAGE: Case Studies ──
   function renderCaseStudies() {
     var studies = [
-      { title: 'Pine Street Medical Group', metric: '34%', label: 'Appointment Availability Improvement', seg: 'Independent Practice' },
-      { title: 'HarborPoint Family Practice', metric: '28%', label: 'No-Show Reduction', seg: 'Independent Practice' },
-      { title: 'Clearview ASC Network', metric: '5 \u2192 1 day', label: 'Prior Auth Turnaround', seg: 'ASC' },
-      { title: 'BlueOak Health Plan', metric: '$8M', label: 'HCC Gap Closure', seg: 'Health Plan' },
-      { title: 'NorthBridge Health System', metric: '22%', label: 'Readmission Reduction', seg: 'Health System' },
-      { title: 'Cedar Valley Health Network', metric: '65%', label: 'Med Reconciliation Error Reduction', seg: 'Health System' },
-      { title: 'Riverside Community Health', metric: '31%', label: 'Preventive Screening Improvement', seg: 'FQHC' }
+      { title: 'West Florida ACO', metric: '40%', label: 'Quality Gap Closure Improvement', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics' },
+      { title: 'Space Coast ACO', metric: '85%+', label: 'TCM Contact Rate', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics' },
+      { title: 'Central Florida ACO', metric: '2.5x', label: 'ROI in Year One', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics' },
+      { title: 'Palm Beach ACO', metric: '3x', label: 'AWV Completion Improvement', seg: 'ACO', desc: 'Outbound Agents (PDV & AWV), AI Scribe' },
+      { title: 'eTernal Health', metric: '45%', label: 'Medication Adherence Improvement', seg: 'Health Plan', desc: 'PDV Agents, Medication Adherence Programs' }
     ];
     var html = '<div class="zynix-case-grid">';
     studies.forEach(function(s) {
-      html += '<div class="zynix-case-card fade-in-up"><span class="zynix-case-seg">' + s.seg + '</span><h3>' + s.title + '</h3><div class="zynix-case-metric"><span>' + s.metric + '</span><small>' + s.label + '</small></div></div>';
+      html += '<div class="zynix-case-card fade-in-up"><span class="zynix-case-seg">' + s.seg + '</span><h3>' + s.title + '</h3><div class="zynix-case-metric"><span>' + s.metric + '</span><small>' + s.label + '</small></div>' + (s.desc ? '<p style="font-size:13px;color:var(--z-text-secondary);margin-top:12px;line-height:1.5">' + s.desc + '</p>' : '') + '</div>';
     });
     html += '</div>';
 
@@ -1309,8 +1341,25 @@
       '<a href="/resources-blog">Blog</a><a href="/resources-case-studies">Case Studies</a><a href="/resources-faq">FAQ</a><a href="/resources-glossary">Glossary</a></div></div>' +
       '<a href="' + CALENDLY + '" class="zynix-mobile-cta" target="_blank">Request a Demo</a>';
 
+    // Announcement banner
+    var announceBanner = document.createElement('div');
+    announceBanner.className = 'zynix-announcement-bar';
+    announceBanner.innerHTML = '🎉 Zynix AI surpasses 1 Million VBC patients onboarded across 30 states <a href="/resources-blog-1m-patients">Read more</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
+
     document.body.prepend(mobile);
     document.body.prepend(nav);
+    document.body.prepend(announceBanner);
+
+    // Push nav down to sit below the fixed announcement bar
+    nav.classList.add('has-banner');
+    document.body.classList.add('has-announcement-bar');
+
+    // Announcement close handler
+    announceBanner.querySelector('.zynix-announce-close').addEventListener('click', function() {
+      announceBanner.style.display = 'none';
+      nav.classList.remove('has-banner');
+      document.body.classList.remove('has-announcement-bar');
+    });
 
     // Hide Webflow nav
     var wfNav = document.querySelector('.w-nav, .navbar, [data-collapse="medium"]');
@@ -1832,8 +1881,33 @@
   }
 
   function renderWebinars() {
-    return renderPlaceholderPage('WEBINARS & EVENTS', 'Learn from Healthcare AI Leaders',
-      'Upcoming webinars, events, and on-demand content from the Zynix team.');
+    return renderInnerHero('WEBINARS & EVENTS', 'Learn from Healthcare AI Leaders',
+      'Upcoming webinars, events, and on-demand content from the Zynix team.',
+      null, '') +
+    '<section class="zynix-section"><div class="zynix-container">' +
+    '<h2 class="zynix-section-title">Upcoming Events</h2>' +
+    '<div class="zynix-feature-grid" style="grid-template-columns:1fr">' +
+    '<div class="zynix-feature-card" style="border:2px solid var(--z-blue);position:relative;overflow:hidden">' +
+    '<span class="zynix-tag" style="margin-bottom:16px">LIVE WEBINAR + VBC EXHIBIT HALL</span>' +
+    '<h3 style="font-size:24px;margin-bottom:12px">Automation with Accountability: How ACOs Can Scale Patient Engagement Without Burning Out Teams</h3>' +
+    '<div style="display:flex;gap:24px;flex-wrap:wrap;margin:16px 0 20px">' +
+    '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Thu, Mar 19, 2026</div>' +
+    '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10:00 AM \u2013 11:00 AM PDT</div>' +
+    '</div>' +
+    '<p style="font-size:16px;line-height:1.7;color:var(--z-text-secondary);margin-bottom:24px">Join Zynix AI at the VBC Exhibit Hall to explore how AI-powered automation is helping ACOs scale patient engagement \u2014 from post-discharge follow-ups to preventive screenings \u2014 without adding staff burnout. Learn real strategies for balancing accountability and efficiency in value-based care.</p>' +
+    '<a href="https://register.gotowebinar.com/register/6452881364816065371?source=Newsletter" class="zynix-btn-primary" target="_blank" rel="noopener">Register Now &rarr;</a>' +
+    '</div></div>' +
+    '</div></section>' +
+    '<section class="zynix-section" style="background:var(--z-blue-light)">' +
+    '<div class="zynix-container" style="text-align:center;max-width:800px">' +
+    '<span class="zynix-tag">ACCESS & EMR CONNECTIVITY</span>' +
+    '<h2 class="zynix-section-title">Zynix AI is Participating in ACCESS</h2>' +
+    '<p class="zynix-section-sub" style="font-size:18px;line-height:1.7">Zynix AI is connected to all major EMRs and participating in ACCESS. If your organization wants to sign up for AI-powered care coordination, outbound patient engagement, or clinical documentation \u2014 we can connect directly to your existing systems.</p>' +
+    '<p style="font-size:16px;color:var(--z-text-secondary);margin-top:16px">Connected EMRs: Epic \u2022 Cerner \u2022 athenahealth \u2022 eClinicalWorks \u2022 NextGen \u2022 Greenway \u2022 Allscripts \u2022 DrChrono</p>' +
+    '<a href="/contact" class="zynix-btn-primary" style="margin-top:24px">Connect Your Organization &rarr;</a>' +
+    '</div></section>' +
+    renderCTA('Ready to See AI in Action?', 'Schedule a live demo and see how Zynix transforms care coordination.', 'Request a Demo') +
+    renderFooter();
   }
 
   function renderWhitepapers() {
@@ -1936,7 +2010,7 @@
     html += '<section class="zynix-screenshot-section"><div class="zynix-container">' +
       '<span class="zynix-tag">INSIDE THE PLATFORM</span>' +
       '<h2>See What You Get on Day One</h2>' +
-      '<p class="zynix-section-sub">Real product screenshots from live deployments across Florida healthcare organizations.</p>' +
+      '<p class="zynix-section-sub">Real product screenshots from live deployments across healthcare organizations in 30 states.</p>' +
       '<div class="zynix-screenshot-gallery">' +
       '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACO + '" alt="ACO Dashboard"><div class="caption">ACO Performance Dashboard</div></div>' +
       '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalProvider + '" alt="Provider View"><div class="caption">Clinical Quality Metrics</div></div>' +
@@ -2039,6 +2113,7 @@
     '/resources-faq': renderFAQ,
     '/blog': renderBlog,
     '/resources-blog': renderBlog,
+    '/resources-blog-1m-patients': renderBlog1MPatients,
     '/case-studies': renderCaseStudies,
     '/resources-case-studies': renderCaseStudies,
     '/resources-glossary': renderGlossary,
@@ -2070,6 +2145,57 @@
     }
   }
 
+  // ── Scroll-triggered counter animation ──
+  function animateCounters() {
+    var counters = document.querySelectorAll('.zynix-stat-value, .zynix-metric-value');
+    if (!counters.length || !('IntersectionObserver' in window)) return;
+    var counterObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        if (el.dataset.animated) return;
+        el.dataset.animated = '1';
+        var text = el.textContent.trim();
+        var match = text.match(/^([\d,.]+)(.*)$/);
+        if (!match) return;
+        var target = parseFloat(match[1].replace(/,/g, ''));
+        var suffix = match[2] || '';
+        var hasComma = match[1].indexOf(',') > -1;
+        var hasDecimal = match[1].indexOf('.') > -1;
+        var decimals = hasDecimal ? (match[1].split('.')[1] || '').length : 0;
+        var duration = 1200;
+        var start = performance.now();
+        function step(now) {
+          var elapsed = now - start;
+          var progress = Math.min(elapsed / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = target * eased;
+          var formatted = hasDecimal ? current.toFixed(decimals) : Math.floor(current).toString();
+          if (hasComma) formatted = Number(formatted).toLocaleString();
+          el.textContent = formatted + suffix;
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.3 });
+    counters.forEach(function(el) { counterObserver.observe(el); });
+  }
+
+  // ── Custom 404 page renderer ──
+  function render404() {
+    return renderHero('Page Not Found', 'The page you\'re looking for doesn\'t exist or has been moved.', { badge: '404 ERROR', img: IMG.hero }) +
+    '<section style="padding:60px 20px 80px;text-align:center;max-width:600px;margin:0 auto">' +
+      '<p style="font-size:18px;color:var(--z-text-light);margin-bottom:32px">It seems you\'ve followed a broken link or the page has been removed. Let us help you find what you need.</p>' +
+      '<div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">' +
+        '<a href="/" class="zynix-btn-primary" style="text-decoration:none">← Back to Home</a>' +
+        '<a href="/products-zynix-os" class="zynix-btn-outline" style="text-decoration:none">Explore Products</a>' +
+        '<a href="/contact" class="zynix-btn-outline" style="text-decoration:none">Contact Us</a>' +
+      '</div>' +
+    '</section>' +
+    renderCTA() + renderFooter();
+  }
+
   if (routes[path]) {
     var doInject = function() {
       injectSEO(path);
@@ -2094,6 +2220,7 @@
       }
       injectAfterNav(renderBreadcrumb(path) + pageContent);
       initAnimations();
+      animateCounters();
       // FAQ accordion toggle
       document.querySelectorAll('.zynix-faq-q').forEach(function(q) {
         q.addEventListener('click', function() {
@@ -2105,6 +2232,19 @@
       document.addEventListener('DOMContentLoaded', doInject);
     } else {
       doInject();
+    }
+  } else {
+    // 404 — unmatched route: show branded 404 page
+    var do404 = function() {
+      document.title = 'Page Not Found | Zynix AI';
+      injectMegaMenu();
+      injectAfterNav(render404());
+      initAnimations();
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', do404);
+    } else {
+      do404();
     }
   }
 
