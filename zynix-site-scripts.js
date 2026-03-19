@@ -2253,6 +2253,9 @@
           q.parentElement.classList.toggle('open');
         });
       });
+      // Anti-flicker: reveal page now that content is injected
+      document.documentElement.classList.remove('js-loading');
+      if(window.__antiFlickerTimeout)clearTimeout(window.__antiFlickerTimeout);
     };
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', doInject);
@@ -2266,6 +2269,9 @@
       injectMegaMenu();
       injectAfterNav(render404());
       initAnimations();
+      // Anti-flicker: reveal page
+      document.documentElement.classList.remove('js-loading');
+      if(window.__antiFlickerTimeout)clearTimeout(window.__antiFlickerTimeout);
     };
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', do404);
