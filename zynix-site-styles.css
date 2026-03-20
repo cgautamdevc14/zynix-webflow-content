@@ -959,6 +959,91 @@ body.has-announcement-bar { padding-top: 40px; }
   100% { transform: translateX(-50%); }
 }
 
+/* ── Testimonials ── */
+.zynix-testimonials-section {
+  padding: 100px 0;
+  background: var(--z-bg-warm);
+}
+.zynix-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.zynix-testimonial-card {
+  background: var(--z-bg-card);
+  padding: 36px 28px;
+  border-radius: var(--z-radius-lg);
+  border: 1px solid var(--z-border);
+  box-shadow: var(--z-shadow-sm);
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+.zynix-testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--z-shadow-lg);
+  border-color: var(--z-blue);
+}
+.zynix-testimonial-stars {
+  font-size: 18px;
+  color: #F59E0B;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+.zynix-testimonial-quote {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--z-text-secondary);
+  margin: 0 0 auto;
+  padding-bottom: 20px;
+  font-style: italic;
+}
+.zynix-testimonial-author {
+  border-top: 1px solid var(--z-border);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.zynix-testimonial-author strong {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--z-text);
+}
+.zynix-testimonial-author span {
+  font-size: 13px;
+  color: var(--z-text-muted);
+}
+
+/* ── Enhanced Trust Strip ── */
+.zynix-trust-track span {
+  position: relative;
+}
+.zynix-trust-track span::after {
+  content: '\00b7';
+  position: absolute;
+  right: -26px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--z-border);
+  font-weight: 700;
+}
+
+/* ── Flywheel enhancements ── */
+.zynix-flywheel-step h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--z-text);
+  margin: 0 0 4px;
+}
+.zynix-flywheel-loop {
+  font-size: 28px !important;
+  color: var(--z-blue) !important;
+  font-weight: 700;
+}
+
 /* ── Crisis Section ── */
 .zynix-crisis-section {
   padding: 100px 0;
@@ -1222,6 +1307,7 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-homepage-hero h1 { font-size: 36px; }
   .zynix-comparison-grid { grid-template-columns: 1fr; }
   .zynix-related-grid { grid-template-columns: repeat(2, 1fr); }
+  .zynix-testimonials-grid { grid-template-columns: 1fr 1fr; }
   .zynix-screenshot-gallery { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 }
 @media (max-width: 767px) {
@@ -1252,6 +1338,7 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-compare-table th, .zynix-compare-table td { padding: 10px 12px; }
   .zynix-related-grid { grid-template-columns: 1fr; }
   .zynix-screenshot-gallery { grid-template-columns: 1fr; gap: 16px; }
+  .zynix-testimonials-grid { grid-template-columns: 1fr; }
 }
 
 /* ── Hide Webflow Template Default Content ── */

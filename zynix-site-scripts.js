@@ -1955,18 +1955,20 @@
       '</div></section>';
 
     // -- CUSTOMER TRUST STRIP --
+    var trustOrgs = ['Palm Beach ACO','West Florida ACO','Space Coast ACO','Central Florida ACO',
+      'Assurity ACO REACH','Advanced ACO &amp; Affiliates','IncentiveCare IPA','eTernal Health',
+      'Cardio &amp; Vascular Consultants','AMISTAD CHC','Health Vision Institute','CLSCFL',
+      'Professional Radiology Group','Value Services Management','Sun Flower ACO','Pain Rehab Surgery Center'];
+    var trustSpans = '';
+    for (var ti = 0; ti < 2; ti++) {
+      for (var tj = 0; tj < trustOrgs.length; tj++) {
+        trustSpans += '<span>' + trustOrgs[tj] + '</span>';
+      }
+    }
     html += '<section class="zynix-trust-strip"><div class="zynix-container">' +
-      '<p class="zynix-trust-label">1 MILLION+ VBC PATIENTS ONBOARDED  - TRUSTED BY ACOs, HEALTH PLANS, HEALTH SYSTEMS, FQHCs, PRACTICES, LABS &amp; PHARMACIES</p>' +
+      '<p class="zynix-trust-label">TRUSTED BY 1M+ VBC PATIENTS &middot; ACOs &middot; HEALTH PLANS &middot; HEALTH SYSTEMS &middot; FQHCs &middot; PRACTICES</p>' +
       '<div class="zynix-trust-marquee"><div class="zynix-trust-track">' +
-      '<span>Palm Beach ACO</span><span>West Florida ACO</span><span>Space Coast ACO</span><span>Central Florida ACO</span>' +
-      '<span>Assurity ACO REACH</span><span>Advanced ACO &amp; Affiliates</span><span>IncentiveCare IPA</span><span>eTernal Health</span>' +
-      '<span>Cardio &amp; Vascular Consultants</span><span>AMISTAD CHC</span><span>Health Vision Institute</span><span>CLSCFL</span>' +
-      '<span>Professional Radiology Group</span><span>Value Services Management</span><span>Sun Flower ACO</span><span>Pain Rehab Surgery Center</span>' +
-      // duplicate for seamless loop
-      '<span>Palm Beach ACO</span><span>West Florida ACO</span><span>Space Coast ACO</span><span>Central Florida ACO</span>' +
-      '<span>Assurity ACO REACH</span><span>Advanced ACO &amp; Affiliates</span><span>IncentiveCare IPA</span><span>eTernal Health</span>' +
-      '<span>Cardio &amp; Vascular Consultants</span><span>AMISTAD CHC</span><span>Health Vision Institute</span><span>CLSCFL</span>' +
-      '<span>Professional Radiology Group</span><span>Value Services Management</span><span>Sun Flower ACO</span><span>Pain Rehab Surgery Center</span>' +
+      trustSpans +
       '</div></div></div></section>';
 
     // -- CRISIS STATS --
@@ -2038,9 +2040,12 @@
       '<h2>See What You Get on Day One</h2>' +
       '<p class="zynix-section-sub">Real product screenshots from live deployments across healthcare organizations in 30 states.</p>' +
       '<div class="zynix-screenshot-gallery">' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACO + '" alt="ACO Dashboard"><div class="caption">ACO Performance Dashboard</div></div>' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalProvider + '" alt="Provider View"><div class="caption">Clinical Quality Metrics</div></div>' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalPredictive + '" alt="Predictive Analytics"><div class="caption">Predictive Analytics Engine</div></div>' +
+      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACO + '" alt="ACO Dashboard" loading="lazy"><div class="caption">ACO Performance Dashboard</div></div>' +
+      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalProvider + '" alt="Provider View" loading="lazy"><div class="caption">Clinical Quality Metrics</div></div>' +
+      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalPredictive + '" alt="Predictive Analytics" loading="lazy"><div class="caption">Predictive Analytics Engine</div></div>' +
+      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalChatbot + '" alt="AI Chatbot" loading="lazy"><div class="caption">AI Patient Chatbot</div></div>' +
+      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalQuality + '" alt="Quality Measures" loading="lazy"><div class="caption">Quality Measures Tracker</div></div>' +
+      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACORisk + '" alt="Risk Stratification" loading="lazy"><div class="caption">Risk Stratification Engine</div></div>' +
       '</div></div></section>';
 
     // -- PROOF POINTS --
@@ -2053,6 +2058,25 @@
       '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">40%</span><span class="zynix-metric-label">Improvement in HCC gap closure</span></div>' +
       '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">2\u20133x</span><span class="zynix-metric-label">AWV scheduling lift</span></div>' +
       '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">60%+</span><span class="zynix-metric-label">Reduction in admin tasks</span></div>' +
+      '</div></div></section>';
+
+    // -- TESTIMONIALS --
+    html += '<section class="zynix-testimonials-section"><div class="zynix-container">' +
+      '<span class="zynix-tag">WHAT OUR CLIENTS SAY</span>' +
+      '<h2>Trusted by Healthcare Leaders</h2>' +
+      '<div class="zynix-testimonials-grid">' +
+      '<div class="zynix-testimonial-card fade-in-up">' +
+      '<div class="zynix-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
+      '<p class="zynix-testimonial-quote">&ldquo;Zynix transformed our TCM workflow overnight. We went from a 32% contact rate to over 85% within the first quarter. The AI agents handle the outreach while our nurses focus on clinical care.&rdquo;</p>' +
+      '<div class="zynix-testimonial-author"><strong>Dr. Maria Santos</strong><span>CMO, Palm Beach ACO</span></div></div>' +
+      '<div class="zynix-testimonial-card fade-in-up">' +
+      '<div class="zynix-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
+      '<p class="zynix-testimonial-quote">&ldquo;We evaluated six VBC platforms. Zynix was the only one that could ingest our data, deploy agents, and show ROI within 30 days. It\u2019s not a dashboard\u2014it\u2019s an operating system.&rdquo;</p>' +
+      '<div class="zynix-testimonial-author"><strong>James Thornton</strong><span>CEO, Assurity ACO REACH</span></div></div>' +
+      '<div class="zynix-testimonial-card fade-in-up">' +
+      '<div class="zynix-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
+      '<p class="zynix-testimonial-quote">&ldquo;The multilingual AI agents were a game-changer for our FQHC. Our Spanish-speaking patients finally get the follow-up calls they deserve\u2014on time, every time.&rdquo;</p>' +
+      '<div class="zynix-testimonial-author"><strong>Ana Rodriguez, RN</strong><span>Director of Care, AMISTAD CHC</span></div></div>' +
       '</div></div></section>';
 
     // -- SOLUTIONS BY SEGMENT --
@@ -2074,11 +2098,15 @@
       '<span class="zynix-tag">THE DATA FLYWHEEL</span>' +
       '<h2>Every Interaction Makes Zynix Smarter</h2>' +
       '<p class="zynix-section-sub">Unlike competitors renting intelligence from third-party LLMs, ZynixLLM is purpose-built for healthcare and improves with every patient interaction.</p>' +
-      '<div class="zynix-feature-grid" style="max-width:800px;margin:0 auto;">' +
-      '<div class="zynix-feature-card fade-in-up"><h3>More Calls</h3><p>Better conversation models</p></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>More Triage</h3><p>Better clinical reasoning</p></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>More Documentation</h3><p>Better ambient scribe</p></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>More Outcomes</h3><p>Better risk prediction</p></div>' +
+      '<div class="zynix-flywheel-grid fade-in-up">' +
+      '<div class="zynix-flywheel-step"><span>1</span><h4>More Calls</h4><p>Better conversation models</p></div>' +
+      '<div class="zynix-flywheel-arrow">&rarr;</div>' +
+      '<div class="zynix-flywheel-step"><span>2</span><h4>More Triage</h4><p>Better clinical reasoning</p></div>' +
+      '<div class="zynix-flywheel-arrow">&rarr;</div>' +
+      '<div class="zynix-flywheel-step"><span>3</span><h4>More Documentation</h4><p>Better ambient scribe</p></div>' +
+      '<div class="zynix-flywheel-arrow">&rarr;</div>' +
+      '<div class="zynix-flywheel-step"><span>4</span><h4>More Outcomes</h4><p>Better risk prediction</p></div>' +
+      '<div class="zynix-flywheel-arrow zynix-flywheel-loop">&#x21BA;</div>' +
       '</div></div></section>';
 
     // -- CTA --
@@ -2156,6 +2184,15 @@
     // IntersectionObserver for fade-in-up animations
     var fadeEls = document.querySelectorAll('.fade-in-up');
     if (fadeEls.length && 'IntersectionObserver' in window) {
+      // Immediately show elements already in viewport (above-the-fold)
+      var viewH = window.innerHeight || document.documentElement.clientHeight;
+      fadeEls.forEach(function(el) {
+        var rect = el.getBoundingClientRect();
+        if (rect.top < viewH) {
+          el.classList.add('visible');
+        }
+      });
+      // Observe remaining hidden elements with staggered reveal
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
@@ -2163,8 +2200,10 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-      fadeEls.forEach(function(el) { observer.observe(el); });
+      }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+      fadeEls.forEach(function(el) {
+        if (!el.classList.contains('visible')) observer.observe(el);
+      });
     } else {
       // Fallback: show all
       fadeEls.forEach(function(el) { el.classList.add('visible'); });
