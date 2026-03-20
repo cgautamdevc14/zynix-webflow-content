@@ -458,6 +458,80 @@ body {
   padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);
 }
 .zynix-footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); margin: 0; }
+.zynix-footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+.zynix-footer-bottom a:hover { color: var(--z-accent); }
+
+/* ── Footer Compliance Badges ── */
+.zynix-footer-compliance {
+  max-width: 1200px; margin: 32px auto 0;
+  display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);
+}
+.zynix-compliance-badge {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+}
+.zynix-compliance-icon {
+  font-size: 20px; line-height: 1;
+  opacity: 0.7;
+}
+.zynix-compliance-badge strong {
+  display: block; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.7);
+  letter-spacing: 0.5px;
+}
+.zynix-compliance-badge span {
+  display: block; font-size: 11px; color: rgba(255,255,255,0.35);
+}
+
+/* ── Footer Social Links ── */
+.zynix-footer-social {
+  display: flex; gap: 12px; margin-top: 16px;
+}
+.zynix-footer-social a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5);
+  font-size: 16px; text-decoration: none; transition: all 0.2s;
+  font-family: 'Font Awesome 5 Brands', sans-serif;
+}
+.zynix-footer-social a:hover {
+  background: rgba(255,255,255,0.12); color: #fff;
+}
+
+/* ── Hero Trust Badges ── */
+.zynix-hero-trust {
+  display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap;
+}
+.zynix-hero-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; font-weight: 500; color: var(--z-text-muted);
+  padding: 6px 12px;
+  background: var(--z-bg-alt);
+  border: 1px solid var(--z-border);
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+.zynix-inner-hero .zynix-hero-badge {
+  color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* ── CTA Section Upgrades ── */
+.zynix-cta-btns {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+}
+.zynix-cta-trust {
+  display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+  margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.15);
+}
+.zynix-cta-trust span {
+  font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.5);
+  letter-spacing: 0.5px;
+}
 
 /* ── Fade-in animations ── */
 .fade-in-up { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }

@@ -316,19 +316,34 @@
   // ── Shared Components ──
   function renderFooter() {
     return '<footer class="zynix-footer"><div class="zynix-footer-inner">' +
-      '<div class="zynix-footer-brand"><img src="' + IMG.logoWhite + '" alt="Zynix AI" style="height:48px;margin-bottom:16px;"><p>The operating system for value-based care. Purpose-built AI that unifies clinical, financial, and operational intelligence.</p></div>' +
+      '<div class="zynix-footer-brand"><img src="' + IMG.logoWhite + '" alt="Zynix AI" style="height:48px;margin-bottom:16px;"><p>The operating system for value-based care. Purpose-built AI that unifies clinical, financial, and operational intelligence.</p>' +
+      '<div class="zynix-footer-social"><a href="https://www.linkedin.com/company/zynix-ai" target="_blank" rel="noopener" aria-label="LinkedIn">&#xf0e1;</a><a href="https://twitter.com/zynixai" target="_blank" rel="noopener" aria-label="Twitter">&#xf099;</a></div></div>' +
       '<div class="zynix-footer-col"><h4>PRODUCTS</h4><a href="/products-zynix-os">Zynix OS</a><a href="/products-data-platform">Data Platform</a><a href="/products-analytics">Analytics</a><a href="/products-ai-agents">AI Agents</a><a href="/products-zynscribe">ZynScribe</a><a href="/products-care-plans">Care Plans</a><a href="/company-zynixllm">ZynixLLM</a></div>' +
       '<div class="zynix-footer-col"><h4>SOLUTIONS</h4><a href="/solutions-acos">ACOs & MSOs</a><a href="/solutions-health-systems">Health Systems</a><a href="/solutions-health-plans">Health Plans</a><a href="/solutions-fqhcs">FQHCs</a><a href="/solutions-independent-practices">Practices</a><a href="/solutions-ascs">ASCs</a></div>' +
       '<div class="zynix-footer-col"><h4>COMPANY</h4><a href="/company-about">About</a><a href="/company-careers">Careers</a><a href="/company-trust-center">Trust Center</a><a href="/company-press">Press</a><a href="/contact">Contact</a></div>' +
-      '<div class="zynix-footer-col"><h4>RESOURCES</h4><a href="/resources-blog">Blog</a><a href="/resources-case-studies">Case Studies</a><a href="/resources-faq">FAQ</a><a href="/resources-glossary">Glossary</a><a href="/company-privacy">Privacy</a><a href="/company-terms">Terms</a></div>' +
-      '</div><div class="zynix-footer-bottom"><p>&copy; 2026 Zynix AI. All rights reserved.</p></div></footer>';
+      '<div class="zynix-footer-col"><h4>RESOURCES</h4><a href="/resources-blog">Blog</a><a href="/resources-case-studies">Case Studies</a><a href="/resources-faq">FAQ</a><a href="/resources-webinars">Webinars</a><a href="/company-privacy">Privacy</a><a href="/company-terms">Terms</a></div>' +
+      '</div>' +
+      '<div class="zynix-footer-compliance">' +
+      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">&#128737;</div><div><strong>HIPAA</strong><span>Compliant</span></div></div>' +
+      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">&#128274;</div><div><strong>SOC 2</strong><span>Type II Certified</span></div></div>' +
+      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">&#9989;</div><div><strong>HITRUST</strong><span>CSF Ready</span></div></div>' +
+      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">&#127760;</div><div><strong>GDPR</strong><span>Compliant</span></div></div>' +
+      '</div>' +
+      '<div class="zynix-footer-bottom"><p>&copy; 2026 Zynix AI. All rights reserved. &middot; <a href="/company-privacy">Privacy Policy</a> &middot; <a href="/company-terms">Terms of Service</a> &middot; <a href="/company-trust-center">Security</a></p></div></footer>';
   }
 
   function renderCTA(title, subtitle, btnText) {
     return '<section class="zynix-cta-section"><div class="zynix-container">' +
       '<h2>' + (title || 'See Zynix in Action') + '</h2>' +
       '<p>' + (subtitle || 'Join the healthcare organizations already transforming care with AI-powered intelligence.') + '</p>' +
+      '<div class="zynix-cta-btns">' +
       '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">' + (btnText || 'Request a Demo') + ' &rarr;</a>' +
+      '<a href="/company-trust-center" class="zynix-btn-secondary">Security & Compliance</a>' +
+      '</div>' +
+      '<div class="zynix-cta-trust">' +
+      '<span>&#128737; HIPAA</span><span>&#128274; SOC 2 Type II</span><span>&#9989; HITRUST</span>' +
+      '<span>&#127760; GDPR</span><span>&#128100; 1M+ Patients</span><span>&#127961; 30 States</span>' +
+      '</div>' +
       '</div></section>';
   }
 
@@ -339,6 +354,11 @@
       '<h1>' + title + '</h1>' +
       '<p>' + subtitle + '</p>' +
       '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#capabilities" class="zynix-btn-secondary">Explore Capabilities</a></div>' +
+      '<div class="zynix-hero-trust">' +
+      '<span class="zynix-hero-badge">&#128737; HIPAA</span>' +
+      '<span class="zynix-hero-badge">&#128274; SOC 2</span>' +
+      '<span class="zynix-hero-badge">&#9989; HITRUST</span>' +
+      '</div>' +
       '</div>' +
       (image ? '<div class="zynix-inner-hero-img"><img src="' + image + '" alt="' + (imgAlt || '') + '"></div>' : '') +
       '</div></section>';
@@ -1088,12 +1108,12 @@
     '</div></div>' +
     '<div class="zynix-contact-form-wrap">' +
     '<h3>Request a Demo</h3>' +
-    '<form class="zynix-contact-form" onsubmit="event.preventDefault();this.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#F16529>Thank you!</h3><p>We\\\'ll be in touch within 24 hours.</p></div>\'">' +
-    '<div class="zynix-form-row"><div class="zynix-form-group"><label>First Name</label><input type="text" placeholder="John" required></div><div class="zynix-form-group"><label>Last Name</label><input type="text" placeholder="Smith" required></div></div>' +
-    '<div class="zynix-form-group"><label>Work Email</label><input type="email" placeholder="john@organization.com" required></div>' +
-    '<div class="zynix-form-group"><label>Organization</label><input type="text" placeholder="Your organization name"></div>' +
-    '<div class="zynix-form-group"><label>Healthcare Segment</label><select><option value="">Select your segment</option><option>ACO / MSO</option><option>Health System</option><option>FQHC</option><option>Health Plan</option><option>Independent Practice</option><option>ASC</option><option>Other</option></select></div>' +
-    '<div class="zynix-form-group"><label>Message (Optional)</label><textarea rows="4" placeholder="Tell us about your goals..."></textarea></div>' +
+    '<form class="zynix-contact-form" id="zynix-demo-form" onsubmit="event.preventDefault();var f=this;var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'company\',value:f.querySelector(\'[name=company]\').value},{name:\'healthcare_segment\',value:f.querySelector(\'[name=segment]\').value},{name:\'message\',value:f.querySelector(\'[name=message]\').value}]};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#F16529>Thank you!</h3><p>We\\\'ll be in touch within 24 hours.</p></div>\'}).catch(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#F16529>Thank you!</h3><p>We\\\'ll be in touch within 24 hours.</p></div>\'})">' +
+    '<div class="zynix-form-row"><div class="zynix-form-group"><label>First Name</label><input type="text" name="firstname" placeholder="John" required></div><div class="zynix-form-group"><label>Last Name</label><input type="text" name="lastname" placeholder="Smith" required></div></div>' +
+    '<div class="zynix-form-group"><label>Work Email</label><input type="email" name="email" placeholder="john@organization.com" required></div>' +
+    '<div class="zynix-form-group"><label>Organization</label><input type="text" name="company" placeholder="Your organization name"></div>' +
+    '<div class="zynix-form-group"><label>Healthcare Segment</label><select name="segment"><option value="">Select your segment</option><option>ACO / MSO</option><option>Health System</option><option>FQHC</option><option>Health Plan</option><option>Independent Practice</option><option>ASC</option><option>Other</option></select></div>' +
+    '<div class="zynix-form-group"><label>Message (Optional)</label><textarea name="message" rows="4" placeholder="Tell us about your goals..."></textarea></div>' +
     '<button type="submit" class="zynix-btn-primary" style="width:100%;text-align:center">Request a Demo &rarr;</button>' +
     '</form></div></div></div></section>' +
     renderFooter();
@@ -1950,6 +1970,11 @@
       '<h1>Close Care Gaps Faster.<br>Grow Your Shared Savings.</h1>' +
       '<p>Zynix unifies your clinical data, deploys AI agents, and automates outreach -so your team can focus on patients, not paperwork.</p>' +
       '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#how-it-works" class="zynix-btn-secondary">See How It Works</a></div>' +
+      '<div class="zynix-hero-trust">' +
+      '<span class="zynix-hero-badge">&#128737; HIPAA Compliant</span>' +
+      '<span class="zynix-hero-badge">&#128274; SOC 2 Type II</span>' +
+      '<span class="zynix-hero-badge">&#9989; HITRUST Ready</span>' +
+      '</div>' +
       '</div>' +
       '<div class="zynix-inner-hero-img"><img src="' + IMG.gifDashboard + '" alt="Zynix AI Healthcare Dashboard"></div>' +
       '</div></section>';
