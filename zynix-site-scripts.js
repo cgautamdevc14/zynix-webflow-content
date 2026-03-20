@@ -2068,15 +2068,15 @@
       '<div class="zynix-testimonial-card fade-in-up">' +
       '<div class="zynix-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
       '<p class="zynix-testimonial-quote">&ldquo;Zynix transformed our TCM workflow overnight. We went from a 32% contact rate to over 85% within the first quarter. The AI agents handle the outreach while our nurses focus on clinical care.&rdquo;</p>' +
-      '<div class="zynix-testimonial-author"><strong>Dr. Maria Santos</strong><span>CMO, Palm Beach ACO</span></div></div>' +
+      '<div class="zynix-testimonial-author"><strong>David Klebonis</strong><span>COO, Palm Beach ACO</span></div></div>' +
       '<div class="zynix-testimonial-card fade-in-up">' +
       '<div class="zynix-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
       '<p class="zynix-testimonial-quote">&ldquo;We evaluated six VBC platforms. Zynix was the only one that could ingest our data, deploy agents, and show ROI within 30 days. It\u2019s not a dashboard\u2014it\u2019s an operating system.&rdquo;</p>' +
-      '<div class="zynix-testimonial-author"><strong>James Thornton</strong><span>CEO, Assurity ACO REACH</span></div></div>' +
+      '<div class="zynix-testimonial-author"><strong>Ronda Mill</strong><span>Senior Care Manager, West Florida ACO</span></div></div>' +
       '<div class="zynix-testimonial-card fade-in-up">' +
       '<div class="zynix-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
       '<p class="zynix-testimonial-quote">&ldquo;The multilingual AI agents were a game-changer for our FQHC. Our Spanish-speaking patients finally get the follow-up calls they deserve\u2014on time, every time.&rdquo;</p>' +
-      '<div class="zynix-testimonial-author"><strong>Ana Rodriguez, RN</strong><span>Director of Care, AMISTAD CHC</span></div></div>' +
+      '<div class="zynix-testimonial-author"><strong>Ganesh Karra</strong><span>Systems Engineer, AMISTAD CHC</span></div></div>' +
       '</div></div></section>';
 
     // -- SOLUTIONS BY SEGMENT --
