@@ -1951,7 +1951,7 @@
       '<p>Zynix unifies your clinical data, deploys AI agents, and automates outreach -so your team can focus on patients, not paperwork.</p>' +
       '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#how-it-works" class="zynix-btn-secondary">See How It Works</a></div>' +
       '</div>' +
-      '<div class="zynix-inner-hero-img"><img src="' + IMG.portalACO + '" alt="Zynix AI Healthcare Dashboard"></div>' +
+      '<div class="zynix-inner-hero-img"><img src="' + IMG.gifDashboard + '" alt="Zynix AI Healthcare Dashboard"></div>' +
       '</div></section>';
 
     // -- CUSTOMER TRUST STRIP --
