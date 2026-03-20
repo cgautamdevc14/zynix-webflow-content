@@ -13,18 +13,18 @@
   var GHG = GH + 'gifs/';
   var IMG = {
     // Premium AI-generated page hero images (OpenAI gpt-image-1)
-    hero: 'https://files.catbox.moe/u4b6xz.png',           // 3D glass dashboard — homepage hero
-    doctor: 'https://files.catbox.moe/vg8tm8.png',          // AI Agent — doctors, AI agents pages
-    patient: 'https://files.catbox.moe/grdw57.png',         // Patient engagement — scheduling, reminders
-    analytics: 'https://files.catbox.moe/u4b6xz.png',       // Hero dashboard — analytics pages
-    data: 'https://files.catbox.moe/f169kt.png',            // Data network — data platform, ZynFax
-    care: 'https://files.catbox.moe/rvlkaa.png',            // Care coordination — care plans, ACOs
-    scribe: 'https://files.catbox.moe/vg8tm8.png',          // AI Agent — ZynScribe
-    patients: 'https://files.catbox.moe/jily5r.png',        // Enterprise platform — FQHCs, About
-    enterprise: 'https://files.catbox.moe/jily5r.png',      // Enterprise platform — Zynix OS
-    mesh: 'https://files.catbox.moe/f169kt.png',            // Data network — ZynixLLM
+    hero: GH + 'hero-dashboard.png',           // 3D glass dashboard — homepage hero
+    doctor: GH + 'doctor-voice-agent.png',          // AI Agent — doctors, AI agents pages
+    patient: GH + 'patient-engagement.png',         // Patient engagement — scheduling, reminders
+    analytics: GH + 'hero-dashboard.png',       // Hero dashboard — analytics pages
+    data: GH + 'data-platform.png',            // Data network — data platform, ZynFax
+    care: GH + 'care-team-insights.png',            // Care coordination — care plans, ACOs
+    scribe: GH + 'doctor-voice-agent.png',          // AI Agent — ZynScribe
+    patients: GH + 'enterprise-command-center.png',        // Enterprise platform — FQHCs, About
+    enterprise: GH + 'enterprise-command-center.png',      // Enterprise platform — Zynix OS
+    mesh: GH + 'data-platform.png',            // Data network — ZynixLLM
     // Background overlay
-    overlay: 'https://files.catbox.moe/gd3pvo.png',         // Dashboard overlay — section backgrounds
+    overlay: GH + 'analytics-dashboard.png',         // Dashboard overlay — section backgrounds
     // GIF clips (kept for optional use)
     gifDashboard: GHG + 'dashboard-walkthrough.gif',
     gifMetrics: GHG + 'dashboard-metrics.gif',
@@ -35,18 +35,18 @@
     gifLogo: GHG + 'logo-animation.gif',
     // Branding
     logo: GH + 'zynix-fill-horizontal.png',
-    logoWhite: 'https://files.catbox.moe/hthre9.png',
+    logoWhite: GH + 'zynix-ai-brand.png',
     symbol: GH + 'logo-symbol.png',
     favicon: GH + 'favicon-32.png?v=3',
     appleTouchIcon: GH + 'apple-touch-icon.png?v=3',
     // Portal Screenshots (real product — used in gallery sections)
-    portalACO: 'https://files.catbox.moe/ymjdj1.png',
-    portalProvider: 'https://files.catbox.moe/sem2y4.png',
-    portalChatbot: 'https://files.catbox.moe/mbj7sl.png',
-    portalPredictive: 'https://files.catbox.moe/ey06uy.png',
-    portalQuality: 'https://files.catbox.moe/3f5hx5.png',
-    portalACOQuality: 'https://files.catbox.moe/9aqd5n.png',
-    portalACORisk: 'https://files.catbox.moe/64syr8.png'
+    portalACO: GH + 'zynix-aco-dashboard.png',
+    portalProvider: GH + 'zynix-provider-view.png',
+    portalChatbot: GH + 'zynix-chatbot.png',
+    portalPredictive: GH + 'zynix-predictive-analytics.png',
+    portalQuality: GH + 'zynix-quality-measures.png',
+    portalACOQuality: GH + 'zynix-aco-quality.png',
+    portalACORisk: GH + 'zynix-aco-risk.png'
   };
 
   // ── Cross-Linking Data Model ──
