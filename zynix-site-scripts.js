@@ -2403,7 +2403,7 @@
 
   // ── Custom 404 page renderer ──
   function render404() {
-    return renderInnerHero('Page Not Found', 'The page you\'re looking for doesn\'t exist or has been moved.', { badge: '404 ERROR', img: IMG.hero }) +
+    return renderInnerHero('404 ERROR', 'Page Not Found', 'The page you\'re looking for doesn\'t exist or has been moved.', IMG.hero, 'Page not found') +
     '<section style="padding:60px 20px 80px;text-align:center;max-width:600px;margin:0 auto">' +
       '<p style="font-size:18px;color:var(--z-text-light);margin-bottom:32px">It seems you\'ve followed a broken link or the page has been removed. Let us help you find what you need.</p>' +
       '<div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">' +
