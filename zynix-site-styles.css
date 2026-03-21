@@ -476,7 +476,11 @@ body {
 }
 .zynix-compliance-icon {
   font-size: 20px; line-height: 1;
-  opacity: 0.7;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.zynix-compliance-icon svg {
+  display: block;
 }
 .zynix-compliance-badge strong {
   display: block; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.7);
@@ -494,8 +498,10 @@ body {
   display: inline-flex; align-items: center; justify-content: center;
   width: 36px; height: 36px; border-radius: 8px;
   background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5);
-  font-size: 16px; text-decoration: none; transition: all 0.2s;
-  font-family: 'Font Awesome 5 Brands', sans-serif;
+  text-decoration: none; transition: all 0.2s;
+}
+.zynix-footer-social a svg {
+  display: block;
 }
 .zynix-footer-social a:hover {
   background: rgba(255,255,255,0.12); color: #fff;

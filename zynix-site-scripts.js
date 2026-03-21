@@ -314,20 +314,33 @@
   }
 
   // ── Shared Components ──
+  // SVG icons for footer
+  var SVG_LINKEDIN = '<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>';
+  var SVG_X = '<svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>';
+  var SVG_INSTAGRAM = '<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>';
+  var SVG_HIPAA = '<svg viewBox="0 0 40 40" width="32" height="32"><rect width="40" height="40" rx="8" fill="#1a73e8" opacity="0.15"/><path d="M20 6l-10 5v9c0 7.1 4.3 13.7 10 16 5.7-2.3 10-8.9 10-16v-9l-10-5z" fill="none" stroke="#1a73e8" stroke-width="2"/><path d="M15 20l3 3 7-7" fill="none" stroke="#1a73e8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var SVG_SOC2 = '<svg viewBox="0 0 40 40" width="32" height="32"><rect width="40" height="40" rx="8" fill="#34a853" opacity="0.15"/><rect x="12" y="16" width="16" height="12" rx="2" fill="none" stroke="#34a853" stroke-width="2"/><path d="M16 16v-3a4 4 0 018 0v3" fill="none" stroke="#34a853" stroke-width="2"/><circle cx="20" cy="23" r="2" fill="#34a853"/></svg>';
+  var SVG_HITRUST = '<svg viewBox="0 0 40 40" width="32" height="32"><rect width="40" height="40" rx="8" fill="#7c3aed" opacity="0.15"/><path d="M20 6l-10 5v9c0 7.1 4.3 13.7 10 16 5.7-2.3 10-8.9 10-16v-9l-10-5z" fill="none" stroke="#7c3aed" stroke-width="2"/><path d="M16 20h8M20 16v8" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round"/></svg>';
+  var SVG_GDPR = '<svg viewBox="0 0 40 40" width="32" height="32"><rect width="40" height="40" rx="8" fill="#ea4335" opacity="0.15"/><circle cx="20" cy="20" r="10" fill="none" stroke="#ea4335" stroke-width="2"/><circle cx="20" cy="20" r="4" fill="none" stroke="#ea4335" stroke-width="2"/><path d="M20 6v4M20 30v4M6 20h4M30 20h4" stroke="#ea4335" stroke-width="2" stroke-linecap="round"/></svg>';
+
   function renderFooter() {
     return '<footer class="zynix-footer"><div class="zynix-footer-inner">' +
       '<div class="zynix-footer-brand"><img src="' + IMG.logoWhite + '" alt="Zynix AI" style="height:48px;margin-bottom:16px;"><p>The operating system for value-based care. Purpose-built AI that unifies clinical, financial, and operational intelligence.</p>' +
-      '<div class="zynix-footer-social"><a href="https://www.linkedin.com/company/zynix-ai" target="_blank" rel="noopener" aria-label="LinkedIn">&#xf0e1;</a><a href="https://twitter.com/zynixai" target="_blank" rel="noopener" aria-label="Twitter">&#xf099;</a></div></div>' +
+      '<div class="zynix-footer-social">' +
+      '<a href="https://www.linkedin.com/company/zynix/" target="_blank" rel="noopener" aria-label="LinkedIn">' + SVG_LINKEDIN + '</a>' +
+      '<a href="https://x.com/zynixai_" target="_blank" rel="noopener" aria-label="X">' + SVG_X + '</a>' +
+      '<a href="https://www.instagram.com/zynixai/" target="_blank" rel="noopener" aria-label="Instagram">' + SVG_INSTAGRAM + '</a>' +
+      '</div></div>' +
       '<div class="zynix-footer-col"><h4>PRODUCTS</h4><a href="/products-zynix-os">Zynix OS</a><a href="/products-data-platform">Data Platform</a><a href="/products-analytics">Analytics</a><a href="/products-ai-agents">AI Agents</a><a href="/products-zynscribe">ZynScribe</a><a href="/products-care-plans">Care Plans</a><a href="/company-zynixllm">ZynixLLM</a></div>' +
       '<div class="zynix-footer-col"><h4>SOLUTIONS</h4><a href="/solutions-acos">ACOs & MSOs</a><a href="/solutions-health-systems">Health Systems</a><a href="/solutions-health-plans">Health Plans</a><a href="/solutions-fqhcs">FQHCs</a><a href="/solutions-independent-practices">Practices</a><a href="/solutions-ascs">ASCs</a></div>' +
       '<div class="zynix-footer-col"><h4>COMPANY</h4><a href="/company-about">About</a><a href="/company-careers">Careers</a><a href="/company-trust-center">Trust Center</a><a href="/company-press">Press</a><a href="/contact">Contact</a></div>' +
       '<div class="zynix-footer-col"><h4>RESOURCES</h4><a href="/resources-blog">Blog</a><a href="/resources-case-studies">Case Studies</a><a href="/resources-faq">FAQ</a><a href="/resources-webinars">Webinars</a><a href="/company-privacy">Privacy</a><a href="/company-terms">Terms</a></div>' +
       '</div>' +
       '<div class="zynix-footer-compliance">' +
-      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">&#128737;</div><div><strong>HIPAA</strong><span>Compliant</span></div></div>' +
-      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">&#128274;</div><div><strong>SOC 2</strong><span>Type II Certified</span></div></div>' +
-      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">&#9989;</div><div><strong>HITRUST</strong><span>CSF Ready</span></div></div>' +
-      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">&#127760;</div><div><strong>GDPR</strong><span>Compliant</span></div></div>' +
+      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_HIPAA + '</div><div><strong>HIPAA</strong><span>Compliant</span></div></div>' +
+      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_SOC2 + '</div><div><strong>SOC 2</strong><span>Type II Certified</span></div></div>' +
+      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_HITRUST + '</div><div><strong>HITRUST</strong><span>CSF Ready</span></div></div>' +
+      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_GDPR + '</div><div><strong>GDPR</strong><span>Compliant</span></div></div>' +
       '</div>' +
       '<div class="zynix-footer-bottom"><p>&copy; 2026 Zynix AI. All rights reserved. &middot; <a href="/company-privacy">Privacy Policy</a> &middot; <a href="/company-terms">Terms of Service</a> &middot; <a href="/company-trust-center">Security</a></p></div></footer>';
   }
