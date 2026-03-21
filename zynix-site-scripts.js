@@ -2369,8 +2369,21 @@
       document.getElementById('roi-readmit').textContent = '-' + Math.round((readmitReduction / (d * 12 * 0.15)) * 100) + '%';
     }
 
+    // Update slider track fill gradient
+    function updateTrackFill(el) {
+      var min = parseFloat(el.min) || 0;
+      var max = parseFloat(el.max) || 100;
+      var val = parseFloat(el.value);
+      var pct = ((val - min) / (max - min)) * 100;
+      el.style.background = 'linear-gradient(90deg, var(--z-primary) 0%, var(--z-primary) ' + pct + '%, #e5e7eb ' + pct + '%, #e5e7eb 100%)';
+    }
+
     [lives, discharges, tcm, gaps].forEach(function(el) {
-      el.addEventListener('input', calc);
+      el.addEventListener('input', function() {
+        calc();
+        updateTrackFill(el);
+      });
+      updateTrackFill(el); // initial fill
     });
     calc(); // initial calculation
   }
