@@ -111,14 +111,15 @@
   // ── SEO Data ──
   var SITE_DOMAIN = (window.location.hostname.indexOf('zynix.ai') > -1) ? 'https://www.zynix.ai' : window.location.origin;
   var PAGE_SEO = {
-    '': { title: 'Zynix AI | The AI Operating System for Value-Based Healthcare', desc: 'Zynix unifies data, analytics, and AI agents into one platform -purpose-built for value-based healthcare. 1 million VBC patients onboarded. Trusted by 16+ healthcare organizations across 30 states.', img: IMG.hero, schema: 'Organization' },
-    '/products-zynix-os': { title: 'Zynix OS | AI Operating System for Healthcare', desc: 'The integrated AI platform where agents work together to deliver measurable patient and financial outcomes. Serving 1M+ VBC patients across ACOs and health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
-    '/products-data-platform': { title: 'Zynix Data Platform | Unified Healthcare Data Layer', desc: 'Ingest, clean, and normalize data from every clinical and administrative source. Real-time ADT processing, 97%+ patient matching. Trusted by healthcare organizations across 30 states.', img: IMG.data, schema: 'Product' },
-    '/products-analytics': { title: 'Zynix Analytics | Population Health Intelligence', desc: 'AI-powered analytics for HCC gap closure, risk prediction, and clinical decision support. 40% improvement in gap closure rates. Deployed across ACOs nationwide.', img: IMG.analytics, schema: 'Product' },
-    '/products-ai-agents': { title: 'Zynix AI Agents | 7 Specialized Healthcare Agents', desc: 'AI agents for outreach, scheduling, triage, documentation, reminders, prior auth, and fax processing. 1M+ patient interactions handled across 30 states.', img: IMG.doctor, schema: 'Product' },
-    '/products-zynscribe': { title: 'ZynScribe | AI Clinical Documentation', desc: 'Ambient AI documentation that captures structured clinical notes in real-time. Reduce documentation burden by 70%. Serving physicians across health systems nationwide.', img: IMG.scribe, schema: 'Product' },
-    '/products-care-plans': { title: 'Zynix Care Plans | Orchestrated AI Workflows', desc: 'Deployable care plans for TCM, CCM, AWV, HEDIS, and HCC closure -executed by AI agents. 85%+ TCM contact rates. Deployed by ACOs nationwide.', img: IMG.care, schema: 'Product' },
-    '/company-zynixllm': { title: 'ZynixLLM | Purpose-Built Healthcare Language Model', desc: 'Healthcare-native language model powering the Zynix platform. Lower hallucination rates than general-purpose models. Gets smarter with every patient interaction.', img: IMG.mesh, schema: 'Product' },
+    '': { title: 'Zynix AI | The AI Operating System for Value-Based Healthcare', desc: 'Zynix AI unifies clinical data, deploys AI agents, and automates care coordination for ACOs, health systems, and health plans. 1M+ VBC patients onboarded across 30 states. Request a demo.', img: IMG.hero, schema: 'Organization' },
+    '/products-zynix-os': { title: 'Zynix OS | The AI Operating System for Value-Based Healthcare', desc: 'Zynix OS integrates data, analytics, AI agents, and care plans into one healthcare platform. See how ACOs and health systems automate care delivery at scale.', img: IMG.enterprise, schema: 'Product' },
+    '/products-data-platform': { title: 'Healthcare Data Platform | Unified Clinical & Claims Data | Zynix AI', desc: 'Ingest, clean, and normalize EHR, claims, ADT, labs, and SDOH data into one unified layer. 97%+ patient matching. Real-time processing for ACOs and health systems.', img: IMG.data, schema: 'Product' },
+    '/products-analytics': { title: 'Population Health Analytics | AI Risk Stratification & Gap Closure | Zynix AI', desc: 'AI-powered population health analytics for HCC gap closure, risk prediction, and clinical decision support. 40% improvement in gap closure rates across ACOs.', img: IMG.analytics, schema: 'Product' },
+    '/products-ai-agents': { title: 'Healthcare AI Agents | 7 Autonomous Agents for Care Operations | Zynix AI', desc: 'Seven AI agents that handle patient outreach, scheduling, triage, documentation, reminders, prior auth, and fax processing autonomously. 1M+ interactions across 30 states.', img: IMG.doctor, schema: 'Product' },
+    '/products-zynscribe': { title: 'ZynScribe | AI Clinical Documentation & Ambient Scribe | Zynix AI', desc: 'Ambient AI documentation that captures structured clinical notes in real-time during patient encounters. Reduce documentation burden by 70%. HIPAA compliant.', img: IMG.scribe, schema: 'Product' },
+    '/products-care-plans': { title: 'AI Care Plans | TCM, CCM, AWV & Gap Closure Workflows | Zynix AI', desc: 'Deployable, AI-orchestrated care plans for TCM, CCM, AWV, HEDIS, and HCC closure. 85%+ TCM contact rates. Executed automatically by AI agents.', img: IMG.care, schema: 'Product' },
+    '/company-zynixllm': { title: 'ZynixLLM | Purpose-Built Healthcare Language Model | Zynix AI', desc: 'Healthcare-native LLM powering the Zynix platform. Lower hallucination rates than general-purpose models. Trained on clinical workflows, not just medical literature.', img: IMG.mesh, schema: 'Product' },
+    '/products-zynixllm': { title: 'ZynixLLM | Purpose-Built Healthcare Language Model | Zynix AI', desc: 'Healthcare-native LLM powering the Zynix platform. Lower hallucination rates than general-purpose models. Trained on clinical workflows, not just medical literature.', img: IMG.mesh, schema: 'Product' },
     '/products-ai-agents-zynafterhours': { title: 'ZynAfterHours | 24/7 AI Triage & After-Hours Call Agent', desc: 'AI-powered patient triage handling inbound calls 24/7 in 15+ languages. 97.3% triage accuracy, 20-30% ER diversion. Trusted by healthcare organizations across 30 states.', img: IMG.doctor, schema: 'Product' },
     '/products-ai-agents-zynschedule': { title: 'ZynSchedule | AI Appointment Scheduling Agent', desc: 'Always-on scheduling that captures every slot, reduces no-shows, and books appointments 24/7. Deployed across practices and ACOs nationwide.', img: IMG.patient, schema: 'Product' },
     '/products-ai-agents-post-discharge': { title: 'Post-Discharge Follow-Up Agent | Zynix AI', desc: 'Automated post-discharge outreach for TCM workflows. 85%+ contact rates vs. 30-40% industry average. Used by ACOs and health systems nationwide.', img: IMG.care, schema: 'Product' },
@@ -126,21 +127,21 @@
     '/products-ai-agents-zynreminder': { title: 'ZynReminder | AI Appointment Reminder Agent', desc: 'Reduce no-shows by 40% with personalized reminders and patient confirmation workflows. Serving practices and community health centers nationwide.', img: IMG.patient, schema: 'Product' },
     '/products-ai-agents-zynfax': { title: 'ZynFax | AI Fax Processing Agent', desc: 'Intelligent fax classification, data extraction, and routing for healthcare. Eliminate manual fax processing. Deployed by health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
     '/products-ai-agents-zynauth': { title: 'ZynAuth | AI Prior Authorization Agent', desc: 'Streamline prior auth with AI-powered submission, tracking, and follow-up. Reduce auth turnaround by 60%. Used by ASCs and health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
-    '/solutions-acos': { title: 'Zynix for ACOs & MSOs | Hit Shared Savings with AI', desc: 'Maximize AWV completion, achieve 85% TCM contact rates, and close HCC gaps. Trusted by Palm Beach ACO, West Florida ACO, Space Coast ACO, and 7+ ACOs nationwide.', img: IMG.care, schema: 'Product' },
-    '/solutions-health-systems': { title: 'Zynix for Health Systems | Reduce Readmissions with AI', desc: 'Unified patient engagement, post-discharge coordination, and documentation at scale. Serving Health Vision Institute, CLSCFL, and health networks nationwide.', img: IMG.enterprise, schema: 'Product' },
-    '/solutions-health-plans': { title: 'Zynix for Health Plans | Improve Stars & Close Gaps', desc: 'Stars ratings improvement, HCC gap closure, member engagement at scale. Trusted by eTernal Health and value-based payers nationwide.', img: IMG.analytics, schema: 'Product' },
-    '/solutions-fqhcs': { title: 'Zynix for FQHCs | Multilingual AI for Community Health', desc: 'Multilingual AI for underserved populations, quality payments maximization, care management at scale. Serving AMISTAD CHC and community health centers nationwide.', img: IMG.patients, schema: 'Product' },
-    '/solutions-independent-practices': { title: 'Zynix for Independent Practices | Reduce No-Shows & Burnout', desc: 'After-hours coverage, appointment scheduling, no-show reduction, documentation savings. Serving Cardio & Vascular Consultants, Professional Radiology Group, and practices nationwide.', img: IMG.doctor, schema: 'Product' },
-    '/solutions-ascs': { title: 'Zynix for ASCs | Prior Auth & Patient Coordination', desc: 'Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination. Serving Pain Rehab Surgery Center and ASCs nationwide.', img: IMG.enterprise, schema: 'Product' },
-    '/solutions-use-case-tcm': { title: 'Transitional Care Management (TCM) | AI-Powered Workflow', desc: 'Automate the 30-day post-discharge TCM workflow. 85%+ contact rates vs. 30-40% industry average. Deployed by ACOs and health systems nationwide.', img: IMG.care, schema: 'Product' },
-    '/solutions-use-case-gap-closure': { title: 'HCC & Quality Gap Closure | AI-Prioritized Worklists', desc: 'Close HCC and quality gaps 40% faster with AI-prioritized worklists and automated outreach. Deployed across ACOs and health plans nationwide.', img: IMG.analytics, schema: 'Product' },
+    '/solutions-acos': { title: 'AI for ACOs & MSOs | Shared Savings, TCM & Gap Closure | Zynix AI', desc: 'Help your ACO hit shared savings targets with AI-powered TCM workflows, HCC gap closure, and automated patient outreach. 85% TCM contact rates. Trusted by 7+ ACOs nationwide.', img: IMG.care, schema: 'Product' },
+    '/solutions-health-systems': { title: 'AI for Health Systems | Reduce Readmissions & Automate Care | Zynix AI', desc: 'Unified patient engagement, post-discharge coordination, and documentation at scale. 25% readmission reduction. Serving health systems and networks nationwide.', img: IMG.enterprise, schema: 'Product' },
+    '/solutions-health-plans': { title: 'AI for Health Plans | Improve Stars Ratings & Close Gaps | Zynix AI', desc: 'Improve Stars ratings, close HCC and quality gaps, and scale member engagement with AI. Trusted by eTernal Health and value-based payers nationwide.', img: IMG.analytics, schema: 'Product' },
+    '/solutions-fqhcs': { title: 'AI for FQHCs | Multilingual Outreach & Quality Measures | Zynix AI', desc: 'Multilingual AI outreach in 15+ languages, quality payment maximization, and care management at scale for community health centers. Serving AMISTAD CHC and FQHCs nationwide.', img: IMG.patients, schema: 'Product' },
+    '/solutions-independent-practices': { title: 'AI for Medical Practices | Reduce No-Shows & Burnout | Zynix AI', desc: 'AI-powered after-hours coverage, appointment scheduling, 40% no-show reduction, and documentation savings for independent practices. Deploy in weeks, not months.', img: IMG.doctor, schema: 'Product' },
+    '/solutions-ascs': { title: 'AI for ASCs | Prior Auth Automation & Scheduling | Zynix AI', desc: 'Prior authorization automation, surgical cancellation reduction, and pre-op/post-op coordination for ambulatory surgery centers. 60% faster auth turnaround.', img: IMG.enterprise, schema: 'Product' },
+    '/solutions-use-case-tcm': { title: 'Transitional Care Management AI | 85% Contact Rates | Zynix AI', desc: 'Automate the 30-day post-discharge TCM workflow with AI. Achieve 85%+ contact rates vs 30-40% industry average. CMS-reimbursable. Deployed by ACOs and health systems.', img: IMG.care, schema: 'Product' },
+    '/solutions-use-case-gap-closure': { title: 'HCC & Quality Gap Closure | AI-Prioritized Worklists | Zynix AI', desc: 'Close HCC and quality gaps 40% faster with AI-prioritized worklists and automated outreach. Deployed across ACOs and health plans nationwide.', img: IMG.analytics, schema: 'Product' },
     '/solutions-use-case-after-hours': { title: 'After-Hours Triage & Access | AI Call Handling', desc: '24/7 AI after-hours call handling with intelligent triage. 97.3% accuracy, 20-30% ER diversion rate. Serving practices and FQHCs nationwide.', img: IMG.doctor, schema: 'Product' },
     '/solutions-use-case-prior-auth': { title: 'Prior Authorization Automation | AI Workflow', desc: 'Reduce prior auth turnaround by 60% with AI-powered submission, tracking, and approval workflows. Used by ASCs and health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
     '/solutions-use-case-preventive-screening': { title: 'Preventive Screening Completion | AI Outreach', desc: 'Increase preventive screening completion with targeted outreach and scheduling. Deployed by FQHCs, ACOs, and health plans nationwide.', img: IMG.patients, schema: 'Product' },
     '/solutions-use-case-readmission-prevention': { title: 'Readmission Prevention | AI Post-Discharge Intervention', desc: 'Reduce hospital readmissions with AI-driven risk stratification and automated post-discharge intervention. 25% reduction in avoidable readmissions.', img: IMG.care, schema: 'Product' },
     '/company-about': { title: 'About Zynix AI | Healthcare AI Built for America', desc: 'Purpose-built AI for value-based care. 1 million VBC patients onboarded. Headquartered in Trinity, FL. Serving ACOs, health systems, health plans, and FQHCs.', img: IMG.patients, schema: 'MedicalBusiness' },
-    '/company-careers': { title: 'Careers at Zynix AI | Join the Healthcare AI Revolution', desc: 'Join the team building healthcare\u2019s AI operating system. Engineering, clinical, and operations roles in Trinity, FL and remote.', img: IMG.hero, schema: 'Organization' },
-    '/company-press': { title: 'Press & News | Zynix AI', desc: 'Latest news, press releases, and media coverage about Zynix AI -the operating system for value-based healthcare.', img: IMG.hero, schema: 'Organization' },
+    '/company-careers': { title: 'Careers at Zynix AI | Join the Healthcare AI Revolution', desc: 'Join the team building healthcare\u2019s AI operating system. Engineering, clinical, and operations roles in Trinity, FL and remote.', img: IMG.hero, schema: 'Organization', noindex: true },
+    '/company-press': { title: 'Press & News | Zynix AI', desc: 'Latest news, press releases, and media coverage about Zynix AI -the operating system for value-based healthcare.', img: IMG.hero, schema: 'Organization', noindex: true },
     '/company-trust-center': { title: 'Trust Center | Zynix AI Security & Compliance', desc: 'HIPAA compliant, SOC 2 Type II, HITRUST ready. Learn about Zynix AI\u2019s security practices, data governance, and compliance certifications.', img: IMG.enterprise, schema: 'Organization' },
     '/contact': { title: 'Contact Zynix AI | Request a Demo', desc: 'Schedule a 30-minute demo with the Zynix AI team. See how AI can transform your healthcare operations. Based in Trinity, FL.', img: IMG.hero, schema: 'MedicalBusiness' },
     '/resources-faq': { title: 'FAQ | Zynix AI Healthcare Platform', desc: 'Answers to common questions about Zynix AI implementation, HIPAA compliance, EHR integration, pricing, and support for healthcare organizations.', img: IMG.hero, schema: 'FAQPage' },
@@ -148,10 +149,17 @@
     '/resources-blog-1m-patients': { title: 'Zynix AI Surpasses 1 Million VBC Patients | Zynix AI', desc: 'Zynix AI announces 1 million value-based care patients onboarded across healthcare organizations in 30 states. Read about our milestone in AI-powered healthcare.', img: IMG.hero, schema: 'Article' },
     '/resources-case-studies': { title: 'Case Studies | Zynix AI Customer Results', desc: 'See how ACOs, health systems, and practices nationwide use Zynix AI to improve outcomes. 1M+ VBC patients served.', img: IMG.care, schema: 'Organization' },
     '/resources-glossary': { title: 'Healthcare AI Glossary | Zynix AI', desc: 'Comprehensive glossary of healthcare AI, value-based care, interoperability, coding, claims, and compliance terminology.', img: IMG.hero, schema: 'Organization' },
-    '/resources-webinars': { title: 'Webinars & Events | Zynix AI', desc: 'Upcoming and on-demand webinars on healthcare AI, value-based care operations, and care management best practices.', img: IMG.hero, schema: 'Organization' },
-    '/resources-whitepapers': { title: 'Whitepapers & Reports | Zynix AI', desc: 'Research on healthcare AI, VBC outcomes, population health analytics, and operational transformation in healthcare.', img: IMG.hero, schema: 'Organization' },
+    '/resources-webinars': { title: 'Webinars & Events | Zynix AI', desc: 'Upcoming and on-demand webinars on healthcare AI, value-based care operations, and care management best practices.', img: IMG.hero, schema: 'Organization', noindex: true },
+    '/resources-whitepapers': { title: 'Whitepapers & Reports | Zynix AI', desc: 'Research on healthcare AI, VBC outcomes, population health analytics, and operational transformation in healthcare.', img: IMG.hero, schema: 'Organization', noindex: true },
     '/company-privacy': { title: 'Privacy Policy | Zynix AI', desc: 'Zynix AI privacy policy. How we collect, use, and protect your personal and health-related information.', img: IMG.hero, schema: 'Organization' },
-    '/company-terms': { title: 'Terms of Service | Zynix AI', desc: 'Zynix AI terms of service governing use of our healthcare AI platform and related services.', img: IMG.hero, schema: 'Organization' }
+    '/company-terms': { title: 'Terms of Service | Zynix AI', desc: 'Zynix AI terms of service governing use of our healthcare AI platform and related services.', img: IMG.hero, schema: 'Organization' },
+    '/compare/zynix-vs-point-solutions': { title: 'Zynix AI vs Point Solutions | Healthcare AI Comparison', desc: 'Compare the Zynix integrated AI operating system against fragmented point solutions for value-based care. See why leading ACOs choose a unified platform over piecemeal tools.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare/zynix-vs-innovaccer': { title: 'Zynix AI vs Innovaccer | Healthcare AI Platform Comparison', desc: 'Compare Zynix AI and Innovaccer head-to-head. Zynix delivers autonomous AI agents that take action while Innovaccer focuses on data aggregation and analytics dashboards.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare/zynix-vs-commure': { title: 'Zynix AI vs Commure | Healthcare AI Platform Comparison', desc: 'Compare Zynix AI and Commure for healthcare operations. Zynix is a turnkey AI operating system while Commure is a developer platform requiring custom engineering.', img: IMG.enterprise, schema: 'Organization' },
+    '/blog/what-is-value-based-care-ai': { title: 'What Is Value-Based Care AI? Complete Guide 2026 | Zynix AI', desc: 'Value-based care AI uses artificial intelligence to automate care coordination, close quality gaps, and optimize risk adjustment. Learn how VBC AI works and why it matters in 2026.', img: IMG.analytics, schema: 'Article', datePublished: '2026-03-01' },
+    '/blog/how-ai-closes-care-gaps': { title: 'How AI Closes Care Gaps: Identification to Resolution | Zynix AI', desc: 'Learn how AI automates the entire care gap lifecycle from identification through patient outreach to confirmed resolution. Reduce manual effort and improve HEDIS and HCC gap closure rates.', img: IMG.care, schema: 'Article', datePublished: '2026-03-10' },
+    '/blog/ai-agents-vs-chatbots-healthcare': { title: 'Healthcare AI Agents vs Chatbots: Key Differences | Zynix AI', desc: 'Healthcare AI agents take autonomous action while chatbots only answer questions. Understand the critical differences and why agents deliver better outcomes for care organizations.', img: IMG.doctor, schema: 'Article', datePublished: '2026-03-15' },
+    '/case-studies/palm-beach-aco': { title: 'Palm Beach ACO Case Study | AI for Value-Based Care | Zynix AI', desc: 'Palm Beach ACO achieved 85% TCM contact rates, 40% gap closure improvement, and 3x AWV lift using the Zynix AI platform. Read the full case study.', img: IMG.care, schema: 'Article', datePublished: '2026-02-01' }
   };
 
   // ── SEO Injection ──
@@ -166,7 +174,7 @@
       el.setAttribute('content', content);
     }
     setMeta('name','description', seo.desc);
-    setMeta('name','robots','index, follow');
+    setMeta('name','robots', seo.noindex ? 'noindex, nofollow' : 'index, follow');
     setMeta('name','geo.region','US-FL');
     setMeta('name','geo.placename','Trinity, Florida');
     setMeta('name','geo.position','28.1856;-82.6800');
@@ -204,25 +212,47 @@
       areaServed:{'@type':'Country',name:'United States'},
       numberOfEmployees:{'@type':'QuantitativeValue',value:'50-100'},
       foundingDate:'2023',
-      sameAs:['https://www.linkedin.com/company/zynix-ai']
+      sameAs:['https://www.linkedin.com/company/zynix/','https://x.com/zynixai_','https://www.instagram.com/zynixai/']
     };
     var schemas = [orgSchema];
+
+    // WebSite schema (homepage only)
+    if (!pagePath || pagePath === '/') {
+      schemas.push({'@context':'https://schema.org','@type':'WebSite',name:'Zynix AI',url:'https://www.zynix.ai',description:'The AI Operating System for Value-Based Healthcare',publisher:{'@type':'Organization',name:'Zynix AI'}});
+    }
+
+    // BreadcrumbList schema (all inner pages)
+    if (pagePath && pagePath !== '/') {
+      var crumbs = [{'@type':'ListItem',position:1,name:'Home',item:'https://www.zynix.ai'}];
+      var seg = pagePath.replace(/^\//,'').split('-');
+      var sectionMap = {products:'Products',solutions:'Solutions',company:'Company',resources:'Resources'};
+      if (sectionMap[seg[0]]) {
+        crumbs.push({'@type':'ListItem',position:2,name:sectionMap[seg[0]],item:'https://www.zynix.ai/' + seg[0] + '-' + (seg[0]==='products'?'zynix-os':seg[0]==='solutions'?'acos':seg[0]==='company'?'about':seg[0]==='resources'?'blog':'')});
+      }
+      crumbs.push({'@type':'ListItem',position:crumbs.length+1,name:seo.title.split('|')[0].trim(),item:'https://www.zynix.ai' + pagePath});
+      schemas.push({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:crumbs});
+    }
+
     if (seo.schema === 'Product') {
       schemas.push({'@context':'https://schema.org','@type':'SoftwareApplication',name:seo.title.split('|')[0].trim(),description:seo.desc,applicationCategory:'HealthcareApplication',operatingSystem:'Web',offers:{'@type':'Offer',price:'0',priceCurrency:'USD',description:'Contact for pricing'},brand:{'@type':'Organization',name:'Zynix AI'}});
     }
     if (seo.schema === 'MedicalBusiness') {
       schemas.push({'@context':'https://schema.org','@type':'MedicalBusiness',name:'Zynix AI',description:seo.desc,address:orgSchema.address,geo:{'@type':'GeoCoordinates',latitude:28.1856,longitude:-82.6800},areaServed:'United States',medicalSpecialty:'Value-Based Care',url:'https://www.zynix.ai'});
     }
-    if (seo.schema === 'FAQPage') {
-      var faqEls = document.querySelectorAll('.zynix-faq-item');
-      var mainEntity = [];
-      faqEls.forEach(function(f) {
-        var q = f.querySelector('.zynix-faq-q');
-        var a = f.querySelector('.zynix-faq-a');
-        if (q && a) mainEntity.push({'@type':'Question',name:q.textContent,acceptedAnswer:{'@type':'Answer',text:a.textContent}});
-      });
-      if (mainEntity.length) schemas.push({'@context':'https://schema.org','@type':'FAQPage',mainEntity:mainEntity});
+    if (seo.schema === 'Article') {
+      schemas.push({'@context':'https://schema.org','@type':'Article',headline:seo.title.split('|')[0].trim(),description:seo.desc,image:seo.img||IMG.hero,author:{'@type':'Organization',name:'Zynix AI'},publisher:{'@type':'Organization',name:'Zynix AI',logo:{'@type':'ImageObject',url:IMG.logo}},datePublished:seo.datePublished||'2026-01-15',dateModified:seo.dateModified||'2026-01-15',mainEntityOfPage:'https://www.zynix.ai'+pagePath});
     }
+
+    // FAQPage schema — detect FAQ items on ANY page, not just /faq
+    var faqEls = document.querySelectorAll('.zynix-faq-item');
+    var mainEntity = [];
+    faqEls.forEach(function(f) {
+      var q = f.querySelector('.zynix-faq-q');
+      var a = f.querySelector('.zynix-faq-a');
+      if (q && a) mainEntity.push({'@type':'Question',name:q.textContent.trim(),acceptedAnswer:{'@type':'Answer',text:a.textContent.trim()}});
+    });
+    if (mainEntity.length) schemas.push({'@context':'https://schema.org','@type':'FAQPage',mainEntity:mainEntity});
+
     schemas.forEach(function(s) {
       var sc = document.createElement('script');
       sc.type = 'application/ld+json';
@@ -822,9 +852,16 @@
   }
 
   // ── Shared: Solution Page Template ──
-  function renderSolutionPage(tag, title, subtitle, image, challenges, solutions, metrics, cta, customers) {
-    var html = renderInnerHero(tag, title, subtitle, image, tag + ' solution') +
-      renderProblemSection('Your Challenges', challenges);
+  function renderSolutionPage(tag, title, subtitle, image, challenges, solutions, metrics, cta, customers, opts) {
+    opts = opts || {};
+    var html = renderInnerHero(tag, title, subtitle, image, tag + ' solution');
+
+    // AEO summary block
+    if (opts.summary) {
+      html += '<div class="zynix-container"><div class="zynix-summary-block">' + opts.summary + '</div></div>';
+    }
+
+    html += renderProblemSection('Your Challenges', challenges);
 
     html += '<section class="zynix-capabilities-section" id="capabilities"><div class="zynix-container">' +
       '<span class="zynix-tag">HOW ZYNIX HELPS</span>' +
@@ -843,6 +880,18 @@
         '<div class="zynix-customer-list">';
       customers.forEach(function(c) {
         html += '<div class="zynix-customer-chip">' + c + '</div>';
+      });
+      html += '</div></div></section>';
+    }
+
+    // FAQ section
+    if (opts.faqs && opts.faqs.length) {
+      html += '<section class="zynix-page-faq"><div class="zynix-container">' +
+        '<span class="zynix-tag">FAQ</span>' +
+        '<h2>Frequently Asked Questions</h2>' +
+        '<div class="zynix-faq-list">';
+      opts.faqs.forEach(function(faq) {
+        html += '<div class="zynix-faq-item"><div class="zynix-faq-q">' + faq.q + '<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>' + faq.a + '</p></div></div>';
       });
       html += '</div></div></section>';
     }
@@ -874,8 +923,17 @@
         { value: '60%', label: 'Coordinator Time Saved' },
         { value: '8-12 wk', label: 'Time to Positive ROI' }
       ],
-      { title: 'Ready to Hit Your Shared Savings Targets?', sub: 'Schedule a demo to see how Zynix transforms ACO operations.', btn: 'Schedule a Demo' },
-      ['Palm Beach ACO', 'West Florida ACO', 'Space Coast ACO', 'Central Florida ACO', 'Assurity ACO REACH', 'Advanced ACO & Affiliates', 'Sun Flower ACO']
+      { title: 'See How ACOs Grow Shared Savings with Zynix', sub: 'Schedule a demo to see how Zynix transforms ACO operations.', btn: 'Schedule a Demo' },
+      ['Palm Beach ACO', 'West Florida ACO', 'Space Coast ACO', 'Central Florida ACO', 'Assurity ACO REACH', 'Advanced ACO & Affiliates', 'Sun Flower ACO'],
+      {
+        summary: '<strong>Zynix for ACOs</strong> is an AI-powered operating system that helps Accountable Care Organizations maximize shared savings, achieve 85%+ TCM contact rates, close HCC and quality gaps, and automate care coordination across their attributed populations. Trusted by 7+ ACOs nationwide including Palm Beach ACO, West Florida ACO, and Space Coast ACO.',
+        faqs: [
+          { q: 'How can ACOs use AI to close care gaps?', a: 'Zynix uses AI to identify open HCC and quality gaps across your attributed population, prioritize them by RAF impact, and automatically deploy outreach campaigns to schedule patients for gap-closing visits. The system achieves 40% improvement in gap closure rates compared to manual worklist management.' },
+          { q: 'What ROI can ACOs expect from Zynix?', a: 'Most ACOs see positive ROI within 8-12 weeks. Key financial impacts include increased TCM revenue from 85%+ contact rates (vs 30-40% industry average), improved RAF scores from HCC gap closure, and reduced administrative costs through AI agent automation. Typical annual savings range from $500K to $5M+ depending on attributed lives.' },
+          { q: 'How does Zynix integrate with existing ACO infrastructure?', a: 'Zynix integrates with all major EHR systems, claims feeds, ADT notifications, and HIE connections. The Data Platform normalizes data from multiple provider organizations within your ACO network into a single unified view. Implementation typically takes 4-6 weeks.' },
+          { q: 'Can Zynix help with MSSP quality benchmarks?', a: 'Yes. Zynix tracks all CMS MSSP quality measures in real-time, identifies patients who need interventions, and deploys AI agents to schedule preventive visits, close quality gaps, and ensure documentation completeness \u2014 all of which directly improve your quality gate performance.' }
+        ]
+      }
     );
   }
 
@@ -902,8 +960,16 @@
         { value: '60%', label: 'Coordinator Time Saved' },
         { value: '25%', label: 'Readmission Reduction' }
       ],
-      { title: 'Ready to Transform Your Health System?', sub: 'See how Zynix delivers unified intelligence across your entire organization.', btn: 'Schedule a Demo' },
-      ['Health Vision Institute', 'CLSCFL']
+      { title: 'See How Health Systems Reduce Readmissions with Zynix', sub: 'See how Zynix delivers unified intelligence across your entire organization.', btn: 'Schedule a Demo' },
+      ['Health Vision Institute', 'CLSCFL'],
+      {
+        summary: '<strong>Zynix for Health Systems</strong> provides unified AI-powered patient engagement, post-discharge coordination, and clinical documentation across multi-facility health networks. The platform reduces 30-day readmissions by 25%, cuts documentation burden by 40%, and automates care transitions at enterprise scale.',
+        faqs: [
+          { q: 'How does AI reduce hospital readmissions?', a: 'Zynix uses predictive analytics to identify high-risk patients at discharge, then automatically deploys the Post-Discharge Follow-Up Agent to contact patients within 48 hours. The agent confirms safe arrival, reviews medications, and schedules follow-up visits \u2014 achieving 85%+ contact rates and 25% reduction in avoidable readmissions.' },
+          { q: 'Can Zynix scale across multiple facilities?', a: 'Yes. Zynix is built for enterprise-scale deployment. The platform normalizes data across multiple EHR instances, departments, and facilities into one unified layer. AI agents can be configured per facility or department while maintaining system-wide analytics and reporting.' },
+          { q: 'How does Zynix help with CMS readmission penalties?', a: 'By automating post-discharge follow-up, medication reconciliation, and care transition workflows, Zynix directly addresses the Hospital Readmissions Reduction Program (HRRP) penalties. Our platform tracks readmission metrics in real-time and proactively intervenes with at-risk patients.' }
+        ]
+      }
     );
   }
 
@@ -930,8 +996,16 @@
         { value: '15+', label: 'Languages Supported' },
         { value: '24/7', label: 'Patient Access' }
       ],
-      { title: 'Ready to Transform FQHC Operations?', sub: 'See how Zynix helps community health centers do more with less.', btn: 'Schedule a Demo' },
-      ['AMISTAD CHC']
+      { title: 'See How FQHCs Scale Care with Zynix', sub: 'See how Zynix helps community health centers do more with less.', btn: 'Schedule a Demo' },
+      ['AMISTAD CHC'],
+      {
+        summary: '<strong>Zynix for FQHCs</strong> provides multilingual AI-powered outreach in 15+ languages, quality payment optimization, and automated care management for community health centers serving underserved populations. The platform helps FQHCs maximize UDS quality metrics while extending limited staff resources.',
+        faqs: [
+          { q: 'How do FQHCs use AI for multilingual patient outreach?', a: 'Zynix AI agents communicate with patients in 15+ languages via phone calls, text messages, and voice. The agents handle appointment reminders, preventive care nudges, and after-hours triage in the patient\u2019s preferred language \u2014 improving engagement with diverse, underserved populations without adding staff.' },
+          { q: 'Can Zynix help FQHCs improve UDS reporting?', a: 'Yes. Zynix tracks UDS clinical quality measures in real-time, identifies patients who need preventive screenings or follow-up care, and deploys automated outreach to schedule visits. This directly improves quality measure performance for HRSA reporting.' },
+          { q: 'How does Zynix work with limited FQHC budgets?', a: 'Zynix is designed for cost-effectiveness. The platform automates tasks that would otherwise require additional FTEs \u2014 after-hours coverage, appointment reminders, care gap outreach. Most FQHCs see positive ROI within 8-12 weeks through increased quality payments and reduced staffing costs.' }
+        ]
+      }
     );
   }
 
@@ -958,8 +1032,16 @@
         { value: '40%', label: 'Faster Gap Closure' },
         { value: '30%', label: 'HCC Capture Improvement' }
       ],
-      { title: 'Ready to Drive Stars Ratings?', sub: 'See how Zynix helps health plans achieve quality targets at scale.', btn: 'Schedule a Demo' },
-      ['eTernal Health']
+      { title: 'See How Health Plans Improve Stars with Zynix', sub: 'See how Zynix helps health plans achieve quality targets at scale.', btn: 'Schedule a Demo' },
+      ['eTernal Health'],
+      {
+        summary: '<strong>Zynix for Health Plans</strong> helps payers improve CMS Stars ratings, close HCC and quality gaps at population scale, and drive member engagement through AI-powered outreach. The platform identifies high-impact intervention opportunities and deploys autonomous agents to reach 85%+ of targeted members.',
+        faqs: [
+          { q: 'How can health plans use AI to improve Stars ratings?', a: 'Zynix identifies members with open quality gaps that impact Stars measures, prioritizes them by potential impact, and deploys AI agents to schedule preventive visits, close care gaps, and ensure proper documentation. The system tracks HEDIS measures in real-time and proactively intervenes before measurement periods close.' },
+          { q: 'How does Zynix help with HCC risk adjustment?', a: 'Zynix Analytics identifies suspected HCC gaps by analyzing claims history, clinical data, and predictive models. The platform prioritizes members by RAF impact and deploys automated outreach to schedule visits with providers who can validate and document chronic conditions, improving risk adjustment accuracy.' },
+          { q: 'Can Zynix handle member engagement at scale?', a: 'Yes. Zynix AI agents can autonomously reach millions of members via phone calls, text messages, and digital channels. The agents handle appointment scheduling, medication adherence reminders, preventive care nudges, and post-discharge follow-ups \u2014 all personalized to the individual member.' }
+        ]
+      }
     );
   }
 
@@ -986,8 +1068,16 @@
         { value: '2 hrs', label: 'Saved Per Physician/Day' },
         { value: '24/7', label: 'Patient Access' }
       ],
-      { title: 'Ready to Transform Your Practice?', sub: 'See how Zynix brings enterprise AI to independent practices.', btn: 'Schedule a Demo' },
-      ['Cardio & Vascular Consultants', 'Professional Radiology Group', 'Pain Rehab Surgery Center']
+      { title: 'See How Practices Reduce No-Shows with Zynix', sub: 'See how Zynix brings enterprise AI to independent practices.', btn: 'Schedule a Demo' },
+      ['Cardio & Vascular Consultants', 'Professional Radiology Group', 'Pain Rehab Surgery Center'],
+      {
+        summary: '<strong>Zynix for Independent Practices</strong> brings enterprise-grade AI to small and mid-size medical practices. The platform reduces no-shows by 40%, provides 24/7 AI-powered after-hours coverage, automates appointment scheduling, and saves physicians 1-2 hours daily on documentation \u2014 all without adding staff.',
+        faqs: [
+          { q: 'How does AI reduce no-shows for medical practices?', a: 'Zynix ZynReminder sends personalized appointment reminders via phone call, text message, and email at optimal intervals before the visit. Patients can confirm, reschedule, or cancel directly through the AI agent. Practices using Zynix see 40% reduction in no-shows, directly recovering lost revenue.' },
+          { q: 'What does AI after-hours coverage look like for a small practice?', a: 'ZynAfterHours answers patient calls 24/7 in 15+ languages. The AI agent triages symptoms using clinical protocols, directs emergencies to 911, schedules urgent next-day appointments, and handles routine questions \u2014 all without waking your on-call physician. You get a detailed report every morning.' },
+          { q: 'How quickly can an independent practice deploy Zynix?', a: 'Most practices go live within 2-4 weeks. The implementation starts with connecting to your EHR and phone system, then activating the agents you need most. Many practices start with ZynReminder and ZynAfterHours, then add scheduling and documentation capabilities over time.' }
+        ]
+      }
     );
   }
 
@@ -1014,8 +1104,16 @@
         { value: '24/7', label: 'Patient Communication' },
         { value: '95%+', label: 'Patient Satisfaction' }
       ],
-      { title: 'Ready to Optimize Your ASC?', sub: 'See how Zynix streamlines surgical operations from authorization to recovery.', btn: 'Schedule a Demo' },
-      []
+      { title: 'See How ASCs Streamline Operations with Zynix', sub: 'See how Zynix streamlines surgical operations from authorization to recovery.', btn: 'Schedule a Demo' },
+      ['Pain Rehab Surgery Center'],
+      {
+        summary: '<strong>Zynix for ASCs</strong> automates prior authorization workflows, reduces surgical cancellations, and coordinates pre-op and post-op patient communication for ambulatory surgery centers. The platform achieves 60% faster auth turnaround and 35% reduction in day-of-surgery cancellations.',
+        faqs: [
+          { q: 'How does AI speed up prior authorization for ASCs?', a: 'ZynAuth automates the entire prior auth workflow: gathering clinical documentation, submitting authorization requests to payers, tracking approval status, and following up on pending authorizations. The AI agent works 24/7 and reduces auth turnaround time by 60%, ensuring surgeries aren\u2019t delayed by administrative bottlenecks.' },
+          { q: 'Can Zynix reduce surgical cancellations?', a: 'Yes. Zynix sends automated pre-op reminders that verify patient readiness \u2014 confirming fasting instructions, medication holds, transportation arrangements, and required lab work. By ensuring patients arrive fully prepared, ASCs using Zynix see 35% reduction in day-of-surgery cancellations.' },
+          { q: 'How does Zynix handle post-operative follow-up?', a: 'After surgery, the Post-Discharge Follow-Up Agent automatically contacts patients to check on recovery, review medication instructions, identify potential complications, and schedule follow-up visits. This proactive approach catches issues early and improves patient satisfaction scores.' }
+        ]
+      }
     );
   }
 
@@ -1162,6 +1260,9 @@
   function renderBlog() {
     var posts = [
       { title: 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States', cat: 'Company News', date: 'Mar 15, 2026', slug: '/resources-blog-1m-patients', featured: true },
+      { title: 'Healthcare AI Agents vs. Chatbots: What\u2019s the Difference?', cat: 'AI Implementation', date: 'Mar 15, 2026', slug: '/blog/ai-agents-vs-chatbots-healthcare' },
+      { title: 'How AI Closes Care Gaps: From Identification to Resolution', cat: 'Population Health & Analytics', date: 'Mar 10, 2026', slug: '/blog/how-ai-closes-care-gaps' },
+      { title: 'What Is Value-Based Care AI? A Complete Guide for 2026', cat: 'Value-Based Care Strategy', date: 'Mar 1, 2026', slug: '/blog/what-is-value-based-care-ai' },
       { title: 'Prior Authorization Delays: What They Actually Cost And How to Fix Them', cat: 'Prior Authorization & RCM', date: 'Mar 3, 2026' },
       { title: 'Your EHR Is Not Broken. It Was Just Never Built to Think.', cat: 'AI Implementation', date: 'Mar 3, 2026' },
       { title: 'Harnessing Generative AI Applications for Healthcare Innovation', cat: 'AI Implementation', date: 'Mar 2, 2026' },
@@ -1243,12 +1344,17 @@
       { title: 'West Florida ACO', metric: '40%', label: 'Quality Gap Closure Improvement', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics' },
       { title: 'Space Coast ACO', metric: '85%+', label: 'TCM Contact Rate', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics' },
       { title: 'Central Florida ACO', metric: '2.5x', label: 'ROI in Year One', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics' },
-      { title: 'Palm Beach ACO', metric: '3x', label: 'AWV Completion Improvement', seg: 'ACO', desc: 'Outbound Agents (PDV & AWV), AI Scribe' },
+      { title: 'Palm Beach ACO', metric: '3x', label: 'AWV Completion Improvement', seg: 'ACO', desc: 'Outbound Agents (PDV & AWV), AI Scribe', slug: '/case-studies/palm-beach-aco' },
       { title: 'eTernal Health', metric: '45%', label: 'Medication Adherence Improvement', seg: 'Health Plan', desc: 'PDV Agents, Medication Adherence Programs' }
     ];
     var html = '<div class="zynix-case-grid">';
     studies.forEach(function(s) {
-      html += '<div class="zynix-case-card fade-in-up"><span class="zynix-case-seg">' + s.seg + '</span><h3>' + s.title + '</h3><div class="zynix-case-metric"><span>' + s.metric + '</span><small>' + s.label + '</small></div>' + (s.desc ? '<p style="font-size:13px;color:var(--z-text-secondary);margin-top:12px;line-height:1.5">' + s.desc + '</p>' : '') + '</div>';
+      var cardInner = '<span class="zynix-case-seg">' + s.seg + '</span><h3>' + s.title + '</h3><div class="zynix-case-metric"><span>' + s.metric + '</span><small>' + s.label + '</small></div>' + (s.desc ? '<p style="font-size:13px;color:var(--z-text-secondary);margin-top:12px;line-height:1.5">' + s.desc + '</p>' : '');
+      if (s.slug) {
+        html += '<a href="' + s.slug + '" class="zynix-case-card fade-in-up" style="text-decoration:none;color:inherit;display:block">' + cardInner + '<span style="display:inline-block;margin-top:12px;color:var(--z-primary);font-size:14px;font-weight:600">Read case study &rarr;</span></a>';
+      } else {
+        html += '<div class="zynix-case-card fade-in-up">' + cardInner + '</div>';
+      }
     });
     html += '</div>';
 
@@ -1485,13 +1591,18 @@
   }
 
   // ── Shared: Use Case Page Template ──
-  function renderUseCasePage(name, subtitle, problems, steps, replaces, kpis, story) {
+  function renderUseCasePage(name, subtitle, problems, steps, replaces, kpis, story, definition) {
     var html = '<section class="zynix-inner-hero"><div class="zynix-container" style="position:relative;z-index:1;text-align:center;max-width:800px;margin:0 auto">' +
       '<span class="zynix-tag" style="display:inline-block">USE CASE</span>' +
       '<h1 style="font-size:42px;font-weight:600;margin:0 0 20px">' + name + '</h1>' +
       '<p style="color:var(--z-text-secondary,#94a3b8);font-size:18px;line-height:1.7">' + subtitle + '</p>' +
       '<div class="zynix-hero-btns" style="justify-content:center;margin-top:32px"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a></div>' +
       '</div></section>';
+
+    // AEO definition block
+    if (definition) {
+      html += '<div class="zynix-container"><div class="zynix-summary-block">' + definition + '</div></div>';
+    }
 
     html += renderProblemSection('What Breaks Today', problems);
 
@@ -1785,7 +1896,8 @@
       ],
       ['Spreadsheet-based discharge tracking', 'Unstructured call lists and manual reminders', 'Inconsistent escalation handoffs', 'Fragmented scheduling workflows', 'Documentation captured late or inconsistently'],
       ['Contact rate within 48 hours', 'Time from discharge to first successful contact', 'Follow-up scheduled within 7 days', 'Medication reconciliation completion rate', 'TCM completion rate within 30 days', 'Documentation completeness rate'],
-      'A patient returns home after CHF exacerbation. On day 1-2 they receive a call and admit they did not fill one discharge med and feel more short of breath. The care plan routes symptom escalation to the on-call clinician, triggers pharmacy follow-up for the missing med, schedules a tele-visit within a week due to transport barriers, and sends appointment reminders. The episode stays open until those steps are verified.'
+      'A patient returns home after CHF exacerbation. On day 1-2 they receive a call and admit they did not fill one discharge med and feel more short of breath. The care plan routes symptom escalation to the on-call clinician, triggers pharmacy follow-up for the missing med, schedules a tele-visit within a week due to transport barriers, and sends appointment reminders. The episode stays open until those steps are verified.',
+      '<strong>Transitional Care Management (TCM)</strong> is a CMS-reimbursable program (CPT 99495/99496) that requires healthcare organizations to contact discharged patients within 48 hours and complete a follow-up visit within 7-14 days. Zynix automates this entire 30-day workflow using AI agents, achieving 85%+ contact rates compared to the 30-40% industry average \u2014 turning every discharge into a completed, billed TCM episode.'
     );
   }
 
@@ -1806,7 +1918,8 @@
       ],
       ['Static gap reports that expire', 'Manual patient outreach calls', 'Spreadsheet-based tracking', 'Visit prep done from memory', 'Closure verification by chart review'],
       ['HCC gap closure rate', 'Time from gap identification to closure', 'AWV completion rate', 'Patient response rate', 'Revenue impact per closed gap'],
-      'A diabetic patient is overdue for A1c and retinal exam. The care plan pushes an outreach sequence, captures that the patient works nights, schedules an after-hours lab, and sets reminders. When results return abnormal, a follow-up visit is scheduled and tracked until completed.'
+      'A diabetic patient is overdue for A1c and retinal exam. The care plan pushes an outreach sequence, captures that the patient works nights, schedules an after-hours lab, and sets reminders. When results return abnormal, a follow-up visit is scheduled and tracked until completed.',
+      '<strong>HCC and quality gap closure</strong> is the process of identifying patients with unaddressed chronic conditions (HCC gaps) or missing preventive measures (HEDIS/quality gaps) and ensuring they receive the appropriate care, documentation, and follow-up. Zynix uses AI to prioritize gaps by financial and clinical impact, then deploys autonomous agents to outreach patients, schedule visits, and verify closure \u2014 closing gaps 40% faster than manual workflows.'
     );
   }
 
@@ -1827,7 +1940,8 @@
       ],
       ['Voicemail-based after-hours', 'Answering services that only take messages', 'Next-day callback delays', 'No completion tracking'],
       ['After-hours call resolution rate', 'Time to first response', 'ER diversion rate', 'Appointment completion rate', 'Patient satisfaction score'],
-      'A parent calls about a child\u2019s fever and rash at 11 PM. The care plan captures red flag status, escalates to the on-call clinician when the rash is concerning, or schedules a next-day visit and sends confirmations. The case does not disappear into a voicemail box.'
+      'A parent calls about a child\u2019s fever and rash at 11 PM. The care plan captures red flag status, escalates to the on-call clinician when the rash is concerning, or schedules a next-day visit and sends confirmations. The case does not disappear into a voicemail box.',
+      '<strong>After-hours triage and access optimization</strong> ensures patients can reach their healthcare organization 24/7 for symptom assessment, appointment scheduling, and care guidance. Zynix ZynAfterHours uses AI to answer inbound calls in 15+ languages, triage symptoms using evidence-based clinical protocols (Schmitt-Thompson), and route patients to the appropriate level of care \u2014 achieving 97.3% triage accuracy and diverting 20-30% of unnecessary ER visits.'
     );
   }
 
@@ -1848,7 +1962,8 @@
       ],
       ['Manual payer portal navigation', 'Phone calls and fax follow-ups', 'Spreadsheet status tracking', 'Reactive denial management'],
       ['Time from order to approval', 'First-pass approval rate', 'Denial appeal success rate', 'Authorization turnaround time', 'Staff hours per auth'],
-      'A patient needs an MRI. The clinic previously lost weeks to back-and-forth. This workflow creates an auth case, flags missing conservative therapy notes before submission, tracks payer requests, schedules the MRI immediately after approval, and keeps the patient from repeatedly calling with no answers.'
+      'A patient needs an MRI. The clinic previously lost weeks to back-and-forth. This workflow creates an auth case, flags missing conservative therapy notes before submission, tracks payer requests, schedules the MRI immediately after approval, and keeps the patient from repeatedly calling with no answers.',
+      '<strong>Prior authorization</strong> is a requirement by health plans that providers must obtain approval before delivering certain services, procedures, or medications. Zynix ZynAuth automates the entire prior auth workflow \u2014 gathering clinical documentation, submitting requests, tracking approvals, and managing denials \u2014 reducing authorization turnaround time by 60% and eliminating the administrative burden that delays patient care.'
     );
   }
 
@@ -1869,7 +1984,8 @@
       ],
       ['Manual screening outreach', 'Generic reminder letters', 'No prep support', 'Results not tracked to completion'],
       ['Screening completion rate', 'Time from identification to completion', 'Patient response rate', 'Follow-up action completion rate'],
-      'A patient avoids colon screening due to prep anxiety and scheduling confusion. The care plan provides plain-language guidance, sets a concrete appointment during a time that works, sends timed reminders including prep instructions, and ensures results follow-through when findings require action.'
+      'A patient avoids colon screening due to prep anxiety and scheduling confusion. The care plan provides plain-language guidance, sets a concrete appointment during a time that works, sends timed reminders including prep instructions, and ensures results follow-through when findings require action.',
+      '<strong>Preventive screening completion</strong> measures whether patients receive age-appropriate and risk-appropriate screenings such as colonoscopy, mammography, cervical cancer screening, and diabetes management labs. Zynix identifies patients overdue for screenings, deploys targeted outreach with plain-language education, schedules appointments around patient availability, and tracks results to ensure follow-through on abnormal findings.'
     );
   }
 
@@ -1890,7 +2006,8 @@
       ],
       ['Reactive post-ED outreach', 'No root cause investigation', 'Fragmented care team communication', 'No completion tracking'],
       ['30-day readmission rate', 'ED utilization frequency', 'Follow-up completion rate', 'Medication adherence improvement', 'Patient-reported access satisfaction'],
-      'A patient repeatedly goes to the ED for COPD flares. Outreach reveals they stopped inhalers due to cost and can\u2019t get timely clinic visits. The care plan routes medication assistance review, schedules a follow-up, sets reminders, and ensures the patient knows how to reach the after-hours line instead of the ED.'
+      'A patient repeatedly goes to the ED for COPD flares. Outreach reveals they stopped inhalers due to cost and can\u2019t get timely clinic visits. The care plan routes medication assistance review, schedules a follow-up, sets reminders, and ensures the patient knows how to reach the after-hours line instead of the ED.',
+      '<strong>Readmission prevention</strong> uses AI-driven risk stratification and automated post-discharge interventions to reduce avoidable hospital readmissions within 30 days. Zynix identifies high-risk patients at discharge, deploys autonomous agents to conduct follow-up calls, reconcile medications, schedule timely appointments, and address social determinants \u2014 achieving 25% reduction in avoidable readmissions and helping hospitals avoid CMS HRRP penalties.'
     );
   }
 
@@ -1925,18 +2042,48 @@
   }
 
   function renderGlossary() {
-    return renderPlaceholderPage('GLOSSARY', 'Healthcare AI Glossary',
-      'Key terms and definitions across interoperability, coding, claims, quality, and compliance.',
-      '<section style="padding:80px 0"><div class="zynix-container">' +
-      '<div class="zynix-feature-grid">' +
-      '<div class="zynix-feature-card"><h3>Interoperability & Health Data</h3><p>HL7, FHIR, ADT feeds, HIE, USCDI, and health data exchange standards.</p></div>' +
-      '<div class="zynix-feature-card"><h3>Coding & Terminology</h3><p>ICD-10, CPT, SNOMED, LOINC, HCC, and clinical data standards.</p></div>' +
-      '<div class="zynix-feature-card"><h3>Claims & Billing</h3><p>837/835 transactions, prior authorization, RCM, and administrative workflows.</p></div>' +
-      '<div class="zynix-feature-card"><h3>Quality & Risk Adjustment</h3><p>HEDIS, Stars, RAF scores, MSSP, ACO REACH, and value-based metrics.</p></div>' +
-      '<div class="zynix-feature-card"><h3>Compliance</h3><p>HIPAA, SOC 2, HITRUST, BAA, and healthcare regulatory frameworks.</p></div>' +
-      '<div class="zynix-feature-card"><h3>AI & Healthcare Operations</h3><p>LLM, NLP, ambient scribe, clinical decision support, and agentic AI.</p></div>' +
-      '</div></div></section>' +
-      renderCTA('Have Questions About Healthcare AI?', 'Our team can help you understand how AI fits into your operations.'));
+    var terms = [
+      { term: 'Value-Based Care', definition: 'Value-based care (VBC) is a healthcare delivery model in which providers are reimbursed based on patient health outcomes rather than the volume of services rendered. Unlike traditional fee-for-service models, VBC aligns financial incentives with quality by rewarding providers who reduce costs, improve clinical outcomes, and enhance patient satisfaction. Key VBC programs include Medicare Shared Savings Program (MSSP), ACO REACH, bundled payments, and capitated arrangements. Success in VBC requires robust data infrastructure, population health analytics, care coordination workflows, and proactive patient engagement. Organizations participating in VBC must track quality measures such as HEDIS, Stars ratings, and HCC risk adjustment to optimize both clinical performance and shared savings distributions.' },
+      { term: 'HCC (Hierarchical Condition Category)', definition: 'Hierarchical Condition Categories (HCCs) are a risk adjustment methodology used by CMS to predict future healthcare costs for Medicare Advantage and other value-based care populations. Each HCC maps to specific ICD-10 diagnosis codes that represent chronic or significant health conditions such as diabetes with complications, congestive heart failure, or chronic kidney disease. HCC coding directly affects a patient\u2019s Risk Adjustment Factor (RAF) score, which determines the per-member-per-month capitation payment a health plan receives. Accurate HCC capture requires thorough clinical documentation, annual recapture of chronic conditions, and proactive gap identification. Organizations that under-code HCCs receive inadequate funding relative to patient acuity, while over-coding triggers regulatory audits. AI-powered platforms like Zynix automate HCC gap identification and prioritize outreach to ensure accurate and compliant coding.' },
+      { term: 'RAF Score (Risk Adjustment Factor)', definition: 'The Risk Adjustment Factor (RAF) score is a numerical value assigned to each Medicare Advantage beneficiary that reflects their predicted healthcare costs relative to the average Medicare patient. A RAF score of 1.0 represents an average-cost patient; scores above 1.0 indicate higher expected costs due to documented chronic conditions, and scores below 1.0 indicate lower expected costs. RAF scores are calculated based on demographic factors (age, gender, Medicaid eligibility) and Hierarchical Condition Categories (HCCs) documented through clinical encounters. Accurate RAF scoring is critical for value-based care organizations because it determines capitation payments and influences shared savings calculations. Under-documented RAF scores result in inadequate funding, while properly captured RAF scores ensure organizations receive appropriate resources to manage complex patient populations. AI platforms help organizations identify RAF gaps and ensure year-round recapture of chronic conditions.' },
+      { term: 'Transitional Care Management (TCM)', definition: 'Transitional Care Management (TCM) is a CMS-reimbursable program designed to reduce hospital readmissions by ensuring patients receive coordinated follow-up care within 30 days of hospital discharge. TCM requires three key components: an interactive contact with the patient or caregiver within two business days of discharge, a face-to-face visit within 7 or 14 days depending on medical complexity, and ongoing medication reconciliation and care coordination throughout the 30-day period. CMS reimburses TCM at approximately $230\u2013$300 per episode depending on complexity (CPT codes 99495 and 99496). Despite strong reimbursement, most organizations achieve only 30\u201340% contact rates due to manual workflows and staffing constraints. AI-powered platforms like Zynix automate the outreach component of TCM, achieving 85%+ contact rates through autonomous phone, SMS, and patient portal engagement, while routing clinical issues to care teams for follow-up.' },
+      { term: 'Population Health Management', definition: 'Population health management (PHM) is the systematic approach to improving health outcomes for a defined group of patients by analyzing aggregated clinical, claims, and social determinants data to identify risks, stratify populations, and deploy targeted interventions. PHM encompasses chronic disease management, preventive care, care transitions, behavioral health integration, and social needs screening. Effective PHM requires a unified data platform that ingests information from EHRs, claims feeds, ADT notifications, labs, pharmacy data, and community resources. Analytics engines then stratify patients by risk level, identify care gaps, predict adverse events such as hospitalizations or ED visits, and generate prioritized worklists for care teams. Modern PHM platforms go beyond analytics by deploying AI agents that automatically execute outreach, schedule appointments, and close gaps without manual intervention, transforming population health from a reporting function into an operational engine.' },
+      { term: 'HEDIS Measures', definition: 'HEDIS (Healthcare Effectiveness Data and Information Set) is a standardized set of performance measures developed by the National Committee for Quality Assurance (NCQA) to evaluate health plan performance across clinical quality, access, and patient experience domains. HEDIS includes over 90 measures spanning preventive care (breast cancer screening, colorectal cancer screening), chronic disease management (diabetes A1C control, blood pressure management), behavioral health, medication management, and utilization. Health plans, ACOs, and provider organizations use HEDIS measures to benchmark performance, satisfy regulatory requirements, and qualify for quality-based incentive payments. HEDIS performance directly impacts Medicare Advantage Stars ratings, which determine bonus payments worth billions of dollars annually. Closing HEDIS gaps requires identifying patients who are due for screenings or interventions and ensuring timely completion through outreach, scheduling, and care coordination.' },
+      { term: 'Prior Authorization', definition: 'Prior authorization (also called pre-authorization or pre-certification) is a utilization management process in which healthcare providers must obtain approval from a payer before delivering specific services, procedures, or medications. The prior authorization process involves submitting clinical documentation that demonstrates medical necessity according to the payer\u2019s coverage criteria. While intended to control costs and ensure appropriate utilization, prior authorization has become a major administrative burden, with the average physician practice spending 14 hours per week on prior auth activities. Delays in prior authorization contribute to treatment delays, patient dissatisfaction, and revenue cycle disruptions. AI-powered prior authorization solutions like ZynAuth automate the submission, tracking, and follow-up process by extracting clinical data from EHRs, matching it against payer criteria, and submitting requests electronically, reducing turnaround times by up to 60%.' },
+      { term: 'Healthcare AI Agent', definition: 'A healthcare AI agent is an autonomous software system that perceives its environment, makes decisions, and takes actions to accomplish specific clinical or operational tasks without requiring continuous human supervision. Unlike chatbots that respond to user queries, AI agents proactively initiate workflows: calling patients for post-discharge follow-up, scheduling appointments, reconciling medications, processing prior authorizations, and closing care gaps. Healthcare AI agents operate within defined clinical protocols and escalation rules, routing complex situations to human care team members while handling routine tasks independently. Modern agent architectures combine large language models (LLMs) for natural language understanding, retrieval-augmented generation (RAG) for clinical knowledge, and workflow engines for multi-step task execution. Zynix deploys seven specialized AI agents that collectively handle patient outreach, scheduling, triage, documentation, reminders, fax processing, and prior authorization across value-based care organizations.' },
+      { term: 'Care Gap', definition: 'A care gap is the difference between recommended clinical guidelines and the care a patient actually receives. Care gaps represent missed or overdue preventive screenings, chronic disease management activities, medication adherence checkpoints, or follow-up appointments that are clinically indicated based on a patient\u2019s conditions and risk profile. Common care gaps include overdue mammograms, missed diabetic eye exams, incomplete colorectal cancer screenings, uncontrolled blood pressure, and gaps in HCC recapture documentation. Care gaps directly impact quality measure performance (HEDIS, Stars ratings), risk adjustment accuracy (RAF scores), and financial outcomes in value-based care arrangements. Identifying care gaps requires integrating data from multiple sources including EHRs, claims, labs, and pharmacy records to create a comprehensive view of each patient\u2019s care status. AI platforms prioritize care gaps by clinical urgency and financial impact, then deploy automated outreach to schedule and close gaps efficiently.' },
+      { term: 'Ambient Clinical Documentation', definition: 'Ambient clinical documentation (also called ambient AI scribing) is technology that passively listens to patient-clinician conversations during medical encounters and automatically generates structured clinical notes in real time. Unlike traditional dictation or manual documentation, ambient documentation operates in the background without requiring the clinician to change their workflow or speak to a microphone. The AI system uses natural language processing and medical language models to capture the clinical narrative, extract relevant diagnoses, medications, procedures, and assessment plans, and format them into EHR-compatible notes. Ambient documentation addresses the physician burnout crisis by reducing documentation time by 60\u201370%, allowing clinicians to maintain eye contact with patients and focus on clinical care rather than typing. ZynScribe, the Zynix ambient documentation solution, captures structured notes during encounters and integrates directly with major EHR systems including Epic, Cerner, athenahealth, and eClinicalWorks.' },
+      { term: 'Risk Stratification', definition: 'Risk stratification is the process of categorizing patients into groups based on their likelihood of experiencing adverse health events such as hospitalization, emergency department visits, disease progression, or high healthcare costs. Risk stratification models analyze clinical data (diagnoses, medications, lab results, vitals), claims data (utilization patterns, cost history), social determinants (housing stability, food security, transportation access), and behavioral factors (medication adherence, appointment attendance) to assign risk scores. Patients are typically categorized as low-risk, rising-risk, or high-risk, with each tier receiving different levels of care management intensity. Accurate risk stratification enables healthcare organizations to allocate limited care management resources efficiently, focusing intensive interventions on the patients most likely to benefit. AI-powered risk stratification goes beyond static scoring by continuously updating risk assessments as new data arrives and triggering automated workflows when patients cross risk thresholds.' },
+      { term: 'Annual Wellness Visit (AWV)', definition: 'The Annual Wellness Visit (AWV) is a Medicare-covered preventive care visit focused on developing or updating a personalized prevention plan, performing health risk assessments, screening for cognitive impairment, and reviewing functional ability and safety. Unlike a standard physical exam, the AWV is specifically designed for preventive planning and does not include a head-to-toe examination. AWVs represent a critical touchpoint for value-based care organizations because they provide an opportunity to recapture HCC diagnoses, identify care gaps, update advance directives, screen for depression and fall risk, and assess social determinants of health. Despite being fully covered by Medicare with no patient copay, AWV completion rates remain low, often below 25\u201330% of eligible beneficiaries. AI platforms improve AWV completion by identifying eligible patients, automating scheduling outreach, and pre-populating visit templates with relevant clinical data, enabling organizations to achieve 2\u20133x improvements in AWV completion rates.' },
+      { term: 'Social Determinants of Health (SDOH)', definition: 'Social determinants of health (SDOH) are the non-medical factors that influence health outcomes, including economic stability (income, employment, debt), education access and quality, healthcare access, neighborhood and built environment (housing, transportation, food access, safety), and social and community context (social support, discrimination, incarceration history). Research shows that SDOH account for 30\u201355% of health outcomes, often exceeding the impact of clinical care itself. In value-based care, SDOH data is essential for accurate risk stratification, care plan development, and intervention targeting. CMS now requires SDOH screening in many quality programs, and Z-codes (ICD-10 codes for social determinants) are increasingly used to document housing instability, food insecurity, transportation barriers, and other social needs. Modern healthcare AI platforms ingest SDOH data from screening tools, community databases, and claims data to identify patients whose social circumstances may undermine clinical interventions, enabling care teams to connect patients with community resources and social services.' },
+      { term: 'Chronic Care Management (CCM)', definition: 'Chronic Care Management (CCM) is a CMS-reimbursable program that provides ongoing care coordination and management for Medicare beneficiaries with two or more chronic conditions expected to last at least 12 months. CCM services include development and revision of comprehensive care plans, medication management, coordination between providers and specialists, 24/7 access to care management services, and enhanced communication through patient portals or phone. CMS reimburses CCM through CPT codes 99490 (20+ minutes per month), 99439 (each additional 20 minutes), and 99491 (clinical staff time). CCM represents a significant revenue opportunity for value-based care organizations while improving outcomes for patients with complex chronic conditions such as diabetes, heart failure, COPD, and chronic kidney disease. AI platforms automate CCM enrollment identification, patient consent collection, monthly touchpoints, care plan updates, and time tracking, allowing organizations to scale CCM programs across large populations without proportional staffing increases.' },
+      { term: 'Medicare Shared Savings Program (MSSP)', definition: 'The Medicare Shared Savings Program (MSSP) is CMS\u2019s flagship accountable care organization program, in which groups of doctors, hospitals, and other healthcare providers voluntarily coordinate care for Medicare fee-for-service beneficiaries. MSSP ACOs that meet quality benchmarks and reduce total cost of care below a spending benchmark earn a share of the savings (typically 40\u201375% depending on the track). Two-sided risk tracks also require ACOs to repay a portion of losses if spending exceeds benchmarks. MSSP quality measures span four domains: patient experience, care coordination, preventive health, and at-risk populations. As of 2026, over 480 ACOs participate in MSSP, covering more than 11 million Medicare beneficiaries. Success in MSSP requires sophisticated data analytics, population health management, care gap closure, transitional care coordination, and efficient administrative operations. AI platforms help MSSP ACOs optimize performance by automating quality measure tracking, HCC gap closure, TCM workflows, and patient outreach at scale across attributed populations.' },
+      { term: 'HL7 / FHIR', definition: 'HL7 (Health Level Seven) is the international standards organization that develops frameworks for the exchange, integration, sharing, and retrieval of electronic health information. FHIR (Fast Healthcare Interoperability Resources) is HL7\u2019s modern standard for exchanging healthcare data electronically, using RESTful APIs, JSON, and XML formats that are familiar to web developers. FHIR defines standardized resources for clinical concepts such as patients, encounters, observations, medications, and conditions, enabling healthcare applications to read and write data across different EHR systems. CMS mandates FHIR-based APIs for patient access and payer-to-payer data exchange, making FHIR proficiency essential for healthcare technology platforms. FHIR enables interoperability between EHRs, health plans, labs, pharmacies, and third-party applications without requiring custom point-to-point integrations. Healthcare AI platforms leverage FHIR APIs to ingest clinical data from multiple EHR systems, enabling unified population health management across diverse provider networks.' },
+      { term: 'ADT (Admit-Discharge-Transfer) Feed', definition: 'An ADT (Admit-Discharge-Transfer) feed is a real-time or near-real-time electronic notification that alerts care teams when a patient is admitted to a hospital, discharged, or transferred between care settings. ADT feeds use the HL7 messaging standard (typically ADT^A01, ADT^A03, ADT^A02 message types) and are transmitted through Health Information Exchanges (HIEs) or direct EHR interfaces. ADT notifications are critical for value-based care because they trigger time-sensitive workflows such as transitional care management (TCM), post-discharge follow-up, medication reconciliation, and readmission prevention. CMS requires Medicare Advantage plans and ACOs to receive and act upon ADT notifications. AI platforms process ADT feeds in real time to automatically initiate care coordination workflows within minutes of a discharge event, ensuring that patients receive timely follow-up and organizations capture TCM reimbursement within CMS-mandated timeframes.' },
+      { term: 'Revenue Cycle Management (RCM)', definition: 'Revenue Cycle Management (RCM) encompasses the financial processes healthcare organizations use to track patient care episodes from registration and appointment scheduling through final payment. RCM includes patient registration, insurance verification, charge capture, claims submission, payment posting, denial management, and patient collections. In value-based care, RCM extends to managing shared savings calculations, quality-based incentive payments, risk adjustment revenue, and care management billing codes such as TCM, CCM, and AWV. Healthcare organizations lose an estimated 5\u201310% of net revenue due to RCM inefficiencies including coding errors, claim denials, and delayed submissions. AI is transforming RCM by automating prior authorization, improving coding accuracy through natural language processing of clinical documentation, predicting claim denials before submission, and optimizing charge capture for value-based billing codes.' },
+      { term: 'Clinical Decision Support (CDS)', definition: 'Clinical Decision Support (CDS) systems provide clinicians, staff, and patients with knowledge and person-specific information at the point of care to enhance health and healthcare decisions. CDS tools include computerized alerts for drug interactions, clinical guidelines presented during documentation, risk calculators, diagnostic suggestions based on patient data, and evidence-based order sets. Modern AI-powered CDS goes beyond rule-based alerts to offer predictive insights such as readmission risk scores, medication adherence predictions, and personalized treatment recommendations generated by machine learning models trained on population health data. Effective CDS improves clinical quality, reduces unnecessary utilization, and helps organizations meet value-based care quality benchmarks. The CMS Promoting Interoperability program incentivizes CDS adoption, and accreditation organizations increasingly evaluate CDS implementation as part of quality assessments.' },
+      { term: 'Health Information Exchange (HIE)', definition: 'A Health Information Exchange (HIE) is both the electronic movement of health-related information among organizations and the entities that facilitate that exchange. HIEs enable hospitals, clinics, labs, pharmacies, health plans, and public health agencies to share patient data securely and efficiently, regardless of which EHR system each organization uses. HIEs provide three key capabilities: directed exchange (secure point-to-point messaging), query-based exchange (finding and requesting patient records), and consumer-mediated exchange (patient-controlled access). In value-based care, HIEs are essential for receiving ADT notifications, aggregating clinical data from multiple providers, and coordinating care across settings. National frameworks such as TEFCA (Trusted Exchange Framework and Common Agreement) aim to create a nationwide interoperability infrastructure. AI platforms integrate with HIEs to aggregate comprehensive patient records and trigger automated workflows based on clinical events detected across the healthcare ecosystem.' },
+      { term: 'Stars Ratings (Medicare Advantage)', definition: 'The CMS Star Ratings system evaluates Medicare Advantage and Part D prescription drug plans on a scale of 1 to 5 stars based on quality and performance measures across five categories: staying healthy (preventive screenings), managing chronic conditions, member experience, member complaints and access, and health plan customer service. Plans achieving 4+ stars qualify for quality bonus payments that can represent hundreds of millions of dollars annually, making Stars optimization a top strategic priority. Stars measures include HEDIS clinical quality metrics, CAHPS patient experience surveys, pharmacy measures, and operational metrics such as appeals processing timeliness. Improving Stars ratings requires coordinated efforts across clinical quality (closing care gaps), member engagement (improving CAHPS scores), medication management (adherence and therapy optimization), and operational efficiency. AI platforms help health plans improve Stars ratings by automating member outreach for preventive screenings, medication adherence programs, and care gap closure at scale.' }
+    ];
+    var html = renderInnerHero('GLOSSARY', 'Healthcare AI Glossary',
+      'Comprehensive glossary of healthcare AI, value-based care, interoperability, coding, claims, quality, and compliance terminology. ' + terms.length + ' terms defined.',
+      null, '') +
+      '<section class="zynix-glossary-detail" style="padding:60px 0"><div class="zynix-container">' +
+      '<div class="zynix-glossary-nav" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;justify-content:center">';
+    terms.forEach(function(t, i) {
+      html += '<a href="#glossary-' + i + '" style="padding:6px 14px;background:var(--z-blue-light);border-radius:20px;font-size:13px;color:var(--z-primary);text-decoration:none;font-weight:500">' + t.term + '</a>';
+    });
+    html += '</div>';
+    terms.forEach(function(t, i) {
+      html += '<div class="zynix-definition-box fade-in-up" id="glossary-' + i + '" style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px;margin-bottom:24px">' +
+        '<h2 style="font-size:22px;font-weight:700;color:var(--z-text);margin:0 0 16px">' + t.term + '</h2>' +
+        '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0">' + t.definition + '</p>' +
+        '</div>';
+    });
+    html += '</div></section>';
+    return html +
+      renderCTA('Have Questions About Healthcare AI?', 'Our team can help you understand how AI fits into your operations.', 'Contact Us') +
+      renderFooter();
   }
 
   function renderWebinars() {
@@ -1991,6 +2138,9 @@
       '</div>' +
       '<div class="zynix-inner-hero-img"><img src="' + IMG.gifDashboard + '" alt="Zynix AI Healthcare Dashboard"></div>' +
       '</div></section>';
+
+    // -- AEO SUMMARY BLOCK --
+    html += '<div class="zynix-container"><div class="zynix-summary-block"><strong>Zynix AI</strong> is a healthcare AI operating system that unifies clinical data, deploys autonomous AI agents, and automates care coordination for value-based care organizations including ACOs, health systems, health plans, and FQHCs. Over 1 million VBC patients have been onboarded across 30 states, with measurable outcomes including 85%+ TCM contact rates, 40% improvement in gap closure, and 2-3x AWV scheduling lift.</div></div>';
 
     // -- CUSTOMER TRUST STRIP --
     var trustOrgs = ['Palm Beach ACO','West Florida ACO','Space Coast ACO','Central Florida ACO',
@@ -2187,6 +2337,20 @@
       '<div class="zynix-flywheel-arrow zynix-flywheel-loop">&#x21BA;</div>' +
       '</div></div></section>';
 
+    // -- HOMEPAGE FAQ (AEO) --
+    html += '<section class="zynix-page-faq"><div class="zynix-container">' +
+      '<span class="zynix-tag">FREQUENTLY ASKED QUESTIONS</span>' +
+      '<h2>Common Questions About Zynix AI</h2>' +
+      '<div class="zynix-faq-list">' +
+      '<div class="zynix-faq-item"><div class="zynix-faq-q">What is Zynix AI?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Zynix AI is a healthcare AI operating system purpose-built for value-based care. It unifies clinical data from EHRs, claims, ADT feeds, labs, and SDOH sources into a single platform, then deploys seven specialized AI agents to automate patient outreach, appointment scheduling, after-hours triage, clinical documentation, medication reconciliation, prior authorization, and fax processing. Over 1 million value-based care patients have been onboarded across 30 states.</p></div></div>' +
+      '<div class="zynix-faq-item"><div class="zynix-faq-q">How does Zynix AI work?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Zynix operates in four layers: (1) The Data Platform ingests and normalizes data from every clinical source. (2) The Analytics Engine predicts risk, identifies gaps, and prioritizes worklists. (3) Seven AI Agents take autonomous action \u2014 calling patients, scheduling appointments, processing authorizations. (4) Care Plans orchestrate these agents into end-to-end workflows for TCM, CCM, AWV, and gap closure. The platform gets smarter with every patient interaction through ZynixLLM, a purpose-built healthcare language model.</p></div></div>' +
+      '<div class="zynix-faq-item"><div class="zynix-faq-q">Who uses Zynix AI?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Zynix serves ACOs and MSOs, health systems, health plans, FQHCs, independent medical practices, and ambulatory surgery centers (ASCs). Our platform is used by organizations like Palm Beach ACO, West Florida ACO, Space Coast ACO, eTernal Health, AMISTAD CHC, Cardio &amp; Vascular Consultants, and 16+ healthcare organizations across 30 states.</p></div></div>' +
+      '<div class="zynix-faq-item"><div class="zynix-faq-q">What results does Zynix deliver?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Organizations using Zynix see measurable outcomes: 85%+ TCM contact rates (vs. 30-40% industry average), 40% improvement in HCC gap closure, 2-3x AWV scheduling lift, 40% reduction in no-shows, 97.3% after-hours triage accuracy, 60% faster prior authorization turnaround, and 70% reduction in documentation burden. Most organizations see positive ROI within 8-12 weeks of deployment.</p></div></div>' +
+      '<div class="zynix-faq-item"><div class="zynix-faq-q">Is Zynix HIPAA compliant?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Yes. Zynix AI is HIPAA compliant, SOC 2 Type II certified, and HITRUST CSF ready. All patient data is encrypted at rest and in transit. The platform undergoes regular third-party security audits and maintains strict access controls, audit logging, and data governance policies. Zynix is also GDPR compliant for international operations.</p></div></div>' +
+      '<div class="zynix-faq-item"><div class="zynix-faq-q">How long does it take to implement Zynix?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Zynix can be deployed in as little as 4-6 weeks for standard implementations. The Data Platform connects to your existing EHR and data sources through pre-built integrations. AI agents can be activated individually or as a suite. Most organizations start with one or two use cases (like TCM or after-hours triage) and expand from there.</p></div></div>' +
+      '<div class="zynix-faq-item"><div class="zynix-faq-q">How is Zynix different from other healthcare AI companies?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Most healthcare AI companies sell point solutions \u2014 a scheduling tool here, an analytics dashboard there. Zynix is an integrated operating system where data, intelligence, and AI agents work together. Our agents don\u2019t just surface insights; they take action. And because ZynixLLM is purpose-built for healthcare (not a general-purpose model), it has lower hallucination rates and deeper clinical understanding than competitors using third-party LLMs.</p></div></div>' +
+      '</div></div></section>';
+
     // -- CTA --
     html += renderCTA('See Zynix in Action', 'Join the healthcare organizations already transforming care operations with AI-powered intelligence.', 'Request a Demo');
 
@@ -2210,6 +2374,7 @@
     '/products-zynscribe': renderZynScribe,
     '/products-care-plans': renderCarePlans,
     '/company-zynixllm': renderZynixLLM,
+    '/products-zynixllm': renderZynixLLM,
     // Products - AI Agent Detail Pages (NEW)
     '/products-ai-agents-zynafterhours': renderZynAfterHours,
     '/products-ai-agents-zynschedule': renderZynSchedule,
@@ -2255,7 +2420,17 @@
     '/privacy-policy': renderPrivacy,
     '/company-privacy': renderPrivacy,
     '/terms-of-service': renderTerms,
-    '/company-terms': renderTerms
+    '/company-terms': renderTerms,
+    // Comparison Pages
+    '/compare/zynix-vs-point-solutions': renderComparePointSolutions,
+    '/compare/zynix-vs-innovaccer': renderCompareInnovaccer,
+    '/compare/zynix-vs-commure': renderCompareCommure,
+    // Blog Posts
+    '/blog/what-is-value-based-care-ai': renderBlogVBCAI,
+    '/blog/how-ai-closes-care-gaps': renderBlogCareGaps,
+    '/blog/ai-agents-vs-chatbots-healthcare': renderBlogAgentsVsChatbots,
+    // Case Studies
+    '/case-studies/palm-beach-aco': renderCaseStudyPalmBeach
   };
 
   function initAnimations() {
@@ -2425,6 +2600,317 @@
         return true;
       });
     }, { passive: true });
+  }
+
+  // ── PAGE: Compare — Zynix vs Point Solutions ──
+  function renderComparePointSolutions() {
+    return renderInnerHero('COMPARISON', 'Zynix AI vs. Point Solutions', 'Why leading value-based care organizations choose an integrated AI operating system over fragmented point solutions.', IMG.enterprise, 'Zynix AI vs point solutions comparison') +
+    '<section class="zynix-compare-section" style="padding:80px 0"><div class="zynix-container">' +
+    '<div class="zynix-summary-block"><strong>Zynix AI</strong> is an integrated healthcare AI operating system that unifies data ingestion, analytics, AI agents, and care management into a single platform. Point solutions are individual tools that each solve one narrow problem\u2014a separate vendor for scheduling, another for documentation, another for analytics\u2014requiring organizations to stitch together a fragmented technology stack.</div>' +
+
+    '<h2 style="text-align:center;font-size:32px;font-weight:700;margin:48px 0 32px;color:var(--z-text)">Head-to-Head Comparison</h2>' +
+
+    '<div class="zynix-compare-two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px">' +
+    '<div class="zynix-compare-card" style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px">' +
+    '<h3 style="font-size:20px;font-weight:700;margin:0 0 20px;color:var(--z-text)">Point Solutions Approach</h3>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Integration:</strong> Each tool requires a separate EHR integration, separate data feed, and separate vendor relationship. Organizations manage 5\u201310 vendor contracts to cover basic care operations.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Data:</strong> Patient data lives in silos across multiple platforms. Care managers toggle between dashboards to piece together a patient\u2019s full picture. No unified longitudinal record.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>AI Agents:</strong> Most point solutions offer rules-based automation or chatbots with limited scope. No autonomous agents that initiate and complete multi-step clinical workflows.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Outcomes:</strong> Analytics tools identify problems but cannot act on them. Scheduling tools book appointments but do not understand clinical context. Gaps between tools cause patients to fall through.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Implementation:</strong> 6\u201312 months per tool, with complex integration projects for each addition. Organizations often abandon tools before seeing ROI.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0"><strong>Total Cost:</strong> $15\u2013$30+ per member per month when combining analytics, engagement, documentation, and care management tools from separate vendors.</p>' +
+    '</div>' +
+    '<div class="zynix-compare-card zynix-card-zynix" style="background:linear-gradient(135deg, #f0f7ff 0%, #fff 100%);border:2px solid var(--z-primary);border-radius:12px;padding:32px">' +
+    '<h3 style="font-size:20px;font-weight:700;margin:0 0 20px;color:var(--z-primary)">Zynix AI Operating System</h3>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Integration:</strong> One platform, one integration. Zynix connects to your EHR once and provides data ingestion, analytics, AI agents, documentation, and care management through a single interface.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Data:</strong> Unified data layer that ingests and normalizes EHR, claims, ADT, labs, pharmacy, and SDOH data into one longitudinal patient record with 97%+ patient matching accuracy.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>AI Agents:</strong> Seven specialized autonomous agents that initiate calls, schedule appointments, reconcile medications, document encounters, process faxes, and submit prior authorizations without human intervention.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Outcomes:</strong> The platform identifies a risk, deploys a care plan, executes outreach through AI agents, and confirms resolution\u2014all in one closed loop. 85%+ TCM contact rates, 40% improvement in gap closure.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Implementation:</strong> Go live in 4\u20138 weeks. One vendor, one contract, one implementation. Most organizations see ROI within the first quarter.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0"><strong>Total Cost:</strong> One platform fee that replaces multiple point solutions, typically delivering 2\u20133x ROI in year one through improved shared savings, TCM revenue, and administrative efficiency.</p>' +
+    '</div></div>' +
+
+    '<div class="zynix-compare-verdict" style="background:var(--z-blue-light);border-radius:12px;padding:40px;text-align:center;margin:40px 0">' +
+    '<h3 style="font-size:24px;font-weight:700;color:var(--z-text);margin:0 0 16px">The Verdict</h3>' +
+    '<p style="font-size:17px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 24px;max-width:700px;margin-left:auto;margin-right:auto">Point solutions solve individual problems. Zynix solves the operating system problem. When your data, analytics, agents, and care plans work together in one platform, you eliminate integration complexity, reduce vendor management overhead, and achieve measurably better outcomes for your patient population.</p>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">See Zynix in Action &rarr;</a>' +
+    '</div>' +
+
+    '<div class="zynix-page-faq" style="max-width:720px;margin:48px auto 0">' +
+    '<h2 style="font-size:28px;font-weight:700;text-align:center;margin:0 0 32px;color:var(--z-text)">Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">Can Zynix replace all my existing point solutions?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Yes. Zynix replaces standalone analytics platforms, patient outreach tools, scheduling systems, documentation solutions, and care management software with one integrated operating system. Most organizations consolidate 5\u201310 vendor contracts into a single Zynix deployment.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">How long does it take to implement Zynix versus multiple point solutions?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Zynix typically goes live in 4\u20138 weeks with a single EHR integration. Implementing equivalent functionality through point solutions often takes 6\u201312 months per tool, with each requiring separate integrations, training, and vendor management.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">What makes Zynix AI agents different from the automation in point solutions?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Most point solutions use rules-based automation or simple chatbots that respond to queries. Zynix AI agents are autonomous\u2014they proactively initiate calls, navigate clinical conversations, reconcile medications, schedule follow-ups, and escalate to care teams when needed, all without human prompting.</p></div></div>' +
+    '</div>' +
+
+    '</div></section>' +
+    renderCTA('Ready to Replace Your Point Solutions?', 'See how Zynix consolidates your entire care operations stack into one AI-powered platform.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  // ── PAGE: Compare — Zynix vs Innovaccer ──
+  function renderCompareInnovaccer() {
+    return renderInnerHero('COMPARISON', 'Zynix AI vs. Innovaccer', 'Compare the Zynix AI operating system with Innovaccer\u2019s data platform for value-based care organizations.', IMG.enterprise, 'Zynix AI vs Innovaccer comparison') +
+    '<section class="zynix-compare-section" style="padding:80px 0"><div class="zynix-container">' +
+    '<div class="zynix-summary-block"><strong>Zynix AI</strong> is a healthcare AI operating system with autonomous agents that take action\u2014calling patients, scheduling appointments, documenting encounters, and closing care gaps automatically. <strong>Innovaccer</strong> is a healthcare data platform focused on data aggregation, normalization, and analytics dashboards. The core difference: Zynix acts on insights while Innovaccer presents them.</div>' +
+
+    '<h2 style="text-align:center;font-size:32px;font-weight:700;margin:48px 0 32px;color:var(--z-text)">Feature-by-Feature Comparison</h2>' +
+
+    '<div class="zynix-compare-two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px">' +
+    '<div class="zynix-compare-card" style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px">' +
+    '<h3 style="font-size:20px;font-weight:700;margin:0 0 20px;color:var(--z-text)">Innovaccer</h3>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Agent Automation:</strong> Innovaccer offers data-driven insights and worklists but relies on human staff or third-party tools to execute outreach, calls, and follow-ups. No autonomous AI agents that take action independently.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Clinical LLM:</strong> Uses general-purpose AI models for analytics and natural language queries. No proprietary healthcare-specific language model purpose-built for clinical workflows and patient conversations.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>TCM Workflows:</strong> Provides TCM dashboards and patient tracking but requires manual outreach by care teams. Typical contact rates remain at industry average of 30\u201340%.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Implementation Speed:</strong> Enterprise implementation typically requires 3\u20136 months for data platform deployment, with additional time for custom analytics configuration and integration.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0"><strong>Target Market:</strong> Primarily large health systems and enterprise-scale organizations with dedicated data engineering and IT teams to manage the platform.</p>' +
+    '</div>' +
+    '<div class="zynix-compare-card zynix-card-zynix" style="background:linear-gradient(135deg, #f0f7ff 0%, #fff 100%);border:2px solid var(--z-primary);border-radius:12px;padding:32px">' +
+    '<h3 style="font-size:20px;font-weight:700;margin:0 0 20px;color:var(--z-primary)">Zynix AI</h3>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Agent Automation:</strong> Seven autonomous AI agents that proactively call patients, schedule appointments, reconcile medications, document encounters, process faxes, and complete prior authorizations. Over 1 million patient interactions handled across 30 states.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Clinical LLM:</strong> ZynixLLM is a proprietary healthcare language model purpose-built for clinical workflows, patient conversations, and medical documentation. Lower hallucination rates than general-purpose models.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>TCM Workflows:</strong> End-to-end automated TCM: ADT feed triggers care plan, AI agent contacts patient within 2 business days, schedules follow-up visit, and completes medication reconciliation. 85%+ contact rates vs. 30\u201340% industry average.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Implementation Speed:</strong> Go live in 4\u20138 weeks. One EHR integration, pre-built care plans, and turnkey AI agents. Most organizations see measurable ROI within the first quarter.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0"><strong>Target Market:</strong> ACOs, MSOs, health systems, health plans, FQHCs, and independent practices of all sizes. No dedicated IT team required to operate the platform.</p>' +
+    '</div></div>' +
+
+    '<div class="zynix-compare-verdict" style="background:var(--z-blue-light);border-radius:12px;padding:40px;text-align:center;margin:40px 0">' +
+    '<h3 style="font-size:24px;font-weight:700;color:var(--z-text);margin:0 0 16px">The Verdict</h3>' +
+    '<p style="font-size:17px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 24px;max-width:700px;margin-left:auto;margin-right:auto">Innovaccer is a strong data platform for organizations that need a foundation for data aggregation and analytics. Zynix goes further by not only unifying data but deploying autonomous AI agents that act on insights\u2014calling patients, closing gaps, and executing care plans without manual intervention. If your organization needs AI that does the work rather than just presenting it, Zynix delivers.</p>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">See the Zynix Difference &rarr;</a>' +
+    '</div>' +
+
+    '<div class="zynix-page-faq" style="max-width:720px;margin:48px auto 0">' +
+    '<h2 style="font-size:28px;font-weight:700;text-align:center;margin:0 0 32px;color:var(--z-text)">Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">Is Zynix a data platform like Innovaccer?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Zynix includes a full data platform (ingestion, normalization, patient matching) as one layer of its operating system, but it goes beyond data aggregation by adding analytics, AI agents, documentation, and care management. Zynix is an operating system that includes data infrastructure, not just a data platform.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">Can we use Zynix alongside Innovaccer?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>While technically possible, most organizations find that Zynix replaces the need for a separate data platform by providing unified data infrastructure along with the action layer that Innovaccer lacks. Organizations typically consolidate onto Zynix for simplicity and better outcomes.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">What if our organization already uses Innovaccer?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Many organizations migrate from analytics-only platforms to Zynix when they realize that dashboards alone do not improve outcomes. Zynix can ingest data from existing platforms during a transition period, making migration straightforward and low-risk.</p></div></div>' +
+    '</div>' +
+
+    '</div></section>' +
+    renderCTA('See How Zynix Compares', 'Request a personalized demo showing exactly how Zynix outperforms your current platform.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  // ── PAGE: Compare — Zynix vs Commure ──
+  function renderCompareCommure() {
+    return renderInnerHero('COMPARISON', 'Zynix AI vs. Commure', 'Compare the Zynix turnkey AI operating system with Commure\u2019s developer platform for healthcare organizations.', IMG.enterprise, 'Zynix AI vs Commure comparison') +
+    '<section class="zynix-compare-section" style="padding:80px 0"><div class="zynix-container">' +
+    '<div class="zynix-summary-block"><strong>Zynix AI</strong> is a turnkey healthcare AI operating system that deploys out of the box\u2014no custom development required. <strong>Commure</strong> is a developer platform that provides APIs, SDKs, and building blocks for health systems to construct their own applications. The core difference: Zynix is a finished product you deploy; Commure is a toolkit you build with.</div>' +
+
+    '<h2 style="text-align:center;font-size:32px;font-weight:700;margin:48px 0 32px;color:var(--z-text)">Feature-by-Feature Comparison</h2>' +
+
+    '<div class="zynix-compare-two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px">' +
+    '<div class="zynix-compare-card" style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px">' +
+    '<h3 style="font-size:20px;font-weight:700;margin:0 0 20px;color:var(--z-text)">Commure</h3>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Approach:</strong> Developer-first platform providing FHIR APIs, communication tools, and infrastructure for health systems to build custom applications. Requires engineering teams to design, develop, and maintain solutions.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>AI Agents:</strong> Commure offers Commure Strongline and ambient documentation through its Athelas acquisition, but does not provide autonomous outreach agents for TCM, gap closure, or patient engagement workflows.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Time to Value:</strong> Typically 6\u201318 months to build, test, and deploy custom applications on the Commure platform. Ongoing engineering investment required for maintenance and feature development.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Population Health:</strong> Provides data infrastructure and interoperability layer but relies on the health system to build population health workflows, risk stratification logic, and care management applications on top.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0"><strong>Target Buyer:</strong> CTO and engineering leadership at large health systems with dedicated software development teams. Not designed for ACOs, MSOs, or organizations without technical staff.</p>' +
+    '</div>' +
+    '<div class="zynix-compare-card zynix-card-zynix" style="background:linear-gradient(135deg, #f0f7ff 0%, #fff 100%);border:2px solid var(--z-primary);border-radius:12px;padding:32px">' +
+    '<h3 style="font-size:20px;font-weight:700;margin:0 0 20px;color:var(--z-primary)">Zynix AI</h3>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Approach:</strong> Turnkey AI operating system that deploys as a complete product. No custom development required. Pre-built care plans, analytics dashboards, AI agents, and documentation tools ready on day one.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>AI Agents:</strong> Seven production-ready autonomous agents for post-discharge follow-up, scheduling, after-hours triage, medication reconciliation, reminders, fax processing, and prior authorization. Over 1 million patient interactions completed.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Time to Value:</strong> Go live in 4\u20138 weeks with measurable outcomes from the first month. No engineering team required. Zynix manages implementation, training, and ongoing optimization.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 16px"><strong>Population Health:</strong> Complete population health management including risk stratification, HCC gap identification, HEDIS measure tracking, care plan orchestration, and automated outreach\u2014all built in and operational from deployment.</p>' +
+    '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0"><strong>Target Buyer:</strong> CMOs, COOs, and care management leaders at ACOs, health systems, health plans, FQHCs, and practices of any size. Designed for operational leaders, not engineering teams.</p>' +
+    '</div></div>' +
+
+    '<div class="zynix-compare-verdict" style="background:var(--z-blue-light);border-radius:12px;padding:40px;text-align:center;margin:40px 0">' +
+    '<h3 style="font-size:24px;font-weight:700;color:var(--z-text);margin:0 0 16px">The Verdict</h3>' +
+    '<p style="font-size:17px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 24px;max-width:700px;margin-left:auto;margin-right:auto">Commure is a strong choice for health systems with dedicated engineering teams that want to build custom applications on top of healthcare infrastructure. Zynix is the right choice for organizations that need a complete, production-ready AI operating system that delivers measurable clinical and financial outcomes without requiring a software development team.</p>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">See Zynix in Action &rarr;</a>' +
+    '</div>' +
+
+    '<div class="zynix-page-faq" style="max-width:720px;margin:48px auto 0">' +
+    '<h2 style="font-size:28px;font-weight:700;text-align:center;margin:0 0 32px;color:var(--z-text)">Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">Do we need a development team to use Zynix?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>No. Zynix is a turnkey platform that requires zero custom development. Your clinical and operational teams use the platform directly through an intuitive interface. Zynix handles all technical implementation, EHR integration, and ongoing maintenance.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">Can Zynix handle the same scale as Commure?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Yes. Zynix serves over 1 million VBC patients across 30 states, supporting healthcare organizations ranging from independent practices to multi-state ACO networks. The platform scales automatically without requiring custom infrastructure management.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">Is Zynix customizable even though it\u2019s turnkey?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Yes. While Zynix deploys as a complete product, it is highly configurable. Organizations customize care plan protocols, agent scripts, escalation rules, risk thresholds, outreach schedules, and reporting dashboards to match their specific clinical workflows and population needs.</p></div></div>' +
+    '</div>' +
+
+    '</div></section>' +
+    renderCTA('Build vs. Deploy: See the Difference', 'Request a demo and see how Zynix delivers results in weeks, not months of development.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  // ── PAGE: Blog — What Is Value-Based Care AI? ──
+  function renderBlogVBCAI() {
+    return renderInnerHero('BLOG', 'What Is Value-Based Care AI? A Complete Guide for 2026', 'How artificial intelligence is transforming value-based care delivery, from risk adjustment to care gap closure and beyond.', IMG.analytics, 'Value-based care AI guide') +
+    '<section class="zynix-article"><div class="zynix-container"><div class="zynix-article-body" style="max-width:780px;margin:0 auto">' +
+    '<div class="zynix-article-meta" style="display:flex;gap:8px;align-items:center;font-size:14px;color:var(--z-text-secondary);margin-bottom:32px"><span>Zynix AI Team</span><span>|</span><span>March 2026</span><span>|</span><span>8 min read</span></div>' +
+
+    '<p style="font-size:18px;line-height:1.9;color:var(--z-text)">Value-based care AI is the application of artificial intelligence to healthcare delivery models where providers are rewarded for patient outcomes rather than service volume. It represents the convergence of two transformative forces in American healthcare: the shift from fee-for-service to value-based reimbursement, and the maturation of AI technologies capable of autonomous clinical and operational action.</p>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">Defining Value-Based Care AI</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">Value-based care AI encompasses any AI system designed to help healthcare organizations succeed in value-based payment arrangements. This includes AI for risk stratification, care gap identification, patient outreach automation, clinical documentation, care plan orchestration, and predictive analytics. The defining characteristic of VBC AI is that it optimizes for outcomes\u2014reduced readmissions, improved quality measures, accurate risk capture, and lower total cost of care\u2014rather than maximizing procedure volume.</p>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">Traditional healthcare IT focused on digitizing records and tracking billing codes. VBC AI takes a fundamentally different approach by analyzing population-level data patterns, predicting which patients need intervention, and increasingly, taking autonomous action to deliver that intervention through AI agents that call patients, schedule appointments, and coordinate care.</p>' +
+
+    '<div class="zynix-key-takeaway" style="background:var(--z-blue-light);border-left:4px solid var(--z-primary);padding:24px 28px;border-radius:0 8px 8px 0;margin:32px 0"><strong style="color:var(--z-text)">Key Takeaway:</strong> <span style="color:var(--z-text-secondary)">Value-based care AI is not a single tool\u2014it is an integrated technology approach that unifies data, analytics, and autonomous action to help organizations succeed in outcome-based payment models.</span></div>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">How VBC AI Works in Practice</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">A modern VBC AI platform operates across four functional layers. First, a <strong>data foundation</strong> ingests and normalizes clinical data from EHRs, claims, ADT feeds, labs, pharmacy records, and social determinants of health sources into a unified patient record. Second, an <strong>intelligence layer</strong> applies predictive models to stratify patients by risk, identify HCC and HEDIS gaps, and generate prioritized worklists. Third, an <strong>action layer</strong> of AI agents executes outreach, scheduling, documentation, and care coordination tasks autonomously. Fourth, a <strong>care management layer</strong> orchestrates end-to-end workflows for TCM, CCM, AWV, and gap closure programs.</p>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">The critical advancement in 2026 is the action layer. Previous generations of healthcare AI stopped at analytics\u2014identifying high-risk patients and generating dashboards. Today\u2019s VBC AI platforms like Zynix close the loop by deploying autonomous agents that contact patients, confirm medication adherence, schedule follow-up visits, and ensure care plans are completed without relying entirely on overstretched human care teams.</p>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">Key Use Cases for VBC AI</h2>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px">' +
+    '<li style="margin-bottom:12px"><strong>Transitional Care Management (TCM):</strong> AI agents contact patients within 48 hours of hospital discharge, schedule follow-up visits, and reconcile medications\u2014achieving 85%+ contact rates versus the 30\u201340% industry average with manual processes.</li>' +
+    '<li style="margin-bottom:12px"><strong>HCC Gap Closure:</strong> Predictive models identify undocumented chronic conditions and prioritize annual recapture visits, improving RAF score accuracy by 40% and ensuring appropriate capitation funding.</li>' +
+    '<li style="margin-bottom:12px"><strong>HEDIS Quality Measures:</strong> Automated outreach identifies patients overdue for preventive screenings and schedules appointments, directly improving Stars ratings and quality-based incentive payments.</li>' +
+    '<li style="margin-bottom:12px"><strong>Annual Wellness Visits (AWV):</strong> AI-driven scheduling campaigns increase AWV completion by 2\u20133x, creating critical touchpoints for chronic condition documentation and preventive care planning.</li>' +
+    '<li style="margin-bottom:12px"><strong>Readmission Prevention:</strong> Risk models predict which discharged patients are most likely to return to the hospital within 30 days, triggering proactive interventions that reduce avoidable readmissions by 20\u201325%.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">Why VBC AI Matters in 2026</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">CMS continues to accelerate the transition to value-based payment models. By 2030, the agency aims to have all Medicare beneficiaries in accountable care relationships. MSSP participation continues to grow, ACO REACH is expanding, and commercial payers are increasingly adopting value-based contracts. Organizations that lack AI-powered care operations will struggle to compete for shared savings against those that can automate outreach at scale, close gaps proactively, and demonstrate measurable quality improvement.</p>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">The economics are compelling: organizations using VBC AI platforms report 2\u20133x ROI in their first year through improved shared savings distributions, increased TCM and CCM reimbursement, and reduced administrative overhead. The question for healthcare leaders in 2026 is no longer whether to adopt AI for value-based care, but which platform to choose.</p>' +
+
+    '<div class="zynix-key-takeaway" style="background:var(--z-blue-light);border-left:4px solid var(--z-primary);padding:24px 28px;border-radius:0 8px 8px 0;margin:32px 0"><strong style="color:var(--z-text)">Key Takeaway:</strong> <span style="color:var(--z-text-secondary)">VBC AI platforms that combine data unification, predictive analytics, and autonomous AI agents represent the most significant operational advantage available to value-based care organizations in 2026.</span></div>' +
+
+    '<div class="zynix-page-faq" style="margin:48px 0 0">' +
+    '<h2 style="font-size:28px;font-weight:700;margin:0 0 32px;color:var(--z-text)">Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">What is the difference between VBC AI and traditional healthcare analytics?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Traditional healthcare analytics identifies trends and surfaces insights through dashboards and reports. VBC AI goes further by predicting which patients need intervention, prioritizing those interventions by impact, and deploying autonomous AI agents to execute outreach and care coordination without manual effort.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">How does VBC AI improve shared savings for ACOs?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>VBC AI improves shared savings by reducing avoidable utilization (readmissions, unnecessary ED visits), improving quality measure performance (which affects savings rates), accurately capturing HCC codes (which adjusts the spending benchmark), and automating care management workflows that prevent costly adverse events.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">Is VBC AI HIPAA compliant?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Reputable VBC AI platforms like Zynix maintain full HIPAA compliance, SOC 2 Type II certification, and HITRUST readiness. All patient data is encrypted at rest (AES-256) and in transit (TLS 1.3), with role-based access controls and comprehensive audit logging. Business Associate Agreements are standard.</p></div></div>' +
+    '</div>' +
+
+    '</div></div></section>' +
+    renderCTA('See VBC AI in Action', 'Request a demo and discover how Zynix transforms value-based care operations with autonomous AI.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  // ── PAGE: Blog — How AI Closes Care Gaps ──
+  function renderBlogCareGaps() {
+    return renderInnerHero('BLOG', 'How AI Closes Care Gaps: From Identification to Resolution', 'The end-to-end workflow for using artificial intelligence to find, prioritize, and close clinical care gaps at scale.', IMG.care, 'AI closing care gaps in healthcare') +
+    '<section class="zynix-article"><div class="zynix-container"><div class="zynix-article-body" style="max-width:780px;margin:0 auto">' +
+    '<div class="zynix-article-meta" style="display:flex;gap:8px;align-items:center;font-size:14px;color:var(--z-text-secondary);margin-bottom:32px"><span>Zynix AI Team</span><span>|</span><span>March 2026</span><span>|</span><span>7 min read</span></div>' +
+
+    '<p style="font-size:18px;line-height:1.9;color:var(--z-text)">A care gap is the difference between the care a patient should receive based on clinical guidelines and the care they actually receive. Care gaps include missed preventive screenings, undocumented chronic conditions, overdue follow-up visits, and lapses in medication adherence. Closing care gaps is the single most impactful operational lever for value-based care organizations seeking to improve quality scores, capture accurate risk adjustment, and earn shared savings.</p>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">Why Manual Care Gap Closure Fails</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">Most healthcare organizations identify care gaps through retrospective claims analysis or periodic EHR data pulls. A quality team generates a spreadsheet of patients with open gaps, distributes worklists to care coordinators, and asks them to call each patient to schedule an appointment. This manual process fails for predictable reasons: worklists are overwhelming (often thousands of patients), care coordinators spend most of their time leaving voicemails, there is no prioritization by clinical or financial impact, and by the time gaps are identified from claims data, months have already passed since the missed service.</p>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">The result is that most organizations close only 15\u201325% of identified care gaps before measurement periods end. The remaining 75\u201385% of gaps translate directly into lower quality scores, missed shared savings, and inaccurate risk adjustment that underfunds patient care.</p>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The AI-Powered Care Gap Lifecycle</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">AI transforms care gap closure from a manual, retrospective process into an automated, real-time workflow. The AI-powered lifecycle has four stages:</p>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)"><strong>Stage 1: Continuous Identification.</strong> Rather than waiting for quarterly claims data, AI platforms ingest data continuously from EHRs, claims feeds, labs, pharmacy records, and ADT notifications. Machine learning models compare each patient\u2019s care history against applicable clinical guidelines (HEDIS, HCC recapture schedules, preventive screening recommendations) to identify gaps in real time. New gaps are detected within hours of data availability, not months later.</p>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)"><strong>Stage 2: Intelligent Prioritization.</strong> Not all care gaps are equal. AI models score each gap by clinical urgency (how long overdue, patient risk level), financial impact (RAF value, quality measure weight), and likelihood of successful closure (patient engagement history, appointment availability). This produces a dynamically ranked worklist where the highest-impact, most-closable gaps surface to the top.</p>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)"><strong>Stage 3: Automated Outreach.</strong> AI agents contact patients through their preferred communication channel\u2014phone calls, text messages, or patient portal notifications\u2014to schedule appointments and close open gaps. Agents handle the conversation autonomously, navigating scheduling logistics, answering common questions, and confirming appointments without requiring staff intervention. For patients who need clinical triage, agents escalate to human care team members with full context.</p>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)"><strong>Stage 4: Confirmed Resolution.</strong> The AI platform tracks each gap from identification through outreach to confirmed closure. When a patient completes a screening, attends a follow-up visit, or has a condition documented during an encounter, the gap is automatically marked as resolved. Unresolved gaps re-enter the outreach cycle with updated prioritization.</p>' +
+
+    '<div class="zynix-key-takeaway" style="background:var(--z-blue-light);border-left:4px solid var(--z-primary);padding:24px 28px;border-radius:0 8px 8px 0;margin:32px 0"><strong style="color:var(--z-text)">Key Takeaway:</strong> <span style="color:var(--z-text-secondary)">AI closes the gap between identification and resolution by automating the most time-consuming step: patient outreach. Organizations using AI-powered care gap workflows report 40% improvement in gap closure rates compared to manual processes.</span></div>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">Types of Care Gaps AI Can Close</h2>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px">' +
+    '<li style="margin-bottom:12px"><strong>HCC Recapture Gaps:</strong> Chronic conditions documented in prior years that have not been recaptured in the current measurement period. AI identifies patients with lapsing HCC codes and prioritizes AWV scheduling to ensure recapture.</li>' +
+    '<li style="margin-bottom:12px"><strong>HEDIS Quality Gaps:</strong> Overdue preventive screenings (mammography, colonoscopy, A1C testing, blood pressure control) that affect Stars ratings and quality incentive payments.</li>' +
+    '<li style="margin-bottom:12px"><strong>Medication Adherence Gaps:</strong> Patients who have not refilled chronic medications on schedule, detected through pharmacy claims data and addressed through automated refill reminders and provider alerts.</li>' +
+    '<li style="margin-bottom:12px"><strong>Follow-Up Gaps:</strong> Missed post-discharge visits, overdue specialist referrals, and incomplete care plan activities identified through ADT feeds and EHR encounter data.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">Measurable Impact of AI-Powered Gap Closure</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">Healthcare organizations using AI for care gap closure consistently report significant improvements: 40% increase in overall gap closure rates, 2\u20133x improvement in AWV completion, measurable improvements in HEDIS measure performance, more accurate RAF scores leading to appropriate capitation payments, and stronger shared savings distributions driven by higher quality scores. These improvements compound over time as the AI models learn from each population\u2019s specific patterns and optimize outreach strategies accordingly.</p>' +
+
+    '<div class="zynix-page-faq" style="margin:48px 0 0">' +
+    '<h2 style="font-size:28px;font-weight:700;margin:0 0 32px;color:var(--z-text)">Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">How quickly can AI identify a new care gap?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>AI platforms that process data in real time can identify new care gaps within hours of receiving updated clinical or claims data. This is a significant improvement over traditional quarterly or annual gap analysis, which often identifies gaps months after the missed service window.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">Do patients respond positively to AI-driven outreach?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Yes. Modern healthcare AI agents are designed to sound natural, empathetic, and professional. Patient satisfaction with AI outreach is consistently high because AI agents are available at convenient times, speak the patient\u2019s preferred language (15+ languages supported), and never rush conversations. Contact rates with AI outreach exceed manual calling by 2\u20133x.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">What data sources are needed for AI-powered gap closure?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Comprehensive gap identification requires EHR data (encounter history, diagnoses, lab results), claims data (procedure codes, billing history), pharmacy data (medication fills and adherence), ADT feeds (admission and discharge events), and quality measure specifications (HEDIS, HCC recapture schedules). Platforms like Zynix ingest all of these sources automatically.</p></div></div>' +
+    '</div>' +
+
+    '</div></div></section>' +
+    renderCTA('Close Your Care Gaps Faster', 'See how Zynix AI identifies, prioritizes, and closes care gaps automatically.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  // ── PAGE: Blog — AI Agents vs Chatbots in Healthcare ──
+  function renderBlogAgentsVsChatbots() {
+    return renderInnerHero('BLOG', 'Healthcare AI Agents vs. Chatbots: What\u2019s the Difference?', 'Understanding the critical distinction between AI agents that take autonomous action and chatbots that only respond to questions.', IMG.doctor, 'AI agents vs chatbots in healthcare') +
+    '<section class="zynix-article"><div class="zynix-container"><div class="zynix-article-body" style="max-width:780px;margin:0 auto">' +
+    '<div class="zynix-article-meta" style="display:flex;gap:8px;align-items:center;font-size:14px;color:var(--z-text-secondary);margin-bottom:32px"><span>Zynix AI Team</span><span>|</span><span>March 2026</span><span>|</span><span>6 min read</span></div>' +
+
+    '<p style="font-size:18px;line-height:1.9;color:var(--z-text)">The healthcare industry uses the terms "AI agent" and "chatbot" interchangeably, but they represent fundamentally different technologies with vastly different capabilities. A chatbot responds to user queries within a conversation. An AI agent perceives its environment, makes decisions, and takes autonomous action to accomplish clinical and operational tasks\u2014often without any human initiation at all. Understanding this distinction is critical for healthcare leaders evaluating AI technology investments.</p>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">What Is a Healthcare Chatbot?</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">A healthcare chatbot is a conversational interface that responds to user-initiated interactions. When a patient or staff member asks a question, the chatbot searches a knowledge base and returns an answer. Chatbots excel at symptom checking, answering FAQs about office hours and insurance, helping patients navigate portal features, and providing general health education. The key limitation of chatbots is that they are <strong>reactive</strong>\u2014they wait for someone to start a conversation and can only respond within the boundaries of that conversation. A chatbot cannot decide on its own to call a recently discharged patient, schedule a follow-up appointment, or reconcile a medication list.</p>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">What Is a Healthcare AI Agent?</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">A healthcare AI agent is an autonomous system that monitors data streams, identifies situations requiring action, and executes multi-step workflows without waiting for human initiation. AI agents are <strong>proactive</strong>\u2014they detect that a patient was discharged from the hospital, automatically initiate a post-discharge call within 48 hours, navigate a clinical conversation covering symptoms and medication changes, schedule a follow-up visit, update the care plan, and route unresolved issues to a care manager. Each of these steps happens autonomously within clinical protocols defined by the organization.</p>' +
+
+    '<div class="zynix-key-takeaway" style="background:var(--z-blue-light);border-left:4px solid var(--z-primary);padding:24px 28px;border-radius:0 8px 8px 0;margin:32px 0"><strong style="color:var(--z-text)">Key Takeaway:</strong> <span style="color:var(--z-text-secondary)">The difference between a chatbot and an AI agent is the difference between answering a question and doing the work. Chatbots are tools for information retrieval. AI agents are autonomous team members that execute clinical workflows.</span></div>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">Five Key Differences</h2>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px">' +
+    '<li style="margin-bottom:12px"><strong>Initiation:</strong> Chatbots wait for user input. AI agents proactively initiate actions based on clinical data triggers such as discharge events, lab results, or approaching care gap deadlines.</li>' +
+    '<li style="margin-bottom:12px"><strong>Scope:</strong> Chatbots handle single-turn or simple multi-turn conversations. AI agents execute complex multi-step workflows spanning data analysis, patient communication, scheduling, documentation, and escalation.</li>' +
+    '<li style="margin-bottom:12px"><strong>Integration:</strong> Chatbots typically sit on a website or patient portal. AI agents are deeply integrated into clinical systems\u2014reading EHR data, processing ADT feeds, updating care plans, and writing back to the health record.</li>' +
+    '<li style="margin-bottom:12px"><strong>Autonomy:</strong> Chatbots require continuous user interaction to function. AI agents operate independently within defined clinical guardrails, making decisions and taking actions across their entire workflow.</li>' +
+    '<li style="margin-bottom:12px"><strong>Impact:</strong> Chatbots improve patient self-service and reduce call center volume. AI agents directly improve clinical outcomes: 85%+ TCM contact rates, 40% gap closure improvement, 60% reduction in administrative burden.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">When to Use Each Technology</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">Chatbots remain valuable for patient-facing information retrieval: answering questions about office hours, explaining insurance coverage, and triaging symptom inquiries on a website. AI agents are the right choice when you need technology to <em>do work</em>\u2014to call patients, close care gaps, schedule appointments, document encounters, and execute care plans at a scale that human staff cannot match. The most effective healthcare organizations deploy both: chatbots for patient self-service and AI agents for operational automation.</p>' +
+
+    '<blockquote style="border-left:4px solid var(--z-blue);padding:20px 24px;margin:32px 0;background:var(--z-blue-light);border-radius:0 8px 8px 0"><p style="font-size:16px;line-height:1.8;color:var(--z-text);margin:0;font-style:italic">"We didn\u2019t need another chatbot. We needed AI that would actually make the calls, book the appointments, and close the gaps. That\u2019s what agents do."</p><cite style="display:block;margin-top:12px;font-size:14px;color:var(--z-text-secondary);font-style:normal"><strong>\u2014 David Klebonis</strong>, COO, Palm Beach ACO</cite></blockquote>' +
+
+    '<div class="zynix-page-faq" style="margin:48px 0 0">' +
+    '<h2 style="font-size:28px;font-weight:700;margin:0 0 32px;color:var(--z-text)">Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">Can AI agents handle complex clinical conversations?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Yes. Healthcare AI agents powered by clinical language models can navigate nuanced patient conversations covering symptoms, medications, appointment logistics, and care plan adherence. When conversations exceed the agent\u2019s clinical scope, they escalate to human care team members with full conversational context and patient history.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">Do AI agents replace clinical staff?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>No. AI agents handle routine, high-volume tasks such as outreach calls, appointment scheduling, and medication reminders that consume care coordinator time. This allows clinical staff to focus on patients who need human clinical judgment, complex case management, and in-person care\u2014work that AI cannot and should not replace.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">How many AI agents does Zynix offer?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Zynix deploys seven specialized AI agents: post-discharge follow-up, appointment scheduling (ZynSchedule), after-hours triage (ZynAfterHours), medication reconciliation, appointment reminders (ZynReminder), fax processing (ZynFax), and prior authorization (ZynAuth). Each agent is purpose-built for its specific workflow and operates autonomously within clinical guardrails.</p></div></div>' +
+    '</div>' +
+
+    '</div></div></section>' +
+    renderCTA('See AI Agents in Action', 'Watch Zynix AI agents make real patient calls, schedule appointments, and close care gaps autonomously.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  // ── PAGE: Case Study — Palm Beach ACO ──
+  function renderCaseStudyPalmBeach() {
+    return renderInnerHero('CASE STUDY', 'Palm Beach ACO', 'How a South Florida ACO transformed value-based care operations with AI-powered outreach, documentation, and care coordination.', IMG.care, 'Palm Beach ACO case study with Zynix AI') +
+    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
+
+    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">85%</span><span style="font-size:14px;color:var(--z-text-secondary)">TCM Contact Rate</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">40%</span><span style="font-size:14px;color:var(--z-text-secondary)">Gap Closure Improvement</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">3x</span><span style="font-size:14px;color:var(--z-text-secondary)">AWV Completion Lift</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">8</span><span style="font-size:14px;color:var(--z-text-secondary)">Weeks to ROI</span></div>' +
+    '</div>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Palm Beach ACO is a Medicare Shared Savings Program (MSSP) ACO serving a large attributed patient population across South Florida. Like many ACOs, Palm Beach faced a persistent set of operational challenges that undermined their value-based care performance:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>Low TCM contact rates:</strong> Manual post-discharge outreach achieved only 30\u201335% contact rates. Care coordinators spent hours each day leaving voicemails, with most discharged patients never receiving timely follow-up contact within the CMS-mandated 2-business-day window.</li>' +
+    '<li style="margin-bottom:8px"><strong>Missed HCC and quality gaps:</strong> Without real-time gap identification, the quality team relied on quarterly claims data to generate worklists. By the time gaps were identified, the optimal intervention window had often closed. Annual Wellness Visit completion was far below potential.</li>' +
+    '<li style="margin-bottom:8px"><strong>Documentation burden:</strong> Providers spent 2\u20133 hours per day on documentation after clinic hours, contributing to burnout and limiting the number of patients each provider could see.</li>' +
+    '<li style="margin-bottom:8px"><strong>Missed shared savings:</strong> The combination of low contact rates, missed quality measures, and incomplete HCC capture meant the ACO was leaving significant shared savings on the table each performance year.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Palm Beach ACO deployed the Zynix AI platform as their comprehensive care operations solution. Implementation was completed in 6 weeks, including full EHR integration, data onboarding, care plan configuration, and AI agent deployment. The deployment included:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>Post-Discharge AI Agent:</strong> Autonomous outreach to every discharged patient within 48 hours, handling the initial TCM contact call including medication review and follow-up scheduling.</li>' +
+    '<li style="margin-bottom:8px"><strong>Gap Closure Engine:</strong> Real-time identification of HCC recapture gaps and HEDIS quality measure gaps, with AI-prioritized worklists and automated patient outreach for appointment scheduling.</li>' +
+    '<li style="margin-bottom:8px"><strong>AWV Campaign Agent:</strong> Proactive scheduling outreach targeting eligible patients for Annual Wellness Visits, with intelligent retry logic and multichannel engagement.</li>' +
+    '<li style="margin-bottom:8px"><strong>ZynScribe:</strong> Ambient AI documentation deployed across participating providers to reduce documentation burden and capture structured clinical notes during encounters.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Within the first quarter of deployment, Palm Beach ACO saw transformative improvements across every key performance metric:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>TCM contact rate increased from 32% to 85%:</strong> AI agents successfully contacted the vast majority of discharged patients within the 2-business-day CMS window, ensuring timely follow-up and enabling TCM billing for significantly more episodes.</li>' +
+    '<li style="margin-bottom:8px"><strong>40% improvement in care gap closure:</strong> Real-time gap identification combined with automated outreach closed HCC and quality gaps at a rate far exceeding manual workflows, improving quality scores and RAF accuracy.</li>' +
+    '<li style="margin-bottom:8px"><strong>3x AWV completion:</strong> Proactive scheduling outreach tripled the number of Annual Wellness Visits completed, creating more touchpoints for chronic condition documentation, preventive screening, and care plan updates.</li>' +
+    '<li style="margin-bottom:8px"><strong>ROI achieved in 8 weeks:</strong> The combination of increased TCM revenue, improved gap closure, higher AWV completion, and reduced administrative costs delivered positive ROI within the first two months of deployment.</li>' +
+    '</ul>' +
+
+    '<blockquote style="border-left:4px solid var(--z-blue);padding:20px 24px;margin:40px 0;background:var(--z-blue-light);border-radius:0 8px 8px 0"><p style="font-size:16px;line-height:1.8;color:var(--z-text);margin:0;font-style:italic">"Zynix transformed our TCM workflow overnight. We went from a 32% contact rate to over 85% within the first quarter. The AI agents handle the outreach while our nurses focus on clinical care."</p><cite style="display:block;margin-top:12px;font-size:14px;color:var(--z-text-secondary);font-style:normal"><strong>\u2014 David Klebonis</strong>, COO, Palm Beach ACO</cite></blockquote>' +
+
+    '</div></div></section>' +
+    renderCTA('Achieve Results Like Palm Beach ACO', 'See how Zynix can transform your organization\u2019s value-based care performance in weeks, not months.', 'Request a Demo') +
+    renderFooter();
   }
 
   // ── Custom 404 page renderer ──
