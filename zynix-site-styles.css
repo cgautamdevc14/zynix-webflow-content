@@ -1136,27 +1136,39 @@ body.has-announcement-bar { padding-top: 40px; }
 
 /* ── Comparison Section ── */
 .zynix-comparison-section {
-  padding: 100px 0;
+  padding: 80px 0;
   background: var(--z-bg-alt);
   text-align: center;
 }
 .zynix-comparison-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 48px;
+  gap: 28px;
+  margin-top: 40px;
   text-align: left;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .zynix-comparison-col {
   background: var(--z-bg-card);
-  border-radius: var(--z-radius);
-  padding: 32px;
+  border-radius: var(--z-radius-lg);
+  padding: 36px 32px;
   border: 1px solid var(--z-border);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.zynix-comparison-col:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
 }
 .zynix-comparison-col h3 {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .zynix-comparison-col ul {
   list-style: none;
@@ -1164,23 +1176,28 @@ body.has-announcement-bar { padding-top: 40px; }
   margin: 0;
 }
 .zynix-comparison-col ul li {
-  padding: 10px 0;
-  border-bottom: 1px solid var(--z-border);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
   font-size: 14px;
   color: var(--z-text-secondary);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 .zynix-comparison-col ul li:last-child { border-bottom: none; }
 .zynix-comparison-before {
   background: #FEF2F2;
   border-color: #FECACA;
+  border-left: 4px solid #DC2626;
 }
 .zynix-comparison-before h3 { color: #DC2626; }
+.zynix-comparison-before ul li { border-bottom-color: rgba(220,38,38,0.1); }
 .zynix-comparison-after {
   background: #F0FDF4;
   border-color: #BBF7D0;
+  border-left: 4px solid var(--z-success);
 }
 .zynix-comparison-after h3 { color: var(--z-success); }
+.zynix-comparison-after ul li { border-bottom-color: rgba(22,163,74,0.1); }
+.zynix-comparison-after ul li strong { color: var(--z-blue); font-size: 13px; }
 
 /* ── Results / Flywheel Sections ── */
 .zynix-results-section {
@@ -1384,17 +1401,20 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-nav-items, .zynix-nav-actions .zynix-nav-contact { display: none; }
   .zynix-nav-hamburger { display: flex; }
   .zynix-wf-step-card { flex-direction: column; }
+  .zynix-homepage-hero { padding: 120px 0 60px; }
   .zynix-homepage-hero h1 { font-size: 36px; }
-  .zynix-comparison-grid { grid-template-columns: 1fr; }
+  .zynix-comparison-grid { grid-template-columns: 1fr; max-width: 560px; }
+  .zynix-comparison-section { padding: 70px 0; }
+  .zynix-crisis-section { padding: 70px 0; }
   .zynix-related-grid { grid-template-columns: repeat(2, 1fr); }
   .zynix-testimonials-grid { grid-template-columns: 1fr 1fr; }
   .zynix-screenshot-gallery { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 }
 @media (max-width: 767px) {
-  .zynix-inner-hero { padding: 100px 0 60px; }
-  .zynix-inner-hero-text h1 { font-size: 30px; }
-  .zynix-inner-page section { padding: 70px 0; }
-  .zynix-inner-page section > .zynix-container > h2 { font-size: 26px; }
+  .zynix-inner-hero { padding: 110px 0 50px; }
+  .zynix-inner-hero-text h1 { font-size: 28px; }
+  .zynix-inner-page section { padding: 56px 0; }
+  .zynix-inner-page section > .zynix-container > h2 { font-size: 24px; }
   .zynix-feature-grid { grid-template-columns: 1fr; }
   .zynix-agents-grid { grid-template-columns: 1fr; }
   .zynix-careplan-grid { grid-template-columns: 1fr; }
@@ -1402,23 +1422,44 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-hero-btns { flex-direction: column; }
   .zynix-flywheel-arrow, .zynix-orch-arrow { display: none; }
   .zynix-flywheel-grid, .zynix-orch-flow { flex-direction: column; }
-  .zynix-metrics-bar { flex-direction: column; gap: 24px; padding: 40px 24px; }
+  .zynix-metrics-bar { flex-direction: column; gap: 20px; padding: 36px 20px; border-radius: 16px; }
+  .zynix-metric-value { font-size: 28px; }
+  .zynix-metric-label { font-size: 13px; }
   .zynix-footer-inner { grid-template-columns: 1fr; }
-  .zynix-cta-section h2 { font-size: 26px; }
+  .zynix-cta-section h2 { font-size: 24px; }
   .zynix-contact-grid { grid-template-columns: 1fr; }
   .zynix-form-row { grid-template-columns: 1fr; }
   .zynix-case-grid { grid-template-columns: 1fr; }
   .zynix-blog-grid { grid-template-columns: 1fr; }
   .zynix-kpi-grid { flex-direction: column; align-items: center; }
-  .zynix-homepage-hero { padding: 100px 0 60px; }
-  .zynix-homepage-hero h1 { font-size: 30px; }
+  .zynix-homepage-hero { padding: 110px 0 48px; }
+  .zynix-homepage-hero h1 { font-size: 28px; letter-spacing: -0.5px; }
+  .zynix-homepage-hero p { font-size: 15px; }
   .zynix-trust-track { gap: 32px; }
-  .zynix-comparison-col { padding: 24px; }
+  .zynix-crisis-section { padding: 56px 0; }
+  .zynix-crisis-section h2 { font-size: 24px; }
+  .zynix-crisis-section .zynix-section-sub { font-size: 14px; }
+  .zynix-architecture-section { padding: 56px 0; }
+  .zynix-comparison-section { padding: 56px 0; }
+  .zynix-comparison-col { padding: 20px; }
+  .zynix-comparison-col h3 { font-size: 16px; margin-bottom: 14px; }
+  .zynix-comparison-col ul li { font-size: 13px; padding: 8px 0; }
+  .zynix-products-overview { padding: 56px 0; }
+  .zynix-results-section { padding: 56px 0; }
+  .zynix-flywheel-section { padding: 56px 0; }
   .zynix-compare-table { font-size: 12px; }
   .zynix-compare-table th, .zynix-compare-table td { padding: 10px 12px; }
   .zynix-related-grid { grid-template-columns: 1fr; }
   .zynix-screenshot-gallery { grid-template-columns: 1fr; gap: 16px; }
   .zynix-testimonials-grid { grid-template-columns: 1fr; }
+  .zynix-section-sub { font-size: 14px; }
+  .zynix-tag { font-size: 11px; letter-spacing: 1.5px; }
+  .zynix-container { padding: 0 16px; }
+  .zynix-arch-grid { gap: 14px; margin-top: 32px; }
+  .zynix-arch-card { padding: 24px 20px; }
+  .zynix-arch-card h3 { font-size: 17px; }
+  .zynix-arch-card p { font-size: 13px; }
+  .zynix-announcement-bar { font-size: 12px; padding: 8px 40px 8px 16px; }
 }
 
 /* ── Hide Webflow Template Default Content ── */
