@@ -2104,6 +2104,46 @@
       '<div class="zynix-testimonial-author"><strong>Ganesh Karra</strong><span>Systems Engineer, AMISTAD CHC</span></div></div>' +
       '</div></div></section>';
 
+    // -- ROI CALCULATOR --
+    html += '<section class="zynix-roi-section" id="roi-calculator"><div class="zynix-container">' +
+      '<span class="zynix-tag">ROI CALCULATOR</span>' +
+      '<h2>Calculate Your Value-Based Care Savings</h2>' +
+      '<p class="zynix-section-sub">See how much Zynix can save your organization annually. Adjust the sliders to match your scale.</p>' +
+      '<div class="zynix-roi-calculator fade-in-up">' +
+      '<div class="zynix-roi-inputs">' +
+        '<div class="zynix-roi-input-group">' +
+          '<label>Total Attributed Lives</label>' +
+          '<input type="range" min="1000" max="500000" value="50000" step="1000" class="zynix-roi-slider" id="roi-lives">' +
+          '<div class="zynix-roi-value" id="roi-lives-val">50,000</div>' +
+        '</div>' +
+        '<div class="zynix-roi-input-group">' +
+          '<label>Monthly Discharges</label>' +
+          '<input type="range" min="50" max="5000" value="500" step="50" class="zynix-roi-slider" id="roi-discharges">' +
+          '<div class="zynix-roi-value" id="roi-discharges-val">500</div>' +
+        '</div>' +
+        '<div class="zynix-roi-input-group">' +
+          '<label>Current TCM Contact Rate</label>' +
+          '<input type="range" min="10" max="80" value="35" step="5" class="zynix-roi-slider" id="roi-tcm">' +
+          '<div class="zynix-roi-value" id="roi-tcm-val">35%</div>' +
+        '</div>' +
+        '<div class="zynix-roi-input-group">' +
+          '<label>Open Care Gaps (HCC/HEDIS)</label>' +
+          '<input type="range" min="500" max="100000" value="10000" step="500" class="zynix-roi-slider" id="roi-gaps">' +
+          '<div class="zynix-roi-value" id="roi-gaps-val">10,000</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="zynix-roi-results">' +
+        '<h3>Projected Annual Impact</h3>' +
+        '<div class="zynix-roi-result-grid">' +
+          '<div class="zynix-roi-result"><span class="zynix-roi-number" id="roi-savings">$2.4M</span><span class="zynix-roi-label">Estimated Annual Savings</span></div>' +
+          '<div class="zynix-roi-result"><span class="zynix-roi-number" id="roi-tcm-lift">+50%</span><span class="zynix-roi-label">TCM Contact Rate Lift</span></div>' +
+          '<div class="zynix-roi-result"><span class="zynix-roi-number" id="roi-gaps-closed">4,000</span><span class="zynix-roi-label">Additional Gaps Closed</span></div>' +
+          '<div class="zynix-roi-result"><span class="zynix-roi-number" id="roi-readmit">-23%</span><span class="zynix-roi-label">Readmission Reduction</span></div>' +
+        '</div>' +
+        '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" style="margin-top:24px">Get Your Custom ROI Report &rarr;</a>' +
+      '</div>' +
+      '</div></div></section>';
+
     // -- SOLUTIONS BY SEGMENT --
     html += '<section class="zynix-solutions-section"><div class="zynix-container">' +
       '<span class="zynix-tag">WHO WE SERVE</span>' +
@@ -2272,9 +2312,98 @@
     counters.forEach(function(el) { counterObserver.observe(el); });
   }
 
+  // ── ROI Calculator Logic ──
+  function initROICalculator() {
+    var lives = document.getElementById('roi-lives');
+    var discharges = document.getElementById('roi-discharges');
+    var tcm = document.getElementById('roi-tcm');
+    var gaps = document.getElementById('roi-gaps');
+    if (!lives) return;
+
+    function fmt(n) { return n.toLocaleString(); }
+    function fmtMoney(n) {
+      if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+      if (n >= 1000) return '$' + Math.round(n / 1000) + 'K';
+      return '$' + Math.round(n);
+    }
+
+    function calc() {
+      var l = parseInt(lives.value);
+      var d = parseInt(discharges.value);
+      var t = parseInt(tcm.value);
+      var g = parseInt(gaps.value);
+
+      // Update display values
+      document.getElementById('roi-lives-val').textContent = fmt(l);
+      document.getElementById('roi-discharges-val').textContent = fmt(d);
+      document.getElementById('roi-tcm-val').textContent = t + '%';
+      document.getElementById('roi-gaps-val').textContent = fmt(g);
+
+      // Calculations
+      var tcmLift = Math.min(85, t + 50) - t;
+      var additionalTCM = d * 12 * (tcmLift / 100);
+      var tcmRevenue = additionalTCM * 260; // avg TCM reimbursement
+      var gapsClosed = Math.round(g * 0.40);
+      var gapRevenue = gapsClosed * 180; // avg RAF value per gap
+      var adminSavings = l * 12; // $12/patient admin savings
+      var readmitReduction = Math.round(d * 12 * 0.15 * 0.23); // 15% readmit rate, 23% reduction
+      var readmitSavings = readmitReduction * 15000; // avg readmission cost
+      var totalSavings = tcmRevenue + gapRevenue + adminSavings + readmitSavings;
+
+      document.getElementById('roi-savings').textContent = fmtMoney(totalSavings);
+      document.getElementById('roi-tcm-lift').textContent = '+' + tcmLift + '%';
+      document.getElementById('roi-gaps-closed').textContent = fmt(gapsClosed);
+      document.getElementById('roi-readmit').textContent = '-' + Math.round((readmitReduction / (d * 12 * 0.15)) * 100) + '%';
+    }
+
+    [lives, discharges, tcm, gaps].forEach(function(el) {
+      el.addEventListener('input', calc);
+    });
+    calc(); // initial calculation
+  }
+
+  // ── Google Analytics ──
+  function initAnalytics() {
+    // GA4 - Replace G-XXXXXXXXXX with actual measurement ID when available
+    var gaId = 'G-PLACEHOLDER';
+    if (gaId === 'G-PLACEHOLDER') return; // Skip if no real ID yet
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', gaId, { page_path: window.location.pathname });
+    // Track CTA clicks
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a');
+      if (!link) return;
+      if (link.href && link.href.indexOf('calendly.com') > -1) {
+        gtag('event', 'cta_click', { event_category: 'conversion', event_label: 'demo_request', page: window.location.pathname });
+      }
+      if (link.classList.contains('zynix-btn-primary') || link.classList.contains('zynix-btn-secondary')) {
+        gtag('event', 'button_click', { event_category: 'engagement', event_label: link.textContent.trim(), page: window.location.pathname });
+      }
+    });
+    // Track page scroll depth
+    var scrollMarks = [25, 50, 75, 100];
+    window.addEventListener('scroll', function() {
+      var scrollPct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      scrollMarks = scrollMarks.filter(function(mark) {
+        if (scrollPct >= mark) {
+          gtag('event', 'scroll_depth', { event_category: 'engagement', event_label: mark + '%', page: window.location.pathname });
+          return false;
+        }
+        return true;
+      });
+    }, { passive: true });
+  }
+
   // ── Custom 404 page renderer ──
   function render404() {
-    return renderHero('Page Not Found', 'The page you\'re looking for doesn\'t exist or has been moved.', { badge: '404 ERROR', img: IMG.hero }) +
+    return renderInnerHero('Page Not Found', 'The page you\'re looking for doesn\'t exist or has been moved.', { badge: '404 ERROR', img: IMG.hero }) +
     '<section style="padding:60px 20px 80px;text-align:center;max-width:600px;margin:0 auto">' +
       '<p style="font-size:18px;color:var(--z-text-light);margin-bottom:32px">It seems you\'ve followed a broken link or the page has been removed. Let us help you find what you need.</p>' +
       '<div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">' +
@@ -2311,6 +2440,8 @@
       injectAfterNav(renderBreadcrumb(path) + pageContent);
       initAnimations();
       animateCounters();
+      initROICalculator();
+      initAnalytics();
       // FAQ accordion toggle
       document.querySelectorAll('.zynix-faq-q').forEach(function(q) {
         q.addEventListener('click', function() {
@@ -2509,7 +2640,7 @@
         recs: [
           { name: 'ZynReminder Agent', desc: 'Smart appointment reminders', link: '/products-ai-agents-zynreminder' },
           { name: 'ZynAfterHours Agent', desc: '24/7 patient triage & messaging', link: '/products-ai-agents-zynafterhours' },
-          { name: 'CareConnect', desc: 'Patient engagement platform', link: '/solutions-use-case-patient-engagement' }
+          { name: 'Care Plans', desc: 'AI-powered care coordination', link: '/products-care-plans' }
         ]
       },
       rec_afterhours: {
