@@ -436,9 +436,9 @@
       '<p>' + subtitle + '</p>' +
       '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#capabilities" class="zynix-btn-secondary">Explore Capabilities</a></div>' +
       '<div class="zynix-hero-trust">' +
-      '<span class="zynix-hero-badge">&#128737; HIPAA</span>' +
-      '<span class="zynix-hero-badge">&#128274; SOC 2</span>' +
-      '<span class="zynix-hero-badge">&#9989; HITRUST</span>' +
+      '<span class="zynix-hero-badge">&#128737; HIPAA Compliant</span>' +
+      '<span class="zynix-hero-badge">&#128274; SOC 2 Type II</span>' +
+      '<span class="zynix-hero-badge">&#9989; HITRUST Ready</span>' +
       '</div>' +
       '</div>' +
       (image ? '<div class="zynix-inner-hero-img"><img src="' + image + '" alt="' + (imgAlt || '') + '"></div>' : '') +
@@ -1297,10 +1297,10 @@
   // ── PAGE: Blog ──
   function renderBlog() {
     var posts = [
-      { title: 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States', cat: 'Company News', date: 'Mar 15, 2026', slug: '/resources-blog-1m-patients', featured: true },
-      { title: 'Healthcare AI Agents vs. Chatbots: What\u2019s the Difference?', cat: 'AI Implementation', date: 'Mar 15, 2026', slug: '/blog/ai-agents-vs-chatbots-healthcare' },
-      { title: 'How AI Closes Care Gaps: From Identification to Resolution', cat: 'Population Health & Analytics', date: 'Mar 10, 2026', slug: '/blog/how-ai-closes-care-gaps' },
-      { title: 'What Is Value-Based Care AI? A Complete Guide for 2026', cat: 'Value-Based Care Strategy', date: 'Mar 1, 2026', slug: '/blog/what-is-value-based-care-ai' },
+      { title: 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States', cat: 'Company News', date: 'Mar 15, 2026', slug: '/resources/blog/1m-patients', featured: true },
+      { title: 'Healthcare AI Agents vs. Chatbots: What\u2019s the Difference?', cat: 'AI Implementation', date: 'Mar 15, 2026', slug: '/resources/blog/ai-agents-vs-chatbots-healthcare' },
+      { title: 'How AI Closes Care Gaps: From Identification to Resolution', cat: 'Population Health & Analytics', date: 'Mar 10, 2026', slug: '/resources/blog/how-ai-closes-care-gaps' },
+      { title: 'What Is Value-Based Care AI? A Complete Guide for 2026', cat: 'Value-Based Care Strategy', date: 'Mar 1, 2026', slug: '/resources/blog/what-is-value-based-care-ai' },
       { title: 'Prior Authorization Delays: What They Actually Cost And How to Fix Them', cat: 'Prior Authorization & RCM', date: 'Mar 3, 2026' },
       { title: 'Your EHR Is Not Broken. It Was Just Never Built to Think.', cat: 'AI Implementation', date: 'Mar 3, 2026' },
       { title: 'Harnessing Generative AI Applications for Healthcare Innovation', cat: 'AI Implementation', date: 'Mar 2, 2026' },
@@ -4967,6 +4967,10 @@ function renderDataAnalyticsV7() {
     '/careers': renderCareers,
     // V7: Resources (new URLs)
     '/resources/blog': renderBlog,
+    '/resources/blog/1m-patients': renderBlog1MPatients,
+    '/resources/blog/what-is-value-based-care-ai': renderBlogVBCAI,
+    '/resources/blog/how-ai-closes-care-gaps': renderBlogCareGaps,
+    '/resources/blog/ai-agents-vs-chatbots-healthcare': renderBlogAgentsVsChatbots,
     '/resources/faq': renderFAQ,
     '/resources/glossary': renderGlossary,
     '/resources/webinars': renderWebinars,
