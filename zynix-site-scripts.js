@@ -877,11 +877,12 @@
 
     '<section class="zynix-deploy-section"><div class="zynix-container">' +
     '<span class="zynix-tag">DEPLOYMENT OPTIONS</span>' +
-    '<h2>Flexible, Secure Deployment</h2>' +
+    '<h2>Healthcare AI Deployment Built for Your Infrastructure</h2>' +
     renderFeatureCards([
-      { icon: '&#9729;', title: 'Secure Cloud', desc: 'Zynix-managed infrastructure with enterprise security, SOC 2 compliance, and 99.95% uptime SLA.' },
-      { icon: '&#128187;', title: 'Customer Cloud', desc: 'Deploy in your AWS, Azure, or GCP account. You control the environment, we provide the intelligence.' },
-      { icon: '&#127968;', title: 'On-Premise / Hybrid', desc: 'Deploy locally with complete data residency, or hybrid. Full control, full compliance.' }
+      { icon: '&#9729;', title: 'Cloud-Hosted (Zynix Cloud)', desc: 'Fully managed healthcare AI deployment on HIPAA-compliant, SOC 2 Type II certified infrastructure. Automatic updates, managed scaling, and 99.9% uptime SLA. Zero infrastructure overhead.' },
+      { icon: '&#128274;', title: 'Private Cloud (AWS / Azure / GCP)', desc: 'Dedicated ZynixLLM instance deployed within your VPC. Private cloud healthcare AI with customer-managed encryption keys, full network isolation, and complete data residency control.' },
+      { icon: '&#127970;', title: 'On-Premises', desc: 'Deploy the complete on-premises healthcare LLM stack in your own data center. Air-gapped medical AI option available for facilities requiring zero external network connectivity. PHI never leaves your physical infrastructure.' },
+      { icon: '&#128260;', title: 'Hybrid', desc: 'Cloud orchestration with on-premises inference for HIPAA compliant AI deployment. Non-sensitive workloads in the cloud, clinical inference on-site. Sensitive patient data never leaves the facility.' }
     ]) +
     '</div></section>' +
 
@@ -953,7 +954,8 @@
         { icon: '&#128196;', title: 'Deployable Care Plans', desc: 'Standardized, evidence-based care plans deployed across your entire ACO network — from discharge to follow-up.' },
         { icon: '&#128202;', title: 'Analytics Platform', desc: 'Real-time visibility into performance metrics, shared savings progress, and population health across all providers.' },
         { icon: '&#129302;', title: 'AI Agent Suite', desc: 'Autonomous agents orchestrate care coordination, appointment scheduling, and patient engagement at scale.' },
-        { icon: '&#128268;', title: 'Unified Data Platform', desc: 'Unified data integration across providers, payers, and EHRs — a single source of truth for your ACO.' }
+        { icon: '&#128268;', title: 'Unified Data Platform', desc: 'Unified data integration across providers, payers, and EHRs — a single source of truth for your ACO.' },
+        { icon: '&#127963;', title: 'CMS ACCESS Model Ready', desc: 'Purpose-built support for the CMS ACCESS model (Advancing All-Payer Health Equity Approaches and Development). Zynix enables health equity measurement across diverse payer mixes, multi-payer alignment for quality reporting, population health management for underserved communities, and SDoH-integrated care coordination — meeting ACCESS requirements for all-payer health equity approaches in value-based care.' }
       ],
       [
         { value: '85%', label: 'TCM Contact Rate' },
@@ -1062,7 +1064,8 @@
         { icon: '&#128202;', title: 'Analytics Suite', desc: 'Identify quality gaps, HCC opportunities, and high-risk members with AI-powered population analytics.' },
         { icon: '&#128196;', title: 'Deployable Care Plans', desc: 'Standardized, evidence-based care plans deployed across your entire member population at scale.' },
         { icon: '&#129302;', title: 'AI Agent Suite', desc: 'Autonomous agents handle member outreach, appointment scheduling, and follow-up — reaching 85%+ of members.' },
-        { icon: '&#128300;', title: 'Risk Stratification', desc: 'Predictive models identify members most likely to benefit from intervention — before they become high-cost.' }
+        { icon: '&#128300;', title: 'Risk Stratification', desc: 'Predictive models identify members most likely to benefit from intervention — before they become high-cost.' },
+        { icon: '&#127963;', title: 'CMS ACCESS Model Ready', desc: 'Built-in support for the CMS ACCESS model (Advancing All-Payer Health Equity Approaches and Development). Enable all-payer health equity measurement, multi-payer quality reporting alignment, population health management across diverse payer mixes, and SDoH-driven member engagement strategies that meet ACCESS program requirements.' }
       ],
       [
         { value: '85%', label: 'Contact Rates' },
@@ -3259,7 +3262,8 @@ function renderWhoWeServeACOs() {
       { title: 'Execution at Full Panel Scale Without Adding Headcount', body: 'Every patient on the follow-up list gets contacted. Every CCM-eligible patient gets a monthly touchpoint. Every HCC gap gets an outreach trigger. The care team handles clinical escalations \u2014 Zynix AI handles the volume.' },
       { title: 'Performance-Year Programs That Run to Completion', body: 'The HCC + Quality Gap Closure Sprint coordinates outreach, scheduling, and documentation on a performance-year timeline \u2014 prioritizing by RAF impact and closure window. Programs don\'t stall in Q4 when coordinator bandwidth is already stretched.' },
       { title: 'Total Cost of Care Protection Through Proactive Outreach', body: 'Predictive signals on rising-risk and readmission-risk patients trigger outreach before the clinical event. Barrier capture routes resolution through the same interaction. The cost that doesn\'t happen is the shared savings that does.' },
-      { title: 'After-Hours Access That Keeps Attributed Patients Out of the ED', body: 'Every non-emergent ED visit by an attributed patient is a direct hit to TCOC. Consistent after-hours access \u2014 clinical triage, self-care guidance, next-day scheduling \u2014 keeps routine care needs from defaulting to the ED.' }
+      { title: 'After-Hours Access That Keeps Attributed Patients Out of the ED', body: 'Every non-emergent ED visit by an attributed patient is a direct hit to TCOC. Consistent after-hours access \u2014 clinical triage, self-care guidance, next-day scheduling \u2014 keeps routine care needs from defaulting to the ED.' },
+      { title: 'CMS ACCESS Model Alignment', body: 'Zynix AI supports the CMS ACCESS model (Advancing All-Payer Health Equity Approaches and Development) requirements. The platform enables health equity measurement across all-payer populations, multi-payer quality alignment, SDoH-integrated outreach for underserved communities, and population health management that meets ACCESS program standards for advancing health equity in value-based care. CMS ACCESS model AI capabilities are built into the core platform.' }
     ],
     primaryUseCases: [
       { title: 'Post-Discharge TCM and Readmission Prevention', teaser: 'The 48-hour post-discharge window is where ACO performance is won or lost \u2014 full workflow from ADT trigger through 30-day close, including TCM billing capture.', url: '/use-cases/post-discharge-tcm-readmission' },
@@ -3322,7 +3326,8 @@ function renderWhoWeServeHealthPlans() {
       { title: 'Member Outreach That Reaches the Full Population, Not a Sample', body: 'Quality gap reminders, HCC documentation outreach, medication adherence check-ins, and preventive care follow-through executed for every eligible member \u2014 not just those a case manager had time to call. Contact rates move when the outreach reaches the full cohort.' },
       { title: 'Barrier Resolution Built Into the Outreach Interaction', body: 'Two-way conversations identify cost, access, transportation, and language barriers in the same interaction where the clinical need is surfaced \u2014 and route each barrier to resolution without requiring a second follow-up. PDC scores and quality measure completion both depend on this step.' },
       { title: 'Risk Adjustment Documentation Closed Before the Deadline', body: 'HCC gaps prioritized by revenue impact. Outreach, scheduling, visit completion, and documentation coordinated in sequence. The risk adjustment deadline is a fixed constraint \u2014 the execution layer runs to meet it.' },
-      { title: 'High-Risk Member Engagement Before the Claim Arrives', body: 'ZynPredict surfaces members on a deterioration trajectory before a hospitalization or ED visit. Proactive outreach engages them at the right window \u2014 identifying the barriers driving the risk and connecting to chronic care management for stabilization.' }
+      { title: 'High-Risk Member Engagement Before the Claim Arrives', body: 'ZynPredict surfaces members on a deterioration trajectory before a hospitalization or ED visit. Proactive outreach engages them at the right window \u2014 identifying the barriers driving the risk and connecting to chronic care management for stabilization.' },
+      { title: 'CMS ACCESS Model Alignment', body: 'Zynix AI supports the CMS ACCESS model (Advancing All-Payer Health Equity Approaches and Development) requirements for health plans. The platform enables health equity measurement and quality reporting across all-payer populations, multi-payer data alignment for ACCESS program participation, SDoH-integrated member outreach for underserved populations, and population health management that meets ACCESS standards for advancing health equity across diverse payer mixes.' }
     ],
     primaryUseCases: [
       { title: 'HEDIS and Stars Quality Measure Improvement', teaser: 'Star Ratings are earned member by member. How quality measure completion moves at full-member-population scale \u2014 not just for the members a case manager reached.', url: '/use-cases/hedis-stars-quality-improvement' },
@@ -3660,6 +3665,17 @@ function renderZynixLLMV7() {
     '</ul></div>' +
     '</div></div></section>';
 
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">DEPLOYMENT FLEXIBILITY</span>' +
+    '<h2>Deploy ZynixLLM Where Your Data Lives</h2>' +
+    '<p class="zynix-section-sub">Healthcare organizations require control over where AI models run and where patient data is processed. ZynixLLM supports every deployment model \u2014 from fully managed cloud to air-gapped on-premises installations \u2014 ensuring HIPAA compliant AI deployment that meets your organization\'s data sovereignty requirements.</p>' +
+    '<div class="zynix-arch-grid">' +
+    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#ccfdcf"><div class="zynix-arch-num">&#9729;</div><h3>Zynix Cloud</h3><p>Fully managed healthcare AI deployment on HIPAA-compliant, SOC 2 Type II certified infrastructure. Zero infrastructure management. Automatic updates and scaling. The fastest path to production.</p></div>' +
+    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#cebffa"><div class="zynix-arch-num">&#128274;</div><h3>Private Cloud (AWS / Azure / GCP)</h3><p>Dedicated ZynixLLM instance in your VPC. Private cloud healthcare AI with customer-managed encryption keys, network isolation, and full data residency control. All inference stays within your cloud boundary.</p></div>' +
+    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#fddbc8"><div class="zynix-arch-num">&#127970;</div><h3>On-Premises</h3><p>Run the complete on-premises healthcare LLM stack in your own data center. Air-gapped medical AI deployment available for facilities requiring zero external connectivity. PHI never leaves your physical infrastructure.</p></div>' +
+    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#d7e9ff"><div class="zynix-arch-num">&#128260;</div><h3>Hybrid</h3><p>Cloud orchestration with on-premises inference. Workflow management runs in the cloud while ZynixLLM clinical inference runs locally. Sensitive data never leaves the facility. Best of both deployment models.</p></div>' +
+    '</div></div></section>';
+
   html += renderCTA('Healthcare AI That Understands How Care Actually Works', 'Talk to our team about how ZynixLLM powers intelligent workflows across the Zynix platform.', 'Talk to Our Team');
   html += renderFooter();
   return html;
@@ -3983,6 +3999,17 @@ function renderPlatformHub() {
     { value: '97%+', label: 'Patient Matching' },
     { value: 'SOC 2', label: 'Type II Certified' }
   ]);
+
+  html += '<section id="deployment"><div class="zynix-container">' +
+    '<span class="zynix-tag">DEPLOYMENT OPTIONS</span>' +
+    '<h2>Healthcare AI Deployment That Meets Your Requirements</h2>' +
+    '<p class="zynix-section-sub">Every healthcare organization has different data sovereignty, compliance, and infrastructure requirements. Zynix supports flexible HIPAA compliant AI deployment models \u2014 from fully managed cloud to air-gapped on-premises installations \u2014 so sensitive patient data stays exactly where your policies require.</p>' +
+    '<div class="zynix-feature-grid">' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#9729;</div><h3>Cloud-Hosted (Zynix Cloud)</h3><p>Fully managed SaaS on HIPAA-compliant infrastructure. SOC 2 Type II certified. Automatic updates, managed scaling, and 99.9% uptime SLA. The fastest path to production for healthcare AI deployment with zero infrastructure management.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128274;</div><h3>Private Cloud</h3><p>Dedicated Zynix instance deployed on AWS, Azure, or GCP within your organization\'s own VPC. Full data isolation with private cloud healthcare AI controls. Customer-managed encryption keys, network policies, and access controls. Ideal for health systems with strict data residency requirements.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#127970;</div><h3>On-Premises</h3><p>Deploy ZynixLLM and all AI agents within your hospital\'s own data center. Air-gapped medical AI option available for environments with no external network connectivity. On-premises healthcare LLM deployment ensures PHI never leaves your facility. Full operational control with Zynix support.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128260;</div><h3>Hybrid</h3><p>Cloud orchestration with on-premises inference. Non-sensitive workloads run in Zynix Cloud while clinical AI inference happens locally. Sensitive patient data never leaves the facility. Combines the scalability of cloud with the data sovereignty of on-premises healthcare AI deployment.</p></div>' +
+    '</div></div></section>';
 
   html += renderCTA('See the Platform in Action', 'Schedule a 30-minute demo to see how ZIP replaces your point-solution stack with one integrated operating system.', 'Request a Demo');
   html += renderFooter();
