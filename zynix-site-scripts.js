@@ -482,7 +482,7 @@
   // ── PAGE: Zynix OS ──
   function renderZynixOS() {
     return renderInnerHero('ZYNIX OS', 'The AI Operating System for Healthcare',
-      'An integrated platform where AI agents work together like a coordinated workforce -delivering measurable patient and financial outcomes at scale.',
+      'An integrated platform where AI agents work together like a coordinated workforce — delivering measurable patient and financial outcomes at scale.',
       IMG.enterprise, 'Zynix OS Enterprise Platform') +
 
     renderProblemSection('Healthcare Has a Doing Problem, Not a Knowing Problem', [
@@ -498,7 +498,7 @@
     '<div class="zynix-arch-grid">' +
     '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #ccfdcf"><div class="zynix-arch-num">01</div><h3>Data</h3><p>Unify and normalize clinical and administrative data into a single, clean source of truth.</p></div>' +
     '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #cebffa"><div class="zynix-arch-num">02</div><h3>Intelligence</h3><p>Convert raw data into prioritized, actionable insight that drives real clinical and operational decisions.</p></div>' +
-    '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #fddbc8"><div class="zynix-arch-num">03</div><h3>Execution</h3><p>Complete work that normally sits on staff worklists -calls, documentation, triage, and care coordination.</p></div>' +
+    '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #fddbc8"><div class="zynix-arch-num">03</div><h3>Execution</h3><p>Complete work that normally sits on staff worklists — calls, documentation, triage, and care coordination.</p></div>' +
     '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #d7e9ff"><div class="zynix-arch-num">04</div><h3>Orchestration</h3><p>Coordinate multiple agents into end-to-end workflows that deliver measurable patient and financial outcomes.</p></div>' +
     '</div></div></section>' +
 
@@ -511,7 +511,7 @@
       { icon: '&#129302;', title: 'Zynix AI Agents', desc: 'Autonomous agents for outreach, triage, documentation, and care coordination at scale.' },
       { icon: '&#128196;', title: 'Deployable Care Plans', desc: 'Multi-agent care workflows that coordinate across your entire care delivery system.' },
       { icon: '&#127908;', title: 'ZynScribe', desc: 'Ambient AI documentation that captures encounters and generates structured notes in seconds.' },
-      { icon: '&#128300;', title: 'Risk Stratification', desc: 'Predictive modeling to identify high-risk patients before crisis -enabling proactive intervention.' }
+      { icon: '&#128300;', title: 'Risk Stratification', desc: 'Predictive modeling to identify high-risk patients before crisis — enabling proactive intervention.' }
     ]) +
     '</div></section>' +
 
@@ -545,7 +545,7 @@
   // ── PAGE: Data Platform ──
   function renderDataPlatform() {
     return renderInnerHero('DATA PLATFORM', 'Your Data. Finally Useful.',
-      'The unified healthcare data layer that ingests, cleans, normalizes, and organizes data from every clinical and administrative source -in real time.',
+      'The unified healthcare data layer that ingests, cleans, normalizes, and organizes data from every clinical and administrative source — in real time.',
       IMG.data, 'Zynix Data Platform') +
 
     renderProblemSection('Why Your Data Isn\u2019t Working', [
@@ -560,7 +560,7 @@
     '<div class="zynix-data-layers">' +
     '<div class="zynix-data-layer fade-in-up"><h3>&#11015; Ingestion Layer</h3><p>EHRs (Epic, Cerner, athena, eCW, NextGen, Allscripts), Claims, ADT, Labs, Pharmacy, SDOH. Every data source. Every format. Connected.</p></div>' +
     '<div class="zynix-data-layer fade-in-up"><h3>&#9881; Processing Layer</h3><p>De-duplication, standardized coding (ICD-10, CPT, SNOMED, LOINC), golden record creation, risk prediction, gap identification, and worklist generation.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>&#9889; Real-Time Feeds</h3><p>EHR APIs, HL7/FHIR feeds, claims (837/835), ADT streams, labs, pharmacy, SDOH, scheduling, and financial data -all flowing in real time.</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>&#9889; Real-Time Feeds</h3><p>EHR APIs, HL7/FHIR feeds, claims (837/835), ADT streams, labs, pharmacy, SDOH, scheduling, and financial data — all flowing in real time.</p></div>' +
     '<div class="zynix-data-layer fade-in-up"><h3>&#128196; Outputs</h3><p>Unified patient records, risk-stratified views, gap closure worklists, dashboards, scorecards, and API endpoints for AI agents.</p></div>' +
     '</div></div></section>' +
 
@@ -589,7 +589,7 @@
   // ── PAGE: Analytics ──
   function renderAnalytics() {
     return renderInnerHero('ANALYTICS', 'Intelligence That Drives Action',
-      'AI-powered analytics that go beyond dashboards. Identify HCC opportunities, predict risk, close quality gaps, and support clinical decisions -all in real time.',
+      'AI-powered analytics that go beyond dashboards. Identify HCC opportunities, predict risk, close quality gaps, and support clinical decisions — all in real time.',
       IMG.analytics, 'Zynix Analytics Dashboard') +
 
     renderProblemSection('Why Traditional Analytics Fall Short', [
@@ -684,7 +684,7 @@
 
     '<div class="zynix-agent-card fade-in-up">' +
     '<div class="zynix-agent-header"><span class="zynix-agent-icon">&#128197;</span><h3>ZynScheduling</h3></div>' +
-    '<p>Intelligent scheduling that books appointments through calls, texts, and chat -matching patients with available slots and managing cancellations.</p>' +
+    '<p>Intelligent scheduling that books appointments through calls, texts, and chat — matching patients with available slots and managing cancellations.</p>' +
     '<div class="zynix-agent-metrics"><span>70-80% Autonomous Booking</span><span>24/7 Availability</span></div></div>' +
 
     '<div class="zynix-agent-card fade-in-up">' +
@@ -704,7 +704,7 @@
 
     '<div class="zynix-agent-card fade-in-up">' +
     '<div class="zynix-agent-header"><span class="zynix-agent-icon">&#128203;</span><h3>ZynPA</h3></div>' +
-    '<p>Automated prior authorization submission, tracking, denial management, and expiration alerts -eliminating the admin burden.</p>' +
+    '<p>Automated prior authorization submission, tracking, denial management, and expiration alerts — eliminating the admin burden.</p>' +
     '<div class="zynix-agent-metrics"><span>75%+ Time Reduction</span><span>$20+ Saved Per Auth</span></div></div>' +
 
     '<div class="zynix-agent-card fade-in-up">' +
@@ -717,7 +717,7 @@
     '<section class="zynix-orchestration-section"><div class="zynix-container">' +
     '<span class="zynix-tag">ORCHESTRATION</span>' +
     '<h2>Agents That Work Together</h2>' +
-    '<p class="zynix-section-sub">Zynix agents don\u2019t operate in silos. They hand off tasks, share context, and coordinate across workflows -just like a high-performing care team.</p>' +
+    '<p class="zynix-section-sub">Zynix agents don\u2019t operate in silos. They hand off tasks, share context, and coordinate across workflows — just like a high-performing care team.</p>' +
     '<div class="zynix-orch-flow">' +
     '<div class="zynix-orch-step fade-in-up"><span>&#128161;</span><p>ZynTriage assesses patient</p></div>' +
     '<div class="zynix-orch-arrow">&rarr;</div>' +
@@ -735,12 +735,12 @@
   // ── PAGE: ZynScribe ──
   function renderZynScribe() {
     return renderInnerHero('ZYNSCRIBE', 'Ambient AI Scribe for Healthcare',
-      'Transform patient encounters into accurate documentation instantly. AI-powered transcription that generates precise SOAP notes in seconds -so you can focus on patients, not paperwork.',
+      'Transform patient encounters into accurate documentation instantly. AI-powered transcription that generates precise SOAP notes in seconds — so you can focus on patients, not paperwork.',
       IMG.scribe, 'ZynScribe Ambient AI') +
 
     renderProblemSection('The Documentation Crisis', [
       { icon: '&#128337;', title: '2 Hours Per 1 Hour', desc: 'Physicians spend 2 hours on documentation for every 1 hour with patients. That\u2019s backwards.' },
-      { icon: '&#128564;', title: '16 Min Pajama Time', desc: '16 minutes of after-hours documentation every night. Burnout isn\u2019t a mystery -it\u2019s a math problem.' },
+      { icon: '&#128564;', title: '16 Min Pajama Time', desc: '16 minutes of after-hours documentation every night. Burnout isn\u2019t a mystery — it\u2019s a math problem.' },
       { icon: '&#128148;', title: '63% Report Burnout', desc: 'The #1 driver of physician dissatisfaction is documentation burden. ZynScribe eliminates it.' }
     ]) +
 
@@ -750,7 +750,7 @@
     renderFeatureCards([
       { icon: '&#127908;', title: 'Ambient Capture', desc: 'Captures natural conversation between clinician and patient without interruption. Works in any clinical setting.' },
       { icon: '&#128101;', title: 'Multi-Speaker Recognition', desc: 'Handles conversations with patients, family members, interpreters, and other care team members with accurate voice distinction.' },
-      { icon: '&#128196;', title: 'Automated Note Generation', desc: 'Generates SOAP notes, H&P, progress notes, and procedure notes automatically -organized, compliant, ready for review.' },
+      { icon: '&#128196;', title: 'Automated Note Generation', desc: 'Generates SOAP notes, H&P, progress notes, and procedure notes automatically — organized, compliant, ready for review.' },
       { icon: '&#129657;', title: '90+ Specialty Templates', desc: 'Cardiology, orthopedics, pediatrics, and more. Customizable templates ensure you never miss critical elements.' },
       { icon: '&#128178;', title: 'Intelligent Coding', desc: 'ICD-10 and CPT code suggestions that optimize billing, reduce missing codes, and improve revenue cycle performance.' },
       { icon: '&#128260;', title: 'EHR Integration', desc: 'Direct upload to Epic, Cerner, athenahealth, and more. One-click integration with physician review before finalization.' }
@@ -781,7 +781,7 @@
   // ── PAGE: Care Plans ──
   function renderCarePlans() {
     return renderInnerHero('DEPLOYABLE CARE PLANS', 'Stop Managing Care. Start Deploying It.',
-      'The orchestration layer atop Zynix OS. Takes insights from the Data Platform and executes through coordinated AI agents -seamlessly handing off tasks from one agent to the next.',
+      'The orchestration layer atop Zynix OS. Takes insights from the Data Platform and executes through coordinated AI agents — seamlessly handing off tasks from one agent to the next.',
       IMG.care, 'Zynix Care Plans') +
 
     renderProblemSection('The Math Doesn\u2019t Work', [
@@ -832,7 +832,7 @@
   // ── PAGE: ZynixLLM ──
   function renderZynixLLM() {
     return renderInnerHero('ZYNIXLLM', 'Healthcare-Native Intelligence',
-      'The foundation model purpose-built for medicine. Not a retrofit of general-purpose AI -every component is designed for medical intelligence, clinical safety, and real-world care delivery.',
+      'The foundation model purpose-built for medicine. Not a retrofit of general-purpose AI — every component is designed for medical intelligence, clinical safety, and real-world care delivery.',
       IMG.mesh, 'ZynixLLM AI') +
 
     '<section class="zynix-why-section"><div class="zynix-container">' +
@@ -847,7 +847,7 @@
     '</ul></div>' +
     '<div class="zynix-compare-card zynix-compare-good fade-in-up"><h3>ZynixLLM</h3><ul>' +
     '<li>Built on real clinical conversations & protocols</li>' +
-    '<li>Certainty calibration -flags uncertainty</li>' +
+    '<li>Certainty calibration — flags uncertainty</li>' +
     '<li>Multi-layer safety architecture</li>' +
     '<li>HIPAA-aligned, audit-ready compliance</li>' +
     '</ul></div>' +
@@ -860,7 +860,7 @@
       { icon: '&#129657;', title: 'Healthcare-Native Design', desc: 'Built from scratch for medicine. Every architectural decision prioritizes clinical safety and accuracy.' },
       { icon: '&#128064;', title: 'Multi-Modal Understanding', desc: 'Understands text, structured medical data, clinical workflows, EHR records, lab results, and imaging notes.' },
       { icon: '&#128737;', title: 'Safety-First Architecture', desc: 'Safety woven into every layer. Validates against protocols, detects uncertainty, triggers human review.' },
-      { icon: '&#9881;', title: 'AI-Enabled Workflows', desc: 'Not just intelligent -operationalized. Powers agents that call, schedule, close gaps, and document visits.' },
+      { icon: '&#9881;', title: 'AI-Enabled Workflows', desc: 'Not just intelligent — operationalized. Powers agents that call, schedule, close gaps, and document visits.' },
       { icon: '&#127968;', title: 'Enterprise-Grade Deployment', desc: 'Secure cloud, customer cloud, or on-premise. Audit trails, compliance reporting, and security controls built in.' }
     ]) +
     '</div></section>' +
@@ -950,10 +950,10 @@
         { icon: '&#128222;', title: 'TCM Contact Underperformance', desc: 'Contact rates stuck at 30-40%, far below the 85%+ needed for optimal outcomes and revenue capture.' }
       ],
       [
-        { icon: '&#128196;', title: 'Deployable Care Plans', desc: 'Standardized, evidence-based care plans deployed across your entire ACO network -from discharge to follow-up.' },
+        { icon: '&#128196;', title: 'Deployable Care Plans', desc: 'Standardized, evidence-based care plans deployed across your entire ACO network — from discharge to follow-up.' },
         { icon: '&#128202;', title: 'Analytics Platform', desc: 'Real-time visibility into performance metrics, shared savings progress, and population health across all providers.' },
         { icon: '&#129302;', title: 'AI Agent Suite', desc: 'Autonomous agents orchestrate care coordination, appointment scheduling, and patient engagement at scale.' },
-        { icon: '&#128268;', title: 'Unified Data Platform', desc: 'Unified data integration across providers, payers, and EHRs -a single source of truth for your ACO.' }
+        { icon: '&#128268;', title: 'Unified Data Platform', desc: 'Unified data integration across providers, payers, and EHRs — a single source of truth for your ACO.' }
       ],
       [
         { value: '85%', label: 'TCM Contact Rate' },
@@ -1061,8 +1061,8 @@
       [
         { icon: '&#128202;', title: 'Analytics Suite', desc: 'Identify quality gaps, HCC opportunities, and high-risk members with AI-powered population analytics.' },
         { icon: '&#128196;', title: 'Deployable Care Plans', desc: 'Standardized, evidence-based care plans deployed across your entire member population at scale.' },
-        { icon: '&#129302;', title: 'AI Agent Suite', desc: 'Autonomous agents handle member outreach, appointment scheduling, and follow-up -reaching 85%+ of members.' },
-        { icon: '&#128300;', title: 'Risk Stratification', desc: 'Predictive models identify members most likely to benefit from intervention -before they become high-cost.' }
+        { icon: '&#129302;', title: 'AI Agent Suite', desc: 'Autonomous agents handle member outreach, appointment scheduling, and follow-up — reaching 85%+ of members.' },
+        { icon: '&#128300;', title: 'Risk Stratification', desc: 'Predictive models identify members most likely to benefit from intervention — before they become high-cost.' }
       ],
       [
         { value: '85%', label: 'Contact Rates' },
@@ -1126,7 +1126,7 @@
       'Eliminate prior authorization delays, reduce surgical cancellations, and automate post-procedure workflows with AI-powered orchestration.',
       IMG.enterprise,
       [
-        { icon: '&#128203;', title: 'Prior Auth Delays', desc: 'Lengthy approval processes delay surgeries and block OR capacity -costing revenue every day.' },
+        { icon: '&#128203;', title: 'Prior Auth Delays', desc: 'Lengthy approval processes delay surgeries and block OR capacity — costing revenue every day.' },
         { icon: '&#128683;', title: 'Surgical Cancellations', desc: 'Inadequate patient prep and missing clearances lead to last-minute cancellations and wasted OR time.' },
         { icon: '&#128222;', title: 'Post-Op Follow-Up Gaps', desc: 'Poor post-procedure communication leads to complications, readmissions, and patient dissatisfaction.' }
       ],
@@ -1158,21 +1158,21 @@
   // ── PAGE: About ──
   function renderAbout() {
     return renderInnerHero('ABOUT ZYNIX', 'We Are Building Healthcare\u2019s Intelligence',
-      'Purpose-built AI for medicine. Not another tool -an operating system that transforms how healthcare organizations deliver care at scale.',
+      'Purpose-built AI for medicine. Not another tool \u2014 an operating system that transforms how healthcare organizations deliver care at scale.',
       IMG.patients, 'Zynix AI Team') +
 
     '<section class="zynix-manifesto-section"><div class="zynix-container">' +
     '<span class="zynix-tag">OUR MANIFESTO</span>' +
     '<h2>Healthcare Is Broken, But Not For The Reason You Think</h2>' +
-    '<p class="zynix-section-sub">The gap isn\u2019t knowledge -it\u2019s execution. Every organization knows who needs care. The problem is delivering that care at scale, consistently, across every patient.</p>' +
-    '<div class="zynix-about-quote fade-in-up"><blockquote>\u201cZynix is not about replacing doctors. It\u2019s about multiplying the impact of every person in healthcare -so the system works for patients, not against them.\u201d</blockquote></div>' +
+    '<p class="zynix-section-sub">The gap isn\u2019t knowledge — it\u2019s execution. Every organization knows who needs care. The problem is delivering that care at scale, consistently, across every patient.</p>' +
+    '<div class="zynix-about-quote fade-in-up"><blockquote>\u201cZynix is not about replacing doctors. It\u2019s about multiplying the impact of every person in healthcare — so the system works for patients, not against them.\u201d</blockquote></div>' +
     '</div></section>' +
 
     '<section class="zynix-capabilities-section"><div class="zynix-container">' +
     '<span class="zynix-tag">WHY WE EXIST</span>' +
     '<h2>Why Healthcare Needs Its Own AI</h2>' +
     renderFeatureCards([
-      { icon: '&#129504;', title: 'Clinical Reasoning Engine', desc: 'Built on real medical conversations and protocols -not internet data. Understands medicine at its core.' },
+      { icon: '&#129504;', title: 'Clinical Reasoning Engine', desc: 'Built on real medical conversations and protocols — not internet data. Understands medicine at its core.' },
       { icon: '&#128737;', title: 'Safety Constellation', desc: 'Multi-layer safety woven into every output. Protocol validation, uncertainty detection, human escalation.' },
       { icon: '&#127919;', title: 'Certainty Calibration', desc: 'Knows what it doesn\u2019t know. Flags uncertainty explicitly and escalates to human clinicians when needed.' },
       { icon: '&#128064;', title: 'Multimodal Understanding', desc: 'Processes text, structured data, clinical workflows, EHR records, and imaging notes in unified context.' }
@@ -1183,8 +1183,8 @@
     '<span class="zynix-tag">MISSION & VISION</span>' +
     '<h2>What We\u2019re Building Toward</h2>' +
     '<div class="zynix-compare-grid">' +
-    '<div class="zynix-compare-card zynix-compare-good fade-in-up"><h3>Our Mission</h3><p style="font-size:16px;line-height:1.8">To transform healthcare operations by building the AI operating system that turns insight into action -enabling every organization to deliver the right care, to the right patient, at the right time.</p></div>' +
-    '<div class="zynix-compare-card zynix-compare-good fade-in-up"><h3>Our Vision</h3><p style="font-size:16px;line-height:1.8">A world where healthcare\u2019s intelligence gap is closed -where AI handles the operational complexity so human caregivers can focus entirely on what they do best: caring for patients.</p></div>' +
+    '<div class="zynix-compare-card zynix-compare-good fade-in-up"><h3>Our Mission</h3><p style="font-size:16px;line-height:1.8">To transform healthcare operations by building the AI operating system that turns insight into action — enabling every organization to deliver the right care, to the right patient, at the right time.</p></div>' +
+    '<div class="zynix-compare-card zynix-compare-good fade-in-up"><h3>Our Vision</h3><p style="font-size:16px;line-height:1.8">A world where healthcare\u2019s intelligence gap is closed — where AI handles the operational complexity so human caregivers can focus entirely on what they do best: caring for patients.</p></div>' +
     '</div></div></section>' +
 
     renderCTA('Join Us in Transforming Healthcare', 'See how Zynix is building the future of healthcare intelligence.', 'Request a Demo') +
@@ -1271,7 +1271,7 @@
   // ── PAGE: FAQ ──
   function renderFAQ() {
     var faqs = [
-      { q: 'What is Zynix AI?', a: 'Zynix is the AI operating system for value-based healthcare. It unifies data, analytics, and autonomous AI agents into a single platform that turns insight into action -at scale.' },
+      { q: 'What is Zynix AI?', a: 'Zynix is the AI operating system for value-based healthcare. It unifies data, analytics, and autonomous AI agents into a single platform that turns insight into action — at scale.' },
       { q: 'What types of healthcare organizations use Zynix?', a: 'ACOs, MSOs, health systems, FQHCs, health plans, independent practices, and ASCs. Any organization accountable for patient outcomes and operational efficiency.' },
       { q: 'What products are included in the Zynix platform?', a: 'Zynix OS includes: Data Platform, Analytics, AI Agent Suite (7 specialized agents), ZynScribe (ambient AI scribe), Deployable Care Plans, and ZynixLLM (healthcare foundation model).' },
       { q: 'How long does implementation take?', a: 'Typical implementation is 3-4 months from contract to full deployment. Many organizations see measurable impact within the first 30 days.' },
@@ -1705,10 +1705,10 @@
   function renderZynAfterHours() {
     return renderAgentPage('ZynAfterHours & Triage',
       'Your Best Nurse. Available 24/7. Speaking 15 Languages.',
-      'AI-powered patient engagement that handles inbound calls 24/7 -triaging symptoms, scheduling appointments, and diverting unnecessary ER visits.',
+      'AI-powered patient engagement that handles inbound calls 24/7 — triaging symptoms, scheduling appointments, and diverting unnecessary ER visits.',
       IMG.doctor,
       [
-        { icon: '&#128222;', title: '67% of Calls Abandoned', desc: 'After-hours calls go to voicemail. Patients give up and go to the ER -costing $1,500-3,000 per avoidable visit.' },
+        { icon: '&#128222;', title: '67% of Calls Abandoned', desc: 'After-hours calls go to voicemail. Patients give up and go to the ER — costing $1,500-3,000 per avoidable visit.' },
         { icon: '&#128176;', title: '$38 Billion Problem', desc: 'Nearly two-thirds of patients avoid care due to scheduling frustration. 30% of ER visits are non-emergent.' },
         { icon: '&#128101;', title: 'Staff Burnout', desc: 'Traditional nurse triage lines cost $15-25 per call and cannot scale. Human staff burn out and turn over.' }
       ],
@@ -1716,7 +1716,7 @@
         { icon: '&#128138;', title: 'Intelligent Symptom Triage', desc: 'Evidence-based protocols (Schmitt-Thompson), real-time assessment, automatic escalation for high-acuity cases.' },
         { icon: '&#128197;', title: 'Smart Scheduling', desc: 'Books same-day and next-day appointments based on urgency and provider availability.' },
         { icon: '&#127973;', title: 'ER Diversion', desc: 'Identifies patients who can safely wait. Provides self-care guidance and routes to appropriate care level.' },
-        { icon: '&#127760;', title: 'Multilingual Support', desc: '15+ languages including Spanish, Mandarin, Vietnamese, Tagalog, Korean -with no translation delays.' },
+        { icon: '&#127760;', title: 'Multilingual Support', desc: '15+ languages including Spanish, Mandarin, Vietnamese, Tagalog, Korean — with no translation delays.' },
         { icon: '&#128101;', title: 'Warm Handoffs', desc: 'Seamless transfer to human staff with complete clinical context. No starting from scratch.' },
         { icon: '&#128196;', title: 'EHR Documentation', desc: 'Every interaction automatically logged with structured ICD-10 ready documentation.' }
       ],
@@ -1737,7 +1737,7 @@
       ],
       [
         { q: 'Is this HIPAA compliant?', a: 'Yes. All data encrypted in transit and at rest. BAA included. SOC 2 Type II certified.' },
-        { q: 'What happens during a real emergency?', a: 'The system recognizes emergency keywords and symptoms immediately. It connects to a live nurse or instructs the patient to call 911 -within seconds.' },
+        { q: 'What happens during a real emergency?', a: 'The system recognizes emergency keywords and symptoms immediately. It connects to a live nurse or instructs the patient to call 911 — within seconds.' },
         { q: 'Does this replace our nurses?', a: 'No. It handles 70-80% of routine calls so your nurses focus on complex cases requiring clinical judgment.' },
         { q: 'What languages does it support?', a: '15+ languages including Spanish, Mandarin, Vietnamese, Tagalog, Korean, and more.' },
         { q: 'How accurate is the triage?', a: '97.3% accuracy validated against clinical review. Lower hallucination rate than any general-purpose model.' }
@@ -1767,7 +1767,7 @@
         { title: 'Availability matching', desc: 'AI checks real-time provider availability, matches urgency, and finds optimal slot.', tag: 'Processing' },
         { title: 'Booking confirmed', desc: 'Appointment booked, confirmation sent via preferred channel. Reminders scheduled.', tag: 'Output' }
       ],
-      { title: 'A patient needs a follow-up after abnormal labs', body: 'At 9 PM, a patient receives a message about abnormal lab results and needs to schedule a follow-up. ZynSchedule is available immediately -no waiting until morning. It identifies the urgency, finds the next available slot with the right provider, books the appointment, and sends confirmation with prep instructions. The patient sleeps knowing their follow-up is scheduled.' },
+      { title: 'A patient needs a follow-up after abnormal labs', body: 'At 9 PM, a patient receives a message about abnormal lab results and needs to schedule a follow-up. ZynSchedule is available immediately — no waiting until morning. It identifies the urgency, finds the next available slot with the right provider, books the appointment, and sends confirmation with prep instructions. The patient sleeps knowing their follow-up is scheduled.' },
       [
         { value: '40%', label: 'No-Show Reduction' },
         { value: '24/7', label: 'Booking Availability' },
@@ -1776,7 +1776,7 @@
       ],
       [
         { q: 'What scheduling systems do you integrate with?', a: 'Epic, Cerner, athenahealth, eClinicalWorks, NextGen, and all major EHRs via HL7/FHIR.' },
-        { q: 'Can it handle complex scheduling rules?', a: 'Yes -provider preferences, appointment types, insurance verification, and multi-provider visits.' }
+        { q: 'Can it handle complex scheduling rules?', a: 'Yes — provider preferences, appointment types, insurance verification, and multi-provider visits.' }
       ]
     );
   }
@@ -1785,7 +1785,7 @@
   function renderPostDischarge() {
     return renderAgentPage('Post-Discharge Follow-Up',
       'From Discharge to Recovery, Automatically',
-      'AI-powered outreach that contacts every patient within 24-48 hours of discharge -confirming safe arrival, reviewing meds, and scheduling follow-ups.',
+      'AI-powered outreach that contacts every patient within 24-48 hours of discharge — confirming safe arrival, reviewing meds, and scheduling follow-ups.',
       IMG.care,
       [
         { icon: '&#127973;', title: 'Only 30-40% Get Follow-Up', desc: 'Most discharged patients never receive timely contact. TCM billing windows are missed.' },
@@ -1801,7 +1801,7 @@
         { icon: '&#128176;', title: 'TCM Revenue Capture', desc: 'Systematic documentation ensures TCM billing codes are captured.' }
       ],
       null,
-      { title: 'TCM Workflow: Patient discharged at 2:47 PM Tuesday', body: 'Minute 0: ADT feed hits Zynix. Minute 1: Patient record enriched with discharge diagnosis, medications, risk score. Minute 2: Risk model flags HIGH (82nd percentile readmission risk). Minute 5: TCM care plan auto-deployed. Hours 1-24: AI calls patient, confirms safe arrival, reviews meds, identifies confusion, escalates to pharmacist, schedules 7-day follow-up. Day 3: Appointment reminder sent. Day 5: Patient confirms via text. Day 7: Patient attends, TCM billing code captured. Day 30: Patient did NOT readmit -shared savings preserved. Total human involvement: pharmacist review (5 min), PCP visit (15 min). Everything else: automated.' },
+      { title: 'TCM Workflow: Patient discharged at 2:47 PM Tuesday', body: 'Minute 0: ADT feed hits Zynix. Minute 1: Patient record enriched with discharge diagnosis, medications, risk score. Minute 2: Risk model flags HIGH (82nd percentile readmission risk). Minute 5: TCM care plan auto-deployed. Hours 1-24: AI calls patient, confirms safe arrival, reviews meds, identifies confusion, escalates to pharmacist, schedules 7-day follow-up. Day 3: Appointment reminder sent. Day 5: Patient confirms via text. Day 7: Patient attends, TCM billing code captured. Day 30: Patient did NOT readmit — shared savings preserved. Total human involvement: pharmacist review (5 min), PCP visit (15 min). Everything else: automated.' },
       [
         { value: '85%+', label: 'Contact Rate' },
         { value: '2x', label: 'TCM Revenue Capture' },
@@ -1833,7 +1833,7 @@
         { icon: '&#128202;', title: 'Adherence Tracking', desc: 'Monitors medication adherence patterns and triggers intervention when needed.' }
       ],
       null,
-      { title: 'Patient stops a new medication due to dizziness', body: 'The medication reconciliation agent discovers during a routine post-discharge call that the patient stopped their new blood pressure medication because of dizziness. The agent captures symptom severity, routes the case for clinician review, documents the medication change, and schedules a follow-up to confirm stability -rather than discovering the issue at an ED visit weeks later.' },
+      { title: 'Patient stops a new medication due to dizziness', body: 'The medication reconciliation agent discovers during a routine post-discharge call that the patient stopped their new blood pressure medication because of dizziness. The agent captures symptom severity, routes the case for clinician review, documents the medication change, and schedules a follow-up to confirm stability — rather than discovering the issue at an ED visit weeks later.' },
       [
         { value: '95%+', label: 'Reconciliation Accuracy' },
         { value: '40%', label: 'Fewer Med Errors' },
@@ -1880,7 +1880,7 @@
   function renderZynFax() {
     return renderAgentPage('ZynFax',
       'Intelligent Fax Processing & Referral Management',
-      'AI that reads, classifies, and routes faxes automatically -turning a paper-based bottleneck into a digital workflow.',
+      'AI that reads, classifies, and routes faxes automatically — turning a paper-based bottleneck into a digital workflow.',
       IMG.data,
       [
         { icon: '&#128424;', title: 'Fax is Still King', desc: 'Healthcare still runs on fax. Referrals, lab results, and prior auth documents pile up in fax queues.' },
@@ -1925,7 +1925,7 @@
         { icon: '&#128202;', title: 'Analytics', desc: 'Tracks approval rates, turnaround times, and denial patterns across payers.' }
       ],
       null,
-      { title: 'MRI prior auth delays a diagnosis', body: 'A clinician orders an MRI for back pain with concerning symptoms. ZynAuth flags missing documentation early -conservative therapy records needed. It assembles the clinical justification, submits to the payer portal, and tracks status. When additional information is requested, ZynAuth routes it as a task with an owner and deadline. Once approved, scheduling is triggered automatically. Result: weeks of delay reduced to days.' },
+      { title: 'MRI prior auth delays a diagnosis', body: 'A clinician orders an MRI for back pain with concerning symptoms. ZynAuth flags missing documentation early — conservative therapy records needed. It assembles the clinical justification, submits to the payer portal, and tracks status. When additional information is requested, ZynAuth routes it as a task with an owner and deadline. Once approved, scheduling is triggered automatically. Result: weeks of delay reduced to days.' },
       [
         { value: '75%', label: 'Processing Time Saved' },
         { value: '10-15%', label: 'Higher First-Pass Approval' },
@@ -1947,7 +1947,7 @@
       [
         { icon: '&#9203;', title: 'Discharge Visibility Delayed', desc: 'ADT feeds arrive late or in multiple formats. By the time patients appear on a list, valuable days are lost.' },
         { icon: '&#128101;', title: 'Ownership is Unclear', desc: 'Who owns the first call? Who owns follow-up scheduling? When ownership is shared, gaps appear.' },
-        { icon: '&#128196;', title: 'Documentation is Afterthought', desc: 'Teams do the work but fail to capture it cleanly -lost billing, poor audit readiness.' }
+        { icon: '&#128196;', title: 'Documentation is Afterthought', desc: 'Teams do the work but fail to capture it cleanly — lost billing, poor audit readiness.' }
       ],
       [
         { title: 'Capture discharges into single work queue', desc: 'Data Platform ingests discharge sources and normalizes into one prioritized queue.', tag: 'Zynix Data Platform' },
@@ -1965,7 +1965,7 @@
 
   function renderUseCaseGapClosure() {
     return renderUseCasePage('Gap Closure (HCC / HEDIS / Quality)',
-      'Turn gap identification into completed closures -labs done, visits completed, documentation aligned.',
+      'Turn gap identification into completed closures — labs done, visits completed, documentation aligned.',
       [
         { icon: '&#128202;', title: 'Gaps Identified But Not Closed', desc: 'Analytics flags 2,000 patients with HCC gaps. Nobody has time to call them all. Insights die in dashboards.' },
         { icon: '&#128683;', title: 'Manual Outreach Doesn\u2019t Scale', desc: 'Care coordinators can reach a fraction of the population. High-impact patients get lost in the queue.' },
@@ -2034,7 +2034,7 @@
       'Move preventive screening from order to completion, especially in populations with access barriers.',
       [
         { icon: '&#128269;', title: 'Overdue Screenings', desc: 'Patients avoid screenings due to anxiety, confusion, and scheduling friction.' },
-        { icon: '&#128683;', title: 'Prep Barriers', desc: 'Colonoscopy prep confusion, mammogram scheduling difficulty -logistics kill compliance.' },
+        { icon: '&#128683;', title: 'Prep Barriers', desc: 'Colonoscopy prep confusion, mammogram scheduling difficulty — logistics kill compliance.' },
         { icon: '&#128268;', title: 'No Follow-Through', desc: 'Results come back but follow-up actions are not tracked to completion.' }
       ],
       [
@@ -2190,7 +2190,7 @@
       '<div class="zynix-inner-hero-text">' +
       '<span class="zynix-tag">AI-POWERED VALUE-BASED CARE PLATFORM</span>' +
       '<h1>Close Care Gaps Faster.<br>Grow Your Shared Savings.</h1>' +
-      '<p>Zynix unifies your clinical data, deploys AI agents, and automates outreach -so your team can focus on patients, not paperwork.</p>' +
+      '<p>Zynix unifies your clinical data, deploys AI agents, and automates outreach — so your team can focus on patients, not paperwork.</p>' +
       '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#how-it-works" class="zynix-btn-secondary">See How It Works</a></div>' +
       '<div class="zynix-hero-trust">' +
       '<span class="zynix-hero-badge">&#128737; HIPAA Compliant</span>' +
@@ -2224,7 +2224,7 @@
     html += '<section class="zynix-crisis-section"><div class="zynix-container">' +
       '<span class="zynix-tag">THE CRISIS</span>' +
       '<h2>Healthcare Has a Doing Problem, Not a Knowing Problem</h2>' +
-      '<p class="zynix-section-sub">Every organization has invested millions in analytics. The problem isn\u2019t knowing who needs care -it\u2019s delivering that care at scale.</p>' +
+      '<p class="zynix-section-sub">Every organization has invested millions in analytics. The problem isn\u2019t knowing who needs care — it\u2019s delivering that care at scale.</p>' +
       '<div class="zynix-metrics-bar">' +
       '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">$285\u2013570B</span><span class="zynix-metric-label">Wasted annually on admin overhead</span></div>' +
       '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">97%</span><span class="zynix-metric-label">Of healthcare data goes unused</span></div>' +
@@ -2238,10 +2238,10 @@
       '<h2>Four Layers. One Operating System.</h2>' +
       '<p class="zynix-section-sub">While competitors sell point solutions, Zynix delivers an integrated OS where AI agents work together like a coordinated workforce.</p>' +
       '<div class="zynix-arch-grid">' +
-      '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #ccfdcf"><div class="zynix-arch-num">01</div><h3>AI Data Foundation</h3><p>Ingest, clean, and normalize data from every source -EHRs, claims, ADT, labs, pharmacy, SDOH -into one unified layer.</p></div>' +
-      '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #cebffa"><div class="zynix-arch-num">02</div><h3>Intelligence &amp; Reasoning</h3><p>Predict, prioritize, and surface actionable insights -risk scores, gap worklists, clinical decision support.</p></div>' +
+      '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #ccfdcf"><div class="zynix-arch-num">01</div><h3>AI Data Foundation</h3><p>Ingest, clean, and normalize data from every source \u2014 EHRs, claims, ADT, labs, pharmacy, SDOH \u2014 into one unified layer.</p></div>' +
+      '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #cebffa"><div class="zynix-arch-num">02</div><h3>Intelligence &amp; Reasoning</h3><p>Predict, prioritize, and surface actionable insights — risk scores, gap worklists, clinical decision support.</p></div>' +
       '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #fddbc8"><div class="zynix-arch-num">03</div><h3>AI Agent Suite</h3><p>Specialized agents that take action: outreach, scheduling, triage, documentation, reminders, and follow-up.</p></div>' +
-      '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #d7e9ff"><div class="zynix-arch-num">04</div><h3>Care Management</h3><p>Orchestrated workflows where agents collaborate on end-to-end care plans -TCM, AWV, gap closure, and more.</p></div>' +
+      '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #d7e9ff"><div class="zynix-arch-num">04</div><h3>Care Management</h3><p>Orchestrated workflows where agents collaborate on end-to-end care plans \u2014 TCM, AWV, gap closure, and more.</p></div>' +
       '</div></div></section>';
 
     // -- THE ZYNIX WAY (Point Solutions vs OS) --
@@ -2279,7 +2279,7 @@
       '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128200;</div><h3>Analytics</h3><p>Population health analytics, predictive modeling, and real-time decision support. ZynGap, ZynPredict, ZynGuide.</p><a href="/products-analytics" class="zynix-card-link">Learn more &rarr;</a></div>' +
       '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#129302;</div><h3>AI Agents</h3><p>Seven specialized agents for outreach, scheduling, triage, documentation, reminders, prior auth, and fax processing.</p><a href="/products-ai-agents" class="zynix-card-link">Learn more &rarr;</a></div>' +
       '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128196;</div><h3>ZynScribe</h3><p>Ambient AI documentation that captures structured clinical notes in real-time during patient encounters.</p><a href="/products-zynscribe" class="zynix-card-link">Learn more &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128203;</div><h3>Care Plans</h3><p>Deployable, orchestrated care plans for TCM, CCM, AWV, HEDIS, and HCC closure -executed by AI agents.</p><a href="/products-care-plans" class="zynix-card-link">Learn more &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128203;</div><h3>Care Plans</h3><p>Deployable, orchestrated care plans for TCM, CCM, AWV, HEDIS, and HCC closure — executed by AI agents.</p><a href="/products-care-plans" class="zynix-card-link">Learn more &rarr;</a></div>' +
       '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#129504;</div><h3>ZynixLLM</h3><p>Purpose-built healthcare language model that powers the entire platform. Gets smarter with every patient interaction.</p><a href="/company-zynixllm" class="zynix-card-link">Learn more &rarr;</a></div>' +
       '</div></div></section>';
 
