@@ -1297,10 +1297,10 @@
   // ── PAGE: Blog ──
   function renderBlog() {
     var posts = [
-      { title: 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States', cat: 'Company News', date: 'Mar 15, 2026', slug: '/resources/blog/1m-patients', featured: true },
-      { title: 'Healthcare AI Agents vs. Chatbots: What\u2019s the Difference?', cat: 'AI Implementation', date: 'Mar 15, 2026', slug: '/resources/blog/ai-agents-vs-chatbots-healthcare' },
-      { title: 'How AI Closes Care Gaps: From Identification to Resolution', cat: 'Population Health & Analytics', date: 'Mar 10, 2026', slug: '/resources/blog/how-ai-closes-care-gaps' },
-      { title: 'What Is Value-Based Care AI? A Complete Guide for 2026', cat: 'Value-Based Care Strategy', date: 'Mar 1, 2026', slug: '/resources/blog/what-is-value-based-care-ai' },
+      { title: 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States', cat: 'Company News', date: 'Mar 15, 2026', slug: '/resources-blog-1m-patients', featured: true },
+      { title: 'Healthcare AI Agents vs. Chatbots: What\u2019s the Difference?', cat: 'AI Implementation', date: 'Mar 15, 2026', slug: '/blog/ai-agents-vs-chatbots-healthcare' },
+      { title: 'How AI Closes Care Gaps: From Identification to Resolution', cat: 'Population Health & Analytics', date: 'Mar 10, 2026', slug: '/blog/how-ai-closes-care-gaps' },
+      { title: 'What Is Value-Based Care AI? A Complete Guide for 2026', cat: 'Value-Based Care Strategy', date: 'Mar 1, 2026', slug: '/blog/what-is-value-based-care-ai' },
       { title: 'Prior Authorization Delays: What They Actually Cost And How to Fix Them', cat: 'Prior Authorization & RCM', date: 'Mar 3, 2026' },
       { title: 'Your EHR Is Not Broken. It Was Just Never Built to Think.', cat: 'AI Implementation', date: 'Mar 3, 2026' },
       { title: 'Harnessing Generative AI Applications for Healthcare Innovation', cat: 'AI Implementation', date: 'Mar 2, 2026' },
@@ -1571,7 +1571,7 @@
     // Announcement banner
     var announceBanner = document.createElement('div');
     announceBanner.className = 'zynix-announcement-bar';
-    announceBanner.innerHTML = '🎉 Zynix AI surpasses 1 Million VBC patients onboarded across 30 states <a href="/resources/blog/1m-patients">Read more</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
+    announceBanner.innerHTML = '🎉 Zynix AI surpasses 1 Million VBC patients onboarded across 30 states <a href="/resources-blog-1m-patients">Read more</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
 
     document.body.prepend(mobile);
     document.body.prepend(nav);
