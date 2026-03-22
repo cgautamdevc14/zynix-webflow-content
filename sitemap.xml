@@ -1,264 +1,300 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <!-- Homepage -->
   <url>
-    <loc>https://zynix-ai.webflow.io/</loc>
-    <lastmod>2026-03-14</lastmod>
+    <loc>https://www.zynix.ai/</loc>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Products - Platform -->
+  <!-- Products (Priority 0.9) -->
   <url>
-    <loc>https://zynix-ai.webflow.io/products-zynix-os</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.zynix.ai/products-zynix-os</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/products-data-platform</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.zynix.ai/products-ai-agents</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/products-analytics</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.zynix.ai/products-data-platform</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/products-ai-agents</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.zynix.ai/products-analytics</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/products-zynscribe</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.zynix.ai/products-zynscribe</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/products-care-plans</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.zynix.ai/products-care-plans</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/company-zynixllm</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Products - AI Agent Detail Pages -->
-  <url>
-    <loc>https://zynix-ai.webflow.io/products-ai-agents-zynafterhours</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/products-ai-agents-zynschedule</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/products-ai-agents-post-discharge</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/products-ai-agents-med-rec</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/products-ai-agents-zynreminder</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/products-ai-agents-zynfax</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/products-ai-agents-zynauth</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.zynix.ai/company-zynixllm</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
-  <!-- Solutions - By Organization Type -->
+  <!-- Solutions - By Organization Type (Priority 0.8) -->
   <url>
-    <loc>https://zynix-ai.webflow.io/solutions-acos</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.zynix.ai/solutions-acos</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/solutions-health-systems</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.zynix.ai/solutions-health-systems</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/solutions-fqhcs</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.zynix.ai/solutions-health-plans</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/solutions-health-plans</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.zynix.ai/solutions-fqhcs</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/solutions-independent-practices</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.zynix.ai/solutions-independent-practices</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/solutions-ascs</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.zynix.ai/solutions-ascs</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Solutions - By Use Case -->
+  <!-- Solutions - By Use Case (Priority 0.8) -->
   <url>
-    <loc>https://zynix-ai.webflow.io/solutions-use-case-tcm</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/solutions-use-case-gap-closure</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/solutions-use-case-after-hours</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/solutions-use-case-prior-auth</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/solutions-use-case-preventive-screening</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/solutions-use-case-readmission-prevention</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Company -->
-  <url>
-    <loc>https://zynix-ai.webflow.io/company-about</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.zynix.ai/solutions-use-case-tcm</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/company-careers</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://www.zynix.ai/solutions-use-case-gap-closure</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/company-press</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://www.zynix.ai/solutions-use-case-after-hours</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/trust-center</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.zynix.ai/solutions-use-case-prior-auth</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/contact</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.zynix.ai/solutions-use-case-preventive-screening</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/solutions-use-case-readmission-prevention</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Resources -->
+  <!-- Individual AI Agents & Comparisons (Priority 0.7) -->
   <url>
-    <loc>https://zynix-ai.webflow.io/faq</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/blog</loc>
-    <lastmod>2026-03-15</lastmod>
+    <loc>https://www.zynix.ai/products-ai-agents-zynafterhours</loc>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/resources-blog-1m-patients</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://zynix-ai.webflow.io/case-studies</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.zynix.ai/products-ai-agents-zynschedule</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/resources-glossary</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://www.zynix.ai/products-ai-agents-post-discharge</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/resources-webinars</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://www.zynix.ai/products-ai-agents-med-rec</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/resources-whitepapers</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://www.zynix.ai/products-ai-agents-zynreminder</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/products-ai-agents-zynfax</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/products-ai-agents-zynauth</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/compare/zynix-vs-point-solutions</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/compare/zynix-vs-innovaccer</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/compare/zynix-vs-commure</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 
-  <!-- Legal -->
+  <!-- Company, Resources, Blog, Case Studies (Priority 0.6) -->
   <url>
-    <loc>https://zynix-ai.webflow.io/privacy-policy</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://www.zynix.ai/company-about</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://zynix-ai.webflow.io/terms-of-service</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://www.zynix.ai/company-trust-center</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://www.zynix.ai/contact</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/resources-faq</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/resources-blog</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/resources-case-studies</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/resources-glossary</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/blog/what-is-value-based-care-ai</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/blog/how-ai-closes-care-gaps</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/blog/ai-agents-vs-chatbots-healthcare</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/case-studies/palm-beach-aco</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Secondary & Legal Pages (Priority 0.4) -->
+  <url>
+    <loc>https://www.zynix.ai/resources-webinars</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/resources-whitepapers</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/company-careers</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/company-press</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/company-privacy</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/company-terms</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
 </urlset>

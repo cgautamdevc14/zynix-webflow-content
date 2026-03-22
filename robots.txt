@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /cdn-cgi/
 
 Sitemap: https://www.zynix.ai/sitemap.xml

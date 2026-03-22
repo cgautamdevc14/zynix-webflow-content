@@ -601,13 +601,14 @@ body {
 }
 .zynix-faq-item:hover { border-color: var(--z-border-hover); box-shadow: var(--z-shadow-sm); }
 .zynix-faq-q {
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: space-between; align-items: center; width: 100%; text-align: left;
   padding: 18px 24px; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--z-text);
+  background: none; border: none; font-family: inherit;
 }
 .zynix-faq-toggle { font-size: 18px; color: var(--z-text-muted); transition: transform 0.25s; }
 .zynix-faq-item.open .zynix-faq-toggle { transform: rotate(45deg); color: var(--z-blue); }
 .zynix-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-.zynix-faq-item.open .zynix-faq-a { max-height: 300px; }
+.zynix-faq-item.open .zynix-faq-a { max-height: 600px; }
 .zynix-faq-a p { padding: 0 24px 20px; font-size: 14px; color: var(--z-text-secondary); line-height: 1.7; margin: 0; }
 
 /* ── Blog Cards ── */
