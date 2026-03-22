@@ -521,9 +521,11 @@ body {
   letter-spacing: 0.3px;
 }
 .zynix-inner-hero .zynix-hero-badge {
-  color: rgba(255,255,255,0.6);
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.25);
+  font-size: 13px;
+  padding: 7px 14px;
 }
 
 /* ── CTA Section Upgrades ── */
