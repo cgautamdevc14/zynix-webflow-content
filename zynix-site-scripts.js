@@ -1524,7 +1524,7 @@
           al('/newsroom','Newsroom','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>') +
           al('/careers','Careers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>') +
           al('/security','Security','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>') +
-          '<div class="zynix-dropdown-featured"><p>AI built for healthcare, by healthcare leaders.</p><a href="/about#team">Meet Our Leadership &rarr;</a></div>' +
+          '<div class="zynix-dropdown-featured"><p>AI built for healthcare, by healthcare leaders.</p><a href="/about">Meet Our Leadership &rarr;</a></div>' +
         '</div></div></div>' +
         // 5. Resources — narrow dropdown
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Resources <span class="chevron">&#9662;</span></button>' +
@@ -1611,7 +1611,7 @@
 
   // ── Shared: Agent Detail Page Template ──
   function renderAgentPage(name, tagline, subtitle, image, problem, capabilities, howItWorks, scenarios, proofPoints, faqs) {
-    var html = renderInnerHero('AI AGENT', name + '  - ' + tagline, subtitle, image, name) +
+    var html = renderInnerHero('AI AGENT', name + ' — ' + tagline, subtitle, image, name) +
       renderProblemSection('The Problem', problem);
 
     html += '<section id="capabilities"><div class="zynix-container">' +
@@ -1726,7 +1726,7 @@
         { title: 'Disposition & action', desc: 'Real-time triage decision: self-care guidance, appointment booking, ER referral, or 911 instruction.', tag: 'Output' },
         { title: 'Documentation & follow-up', desc: 'Encounter note uploaded to EHR. Escalation alerts sent. Patient follow-up messages delivered.', tag: 'Documentation' }
       ],
-      { title: '2:47 AM  - Patient calls with chest discomfort', body: 'ZynAfterHours answers in 2 rings. Patient describes pressure in their chest for about an hour. The AI asks structured questions: location, radiation, shortness of breath, risk factors. Patient reports no radiation, no SOB, history of GERD, ate spicy food. Triage assessment: likely non-cardiac, but age/timing warrants evaluation. Action: same-day urgent care appointment scheduled. Red flag instructions provided. Complete encounter note documented in EHR. Total time: 4 minutes 23 seconds.' },
+      { title: '2:47 AM — Patient calls with chest discomfort', body: 'ZynAfterHours answers in 2 rings. Patient describes pressure in their chest for about an hour. The AI asks structured questions: location, radiation, shortness of breath, risk factors. Patient reports no radiation, no SOB, history of GERD, ate spicy food. Triage assessment: likely non-cardiac, but age/timing warrants evaluation. Action: same-day urgent care appointment scheduled. Red flag instructions provided. Complete encounter note documented in EHR. Total time: 4 minutes 23 seconds.' },
       [
         { value: '<60s', label: 'Average Wait Time' },
         { value: '70-80%', label: 'Routine Inquiries Handled' },
@@ -2162,7 +2162,7 @@
     '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Thu, Mar 19, 2026</div>' +
     '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10:00 AM \u2013 11:00 AM PDT</div>' +
     '</div>' +
-    '<p style="font-size:16px;line-height:1.7;color:var(--z-text-secondary);margin-bottom:24px">Join Zynix AI at the VBC Exhibit Hall to explore how AI-powered automation is helping ACOs scale patient engagement  - from post-discharge follow-ups to preventive screenings  - without adding staff burnout. Learn real strategies for balancing accountability and efficiency in value-based care.</p>' +
+    '<p style="font-size:16px;line-height:1.7;color:var(--z-text-secondary);margin-bottom:24px">Join Zynix AI at the VBC Exhibit Hall to explore how AI-powered automation is helping ACOs scale patient engagement — from post-discharge follow-ups to preventive screenings — without adding staff burnout. Learn real strategies for balancing accountability and efficiency in value-based care.</p>' +
     '<a href="https://register.gotowebinar.com/register/6452881364816065371?source=Newsletter" class="zynix-btn-primary" target="_blank" rel="noopener">Register Now &rarr;</a>' +
     '</div></div>' +
     '</div></section>' +
@@ -2170,7 +2170,7 @@
     '<div class="zynix-container" style="text-align:center;max-width:800px">' +
     '<span class="zynix-tag">ACCESS & EMR CONNECTIVITY</span>' +
     '<h2 class="zynix-section-title">Zynix AI is Participating in ACCESS</h2>' +
-    '<p class="zynix-section-sub" style="font-size:18px;line-height:1.7">Zynix AI is connected to all major EMRs and participating in ACCESS. If your organization wants to sign up for AI-powered care coordination, outbound patient engagement, or clinical documentation  - we can connect directly to your existing systems.</p>' +
+    '<p class="zynix-section-sub" style="font-size:18px;line-height:1.7">Zynix AI is connected to all major EMRs and participating in ACCESS. If your organization wants to sign up for AI-powered care coordination, outbound patient engagement, or clinical documentation — we can connect directly to your existing systems.</p>' +
     '<p style="font-size:16px;color:var(--z-text-secondary);margin-top:16px">Connected EMRs: Epic \u2022 Cerner \u2022 athenahealth \u2022 eClinicalWorks \u2022 NextGen \u2022 Greenway \u2022 Allscripts \u2022 DrChrono</p>' +
     '<a href="/contact" class="zynix-btn-primary" style="margin-top:24px">Connect Your Organization &rarr;</a>' +
     '</div></section>' +
