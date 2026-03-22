@@ -1458,12 +1458,12 @@
     nav.innerHTML =
       '<a href="/" class="zynix-nav-logo"><img src="' + IMG.logo + '" alt="Zynix AI"><span class="zynix-nav-logo-text">zynix<span class="zynix-logo-dot">.ai</span></span></a>' +
       '<div class="zynix-nav-items">' +
-        // 1. Platform — single link, no dropdown
-        '<a href="/platform" class="zynix-nav-trigger zynix-nav-link-single' + (path === '/platform' ? ' active' : '') + '">Platform</a>' +
-        // 2. Solutions — full-width mega panel (3 columns + featured)
-        '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Solutions <span class="chevron">&#9662;</span></button>' +
+        // 1. Platform & Solutions — merged mega panel
+        '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Platform <span class="chevron">&#9662;</span></button>' +
         '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
-          '<div class="zynix-mega-col"><h5>Data &amp; Documentation</h5>' +
+          '<div class="zynix-mega-col"><h5>Platform Overview</h5>' +
+            al('/platform','Zynix Intelligent Platform','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>','The AI Operating System for VBC') +
+          '<h5 style="margin-top:16px">Data &amp; Documentation</h5>' +
             al('/solutions/zynix-data-analytics','Zynix Data Analytics','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>','Population health intelligence and gap closure') +
             al('/zynscribe','ZynScribe','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>','Ambient AI clinical documentation') +
             al('/care-plans','Deployable Care Plans','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>','Configurable evidence-based care workflows') +
@@ -1548,8 +1548,8 @@
     var mobile = document.createElement('div');
     mobile.className = 'zynix-mobile-menu';
     mobile.innerHTML =
-      '<a href="/platform" class="zynix-mobile-single-link">Platform</a>' +
-      '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Solutions &#9662;</button><div class="zynix-mobile-section-links">' +
+      '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Platform &#9662;</button><div class="zynix-mobile-section-links">' +
+      '<a href="/platform"><strong>Zynix Intelligent Platform</strong></a>' +
       '<strong>Data &amp; Documentation</strong>' +
       '<a href="/solutions/zynix-data-analytics">Zynix Data Analytics</a><a href="/zynscribe">ZynScribe</a><a href="/care-plans">Deployable Care Plans</a>' +
       '<strong>AI Agents &mdash; Clinical Performance</strong>' +
@@ -2201,8 +2201,7 @@
       '<div class="zynix-inner-hero-img"><img src="' + IMG.gifDashboard + '" alt="Zynix AI Healthcare Dashboard"></div>' +
       '</div></section>';
 
-    // -- AEO SUMMARY BLOCK (visually hidden, available for LLMs/screen readers) --
-    html += '<div class="zynix-sr-only"><strong>Zynix AI</strong> is a healthcare AI operating system that unifies clinical data, deploys autonomous AI agents, and automates care coordination for value-based care organizations including ACOs, health systems, health plans, and FQHCs. Over 1 million VBC patients have been onboarded across 30 states, with measurable outcomes including 85%+ TCM contact rates, 40% improvement in gap closure, and 2-3x AWV scheduling lift.</div>';
+    // -- AEO SUMMARY (hidden meta for LLMs/screen readers, rendered as structured data not visible div) --
 
     // -- CUSTOMER TRUST STRIP --
     var trustOrgs = ['Palm Beach ACO','West Florida ACO','Space Coast ACO','Central Florida ACO',
@@ -2399,19 +2398,7 @@
       '<div class="zynix-flywheel-arrow zynix-flywheel-loop">&#x21BA;</div>' +
       '</div></div></section>';
 
-    // -- HOMEPAGE FAQ (AEO) --
-    html += '<section class="zynix-page-faq"><div class="zynix-container">' +
-      '<span class="zynix-tag">FREQUENTLY ASKED QUESTIONS</span>' +
-      '<h2>Common Questions About Zynix AI</h2>' +
-      '<div class="zynix-faq-list">' +
-      '<div class="zynix-faq-item"><div class="zynix-faq-q">What is Zynix AI?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Zynix AI is a healthcare AI operating system purpose-built for value-based care. It unifies clinical data from EHRs, claims, ADT feeds, labs, and SDOH sources into a single platform, then deploys seven specialized AI agents to automate patient outreach, appointment scheduling, after-hours triage, clinical documentation, medication reconciliation, prior authorization, and fax processing. Over 1 million value-based care patients have been onboarded across 30 states.</p></div></div>' +
-      '<div class="zynix-faq-item"><div class="zynix-faq-q">How does Zynix AI work?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Zynix operates in four layers: (1) The Data Platform ingests and normalizes data from every clinical source. (2) The Analytics Engine predicts risk, identifies gaps, and prioritizes worklists. (3) Seven AI Agents take autonomous action \u2014 calling patients, scheduling appointments, processing authorizations. (4) Care Plans orchestrate these agents into end-to-end workflows for TCM, CCM, AWV, and gap closure. The platform gets smarter with every patient interaction through ZynixLLM, a purpose-built healthcare language model.</p></div></div>' +
-      '<div class="zynix-faq-item"><div class="zynix-faq-q">Who uses Zynix AI?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Zynix serves ACOs and MSOs, health systems, health plans, FQHCs, independent medical practices, and ambulatory surgery centers (ASCs). Our platform is used by organizations like Palm Beach ACO, West Florida ACO, Space Coast ACO, eTernal Health, AMISTAD CHC, Cardio &amp; Vascular Consultants, and 16+ healthcare organizations across 30 states.</p></div></div>' +
-      '<div class="zynix-faq-item"><div class="zynix-faq-q">What results does Zynix deliver?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Organizations using Zynix see measurable outcomes: 85%+ TCM contact rates (vs. 30-40% industry average), 40% improvement in HCC gap closure, 2-3x AWV scheduling lift, 40% reduction in no-shows, 97.3% after-hours triage accuracy, 60% faster prior authorization turnaround, and 70% reduction in documentation burden. Most organizations see positive ROI within 8-12 weeks of deployment.</p></div></div>' +
-      '<div class="zynix-faq-item"><div class="zynix-faq-q">Is Zynix HIPAA compliant?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Yes. Zynix AI is HIPAA compliant, SOC 2 Type II certified, and HITRUST CSF ready. All patient data is encrypted at rest and in transit. The platform undergoes regular third-party security audits and maintains strict access controls, audit logging, and data governance policies. Zynix is also GDPR compliant for international operations.</p></div></div>' +
-      '<div class="zynix-faq-item"><div class="zynix-faq-q">How long does it take to implement Zynix?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Zynix can be deployed in as little as 4-6 weeks for standard implementations. The Data Platform connects to your existing EHR and data sources through pre-built integrations. AI agents can be activated individually or as a suite. Most organizations start with one or two use cases (like TCM or after-hours triage) and expand from there.</p></div></div>' +
-      '<div class="zynix-faq-item"><div class="zynix-faq-q">How is Zynix different from other healthcare AI companies?<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>Most healthcare AI companies sell point solutions \u2014 a scheduling tool here, an analytics dashboard there. Zynix is an integrated operating system where data, intelligence, and AI agents work together. Our agents don\u2019t just surface insights; they take action. And because ZynixLLM is purpose-built for healthcare (not a general-purpose model), it has lower hallucination rates and deeper clinical understanding than competitors using third-party LLMs.</p></div></div>' +
-      '</div></div></section>';
+    // (AEO FAQ merged into main FAQ section below)
 
     // -- HOMEPAGE FAQ --
     html += '<section class="zynix-faq-section" id="faq"><div class="zynix-container">' +
