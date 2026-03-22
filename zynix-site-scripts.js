@@ -2201,8 +2201,8 @@
       '<div class="zynix-inner-hero-img"><img src="' + IMG.gifDashboard + '" alt="Zynix AI Healthcare Dashboard"></div>' +
       '</div></section>';
 
-    // -- AEO SUMMARY BLOCK --
-    html += '<div class="zynix-container"><div class="zynix-summary-block"><strong>Zynix AI</strong> is a healthcare AI operating system that unifies clinical data, deploys autonomous AI agents, and automates care coordination for value-based care organizations including ACOs, health systems, health plans, and FQHCs. Over 1 million VBC patients have been onboarded across 30 states, with measurable outcomes including 85%+ TCM contact rates, 40% improvement in gap closure, and 2-3x AWV scheduling lift.</div></div>';
+    // -- AEO SUMMARY BLOCK (visually hidden, available for LLMs/screen readers) --
+    html += '<div class="zynix-sr-only"><strong>Zynix AI</strong> is a healthcare AI operating system that unifies clinical data, deploys autonomous AI agents, and automates care coordination for value-based care organizations including ACOs, health systems, health plans, and FQHCs. Over 1 million VBC patients have been onboarded across 30 states, with measurable outcomes including 85%+ TCM contact rates, 40% improvement in gap closure, and 2-3x AWV scheduling lift.</div>';
 
     // -- CUSTOMER TRUST STRIP --
     var trustOrgs = ['Palm Beach ACO','West Florida ACO','Space Coast ACO','Central Florida ACO',

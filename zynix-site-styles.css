@@ -1667,6 +1667,19 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
   .zynix-trust-track { animation: none !important; }
 }
 
+/* ── Screen-reader only (AEO content hidden visually) ── */
+.zynix-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ── AEO Summary Block ── */
 .zynix-summary-block {
   background: linear-gradient(135deg, rgba(32,68,155,0.04), rgba(241,101,41,0.03));
