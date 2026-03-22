@@ -2545,91 +2545,134 @@
 function renderUseCaseV7(data) {
   var html = '';
 
-  /* ── 1. HERO — split layout ── */
-  html += '<section class="zynix-uc-hero">' +
-    '<div class="zynix-hero-split">' +
-      '<div class="zynix-hero-text" style="background:#20449B">' +
-        '<nav class="zynix-breadcrumb"><a href="/use-cases" style="color:rgba(255,255,255,.7);text-decoration:none">Use Cases</a> &rsaquo; ' + data.title + '</nav>' +
-        '<span class="zynix-uc-badge-hero">' + data.id + '</span>' +
-        '<h1>' + data.h1 + '</h1>' +
-        '<p class="zynix-subhead">' + data.subhead + '</p>' +
-      '</div>' +
-      '<div class="zynix-hero-image">' +
-        '<div class="zynix-hero-photo-placeholder" style="background:#EEF2FB;width:100%;height:100%;min-height:360px;display:flex;align-items:center;justify-content:center;color:#20449B;font-family:\'Funnel Sans\',sans-serif;font-size:14px;text-align:center;padding:24px">' +
-          'Photography placeholder' +
-        '</div>' +
-      '</div>' +
-    '</div>' +
-  '</section>';
+  html += renderInnerHero(data.id, data.h1, data.subhead, IMG.care, data.title);
 
-  /* ── 2. THE PROBLEM — narrative prose ── */
-  html += '<section class="zynix-problem-section" style="background:#fff">' +
-    '<div class="zynix-container" style="max-width:760px;margin:0 auto;padding:64px 24px">' +
-      '<h3 class="zynix-section-subhead" style="font-family:\'Funnel Sans\',sans-serif;color:#20449B;font-size:24px;margin:0 0 24px">' + data.problemHeading + '</h3>' +
-      '<div class="zynix-narrative-prose" style="font-family:Roboto,sans-serif;font-size:16px;line-height:1.6;color:#1e293b">' + data.problem + '</div>' +
-    '</div>' +
-  '</section>';
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">THE PROBLEM</span>' +
+    '<h2>' + data.problemHeading + '</h2>' +
+    '<p class="zynix-section-sub">' + data.problem + '</p>' +
+    '</div></section>';
 
-  /* ── 3. WHY CURRENT TOOLS FALL SHORT — 2-card grid ── */
-  html += '<section class="zynix-shortfall-section" style="background:#EEF2FB;padding:64px 24px">' +
-    '<div class="zynix-container" style="max-width:1080px;margin:0 auto">' +
-      '<h3 class="zynix-section-subhead" style="font-family:\'Funnel Sans\',sans-serif;color:#20449B;font-size:24px;margin:0 0 32px;text-align:center">Why Current Tools Fall Short</h3>' +
-      '<div class="zynix-card-grid-2col" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px">';
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">WHY CURRENT TOOLS FALL SHORT</span>' +
+    '<h2>Where Existing Approaches Break Down</h2>' +
+    '<div class="zynix-compare-grid">';
   for (var s = 0; s < data.shortfalls.length; s++) {
-    html += '<div class="zynix-shortfall-card" style="background:#fff;border-radius:8px;padding:32px;border-bottom:4px solid #F16529">' +
-      '<h4 style="font-family:\'Funnel Sans\',sans-serif;color:#20449B;font-size:18px;margin:0 0 12px">' + data.shortfalls[s].tool + '</h4>' +
-      '<p style="font-family:Roboto,sans-serif;font-size:15px;line-height:1.6;color:#475569;margin:0">' + data.shortfalls[s].description + '</p>' +
-    '</div>';
+    html += '<div class="zynix-compare-card zynix-compare-bad">' +
+      '<h3>' + data.shortfalls[s].tool + '</h3>' +
+      '<ul><li>' + data.shortfalls[s].description + '</li></ul>' +
+      '</div>';
   }
   html += '</div></div></section>';
 
-  /* ── 4. HOW ZYNIX AI FITS — narrative prose ── */
-  html += '<section class="zynix-solution-section" style="background:#fff">' +
-    '<div class="zynix-container" style="max-width:760px;margin:0 auto;padding:64px 24px">' +
-      '<div style="border-top:3px solid #F16529;margin-bottom:32px"></div>' +
-      '<h3 class="zynix-section-subhead" style="font-family:\'Funnel Sans\',sans-serif;color:#20449B;font-size:24px;margin:0 0 24px">' + data.solutionHeading + '</h3>' +
-      '<div class="zynix-narrative-prose" style="font-family:Roboto,sans-serif;font-size:16px;line-height:1.6;color:#1e293b">' + data.solution + '</div>' +
-    '</div>' +
-  '</section>';
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">HOW ZYNIX AI FITS</span>' +
+    '<h2>' + data.solutionHeading + '</h2>' +
+    '<p class="zynix-section-sub">' + data.solution + '</p>' +
+    '</div></section>';
 
-  /* ── 5. PRODUCTS REFERENCED — strip ── */
-  html += '<section class="zynix-products-strip" style="background:#f8fafc;padding:48px 24px">' +
-    '<div class="zynix-container" style="max-width:1080px;margin:0 auto">' +
-      '<h3 style="font-family:\'Funnel Sans\',sans-serif;color:#20449B;font-size:20px;margin:0 0 24px;text-align:center">Products Referenced</h3>' +
-      '<div class="zynix-product-strip-row" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px">';
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">PRODUCTS REFERENCED</span>' +
+    '<h2>Platform Capabilities</h2>' +
+    '<div class="zynix-feature-grid">';
   for (var p = 0; p < data.products.length; p++) {
-    html += '<div class="zynix-product-ref" style="background:#fff;border-radius:8px;padding:24px;border-top:3px solid #20449B">' +
-      '<h4 style="font-family:\'Funnel Sans\',sans-serif;color:#20449B;font-size:16px;margin:0 0 8px">' + data.products[p].name + '</h4>' +
-      '<p style="font-family:Roboto,sans-serif;font-size:14px;line-height:1.5;color:#64748b;margin:0 0 12px">' + data.products[p].descriptor + '</p>' +
-      '<a href="' + data.products[p].url + '" class="zynix-link-orange" style="color:#F16529;font-family:\'Funnel Sans\',sans-serif;font-size:14px;font-weight:600;text-decoration:none">Learn more &rarr;</a>' +
-    '</div>';
+    html += '<div class="zynix-feature-card fade-in-up">' +
+      '<div class="zynix-feature-icon">&#9881;</div>' +
+      '<h3>' + data.products[p].name + '</h3>' +
+      '<p>' + data.products[p].descriptor + '</p>' +
+      '<div class="zynix-feature-metric"><span>' + data.products[p].status + '</span><small><a href="' + data.products[p].url + '">Learn more &rarr;</a></small></div>' +
+      '</div>';
   }
   html += '</div></div></section>';
 
-  /* ── 6. CTA — full-width ZynBlue band ── */
-  html += '<section class="zynix-cta-band" style="background:#20449B;padding:64px 24px;text-align:center">' +
-    '<div class="zynix-container" style="max-width:760px;margin:0 auto">' +
-      '<h2 style="font-family:\'Funnel Sans\',sans-serif;color:#fff;font-size:28px;margin:0 0 24px;font-weight:600">' + data.cta.headline + '</h2>' +
-      '<a href="/contact" class="zynix-btn-cta-orange" style="display:inline-block;background:#F16529;color:#fff;font-family:\'Funnel Sans\',sans-serif;font-size:16px;font-weight:700;padding:0 24px;height:48px;line-height:48px;border-radius:6px;text-decoration:none">' + data.cta.label + '</a>' +
-    '</div>' +
-  '</section>';
+  html += renderCTA(data.cta.headline, 'See how Zynix AI can transform this workflow for your organization.', data.cta.label);
 
-  /* ── 7. READ NEXT — 3-card grid ── */
-  html += '<section class="zynix-readnext-section" style="background:#fff;padding:64px 24px">' +
-    '<div class="zynix-container" style="max-width:1080px;margin:0 auto">' +
-      '<h3 style="font-family:\'Funnel Sans\',sans-serif;color:#20449B;font-size:24px;margin:0 0 32px">Explore related use cases</h3>' +
-      '<div class="zynix-card-grid-3col" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">';
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">EXPLORE MORE</span>' +
+    '<h2>Related Use Cases</h2>' +
+    '<div class="zynix-agents-grid">';
   for (var r = 0; r < data.readNext.length; r++) {
-    html += '<div class="zynix-readnext-card" style="background:#f8fafc;border-radius:8px;padding:24px">' +
-      '<span class="zynix-uc-badge" style="display:inline-block;background:#20449B;color:#fff;font-family:\'Funnel Sans\',sans-serif;font-size:12px;font-weight:700;padding:4px 10px;border-radius:4px;margin:0 0 12px">' + data.readNext[r].id + '</span>' +
-      '<h4 style="font-family:\'Funnel Sans\',sans-serif;color:#1e293b;font-size:16px;margin:0 0 12px">' + data.readNext[r].title + '</h4>' +
-      '<a href="/use-cases/' + data.readNext[r].slug + '" class="zynix-link-orange" style="color:#F16529;font-family:\'Funnel Sans\',sans-serif;font-size:14px;font-weight:600;text-decoration:none">View use case &rarr;</a>' +
-    '</div>';
+    html += '<div class="zynix-agent-card fade-in-up">' +
+      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + data.readNext[r].id + '</span><h3>' + data.readNext[r].title + '</h3></div>' +
+      '<p><a href="/use-cases/' + data.readNext[r].slug + '">View use case &rarr;</a></p>' +
+      '</div>';
   }
   html += '</div></div></section>';
 
+  html += renderFooter();
   return html;
 }
+
+
+function renderAudiencePageV7(data) {
+  var html = '';
+
+  html += renderInnerHero(data.eyebrow, data.headline, data.subhead, IMG.patients, data.audienceName);
+
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">THE CHALLENGE</span>' +
+    '<h2>Key Challenges</h2>' +
+    '<p class="zynix-section-sub">' + data.challengeIntro + '</p>' +
+    '<div class="zynix-problem-grid">';
+  for (var i = 0; i < data.challenges.length; i++) {
+    html += '<div class="zynix-problem-card fade-in-up"><div class="zynix-problem-icon">&#9888;</div><h3>' + data.challenges[i].title + '</h3><p>' + data.challenges[i].body + '</p></div>';
+  }
+  html += '</div></div></section>';
+
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">HOW ZYNIX AI FITS</span>' +
+    '<h2>Platform Capabilities</h2>' +
+    '<p class="zynix-section-sub">' + data.fitIntro + '</p>' +
+    '<div class="zynix-feature-grid">';
+  for (var j = 0; j < data.capabilities.length; j++) {
+    html += '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#9889;</div><h3>' + data.capabilities[j].title + '</h3><p>' + data.capabilities[j].body + '</p></div>';
+  }
+  html += '</div></div></section>';
+
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">USE CASES</span>' +
+    '<h2>Primary Use Cases</h2>' +
+    '<div class="zynix-agents-grid">';
+  for (var k = 0; k < data.primaryUseCases.length; k++) {
+    var uc = data.primaryUseCases[k];
+    html += '<div class="zynix-agent-card fade-in-up">' +
+      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + String(k + 1).padStart(2, '0') + '</span><h3>' + uc.title + '</h3></div>' +
+      '<p>' + uc.teaser + '</p>' +
+      '<p><a href="' + uc.url + '">View use case &rarr;</a></p>' +
+      '</div>';
+  }
+  html += '</div></div></section>';
+
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">FEATURED PLATFORM CAPABILITIES</span>' +
+    '<h2>Products That Power This</h2>' +
+    '<div class="zynix-feature-grid">';
+  for (var n = 0; n < data.featuredProducts.length; n++) {
+    var fp = data.featuredProducts[n];
+    html += '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128300;</div><h3><a href="' + fp.url + '">' + fp.name + '</a></h3><p>' + fp.description + '</p></div>';
+  }
+  html += '</div></div></section>';
+
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">INDUSTRY CONTEXT</span>' +
+    '<h2>What the Data Shows</h2>' +
+    '<div class="zynix-data-layers">';
+  for (var ci = 0; ci < data.citations.length; ci++) {
+    var c = data.citations[ci];
+    html += '<div class="zynix-data-layer fade-in-up"><h3>' + c.stat + '</h3><p>' + c.context + '</p>' +
+      (c.sourceUrl ? '<p><small><a href="' + c.sourceUrl + '" target="_blank">' + c.sourceName + ' &#8599;</a></small></p>' : '<p><small><em>' + c.sourceName + '</em></small></p>') +
+      '</div>';
+  }
+  html += '</div></div></section>';
+
+  html += renderCTA(data.ctaHeadline, data.ctaSubline, data.ctaButton);
+  html += renderFooter();
+  return html;
+}
+
+
+
+
 
 
 // ── Use Case Data Objects ───────────────────────────────────
@@ -3145,110 +3188,6 @@ var USE_CASE_SEO = {};
 
 // ---------------------------------------------------------------------------
 // Shared audience-page renderer (Template A pattern)
-// ---------------------------------------------------------------------------
-function renderAudiencePageV7(data) {
-  var html = '';
-
-  // ── HERO ──
-  html += '<section class="zynix-audience-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<nav class="zynix-breadcrumb">' + data.breadcrumb + '</nav>' +
-    '<span class="zynix-eyebrow">' + data.eyebrow + '</span>' +
-    '<h1>' + data.headline + '</h1>' +
-    '<p class="zynix-subhead">' + data.subhead + '</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image">' +
-    '<img src="" alt="' + data.audienceName + ' — Zynix AI" />' +
-    '</div>' +
-    '</div></section>';
-
-  // ── THE CHALLENGE ──
-  html += '<section class="zynix-challenge-section"><div class="zynix-container" style="max-width:760px">' +
-    '<span class="zynix-tag">THE CHALLENGE</span>' +
-    '<p class="zynix-narrative-prose">' + data.challengeIntro + '</p>' +
-    '</div><div class="zynix-container"><div class="zynix-card-grid-2x2">';
-  for (var i = 0; i < data.challenges.length; i++) {
-    html += '<div class="zynix-challenge-card"><h3>' + data.challenges[i].title + '</h3><p>' + data.challenges[i].body + '</p></div>';
-  }
-  html += '</div></div></section>';
-
-  // ── HOW ZYNIX AI FITS ──
-  html += '<section class="zynix-fit-section"><div class="zynix-container" style="max-width:760px">' +
-    '<span class="zynix-tag">HOW ZYNIX AI FITS</span>' +
-    '<p class="zynix-narrative-prose">' + data.fitIntro + '</p>' +
-    '</div><div class="zynix-container"><div class="zynix-card-grid-2x2">';
-  for (var j = 0; j < data.capabilities.length; j++) {
-    html += '<div class="zynix-capability-card"><h3>' + data.capabilities[j].title + '</h3><p>' + data.capabilities[j].body + '</p></div>';
-  }
-  html += '</div></div></section>';
-
-  // ── USE CASES ──
-  var ucId = 'uc-' + data.audienceName.replace(/[^a-z0-9]/gi, '').toLowerCase();
-  html += '<section class="zynix-usecases-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">USE CASES</span>' +
-    '<div class="zynix-usecase-list" id="' + ucId + '-primary">';
-  for (var k = 0; k < data.primaryUseCases.length; k++) {
-    var uc = data.primaryUseCases[k];
-    html += '<div class="zynix-usecase-row">' +
-      '<span class="zynix-uc-badge">' + String(k + 1).padStart(2, '0') + '</span>' +
-      '<div><h4>' + uc.title + '</h4>' +
-      '<p>' + uc.teaser + '</p>' +
-      '<a href="' + uc.url + '" class="zynix-link-orange">View use case &rarr;</a>' +
-      '</div></div>';
-  }
-  html += '</div>';
-  if (data.additionalUseCases && data.additionalUseCases.length) {
-    html += '<button class="zynix-load-more" onclick="document.getElementById(\'' + ucId + '-additional\').style.display=\'block\'; this.style.display=\'none\';">See more use cases</button>' +
-      '<div class="zynix-usecase-list" id="' + ucId + '-additional" style="display:none">';
-    for (var m = 0; m < data.additionalUseCases.length; m++) {
-      var auc = data.additionalUseCases[m];
-      html += '<div class="zynix-usecase-row">' +
-        '<span class="zynix-uc-badge">' + auc.id + '</span>' +
-        '<div><h4>' + auc.title + '</h4>' +
-        '<p class="zynix-uc-segment">Primary segment: ' + auc.primarySegment + '</p>' +
-        '<a href="' + auc.url + '" class="zynix-link-orange">View use case &rarr;</a>' +
-        '</div></div>';
-    }
-    html += '</div>';
-  }
-  html += '</div></section>';
-
-  // ── FEATURED PLATFORM CAPABILITIES ──
-  html += '<section class="zynix-featured-products"><div class="zynix-container">' +
-    '<span class="zynix-tag">FEATURED PLATFORM CAPABILITIES</span>' +
-    '<div class="zynix-card-grid-2x2">';
-  for (var n = 0; n < data.featuredProducts.length; n++) {
-    var fp = data.featuredProducts[n];
-    html += '<div class="zynix-product-card"><h3><a href="' + fp.url + '">' + fp.name + '</a></h3><p>' + fp.description + '</p></div>';
-  }
-  html += '</div></div></section>';
-
-  // ── INDUSTRY CONTEXT (citations) ──
-  html += '<section class="zynix-citations-section" style="background:#F5F5F5"><div class="zynix-container"><div class="zynix-card-grid-2x2">';
-  for (var p = 0; p < data.citations.length; p++) {
-    var c = data.citations[p];
-    html += '<div class="zynix-citation-panel">' +
-      '<p class="zynix-citation-stat"><strong>' + c.stat + '</strong></p>' +
-      '<p class="zynix-citation-context">' + c.context + '</p>';
-    if (c.sourceUrl) {
-      html += '<p class="zynix-citation-source"><a href="' + c.sourceUrl + '" target="_blank">' + c.sourceName + ' &#8599;</a></p>';
-    } else {
-      html += '<p class="zynix-citation-source-unlinked"><em>' + c.sourceName + '</em></p>';
-    }
-    html += '</div>';
-  }
-  html += '</div></div></section>';
-
-  // ── CTA ──
-  html += '<section class="zynix-cta-band" style="background:#20449B"><div class="zynix-container" style="text-align:center">' +
-    '<h2 style="color:#fff">' + data.ctaHeadline + '</h2>' +
-    '<p style="color:#AABBDD">' + data.ctaSubline + '</p>' +
-    '<a href="/contact" class="zynix-btn-cta">' + data.ctaButton + '</a>' +
-    '</div></section>';
-
-  return html;
-}
 
 
 // ============================================================================
@@ -3599,592 +3538,322 @@ function renderWhoWeServeFQHCs() {
 // ============================================================================
 // 7. ABOUT US
 // ============================================================================
+
+
 function renderAboutV7() {
   var html = '';
 
-  // ── Hero ──
-  html += '<section class="zynix-audience-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<span class="zynix-eyebrow" style="color:#F16529">ABOUT ZYNIX AI</span>' +
-    '<h1>Physician-led. Built for the people running value-based care every day.</h1>' +
-    '<p class="zynix-subhead">Zynix AI combines a clinical intelligence engine with purpose-built AI agents and orchestrated care plans \u2014 built by operators who spent decades watching the gap between knowing and acting cost organizations their shared savings and their patients their care.</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image"><img src="" alt="Zynix AI leadership team" /></div>' +
+  html += renderInnerHero('ABOUT ZYNIX AI', 'Physician-led. Built for the people running value-based care every day.',
+    'Zynix AI combines a clinical intelligence engine with purpose-built AI agents and orchestrated care plans \u2014 built by operators who spent decades watching the gap between knowing and acting cost organizations their shared savings and their patients their care.',
+    IMG.patients, 'Zynix AI leadership team');
+
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">OUR STORY</span>' +
+    '<h2>Thirty Years Inside the System. One Conclusion.</h2>' +
+    '<p class="zynix-section-sub">Jayadeva (Jay) Chowdappa, M.D. has spent more than thirty years operating inside US healthcare \u2014 as a physician, managed care leader, and ACO operator. After building Apollo Medical Group and Next Healthcare Solutions, he spent over a decade running MSSP ACOs, REACH ACOs, and Medicare Advantage programs across seven states, managing more than 35,000 Medicare patients across 140 practices.</p>' +
+    '<p class="zynix-section-sub">He brought together a team of engineers, clinical informaticists, and healthcare operators to build what was missing. A platform that combines a data and analytics intelligence engine with purpose-built AI agents, orchestrated by deployable care plans that coordinate multiple workflows until the work is actually done.</p>' +
     '</div></section>';
 
-  // ── Founding Story ──
-  html += '<section class="zynix-about-story" style="background:#fff"><div class="zynix-container" style="max-width:760px">' +
-    '<span class="zynix-tag" style="color:#F16529">OUR STORY</span>' +
-    '<h2 style="color:#20449B">Thirty years inside the system. One conclusion.</h2>' +
-    '<p>Jayadeva (Jay) Chowdappa, M.D. has spent more than thirty years operating inside US healthcare \u2014 as a physician, managed care leader, and ACO operator. After building Apollo Medical Group and Next Healthcare Solutions, he spent over a decade running MSSP ACOs, REACH ACOs, and Medicare Advantage programs across seven states, managing more than 35,000 Medicare patients across 140 practices.</p>' +
-    '<p>Through that work, he encountered the same structural problem everywhere. Organizations had the data. Care managers knew which patients had open HCC gaps, which ones had not been seen since discharge, which chronic conditions were trending the wrong way. The analytics showed everything. The capacity to act on it at scale \u2014 before TCM windows closed, before year-end coding deadlines passed, before a readmission erased a quarter of shared savings \u2014 was never there.</p>' +
-    '<p>He brought together a team of engineers, clinical informaticists, and healthcare operators to build what was missing. A platform that combines a data and analytics intelligence engine with purpose-built AI agents, orchestrated by deployable care plans that coordinate multiple workflows until the work is actually done. Not another dashboard. Not a point solution. A permanent solution to the gap that every value-based care organization is living with.</p>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">OUR MISSION</span>' +
+    '<h2>Why We Exist</h2>' +
+    '<div class="zynix-about-quote"><blockquote>To give value-based care organizations the intelligence to see what matters and the execution infrastructure to act on it \u2014 so more patients receive the care they need, and the organizations delivering it can sustain the work.</blockquote></div>' +
     '</div></section>';
 
-  // ── Mission ──
-  html += '<section style="background:#EEF2FB;padding:96px 0"><div class="zynix-container">' +
-    '<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:center">' +
-    '<div style="flex:2;min-width:280px">' +
-    '<span class="zynix-tag" style="color:#F16529">OUR MISSION</span>' +
-    '<h2 style="color:#20449B">Why we exist.</h2>' +
-    '</div>' +
-    '<div style="flex:3;min-width:320px;border-left:4px solid #F16529;padding-left:28px">' +
-    '<p style="font-size:22px;font-weight:700;color:#20449B;line-height:1.5">To give value-based care organizations the intelligence to see what matters and the execution infrastructure to act on it \u2014 so more patients receive the care they need, and the organizations delivering it can sustain the work.</p>' +
-    '</div></div></div></section>';
-
-  // ── Vision ──
-  html += '<section style="background:#fff;padding:96px 0"><div class="zynix-container" style="max-width:760px;text-align:center">' +
-    '<span class="zynix-tag" style="color:#F16529">OUR VISION</span>' +
-    '<h2 style="color:#20449B">Where we are headed.</h2>' +
-    '<p style="font-size:22px;font-weight:700;color:#20449B;line-height:1.5">A future where no chronic condition goes undocumented, no discharged patient goes unreached, and no care gap expires because a team ran out of bandwidth \u2014 where data intelligence, purpose-built AI agents, and orchestrated care plans work together at the pace value-based care actually demands.</p>' +
-    '<p style="font-size:15px;color:#555;font-style:italic;margin-top:24px">What makes this achievable now \u2014 and why Zynix AI was founded at this moment \u2014 is that AI has reached the threshold where it can carry the operational and analytical work that previously required human capacity the system simply did not have. The vision is about the outcome. AI is what makes it possible at scale.</p>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">WHAT WE BELIEVE</span>' +
+    '<h2>Healthcare\'s Doing Problem Is Solvable</h2>' +
+    renderFeatureCards([
+      { icon: '&#128161;', title: 'The Chaos Is Not Inevitable', desc: 'What looks like an inherent limitation of care operations is almost always a workflow problem with a workflow solution.' },
+      { icon: '&#128300;', title: 'Clinical Trust Is Earned Through Precision', desc: 'AI in healthcare only works if the clinicians and operators using it believe it understands the domain.' },
+      { icon: '&#9889;', title: 'Insight Without Execution Is a Missed Deadline', desc: 'Seeing who needs care is not the same as reaching them. Zynix AI connects intelligence to agents that act.' },
+      { icon: '&#128101;', title: 'Built by People Accountable for Outcomes', desc: 'The founding team has run ACOs, managed risk contracts, and been in the room where performance-year results are reviewed.' }
+    ]) +
     '</div></section>';
 
-  // ── What We Believe ──
-  html += '<section style="background:#20449B;padding:96px 0"><div class="zynix-container" style="max-width:1100px">' +
-    '<span class="zynix-tag" style="color:#F16529">WHAT WE BELIEVE</span>' +
-    '<h2 style="color:#fff">Healthcare\'s doing problem is solvable.</h2>' +
-    '<p style="color:rgba(255,255,255,0.9);max-width:680px;font-size:17px;line-height:1.7;margin-bottom:40px">Most healthcare professionals are not running inefficient workflows because they have accepted failure. They have been told that the chaos is the job. Missed follow-ups, documentation burden, coordinators buried in manual tracking \u2014 these are treated as features of the system rather than problems with solutions. The real goal of every executive in every ACO leadership meeting is not complicated: give patients better care. Everything else is friction standing between the team and that goal. We believe the right combination of clinical intelligence, purpose-built AI agents, and deep operational understanding can remove that friction \u2014 permanently, not just for one workflow at a time.</p>' +
-    '<div class="zynix-card-grid-2x2">' +
-    '<div style="background:#EEF2FB;border-left:4px solid #F16529;border-radius:6px;padding:24px"><h3 style="color:#20449B;font-size:18px;font-weight:700;margin-bottom:8px">The chaos is not inevitable.</h3><p style="color:#2D2D2D;font-size:15px;line-height:1.6">What looks like an inherent limitation of care operations is almost always a workflow problem with a workflow solution. The tools have been the bottleneck, not the teams using them.</p></div>' +
-    '<div style="background:#EEF2FB;border-left:4px solid #F16529;border-radius:6px;padding:24px"><h3 style="color:#20449B;font-size:18px;font-weight:700;margin-bottom:8px">Clinical trust is earned through precision.</h3><p style="color:#2D2D2D;font-size:15px;line-height:1.6">AI in healthcare only works if the clinicians and operators using it believe it understands the domain. We built with that depth \u2014 not with generic language models applied to healthcare on the surface.</p></div>' +
-    '<div style="background:#EEF2FB;border-left:4px solid #F16529;border-radius:6px;padding:24px"><h3 style="color:#20449B;font-size:18px;font-weight:700;margin-bottom:8px">Insight without execution is a missed deadline.</h3><p style="color:#2D2D2D;font-size:15px;line-height:1.6">Seeing who needs care is not the same as reaching them. Zynix AI connects the intelligence layer to the agents that act on it and the care plans that coordinate the work through to completion.</p></div>' +
-    '<div style="background:#EEF2FB;border-left:4px solid #F16529;border-radius:6px;padding:24px"><h3 style="color:#20449B;font-size:18px;font-weight:700;margin-bottom:8px">Built by people accountable for outcomes.</h3><p style="color:#2D2D2D;font-size:15px;line-height:1.6">The founding team has run ACOs, managed risk contracts, and been in the room where the performance-year results are reviewed. That experience is not background. It is the product.</p></div>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">OUR TEAM</span>' +
+    '<h2>Our Leadership Team</h2>' +
+    '<p class="zynix-section-sub">The driving force behind Zynix AI \u2014 operators and builders who have been accountable for the problems this platform is designed to solve.</p>' +
+    '<div class="zynix-agents-grid">' +
+    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">&#129657;</span><h3>Jayadeva (Jay) Chowdappa, M.D.</h3></div><p style="font-size:13px;color:var(--z-accent);font-weight:600;margin-bottom:8px">Co-Founder & CEO</p><p>Physician executive with 30+ years in Internal Medicine, managed care, and physician leadership. Built Next Healthcare Solutions into a multi-state ACO network serving 35,000+ Medicare patients across 140 practices and seven states.</p><div class="zynix-agent-metrics"><span><a href="https://www.linkedin.com/in/jayadeva-jay-chowdappa-m-d-6b221616/" target="_blank" rel="noopener">LinkedIn</a></span></div></div>' +
+    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">&#128187;</span><h3>Gautamdev Chowdary</h3></div><p style="font-size:13px;color:var(--z-accent);font-weight:600;margin-bottom:8px">Co-Founder & CTO</p><p>Architects Kubernetes-orchestrated microservices, production ML pipelines, and HIPAA-secure LLM agents. Background spans graduate-level AI research and deployment of predictive analytics stacks.</p><div class="zynix-agent-metrics"><span><a href="https://www.linkedin.com/in/cgautamdevc/" target="_blank" rel="noopener">LinkedIn</a></span></div></div>' +
+    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">&#128200;</span><h3>David McDonald</h3></div><p style="font-size:13px;color:var(--z-accent);font-weight:600;margin-bottom:8px">Vice President, Sales</p><p>31 years of healthcare industry experience spanning population health, clinical analytics, risk adjustment, and the commercial partnerships that connect clinical performance to financial outcomes.</p><div class="zynix-agent-metrics"><span><a href="https://www.linkedin.com/in/mcdonalddavidl/" target="_blank" rel="noopener">LinkedIn</a></span></div></div>' +
     '</div></div></section>';
 
-  // ── Leadership Team ──
-  html += '<section style="background:#fff;padding:96px 0"><div class="zynix-container" style="max-width:1100px">' +
-    '<span class="zynix-tag" style="color:#F16529">OUR TEAM</span>' +
-    '<h2 style="color:#20449B">Our Leadership Team</h2>' +
-    '<p style="color:#555;max-width:640px;margin-bottom:48px">The driving force behind Zynix AI \u2014 operators and builders who have been accountable for the problems this platform is designed to solve.</p>' +
-    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px">';
+  html += renderMetricsBar([
+    { value: '1M+', label: 'Patients Served' },
+    { value: '40%', label: 'Reduction in Admin Burden' },
+    { value: '25%', label: 'Revenue Capture Improvement' }
+  ]);
 
-  // Card 1
-  html += '<div class="zynix-product-card" style="border-top:3px solid #20449B;text-align:center;padding:28px">' +
-    '<div style="width:280px;height:280px;background:#EEF2FB;border-radius:8px;margin:0 auto 20px"></div>' +
-    '<h3 style="color:#20449B;margin-bottom:4px">Jayadeva (Jay) Chowdappa, M.D.</h3>' +
-    '<p style="color:#F16529;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Co-Founder &amp; CEO</p>' +
-    '<p style="font-size:14px;color:#444;line-height:1.65">Jayadeva (Jay) Chowdappa, M.D. is a physician executive with more than 30 years of experience in Internal Medicine, managed care, and physician leadership. He built Next Healthcare Solutions into a multi-state ACO network serving more than 35,000 Medicare patients across 140 practices and seven states \u2014 running MSSP ACOs, REACH ACOs, and Medicare Advantage programs at scale. Dr. Chowdappa is a national leader in value-based care, population health, and healthcare AI, and actively consults on Medicare risk and strategic care transformation. He co-founded Zynix AI to build the platform he spent a career recognizing was missing.</p>' +
-    '<a href="https://www.linkedin.com/in/jayadeva-jay-chowdappa-m-d-6b221616/" target="_blank" rel="noopener" style="display:inline-block;margin-top:12px;color:#0A66C2">LinkedIn</a>' +
-    '</div>';
-
-  // Card 2
-  html += '<div class="zynix-product-card" style="border-top:3px solid #20449B;text-align:center;padding:28px">' +
-    '<div style="width:280px;height:280px;background:#EEF2FB;border-radius:8px;margin:0 auto 20px"></div>' +
-    '<h3 style="color:#20449B;margin-bottom:4px">Gautamdev Chowdary</h3>' +
-    '<p style="color:#F16529;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Co-Founder &amp; CTO</p>' +
-    '<p style="font-size:14px;color:#444;line-height:1.65">Gautamdev Chowdary brings deep cloud-native engineering and advanced AI development to the Zynix AI platform. He architects Kubernetes-orchestrated microservices in Golang, Python, Java, and Scala on AWS and Azure, builds production ML pipelines end-to-end, and leads the development of HIPAA-secure LLM agents embedded in Zynix AI\'s population health infrastructure. His background spans graduate-level AI research, hands-on deployment of predictive analytics stacks, and leadership of cross-functional teams that turn AI from prototype into production clinical tools.</p>' +
-    '<a href="https://www.linkedin.com/in/cgautamdevc/" target="_blank" rel="noopener" style="display:inline-block;margin-top:12px;color:#0A66C2">LinkedIn</a>' +
-    '</div>';
-
-  // Card 3
-  html += '<div class="zynix-product-card" style="border-top:3px solid #20449B;text-align:center;padding:28px">' +
-    '<div style="width:280px;height:280px;background:#EEF2FB;border-radius:8px;margin:0 auto 20px"></div>' +
-    '<h3 style="color:#20449B;margin-bottom:4px">David McDonald</h3>' +
-    '<p style="color:#F16529;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Vice President, Sales</p>' +
-    '<p style="font-size:14px;color:#444;line-height:1.65">David McDonald is Vice President of Sales at Zynix AI with 31 years of healthcare industry experience. His focus is the relationship between clinical performance and financial outcomes \u2014 spanning population health, clinical analytics, risk adjustment, and the commercial partnerships that connect all three. David is a subject matter expert on clinical and risk adjustment strategy and on building preferred healthcare partnerships that align payer and provider incentives toward shared goals.</p>' +
-    '<a href="https://www.linkedin.com/in/mcdonalddavidl/" target="_blank" rel="noopener" style="display:inline-block;margin-top:12px;color:#0A66C2">LinkedIn</a>' +
-    '</div>';
-
-  html += '</div></div></section>';
-
-  // ── Credibility Stats Bar ──
-  html += '<section style="background:#EEF2FB;padding:80px 0"><div class="zynix-container" style="max-width:1100px">' +
-    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;text-align:center">' +
-    '<div><div style="border-top:3px solid #F16529;display:inline-block;padding-top:12px"><span style="font-size:48px;font-weight:700;color:#20449B">1M+</span></div><p style="color:#555;font-size:14px">Patients Served</p></div>' +
-    '<div><div style="border-top:3px solid #F16529;display:inline-block;padding-top:12px"><span style="font-size:48px;font-weight:700;color:#20449B">40%</span></div><p style="color:#555;font-size:14px">Reduction in Administrative Burden</p></div>' +
-    '<div><div style="border-top:3px solid #F16529;display:inline-block;padding-top:12px"><span style="font-size:48px;font-weight:700;color:#20449B">25%</span></div><p style="color:#555;font-size:14px">Improvement in Revenue Capture</p></div>' +
-    '</div></div></section>';
-
-  // ── Closing CTA ──
-  html += '<section class="zynix-cta-band" style="background:#20449B;padding:96px 0"><div class="zynix-container" style="text-align:center;max-width:760px">' +
-    '<h2 style="color:#fff;font-size:32px">Built on clinical insight. Powered by AI agents. Orchestrated to close every gap.</h2>' +
-    '<p style="color:rgba(255,255,255,0.85);font-size:17px;max-width:560px;margin:16px auto 32px">Zynix AI brings together a population health intelligence engine, purpose-built AI agents, and deployable care plans that coordinate the work from first signal to final follow-up. Talk to our team about what that looks like for your organization.</p>' +
-    '<a href="/contact" class="zynix-btn-cta" style="margin-right:16px">Book a Demo</a>' +
-    '<a href="/platform" class="zynix-btn-cta" style="background:transparent;border:2px solid #fff">Explore the Platform</a>' +
-    '</div></section>';
-
+  html += renderCTA('Built on Clinical Insight. Powered by AI Agents.', 'Talk to our team about what Zynix AI looks like for your organization.', 'Book a Demo');
+  html += renderFooter();
   return html;
 }
 
 
-// ============================================================================
-// 8. ZYNIXLLM
-// ============================================================================
 function renderZynixLLMV7() {
   var html = '';
 
-  // ── Hero ──
-  html += '<section class="zynix-audience-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<span class="zynix-eyebrow" style="color:#F16529">COMPANY \u2014 TECHNOLOGY</span>' +
-    '<h1>Healthcare-Native Intelligence, Built for Real-World Care</h1>' +
-    '<p class="zynix-subhead" style="color:#DDEAFF">ZynixLLM is the intelligence layer built into the Zynix AI platform. It was developed specifically for healthcare \u2014 trained on clinical language, built with safety guardrails, and designed to support the workflows that care teams depend on. Not a general-purpose AI repurposed for medicine. A system built from the ground up for how healthcare actually works.</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image"><img src="" alt="Care coordinator at workstation reviewing AI-assisted patient outreach queue" /></div>' +
+  html += renderInnerHero('COMPANY \u2014 TECHNOLOGY', 'Healthcare-Native Intelligence, Built for Real-World Care',
+    'ZynixLLM is the intelligence layer built into the Zynix AI platform. It was developed specifically for healthcare \u2014 trained on clinical language, built with safety guardrails, and designed to support the workflows that care teams depend on.',
+    IMG.mesh, 'ZynixLLM Healthcare AI');
+
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">WHAT IS ZYNIXLLM</span>' +
+    '<h2>The Reasoning Engine Behind Every Workflow</h2>' +
+    '<p class="zynix-section-sub">ZynixLLM is Zynix AI\'s healthcare-adapted language model \u2014 built by fine-tuning foundational AI systems on US healthcare data, clinical documentation, care coordination language, and value-based care workflows. It is the intelligence infrastructure that powers everything on the platform. It is not a product customers buy separately. It is the reasoning engine built into every agent, analytics tool, and documentation workflow.</p>' +
     '</div></section>';
 
-  // ── What Is ZynixLLM ──
-  html += '<section style="background:#fff;padding:96px 0"><div class="zynix-container" style="max-width:760px">' +
-    '<h3 style="color:#20449B;font-size:22px;font-weight:700">Behind every workflow on the Zynix AI platform is the same question: does the AI actually understand healthcare?</h3>' +
-    '<p>Most AI systems in use today were built to handle a broad range of language tasks \u2014 writing, summarising, answering questions in general terms. They are powerful tools. But healthcare is a different environment. The language is specialised. The stakes are higher. A wrong output in a clinical workflow does not just create inconvenience \u2014 it can affect patient safety, documentation accuracy, and care decisions.</p>' +
-    '<p>ZynixLLM was developed to address that gap. It is Zynix AI\'s healthcare-adapted language model \u2014 built by fine-tuning foundational AI systems on US healthcare data, clinical documentation, care coordination language, and value-based care workflows. It is the intelligence infrastructure that powers everything on the platform.</p>' +
-    '<p>ZynixLLM is not a product customers buy or deploy on their own. It is the reasoning engine built into Zynix AI\'s agents, analytics tools, documentation workflows, and patient engagement systems. When a care coordinator sees a risk-prioritised patient list, when an AI agent follows up with a recently discharged patient, when ZynScribe produces a structured clinical note from a patient conversation \u2014 ZynixLLM is what makes that output accurate, contextual, and safe.</p>' +
-    '<div style="background:#EEF2FB;border-left:6px solid #F16529;border-radius:4px;padding:24px 28px;margin-top:24px">' +
-    '<p style="font-weight:700;color:#20449B;font-size:15px;margin-bottom:8px">A simple way to think about it:</p>' +
-    '<p style="font-style:italic;font-size:15px;color:#222;line-height:1.6">ZynixLLM is to Zynix AI what a clinical education and years of practice experience are to a skilled care coordinator \u2014 the trained background knowledge that makes every interaction informed, appropriate, and safe. You do not see the training. You see the judgment it produces.</p>' +
-    '</div></div></section>';
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">WHY HEALTHCARE NEEDS DIFFERENT AI</span>' +
+    '<h2>General-Purpose AI Falls Short in Clinical Settings</h2>' +
+    renderFeatureCards([
+      { icon: '&#128300;', title: 'The Language Is Specialized', desc: 'Healthcare documentation uses terminology, abbreviations, and coding conventions that general AI systems were not trained to handle with clinical precision.' },
+      { icon: '&#9888;', title: 'Incomplete Context Creates Real Risk', desc: 'A model that cannot reason under uncertainty and does not flag gaps for human review is not appropriate for clinical environments.' },
+      { icon: '&#128274;', title: 'Compliance Is Not Optional', desc: 'Healthcare organizations operate under HIPAA, CMS guidelines, and enterprise security requirements.' },
+      { icon: '&#9881;', title: 'Workflows Are the Unit of Value', desc: 'AI that only produces outputs, without integrating into defined workflows, stops short of the problem.' }
+    ]) +
+    '</div></section>';
 
-  // ── Why Healthcare Needs a Different Kind of AI ──
-  html += '<section style="background:#fff;padding:0 0 96px"><div class="zynix-container" style="max-width:1100px">' +
-    '<h2 style="color:#20449B;margin-bottom:16px">Why Healthcare Needs a Different Kind of AI</h2>' +
-    '<p style="max-width:760px;margin:0 auto 32px">General-purpose AI systems are trained on the broadest possible range of text \u2014 websites, books, news, public conversations. That breadth makes them useful for many tasks. It also means they have no particular depth in any one domain. In healthcare, that depth is not optional.</p>' +
-    '<div class="zynix-card-grid-2x2">' +
-    '<div class="zynix-capability-card"><h3>The language is specialised</h3><p>Healthcare documentation uses terminology, abbreviations, and coding conventions that general AI systems were not trained to handle with clinical precision. A system that misreads a medication abbreviation or conflates two similar diagnosis codes is not a useful tool in a care coordination workflow.</p></div>' +
-    '<div class="zynix-capability-card"><h3>Incomplete context creates real risk</h3><p>Healthcare AI systems often work with fragmented data \u2014 partial records, handoff notes, payer feeds that do not match the EHR. A model that cannot reason under uncertainty and does not flag gaps for human review is not appropriate for clinical environments.</p></div>' +
-    '<div class="zynix-capability-card"><h3>Compliance is not optional</h3><p>Healthcare organisations operate under HIPAA, CMS guidelines, and enterprise security requirements. AI systems must be deployable in configurations that meet those requirements \u2014 not just cloud tools designed for consumer environments.</p></div>' +
-    '<div class="zynix-capability-card"><h3>Workflows are the unit of value</h3><p>The goal in value-based care is not to generate information. It is to move work through defined workflows \u2014 outreach completed, documentation filed, follow-up confirmed. AI that only produces outputs, without integrating into those workflows, stops short of the problem.</p></div>' +
-    '</div></div></section>';
-
-  // ── What Makes ZynixLLM Different — 5 numbered cards ──
-  html += '<section style="background:#fff;padding:0 0 96px"><div class="zynix-container" style="max-width:900px">' +
-    '<h2 style="color:#20449B;margin-bottom:32px">What Makes ZynixLLM Different</h2>';
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">DIFFERENTIATORS</span>' +
+    '<h2>What Makes ZynixLLM Different</h2>' +
+    '<div class="zynix-arch-grid">';
   var diffs = [
-    { num: '01', title: 'Healthcare-Native Design', body: 'ZynixLLM is built on foundational AI models that have been fine-tuned on clinical language, US healthcare workflows, care coordination documentation, and value-based care operations. It is not a general model with healthcare prompts layered on top. The training reflects the actual language, structure, and logic of how care organisations work.' },
-    { num: '02', title: 'Multi-Modal Understanding', body: 'Clinical environments combine voice conversations, structured EHR data, free-text notes, claims data, lab results, and diagnostic documentation. ZynixLLM is built to process and reason across these different data types together \u2014 creating a unified picture of the patient that a single-input model cannot produce.' },
-    { num: '03', title: 'Safety-First Architecture', body: 'ZynixLLM incorporates a layered safety framework designed for clinical environments. Outputs are validated against clinical protocols. Uncertainty is flagged rather than masked. When the system encounters a situation that warrants human review, it routes it \u2014 it does not guess. Critical decisions always include a human in the loop.' },
-    { num: '04', title: 'Workflow Integration, Not Standalone Outputs', body: 'ZynixLLM is not designed to answer questions in isolation. It is designed to support defined clinical and operational workflows \u2014 patient outreach sequences, documentation workflows, care coordination handoffs, triage logic \u2014 where its outputs feed into the next step of a process rather than ending the interaction.' },
-    { num: '05', title: 'Flexible, Secure Deployment', body: 'ZynixLLM supports secure cloud environments, customer-controlled cloud infrastructure, and on-premise or hybrid configurations. Healthcare organisations have different security, privacy, and latency requirements. Deployment options are designed to align with those requirements rather than require organisations to adapt to a fixed model.' }
+    { num: '01', title: 'Healthcare-Native Design', desc: 'Fine-tuned on clinical language, US healthcare workflows, care coordination documentation, and value-based care operations.' },
+    { num: '02', title: 'Multi-Modal Understanding', desc: 'Processes voice, structured EHR data, free-text notes, claims data, lab results, and diagnostic documentation together.' },
+    { num: '03', title: 'Safety-First Architecture', desc: 'Layered safety framework. Uncertainty is flagged rather than masked. Critical decisions include a human in the loop.' },
+    { num: '04', title: 'Workflow Integration', desc: 'Designed to support defined clinical and operational workflows where outputs feed into the next step of a process.' },
+    { num: '05', title: 'Flexible Deployment', desc: 'Supports secure cloud, customer-controlled cloud, on-premise, and hybrid configurations.' }
   ];
-  for (var d = 0; d < diffs.length; d++) {
-    html += '<div style="background:#EEF2FB;border-left:6px solid #20449B;border-radius:4px;padding:28px 32px;margin-bottom:16px">' +
-      '<span style="font-size:22px;font-weight:700;color:#F16529">' + diffs[d].num + '</span>' +
-      '<h3 style="color:#20449B;font-size:20px;font-weight:700;margin-top:8px">' + diffs[d].title + '</h3>' +
-      '<p style="font-size:15px;color:#222;line-height:1.6;margin-top:12px">' + diffs[d].body + '</p>' +
-      '</div>';
+  // Use 5 cards - first 4 in arch-grid (2x2), last one below
+  for (var d = 0; d < 4; d++) {
+    html += '<div class="zynix-arch-card fade-in-up"><div class="zynix-arch-num">' + diffs[d].num + '</div><h3>' + diffs[d].title + '</h3><p>' + diffs[d].desc + '</p></div>';
   }
-  html += '</div></section>';
-
-  // ── Four-Layer Platform Table ──
-  html += '<section style="background:#fff;padding:0 0 96px"><div class="zynix-container">' +
-    '<h2 style="color:#20449B;margin-bottom:16px">The Four-Layer Platform, Powered by ZynixLLM</h2>' +
-    '<p style="max-width:760px;margin:0 auto 32px">ZynixLLM is not a standalone component. It is the intelligence layer running through all four levels of the Zynix AI platform.</p>' +
-    '<table style="width:100%;border-collapse:collapse;border:1px solid #CCC">' +
-    '<thead><tr style="background:#20449B;color:#fff"><th style="padding:12px 16px;text-align:left">Layer</th><th style="padding:12px 16px;text-align:left">Platform Component</th><th style="padding:12px 16px;text-align:left">What ZynixLLM Does Here</th></tr></thead>' +
-    '<tbody>' +
-    '<tr style="background:#EEF2FB"><td style="padding:12px 16px;font-weight:700;color:#20449B">Layer 1</td><td style="padding:12px 16px">AI Data Foundation</td><td style="padding:12px 16px">Collects and unifies fragmented healthcare data from every source a client uses \u2014 EHR systems, claims feeds, payer data, lab results, ADT notifications, pharmacy records, and SDoH inputs. ZynixLLM interprets this unified record as the starting point for every downstream action.</td></tr>' +
-    '<tr style="background:#fff"><td style="padding:12px 16px;font-weight:700;color:#20449B">Layer 2</td><td style="padding:12px 16px">Intelligence and Reasoning</td><td style="padding:12px 16px">Applies clinical and population-level intelligence to the unified data. The engine predicts risk, flags trends, prioritises worklists, and presents structured insights. ZynixLLM provides the reasoning capability that turns raw data into prioritised, actionable intelligence.</td></tr>' +
-    '<tr style="background:#EEF2FB"><td style="padding:12px 16px;font-weight:700;color:#20449B">Layer 3</td><td style="padding:12px 16px">AI Agent Suite</td><td style="padding:12px 16px">A suite of AI agents that execute specific clinical and operational workflows \u2014 patient outreach, inbound call handling, clinical documentation, and care coordination tasks. ZynixLLM powers the language understanding, triage logic, and communication capability across every agent.</td></tr>' +
-    '<tr style="background:#fff"><td style="padding:12px 16px;font-weight:700;color:#20449B">Layer 4</td><td style="padding:12px 16px">Deployable Care Plans</td><td style="padding:12px 16px">The orchestration layer that coordinates multiple agents working together toward a defined clinical or operational goal. Agents hand off to each other in sequence, triggered by outcomes, not timers. ZynixLLM provides the intelligence that makes those handoffs accurate and context-aware.</td></tr>' +
-    '</tbody></table>' +
-    '<p style="max-width:760px;margin:24px auto 0;font-size:15px;color:#222">The practical result: care teams and AI agents at every level of the platform are working from the same intelligence foundation \u2014 the same clinical reasoning, the same safety guardrails, the same understanding of the patient record.</p>' +
+  html += '</div>' +
+    '<div class="zynix-arch-grid" style="grid-template-columns:1fr"><div class="zynix-arch-card fade-in-up"><div class="zynix-arch-num">' + diffs[4].num + '</div><h3>' + diffs[4].title + '</h3><p>' + diffs[4].desc + '</p></div></div>' +
     '</div></section>';
 
-  // ── Where ZynixLLM Is Used (2x3 cards) ──
-  html += '<section style="background:#fff;padding:0 0 96px"><div class="zynix-container" style="max-width:1100px">' +
-    '<h2 style="color:#20449B;margin-bottom:32px">Where ZynixLLM Is Used</h2>' +
-    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">';
-  var usedCards = [
-    { title: 'Patient Engagement and AI Voice Agents', body: 'ZynixLLM powers the clinical language understanding behind patient-facing AI voice agents \u2014 enabling two-way outreach conversations that capture barriers, document responses, and route escalations with clinical context intact.' },
-    { title: 'Ambient Clinical Documentation', body: 'ZynixLLM enables real-time transcription and structuring of patient-clinician conversations into clinical notes formatted for EHR upload \u2014 reducing documentation time and supporting accurate, billable records.' },
-    { title: 'Care Gap Detection and Prioritisation', body: 'ZynixLLM supports the intelligence layer that identifies which patients have open quality and risk gaps, prioritises them by clinical urgency and RAF impact, and triggers the appropriate outreach workflow.' },
-    { title: 'Predictive Analytics and Risk Stratification', body: 'ZynixLLM contributes to the reasoning behind risk stratification models \u2014 interpreting signals across claims, EHR data, labs, and SDoH to surface patients who are rising in risk before a clinical event occurs.' },
-    { title: 'Care Coordination and Workflow Orchestration', body: 'Across post-discharge follow-up, referral coordination, prior authorisation, and chronic care management, ZynixLLM provides the language and reasoning backbone that moves work through multi-step clinical workflows to completion.' },
-    { title: 'After-Hours Triage and Clinical Communication', body: 'ZynixLLM supports triage logic and clinical communication in after-hours contexts \u2014 interpreting patient-reported symptoms, applying evidence-based protocols, and routing to the appropriate level of care or human clinician.' }
-  ];
-  for (var u = 0; u < usedCards.length; u++) {
-    html += '<div class="zynix-capability-card"><h3>' + usedCards[u].title + '</h3><p>' + usedCards[u].body + '</p></div>';
-  }
-  html += '</div></div></section>';
-
-  // ── Trust, Safety, Compliance (2x2 cards + disclaimer) ──
-  html += '<section style="background:#fff;padding:0 0 96px"><div class="zynix-container" style="max-width:1100px">' +
-    '<h2 style="color:#20449B;margin-bottom:16px">Built for Trust, Safety, and Compliance</h2>' +
-    '<p style="max-width:760px;margin:0 auto 32px">Healthcare AI is trusted when it is transparent about what it does, consistent in how it behaves, and designed to keep humans in control of decisions that affect patients.</p>' +
-    '<div class="zynix-card-grid-2x2">' +
-    '<div class="zynix-capability-card"><h3>Human-in-the-Loop Decision Support</h3><p>ZynixLLM is designed for decision support, not autonomous decision-making. When outputs carry clinical significance, human review is part of the workflow by design \u2014 not an optional add-on.</p></div>' +
-    '<div class="zynix-capability-card"><h3>Transparent AI Behaviour</h3><p>The system is designed to flag uncertainty rather than mask it. When confidence is low or context is incomplete, ZynixLLM surfaces that gap rather than generating a plausible-sounding output that could misdirect care.</p></div>' +
-    '<div class="zynix-capability-card"><h3>Continuous Monitoring and Quality Review</h3><p>ZynixLLM\'s outputs are subject to continuous quality monitoring. Healthcare environments change \u2014 coding updates, care protocol changes, new patient populations. Monitoring ensures the system stays calibrated.</p></div>' +
-    '<div class="zynix-capability-card"><h3>HIPAA and Enterprise Security Alignment</h3><p>ZynixLLM is designed for deployment in regulated healthcare environments. It supports the BAA requirements, data handling standards, and security configurations that healthcare enterprise security teams require.</p></div>' +
-    '</div>' +
-    '<p style="font-size:13px;font-style:italic;color:#555;text-align:center;max-width:680px;margin:24px auto 0">Disclaimer: ZynixLLM is designed for education and operational support. It does not provide autonomous medical decision-making. All clinical decisions remain with licensed clinicians and care teams.</p>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">WHERE IT IS USED</span>' +
+    '<h2>ZynixLLM Powers Every Platform Layer</h2>' +
+    renderFeatureCards([
+      { icon: '&#128222;', title: 'Patient Engagement & AI Voice Agents', desc: 'Powers clinical language understanding behind patient-facing AI voice agents for two-way outreach conversations.' },
+      { icon: '&#127908;', title: 'Ambient Clinical Documentation', desc: 'Enables real-time transcription and structuring of patient-clinician conversations into clinical notes.' },
+      { icon: '&#128202;', title: 'Care Gap Detection & Prioritization', desc: 'Identifies patients with open quality and risk gaps, prioritizes by clinical urgency and RAF impact.' },
+      { icon: '&#128200;', title: 'Predictive Analytics & Risk Stratification', desc: 'Interprets signals across claims, EHR data, labs, and SDoH to surface patients rising in risk.' },
+      { icon: '&#128268;', title: 'Care Coordination & Workflow Orchestration', desc: 'Provides the reasoning backbone that moves work through multi-step clinical workflows to completion.' },
+      { icon: '&#128161;', title: 'After-Hours Triage & Clinical Communication', desc: 'Supports triage logic and clinical communication in after-hours contexts in 15+ languages.' }
+    ]) +
     '</div></section>';
 
-  // ── Comparison Table ──
-  html += '<section style="background:#fff;padding:0 0 96px"><div class="zynix-container">' +
-    '<h2 style="color:#20449B;margin-bottom:32px">ZynixLLM vs General-Purpose AI</h2>' +
-    '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;border:1px solid #CCC">' +
-    '<thead><tr style="background:#20449B;color:#fff;text-align:center"><th style="padding:12px 16px;text-align:left">Dimension</th><th style="padding:12px 16px">ZynixLLM</th><th style="padding:12px 16px">General-Purpose AI Models</th></tr></thead>' +
-    '<tbody>';
-  var compRows = [
-    ['Design Focus', 'Built specifically for healthcare workflows and clinical environments', 'Built for broad, general-purpose language tasks'],
-    ['Clinical Language', 'Optimised for clinical terminology, coding, and care documentation', 'Limited healthcare-specific language depth'],
-    ['Safety Architecture', 'Layered safety checks, uncertainty flagging, and human escalation built in', 'General content moderation; limited clinical guardrails'],
-    ['Workflow Integration', 'Designed to support multi-step care and operational workflows to completion', 'Primarily response-based; outputs do not connect to workflow execution'],
-    ['Patient Communication', 'Tuned for healthcare conversation, triage logic, and appropriate escalation', 'Not optimised for clinical nuance or escalation routing'],
-    ['Deployment Options', 'Secure cloud, customer-controlled cloud, on-premise, hybrid', 'Typically cloud-only'],
-    ['Compliance Alignment', 'Built for HIPAA and enterprise healthcare security requirements', 'Not healthcare-specific'],
-    ['Role in Care', 'Decision support and workflow orchestration with human oversight', 'Information generation'],
-    ['Population-Level Use', 'Designed for population-level coordination at scale', 'Often point-use; not built for attributed population workflows'],
-    ['Regulatory Readiness', 'Supports regulated healthcare deployment configurations', 'Not designed for regulated deployment']
-  ];
-  for (var r = 0; r < compRows.length; r++) {
-    var bg = (r % 2 === 0) ? '#fff' : '#F5F5F5';
-    html += '<tr style="background:' + bg + '"><td style="padding:12px 16px;font-weight:700;color:#20449B;background:#EEF2FB">' + compRows[r][0] + '</td><td style="padding:12px 16px;background:#E8F0FE">' + compRows[r][1] + '</td><td style="padding:12px 16px">' + compRows[r][2] + '</td></tr>';
-  }
-  html += '</tbody></table></div></div></section>';
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">COMPARISON</span>' +
+    '<h2>ZynixLLM vs General-Purpose AI</h2>' +
+    '<div class="zynix-compare-grid">' +
+    '<div class="zynix-compare-card zynix-compare-good"><h3>ZynixLLM</h3><ul>' +
+    '<li>Built specifically for healthcare workflows</li>' +
+    '<li>Optimized for clinical terminology and coding</li>' +
+    '<li>Safety checks, uncertainty flagging, and human escalation</li>' +
+    '<li>Supports multi-step care workflows to completion</li>' +
+    '<li>Tuned for healthcare conversation and triage logic</li>' +
+    '<li>Secure cloud, on-premise, hybrid deployment</li>' +
+    '<li>Built for HIPAA and enterprise security</li>' +
+    '</ul></div>' +
+    '<div class="zynix-compare-card zynix-compare-bad"><h3>General-Purpose AI</h3><ul>' +
+    '<li>Built for broad general-purpose language tasks</li>' +
+    '<li>Limited healthcare-specific language depth</li>' +
+    '<li>General content moderation only</li>' +
+    '<li>Response-based; no workflow execution</li>' +
+    '<li>Not optimized for clinical nuance</li>' +
+    '<li>Typically cloud-only</li>' +
+    '<li>Not healthcare-specific compliance</li>' +
+    '</ul></div>' +
+    '</div></div></section>';
 
-  // ── CTA ──
-  html += '<section class="zynix-cta-band" style="background:#20449B;padding:64px 40px"><div class="zynix-container" style="text-align:center">' +
-    '<h2 style="color:#fff;font-size:28px">Healthcare AI that understands how care actually works.</h2>' +
-    '<a href="/contact" class="zynix-btn-cta" style="background:#F16529;color:#fff;margin-top:24px">Talk to our team</a>' +
-    '</div></section>';
-
+  html += renderCTA('Healthcare AI That Understands How Care Actually Works', 'Talk to our team about how ZynixLLM powers intelligent workflows across the Zynix platform.', 'Talk to Our Team');
+  html += renderFooter();
   return html;
 }
 
 
-// ============================================================================
-// 9. SECURITY OVERVIEW
-// ============================================================================
 function renderSecurityV7() {
   var html = '';
 
-  // ── Hero ──
-  html += '<section style="background:#20449B;padding:80px 0"><div class="zynix-container" style="text-align:center">' +
-    '<h1 style="color:#fff;font-size:42px;font-weight:800">Security and compliance built for healthcare.</h1>' +
-    '<p style="color:rgba(255,255,255,0.85);font-size:18px;max-width:640px;margin:16px auto 0">Zynix AI is SOC 2 Type II certified and operates HIPAA-aligned safeguards across every deployment. This page summarizes our security posture for prospective customers, procurement teams, and compliance reviewers.</p>' +
-    '<p style="color:#AABBDD;font-size:14px;margin-top:16px">Last Reviewed: March 22, 2026</p>' +
+  html += renderInnerHero('SECURITY & COMPLIANCE', 'Security and Compliance Built for Healthcare',
+    'Zynix AI is SOC 2 Type II certified and operates HIPAA-aligned safeguards across every deployment. This page summarizes our security posture for prospective customers, procurement teams, and compliance reviewers.',
+    IMG.enterprise, 'Zynix AI Security');
+
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">COMPLIANCE</span>' +
+    '<h2>Compliance Highlights</h2>' +
+    renderFeatureCards([
+      { icon: '&#128274;', title: 'SOC 2 Type II', desc: 'Certified. Coverage: Zynix AI platform and supporting systems. Full audit documentation available through the Zynix AI Trust Portal powered by Drata. Contact info@zynix.ai to request access.', metric: 'Certified', metricLabel: 'Current' },
+      { icon: '&#128737;', title: 'HIPAA', desc: 'HIPAA-aligned safeguards and operating practices for all deployments involving PHI. Validated through our SOC 2 program. Business Associate Agreement (BAA) available for all covered entity customers.', metric: 'Aligned', metricLabel: 'BAA Available' },
+      { icon: '&#128272;', title: 'HITRUST CSF', desc: 'HITRUST CSF readiness assessment completed. Enterprise-grade security framework alignment for healthcare AI deployments.', metric: 'Ready', metricLabel: 'Assessment Complete' }
+    ]) +
     '</div></section>';
 
-  // ── Compliance Highlights ──
-  html += '<section style="background:#fff;padding:80px 0"><div class="zynix-container" style="max-width:1100px">' +
-    '<span class="zynix-tag" style="color:#F16529">COMPLIANCE</span>' +
-    '<h2 style="color:#20449B">Compliance Highlights</h2>' +
-    '<div class="zynix-card-grid-2x2" style="margin-top:32px">' +
-    '<div class="zynix-product-card" style="border-top:3px solid #20449B"><h3 style="color:#20449B">SOC 2 Type II</h3><p style="margin-bottom:8px"><span style="background:#2ecc71;color:#fff;padding:2px 10px;border-radius:12px;font-size:13px">Certified</span></p><p style="font-size:14px;color:#555">Coverage: Zynix AI platform and supporting systems. Full audit documentation, including the current SOC 2 Type II report, is available through the Zynix AI Trust Portal powered by Drata. Contact info@zynix.ai to request access. Reports are available to prospective and current customers under NDA.</p></div>' +
-    '<div class="zynix-product-card" style="border-top:3px solid #20449B"><h3 style="color:#20449B">HIPAA</h3><p style="margin-bottom:8px"><span style="background:#2ecc71;color:#fff;padding:2px 10px;border-radius:12px;font-size:13px">Aligned</span></p><p style="font-size:14px;color:#555">HIPAA-aligned safeguards and operating practices for all deployments involving PHI. Our HIPAA posture is validated through our SOC 2 program and operating procedures. A Business Associate Agreement (BAA) is available for all covered entity and business associate customers. Contact info@zynix.ai to initiate the BAA process.</p></div>' +
-    '</div>' +
-    '<p style="font-size:13px;color:#888;margin-top:24px">This page is provided for informational purposes and does not constitute legal advice. Compliance commitments are defined in executed agreements.</p>' +
-    '</div></section>';
-
-  // ── Security Program Overview ──
-  html += '<section style="background:#EEF2FB;padding:80px 0"><div class="zynix-container" style="max-width:900px">' +
-    '<span class="zynix-tag" style="color:#F16529">SECURITY PROGRAM</span>' +
-    '<h2 style="color:#20449B">Security Program Overview</h2>';
-  var secSections = [
-    { title: 'Data Protection', items: ['Encryption in transit and at rest across all supported platform components', 'Access controls based on least-privilege principles', 'Separation of production and non-production environments'] },
-    { title: 'Identity and Access Management', items: ['Role-based access controls (RBAC) across all systems', 'Multi-factor authentication (MFA) required for all administrative access', 'Periodic access reviews to maintain least-privilege posture'] },
-    { title: 'Monitoring and Incident Response', items: ['Continuous security monitoring across key systems and infrastructure', 'Documented incident response plan with defined escalation paths and containment procedures', 'Customer notification obligations defined in the applicable customer agreement and BAA'] },
-    { title: 'Business Continuity', items: ['Backup and recovery procedures for all critical systems, tested on a periodic basis', 'Business continuity planning designed for operational resilience across healthcare deployment environments'] },
-    { title: 'Vendor and Risk Management', items: ['All subprocessors and third-party vendors reviewed for security and compliance posture during onboarding', 'Periodic vendor reassessments aligned with SOC 2 expectations', 'Supplier risk tracked as part of the overall information security program'] }
-  ];
-  for (var s = 0; s < secSections.length; s++) {
-    html += '<h3 style="color:#20449B;margin-top:32px;margin-bottom:8px">' + secSections[s].title + '</h3><ul style="color:#333;font-size:15px;line-height:1.8">';
-    for (var si = 0; si < secSections[s].items.length; si++) {
-      html += '<li>' + secSections[s].items[si] + '</li>';
-    }
-    html += '</ul>';
-  }
-  html += '<h3 style="color:#20449B;margin-top:32px;margin-bottom:8px">Additional Practices</h3>' +
-    '<ul style="color:#333;font-size:15px;line-height:1.8">' +
-    '<li><strong>Penetration testing:</strong> Third-party penetration testing conducted on a periodic basis. Results are available to current and prospective customers under NDA.</li>' +
-    '<li><strong>Security awareness training:</strong> Annual security awareness training required for all relevant personnel. Completion is tracked and reviewed under our SOC 2 program.</li>' +
-    '<li><strong>Background screening:</strong> Pre-employment background screening conducted for relevant roles in accordance with applicable law.</li>' +
-    '<li><strong>Vulnerability management:</strong> Ongoing vulnerability scanning, prioritized remediation, and tracking against defined SLAs as part of continuous security operations.</li>' +
-    '</ul></div></section>';
-
-  // ── Trust Portal ──
-  html += '<section style="background:#fff;padding:64px 0"><div class="zynix-container" style="max-width:760px">' +
-    '<div style="background:#EEF2FB;border:1px solid #C8D0E0;border-radius:8px;padding:32px">' +
-    '<h3 style="color:#20449B;margin-bottom:12px">Trust Portal</h3>' +
-    '<p style="font-size:15px;color:#333;line-height:1.7">Zynix AI\'s security and compliance documentation \u2014 including our SOC 2 Type II report, security policies, and compliance certificates \u2014 is available through our Trust Portal, powered by Drata.</p>' +
-    '<p style="font-size:15px;color:#333;margin-top:12px">To request access to the trust portal, submit a security questionnaire, or begin the BAA process, contact <a href="mailto:info@zynix.ai" style="color:#F16529">info@zynix.ai</a>.</p>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">SECURITY PROGRAM</span>' +
+    '<h2>Security Program Overview</h2>' +
+    '<div class="zynix-data-layers">' +
+    '<div class="zynix-data-layer fade-in-up"><h3>Data Protection</h3><p>Encryption in transit and at rest across all platform components. Access controls based on least-privilege principles. Separation of production and non-production environments.</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>Identity & Access Management</h3><p>Role-based access controls (RBAC) across all systems. Multi-factor authentication (MFA) required for all administrative access. Periodic access reviews.</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>Monitoring & Incident Response</h3><p>Continuous security monitoring across key systems. Documented incident response plan with defined escalation paths. Customer notification obligations defined in agreements.</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>Business Continuity</h3><p>Backup and recovery procedures for all critical systems, tested periodically. Business continuity planning for operational resilience across healthcare deployments.</p></div>' +
     '</div></div></section>';
 
-  // ── FAQ ──
-  html += '<section style="background:#fff;padding:0 0 80px"><div class="zynix-container" style="max-width:900px">' +
-    '<h2 style="color:#20449B;margin-bottom:32px">Frequently Asked Questions</h2>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">TRUST PORTAL</span>' +
+    '<h2>Access Our Security Documentation</h2>' +
+    '<p class="zynix-section-sub">Zynix AI\'s security and compliance documentation \u2014 including our SOC 2 Type II report, security policies, and compliance certificates \u2014 is available through our Trust Portal, powered by Drata. Contact <a href="mailto:info@zynix.ai">info@zynix.ai</a> to request access.</p>' +
+    '</div></section>';
+
+  html += '<section class="zynix-faq-section"><div class="zynix-container">' +
+    '<span class="zynix-tag">FAQ</span>' +
+    '<h2>Frequently Asked Questions</h2>' +
     '<div class="zynix-faq-list">';
   var faqItems = [
-    { q: 'Are you SOC 2 Type II certified?', a: 'Yes. Zynix AI holds a current SOC 2 Type II certification covering our platform and supporting systems. The full report is available to prospective and current customers under a non-disclosure agreement. Contact info@zynix.ai to request access.' },
-    { q: 'Is a Business Associate Agreement (BAA) available?', a: 'Yes. A BAA is available for all customers operating under HIPAA-regulated workflows. BAA execution is a standard part of our healthcare customer onboarding process. Contact info@zynix.ai to initiate the BAA process.' },
-    { q: 'How does Zynix AI handle protected health information (PHI)?', a: 'When Zynix AI is deployed in HIPAA-regulated workflows, PHI is processed in accordance with our executed BAA and applicable HIPAA safeguards \u2014 including encryption in transit and at rest, access controls, and audit logging. PHI handling obligations are defined in the customer agreement, not this page.' },
-    { q: 'Do you support customer security assessments and questionnaires?', a: 'Yes. We regularly support procurement and security review processes for prospective and current customers. To submit a security questionnaire or request supporting documentation, contact info@zynix.ai.' },
-    { q: 'Do you have written security policies and procedures?', a: 'Yes. Zynix AI maintains documented security policies covering access control, data classification, incident response, vendor management, acceptable use, and security awareness. Policy documentation is available to customers under NDA through our Trust Portal.' },
-    { q: 'Do you conduct security awareness training?', a: 'Yes. All relevant personnel are required to complete security awareness training on at least an annual basis. Training completion is tracked and is a formal component of our SOC 2 program.' },
-    { q: 'Do you perform penetration testing?', a: 'Yes. Zynix AI conducts periodic third-party penetration testing as part of our ongoing security program. Results and executive summaries are available to current and prospective customers under NDA.' },
-    { q: 'How do you manage subprocessors and third-party vendors?', a: 'All subprocessors are reviewed for security and compliance posture during onboarding and are subject to periodic reassessment. We maintain a current subprocessor list and can provide it to customers upon request.' },
-    { q: 'What is your incident response and breach notification process?', a: 'Zynix AI maintains a documented incident response plan with defined escalation paths, containment procedures, and notification workflows. Specific breach notification obligations \u2014 including timing and scope \u2014 are governed by the applicable customer agreement and BAA.' },
-    { q: 'Do you run vulnerability management?', a: 'Yes. Vulnerability scanning, prioritized remediation, and tracking against defined SLAs are part of our ongoing security operations and are reviewed under our SOC 2 Type II program.' }
+    { q: 'Are you SOC 2 Type II certified?', a: 'Yes. Zynix AI holds a current SOC 2 Type II certification covering our platform and supporting systems. The full report is available under NDA.' },
+    { q: 'Is a Business Associate Agreement (BAA) available?', a: 'Yes. A BAA is available for all customers operating under HIPAA-regulated workflows. Contact info@zynix.ai to initiate.' },
+    { q: 'How does Zynix AI handle protected health information (PHI)?', a: 'PHI is processed in accordance with our executed BAA and applicable HIPAA safeguards \u2014 including encryption in transit and at rest, access controls, and audit logging.' },
+    { q: 'Do you support customer security assessments?', a: 'Yes. We regularly support procurement and security review processes. Contact info@zynix.ai to submit a questionnaire.' },
+    { q: 'Do you conduct penetration testing?', a: 'Yes. Third-party penetration testing is conducted periodically. Results are available to customers under NDA.' },
+    { q: 'Do you run vulnerability management?', a: 'Yes. Vulnerability scanning, prioritized remediation, and tracking against defined SLAs are part of our ongoing security operations.' }
   ];
   for (var f = 0; f < faqItems.length; f++) {
     html += '<div class="zynix-faq-item"><div class="zynix-faq-q">' + faqItems[f].q + '<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>' + faqItems[f].a + '</p></div></div>';
   }
   html += '</div></div></section>';
 
-  // ── Contact ──
-  html += '<section style="background:#fff;padding:0 0 64px"><div class="zynix-container" style="max-width:760px">' +
-    '<p>For security and compliance questions, report access requests, BAA inquiries, or security assessment support:</p>' +
-    '<p><strong>Email:</strong> <a href="mailto:info@zynix.ai" style="color:#F16529">info@zynix.ai</a></p>' +
-    '<p><strong>Address:</strong> 3535 Little Rd, Trinity, FL 34655, USA</p>' +
-    '<p style="font-size:13px;color:#888;font-style:italic;margin-top:16px">This page is provided for informational purposes and does not constitute legal advice. Compliance commitments are defined in executed agreements.</p>' +
-    '</div></section>';
-
-  // ── CTA ──
-  html += '<section class="zynix-cta-band" style="background:#20449B;padding:96px 0"><div class="zynix-container" style="text-align:center">' +
-    '<h2 style="color:#fff">Working through a security review or procurement process?</h2>' +
-    '<p style="color:#AABBDD;margin:12px auto 32px;max-width:560px">Our team supports questionnaires, documentation requests, and BAA execution as part of every customer evaluation.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Contact Our Security Team</a>' +
-    '</div></section>';
-
+  html += renderCTA('Working Through a Security Review?', 'Our team supports questionnaires, documentation requests, and BAA execution as part of every customer evaluation.', 'Contact Our Security Team');
+  html += renderFooter();
   return html;
 }
 
 
-// ============================================================================
-// 10. PRESS
-// ============================================================================
 function renderPressV7() {
   var html = '';
 
-  // ── Hero ──
-  html += '<section style="background:#fff;padding:100px 0 72px"><div class="zynix-container" style="text-align:center;max-width:860px">' +
-    '<h1 style="color:#20449B;font-size:44px;font-weight:800">Press Resources</h1>' +
-    '<p style="color:#444;font-size:18px;max-width:640px;margin:16px auto 0;line-height:1.6">Everything you need to cover Zynix AI \u2014 in one place.</p>' +
-    '<div style="width:60px;height:3px;background:#F16529;margin:24px auto 0"></div>' +
+  html += renderInnerHero('PRESS', 'Press Resources',
+    'Everything you need to cover Zynix AI \u2014 in one place. Official logos, brand guidelines, leadership bios, company boilerplate, and press contact information.',
+    IMG.hero, 'Zynix AI Press');
+
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">ABOUT</span>' +
+    '<h2>About Zynix AI</h2>' +
+    '<p class="zynix-section-sub">Zynix AI is an AI operating layer for value-based care. The platform connects healthcare data, clinical intelligence, and workflow execution so care teams can act on the right patient, at the right time, through the right channel. It is built on ZynixLLM, a healthcare-native language model, and is used by MSSP ACOs, risk-bearing MSOs, Medicare Advantage plans, and value-based care organizations throughout the United States. Headquartered in Florida, co-founded by Jayadeva (Jay) Chowdappa, M.D. and Gautamdev Chowdary.</p>' +
     '</div></section>';
 
-  // ── About Zynix AI ──
-  html += '<section style="background:#EEF2FB;padding:80px 0"><div class="zynix-container" style="max-width:860px">' +
-    '<span class="zynix-tag" style="color:#F16529">ABOUT</span>' +
-    '<h2 style="color:#20449B">About Zynix AI</h2>' +
-    '<p style="font-size:16px;color:#2D2D2D;line-height:1.75">Zynix AI is an AI operating layer for value-based care. The platform connects healthcare data, clinical intelligence, and workflow execution so care teams can act on the right patient, at the right time, through the right channel. It is built on ZynixLLM, a healthcare-native language model fine-tuned on US healthcare data, and is used by MSSP ACOs, risk-bearing MSOs, Medicare Advantage plans, and value-based care organizations throughout the United States.</p>' +
-    '<p style="font-size:16px;color:#2D2D2D;line-height:1.75;margin-top:16px">Zynix AI is headquartered in Florida and is co-founded by Jayadeva (Jay) Chowdappa, M.D. and Gautamdev Chowdary.</p>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">MEDIA KIT</span>' +
+    '<h2>Download the Press Kit</h2>' +
+    '<p class="zynix-section-sub">The Zynix AI Press Kit includes official logos, brand color and typography guidelines, leadership bios and headshots, company boilerplate, and product visuals guide. All assets are cleared for editorial use.</p>' +
+    renderFeatureCards([
+      { icon: '&#127912;', title: 'Logo Assets', desc: 'SVG, PNG 1080px, and high-resolution PNG formats. Light and dark background versions.' },
+      { icon: '&#128203;', title: 'Brand Guidelines', desc: 'Colors, typography, usage rules, and brand voice guidance.' },
+      { icon: '&#128100;', title: 'Leadership Bios', desc: 'Full bios and headshots for co-founders and executive team.' }
+    ]) +
     '</div></section>';
 
-  // ── Press Kit Download ──
-  html += '<section style="background:#fff;padding:80px 0"><div class="zynix-container" style="text-align:center;max-width:960px">' +
-    '<span class="zynix-tag" style="color:#F16529">MEDIA KIT</span>' +
-    '<h2 style="color:#20449B">Download the Press Kit</h2>' +
-    '<p style="color:#555;font-size:16px;max-width:680px;margin:0 auto 32px;line-height:1.7">The Zynix AI Press Kit includes official logos in SVG, PNG 1080px, and high-resolution PNG formats, brand color and typography guidelines, leadership bios and headshots, a company boilerplate and fact sheet, and a product visuals guide. All assets are cleared for editorial use.</p>' +
-    '<div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:32px">' +
-    '<div style="background:#fff;border:1px solid #E5EAF2;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.06);padding:16px;width:200px"><p style="color:#888;font-size:13px">Logo on White</p></div>' +
-    '<div style="background:#fff;border:1px solid #E5EAF2;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.06);padding:16px;width:200px"><p style="color:#888;font-size:13px">Logo on White BG</p></div>' +
-    '<div style="background:#20449B;border:1px solid #E5EAF2;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.06);padding:16px;width:200px"><p style="color:rgba(255,255,255,0.7);font-size:13px">Logo on Blue BG</p></div>' +
-    '</div>' +
-    '<a href="#" class="zynix-btn-cta" style="background:#20449B;color:#fff">Download Press Kit (.zip)</a>' +
-    '</div></section>';
-
-  // ── Press Contact ──
-  html += '<section style="background:#20449B;padding:96px 0"><div class="zynix-container" style="max-width:1100px">' +
-    '<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:center">' +
-    '<div style="flex:1;min-width:300px">' +
-    '<h2 style="color:#fff;font-size:28px">Talk to Us</h2>' +
-    '<p style="color:rgba(255,255,255,0.8);font-size:16px;max-width:500px;line-height:1.7;margin-top:16px">For press inquiries, interview requests, background briefings, analyst calls, or permission to use Zynix AI brand assets, contact our press team directly. We aim to respond to all media inquiries within one business day.</p>' +
-    '</div>' +
-    '<div style="flex:0 0 auto;background:#fff;border-radius:12px;padding:36px;box-shadow:0 4px 24px rgba(0,0,0,0.15);border-top:4px solid #F16529">' +
-    '<p style="color:#F16529;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:16px">PRESS CONTACT</p>' +
-    '<p style="color:#20449B;font-size:20px;font-weight:700">Jayadeva (Jay) Chowdappa, M.D.</p>' +
-    '<p style="color:#555;font-size:14px;margin-bottom:12px">Co-Founder & CEO, Zynix AI</p>' +
-    '<p><a href="mailto:press@zynix.ai" style="color:#20449B;font-size:16px;font-weight:500">press@zynix.ai</a></p>' +
-    '<p style="color:#777;font-size:14px;margin-top:4px">zynix.ai</p>' +
-    '</div></div></div></section>';
-
-  // ── Leadership Team ──
-  html += '<section style="background:#fff;padding:96px 0"><div class="zynix-container" style="max-width:1100px;text-align:center">' +
-    '<span class="zynix-tag" style="color:#F16529">OUR TEAM</span>' +
-    '<h2 style="color:#20449B">Leadership Team</h2>' +
-    '<p style="color:#555;font-size:16px;max-width:640px;margin:0 auto 48px">The operators and builders who have been accountable for the problems this platform is designed to solve.</p>' +
-    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;text-align:center">' +
-    '<div class="zynix-product-card" style="border-top:3px solid #20449B;padding:28px"><h3 style="color:#20449B">Jayadeva (Jay) Chowdappa, M.D.</h3><p style="color:#F16529;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Co-Founder & CEO</p><p style="font-size:14px;color:#555;line-height:1.65">Dr. Jay Chowdappa is a physician executive with more than 30 years of experience in Internal Medicine, managed care, and physician leadership. He built Next Healthcare Solutions into a multi-state ACO network serving more than 35,000 Medicare patients across 140 practices and seven states. He co-founded Zynix AI to build the platform he spent a career recognizing was missing.</p></div>' +
-    '<div class="zynix-product-card" style="border-top:3px solid #20449B;padding:28px"><h3 style="color:#20449B">Gautamdev Chowdary</h3><p style="color:#F16529;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Co-Founder & CTO</p><p style="font-size:14px;color:#555;line-height:1.65">Gautamdev Chowdary leads technology and platform development at Zynix AI. He architects the Kubernetes-orchestrated microservices, production ML pipelines, and HIPAA-secure LLM agents that power the platform\'s clinical intelligence and care execution infrastructure.</p></div>' +
-    '<div class="zynix-product-card" style="border-top:3px solid #20449B;padding:28px"><h3 style="color:#20449B">David McDonald</h3><p style="color:#F16529;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Vice President, Sales</p><p style="font-size:14px;color:#555;line-height:1.65">David McDonald brings 31 years of healthcare industry experience to Zynix AI\'s go-to-market strategy and commercial partnerships. His expertise spans population health, clinical analytics, risk adjustment, and the provider-payer relationships that connect clinical performance to financial outcomes.</p></div>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">OUR TEAM</span>' +
+    '<h2>Leadership Team</h2>' +
+    '<div class="zynix-agents-grid">' +
+    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">&#129657;</span><h3>Jayadeva (Jay) Chowdappa, M.D.</h3></div><p style="font-size:13px;color:var(--z-accent);font-weight:600;margin-bottom:8px">Co-Founder & CEO</p><p>Dr. Jay Chowdappa is a physician executive with more than 30 years of experience. He built Next Healthcare Solutions into a multi-state ACO network serving 35,000+ Medicare patients.</p></div>' +
+    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">&#128187;</span><h3>Gautamdev Chowdary</h3></div><p style="font-size:13px;color:var(--z-accent);font-weight:600;margin-bottom:8px">Co-Founder & CTO</p><p>Leads technology and platform development. Architects Kubernetes-orchestrated microservices, production ML pipelines, and HIPAA-secure LLM agents.</p></div>' +
+    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">&#128200;</span><h3>David McDonald</h3></div><p style="font-size:13px;color:var(--z-accent);font-weight:600;margin-bottom:8px">Vice President, Sales</p><p>31 years of healthcare industry experience spanning population health, clinical analytics, risk adjustment, and commercial partnerships.</p></div>' +
     '</div></div></section>';
 
-  // ── In the Press (placeholder) ──
-  html += '<section style="background:#EEF2FB;padding:96px 0"><div class="zynix-container" style="max-width:1100px;text-align:center">' +
-    '<span class="zynix-tag" style="color:#F16529">MEDIA COVERAGE</span>' +
-    '<h2 style="color:#20449B">In the Press</h2>' +
-    '<p style="color:#777;font-size:16px;max-width:560px;margin:0 auto 32px">Recent coverage of Zynix AI in healthcare and technology media.</p>' +
-    '<div style="background:#fff;border:1px dashed #C8D0E0;border-radius:10px;padding:40px 32px;max-width:600px;margin:0 auto">' +
-    '<p style="color:#777;font-style:italic">Coverage will appear here as it\'s published. In the meantime, reach out at <a href="mailto:press@zynix.ai" style="color:#F16529">press@zynix.ai</a> \u2014 we\'re happy to brief journalists and analysts.</p>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">PRESS CONTACT</span>' +
+    '<h2>Talk to Us</h2>' +
+    '<p class="zynix-section-sub">For press inquiries, interview requests, background briefings, analyst calls, or permission to use Zynix AI brand assets, contact our press team directly. We aim to respond to all media inquiries within one business day.</p>' +
+    '<div class="zynix-feature-grid">' +
+    '<div class="zynix-feature-card"><div class="zynix-feature-icon">&#128231;</div><h3>Press Contact</h3><p>Jayadeva (Jay) Chowdappa, M.D.<br>Co-Founder & CEO<br><a href="mailto:press@zynix.ai">press@zynix.ai</a></p></div>' +
+    '<div class="zynix-feature-card"><div class="zynix-feature-icon">&#127760;</div><h3>Website</h3><p>zynix.ai</p></div>' +
+    '<div class="zynix-feature-card"><div class="zynix-feature-icon">&#128205;</div><h3>Headquarters</h3><p>3535 Little Rd<br>Trinity, FL 34655, USA</p></div>' +
     '</div></div></section>';
 
-  // ── Brand Assets Usage Note ──
-  html += '<section style="background:#fff;padding:64px 0;border-top:1px solid #EDEDEF;border-bottom:1px solid #EDEDEF"><div class="zynix-container" style="max-width:760px;text-align:center">' +
-    '<h3 style="color:#20449B;font-size:22px">Using Our Brand Assets</h3>' +
-    '<p style="color:#555;font-size:15px;line-height:1.75;margin-top:12px">The Zynix AI Press Kit is available for use by journalists, analysts, and media professionals covering Zynix AI. Assets may be used for editorial purposes. Please do not modify logos, alter brand colors, or use assets in contexts unrelated to editorial coverage of Zynix AI. For questions, contact <a href="mailto:press@zynix.ai" style="color:#F16529">press@zynix.ai</a>.</p>' +
-    '</div></section>';
-
+  html += renderFooter();
   return html;
 }
 
 
-// ============================================================================
-// 11. PRIVACY POLICY
-// ============================================================================
 function renderPrivacyV7() {
   var html = '';
 
-  // ── Hero ──
-  html += '<section style="background:#20449B;padding:80px 0"><div class="zynix-container" style="text-align:center">' +
-    '<h1 style="color:#fff;font-size:42px;font-weight:800">Your privacy is part of how we build.</h1>' +
-    '<p style="color:rgba(255,255,255,0.85);font-size:18px;max-width:640px;margin:16px auto 0">This policy explains how Zynix AI collects, uses, and protects information when you visit our website or contact us about our services.</p>' +
-    '<p style="color:#AABBDD;font-size:14px;margin-top:16px">Effective Date: March 22, 2026 | Last Updated: March 22, 2026</p>' +
-    '</div></section>';
+  html += renderInnerHero('PRIVACY POLICY', 'Your Privacy Is Part of How We Build',
+    'This policy explains how Zynix AI collects, uses, and protects information when you visit our website or contact us about our services.',
+    IMG.hero, 'Zynix AI Privacy Policy');
 
-  // ── Legal Sections ──
-  html += '<section style="background:#fff;padding:80px 0"><div class="zynix-container" style="max-width:760px;color:#333;font-size:16px;line-height:1.75">';
+  html += '<section class="zynix-legal-section"><div class="zynix-container"><div class="zynix-legal-content">' +
+    '<p><strong>Effective Date:</strong> March 22, 2026 | <strong>Last Updated:</strong> March 22, 2026</p>' +
+    '<h2>1. Who This Policy Applies To</h2>' +
+    '<p>This policy applies to visitors to the Zynix AI website (zynix.ai), people who contact us for demos or inquiries, and business contacts interacting with Zynix AI for procurement, security reviews, or partnerships.</p>' +
+    '<h2>2. Information We Collect</h2>' +
+    '<p><strong>Information you provide:</strong> Contact details (name, email, phone), company name and role, messages and form submissions.</p>' +
+    '<p><strong>Information collected automatically:</strong> IP address, browser type, pages visited, referring source, and device information through cookies and analytics tools.</p>' +
+    '<h2>3. How We Use Information</h2>' +
+    '<p>We use information to respond to demo requests and inquiries, improve our website, comply with legal obligations, and communicate about our services when you have opted in.</p>' +
+    '<h2>4. Data Sharing</h2>' +
+    '<p>We do not sell personal information. We may share with service providers who help operate our website, professional advisors, and as required by law.</p>' +
+    '<h2>5. Data Security</h2>' +
+    '<p>We implement appropriate technical and organizational measures to protect information. Zynix AI is SOC 2 Type II certified and operates HIPAA-aligned safeguards.</p>' +
+    '<h2>6. Your Rights</h2>' +
+    '<p>You may request access to, correction of, or deletion of your personal information. Contact <a href="mailto:info@zynix.ai">info@zynix.ai</a> to exercise these rights.</p>' +
+    '<h2>7. Contact</h2>' +
+    '<p><strong>Email:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a></p>' +
+    '<p><strong>Address:</strong> 3535 Little Rd, Trinity, FL 34655, USA</p>' +
+    '</div></div></section>';
 
-  html += '<h2 style="color:#20449B">1. Who This Policy Applies To</h2>' +
-    '<p>This policy applies to:</p>' +
-    '<ul><li>Visitors to the Zynix AI website (zynix.ai)</li><li>People who contact us \u2014 for example, to request a demo, ask a question, or submit a form</li><li>Business contacts interacting with Zynix AI for procurement, security reviews, or partnership inquiries</li></ul>' +
-    '<p>If you are a customer using the Zynix AI platform, your organization\'s agreement with Zynix AI governs data handling in addition to this policy.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">2. Information We Collect</h2>' +
-    '<h3 style="color:#20449B;font-size:18px">A. Information you provide</h3>' +
-    '<ul><li>Contact details (name, email address, phone number)</li><li>Company name and role</li><li>Messages and form submissions, such as demo request details or inquiry content</li></ul>' +
-    '<h3 style="color:#20449B;font-size:18px">B. Information collected automatically</h3>' +
-    '<p>When you visit our website, we may automatically collect:</p>' +
-    '<ul><li>Device type and browser information</li><li>Approximate location inferred from IP address (typically city or state level)</li><li>Website usage data, including pages viewed, time on page, and referral source</li></ul>' +
-    '<h3 style="color:#20449B;font-size:18px">C. Information processed on behalf of customers</h3>' +
-    '<p>When Zynix AI is deployed by a healthcare organization, we may process information as a service provider acting on that organization\'s instructions.</p>' +
-    '<p><strong>HIPAA note:</strong> Zynix AI supports HIPAA-regulated workflows and may process protected health information (PHI) when implemented by covered entities or their business partners. In those cases, data handling is governed by the applicable customer agreement and Business Associate Agreement (BAA), not this policy.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">3. How We Use Information</h2>' +
-    '<p>We use the information we collect to:</p>' +
-    '<ul><li>Respond to inquiries and schedule product demos</li><li>Provide and continuously improve our website and services</li><li>Communicate about product updates, events, and company news (B2B communications only)</li><li>Maintain website security, prevent fraud, and troubleshoot technical issues</li><li>Comply with applicable legal obligations</li></ul>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">4. How We Share Information</h2>' +
-    '<p>We may share information with:</p>' +
-    '<ul><li><strong>Service providers</strong> who support our operations \u2014 including hosting, analytics, CRM, and communications platforms \u2014 under contractual confidentiality and security requirements</li>' +
-    '<li><strong>Professional advisors</strong> such as legal counsel and accountants, when reasonably necessary</li>' +
-    '<li><strong>Authorities</strong>, if required by applicable law or to protect the rights, safety, or property of Zynix AI or others</li>' +
-    '<li><strong>Successors in a business transfer</strong>, such as a merger or acquisition, subject to customary confidentiality safeguards</li></ul>' +
-    '<div style="border-left:4px solid #20449B;padding-left:16px;margin:24px 0"><p><strong>We do not sell personal information.</strong></p></div>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">5. Cookies and Analytics</h2>' +
-    '<p>We use cookies and similar technologies for website functionality and analytics.</p>' +
-    '<ul><li>We use analytics tools to understand website performance and improve our content.</li><li>We do not currently run consumer-targeted advertising campaigns. If this changes, we will update this policy and provide applicable choices where required.</li></ul>' +
-    '<p>You can manage cookie preferences through your browser settings. Note that disabling certain cookies may affect website functionality.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">6. Data Retention</h2>' +
-    '<p>We retain information for as long as reasonably necessary to fulfill the purposes described in this policy, unless a longer retention period is required or permitted by applicable law. When information is no longer needed, we take reasonable steps to securely delete or anonymize it.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">7. Data Security</h2>' +
-    '<p>Zynix AI maintains administrative, technical, and organizational measures designed to protect the information we hold. These measures are aligned with industry standards for B2B software and healthcare-adjacent services, including our SOC 2 Type II certification.</p>' +
-    '<p>No method of electronic transmission or storage is completely risk-free. For more detail on our security program, visit our <a href="/security" style="color:#F16529">Security Overview</a> page.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">8. Your Rights and Choices</h2>' +
-    '<p>Depending on your location, you may have rights to access, correct, or delete information we hold about you, or to object to certain types of processing. To submit a request, contact us at <a href="mailto:info@zynix.ai" style="color:#F16529">info@zynix.ai</a>.</p>' +
-    '<h3 style="color:#20449B;font-size:18px">California Residents \u2014 CCPA Rights</h3>' +
-    '<p>If you are a California resident, you have specific rights under the California Consumer Privacy Act (CCPA), including:</p>' +
-    '<ul><li>The right to know what personal information we collect, use, and share</li><li>The right to request deletion of your personal information</li><li>The right to opt out of the sale of personal information</li></ul>' +
-    '<p>Zynix AI does not sell personal information. To submit a CCPA request or learn more about your California privacy rights, contact us at <a href="mailto:info@zynix.ai" style="color:#F16529">info@zynix.ai</a>.</p>' +
-    '<p>If you interact with Zynix AI through a healthcare organization that uses our platform, rights requests related to that data should be directed to that organization, as they are the data controller for that information.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">9. Children\'s Privacy</h2>' +
-    '<p>Our website and services are directed to healthcare and business professionals. We do not knowingly collect personal information from children under the age of 13. If we become aware that we have inadvertently collected such information, we will take steps to delete it promptly.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">10. Changes to This Policy</h2>' +
-    '<p>We may update this policy from time to time to reflect changes in our practices or applicable law. When we do, we will post the updated version on this page and update the "Last Updated" date above. We encourage you to review this policy periodically.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">11. Contact</h2>' +
-    '<p>For privacy-related questions or to submit a data rights request:</p>' +
-    '<p><strong>Email:</strong> <a href="mailto:info@zynix.ai" style="color:#F16529">info@zynix.ai</a></p>' +
-    '<p><strong>Address:</strong> 3535 Little Rd, Trinity, FL 34655, USA</p>';
-
-  html += '</div></section>';
-
-  // ── CTA ──
-  html += '<section class="zynix-cta-band" style="background:#20449B;padding:96px 0"><div class="zynix-container" style="text-align:center">' +
-    '<h2 style="color:#fff">Have a privacy question or data request?</h2>' +
-    '<p style="color:#AABBDD;margin:12px auto 32px">We\'re here to help. Reach out to our team directly.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Contact Us</a>' +
-    '</div></section>';
-
+  html += renderCTA('Questions About Our Privacy Practices?', 'Our team is happy to help with questions about how we handle your information.', 'Contact Us');
+  html += renderFooter();
   return html;
 }
 
 
-// ============================================================================
-// 12. TERMS OF SERVICE
-// ============================================================================
 function renderTermsV7() {
   var html = '';
 
-  // ── Hero ──
-  html += '<section style="background:#20449B;padding:80px 0"><div class="zynix-container" style="text-align:center">' +
-    '<h1 style="color:#fff;font-size:42px;font-weight:800">Terms of Service</h1>' +
-    '<p style="color:rgba(255,255,255,0.85);font-size:18px;max-width:640px;margin:16px auto 0">These terms govern your use of the Zynix AI website. By accessing or using this site, you agree to the terms below.</p>' +
-    '<p style="color:#AABBDD;font-size:14px;margin-top:16px">Effective Date: March 22, 2026 | Last Updated: March 22, 2026</p>' +
-    '</div></section>';
+  html += renderInnerHero('TERMS OF SERVICE', 'Terms of Service',
+    'These terms govern your use of the Zynix AI website. By accessing or using this site, you agree to the terms below.',
+    IMG.hero, 'Zynix AI Terms');
 
-  // ── Legal Sections ──
-  html += '<section style="background:#fff;padding:80px 0"><div class="zynix-container" style="max-width:760px;color:#333;font-size:16px;line-height:1.75">';
-
-  html += '<h2 style="color:#20449B">1. Who We Are</h2>' +
+  html += '<section class="zynix-legal-section"><div class="zynix-container"><div class="zynix-legal-content">' +
+    '<p><strong>Effective Date:</strong> March 22, 2026 | <strong>Last Updated:</strong> March 22, 2026</p>' +
+    '<h2>1. Who We Are</h2>' +
     '<p>Zynix AI (referred to as "Zynix," "we," "us," or "our") operates this website.</p>' +
-    '<p><strong>Contact:</strong> <a href="mailto:info@zynix.ai" style="color:#F16529">info@zynix.ai</a></p>' +
-    '<p><strong>Address:</strong> 3535 Little Rd, Trinity, FL 34655, USA</p>';
+    '<p><strong>Contact:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a> | 3535 Little Rd, Trinity, FL 34655, USA</p>' +
+    '<h2>2. Permitted Use</h2>' +
+    '<p>You may use this website for lawful business purposes. You agree not to: attempt to disrupt or compromise the website\'s security; reverse engineer, scrape, or harvest data unlawfully; upload malicious code; or transmit unlawful content.</p>' +
+    '<h2>3. No Medical Advice</h2>' +
+    '<p>This website is provided for informational and business purposes only. Nothing on this website constitutes medical advice, clinical guidance, diagnosis, or treatment.</p>' +
+    '<h2>4. Intellectual Property</h2>' +
+    '<p>All content on this website is owned by Zynix AI or its licensors and is protected by applicable intellectual property laws.</p>' +
+    '<h2>5. Third-Party Links</h2>' +
+    '<p>This website may contain links to third-party websites. Zynix AI does not control those sites and is not responsible for their content.</p>' +
+    '<h2>6. Disclaimers</h2>' +
+    '<p>This website is provided on an "AS IS" and "AS AVAILABLE" basis. Zynix AI disclaims all warranties to the maximum extent permitted by law.</p>' +
+    '<h2>7. Limitation of Liability</h2>' +
+    '<p>Zynix AI will not be liable for any indirect, incidental, special, consequential, or punitive damages arising from use of this website. Total liability will not exceed USD $100.</p>' +
+    '<h2>8. Indemnification</h2>' +
+    '<p>You agree to indemnify and hold harmless Zynix AI from claims arising out of your misuse of this website or violation of these Terms.</p>' +
+    '<h2>9. Changes</h2>' +
+    '<p>We may update these Terms at any time. Continued use constitutes acceptance of revised Terms.</p>' +
+    '<h2>10. Governing Law</h2>' +
+    '<p>These Terms are governed by the laws of the State of Florida. Disputes shall be subject to the exclusive jurisdiction of courts in Pasco County, Florida.</p>' +
+    '<h2>11. Contact</h2>' +
+    '<p><strong>Email:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a> | <strong>Address:</strong> 3535 Little Rd, Trinity, FL 34655, USA</p>' +
+    '</div></div></section>';
 
-  html += '<h2 style="color:#20449B;margin-top:48px">2. Permitted Use</h2>' +
-    '<p>You may use this website for lawful business purposes, including learning about Zynix AI and contacting us.</p>' +
-    '<p>You agree not to:</p>' +
-    '<ul><li>Attempt to disrupt, circumvent, or compromise the security or integrity of the website</li>' +
-    '<li>Reverse engineer, scrape, or harvest data from the website in a manner that violates applicable law</li>' +
-    '<li>Upload, transmit, or introduce malicious code, or conduct vulnerability probing without prior written permission from Zynix AI</li>' +
-    '<li>Use the website to transmit unlawful, harmful, deceptive, or fraudulent content</li></ul>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">3. No Medical Advice</h2>' +
-    '<div style="background:#EEF2FB;border-left:4px solid #20449B;padding:20px 24px;border-radius:4px">' +
-    '<p>This website is provided for informational and business purposes only. Nothing on this website constitutes medical advice, clinical guidance, diagnosis, or treatment. Do not rely on this website for clinical decision-making.</p>' +
-    '</div>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">4. Intellectual Property</h2>' +
-    '<p>All content on this website \u2014 including text, graphics, trademarks, logos, and other materials \u2014 is owned by Zynix AI or its licensors and is protected by applicable intellectual property laws.</p>' +
-    '<p>You may not copy, reproduce, modify, distribute, or create derivative works from any content on this website without prior written permission from Zynix AI, except as expressly permitted by law.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">5. Third-Party Links</h2>' +
-    '<p>This website may contain links to third-party websites. These links are provided for convenience only. Zynix AI does not control those sites and is not responsible for their content, privacy practices, or security.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">6. Disclaimers</h2>' +
-    '<p>This website is provided on an "AS IS" and "AS AVAILABLE" basis. To the maximum extent permitted by applicable law, Zynix AI disclaims all warranties, express or implied, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">7. Limitation of Liability</h2>' +
-    '<p>To the maximum extent permitted by applicable law, Zynix AI will not be liable for any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of this website.</p>' +
-    '<p>Zynix AI\'s total liability for any claim arising from or related to this website will not exceed USD $100, or the minimum amount permitted under applicable law if this limitation is unenforceable.</p>' +
-    '<p style="font-style:italic;font-size:14px;color:#555;margin-top:16px"><em>Note: These Terms govern use of the Zynix AI website (zynix.ai) only. If your organization has an executed Master Services Agreement or similar agreement with Zynix AI for use of our platform or services, that agreement governs your platform use and contains its own liability provisions separate from these Terms.</em></p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">8. Indemnification</h2>' +
-    '<p>You agree to indemnify, defend, and hold harmless Zynix AI and its officers, directors, employees, and agents from and against any claims, damages, liabilities, losses, and expenses (including reasonable attorneys\' fees) arising out of or related to your misuse of this website or your violation of these Terms.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">9. Changes to the Site and Terms</h2>' +
-    '<p>We may update this website or these Terms at any time without prior notice. When we update these Terms, we will post the revised version on this page and update the "Last Updated" date at the top. Your continued use of this website after any update constitutes your acceptance of the revised Terms.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">10. Governing Law</h2>' +
-    '<p>These Terms are governed by the laws of the State of Florida, without regard to conflict of laws principles. Any disputes arising under or related to these Terms shall be subject to the exclusive jurisdiction of the state and federal courts located in Pasco County, Florida.</p>';
-
-  html += '<h2 style="color:#20449B;margin-top:48px">11. Contact</h2>' +
-    '<p>For questions about these Terms:</p>' +
-    '<p><strong>Email:</strong> <a href="mailto:info@zynix.ai" style="color:#F16529">info@zynix.ai</a></p>' +
-    '<p><strong>Address:</strong> 3535 Little Rd, Trinity, FL 34655, USA</p>';
-
-  html += '</div></section>';
-
-  // ── CTA ──
-  html += '<section class="zynix-cta-band" style="background:#20449B;padding:96px 0"><div class="zynix-container" style="text-align:center">' +
-    '<h2 style="color:#fff">Questions about our terms or how we work?</h2>' +
-    '<p style="color:#AABBDD;margin:12px auto 32px">Our team is happy to help with questions about our website, our services, or how we operate.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Contact Us</a>' +
-    '</div></section>';
-
+  html += renderCTA('Questions About Our Terms?', 'Our team is happy to help with questions about our website, services, or how we operate.', 'Contact Us');
+  html += renderFooter();
   return html;
 }
-
 
 // ============================================================================
 // ROUTE ENTRIES
@@ -4215,434 +3884,288 @@ var AUDIENCE_COMPANY_ROUTES = {
 function renderAgentPageV7(data) {
   var html = '';
 
-  // ── HERO ──
-  html += '<section class="zynix-agent-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<nav class="zynix-breadcrumb">Platform &gt; Agents &gt; ' + data.agentName + '</nav>' +
-    '<span class="zynix-eyebrow">' + data.category + '</span>' +
-    '<h1>' + data.headline + '</h1>' +
-    '<p class="zynix-subhead">' + data.subhead + '</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image">' +
-    '<img src="' + data.heroImage + '" alt="' + data.heroAlt + '">' +
-    '</div>' +
-    '</div></section>';
+  html += renderInnerHero(data.category, data.headline, data.subhead, data.heroImage, data.heroAlt);
 
-  // ── WHAT IT DOES ──
-  html += '<section class="zynix-agent-what">' +
-    '<div class="zynix-container" style="max-width:760px">' +
-    '<span class="zynix-eyebrow">WHAT IT DOES</span>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">WHAT IT DOES</span>' +
     '<h2>' + data.whatHeading + '</h2>' +
-    '<div class="zynix-narrative-prose">' + data.whatBody + '</div>' +
+    '<p class="zynix-section-sub">' + data.whatBody + '</p>' +
     '</div></section>';
 
-  // ── HOW IT WORKS ──
-  html += '<section class="zynix-agent-workflow">' +
-    '<div class="zynix-container">' +
-    '<span class="zynix-eyebrow">HOW IT WORKS</span>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">HOW IT WORKS</span>' +
     '<h2>' + data.workflowHeading + '</h2>' +
-    '<div class="zynix-workflow-timeline">';
+    '<div class="zynix-orch-flow">';
   data.workflowSteps.forEach(function(step, i) {
-    html += '<div class="zynix-wf-step">' +
-      '<div class="zynix-wf-dot">' + (i + 1) + '</div>' +
-      '<div class="zynix-wf-content">' +
-      '<h4>' + step.title + '</h4>' +
-      '<p>' + step.description + '</p>' +
-      '</div></div>';
+    if (i > 0) html += '<div class="zynix-orch-arrow">&rarr;</div>';
+    html += '<div class="zynix-orch-step fade-in-up"><span>' + (i + 1) + '</span><p>' + step.title + '</p></div>';
+  });
+  html += '</div>' +
+    '<div class="zynix-careplan-grid" style="margin-top:32px">';
+  data.workflowSteps.forEach(function(step, i) {
+    html += '<div class="zynix-careplan-card fade-in-up"><div class="zynix-cp-num">' + (i + 1) + '</div><div><h4>' + step.title + '</h4><p>' + step.description + '</p></div></div>';
   });
   html += '</div></div></section>';
 
-  // ── INPUTS / OUTPUTS ──
-  html += '<section class="zynix-agent-io" style="background:#EEF2FB">' +
-    '<div class="zynix-container">' +
-    '<span class="zynix-eyebrow">INPUTS &amp; OUTPUTS</span>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">INPUTS &amp; OUTPUTS</span>' +
     '<h2>What Goes In. What Comes Out.</h2>' +
-    '<div class="zynix-io-grid">' +
-    '<div class="zynix-io-col"><h3>Inputs</h3><ul>';
+    '<div class="zynix-compare-grid">' +
+    '<div class="zynix-compare-card zynix-compare-bad"><h3>Inputs</h3><ul>';
   data.inputs.forEach(function(item) { html += '<li>' + item + '</li>'; });
   html += '</ul></div>' +
-    '<div class="zynix-io-col"><h3>Outputs</h3><ul>';
+    '<div class="zynix-compare-card zynix-compare-good"><h3>Outputs</h3><ul>';
   data.outputs.forEach(function(item) { html += '<li>' + item + '</li>'; });
   html += '</ul></div></div></div></section>';
 
-  // ── INTEGRATION POINTS ──
-  html += '<section class="zynix-agent-integrations">' +
-    '<div class="zynix-container">' +
-    '<span class="zynix-eyebrow">INTEGRATIONS</span>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">INTEGRATIONS</span>' +
     '<h2>Where It Connects</h2>' +
-    '<div class="zynix-card-grid-3col">';
+    '<div class="zynix-feature-grid">';
   data.integrations.forEach(function(intg) {
-    html += '<div class="zynix-integration-card">' +
-      '<h4>' + intg.system + '</h4>' +
-      '<p>' + intg.description + '</p>' +
-      '</div>';
+    html += '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128268;</div><h3>' + intg.system + '</h3><p>' + intg.description + '</p></div>';
   });
   html += '</div></div></section>';
 
-  // ── GOVERNANCE ──
-  html += '<section class="zynix-agent-governance">' +
-    '<div class="zynix-container" style="max-width:760px">' +
-    '<span class="zynix-eyebrow">GOVERNANCE</span>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">GOVERNANCE</span>' +
     '<h2>Human Oversight Built In</h2>' +
-    '<div class="zynix-narrative-prose">' + data.governanceBody + '</div>' +
-    '<div class="zynix-governance-cards">';
+    '<p class="zynix-section-sub">' + data.governanceBody + '</p>' +
+    '<div class="zynix-problem-grid">';
   data.governancePoints.forEach(function(g) {
-    html += '<div class="zynix-governance-card">' +
-      '<h4>' + g.title + '</h4>' +
-      '<p>' + g.body + '</p>' +
-      '</div>';
+    html += '<div class="zynix-problem-card fade-in-up"><div class="zynix-problem-icon">&#128737;</div><h3>' + g.title + '</h3><p>' + g.body + '</p></div>';
   });
   html += '</div></div></section>';
 
-  // ── RELATED USE CASES ──
-  html += '<section class="zynix-agent-usecases">' +
-    '<div class="zynix-container">' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">RELATED</span>' +
     '<h2>Related Use Cases</h2>' +
-    '<div class="zynix-card-grid-3col">';
+    '<div class="zynix-agents-grid">';
   data.relatedUseCases.forEach(function(uc) {
-    html += '<div class="zynix-readnext-card">' +
-      '<span class="zynix-uc-badge">' + uc.ucId + '</span>' +
-      '<h4>' + uc.title + '</h4>' +
-      '<a href="' + uc.url + '" class="zynix-link-orange">View use case &rarr;</a>' +
+    html += '<div class="zynix-agent-card fade-in-up">' +
+      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + uc.ucId + '</span><h3>' + uc.title + '</h3></div>' +
+      '<p><a href="' + uc.url + '">View use case &rarr;</a></p>' +
       '</div>';
   });
   html += '</div></div></section>';
 
-  // ── CTA ──
-  html += '<section class="zynix-cta-band" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<h2>' + data.ctaHeadline + '</h2>' +
-    '<p>' + data.ctaSubline + '</p>' +
-    '<a href="/contact" class="zynix-btn-cta">' + data.ctaButton + '</a>' +
-    '</div></section>';
-
+  html += renderCTA(data.ctaHeadline, data.ctaSubline, data.ctaButton);
+  html += renderFooter();
   return html;
 }
 
 
-// ═══════════════════════════════════════════════════════════════
-// 1. PLATFORM HUB — /platform
-// ═══════════════════════════════════════════════════════════════
 
 function renderPlatformHub() {
   var html = '';
 
-  // ── HERO ──
-  html += '<section class="zynix-platform-hero" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<span class="zynix-eyebrow">THE PLATFORM</span>' +
-    '<h1>The AI Operating System for Value-Based Care</h1>' +
-    '<p class="zynix-subhead">Zynix Intelligent Platform (ZIP) unifies healthcare data, clinical intelligence, autonomous AI agents, and deployable care plans into a single operating system. One platform replaces the patchwork of point solutions that fragment care delivery and limit performance improvement.</p>' +
+  html += renderInnerHero('THE PLATFORM', 'The AI Operating System for Value-Based Care',
+    'Zynix Intelligent Platform (ZIP) unifies healthcare data, clinical intelligence, autonomous AI agents, and deployable care plans into a single operating system. One platform replaces the patchwork of point solutions that fragment care delivery and limit performance improvement.',
+    IMG.enterprise, 'Zynix Intelligent Platform');
+
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">OVERVIEW</span>' +
+    '<h2>What ZIP Is</h2>' +
+    '<p class="zynix-section-sub">ZIP is the unified platform that connects data ingestion, AI-driven intelligence, autonomous agent execution, and orchestrated care plans into a single system of record and action. It replaces the fragmented stack of analytics dashboards, outreach tools, scheduling software, and documentation platforms that most healthcare organizations operate today.</p>' +
+    '<p class="zynix-section-sub">Every component shares the same data layer, the same patient context, and the same security posture. ZIP is deployed across ACOs, health systems, health plans, FQHCs, and independent practices serving over 1 million patients in 30 states.</p>' +
     '</div></section>';
 
-  // ── SYSTEM OVERVIEW ──
-  html += '<section class="zynix-platform-overview">' +
-    '<div class="zynix-container" style="max-width:760px">' +
-    '<h2>What ZIP Is</h2>' +
-    '<div class="zynix-narrative-prose">' +
-    '<p>ZIP is the unified platform that connects data ingestion, AI-driven intelligence, autonomous agent execution, and orchestrated care plans into a single system of record and action. It replaces the fragmented stack of analytics dashboards, outreach tools, scheduling software, and documentation platforms that most healthcare organizations operate today.</p>' +
-    '<p>Every component shares the same data layer, the same patient context, and the same security posture. When an ADT feed signals a discharge, the data layer normalizes it, the intelligence engine risk-stratifies the patient, an agent initiates outreach, and a care plan orchestrates the 30-day follow-through. No manual handoffs. No data silos. No integration tax.</p>' +
-    '<p>ZIP is deployed across ACOs, health systems, health plans, FQHCs, and independent practices serving over 1 million patients in 30 states.</p>' +
+  html += '<section id="capabilities"><div class="zynix-container">' +
+    '<span class="zynix-tag">ARCHITECTURE</span>' +
+    '<h2>Four Layers. One Integrated Platform.</h2>' +
+    '<div class="zynix-arch-grid">' +
+    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#ccfdcf"><div class="zynix-arch-num">01</div><h3>AI Data Foundation</h3><p>Ingest, clean, normalize, and unify data from EHR systems (Epic, Cerner, athenahealth, eClinicalWorks, NextGen, Allscripts), claims feeds (837/835), ADT streams, lab results, pharmacy fills, and SDOH sources. 97%+ patient matching accuracy.</p></div>' +
+    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#cebffa"><div class="zynix-arch-num">02</div><h3>Intelligence & Reasoning</h3><p>ZynixLLM and proprietary clinical models power risk stratification, HCC gap detection, quality measure identification, readmission prediction, and clinical decision support. Intelligence feeds directly into agent workflows.</p></div>' +
+    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#fddbc8"><div class="zynix-arch-num">03</div><h3>AI Agent Suite</h3><p>Twelve specialized AI agents that take autonomous action: after-hours triage, scheduling, post-discharge outreach, medication reconciliation, prior authorization, fax processing, appointment reminders, AWV scheduling, chronic disease monitoring, and more.</p></div>' +
+    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#d7e9ff"><div class="zynix-arch-num">04</div><h3>Deployable Care Plans</h3><p>Pre-built, configurable care plan templates that orchestrate multiple agents into end-to-end workflows: TCM 30-day follow-through, CCM longitudinal management, AWV identification-to-completion, quality gap closure, and prior authorization sequences.</p></div>' +
     '</div></div></section>';
 
-  // ── FOUR-LAYER ARCHITECTURE ──
-  html += '<section class="zynix-platform-architecture" style="background:#EEF2FB">' +
-    '<div class="zynix-container">' +
-    '<span class="zynix-eyebrow">ARCHITECTURE</span>' +
-    '<h2>Four Layers. One Integrated Platform.</h2>' +
-    '<div class="zynix-architecture-diagram-placeholder">[Architecture diagram SVG &mdash; provided by design team]</div>' +
-    '<div class="zynix-arch-cards">';
-
-  var layers = [
-    { num: '01', name: 'AI Data Foundation', desc: 'Ingest, clean, normalize, and unify data from EHR systems (Epic, Cerner, athenahealth, eClinicalWorks, NextGen, Allscripts), claims feeds (837/835), ADT streams, lab results, pharmacy fills, and SDOH sources. De-duplication, standardized coding (ICD-10, CPT, SNOMED, LOINC), and golden record creation produce a single source of truth with 97%+ patient matching accuracy.', url: '/solutions/zynix-data-analytics', color: '#ccfdcf' },
-    { num: '02', name: 'Intelligence & Reasoning', desc: 'ZynixLLM and proprietary clinical models power risk stratification, HCC gap detection, quality measure identification, readmission prediction, and clinical decision support. Every insight is ranked by impact, probability, and optimal timing. Intelligence feeds directly into agent workflows rather than sitting in a dashboard.', url: '/company/zynixllm', color: '#cebffa' },
-    { num: '03', name: 'AI Agent Suite', desc: 'Twelve specialized AI agents that take autonomous action: after-hours triage, scheduling, post-discharge outreach, medication reconciliation, prior authorization, fax processing, appointment reminders, AWV scheduling, chronic disease monitoring, and more. Agents operate 24/7, coordinate with each other, and escalate to human staff when clinical judgment is required.', url: '/agents', color: '#fddbc8' },
-    { num: '04', name: 'Deployable Care Plans', desc: 'Pre-built, configurable care plan templates that orchestrate multiple agents into end-to-end workflows: TCM 30-day follow-through, CCM longitudinal management, AWV identification-to-completion, quality gap closure, and prior authorization sequences. Deploy in days. Achieve 85%+ patient contact rates versus the 30-40% industry average.', url: '/care-plans', color: '#d7e9ff' }
-  ];
-
-  layers.forEach(function(layer) {
-    html += '<div class="zynix-arch-card" style="border-left:4px solid ' + layer.color + '">' +
-      '<div class="zynix-arch-num">' + layer.num + '</div>' +
-      '<h3>' + layer.name + '</h3>' +
-      '<p>' + layer.desc + '</p>' +
-      '<a href="' + layer.url + '" class="zynix-link-orange">Explore &rarr;</a>' +
-      '</div>';
-  });
-
-  html += '</div></div></section>';
-
-  // ── INTEGRATION ECOSYSTEM ──
-  html += '<section class="zynix-platform-integrations">' +
-    '<div class="zynix-container">' +
-    '<span class="zynix-eyebrow">INTEGRATIONS</span>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">INTEGRATIONS</span>' +
     '<h2>Connects to Everything You Already Use</h2>' +
-    '<div class="zynix-integration-grid">';
+    '<div class="zynix-data-layers">' +
+    '<div class="zynix-data-layer fade-in-up"><h3>EHR Systems</h3><p>Epic, Cerner (Oracle Health), athenahealth, eClinicalWorks, NextGen, Allscripts</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>Data Feeds</h3><p>Claims (837/835), ADT (HL7 v2), FHIR R4 APIs, Lab results (ORU), Pharmacy fill data, SDOH databases</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>Communication</h3><p>Voice (SIP/PSTN), SMS/MMS, Email, Patient portals, Secure messaging</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>Payer Systems</h3><p>Prior auth portals, Eligibility verification, Claims adjudication, Quality measure reporting</p></div>' +
+    '</div></div></section>';
 
-  var integrations = [
-    { category: 'EHR Systems', systems: ['Epic', 'Cerner (Oracle Health)', 'athenahealth', 'eClinicalWorks', 'NextGen', 'Allscripts'] },
-    { category: 'Data Feeds', systems: ['Claims (837/835)', 'ADT (HL7 v2)', 'FHIR R4 APIs', 'Lab results (ORU)', 'Pharmacy fill data', 'SDOH databases'] },
-    { category: 'Communication', systems: ['Voice (SIP/PSTN)', 'SMS/MMS', 'Email', 'Patient portals', 'Secure messaging'] },
-    { category: 'Payer Systems', systems: ['Prior auth portals', 'Eligibility verification', 'Claims adjudication', 'Quality measure reporting'] }
-  ];
+  html += renderMetricsBar([
+    { value: '1M+', label: 'Patients Served' },
+    { value: '30', label: 'States Active' },
+    { value: '97%+', label: 'Patient Matching' },
+    { value: 'SOC 2', label: 'Type II Certified' }
+  ]);
 
-  integrations.forEach(function(cat) {
-    html += '<div class="zynix-integration-category">' +
-      '<h4>' + cat.category + '</h4><ul>';
-    cat.systems.forEach(function(s) { html += '<li>' + s + '</li>'; });
-    html += '</ul></div>';
-  });
-
-  html += '</div></div></section>';
-
-  // ── SECURITY & COMPLIANCE ──
-  html += '<section class="zynix-platform-security" style="background:#EEF2FB">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<span class="zynix-eyebrow">SECURITY</span>' +
-    '<h2>Enterprise-Grade. Healthcare-Ready.</h2>' +
-    '<div class="zynix-security-badges">' +
-    '<span>SOC 2 Type II Certified</span>' +
-    '<span>HIPAA Aligned</span>' +
-    '<span>BAA Available</span>' +
-    '</div>' +
-    '<p>All data is encrypted in transit (TLS 1.3) and at rest (AES-256). Role-based access controls, comprehensive audit logging, and PHI access monitoring are enabled by default. Business Associate Agreements are executed with every client. HITRUST CSF readiness assessment completed.</p>' +
-    '<a href="/security" class="zynix-link-orange">View Security Overview &rarr;</a>' +
-    '</div></section>';
-
-  // ── CTA ──
-  html += '<section class="zynix-cta-band" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<h2>See the Platform in Action</h2>' +
-    '<p>Schedule a 30-minute demo to see how ZIP replaces your point-solution stack with one integrated operating system.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Request a Demo</a>' +
-    '</div></section>';
-
+  html += renderCTA('See the Platform in Action', 'Schedule a 30-minute demo to see how ZIP replaces your point-solution stack with one integrated operating system.', 'Request a Demo');
+  html += renderFooter();
   return html;
 }
 
 
-// ═══════════════════════════════════════════════════════════════
-// 2. AI AGENTS HUB — /agents
-// ═══════════════════════════════════════════════════════════════
-
 function renderAgentsHub() {
   var html = '';
 
-  // ── HERO ──
-  html += '<section class="zynix-agent-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<nav class="zynix-breadcrumb">Platform &gt; AI Agents</nav>' +
-    '<span class="zynix-eyebrow">AI AGENT SUITE</span>' +
-    '<h1>AI Agents That Don\'t Just Inform &mdash; They Act</h1>' +
-    '<p class="zynix-subhead">Twelve purpose-built AI agents that convert clinical intelligence into completed actions. They call patients, book appointments, reconcile medications, process faxes, submit prior authorizations, and document encounters &mdash; 24/7, across every department, in 15+ languages.</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image">' +
-    '<img src="' + IMG.doctor + '" alt="Zynix AI Agents Suite">' +
-    '</div>' +
-    '</div></section>';
+  html += renderInnerHero('AI AGENT SUITE', 'AI Agents That Don\'t Just Inform \u2014 They Act',
+    'Twelve purpose-built AI agents that convert clinical intelligence into completed actions. They call patients, book appointments, reconcile medications, process faxes, submit prior authorizations, and document encounters \u2014 24/7, across every department, in 15+ languages.',
+    IMG.doctor, 'Zynix AI Agents Suite');
 
-  // ── CLINICAL PERFORMANCE AGENTS ──
-  html += '<section class="zynix-agents-section" id="clinical-performance"><div class="zynix-container">' +
+  // Clinical Performance Agents
+  html += '<section id="clinical-performance"><div class="zynix-container">' +
     '<span class="zynix-tag">CLINICAL PERFORMANCE</span>' +
     '<h2>Agents for Care Quality and Patient Outcomes</h2>' +
     '<p class="zynix-section-sub">Automate chronic care management, transitions of care, preventive screening, AWV outreach, and social determinant assessment.</p>' +
     '<div class="zynix-agents-grid">';
 
   var clinicalAgents = [
-    { name: 'Chronic Care Management', desc: 'Longitudinal care automation for chronic disease populations. Risk-tiered outreach, medication adherence tracking, and care plan reinforcement across CCM billing cycles.', metrics: ['85%+ Contact Rate', 'CCM Revenue Capture'], url: '/agents/chronic-care-management' },
-    { name: 'Transitions of Care', desc: 'Post-discharge follow-up within TCM billing windows. Medication reconciliation, symptom monitoring, follow-up scheduling, and readmission prevention.', metrics: ['85%+ Contact Rate', '25% Readmission Reduction'], url: '/agents/transitions-of-care' },
-    { name: 'Preventive & Quality Activation', desc: 'AWV outreach, appointment reminders, vaccination scheduling, and HEDIS quality gap closure. Drive preventive care completion at population scale.', metrics: ['3x AWV Lift', '40% No-Show Reduction'], url: '/agents/preventive-quality-activation' },
-    { name: 'SDoH Determination', desc: 'Screen patients for social determinants of health and route to community resources. Identify housing, food, transportation, and financial barriers to care.', metrics: ['Planned', 'Coming Soon'], url: '/agents/sdoh-determination' }
+    { icon: '&#128138;', name: 'Chronic Care Management', desc: 'Longitudinal care automation for chronic disease populations. Risk-tiered outreach, medication adherence tracking, and care plan reinforcement across CCM billing cycles.', metrics: ['85%+ Contact Rate', 'CCM Revenue Capture'], url: '/agents/chronic-care-management' },
+    { icon: '&#128222;', name: 'Transitions of Care', desc: 'Post-discharge follow-up within TCM billing windows. Medication reconciliation, symptom monitoring, follow-up scheduling, and readmission prevention.', metrics: ['85%+ Contact Rate', '25% Readmission Reduction'], url: '/agents/transitions-of-care' },
+    { icon: '&#128276;', name: 'Preventive & Quality Activation', desc: 'AWV outreach, appointment reminders, vaccination scheduling, and HEDIS quality gap closure. Drive preventive care completion at population scale.', metrics: ['3x AWV Lift', '40% No-Show Reduction'], url: '/agents/preventive-quality-activation' },
+    { icon: '&#127968;', name: 'SDoH Determination', desc: 'Screen patients for social determinants of health and route to community resources. Identify housing, food, transportation, and financial barriers to care.', metrics: ['Planned', 'Coming Soon'], url: '/agents/sdoh-determination' }
   ];
 
   clinicalAgents.forEach(function(agent) {
     html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><h3>' + agent.name + '</h3></div>' +
+      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
       '<p>' + agent.desc + '</p>' +
       '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      '<a href="' + agent.url + '" class="zynix-link-orange">Learn more &rarr;</a>' +
+      '<p><a href="' + agent.url + '">Learn more &rarr;</a></p>' +
       '</div>';
   });
 
-  html += '</div>' +
-    '<div style="text-align:center;margin-top:24px"><a href="/agents/clinical-performance" class="zynix-btn-secondary">View All Clinical Performance Agents &rarr;</a></div>' +
-    '</div></section>';
+  html += '</div></div></section>';
 
-  // ── PREDICTIVE ACTIVATION AGENTS ──
-  html += '<section class="zynix-agents-section" id="predictive-activation" style="background:#EEF2FB"><div class="zynix-container">' +
+  // Predictive Activation Agents
+  html += '<section id="predictive-activation"><div class="zynix-container">' +
     '<span class="zynix-tag">PREDICTIVE ACTIVATION</span>' +
     '<h2>Agents That Act Before Events Occur</h2>' +
     '<p class="zynix-section-sub">Risk-based proactive outreach triggered by predictive models. Identify rising-risk patients, predict readmissions, and intervene before clinical deterioration.</p>' +
     '<div class="zynix-agents-grid">';
 
   var predictiveAgents = [
-    { name: 'Readmission Risk Agent', desc: 'Identifies high-risk patients at the moment of discharge using predictive models validated against real outcomes. Triggers automated intervention sequences to prevent avoidable readmissions.', metrics: ['25% Readmission Reduction', 'Real-Time Scoring'] },
-    { name: 'Rising Risk Outreach', desc: 'Monitors patient populations continuously for clinical and utilization patterns that signal escalating risk. Initiates proactive outreach before patients reach crisis.', metrics: ['Weeks of Lead Time', 'Continuous Monitoring'] },
-    { name: 'Predictive Deterioration Monitor', desc: 'Tracks chronic disease patients for early signs of clinical deterioration using lab trends, medication adherence patterns, and encounter frequency. Routes alerts to care teams.', metrics: ['Early Detection', 'Automated Escalation'] }
+    { icon: '&#128202;', name: 'Readmission Risk Agent', desc: 'Identifies high-risk patients at the moment of discharge using predictive models validated against real outcomes. Triggers automated intervention sequences.', metrics: ['25% Readmission Reduction', 'Real-Time Scoring'] },
+    { icon: '&#128200;', name: 'Rising Risk Outreach', desc: 'Monitors patient populations continuously for clinical and utilization patterns that signal escalating risk. Initiates proactive outreach before patients reach crisis.', metrics: ['Weeks of Lead Time', 'Continuous Monitoring'] },
+    { icon: '&#128161;', name: 'Predictive Deterioration Monitor', desc: 'Tracks chronic disease patients for early signs of clinical deterioration using lab trends, medication adherence patterns, and encounter frequency.', metrics: ['Early Detection', 'Automated Escalation'] }
   ];
 
   predictiveAgents.forEach(function(agent) {
     html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><h3>' + agent.name + '</h3></div>' +
+      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
       '<p>' + agent.desc + '</p>' +
       '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
       '</div>';
   });
 
-  html += '</div>' +
-    '<div style="text-align:center;margin-top:24px"><a href="/agents/predictive-activation" class="zynix-btn-secondary">View Predictive Activation Agents &rarr;</a></div>' +
-    '</div></section>';
+  html += '</div></div></section>';
 
-  // ── OPERATIONAL EFFICIENCY AGENTS ──
-  html += '<section class="zynix-agents-section" id="operational-efficiency"><div class="zynix-container">' +
+  // Operational Efficiency Agents
+  html += '<section id="operational-efficiency"><div class="zynix-container">' +
     '<span class="zynix-tag">OPERATIONAL EFFICIENCY</span>' +
     '<h2>Agents That Eliminate Administrative Burden</h2>' +
-    '<p class="zynix-section-sub">Automate after-hours call handling, appointment scheduling, prior authorization, referral coordination, and fax processing. Free staff to focus on work that requires human judgment.</p>' +
+    '<p class="zynix-section-sub">Automate after-hours call handling, appointment scheduling, prior authorization, referral coordination, and fax processing.</p>' +
     '<div class="zynix-agents-grid">';
 
   var opsAgents = [
-    { name: 'ZynAfterHours & Triage', desc: '24/7 AI-powered call handling that triages symptoms using Schmitt-Thompson protocols, diverts unnecessary ER visits, and schedules appropriate care. 15+ languages.', metrics: ['97.3% Accuracy', '20-30% ER Diversion'], url: '/agents/operational-efficiency/zynafterhours-triage' },
-    { name: 'ZynSchedule', desc: 'Always-on appointment scheduling via voice, text, and web. Matches patient urgency with provider availability. Handles rescheduling and cancellations autonomously.', metrics: ['40% No-Show Reduction', '24/7 Availability'], url: '/agents/operational-efficiency/zynschedule' },
-    { name: 'Prior Authorization', desc: 'Automated submission to payer portals with optimized clinical documentation. Status tracking, denial management, appeal preparation, and expiration alerts.', metrics: ['75% Time Reduction', '$20+ Saved Per Auth'], url: '/agents/operational-efficiency' },
-    { name: 'Referral Management', desc: 'Track referrals from order to completed visit. Confirm appointments, retrieve results, prevent leakage, and close the loop with referring providers.', metrics: ['3x Faster Processing', '50% Less Leakage'], url: '/agents/operational-efficiency' },
-    { name: 'ZynFax', desc: 'AI-powered fax classification, data extraction, patient matching, and intelligent routing. Turns paper-based bottlenecks into digital workflows.', metrics: ['90%+ Classification Accuracy', '75% Staff Time Saved'], url: '/agents/operational-efficiency' }
+    { icon: '&#128161;', name: 'ZynAfterHours & Triage', desc: '24/7 AI-powered call handling that triages symptoms using Schmitt-Thompson protocols, diverts unnecessary ER visits, and schedules appropriate care. 15+ languages.', metrics: ['97.3% Accuracy', '20-30% ER Diversion'], url: '/agents/operational-efficiency/zynafterhours-triage' },
+    { icon: '&#128197;', name: 'ZynSchedule', desc: 'Always-on appointment scheduling via voice, text, and web. Matches patient urgency with provider availability.', metrics: ['40% No-Show Reduction', '24/7 Availability'], url: '/agents/operational-efficiency/zynschedule' },
+    { icon: '&#128203;', name: 'Prior Authorization', desc: 'Automated submission to payer portals with optimized clinical documentation. Status tracking, denial management, appeal preparation.', metrics: ['75% Time Reduction', '$20+ Saved Per Auth'] },
+    { icon: '&#128268;', name: 'Referral Management', desc: 'Track referrals from order to completed visit. Confirm appointments, retrieve results, prevent leakage.', metrics: ['3x Faster Processing', '50% Less Leakage'] },
+    { icon: '&#128424;', name: 'ZynFax', desc: 'AI-powered fax classification, data extraction, patient matching, and intelligent routing.', metrics: ['90%+ Classification', '75% Staff Time Saved'] }
   ];
 
   opsAgents.forEach(function(agent) {
     html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><h3>' + agent.name + '</h3></div>' +
+      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
       '<p>' + agent.desc + '</p>' +
       '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      (agent.url ? '<a href="' + agent.url + '" class="zynix-link-orange">Learn more &rarr;</a>' : '') +
+      (agent.url ? '<p><a href="' + agent.url + '">Learn more &rarr;</a></p>' : '') +
       '</div>';
   });
 
-  html += '</div>' +
-    '<div style="text-align:center;margin-top:24px"><a href="/agents/operational-efficiency" class="zynix-btn-secondary">View All Operational Efficiency Agents &rarr;</a></div>' +
-    '</div></section>';
+  html += '</div></div></section>';
 
-  // ── AGENTS VS CHATBOTS ──
-  html += '<section class="zynix-comparison-section" style="background:#EEF2FB"><div class="zynix-container">' +
+  // Agents vs Chatbots
+  html += '<section><div class="zynix-container">' +
     '<span class="zynix-tag">WHY AGENTS</span>' +
     '<h2>Agents Are Not Chatbots</h2>' +
-    '<div class="zynix-card-grid-2col">' +
-    '<div class="zynix-shortfall-card">' +
-    '<h4>Chatbots Answer Questions</h4>' +
-    '<p>Traditional healthcare chatbots respond to patient queries with pre-scripted answers. They cannot access EHR data, take clinical action, or coordinate across systems. When a patient needs something done, the chatbot generates a ticket and a human does the work.</p>' +
-    '</div>' +
-    '<div class="zynix-capability-card">' +
-    '<h4>Agents Complete Work</h4>' +
-    '<p>Zynix AI agents access patient records, apply clinical protocols, take autonomous action, and coordinate with other agents. They call patients, book appointments, reconcile medications, submit authorizations, and document every interaction &mdash; with full audit trails and human escalation built in.</p>' +
-    '</div>' +
+    '<div class="zynix-compare-grid">' +
+    '<div class="zynix-compare-card zynix-compare-bad"><h3>Chatbots Answer Questions</h3><ul><li>Traditional healthcare chatbots respond to patient queries with pre-scripted answers. They cannot access EHR data, take clinical action, or coordinate across systems.</li></ul></div>' +
+    '<div class="zynix-compare-card zynix-compare-good"><h3>Agents Complete Work</h3><ul><li>Zynix AI agents access patient records, apply clinical protocols, take autonomous action, and coordinate with other agents. Full audit trails and human escalation built in.</li></ul></div>' +
     '</div></div></section>';
 
-  // ── CTA ──
-  html += '<section class="zynix-cta-band" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<h2>See AI Agents in Action</h2>' +
-    '<p>Schedule a demo to see how autonomous agents handle the work that overwhelms your care teams today.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Request a Demo</a>' +
-    '</div></section>';
-
+  html += renderCTA('See AI Agents in Action', 'Schedule a demo to see how autonomous agents handle the work that overwhelms your care teams today.', 'Request a Demo');
+  html += renderFooter();
   return html;
 }
 
 
-// ═══════════════════════════════════════════════════════════════
-// 3. CLINICAL PERFORMANCE HUB — /agents/clinical-performance
-// ═══════════════════════════════════════════════════════════════
-
 function renderClinicalPerformanceHub() {
   var html = '';
 
-  html += '<section class="zynix-agent-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<nav class="zynix-breadcrumb">Platform &gt; Agents &gt; Clinical Performance</nav>' +
-    '<span class="zynix-eyebrow">CLINICAL PERFORMANCE AGENTS</span>' +
-    '<h1>Automate the Clinical Workflows That Drive Quality Outcomes</h1>' +
-    '<p class="zynix-subhead">AI agents purpose-built for chronic care management, transitions of care, preventive activation, annual wellness visit outreach, and social determinant screening. Each agent operates within clinical protocols, documents every action, and escalates to human staff when judgment is required.</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image"><img src="' + IMG.care + '" alt="Clinical Performance AI Agents"></div>' +
-    '</div></section>';
+  html += renderInnerHero('CLINICAL PERFORMANCE AGENTS', 'Automate the Clinical Workflows That Drive Quality Outcomes',
+    'AI agents purpose-built for chronic care management, transitions of care, preventive activation, annual wellness visit outreach, and social determinant screening.',
+    IMG.care, 'Clinical Performance AI Agents');
 
-  html += '<section class="zynix-agents-section"><div class="zynix-container">' +
+  html += '<section id="capabilities"><div class="zynix-container">' +
     '<span class="zynix-tag">AGENTS IN THIS CATEGORY</span>' +
     '<h2>Five Agents. One Clinical Mission.</h2>' +
     '<div class="zynix-agents-grid">';
 
   var agents = [
-    { name: 'Chronic Care Management Agent', desc: 'Automates CCM billing workflows with longitudinal patient engagement: medication adherence tracking, risk-tiered outreach cadences, symptom monitoring, and care plan reinforcement across 20+ minute monthly thresholds.', url: '/agents/chronic-care-management', metrics: ['85%+ Contact Rate', 'CCM Revenue Capture'] },
-    { name: 'Transitions of Care Agent', desc: 'Executes post-discharge follow-up within CMS TCM billing windows. Contacts patients within 24-48 hours, reviews discharge instructions, reconciles medications, schedules follow-up visits, and monitors for readmission red flags.', url: '/agents/transitions-of-care', metrics: ['85%+ Contact Rate', '25% Readmission Reduction'] },
-    { name: 'Preventive & Quality Activation', desc: 'Drives HEDIS quality measure completion through automated patient outreach for preventive screenings, vaccinations, and quality gap closure. Includes AWV outreach and ZynReminder sub-agents.', url: '/agents/preventive-quality-activation', metrics: ['3x AWV Lift', '40% Gap Closure Improvement'] },
-    { name: 'Chronic Disease Monitoring', desc: 'Continuous AI-powered monitoring for patients with diabetes, CHF, COPD, and other chronic conditions. Tracks symptom trends, lab results, and medication patterns. Escalates deterioration signals to clinical teams.', url: '/agents/chronic-care-management/chronic-disease-monitoring', metrics: ['Continuous Monitoring', 'Early Escalation'] },
-    { name: 'SDoH Determination Agent', desc: 'Screens patients for social determinants of health including housing instability, food insecurity, transportation barriers, and financial hardship. Routes identified needs to community resources and care navigators.', url: '/agents/sdoh-determination', metrics: ['Planned', 'Coming Soon'] }
+    { icon: '&#128138;', name: 'Chronic Care Management Agent', desc: 'Automates CCM billing workflows with longitudinal patient engagement: medication adherence tracking, risk-tiered outreach cadences, symptom monitoring, and care plan reinforcement.', url: '/agents/chronic-care-management', metrics: ['85%+ Contact Rate', 'CCM Revenue Capture'] },
+    { icon: '&#128222;', name: 'Transitions of Care Agent', desc: 'Executes post-discharge follow-up within CMS TCM billing windows. Contacts patients within 24-48 hours, reviews discharge instructions, reconciles medications, schedules follow-up visits.', url: '/agents/transitions-of-care', metrics: ['85%+ Contact Rate', '25% Readmission Reduction'] },
+    { icon: '&#128276;', name: 'Preventive & Quality Activation', desc: 'Drives HEDIS quality measure completion through automated patient outreach for preventive screenings, vaccinations, and quality gap closure.', url: '/agents/preventive-quality-activation', metrics: ['3x AWV Lift', '40% Gap Closure Improvement'] },
+    { icon: '&#128200;', name: 'Chronic Disease Monitoring', desc: 'Continuous AI-powered monitoring for patients with diabetes, CHF, COPD, and other chronic conditions. Tracks symptom trends, lab results, and medication patterns.', url: '/agents/chronic-care-management/chronic-disease-monitoring', metrics: ['Continuous Monitoring', 'Early Escalation'] },
+    { icon: '&#127968;', name: 'SDoH Determination Agent', desc: 'Screens patients for social determinants of health including housing instability, food insecurity, transportation barriers, and financial hardship.', url: '/agents/sdoh-determination', metrics: ['Planned', 'Coming Soon'] }
   ];
 
   agents.forEach(function(agent) {
     html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><h3>' + agent.name + '</h3></div>' +
+      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
       '<p>' + agent.desc + '</p>' +
       '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      '<a href="' + agent.url + '" class="zynix-link-orange">Learn more &rarr;</a>' +
+      '<p><a href="' + agent.url + '">Learn more &rarr;</a></p>' +
       '</div>';
   });
 
   html += '</div></div></section>';
 
-  // ── RELATED USE CASES ──
-  html += '<section class="zynix-agent-usecases" style="background:#EEF2FB"><div class="zynix-container">' +
-    '<h2>Related Use Cases</h2>' +
-    '<div class="zynix-card-grid-3col">' +
-    '<div class="zynix-readnext-card"><span class="zynix-uc-badge">UC01</span><h4>Post-Discharge Follow-Up at Scale</h4><a href="/use-cases/post-discharge-follow-up" class="zynix-link-orange">View use case &rarr;</a></div>' +
-    '<div class="zynix-readnext-card"><span class="zynix-uc-badge">UC10</span><h4>Chronic Care Coordination at Scale</h4><a href="/use-cases/chronic-care-coordination-scale" class="zynix-link-orange">View use case &rarr;</a></div>' +
-    '<div class="zynix-readnext-card"><span class="zynix-uc-badge">UC11</span><h4>HEDIS and Stars Quality Improvement</h4><a href="/use-cases/hedis-stars-quality-improvement" class="zynix-link-orange">View use case &rarr;</a></div>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">RELATED USE CASES</span>' +
+    '<h2>See These Agents in Action</h2>' +
+    '<div class="zynix-agents-grid">' +
+    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">UC01</span><h3>Post-Discharge Follow-Up at Scale</h3></div><p><a href="/use-cases/post-discharge-follow-up">View use case &rarr;</a></p></div>' +
+    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">UC10</span><h3>Chronic Care Coordination at Scale</h3></div><p><a href="/use-cases/chronic-care-coordination-scale">View use case &rarr;</a></p></div>' +
+    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">UC11</span><h3>HEDIS and Stars Quality Improvement</h3></div><p><a href="/use-cases/hedis-stars-quality-improvement">View use case &rarr;</a></p></div>' +
     '</div></div></section>';
 
-  html += '<section class="zynix-cta-band" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<h2>Automate Clinical Performance at Scale</h2>' +
-    '<p>See how AI agents drive quality outcomes across your entire patient population.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Request a Demo</a>' +
-    '</div></section>';
-
+  html += renderCTA('Automate Clinical Performance at Scale', 'See how AI agents drive quality outcomes across your entire patient population.', 'Request a Demo');
+  html += renderFooter();
   return html;
 }
 
 
-// ═══════════════════════════════════════════════════════════════
-// 4. PREDICTIVE ACTIVATION HUB — /agents/predictive-activation
-// ═══════════════════════════════════════════════════════════════
-
 function renderPredictiveActivationHub() {
   var html = '';
 
-  html += '<section class="zynix-agent-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<nav class="zynix-breadcrumb">Platform &gt; Agents &gt; Predictive Activation</nav>' +
-    '<span class="zynix-eyebrow">PREDICTIVE ACTIVATION AGENTS</span>' +
-    '<h1>Intervene Before the Crisis, Not After</h1>' +
-    '<p class="zynix-subhead">Predictive models identify patients heading toward hospitalization, clinical deterioration, or care disengagement. Activation agents convert those predictions into proactive outreach and intervention &mdash; weeks before an event would otherwise occur.</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image"><img src="' + IMG.analytics + '" alt="Predictive Activation AI Agents"></div>' +
-    '</div></section>';
+  html += renderInnerHero('PREDICTIVE ACTIVATION AGENTS', 'Intervene Before the Crisis, Not After',
+    'Predictive models identify patients heading toward hospitalization, clinical deterioration, or care disengagement. Activation agents convert those predictions into proactive outreach and intervention \u2014 weeks before an event would otherwise occur.',
+    IMG.analytics, 'Predictive Activation AI Agents');
 
-  html += '<section class="zynix-agents-section"><div class="zynix-container">' +
+  html += '<section id="capabilities"><div class="zynix-container">' +
     '<span class="zynix-tag">AGENTS IN THIS CATEGORY</span>' +
     '<h2>From Prediction to Prevention</h2>' +
     '<div class="zynix-agents-grid">';
 
   var agents = [
-    { name: 'Readmission Risk Agent', desc: 'At the moment of discharge, this agent scores every patient against validated readmission risk models incorporating diagnosis complexity, prior utilization, medication burden, social factors, and discharge disposition. High-risk patients are automatically enrolled in intensified post-discharge care plans with escalated outreach cadences.', metrics: ['25% Readmission Reduction', 'Real-Time Risk Scoring'] },
-    { name: 'Rising Risk Outreach Agent', desc: 'Continuously monitors population-level data for patients whose clinical trajectory is worsening &mdash; increasing ED visits, declining lab values, medication non-adherence, missed appointments. Triggers proactive outreach to engage patients before they require acute intervention.', metrics: ['Weeks of Lead Time', 'Proactive Engagement'] },
-    { name: 'Predictive Deterioration Monitor', desc: 'Specialized monitoring for chronic disease patients (CHF, COPD, diabetes, CKD) using longitudinal lab trends, vital sign patterns, and encounter frequency analysis. Detects subtle deterioration signals that clinical teams would otherwise miss until the next scheduled visit.', metrics: ['Early Detection', 'Automated Clinical Alerts'] }
+    { icon: '&#128202;', name: 'Readmission Risk Agent', desc: 'At the moment of discharge, this agent scores every patient against validated readmission risk models. High-risk patients are automatically enrolled in intensified post-discharge care plans.', metrics: ['25% Readmission Reduction', 'Real-Time Risk Scoring'] },
+    { icon: '&#128200;', name: 'Rising Risk Outreach Agent', desc: 'Continuously monitors population-level data for patients whose clinical trajectory is worsening. Triggers proactive outreach to engage patients before they require acute intervention.', metrics: ['Weeks of Lead Time', 'Proactive Engagement'] },
+    { icon: '&#128161;', name: 'Predictive Deterioration Monitor', desc: 'Specialized monitoring for chronic disease patients using longitudinal lab trends, vital sign patterns, and encounter frequency analysis. Detects subtle deterioration signals.', metrics: ['Early Detection', 'Automated Clinical Alerts'] }
   ];
 
   agents.forEach(function(agent) {
     html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><h3>' + agent.name + '</h3></div>' +
+      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
       '<p>' + agent.desc + '</p>' +
       '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
       '</div>';
@@ -4650,96 +4173,59 @@ function renderPredictiveActivationHub() {
 
   html += '</div></div></section>';
 
-  // ── HOW PREDICTIVE AGENTS WORK ──
-  html += '<section style="background:#EEF2FB"><div class="zynix-container">' +
+  html += '<section><div class="zynix-container">' +
     '<span class="zynix-tag">HOW IT WORKS</span>' +
     '<h2>The Prediction-to-Action Pipeline</h2>' +
-    '<div class="zynix-workflow-timeline">' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">1</div><div class="zynix-wf-content"><h4>Data Ingestion</h4><p>Claims, ADT, labs, pharmacy, and EHR data flow into the Zynix data layer in real time.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">2</div><div class="zynix-wf-content"><h4>Risk Scoring</h4><p>Proprietary models score patients for readmission risk, rising risk trajectory, and deterioration probability.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">3</div><div class="zynix-wf-content"><h4>Threshold Activation</h4><p>When a patient crosses a configurable risk threshold, the activation agent is triggered automatically.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">4</div><div class="zynix-wf-content"><h4>Proactive Outreach</h4><p>Agent contacts the patient, assesses current status, and initiates appropriate intervention.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">5</div><div class="zynix-wf-content"><h4>Escalation or Resolution</h4><p>Issues resolved autonomously are documented. Concerns requiring clinical judgment escalate to care teams with full context.</p></div></div>' +
+    '<div class="zynix-orch-flow">' +
+    '<div class="zynix-orch-step fade-in-up"><span>&#11015;</span><p>Data Ingestion</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>&#128202;</span><p>Risk Scoring</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>&#9888;</span><p>Threshold Activation</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>&#128222;</span><p>Proactive Outreach</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>&#9989;</span><p>Resolution</p></div>' +
     '</div></div></section>';
 
-  html += '<section class="zynix-agent-usecases"><div class="zynix-container">' +
-    '<h2>Related Use Cases</h2>' +
-    '<div class="zynix-card-grid-3col">' +
-    '<div class="zynix-readnext-card"><span class="zynix-uc-badge">UC06</span><h4>Post-Discharge TCM and Readmission Prevention</h4><a href="/use-cases/post-discharge-tcm-readmission" class="zynix-link-orange">View use case &rarr;</a></div>' +
-    '<div class="zynix-readnext-card"><span class="zynix-uc-badge">UC08</span><h4>Rising-Risk Patient Outreach</h4><a href="/use-cases/rising-risk-patient-outreach" class="zynix-link-orange">View use case &rarr;</a></div>' +
-    '<div class="zynix-readnext-card"><span class="zynix-uc-badge">UC13</span><h4>High-Cost Member Management</h4><a href="/use-cases/high-utilizer-member-management" class="zynix-link-orange">View use case &rarr;</a></div>' +
-    '</div></div></section>';
-
-  html += '<section class="zynix-cta-band" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<h2>Move from Reactive to Predictive</h2>' +
-    '<p>See how predictive activation agents reduce readmissions and total cost of care.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Request a Demo</a>' +
-    '</div></section>';
-
+  html += renderCTA('Move from Reactive to Predictive', 'See how predictive activation agents reduce readmissions and total cost of care.', 'Request a Demo');
+  html += renderFooter();
   return html;
 }
 
 
-// ═══════════════════════════════════════════════════════════════
-// 5. OPERATIONAL EFFICIENCY HUB — /agents/operational-efficiency
-// ═══════════════════════════════════════════════════════════════
-
 function renderOperationalEfficiencyHub() {
   var html = '';
 
-  html += '<section class="zynix-agent-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<nav class="zynix-breadcrumb">Platform &gt; Agents &gt; Operational Efficiency</nav>' +
-    '<span class="zynix-eyebrow">OPERATIONAL EFFICIENCY AGENTS</span>' +
-    '<h1>Automate the Administrative Work That Burns Out Your Staff</h1>' +
-    '<p class="zynix-subhead">AI agents that handle after-hours triage, inbound scheduling, prior authorization, referral coordination, and fax processing. They operate 24/7, integrate with your EHR, and escalate to staff only when human judgment is required.</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image"><img src="' + IMG.enterprise + '" alt="Operational Efficiency AI Agents"></div>' +
-    '</div></section>';
+  html += renderInnerHero('OPERATIONAL EFFICIENCY AGENTS', 'Automate the Administrative Work That Burns Out Your Staff',
+    'AI agents that handle after-hours triage, inbound scheduling, prior authorization, referral coordination, and fax processing. They operate 24/7, integrate with your EHR, and escalate to staff only when human judgment is required.',
+    IMG.enterprise, 'Operational Efficiency AI Agents');
 
-  html += '<section class="zynix-agents-section"><div class="zynix-container">' +
+  html += '<section id="capabilities"><div class="zynix-container">' +
     '<span class="zynix-tag">AGENTS IN THIS CATEGORY</span>' +
     '<h2>Five Agents. Zero Admin Burden.</h2>' +
     '<div class="zynix-agents-grid">';
 
   var agents = [
-    { name: 'ZynAfterHours & Triage', desc: 'Answers patient calls 24/7 in 15+ languages. Applies Schmitt-Thompson triage protocols to assess symptom severity, provides self-care guidance for low-acuity cases, diverts unnecessary ER visits, and schedules same-day or next-day appointments for urgent but non-emergent situations.', url: '/agents/operational-efficiency/zynafterhours-triage', metrics: ['97.3% Triage Accuracy', '60-80% Cost Reduction'] },
-    { name: 'ZynSchedule', desc: 'Captures every inbound scheduling request via phone, text, or web. Matches patient urgency with real-time provider availability, books appointments, handles rescheduling and cancellations, and sends multi-channel confirmations.', url: '/agents/operational-efficiency/zynschedule', metrics: ['40% No-Show Reduction', '3x Scheduling Throughput'] },
-    { name: 'Prior Authorization Agent', desc: 'Submits prior authorization requests to payer portals with optimized clinical justification. Tracks status across all payers, manages denials, prepares appeals, and alerts before authorizations expire.', url: '#', metrics: ['75% Processing Time Saved', '10-15% Higher First-Pass Approval'] },
-    { name: 'Referral Management Agent', desc: 'Tracks referrals from order to completed specialist visit. Confirms scheduling, retrieves results, closes the loop with referring providers, and prevents referral leakage across health system networks.', url: '#', metrics: ['3x Faster Processing', '50% Less Leakage'] },
-    { name: 'ZynFax', desc: 'Reads, classifies, and routes incoming faxes using AI document understanding. Matches content to patient records, detects missing documentation, and queues items for appropriate workflows.', url: '#', metrics: ['90%+ Classification Accuracy', '75% Staff Time Saved'] }
+    { icon: '&#128161;', name: 'ZynAfterHours & Triage', desc: 'Answers patient calls 24/7 in 15+ languages. Applies Schmitt-Thompson triage protocols to assess symptom severity, provides self-care guidance, diverts unnecessary ER visits, and schedules appointments.', url: '/agents/operational-efficiency/zynafterhours-triage', metrics: ['97.3% Triage Accuracy', '60-80% Cost Reduction'] },
+    { icon: '&#128197;', name: 'ZynSchedule', desc: 'Captures every inbound scheduling request via phone, text, or web. Matches patient urgency with real-time provider availability, books appointments, handles rescheduling and cancellations.', url: '/agents/operational-efficiency/zynschedule', metrics: ['40% No-Show Reduction', '3x Scheduling Throughput'] },
+    { icon: '&#128203;', name: 'Prior Authorization Agent', desc: 'Submits prior authorization requests to payer portals with optimized clinical justification. Tracks status, manages denials, prepares appeals, and alerts before authorizations expire.', metrics: ['75% Processing Time Saved', '10-15% Higher First-Pass'] },
+    { icon: '&#128268;', name: 'Referral Management Agent', desc: 'Tracks referrals from order to completed specialist visit. Confirms scheduling, retrieves results, closes the loop with referring providers, and prevents referral leakage.', metrics: ['3x Faster Processing', '50% Less Leakage'] },
+    { icon: '&#128424;', name: 'ZynFax', desc: 'Reads, classifies, and routes incoming faxes using AI document understanding. Matches content to patient records, detects missing documentation, and queues items for workflows.', metrics: ['90%+ Classification Accuracy', '75% Staff Time Saved'] }
   ];
 
   agents.forEach(function(agent) {
     html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><h3>' + agent.name + '</h3></div>' +
+      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
       '<p>' + agent.desc + '</p>' +
       '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      (agent.url !== '#' ? '<a href="' + agent.url + '" class="zynix-link-orange">Learn more &rarr;</a>' : '') +
+      (agent.url ? '<p><a href="' + agent.url + '">Learn more &rarr;</a></p>' : '') +
       '</div>';
   });
 
   html += '</div></div></section>';
 
-  html += '<section class="zynix-agent-usecases" style="background:#EEF2FB"><div class="zynix-container">' +
-    '<h2>Related Use Cases</h2>' +
-    '<div class="zynix-card-grid-3col">' +
-    '<div class="zynix-readnext-card"><span class="zynix-uc-badge">UC02</span><h4>After-Hours Patient Triage Across Multiple Sites</h4><a href="/use-cases/after-hours-triage-multi-site" class="zynix-link-orange">View use case &rarr;</a></div>' +
-    '<div class="zynix-readnext-card"><span class="zynix-uc-badge">UC04</span><h4>Prior Auth Across High-Volume Specialty Services</h4><a href="/use-cases/prior-auth-high-volume-specialty" class="zynix-link-orange">View use case &rarr;</a></div>' +
-    '<div class="zynix-readnext-card"><span class="zynix-uc-badge">UC17</span><h4>Appointment Scheduling and No-Show Reduction</h4><a href="/use-cases/appointment-scheduling-no-show" class="zynix-link-orange">View use case &rarr;</a></div>' +
-    '</div></div></section>';
-
-  html += '<section class="zynix-cta-band" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<h2>Eliminate Administrative Overhead</h2>' +
-    '<p>See how operational AI agents free your staff to focus on patient care.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Request a Demo</a>' +
-    '</div></section>';
-
+  html += renderCTA('Eliminate Administrative Overhead', 'See how operational AI agents free your staff to focus on patient care.', 'Request a Demo');
+  html += renderFooter();
   return html;
 }
+
 
 
 // ═══════════════════════════════════════════════════════════════
@@ -5125,371 +4611,247 @@ function renderZynReminderV7() {
 // 12. CHRONIC DISEASE MONITORING — /agents/chronic-care-management/chronic-disease-monitoring
 // ═══════════════════════════════════════════════════════════════
 
+
 function renderChronicDiseaseMonitoring() {
   var html = '';
 
-  html += '<section class="zynix-agent-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<nav class="zynix-breadcrumb">Platform &gt; Agents &gt; Chronic Care Management &gt; Chronic Disease Monitoring</nav>' +
-    '<span class="zynix-eyebrow">CLINICAL PERFORMANCE</span>' +
-    '<h1>Continuous Monitoring Between Visits</h1>' +
-    '<p class="zynix-subhead">AI-powered chronic disease monitoring that tracks symptoms, lab trends, and medication patterns for patients with diabetes, CHF, COPD, and CKD. Detects deterioration early and routes alerts to clinical teams before crises occur.</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image"><img src="' + IMG.care + '" alt="Chronic Disease Monitoring"></div>' +
-    '</div></section>';
+  html += renderInnerHero('CLINICAL PERFORMANCE', 'Continuous Monitoring Between Visits',
+    'AI-powered chronic disease monitoring that tracks symptoms, lab trends, and medication patterns for patients with diabetes, CHF, COPD, and CKD. Detects deterioration early and routes alerts to clinical teams.',
+    IMG.care, 'Chronic Disease Monitoring');
 
-  html += '<section class="zynix-agent-what">' +
-    '<div class="zynix-container" style="max-width:760px">' +
-    '<span class="zynix-eyebrow">WHAT IT DOES</span>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">WHAT IT DOES</span>' +
     '<h2>Filling the Gap Between Office Visits</h2>' +
-    '<div class="zynix-narrative-prose">' +
-    '<p>Most chronic disease patients are seen 2-4 times per year. Between those visits, clinical teams have limited visibility into whether the patient is adhering to medications, experiencing symptom changes, or trending toward a clinical event. The Chronic Disease Monitoring agent fills that gap.</p>' +
-    '<p>The agent conducts periodic automated check-ins via voice or text, asking structured questions about symptoms, medication adherence, and daily functioning. It cross-references patient-reported data with pharmacy fill records and lab result trends to identify early warning signals. When deterioration patterns emerge, the agent generates a clinical alert with the complete longitudinal picture.</p>' +
-    '</div></div></section>';
-
-  html += '<section class="zynix-agent-workflow">' +
-    '<div class="zynix-container">' +
-    '<span class="zynix-eyebrow">HOW IT WORKS</span>' +
-    '<h2>Structured Check-In Workflow</h2>' +
-    '<div class="zynix-workflow-timeline">' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">1</div><div class="zynix-wf-content"><h4>Patient Enrollment</h4><p>Patients with qualifying chronic conditions are enrolled into disease-specific monitoring protocols with configurable check-in frequencies.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">2</div><div class="zynix-wf-content"><h4>Automated Check-In</h4><p>Agent contacts the patient at scheduled intervals. Asks condition-specific questions about symptoms, medication adherence, weight changes, blood sugar readings, or breathing difficulty.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">3</div><div class="zynix-wf-content"><h4>Trend Analysis</h4><p>Patient-reported data is combined with pharmacy fill data and lab results to build a longitudinal trend profile. AI models identify deterioration patterns.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">4</div><div class="zynix-wf-content"><h4>Alert or Continue</h4><p>Stable patients continue in their monitoring cadence. Patients showing deterioration signals trigger clinical alerts with the full longitudinal summary for care team review.</p></div></div>' +
-    '</div></div></section>';
-
-  html += '<div style="text-align:center;padding:24px 0"><a href="/agents/chronic-care-management" style="color:#F16529;font-weight:600;font-size:14px">&larr; Back to Chronic Care Management Agent</a></div>';
-
-  html += '<section class="zynix-cta-band" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<h2>Monitor Chronic Patients Continuously</h2>' +
-    '<p>See how continuous AI monitoring detects deterioration before it becomes a hospitalization.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Request a Demo</a>' +
+    '<p class="zynix-section-sub">Most chronic disease patients are seen 2-4 times per year. Between those visits, clinical teams have limited visibility. The Chronic Disease Monitoring agent fills that gap with periodic automated check-ins, cross-referencing patient-reported data with pharmacy fill records and lab result trends to identify early warning signals.</p>' +
     '</div></section>';
 
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">HOW IT WORKS</span>' +
+    '<h2>Structured Check-In Workflow</h2>' +
+    '<div class="zynix-orch-flow">' +
+    '<div class="zynix-orch-step fade-in-up"><span>1</span><p>Patient Enrollment</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>2</span><p>Automated Check-In</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>3</span><p>Trend Analysis</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>4</span><p>Alert or Continue</p></div>' +
+    '</div></div></section>';
+
+  html += renderCTA('Monitor Chronic Patients Continuously', 'See how continuous AI monitoring detects deterioration before it becomes a hospitalization.', 'Request a Demo');
+  html += renderFooter();
   return html;
 }
 
-
-// ═══════════════════════════════════════════════════════════════
-// 13. AWV OUTREACH — /agents/preventive-quality-activation/awv-outreach
-// ═══════════════════════════════════════════════════════════════
 
 function renderAWVOutreach() {
   var html = '';
 
-  html += '<section class="zynix-agent-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<nav class="zynix-breadcrumb">Platform &gt; Agents &gt; Preventive &amp; Quality Activation &gt; AWV Outreach</nav>' +
-    '<span class="zynix-eyebrow">CLINICAL PERFORMANCE</span>' +
-    '<h1>Annual Wellness Visits: Identified, Scheduled, Completed</h1>' +
-    '<p class="zynix-subhead">AI-powered identification of AWV-eligible patients, automated outreach campaigns, appointment scheduling, and completion tracking. Increase AWV completion rates by 3x compared to manual outreach programs.</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image"><img src="' + IMG.patient + '" alt="AWV Outreach Agent"></div>' +
-    '</div></section>';
+  html += renderInnerHero('CLINICAL PERFORMANCE', 'Annual Wellness Visits: Identified, Scheduled, Completed',
+    'AI-powered identification of AWV-eligible patients, automated outreach campaigns, appointment scheduling, and completion tracking. Increase AWV completion rates by 3x compared to manual outreach programs.',
+    IMG.patient, 'AWV Outreach Agent');
 
-  html += '<section class="zynix-agent-what">' +
-    '<div class="zynix-container" style="max-width:760px">' +
-    '<span class="zynix-eyebrow">WHAT IT DOES</span>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">WHAT IT DOES</span>' +
     '<h2>Automated AWV Pipeline</h2>' +
-    '<div class="zynix-narrative-prose">' +
-    '<p>The AWV Outreach agent identifies Medicare patients eligible for Annual Wellness Visits who have not yet been scheduled. It cross-references enrollment data, claims history, and scheduling records to build a prioritized outreach list. Patients are then contacted via their preferred channel to explain the visit, answer common questions, and schedule the appointment.</p>' +
-    '<p>After scheduling, the agent sends preparation reminders including Health Risk Assessment forms, medication lists, and instructions for what to bring. Post-visit, it confirms completion in the claims data and updates quality tracking dashboards. For ACOs, this directly supports Stars ratings and shared savings performance.</p>' +
-    '</div></div></section>';
-
-  html += '<section class="zynix-agent-workflow">' +
-    '<div class="zynix-container">' +
-    '<span class="zynix-eyebrow">HOW IT WORKS</span>' +
-    '<h2>The AWV Outreach Sequence</h2>' +
-    '<div class="zynix-workflow-timeline">' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">1</div><div class="zynix-wf-content"><h4>Eligibility Identification</h4><p>Cross-reference Medicare enrollment, claims history, and scheduling data to identify patients eligible for AWV who have not had one in the current year.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">2</div><div class="zynix-wf-content"><h4>Prioritized Outreach</h4><p>Patients ranked by engagement likelihood, time remaining in measurement year, and associated gap closure opportunities (HCC, HEDIS measures that can be addressed during the AWV).</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">3</div><div class="zynix-wf-content"><h4>Scheduling</h4><p>Agent contacts patient, explains AWV benefits, and books the appointment with the appropriate provider. Sends Health Risk Assessment form for pre-visit completion.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">4</div><div class="zynix-wf-content"><h4>Completion Tracking</h4><p>After the visit date, the agent confirms completion via claims data. Uncompleted visits trigger follow-up outreach. AWV completion metrics update in real time.</p></div></div>' +
-    '</div></div></section>';
-
-  html += '<div style="text-align:center;padding:24px 0"><a href="/agents/preventive-quality-activation" style="color:#F16529;font-weight:600;font-size:14px">&larr; Back to Preventive &amp; Quality Activation Agents</a></div>';
-
-  html += '<section class="zynix-cta-band" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<h2>Triple Your AWV Completion Rate</h2>' +
-    '<p>See how AI-driven AWV outreach delivers 3x improvement over manual scheduling programs.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Request a Demo</a>' +
+    '<p class="zynix-section-sub">The AWV Outreach agent identifies Medicare patients eligible for Annual Wellness Visits who have not yet been scheduled. It cross-references enrollment data, claims history, and scheduling records to build a prioritized outreach list. Post-visit, it confirms completion and updates quality tracking dashboards.</p>' +
     '</div></section>';
 
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">HOW IT WORKS</span>' +
+    '<h2>The AWV Outreach Sequence</h2>' +
+    '<div class="zynix-orch-flow">' +
+    '<div class="zynix-orch-step fade-in-up"><span>1</span><p>Eligibility ID</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>2</span><p>Prioritized Outreach</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>3</span><p>Scheduling</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>4</span><p>Completion Tracking</p></div>' +
+    '</div></div></section>';
+
+  html += renderCTA('Triple Your AWV Completion Rate', 'See how AI-driven AWV outreach delivers 3x improvement over manual scheduling programs.', 'Request a Demo');
+  html += renderFooter();
   return html;
 }
 
-
-// ═══════════════════════════════════════════════════════════════
-// 14. SDOH DETERMINATION AGENT (PLANNED) — /agents/sdoh-determination
-// ═══════════════════════════════════════════════════════════════
 
 function renderSDoHAgent() {
   var html = '';
 
-  html += '<section class="zynix-agent-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<nav class="zynix-breadcrumb">Platform &gt; Agents &gt; Clinical Performance &gt; SDoH Determination</nav>' +
-    '<span class="zynix-eyebrow">PLANNED CAPABILITY</span>' +
-    '<h1>Social Determinants of Health Screening and Navigation</h1>' +
-    '<p class="zynix-subhead">An AI agent that screens patients for social determinants of health &mdash; housing instability, food insecurity, transportation barriers, financial hardship, and social isolation &mdash; and routes identified needs to community resources and care navigators.</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image"><img src="' + IMG.patients + '" alt="SDoH Determination Agent"></div>' +
-    '</div></section>';
+  html += renderInnerHero('PLANNED CAPABILITY', 'Social Determinants of Health Screening and Navigation',
+    'An AI agent that screens patients for social determinants of health \u2014 housing instability, food insecurity, transportation barriers, financial hardship, and social isolation \u2014 and routes identified needs to community resources and care navigators.',
+    IMG.patients, 'SDoH Determination Agent');
 
-  html += '<section class="zynix-agent-what">' +
-    '<div class="zynix-container" style="max-width:760px">' +
-    '<span class="zynix-eyebrow">PLANNED</span>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">PLANNED</span>' +
     '<h2>Addressing the Non-Clinical Drivers of Health Outcomes</h2>' +
-    '<div class="zynix-narrative-prose">' +
-    '<p>Social determinants of health account for an estimated 30-55% of health outcomes, yet most healthcare organizations lack a systematic way to screen for and address them. The SDoH Determination Agent will automate validated screening instruments (PRAPARE, AHC HRSN), identify patients with unmet social needs, and connect them with community resources.</p>' +
-    '<p>This agent is currently in development. Planned capabilities include automated SDoH screening during routine patient contacts, Z-code documentation for billing, integration with community resource directories, referral tracking, and outcome measurement.</p>' +
-    '<p style="padding:16px;background:#FFF3E0;border-left:4px solid #F16529;margin-top:24px"><strong>Status: Planned.</strong> The SDoH Determination Agent is under active development. Contact us to discuss timelines and early access for your organization.</p>' +
-    '</div></div></section>';
-
-  html += '<section class="zynix-agent-usecases" style="background:#EEF2FB"><div class="zynix-container">' +
-    '<h2>Related Use Cases</h2>' +
-    '<div class="zynix-card-grid-3col">' +
-    '<div class="zynix-readnext-card"><span class="zynix-uc-badge">UC27</span><h4>SDoH Screening and Care Navigation</h4><a href="/use-cases/sdoh-screening-care-navigation" class="zynix-link-orange">View use case &rarr;</a></div>' +
-    '<div class="zynix-readnext-card"><span class="zynix-uc-badge">UC28</span><h4>Preventive Screening Gap Closure</h4><a href="/use-cases/preventive-screening-gap-fqhc" class="zynix-link-orange">View use case &rarr;</a></div>' +
-    '<div class="zynix-readnext-card"><span class="zynix-uc-badge">UC29</span><h4>Medication Adherence for Complex Chronic Patients</h4><a href="/use-cases/medication-adherence-complex-chronic" class="zynix-link-orange">View use case &rarr;</a></div>' +
-    '</div></div></section>';
-
-  html += '<section class="zynix-cta-band" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<h2>Interested in SDoH Screening?</h2>' +
-    '<p>Contact us to learn about our development timeline and early access program.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Contact Us</a>' +
+    '<p class="zynix-section-sub">Social determinants of health account for an estimated 30-55% of health outcomes. The SDoH Determination Agent will automate validated screening instruments (PRAPARE, AHC HRSN), identify patients with unmet social needs, and connect them with community resources.</p>' +
+    renderFeatureCards([
+      { icon: '&#127968;', title: 'Housing & Food Security', desc: 'Screen for housing instability, food insecurity, and utility needs. Route to local assistance programs.' },
+      { icon: '&#128663;', title: 'Transportation Barriers', desc: 'Identify patients who miss appointments due to transportation. Connect with ride services and community transit.' },
+      { icon: '&#128176;', title: 'Financial Hardship', desc: 'Screen for inability to pay for medications, copays, or basic needs. Route to financial assistance and pharmacy discount programs.' }
+    ]) +
     '</div></section>';
 
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">RELATED USE CASES</span>' +
+    '<h2>See Related Work</h2>' +
+    '<div class="zynix-agents-grid">' +
+    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">UC27</span><h3>SDoH Screening and Care Navigation</h3></div><p><a href="/use-cases/sdoh-screening-care-navigation">View use case &rarr;</a></p></div>' +
+    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">UC28</span><h3>Preventive Screening Gap Closure</h3></div><p><a href="/use-cases/preventive-screening-gap-fqhc">View use case &rarr;</a></p></div>' +
+    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">UC29</span><h3>Medication Adherence for Complex Chronic Patients</h3></div><p><a href="/use-cases/medication-adherence-complex-chronic">View use case &rarr;</a></p></div>' +
+    '</div></div></section>';
+
+  html += renderCTA('Interested in SDoH Screening?', 'Contact us to learn about our development timeline and early access program.', 'Contact Us');
+  html += renderFooter();
   return html;
 }
 
-
-// ═══════════════════════════════════════════════════════════════
-// 15. ZYNSCRIBE V7 — /zynscribe
-// ═══════════════════════════════════════════════════════════════
 
 function renderZynScribeV7() {
   var html = '';
 
-  // ── HERO ──
-  html += '<section class="zynix-agent-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<nav class="zynix-breadcrumb">Solutions &gt; ZynScribe</nav>' +
-    '<span class="zynix-eyebrow">AI CLINICAL DOCUMENTATION</span>' +
-    '<h1>Ambient AI Scribe for Healthcare</h1>' +
-    '<p class="zynix-subhead">Transform patient encounters into accurate, structured clinical documentation instantly. ZynScribe captures natural conversation, generates SOAP notes, suggests ICD-10 and CPT codes, and uploads directly to your EHR &mdash; so physicians spend time with patients, not typing.</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image"><img src="' + IMG.scribe + '" alt="ZynScribe AI Clinical Documentation"></div>' +
-    '</div></section>';
+  html += renderInnerHero('AI CLINICAL DOCUMENTATION', 'Ambient AI Scribe for Healthcare',
+    'Transform patient encounters into accurate, structured clinical documentation instantly. ZynScribe captures natural conversation, generates SOAP notes, suggests ICD-10 and CPT codes, and uploads directly to your EHR.',
+    IMG.scribe, 'ZynScribe AI Clinical Documentation');
 
-  // ── THE PROBLEM ──
-  html += '<section class="zynix-agent-what">' +
-    '<div class="zynix-container" style="max-width:760px">' +
-    '<span class="zynix-eyebrow">THE DOCUMENTATION CRISIS</span>' +
-    '<h2>Physicians Spend 2 Hours Documenting for Every 1 Hour with Patients</h2>' +
-    '<div class="zynix-narrative-prose">' +
-    '<p>16 minutes of after-hours documentation every night. 63% of physicians report burnout. The primary driver is documentation burden. EHR note requirements have grown to the point where the documentation tail wags the clinical dog. ZynScribe eliminates this burden by listening to the encounter and writing the note.</p>' +
-    '</div></div></section>';
+  html += renderProblemSection('The Documentation Crisis', [
+    { icon: '&#128337;', title: '2 Hours Per 1 Hour', desc: 'Physicians spend 2 hours on documentation for every 1 hour with patients. That\'s backwards.' },
+    { icon: '&#128564;', title: '16 Min Pajama Time', desc: '16 minutes of after-hours documentation every night. Burnout isn\'t a mystery \u2014 it\'s a math problem.' },
+    { icon: '&#128148;', title: '63% Report Burnout', desc: 'The #1 driver of physician dissatisfaction is documentation burden. ZynScribe eliminates it.' }
+  ]);
 
-  // ── HOW IT WORKS ──
-  html += '<section class="zynix-agent-workflow">' +
-    '<div class="zynix-container">' +
-    '<span class="zynix-eyebrow">HOW IT WORKS</span>' +
+  html += '<section id="capabilities"><div class="zynix-container">' +
+    '<span class="zynix-tag">HOW IT WORKS</span>' +
     '<h2>From Conversation to Completed Note</h2>' +
-    '<div class="zynix-workflow-timeline">' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">1</div><div class="zynix-wf-content"><h4>Ambient Capture</h4><p>ZynScribe listens to the natural conversation between clinician and patient. No button presses, no structured prompts, no workflow interruption. Works in any clinical setting.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">2</div><div class="zynix-wf-content"><h4>Multi-Speaker Recognition</h4><p>Distinguishes between clinician, patient, family members, interpreters, and other care team members. Attributes statements correctly to enable accurate clinical documentation.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">3</div><div class="zynix-wf-content"><h4>Structured Note Generation</h4><p>Generates SOAP notes, H&P, progress notes, and procedure notes using 90+ specialty-specific templates. Cardiology, orthopedics, pediatrics, and every major specialty supported.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">4</div><div class="zynix-wf-content"><h4>Code Suggestions</h4><p>ICD-10 and CPT code suggestions based on the documented encounter. Optimizes billing accuracy, reduces missing codes, and improves revenue cycle performance.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">5</div><div class="zynix-wf-content"><h4>Physician Review & Upload</h4><p>Clinician reviews the generated note, makes any edits, and approves. One-click upload to Epic, Cerner, athenahealth, or other EHR systems.</p></div></div>' +
+    '<div class="zynix-orch-flow">' +
+    '<div class="zynix-orch-step fade-in-up"><span>&#127908;</span><p>Ambient Capture</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>&#128101;</span><p>Speaker Recognition</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>&#128196;</span><p>Note Generation</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>&#128300;</span><p>Code Suggestions</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>&#9989;</span><p>Review & Upload</p></div>' +
     '</div></div></section>';
 
-  // ── METRICS ──
-  html += '<div class="zynix-metrics-bar">' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">15K+</span><span class="zynix-metric-label">Notes Processed</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">40%</span><span class="zynix-metric-label">Time Savings</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">97%</span><span class="zynix-metric-label">Accuracy Rate</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">90+</span><span class="zynix-metric-label">Specialties Supported</span></div>' +
-    '</div>';
+  html += renderMetricsBar([
+    { value: '15K+', label: 'Notes Processed' },
+    { value: '40%', label: 'Time Savings' },
+    { value: '97%', label: 'Accuracy Rate' },
+    { value: '90+', label: 'Specialties Supported' }
+  ]);
 
-  // ── INTEGRATIONS ──
-  html += '<section class="zynix-agent-integrations">' +
-    '<div class="zynix-container">' +
-    '<span class="zynix-eyebrow">INTEGRATIONS</span>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">INTEGRATIONS</span>' +
     '<h2>Where It Connects</h2>' +
-    '<div class="zynix-card-grid-3col">' +
-    '<div class="zynix-integration-card"><h4>EHR Systems</h4><p>Direct upload to Epic, Cerner, athenahealth, eClinicalWorks, and NextGen with one-click physician review.</p></div>' +
-    '<div class="zynix-integration-card"><h4>Billing & Coding</h4><p>ICD-10 and CPT code suggestions feed into billing workflows. Revenue cycle integration for claim optimization.</p></div>' +
-    '<div class="zynix-integration-card"><h4>Zynix Platform</h4><p>Notes generated by ZynScribe feed into the Zynix data layer, enabling AI agents and analytics to leverage encounter documentation.</p></div>' +
-    '</div></div></section>';
-
-  // ── GOVERNANCE ──
-  html += '<section class="zynix-agent-governance">' +
-    '<div class="zynix-container" style="max-width:760px">' +
-    '<span class="zynix-eyebrow">GOVERNANCE</span>' +
-    '<h2>Physician Control at Every Step</h2>' +
-    '<div class="zynix-narrative-prose"><p>ZynScribe generates notes. Physicians approve them. No note is uploaded to the EHR or used for billing without explicit physician review and approval. The clinician remains the author of record.</p></div>' +
-    '<div class="zynix-governance-cards">' +
-    '<div class="zynix-governance-card"><h4>Physician Review Required</h4><p>Every generated note must be reviewed and approved by the clinician before upload. ZynScribe suggests; the physician decides.</p></div>' +
-    '<div class="zynix-governance-card"><h4>HIPAA Compliant</h4><p>Audio processing and note generation comply with HIPAA. All data encrypted in transit and at rest. BAA included. SOC 2 Type II certified.</p></div>' +
-    '<div class="zynix-governance-card"><h4>Audit Trail</h4><p>Complete record of original transcription, generated note, physician edits, and final approved version. Available for quality review and compliance auditing.</p></div>' +
-    '</div></div></section>';
-
-  html += '<section class="zynix-cta-band" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<h2>Reclaim Your Time</h2>' +
-    '<p>See how ZynScribe saves physicians 1-2 hours daily with ambient AI documentation.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Request a Demo</a>' +
+    renderFeatureCards([
+      { icon: '&#9881;', title: 'EHR Systems', desc: 'Direct upload to Epic, Cerner, athenahealth, eClinicalWorks, and NextGen with one-click physician review.' },
+      { icon: '&#128176;', title: 'Billing & Coding', desc: 'ICD-10 and CPT code suggestions feed into billing workflows. Revenue cycle integration for claim optimization.' },
+      { icon: '&#128268;', title: 'Zynix Platform', desc: 'Notes generated by ZynScribe feed into the Zynix data layer, enabling AI agents and analytics to leverage encounter documentation.' }
+    ]) +
     '</div></section>';
 
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">GOVERNANCE</span>' +
+    '<h2>Physician Control at Every Step</h2>' +
+    '<p class="zynix-section-sub">ZynScribe generates notes. Physicians approve them. No note is uploaded to the EHR or used for billing without explicit physician review and approval.</p>' +
+    '<div class="zynix-problem-grid">' +
+    '<div class="zynix-problem-card fade-in-up"><div class="zynix-problem-icon">&#128737;</div><h3>Physician Review Required</h3><p>Every generated note must be reviewed and approved by the clinician before upload.</p></div>' +
+    '<div class="zynix-problem-card fade-in-up"><div class="zynix-problem-icon">&#128274;</div><h3>HIPAA Compliant</h3><p>Audio processing and note generation comply with HIPAA. All data encrypted in transit and at rest. SOC 2 Type II certified.</p></div>' +
+    '<div class="zynix-problem-card fade-in-up"><div class="zynix-problem-icon">&#128203;</div><h3>Audit Trail</h3><p>Complete record of original transcription, generated note, physician edits, and final approved version.</p></div>' +
+    '</div></div></section>';
+
+  html += renderCTA('Reclaim Your Time', 'See how ZynScribe saves physicians 1-2 hours daily with ambient AI documentation.', 'Request a Demo');
+  html += renderFooter();
   return html;
 }
 
-
-// ═══════════════════════════════════════════════════════════════
-// 16. CARE PLANS V7 — /care-plans
-// ═══════════════════════════════════════════════════════════════
 
 function renderCarePlansV7() {
   var html = '';
 
-  html += '<section class="zynix-agent-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<nav class="zynix-breadcrumb">Solutions &gt; Deployable Care Plans</nav>' +
-    '<span class="zynix-eyebrow">CARE ORCHESTRATION</span>' +
-    '<h1>Stop Managing Care. Start Deploying It.</h1>' +
-    '<p class="zynix-subhead">Pre-built, configurable care plan templates that orchestrate multiple AI agents into end-to-end workflows. Deploy TCM, CCM, AWV, gap closure, and prior authorization care plans in days. Reach 85%+ of patients while your staff focuses on the 15-20% requiring clinical judgment.</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image"><img src="' + IMG.care + '" alt="Zynix Deployable Care Plans"></div>' +
-    '</div></section>';
+  html += renderInnerHero('CARE ORCHESTRATION', 'Stop Managing Care. Start Deploying It.',
+    'Pre-built, configurable care plan templates that orchestrate multiple AI agents into end-to-end workflows. Deploy TCM, CCM, AWV, gap closure, and prior authorization care plans in days. Reach 85%+ of patients.',
+    IMG.care, 'Zynix Deployable Care Plans');
 
-  // ── THE PROBLEM ──
-  html += '<section class="zynix-agent-what">' +
-    '<div class="zynix-container" style="max-width:760px">' +
-    '<span class="zynix-eyebrow">THE MATH PROBLEM</span>' +
-    '<h2>Your Staff Cannot Scale to Your Population</h2>' +
-    '<div class="zynix-narrative-prose">' +
-    '<p>A typical large ACO or MA plan has 50,000 attributed patients. 20% need AWV completion. 10% have undiagnosed conditions requiring gap closure. 5% are discharged from hospitals every month and need TCM follow-up. That is 17,500 patients who need active outreach and coordination in any given period.</p>' +
-    '<p>A team of 20 care coordinators, 10 nurses, and 5 community health workers cannot reach them all. Manual care management reaches 30-40% of eligible patients. The rest fall through the cracks. Missed TCM billing windows, open quality gaps, and preventable readmissions are the result.</p>' +
-    '<p>Deployable Care Plans solve this by orchestrating AI agents that handle the high-volume outreach, scheduling, documentation, and follow-up work. Your staff focuses on the patients who need human clinical judgment.</p>' +
-    '</div></div></section>';
+  html += renderProblemSection('Your Staff Cannot Scale to Your Population', [
+    { icon: '&#128202;', title: '50,000 Attributed Patients', desc: 'A typical large ACO or MA plan has 50,000 attributed patients requiring active outreach and coordination.' },
+    { icon: '&#128100;', title: 'Manual Reaches 30-40%', desc: 'Manual care management reaches 30-40% of eligible patients. The rest fall through the cracks.' },
+    { icon: '&#128176;', title: 'Missed Revenue', desc: 'Missed TCM billing windows, open quality gaps, and preventable readmissions are the result.' }
+  ]);
 
-  // ── 10 CARE PLAN TEMPLATES ──
-  html += '<section class="zynix-agent-workflow">' +
-    '<div class="zynix-container">' +
-    '<span class="zynix-eyebrow">10 PRE-BUILT TEMPLATES</span>' +
+  html += '<section id="capabilities"><div class="zynix-container">' +
+    '<span class="zynix-tag">10 PRE-BUILT TEMPLATES</span>' +
     '<h2>Care Plans Ready to Deploy</h2>' +
     '<p class="zynix-section-sub">Each template orchestrates multiple AI agents into coordinated workflows. Configurable to your population, protocols, and operational requirements.</p>' +
-    '<div class="zynix-workflow-timeline">';
+    '<div class="zynix-careplan-grid">';
 
   var carePlans = [
-    { num: '01', title: 'Hospital Discharge (TCM)', desc: '30-day post-discharge follow-through. Outreach, medication reconciliation, appointment scheduling, symptom monitoring, and TCM billing capture.' },
-    { num: '02', title: 'Quality & HCC Gap Closure', desc: 'Identification and closure of HEDIS, Stars, and HCC documentation gaps through prioritized patient outreach and scheduling.' },
-    { num: '03', title: 'Prior Authorization', desc: 'Submission, tracking, denial management, and appeal preparation coordinated across payer portals.' },
-    { num: '04', title: '24/7 Scheduling', desc: 'After-hours and weekend scheduling with triage integration and multi-channel patient access.' },
-    { num: '05', title: 'Post-Medication Monitoring', desc: '30-day monitoring after medication changes. Dosage review, side effect tracking, and adherence confirmation.' },
-    { num: '06', title: 'Specialist Referral Management', desc: 'Track referrals from order to completed visit. Confirm scheduling, retrieve results, close the loop.' },
-    { num: '07', title: 'Abnormal Lab/Imaging Alerts', desc: 'Flag critical results, contact the patient, escalate to the provider, and schedule follow-up.' },
-    { num: '08', title: 'Preventive Care & Screenings', desc: 'Cancer screenings, immunizations, wellness visits. Identify eligible patients, schedule, and confirm completion.' },
-    { num: '09', title: 'ED Diversion', desc: 'Identify high-utilizers, offer alternatives, schedule PCP visits, and reduce avoidable ED volume.' },
-    { num: '10', title: 'Chronic Condition Pre-Visit', desc: 'Pre-visit preparation for diabetes, CHF, COPD. Labs ordered, medications reviewed, care plan goals updated.' }
+    { num: '01', title: 'Hospital Discharge (TCM)', desc: '30-day post-discharge follow-through with TCM billing capture.' },
+    { num: '02', title: 'Quality & HCC Gap Closure', desc: 'Identification and closure of HEDIS, Stars, and HCC documentation gaps.' },
+    { num: '03', title: 'Prior Authorization', desc: 'Submission, tracking, denial management, and appeal preparation.' },
+    { num: '04', title: '24/7 Scheduling', desc: 'After-hours and weekend scheduling with triage integration.' },
+    { num: '05', title: 'Post-Medication Monitoring', desc: '30-day monitoring after medication changes.' },
+    { num: '06', title: 'Specialist Referral Management', desc: 'Track referrals from order to completed visit.' },
+    { num: '07', title: 'Abnormal Lab/Imaging Alerts', desc: 'Flag critical results, contact patient, escalate to provider.' },
+    { num: '08', title: 'Preventive Care & Screenings', desc: 'Cancer screenings, immunizations, wellness visits.' },
+    { num: '09', title: 'ED Diversion', desc: 'Identify high-utilizers, offer alternatives, schedule PCP visits.' },
+    { num: '10', title: 'Chronic Condition Pre-Visit', desc: 'Pre-visit preparation for diabetes, CHF, COPD.' }
   ];
 
   carePlans.forEach(function(cp) {
-    html += '<div class="zynix-wf-step"><div class="zynix-wf-dot">' + cp.num + '</div><div class="zynix-wf-content"><h4>' + cp.title + '</h4><p>' + cp.desc + '</p></div></div>';
+    html += '<div class="zynix-careplan-card fade-in-up"><div class="zynix-cp-num">' + cp.num + '</div><div><h4>' + cp.title + '</h4><p>' + cp.desc + '</p></div></div>';
   });
 
   html += '</div></div></section>';
 
-  // ── TCM WORKFLOW EXAMPLE ──
-  html += '<section style="background:#EEF2FB"><div class="zynix-container">' +
-    '<span class="zynix-eyebrow">TCM WORKFLOW EXAMPLE</span>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">TCM WORKFLOW EXAMPLE</span>' +
     '<h2>See How a Care Plan Executes</h2>' +
-    '<div class="zynix-workflow-timeline">' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">0</div><div class="zynix-wf-content"><h4>Day 0: Discharge</h4><p>Discharge data flows into Zynix. Care plan eligibility model runs. Patient flagged HIGH RISK (82nd percentile readmission risk). TCM care plan auto-deployed.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">1</div><div class="zynix-wf-content"><h4>Day 1: Outreach</h4><p>Transitions of Care agent calls the patient. Confirms safe arrival. Reviews medications. Detects medication confusion. Escalates to pharmacist for review.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">4</div><div class="zynix-wf-content"><h4>Day 4: Reminder</h4><p>ZynReminder sends an SMS reminder 72 hours before the scheduled PCP visit. Patient confirms attendance.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">7</div><div class="zynix-wf-content"><h4>Day 7: Visit</h4><p>PCP visit completed. TCM billing code captured. ZynScribe documents the visit with full care plan context.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">30</div><div class="zynix-wf-content"><h4>Day 30: Outcome</h4><p>Follow-up check-in conducted. Patient did NOT readmit. Shared savings preserved. Full cycle documented for quality reporting.</p></div></div>' +
+    '<div class="zynix-orch-flow">' +
+    '<div class="zynix-orch-step fade-in-up"><span>0</span><p>Day 0: Discharge</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>1</span><p>Day 1: Outreach</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>4</span><p>Day 4: Reminder</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>7</span><p>Day 7: Visit</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
+    '<div class="zynix-orch-step fade-in-up"><span>30</span><p>Day 30: Outcome</p></div>' +
     '</div></div></section>';
 
-  // ── METRICS ──
-  html += '<div class="zynix-metrics-bar">' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">85%</span><span class="zynix-metric-label">Patient Contact Rate</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">3x</span><span class="zynix-metric-label">vs Traditional Models</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">60%</span><span class="zynix-metric-label">Coordinator Time Saved</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">40%</span><span class="zynix-metric-label">Readmission Reduction</span></div>' +
-    '</div>';
+  html += renderMetricsBar([
+    { value: '85%', label: 'Patient Contact Rate' },
+    { value: '3x', label: 'vs Traditional Models' },
+    { value: '60%', label: 'Coordinator Time Saved' },
+    { value: '40%', label: 'Readmission Reduction' }
+  ]);
 
-  html += '<section class="zynix-cta-band" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<h2>Deploy Care Plans at Scale</h2>' +
-    '<p>Stop managing care manually. Deploy intelligent orchestration that reaches every patient who needs follow-through.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Request a Demo</a>' +
-    '</div></section>';
-
+  html += renderCTA('Deploy Care Plans at Scale', 'Stop managing care manually. Deploy intelligent orchestration that reaches every patient who needs follow-through.', 'Request a Demo');
+  html += renderFooter();
   return html;
 }
 
 
-// ═══════════════════════════════════════════════════════════════
-// 17. DATA ANALYTICS V7 — /solutions/zynix-data-analytics
-// ═══════════════════════════════════════════════════════════════
-
 function renderDataAnalyticsV7() {
   var html = '';
 
-  html += '<section class="zynix-agent-hero">' +
-    '<div class="zynix-hero-split">' +
-    '<div class="zynix-hero-text" style="background:#20449B">' +
-    '<nav class="zynix-breadcrumb">Solutions &gt; Zynix Data Analytics</nav>' +
-    '<span class="zynix-eyebrow">DATA INTELLIGENCE</span>' +
-    '<h1>Intelligence That Drives Action</h1>' +
-    '<p class="zynix-subhead">AI-powered population health analytics that go beyond dashboards. Identify HCC opportunities, predict readmission risk, close quality gaps, and support clinical decisions &mdash; all in real time, all connected to agents that take action on findings.</p>' +
-    '</div>' +
-    '<div class="zynix-hero-image"><img src="' + IMG.analytics + '" alt="Zynix Data Analytics"></div>' +
+  html += renderInnerHero('DATA INTELLIGENCE', 'Intelligence That Drives Action',
+    'AI-powered population health analytics that go beyond dashboards. Identify HCC opportunities, predict readmission risk, close quality gaps, and support clinical decisions \u2014 all in real time, all connected to agents that take action on findings.',
+    IMG.analytics, 'Zynix Data Analytics');
+
+  html += renderProblemSection('Why Traditional Analytics Fall Short', [
+    { icon: '&#128337;', title: 'Stale Data', desc: 'Most healthcare analytics are 3-6 months old. You\'re always analyzing yesterday\'s problems.' },
+    { icon: '&#128566;', title: 'Analysis Paralysis', desc: 'Too many dashboards, too much data, no clarity. Teams spend weeks interpreting instead of acting.' },
+    { icon: '&#128268;', title: 'Fragmented Insights', desc: 'Risk scores live in silos. Quality gaps aren\'t connected to HCC opportunities. Everything stays disconnected.' }
+  ]);
+
+  html += '<section id="capabilities"><div class="zynix-container">' +
+    '<span class="zynix-tag">THREE ANALYTICS TRACKS</span>' +
+    '<h2>Analytics That Actually Move the Needle</h2>' +
+    '<div class="zynix-track fade-in-up"><div class="zynix-track-header"><span class="zynix-track-num">01</span><h3>HCC & Quality Analytics</h3></div><div class="zynix-track-body"><ul><li>Identify all HCC opportunities with clinical documentation analysis</li><li>Flag quality measures with actionable closure recommendations</li><li>Rank by RAF impact, closure probability, and optimal timing</li><li>Trigger gap closure workflows automatically</li></ul></div></div>' +
+    '<div class="zynix-track fade-in-up"><div class="zynix-track-header"><span class="zynix-track-num">02</span><h3>Risk & Readmission Prediction</h3></div><div class="zynix-track-body"><ul><li>Predict hospitalizations weeks in advance for early intervention</li><li>Identify high-risk patients at the moment of discharge</li><li>Industry-leading models validated against real outcomes</li></ul></div></div>' +
+    '<div class="zynix-track fade-in-up"><div class="zynix-track-header"><span class="zynix-track-num">03</span><h3>Clinical Decision Support</h3></div><div class="zynix-track-body"><ul><li>Immediate alerts at point of care for critical decisions</li><li>Guideline-aligned treatment recommendations in context</li><li>Real-time allergy and contraindication warnings</li></ul></div></div>' +
     '</div></section>';
 
-  // ── THE PROBLEM ──
-  html += '<section class="zynix-agent-what">' +
-    '<div class="zynix-container" style="max-width:760px">' +
-    '<span class="zynix-eyebrow">WHY TRADITIONAL ANALYTICS FALL SHORT</span>' +
-    '<h2>Dashboards Don\'t Close Gaps. Action Does.</h2>' +
-    '<div class="zynix-narrative-prose">' +
-    '<p>Most healthcare analytics platforms are 3-6 months old by the time you see the data. You are always analyzing yesterday\'s problems while today\'s patients need help now. Teams spend weeks interpreting dashboards instead of taking action. Risk scores live in silos. Quality gaps are not connected to HCC opportunities. Everything stays disconnected.</p>' +
-    '<p>Zynix Data Analytics is different because it is connected to agents that act on findings. When analytics identifies a quality gap, an agent can immediately initiate outreach. When a risk model flags a patient, a care plan can auto-deploy. The insight-to-action loop is minutes, not months.</p>' +
-    '</div></div></section>';
+  html += renderMetricsBar([
+    { value: '30%', label: 'HCC Gap Closure Improvement' },
+    { value: '25%', label: 'Readmission Reduction' },
+    { value: 'Real-time', label: 'Analytics Processing' },
+    { value: '100+', label: 'Quality Measures Tracked' }
+  ]);
 
-  // ── THREE TRACKS ──
-  html += '<section class="zynix-agent-workflow">' +
-    '<div class="zynix-container">' +
-    '<span class="zynix-eyebrow">THREE ANALYTICS TRACKS</span>' +
-    '<h2>Analytics That Actually Move the Needle</h2>' +
-    '<div class="zynix-workflow-timeline">' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">01</div><div class="zynix-wf-content"><h4>HCC & Quality Analytics</h4><p>Identify all HCC opportunities through clinical documentation analysis. Flag quality measures with actionable closure recommendations. Rank by RAF impact, closure probability, and optimal timing. Trigger gap closure workflows automatically. Monitor completion and ROI in real time.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">02</div><div class="zynix-wf-content"><h4>Risk & Readmission Prediction</h4><p>Predict hospitalizations weeks in advance for early intervention. Identify high-risk patients at the moment of discharge. Enable palliative care discussions for appropriate patients. Industry-leading models validated against real outcomes.</p></div></div>' +
-    '<div class="zynix-wf-step"><div class="zynix-wf-dot">03</div><div class="zynix-wf-content"><h4>Clinical Decision Support</h4><p>Immediate alerts at point of care for critical decisions. Guideline-aligned treatment recommendations in context. Real-time allergy and contraindication warnings. Seamlessly integrated with EHR workflows.</p></div></div>' +
-    '</div></div></section>';
-
-  // ── METRICS ──
-  html += '<div class="zynix-metrics-bar">' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">30%</span><span class="zynix-metric-label">HCC Gap Closure Improvement</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">25%</span><span class="zynix-metric-label">Readmission Reduction</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">Real-time</span><span class="zynix-metric-label">Analytics Processing</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">100+</span><span class="zynix-metric-label">Quality Measures Tracked</span></div>' +
-    '</div>';
-
-  // ── PLATFORM SCREENSHOTS ──
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-eyebrow">THE PLATFORM</span>' +
+  html += '<section class="zynix-screenshot-section"><div class="zynix-container">' +
+    '<span class="zynix-tag">THE PLATFORM</span>' +
     '<h2>See the Zynix Portal in Action</h2>' +
     '<p class="zynix-section-sub">Real product screenshots from the Zynix analytics and quality dashboards.</p>' +
     '<div class="zynix-screenshot-gallery">' +
@@ -5498,26 +4860,21 @@ function renderDataAnalyticsV7() {
     '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACOQuality + '" alt="ACO Quality Dashboard"><div class="caption">ACO Quality Performance</div></div>' +
     '</div></div></section>';
 
-  // ── INTEGRATIONS ──
-  html += '<section class="zynix-agent-integrations" style="background:#EEF2FB">' +
-    '<div class="zynix-container">' +
-    '<span class="zynix-eyebrow">DATA SOURCES</span>' +
+  html += '<section><div class="zynix-container">' +
+    '<span class="zynix-tag">DATA SOURCES</span>' +
     '<h2>Unified Data From Every Source</h2>' +
-    '<div class="zynix-card-grid-3col">' +
-    '<div class="zynix-integration-card"><h4>EHR Systems</h4><p>Epic, Cerner, athenahealth, eClinicalWorks, NextGen, Allscripts. Clinical data, encounters, orders, and documentation.</p></div>' +
-    '<div class="zynix-integration-card"><h4>Claims & Financial</h4><p>837/835 claims, eligibility, enrollment, and attribution data. RAF scoring and financial performance analytics.</p></div>' +
-    '<div class="zynix-integration-card"><h4>Clinical Data Feeds</h4><p>ADT streams, lab results (ORU), pharmacy fill data, SDOH sources, and scheduling system data. Real-time processing.</p></div>' +
+    '<div class="zynix-data-layers">' +
+    '<div class="zynix-data-layer fade-in-up"><h3>EHR Systems</h3><p>Epic, Cerner, athenahealth, eClinicalWorks, NextGen, Allscripts. Clinical data, encounters, orders, and documentation.</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>Claims & Financial</h3><p>837/835 claims, eligibility, enrollment, and attribution data. RAF scoring and financial performance analytics.</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>Clinical Data Feeds</h3><p>ADT streams, lab results (ORU), pharmacy fill data, SDOH sources, and scheduling system data. Real-time processing.</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>Quality & Compliance</h3><p>HEDIS measure tracking, Stars performance data, HCC documentation analysis, and compliance reporting.</p></div>' +
     '</div></div></section>';
 
-  html += '<section class="zynix-cta-band" style="background:#20449B">' +
-    '<div class="zynix-container" style="text-align:center">' +
-    '<h2>Turn Analytics Into Action</h2>' +
-    '<p>See how Zynix Data Analytics drives measurable outcomes with intelligence connected to autonomous agents.</p>' +
-    '<a href="/contact" class="zynix-btn-cta">Request a Demo</a>' +
-    '</div></section>';
-
+  html += renderCTA('Turn Analytics Into Action', 'See how Zynix Data Analytics drives measurable outcomes with intelligence connected to autonomous agents.', 'Request a Demo');
+  html += renderFooter();
   return html;
 }
+
 
 
   var routes = {
