@@ -2100,13 +2100,77 @@
   }
 
   function renderCareers() {
-    return renderPlaceholderPage('CAREERS', 'Join the Team Building Healthcare\u2019s Future',
-      'We\u2019re looking for builders, clinicians, engineers, and operators who believe AI can transform healthcare.',
-      '<section style="padding:80px 0"><div class="zynix-container" style="text-align:center">' +
-      '<h2 style="font-size:32px;font-weight:700;color:#e8eaf0;margin:0 0 16px">Open Positions</h2>' +
-      '<p style="font-size:16px;color:#94a3b8;max-width:500px;margin:0 auto 32px">We\u2019re growing fast. If you\u2019re passionate about healthcare and AI, we want to hear from you.</p>' +
-      '<a href="mailto:careers@zynix.ai" class="zynix-btn-primary">Send Your Resume &rarr;</a>' +
-      '</div></section>');
+    var wellfound = 'https://wellfound.com/company/zynix-ai';
+    var jobs = [
+      { title: 'Engineering Manager', loc: 'Bengaluru', type: 'In Office', dept: 'Engineering' },
+      { title: 'Senior Product Manager \u2014 Healthcare AI / Care Management', loc: 'Bangalore', type: 'In Office', dept: 'Product' },
+      { title: 'Project Manager \u2014 HealthTech', loc: 'Bengaluru', type: 'In Office', dept: 'Operations' },
+      { title: 'Talent Acquisition \u2014 HR Recruiter', loc: 'Bengaluru', type: 'In Office', dept: 'Operations' },
+      { title: 'Software Development Engineer II', loc: 'Bengaluru', type: 'In Office', dept: 'Engineering' },
+      { title: 'Product Designer', loc: 'Bangalore', type: 'In Office', dept: 'Design' },
+      { title: 'Mobile Developer', loc: 'Bangalore', type: 'In Office', dept: 'Engineering' },
+      { title: 'Software Engineering Intern', loc: 'Bangalore', type: 'In Office', dept: 'Engineering' },
+      { title: 'Quality Analyst \u2014 Healthcare AI', loc: 'Bengaluru', type: 'In Office', dept: 'Engineering' },
+      { title: 'SDE-1', loc: 'Bangalore', type: 'In Office', dept: 'Engineering' },
+      { title: 'AI/ML Engineer', loc: 'Seattle / Remote', type: 'Hybrid', dept: 'Engineering' },
+      { title: 'Healthcare Data Engineer', loc: 'Tampa / Remote', type: 'Hybrid', dept: 'Engineering' },
+      { title: 'Sales Development Representative', loc: 'Tampa', type: 'In Office', dept: 'Sales' }
+    ];
+
+    return renderInnerHero('CAREERS', 'Build Healthcare\u2019s Most Important AI',
+      'We\u2019re a team of engineers, clinicians, and operators building the AI operating system for value-based care. Over 1 million patients. 30 states. And we\u2019re just getting started.',
+      IMG.patients, 'Zynix AI Careers') +
+
+    // WHY ZYNIX
+    '<section style="padding:80px 0"><div class="zynix-container">' +
+    '<span class="zynix-tag">WHY ZYNIX</span>' +
+    '<h2>Why You\u2019ll Want to Be Here</h2>' +
+    '<div class="zynix-feature-grid" style="margin-top:40px">' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#127919;</div><h3>Real Impact, Not Demos</h3><p>Our AI agents handle 85%+ of post-discharge follow-ups. Patients get called. TCM gets billed. Readmissions drop. Your code runs in production on day one.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#129504;</div><h3>Hardest Problems in AI</h3><p>Healthcare is the ultimate AI challenge. Ambiguous data, life-or-death stakes, regulatory constraints, multilingual patients. We build AI that earns clinical trust.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128200;</div><h3>Rocketship Growth</h3><p>From 0 to 1M+ patients in under two years. Expanding across ACOs, health systems, health plans, and FQHCs. The market is $285B+ and we\u2019re early.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128101;</div><h3>Physician-Led, Engineer-Driven</h3><p>Founded by a physician who ran six ACOs with $300M+ in shared savings. We build for people who understand healthcare operations, not just technology demos.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#127760;</div><h3>Global Team, Real Ownership</h3><p>Seattle. Tampa. Bengaluru. Small teams with high autonomy. No layers of middle management. Ship fast, learn faster.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#129309;</div><h3>Culture of Builders</h3><p>Healthcare benefits. Generous vacation. Professional development budget. Parental leave. We invest in the people building the future of care.</p></div>' +
+    '</div></div></section>' +
+
+    // CULTURE PERKS
+    '<section style="padding:60px 0;background:var(--z-bg-alt)"><div class="zynix-container" style="text-align:center">' +
+    '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:24px">' +
+    '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--z-bg-card);border:1px solid var(--z-border);border-radius:40px;font-size:14px;font-weight:500;color:var(--z-text-secondary)">&#127968; Healthcare Benefits</span>' +
+    '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--z-bg-card);border:1px solid var(--z-border);border-radius:40px;font-size:14px;font-weight:500;color:var(--z-text-secondary)">&#127796; Generous Vacation</span>' +
+    '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--z-bg-card);border:1px solid var(--z-border);border-radius:40px;font-size:14px;font-weight:500;color:var(--z-text-secondary)">&#128118; Parental Leave</span>' +
+    '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--z-bg-card);border:1px solid var(--z-border);border-radius:40px;font-size:14px;font-weight:500;color:var(--z-text-secondary)">&#128218; Professional Development</span>' +
+    '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--z-bg-card);border:1px solid var(--z-border);border-radius:40px;font-size:14px;font-weight:500;color:var(--z-text-secondary)">&#127968; Remote-Friendly</span>' +
+    '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--z-bg-card);border:1px solid var(--z-border);border-radius:40px;font-size:14px;font-weight:500;color:var(--z-text-secondary)">&#128640; Equity Participation</span>' +
+    '</div></div></section>' +
+
+    // OPEN POSITIONS
+    '<section style="padding:80px 0" id="positions"><div class="zynix-container">' +
+    '<span class="zynix-tag">OPEN POSITIONS</span>' +
+    '<h2>13 Roles Across Engineering, Product, Design &amp; Operations</h2>' +
+    '<p class="zynix-section-sub">All positions include equity. Apply through Wellfound or send your resume directly.</p>' +
+    '<div style="margin-top:40px;max-width:800px;margin-left:auto;margin-right:auto">' +
+    (function() {
+      var jobHtml = '';
+      for (var ji = 0; ji < jobs.length; ji++) {
+        var j = jobs[ji];
+        jobHtml += '<a href="' + wellfound + '" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--z-border);text-decoration:none;color:inherit;transition:background 0.15s;border-radius:8px' + (ji === 0 ? ';border-top:1px solid var(--z-border)' : '') + '"' +
+          ' onmouseover="this.style.background=\'var(--z-bg-alt)\'" onmouseout="this.style.background=\'transparent\'">' +
+          '<div><div style="font-size:16px;font-weight:600;color:var(--z-text)">' + j.title + '</div>' +
+          '<div style="font-size:13px;color:var(--z-text-muted);margin-top:4px">' + j.loc + ' &middot; ' + j.type + ' &middot; ' + j.dept + '</div></div>' +
+          '<span style="font-size:13px;font-weight:500;color:var(--z-accent);white-space:nowrap">Apply &rarr;</span></a>';
+      }
+      return jobHtml;
+    })() +
+    '</div>' +
+    '<div style="text-align:center;margin-top:40px">' +
+    '<a href="' + wellfound + '" class="zynix-btn-primary" target="_blank" rel="noopener">View All on Wellfound &rarr;</a>' +
+    '<p style="margin-top:16px;font-size:14px;color:var(--z-text-muted)">Or email your resume to <a href="mailto:careers@zynix.ai" style="color:var(--z-accent);font-weight:500">careers@zynix.ai</a></p>' +
+    '</div></div></section>' +
+
+    renderCTA('Ready to Build the Future of Healthcare AI?', 'Join a team where your work directly improves patient outcomes at scale.', 'View Open Roles') +
+    renderFooter();
   }
 
   function renderPress() {
