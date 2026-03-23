@@ -2397,7 +2397,7 @@
       { name: 'Palm Beach ACO', logo: 'https://cdn.prod.website-files.com/6818da6a953b7f1e582f8191/682e6a2ca7d7d2df4e89db1d_pbacologohighres.png' },
       { name: 'West Florida ACO', logo: 'https://westfloridaaco.com/assets/img/New_WestFlorida_ACO_logo_color.svg' },
       { name: 'Space Coast ACO', logo: 'https://spacecoastaco.com/assets/img/New_Space_Coast_ACO_logo_color.svg' },
-      { name: 'Central Florida ACO', logo: '' },
+      { name: 'Central Florida ACO', logo: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40"><text x="100" y="28" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#333">CENTRAL FLORIDA ACO</text></svg>') },
       { name: 'GoldenCare ACO', logo: 'https://static.wixstatic.com/media/ca9ca7_8186b443254b49ada16878821eca400a~mv2.png/v1/fill/w_184,h_92,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GoldenCare%20ACO%20(2).png' },
       { name: 'NEXT Healthcare', logo: 'https://nexthealthcaresolutions.com/assets/img/next-logo.svg' },
       { name: 'eTernal Health', logo: 'https://www.eternalhealth.com/wp-content/uploads/2022/08/HR_eH-InfinityIcon-Logo.jpg' },
