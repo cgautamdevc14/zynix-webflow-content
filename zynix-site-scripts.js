@@ -150,7 +150,7 @@
     '/resources-case-studies': { title: 'Case Studies | Healthcare AI Results | Zynix AI', desc: 'See real healthcare AI results from ACOs, health systems, and practices using Zynix AI. Proven outcomes across 1M+ value-based care patients.', img: IMG.care, schema: 'Organization' },
     '/resources-glossary': { title: 'Healthcare AI Glossary | Zynix AI', desc: 'Browse the complete healthcare AI glossary covering value-based care, interoperability, HCC coding, claims processing, and compliance terms.', img: IMG.hero, schema: 'Organization' },
     '/resources-webinars': { title: 'Webinars & Events | Zynix AI', desc: 'Upcoming and on-demand webinars on healthcare AI, value-based care operations, and care management best practices from Zynix AI experts.', img: IMG.hero, schema: 'Organization', noindex: true },
-    '/resources-whitepapers': { title: 'Whitepapers & Reports | Zynix AI', desc: 'Download research on healthcare AI, value-based care outcomes, population health analytics, and operational transformation from Zynix AI.', img: IMG.hero, schema: 'Organization', noindex: true },
+    '/resources-whitepapers': { title: 'Whitepapers & Reports | Zynix AI', desc: 'Download research on healthcare AI including AWV optimization, post-discharge follow-up, and care management at scale from Zynix AI.', img: IMG.hero, schema: 'Organization' },
     '/company-privacy': { title: 'Privacy Policy | Zynix AI', desc: 'Zynix AI privacy policy detailing how we collect, use, and protect your personal and health-related information across our healthcare AI platform.', img: IMG.hero, schema: 'Organization' },
     '/company-terms': { title: 'Terms of Service | Zynix AI', desc: 'Review the Zynix AI terms of service governing use of our healthcare AI platform, data processing agreements, and related professional services offerings.', img: IMG.hero, schema: 'Organization' },
     '/compare/zynix-vs-point-solutions': { title: 'Zynix AI vs Point Solutions | Zynix AI', desc: 'Compare the Zynix unified AI operating system against fragmented point solutions for value-based care. See why leading ACOs choose one platform.', img: IMG.enterprise, schema: 'Organization' },
@@ -160,6 +160,9 @@
     '/blog/how-ai-closes-care-gaps': { title: 'How AI Closes Care Gaps | Zynix AI', desc: 'Discover how AI automates HCC, RAF, and quality measure gap closure from identification through patient outreach to confirmed resolution.', img: IMG.care, schema: 'Article', datePublished: '2026-03-10' },
     '/blog/ai-agents-vs-chatbots-healthcare': { title: 'AI Agents vs Chatbots in Healthcare', desc: 'Healthcare AI agents take autonomous action while chatbots only answer questions. Learn the key differences and why agents deliver better outcomes.', img: IMG.doctor, schema: 'Article', datePublished: '2026-03-15' },
     '/case-studies/palm-beach-aco': { title: 'Palm Beach ACO Case Study | Zynix AI', desc: 'Palm Beach ACO achieved 85% TCM contact rates, 40% gap closure improvement, and 3x AWV lift using Zynix AI. Read the full case study results.', img: IMG.care, schema: 'Article', datePublished: '2026-02-01' },
+    '/case-studies/amistad': { title: 'AMISTAD CHC Case Study | Zynix AI', desc: 'AMISTAD Community Health Center deployed multilingual AI outreach in 15+ languages to close preventive care gaps and reduce ED utilization for underserved populations.', img: IMG.patients, schema: 'Article', datePublished: '2026-03-01' },
+    '/case-studies/apollo-clinic': { title: 'Apollo Clinic Case Study | Zynix AI', desc: 'Apollo Clinic Network reduced no-shows by 40% and recovered significant revenue with AI-powered scheduling, barrier-aware reminders, and automated prior auth.', img: IMG.patient, schema: 'Article', datePublished: '2026-03-01' },
+    '/case-studies/nhs': { title: 'NHS Health System Case Study | Zynix AI', desc: 'NHS Health System deployed the full Zynix AI platform across 12 sites achieving 40% gap closure improvement, consistent after-hours coverage, and documentation time reduction.', img: IMG.enterprise, schema: 'Article', datePublished: '2026-03-01' },
     // V7: Platform + Agent Pages
     '/platform': { title: 'Zynix Intelligent Platform (ZIP) | Zynix AI', desc: 'The unified AI operating system for value-based care. Data foundation, intelligence engine, agent orchestration, and deployable care plans in one platform.', schema: 'Product' },
     '/agents': { title: 'AI Agents for Healthcare | Zynix AI', desc: 'Twelve purpose-built AI agents that automate care coordination, outreach, triage, scheduling, documentation, and prior auth across 30 states.', schema: 'Product' },
@@ -195,7 +198,7 @@
     '/resources/faq': { title: 'FAQ | Zynix AI', desc: 'Find answers about the Zynix healthcare AI platform including HIPAA compliance, EHR integration, pricing, deployment timelines, and support options.', schema: 'FAQPage' },
     '/resources/glossary': { title: 'Healthcare AI Glossary | Zynix AI', desc: 'Browse the complete healthcare AI glossary covering value-based care, interoperability, HCC coding, and compliance terms for healthcare professionals.', schema: 'Organization' },
     '/resources/webinars': { title: 'Webinars & Events | Zynix AI', desc: 'Upcoming and on-demand webinars on healthcare AI, value-based care operations, and care management best practices from Zynix AI experts.', schema: 'Organization', noindex: true },
-    '/resources/whitepapers': { title: 'Whitepapers & Reports | Zynix AI', desc: 'Download research on healthcare AI, value-based care outcomes, population health analytics, and operational transformation from Zynix AI.', schema: 'Organization', noindex: true },
+    '/resources/whitepapers': { title: 'Whitepapers & Reports | Zynix AI', desc: 'Download research on healthcare AI including AWV optimization, post-discharge follow-up, and care management at scale from Zynix AI.', schema: 'Organization' },
     '/case-studies/pbaco': { title: 'Palm Beach ACO Case Study | Zynix AI', desc: 'Palm Beach ACO achieved 85% TCM contact rates, 40% gap closure improvement, and 3x AWV lift using Zynix AI. Read the full case study.', schema: 'Article', datePublished: '2026-02-01' },
     // V7: Missing route aliases
     '/about': { title: 'About Zynix AI | Healthcare AI Company', desc: 'Zynix AI is a healthcare AI company purpose-built for value-based care with 1M+ patients onboarded across 30 states serving ACOs and health systems.', img: IMG.patients, schema: 'MedicalBusiness' },
@@ -1394,10 +1397,13 @@
   // ── PAGE: Case Studies ──
   function renderCaseStudies() {
     var studies = [
+      { title: 'Palm Beach ACO', metric: '3x', label: 'AWV Completion Improvement', seg: 'ACO', desc: 'Outbound Agents (PDV & AWV), AI Scribe', slug: '/case-studies/palm-beach-aco' },
+      { title: 'AMISTAD CHC', metric: '15+', label: 'Languages Supported', seg: 'FQHC', desc: 'ZynAfterHours, Preventive & Quality Activation Agents, SDoH Agent', slug: '/case-studies/amistad' },
+      { title: 'Apollo Clinic', metric: '40%', label: 'No-Show Reduction', seg: 'Practice', desc: 'ZynSchedule, ZynReminder, ZynAuth', slug: '/case-studies/apollo-clinic' },
+      { title: 'NHS Health System', metric: '40%', label: 'Gap Closure Improvement', seg: 'Health System', desc: 'Full Zynix Platform, ZynAfterHours, ZynScribe, ToC Agent', slug: '/case-studies/nhs' },
       { title: 'West Florida ACO', metric: '40%', label: 'Quality Gap Closure Improvement', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics' },
       { title: 'Space Coast ACO', metric: '85%+', label: 'TCM Contact Rate', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics' },
       { title: 'Central Florida ACO', metric: '2.5x', label: 'ROI in Year One', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics' },
-      { title: 'Palm Beach ACO', metric: '3x', label: 'AWV Completion Improvement', seg: 'ACO', desc: 'Outbound Agents (PDV & AWV), AI Scribe', slug: '/case-studies/palm-beach-aco' },
       { title: 'eTernal Health', metric: '45%', label: 'Medication Adherence Improvement', seg: 'Health Plan', desc: 'PDV Agents, Medication Adherence Programs' }
     ];
     var html = '<div class="zynix-case-grid">';
@@ -2258,8 +2264,52 @@
   }
 
   function renderWhitepapers() {
-    return renderPlaceholderPage('WHITEPAPERS & REPORTS', 'Research & Insights',
-      'In-depth analysis on healthcare AI, value-based care, and operational transformation.');
+    var cardStyle = 'background:var(--z-card-bg,#fff);border:1px solid var(--z-border,#e5e7eb);border-radius:16px;padding:40px;margin-bottom:32px;transition:box-shadow 0.3s;';
+    var tagStyle = 'display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:16px;';
+
+    var html = renderInnerHero('WHITEPAPERS & REPORTS', 'Research & Insights',
+      'In-depth analysis on healthcare AI, value-based care, and operational transformation.', null, '');
+
+    html += '<section style="padding:60px 0"><div class="zynix-container" style="max-width:900px;margin:0 auto">';
+
+    // Whitepaper 1: AWV Optimization (available)
+    html += '<div class="fade-in-up" style="' + cardStyle + '">' +
+      '<span style="' + tagStyle + 'background:#e8f5e9;color:#2e7d32;">AVAILABLE NOW</span>' +
+      '<h2 style="font-size:24px;font-weight:700;margin:0 0 8px;color:var(--z-text)">Optimizing Annual Wellness Visit (AWV) Utilization in ACOs</h2>' +
+      '<p style="font-size:15px;color:var(--z-text-secondary);margin:0 0 24px;line-height:1.6">Applying Data Insights along with AI to Reduce Preventable Healthcare Costs</p>' +
+      '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px">' +
+        '<div style="text-align:center;padding:16px;background:var(--z-blue-light,#f0f4ff);border-radius:8px"><span style="display:block;font-size:24px;font-weight:800;color:var(--z-primary)">34.1%</span><span style="font-size:12px;color:var(--z-text-secondary)">AWV Completion Rate</span></div>' +
+        '<div style="text-align:center;padding:16px;background:var(--z-blue-light,#f0f4ff);border-radius:8px"><span style="display:block;font-size:24px;font-weight:800;color:var(--z-primary)">172K+</span><span style="font-size:12px;color:var(--z-text-secondary)">Patient Records Analyzed</span></div>' +
+        '<div style="text-align:center;padding:16px;background:var(--z-blue-light,#f0f4ff);border-radius:8px"><span style="display:block;font-size:24px;font-weight:800;color:var(--z-primary)">65%</span><span style="font-size:12px;color:var(--z-text-secondary)">Two-Sided Risk ACOs</span></div>' +
+        '<div style="text-align:center;padding:16px;background:var(--z-blue-light,#f0f4ff);border-radius:8px"><span style="display:block;font-size:24px;font-weight:800;color:var(--z-primary)">$456</span><span style="font-size:12px;color:var(--z-text-secondary)">Savings Per Patient/Year</span></div>' +
+      '</div>' +
+      '<p style="font-size:14px;color:var(--z-text-secondary);margin:0 0 8px;line-height:1.6"><strong>Topics covered:</strong> AWV utilization gap analysis, patient and provider barriers, AI-based scheduling and outreach workflows, HCC/quality coding matrix, cost reduction modeling</p>' +
+      '<p style="font-size:13px;color:var(--z-text-secondary);margin:0 0 24px">14 peer-reviewed references cited</p>' +
+      '<a href="' + GH + 'Zynix-AWV-Whitepaper.pdf" class="zynix-btn-primary" target="_blank" rel="noopener" style="text-decoration:none">Download Whitepaper &rarr;</a>' +
+    '</div>';
+
+    // Whitepaper 2: Post-Discharge Follow-Up (coming soon)
+    html += '<div class="fade-in-up" style="' + cardStyle + '">' +
+      '<span style="' + tagStyle + 'background:#fff3e0;color:#e65100;">COMING SOON</span>' +
+      '<h2 style="font-size:24px;font-weight:700;margin:0 0 8px;color:var(--z-text)">AI-Powered Post-Discharge Follow-Up: Closing the 48-Hour TCM Window at Scale</h2>' +
+      '<p style="font-size:15px;color:var(--z-text-secondary);margin:0 0 16px;line-height:1.6">How AI agents achieve 85%+ TCM contact rates versus the 30% industry average, transforming transitional care management from a staffing challenge into an automated workflow.</p>' +
+      '<p style="font-size:14px;color:var(--z-text-secondary);margin:0"><em>Sign up to be notified when this whitepaper is available.</em></p>' +
+    '</div>';
+
+    // Whitepaper 3: Care Management at Scale (coming soon)
+    html += '<div class="fade-in-up" style="' + cardStyle + '">' +
+      '<span style="' + tagStyle + 'background:#fff3e0;color:#e65100;">COMING SOON</span>' +
+      '<h2 style="font-size:24px;font-weight:700;margin:0 0 8px;color:var(--z-text)">From Coordinator Bottleneck to AI-Augmented Care Management</h2>' +
+      '<p style="font-size:15px;color:var(--z-text-secondary);margin:0 0 16px;line-height:1.6">How AI handles routine CCM touchpoints so coordinators focus on complex cases \u2014 scaling chronic care management programs without proportional staffing increases.</p>' +
+      '<p style="font-size:14px;color:var(--z-text-secondary);margin:0"><em>Sign up to be notified when this whitepaper is available.</em></p>' +
+    '</div>';
+
+    html += '</div></section>';
+
+    html += renderCTA('Want More Research?', 'Get early access to upcoming whitepapers and exclusive healthcare AI insights.', 'Request Access') +
+    renderFooter();
+
+    return html;
   }
 
   // ── PAGE: Homepage ──
@@ -2282,7 +2332,7 @@
 
 
     // -- AEO SUMMARY (hidden visually, readable by crawlers/screen readers for SEO/AEO) --
-    html += '<div class="zynix-sr-only" aria-hidden="false">' +
+    html += '<div class="zynix-sr-only" aria-hidden="false" style="position:absolute;left:-9999px;height:0;overflow:hidden">' +
       '<h2>What is Zynix AI?</h2>' +
       '<p>Zynix AI is a healthcare artificial intelligence platform purpose-built for value-based care. It deploys autonomous AI agents that automate care coordination, close quality gaps, and boost shared savings for ACOs, health systems, health plans, FQHCs, and independent practices. The platform unifies clinical data from EHRs, claims, ADT feeds, and SDOH sources into one intelligence layer, then orchestrates twelve specialized AI agents to take action.</p>' +
       '<p>Who is it for? ACOs in MSSP and ACO REACH, health systems, Medicare Advantage plans, FQHCs, independent practices, and ambulatory surgery centers.</p>' +
@@ -2296,7 +2346,7 @@
       { name: 'Palm Beach ACO', logo: 'https://cdn.prod.website-files.com/6818da6a953b7f1e582f8191/682e6a2ca7d7d2df4e89db1d_pbacologohighres.png' },
       { name: 'West Florida ACO', logo: 'https://westfloridaaco.com/assets/img/New_WestFlorida_ACO_logo_color.svg' },
       { name: 'Space Coast ACO', logo: 'https://spacecoastaco.com/assets/img/New_Space_Coast_ACO_logo_color.svg' },
-      { name: 'Central Florida ACO', logo: GH + 'central-florida-aco-logo.svg' },
+      { name: 'Central Florida ACO', logo: '' },
       { name: 'GoldenCare ACO', logo: 'https://static.wixstatic.com/media/ca9ca7_8186b443254b49ada16878821eca400a~mv2.png/v1/fill/w_184,h_92,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GoldenCare%20ACO%20(2).png' },
       { name: 'NEXT Healthcare', logo: 'https://nexthealthcaresolutions.com/assets/img/next-logo.svg' },
       { name: 'eTernal Health', logo: 'https://www.eternalhealth.com/wp-content/uploads/2022/08/HR_eH-InfinityIcon-Logo.jpg' },
@@ -2305,12 +2355,16 @@
       { name: 'Sunflower ACO', logo: 'https://static.wixstatic.com/media/ca9ca7_43571900261a4d69bb69dab454fd7439~mv2.png/v1/fill/w_184,h_92,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Sunflower%20ACO%20Logo.png' },
       { name: 'CLSCFL', logo: 'https://clscfl.com/wp-content/uploads/2022/08/Complete-Local-Specialty-Care.png' }
     ];
-    var logoStyle = 'height:32px;width:auto;max-width:130px;max-height:32px;object-fit:contain;filter:grayscale(100%);opacity:0.6';
+    var logoStyle = 'height:32px;width:auto;filter:grayscale(1) opacity(0.5);transition:filter 0.3s;object-fit:contain';
     var trustSpans = '';
     for (var ti = 0; ti < 2; ti++) {
       for (var tj = 0; tj < trustLogos.length; tj++) {
         var tl = trustLogos[tj];
-        trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"></span>';
+        if (tl.logo) {
+          trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"></span>';
+        } else {
+          trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0;font-size:13px;font-weight:600;color:rgba(255,255,255,0.4);white-space:nowrap;letter-spacing:0.5px">' + tl.name + '</span>';
+        }
       }
     }
     html += '<section class="zynix-trust-strip"><div class="zynix-container">' +
@@ -5068,6 +5122,9 @@ function renderDataAnalyticsV7() {
     '/blog/ai-agents-vs-chatbots-healthcare': renderBlogAgentsVsChatbots,
     // Case Studies
     '/case-studies/palm-beach-aco': renderCaseStudyPalmBeach,
+    '/case-studies/amistad': renderCaseStudyAmistad,
+    '/case-studies/apollo-clinic': renderCaseStudyApollo,
+    '/case-studies/nhs': renderCaseStudyNHS,
     // V7: Platform
     '/platform': renderPlatformHub,
     '/solutions/zynix-data-analytics': renderDataAnalyticsV7,
@@ -5580,6 +5637,135 @@ function renderDataAnalyticsV7() {
   }
 
   // ── PAGE: Case Study — Palm Beach ACO ──
+  function renderCaseStudyAmistad() {
+    return renderInnerHero('CASE STUDY', 'AMISTAD Community Health Center', 'Multilingual AI Outreach Closes Care Gaps for Underserved Populations', IMG.patients, 'AMISTAD CHC case study with Zynix AI') +
+    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
+
+    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">15+</span><span style="font-size:14px;color:var(--z-text-secondary)">Languages Supported</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">24/7</span><span style="font-size:14px;color:var(--z-text-secondary)">Multilingual Triage</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">\u2191</span><span style="font-size:14px;color:var(--z-text-secondary)">Preventive Screening Improvement</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">\u2193</span><span style="font-size:14px;color:var(--z-text-secondary)">Non-Urgent ED Utilization</span></div>' +
+    '</div>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">AMISTAD Community Health Center is an FQHC serving a diverse, predominantly Spanish-speaking population across Central Florida. The health center faced persistent challenges:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>Language barriers:</strong> English-only answering services meant Spanish, Haitian Creole, and Portuguese-speaking patients could not communicate after hours or during outreach campaigns.</li>' +
+    '<li style="margin-bottom:8px"><strong>Preventive screening gaps:</strong> Without proactive outreach in patients\u2019 primary language, preventive screening completion rates remained well below benchmarks.</li>' +
+    '<li style="margin-bottom:8px"><strong>SDoH barriers unidentified:</strong> Social determinants like food insecurity, transportation, and housing instability went undetected because screening was not happening consistently.</li>' +
+    '<li style="margin-bottom:8px"><strong>Reporting pressure:</strong> HRSA UDS reporting requirements demanded better quality data and higher measure completion rates.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">AMISTAD deployed three Zynix AI products tailored to the needs of their multilingual patient population:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>ZynAfterHours:</strong> 24/7 multilingual AI triage covering Spanish, Haitian Creole, Portuguese, and 12+ additional languages. Patients can call after hours and receive clinically accurate triage in their own language.</li>' +
+    '<li style="margin-bottom:8px"><strong>Preventive & Quality Activation Agents:</strong> Automated outreach campaigns for preventive screenings delivered in each patient\u2019s preferred language, driving completion of mammograms, colonoscopies, A1C tests, and more.</li>' +
+    '<li style="margin-bottom:8px"><strong>SDoH Determination Agent:</strong> Proactive social determinant screening integrated into outreach workflows, identifying food insecurity, transportation barriers, and housing instability and routing patients to community resources.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Within the first two quarters of deployment, AMISTAD saw meaningful improvements across quality and patient engagement:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>Preventive screening improvement:</strong> Multilingual outreach campaigns significantly increased completion rates for key preventive screenings, directly improving UDS quality measures.</li>' +
+    '<li style="margin-bottom:8px"><strong>Reduced non-urgent ED utilization:</strong> 24/7 multilingual triage gave patients an alternative to the emergency department for after-hours concerns, reducing unnecessary ED visits.</li>' +
+    '<li style="margin-bottom:8px"><strong>Improved HRSA UDS reporting:</strong> Better data capture from screening campaigns and SDoH assessments strengthened AMISTAD\u2019s annual UDS submission.</li>' +
+    '<li style="margin-bottom:8px"><strong>SDoH identification at scale:</strong> The AI agent identified social determinant barriers that had gone undetected through manual processes, enabling the care team to connect patients with community resources.</li>' +
+    '</ul>' +
+
+    '<blockquote style="border-left:4px solid var(--z-blue);padding:20px 24px;margin:40px 0;background:var(--z-blue-light);border-radius:0 8px 8px 0"><p style="font-size:16px;line-height:1.8;color:var(--z-text);margin:0;font-style:italic">"The multilingual AI agents were a game-changer for our FQHC. Our Spanish-speaking patients finally get the follow-up calls they deserve\u2014on time, every time."</p><cite style="display:block;margin-top:12px;font-size:14px;color:var(--z-text-secondary);font-style:normal"><strong>\u2014 Ganesh Karra</strong>, Systems Engineer, AMISTAD CHC</cite></blockquote>' +
+
+    '</div></div></section>' +
+    renderCTA('Serve Your Community Better with AI', 'See how Zynix helps FQHCs deliver multilingual care coordination at scale.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  function renderCaseStudyApollo() {
+    return renderInnerHero('CASE STUDY', 'Apollo Clinic Network', 'AI Scheduling Reduces No-Shows by 40% Across Multi-Site Practice', IMG.patient, 'Apollo Clinic case study with Zynix AI') +
+    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
+
+    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">40%</span><span style="font-size:14px;color:var(--z-text-secondary)">No-Show Reduction</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">\u2191</span><span style="font-size:14px;color:var(--z-text-secondary)">Revenue Recovery</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">60%</span><span style="font-size:14px;color:var(--z-text-secondary)">Staff Time Savings</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">\u2191</span><span style="font-size:14px;color:var(--z-text-secondary)">Prior Auth Acceleration</span></div>' +
+    '</div>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Apollo Clinic Network is an independent group practice operating multiple locations. Despite strong clinical quality, operational inefficiencies were holding the practice back:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>22% no-show rate:</strong> More than one in five appointments went unfilled, costing the practice significant revenue and creating scheduling gaps that were difficult to backfill.</li>' +
+    '<li style="margin-bottom:8px"><strong>Manual reminder calls:</strong> Front desk staff spent hours each day making reminder calls, with limited ability to reach patients who didn\u2019t answer.</li>' +
+    '<li style="margin-bottom:8px"><strong>Reactive waitlist management:</strong> When patients cancelled, the waitlist was managed manually and slots often went unfilled because staff couldn\u2019t react fast enough.</li>' +
+    '<li style="margin-bottom:8px"><strong>Prior auth backlogs:</strong> Prior authorization submissions were handled manually, creating delays that led to appointment cancellations and revenue leakage.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Apollo Clinic deployed three Zynix AI products to transform scheduling and operational workflows:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>ZynSchedule:</strong> Intelligent AI-powered scheduling that handles inbound booking requests 24/7, manages waitlists automatically, and fills cancellation slots in real time.</li>' +
+    '<li style="margin-bottom:8px"><strong>ZynReminder:</strong> Barrier-aware appointment confirmation that goes beyond simple reminders \u2014 identifying transportation, financial, or scheduling barriers and offering solutions before the patient no-shows.</li>' +
+    '<li style="margin-bottom:8px"><strong>ZynAuth:</strong> Automated prior authorization submission, tracking, and follow-up that eliminates manual bottlenecks and ensures approvals are in place before scheduled procedures.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Within the first quarter, Apollo Clinic saw dramatic improvements across scheduling and operations:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>No-shows dropped from 22% to under 14%:</strong> A 40% reduction in no-shows meant more patients seen, more revenue captured, and better continuity of care.</li>' +
+    '<li style="margin-bottom:8px"><strong>Revenue recovery:</strong> Filling previously empty slots and reducing last-minute cancellations delivered meaningful revenue gains across all locations.</li>' +
+    '<li style="margin-bottom:8px"><strong>60% staff time savings:</strong> Front desk staff were freed from manual reminder calls and waitlist management, allowing them to focus on in-office patient experience.</li>' +
+    '<li style="margin-bottom:8px"><strong>Prior auth acceleration:</strong> Automated prior auth submission and tracking eliminated backlogs and reduced appointment cancellations due to missing authorizations.</li>' +
+    '</ul>' +
+
+    '</div></div></section>' +
+    renderCTA('Reduce No-Shows Like Apollo Clinic', 'See how Zynix AI can transform your practice\u2019s scheduling and operational efficiency.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  function renderCaseStudyNHS() {
+    return renderInnerHero('CASE STUDY', 'NHS Health System', 'Enterprise-Scale Population Health Management with AI Agents', IMG.enterprise, 'NHS Health System case study with Zynix AI') +
+    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
+
+    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">40%</span><span style="font-size:14px;color:var(--z-text-secondary)">Gap Closure Improvement</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">12</span><span style="font-size:14px;color:var(--z-text-secondary)">Sites Covered</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">\u2193</span><span style="font-size:14px;color:var(--z-text-secondary)">Documentation Time Reduction</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">24/7</span><span style="font-size:14px;color:var(--z-text-secondary)">Consistent After-Hours Coverage</span></div>' +
+    '</div>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">NHS Health System is a multi-hospital system managing population health across hundreds of thousands of attributed lives. At enterprise scale, several systemic challenges undermined performance:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>Population health at scale:</strong> Managing HCC gaps, quality measures, and care coordination across hundreds of thousands of lives required more capacity than manual workflows could deliver.</li>' +
+    '<li style="margin-bottom:8px"><strong>HCC gaps:</strong> Risk adjustment accuracy suffered because chart reviews and suspect coding could not keep pace with the volume of patient encounters across 12 sites.</li>' +
+    '<li style="margin-bottom:8px"><strong>Inconsistent after-hours coverage:</strong> Each site handled after-hours calls differently, resulting in variable patient experience and missed triage opportunities.</li>' +
+    '<li style="margin-bottom:8px"><strong>Physician documentation burden:</strong> Providers across the system spent excessive time on documentation, contributing to burnout and limiting throughput.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">NHS Health System deployed the full Zynix AI platform across all 12 sites in a phased rollout:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>Full Zynix Platform:</strong> Unified data ingestion, intelligence engine, and AI agent orchestration layer deployed across the entire health system for consistent population health management.</li>' +
+    '<li style="margin-bottom:8px"><strong>ZynAfterHours:</strong> Standardized 24/7 AI-powered after-hours triage across all 12 sites, providing consistent patient experience and clinically accurate call handling.</li>' +
+    '<li style="margin-bottom:8px"><strong>ZynScribe:</strong> Ambient AI documentation deployed to providers across the system, dramatically reducing time spent on notes and freeing up clinical capacity.</li>' +
+    '<li style="margin-bottom:8px"><strong>Transitions of Care Agent:</strong> Automated post-discharge follow-up across the system, ensuring timely TCM contact and reducing readmission risk at scale.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">The full platform deployment delivered enterprise-scale improvements:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>40% HCC gap closure improvement:</strong> AI-powered chart review and automated outreach closed risk adjustment gaps at a rate far exceeding manual workflows, improving RAF accuracy and financial performance.</li>' +
+    '<li style="margin-bottom:8px"><strong>Consistent after-hours coverage across 12 sites:</strong> Standardized AI triage replaced inconsistent answering services, improving patient satisfaction and reducing unnecessary ED visits system-wide.</li>' +
+    '<li style="margin-bottom:8px"><strong>Documentation time reduction:</strong> ZynScribe reduced provider documentation burden significantly, improving provider satisfaction and increasing the number of patients seen per day.</li>' +
+    '<li style="margin-bottom:8px"><strong>Scalable care coordination:</strong> The unified platform enabled centralized visibility into population health metrics while agents executed outreach autonomously across all locations.</li>' +
+    '</ul>' +
+
+    '</div></div></section>' +
+    renderCTA('Scale Population Health Like NHS', 'See how the full Zynix platform can transform care delivery across your health system.', 'Request a Demo') +
+    renderFooter();
+  }
+
   function renderCaseStudyPalmBeach() {
     return renderInnerHero('CASE STUDY', 'Palm Beach ACO', 'How a South Florida ACO transformed value-based care operations with AI-powered outreach, documentation, and care coordination.', IMG.care, 'Palm Beach ACO case study with Zynix AI') +
     '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
