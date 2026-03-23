@@ -111,9 +111,9 @@
   // ── SEO Data ──
   var SITE_DOMAIN = (window.location.hostname.indexOf('zynix.ai') > -1) ? 'https://www.zynix.ai' : window.location.origin;
   var PAGE_SEO = {
-    '': { title: 'AI for Value-Based Care | Zynix AI', desc: 'Zynix AI deploys autonomous AI agents that close care gaps, boost shared savings, and automate coordination for ACOs and health systems. Request a demo today.', img: IMG.hero, schema: 'Organization' },
-    '/products-zynix-os': { title: 'Value-Based Care Operating System | Zynix AI', desc: 'Zynix OS unifies data, analytics, AI agents, and care plans into one healthcare AI platform. Automate care delivery and hit quality targets. See it in action.', img: IMG.enterprise, schema: 'Product' },
-    '/products-data-platform': { title: 'Healthcare Data Platform | Zynix AI', desc: 'Integrate EHR, claims, ADT, and SDOH clinical data into one unified layer with 97%+ patient matching. Power real-time insights for value-based care programs.', img: IMG.data, schema: 'Product' },
+    '': { title: 'AI for Value-Based Care | Zynix AI', desc: 'Zynix AI deploys autonomous AI agents that close care gaps, boost shared savings, and automate coordination for ACOs and health systems.', img: IMG.hero, schema: 'Organization' },
+    '/products-zynix-os': { title: 'Value-Based Care Operating System | Zynix AI', desc: 'Zynix OS unifies data, analytics, AI agents, and care plans into one healthcare AI platform. Automate care delivery and hit quality targets.', img: IMG.enterprise, schema: 'Product' },
+    '/products-data-platform': { title: 'Healthcare Data Platform | Zynix AI', desc: 'Integrate EHR, claims, ADT, and SDOH data into one unified layer with 97%+ patient matching. Power real-time value-based care insights.', img: IMG.data, schema: 'Product' },
     '/products-analytics': { title: 'Population Health Analytics | Zynix AI', desc: 'AI-driven risk stratification, HCC coding, and population health analytics that close quality gaps 40% faster. Built for ACOs and health plans. Get a demo.', img: IMG.analytics, schema: 'Product' },
     '/products-ai-agents': { title: 'AI Agents for Healthcare | Zynix AI', desc: 'Seven autonomous AI agents automate care coordination, outreach, scheduling, triage, and documentation. Over 1M patient interactions across 30 states. Learn more.', img: IMG.doctor, schema: 'Product' },
     '/products-zynscribe': { title: 'AI Clinical Documentation | Zynix AI', desc: 'ZynScribe delivers ambient documentation that captures structured clinical notes in real time. Cut documentation burden by 70% while staying HIPAA compliant.', img: IMG.scribe, schema: 'Product' },
@@ -2206,15 +2206,30 @@
 
     // -- AEO SUMMARY (hidden meta for LLMs/screen readers, rendered as structured data not visible div) --
 
-    // -- CUSTOMER TRUST STRIP --
-    var trustOrgs = ['Palm Beach ACO','West Florida ACO','Space Coast ACO','Central Florida ACO',
-      'Assurity ACO REACH','Advanced ACO &amp; Affiliates','IncentiveCare IPA','eTernal Health',
-      'Cardio &amp; Vascular Consultants','AMISTAD CHC','Health Vision Institute','CLSCFL',
-      'Professional Radiology Group','Value Services Management','Sun Flower ACO','Pain Rehab Surgery Center'];
+    // -- CUSTOMER TRUST STRIP (with real logos) --
+    var trustLogos = [
+      { name: 'Palm Beach ACO', logo: 'https://cdn.prod.website-files.com/6818da6a953b7f1e582f8191/682e6a2ca7d7d2df4e89db1d_pbacologohighres.png', flagship: true, lives: '600K+ VBC Lives' },
+      { name: 'West Florida ACO', logo: 'https://westfloridaaco.com/assets/img/New_WestFlorida_ACO_logo_color.svg' },
+      { name: 'Space Coast ACO', logo: 'https://spacecoastaco.com/assets/img/New_Space_Coast_ACO_logo_color.svg' },
+      { name: 'Central Florida ACO', logo: 'https://floridaaco.com/wp-content/uploads/2021/09/Florida-Accountable-Care-Services-442x125-1.png' },
+      { name: 'Advanced ACO & Affiliates', logo: 'https://advancedmanagement.org/wp-content/uploads/2022/05/advanced-management-logo-new-removebg-preview.png' },
+      { name: 'eTernal Health', logo: 'https://www.eternalhealth.com/wp-content/uploads/2022/08/HR_eH-InfinityIcon-Logo.jpg' },
+      { name: 'NEXT Healthcare', logo: 'https://nexthealthcaresolutions.com/assets/img/next-logo.svg' },
+      { name: 'AMISTAD CHC', logo: 'https://amistadchc.com/wp-content/uploads/2018/10/image.png' },
+      { name: 'CLSCFL', logo: 'https://clscfl.com/wp-content/uploads/2022/08/Complete-Local-Specialty-Care.png' },
+      { name: 'Professional Radiology', logo: 'https://www.professionalradiology.com/layout/images/logo.png' },
+      { name: 'Sunflower ACO', logo: 'https://static.wixstatic.com/media/ca9ca7_43571900261a4d69bb69dab454fd7439~mv2.png/v1/fill/w_184,h_92,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Sunflower%20ACO%20Logo.png' },
+      { name: 'GoldenCare ACO', logo: 'https://static.wixstatic.com/media/ca9ca7_8186b443254b49ada16878821eca400a~mv2.png/v1/fill/w_184,h_92,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GoldenCare%20ACO%20(2).png' }
+    ];
     var trustSpans = '';
     for (var ti = 0; ti < 2; ti++) {
-      for (var tj = 0; tj < trustOrgs.length; tj++) {
-        trustSpans += '<span>' + trustOrgs[tj] + '</span>';
+      for (var tj = 0; tj < trustLogos.length; tj++) {
+        var tl = trustLogos[tj];
+        if (tl.flagship) {
+          trustSpans += '<span class="zynix-trust-logo zynix-trust-flagship" title="' + tl.name + ' \u2014 ' + tl.lives + '"><img src="' + tl.logo + '" alt="' + tl.name + '" loading="lazy"><span class="zynix-flagship-badge">' + tl.lives + '</span></span>';
+        } else {
+          trustSpans += '<span class="zynix-trust-logo" title="' + tl.name + '"><img src="' + tl.logo + '" alt="' + tl.name + '" loading="lazy"></span>';
+        }
       }
     }
     html += '<section class="zynix-trust-strip"><div class="zynix-container">' +
@@ -2278,12 +2293,12 @@
       '<span class="zynix-tag">PRODUCT SUITE</span>' +
       '<h2>Everything You Need. Nothing You Don\u2019t.</h2>' +
       '<div class="zynix-feature-grid">' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128450;</div><h3>Data Platform</h3><p>Unified healthcare data layer that ingests, cleans, and normalizes data from every clinical and administrative source.</p><a href="/products-data-platform" class="zynix-card-link">Learn more &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128200;</div><h3>Analytics</h3><p>Population health analytics, predictive modeling, and real-time decision support. ZynGap, ZynPredict, ZynGuide.</p><a href="/products-analytics" class="zynix-card-link">Learn more &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#129302;</div><h3>AI Agents</h3><p>Seven specialized agents for outreach, scheduling, triage, documentation, reminders, prior auth, and fax processing.</p><a href="/products-ai-agents" class="zynix-card-link">Learn more &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128196;</div><h3>ZynScribe</h3><p>Ambient AI documentation that captures structured clinical notes in real-time during patient encounters.</p><a href="/products-zynscribe" class="zynix-card-link">Learn more &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128203;</div><h3>Care Plans</h3><p>Deployable, orchestrated care plans for TCM, CCM, AWV, HEDIS, and HCC closure — executed by AI agents.</p><a href="/products-care-plans" class="zynix-card-link">Learn more &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#129504;</div><h3>ZynixLLM</h3><p>Purpose-built healthcare language model that powers the entire platform. Gets smarter with every patient interaction.</p><a href="/company-zynixllm" class="zynix-card-link">Learn more &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128450;</div><h3>Data Platform</h3><p>Unified healthcare data layer that ingests, cleans, and normalizes data from every clinical and administrative source.</p><a href="/platform" class="zynix-card-link">Learn more &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128200;</div><h3>Analytics</h3><p>Population health analytics, predictive modeling, and real-time decision support. ZynGap, ZynPredict, ZynGuide.</p><a href="/solutions/zynix-data-analytics" class="zynix-card-link">Learn more &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#129302;</div><h3>AI Agents</h3><p>Seven specialized agents for outreach, scheduling, triage, documentation, reminders, prior auth, and fax processing.</p><a href="/agents" class="zynix-card-link">Learn more &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128196;</div><h3>ZynScribe</h3><p>Ambient AI documentation that captures structured clinical notes in real-time during patient encounters.</p><a href="/zynscribe" class="zynix-card-link">Learn more &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#128203;</div><h3>Care Plans</h3><p>Deployable, orchestrated care plans for TCM, CCM, AWV, HEDIS, and HCC closure — executed by AI agents.</p><a href="/care-plans" class="zynix-card-link">Learn more &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">&#129504;</div><h3>ZynixLLM</h3><p>Purpose-built healthcare language model that powers the entire platform. Gets smarter with every patient interaction.</p><a href="/company/zynixllm" class="zynix-card-link">Learn more &rarr;</a></div>' +
       '</div></div></section>';
 
     // -- PLATFORM SCREENSHOTS --
@@ -2377,12 +2392,12 @@
       '<h2>Purpose-Built for Value-Based Healthcare</h2>' +
       '<p class="zynix-section-sub">Zynix serves organizations responsible for outcomes, cost, quality, and operations.</p>' +
       '<div class="zynix-feature-grid">' +
-      '<div class="zynix-feature-card fade-in-up"><h3>ACOs &amp; MSOs</h3><p>TCM execution, AWV completion, shared savings optimization, and quality performance.</p><a href="/solutions-acos" class="zynix-card-link">ACO Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>Health Systems</h3><p>Readmission reduction, unified patient engagement, post-discharge coordination at scale.</p><a href="/solutions-health-systems" class="zynix-card-link">Health System Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>Health Plans</h3><p>Stars ratings improvement, HCC gap closure, member engagement, avoidable ER reduction.</p><a href="/solutions-health-plans" class="zynix-card-link">Health Plan Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>FQHCs</h3><p>Multilingual AI for underserved populations, quality payments maximization, care management at scale.</p><a href="/solutions-fqhcs" class="zynix-card-link">FQHC Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>Independent Practices</h3><p>No-show reduction, after-hours coverage, appointment scheduling, documentation time savings.</p><a href="/solutions-independent-practices" class="zynix-card-link">Practice Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>ASCs</h3><p>Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination.</p><a href="/solutions-ascs" class="zynix-card-link">ASC Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><h3>ACOs &amp; MSOs</h3><p>TCM execution, AWV completion, shared savings optimization, and quality performance.</p><a href="/who-we-serve/acos-msos" class="zynix-card-link">ACO Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><h3>Health Systems</h3><p>Readmission reduction, unified patient engagement, post-discharge coordination at scale.</p><a href="/who-we-serve/health-systems" class="zynix-card-link">Health System Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><h3>Health Plans</h3><p>Stars ratings improvement, HCC gap closure, member engagement, avoidable ER reduction.</p><a href="/who-we-serve/health-plans" class="zynix-card-link">Health Plan Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><h3>FQHCs</h3><p>Multilingual AI for underserved populations, quality payments maximization, care management at scale.</p><a href="/who-we-serve/fqhcs" class="zynix-card-link">FQHC Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><h3>Independent Practices</h3><p>No-show reduction, after-hours coverage, appointment scheduling, documentation time savings.</p><a href="/who-we-serve/independent-group-practices" class="zynix-card-link">Practice Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><h3>ASCs</h3><p>Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination.</p><a href="/who-we-serve/ascs" class="zynix-card-link">ASC Solutions &rarr;</a></div>' +
       '</div></div></section>';
 
     // -- DATA FLYWHEEL --
@@ -3301,7 +3316,7 @@ function renderWhoWeServeACOs() {
     featuredProducts: [
       { name: 'Deployable Care Plans', url: '/care-plans', description: 'Post-Discharge TCM Care Plan, HCC + Quality Gap Closure Sprint, High-Utilizer ED Diversion Plan, Medication Safety & Adherence Plan. Multi-agent programs built around ACO performance-year priorities.' },
       { name: 'Clinical Performance Agents', url: '/agents/clinical-performance', description: 'Transitions of Care Agent, Chronic & Longitudinal Care Management Agent, Preventive & Quality Activation Agents, SDoH Determination Agent. The execution layer your care management program identifies the work for.' },
-      { name: 'ZynGap', url: '/solutions/zyngap', description: 'HCC and quality gap identification prioritized by RAF impact and closure timing. Actionable worklists for coordinators \u2014 not raw gap data that has to be triaged before it can be acted on.' },
+      { name: 'ZynGap', url: '/solutions/zynix-data-analytics', description: 'HCC and quality gap identification prioritized by RAF impact and closure timing. Actionable worklists for coordinators \u2014 not raw gap data that has to be triaged before it can be acted on.' },
       { name: 'ZynAfterHours', url: '/agents/operational-efficiency/zynafterhours-triage', description: '24/7 after-hours triage for your attributed population. Clinical triage logic, 15+ languages, ED diversion built in. Every non-emergent call that stays out of the ED is a TCOC win.' }
     ],
     citations: [
@@ -3358,7 +3373,7 @@ function renderWhoWeServeHealthPlans() {
       { id: 'UC06', title: 'Post-Discharge TCM and Readmission Prevention', primarySegment: 'ACOs & MSOs', url: '/use-cases/post-discharge-tcm-readmission' }
     ],
     featuredProducts: [
-      { name: 'ZynGap', url: '/solutions/zyngap', description: 'HCC and quality gap identification across your member population, prioritized by risk adjustment impact and Stars measure completion timing. Actionable worklists, not raw gap exports.' },
+      { name: 'ZynGap', url: '/solutions/zynix-data-analytics', description: 'HCC and quality gap identification across your member population, prioritized by risk adjustment impact and Stars measure completion timing. Actionable worklists, not raw gap exports.' },
       { name: 'Predictive Activation Agents', url: '/agents/predictive-activation', description: 'Rising risk member outreach, readmission risk monitoring, high-utilizer ED diversion. Acts on ZynPredict signals before the clinical event \u2014 not after the claim arrives.' },
       { name: 'Clinical Performance Agents', url: '/agents/clinical-performance', description: 'Medication adherence outreach, Transitions of Care Agent, Preventive & Quality Activation. The member engagement execution layer for Medicare Advantage population scale.' },
       { name: 'HCC + Quality Gap Closure Sprint', url: '/care-plans', description: 'Orchestrated program that coordinates outreach, visit completion, and documentation for the highest-impact HCC and quality gaps before the risk adjustment deadline.' }
