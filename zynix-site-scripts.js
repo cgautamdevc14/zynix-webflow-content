@@ -2217,24 +2217,22 @@
       '</div></section>';
 
 
-    // -- AEO SUMMARY (structured for AI extraction and screen readers) --
-    html += '<section class="zynix-aeo-summary" style="padding:48px 0;background:var(--z-bg-alt)"><div class="zynix-container" style="max-width:800px">' +
-      '<h2 style="font-size:22px;margin-bottom:16px">What is Zynix AI?</h2>' +
-      '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">Zynix AI is a healthcare artificial intelligence platform purpose-built for value-based care. It deploys autonomous AI agents that automate care coordination, close quality gaps, and boost shared savings for ACOs, health systems, health plans, FQHCs, and independent practices. The platform unifies clinical data from EHRs, claims, ADT feeds, and SDOH sources into one intelligence layer, then orchestrates twelve specialized AI agents to take action \u2014 from post-discharge follow-up and medication reconciliation to after-hours triage and prior authorization.</p>' +
-      '<dl style="margin-top:24px;font-size:15px;line-height:1.8;color:var(--z-text-secondary)">' +
-      '<dt style="font-weight:600;color:var(--z-text);margin-top:12px">Who is it for?</dt><dd style="margin:0 0 8px">ACOs in MSSP and ACO REACH, health systems, Medicare Advantage plans, FQHCs, independent practices, and ambulatory surgery centers.</dd>' +
-      '<dt style="font-weight:600;color:var(--z-text);margin-top:12px">What problem does it solve?</dt><dd style="margin:0 0 8px">Healthcare organizations have invested in analytics but lack the execution infrastructure to act on insights at scale. Zynix bridges the gap between knowing which patients need care and actually delivering it.</dd>' +
-      '<dt style="font-weight:600;color:var(--z-text);margin-top:12px">How does it work?</dt><dd style="margin:0 0 8px">Four integrated layers: (1) AI Data Foundation for unified clinical data, (2) Intelligence Engine for risk stratification and gap identification, (3) AI Agent Suite with 12 purpose-built agents, and (4) Deployable Care Plans that orchestrate multi-agent workflows.</dd>' +
-      '<dt style="font-weight:600;color:var(--z-text);margin-top:12px">How is it different?</dt><dd style="margin:0">Unlike fragmented point solutions, Zynix is an integrated operating system where AI agents share data and coordinate actions. It achieves 85%+ TCM contact rates versus the 30-40% industry average, with 1M+ patients onboarded across 30 states.</dd>' +
-      '</dl>' +
-      '</div></section>';
+    // -- AEO SUMMARY (hidden visually, readable by crawlers/screen readers for SEO/AEO) --
+    html += '<div class="zynix-sr-only" aria-hidden="false">' +
+      '<h2>What is Zynix AI?</h2>' +
+      '<p>Zynix AI is a healthcare artificial intelligence platform purpose-built for value-based care. It deploys autonomous AI agents that automate care coordination, close quality gaps, and boost shared savings for ACOs, health systems, health plans, FQHCs, and independent practices. The platform unifies clinical data from EHRs, claims, ADT feeds, and SDOH sources into one intelligence layer, then orchestrates twelve specialized AI agents to take action.</p>' +
+      '<p>Who is it for? ACOs in MSSP and ACO REACH, health systems, Medicare Advantage plans, FQHCs, independent practices, and ambulatory surgery centers.</p>' +
+      '<p>What problem does it solve? Healthcare organizations have invested in analytics but lack the execution infrastructure to act on insights at scale.</p>' +
+      '<p>How does it work? Four integrated layers: AI Data Foundation, Intelligence Engine, AI Agent Suite with 12 agents, and Deployable Care Plans.</p>' +
+      '<p>How is it different? Unlike fragmented point solutions, Zynix is an integrated operating system achieving 85%+ TCM contact rates with 1M+ patients across 30 states.</p>' +
+      '</div>';
 
     // -- CUSTOMER TRUST STRIP (with real logos) --
     var trustLogos = [
       { name: 'Palm Beach ACO', logo: 'https://cdn.prod.website-files.com/6818da6a953b7f1e582f8191/682e6a2ca7d7d2df4e89db1d_pbacologohighres.png', flagship: true, lives: '600K+ VBC Lives' },
       { name: 'West Florida ACO', logo: 'https://westfloridaaco.com/assets/img/New_WestFlorida_ACO_logo_color.svg' },
       { name: 'Space Coast ACO', logo: 'https://spacecoastaco.com/assets/img/New_Space_Coast_ACO_logo_color.svg' },
-      { name: 'Central Florida ACO', logo: 'https://floridaaco.com/wp-content/uploads/2021/09/Florida-Accountable-Care-Services-442x125-1.png' },
+      { name: 'Central Florida ACO', logo: '' },
       { name: 'Advanced ACO & Affiliates', logo: 'https://advancedmanagement.org/wp-content/uploads/2022/05/advanced-management-logo-new-removebg-preview.png' },
       { name: 'eTernal Health', logo: 'https://www.eternalhealth.com/wp-content/uploads/2022/08/HR_eH-InfinityIcon-Logo.jpg' },
       { name: 'NEXT Healthcare', logo: 'https://nexthealthcaresolutions.com/assets/img/next-logo.svg' },
@@ -2250,8 +2248,10 @@
         var tl = trustLogos[tj];
         if (tl.flagship) {
           trustSpans += '<span class="zynix-trust-logo zynix-trust-flagship" title="' + tl.name + ' \u2014 ' + tl.lives + '"><img src="' + tl.logo + '" alt="' + tl.name + '" loading="lazy"><span class="zynix-flagship-badge">' + tl.lives + '</span></span>';
-        } else {
+        } else if (tl.logo) {
           trustSpans += '<span class="zynix-trust-logo" title="' + tl.name + '"><img src="' + tl.logo + '" alt="' + tl.name + '" loading="lazy"></span>';
+        } else {
+          trustSpans += '<span class="zynix-trust-text">' + tl.name + '</span>';
         }
       }
     }
