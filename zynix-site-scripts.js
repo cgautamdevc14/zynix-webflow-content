@@ -4062,26 +4062,95 @@ function renderPrivacyV7() {
     IMG.hero, 'Zynix AI Privacy Policy');
 
   html += '<section class="zynix-legal-section"><div class="zynix-container"><div class="zynix-legal-content">' +
-    '<p><strong>Effective Date:</strong> March 22, 2026 | <strong>Last Updated:</strong> March 22, 2026</p>' +
+    '<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> March 22, 2026</p>' +
+
     '<h2>1. Who This Policy Applies To</h2>' +
-    '<p>This policy applies to visitors to the Zynix AI website (zynix.ai), people who contact us for demos or inquiries, and business contacts interacting with Zynix AI for procurement, security reviews, or partnerships.</p>' +
+    '<p>This policy applies to:</p>' +
+    '<ul>' +
+    '<li>Visitors to the Zynix AI website (zynix.ai)</li>' +
+    '<li>People who contact us \u2014 for example, to request a demo, ask a question, or submit a form</li>' +
+    '<li>Business contacts interacting with Zynix AI for procurement, security reviews, or partnership inquiries</li>' +
+    '</ul>' +
+    '<p>If you are a customer using the Zynix AI platform, your organization\u2019s agreement with Zynix AI governs data handling in addition to this policy.</p>' +
+
     '<h2>2. Information We Collect</h2>' +
-    '<p><strong>Information you provide:</strong> Contact details (name, email, phone), company name and role, messages and form submissions.</p>' +
-    '<p><strong>Information collected automatically:</strong> IP address, browser type, pages visited, referring source, and device information through cookies and analytics tools.</p>' +
+    '<h3>A. Information you provide</h3>' +
+    '<ul>' +
+    '<li>Contact details (name, email address, phone number)</li>' +
+    '<li>Company name and role</li>' +
+    '<li>Messages and form submissions, such as demo request details or inquiry content</li>' +
+    '</ul>' +
+    '<h3>B. Information collected automatically</h3>' +
+    '<p>When you visit our website, we may automatically collect:</p>' +
+    '<ul>' +
+    '<li>Device type and browser information</li>' +
+    '<li>Approximate location inferred from IP address (typically city or state level)</li>' +
+    '<li>Website usage data, including pages viewed, time on page, and referral source</li>' +
+    '</ul>' +
+    '<h3>C. Information processed on behalf of customers</h3>' +
+    '<p>When Zynix AI is deployed by a healthcare organization, we may process information as a service provider acting on that organization\u2019s instructions.</p>' +
+    '<p><strong>HIPAA note:</strong> Zynix AI supports HIPAA-regulated workflows and may process protected health information (PHI) when implemented by covered entities or their business partners. In those cases, data handling is governed by the applicable customer agreement and Business Associate Agreement (BAA), not this policy.</p>' +
+
     '<h2>3. How We Use Information</h2>' +
-    '<p>We use information to respond to demo requests and inquiries, improve our website, comply with legal obligations, and communicate about our services when you have opted in.</p>' +
-    '<h2>4. Data Sharing</h2>' +
-    '<p>We do not sell personal information. We may share with service providers who help operate our website, professional advisors, and as required by law.</p>' +
-    '<h2>5. Data Security</h2>' +
-    '<p>We implement appropriate technical and organizational measures to protect information. Zynix AI is SOC 2 Type II certified and operates HIPAA-aligned safeguards.</p>' +
-    '<h2>6. Your Rights</h2>' +
-    '<p>You may request access to, correction of, or deletion of your personal information. Contact <a href="mailto:info@zynix.ai">info@zynix.ai</a> to exercise these rights.</p>' +
-    '<h2>7. Contact</h2>' +
+    '<p>We use the information we collect to:</p>' +
+    '<ul>' +
+    '<li>Respond to inquiries and schedule product demos</li>' +
+    '<li>Provide and continuously improve our website and services</li>' +
+    '<li>Communicate about product updates, events, and company news (B2B communications only)</li>' +
+    '<li>Maintain website security, prevent fraud, and troubleshoot technical issues</li>' +
+    '<li>Comply with applicable legal obligations</li>' +
+    '</ul>' +
+
+    '<h2>4. How We Share Information</h2>' +
+    '<p>We may share information with:</p>' +
+    '<ul>' +
+    '<li><strong>Service providers</strong> who support our operations \u2014 including hosting, analytics, CRM, and communications platforms \u2014 under contractual confidentiality and security requirements</li>' +
+    '<li><strong>Professional advisors</strong> such as legal counsel and accountants, when reasonably necessary</li>' +
+    '<li><strong>Authorities</strong>, if required by applicable law or to protect the rights, safety, or property of Zynix AI or others</li>' +
+    '<li><strong>Successors in a business transfer</strong>, such as a merger or acquisition, subject to customary confidentiality safeguards</li>' +
+    '</ul>' +
+    '<p style="border-left:4px solid #20449B;padding:12px 16px;background:#EEF2FB;margin:20px 0"><strong>We do not sell personal information.</strong></p>' +
+
+    '<h2>5. Cookies and Analytics</h2>' +
+    '<p>We use cookies and similar technologies for website functionality and analytics.</p>' +
+    '<ul>' +
+    '<li>We use analytics tools to understand website performance and improve our content.</li>' +
+    '<li>We do not currently run consumer-targeted advertising campaigns. If this changes, we will update this policy and provide applicable choices where required.</li>' +
+    '</ul>' +
+    '<p>You can manage cookie preferences through your browser settings. Note that disabling certain cookies may affect website functionality.</p>' +
+
+    '<h2>6. Data Retention</h2>' +
+    '<p>We retain information for as long as reasonably necessary to fulfill the purposes described in this policy, unless a longer retention period is required or permitted by applicable law. When information is no longer needed, we take reasonable steps to securely delete or anonymize it.</p>' +
+
+    '<h2>7. Data Security</h2>' +
+    '<p>Zynix AI maintains administrative, technical, and organizational measures designed to protect the information we hold. These measures are aligned with industry standards for B2B software and healthcare-adjacent services, including our SOC 2 Type II certification.</p>' +
+    '<p>No method of electronic transmission or storage is completely risk-free. For more detail on our security program, visit our <a href="/security">Security Overview</a> page.</p>' +
+
+    '<h2>8. Your Rights and Choices</h2>' +
+    '<p>Depending on your location, you may have rights to access, correct, or delete information we hold about you, or to object to certain types of processing. To submit a request, contact us at <a href="mailto:info@zynix.ai">info@zynix.ai</a>.</p>' +
+    '<h3>California Residents \u2014 CCPA Rights</h3>' +
+    '<p>If you are a California resident, you have specific rights under the California Consumer Privacy Act (CCPA), including:</p>' +
+    '<ul>' +
+    '<li>The right to know what personal information we collect, use, and share</li>' +
+    '<li>The right to request deletion of your personal information</li>' +
+    '<li>The right to opt out of the sale of personal information</li>' +
+    '</ul>' +
+    '<p>Zynix AI does not sell personal information. To submit a CCPA request or learn more about your California privacy rights, contact us at <a href="mailto:info@zynix.ai">info@zynix.ai</a>.</p>' +
+    '<p>If you interact with Zynix AI through a healthcare organization that uses our platform, rights requests related to that data should be directed to that organization, as they are the data controller for that information.</p>' +
+
+    '<h2>9. Children\u2019s Privacy</h2>' +
+    '<p>Our website and services are directed to healthcare and business professionals. We do not knowingly collect personal information from children under the age of 13. If we become aware that we have inadvertently collected such information, we will take steps to delete it promptly.</p>' +
+
+    '<h2>10. Changes to This Policy</h2>' +
+    '<p>We may update this policy from time to time to reflect changes in our practices or applicable law. When we do, we will post the updated version on this page and update the \u201cLast Updated\u201d date above. We encourage you to review this policy periodically.</p>' +
+
+    '<h2>11. Contact</h2>' +
+    '<p>For privacy-related questions or to submit a data rights request:</p>' +
     '<p><strong>Email:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a></p>' +
-    '<p><strong>Address:</strong> 3535 Little Rd, Trinity, FL 34655, USA</p>' +
+    '<p><strong>Address:</strong> Zynix Health Technologies Inc., 3535 Little Rd, Trinity, FL 34655, USA</p>' +
     '</div></div></section>';
 
-  html += renderCTA('Questions About Our Privacy Practices?', 'Our team is happy to help with questions about how we handle your information.', 'Contact Us');
+  html += renderCTA('Have a Privacy Question or Data Request?', 'We\u2019re here to help. Reach out to our team directly.', 'Contact Us');
   html += renderFooter();
   return html;
 }
@@ -4095,33 +4164,57 @@ function renderTermsV7() {
     IMG.hero, 'Zynix AI Terms');
 
   html += '<section class="zynix-legal-section"><div class="zynix-container"><div class="zynix-legal-content">' +
-    '<p><strong>Effective Date:</strong> March 22, 2026 | <strong>Last Updated:</strong> March 22, 2026</p>' +
+    '<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> March 22, 2026</p>' +
+
     '<h2>1. Who We Are</h2>' +
-    '<p>Zynix AI (referred to as "Zynix," "we," "us," or "our") operates this website.</p>' +
-    '<p><strong>Contact:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a> | 3535 Little Rd, Trinity, FL 34655, USA</p>' +
+    '<p>Zynix AI (referred to as \u201cZynix,\u201d \u201cwe,\u201d \u201cus,\u201d or \u201cour\u201d) operates this website.</p>' +
+    '<p><strong>Contact:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a></p>' +
+    '<p><strong>Address:</strong> Zynix Health Technologies Inc., 3535 Little Rd, Trinity, FL 34655, USA</p>' +
+
     '<h2>2. Permitted Use</h2>' +
-    '<p>You may use this website for lawful business purposes. You agree not to: attempt to disrupt or compromise the website\'s security; reverse engineer, scrape, or harvest data unlawfully; upload malicious code; or transmit unlawful content.</p>' +
+    '<p>You may use this website for lawful business purposes, including learning about Zynix AI and contacting us.</p>' +
+    '<p>You agree not to:</p>' +
+    '<ul>' +
+    '<li>Attempt to disrupt, circumvent, or compromise the security or integrity of the website</li>' +
+    '<li>Reverse engineer, scrape, or harvest data from the website in a manner that violates applicable law</li>' +
+    '<li>Upload, transmit, or introduce malicious code, or conduct vulnerability probing without prior written permission from Zynix AI</li>' +
+    '<li>Use the website to transmit unlawful, harmful, deceptive, or fraudulent content</li>' +
+    '</ul>' +
+
     '<h2>3. No Medical Advice</h2>' +
-    '<p>This website is provided for informational and business purposes only. Nothing on this website constitutes medical advice, clinical guidance, diagnosis, or treatment.</p>' +
+    '<p style="border-left:4px solid #20449B;padding:12px 16px;background:#EEF2FB;margin:20px 0">This website is provided for informational and business purposes only. Nothing on this website constitutes medical advice, clinical guidance, diagnosis, or treatment. Do not rely on this website for clinical decision-making.</p>' +
+
     '<h2>4. Intellectual Property</h2>' +
-    '<p>All content on this website is owned by Zynix AI or its licensors and is protected by applicable intellectual property laws.</p>' +
+    '<p>All content on this website \u2014 including text, graphics, trademarks, logos, and other materials \u2014 is owned by Zynix AI or its licensors and is protected by applicable intellectual property laws.</p>' +
+    '<p>You may not copy, reproduce, modify, distribute, or create derivative works from any content on this website without prior written permission from Zynix AI, except as expressly permitted by law.</p>' +
+
     '<h2>5. Third-Party Links</h2>' +
-    '<p>This website may contain links to third-party websites. Zynix AI does not control those sites and is not responsible for their content.</p>' +
+    '<p>This website may contain links to third-party websites. These links are provided for convenience only. Zynix AI does not control those sites and is not responsible for their content, privacy practices, or security.</p>' +
+
     '<h2>6. Disclaimers</h2>' +
-    '<p>This website is provided on an "AS IS" and "AS AVAILABLE" basis. Zynix AI disclaims all warranties to the maximum extent permitted by law.</p>' +
+    '<p>This website is provided on an \u201cAS IS\u201d and \u201cAS AVAILABLE\u201d basis. To the maximum extent permitted by applicable law, Zynix AI disclaims all warranties, express or implied, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>' +
+
     '<h2>7. Limitation of Liability</h2>' +
-    '<p>Zynix AI will not be liable for any indirect, incidental, special, consequential, or punitive damages arising from use of this website. Total liability will not exceed USD $100.</p>' +
+    '<p>To the maximum extent permitted by applicable law, Zynix AI will not be liable for any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of this website.</p>' +
+    '<p>Zynix AI\u2019s total liability for any claim arising from or related to this website will not exceed USD $100, or the minimum amount permitted under applicable law if this limitation is unenforceable.</p>' +
+    '<p><em>Note: These Terms govern use of the Zynix AI website (zynix.ai) only. If your organization has an executed Master Services Agreement or similar agreement with Zynix AI for use of our platform or services, that agreement governs your platform use and contains its own liability provisions separate from these Terms.</em></p>' +
+
     '<h2>8. Indemnification</h2>' +
-    '<p>You agree to indemnify and hold harmless Zynix AI from claims arising out of your misuse of this website or violation of these Terms.</p>' +
-    '<h2>9. Changes</h2>' +
-    '<p>We may update these Terms at any time. Continued use constitutes acceptance of revised Terms.</p>' +
+    '<p>You agree to indemnify, defend, and hold harmless Zynix AI and its officers, directors, employees, and agents from and against any claims, damages, liabilities, losses, and expenses (including reasonable attorneys\u2019 fees) arising out of or related to your misuse of this website or your violation of these Terms.</p>' +
+
+    '<h2>9. Changes to the Site and Terms</h2>' +
+    '<p>We may update this website or these Terms at any time without prior notice. When we update these Terms, we will post the revised version on this page and update the \u201cLast Updated\u201d date at the top. Your continued use of this website after any update constitutes your acceptance of the revised Terms.</p>' +
+
     '<h2>10. Governing Law</h2>' +
-    '<p>These Terms are governed by the laws of the State of Florida. Disputes shall be subject to the exclusive jurisdiction of courts in Pasco County, Florida.</p>' +
+    '<p>These Terms are governed by the laws of the State of Florida, without regard to conflict of laws principles. Any disputes arising under or related to these Terms shall be subject to the exclusive jurisdiction of the state and federal courts located in Pasco County, Florida.</p>' +
+
     '<h2>11. Contact</h2>' +
-    '<p><strong>Email:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a> | <strong>Address:</strong> 3535 Little Rd, Trinity, FL 34655, USA</p>' +
+    '<p>For questions about these Terms:</p>' +
+    '<p><strong>Email:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a></p>' +
+    '<p><strong>Address:</strong> Zynix Health Technologies Inc., 3535 Little Rd, Trinity, FL 34655, USA</p>' +
     '</div></div></section>';
 
-  html += renderCTA('Questions About Our Terms?', 'Our team is happy to help with questions about our website, services, or how we operate.', 'Contact Us');
+  html += renderCTA('Questions About Our Terms or How We Work?', 'Our team is happy to help with questions about our website, our services, or how we operate.', 'Contact Us');
   html += renderFooter();
   return html;
 }
@@ -5215,10 +5308,10 @@ function renderDataAnalyticsV7() {
     '/resources-webinars': renderWebinars,
     '/resources-whitepapers': renderWhitepapers,
     // Legal
-    '/privacy-policy': renderPrivacy,
-    '/company-privacy': renderPrivacy,
-    '/terms-of-service': renderTerms,
-    '/company-terms': renderTerms,
+    '/privacy-policy': renderPrivacyV7,
+    '/company-privacy': renderPrivacyV7,
+    '/terms-of-service': renderTermsV7,
+    '/company-terms': renderTermsV7,
     // Comparison Pages
     '/compare/zynix-vs-point-solutions': renderComparePointSolutions,
     '/compare/zynix-vs-innovaccer': renderCompareInnovaccer,
