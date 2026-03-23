@@ -5443,13 +5443,27 @@ function renderDataAnalyticsV7() {
         if (el.dataset.animated) return;
         el.dataset.animated = '1';
         var text = el.textContent.trim();
-        var match = text.match(/^([\d,.]+)(.*)$/);
-        if (!match) return;
-        var target = parseFloat(match[1].replace(/,/g, ''));
-        var suffix = match[2] || '';
-        var hasComma = match[1].indexOf(',') > -1;
-        var hasDecimal = match[1].indexOf('.') > -1;
-        var decimals = hasDecimal ? (match[1].split('.')[1] || '').length : 0;
+        // Match: optional prefix ($), digits with optional comma/decimal, optional suffix (M+, %, B, +, etc.)
+        var match = text.match(/^([^\d]*)([\d,.]+)(.*)$/);
+        if (!match) {
+          // No numeric content (e.g., "$285\u2013570B") — just fade in without counting
+          el.style.opacity = '0';
+          el.style.transition = 'opacity 0.6s ease';
+          setTimeout(function() { el.style.opacity = '1'; }, 50);
+          return;
+        }
+        var prefix = match[1] || '';
+        var target = parseFloat(match[2].replace(/,/g, ''));
+        var suffix = match[3] || '';
+        var hasComma = match[2].indexOf(',') > -1;
+        var hasDecimal = match[2].indexOf('.') > -1;
+        var decimals = hasDecimal ? (match[2].split('.')[1] || '').length : 0;
+        if (isNaN(target) || target === 0) {
+          el.style.opacity = '0';
+          el.style.transition = 'opacity 0.6s ease';
+          setTimeout(function() { el.style.opacity = '1'; }, 50);
+          return;
+        }
         var duration = 1200;
         var start = performance.now();
         function step(now) {
@@ -5459,7 +5473,7 @@ function renderDataAnalyticsV7() {
           var current = target * eased;
           var formatted = hasDecimal ? current.toFixed(decimals) : Math.floor(current).toString();
           if (hasComma) formatted = Number(formatted).toLocaleString();
-          el.textContent = formatted + suffix;
+          el.textContent = prefix + formatted + suffix;
           if (progress < 1) requestAnimationFrame(step);
         }
         requestAnimationFrame(step);
