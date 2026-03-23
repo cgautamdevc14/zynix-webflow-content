@@ -2443,6 +2443,15 @@
 
   // ── 301 REDIRECT MAP (v7 rebuild) ──
   var REDIRECTS = {
+    // Old use case slugs → correct slugs
+    '/use-cases/post-discharge-followup-health-systems': '/use-cases/post-discharge-follow-up',
+    '/use-cases/hcc-gap-closure-health-systems': '/use-cases/hcc-gap-closure-health-system-aco',
+    '/use-cases/after-hours-ed-diversion-aco': '/use-cases/after-hours-ed-diversion',
+    '/use-cases/post-discharge-followup-acos': '/use-cases/post-discharge-tcm-readmission',
+    '/use-cases/hcc-gap-closure-acos': '/use-cases/hcc-gap-raf-optimization',
+    '/use-cases/after-hours-triage-health-systems': '/use-cases/after-hours-triage-multi-site',
+    '/use-cases/prior-auth-health-systems': '/use-cases/prior-auth-high-volume-specialty',
+    '/use-cases/physician-documentation-health-systems': '/use-cases/physician-documentation-ambient-ai',
     // Products → Platform / Solutions
     '/products-zynix-os': '/platform',
     '/products-data-platform': '/platform',
