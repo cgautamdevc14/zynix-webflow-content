@@ -363,8 +363,15 @@ body {
 .zynix-compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
 .zynix-compare-card {
   padding: 36px 28px;
-  border-radius: var(--z-radius);
+  border-radius: var(--z-radius-lg);
   background: var(--z-bg-card);
+  border: 1px solid var(--z-border);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.zynix-compare-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 .zynix-compare-bad {
   background: #FEF2F2;

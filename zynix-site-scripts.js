@@ -2535,57 +2535,61 @@
 function renderUseCaseV7(data) {
   var html = '';
 
-  html += renderInnerHero(data.id, data.h1, data.subhead, IMG.care, data.title);
+  var segLabel = (data.segments && data.segments.primary) ? data.segments.primary.toUpperCase() : 'USE CASE';
+  html += renderInnerHero(segLabel, data.h1, data.subhead, IMG.care, data.title);
 
-  html += '<section><div class="zynix-container">' +
+  html += '<section style="padding:80px 0"><div class="zynix-container" style="max-width:800px">' +
     '<span class="zynix-tag">THE PROBLEM</span>' +
     '<h2>' + data.problemHeading + '</h2>' +
-    '<p class="zynix-section-sub">' + data.problem + '</p>' +
+    '<div style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin-top:24px">' + data.problem + '</div>' +
     '</div></section>';
 
-  html += '<section><div class="zynix-container">' +
+  html += '<section style="padding:80px 0;background:var(--z-bg-alt)"><div class="zynix-container">' +
     '<span class="zynix-tag">WHY CURRENT TOOLS FALL SHORT</span>' +
     '<h2>Where Existing Approaches Break Down</h2>' +
-    '<div class="zynix-compare-grid">';
+    '<div class="zynix-compare-grid" style="margin-top:40px">';
   for (var s = 0; s < data.shortfalls.length; s++) {
-    html += '<div class="zynix-compare-card zynix-compare-bad">' +
-      '<h3>' + data.shortfalls[s].tool + '</h3>' +
-      '<ul><li>' + data.shortfalls[s].description + '</li></ul>' +
+    html += '<div class="zynix-compare-card zynix-compare-bad fade-in-up">' +
+      '<h3>&#9888; ' + data.shortfalls[s].tool + '</h3>' +
+      '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0">' + data.shortfalls[s].description + '</p>' +
       '</div>';
   }
   html += '</div></div></section>';
 
-  html += '<section><div class="zynix-container">' +
+  html += '<section style="padding:80px 0"><div class="zynix-container" style="max-width:800px">' +
     '<span class="zynix-tag">HOW ZYNIX AI FITS</span>' +
     '<h2>' + data.solutionHeading + '</h2>' +
-    '<p class="zynix-section-sub">' + data.solution + '</p>' +
+    '<div style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin-top:24px">' + data.solution + '</div>' +
     '</div></section>';
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">PRODUCTS REFERENCED</span>' +
+  html += '<section style="padding:80px 0;background:var(--z-bg-alt)"><div class="zynix-container">' +
+    '<span class="zynix-tag">CAPABILITIES USED</span>' +
     '<h2>Platform Capabilities</h2>' +
-    '<div class="zynix-feature-grid">';
+    '<div class="zynix-feature-grid" style="margin-top:40px">';
+  var prodIcons = ['&#129302;','&#128300;','&#128197;','&#128203;','&#9881;','&#128196;'];
   for (var p = 0; p < data.products.length; p++) {
     html += '<div class="zynix-feature-card fade-in-up">' +
-      '<div class="zynix-feature-icon">&#9881;</div>' +
+      '<div class="zynix-feature-icon">' + (prodIcons[p] || '&#9881;') + '</div>' +
       '<h3>' + data.products[p].name + '</h3>' +
       '<p>' + data.products[p].descriptor + '</p>' +
-      '<div class="zynix-feature-metric"><span>' + data.products[p].status + '</span><small><a href="' + data.products[p].url + '">Learn more &rarr;</a></small></div>' +
+      (data.products[p].status !== 'Available' ? '<div class="zynix-feature-metric"><span style="color:var(--z-accent)">' + data.products[p].status + '</span></div>' : '') +
+      '<a href="' + data.products[p].url + '" class="zynix-card-link">Learn more &rarr;</a>' +
       '</div>';
   }
   html += '</div></div></section>';
 
   html += renderCTA(data.cta.headline, 'See how Zynix AI can transform this workflow for your organization.', data.cta.label);
 
-  html += '<section><div class="zynix-container">' +
+  html += '<section style="padding:80px 0"><div class="zynix-container">' +
     '<span class="zynix-tag">EXPLORE MORE</span>' +
     '<h2>Related Use Cases</h2>' +
-    '<div class="zynix-agents-grid">';
+    '<div class="zynix-agents-grid" style="margin-top:40px">';
+  var ucIcons = ['&#128196;','&#129302;','&#128300;'];
   for (var r = 0; r < data.readNext.length; r++) {
-    html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + data.readNext[r].id + '</span><h3>' + data.readNext[r].title + '</h3></div>' +
-      '<p><a href="/use-cases/' + data.readNext[r].slug + '">View use case &rarr;</a></p>' +
-      '</div>';
+    html += '<a href="/use-cases/' + data.readNext[r].slug + '" class="zynix-agent-card fade-in-up" style="text-decoration:none;color:inherit;display:block">' +
+      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + (ucIcons[r] || '&#128196;') + '</span><h3>' + data.readNext[r].title + '</h3></div>' +
+      '<p style="color:var(--z-accent);font-weight:500;font-size:14px;margin-top:12px">View use case &rarr;</p>' +
+      '</a>';
   }
   html += '</div></div></section>';
 
