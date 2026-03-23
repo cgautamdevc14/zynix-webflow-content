@@ -2241,12 +2241,12 @@
       { name: 'Sunflower ACO', logo: 'https://static.wixstatic.com/media/ca9ca7_43571900261a4d69bb69dab454fd7439~mv2.png/v1/fill/w_184,h_92,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Sunflower%20ACO%20Logo.png' },
       { name: 'CLSCFL', logo: 'https://clscfl.com/wp-content/uploads/2022/08/Complete-Local-Specialty-Care.png' }
     ];
-    var logoStyle = 'height:24px;width:auto;max-width:110px;max-height:24px;object-fit:contain;filter:grayscale(100%);opacity:0.5';
+    var logoStyle = 'height:32px;width:auto;max-width:130px;max-height:32px;object-fit:contain;filter:grayscale(100%);opacity:0.45';
     var trustSpans = '';
     for (var ti = 0; ti < 2; ti++) {
       for (var tj = 0; tj < trustLogos.length; tj++) {
         var tl = trustLogos[tj];
-        trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:32px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"></span>';
+        trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"></span>';
       }
     }
     html += '<section class="zynix-trust-strip"><div class="zynix-container">' +
