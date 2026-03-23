@@ -1030,6 +1030,7 @@ body.has-announcement-bar { padding-top: 40px; }
   animation: marqueeScroll 40s linear infinite;
   white-space: nowrap;
   width: max-content;
+  align-items: center;
 }
 .zynix-trust-track span {
   font-size: 14px;
@@ -1038,24 +1039,34 @@ body.has-announcement-bar { padding-top: 40px; }
   letter-spacing: 0.5px;
   flex-shrink: 0;
 }
+/* Force all images in trust strip to be small and grayscale */
+.zynix-trust-track img,
+.zynix-trust-strip img {
+  height: 24px !important;
+  width: auto !important;
+  max-width: 110px !important;
+  max-height: 24px !important;
+  object-fit: contain !important;
+  filter: grayscale(100%) !important;
+  opacity: 0.5 !important;
+  transition: opacity 0.3s, filter 0.3s;
+}
+.zynix-trust-track span:hover img,
+.zynix-trust-strip span:hover img {
+  opacity: 0.75 !important;
+  filter: grayscale(40%) !important;
+}
 .zynix-trust-logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 32px;
   flex-shrink: 0;
-  opacity: 0.45;
-  transition: opacity 0.3s;
-  filter: grayscale(100%);
-}
-.zynix-trust-logo:hover {
-  opacity: 0.8;
-  filter: grayscale(30%);
 }
 .zynix-trust-logo img {
   height: 24px;
   width: auto;
-  max-width: 120px;
+  max-width: 110px;
   object-fit: contain;
 }
 .zynix-trust-text {
