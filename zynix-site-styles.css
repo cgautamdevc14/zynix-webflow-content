@@ -27,8 +27,9 @@
   --z-sky: #EAF4FD;
   --z-peach: #FFF3ED;
   --z-yellow: #FFF9E6;
-  --z-mint: #E8F7F0;
   --z-success: #0D9B6A;
+  --z-primary: #E85D2F;
+  --z-font-heading: 'Funnel Sans', sans-serif;
   --z-radius: 12px;
   --z-radius-lg: 20px;
   --z-shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
@@ -38,10 +39,14 @@
   --z-font: 'Funnel Sans', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* ── Smooth Scroll ── */
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+
 /* ── Global Light Background ── */
 body {
   background: var(--z-bg);
   color: var(--z-text);
+  font-family: var(--z-font);
 }
 
 /* ── Inner Page Hero ── */
@@ -678,7 +683,7 @@ body {
 
 /* ── Mega Menu Navigation ── */
 .zynix-mega-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 48px; height: 72px;
   background: rgba(255,255,255,0.95);
@@ -693,7 +698,7 @@ body {
 .zynix-nav-logo {
   display: flex; align-items: center; gap: 10px; text-decoration: none;
 }
-.zynix-nav-logo img { height: 170px; width: auto; margin: -44px 0; }
+.zynix-nav-logo img { height: 44px; width: auto; margin: 0; }
 .zynix-nav-logo-text {
   font-size: 24px; font-weight: 700; color: #1A1F2E;
   letter-spacing: -0.5px; white-space: nowrap;
@@ -714,7 +719,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1002;
+  z-index: 100;
 }
 /* Push nav down when banner is visible */
 .zynix-mega-nav.has-banner { top: 40px; }
@@ -789,6 +794,7 @@ body.has-announcement-bar { padding-top: 40px; }
   transition: opacity 0.2s ease, transform 0.2s ease;
   transform: translateX(-50%) translateY(6px);
   padding-top: 8px;
+  z-index: 250;
 }
 .zynix-nav-dropdown:hover .zynix-mega-panel,
 .zynix-nav-dropdown:hover .zynix-dropdown-panel {
@@ -870,7 +876,7 @@ body.has-announcement-bar { padding-top: 40px; }
 /* ── Mobile menu overlay ── */
 .zynix-mobile-menu {
   display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
-  background: rgba(255,255,255,0.98); z-index: 9998;
+  background: rgba(255,255,255,0.98); z-index: 150;
   overflow-y: auto; padding: 24px;
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
 }
@@ -1040,21 +1046,19 @@ body.has-announcement-bar { padding-top: 40px; }
   flex-shrink: 0;
 }
 /* Force all images in trust strip to be small and grayscale */
-.zynix-trust-track img,
-.zynix-trust-strip img {
-  height: 24px !important;
-  width: auto !important;
-  max-width: 110px !important;
-  max-height: 24px !important;
-  object-fit: contain !important;
-  filter: grayscale(100%) !important;
-  opacity: 0.5 !important;
+.zynix-trust-strip .zynix-trust-track img {
+  height: 24px;
+  width: auto;
+  max-width: 110px;
+  max-height: 24px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.5;
   transition: opacity 0.3s, filter 0.3s;
 }
-.zynix-trust-track span:hover img,
-.zynix-trust-strip span:hover img {
-  opacity: 0.75 !important;
-  filter: grayscale(40%) !important;
+.zynix-trust-strip .zynix-trust-track span:hover img {
+  opacity: 0.75;
+  filter: grayscale(40%);
 }
 .zynix-trust-logo {
   display: inline-flex;
@@ -1556,6 +1560,8 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
 }
 #zynix-chat-widget {
   font-family: 'Funnel Sans', Helvetica, Arial, sans-serif;
+  z-index: 300;
+  position: relative;
 }
 #zynix-chat-panel {
   animation: zynixSlideUp 0.3s ease;
@@ -1618,36 +1624,36 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
 }
 .zynix-roi-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: #F16529;
+  background: #fff;
   cursor: pointer;
-  border: 4px solid #fff;
-  box-shadow: 0 2px 12px rgba(241, 101, 41, 0.5), 0 0 0 3px rgba(241, 101, 41, 0.25);
+  border: 3px solid var(--z-primary);
+  box-shadow: 0 2px 16px rgba(232, 93, 47, 0.5), 0 0 0 4px rgba(232, 93, 47, 0.2);
   transition: transform 0.15s, box-shadow 0.15s;
 }
 .zynix-roi-slider::-webkit-slider-thumb:hover {
   transform: scale(1.15);
-  box-shadow: 0 2px 16px rgba(241, 101, 41, 0.6), 0 0 0 5px rgba(241, 101, 41, 0.2);
+  box-shadow: 0 2px 20px rgba(232, 93, 47, 0.6), 0 0 0 6px rgba(232, 93, 47, 0.18);
 }
 .zynix-roi-slider::-webkit-slider-thumb:active {
   transform: scale(1.2);
-  box-shadow: 0 2px 20px rgba(241, 101, 41, 0.7), 0 0 0 7px rgba(241, 101, 41, 0.15);
+  box-shadow: 0 2px 24px rgba(232, 93, 47, 0.7), 0 0 0 8px rgba(232, 93, 47, 0.15);
 }
 .zynix-roi-slider::-moz-range-thumb {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: #F16529;
+  background: #fff;
   cursor: pointer;
-  border: 4px solid #fff;
-  box-shadow: 0 2px 12px rgba(241, 101, 41, 0.5), 0 0 0 3px rgba(241, 101, 41, 0.25);
+  border: 3px solid var(--z-primary);
+  box-shadow: 0 2px 16px rgba(232, 93, 47, 0.5), 0 0 0 4px rgba(232, 93, 47, 0.2);
   transition: transform 0.15s, box-shadow 0.15s;
 }
 .zynix-roi-slider::-moz-range-thumb:hover {
   transform: scale(1.15);
-  box-shadow: 0 2px 14px rgba(232, 93, 47, 0.5), 0 0 0 6px rgba(232, 93, 47, 0.15);
+  box-shadow: 0 2px 20px rgba(232, 93, 47, 0.6), 0 0 0 6px rgba(232, 93, 47, 0.18);
 }
 .zynix-roi-slider::-moz-range-track {
   height: 10px;
@@ -1803,3 +1809,22 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
 .zynix-case-detail h2 { font-size: 22px; font-weight: 700; margin: 40px 0 16px; color: var(--z-text); }
 .zynix-case-detail p { font-size: 15px; line-height: 1.8; color: var(--z-text-secondary); margin: 0 0 16px; }
 .zynix-case-detail blockquote { border-left: 4px solid var(--z-accent); padding: 16px 24px; margin: 32px 0; background: rgba(241,101,41,0.04); border-radius: 0 var(--z-radius) var(--z-radius) 0; font-style: italic; font-size: 17px; line-height: 1.7; color: var(--z-text); }
+
+/* ── Focus-Visible Styles (H9) ── */
+.zynix-btn-primary:focus-visible,
+.zynix-btn-secondary:focus-visible,
+.zynix-faq-q:focus-visible,
+.zynix-nav-trigger:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--z-blue);
+  outline-offset: 2px;
+}
+
+/* ── Custom Scrollbar (L1) ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--z-bg-alt); }
+::-webkit-scrollbar-thumb { background: var(--z-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ── Text Selection Color (L4) ── */
+::selection { background: rgba(32,68,155,0.15); color: var(--z-text); }
