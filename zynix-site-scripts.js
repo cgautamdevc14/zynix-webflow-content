@@ -2363,7 +2363,7 @@
         if (tl.logo) {
           trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"></span>';
         } else {
-          trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0;font-size:13px;font-weight:600;color:rgba(255,255,255,0.4);white-space:nowrap;letter-spacing:0.5px">' + tl.name + '</span>';
+          trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0;font-size:14px;font-weight:700;color:#94a3b8;white-space:nowrap;letter-spacing:0.3px;opacity:0.6">' + tl.name + '</span>';
         }
       }
     }
