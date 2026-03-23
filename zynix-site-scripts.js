@@ -511,7 +511,7 @@
       '<span class="zynix-hero-badge">&#9989; HITRUST Ready</span>' +
       '</div>' +
       '</div>' +
-      (image ? '<div class="zynix-inner-hero-img"><img src="' + image + '" alt="' + (imgAlt || '') + '"></div>' : '') +
+      (image ? '<div class="zynix-inner-hero-img"><img src="' + image + '" alt="' + (imgAlt || '') + '" loading="lazy"></div>' : '') +
       '</div></section>';
   }
 
@@ -1230,7 +1230,7 @@
 
   // ── PAGE: About ──
   function renderAbout() {
-    return renderInnerHero('ABOUT ZYNIX', 'We Are Building Healthcare\u2019s Intelligence',
+    return renderInnerHero('ABOUT ZYNIX', 'We Are Building Healthcare\u2019s <span style="color:var(--z-accent)">Intelligence</span>',
       'Purpose-built AI for medicine. Not another tool \u2014 an operating system that transforms how healthcare organizations deliver care at scale.',
       IMG.patients, 'Zynix AI Team') +
 
@@ -2476,7 +2476,7 @@
     var html = '<section class="zynix-homepage-hero"><div class="zynix-container zynix-inner-hero-grid">' +
       '<div class="zynix-inner-hero-text">' +
       '<span class="zynix-tag">AI-POWERED VALUE-BASED CARE PLATFORM</span>' +
-      '<h1>Close Care Gaps Faster.<br>Grow Your Shared Savings.</h1>' +
+      '<h1>Close Care Gaps Faster.<br>Grow Your <span style="color:var(--z-accent)">Shared Savings</span>.</h1>' +
       '<p>Zynix unifies your clinical data, deploys AI agents, and automates outreach — so your team can focus on patients, not paperwork.</p>' +
       '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#how-it-works" class="zynix-btn-secondary">See How It Works</a></div>' +
       '<div class="zynix-hero-trust">' +
@@ -2485,12 +2485,12 @@
       '<span class="zynix-hero-badge">&#9989; HITRUST Ready</span>' +
       '</div>' +
       '</div>' +
-      '<div class="zynix-inner-hero-img"><img src="' + IMG.gifDashboard + '" alt="Zynix AI Healthcare Dashboard"></div>' +
+      '<div class="zynix-inner-hero-img"><img src="' + IMG.gifDashboard + '" alt="Zynix AI Healthcare Dashboard" loading="lazy"></div>' +
       '</div></section>';
 
 
     // -- AEO SUMMARY (hidden visually, readable by crawlers/screen readers for SEO/AEO) --
-    html += '<div class="zynix-sr-only" aria-hidden="false" style="position:absolute;left:-9999px;height:0;overflow:hidden">' +
+    html += '<div class="zynix-sr-only" aria-hidden="false" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">' +
       '<h2>What is Zynix AI?</h2>' +
       '<p>Zynix AI is a healthcare artificial intelligence platform purpose-built for value-based care. It deploys autonomous AI agents that automate care coordination, close quality gaps, and boost shared savings for ACOs, health systems, health plans, FQHCs, and independent practices. The platform unifies clinical data from EHRs, claims, ADT feeds, and SDOH sources into one intelligence layer, then orchestrates twelve specialized AI agents to take action.</p>' +
       '<p>Who is it for? ACOs in MSSP and ACO REACH, health systems, Medicare Advantage plans, FQHCs, independent practices, and ambulatory surgery centers.</p>' +
@@ -2504,7 +2504,7 @@
       { name: 'Palm Beach ACO', logo: 'https://cdn.prod.website-files.com/6818da6a953b7f1e582f8191/682e6a2ca7d7d2df4e89db1d_pbacologohighres.png' },
       { name: 'West Florida ACO', logo: 'https://westfloridaaco.com/assets/img/New_WestFlorida_ACO_logo_color.svg' },
       { name: 'Space Coast ACO', logo: 'https://spacecoastaco.com/assets/img/New_Space_Coast_ACO_logo_color.svg' },
-      { name: 'Central Florida ACO', logo: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40"><text x="100" y="28" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#333">CENTRAL FLORIDA ACO</text></svg>') },
+      { name: 'Central Florida ACO', logo: null },
       { name: 'GoldenCare ACO', logo: 'https://static.wixstatic.com/media/ca9ca7_8186b443254b49ada16878821eca400a~mv2.png/v1/fill/w_184,h_92,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GoldenCare%20ACO%20(2).png' },
       { name: 'NEXT Healthcare', logo: 'https://nexthealthcaresolutions.com/assets/img/next-logo.svg' },
       { name: 'eTernal Health', logo: 'https://www.eternalhealth.com/wp-content/uploads/2022/08/HR_eH-InfinityIcon-Logo.jpg' },
@@ -2521,7 +2521,7 @@
         if (tl.logo) {
           trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"></span>';
         } else {
-          trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0;font-size:14px;font-weight:700;color:#94a3b8;white-space:nowrap;letter-spacing:0.3px;opacity:0.6">' + tl.name + '</span>';
+          trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0;font-size:13px;font-weight:700;color:#94a3b8;white-space:nowrap;letter-spacing:1px;text-transform:uppercase;opacity:0.55;font-family:var(--z-font)">' + tl.name + '</span>';
         }
       }
     }
@@ -4390,7 +4390,7 @@ function renderAgentPageV7(data) {
 function renderPlatformHub() {
   var html = '';
 
-  html += renderInnerHero('THE PLATFORM', 'The AI Operating System for Value-Based Care',
+  html += renderInnerHero('THE PLATFORM', 'The AI Operating System for <span style="color:var(--z-accent)">Value-Based Care</span>',
     'Zynix Intelligent Platform (ZIP) unifies healthcare data, clinical intelligence, autonomous AI agents, and deployable care plans into a single operating system. One platform replaces the patchwork of point solutions that fragment care delivery and limit performance improvement.',
     IMG.enterprise, 'Zynix Intelligent Platform');
 
@@ -4448,7 +4448,7 @@ function renderPlatformHub() {
 function renderAgentsHub() {
   var html = '';
 
-  html += renderInnerHero('AI AGENT SUITE', 'AI Agents That Don\'t Just Inform \u2014 They Act',
+  html += renderInnerHero('AI AGENT SUITE', 'AI Agents That Don\'t Just Inform \u2014 They <span style="color:var(--z-accent)">Act</span>',
     'Twelve purpose-built AI agents that convert clinical intelligence into completed actions. They call patients, book appointments, reconcile medications, process faxes, submit prior authorizations, and document encounters \u2014 24/7, across every department, in 15+ languages.',
     IMG.doctor, 'Zynix AI Agents Suite');
 
@@ -6153,6 +6153,23 @@ function renderDataAnalyticsV7() {
           var roi = document.getElementById('roi-calculator');
           if (roi) roi.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 300);
+      }
+      // Subtle parallax on hero image
+      var heroImg = document.querySelector('.zynix-inner-hero-img img, .zynix-homepage-hero .zynix-inner-hero-img img');
+      if (heroImg) {
+        var ticking = false;
+        window.addEventListener('scroll', function() {
+          if (!ticking) {
+            requestAnimationFrame(function() {
+              var scrollY = window.pageYOffset;
+              if (scrollY < 800) {
+                heroImg.style.transform = 'translateY(' + (scrollY * 0.08) + 'px)';
+              }
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
       }
       // Anti-flicker: reveal page now that content is injected
       document.documentElement.classList.remove('js-loading');
