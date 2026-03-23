@@ -144,6 +144,8 @@
     '/company-press': { title: 'Press & News | Zynix AI', desc: 'Latest news, press releases, and media coverage about Zynix AI and the future of AI-powered value-based healthcare across the United States.', img: IMG.hero, schema: 'Organization', noindex: true },
     '/company-trust-center': { title: 'Trust & Security | Zynix AI', desc: 'Zynix AI is HIPAA compliant and SOC 2 Type II certified. Explore our security practices, data governance, and compliance for healthcare AI.', img: IMG.enterprise, schema: 'Organization' },
     '/contact': { title: 'Contact Zynix AI | Request a Demo', desc: 'Request a personalized demo and see how Zynix AI transforms healthcare operations for ACOs, health systems, and practices. Based in Trinity, FL.', img: IMG.hero, schema: 'MedicalBusiness' },
+    '/roi': { title: 'ROI Calculator | Zynix AI', desc: 'Calculate your projected savings from AI-powered value-based care. Estimate TCM revenue lift, gap closure impact, and readmission reduction.', img: IMG.hero },
+    '/roi-calculator': { title: 'ROI Calculator | Zynix AI', desc: 'Calculate your projected savings from AI-powered value-based care. Estimate TCM revenue lift, gap closure impact, and readmission reduction.', img: IMG.hero },
     '/resources-faq': { title: 'FAQ | Zynix AI', desc: 'Find answers about the Zynix healthcare AI platform including HIPAA compliance, EHR integration, pricing, deployment timelines, and support.', img: IMG.hero, schema: 'FAQPage' },
     '/resources-blog': { title: 'Blog | Healthcare AI Insights | Zynix AI', desc: 'Expert healthcare AI insights on value-based care, population health, care coordination, and operational transformation from the Zynix AI team.', img: IMG.hero, schema: 'Organization' },
     '/resources-blog-1m-patients': { title: 'Zynix AI Reaches 1M VBC Patients | Zynix AI', desc: 'Zynix AI announces 1 million value-based care patients onboarded across healthcare organizations in 30 states. Read about this milestone.', img: IMG.hero, schema: 'Article' },
@@ -1302,6 +1304,58 @@
   }
 
   // ── PAGE: Contact ──
+  function renderROI() {
+    return renderInnerHero('ROI CALCULATOR', 'Calculate Your Value-Based Care Savings',
+      'See how much Zynix can save your organization annually. Adjust the sliders to match your scale and get a custom ROI projection.',
+      IMG.hero, 'Zynix AI ROI Calculator') +
+
+    '<section class="zynix-roi-section" id="roi-calculator" style="padding-top:40px"><div class="zynix-container">' +
+      '<div class="zynix-roi-calculator fade-in-up">' +
+      '<div class="zynix-roi-inputs">' +
+        '<div class="zynix-roi-input-group">' +
+          '<label>Total Attributed Lives</label>' +
+          '<input type="range" min="1000" max="500000" value="50000" step="1000" class="zynix-roi-slider" id="roi-lives">' +
+          '<div class="zynix-roi-value" id="roi-lives-val">50,000</div>' +
+        '</div>' +
+        '<div class="zynix-roi-input-group">' +
+          '<label>Monthly Discharges</label>' +
+          '<input type="range" min="50" max="5000" value="500" step="50" class="zynix-roi-slider" id="roi-discharges">' +
+          '<div class="zynix-roi-value" id="roi-discharges-val">500</div>' +
+        '</div>' +
+        '<div class="zynix-roi-input-group">' +
+          '<label>Current TCM Contact Rate</label>' +
+          '<input type="range" min="10" max="80" value="35" step="5" class="zynix-roi-slider" id="roi-tcm">' +
+          '<div class="zynix-roi-value" id="roi-tcm-val">35%</div>' +
+        '</div>' +
+        '<div class="zynix-roi-input-group">' +
+          '<label>Open Care Gaps (HCC/HEDIS)</label>' +
+          '<input type="range" min="500" max="100000" value="10000" step="500" class="zynix-roi-slider" id="roi-gaps">' +
+          '<div class="zynix-roi-value" id="roi-gaps-val">10,000</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="zynix-roi-results">' +
+        '<h3 style="font-size:14px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.6);margin:0 0 24px">Projected Annual Impact</h3>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">' +
+          '<div><span class="zynix-roi-number" id="roi-savings">$5.2M</span><span class="zynix-roi-label">Estimated Annual Savings</span></div>' +
+          '<div><span class="zynix-roi-number" id="roi-tcm-lift">+50%</span><span class="zynix-roi-label">TCM Contact Rate Lift</span></div>' +
+          '<div><span class="zynix-roi-number" id="roi-gaps-closed">4,000</span><span class="zynix-roi-label">Additional Gaps Closed</span></div>' +
+          '<div><span class="zynix-roi-number" id="roi-readmit">-23%</span><span class="zynix-roi-label">Readmission Reduction</span></div>' +
+        '</div>' +
+        '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" style="margin-top:24px">Get Your Custom ROI Report &rarr;</a>' +
+      '</div>' +
+      '</div>' +
+    '</div></section>' +
+
+    '<section style="padding:60px 0;background:var(--z-bg-alt)"><div class="zynix-container" style="text-align:center">' +
+    '<h2 style="font-size:24px;margin:0 0 16px">Want a detailed ROI analysis for your organization?</h2>' +
+    '<p class="zynix-section-sub">Our team will build a custom projection based on your specific patient population, payer mix, and operational workflows.</p>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" style="margin-top:16px">Schedule a Custom Analysis &rarr;</a>' +
+    '</div></section>' +
+
+    renderCTA('See Zynix in Action', 'Request a personalized demo to see how Zynix transforms your value-based care operations.', 'Request a Demo') +
+    renderFooter();
+  }
+
   function renderContact() {
     return '<section class="zynix-inner-hero" style="padding:140px 0 60px"><div class="zynix-container">' +
     '<div style="text-align:center;position:relative;z-index:1">' +
@@ -5147,6 +5201,8 @@ function renderDataAnalyticsV7() {
     '/trust-center': renderTrustCenter,
     '/company-trust-center': renderTrustCenter,
     '/contact': renderContact,
+    '/roi': renderROI,
+    '/roi-calculator': renderROI,
     // Resources
     '/faq': renderFAQ,
     '/resources-faq': renderFAQ,
