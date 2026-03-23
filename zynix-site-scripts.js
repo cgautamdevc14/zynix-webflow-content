@@ -1205,6 +1205,57 @@
     '<div class="zynix-compare-card zynix-compare-good fade-in-up"><h3>Our Vision</h3><p style="font-size:16px;line-height:1.8">A world where healthcare\u2019s intelligence gap is closed — where AI handles the operational complexity so human caregivers can focus entirely on what they do best: caring for patients.</p></div>' +
     '</div></div></section>' +
 
+    // LEADERSHIP
+    '<section style="padding:80px 0" id="team"><div class="zynix-container">' +
+    '<span class="zynix-tag">OUR LEADERSHIP</span>' +
+    '<h2>Physician-Led. Engineer-Driven.</h2>' +
+    '<p class="zynix-section-sub">Founded by healthcare operators who have run ACOs, managed populations, and lived the workflows Zynix now automates.</p>' +
+    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px">' +
+
+    // Jay
+    '<div class="fade-in-up" style="text-align:center">' +
+    '<div style="width:180px;height:180px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:3px solid var(--z-border)">' +
+    '<img src="' + GH + 'headshot-jay.png" alt="Jay Chowdappa, MD" style="width:100%;height:100%;object-fit:cover" loading="lazy">' +
+    '</div>' +
+    '<h3 style="font-size:20px;font-weight:700;margin:0 0 4px">Jay Chowdappa, MD</h3>' +
+    '<p style="font-size:14px;color:var(--z-accent);font-weight:600;margin:0 0 12px">Co-Founder & CEO</p>' +
+    '<p style="font-size:13px;color:var(--z-text-secondary);line-height:1.7;max-width:320px;margin:0 auto">Physician executive with 30+ years in healthcare. Co-founded six Medicare ACOs generating over $300M in total shared savings. Built Zynix to close the gap between clinical insight and operational execution.</p>' +
+    '<a href="https://www.linkedin.com/in/jaychowdappa/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--z-blue);font-weight:500;text-decoration:none">' + SVG_LINKEDIN + ' LinkedIn</a>' +
+    '</div>' +
+
+    // Gautamdev
+    '<div class="fade-in-up" style="text-align:center">' +
+    '<div style="width:180px;height:180px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:3px solid var(--z-border)">' +
+    '<img src="' + GH + 'headshot-gautam.png" alt="Gautamdev Chowdary" style="width:100%;height:100%;object-fit:cover" loading="lazy">' +
+    '</div>' +
+    '<h3 style="font-size:20px;font-weight:700;margin:0 0 4px">Gautamdev Chowdary</h3>' +
+    '<p style="font-size:14px;color:var(--z-accent);font-weight:600;margin:0 0 12px">Co-Founder & CTO</p>' +
+    '<p style="font-size:13px;color:var(--z-text-secondary);line-height:1.7;max-width:320px;margin:0 auto">Full-stack engineer and AI architect. Previously built computer vision systems for the USDA achieving 94.6% accuracy and saving millions. Leads Zynix\u2019s engineering team across Seattle and Bengaluru.</p>' +
+    '<a href="https://www.linkedin.com/in/gautamdevc/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--z-blue);font-weight:500;text-decoration:none">' + SVG_LINKEDIN + ' LinkedIn</a>' +
+    '</div>' +
+
+    // David
+    '<div class="fade-in-up" style="text-align:center">' +
+    '<div style="width:180px;height:180px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:3px solid var(--z-border)">' +
+    '<img src="' + GH + 'headshot-david.jpg" alt="David McDonald" style="width:100%;height:100%;object-fit:cover" loading="lazy">' +
+    '</div>' +
+    '<h3 style="font-size:20px;font-weight:700;margin:0 0 4px">David McDonald</h3>' +
+    '<p style="font-size:14px;color:var(--z-accent);font-weight:600;margin:0 0 12px">VP of Sales</p>' +
+    '<p style="font-size:13px;color:var(--z-text-secondary);line-height:1.7;max-width:320px;margin:0 auto">Healthcare sales leader with deep expertise in value-based care technology. Leads Zynix\u2019s go-to-market strategy across ACOs, health systems, health plans, and FQHCs nationwide.</p>' +
+    '<a href="https://www.linkedin.com/in/david-mcdonald-zynix/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--z-blue);font-weight:500;text-decoration:none">' + SVG_LINKEDIN + ' LinkedIn</a>' +
+    '</div>' +
+
+    '</div></div></section>' +
+
+    // TEAM STATS
+    '<section style="padding:60px 0;background:var(--z-bg-alt)"><div class="zynix-container">' +
+    '<div class="zynix-metrics-bar" style="margin:0">' +
+    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">60+</span><span class="zynix-metric-label">Team Members</span></div>' +
+    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">3</span><span class="zynix-metric-label">Offices (Seattle, Tampa, Bengaluru)</span></div>' +
+    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">1M+</span><span class="zynix-metric-label">Patients Served</span></div>' +
+    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">30</span><span class="zynix-metric-label">States</span></div>' +
+    '</div></div></section>' +
+
     renderCTA('Join Us in Transforming Healthcare', 'See how Zynix is building the future of healthcare intelligence.', 'Request a Demo') +
     renderFooter();
   }
@@ -1545,7 +1596,7 @@
           al('/newsroom','Newsroom','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>') +
           al('/careers','Careers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>') +
           al('/security','Security','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>') +
-          '<div class="zynix-dropdown-featured"><p>AI built for healthcare, by healthcare leaders.</p><a href="/about">Meet Our Leadership &rarr;</a></div>' +
+          '<div class="zynix-dropdown-featured"><p>AI built for healthcare, by healthcare leaders.</p><a href="/about#team">Meet Our Leadership &rarr;</a></div>' +
         '</div></div></div>' +
         // 5. Resources — narrow dropdown
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Resources <span class="chevron">&#9662;</span></button>' +
