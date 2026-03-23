@@ -3205,9 +3205,9 @@ function renderWhoWeServeHealthSystems() {
       { title: 'Administrative Workflows That Stop Blocking Clinical Capacity', body: 'Documentation assembly, prior auth submission, denial routing, fax classification, and referral coordination run without coordinator involvement at every step. Clinical staff spend their time on patients who need a human.' }
     ],
     primaryUseCases: [
-      { title: 'Post-Discharge Follow-Up at Scale', teaser: 'Reaching every discharged patient within 24\u201348 hours \u2014 consistently, at health system volume, with TCM billing documentation captured in parallel.', url: '/use-cases/post-discharge-followup-health-systems' },
+      { title: 'Post-Discharge Follow-Up at Scale', teaser: 'Reaching every discharged patient within 24\u201348 hours \u2014 consistently, at health system volume, with TCM billing documentation captured in parallel.', url: '/use-cases/post-discharge-follow-up' },
       { title: 'After-Hours Patient Triage Across Multiple Sites', teaser: 'Clinical triage at every site after hours \u2014 without routing routine calls to on-call physicians or losing patients to non-urgent ED visits.', url: '/use-cases/after-hours-triage-multi-site' },
-      { title: 'HCC Gap Closure at Health System ACO Scale', teaser: 'Closing HCC documentation and quality measure gaps before year-end through coordinated outreach and scheduling \u2014 not raw gap lists.', url: '/use-cases/hcc-gap-closure-health-systems' },
+      { title: 'HCC Gap Closure at Health System ACO Scale', teaser: 'Closing HCC documentation and quality measure gaps before year-end through coordinated outreach and scheduling \u2014 not raw gap lists.', url: '/use-cases/hcc-gap-closure-health-system-aco' },
       { title: 'Prior Authorization Across High-Volume Specialty Services', teaser: 'Automated documentation assembly, payer submission, tracking, and denial management for thousands of monthly prior auths.', url: '/use-cases/prior-auth-high-volume-specialty' },
       { title: 'Reducing Physician Documentation Burden with Ambient AI', teaser: 'Structured clinical notes from every patient visit, uploaded directly to the EHR \u2014 without adding documentation time after the encounter.', url: '/use-cases/physician-documentation-ambient-ai' }
     ],
@@ -3215,7 +3215,7 @@ function renderWhoWeServeHealthSystems() {
       { id: 'UC06', title: 'Post-Discharge TCM and Readmission Prevention', primarySegment: 'ACOs & MSOs', url: '/use-cases/post-discharge-tcm-readmission' },
       { id: 'UC07', title: 'HCC Gap Closure and RAF Score Optimization', primarySegment: 'ACOs & MSOs', url: '/use-cases/hcc-gap-raf-optimization' },
       { id: 'UC08', title: 'Rising-Risk Patient Outreach Before a Clinical Event', primarySegment: 'ACOs & MSOs', url: '/use-cases/rising-risk-patient-outreach' },
-      { id: 'UC09', title: 'After-Hours Access and ED Diversion for ACO Populations', primarySegment: 'ACOs & MSOs', url: '/use-cases/after-hours-ed-diversion-aco' },
+      { id: 'UC09', title: 'After-Hours Access and ED Diversion for ACO Populations', primarySegment: 'ACOs & MSOs', url: '/use-cases/after-hours-ed-diversion' },
       { id: 'UC10', title: 'Chronic Care Coordination at Scale', primarySegment: 'ACOs & MSOs', url: '/use-cases/chronic-care-coordination-scale' },
       { id: 'UC13', title: 'High-Cost and High-Utilizer Member Management', primarySegment: 'Health Plans', url: '/use-cases/high-utilizer-member-management' },
       { id: 'UC20', title: 'Referral Coordination and Leakage Prevention', primarySegment: 'Independent Group Practices', url: '/use-cases/referral-coordination-leakage' },
@@ -3269,13 +3269,13 @@ function renderWhoWeServeACOs() {
       { title: 'Post-Discharge TCM and Readmission Prevention', teaser: 'The 48-hour post-discharge window is where ACO performance is won or lost \u2014 full workflow from ADT trigger through 30-day close, including TCM billing capture.', url: '/use-cases/post-discharge-tcm-readmission' },
       { title: 'HCC Gap Closure and RAF Score Optimization', teaser: 'RAF scores are documentation scores. End-to-end gap closure \u2014 prioritized by RAF impact, executed before year-end performance close.', url: '/use-cases/hcc-gap-raf-optimization' },
       { title: 'Rising-Risk Patient Outreach Before a Clinical Event', teaser: 'Prediction without action is just an earlier warning about a cost you didn\'t prevent. How ZynPredict signals translate into structured proactive outreach.', url: '/use-cases/rising-risk-patient-outreach' },
-      { title: 'After-Hours Access and ED Diversion for ACO Populations', teaser: 'The ACO\'s after-hours answer rate is a shared savings metric hiding in the phone system. The connection between access and TCOC, operationalized.', url: '/use-cases/after-hours-ed-diversion-aco' },
+      { title: 'After-Hours Access and ED Diversion for ACO Populations', teaser: 'The ACO\'s after-hours answer rate is a shared savings metric hiding in the phone system. The connection between access and TCOC, operationalized.', url: '/use-cases/after-hours-ed-diversion' },
       { title: 'Chronic Care Coordination at Scale', teaser: 'CCM billing revenue is sitting in your patient panel. The consistent monthly contact and documentation workflow that most ACO coordinator teams cannot sustain manually.', url: '/use-cases/chronic-care-coordination-scale' }
     ],
     additionalUseCases: [
-      { id: 'UC01', title: 'Post-Discharge Follow-Up at Scale', primarySegment: 'Health Systems', url: '/use-cases/post-discharge-followup-health-systems' },
+      { id: 'UC01', title: 'Post-Discharge Follow-Up at Scale', primarySegment: 'Health Systems', url: '/use-cases/post-discharge-follow-up' },
       { id: 'UC02', title: 'After-Hours Patient Triage Across Multiple Sites', primarySegment: 'Health Systems', url: '/use-cases/after-hours-triage-multi-site' },
-      { id: 'UC03', title: 'HCC Gap Closure at Health System ACO Scale', primarySegment: 'Health Systems', url: '/use-cases/hcc-gap-closure-health-systems' },
+      { id: 'UC03', title: 'HCC Gap Closure at Health System ACO Scale', primarySegment: 'Health Systems', url: '/use-cases/hcc-gap-closure-health-system-aco' },
       { id: 'UC12', title: 'HCC Risk Adjustment Accuracy', primarySegment: 'Health Plans', url: '/use-cases/hcc-risk-adjustment-ma' },
       { id: 'UC14', title: 'Post-Discharge Care Management for MA Members', primarySegment: 'Health Plans', url: '/use-cases/post-discharge-ma-members' },
       { id: 'UC15', title: 'Medication Adherence for Chronic Disease Populations', primarySegment: 'Health Plans', url: '/use-cases/medication-adherence-chronic-populations' },
@@ -3338,7 +3338,7 @@ function renderWhoWeServeHealthPlans() {
     ],
     additionalUseCases: [
       { id: 'UC08', title: 'Rising-Risk Patient Outreach Before a Clinical Event', primarySegment: 'ACOs & MSOs', url: '/use-cases/rising-risk-patient-outreach' },
-      { id: 'UC09', title: 'After-Hours Access and ED Diversion for ACO Populations', primarySegment: 'ACOs & MSOs', url: '/use-cases/after-hours-ed-diversion-aco' },
+      { id: 'UC09', title: 'After-Hours Access and ED Diversion for ACO Populations', primarySegment: 'ACOs & MSOs', url: '/use-cases/after-hours-ed-diversion' },
       { id: 'UC10', title: 'Chronic Care Coordination at Scale', primarySegment: 'ACOs & MSOs', url: '/use-cases/chronic-care-coordination-scale' },
       { id: 'UC28', title: 'Preventive Screening Gap Closure for High-Barrier Populations', primarySegment: 'FQHCs', url: '/use-cases/preventive-screening-gap-fqhc' },
       { id: 'UC29', title: 'Medication Adherence for Complex Chronic Patients', primarySegment: 'FQHCs', url: '/use-cases/medication-adherence-complex-chronic' },
