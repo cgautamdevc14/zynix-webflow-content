@@ -1665,6 +1665,27 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
   object-fit: contain;
 }
 
+/* ── Hero Dashboard Animations ── */
+@keyframes zynixHeroFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes zynixHeroBarGrow {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+@keyframes zynixLivePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.6); }
+}
+@keyframes zynixCountUp {
+  from { opacity: 0.4; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.zynix-homepage-hero .zynix-inner-hero-img > div {
+  animation: zynixHeroFloat 4s ease-in-out infinite;
+}
+
 /* ── AI Chat Widget ── */
 @keyframes zynixPulse {
   0%, 100% { box-shadow: 0 4px 20px rgba(32,68,155,0.3); }

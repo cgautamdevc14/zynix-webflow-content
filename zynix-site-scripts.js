@@ -2573,17 +2573,283 @@
       '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">30%</span><span class="zynix-metric-label">ER visits are avoidable</span></div>' +
       '</div></div></section>';
 
-    // -- HOW IT WORKS (4-Layer Architecture) --
+    // -- HOW IT WORKS (V2 Interactive 4-Layer Architecture) --
     html += '<section class="zynix-architecture-section" id="how-it-works"><div class="zynix-container">' +
       '<span class="zynix-tag">HOW IT WORKS</span>' +
-      '<h2>Four Layers. One Operating System.</h2>' +
-      '<p class="zynix-section-sub">While competitors sell point solutions, Zynix delivers an integrated OS where AI agents work together like a coordinated workforce.</p>' +
-      '<div class="zynix-arch-grid">' +
-      '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #ccfdcf"><div class="zynix-arch-num">01</div><h3>AI Data Foundation</h3><p>Ingest, clean, and normalize data from every source \u2014 EHRs, claims, ADT, labs, pharmacy, SDOH \u2014 into one unified layer.</p></div>' +
-      '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #cebffa"><div class="zynix-arch-num">02</div><h3>Intelligence &amp; Reasoning</h3><p>Predict, prioritize, and surface actionable insights — risk scores, gap worklists, clinical decision support.</p></div>' +
-      '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #fddbc8"><div class="zynix-arch-num">03</div><h3>AI Agent Suite</h3><p>Specialized agents that take action: outreach, scheduling, triage, documentation, reminders, and follow-up.</p></div>' +
-      '<div class="zynix-arch-card fade-in-up" style="border-left:4px solid #d7e9ff"><div class="zynix-arch-num">04</div><h3>Care Management</h3><p>Orchestrated workflows where agents collaborate on end-to-end care plans \u2014 TCM, AWV, gap closure, and more.</p></div>' +
-      '</div></div></section>';
+      '<style>' +
+      '.za{font-family:var(--z-font);background:transparent;padding:0;position:relative;overflow:hidden}' +
+      '.za-h{text-align:center;margin-bottom:36px;position:relative;z-index:1}' +
+      '.za-ey{display:block;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#F16529;margin-bottom:8px}' +
+      '.za-h2{font-size:24px;font-weight:800;color:#20449B;line-height:1.25;margin-bottom:10px}' +
+      '.za-sub{font-size:13.5px;color:#606061;line-height:1.65;max-width:500px;margin:0 auto}' +
+      '.za-b{display:flex;gap:16px;max-width:880px;margin:0 auto;align-items:flex-start;position:relative;z-index:1}' +
+      '.za-s{width:236px;flex-shrink:0;display:flex;flex-direction:column}' +
+      '.lb{border-radius:10px;padding:11px 14px;cursor:pointer;border:1.5px solid transparent;position:relative;overflow:hidden;user-select:none;transition:background .32s,border-color .32s,box-shadow .32s}' +
+      '.lb[data-n="4"]{background:#FEF0E9;border-color:#F5BEAA}' +
+      '.lb[data-n="3"]{background:#E8EDF8;border-color:#BCC6E6}' +
+      '.lb[data-n="2"]{background:#E0F5FD;border-color:#A8D8EF}' +
+      '.lb[data-n="1"]{background:#EAF0FA;border-color:#BCC6E6}' +
+      '.lb.on[data-n="4"]{background:#F16529;border-color:#d95821;box-shadow:0 6px 22px rgba(241,101,41,.32)}' +
+      '.lb.on[data-n="3"]{background:#3286E0;border-color:#2863BA;box-shadow:0 6px 22px rgba(50,134,224,.28)}' +
+      '.lb.on[data-n="2"]{background:#2863BA;border-color:#20459B;box-shadow:0 6px 22px rgba(40,99,186,.28)}' +
+      '.lb.on[data-n="1"]{background:#20449B;border-color:#192f78;box-shadow:0 6px 22px rgba(32,68,155,.36)}' +
+      '.lb-bg{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-bottom:5px}' +
+      '.lb[data-n="4"]:not(.on) .lb-bg{background:#F16529;color:#fff}' +
+      '.lb[data-n="3"]:not(.on) .lb-bg{background:#2D74CD;color:#fff}' +
+      '.lb[data-n="2"]:not(.on) .lb-bg{background:#2863BA;color:#fff}' +
+      '.lb[data-n="1"]:not(.on) .lb-bg{background:#20449B;color:#fff}' +
+      '.lb.on .lb-bg{background:rgba(255,255,255,.22);color:#fff}' +
+      '.lb-nm{font-size:12.5px;font-weight:700;line-height:1.3}' +
+      '.lb[data-n="4"]:not(.on) .lb-nm{color:#b14619}' +
+      '.lb[data-n="3"]:not(.on) .lb-nm{color:#1e4fa0}' +
+      '.lb[data-n="2"]:not(.on) .lb-nm{color:#1a4080}' +
+      '.lb[data-n="1"]:not(.on) .lb-nm{color:#1a3a8a}' +
+      '.lb.on .lb-nm{color:#fff}' +
+      '.lb-sb{font-size:11px;line-height:1.4;margin-top:3px}' +
+      '.lb:not(.on) .lb-sb{color:#747475}' +
+      '.lb.on .lb-sb{color:rgba(255,255,255,.78)}' +
+      '.lb-pr{position:absolute;bottom:0;left:0;height:3px;background:rgba(255,255,255,.48);width:0%;border-radius:0 0 0 9px;transition:width .08s linear}' +
+      '.za-cn{height:16px;padding-left:18px;display:flex;align-items:center;gap:3px;flex-shrink:0}' +
+      '.za-cn-l{width:1.5px;height:100%;background:#DFDFE1}' +
+      '.za-cn-a{font-size:10px;color:#C8C8CA;line-height:1;margin-top:-1px}' +
+      '.za-dots{display:flex;gap:5px;justify-content:center;margin-top:12px}' +
+      '.za-dot{width:7px;height:7px;border-radius:50%;background:#DFDFE1;cursor:pointer;transition:all .25s;flex-shrink:0}' +
+      '.za-dot.on[data-n="4"]{background:#F16529;width:18px;border-radius:3.5px}' +
+      '.za-dot.on[data-n="3"]{background:#3286E0;width:18px;border-radius:3.5px}' +
+      '.za-dot.on[data-n="2"]{background:#2863BA;width:18px;border-radius:3.5px}' +
+      '.za-dot.on[data-n="1"]{background:#20449B;width:18px;border-radius:3.5px}' +
+      '.za-d{flex:1;min-width:0;background:#fff;border-radius:14px;overflow:hidden;border:1px solid #DFDFE1;min-height:320px;position:relative}' +
+      '.dp{display:none;flex-direction:column;height:100%;min-height:320px}' +
+      '.dp.on{display:flex;animation:dpIn .38s ease}' +
+      '@keyframes dpIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}' +
+      '.dp-st{height:5px;flex-shrink:0}' +
+      '.dp[data-n="4"] .dp-st{background:linear-gradient(90deg,#F16529,#f27a48)}' +
+      '.dp[data-n="3"] .dp-st{background:linear-gradient(90deg,#2D74CD,#3286E0)}' +
+      '.dp[data-n="2"] .dp-st{background:linear-gradient(90deg,#20459B,#2863BA)}' +
+      '.dp[data-n="1"] .dp-st{background:linear-gradient(90deg,#20449B,#2D74CD)}' +
+      '.dp-in{padding:20px 22px;flex:1;display:flex;flex-direction:column}' +
+      '.dp-ln{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px}' +
+      '.dp[data-n="4"] .dp-ln{color:#F16529}' +
+      '.dp[data-n="3"] .dp-ln{color:#3286E0}' +
+      '.dp[data-n="2"] .dp-ln{color:#2863BA}' +
+      '.dp[data-n="1"] .dp-ln{color:#20449B}' +
+      '.dp-ti{font-size:17px;font-weight:800;color:#202021;line-height:1.25;margin-bottom:5px}' +
+      '.dp-tg{font-size:12.5px;color:#606061;font-style:italic;margin-bottom:13px;padding-bottom:13px;border-bottom:1px solid #EDEDEF;line-height:1.5}' +
+      '.dp-de{font-size:12.5px;color:#414142;line-height:1.72;margin-bottom:15px}' +
+      '.dp-cl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9C9C9E;margin-bottom:7px}' +
+      '.dp-cs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}' +
+      '.dp-c{font-size:11px;font-weight:500;padding:3px 9px;border-radius:4px;display:inline-block}' +
+      '.dp[data-n="4"] .dp-c{background:#FEF0E9;color:#b14619}' +
+      '.dp[data-n="3"] .dp-c{background:#E8EDF8;color:#1e4fa0}' +
+      '.dp[data-n="2"] .dp-c{background:#EAF0FA;color:#1a4080}' +
+      '.dp[data-n="1"] .dp-c{background:#EAF0FA;color:#1a3a8a}' +
+      '.dp-ft{margin-top:auto;padding-top:11px;border-top:1px solid #EDEDEF;font-size:11px;color:#747475;display:flex;align-items:flex-start;gap:5px;flex-wrap:wrap;line-height:1.6}' +
+      '.dp-fl{font-weight:600;cursor:pointer}' +
+      '.dp[data-n="4"] .dp-fl{color:#F16529}' +
+      '.dp[data-n="3"] .dp-fl{color:#3286E0}' +
+      '.dp[data-n="2"] .dp-fl{color:#2863BA}' +
+      '.dp[data-n="1"] .dp-fl{color:#20449B}' +
+      /* V2 responsive */
+      '@media(max-width:767px){' +
+        '.za-b{flex-direction:column;gap:20px}' +
+        '.za-s{width:100%;flex-direction:row;flex-wrap:wrap;gap:8px}' +
+        '.lb{flex:1 1 calc(50% - 4px);min-width:140px}' +
+        '.za-cn{display:none}' +
+        '.za-dots{margin-top:8px;width:100%}' +
+        '.za-d{min-height:auto}' +
+        '.dp{min-height:auto}' +
+        '.dp-de{font-size:12px}' +
+      '}' +
+      '</style>' +
+      '<div class="za" id="za-root">' +
+        '<div class="za-h">' +
+          '<h2 class="za-h2">Four Layers. One Operating System.</h2>' +
+          '<p class="za-sub">Four integrated layers \u2014 each one built to feed the next, with no manual handoff between insight and action.</p>' +
+        '</div>' +
+        '<div class="za-b">' +
+          '<div class="za-s">' +
+            '<div class="lb" data-n="4" onclick="zPick(4)"><div class="lb-bg">Layer 4</div><div class="lb-nm">Deployable Care Plans</div><div class="lb-sb">Closed-loop care orchestration</div><div class="lb-pr"></div></div>' +
+            '<div class="za-cn"><div class="za-cn-l"></div><span class="za-cn-a">\u2191</span></div>' +
+            '<div class="lb" data-n="3" onclick="zPick(3)"><div class="lb-bg">Layer 3</div><div class="lb-nm">AI Agent Suite</div><div class="lb-sb">Three families of purpose-built agents</div><div class="lb-pr"></div></div>' +
+            '<div class="za-cn"><div class="za-cn-l"></div><span class="za-cn-a">\u2191</span></div>' +
+            '<div class="lb" data-n="2" onclick="zPick(2)"><div class="lb-bg">Layer 2</div><div class="lb-nm">Intelligence and Reasoning</div><div class="lb-sb">Clinical population intelligence engine</div><div class="lb-pr"></div></div>' +
+            '<div class="za-cn"><div class="za-cn-l"></div><span class="za-cn-a">\u2191</span></div>' +
+            '<div class="lb" data-n="1" onclick="zPick(1)"><div class="lb-bg">Layer 1</div><div class="lb-nm">AI Data Foundation</div><div class="lb-sb">Unified healthcare data layer</div><div class="lb-pr"></div></div>' +
+            '<div class="za-dots">' +
+              '<div class="za-dot" data-n="1" onclick="zPick(1)"></div>' +
+              '<div class="za-dot" data-n="2" onclick="zPick(2)"></div>' +
+              '<div class="za-dot" data-n="3" onclick="zPick(3)"></div>' +
+              '<div class="za-dot" data-n="4" onclick="zPick(4)"></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="za-d">' +
+            '<div class="dp" data-n="1"><div class="dp-st"></div><div class="dp-in">' +
+              '<div class="dp-ln">Layer 1 \u2014 Foundation</div><div class="dp-ti">AI Data Foundation</div>' +
+              '<div class="dp-tg">Every patient signal, unified into one continuously refreshed record</div>' +
+              '<p class="dp-de">Zynix connects and normalizes data from every source that matters \u2014 EHR systems, Medicare and Medicaid claims, real-time ADT feeds, labs, pharmacy fills, and SDoH screens. De-duplication across systems creates a single reconciled patient record. No manual exports. No 30-day claims lag.</p>' +
+              '<div class="dp-cl">Data sources connected</div>' +
+              '<div class="dp-cs"><span class="dp-c">Epic \u00b7 Cerner \u00b7 athenahealth</span><span class="dp-c">CMS Medicare Claims</span><span class="dp-c">Real-time ADT feeds</span><span class="dp-c">Labs &amp; imaging</span><span class="dp-c">Pharmacy data</span><span class="dp-c">SDoH screening</span><span class="dp-c">FHIR \u00b7 HL7 \u00b7 CCLF</span></div>' +
+              '<div class="dp-ft">Powers \u2192 <span class="dp-fl" onclick="zPick(2)">Layer 2: Intelligence and Reasoning \u2191</span></div>' +
+            '</div></div>' +
+            '<div class="dp" data-n="2"><div class="dp-st"></div><div class="dp-in">' +
+              '<div class="dp-ln">Layer 2 \u2014 Intelligence</div><div class="dp-ti">Intelligence and Reasoning</div>' +
+              '<div class="dp-tg">Surface who needs care, what\u2019s at risk, and when the window closes</div>' +
+              '<p class="dp-de">Four intelligence products sit on top of the unified data foundation. ZynGap cross-references clinical diagnoses against current-year claims to surface HCC and quality gaps. ZynPredict scores readmission and admission risk 30 to 90 days out. ZynGuide surfaces drug interactions and quality gaps at the point of care. ZynAnalytics gives population health leaders real-time cohort visibility.</p>' +
+              '<div class="dp-cl">Intelligence products</div>' +
+              '<div class="dp-cs"><span class="dp-c">ZynGap \u2014 HCC &amp; quality gaps</span><span class="dp-c">ZynPredict \u2014 Risk prediction</span><span class="dp-c">ZynGuide \u2014 Point-of-care support</span><span class="dp-c">ZynAnalytics \u2014 Population dashboards</span></div>' +
+              '<div class="dp-ft">Triggers \u2192 <span class="dp-fl" onclick="zPick(3)">Layer 3: AI Agent Suite \u2191</span></div>' +
+            '</div></div>' +
+            '<div class="dp" data-n="3"><div class="dp-st"></div><div class="dp-in">' +
+              '<div class="dp-ln">Layer 3 \u2014 Execution</div><div class="dp-ti">AI Agent Suite</div>' +
+              '<div class="dp-tg">Carry out the follow-through at the scale of your full attributed panel</div>' +
+              '<p class="dp-de">Three families of purpose-built agents execute the work that intelligence identifies but coordinator teams cannot sustain at panel scale. Clinical Performance Agents handle post-discharge follow-up and chronic care management. Predictive Activation Agents act on rising risk signals. Operational Efficiency Agents cover after-hours, scheduling, fax, and prior auth.</p>' +
+              '<div class="dp-cl">Agent families</div>' +
+              '<div class="dp-cs"><span class="dp-c">Clinical Performance Agents</span><span class="dp-c">Predictive Activation Agents</span><span class="dp-c">Operational Efficiency Agents</span><span class="dp-c">ZynAfterHours \u00b7 ZynSchedule</span><span class="dp-c">ZynReminder \u00b7 ZynFax \u00b7 ZynAuth</span></div>' +
+              '<div class="dp-ft">Coordinated by \u2192 <span class="dp-fl" onclick="zPick(4)">Layer 4: Deployable Care Plans \u2191</span></div>' +
+            '</div></div>' +
+            '<div class="dp" data-n="4"><div class="dp-st"></div><div class="dp-in">' +
+              '<div class="dp-ln">Layer 4 \u2014 Orchestration</div><div class="dp-ti">Deployable Care Plans</div>' +
+              '<div class="dp-tg">Coordinate multiple agents around one clinical goal \u2014 and keep the episode open until the work is done</div>' +
+              '<p class="dp-de">Care Plans orchestrate agents around defined clinical and operational goals, sequencing outreach, managing exceptions, and documenting outcomes back into the EHR. A post-discharge TCM plan sequences Transitions of Care, ZynSchedule, ZynReminder, and ZynScribe in the right order, and closes only when each step is verified complete.</p>' +
+              '<div class="dp-cl">Active care plans</div>' +
+              '<div class="dp-cs"><span class="dp-c">Post-discharge TCM</span><span class="dp-c">HCC Gap Closure Sprint</span><span class="dp-c">Medication Safety &amp; Adherence</span><span class="dp-c">High-Utilizer ED Diversion</span><span class="dp-c">Chronic Condition Visit Readiness</span><span class="dp-c">Preventive Screening Program</span></div>' +
+              '<div class="dp-ft">Output \u2192 Episode completion documented in EHR \u00b7 Shared savings protected \u00b7 RAF score closed</div>' +
+            '</div></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '</div></section>';
+
+    // -- PLATFORM ARCHITECTURE DIAGRAM (V3 Visual Flow) --
+    html += '<section class="zynix-architecture-diagram-section" style="padding:60px 0 0;background:#FAFAFC;overflow:hidden"><div class="zynix-container">' +
+      '<style>' +
+      ':root{--zpa-blue-core:#20449B;--zpa-blue-mid:#2863BA;--zpa-blue-bright:#3286E0;--zpa-blue-pale:#EAF0FA;--zpa-orange:#F16529;--zpa-orange-light:#FEF0E9;--zpa-gray-line:#DFDFE1;--zpa-gray-card:#F4F4F6;--zpa-text-body:#414142;--zpa-text-muted:#747475}' +
+      '.zpa-diagram{position:relative;z-index:1;display:grid;grid-template-columns:148px 1fr 148px;align-items:center;max-width:1100px;margin:0 auto;gap:0}' +
+      '.zpa-box{background:#fff;border:1px solid var(--zpa-gray-line);border-radius:12px;padding:14px 12px;box-shadow:0 2px 10px rgba(32,68,155,.06)}' +
+      '.zpa-box-label{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-bottom:10px;display:block;text-align:center}' +
+      '.zpa-src-box .zpa-box-label{color:var(--zpa-blue-mid)}' +
+      '.zpa-usr-box .zpa-box-label{color:var(--zpa-orange)}' +
+      '.zpa-src-item,.zpa-usr-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;background:var(--zpa-blue-pale);margin-bottom:5px;border:1px solid #D0DAF0}' +
+      '.zpa-src-item:last-child,.zpa-usr-item:last-child{margin-bottom:0}' +
+      '.zpa-src-ic,.zpa-usr-ic{width:24px;height:24px;border-radius:50%;background:#fff;border:1px solid #BCC6E6;display:flex;align-items:center;justify-content:center;flex-shrink:0}' +
+      '.zpa-src-ic svg{width:12px;height:12px;stroke:var(--zpa-blue-mid);fill:none;stroke-width:1.5}' +
+      '.zpa-usr-ic svg{width:12px;height:12px;fill:var(--zpa-blue-mid)}' +
+      '.zpa-src-name,.zpa-usr-name{font-size:10.5px;font-weight:600;color:var(--zpa-blue-core);flex:1}' +
+      '.zpa-usr-item.highlight{background:var(--zpa-orange-light);border-color:#F5BEAA}' +
+      '.zpa-usr-item.highlight .zpa-usr-ic{border-color:#F5BEAA}' +
+      '.zpa-usr-item.highlight .zpa-usr-ic svg{fill:var(--zpa-orange)}' +
+      '.zpa-usr-item.highlight .zpa-usr-name{color:var(--zpa-orange);font-weight:700}' +
+      '.zpa-flow{position:relative;padding:88px 0 64px}' +
+      '.zpa-flow-line{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:2.5px;background:linear-gradient(90deg,var(--zpa-blue-pale) 0%,var(--zpa-blue-mid) 35%,var(--zpa-blue-bright) 62%,var(--zpa-orange) 100%);z-index:0}' +
+      '.zpa-nodes{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}' +
+      '.zpa-node{display:flex;flex-direction:column;align-items:center;position:relative;cursor:pointer;flex:1}' +
+      '.zpa-tip{position:absolute;bottom:calc(100% + 10px);width:116px;background:#fff;border:1px solid var(--zpa-gray-line);border-radius:8px;padding:8px 10px;font-size:10px;line-height:1.55;color:var(--zpa-text-muted);text-align:center;box-shadow:0 3px 12px rgba(32,68,155,.09);pointer-events:none;opacity:0;transition:opacity .3s}' +
+      '.zpa-tip::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--zpa-gray-line)}' +
+      '.zpa-tip::before{content:"";position:absolute;top:calc(100% - 1px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#fff;z-index:1}' +
+      '.zpa-node.on .zpa-tip{opacity:1}' +
+      '.zpa-ring{width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(32,68,155,.06);transition:background .35s,transform .35s;flex-shrink:0}' +
+      '.zpa-node.on .zpa-ring{background:rgba(32,68,155,.14);transform:scale(1.1)}' +
+      '.zpa-node[data-n="5"].on .zpa-ring{background:rgba(241,101,41,.14)}' +
+      '.zpa-circle{width:70px;height:70px;border-radius:50%;background:var(--zpa-blue-core);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(32,68,155,.28);border:3px solid #fff;transition:all .35s;flex-shrink:0}' +
+      '.zpa-node.on .zpa-circle{width:80px;height:80px;box-shadow:0 8px 28px rgba(32,68,155,.42)}' +
+      '.zpa-node[data-n="5"] .zpa-circle{background:linear-gradient(135deg,var(--zpa-blue-mid),var(--zpa-orange))}' +
+      '.zpa-node[data-n="5"].on .zpa-circle{box-shadow:0 8px 28px rgba(241,101,41,.36)}' +
+      '.zpa-lbadge{font-size:20px;font-weight:800;line-height:1}' +
+      '.zpa-lname{font-size:8px;font-weight:700;text-align:center;line-height:1.25;margin-top:2px;padding:0 4px}' +
+      '.zpa-nlabel{margin-top:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--zpa-text-muted);text-align:center;transition:color .35s}' +
+      '.zpa-node.on .zpa-nlabel{color:var(--zpa-blue-core)}' +
+      '.zpa-node[data-n="5"].on .zpa-nlabel{color:var(--zpa-orange)}' +
+      '.zpa-ico{width:32px;height:32px;border-radius:8px;background:var(--zpa-blue-pale);border:1px solid #BCC6E6;display:flex;align-items:center;justify-content:center;transition:background .35s,border-color .35s}' +
+      '.zpa-ico svg{width:15px;height:15px;fill:var(--zpa-blue-mid);stroke:none}' +
+      '.zpa-node.on .zpa-ico{background:var(--zpa-blue-mid);border-color:var(--zpa-blue-mid)}' +
+      '.zpa-node.on .zpa-ico svg{fill:#fff}' +
+      '.zpa-node[data-n="5"] .zpa-ico{background:var(--zpa-orange-light);border-color:#F5BEAA}' +
+      '.zpa-node[data-n="5"] .zpa-ico svg{fill:var(--zpa-orange)}' +
+      '.zpa-node[data-n="5"].on .zpa-ico{background:var(--zpa-orange);border-color:var(--zpa-orange)}' +
+      '.zpa-node[data-n="5"].on .zpa-ico svg{fill:#fff}' +
+      '.zpa-ico-wrap{display:flex;flex-direction:column;align-items:center;gap:6px}' +
+      '.zpa-ico-wrap.below{flex-direction:column-reverse}' +
+      '.zpa-detail{max-width:1100px;margin:28px auto 0;background:#fff;border-radius:16px;border:1px solid var(--zpa-gray-line);box-shadow:0 4px 24px rgba(32,68,155,.09);overflow:hidden;position:relative;z-index:1}' +
+      '.zpa-prog{height:3px;background:var(--zpa-gray-line);position:relative}' +
+      '.zpa-prog-fill{height:3px;width:0%;position:absolute;left:0;top:0;transition:width .08s linear}' +
+      '.zpa-slide{display:none;padding:26px 36px}' +
+      '.zpa-slide.on{display:block;animation:zpaSlideIn .35s ease}' +
+      '@keyframes zpaSlideIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}' +
+      '.zpa-slide-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}' +
+      '.zpa-slide-badge{flex-shrink:0;font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;background:var(--zpa-blue-pale);color:var(--zpa-blue-core);margin-top:2px;white-space:nowrap}' +
+      '.zpa-slide[data-n="5"] .zpa-slide-badge{background:var(--zpa-orange-light);color:var(--zpa-orange)}' +
+      '.zpa-slide-title{font-size:17px;font-weight:800;color:var(--zpa-blue-core);line-height:1.25}' +
+      '.zpa-slide[data-n="5"] .zpa-slide-title{color:var(--zpa-orange)}' +
+      '.zpa-slide-body{font-size:13.5px;color:var(--zpa-text-body);line-height:1.78;max-width:800px}' +
+      '.zpa-slide-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}' +
+      '.zpa-slide-tag{font-size:11px;font-weight:500;padding:3px 9px;border-radius:4px;background:var(--zpa-blue-pale);color:var(--zpa-blue-mid)}' +
+      '.zpa-slide[data-n="5"] .zpa-slide-tag{background:var(--zpa-orange-light);color:#b14619}' +
+      '.zpa-nav{display:flex;align-items:center;justify-content:space-between;padding:13px 36px 16px;border-top:1px solid var(--zpa-gray-line)}' +
+      '.zpa-nav-btn{width:30px;height:30px;border-radius:50%;background:var(--zpa-gray-card);border:1px solid var(--zpa-gray-line);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:var(--zpa-text-muted);transition:background .2s,color .2s;user-select:none}' +
+      '.zpa-nav-btn:hover{background:var(--zpa-blue-pale);color:var(--zpa-blue-core)}' +
+      '.zpa-dots-v3{display:flex;gap:7px;align-items:center}' +
+      '.zpa-dot-v3{width:8px;height:8px;border-radius:50%;background:var(--zpa-gray-line);cursor:pointer;transition:all .25s}' +
+      '.zpa-dot-v3.on{background:var(--zpa-blue-core);width:20px;border-radius:4px}' +
+      '.zpa-dot-v3[data-n="5"].on{background:var(--zpa-orange)}' +
+      /* V3 responsive */
+      '@media(max-width:767px){' +
+        '.zpa-diagram{grid-template-columns:1fr;gap:20px}' +
+        '.zpa-flow{padding:40px 0 32px}' +
+        '.zpa-nodes{flex-wrap:wrap;gap:16px;justify-content:center}' +
+        '.zpa-node{flex:0 0 auto;width:80px}' +
+        '.zpa-ring{width:64px;height:64px}' +
+        '.zpa-circle{width:48px;height:48px}' +
+        '.zpa-node.on .zpa-circle{width:56px;height:56px}' +
+        '.zpa-lbadge{font-size:14px}' +
+        '.zpa-lname{font-size:7px}' +
+        '.zpa-tip{display:none}' +
+        '.zpa-ico{width:24px;height:24px}' +
+        '.zpa-ico svg{width:11px;height:11px}' +
+        '.zpa-slide{padding:20px 16px}' +
+        '.zpa-nav{padding:10px 16px 12px}' +
+      '}' +
+      '</style>' +
+      '<div class="zpa-diagram">' +
+        '<div class="zpa-box zpa-src-box">' +
+          '<span class="zpa-box-label">Data sources</span>' +
+          '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><rect x="3" y="2" width="14" height="16" rx="2"/><line x1="6" y1="7" x2="14" y2="7"/><line x1="6" y1="10" x2="14" y2="10"/><line x1="6" y1="13" x2="10" y2="13"/></svg></div><span class="zpa-src-name">EHR systems</span></div>' +
+          '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><path d="M10 2L2 7v6l8 5 8-5V7z"/></svg></div><span class="zpa-src-name">Claims &amp; BCDA</span></div>' +
+          '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div><span class="zpa-src-name">ADT events</span></div>' +
+          '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><path d="M7 3v8l-3 5h12l-3-5V3"/><line x1="7" y1="7" x2="13" y2="7"/></svg></div><span class="zpa-src-name">Labs &amp; imaging</span></div>' +
+          '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><rect x="5" y="3" width="10" height="14" rx="2"/><line x1="10" y1="7" x2="10" y2="13"/><line x1="7" y1="10" x2="13" y2="10"/></svg></div><span class="zpa-src-name">Pharmacy data</span></div>' +
+          '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><circle cx="10" cy="8" r="3"/><path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></div><span class="zpa-src-name">SDoH screening</span></div>' +
+          '<div style="display:flex;align-items:center;margin-top:12px;padding:0 4px"><div style="flex:1;height:2px;background:linear-gradient(90deg,var(--zpa-blue-pale),var(--zpa-blue-mid))"></div><div style="width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:10px solid var(--zpa-blue-mid)"></div></div>' +
+        '</div>' +
+        '<div class="zpa-flow">' +
+          '<div class="zpa-flow-line"></div>' +
+          '<div class="zpa-nodes">' +
+            '<div class="zpa-node" data-n="1" onclick="zpaPick(1)"><div class="zpa-ico-wrap"><div class="zpa-ico"><svg viewBox="0 0 20 20"><ellipse cx="10" cy="6" rx="7" ry="3" fill="currentColor"/><path d="M3 6v4c0 1.65 3.13 3 7 3s7-1.35 7-3V6"/><path d="M3 10v4c0 1.65 3.13 3 7 3s7-1.35 7-3v-4"/></svg></div></div><div class="zpa-ring"><div class="zpa-circle"><span class="zpa-lbadge">L1</span><span class="zpa-lname">Data Foundation</span></div></div><div class="zpa-nlabel">Ingest</div><div class="zpa-tip">Ingest &amp; unify all healthcare data into one secure, compliant record</div></div>' +
+            '<div class="zpa-node" data-n="2" onclick="zpaPick(2)"><div class="zpa-ico-wrap below"><div class="zpa-ico"><svg viewBox="0 0 20 20"><path d="M4 5h12M4 9h8M4 13h10"/><polyline points="14 11 17 14 14 17"/></svg></div></div><div class="zpa-ring"><div class="zpa-circle"><span class="zpa-lbadge">L2</span><span class="zpa-lname">Curated Layer</span></div></div><div class="zpa-nlabel">Normalize</div><div class="zpa-tip">Clean, standardize &amp; validate \u2014 FHIR, HL7, CCLF aligned and deduplicated</div></div>' +
+            '<div class="zpa-node" data-n="3" onclick="zpaPick(3)"><div class="zpa-ico-wrap"><div class="zpa-ico"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="3" fill="currentColor"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.93 4.93l1.41 1.41M13.66 13.66l1.41 1.41M4.93 15.07l1.41-1.41M13.66 6.34l1.41-1.41"/></svg></div></div><div class="zpa-ring"><div class="zpa-circle"><span class="zpa-lbadge">L3</span><span class="zpa-lname">ZynixLLM Engine</span></div></div><div class="zpa-nlabel">Reason</div><div class="zpa-tip">Healthcare-native AI \u2014 clinical risk models, gap detection, care pathway logic</div></div>' +
+            '<div class="zpa-node" data-n="4" onclick="zpaPick(4)"><div class="zpa-ico-wrap below"><div class="zpa-ico"><svg viewBox="0 0 20 20"><polyline points="4 15 8 9 12 12 16 5"/></svg></div></div><div class="zpa-ring"><div class="zpa-circle"><span class="zpa-lbadge">L4</span><span class="zpa-lname">Intelligence</span></div></div><div class="zpa-nlabel">Surface</div><div class="zpa-tip">ZynGap \u00b7 ZynPredict \u00b7 ZynGuide \u00b7 ZynAnalytics \u2014 RAF-prioritized, actionable outputs</div></div>' +
+            '<div class="zpa-node" data-n="5" onclick="zpaPick(5)"><div class="zpa-ico-wrap"><div class="zpa-ico"><svg viewBox="0 0 20 20"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6L2 8h6z" fill="currentColor"/></svg></div></div><div class="zpa-ring"><div class="zpa-circle"><span class="zpa-lbadge">L5</span><span class="zpa-lname">Action Layer</span></div></div><div class="zpa-nlabel">Execute</div><div class="zpa-tip">AI agents + care plans close the loop \u2014 insight to documented outcome</div></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="zpa-box zpa-usr-box">' +
+          '<span class="zpa-box-label">Output to</span>' +
+          '<div style="display:flex;align-items:center;margin-bottom:10px;padding:0 4px"><div style="width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:10px solid var(--zpa-blue-mid)"></div><div style="flex:1;height:2px;background:linear-gradient(90deg,var(--zpa-blue-mid),var(--zpa-blue-pale))"></div></div>' +
+          '<div class="zpa-usr-item"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.5"/><path d="M3 18c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></div><span class="zpa-usr-name">Clinicians</span></div>' +
+          '<div class="zpa-usr-item"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><circle cx="8" cy="7" r="3"/><path d="M2 18c0-3.3 2.7-6 6-6"/><circle cx="14" cy="9" r="2.5"/><path d="M11 18c0-2.8 2.1-5 5-5"/></svg></div><span class="zpa-usr-name">Care coordinators</span></div>' +
+          '<div class="zpa-usr-item"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><polyline points="3 7 10 3 17 7 10 11 3 7"/><polyline points="3 12 10 16 17 12"/></svg></div><span class="zpa-usr-name">Pop. health directors</span></div>' +
+          '<div class="zpa-usr-item"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><rect x="3" y="5" width="14" height="11" rx="2"/><line x1="7" y1="9" x2="13" y2="9"/><line x1="7" y1="12" x2="11" y2="12"/></svg></div><span class="zpa-usr-name">Executives</span></div>' +
+          '<div class="zpa-usr-item highlight"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6L2 8h6z"/></svg></div><span class="zpa-usr-name">AI agents</span></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="zpa-detail">' +
+        '<div class="zpa-prog"><div class="zpa-prog-fill" id="zpa-fill"></div></div>' +
+        '<div class="zpa-slide" data-n="1"><div class="zpa-slide-head"><span class="zpa-slide-badge">L1 \u2014 Foundation</span><div><div class="zpa-slide-title">AI Data Foundation \u2014 Unified Healthcare Data Lake</div></div></div><p class="zpa-slide-body">Zynix connects every data source that matters \u2014 EHR systems, Medicare and Medicaid claims, real-time ADT feeds, labs, pharmacy fills, and SDoH screens \u2014 into a single unified patient record. De-duplication across systems resolves patient identity conflicts before any intelligence runs on top.</p><div class="zpa-slide-tags"><span class="zpa-slide-tag">Epic \u00b7 Cerner \u00b7 athenahealth</span><span class="zpa-slide-tag">CMS Medicare Claims</span><span class="zpa-slide-tag">Real-time ADT feeds</span><span class="zpa-slide-tag">Labs &amp; imaging</span><span class="zpa-slide-tag">Pharmacy fills</span><span class="zpa-slide-tag">SDoH screening</span><span class="zpa-slide-tag">FHIR \u00b7 HL7 \u00b7 CCLF</span></div></div>' +
+        '<div class="zpa-slide" data-n="2"><div class="zpa-slide-head"><span class="zpa-slide-badge">L2 \u2014 Curation</span><div><div class="zpa-slide-title">Curated Data Layer \u2014 Normalize, Validate, and Deduplicate</div></div></div><p class="zpa-slide-body">Raw healthcare data from every source is structurally inconsistent. This layer standardizes clinical coding across ICD-10, CPT, SNOMED, and LOINC, reconciles conflicting information, and flags irreconcilable discrepancies for review.</p><div class="zpa-slide-tags"><span class="zpa-slide-tag">ICD-10 \u00b7 CPT \u00b7 SNOMED \u00b7 LOINC</span><span class="zpa-slide-tag">Patient identity resolution</span><span class="zpa-slide-tag">Claims reconciliation</span><span class="zpa-slide-tag">Data quality scoring</span><span class="zpa-slide-tag">Deduplication engine</span></div></div>' +
+        '<div class="zpa-slide" data-n="3"><div class="zpa-slide-head"><span class="zpa-slide-badge">L3 \u2014 Intelligence</span><div><div class="zpa-slide-title">ZynixLLM Intelligence Engine \u2014 Healthcare-Native AI Reasoning</div></div></div><p class="zpa-slide-body">ZynixLLM is Zynix AI\u2019s healthcare-native adapted language model \u2014 fine-tuned on US healthcare data to understand clinical terminology, risk context, care pathway logic, and documentation requirements.</p><div class="zpa-slide-tags"><span class="zpa-slide-tag">Healthcare-native LLM</span><span class="zpa-slide-tag">Risk stratification models</span><span class="zpa-slide-tag">Clinical gap detection</span><span class="zpa-slide-tag">Predictive deterioration</span><span class="zpa-slide-tag">NLP on clinical notes</span></div></div>' +
+        '<div class="zpa-slide" data-n="4"><div class="zpa-slide-head"><span class="zpa-slide-badge">L4 \u2014 Analytics</span><div><div class="zpa-slide-title">Intelligence and Analytics \u2014 Surface What Matters, When It Matters</div></div></div><p class="zpa-slide-body">Four intelligence products sit on top of the engine \u2014 each connected directly to an outreach workflow. ZynGap identifies HCC and quality gaps prioritized by RAF impact. ZynPredict scores readmission risk 30 to 90 days in advance. ZynGuide surfaces point-of-care support. ZynAnalytics provides real-time population visibility.</p><div class="zpa-slide-tags"><span class="zpa-slide-tag">ZynGap \u2014 HCC &amp; quality gaps</span><span class="zpa-slide-tag">ZynPredict \u2014 Readmission risk</span><span class="zpa-slide-tag">ZynGuide \u2014 Point-of-care</span><span class="zpa-slide-tag">ZynAnalytics \u2014 Population dashboards</span></div></div>' +
+        '<div class="zpa-slide" data-n="5"><div class="zpa-slide-head"><span class="zpa-slide-badge">L5 \u2014 Action</span><div><div class="zpa-slide-title">Action and Execution Layer \u2014 Agents and Care Plans Close the Loop</div></div></div><p class="zpa-slide-body">Intelligence outputs from L4 directly trigger the AI Agent Suite \u2014 Clinical Performance Agents, Predictive Activation Agents, and Operational Efficiency Agents. Deployable Care Plans orchestrate multiple agents around a single clinical goal.</p><div class="zpa-slide-tags"><span class="zpa-slide-tag">Clinical Performance Agents</span><span class="zpa-slide-tag">Predictive Activation Agents</span><span class="zpa-slide-tag">Operational Efficiency Agents</span><span class="zpa-slide-tag">Deployable Care Plans</span><span class="zpa-slide-tag">Post-discharge TCM</span><span class="zpa-slide-tag">EHR documentation loop</span></div></div>' +
+        '<div class="zpa-nav"><div class="zpa-nav-btn" onclick="zpaPrev()">&#8249;</div><div class="zpa-dots-v3"><div class="zpa-dot-v3" data-n="1" onclick="zpaPick(1)"></div><div class="zpa-dot-v3" data-n="2" onclick="zpaPick(2)"></div><div class="zpa-dot-v3" data-n="3" onclick="zpaPick(3)"></div><div class="zpa-dot-v3" data-n="4" onclick="zpaPick(4)"></div><div class="zpa-dot-v3" data-n="5" onclick="zpaPick(5)"></div></div><div class="zpa-nav-btn" onclick="zpaNext()">&#8250;</div></div>' +
+      '</div>' +
+      '</div></section>';
 
     // -- PROVEN RESULTS (Statement Section) --
     html += '<section style="padding:80px 0;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;text-align:center"><div class="zynix-container">' +
@@ -6163,6 +6429,95 @@ function renderDataAnalyticsV7() {
       animateCounters();
       initROICalculator();
       initAnalytics();
+      // V2 Interactive Architecture Component (zPick)
+      (function(){
+        var _c=1,_e=0,_DUR=5000,_T=80,_iv=null,_paused=false;
+        function _tick(){
+          _e+=_T;
+          var pct=Math.min((_e/_DUR)*100,100);
+          var pr=document.querySelector('.lb.on .lb-pr');
+          if(pr) pr.style.width=pct+'%';
+          if(_e>=_DUR){ window.zPick(_c>=4?1:_c+1); }
+        }
+        function _start(){ clearInterval(_iv); _iv=setInterval(_tick,_T); }
+        window.zPick=function(n){
+          clearInterval(_iv);
+          document.querySelectorAll('.lb').forEach(function(el){
+            var on=+el.getAttribute('data-n')===n;
+            el.classList.toggle('on',on);
+            var pr=el.querySelector('.lb-pr');
+            if(pr) pr.style.width='0%';
+          });
+          document.querySelectorAll('.dp').forEach(function(el){
+            el.classList.toggle('on',+el.getAttribute('data-n')===n);
+          });
+          document.querySelectorAll('.za-dot').forEach(function(el){
+            el.classList.toggle('on',+el.getAttribute('data-n')===n);
+          });
+          _c=n; _e=0;
+          if(!_paused) _start();
+        };
+        var root=document.getElementById('za-root');
+        if(root){
+          root.addEventListener('mouseenter',function(){ _paused=true; clearInterval(_iv); });
+          root.addEventListener('mouseleave',function(){ _paused=false; _start(); });
+          window.zPick(1);
+        }
+      })();
+      // V3 Architecture Diagram Component (zpaPick)
+      (function(){
+        var _c=1,_e=0,_DUR=5000,_T=80,_iv=null,_paused=false;
+        var C={1:'#20449B',2:'#20449B',3:'#20449B',4:'#20449B',5:'#F16529'};
+        function _render(n){
+          document.querySelectorAll('.zpa-node').forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-n')===n)});
+          document.querySelectorAll('.zpa-slide').forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-n')===n)});
+          document.querySelectorAll('.zpa-dot-v3').forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-n')===n)});
+          var f=document.getElementById('zpa-fill');
+          if(f){f.style.background=C[n];f.style.width='0%';}
+          _c=n;_e=0;
+        }
+        function _tick(){
+          _e+=_T;
+          var f=document.getElementById('zpa-fill');
+          if(f) f.style.width=Math.min((_e/_DUR)*100,100)+'%';
+          if(_e>=_DUR) _render(_c>=5?1:_c+1);
+        }
+        function _start(){clearInterval(_iv);_iv=setInterval(_tick,_T);}
+        window.zpaPick=function(n){clearInterval(_iv);_render(n);if(!_paused)_start();};
+        window.zpaNext=function(){window.zpaPick(_c>=5?1:_c+1);};
+        window.zpaPrev=function(){window.zpaPick(_c<=1?5:_c-1);};
+        var root=document.getElementById('zpa-root');
+        if(root){
+          root.addEventListener('mouseenter',function(){_paused=true;clearInterval(_iv);});
+          root.addEventListener('mouseleave',function(){_paused=false;_start();});
+        }
+        // Wait for the V3 section to be rendered, then initialize
+        var zpaDetail=document.querySelector('.zpa-detail');
+        if(zpaDetail){
+          zpaDetail.closest('section').addEventListener('mouseenter',function(){_paused=true;clearInterval(_iv);});
+          zpaDetail.closest('section').addEventListener('mouseleave',function(){_paused=false;_start();});
+          window.zpaPick(1);
+        }
+      })();
+      // Hero dashboard animations
+      (function(){
+        var heroCard=document.querySelector('.zynix-homepage-hero .zynix-inner-hero-img');
+        if(!heroCard) return;
+        var style=document.createElement('style');
+        style.textContent=
+          '@keyframes zynixHeroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}' +
+          '@keyframes zynixHeroBarGrow{from{width:0%}to{width:100%}}' +
+          '@keyframes zynixLivePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.6)}}' +
+          '@keyframes zynixCountUp{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}' +
+          '.zynix-homepage-hero .zynix-inner-hero-img>div{animation:zynixHeroFloat 4s ease-in-out infinite}' +
+          '.zynix-homepage-hero .zynix-inner-hero-img [style*="animation:zynixPulse"] span:first-child,.zynix-homepage-hero .zynix-inner-hero-img span[style*="animation:zynixPulse"]{animation:zynixLivePulse 2s ease-in-out infinite !important}';
+        document.head.appendChild(style);
+        // Animate stat numbers with count-up effect
+        var statEls=heroCard.querySelectorAll('[style*="font-size:28px"]');
+        statEls.forEach(function(el){
+          el.style.animation='zynixCountUp 1.2s ease-out';
+        });
+      })();
       // FAQ accordion toggle
       document.querySelectorAll('.zynix-faq-q').forEach(function(q) {
         q.addEventListener('click', function() {
