@@ -1489,55 +1489,141 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-screenshot-gallery { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 }
 @media (max-width: 767px) {
-  .zynix-inner-hero { padding: 110px 0 50px; }
-  .zynix-inner-hero-text h1 { font-size: 28px; }
-  .zynix-inner-page section { padding: 56px 0; }
-  .zynix-inner-page section > .zynix-container > h2 { font-size: 24px; }
-  .zynix-feature-grid { grid-template-columns: 1fr; }
-  .zynix-agents-grid { grid-template-columns: 1fr; }
+  /* Prevent horizontal overflow */
+  html, body { overflow-x: hidden; }
+
+  .zynix-inner-hero { padding: 100px 0 40px; }
+  .zynix-inner-hero-text h1 { font-size: 26px; line-height: 1.15; }
+  .zynix-inner-hero-text p { font-size: 14px; }
+  .zynix-inner-hero-img { display: none; }
+  .zynix-inner-page section { padding: 48px 0; }
+  .zynix-inner-page section > .zynix-container > h2 { font-size: 22px; }
+  .zynix-feature-grid { grid-template-columns: 1fr; gap: 16px; }
+  .zynix-agents-grid { grid-template-columns: 1fr; gap: 16px; }
   .zynix-careplan-grid { grid-template-columns: 1fr; }
   .zynix-safety-grid { grid-template-columns: 1fr; }
-  .zynix-hero-btns { flex-direction: column; }
+  .zynix-hero-btns { flex-direction: column; gap: 12px; }
+  .zynix-hero-btns a { width: 100%; text-align: center; }
   .zynix-flywheel-arrow, .zynix-orch-arrow { display: none; }
   .zynix-flywheel-grid, .zynix-orch-flow { flex-direction: column; }
-  .zynix-metrics-bar { flex-direction: column; gap: 20px; padding: 36px 20px; border-radius: 16px; }
+  .zynix-metrics-bar { flex-direction: column; gap: 16px; padding: 32px 20px; border-radius: 16px; }
   .zynix-metric-value { font-size: 28px; }
-  .zynix-metric-label { font-size: 13px; }
-  .zynix-footer-inner { grid-template-columns: 1fr; }
-  .zynix-cta-section h2 { font-size: 24px; }
+  .zynix-metric-label { font-size: 12px; }
+  .zynix-footer-inner { grid-template-columns: 1fr 1fr; gap: 32px 16px; }
+  .zynix-footer-col:first-child { grid-column: 1 / -1; }
+  .zynix-cta-section { padding: 48px 0; }
+  .zynix-cta-section h2 { font-size: 22px; }
+  .zynix-cta-section p { font-size: 14px; }
   .zynix-contact-grid { grid-template-columns: 1fr; }
   .zynix-form-row { grid-template-columns: 1fr; }
   .zynix-case-grid { grid-template-columns: 1fr; }
   .zynix-blog-grid { grid-template-columns: 1fr; }
   .zynix-kpi-grid { flex-direction: column; align-items: center; }
-  .zynix-homepage-hero { padding: 110px 0 48px; }
-  .zynix-homepage-hero h1 { font-size: 28px; letter-spacing: -0.5px; }
-  .zynix-homepage-hero p { font-size: 15px; }
-  .zynix-trust-track { gap: 32px; }
-  .zynix-crisis-section { padding: 56px 0; }
-  .zynix-crisis-section h2 { font-size: 24px; }
-  .zynix-crisis-section .zynix-section-sub { font-size: 14px; }
-  .zynix-architecture-section { padding: 56px 0; }
-  .zynix-comparison-section { padding: 56px 0; }
-  .zynix-comparison-col { padding: 20px; }
-  .zynix-comparison-col h3 { font-size: 16px; margin-bottom: 14px; }
-  .zynix-comparison-col ul li { font-size: 13px; padding: 8px 0; }
-  .zynix-products-overview { padding: 56px 0; }
-  .zynix-results-section { padding: 56px 0; }
-  .zynix-flywheel-section { padding: 56px 0; }
-  .zynix-compare-table { font-size: 12px; }
-  .zynix-compare-table th, .zynix-compare-table td { padding: 10px 12px; }
+  .zynix-homepage-hero { padding: 100px 0 40px; }
+  .zynix-homepage-hero h1 { font-size: 26px; letter-spacing: -0.5px; line-height: 1.15; }
+  .zynix-homepage-hero p { font-size: 14px; }
+  .zynix-homepage-hero .zynix-inner-hero-img { display: none; }
+
+  /* Trust strip mobile */
+  .zynix-trust-strip { padding: 24px 0; }
+  .zynix-trust-label { font-size: 10px; letter-spacing: 1px; }
+  .zynix-trust-track { gap: 24px; }
+  .zynix-trust-track img, .zynix-trust-track span { height: 24px !important; max-width: 100px !important; }
+
+  /* Hero trust badges mobile */
+  .zynix-hero-trust { flex-wrap: wrap; gap: 8px; }
+  .zynix-hero-badge { font-size: 11px; padding: 4px 10px; }
+
+  /* Section spacing */
+  .zynix-crisis-section { padding: 48px 0; }
+  .zynix-crisis-section h2 { font-size: 22px; }
+  .zynix-crisis-section .zynix-section-sub { font-size: 13px; }
+  .zynix-architecture-section { padding: 48px 0; }
+  .zynix-comparison-section { padding: 48px 0; }
+  .zynix-comparison-col { padding: 16px; }
+  .zynix-comparison-col h3 { font-size: 15px; margin-bottom: 12px; }
+  .zynix-comparison-col ul li { font-size: 12px; padding: 6px 0; }
+  .zynix-products-overview { padding: 48px 0; }
+  .zynix-results-section { padding: 48px 0; }
+  .zynix-flywheel-section { padding: 48px 0; }
+  .zynix-compare-table { font-size: 11px; }
+  .zynix-compare-table th, .zynix-compare-table td { padding: 8px 10px; }
   .zynix-related-grid { grid-template-columns: 1fr; }
-  .zynix-screenshot-gallery { grid-template-columns: 1fr; gap: 16px; }
+  .zynix-screenshot-gallery { grid-template-columns: 1fr; gap: 12px; }
   .zynix-testimonials-grid { grid-template-columns: 1fr; }
-  .zynix-section-sub { font-size: 14px; }
-  .zynix-tag { font-size: 11px; letter-spacing: 1.5px; }
+  .zynix-section-sub { font-size: 13px; }
+  .zynix-tag { font-size: 10px; letter-spacing: 1.5px; padding: 4px 12px; }
+  .zynix-container { padding: 0 20px; }
+  .zynix-arch-grid { gap: 12px; margin-top: 24px; }
+  .zynix-arch-card { padding: 20px 16px; }
+  .zynix-arch-card h3 { font-size: 16px; }
+  .zynix-arch-card p { font-size: 12px; }
+  .zynix-announcement-bar { font-size: 11px; padding: 8px 36px 8px 12px; }
+
+  /* Mega menu mobile fixes */
+  .zynix-mega-nav { height: 60px; padding: 0 16px; }
+  .zynix-nav-logo img { height: 90px; margin: -20px 0; }
+  .zynix-nav-cta { font-size: 13px; padding: 8px 16px; }
+
+  /* Mobile menu full screen */
+  .zynix-mobile-menu { top: 60px; max-height: calc(100vh - 60px); overflow-y: auto; }
+
+  /* Feature cards mobile */
+  .zynix-feature-card { padding: 20px 16px; }
+  .zynix-feature-card h3 { font-size: 16px; }
+  .zynix-feature-card p { font-size: 13px; }
+  .zynix-feature-icon { width: 40px; height: 40px; font-size: 20px; }
+  .zynix-feature-icon svg { width: 20px; height: 20px; }
+
+  /* Problem cards mobile */
+  .zynix-problem-card { padding: 24px 16px; }
+  .zynix-problem-card h3 { font-size: 16px; }
+  .zynix-problem-card p { font-size: 13px; }
+
+  /* Agent cards mobile */
+  .zynix-agent-card { padding: 20px 16px; }
+
+  /* ROI calculator mobile */
+  .zynix-roi-calculator { grid-template-columns: 1fr; }
+  .zynix-roi-results { border-radius: 16px; }
+
+  /* FAQ mobile */
+  .zynix-faq-q { font-size: 15px; padding: 16px 0; }
+  .zynix-faq-a { font-size: 13px; }
+
+  /* Blog cards mobile */
+  .zynix-blog-card { padding: 20px 16px; }
+  .zynix-blog-card h3 { font-size: 16px; }
+
+  /* Who we serve grid fix */
+  .zynix-compare-grid { grid-template-columns: 1fr; gap: 16px; }
+
+  /* Proven results section mobile */
+  .zynix-proven-results { padding: 48px 0; }
+  .zynix-proven-results h2 { font-size: 22px; }
+
+  /* Compliance badges mobile */
+  .zynix-compliance-badges { flex-wrap: wrap; gap: 16px; justify-content: center; }
+
+  /* Footer mobile polish */
+  .zynix-footer { padding: 48px 0 24px; }
+  .zynix-footer-social a { width: 36px; height: 36px; }
+  .zynix-footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+}
+
+/* ── Extra small phones ── */
+@media (max-width: 479px) {
+  .zynix-homepage-hero h1 { font-size: 24px; }
+  .zynix-inner-hero-text h1 { font-size: 24px; }
   .zynix-container { padding: 0 16px; }
-  .zynix-arch-grid { gap: 14px; margin-top: 32px; }
-  .zynix-arch-card { padding: 24px 20px; }
-  .zynix-arch-card h3 { font-size: 17px; }
-  .zynix-arch-card p { font-size: 13px; }
-  .zynix-announcement-bar { font-size: 12px; padding: 8px 40px 8px 16px; }
+  .zynix-footer-inner { grid-template-columns: 1fr; }
+  .zynix-mega-nav { padding: 0 12px; }
+  .zynix-nav-logo img { height: 80px; margin: -16px 0; }
+  .zynix-btn-primary, .zynix-btn-secondary { font-size: 14px; padding: 12px 20px; }
+  .zynix-cta-section h2 { font-size: 20px; }
+  h2 { font-size: 20px; }
+  .zynix-feature-card, .zynix-problem-card, .zynix-agent-card { padding: 16px 14px; }
+  .zynix-metrics-bar { padding: 28px 16px; }
 }
 
 /* ── Hide Webflow Template Default Content ── */
