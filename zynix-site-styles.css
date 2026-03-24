@@ -713,7 +713,7 @@ body {
 .zynix-nav-logo {
   display: flex; align-items: center; gap: 10px; text-decoration: none;
 }
-.zynix-nav-logo img { height: 44px; width: auto; margin: 0; }
+.zynix-nav-logo img { height: 120px; width: auto; margin: -30px 0; }
 .zynix-nav-logo-text {
   font-size: 24px; font-weight: 700; color: #1A1F2E;
   letter-spacing: -0.5px; white-space: nowrap;
