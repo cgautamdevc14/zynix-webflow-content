@@ -1522,7 +1522,8 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-homepage-hero { padding: 100px 0 40px; }
   .zynix-homepage-hero h1 { font-size: 26px; letter-spacing: -0.5px; line-height: 1.15; }
   .zynix-homepage-hero p { font-size: 14px; }
-  .zynix-homepage-hero .zynix-inner-hero-img { display: none; }
+  .zynix-homepage-hero .zynix-inner-hero-img,
+  .zynix-inner-hero-img { display: none !important; }
 
   /* Trust strip mobile */
   .zynix-trust-strip { padding: 24px 0; }
