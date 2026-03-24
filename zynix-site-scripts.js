@@ -2543,7 +2543,7 @@
       { name: 'Sunflower ACO', logo: 'https://static.wixstatic.com/media/ca9ca7_43571900261a4d69bb69dab454fd7439~mv2.png/v1/fill/w_184,h_92,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Sunflower%20ACO%20Logo.png' },
       { name: 'CLSCFL', logo: 'https://clscfl.com/wp-content/uploads/2022/08/Complete-Local-Specialty-Care.png' }
     ];
-    var logoStyle = 'height:32px;width:auto;filter:grayscale(1) opacity(0.5);transition:filter 0.3s;object-fit:contain';
+    var logoStyle = 'height:40px;width:auto;max-width:150px;filter:grayscale(1) opacity(0.65);transition:filter 0.3s,opacity 0.3s;object-fit:contain';
     var trustSpans = '';
     for (var ti = 0; ti < 2; ti++) {
       for (var tj = 0; tj < trustLogos.length; tj++) {
@@ -2551,7 +2551,7 @@
         if (tl.logo) {
           trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"></span>';
         } else {
-          trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0;font-size:13px;font-weight:700;color:#94a3b8;white-space:nowrap;letter-spacing:1px;text-transform:uppercase;opacity:0.55;font-family:var(--z-font)">' + tl.name + '</span>';
+          trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0;font-size:15px;font-weight:700;color:#64748b;white-space:nowrap;letter-spacing:0.5px;text-transform:uppercase;opacity:0.6;font-family:var(--z-font)">' + tl.name + '</span>';
         }
       }
     }
