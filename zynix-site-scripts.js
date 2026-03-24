@@ -6499,24 +6499,124 @@ function renderDataAnalyticsV7() {
           window.zpaPick(1);
         }
       })();
-      // Hero dashboard animations
+      // Hero dashboard animations — full GIF-like experience
       (function(){
         var heroCard=document.querySelector('.zynix-homepage-hero .zynix-inner-hero-img');
         if(!heroCard) return;
         var style=document.createElement('style');
         style.textContent=
-          '@keyframes zynixHeroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}' +
-          '@keyframes zynixHeroBarGrow{from{width:0%}to{width:100%}}' +
-          '@keyframes zynixLivePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.6)}}' +
-          '@keyframes zynixCountUp{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}' +
-          '.zynix-homepage-hero .zynix-inner-hero-img>div{animation:zynixHeroFloat 4s ease-in-out infinite}' +
-          '.zynix-homepage-hero .zynix-inner-hero-img [style*="animation:zynixPulse"] span:first-child,.zynix-homepage-hero .zynix-inner-hero-img span[style*="animation:zynixPulse"]{animation:zynixLivePulse 2s ease-in-out infinite !important}';
+          '@keyframes zhFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}' +
+          '@keyframes zhPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.8)}}' +
+          '@keyframes zhFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}' +
+          '@keyframes zhGlow{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.2)}50%{box-shadow:0 0 0 8px rgba(34,197,94,0)}}' +
+          '@keyframes zhSlideNum{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}' +
+          '@keyframes zhBarGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}' +
+          '@keyframes zhRowFlash{0%,100%{background:transparent}50%{background:rgba(241,101,41,0.04)}}' +
+          '.zynix-homepage-hero .zynix-inner-hero-img>div{animation:zhFloat 4s ease-in-out infinite}' +
+          '.zh-live-dot{animation:zhPulse 2s ease-in-out infinite !important}' +
+          '.zh-stat-anim{animation:zhSlideNum 0.8s ease-out both}' +
+          '.zh-row-anim{animation:zhFadeIn 0.6s ease-out both}' +
+          '.zh-active-tab{border-bottom:2px solid #F16529 !important;color:#1a1a2e !important}' +
+          '.zh-tab-trans{transition:all 0.3s ease}';
         document.head.appendChild(style);
-        // Animate stat numbers with count-up effect
-        var statEls=heroCard.querySelectorAll('[style*="font-size:28px"]');
-        statEls.forEach(function(el){
-          el.style.animation='zynixCountUp 1.2s ease-out';
+
+        // Mark LIVE dot for pulsing
+        var liveDots = heroCard.querySelectorAll('[style*="animation:zynixPulse"]');
+        liveDots.forEach(function(el){
+          var dot = el.querySelector('span') || el;
+          dot.classList.add('zh-live-dot');
         });
+
+        // Get all tabs, stats, and rows
+        var tabs = heroCard.querySelectorAll('[style*="padding:10px 18px"]');
+        var stats = heroCard.querySelectorAll('[style*="font-size:28px"]');
+        var rows = heroCard.querySelectorAll('[style*="padding:10px 0"]');
+
+        // Add transition class to tabs
+        tabs.forEach(function(t){ t.classList.add('zh-tab-trans'); });
+
+        // Counter animation for stats
+        function animateCounter(el, target, suffix, duration) {
+          suffix = suffix || '';
+          duration = duration || 1200;
+          var start = performance.now();
+          var isDecimal = String(target).indexOf('.') > -1;
+          function step(now) {
+            var p = Math.min((now - start) / duration, 1);
+            var ease = 1 - Math.pow(1 - p, 3);
+            var val = target * ease;
+            if (isDecimal) {
+              el.textContent = val.toFixed(1) + suffix;
+            } else if (target >= 1000) {
+              el.textContent = Math.floor(val).toLocaleString() + suffix;
+            } else {
+              el.textContent = Math.floor(val) + suffix;
+            }
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        }
+
+        // Data sets for tab cycling
+        var tabData = [
+          { stats: [{v:247,s:''},{v:40,s:'%'},{v:2.5,s:'x'}], labels:['Gaps Closed','Closure Rate','ROI Year One'], activeTab:0 },
+          { stats: [{v:183,s:''},{v:85,s:'%'},{v:1.2,s:'M'}], labels:['Calls Made','Contact Rate','Revenue Impact'], activeTab:1 },
+          { stats: [{v:389,s:''},{v:92,s:'%'},{v:847,s:'K'}], labels:['AWVs Scheduled','Confirmation','Revenue Impact'], activeTab:2 },
+          { stats: [{v:5120,s:''},{v:40,s:'%'},{v:2.5,s:'x'}], labels:['Patients Managed','Gap Closure Rate','ROI Year One'], activeTab:3 }
+        ];
+        var currentTab = 3; // Start on Care Team
+
+        function cycleTab() {
+          currentTab = (currentTab + 1) % 4;
+          var d = tabData[currentTab];
+
+          // Update tab styling
+          tabs.forEach(function(t, i) {
+            if (i === d.activeTab) {
+              t.style.color = '#1a1a2e';
+              t.style.borderBottom = '2px solid #F16529';
+            } else {
+              t.style.color = 'rgba(0,0,0,0.4)';
+              t.style.borderBottom = '2px solid transparent';
+            }
+          });
+
+          // Animate stats with count-up
+          stats.forEach(function(el, i) {
+            if (d.stats[i]) {
+              el.classList.remove('zh-stat-anim');
+              void el.offsetWidth; // force reflow
+              el.classList.add('zh-stat-anim');
+              animateCounter(el, d.stats[i].v, d.stats[i].s, 800);
+            }
+          });
+
+          // Update stat labels
+          var labels = heroCard.querySelectorAll('[style*="text-transform:uppercase"][style*="letter-spacing:1px"]');
+          labels.forEach(function(el, i) {
+            if (d.labels[i]) el.textContent = d.labels[i];
+          });
+
+          // Flash rows sequentially
+          rows.forEach(function(r, i) {
+            r.classList.remove('zh-row-anim');
+            void r.offsetWidth;
+            r.style.animationDelay = (i * 0.15) + 's';
+            r.classList.add('zh-row-anim');
+          });
+        }
+
+        // Initial animation
+        stats.forEach(function(el) {
+          el.classList.add('zh-stat-anim');
+        });
+        rows.forEach(function(r, i) {
+          r.style.animationDelay = (i * 0.15) + 's';
+          r.classList.add('zh-row-anim');
+        });
+
+        // Cycle tabs every 3 seconds
+        setInterval(cycleTab, 3000);
       })();
       // FAQ accordion toggle
       document.querySelectorAll('.zynix-faq-q').forEach(function(q) {
