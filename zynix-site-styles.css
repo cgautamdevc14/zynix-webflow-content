@@ -1072,39 +1072,39 @@ body.has-announcement-bar { padding-top: 40px; }
 }
 /* Force all images in trust strip to be small and grayscale */
 .zynix-trust-strip .zynix-trust-track img {
-  height: 24px;
+  height: 36px;
   width: auto;
-  max-width: 110px;
-  max-height: 24px;
+  max-width: 140px;
+  max-height: 36px;
   object-fit: contain;
   filter: grayscale(100%);
-  opacity: 0.5;
+  opacity: 0.65;
   transition: opacity 0.3s, filter 0.3s;
 }
 .zynix-trust-strip .zynix-trust-track span:hover img {
-  opacity: 0.75;
-  filter: grayscale(40%);
+  opacity: 0.9;
+  filter: grayscale(20%);
 }
 .zynix-trust-logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 32px;
+  height: 40px;
   flex-shrink: 0;
 }
 .zynix-trust-logo img {
-  height: 24px;
+  height: 36px;
   width: auto;
-  max-width: 110px;
+  max-width: 140px;
   object-fit: contain;
 }
 .zynix-trust-text {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--z-text-muted);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--z-text-secondary);
   letter-spacing: 0.5px;
   flex-shrink: 0;
-  opacity: 0.4;
+  opacity: 0.55;
 }
 .zynix-flagship-badge {
   display: none; /* hidden for clean look */
@@ -1529,7 +1529,7 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-trust-strip { padding: 24px 0; }
   .zynix-trust-label { font-size: 10px; letter-spacing: 1px; }
   .zynix-trust-track { gap: 24px; }
-  .zynix-trust-track img, .zynix-trust-track span { height: 24px !important; max-width: 100px !important; }
+  .zynix-trust-track img, .zynix-trust-track span { height: 28px !important; max-width: 120px !important; }
 
   /* Hero trust badges mobile */
   .zynix-hero-trust { flex-wrap: wrap; gap: 8px; }
