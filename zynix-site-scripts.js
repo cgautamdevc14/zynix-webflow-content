@@ -1473,10 +1473,10 @@
   // ── PAGE: Blog ──
   function renderBlog() {
     var posts = [
-      { title: 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States', cat: 'Company News', date: 'Mar 15, 2026', slug: '/resources-blog-1m-patients', featured: true },
-      { title: 'Healthcare AI Agents vs. Chatbots: What\u2019s the Difference?', cat: 'AI Implementation', date: 'Mar 15, 2026', slug: '/blog/ai-agents-vs-chatbots-healthcare' },
-      { title: 'How AI Closes Care Gaps: From Identification to Resolution', cat: 'Population Health & Analytics', date: 'Mar 10, 2026', slug: '/blog/how-ai-closes-care-gaps' },
-      { title: 'What Is Value-Based Care AI? A Complete Guide for 2026', cat: 'Value-Based Care Strategy', date: 'Mar 1, 2026', slug: '/blog/what-is-value-based-care-ai' },
+      { title: 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States', cat: 'Company News', date: 'Mar 15, 2026', slug: '/resources/blog/1m-patients', featured: true },
+      { title: 'Healthcare AI Agents vs. Chatbots: What\u2019s the Difference?', cat: 'AI Implementation', date: 'Mar 15, 2026', slug: '/resources/blog/ai-agents-vs-chatbots-healthcare' },
+      { title: 'How AI Closes Care Gaps: From Identification to Resolution', cat: 'Population Health & Analytics', date: 'Mar 10, 2026', slug: '/resources/blog/how-ai-closes-care-gaps' },
+      { title: 'What Is Value-Based Care AI? A Complete Guide for 2026', cat: 'Value-Based Care Strategy', date: 'Mar 1, 2026', slug: '/resources/blog/what-is-value-based-care-ai' },
       { title: 'Prior Authorization Delays: What They Actually Cost And How to Fix Them', cat: 'Prior Authorization & RCM', date: 'Mar 3, 2026' },
       { title: 'Your EHR Is Not Broken. It Was Just Never Built to Think.', cat: 'AI Implementation', date: 'Mar 3, 2026' },
       { title: 'Harnessing Generative AI Applications for Healthcare Innovation', cat: 'AI Implementation', date: 'Mar 2, 2026' },
@@ -1509,11 +1509,12 @@
     var html = '<div class="zynix-blog-grid">';
     posts.forEach(function(p) {
       var featuredClass = p.featured ? ' zynix-blog-featured' : '';
-      var cardInner = '<span class="zynix-blog-cat">' + p.cat + '</span><h3>' + p.title + '</h3><span class="zynix-blog-date">' + p.date + '</span>';
+      var comingSoonBadge = p.slug ? '' : '<span style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:12px;background:#fff3e0;color:#e65100;margin-bottom:8px">COMING SOON</span>';
+      var cardInner = comingSoonBadge + '<span class="zynix-blog-cat">' + p.cat + '</span><h3>' + p.title + '</h3><span class="zynix-blog-date">' + p.date + '</span>';
       if (p.slug) {
         html += '<a href="' + p.slug + '" class="zynix-blog-card fade-in-up' + featuredClass + '" style="text-decoration:none;color:inherit;display:block">' + cardInner + '</a>';
       } else {
-        html += '<div class="zynix-blog-card fade-in-up' + featuredClass + '">' + cardInner + '</div>';
+        html += '<div class="zynix-blog-card fade-in-up' + featuredClass + '" style="opacity:0.7;cursor:default">' + cardInner + '</div>';
       }
     });
     html += '</div>';
@@ -1555,7 +1556,7 @@
   // ── PAGE: Case Studies ──
   function renderCaseStudies() {
     var studies = [
-      { title: 'Palm Beach ACO', metric: '3x', label: 'AWV Completion Improvement', seg: 'ACO', desc: 'Outbound Agents (PDV & AWV), AI Scribe', slug: '/case-studies/palm-beach-aco' },
+      { title: 'Palm Beach ACO', metric: '3x', label: 'AWV Completion Improvement', seg: 'ACO', desc: 'Outbound Agents (PDV & AWV), AI Scribe', slug: '/case-studies/pbaco' },
       { title: 'AMISTAD CHC', metric: '15+', label: 'Languages Supported', seg: 'FQHC', desc: 'ZynAfterHours, Preventive & Quality Activation Agents, SDoH Agent', slug: '/case-studies/amistad' },
       { title: 'Apollo Clinic', metric: '40%', label: 'No-Show Reduction', seg: 'Practice', desc: 'ZynSchedule, ZynReminder, ZynAuth', slug: '/case-studies/apollo-clinic' },
       { title: 'NHS Health System', metric: '40%', label: 'Gap Closure Improvement', seg: 'Health System', desc: 'Full Zynix Platform, ZynAfterHours, ZynScribe, ToC Agent', slug: '/case-studies/nhs' },
@@ -1750,7 +1751,7 @@
     // Announcement banner
     var announceBanner = document.createElement('div');
     announceBanner.className = 'zynix-announcement-bar';
-    announceBanner.innerHTML = '🎉 Zynix AI surpasses 1 Million VBC patients onboarded across 30 states <a href="/resources-blog-1m-patients">Read more</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
+    announceBanner.innerHTML = '🎉 Zynix AI surpasses 1 Million VBC patients onboarded across 30 states <a href="/resources/blog/1m-patients">Read more</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
 
     document.body.prepend(mobile);
     document.body.prepend(nav);
@@ -5615,9 +5616,9 @@ function renderDataAnalyticsV7() {
 
   // ── Google Analytics ──
   function initAnalytics() {
-    // GA4 - Replace G-XXXXXXXXXX with actual measurement ID when available
-    var gaId = 'G-PLACEHOLDER';
-    if (gaId === 'G-PLACEHOLDER') return; // Skip if no real ID yet
+    // GA4 - Live measurement ID (also configured natively in Webflow)
+    var gaId = 'G-LJSSJVVXNB';
+    if (!gaId) return;
     var s = document.createElement('script');
     s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
@@ -6261,116 +6262,116 @@ function renderDataAnalyticsV7() {
       explore: {
         msg: "Welcome! Here are our most popular starting points:",
         options: [
-          { label: '📋 See All Products', link: '/products-zynix-os' },
-          { label: '🤖 AI Agents Hub', link: '/products-ai-agents' },
-          { label: '📊 Solutions by Org Type', link: '/solutions-acos' },
+          { label: '📋 See All Products', link: '/platform' },
+          { label: '🤖 AI Agents Hub', link: '/agents' },
+          { label: '📊 Solutions by Org Type', link: '/who-we-serve/acos-msos' },
           { label: '📅 Book a Demo', link: CALENDLY },
-          { label: '📖 Read Our Blog', link: '/resources-blog' }
+          { label: '📖 Read Our Blog', link: '/resources/blog' }
         ]
       },
       // Recommendation endpoints
       rec_hcc: {
         msg: "For HCC Risk Adjustment, I recommend:",
         recs: [
-          { name: 'Zynix OS+', desc: 'AI-powered HCC coding with 95%+ accuracy', link: '/products-zynix-os' },
-          { name: 'Analytics Dashboard', desc: 'RAF score tracking & gap identification', link: '/products-analytics' },
-          { name: 'Risk Intelligence Agent', desc: 'Automated chart review & suspect coding', link: '/products-ai-agents' }
+          { name: 'Zynix Platform', desc: 'AI-powered HCC coding with 95%+ accuracy', link: '/platform' },
+          { name: 'Analytics Dashboard', desc: 'RAF score tracking & gap identification', link: '/solutions/zynix-data-analytics' },
+          { name: 'Risk Intelligence Agent', desc: 'Automated chart review & suspect coding', link: '/agents' }
         ]
       },
       rec_caregap: {
         msg: "For Care Gap Closure & Quality, I recommend:",
         recs: [
-          { name: 'Care Plans', desc: 'Automated patient care plans with gap tracking', link: '/products-care-plans' },
-          { name: 'Patient Navigator Agent', desc: 'AI outreach for gap closure', link: '/products-ai-agents' },
-          { name: 'Quality Measures Agent', desc: 'Automated HEDIS/STAR measure tracking', link: '/products-ai-agents' }
+          { name: 'Care Plans', desc: 'Automated patient care plans with gap tracking', link: '/care-plans' },
+          { name: 'Patient Navigator Agent', desc: 'AI outreach for gap closure', link: '/agents/clinical-performance' },
+          { name: 'Quality Measures Agent', desc: 'Automated HEDIS/STAR measure tracking', link: '/agents/preventive-quality-activation' }
         ]
       },
       rec_tcoc: {
         msg: "To reduce Total Cost of Care, I recommend:",
         recs: [
-          { name: 'Zynix OS', desc: 'Full AI operating system for VBC', link: '/products-zynix-os' },
-          { name: 'Data Platform', desc: 'Unified data across claims, EHR, and ADT feeds', link: '/products-data-platform' },
-          { name: 'TCM Solution', desc: 'Transitional Care Management to prevent readmissions', link: '/solutions-use-case-tcm' }
+          { name: 'Zynix Platform', desc: 'Full AI operating system for VBC', link: '/platform' },
+          { name: 'Data Platform', desc: 'Unified data across claims, EHR, and ADT feeds', link: '/platform' },
+          { name: 'TCM Solution', desc: 'Transitional Care Management to prevent readmissions', link: '/use-cases/post-discharge-follow-up' }
         ]
       },
       rec_os: {
-        msg: "The Zynix OS is our flagship AI operating system — used by organizations managing 1M+ VBC patients:",
+        msg: "The Zynix Platform is our flagship AI operating system — used by organizations managing 1M+ VBC patients:",
         recs: [
-          { name: 'Zynix OS', desc: 'Complete AI healthcare operating system', link: '/products-zynix-os' },
+          { name: 'Zynix Platform', desc: 'Complete AI healthcare operating system', link: '/platform' },
           { name: 'Book a Demo', desc: 'See it live with your data', link: CALENDLY }
         ]
       },
       rec_scribe: {
         msg: "For Clinical Documentation, I recommend:",
         recs: [
-          { name: 'ZynScribe', desc: 'AI medical scribe — 70% less documentation time', link: '/products-zynscribe' },
-          { name: 'AI Medical Scribe Agent', desc: 'Real-time ambient documentation', link: '/products-ai-agents' }
+          { name: 'ZynScribe', desc: 'AI medical scribe — 70% less documentation time', link: '/zynscribe' },
+          { name: 'AI Medical Scribe Agent', desc: 'Real-time ambient documentation', link: '/agents' }
         ]
       },
       rec_priorauth: {
         msg: "For Prior Authorization automation, I recommend:",
         recs: [
-          { name: 'ZynAuth Agent', desc: 'Automated prior auth submission & tracking', link: '/products-ai-agents-zynauth' },
-          { name: 'Prior Auth Use Case', desc: 'See how practices save 12+ hours/week', link: '/solutions-use-case-prior-auth' }
+          { name: 'ZynAuth Agent', desc: 'Automated prior auth submission & tracking', link: '/agents/operational-efficiency' },
+          { name: 'Prior Auth Use Case', desc: 'See how practices save 12+ hours/week', link: '/use-cases/prior-auth-high-volume-specialty' }
         ]
       },
       rec_rcm: {
         msg: "For Revenue Cycle optimization, I recommend:",
         recs: [
-          { name: 'Claims Optimizer Agent', desc: 'AI-powered claims scrubbing & denial prevention', link: '/products-ai-agents' },
-          { name: 'Zynix RCM Solution', desc: 'End-to-end revenue cycle intelligence', link: '/solutions-use-case-prior-auth' }
+          { name: 'Claims Optimizer Agent', desc: 'AI-powered claims scrubbing & denial prevention', link: '/agents/operational-efficiency' },
+          { name: 'Zynix RCM Solution', desc: 'End-to-end revenue cycle intelligence', link: '/use-cases/prior-auth-high-volume-specialty' }
         ]
       },
       rec_analytics: {
         msg: "For Analytics & Population Health, I recommend:",
         recs: [
-          { name: 'Analytics Dashboard', desc: 'Real-time population health insights', link: '/products-analytics' },
-          { name: 'Data Platform', desc: 'Unified data lake across all sources', link: '/products-data-platform' }
+          { name: 'Analytics Dashboard', desc: 'Real-time population health insights', link: '/solutions/zynix-data-analytics' },
+          { name: 'Data Platform', desc: 'Unified data lake across all sources', link: '/platform' }
         ]
       },
       rec_schedule: {
         msg: "For Patient Scheduling & No-Show Reduction, I recommend:",
         recs: [
-          { name: 'ZynSchedule Agent', desc: 'AI-powered intelligent scheduling', link: '/products-ai-agents-zynschedule' },
-          { name: 'ZynReminder Agent', desc: 'Automated appointment reminders', link: '/products-ai-agents-zynreminder' }
+          { name: 'ZynSchedule Agent', desc: 'AI-powered intelligent scheduling', link: '/agents/operational-efficiency/zynschedule' },
+          { name: 'ZynReminder Agent', desc: 'Automated appointment reminders', link: '/agents/preventive-quality-activation/zynreminder' }
         ]
       },
       rec_quality: {
         msg: "For Quality Reporting & Measures, I recommend:",
         recs: [
-          { name: 'Quality Measures Agent', desc: 'Automated HEDIS, STAR, and UDS tracking', link: '/products-ai-agents' },
-          { name: 'Analytics Dashboard', desc: 'Quality measure performance insights', link: '/products-analytics' }
+          { name: 'Quality Measures Agent', desc: 'Automated HEDIS, STAR, and UDS tracking', link: '/agents/preventive-quality-activation' },
+          { name: 'Analytics Dashboard', desc: 'Quality measure performance insights', link: '/solutions/zynix-data-analytics' }
         ]
       },
       rec_carecoord: {
         msg: "For Care Coordination, I recommend:",
         recs: [
-          { name: 'Referral Coordinator Agent', desc: 'AI-managed referral tracking', link: '/products-ai-agents' },
-          { name: 'Post-Discharge Follow-Up', desc: 'Automated TCM outreach', link: '/products-ai-agents-post-discharge' },
-          { name: 'Care Plans', desc: 'Collaborative care plan management', link: '/products-care-plans' }
+          { name: 'Referral Coordinator Agent', desc: 'AI-managed referral tracking', link: '/agents/operational-efficiency' },
+          { name: 'Post-Discharge Follow-Up', desc: 'Automated TCM outreach', link: '/agents/transitions-of-care' },
+          { name: 'Care Plans', desc: 'Collaborative care plan management', link: '/care-plans' }
         ]
       },
       rec_network: {
         msg: "For Provider Network Optimization, I recommend:",
         recs: [
-          { name: 'Analytics Dashboard', desc: 'Provider performance scorecards', link: '/products-analytics' },
-          { name: 'Data Platform', desc: 'Network-wide data aggregation', link: '/products-data-platform' },
-          { name: 'Health Plans Solution', desc: 'Purpose-built for payer needs', link: '/solutions-health-plans' }
+          { name: 'Analytics Dashboard', desc: 'Provider performance scorecards', link: '/solutions/zynix-data-analytics' },
+          { name: 'Data Platform', desc: 'Network-wide data aggregation', link: '/platform' },
+          { name: 'Health Plans Solution', desc: 'Purpose-built for payer needs', link: '/who-we-serve/health-plans' }
         ]
       },
       rec_patient_engage: {
         msg: "For Patient Communication & Engagement, I recommend:",
         recs: [
-          { name: 'ZynReminder Agent', desc: 'Smart appointment reminders', link: '/products-ai-agents-zynreminder' },
-          { name: 'ZynAfterHours Agent', desc: '24/7 patient triage & messaging', link: '/products-ai-agents-zynafterhours' },
-          { name: 'Care Plans', desc: 'AI-powered care coordination', link: '/products-care-plans' }
+          { name: 'ZynReminder Agent', desc: 'Smart appointment reminders', link: '/agents/preventive-quality-activation/zynreminder' },
+          { name: 'ZynAfterHours Agent', desc: '24/7 patient triage & messaging', link: '/agents/operational-efficiency/zynafterhours-triage' },
+          { name: 'Care Plans', desc: 'AI-powered care coordination', link: '/care-plans' }
         ]
       },
       rec_afterhours: {
         msg: "For After-Hours & Triage, I recommend:",
         recs: [
-          { name: 'ZynAfterHours & Triage', desc: 'AI-powered 24/7 patient triage', link: '/products-ai-agents-zynafterhours' },
-          { name: 'ZynReminder', desc: 'Next-day follow-up automation', link: '/products-ai-agents-zynreminder' }
+          { name: 'ZynAfterHours & Triage', desc: 'AI-powered 24/7 patient triage', link: '/agents/operational-efficiency/zynafterhours-triage' },
+          { name: 'ZynReminder', desc: 'Next-day follow-up automation', link: '/agents/preventive-quality-activation/zynreminder' }
         ]
       }
     };
