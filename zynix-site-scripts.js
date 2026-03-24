@@ -2864,32 +2864,37 @@
       '</div></div></section>';
 
     // -- THE ZYNIX WAY (Point Solutions vs OS) --
-    html += '<section class="zynix-comparison-section"><div class="zynix-container">' +
+    html += '<section style="padding:80px 0;background:var(--z-bg-alt)"><div class="zynix-container" style="text-align:center">' +
       '<span class="zynix-tag">THE ZYNIX DIFFERENCE</span>' +
-      '<h2>Point Solutions vs. an Operating System</h2>' +
-      '<div class="zynix-comparison-grid">' +
-      '<div class="zynix-comparison-col zynix-comparison-before fade-in-up">' +
-      '<h3>' + IC_ALERT + ' Fragmented World</h3>' +
-      '<p style="font-size:12px;color:#94a3b8;margin:-12px 0 16px;font-weight:500">Without Zynix</p>' +
-      '<ul>' +
-      '<li>Analytics flags a high-risk patient (but does nothing)</li>' +
-      '<li>Care management adds them to a worklist (already too long)</li>' +
-      '<li>Call center tries to reach them (voicemail 70% of the time)</li>' +
-      '<li>EHR tracks the missed follow-up (but can\u2019t fix it)</li>' +
-      '<li>Revenue team misses the TCM billing window</li>' +
-      '</ul></div>' +
-      '<div class="zynix-comparison-col zynix-comparison-after fade-in-up">' +
-      '<h3>' + IC_CHECK + ' The Zynix Way</h3>' +
-      '<p style="font-size:12px;color:#94a3b8;margin:-12px 0 16px;font-weight:500">With Zynix</p>' +
-      '<ul>' +
-      '<li><strong>Minute 0:</strong> ADT feed hits Zynix Data Platform</li>' +
-      '<li><strong>Minute 1:</strong> Intelligence Engine: High-risk, 82nd percentile</li>' +
-      '<li><strong>Minute 2:</strong> TCM care plan auto-deployed</li>' +
-      '<li><strong>Hour 2:</strong> AI agent calls patient, confirms safe arrival</li>' +
-      '<li><strong>Day 7:</strong> Follow-up attended. TCM billed. Revenue captured.</li>' +
-      '<li><strong>Day 30:</strong> Patient did NOT readmit. Savings preserved.</li>' +
-      '</ul></div>' +
-      '</div></div></section>';
+      '<h2>What Happens After a Patient Is Discharged?</h2>' +
+      '<p class="zynix-section-sub">Same patient. Same 48-hour window. Two very different outcomes.</p>' +
+      '<div style="display:grid;grid-template-columns:1fr 60px 1fr;gap:0;margin-top:48px;max-width:960px;margin-left:auto;margin-right:auto;text-align:left">' +
+      // Left column header
+      '<div style="padding:20px 24px;background:#fef2f2;border-radius:12px 0 0 0;border-bottom:1px solid rgba(220,38,38,0.1)"><div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#dc2626">WITHOUT ZYNIX</div></div>' +
+      '<div style="background:#f8fafc;display:flex;align-items:center;justify-content:center"><div style="font-size:11px;font-weight:600;color:#94a3b8">vs</div></div>' +
+      '<div style="padding:20px 24px;background:#f0fdf4;border-radius:0 12px 0 0;border-bottom:1px solid rgba(22,163,74,0.1)"><div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#16a34a">WITH ZYNIX</div></div>' +
+      // Row 1
+      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text-secondary)">Analytics flags a high-risk patient <span style="color:#dc2626;font-weight:500">(but does nothing)</span></div>' +
+      '<div style="background:#f8fafc;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:#e2e8f0"></div></div>' +
+      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text)"><strong style="color:var(--z-accent)">Minute 0:</strong> ADT feed hits Zynix Data Platform</div>' +
+      // Row 2
+      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text-secondary)">Care management adds to a worklist <span style="color:#dc2626;font-weight:500">(already too long)</span></div>' +
+      '<div style="background:#f8fafc;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:#e2e8f0"></div></div>' +
+      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text)"><strong style="color:var(--z-accent)">Minute 1:</strong> Intelligence Engine flags 82nd percentile risk</div>' +
+      // Row 3
+      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text-secondary)">Call center tries to reach them <span style="color:#dc2626;font-weight:500">(voicemail 70%)</span></div>' +
+      '<div style="background:#f8fafc;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:#e2e8f0"></div></div>' +
+      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text)"><strong style="color:var(--z-accent)">Minute 2:</strong> TCM care plan auto-deployed</div>' +
+      // Row 4
+      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text-secondary)">EHR tracks missed follow-up <span style="color:#dc2626;font-weight:500">(can\u2019t fix it)</span></div>' +
+      '<div style="background:#f8fafc;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:#e2e8f0"></div></div>' +
+      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text)"><strong style="color:var(--z-accent)">Hour 2:</strong> AI agent calls patient, confirms safe arrival</div>' +
+      // Row 5
+      '<div style="padding:16px 24px;background:#fff;border-radius:0 0 0 12px;font-size:14px;color:var(--z-text-secondary)">Revenue team misses TCM billing window <span style="color:#dc2626;font-weight:500">\u2718</span></div>' +
+      '<div style="background:#f8fafc;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:#e2e8f0"></div></div>' +
+      '<div style="padding:16px 24px;background:#fff;border-radius:0 0 12px 0;font-size:14px;color:var(--z-text)"><strong style="color:var(--z-accent)">Day 30:</strong> No readmission. TCM billed. <span style="color:#16a34a;font-weight:600">Savings preserved. \u2714</span></div>' +
+      '</div>' +
+      '</div></section>';
 
     // -- PRODUCT SUITE --
     html += '<section class="zynix-products-overview"><div class="zynix-container">' +
