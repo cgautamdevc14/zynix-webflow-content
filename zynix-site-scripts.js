@@ -4627,13 +4627,23 @@ function renderTermsV7() {
     '<h2>8. Indemnification</h2>' +
     '<p>You agree to indemnify, defend, and hold harmless Zynix AI and its officers, directors, employees, and agents from and against any claims, damages, liabilities, losses, and expenses (including reasonable attorneys\u2019 fees) arising out of or related to your misuse of this website or your violation of these Terms.</p>' +
 
-    '<h2>9. Changes to the Site and Terms</h2>' +
+    '<h2>9. SMS/Text Messaging Program</h2>' +
+    '<p><strong>Program Name:</strong> Zynix AI Customer Care SMS</p>' +
+    '<p><strong>Program Description:</strong> Zynix AI sends SMS messages exclusively for customer care and account-related notifications to users who have explicitly opted in via the Zynix.ai website or sign-up flow. Message types include: appointment confirmations, appointment reminders, care coordination updates, scheduling changes, and account service notifications. This program does not send marketing, promotional, or lead generation messages.</p>' +
+    '<p><strong>Message Frequency:</strong> Message frequency varies based on user activity, scheduled appointments, and care coordination needs. You will only receive messages relevant to your account and care programs.</p>' +
+    '<p><strong>Message and Data Rates:</strong> Message and data rates may apply. Please check with your mobile carrier for details about your messaging plan.</p>' +
+    '<p><strong>Opt-Out:</strong> You may opt out of receiving SMS messages at any time by replying <strong>STOP</strong> to any message. Upon opting out, you will receive a final confirmation message and will no longer receive SMS communications from Zynix AI.</p>' +
+    '<p><strong>Help:</strong> For support or questions about SMS messages, reply <strong>HELP</strong> to any message, or contact us at <a href="mailto:info@zynix.ai">info@zynix.ai</a> or call (727) 264-5582.</p>' +
+    '<p><strong>Supported Carriers:</strong> Zynix AI SMS is supported on all major US carriers including AT&T, T-Mobile, Verizon, and Sprint, as well as most regional carriers.</p>' +
+    '<p><strong>Privacy:</strong> Your phone number and messaging data will not be shared with third parties for marketing purposes. See our <a href="/privacy-policy">Privacy Policy</a> for complete details on how we handle your information.</p>' +
+
+    '<h2>10. Changes to the Site and Terms</h2>' +
     '<p>We may update this website or these Terms at any time without prior notice. When we update these Terms, we will post the revised version on this page and update the \u201cLast Updated\u201d date at the top. Your continued use of this website after any update constitutes your acceptance of the revised Terms.</p>' +
 
-    '<h2>10. Governing Law</h2>' +
+    '<h2>11. Governing Law</h2>' +
     '<p>These Terms are governed by the laws of the State of Florida, without regard to conflict of laws principles. Any disputes arising under or related to these Terms shall be subject to the exclusive jurisdiction of the state and federal courts located in Pasco County, Florida.</p>' +
 
-    '<h2>11. Contact</h2>' +
+    '<h2>12. Contact</h2>' +
     '<p>For questions about these Terms:</p>' +
     '<p><strong>Email:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a></p>' +
     '<p><strong>Address:</strong> Zynix Health Technologies Inc., 3535 Little Rd, Trinity, FL 34655, USA</p>' +
