@@ -816,7 +816,7 @@ body.has-announcement-bar { padding-top: 40px; }
 }
 .zynix-nav-trigger:hover, .zynix-nav-dropdown:hover .zynix-nav-trigger { color: var(--z-text); }
 .zynix-nav-trigger .chevron {
-  font-size: 10px; transition: transform 0.2s; color: var(--z-text-muted);
+  font-size: 12px; transition: transform 0.2s; color: var(--z-text-muted);
 }
 .zynix-nav-dropdown:hover .zynix-nav-trigger .chevron { transform: rotate(180deg); }
 
@@ -2087,8 +2087,9 @@ html:not(.js-loading) body::before { display: none; }
 }
 
 /* ── Phase 3: GPU Acceleration for Transformed Elements ── */
-.zynix-feature-card, .zynix-problem-card, .zynix-agent-card, .zynix-testimonial-card,
-.zynix-compare-card, .zynix-safety-card, .zynix-case-card, .zynix-blog-card {
+/* will-change applied on hover only to avoid excessive layer promotion */
+.zynix-feature-card:hover, .zynix-problem-card:hover, .zynix-agent-card:hover, .zynix-testimonial-card:hover,
+.zynix-compare-card:hover, .zynix-safety-card:hover, .zynix-case-card:hover, .zynix-blog-card:hover {
   will-change: transform;
 }
 

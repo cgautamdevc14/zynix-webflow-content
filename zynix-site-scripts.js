@@ -1716,7 +1716,7 @@
             '<div class="zynix-mega-featured-card">' +
               '<h5>Use Cases</h5>' +
               '<p>30 real-world use cases across 6 care segments</p>' +
-              '<a href="/who-we-serve/health-systems" class="zynix-mega-featured-link">Browse All Use Cases &rarr;</a>' +
+              '<a href="/use-cases/post-discharge-follow-up" class="zynix-mega-featured-link">Browse Use Cases &rarr;</a>' +
             '</div>' +
             '<div class="zynix-mega-featured-card" style="margin-top:16px">' +
               '<h5>Case Study Spotlight</h5>' +
@@ -2882,14 +2882,14 @@
 
     // -- PROVEN RESULTS (Statement Section) --
     html += '<section style="padding:80px 0;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;text-align:center"><div class="zynix-container">' +
-      '<span class="zynix-tag" style="color:#f97316;border-color:rgba(249,115,22,0.3)">PROVEN RESULTS</span>' +
+      '<span class="zynix-tag" style="color:var(--z-accent);border-color:rgba(249,115,22,0.3)">PROVEN RESULTS</span>' +
       '<h2 style="color:#fff;font-size:clamp(2rem,4vw,2.75rem)">Built for Outcomes. Measured in Impact.</h2>' +
       '<p style="color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto 48px;font-size:16px">Real results from healthcare organizations using Zynix in production.</p>' +
       '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px 48px;max-width:900px;margin:0 auto">' +
-      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:#f97316;line-height:1.2;padding-top:4px">85%+</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">TCM Contact Rate</div></div>' +
-      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:#f97316;line-height:1.2;padding-top:4px">40%</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">Gap Closure Improvement</div></div>' +
-      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:#f97316;line-height:1.2;padding-top:4px">2.5x</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">AWV Scheduling Lift</div></div>' +
-      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:#f97316;line-height:1.2;padding-top:4px">30</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">States Deployed</div></div>' +
+      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:var(--z-accent);line-height:1.2;padding-top:4px">85%+</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">TCM Contact Rate</div></div>' +
+      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:var(--z-accent);line-height:1.2;padding-top:4px">40%</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">Gap Closure Improvement</div></div>' +
+      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:var(--z-accent);line-height:1.2;padding-top:4px">2.5x</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">AWV Scheduling Lift</div></div>' +
+      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:var(--z-accent);line-height:1.2;padding-top:4px">30</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">States Deployed</div></div>' +
       '</div></div></section>';
 
     // -- THE ZYNIX WAY (Point Solutions vs OS) --
@@ -6012,7 +6012,7 @@ function renderDataAnalyticsV7() {
     });
     // Track page scroll depth
     var scrollMarks = [25, 50, 75, 100];
-    window.addEventListener('scroll', function() {
+    function scrollDepthHandler() {
       var scrollPct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
       scrollMarks = scrollMarks.filter(function(mark) {
         if (scrollPct >= mark) {
@@ -6021,7 +6021,11 @@ function renderDataAnalyticsV7() {
         }
         return true;
       });
-    }, { passive: true });
+      if (scrollMarks.length === 0) {
+        window.removeEventListener('scroll', scrollDepthHandler);
+      }
+    }
+    window.addEventListener('scroll', scrollDepthHandler, { passive: true });
   }
 
   // ── PAGE: Compare — Zynix vs Point Solutions ──
@@ -6772,11 +6776,14 @@ function renderDataAnalyticsV7() {
             });
           });
           heroObserver.observe(heroH1, { childList: true, characterData: true, subtree: true });
-          // Also re-check periodically for the first 10 seconds
+          // Also re-check periodically for the first 10 seconds, then disconnect observer
           var heroChecks = 0;
           var heroInterval = setInterval(function() {
             if (heroH1.innerHTML !== correctHTML) heroH1.innerHTML = correctHTML;
-            if (++heroChecks > 20) clearInterval(heroInterval);
+            if (++heroChecks > 20) {
+              clearInterval(heroInterval);
+              heroObserver.disconnect();
+            }
           }, 500);
         }
       }
