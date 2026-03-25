@@ -1024,7 +1024,7 @@
         '<h2>Frequently Asked Questions</h2>' +
         '<div class="zynix-faq-list">';
       opts.faqs.forEach(function(faq) {
-        html += '<div class="zynix-faq-item"><div class="zynix-faq-q">' + faq.q + '<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>' + faq.a + '</p></div></div>';
+        html += '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">' + faq.q + '<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>' + faq.a + '</p></div></div>';
       });
       html += '</div></div></section>';
     }
@@ -1482,7 +1482,7 @@
     ];
     var faqHtml = '<div class="zynix-faq-list">';
     faqs.forEach(function(f, i) {
-      faqHtml += '<div class="zynix-faq-item fade-in-up"><div class="zynix-faq-q" onclick="this.parentElement.classList.toggle(\'open\')"><span>' + f.q + '</span><span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>' + f.a + '</p></div></div>';
+      faqHtml += '<div class="zynix-faq-item fade-in-up"><button class="zynix-faq-q" aria-expanded="false"><span>' + f.q + '</span><span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>' + f.a + '</p></div></div>';
     });
     faqHtml += '</div>';
 
@@ -1846,7 +1846,7 @@
         '<span class="zynix-tag">FAQ</span><h2>Common Questions</h2>' +
         '<div class="zynix-faq-list">';
       faqs.forEach(function(f) {
-        html += '<div class="zynix-faq-item"><div class="zynix-faq-q"><span>' + f.q + '</span><span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>' + f.a + '</p></div></div>';
+        html += '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false"><span>' + f.q + '</span><span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>' + f.a + '</p></div></div>';
       });
       html += '</div></div></section>';
     }
@@ -2959,6 +2959,15 @@
       '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">60%+</span><span class="zynix-metric-label">Reduction in admin tasks</span></div>' +
       '</div></div></section>';
 
+    // -- TESTIMONIAL SOCIAL PROOF QUOTE --
+    html += '<section style="padding:64px 0;background:#fff;text-align:center"><div class="zynix-container" style="max-width:720px">' +
+    '<blockquote style="font-size:20px;line-height:1.8;color:var(--z-text);font-style:italic;font-weight:400;margin:0;position:relative;padding:0 40px">' +
+    '<span style="position:absolute;top:-10px;left:0;font-size:64px;color:var(--z-accent);opacity:0.3;font-family:Georgia,serif;line-height:1">\u201C</span>' +
+    'Zynix didn\u2019t just improve our TCM rates \u2014 it fundamentally changed how we deliver post-discharge care. Our coordinators now focus on complex cases while AI handles the volume.' +
+    '</blockquote>' +
+    '<div style="margin-top:24px"><strong style="color:var(--z-text)">VP of Care Management</strong><span style="color:var(--z-text-muted);margin-left:8px">\u2014 Multi-State ACO, 45,000 Attributed Lives</span></div>' +
+    '</div></section>';
+
     // -- TESTIMONIALS --
     html += '<section class="zynix-testimonials-section"><div class="zynix-container">' +
       '<span class="zynix-tag">WHAT OUR CLIENTS SAY</span>' +
@@ -3024,12 +3033,12 @@
       '<h2>Purpose-Built for Value-Based Healthcare</h2>' +
       '<p class="zynix-section-sub">Zynix serves organizations responsible for outcomes, cost, quality, and operations.</p>' +
       '<div class="zynix-feature-grid">' +
-      '<div class="zynix-feature-card fade-in-up"><h3>ACOs &amp; MSOs</h3><p>TCM execution, AWV completion, shared savings optimization, and quality performance.</p><a href="/who-we-serve/acos-msos" class="zynix-card-link">ACO Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>Health Systems</h3><p>Readmission reduction, unified patient engagement, post-discharge coordination at scale.</p><a href="/who-we-serve/health-systems" class="zynix-card-link">Health System Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>Health Plans</h3><p>Stars ratings improvement, HCC gap closure, member engagement, avoidable ER reduction.</p><a href="/who-we-serve/health-plans" class="zynix-card-link">Health Plan Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>FQHCs</h3><p>Multilingual AI for underserved populations, quality payments maximization, care management at scale.</p><a href="/who-we-serve/fqhcs" class="zynix-card-link">FQHC Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>Independent Practices</h3><p>No-show reduction, after-hours coverage, appointment scheduling, documentation time savings.</p><a href="/who-we-serve/independent-group-practices" class="zynix-card-link">Practice Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><h3>ASCs</h3><p>Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination.</p><a href="/who-we-serve/ascs" class="zynix-card-link">ASC Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid var(--z-blue)"><h3>ACOs &amp; MSOs</h3><p>TCM execution, AWV completion, shared savings optimization, and quality performance.</p><a href="/who-we-serve/acos-msos" class="zynix-card-link">ACO Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid var(--z-accent)"><h3>Health Systems</h3><p>Readmission reduction, unified patient engagement, post-discharge coordination at scale.</p><a href="/who-we-serve/health-systems" class="zynix-card-link">Health System Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid var(--z-success)"><h3>Health Plans</h3><p>Stars ratings improvement, HCC gap closure, member engagement, avoidable ER reduction.</p><a href="/who-we-serve/health-plans" class="zynix-card-link">Health Plan Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #7C3AED"><h3>FQHCs</h3><p>Multilingual AI for underserved populations, quality payments maximization, care management at scale.</p><a href="/who-we-serve/fqhcs" class="zynix-card-link">FQHC Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #0891B2"><h3>Independent Practices</h3><p>No-show reduction, after-hours coverage, appointment scheduling, documentation time savings.</p><a href="/who-we-serve/independent-group-practices" class="zynix-card-link">Practice Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #D97706"><h3>ASCs</h3><p>Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination.</p><a href="/who-we-serve/ascs" class="zynix-card-link">ASC Solutions &rarr;</a></div>' +
       '</div></div></section>';
 
     // -- DATA FLYWHEEL --
@@ -4388,7 +4397,7 @@ function renderSecurityV7() {
     { q: 'Do you run vulnerability management?', a: 'Yes. Vulnerability scanning, prioritized remediation, and tracking against defined SLAs are part of our ongoing security operations.' }
   ];
   for (var f = 0; f < faqItems.length; f++) {
-    html += '<div class="zynix-faq-item"><div class="zynix-faq-q">' + faqItems[f].q + '<span class="zynix-faq-toggle">+</span></div><div class="zynix-faq-a"><p>' + faqItems[f].a + '</p></div></div>';
+    html += '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">' + faqItems[f].q + '<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>' + faqItems[f].a + '</p></div></div>';
   }
   html += '</div></div></section>';
 
@@ -6647,10 +6656,13 @@ function renderDataAnalyticsV7() {
         // Cycle tabs every 3 seconds
         setInterval(cycleTab, 3000);
       })();
-      // FAQ accordion toggle
+      // FAQ accordion toggle (keyboard accessible — uses <button> elements)
       document.querySelectorAll('.zynix-faq-q').forEach(function(q) {
         q.addEventListener('click', function() {
-          q.parentElement.classList.toggle('open');
+          var item = q.parentElement;
+          item.classList.toggle('open');
+          var expanded = item.classList.contains('open');
+          q.setAttribute('aria-expanded', expanded ? 'true' : 'false');
         });
       });
       // Handle hash scrolling after page render
@@ -6668,22 +6680,26 @@ function renderDataAnalyticsV7() {
           if (roi) roi.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 300);
       }
-      // Subtle parallax on hero image
-      var heroImg = document.querySelector('.zynix-inner-hero-img img, .zynix-homepage-hero .zynix-inner-hero-img img');
-      if (heroImg) {
-        var ticking = false;
-        window.addEventListener('scroll', function() {
-          if (!ticking) {
-            requestAnimationFrame(function() {
-              var scrollY = window.pageYOffset;
-              if (scrollY < 800) {
-                heroImg.style.transform = 'translateY(' + (scrollY * 0.08) + 'px)';
-              }
-              ticking = false;
-            });
-            ticking = true;
-          }
-        }, { passive: true });
+      // Subtle parallax on hero image (disabled for reduced-motion and lower-end devices)
+      var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReducedMotion) {
+        var heroImg = document.querySelector('.zynix-inner-hero-img img, .zynix-homepage-hero .zynix-inner-hero-img img');
+        if (heroImg) {
+          heroImg.style.willChange = 'transform';
+          var ticking = false;
+          window.addEventListener('scroll', function() {
+            if (!ticking) {
+              requestAnimationFrame(function() {
+                var scrollY = window.pageYOffset;
+                if (scrollY < 800) {
+                  heroImg.style.transform = 'translateY(' + (scrollY * 0.08) + 'px)';
+                }
+                ticking = false;
+              });
+              ticking = true;
+            }
+          }, { passive: true });
+        }
       }
       // Sticky CTA bar - appears after scrolling past hero
       var stickyBar = document.createElement('div');

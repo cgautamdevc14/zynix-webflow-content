@@ -435,7 +435,7 @@ h3 { font-weight: 600; letter-spacing: 0; }
 /* ── CTA Section ── */
 .zynix-cta-section {
   padding: 100px 24px;
-  background: var(--z-blue);
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #20449B 100%);
   text-align: center;
   color: #fff;
   position: relative;
@@ -1896,9 +1896,15 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
 
 /* ── Accessibility: Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
   .fade-in-up { opacity: 1 !important; transform: none !important; }
   .zynix-trust-track { animation: none !important; }
+  .zynix-homepage-hero .zynix-inner-hero-img { animation: none !important; }
 }
 
 /* ── Screen-reader only (AEO content hidden visually) ── */
@@ -2065,3 +2071,32 @@ body::before {
 }
 @keyframes zynixSpin { to { transform: rotate(360deg); } }
 html:not(.js-loading) body::before { display: none; }
+
+/* ── Phase 3: Smooth Page Transitions ── */
+.zynix-inner-page, .zynix-homepage-hero {
+  animation: zynixPageIn 0.4s ease;
+}
+@keyframes zynixPageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Phase 3: Card Border-Radius Consistency ── */
+.zynix-feature-card, .zynix-problem-card, .zynix-agent-card, .zynix-arch-card, .zynix-compare-card, .zynix-blog-card {
+  border-radius: 16px;
+}
+
+/* ── Phase 3: GPU Acceleration for Transformed Elements ── */
+.zynix-feature-card, .zynix-problem-card, .zynix-agent-card, .zynix-testimonial-card,
+.zynix-compare-card, .zynix-safety-card, .zynix-case-card, .zynix-blog-card {
+  will-change: transform;
+}
+
+/* ── Phase 3: Print Stylesheet ── */
+@media print {
+  .zynix-mega-nav, .zynix-announcement-bar, .zynix-footer, .zynix-cta-section,
+  #zynix-chat-widget, .zynix-sticky-cta, .zynix-mobile-menu { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+  .zynix-inner-hero { background: #f5f7fa !important; padding: 40px 0 !important; }
+  a { color: #20449B !important; text-decoration: underline !important; }
+}
