@@ -519,13 +519,15 @@
       '</div></section>';
   }
 
-  function renderInnerHero(tag, title, subtitle, image, imgAlt) {
+  function renderInnerHero(tag, title, subtitle, image, imgAlt, secondaryBtnText) {
+    var btnText = secondaryBtnText !== undefined ? secondaryBtnText : 'Learn More';
+    var secondaryBtn = btnText ? '<a href="#" class="zynix-btn-secondary zynix-scroll-next" onclick="event.preventDefault();var hero=this.closest(\'.zynix-inner-hero\');if(hero&&hero.nextElementSibling){hero.nextElementSibling.scrollIntoView({behavior:\'smooth\',block:\'start\'});}">' + btnText + '</a>' : '';
     return '<section class="zynix-inner-hero"><div class="zynix-container zynix-inner-hero-grid">' +
       '<div class="zynix-inner-hero-text">' +
       (tag ? '<span class="zynix-tag">' + tag + '</span>' : '') +
       '<h1>' + title + '</h1>' +
       '<p>' + subtitle + '</p>' +
-      '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#" class="zynix-btn-secondary zynix-scroll-next" onclick="event.preventDefault();var hero=this.closest(\'.zynix-inner-hero\');if(hero&&hero.nextElementSibling){hero.nextElementSibling.scrollIntoView({behavior:\'smooth\',block:\'start\'});}">Explore Capabilities</a></div>' +
+      '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a>' + secondaryBtn + '</div>' +
       '<div class="zynix-hero-trust">' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#4B5563;padding:8px 14px;background:#fff;border:1px solid #E5E7EB;border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> HIPAA Compliant</span>' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#4B5563;padding:8px 14px;background:#fff;border:1px solid #E5E7EB;border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> SOC 2 Type II</span>' +
@@ -574,7 +576,7 @@
   function renderZynixOS() {
     return renderInnerHero('ZYNIX OS', 'The AI Operating System for Healthcare',
       'An integrated platform where AI agents work together like a coordinated workforce — delivering measurable patient and financial outcomes at scale.',
-      IMG.enterprise, 'Zynix OS Enterprise Platform') +
+      IMG.enterprise, 'Zynix OS Enterprise Platform', 'Explore Capabilities') +
 
     renderProblemSection('Healthcare Has a Doing Problem, Not a Knowing Problem', [
       { icon: IC_CHART, title: 'Millions Spent on Analytics', desc: 'Every organization has invested heavily in BI tools. You know who needs care. The problem is delivering that care at scale.' },
@@ -637,7 +639,7 @@
   function renderDataPlatform() {
     return renderInnerHero('DATA PLATFORM', 'Your Data. Finally Useful.',
       'The unified healthcare data layer that ingests, cleans, normalizes, and organizes data from every clinical and administrative source — in real time.',
-      IMG.data, 'Zynix Data Platform') +
+      IMG.data, 'Zynix Data Platform', 'Explore Capabilities') +
 
     renderProblemSection('Why Your Data Isn\u2019t Working', [
       { icon: IC_ZAP, title: 'Fragmented Data', desc: 'Claims in one system, clinical in another, labs in a third. You\u2019re flying blind with partial information.' },
@@ -681,7 +683,7 @@
   function renderAnalytics() {
     return renderInnerHero('ANALYTICS', 'Intelligence That Drives Action',
       'AI-powered analytics that go beyond dashboards. Identify HCC opportunities, predict risk, close quality gaps, and support clinical decisions — all in real time.',
-      IMG.analytics, 'Zynix Analytics Dashboard') +
+      IMG.analytics, 'Zynix Analytics Dashboard', 'Explore Capabilities') +
 
     renderProblemSection('Why Traditional Analytics Fall Short', [
       { icon: IC_CLOCK, title: 'Stale Data', desc: 'Most healthcare analytics are 3-6 months old. You\u2019re always analyzing yesterday\u2019s problems while today\u2019s patients need help now.' },
@@ -758,8 +760,8 @@
   // ── PAGE: AI Agents ──
   function renderAIAgents() {
     return renderInnerHero('AI AGENT SUITE', 'Specialized AI Agents That Get Work Done',
-      'Stop chatting. Start executing. Our AI agents convert insights into completed actions -24/7, across every department, handling the work humans shouldn\u2019t have to do.',
-      IMG.doctor, 'Zynix AI Agents') +
+      'Stop chatting. Start executing. Our AI agents convert insights into completed actions — 24/7, across every department, handling the work humans shouldn\u2019t have to do.',
+      IMG.doctor, 'Zynix AI Agents', 'Explore Capabilities') +
 
     '<section class="zynix-agents-section" id="capabilities"><div class="zynix-container">' +
     '<span class="zynix-tag">7 SPECIALIZED AGENTS</span>' +
@@ -827,7 +829,7 @@
   function renderZynScribe() {
     return renderInnerHero('ZYNSCRIBE', 'Ambient AI Scribe for Healthcare',
       'Transform patient encounters into accurate documentation instantly. AI-powered transcription that generates precise SOAP notes in seconds — so you can focus on patients, not paperwork.',
-      IMG.scribe, 'ZynScribe Ambient AI') +
+      IMG.scribe, 'ZynScribe Ambient AI', 'Explore Capabilities') +
 
     renderProblemSection('The Documentation Crisis', [
       { icon: IC_CLOCK, title: '2 Hours Per 1 Hour', desc: 'Physicians spend 2 hours on documentation for every 1 hour with patients. That\u2019s backwards.' },
@@ -873,7 +875,7 @@
   function renderCarePlans() {
     return renderInnerHero('DEPLOYABLE CARE PLANS', 'Stop Managing Care. Start Deploying It.',
       'The orchestration layer atop Zynix OS. Takes insights from the Data Platform and executes through coordinated AI agents — seamlessly handing off tasks from one agent to the next.',
-      IMG.care, 'Zynix Care Plans') +
+      IMG.care, 'Zynix Care Plans', 'Explore Capabilities') +
 
     renderProblemSection('The Math Doesn\u2019t Work', [
       { icon: IC_USERS, title: '50,000 Patients', desc: 'A typical large ACO or MA plan population. 20% need AWV completion. 10% have undiagnosed conditions needing closure.' },
@@ -924,7 +926,7 @@
   function renderZynixLLM() {
     return renderInnerHero('ZYNIXLLM', 'Healthcare-Native Intelligence',
       'The foundation model purpose-built for medicine. Not a retrofit of general-purpose AI — every component is designed for medical intelligence, clinical safety, and real-world care delivery.',
-      IMG.mesh, 'ZynixLLM AI') +
+      IMG.mesh, 'ZynixLLM AI', 'Explore Capabilities') +
 
     '<section class="zynix-why-section"><div class="zynix-container">' +
     '<span class="zynix-tag">WHY HEALTHCARE NEEDS DIFFERENT AI</span>' +
@@ -984,7 +986,7 @@
   // ── Shared: Solution Page Template ──
   function renderSolutionPage(tag, title, subtitle, image, challenges, solutions, metrics, cta, customers, opts) {
     opts = opts || {};
-    var html = renderInnerHero(tag, title, subtitle, image, tag + ' solution');
+    var html = renderInnerHero(tag, title, subtitle, image, tag + ' solution', 'Explore Capabilities');
 
     // AEO summary block
     if (opts.summary) {
@@ -1541,7 +1543,7 @@
     html += '</div>';
 
     return renderInnerHero('BLOG', 'Insights & Research',
-      'Perspectives on operational excellence, AI transformation, and clinical innovation in healthcare. 28 articles on healthcare AI, value-based care, and population health.',
+      'Perspectives on operational excellence, AI transformation, and clinical innovation in healthcare. 32 articles on healthcare AI, value-based care, and population health.',
       null, '') +
     '<section class="zynix-blog-section"><div class="zynix-container">' + html + '</div></section>' +
     renderCTA('Want More Insights?', 'Subscribe to our newsletter for the latest in healthcare AI.', 'Contact Us') +
@@ -1812,7 +1814,7 @@
 
   // ── Shared: Agent Detail Page Template ──
   function renderAgentPage(name, tagline, subtitle, image, problem, capabilities, howItWorks, scenarios, proofPoints, faqs) {
-    var html = renderInnerHero('AI AGENT', name + ' — ' + tagline, subtitle, image, name) +
+    var html = renderInnerHero('AI AGENT', name + ' — ' + tagline, subtitle, image, name, 'Explore Capabilities') +
       renderProblemSection('The Problem', problem);
 
     html += '<section id="capabilities"><div class="zynix-container">' +
@@ -3189,7 +3191,7 @@ function renderUseCaseV7(data) {
   var html = '';
 
   var segLabel = (data.segments && data.segments.primary) ? data.segments.primary.toUpperCase() : 'USE CASE';
-  html += renderInnerHero(segLabel, data.h1, data.subhead, IMG.care, data.title);
+  html += renderInnerHero(segLabel, data.h1, data.subhead, IMG.care, data.title, 'Explore Capabilities');
 
   html += '<section style="padding:80px 0"><div class="zynix-container" style="max-width:800px">' +
     '<span class="zynix-tag">THE PROBLEM</span>' +
@@ -3254,7 +3256,7 @@ function renderUseCaseV7(data) {
 function renderAudiencePageV7(data) {
   var html = '';
 
-  html += renderInnerHero(data.eyebrow, data.headline, data.subhead, IMG.patients, data.audienceName);
+  html += renderInnerHero(data.eyebrow, data.headline, data.subhead, IMG.patients, data.audienceName, 'Explore Capabilities');
 
   html += '<section><div class="zynix-container">' +
     '<span class="zynix-tag">THE CHALLENGE</span>' +
@@ -4637,7 +4639,7 @@ var AUDIENCE_COMPANY_ROUTES = {
 function renderAgentPageV7(data) {
   var html = '';
 
-  html += renderInnerHero(data.category, data.headline, data.subhead, data.heroImage, data.heroAlt);
+  html += renderInnerHero(data.category, data.headline, data.subhead, data.heroImage, data.heroAlt, 'Explore Capabilities');
 
   html += '<section><div class="zynix-container">' +
     '<span class="zynix-tag">WHAT IT DOES</span>' +
@@ -4714,7 +4716,7 @@ function renderPlatformHub() {
 
   html += renderInnerHero('THE PLATFORM', 'The AI Operating System for <span style="color:var(--z-accent)">Value-Based Care</span>',
     'Zynix Intelligent Platform (ZIP) unifies healthcare data, clinical intelligence, autonomous AI agents, and deployable care plans into a single operating system. One platform replaces the patchwork of point solutions that fragment care delivery and limit performance improvement.',
-    IMG.enterprise, 'Zynix Intelligent Platform');
+    IMG.enterprise, 'Zynix Intelligent Platform', 'Explore Capabilities');
 
   html += '<section><div class="zynix-container">' +
     '<span class="zynix-tag">OVERVIEW</span>' +
@@ -4772,7 +4774,7 @@ function renderAgentsHub() {
 
   html += renderInnerHero('AI AGENT SUITE', 'AI Agents That Don\'t Just Inform \u2014 They <span style="color:var(--z-accent)">Act</span>',
     'Twelve purpose-built AI agents that convert clinical intelligence into completed actions. They call patients, book appointments, reconcile medications, process faxes, submit prior authorizations, and document encounters \u2014 24/7, across every department, in 15+ languages.',
-    IMG.doctor, 'Zynix AI Agents Suite');
+    IMG.doctor, 'Zynix AI Agents Suite', 'Explore Capabilities');
 
   // Clinical Performance Agents
   html += '<section id="clinical-performance"><div class="zynix-container">' +
@@ -4868,7 +4870,7 @@ function renderClinicalPerformanceHub() {
 
   html += renderInnerHero('CLINICAL PERFORMANCE AGENTS', 'Automate the Clinical Workflows That Drive Quality Outcomes',
     'AI agents purpose-built for chronic care management, transitions of care, preventive activation, annual wellness visit outreach, and social determinant screening.',
-    IMG.care, 'Clinical Performance AI Agents');
+    IMG.care, 'Clinical Performance AI Agents', 'Explore Capabilities');
 
   html += '<section id="capabilities"><div class="zynix-container">' +
     '<span class="zynix-tag">AGENTS IN THIS CATEGORY</span>' +
@@ -4914,7 +4916,7 @@ function renderPredictiveActivationHub() {
 
   html += renderInnerHero('PREDICTIVE ACTIVATION AGENTS', 'Intervene Before the Crisis, Not After',
     'Predictive models identify patients heading toward hospitalization, clinical deterioration, or care disengagement. Activation agents convert those predictions into proactive outreach and intervention \u2014 weeks before an event would otherwise occur.',
-    IMG.analytics, 'Predictive Activation AI Agents');
+    IMG.analytics, 'Predictive Activation AI Agents', 'Explore Capabilities');
 
   html += '<section id="capabilities"><div class="zynix-container">' +
     '<span class="zynix-tag">AGENTS IN THIS CATEGORY</span>' +
@@ -4959,7 +4961,7 @@ function renderOperationalEfficiencyHub() {
 
   html += renderInnerHero('OPERATIONAL EFFICIENCY AGENTS', 'Automate the Administrative Work That Burns Out Your Staff',
     'AI agents that handle after-hours triage, inbound scheduling, prior authorization, referral coordination, and fax processing. They operate 24/7, integrate with your EHR, and escalate to staff only when human judgment is required.',
-    IMG.enterprise, 'Operational Efficiency AI Agents');
+    IMG.enterprise, 'Operational Efficiency AI Agents', 'Explore Capabilities');
 
   html += '<section id="capabilities"><div class="zynix-container">' +
     '<span class="zynix-tag">AGENTS IN THIS CATEGORY</span>' +
@@ -5381,7 +5383,7 @@ function renderChronicDiseaseMonitoring() {
 
   html += renderInnerHero('CLINICAL PERFORMANCE', 'Continuous Monitoring Between Visits',
     'AI-powered chronic disease monitoring that tracks symptoms, lab trends, and medication patterns for patients with diabetes, CHF, COPD, and CKD. Detects deterioration early and routes alerts to clinical teams.',
-    IMG.care, 'Chronic Disease Monitoring');
+    IMG.care, 'Chronic Disease Monitoring', 'Explore Capabilities');
 
   html += '<section><div class="zynix-container">' +
     '<span class="zynix-tag">WHAT IT DOES</span>' +
@@ -5410,7 +5412,7 @@ function renderAWVOutreach() {
 
   html += renderInnerHero('CLINICAL PERFORMANCE', 'Annual Wellness Visits: Identified, Scheduled, Completed',
     'AI-powered identification of AWV-eligible patients, automated outreach campaigns, appointment scheduling, and completion tracking. Increase AWV completion rates by 3x compared to manual outreach programs.',
-    IMG.patient, 'AWV Outreach Agent');
+    IMG.patient, 'AWV Outreach Agent', 'Explore Capabilities');
 
   html += '<section><div class="zynix-container">' +
     '<span class="zynix-tag">WHAT IT DOES</span>' +
@@ -5439,7 +5441,7 @@ function renderSDoHAgent() {
 
   html += renderInnerHero('PLANNED CAPABILITY', 'Social Determinants of Health Screening and Navigation',
     'An AI agent that screens patients for social determinants of health \u2014 housing instability, food insecurity, transportation barriers, financial hardship, and social isolation \u2014 and routes identified needs to community resources and care navigators.',
-    IMG.patients, 'SDoH Determination Agent');
+    IMG.patients, 'SDoH Determination Agent', 'Explore Capabilities');
 
   html += '<section><div class="zynix-container">' +
     '<span class="zynix-tag">PLANNED</span>' +
@@ -5472,7 +5474,7 @@ function renderZynScribeV7() {
 
   html += renderInnerHero('AI CLINICAL DOCUMENTATION', 'Ambient AI Scribe for Healthcare',
     'Transform patient encounters into accurate, structured clinical documentation instantly. ZynScribe captures natural conversation, generates SOAP notes, suggests ICD-10 and CPT codes, and uploads directly to your EHR.',
-    IMG.scribe, 'ZynScribe AI Clinical Documentation');
+    IMG.scribe, 'ZynScribe AI Clinical Documentation', 'Explore Capabilities');
 
   html += renderProblemSection('The Documentation Crisis', [
     { icon: IC_CLOCK, title: '2 Hours Per 1 Hour', desc: 'Physicians spend 2 hours on documentation for every 1 hour with patients. That\'s backwards.' },
@@ -5529,7 +5531,7 @@ function renderCarePlansV7() {
 
   html += renderInnerHero('CARE ORCHESTRATION', 'Stop Managing Care. Start Deploying It.',
     'Pre-built, configurable care plan templates that orchestrate multiple AI agents into end-to-end workflows. Deploy TCM, CCM, AWV, gap closure, and prior authorization care plans in days. Reach 85%+ of patients.',
-    IMG.care, 'Zynix Deployable Care Plans');
+    IMG.care, 'Zynix Deployable Care Plans', 'Explore Capabilities');
 
   html += renderProblemSection('Your Staff Cannot Scale to Your Population', [
     { icon: IC_CHART, title: '50,000 Attributed Patients', desc: 'A typical large ACO or MA plan has 50,000 attributed patients requiring active outreach and coordination.' },
@@ -5591,7 +5593,7 @@ function renderDataAnalyticsV7() {
 
   html += renderInnerHero('DATA INTELLIGENCE', 'Intelligence That Drives Action',
     'AI-powered population health analytics that go beyond dashboards. Identify HCC opportunities, predict readmission risk, close quality gaps, and support clinical decisions \u2014 all in real time, all connected to agents that take action on findings.',
-    IMG.analytics, 'Zynix Data Analytics');
+    IMG.analytics, 'Zynix Data Analytics', 'Explore Capabilities');
 
   html += renderProblemSection('Why Traditional Analytics Fall Short', [
     { icon: IC_CLOCK, title: 'Stale Data', desc: 'Most healthcare analytics are 3-6 months old. You\'re always analyzing yesterday\'s problems.' },
