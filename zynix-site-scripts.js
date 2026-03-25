@@ -144,7 +144,7 @@
     '/company-press': { title: 'Press & News | Zynix AI', desc: 'Latest news, press releases, and media coverage about Zynix AI and the future of AI-powered value-based healthcare across the United States.', img: IMG.hero, schema: 'Organization', noindex: true },
     '/company-trust-center': { title: 'Trust & Security | Zynix AI', desc: 'Zynix AI is HIPAA compliant and SOC 2 Type II certified. Explore our security practices, data governance, and compliance for healthcare AI.', img: IMG.enterprise, schema: 'Organization' },
     '/contact': { title: 'Contact Zynix AI | Request a Demo', desc: 'Request a personalized demo and see how Zynix AI transforms healthcare operations for ACOs, health systems, and practices. Based in Trinity, FL.', img: IMG.hero, schema: 'MedicalBusiness' },
-    '/roi': { title: 'ROI Calculator | Zynix AI', desc: 'Calculate your projected savings from AI-powered value-based care. Estimate TCM revenue lift, gap closure impact, and readmission reduction.', img: IMG.hero },
+    '/roi': { title: 'Healthcare AI ROI Calculator | Estimate Your Savings | Zynix AI', desc: 'Use the Zynix AI ROI calculator to estimate projected savings from AI-powered care coordination. Model TCM revenue lift, gap closure improvement, readmission reduction, and coordinator time savings for your organization.', img: IMG.hero },
     '/roi-calculator': { title: 'ROI Calculator | Zynix AI', desc: 'Calculate your projected savings from AI-powered value-based care. Estimate TCM revenue lift, gap closure impact, and readmission reduction.', img: IMG.hero },
     '/resources-faq': { title: 'FAQ | Zynix AI', desc: 'Find answers about the Zynix healthcare AI platform including HIPAA compliance, EHR integration, pricing, deployment timelines, and support.', img: IMG.hero, schema: 'FAQPage' },
     '/resources-blog': { title: 'Blog | Healthcare AI Insights | Zynix AI', desc: 'Expert healthcare AI insights on value-based care, population health, care coordination, and operational transformation from the Zynix AI team.', img: IMG.hero, schema: 'Organization' },
@@ -279,10 +279,20 @@
     // BreadcrumbList schema (all inner pages)
     if (pagePath && pagePath !== '/') {
       var crumbs = [{'@type':'ListItem',position:1,name:'Home',item:'https://www.zynix.ai'}];
-      var seg = pagePath.replace(/^\//,'').split('-');
-      var sectionMap = {products:'Products',solutions:'Solutions',company:'Company',resources:'Resources'};
-      if (sectionMap[seg[0]]) {
-        crumbs.push({'@type':'ListItem',position:2,name:sectionMap[seg[0]],item:'https://www.zynix.ai/' + seg[0] + '-' + (seg[0]==='products'?'zynix-os':seg[0]==='solutions'?'acos':seg[0]==='company'?'about':seg[0]==='resources'?'blog':'')});
+      var segments = pagePath.replace(/^\//,'').split('/').filter(function(s) { return s; });
+      var topSegment = segments[0];
+      // For v7 slash-based URLs (e.g. /who-we-serve/health-systems, /agents/clinical-performance)
+      var sectionMapV7 = {'who-we-serve':'Who We Serve','agents':'AI Agents','platform':'Platform','company':'Company','resources':'Resources','solutions':'Solutions','case-studies':'Case Studies','blog':'Blog'};
+      // For legacy dash-based URLs (e.g. /products-zynix-os)
+      var legacySeg = pagePath.replace(/^\//,'').split('-');
+      var sectionMapLegacy = {products:'Products',solutions:'Solutions',company:'Company',resources:'Resources'};
+      if (sectionMapV7[topSegment] && segments.length > 1) {
+        crumbs.push({'@type':'ListItem',position:2,name:sectionMapV7[topSegment],item:'https://www.zynix.ai/' + topSegment});
+        if (segments.length > 2) {
+          crumbs.push({'@type':'ListItem',position:3,name:seo.title.split('|')[0].trim().replace(/ \| Zynix AI$/,''),item:'https://www.zynix.ai/' + topSegment + '/' + segments[1]});
+        }
+      } else if (sectionMapLegacy[legacySeg[0]]) {
+        crumbs.push({'@type':'ListItem',position:2,name:sectionMapLegacy[legacySeg[0]],item:'https://www.zynix.ai/' + legacySeg[0] + '-' + (legacySeg[0]==='products'?'zynix-os':legacySeg[0]==='solutions'?'acos':legacySeg[0]==='company'?'about':legacySeg[0]==='resources'?'blog':'')});
       }
       crumbs.push({'@type':'ListItem',position:crumbs.length+1,name:seo.title.split('|')[0].trim(),item:'https://www.zynix.ai' + pagePath});
       schemas.push({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:crumbs});
@@ -345,15 +355,26 @@
   }
 
   function renderBreadcrumb(pagePath) {
-    var parts = pagePath.replace(/^\//, '').split('-');
-    var section = parts[0];
-    var labels = { products: 'Products', solutions: 'Solutions', company: 'Company', resources: 'Resources', contact: 'Contact' };
-    var sectionLabel = labels[section] || '';
+    var segments = pagePath.replace(/^\//, '').split('/').filter(function(s) { return s; });
+    var topSegment = segments[0];
+    // V7 slash-based labels
+    var v7Labels = {'who-we-serve':'Who We Serve','agents':'AI Agents','platform':'Platform','company':'Company','resources':'Resources','solutions':'Solutions','case-studies':'Case Studies','blog':'Blog'};
+    // Legacy dash-based labels
+    var legacyLabels = { products: 'Products', solutions: 'Solutions', company: 'Company', resources: 'Resources', contact: 'Contact' };
+    var sectionLabel = '';
+    var sectionHref = '';
+    if (v7Labels[topSegment] && segments.length > 1) {
+      sectionLabel = v7Labels[topSegment];
+      sectionHref = '/' + topSegment;
+    } else {
+      var legacyParts = pagePath.replace(/^\//, '').split('-');
+      sectionLabel = legacyLabels[legacyParts[0]] || '';
+    }
     var pageName = (LINK_NAMES[pagePath] || '').replace(/ \| .*/, '');
     if (!sectionLabel || !pageName) return '';
     return '<div class="zynix-breadcrumb"><div class="zynix-container">' +
       '<a href="/">Home</a><span class="zynix-bc-sep">/</span>' +
-      '<span>' + sectionLabel + '</span><span class="zynix-bc-sep">/</span>' +
+      (sectionHref ? '<a href="' + sectionHref + '">' + sectionLabel + '</a>' : '<span>' + sectionLabel + '</span>') + '<span class="zynix-bc-sep">/</span>' +
       '<span class="zynix-bc-current">' + pageName + '</span>' +
       '</div></div>';
   }
@@ -504,7 +525,7 @@
       (tag ? '<span class="zynix-tag">' + tag + '</span>' : '') +
       '<h1>' + title + '</h1>' +
       '<p>' + subtitle + '</p>' +
-      '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#capabilities" class="zynix-btn-secondary">Explore Capabilities</a></div>' +
+      '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#" class="zynix-btn-secondary zynix-scroll-next" onclick="event.preventDefault();var hero=this.closest(\'.zynix-inner-hero\');if(hero&&hero.nextElementSibling){hero.nextElementSibling.scrollIntoView({behavior:\'smooth\',block:\'start\'});}">Explore Capabilities</a></div>' +
       '<div class="zynix-hero-trust">' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#4B5563;padding:8px 14px;background:#fff;border:1px solid #E5E7EB;border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> HIPAA Compliant</span>' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#4B5563;padding:8px 14px;background:#fff;border:1px solid #E5E7EB;border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> SOC 2 Type II</span>' +
@@ -2403,7 +2424,7 @@
     '<span class="zynix-tag" style="margin-bottom:16px">LIVE WEBINAR + VBC EXHIBIT HALL</span>' +
     '<h3 style="font-size:24px;margin-bottom:12px">Automation with Accountability: How ACOs Can Scale Patient Engagement Without Burning Out Teams</h3>' +
     '<div style="display:flex;gap:24px;flex-wrap:wrap;margin:16px 0 20px">' +
-    '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Thu, Mar 19, 2026</div>' +
+    '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Thu, Apr 17, 2026</div>' +
     '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10:00 AM \u2013 11:00 AM PDT</div>' +
     '</div>' +
     '<p style="font-size:16px;line-height:1.7;color:var(--z-text-secondary);margin-bottom:24px">Join Zynix AI at the VBC Exhibit Hall to explore how AI-powered automation is helping ACOs scale patient engagement — from post-discharge follow-ups to preventive screenings — without adding staff burnout. Learn real strategies for balancing accountability and efficiency in value-based care.</p>' +
