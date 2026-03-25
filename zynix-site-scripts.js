@@ -1457,13 +1457,18 @@
     '</div></div>' +
     '<div class="zynix-contact-form-wrap">' +
     '<h3>Request a Demo</h3>' +
-    '<form class="zynix-contact-form" id="zynix-demo-form" onsubmit="event.preventDefault();var f=this;var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'company\',value:f.querySelector(\'[name=company]\').value},{name:\'healthcare_segment\',value:f.querySelector(\'[name=segment]\').value},{name:\'message\',value:f.querySelector(\'[name=message]\').value}]};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#F16529>Thank you!</h3><p>We\\\'ll be in touch within 24 hours.</p></div>\'}).catch(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#F16529>Thank you!</h3><p>We\\\'ll be in touch within 24 hours.</p></div>\'})">' +
+    '<form class="zynix-contact-form" id="zynix-demo-form" onsubmit="event.preventDefault();var f=this;var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'phone\',value:f.querySelector(\'[name=phone]\').value},{name:\'company\',value:f.querySelector(\'[name=company]\').value},{name:\'healthcare_segment\',value:f.querySelector(\'[name=segment]\').value},{name:\'message\',value:f.querySelector(\'[name=message]\').value},{name:\'sms_consent\',value:f.querySelector(\'[name=sms_consent]\').checked?\'Yes\':\'No\'}]};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#F16529>Thank you!</h3><p>We\\\'ll be in touch within 24 hours.</p></div>\'}).catch(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#F16529>Thank you!</h3><p>We\\\'ll be in touch within 24 hours.</p></div>\'})">' +
     '<div class="zynix-form-row"><div class="zynix-form-group"><label>First Name</label><input type="text" name="firstname" placeholder="John" required></div><div class="zynix-form-group"><label>Last Name</label><input type="text" name="lastname" placeholder="Smith" required></div></div>' +
     '<div class="zynix-form-group"><label>Work Email</label><input type="email" name="email" placeholder="john@organization.com" required></div>' +
+    '<div class="zynix-form-group"><label>Phone Number</label><input type="tel" name="phone" placeholder="(555) 123-4567"></div>' +
     '<div class="zynix-form-group"><label>Organization</label><input type="text" name="company" placeholder="Your organization name"></div>' +
     '<div class="zynix-form-group"><label>Healthcare Segment</label><select name="segment"><option value="">Select your segment</option><option>ACO / MSO</option><option>Health System</option><option>FQHC</option><option>Health Plan</option><option>Independent Practice</option><option>ASC</option><option>Other</option></select></div>' +
     '<div class="zynix-form-group"><label>Message (Optional)</label><textarea name="message" rows="4" placeholder="Tell us about your goals..."></textarea></div>' +
+    '<div class="zynix-form-group" style="margin-bottom:16px"><label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-weight:400;font-size:13px;line-height:1.5;color:var(--z-text-secondary)">' +
+    '<input type="checkbox" name="sms_consent" style="margin-top:3px;width:18px;height:18px;flex-shrink:0;accent-color:var(--z-accent)">' +
+    '<span>I agree to receive SMS notifications from Zynix AI related to my account, appointments, and care coordination. Message frequency varies. Message and data rates may apply. Reply STOP to opt out at any time. Reply HELP for support. View our <a href="/privacy-policy" style="color:var(--z-blue);text-decoration:underline">Privacy Policy</a> and <a href="/terms-of-service" style="color:var(--z-blue);text-decoration:underline">Terms of Service</a>.</span></label></div>' +
     '<button type="submit" class="zynix-btn-primary" style="width:100%;text-align:center">Request a Demo &rarr;</button>' +
+    '<p style="font-size:11px;color:var(--z-text-muted);margin-top:12px;text-align:center;line-height:1.5">By submitting this form, you consent to receive communications from Zynix AI. For SMS, reply STOP to unsubscribe or HELP for help. Msg &amp; data rates may apply. Msg frequency varies. See our <a href="/privacy-policy" style="color:var(--z-text-muted);text-decoration:underline">Privacy Policy</a>.</p>' +
     '</form></div></div></div></section>' +
     renderFooter();
   }
@@ -4539,7 +4544,22 @@ function renderPrivacyV7() {
     '<p>Zynix AI does not sell personal information. To submit a CCPA request or learn more about your California privacy rights, contact us at <a href="mailto:info@zynix.ai">info@zynix.ai</a>.</p>' +
     '<p>If you interact with Zynix AI through a healthcare organization that uses our platform, rights requests related to that data should be directed to that organization, as they are the data controller for that information.</p>' +
 
-    '<h2>9. Children\u2019s Privacy</h2>' +
+    '<h2>9. SMS Communications</h2>' +
+    '<p>When you provide your phone number and opt in to SMS notifications on our website or through our sign-up flow, you consent to receive text messages from Zynix AI related to:</p>' +
+    '<ul style="margin:16px 0;padding-left:24px;color:var(--z-text-secondary)">' +
+    '<li>Appointment confirmations and reminders</li>' +
+    '<li>Care coordinator match updates</li>' +
+    '<li>Scheduling changes and notifications</li>' +
+    '<li>Account service notifications</li>' +
+    '</ul>' +
+    '<p><strong>Message frequency:</strong> Message frequency varies based on your activity and scheduled appointments.</p>' +
+    '<p><strong>Message and data rates:</strong> Standard message and data rates may apply depending on your mobile carrier and plan.</p>' +
+    '<p><strong>Opt-out:</strong> You may opt out of SMS notifications at any time by replying <strong>STOP</strong> to any message. You will receive a confirmation message and no further texts will be sent.</p>' +
+    '<p><strong>Help:</strong> Reply <strong>HELP</strong> to any message for support contact information, or email us at <a href="mailto:info@zynix.ai" style="color:var(--z-blue)">info@zynix.ai</a>.</p>' +
+    '<p><strong>Carriers supported:</strong> Compatible with all major US carriers including AT&amp;T, T-Mobile, Verizon, and Sprint.</p>' +
+    '<p>We do not send marketing, promotional, or lead generation messages via SMS. SMS communications are limited to customer care and account-related notifications. Your phone number will not be shared with third parties for marketing purposes. For questions about our SMS program, contact <a href="mailto:info@zynix.ai" style="color:var(--z-blue)">info@zynix.ai</a>.</p>' +
+
+    '<h2>10. Children\u2019s Privacy</h2>' +
     '<p>Our website and services are directed to healthcare and business professionals. We do not knowingly collect personal information from children under the age of 13. If we become aware that we have inadvertently collected such information, we will take steps to delete it promptly.</p>' +
 
     '<h2>10. Changes to This Policy</h2>' +
