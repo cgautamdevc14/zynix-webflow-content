@@ -6756,6 +6756,30 @@ function renderDataAnalyticsV7() {
       // Anti-flicker: reveal page now that content is injected
       document.documentElement.classList.remove('js-loading');
       if(window.__antiFlickerTimeout)clearTimeout(window.__antiFlickerTimeout);
+
+      // Defensive: prevent external scripts from overwriting hero content
+      // The zynixherofix MCP Bridge script tries to revert the hero text
+      // This observer watches for unauthorized changes and restores correct content
+      if (path === '' || path === '/') {
+        var heroH1 = document.querySelector('.zynix-homepage-hero h1');
+        if (heroH1) {
+          var correctHTML = heroH1.innerHTML;
+          var heroObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(m) {
+              if (m.target.innerHTML !== correctHTML && m.target.closest('.zynix-homepage-hero')) {
+                m.target.innerHTML = correctHTML;
+              }
+            });
+          });
+          heroObserver.observe(heroH1, { childList: true, characterData: true, subtree: true });
+          // Also re-check periodically for the first 10 seconds
+          var heroChecks = 0;
+          var heroInterval = setInterval(function() {
+            if (heroH1.innerHTML !== correctHTML) heroH1.innerHTML = correctHTML;
+            if (++heroChecks > 20) clearInterval(heroInterval);
+          }, 500);
+        }
+      }
     };
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', doInject);
