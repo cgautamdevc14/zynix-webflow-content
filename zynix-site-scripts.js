@@ -4571,7 +4571,11 @@ function renderPrivacyV7() {
     '<p><strong>Address:</strong> Zynix Health Technologies Inc., 3535 Little Rd, Trinity, FL 34655, USA</p>' +
     '</div></div></section>';
 
-  html += renderCTA('Have a Privacy Question or Data Request?', 'We\u2019re here to help. Reach out to our team directly.', 'Contact Us');
+  html += '<section class="zynix-cta-section"><div class="zynix-container" style="text-align:center;position:relative;z-index:1">' +
+    '<h2 style="color:#fff">Have a Privacy Question or Data Request?</h2>' +
+    '<p style="color:rgba(255,255,255,0.8);max-width:600px;margin:16px auto 32px">We\u2019re here to help. Reach out to our security and compliance team directly.</p>' +
+    '<a href="mailto:security@zynix.ai" class="zynix-btn-primary" style="display:inline-flex;align-items:center;gap:8px">Email security@zynix.ai &rarr;</a>' +
+    '</div></section>';
   html += renderFooter();
   return html;
 }
@@ -4635,7 +4639,11 @@ function renderTermsV7() {
     '<p><strong>Address:</strong> Zynix Health Technologies Inc., 3535 Little Rd, Trinity, FL 34655, USA</p>' +
     '</div></div></section>';
 
-  html += renderCTA('Questions About Our Terms or How We Work?', 'Our team is happy to help with questions about our website, our services, or how we operate.', 'Contact Us');
+  html += '<section class="zynix-cta-section"><div class="zynix-container" style="text-align:center;position:relative;z-index:1">' +
+    '<h2 style="color:#fff">Questions About Our Terms or How We Work?</h2>' +
+    '<p style="color:rgba(255,255,255,0.8);max-width:600px;margin:16px auto 32px">Our security and compliance team is happy to help with questions about our website, services, or how we operate.</p>' +
+    '<a href="mailto:security@zynix.ai" class="zynix-btn-primary" style="display:inline-flex;align-items:center;gap:8px">Email security@zynix.ai &rarr;</a>' +
+    '</div></section>';
   html += renderFooter();
   return html;
 }
