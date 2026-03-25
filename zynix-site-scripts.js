@@ -2501,7 +2501,7 @@
     var html = '<section class="zynix-homepage-hero"><div class="zynix-container zynix-inner-hero-grid">' +
       '<div class="zynix-inner-hero-text">' +
       '<span class="zynix-tag">AI-POWERED VALUE-BASED CARE PLATFORM</span>' +
-      '<h1>Close Care Gaps Faster.<br>Grow Your <span style="color:var(--z-accent)">Shared Savings</span>.</h1>' +
+      '<h1>Your Analytics Found the Gaps.<br>Our <span style="color:var(--z-accent)">AI Agents</span> Close Them.</h1>' +
       '<p>Zynix unifies your clinical data, deploys AI agents, and automates outreach — so your team can focus on patients, not paperwork.</p>' +
       '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#how-it-works" class="zynix-btn-secondary">See How It Works</a></div>' +
       '<div class="zynix-hero-trust">' +
@@ -2881,10 +2881,10 @@
       '<h2 style="color:#fff;font-size:clamp(2rem,4vw,2.75rem)">Built for Outcomes. Measured in Impact.</h2>' +
       '<p style="color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto 48px;font-size:16px">Real results from healthcare organizations using Zynix in production.</p>' +
       '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px 48px;max-width:900px;margin:0 auto">' +
-      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:#f97316">85%+</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">TCM Contact Rate</div></div>' +
-      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:#f97316">40%</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">Gap Closure Improvement</div></div>' +
-      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:#f97316">2.5x</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">AWV Scheduling Lift</div></div>' +
-      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:#f97316">30</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">States Deployed</div></div>' +
+      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;background:linear-gradient(135deg,#f97316,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">85%+</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">TCM Contact Rate</div></div>' +
+      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;background:linear-gradient(135deg,#f97316,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">40%</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">Gap Closure Improvement</div></div>' +
+      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;background:linear-gradient(135deg,#f97316,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">2.5x</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">AWV Scheduling Lift</div></div>' +
+      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;background:linear-gradient(135deg,#f97316,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">30</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">States Deployed</div></div>' +
       '</div></div></section>';
 
     // -- THE ZYNIX WAY (Point Solutions vs OS) --
