@@ -2,7 +2,7 @@
 /* Brand: ZynBlue #20449B, ZynOrange #F16529 */
 /* Inspired by Navina + Tempus — premium healthcare SaaS */
 
-@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
 
 /* ── CSS Custom Properties ── */
 :root {
@@ -36,7 +36,8 @@
   --z-shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
   --z-shadow-lg: 0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.05);
   --z-shadow-xl: 0 20px 60px rgba(0,0,0,0.12), 0 8px 20px rgba(0,0,0,0.06);
-  --z-font: 'Funnel Sans', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  --z-font: 'Funnel Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --z-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --z-card-sm: 24px 20px;
   --z-card-md: 32px 28px;
   --z-card-lg: 40px 36px;
@@ -52,8 +53,14 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 body {
   background: var(--z-bg);
   color: var(--z-text);
-  font-family: var(--z-font);
+  font-family: var(--z-font-body);
 }
+h1, h2, h3, h4, h5, h6 { font-family: var(--z-font); }
+h1 { font-weight: 800; letter-spacing: -1.5px; }
+h2 { font-weight: 700; letter-spacing: -0.5px; }
+h3 { font-weight: 600; letter-spacing: 0; }
+.zynix-tag { font-family: var(--z-font); }
+.zynix-btn-primary, .zynix-btn-secondary { font-family: var(--z-font); }
 
 /* ── Inner Page Hero ── */
 .zynix-inner-hero {
@@ -121,10 +128,11 @@ body {
   font-weight: 600;
   font-size: 15px;
   text-decoration: none;
-  transition: all 0.25s;
+  transition: all var(--z-ease) ease;
   border: 1px solid var(--z-accent);
 }
-.zynix-btn-primary:hover { background: var(--z-accent-hover); border-color: var(--z-accent-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(241,101,41,0.25); }
+.zynix-btn-primary:hover { background: var(--z-accent-hover); border-color: var(--z-accent-hover); transform: translateY(-2px) scale(1.02); box-shadow: 0 12px 32px rgba(232, 93, 47, 0.3); }
+.zynix-btn-primary:active { transform: translateY(0) scale(0.98); }
 .zynix-btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -209,7 +217,7 @@ body {
   border: 1px solid var(--z-border);
   transition: all var(--z-ease);
 }
-.zynix-feature-card:hover { transform: translateY(-3px); box-shadow: var(--z-shadow-md); border-color: var(--z-blue); }
+.zynix-feature-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.06), 0 0 0 1px rgba(32, 68, 155, 0.08); border-color: rgba(32, 68, 155, 0.2); }
 .zynix-feature-icon { font-size: 24px; margin-bottom: 12px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--z-blue-light); border-radius: 10px; color: var(--z-primary, #1a73e8); }
 .zynix-feature-icon svg { width: 24px; height: 24px; flex-shrink: 0; }
 .zynix-feature-card h3 { font-size: 17px; font-weight: 600; color: var(--z-text); margin: 0 0 8px; }
@@ -1961,3 +1969,60 @@ a:focus-visible {
 
 /* ── Text Selection Color (L4) ── */
 ::selection { background: rgba(32,68,155,0.15); color: var(--z-text); }
+
+/* ── Section Dividers ── */
+.zynix-inner-page section + section {
+  border-top: 1px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+.zynix-inner-page section + section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--z-border), transparent);
+}
+
+/* ── Sticky CTA Bar ── */
+.zynix-sticky-cta {
+  position: fixed;
+  bottom: -80px;
+  left: 0;
+  right: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--z-border);
+  padding: 12px 0;
+  z-index: 180;
+  transition: bottom 0.3s ease;
+}
+.zynix-sticky-cta.visible {
+  bottom: 0;
+}
+@media (max-width: 767px) {
+  .zynix-sticky-cta { display: none; }
+}
+
+/* ── Loading Spinner ── */
+#zaf {
+  background: #fff !important;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 3px solid #E5E7EB;
+  border-top-color: #20449B;
+  border-radius: 50%;
+  animation: zynixSpin 0.8s linear infinite;
+  z-index: 99999;
+}
+@keyframes zynixSpin { to { transform: rotate(360deg); } }
+html:not(.js-loading) body::before { display: none; }

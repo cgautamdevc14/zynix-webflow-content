@@ -516,6 +516,7 @@
       '<span>&#128737; HIPAA</span><span>&#128274; SOC 2 Type II</span><span>&#9989; HITRUST</span>' +
       '<span>&#127760; GDPR</span><span>&#128100; 1M+ Patients</span><span>&#127961; 30 States</span>' +
       '</div>' +
+      '<p style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:16px">Trusted by 1M+ VBC patients across 30 states</p>' +
       '</div></section>';
   }
 
@@ -6684,6 +6685,20 @@ function renderDataAnalyticsV7() {
           }
         }, { passive: true });
       }
+      // Sticky CTA bar - appears after scrolling past hero
+      var stickyBar = document.createElement('div');
+      stickyBar.className = 'zynix-sticky-cta';
+      stickyBar.innerHTML = '<div style="display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 24px"><span style="font-size:14px;font-weight:600;color:var(--z-text)">Ready to transform your value-based care operations?</span><a href="' + CALENDLY + '" target="_blank" class="zynix-btn-primary" style="padding:10px 24px;font-size:13px">Request a Demo &rarr;</a></div>';
+      document.body.appendChild(stickyBar);
+
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 800) {
+          stickyBar.classList.add('visible');
+        } else {
+          stickyBar.classList.remove('visible');
+        }
+      }, { passive: true });
+
       // Anti-flicker: reveal page now that content is injected
       document.documentElement.classList.remove('js-loading');
       if(window.__antiFlickerTimeout)clearTimeout(window.__antiFlickerTimeout);
