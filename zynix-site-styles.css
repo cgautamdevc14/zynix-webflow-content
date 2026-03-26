@@ -1539,8 +1539,8 @@ body.has-announcement-bar { padding-top: 40px; }
   /* Prevent horizontal overflow */
   html, body { overflow-x: hidden; }
 
-  .zynix-inner-hero { padding: 100px 0 40px; }
-  .zynix-inner-hero-text h1 { font-size: 26px; line-height: 1.15; }
+  .zynix-inner-hero { padding: 88px 0 36px; }
+  .zynix-inner-hero-text h1 { font-size: 24px; line-height: 1.2; }
   .zynix-inner-hero-text p { font-size: 14px; }
   .zynix-inner-hero-img { display: none; }
   .zynix-inner-page section { padding: 48px 0; }
@@ -1566,17 +1566,19 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-case-grid { grid-template-columns: 1fr; }
   .zynix-blog-grid { grid-template-columns: 1fr; }
   .zynix-kpi-grid { flex-direction: column; align-items: center; }
-  .zynix-homepage-hero { padding: 100px 0 40px; }
-  .zynix-homepage-hero h1 { font-size: 26px; letter-spacing: -0.5px; line-height: 1.15; }
-  .zynix-homepage-hero p { font-size: 14px; }
+  .zynix-homepage-hero { padding: 88px 0 32px; }
+  .zynix-homepage-hero h1 { font-size: 26px; letter-spacing: -0.5px; line-height: 1.2; }
+  .zynix-homepage-hero p { font-size: 14px; line-height: 1.6; }
   .zynix-homepage-hero .zynix-inner-hero-img,
   .zynix-inner-hero-img { display: none !important; }
+  .zynix-homepage-hero .zynix-tag { font-size: 9px; padding: 4px 10px; letter-spacing: 1px; }
 
   /* Trust strip mobile */
-  .zynix-trust-strip { padding: 24px 0; }
-  .zynix-trust-label { font-size: 10px; letter-spacing: 1px; }
-  .zynix-trust-track { gap: 24px; }
-  .zynix-trust-track img, .zynix-trust-track span { height: 28px !important; max-width: 120px !important; }
+  .zynix-trust-strip { padding: 20px 0; }
+  .zynix-trust-label { font-size: 9px; letter-spacing: 1px; }
+  .zynix-trust-track { gap: 20px; }
+  .zynix-trust-track img { height: 24px !important; max-width: 100px !important; }
+  .zynix-trust-track span { font-size: 11px !important; }
 
   /* Hero trust badges mobile */
   .zynix-hero-trust { flex-wrap: wrap; gap: 8px; }
@@ -1606,12 +1608,16 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-arch-card { padding: 20px 16px; }
   .zynix-arch-card h3 { font-size: 16px; }
   .zynix-arch-card p { font-size: 12px; }
-  .zynix-announcement-bar { font-size: 11px; padding: 8px 36px 8px 12px; }
+  .zynix-announcement-bar { font-size: 10px; padding: 6px 32px 6px 10px; line-height: 1.4; }
+  .zynix-announce-close { right: 8px; font-size: 16px; }
 
   /* Mega menu mobile fixes */
-  .zynix-mega-nav { height: 60px; padding: 0 16px; }
-  .zynix-nav-logo img { height: 90px; margin: -20px 0; }
-  .zynix-nav-cta { font-size: 13px; padding: 8px 16px; }
+  .zynix-mega-nav { height: 56px; padding: 0 12px; }
+  .zynix-nav-logo img { height: 80px; margin: -16px 0; }
+  .zynix-nav-cta { font-size: 12px; padding: 6px 14px; border-radius: 6px; }
+  .zynix-nav-actions { gap: 8px; }
+  .zynix-nav-hamburger { width: 36px; height: 36px; }
+  .zynix-nav-hamburger span { width: 18px; }
 
   /* Mobile menu full screen */
   .zynix-mobile-menu { top: 60px; max-height: calc(100vh - 60px); overflow-y: auto; }
