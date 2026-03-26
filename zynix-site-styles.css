@@ -816,9 +816,9 @@ body.has-announcement-bar { padding-top: 40px; }
 }
 .zynix-nav-trigger:hover, .zynix-nav-dropdown:hover .zynix-nav-trigger { color: var(--z-text); }
 .zynix-nav-trigger .chevron {
-  font-size: 14px; transition: transform 0.2s; color: var(--z-text-secondary); margin-left: 4px;
+  display: inline-block; vertical-align: middle; margin-left: 6px; transition: transform 0.25s ease; color: var(--z-text-muted); position: relative; top: -1px;
 }
-.zynix-nav-dropdown:hover .zynix-nav-trigger .chevron { transform: rotate(180deg); }
+.zynix-nav-dropdown:hover .zynix-nav-trigger .chevron { transform: rotate(180deg); color: var(--z-text); }
 
 /* ── Nav Icon Styles ── */
 .zynix-nav-icon {
