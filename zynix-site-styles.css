@@ -794,9 +794,9 @@ body.has-announcement-bar { padding-top: 40px; }
 .zynix-nav-items { display: flex; align-items: center; gap: 4px; }
 .zynix-nav-dropdown { position: relative; }
 .zynix-nav-trigger {
-  background: none; border: none; color: var(--z-text-secondary);
-  font-size: 15px; font-weight: 500; padding: 12px 18px; cursor: pointer;
-  font-family: inherit; display: flex; align-items: center; gap: 6px;
+  background: none; border: none; color: var(--z-text);
+  font-size: 16px; font-weight: 500; padding: 12px 20px; cursor: pointer;
+  font-family: var(--z-font); display: flex; align-items: center; gap: 6px; letter-spacing: -0.2px;
   transition: color 0.2s; position: relative;
 }
 .zynix-nav-trigger::after {
@@ -909,8 +909,8 @@ body.has-announcement-bar { padding-top: 40px; }
 
 .zynix-nav-actions { display: flex; align-items: center; gap: 16px; }
 .zynix-nav-contact {
-  color: var(--z-text-secondary); font-size: 15px; font-weight: 500;
-  text-decoration: none; transition: color 0.2s;
+  color: var(--z-text); font-size: 16px; font-weight: 500;
+  text-decoration: none; transition: color 0.2s; letter-spacing: -0.2px;
 }
 .zynix-nav-contact:hover { color: var(--z-text); }
 .zynix-nav-cta {
