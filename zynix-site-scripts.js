@@ -579,6 +579,8 @@
       'An integrated platform where AI agents work together like a coordinated workforce — delivering measurable patient and financial outcomes at scale.',
       IMG.enterprise, 'Zynix OS Enterprise Platform', 'Explore Capabilities') +
 
+    '<div class="zynix-container"><div class="zynix-summary-block"><p><strong>Zynix OS</strong> is the AI operating system for healthcare — a unified platform that integrates data intelligence, AI agent execution, and care orchestration into a single system. Unlike point solutions, Zynix OS connects every layer of your operation: ingesting and normalizing clinical and claims data, converting it into prioritized insights, and deploying specialized AI agents to execute care workflows autonomously at scale.</p></div></div>' +
+
     renderProblemSection('Healthcare Has a Doing Problem, Not a Knowing Problem', [
       { icon: IC_CHART, title: 'Millions Spent on Analytics', desc: 'Every organization has invested heavily in BI tools. You know who needs care. The problem is delivering that care at scale.' },
       { icon: IC_USER, title: 'Staff Can\u2019t Keep Up', desc: 'Care coordinators are overwhelmed with worklists, phone calls, and documentation. Manual processes don\u2019t scale.' },
@@ -632,6 +634,15 @@
     '<div class="zynix-flywheel-step fade-in-up"><span>4</span><p>More outcomes data</p></div>' +
     '</div></div></section>' +
 
+    '<section class="zynix-page-faq"><div class="zynix-container">' +
+    '<span class="zynix-tag">FAQ</span>' +
+    '<h2>Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-list">' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What is a healthcare AI operating system?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>A healthcare AI operating system is an integrated platform that connects data ingestion, clinical intelligence, AI agent execution, and care orchestration into a single unified system. Zynix OS is the healthcare AI operating system purpose-built for value-based care — enabling AI agents to work together like a coordinated workforce to deliver measurable patient and financial outcomes at scale.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How is Zynix OS different from an EHR?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Zynix OS is not an EHR — it is the AI execution layer that sits atop your existing EHR. While an EHR records what happened during a visit, Zynix OS proactively identifies care gaps, deploys AI agents to close them, and coordinates multi-step workflows across your entire patient population between visits. Zynix integrates with Epic, Cerner, athenahealth, and all major EHR systems.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What data sources does Zynix OS integrate?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Zynix OS integrates with EHRs (Epic, Cerner, athena, eCW, NextGen), claims data (837/835), ADT streams, labs, pharmacy, SDOH sources, scheduling systems, and financial data. All data is normalized in real time into a single unified patient record that powers analytics, risk stratification, and AI agent execution.</p></div></div>' +
+    '</div></div></section>' +
+
     renderCTA('Ready to Transform Your Operations?', 'Schedule a demo to see how Zynix OS turns insight into action across your organization.', 'Schedule a Demo') +
     renderFooter();
   }
@@ -641,6 +652,8 @@
     return renderInnerHero('DATA PLATFORM', 'Your Data. Finally Useful.',
       'The unified healthcare data layer that ingests, cleans, normalizes, and organizes data from every clinical and administrative source — in real time.',
       IMG.data, 'Zynix Data Platform', 'Explore Capabilities') +
+
+    '<div class="zynix-container"><div class="zynix-summary-block"><p><strong>Zynix Data Platform</strong> is the unified healthcare data layer that ingests, normalizes, and organizes clinical and administrative data from every source in real time. It connects EHRs, claims, ADT streams, labs, pharmacy, and SDOH data into a single clean patient record — creating the data foundation that powers AI agents, risk stratification, and population health analytics.</p></div></div>' +
 
     renderProblemSection('Why Your Data Isn\u2019t Working', [
       { icon: IC_ZAP, title: 'Fragmented Data', desc: 'Claims in one system, clinical in another, labs in a third. You\u2019re flying blind with partial information.' },
@@ -676,6 +689,15 @@
       { value: 'Real-time', label: 'Data processing speed' }
     ]) +
 
+    '<section class="zynix-page-faq"><div class="zynix-container">' +
+    '<span class="zynix-tag">FAQ</span>' +
+    '<h2>Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-list">' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What data sources does Zynix integrate?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Zynix integrates with all major EHR systems (Epic, Cerner, athenahealth, eCW, NextGen, Allscripts), claims data in 837/835 format, ADT notifications, laboratory results, pharmacy data, SDOH sources, scheduling systems, and financial data. Every data feed is connected via HL7/FHIR APIs, direct EHR integrations, and secure claims pipelines — all processed in real time.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How does patient matching work?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Zynix uses probabilistic and deterministic patient matching algorithms to create a single golden record for each patient across multiple data sources. The system de-duplicates records using identifiers such as name, date of birth, MRN, and address — resolving discrepancies and merging fragmented records into a unified longitudinal patient profile that drives accurate analytics and AI agent actions.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Is data encrypted at rest and in transit?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Yes. Zynix encrypts all patient data at rest using AES-256 encryption and in transit using TLS 1.2+. The platform is HIPAA-compliant, SOC 2 Type II certified, and supports customer-managed encryption keys for private cloud deployments. Comprehensive audit trails log all data access and are available for compliance reporting.</p></div></div>' +
+    '</div></div></section>' +
+
     renderCTA('Ready to Transform Your Data Into Action?', 'Join healthcare leaders who\u2019ve made their data work for them. Schedule a 30-minute demo.', 'Schedule a Demo') +
     renderFooter();
   }
@@ -685,6 +707,8 @@
     return renderInnerHero('ANALYTICS', 'Intelligence That Drives Action',
       'AI-powered analytics that go beyond dashboards. Identify HCC opportunities, predict risk, close quality gaps, and support clinical decisions — all in real time.',
       IMG.analytics, 'Zynix Analytics Dashboard', 'Explore Capabilities') +
+
+    '<div class="zynix-container"><div class="zynix-summary-block"><p><strong>Zynix Analytics</strong> is an AI-powered population health analytics platform purpose-built for value-based care. It identifies HCC documentation gaps, predicts readmission risk, closes HEDIS and STARS quality gaps, and delivers clinical decision support — all in real time, directly connected to the workflows that drive action.</p></div></div>' +
 
     renderProblemSection('Why Traditional Analytics Fall Short', [
       { icon: IC_CLOCK, title: 'Stale Data', desc: 'Most healthcare analytics are 3-6 months old. You\u2019re always analyzing yesterday\u2019s problems while today\u2019s patients need help now.' },
@@ -754,6 +778,15 @@
     ]) +
     '</div></section>' +
 
+    '<section class="zynix-page-faq"><div class="zynix-container">' +
+    '<span class="zynix-tag">FAQ</span>' +
+    '<h2>Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-list">' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What is population health analytics?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Population health analytics is the systematic analysis of health data across a defined patient population to identify care gaps, predict risk, and improve outcomes. Zynix population health analytics aggregates clinical, claims, and social data in real time — enabling healthcare organizations to prioritize interventions, close quality gaps, and reduce costs across their entire attributed population.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How does risk stratification work?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Zynix risk stratification uses machine learning models trained on clinical, claims, and social determinants data to assign each patient a risk score predicting hospitalization, readmission, or care gap likelihood. Patients are ranked by risk tier and surfaced in prioritized worklists — enabling care teams to focus on the highest-need patients and deploy AI agents for proactive outreach before a crisis occurs.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What is HCC gap closure?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>HCC (Hierarchical Condition Category) gap closure is the process of identifying chronic conditions that are clinically present but not yet documented in the current year — which directly impacts risk adjustment factor (RAF) scores and Medicare Advantage revenue. Zynix identifies open HCC opportunities across your attributed population using clinical documentation analysis, prioritizes them by RAF impact, and deploys AI agents to schedule patients for gap-closing visits.</p></div></div>' +
+    '</div></div></section>' +
+
     renderCTA('Ready to Turn Analytics Into Action?', 'See how Zynix Analytics drives measurable outcomes for your organization.', 'Request a Demo') +
     renderFooter();
   }
@@ -763,6 +796,8 @@
     return renderInnerHero('AI AGENT SUITE', 'Specialized AI Agents That Get Work Done',
       'Stop chatting. Start executing. Our AI agents convert insights into completed actions — 24/7, across every department, handling the work humans shouldn\u2019t have to do.',
       IMG.doctor, 'Zynix AI Agents', 'Explore Capabilities') +
+
+    '<div class="zynix-container"><div class="zynix-summary-block"><p><strong>Zynix AI Agents</strong> are specialized autonomous agents purpose-built for healthcare workflows — executing patient outreach, scheduling, documentation, prior authorization, and care coordination 24/7 without human intervention. Each agent is trained on healthcare data, HIPAA-compliant, and designed to work independently or in coordination with other agents to complete end-to-end care workflows at scale.</p></div></div>' +
 
     '<section class="zynix-agents-section" id="capabilities"><div class="zynix-container">' +
     '<span class="zynix-tag">7 SPECIALIZED AGENTS</span>' +
@@ -822,6 +857,15 @@
     '<div class="zynix-orch-step fade-in-up"><span>' + IC_PHONE + '</span><p>ZynOutreach follows up</p></div>' +
     '</div></div></section>' +
 
+    '<section class="zynix-page-faq"><div class="zynix-container">' +
+    '<span class="zynix-tag">FAQ</span>' +
+    '<h2>Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-list">' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What is a healthcare AI agent?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>A healthcare AI agent is an autonomous software system trained to perform specific clinical or administrative tasks — such as patient outreach, appointment scheduling, prior authorization, or medication reconciliation — without requiring human input for each action. Zynix AI agents operate 24/7, communicate across phone, SMS, and chat, and hand off tasks between agents to complete end-to-end healthcare workflows at scale.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Are AI agents HIPAA compliant?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Yes. All Zynix AI agents are HIPAA-compliant by design. Patient data is encrypted in transit and at rest, access is role-based with full audit logging, Business Associate Agreements (BAAs) are executed with all customers, and all agent communications comply with HIPAA Privacy and Security Rule requirements. Zynix is SOC 2 Type II certified and supports deployment within customer-controlled infrastructure for maximum data control.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Do AI agents replace staff?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>No. Zynix AI agents augment your existing staff by handling high-volume, repetitive tasks — freeing care coordinators, nurses, and administrative teams to focus on complex cases requiring clinical judgment. Agents handle the 80% of routine work (outreach calls, reminders, scheduling, documentation) while escalating to human staff for the 20% of situations that require human intervention or clinical decision-making.</p></div></div>' +
+    '</div></div></section>' +
+
     renderCTA('Ready to Deploy Your AI Workforce?', 'See how Zynix AI Agents can transform your operations with autonomous execution.', 'Request a Demo') +
     renderFooter();
   }
@@ -831,6 +875,8 @@
     return renderInnerHero('ZYNSCRIBE', 'Ambient AI Scribe for Healthcare',
       'Transform patient encounters into accurate documentation instantly. AI-powered transcription that generates precise SOAP notes in seconds — so you can focus on patients, not paperwork.',
       IMG.scribe, 'ZynScribe Ambient AI', 'Explore Capabilities') +
+
+    '<div class="zynix-container"><div class="zynix-summary-block"><p><strong>ZynScribe</strong> is an ambient clinical documentation solution that uses AI to capture patient-clinician conversations and automatically generate structured SOAP notes, H&amp;P, and progress notes in seconds. It supports 90+ clinical specialties, integrates directly with major EHR systems, and reduces documentation time by 40% — allowing physicians to focus on patients instead of paperwork.</p></div></div>' +
 
     renderProblemSection('The Documentation Crisis', [
       { icon: IC_CLOCK, title: '2 Hours Per 1 Hour', desc: 'Physicians spend 2 hours on documentation for every 1 hour with patients. That\u2019s backwards.' },
@@ -868,6 +914,15 @@
     ]) +
     '</div></section>' +
 
+    '<section class="zynix-page-faq"><div class="zynix-container">' +
+    '<span class="zynix-tag">FAQ</span>' +
+    '<h2>Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-list">' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What is ambient clinical documentation?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Ambient clinical documentation is the use of AI to passively listen to a patient-clinician encounter and automatically generate a structured clinical note — without the physician typing, dictating, or entering data manually. ZynScribe ambient documentation captures the full clinical conversation in real time and produces a complete, compliant note ready for physician review and EHR upload within seconds of the encounter ending.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How does AI scribe technology work?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>AI scribe technology uses speech recognition and natural language processing (NLP) to transcribe and interpret clinical conversations. ZynScribe identifies multiple speakers, extracts clinically relevant information — symptoms, diagnoses, medications, treatment plans — and structures it into specialty-specific note templates (SOAP, H&amp;P, progress notes). The result is a complete, accurate clinical note generated automatically with 97%+ accuracy across 90+ specialties.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Does ZynScribe integrate with EHRs?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Yes. ZynScribe integrates directly with Epic, Cerner, athenahealth, eClinicalWorks, NextGen, and all major EHR platforms. Notes are uploaded automatically into the correct patient chart with one-click physician review before finalization. ZynScribe also suggests ICD-10 and CPT codes from the documentation — improving coding accuracy and revenue cycle performance without additional clinical effort.</p></div></div>' +
+    '</div></div></section>' +
+
     renderCTA('Ready to Reclaim Your Time?', 'Join thousands of physicians saving 1-2 hours daily with ZynScribe.', 'Start Free Trial') +
     renderFooter();
   }
@@ -877,6 +932,8 @@
     return renderInnerHero('DEPLOYABLE CARE PLANS', 'Stop Managing Care. Start Deploying It.',
       'The orchestration layer atop Zynix OS. Takes insights from the Data Platform and executes through coordinated AI agents — seamlessly handing off tasks from one agent to the next.',
       IMG.care, 'Zynix Care Plans', 'Explore Capabilities') +
+
+    '<div class="zynix-container"><div class="zynix-summary-block"><p><strong>Zynix Deployable Care Plans</strong> are AI-orchestrated, multi-agent care workflows that convert population health insights into coordinated patient action. Built atop Zynix OS, they deploy pre-built care plan templates — including TCM, gap closure, and chronic condition management — that coordinate AI agents across outreach, scheduling, documentation, and follow-up to reach 85%+ of patients autonomously.</p></div></div>' +
 
     renderProblemSection('The Math Doesn\u2019t Work', [
       { icon: IC_USERS, title: '50,000 Patients', desc: 'A typical large ACO or MA plan population. 20% need AWV completion. 10% have undiagnosed conditions needing closure.' },
@@ -919,6 +976,15 @@
     '<div class="zynix-wf-step fade-in-up"><div class="zynix-wf-dot"></div><div class="zynix-wf-content"><h4>Day 30: Outcome</h4><p>Follow-up check-in conducted. Patient did NOT readmit. Shared savings preserved. Full cycle documented.</p></div></div>' +
     '</div></div></section>' +
 
+    '<section class="zynix-page-faq"><div class="zynix-container">' +
+    '<span class="zynix-tag">FAQ</span>' +
+    '<h2>Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-list">' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What are AI-orchestrated care plans?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>AI-orchestrated care plans are structured, multi-step care workflows executed autonomously by coordinated AI agents. Unlike static care pathways that rely on staff to complete each step, Zynix Deployable Care Plans trigger automatically when a patient meets eligibility criteria and coordinate specialized agents — for outreach, scheduling, documentation, and follow-up — to complete the full care workflow without manual intervention at each step.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What care plans does Zynix support?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Zynix offers 10 pre-built care plan templates deployable in days: Hospital Discharge (TCM), Quality and HCC Gap Closure, Prior Authorization, 24/7 Scheduling, Post-Medication Monitoring, Specialist Referral Management, Abnormal Lab and Imaging Alerts, Preventive Care and Screenings, ED Diversion, and Chronic Condition Pre-Visit Preparation. Each template can be customized to your organization\'s clinical protocols and workflows.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How are care plans deployed?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Zynix care plans are deployed through the Zynix OS orchestration layer. Eligibility models run continuously against your patient population and automatically enroll qualifying patients into the appropriate care plan. Deployment typically takes days — not months — because all agent integrations, communication templates, and escalation logic are pre-configured. Organizations typically achieve measurable patient contact and care gap closure within the first 30 days.</p></div></div>' +
+    '</div></div></section>' +
+
     renderCTA('Ready to Deploy Care Plans at Scale?', 'Stop managing care manually. Deploy intelligent orchestration and reach every patient.', 'Schedule a Demo') +
     renderFooter();
   }
@@ -928,6 +994,8 @@
     return renderInnerHero('ZYNIXLLM', 'Healthcare-Native Intelligence',
       'The foundation model purpose-built for medicine. Not a retrofit of general-purpose AI — every component is designed for medical intelligence, clinical safety, and real-world care delivery.',
       IMG.mesh, 'ZynixLLM AI', 'Explore Capabilities') +
+
+    '<div class="zynix-container"><div class="zynix-summary-block"><p><strong>ZynixLLM</strong> is the healthcare-native large language model purpose-built for clinical AI applications. Unlike general-purpose LLMs adapted for healthcare, ZynixLLM is trained on real clinical conversations, medical protocols, and structured health data — with safety, certainty calibration, and HIPAA-compliant deployment built into every layer of its architecture.</p></div></div>' +
 
     '<section class="zynix-why-section"><div class="zynix-container">' +
     '<span class="zynix-tag">WHY HEALTHCARE NEEDS DIFFERENT AI</span>' +
@@ -979,6 +1047,15 @@
       { icon: IC_REFRESH, title: 'Hybrid', desc: 'Cloud orchestration with on-premises inference for HIPAA compliant AI deployment. Non-sensitive workloads in the cloud, clinical inference on-site. Sensitive patient data never leaves the facility.' }
     ]) +
     '</div></section>' +
+
+    '<section class="zynix-page-faq"><div class="zynix-container">' +
+    '<span class="zynix-tag">FAQ</span>' +
+    '<h2>Frequently Asked Questions</h2>' +
+    '<div class="zynix-faq-list">' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What is a healthcare LLM?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>A healthcare large language model (LLM) is an AI foundation model trained specifically on medical data — including clinical notes, medical literature, healthcare protocols, and real patient-clinician conversations — to understand and generate accurate clinical language. ZynixLLM is a healthcare LLM purpose-built for medicine, designed to power AI agents, documentation systems, and clinical decision support with the accuracy and safety standards required in real-world care delivery.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How is ZynixLLM different from ChatGPT?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>ChatGPT and other general-purpose LLMs are trained on broad internet data and adapted for healthcare as a secondary use case. ZynixLLM is built from the ground up for medicine — trained on clinical conversations, medical protocols, ICD-10/CPT coding logic, and real healthcare workflows. ZynixLLM includes certainty calibration (flagging when it is uncertain rather than confidently guessing), multi-layer clinical safety validation, HIPAA-compliant deployment, and integration with EHR and claims data that ChatGPT cannot access.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What about hallucination in clinical AI?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Hallucination — where an AI generates plausible but incorrect information — is a critical safety risk in healthcare AI. ZynixLLM addresses this through a four-layer safety architecture: clinical protocol validation that checks every output against evidence-based guidelines, uncertainty detection that explicitly flags low-confidence responses, consistency checking across multiple internal verification systems, and automatic human escalation when clinical stakes are high. ZynixLLM is designed to say "I don\'t know" rather than guess in clinical contexts where accuracy is non-negotiable.</p></div></div>' +
+    '</div></div></section>' +
 
     renderCTA('Ready to Build with Healthcare-Native Intelligence?', 'Start with a 30-minute Readiness Conversation. We\u2019ll walk through your use cases and implementation.', 'Schedule Conversation') +
     renderFooter();
