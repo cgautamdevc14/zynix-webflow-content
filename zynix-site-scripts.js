@@ -1863,14 +1863,21 @@
     document.body.prepend(nav);
     document.body.prepend(announceBanner);
 
-    // Push nav down to sit below the fixed announcement bar
-    nav.classList.add('has-banner');
+    // Push nav down to sit below the fixed announcement bar — use actual height
+    function adjustNavForBanner() {
+      var bh = announceBanner.offsetHeight;
+      nav.style.top = bh + 'px';
+      document.body.style.paddingTop = (bh + 64) + 'px';
+    }
+    adjustNavForBanner();
+    window.addEventListener('resize', adjustNavForBanner);
     document.body.classList.add('has-announcement-bar');
 
     // Announcement close handler
     announceBanner.querySelector('.zynix-announce-close').addEventListener('click', function() {
       announceBanner.style.display = 'none';
-      nav.classList.remove('has-banner');
+      nav.style.top = '0';
+      document.body.style.paddingTop = '64px';
       document.body.classList.remove('has-announcement-bar');
     });
 
@@ -1883,6 +1890,10 @@
     burger.addEventListener('click', function() {
       burger.classList.toggle('open');
       mobile.classList.toggle('open');
+      // Set mobile menu top to bottom of nav
+      if (mobile.classList.contains('open')) {
+        mobile.style.top = nav.getBoundingClientRect().bottom + 'px';
+      }
     });
 
     // Mobile accordion

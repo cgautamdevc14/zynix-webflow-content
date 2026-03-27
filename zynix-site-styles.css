@@ -768,9 +768,7 @@ h3 { font-weight: 600; letter-spacing: 0; }
   right: 0;
   z-index: 100;
 }
-/* Push nav down when banner is visible */
-.zynix-mega-nav.has-banner { top: 40px; }
-body.has-announcement-bar { padding-top: 40px; }
+/* Nav top position and body padding are set dynamically by JS based on actual banner height */
 .zynix-announcement-bar a {
   color: #fff;
   text-decoration: underline;
@@ -1559,7 +1557,7 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-mobile-menu .zynix-btn-primary { margin-top: 20px; padding: 16px; font-size: 16px; border-radius: 12px; }
 
   /* ── HOMEPAGE HERO ── */
-  .zynix-homepage-hero { padding: 100px 0 48px; }
+  .zynix-homepage-hero { padding: 24px 0 40px; }
   .zynix-homepage-hero .zynix-tag { font-size: 10px; padding: 6px 14px; letter-spacing: 1.2px; }
   .zynix-homepage-hero h1 { font-size: 30px; margin-bottom: 16px; letter-spacing: -0.5px; line-height: 1.2; }
   .zynix-homepage-hero p { font-size: 16px; margin-bottom: 24px; line-height: 1.6; }
@@ -1584,7 +1582,7 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-trust-track span { font-size: 12px !important; }
 
   /* ── INNER PAGE HERO ── */
-  .zynix-inner-hero { padding: 100px 0 40px; }
+  .zynix-inner-hero { padding: 24px 0 40px; }
   .zynix-inner-hero-text h1 { font-size: 28px; line-height: 1.2; }
   .zynix-inner-hero-text p { font-size: 16px; }
   .zynix-inner-hero-img { display: none; }
