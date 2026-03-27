@@ -1889,11 +1889,11 @@
     var burger = nav.querySelector('.zynix-nav-hamburger');
     burger.addEventListener('click', function() {
       burger.classList.toggle('open');
+      // Always set mobile menu top to exactly below the nav bar
+      var navBottom = nav.getBoundingClientRect().bottom;
+      mobile.style.top = navBottom + 'px';
+      mobile.style.height = 'calc(100vh - ' + navBottom + 'px)';
       mobile.classList.toggle('open');
-      // Set mobile menu top to bottom of nav
-      if (mobile.classList.contains('open')) {
-        mobile.style.top = nav.getBoundingClientRect().bottom + 'px';
-      }
     });
 
     // Mobile accordion
