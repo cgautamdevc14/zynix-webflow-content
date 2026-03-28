@@ -766,7 +766,7 @@ h3 { font-weight: 600; letter-spacing: 0; }
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 50;
 }
 /* Nav top position and body padding are set dynamically by JS based on actual banner height */
 .zynix-announcement-bar a {
@@ -923,16 +923,16 @@ h3 { font-weight: 600; letter-spacing: 0; }
 .zynix-nav-hamburger {
   display: none; background: none; border: none; cursor: pointer;
   width: 40px; height: 40px; position: relative;
-  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
-  overflow: visible; z-index: 10;
+  flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  z-index: 210;
 }
 .zynix-nav-hamburger span {
-  display: block; width: 20px; height: 2px; background: var(--z-text);
-  transition: all 0.3s;
+  display: block; width: 22px; height: 2px; background: var(--z-text);
+  transition: all 0.3s; transform-origin: center center;
 }
-.zynix-nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(3px, 3px); }
+.zynix-nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 .zynix-nav-hamburger.open span:nth-child(2) { opacity: 0; }
-.zynix-nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(3px, -3px); }
+.zynix-nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
 /* ── Mobile menu overlay ── */
 .zynix-mobile-menu {
@@ -1540,8 +1540,9 @@ h3 { font-weight: 600; letter-spacing: 0; }
   .zynix-container { padding: 0 24px; }
 
   /* ── ANNOUNCEMENT BAR ── */
-  .zynix-announcement-bar { font-size: 12px; padding: 10px 40px 10px 16px; line-height: 1.4; }
-  .zynix-announce-close { right: 12px; font-size: 20px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+  .zynix-announcement-bar { font-size: 11px; padding: 8px 44px 8px 16px; line-height: 1.4; }
+  .zynix-announcement-bar a { margin-left: 6px; }
+  .zynix-announce-close { right: 10px; font-size: 22px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
 
   /* ── NAVIGATION ── */
   .zynix-mega-nav { height: 64px; padding: 0 16px; }
@@ -1558,22 +1559,23 @@ h3 { font-weight: 600; letter-spacing: 0; }
   .zynix-mobile-menu .zynix-btn-primary { margin-top: 20px; padding: 16px; font-size: 16px; border-radius: 12px; }
 
   /* ── HOMEPAGE HERO ── */
-  .zynix-homepage-hero { padding: 24px 0 40px; }
+  .zynix-homepage-hero { padding: 32px 0 48px; }
+  .zynix-homepage-hero .zynix-container { text-align: center; }
   .zynix-homepage-hero .zynix-tag { font-size: 10px; padding: 6px 14px; letter-spacing: 1.2px; }
-  .zynix-homepage-hero h1 { font-size: 30px; margin-bottom: 16px; letter-spacing: -0.5px; line-height: 1.2; }
-  .zynix-homepage-hero p { font-size: 16px; margin-bottom: 24px; line-height: 1.6; }
+  .zynix-homepage-hero h1 { font-size: 28px; margin-bottom: 20px; letter-spacing: -0.5px; line-height: 1.25; }
+  .zynix-homepage-hero p { font-size: 15px; margin-bottom: 28px; line-height: 1.7; max-width: 340px; margin-left: auto; margin-right: auto; }
   .zynix-homepage-hero .zynix-inner-hero-img,
   .zynix-inner-hero-img { display: none !important; }
 
   /* ── HERO BUTTONS ── */
-  .zynix-hero-btns { flex-direction: column; gap: 12px; margin-bottom: 20px; }
-  .zynix-hero-btns a { width: 100%; text-align: center; }
-  .zynix-hero-btns .zynix-btn-primary { padding: 14px 0; font-size: 16px; border-radius: 12px; }
-  .zynix-hero-btns .zynix-btn-secondary { padding: 12px 0; font-size: 15px; }
+  .zynix-hero-btns { flex-direction: column; gap: 12px; margin-bottom: 24px; align-items: center; }
+  .zynix-hero-btns a { width: 100%; text-align: center; max-width: 320px; }
+  .zynix-hero-btns .zynix-btn-primary { padding: 16px 0; font-size: 16px; border-radius: 12px; }
+  .zynix-hero-btns .zynix-btn-secondary { padding: 14px 0; font-size: 15px; }
 
   /* ── TRUST BADGES ── */
-  .zynix-hero-trust { flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-  .zynix-hero-badge { font-size: 13px; padding: 6px 12px; }
+  .zynix-hero-trust { flex-wrap: wrap; gap: 8px; margin-top: 20px; justify-content: center; }
+  .zynix-hero-badge { font-size: 12px; padding: 6px 12px; }
 
   /* ── TRUST STRIP ── */
   .zynix-trust-strip { padding: 28px 0; }
@@ -1590,8 +1592,8 @@ h3 { font-weight: 600; letter-spacing: 0; }
 
   /* ── SECTIONS ── */
   .zynix-inner-page section { padding: 56px 0; }
-  .zynix-inner-page section > .zynix-container > h2 { font-size: 24px; }
-  .zynix-section-sub { font-size: 15px; }
+  .zynix-inner-page section > .zynix-container > h2 { font-size: 24px; text-align: center; }
+  .zynix-section-sub { font-size: 15px; text-align: center; }
   .zynix-tag { font-size: 10px; letter-spacing: 1.5px; padding: 5px 14px; }
 
   /* ── GRIDS → SINGLE COLUMN ── */
@@ -1632,7 +1634,7 @@ h3 { font-weight: 600; letter-spacing: 0; }
   .zynix-kpi-grid { flex-direction: column; align-items: center; }
 
   /* ── CRISIS / ARCHITECTURE / COMPARISON ── */
-  .zynix-crisis-section { padding: 56px 0; }
+  .zynix-crisis-section { padding: 56px 0; text-align: center; }
   .zynix-crisis-section h2 { font-size: 24px; }
   .zynix-crisis-section .zynix-section-sub { font-size: 15px; }
   .zynix-architecture-section { padding: 56px 0; }
@@ -1657,9 +1659,10 @@ h3 { font-weight: 600; letter-spacing: 0; }
   .zynix-faq-a { font-size: 14px; }
 
   /* ── CTA SECTION ── */
-  .zynix-cta-section { padding: 56px 0; }
+  .zynix-cta-section { padding: 56px 0; text-align: center; }
   .zynix-cta-section h2 { font-size: 24px; }
   .zynix-cta-section p { font-size: 15px; margin-bottom: 28px; }
+  .zynix-cta-section .zynix-btn-primary { display: inline-block; }
 
   /* ── FOOTER ── */
   .zynix-footer { padding: 56px 0 28px; }
@@ -1695,7 +1698,7 @@ h3 { font-weight: 600; letter-spacing: 0; }
   h2 { font-size: 22px; }
   .zynix-feature-card, .zynix-problem-card, .zynix-agent-card { padding: 16px 14px; }
   .zynix-metrics-bar { padding: 28px 16px; }
-  .zynix-announcement-bar { font-size: 9px; padding: 4px 24px 4px 8px; }
+  .zynix-announcement-bar { font-size: 10px; padding: 6px 40px 6px 12px; }
   .zynix-hero-badge { font-size: 9px; padding: 2px 6px; }
   .zynix-trust-track img { height: 18px !important; max-width: 70px !important; }
   #zynix-chat-btn { width: 44px !important; height: 44px !important; }
