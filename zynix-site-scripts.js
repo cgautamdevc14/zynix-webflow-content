@@ -2839,7 +2839,7 @@
       '</div></section>';
 
     // -- PLATFORM ARCHITECTURE DIAGRAM (V3 Visual Flow) --
-    html += '<section class="zynix-architecture-diagram-section" style="padding:60px 0 0;background:#FAFAFC;overflow:hidden"><div class="zynix-container">' +
+    html += '<section class="zynix-architecture-diagram-section" style="padding:60px 0 80px;background:#FAFAFC;overflow:hidden"><div class="zynix-container">' +
       '<style>' +
       ':root{--zpa-blue-core:#20449B;--zpa-blue-mid:#2863BA;--zpa-blue-bright:#3286E0;--zpa-blue-pale:#EAF0FA;--zpa-orange:#F16529;--zpa-orange-light:#FEF0E9;--zpa-gray-line:#DFDFE1;--zpa-gray-card:#F4F4F6;--zpa-text-body:#414142;--zpa-text-muted:#747475}' +
       '.zpa-diagram{position:relative;z-index:1;display:grid;grid-template-columns:148px 1fr 148px;align-items:center;max-width:1100px;margin:0 auto;gap:0}' +
