@@ -2911,19 +2911,28 @@
       '.zpa-dot-v3[data-n="5"].on{background:var(--zpa-orange)}' +
       /* V3 responsive */
       '@media(max-width:767px){' +
-        '.zpa-diagram{grid-template-columns:1fr;gap:20px}' +
-        '.zpa-flow{padding:40px 0 32px}' +
-        '.zpa-nodes{flex-wrap:wrap;gap:16px;justify-content:center}' +
-        '.zpa-node{flex:0 0 auto;width:80px}' +
-        '.zpa-ring{width:64px;height:64px}' +
-        '.zpa-circle{width:48px;height:48px}' +
-        '.zpa-node.on .zpa-circle{width:56px;height:56px}' +
-        '.zpa-lbadge{font-size:14px}' +
-        '.zpa-lname{font-size:7px}' +
+        '.zpa-diagram{display:flex;flex-direction:column;gap:0}' +
+        '.zpa-src-box,.zpa-usr-box{display:none}' +
+        '.zpa-flow{padding:16px 0 20px}' +
+        '.zpa-flow-line{display:none}' +
+        '.zpa-nodes{display:flex;justify-content:center;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:0 4px}' +
+        '.zpa-node{flex:0 0 auto;width:60px}' +
+        '.zpa-ring{width:52px;height:52px}' +
+        '.zpa-circle{width:42px;height:42px;border-width:2px}' +
+        '.zpa-node.on .zpa-ring{transform:scale(1.15)}' +
+        '.zpa-node.on .zpa-circle{width:46px;height:46px;box-shadow:0 4px 16px rgba(32,68,155,.35)}' +
+        '.zpa-lbadge{font-size:13px}' +
+        '.zpa-lname{display:none}' +
+        '.zpa-nlabel{font-size:8px;margin-top:6px;letter-spacing:.04em}' +
         '.zpa-tip{display:none}' +
-        '.zpa-ico{width:24px;height:24px}' +
-        '.zpa-ico svg{width:11px;height:11px}' +
-        '.zpa-slide{padding:20px 16px}' +
+        '.zpa-ico-wrap{display:none}' +
+        '.zpa-detail{margin:12px 0 0;border-radius:12px}' +
+        '.zpa-slide{padding:18px 16px}' +
+        '.zpa-slide-head{flex-direction:column;gap:6px}' +
+        '.zpa-slide-title{font-size:15px}' +
+        '.zpa-slide-body{font-size:13px;line-height:1.7}' +
+        '.zpa-slide-tags{gap:4px}' +
+        '.zpa-slide-tag{font-size:10px;padding:2px 7px}' +
         '.zpa-nav{padding:10px 16px 12px}' +
       '}' +
       '</style>' +
