@@ -1665,10 +1665,13 @@ h3 { font-weight: 600; letter-spacing: 0; }
   .zynix-cta-section .zynix-btn-primary { display: inline-block; }
 
   /* ── FOOTER ── */
-  .zynix-footer { padding: 56px 0 28px; }
+  .zynix-footer { padding: 56px 24px 28px; }
   .zynix-footer-inner { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
-  .zynix-footer-col:first-child { grid-column: 1 / -1; }
-  .zynix-footer-col:first-child img { height: 48px; }
+  .zynix-footer-col:first-child { grid-column: 1 / -1; text-align: center; }
+  .zynix-footer-col:first-child img { height: 80px !important; margin-bottom: 20px !important; }
+  .zynix-footer-brand p { text-align: center; }
+  .zynix-footer-social { justify-content: center; }
+  .zynix-footer-col { text-align: center; }
   .zynix-footer-col h4 { font-size: 13px; margin-bottom: 16px; }
   .zynix-footer-col a { font-size: 15px; padding: 5px 0; }
   .zynix-footer-social a { width: 40px; height: 40px; }
