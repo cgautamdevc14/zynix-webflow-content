@@ -2006,7 +2006,7 @@
       'AI-powered patient engagement that handles inbound calls 24/7 — triaging symptoms, scheduling appointments, and diverting unnecessary ER visits.',
       IMG.doctor,
       [
-        { icon: IC_PHONE, title: '67% of Calls Abandoned', desc: 'After-hours calls go to voicemail. Patients give up and go to the ER — costing $1,500-3,000 per avoidable visit.' },
+        { icon: IC_PHONE, title: '85% of Callers Never Call Back', desc: 'After-hours calls go to voicemail. Patients give up and go to the ER — costing $1,500\u20133,000 per avoidable visit.' },
         { icon: IC_DOLLAR, title: '$38 Billion Problem', desc: 'Nearly two-thirds of patients avoid care due to scheduling frustration. 30% of ER visits are non-emergent.' },
         { icon: IC_USERS, title: 'Staff Burnout', desc: 'Traditional nurse triage lines cost $15-25 per call and cannot scale. Human staff burn out and turn over.' }
       ],
@@ -2411,7 +2411,7 @@
     '<div class="zynix-feature-grid" style="margin-top:40px">' +
     '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_TARGET + '</div><h3>Real Impact, Not Demos</h3><p>Our AI agents handle 85%+ of post-discharge follow-ups. Patients get called. TCM gets billed. Readmissions drop. Your code runs in production on day one.</p></div>' +
     '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_BRAIN + '</div><h3>Hardest Problems in AI</h3><p>Healthcare is the ultimate AI challenge. Ambiguous data, life-or-death stakes, regulatory constraints, multilingual patients. We build AI that earns clinical trust.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_CHART + '</div><h3>Rocketship Growth</h3><p>From 0 to 1M+ patients in under two years. Expanding across ACOs, health systems, health plans, and FQHCs. The market is $285B+ and we\u2019re early.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_CHART + '</div><h3>Rocketship Growth</h3><p>From 0 to 1M+ patients in under two years. Expanding across ACOs, health systems, health plans, and FQHCs. The market is $850B+ and we\u2019re early.</p></div>' +
     '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_USERS + '</div><h3>Physician-Led, Engineer-Driven</h3><p>Founded by a physician who ran six ACOs with $300M+ in shared savings. We build for people who understand healthcare operations, not just technology demos.</p></div>' +
     '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_GLOBE + '</div><h3>Global Team, Real Ownership</h3><p>Seattle. Tampa. Bengaluru. Small teams with high autonomy. No layers of middle management. Ship fast, learn faster.</p></div>' +
     '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HEART + '</div><h3>Culture of Builders</h3><p>Healthcare benefits. Generous vacation. Professional development budget. Parental leave. We invest in the people building the future of care.</p></div>' +
@@ -2685,9 +2685,9 @@
       '<h2>Healthcare Has a Doing Problem, Not a Knowing Problem</h2>' +
       '<p class="zynix-section-sub">Every organization has invested millions in analytics. The problem isn\u2019t knowing who needs care — it\u2019s delivering that care at scale.</p>' +
       '<div class="zynix-metrics-bar">' +
-      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">$285\u2013570B</span><span class="zynix-metric-label">Wasted annually on admin overhead</span></div>' +
+      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">$600\u2013850B</span><span class="zynix-metric-label">Wasted annually on admin overhead</span></div>' +
       '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">97%</span><span class="zynix-metric-label">Of healthcare data goes unused</span></div>' +
-      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">67%</span><span class="zynix-metric-label">After-hours calls abandoned</span></div>' +
+      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">85%</span><span class="zynix-metric-label">After-hours callers never call back</span></div>' +
       '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">30%</span><span class="zynix-metric-label">ER visits are avoidable</span></div>' +
       '</div></div></section>';
 
@@ -5370,7 +5370,7 @@ function renderZynAfterHoursV7() {
     heroAlt: 'ZynAfterHours AI Triage Agent',
     whatHeading: '24/7 Clinical Triage Without the Staffing Burden',
     whatBody: '<p>ZynAfterHours answers patient calls around the clock in 15+ languages, including Spanish, Mandarin, Vietnamese, Tagalog, and Korean. It applies Schmitt-Thompson clinical triage protocols to assess symptom severity, determine the appropriate level of care, and take immediate action &mdash; whether that means providing self-care guidance, scheduling a same-day appointment, or instructing the patient to call 911.</p>' +
-      '<p>67% of after-hours calls currently go to voicemail. Patients give up and go to the ER, costing $1,500-3,000 per avoidable visit. ZynAfterHours eliminates that gap by answering every call within 60 seconds, loading the patient\'s EHR context (demographics, medical history, medications, allergies), and conducting a structured clinical assessment.</p>' +
+      '<p>85% of after-hours callers who reach voicemail never call back. They go to the ER instead, costing $1,500\u20133,000 per avoidable visit. ZynAfterHours eliminates that gap by answering every call within 60 seconds, loading the patient\'s EHR context (demographics, medical history, medications, allergies), and conducting a structured clinical assessment.</p>' +
       '<p>The agent handles 70-80% of routine inquiries autonomously. For complex cases requiring human clinical judgment, it performs a warm handoff to on-call staff with the complete assessment, EHR context, and recommended disposition.</p>',
     workflowHeading: 'From Inbound Call to Documented Outcome',
     workflowSteps: [
