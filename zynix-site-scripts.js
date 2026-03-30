@@ -111,7 +111,7 @@
   // ── SEO Data ──
   var SITE_DOMAIN = (window.location.hostname.indexOf('zynix.ai') > -1) ? 'https://www.zynix.ai' : window.location.origin;
   var PAGE_SEO = {
-    '': { title: 'The OS That Executes Care | Zynix AI', desc: 'Zynix is the operating system that executes care, not just analyzes it. AI agents that call patients, close gaps, and capture revenue for ACOs and health systems.', img: IMG.hero, schema: 'Organization' },
+    '': { title: 'AI That Executes Care | Zynix AI', desc: 'Zynix deploys AI agents that execute care, not just analyze it. Agents that call patients, close gaps, and capture revenue for ACOs and health systems.', img: IMG.hero, schema: 'Organization' },
     '/products-zynix-os': { title: 'Value-Based Care Operating System | Zynix AI', desc: 'Zynix OS unifies data, analytics, AI agents, and care plans into one healthcare AI platform. Automate care delivery and hit quality targets.', img: IMG.enterprise, schema: 'Product' },
     '/products-data-platform': { title: 'Healthcare Data Platform | Zynix AI', desc: 'Integrate EHR, claims, ADT, and SDOH data into one unified layer with 97%+ patient matching. Power real-time value-based care insights.', img: IMG.data, schema: 'Product' },
     '/products-analytics': { title: 'Population Health Analytics | Zynix AI', desc: 'AI-driven risk stratification, HCC coding, and population health analytics that close quality gaps 40% faster. Built for ACOs and health plans.', img: IMG.analytics, schema: 'Product' },
@@ -2594,9 +2594,9 @@
     // -- HERO --
     var html = '<section class="zynix-homepage-hero"><div class="zynix-container zynix-inner-hero-grid">' +
       '<div class="zynix-inner-hero-text">' +
-      '<span class="zynix-tag">THE AI OPERATING SYSTEM FOR VALUE-BASED CARE</span>' +
-      '<h1>The OS That <span style="color:var(--z-accent)">Executes</span> Care.<br>Not Just Analyzes It.</h1>' +
-      '<p>Zynix is the operating system that turns insight into action. AI agents that call patients, close gaps, schedule visits, and document outcomes, all without adding headcount.</p>' +
+      '<span class="zynix-tag">AI-POWERED VALUE-BASED CARE PLATFORM</span>' +
+      '<h1>AI That <span style="color:var(--z-accent)">Executes</span> Care.<br>Not Just Analyzes It.</h1>' +
+      '<p>Zynix deploys AI agents that call patients, close care gaps, schedule visits, and document outcomes. All without adding headcount.</p>' +
       '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#how-it-works" class="zynix-btn-secondary">See How It Works</a></div>' +
       '<div class="zynix-hero-trust">' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#4B5563;padding:8px 14px;background:#fff;border:1px solid #E5E7EB;border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> HIPAA Compliant</span>' +
