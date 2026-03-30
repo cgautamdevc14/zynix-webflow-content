@@ -111,7 +111,7 @@
   // ── SEO Data ──
   var SITE_DOMAIN = (window.location.hostname.indexOf('zynix.ai') > -1) ? 'https://www.zynix.ai' : window.location.origin;
   var PAGE_SEO = {
-    '': { title: 'AI for Value-Based Care | Zynix AI', desc: 'Zynix AI deploys autonomous AI agents that close care gaps, boost shared savings, and automate coordination for ACOs and health systems.', img: IMG.hero, schema: 'Organization' },
+    '': { title: 'The OS That Executes Care | Zynix AI', desc: 'Zynix is the operating system that executes care, not just analyzes it. AI agents that call patients, close gaps, and capture revenue for ACOs and health systems.', img: IMG.hero, schema: 'Organization' },
     '/products-zynix-os': { title: 'Value-Based Care Operating System | Zynix AI', desc: 'Zynix OS unifies data, analytics, AI agents, and care plans into one healthcare AI platform. Automate care delivery and hit quality targets.', img: IMG.enterprise, schema: 'Product' },
     '/products-data-platform': { title: 'Healthcare Data Platform | Zynix AI', desc: 'Integrate EHR, claims, ADT, and SDOH data into one unified layer with 97%+ patient matching. Power real-time value-based care insights.', img: IMG.data, schema: 'Product' },
     '/products-analytics': { title: 'Population Health Analytics | Zynix AI', desc: 'AI-driven risk stratification, HCC coding, and population health analytics that close quality gaps 40% faster. Built for ACOs and health plans.', img: IMG.analytics, schema: 'Product' },
@@ -484,7 +484,7 @@
 
   function renderFooter() {
     return '<footer class="zynix-footer"><div class="zynix-footer-inner">' +
-      '<div class="zynix-footer-brand"><img src="' + IMG.logoWhite + '" alt="Zynix AI" style="height:48px;margin-bottom:16px;"><p>The operating system for value-based care. Purpose-built AI that unifies clinical, financial, and operational intelligence.</p>' +
+      '<div class="zynix-footer-brand"><img src="' + IMG.logoWhite + '" alt="Zynix AI" style="height:48px;margin-bottom:16px;"><p>The operating system that executes care, not just analyzes it. Purpose-built AI for value-based healthcare.</p>' +
       '<div class="zynix-footer-social">' +
       '<a href="https://www.linkedin.com/company/zynix/" target="_blank" rel="noopener" aria-label="LinkedIn">' + SVG_LINKEDIN + '</a>' +
       '<a href="https://x.com/zynixai_" target="_blank" rel="noopener" aria-label="X">' + SVG_X + '</a>' +
@@ -1553,7 +1553,7 @@
   // ── PAGE: FAQ ──
   function renderFAQ() {
     var faqs = [
-      { q: 'What is Zynix AI?', a: 'Zynix is the AI operating system for value-based healthcare. It unifies data, analytics, and autonomous AI agents into a single platform that turns insight into action at scale.' },
+      { q: 'What is Zynix AI?', a: 'Zynix is the operating system that executes care, not just analyzes it. It unifies clinical data, deploys autonomous AI agents, and orchestrates care workflows so healthcare organizations can act on insights at scale without adding headcount.' },
       { q: 'What types of healthcare organizations use Zynix?', a: 'ACOs, MSOs, health systems, FQHCs, health plans, independent practices, and ASCs. Any organization accountable for patient outcomes and operational efficiency.' },
       { q: 'What products are included in the Zynix platform?', a: 'Zynix OS includes: Data Platform, Analytics, AI Agent Suite (7 specialized agents), ZynScribe (ambient AI scribe), Deployable Care Plans, and ZynixLLM (healthcare foundation model).' },
       { q: 'How long does implementation take?', a: 'Typical implementation is 3-4 months from contract to full deployment. Many organizations see measurable impact within the first 30 days.' },
@@ -2594,9 +2594,9 @@
     // -- HERO --
     var html = '<section class="zynix-homepage-hero"><div class="zynix-container zynix-inner-hero-grid">' +
       '<div class="zynix-inner-hero-text">' +
-      '<span class="zynix-tag">AI-POWERED VALUE-BASED CARE PLATFORM</span>' +
-      '<h1>Your Analytics Found the Gaps.<br>Our <span style="color:var(--z-accent)">AI Agents</span> Close Them.</h1>' +
-      '<p>Zynix unifies your clinical data, deploys AI agents, and automates outreach so your team can focus on patients, not paperwork.</p>' +
+      '<span class="zynix-tag">THE AI OPERATING SYSTEM FOR VALUE-BASED CARE</span>' +
+      '<h1>The OS That <span style="color:var(--z-accent)">Executes</span> Care.<br>Not Just Analyzes It.</h1>' +
+      '<p>Zynix is the operating system that turns insight into action. AI agents that call patients, close gaps, schedule visits, and document outcomes, all without adding headcount.</p>' +
       '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#how-it-works" class="zynix-btn-secondary">See How It Works</a></div>' +
       '<div class="zynix-hero-trust">' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#4B5563;padding:8px 14px;background:#fff;border:1px solid #E5E7EB;border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> HIPAA Compliant</span>' +
@@ -2640,11 +2640,11 @@
     // -- AEO SUMMARY (hidden visually, readable by crawlers/screen readers for SEO/AEO) --
     html += '<div class="zynix-sr-only" aria-hidden="false" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">' +
       '<h2>What is Zynix AI?</h2>' +
-      '<p>Zynix AI is a healthcare artificial intelligence platform purpose-built for value-based care. It deploys autonomous AI agents that automate care coordination, close quality gaps, and boost shared savings for ACOs, health systems, health plans, FQHCs, and independent practices. The platform unifies clinical data from EHRs, claims, ADT feeds, and SDOH sources into one intelligence layer, then orchestrates twelve specialized AI agents to take action.</p>' +
+      '<p>Zynix AI is the operating system that executes care, not just analyzes it. Purpose-built for value-based care, it deploys autonomous AI agents that call patients, close care gaps, schedule visits, document outcomes, and capture revenue, all without adding headcount. The platform serves ACOs, health systems, health plans, FQHCs, independent practices, and ambulatory surgery centers.</p>' +
       '<p>Who is it for? ACOs in MSSP and ACO REACH, health systems, Medicare Advantage plans, FQHCs, independent practices, and ambulatory surgery centers.</p>' +
-      '<p>What problem does it solve? Healthcare organizations have invested in analytics but lack the execution infrastructure to act on insights at scale.</p>' +
-      '<p>How does it work? Four integrated layers: AI Data Foundation, Intelligence Engine, AI Agent Suite with 12 agents, and Deployable Care Plans.</p>' +
-      '<p>How is it different? Unlike fragmented point solutions, Zynix is an integrated operating system achieving 85%+ TCM contact rates with 1M+ patients across 30 states.</p>' +
+      '<p>What problem does it solve? Healthcare has a doing problem, not a knowing problem. Organizations have invested millions in analytics but lack the execution infrastructure to act on insights at scale.</p>' +
+      '<p>How does it work? Four integrated layers: AI Data Foundation, Intelligence Engine, AI Agent Suite with 12 specialized agents, and Deployable Care Plans that orchestrate end-to-end workflows.</p>' +
+      '<p>How is it different? Unlike analytics dashboards that show you what to do, Zynix actually does it. The platform achieves 85%+ TCM contact rates with 1M+ patients across 30 states.</p>' +
       '</div>';
 
     // -- CUSTOMER TRUST STRIP (Navina-style: small, grayscale, uniform) --
