@@ -297,6 +297,15 @@
         el.style.display = 'none';
       }
     });
+    // Demote non-zynix H1s to aria-hidden H2s to prevent duplicate H1 for SEO crawlers
+    document.querySelectorAll('h1').forEach(function(h) {
+      if (h.closest('.zynix-injected') || h.closest('.zynix-mega-nav') || h.closest('.zynix-announcement-bar')) return;
+      var h2 = document.createElement('h2');
+      h2.innerHTML = h.innerHTML;
+      h2.className = h.className;
+      h2.setAttribute('aria-hidden', 'true');
+      h.parentNode.replaceChild(h2, h);
+    });
   }
 
   function injectAfterNav(html) {
@@ -1133,50 +1142,66 @@
   // ── PAGE: Blog ──
   function renderBlog() {
     var posts = [
-      { title: 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States', cat: 'Company News', date: 'Mar 15, 2026', slug: '/resources-blog-1m-patients', featured: true },
-      { title: 'Prior Authorization Delays: What They Actually Cost And How to Fix Them', cat: 'Prior Authorization & RCM', date: 'Mar 3, 2026' },
-      { title: 'Your EHR Is Not Broken. It Was Just Never Built to Think.', cat: 'AI Implementation', date: 'Mar 3, 2026' },
-      { title: 'Harnessing Generative AI Applications for Healthcare Innovation', cat: 'AI Implementation', date: 'Mar 2, 2026' },
-      { title: 'Revolutionizing Healthcare with AI Breakthroughs in Medicine', cat: 'AI Implementation', date: 'Feb 23, 2026' },
-      { title: 'Eligibility Verification Automation: The Front Door to Faster Prior Authorization and Fewer Denials', cat: 'Patient Access & Scheduling', date: 'Jan 8, 2026' },
-      { title: 'Transforming HCC Risk Adjustment: From Q4 Scramble to Year-Round Success', cat: 'HCC Risk Adjustment', date: 'Dec 23, 2025' },
-      { title: 'How To Safely Roll Out AI Medical Scribes Across a Multi-Site Practice', cat: 'AI Medical Scribes', date: 'Dec 17, 2025' },
-      { title: 'Using AI To Identify Rising-Risk Patients Before They Deteriorate', cat: 'Value-Based Care Strategy', date: 'Dec 13, 2025' },
-      { title: 'Reducing No-Shows With Behaviorally Intelligent AI Scheduling Agents', cat: 'Patient Access & Scheduling', date: 'Dec 9, 2025' },
-      { title: 'Prior Authorization Bottlenecks: How AI Automation Helps Providers Win Back Time', cat: 'Prior Authorization & RCM', date: 'Dec 4, 2025' },
-      { title: 'The New Era of HCC Risk Adjustment: What CMS Changes Mean for Providers', cat: 'HCC Risk Adjustment', date: 'Nov 26, 2025' },
-      { title: 'Year-End ACO Gap Closure: How ACOs Can Close Gaps Faster With Zynix AI', cat: 'Value-Based Care Strategy', date: 'Nov 25, 2025' },
-      { title: 'Harnessing Generative AI in Healthcare', cat: 'AI Implementation', date: 'Nov 24, 2025' },
-      { title: 'Transforming Healthcare with AI-Driven Value-Based Care Analytics', cat: 'Population Health & Analytics', date: 'Nov 21, 2025' },
-      { title: 'Revolutionizing Healthcare: The Role of AI', cat: 'AI Implementation', date: 'Nov 17, 2025' },
-      { title: 'Generative AI in Healthcare: Enhancing Outcomes While Ensuring Trust and Safety', cat: 'Responsible AI & Governance', date: 'Nov 15, 2025' },
-      { title: 'Autonomous AI Agents in Healthcare: Automating Scheduling, Patient Communication, and Follow-Ups', cat: 'AI Implementation', date: 'Nov 14, 2025' },
-      { title: 'Predictive Analytics in Healthcare: Leveraging AI for Population Health Management', cat: 'Population Health & Analytics', date: 'Nov 9, 2025' },
-      { title: 'Revolutionizing Clinical Documentation: How AI Medical Scribes Reduce Physician Burnout', cat: 'AI Medical Scribes', date: 'Nov 3, 2025' },
-      { title: 'Innovative Approaches to Enhance Patient Recovery and Satisfaction', cat: 'Value-Based Care Strategy', date: 'Oct 27, 2025' },
-      { title: 'Strategies for Coordinating Better Patient Care Systems', cat: 'Operations', date: 'Oct 20, 2025' },
-      { title: 'How Artificial Intelligence is Transforming the Medical Field', cat: 'AI Implementation', date: 'Oct 13, 2025' },
-      { title: 'Essential AI Tools Every Medical Professional Should Know', cat: 'AI Implementation', date: 'Oct 6, 2025' },
-      { title: 'How AI is Changing Decision-Making in Healthcare', cat: 'AI Implementation', date: 'Oct 2, 2025' },
-      { title: 'Tools Driving the Shift to Value-Based Healthcare', cat: 'Value-Based Care Strategy', date: 'Oct 2, 2025' },
-      { title: 'How ACOs Can Run a Consistent 30-Day Post-Discharge Program', cat: 'Operations', date: 'Sep 15, 2025' },
-      { title: 'Why TCM Fails in Real Workflows', cat: 'Operations', date: 'Sep 8, 2025' },
-      { title: 'The Documentation Crisis: Why Physicians Are Burning Out', cat: 'Clinical Excellence', date: 'Sep 1, 2025' }
+      { title: 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States', cat: 'Company News', date: 'Mar 17, 2026', slug: '/resources-blog-1m-patients', featured: true },
+      { title: 'How ACOs Actually Make Money: Shared Savings Mechanics and Where AI Moves the Needle', cat: 'ACO Strategy', date: 'Apr 1, 2026', slug: '/blog-posts/how-acos-make-money-shared-savings-ai-impact' },
+      { title: 'Multi-Agent AI Is Outperforming Monolithic Models \u2014 Here\'s What That Means for ACOs', cat: 'AI in Healthcare', date: 'Apr 1, 2026', slug: '/blog-posts/multi-agent-ai-outperforming-monolithic-models-acos' },
+      { title: 'The CMS LEAD Model RFA Is Open: Why Your ACO\'s Data Infrastructure Will Decide If You Win', cat: 'ACO Performance', date: 'Apr 1, 2026', slug: '/blog-posts/cms-lead-model-rfa-aco-data-infrastructure' },
+      { title: 'CMS WISeR Is Live in 6 States: What the AI Prior Auth Pilot Means for Your Revenue Cycle', cat: 'Prior Authorization', date: 'Apr 1, 2026', slug: '/blog-posts/cms-wiser-prior-authorization-gold-card-2026' },
+      { title: 'The CMS LEAD Model RFA Is Live: What ACOs Have 47 Days to Get Right', cat: 'ACO Performance', date: 'Apr 1, 2026', slug: '/blog-posts/cms-lead-model-rfa-acos-47-days' },
+      { title: 'Prior Auth Transparency Is Live Today \u2014 Here\'s What It Means for Your ACO', cat: 'Prior Authorization', date: 'Apr 1, 2026', slug: '/blog-posts/prior-auth-transparency-live-what-it-means-for-acos' },
+      { title: 'Healthcare EHR Integrations: Epic, athenahealth, Cerner, FHIR & HL7', cat: 'Data Platform', date: 'Mar 31, 2026', slug: '/blog-posts/healthcare-ehr-integrations-epic-athenahealth-fhir-hl7' },
+      { title: 'Olive AI Alternative: Next-Generation Healthcare AI for Care Execution', cat: 'Comparisons', date: 'Mar 31, 2026', slug: '/blog-posts/olive-ai-alternative-healthcare' },
+      { title: 'Arcadia Healthcare Platform Alternative: Execution-First AI for VBC', cat: 'Comparisons', date: 'Mar 31, 2026', slug: '/blog-posts/arcadia-healthcare-platform-alternative' },
+      { title: 'Notable Health AI Alternative: Autonomous Agents vs Point Solutions', cat: 'Comparisons', date: 'Mar 31, 2026', slug: '/blog-posts/notable-health-ai-alternative-zynix-ai' },
+      { title: 'Health Catalyst Alternative: AI Execution vs Analytics Dashboards', cat: 'Comparisons', date: 'Mar 31, 2026', slug: '/blog-posts/health-catalyst-alternative-zynix-ai' },
+      { title: 'Innovaccer Alternative: Why ACOs Are Switching to Zynix AI', cat: 'Comparisons', date: 'Mar 31, 2026', slug: '/blog-posts/innovaccer-alternative-zynix-ai' },
+      { title: 'How To Scale ACO Operations Without Adding Headcount', cat: 'ACO Strategy', date: 'Mar 31, 2026', slug: '/blog-posts/how-to-scale-aco-operations' },
+      { title: 'Reducing Hospital Readmissions With AI Post-Discharge Programs', cat: 'Clinical Outcomes', date: 'Mar 31, 2026', slug: '/blog-posts/reduce-readmissions-post-discharge-programs' },
+      { title: 'How To Automate Care Management With AI Agents', cat: 'Care Management', date: 'Mar 31, 2026', slug: '/blog-posts/how-to-automate-care-management' },
+      { title: 'AI Use Cases in Population Health Management', cat: 'Population Health', date: 'Mar 31, 2026', slug: '/blog-posts/ai-use-cases-population-health' },
+      { title: 'Best AI Tools for Healthcare Operations in 2026', cat: 'Industry Analysis', date: 'Mar 31, 2026', slug: '/blog-posts/best-ai-tools-healthcare-operations-2026' },
+      { title: 'How To Reduce Patient No-Shows in Healthcare With AI Scheduling', cat: 'Operational Efficiency', date: 'Mar 31, 2026', slug: '/blog-posts/how-to-reduce-patient-no-shows-healthcare' },
+      { title: 'How To Improve AWV Completion Rates With AI-Powered Outreach', cat: 'Clinical Operations', date: 'Mar 31, 2026', slug: '/blog-posts/how-to-improve-awv-completion-rates' },
+      { title: 'Why Healthcare Organizations Are Moving Beyond Chatbots to Autonomous AI Agents', cat: 'Healthcare AI', date: 'Mar 17, 2026', slug: '/blog-posts/beyond-chatbots-autonomous-ai-agents-healthcare' },
+      { title: 'The Documentation Crisis: Why Physicians Are Burning Out', cat: 'Healthcare AI', date: 'Mar 17, 2026', slug: '/blog-posts/documentation-crisis-physician-burnout' },
+      { title: 'Why TCM Fails in Real Workflows', cat: 'Value-Based Care', date: 'Mar 17, 2026', slug: '/blog-posts/why-tcm-fails-real-workflows' },
+      { title: 'How ACOs Can Run a Consistent 30-Day Post-Discharge Program', cat: 'Value-Based Care', date: 'Mar 17, 2026', slug: '/blog-posts/acos-consistent-30-day-post-discharge-program' },
+      { title: 'Tools Driving the Shift to Value-Based Healthcare', cat: 'Value-Based Care', date: 'Mar 17, 2026', slug: '/blog-posts/tools-driving-shift-value-based-healthcare' },
+      { title: 'How AI is Changing Decision-Making in Healthcare', cat: 'Healthcare AI', date: 'Mar 17, 2026', slug: '/blog-posts/ai-changing-decision-making-healthcare' },
+      { title: 'Essential AI Tools Every Medical Professional Should Know', cat: 'Healthcare AI', date: 'Mar 17, 2026', slug: '/blog-posts/essential-ai-tools-medical-professionals' },
+      { title: 'How Artificial Intelligence is Transforming the Medical Field', cat: 'Healthcare AI', date: 'Mar 17, 2026', slug: '/blog-posts/how-ai-transforming-medical-field' },
+      { title: 'Strategies for Coordinating Better Patient Care Systems', cat: 'Value-Based Care', date: 'Mar 17, 2026', slug: '/blog-posts/strategies-coordinating-better-patient-care-systems' },
+      { title: 'Innovative Approaches to Enhance Patient Recovery and Satisfaction', cat: 'Patient Care', date: 'Mar 17, 2026', slug: '/blog-posts/innovative-approaches-patient-recovery-satisfaction' },
+      { title: 'Revolutionizing Clinical Documentation: How AI Medical Scribes Reduce Physician Burnout', cat: 'AI Medical Scribes', date: 'Mar 17, 2026', slug: '/blog-posts/ai-medical-scribes-reduce-physician-burnout' },
+      { title: 'Predictive Analytics in Healthcare: Leveraging AI for Population Health Management', cat: 'Population Health & Analytics', date: 'Mar 17, 2026', slug: '/blog-posts/predictive-analytics-healthcare-ai-population-health-management' },
+      { title: 'Autonomous AI Agents in Healthcare: Automating Scheduling, Patient Communication, and Follow-Ups', cat: 'AI Implementation', date: 'Mar 17, 2026', slug: '/blog-posts/autonomous-ai-agents-healthcare-scheduling-communication-followups' },
+      { title: 'Generative AI in Healthcare: Enhancing Outcomes While Ensuring Trust and Safety', cat: 'Responsible AI & Governance', date: 'Mar 17, 2026', slug: '/blog-posts/generative-ai-healthcare-enhancing-outcomes-ensuring-trust-safety' },
+      { title: 'Revolutionizing Healthcare: The Role of AI', cat: 'AI Implementation', date: 'Mar 17, 2026', slug: '/blog-posts/revolutionizing-healthcare-the-role-of-ai' },
+      { title: 'Transforming Healthcare with AI-Driven Value-Based Care Analytics', cat: 'Population Health & Analytics', date: 'Mar 17, 2026', slug: '/blog-posts/transforming-healthcare-ai-driven-value-based-care-analytics' },
+      { title: 'Harnessing Generative AI in Healthcare', cat: 'AI Implementation', date: 'Mar 17, 2026', slug: '/blog-posts/harnessing-generative-ai-in-healthcare' },
+      { title: 'Year-End ACO Gap Closure: How ACOs Can Close Gaps Faster With Zynix AI', cat: 'Value-Based Care Strategy', date: 'Mar 17, 2026', slug: '/blog-posts/year-end-aco-gap-closure-close-gaps-faster-zynix-ai' },
+      { title: 'The New Era of HCC Risk Adjustment: What CMS Changes Mean for Providers', cat: 'HCC Risk Adjustment', date: 'Mar 17, 2026', slug: '/blog-posts/new-era-hcc-risk-adjustment-cms-changes-providers' },
+      { title: 'Prior Authorization Bottlenecks: How AI Automation Helps Providers Win Back Time', cat: 'Prior Authorization & RCM', date: 'Mar 17, 2026', slug: '/blog-posts/prior-authorization-bottlenecks-ai-automation-helps-providers' },
+      { title: 'Reducing No-Shows With Behaviorally Intelligent AI Scheduling Agents', cat: 'Patient Access & Scheduling', date: 'Mar 17, 2026', slug: '/blog-posts/reducing-no-shows-behaviorally-intelligent-ai-scheduling-agents' },
+      { title: 'Using AI To Identify Rising-Risk Patients Before They Deteriorate', cat: 'Value-Based Care Strategy', date: 'Mar 17, 2026', slug: '/blog-posts/using-ai-identify-rising-risk-patients-before-they-deteriorate' },
+      { title: 'How To Safely Roll Out AI Medical Scribes Across a Multi-Site Practice', cat: 'AI Medical Scribes', date: 'Mar 17, 2026', slug: '/blog-posts/how-to-safely-roll-out-ai-medical-scribes-multi-site-practice' },
+      { title: 'Transforming HCC Risk Adjustment: From Q4 Scramble to Year-Round Success', cat: 'HCC Risk Adjustment', date: 'Mar 17, 2026', slug: '/blog-posts/transforming-hcc-risk-adjustment-q4-scramble-year-round-success' },
+      { title: 'Eligibility Verification Automation: The Front Door to Faster Prior Authorization and Fewer Denials', cat: 'Patient Access & Scheduling', date: 'Mar 17, 2026', slug: '/blog-posts/eligibility-verification-automation-front-door-faster-prior-auth' },
+      { title: 'Revolutionizing Healthcare with AI Breakthroughs in Medicine', cat: 'AI Implementation', date: 'Mar 17, 2026', slug: '/blog-posts/revolutionizing-healthcare-with-ai-breakthroughs-in-medicine' },
+      { title: 'Harnessing Generative AI Applications for Healthcare Innovation', cat: 'AI Implementation', date: 'Mar 17, 2026', slug: '/blog-posts/harnessing-generative-ai-applications-for-healthcare-innovation' },
+      { title: 'Your EHR Is Not Broken. It Was Just Never Built to Think.', cat: 'AI Implementation', date: 'Mar 17, 2026', slug: '/blog-posts/your-ehr-is-not-broken-it-was-just-never-built-to-think' },
+      { title: 'Prior Authorization Delays: What They Actually Cost And How to Fix Them', cat: 'Prior Authorization & RCM', date: 'Mar 17, 2026', slug: '/blog-posts/prior-authorization-delays-what-they-actually-cost-and-how-to-fix-them' }
     ];
     var html = '<div class="zynix-blog-grid">';
     posts.forEach(function(p) {
       var featuredClass = p.featured ? ' zynix-blog-featured' : '';
       var cardInner = '<span class="zynix-blog-cat">' + p.cat + '</span><h3>' + p.title + '</h3><span class="zynix-blog-date">' + p.date + '</span>';
-      if (p.slug) {
-        html += '<a href="' + p.slug + '" class="zynix-blog-card fade-in-up' + featuredClass + '" style="text-decoration:none;color:inherit;display:block">' + cardInner + '</a>';
-      } else {
-        html += '<div class="zynix-blog-card fade-in-up' + featuredClass + '">' + cardInner + '</div>';
-      }
+      html += '<a href="' + p.slug + '" class="zynix-blog-card fade-in-up' + featuredClass + '" style="text-decoration:none;color:inherit;display:block">' + cardInner + '</a>';
     });
     html += '</div>';
 
     return renderInnerHero('BLOG', 'Insights & Research',
-      'Perspectives on operational excellence, AI transformation, and clinical innovation in healthcare. 28 articles on healthcare AI, value-based care, and population health.',
+      'Perspectives on operational excellence, AI transformation, and clinical innovation in healthcare. 49 articles on healthcare AI, value-based care, ACO strategy, and population health.',
       null, '') +
     '<section class="zynix-blog-section"><div class="zynix-container">' + html + '</div></section>' +
     renderCTA('Want More Insights?', 'Subscribe to our newsletter for the latest in healthcare AI.', 'Contact Us') +
@@ -1457,7 +1482,8 @@
   }
 
   // ── Shared: Use Case Page Template ──
-  function renderUseCasePage(name, subtitle, problems, steps, replaces, kpis, story) {
+  function renderUseCasePage(name, subtitle, problems, steps, replaces, kpis, story, labels, faq) {
+    var lbl = labels || {};
     var html = '<section class="zynix-inner-hero"><div class="zynix-container" style="position:relative;z-index:1;text-align:center;max-width:800px;margin:0 auto">' +
       '<span class="zynix-tag" style="display:inline-block">USE CASE</span>' +
       '<h1 style="font-size:42px;font-weight:600;margin:0 0 20px">' + name + '</h1>' +
@@ -1469,7 +1495,7 @@
 
     if (steps && steps.length) {
       html += '<section id="capabilities"><div class="zynix-container">' +
-        '<span class="zynix-tag">HOW ZYNIX HELPS</span><h2>The Workflow, Reimagined</h2>' +
+        '<span class="zynix-tag">HOW ZYNIX HELPS</span><h2>' + (lbl.steps || 'The Workflow, Reimagined') + '</h2>' +
         '<div class="zynix-workflow-steps">';
       steps.forEach(function(s, i) {
         html += '<div class="zynix-wf-step-card fade-in-up"><div class="zynix-wf-step-num">' + (i+1) + '</div><div><h4>' + s.title + '</h4><p>' + s.desc + '</p>' + (s.tag ? '<span class="zynix-wf-step-tag">' + s.tag + '</span>' : '') + '</div></div>';
@@ -1478,7 +1504,7 @@
     }
 
     if (replaces && replaces.length) {
-      html += '<section><div class="zynix-container"><span class="zynix-tag">WHAT IT REPLACES</span><h2>Manual Processes Eliminated</h2><div class="zynix-feature-grid">';
+      html += '<section><div class="zynix-container"><span class="zynix-tag">WHAT IT REPLACES</span><h2>' + (lbl.replaces || 'Manual Processes Eliminated') + '</h2><div class="zynix-feature-grid">';
       replaces.forEach(function(r) {
         html += '<div class="zynix-feature-card fade-in-up"><h3>' + r + '</h3></div>';
       });
@@ -1486,14 +1512,26 @@
     }
 
     if (kpis && kpis.length) {
-      html += '<section><div class="zynix-container"><span class="zynix-tag">SUCCESS METRICS</span><h2>KPIs to Track</h2><div class="zynix-kpi-grid">';
+      html += '<section><div class="zynix-container"><span class="zynix-tag">SUCCESS METRICS</span><h2>' + (lbl.kpis || 'KPIs to Track') + '</h2><div class="zynix-kpi-grid">';
       kpis.forEach(function(k) { html += '<div class="zynix-kpi-chip fade-in-up"><strong>' + k + '</strong></div>'; });
       html += '</div></div></section>';
     }
 
     if (story) {
-      html += '<section><div class="zynix-container"><span class="zynix-tag">STORY WALKTHROUGH</span><h2>A Real Scenario</h2>' +
+      html += '<section><div class="zynix-container"><span class="zynix-tag">STORY WALKTHROUGH</span><h2>' + (lbl.story || 'A Real Scenario') + '</h2>' +
         '<div class="zynix-story-block"><p>' + story + '</p></div></div></section>';
+    }
+
+    if (faq && faq.length) {
+      html += '<section><div class="zynix-container"><span class="zynix-tag">FAQ</span><h2>' + (lbl.faq || 'Frequently Asked Questions') + '</h2>' +
+        '<div class="zynix-faq-list" style="max-width:720px;margin:0 auto">';
+      faq.forEach(function(item) {
+        html += '<div class="zynix-faq-item" style="border-bottom:1px solid rgba(255,255,255,0.08);padding:20px 0">' +
+          '<h3 style="font-size:17px;font-weight:600;color:#e8eaf0;margin:0 0 8px">' + item.q + '</h3>' +
+          '<p style="font-size:15px;color:#94a3b8;margin:0;line-height:1.7">' + item.a + '</p>' +
+          '</div>';
+      });
+      html += '</div></div></section>';
     }
 
     html += renderCTA('Ready to Transform This Workflow?', 'See how Zynix automates and orchestrates ' + name.toLowerCase() + '.') + renderFooter();
@@ -1742,22 +1780,37 @@
   // ── NEW PAGES: Use Cases ──
   function renderUseCaseTCM() {
     return renderUseCasePage('Transitional Care Management (TCM)',
-      'A practical 30-day post-discharge execution workflow that turns discharge events into completed follow-ups.',
+      'Automate your transitional care management program across the 30-day post-discharge window. Zynix AI orchestrates every step \u2014 from ADT feed ingestion to completed follow-up and TCM billing code capture \u2014 so no discharge event falls through the cracks.',
       [
-        { icon: '&#9203;', title: 'Discharge Visibility Delayed', desc: 'ADT feeds arrive late or in multiple formats. By the time patients appear on a list, valuable days are lost.' },
-        { icon: '&#128101;', title: 'Ownership is Unclear', desc: 'Who owns the first call? Who owns follow-up scheduling? When ownership is shared, gaps appear.' },
-        { icon: '&#128196;', title: 'Documentation is Afterthought', desc: 'Teams do the work but fail to capture it cleanly -lost billing, poor audit readiness.' }
+        { icon: '&#9203;', title: 'Discharge Visibility Delayed', desc: 'ADT feeds arrive late or in multiple formats. By the time patients appear on a work list, the 48-hour TCM billing window is already closing.' },
+        { icon: '&#128101;', title: 'Ownership is Unclear', desc: 'Who owns the first call? Who owns follow-up scheduling? When TCM ownership is shared, gaps appear and CPT 99495/99496 goes uncaptured.' },
+        { icon: '&#128196;', title: 'Documentation is an Afterthought', desc: 'Teams complete the work but fail to capture it cleanly \u2014 lost TCM billing, failed audits, and no program visibility.' }
       ],
       [
-        { title: 'Capture discharges into single work queue', desc: 'Data Platform ingests discharge sources and normalizes into one prioritized queue.', tag: 'Zynix Data Platform' },
-        { title: 'Execute outreach within 48 hours', desc: 'Post-Discharge Follow-Up agent runs outreach sequences, captures outcomes, updates status.', tag: 'Post-Discharge Agent' },
-        { title: 'Resolve medication risk', desc: 'Medication Reconciliation agent flags discrepancies and routes issues for resolution.', tag: 'Med Rec Agent' },
-        { title: 'Schedule follow-up visit', desc: 'ZynSchedule books/reschedules follow-ups and sends confirmation reminders.', tag: 'ZynSchedule' },
-        { title: 'Document as work happens', desc: 'ZynScribe supports structured documentation. Program reporting artifacts ensured before case closure.', tag: 'ZynScribe' }
+        { title: 'Capture discharges into a single TCM work queue', desc: 'Data Platform ingests ADT feeds and normalizes all discharge sources into one prioritized transitional care work queue.', tag: 'Zynix Data Platform' },
+        { title: 'Execute outreach within 48 hours of discharge', desc: 'Post-Discharge Follow-Up agent contacts patients within the TCM billing window, captures outcomes, and updates case status automatically.', tag: 'Post-Discharge Agent' },
+        { title: 'Resolve medication reconciliation risk', desc: 'Medication Reconciliation agent flags post-discharge discrepancies and routes issues for pharmacist or clinician resolution.', tag: 'Med Rec Agent' },
+        { title: 'Schedule the required follow-up visit', desc: 'ZynSchedule books the 7- or 14-day follow-up visit required for TCM billing and sends patient confirmation reminders.', tag: 'ZynSchedule' },
+        { title: 'Document as work happens, close the TCM case', desc: 'ZynScribe supports structured clinical documentation. All TCM program artifacts are verified before the case is marked complete and billed.', tag: 'ZynScribe' }
       ],
-      ['Spreadsheet-based discharge tracking', 'Unstructured call lists and manual reminders', 'Inconsistent escalation handoffs', 'Fragmented scheduling workflows', 'Documentation captured late or inconsistently'],
-      ['Contact rate within 48 hours', 'Time from discharge to first successful contact', 'Follow-up scheduled within 7 days', 'Medication reconciliation completion rate', 'TCM completion rate within 30 days', 'Documentation completeness rate'],
-      'A patient returns home after CHF exacerbation. On day 1-2 they receive a call and admit they did not fill one discharge med and feel more short of breath. The care plan routes symptom escalation to the on-call clinician, triggers pharmacy follow-up for the missing med, schedules a tele-visit within a week due to transport barriers, and sends appointment reminders. The episode stays open until those steps are verified.'
+      ['Spreadsheet-based discharge tracking', 'Unstructured call lists and manual reminders', 'Inconsistent escalation handoffs', 'Fragmented TCM scheduling workflows', 'Documentation captured late or missing at billing'],
+      ['Contact rate within 48 hours of discharge', 'Time from discharge to first successful contact', 'Follow-up visit scheduled within 7 days', 'Medication reconciliation completion rate', 'TCM completion rate within 30 days', 'CPT 99495/99496 capture rate', 'Documentation completeness rate'],
+      'A patient returns home after a CHF exacerbation. On day 1\u20132 they receive a transitional care call and admit they did not fill one discharge medication and feel more short of breath. The care plan routes symptom escalation to the on-call clinician, triggers pharmacy follow-up for the missing medication, schedules a tele-visit within a week due to transport barriers, and sends appointment reminders. The 30-day TCM episode stays open until every step is verified \u2014 then the billing code is captured.',
+      {
+        steps: 'How Zynix AI Automates the 30-Day TCM Workflow',
+        replaces: 'Manual TCM Processes Zynix Eliminates',
+        kpis: 'Transitional Care Management KPIs That Matter',
+        story: 'TCM Scenario: CHF Patient Post-Discharge',
+        faq: 'Transitional Care Management FAQs'
+      },
+      [
+        { q: 'What is transitional care management (TCM)?', a: 'Transitional care management is a Medicare program (CPT codes 99495 and 99496) that reimburses providers for coordinating care in the 30 days following a hospital, skilled nursing facility, or other qualifying discharge. It requires contact within 2 business days and a face-to-face visit within 7 or 14 days depending on complexity.' },
+        { q: 'What are CPT codes 99495 and 99496?', a: 'CPT 99495 covers moderate complexity TCM with a face-to-face visit within 14 days. CPT 99496 covers high complexity TCM requiring a visit within 7 days. Both require direct contact within 2 business days of discharge. Zynix tracks both windows automatically.' },
+        { q: 'How does Zynix automate TCM billing capture?', a: 'Zynix ingests ADT discharge feeds in real time, triggers the outreach workflow immediately, tracks every required step (48-hour contact, medication reconciliation, follow-up visit), and generates the documentation needed to bill 99495 or 99496 before the 30-day window closes.' },
+        { q: 'What qualifies as the required TCM contact within 2 business days?', a: 'CMS requires interactive contact (voice call, telehealth, or in-person) \u2014 not just a voicemail or text. Zynix\u2019s Post-Discharge agent attempts contact through multiple channels and documents the first successful interactive contact to satisfy this requirement.' },
+        { q: 'Can Zynix handle high-risk and complex discharge populations?', a: 'Yes. Zynix uses risk stratification to prioritize patients by readmission risk, diagnoses, and social determinants. High-risk patients (e.g., CHF, COPD, complex polypharmacy) receive accelerated outreach with escalation pathways to clinical staff.' },
+        { q: 'How does this integrate with our EHR?', a: 'Zynix connects to Epic, Cerner, athenahealth, eClinicalWorks, and other EHRs via HL7 ADT feeds and FHIR APIs. Discharge events, medication lists, and TCM documentation flow bidirectionally without manual data entry.' }
+      ]
     );
   }
 
