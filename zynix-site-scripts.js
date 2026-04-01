@@ -6,6 +6,15 @@
 (function() {
   'use strict';
 
+  // ── Noindex deprecated pages ──
+  (function() {
+    if (/^\/deprecated-/.test(window.location.pathname)) {
+      var m = document.createElement('meta');
+      m.name = 'robots'; m.content = 'noindex, nofollow';
+      document.head.appendChild(m);
+    }
+  })();
+
   var CALENDLY = 'https://calendly.com/david-zynix-ai-calendar/30min';
 
   // ── Image URLs ──
