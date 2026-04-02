@@ -2134,9 +2134,9 @@
     // -- HERO --
     var html = '<section class="zynix-homepage-hero"><div class="zynix-container zynix-inner-hero-grid">' +
       '<div class="zynix-inner-hero-text">' +
-      '<span class="zynix-tag">HEALTHCARE AI OPERATING SYSTEM</span>' +
-      '<h1>AI That Executes Care,<br>Not Just Analyzes It.</h1>' +
-      '<p>Zynix AI deploys autonomous agents that close care gaps, run TCM programs, automate prior auth, and capture documentation — so your team focuses on patients, not paperwork.</p>' +
+      '<span class="zynix-tag">AI-POWERED VALUE-BASED CARE PLATFORM</span>' +
+      '<h1>Close Care Gaps Faster.<br>Grow Your Shared Savings.</h1>' +
+      '<p>Zynix unifies your clinical data, deploys AI agents, and automates outreach -so your team can focus on patients, not paperwork.</p>' +
       '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#how-it-works" class="zynix-btn-secondary">See How It Works</a></div>' +
       '<div class="zynix-hero-trust">' +
       '<span class="zynix-hero-badge">&#128737; HIPAA Compliant</span>' +
