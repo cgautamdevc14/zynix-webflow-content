@@ -1256,32 +1256,38 @@
   function renderBlogPostFromData(post) {
     // Style the raw CMS HTML to match design system
     var body = (post.b || '')
-      .replace(/<h2>/g, '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">')
+      .replace(/<h2>/g, '<h2 style="font-size:26px;font-weight:700;margin:40px 0 14px;color:var(--z-text);letter-spacing:-0.3px">')
       .replace(/<\/h2>/g, '</h2>')
-      .replace(/<h3>/g, '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">')
-      .replace(/<p>/g, '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">')
-      .replace(/<ul>/g, '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:16px 0">')
-      .replace(/<ol>/g, '<ol style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:16px 0">')
+      .replace(/<h3>/g, '<h3 style="font-size:20px;font-weight:600;margin:32px 0 10px;color:var(--z-text)">')
+      .replace(/<p>/g, '<p style="font-size:16px;line-height:1.85;color:var(--z-text-secondary);margin:0 0 18px">')
+      .replace(/<ul>/g, '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 18px">')
+      .replace(/<ol>/g, '<ol style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 18px">')
       .replace(/<li>/g, '<li style="margin-bottom:8px">')
-      .replace(/<blockquote>/g, '<blockquote style="border-left:4px solid var(--z-blue);padding:20px 24px;margin:32px 0;background:rgba(59,130,246,0.08);border-radius:0 8px 8px 0"><p style="font-size:16px;line-height:1.8;color:var(--z-text);margin:0;font-style:italic">')
-      .replace(/<\/blockquote>/g, '</p></blockquote>')
-      .replace(/<a /g, '<a style="color:var(--z-blue);font-weight:500" ');
+      .replace(/<blockquote>/g, '<blockquote style="border-left:3px solid var(--z-accent);padding:16px 20px;margin:28px 0;background:var(--z-peach);border-radius:0 8px 8px 0">')
+      .replace(/<a /g, '<a style="color:var(--z-blue);font-weight:500;text-decoration:underline" ');
 
-    var authorLine = '<div style="display:flex;align-items:center;gap:12px;margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.08)">' +
-      '<div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--z-blue),var(--z-purple));display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#fff;font-weight:700;font-size:16px">' + (post.a || 'Z').charAt(0) + '</span></div>' +
-      '<div><div style="font-size:15px;font-weight:600;color:var(--z-text)">' + (post.a || 'Zynix AI') + '</div><div style="font-size:13px;color:var(--z-text-secondary)">' + (post.d || '') + '</div></div>' +
-      '</div>';
+    // Clean blog post header — no CTA buttons or trust badges
+    var blogHero = '<section style="background:var(--z-bg);padding:64px 24px 48px;border-bottom:1px solid var(--z-border)">' +
+      '<div style="max-width:800px;margin:0 auto">' +
+      '<a href="/resources-blog" style="display:inline-flex;align-items:center;gap:6px;color:var(--z-text-secondary);font-size:13px;font-weight:500;text-decoration:none;margin-bottom:24px;letter-spacing:0.3px">' +
+      '\u2190 Back to Blog</a>' +
+      '<div style="display:inline-block;background:var(--z-blue-light);color:var(--z-blue);font-size:11px;font-weight:700;letter-spacing:1.5px;padding:4px 10px;border-radius:4px;margin-bottom:16px">' + (post.c || 'INSIGHTS').toUpperCase() + '</div>' +
+      '<h1 style="font-size:clamp(26px,4vw,38px);font-weight:800;color:var(--z-text);line-height:1.2;letter-spacing:-1px;margin:0 0 20px">' + (post.t || '') + '</h1>' +
+      '<div style="display:flex;align-items:center;gap:12px">' +
+      '<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--z-blue),#4f46e5);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#fff;font-weight:700;font-size:14px">' + (post.a || 'Z').charAt(0).toUpperCase() + '</span></div>' +
+      '<div><span style="font-size:14px;font-weight:600;color:var(--z-text)">' + (post.a || 'Zynix AI') + '</span>' +
+      '<span style="font-size:13px;color:var(--z-text-secondary);margin-left:8px">' + (post.d || '') + '</span></div>' +
+      '</div>' +
+      '</div></section>';
 
-    return renderInnerHero((post.c || 'INSIGHTS').toUpperCase(), post.t || 'Blog Post', post.d + ' \u00b7 ' + (post.a || 'Zynix AI'), null, '') +
-      '<section class="zynix-blog-post-section"><div class="zynix-container" style="max-width:800px;margin:0 auto;padding:60px 24px">' +
-      '<article class="zynix-blog-post-content">' +
-      authorLine +
-      '<p style="font-size:18px;line-height:1.9;color:var(--z-text);margin-bottom:40px"><em>' + (post.s || '') + '</em></p>' +
-      body +
-      '</article>' +
-      '<div style="margin-top:56px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">' +
+    return blogHero +
+      '<section style="background:var(--z-bg-alt);padding:48px 24px 80px">' +
+      '<div style="max-width:800px;margin:0 auto">' +
+      '<p style="font-size:18px;line-height:1.85;color:var(--z-text);margin:0 0 40px;font-style:italic;padding-bottom:32px;border-bottom:1px solid var(--z-border)">' + (post.s || '') + '</p>' +
+      '<article>' + body + '</article>' +
+      '<div style="margin-top:56px;padding-top:32px;border-top:1px solid var(--z-border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">' +
       '<a href="/resources-blog" style="color:var(--z-blue);font-size:15px;font-weight:500;text-decoration:none">\u2190 Back to Blog</a>' +
-      '<a href="/contact" style="background:var(--z-blue);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none">Request a Demo</a>' +
+      '<a href="/contact" style="background:var(--z-accent);color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none">Request a Demo</a>' +
       '</div>' +
       '</div></section>' +
       renderCTA('Transform Your Healthcare Operations', 'Join 1M+ VBC patients managed on the Zynix AI platform.', 'Get a Demo') +
