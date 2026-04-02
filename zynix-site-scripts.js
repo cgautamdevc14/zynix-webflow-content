@@ -259,22 +259,66 @@
   }
 
   function injectJSONLD(pagePath, seo) {
+    // ── Organization schema — comprehensive entity for GEO + SEO ──
     var orgSchema = {
       '@context':'https://schema.org','@type':'Organization',
-      name:'Zynix AI',url:'https://www.zynix.ai',logo:IMG.logo,
-      description:'The AI operating system for value-based healthcare. 1 million VBC patients onboarded across 16+ healthcare organizations.',
+      '@id':'https://www.zynix.ai/#organization',
+      name:'Zynix AI',
+      legalName:'Zynix Inc',
+      url:'https://www.zynix.ai',
+      logo:{'@type':'ImageObject',url:IMG.logo,width:400,height:80},
+      description:'Zynix AI is the healthcare automation platform for value-based care. Deploys autonomous AI agents to close care gaps, reduce hospital readmissions, automate care coordination, and cut administrative costs. Purpose-built for ACOs, health systems, health plans, and FQHCs. Over 1 million VBC patients served across 30+ U.S. states.',
+      slogan:'AI That Executes Care. Not Just Analyzes It.',
+      telephone:'+1-727-261-1297',
+      email:'info@zynix.ai',
       address:{'@type':'PostalAddress',streetAddress:'3535 Little Rd',addressLocality:'Trinity',addressRegion:'FL',postalCode:'34655',addressCountry:'US'},
-      contactPoint:{'@type':'ContactPoint',email:'info@zynix.ai',contactType:'sales'},
+      geo:{'@type':'GeoCoordinates',latitude:28.1856,longitude:-82.6800},
+      contactPoint:[
+        {'@type':'ContactPoint',telephone:'+1-727-261-1297',contactType:'sales',areaServed:'US',availableLanguage:'English'},
+        {'@type':'ContactPoint',email:'info@zynix.ai',contactType:'customer support',areaServed:'US'}
+      ],
       areaServed:{'@type':'Country',name:'United States'},
-      numberOfEmployees:{'@type':'QuantitativeValue',value:'50-100'},
+      numberOfEmployees:{'@type':'QuantitativeValue',minValue:50,maxValue:100},
       foundingDate:'2023',
+      naics:'541511',
+      knowsAbout:['Value-Based Care','Healthcare Artificial Intelligence','Population Health Management','Care Gap Closure','Transitional Care Management','HCC Risk Adjustment','HEDIS Quality Measures','ACO Management','Medicare Shared Savings Program','HIPAA Compliance','Healthcare Workflow Automation','Clinical Documentation','AI Voice Agents for Healthcare','Patient Outreach Automation','Care Coordination Software'],
+      hasOfferCatalog:{'@type':'OfferCatalog',name:'Healthcare AI Platform',itemListElement:[
+        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'Zynix OS',description:'Unified AI operating system for value-based care — data platform, AI agents, and care plan orchestration in one platform'}},
+        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynAfterHours',description:'24/7 AI voice agent for after-hours patient triage in 15+ languages with 97.3% clinical accuracy'}},
+        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynSchedule',description:'AI patient scheduling that reduces no-show rates by 40% and books appointments around the clock'}},
+        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynScribe',description:'Ambient AI clinical documentation that reduces physician documentation burden by 70%'}},
+        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynAuth',description:'AI prior authorization automation that reduces approval turnaround time by 60%'}}
+      ]},
       sameAs:['https://www.linkedin.com/company/zynix/','https://x.com/zynixai_','https://www.instagram.com/zynixai/']
     };
     var schemas = [orgSchema];
 
     // WebSite schema (homepage only)
     if (!pagePath || pagePath === '/') {
-      schemas.push({'@context':'https://schema.org','@type':'WebSite',name:'Zynix AI',url:'https://www.zynix.ai',description:'The AI Operating System for Value-Based Healthcare',publisher:{'@type':'Organization',name:'Zynix AI'},potentialAction:{'@type':'SearchAction',target:'https://www.zynix.ai/resources/glossary?q={search_term_string}','query-input':'required name=search_term_string'}});
+      schemas.push({
+        '@context':'https://schema.org','@type':'WebSite',
+        '@id':'https://www.zynix.ai/#website',
+        name:'Zynix AI',url:'https://www.zynix.ai',
+        description:'The AI Operating System for Value-Based Healthcare — purpose-built AI agents for ACOs, health systems, health plans, and FQHCs.',
+        publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
+        potentialAction:{'@type':'SearchAction',target:{'@type':'EntryPoint',urlTemplate:'https://www.zynix.ai/resources-glossary?q={search_term_string}'},'query-input':'required name=search_term_string'},
+        inLanguage:'en-US'
+      });
+      // SoftwareApplication for the platform — on homepage
+      schemas.push({
+        '@context':'https://schema.org','@type':'SoftwareApplication',
+        name:'Zynix AI Platform',
+        description:'Healthcare AI platform that deploys autonomous AI agents to close care gaps, reduce readmissions, and automate care coordination for value-based care organizations.',
+        applicationCategory:'HealthcareApplication',
+        applicationSubCategory:'Value-Based Care Software',
+        operatingSystem:'Web Browser',
+        offers:{'@type':'Offer',price:'0',priceCurrency:'USD',description:'Contact for enterprise pricing'},
+        publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
+        audience:{'@type':'Audience',audienceType:'Healthcare Organizations — ACOs, Health Systems, Health Plans, FQHCs, Independent Practices'},
+        featureList:['HIPAA Compliant','SOC 2 Type II Certified','Epic EHR Integration','athenahealth Integration','Real-time ADT Processing','AI Voice Agents','Care Gap Closure','TCM Automation','AWV Outreach'],
+        screenshot:IMG.hero,
+        url:'https://www.zynix.ai/platform'
+      });
     }
 
     // BreadcrumbList schema (all inner pages)
@@ -282,9 +326,7 @@
       var crumbs = [{'@type':'ListItem',position:1,name:'Home',item:'https://www.zynix.ai'}];
       var segments = pagePath.replace(/^\//,'').split('/').filter(function(s) { return s; });
       var topSegment = segments[0];
-      // For v7 slash-based URLs (e.g. /who-we-serve/health-systems, /agents/clinical-performance)
       var sectionMapV7 = {'who-we-serve':'Who We Serve','agents':'AI Agents','platform':'Platform','company':'Company','resources':'Resources','solutions':'Solutions','case-studies':'Case Studies','blog':'Blog'};
-      // For legacy dash-based URLs (e.g. /products-zynix-os)
       var legacySeg = pagePath.replace(/^\//,'').split('-');
       var sectionMapLegacy = {products:'Products',solutions:'Solutions',company:'Company',resources:'Resources'};
       if (sectionMapV7[topSegment] && segments.length > 1) {
@@ -300,16 +342,72 @@
     }
 
     if (seo.schema === 'Product') {
-      schemas.push({'@context':'https://schema.org','@type':'SoftwareApplication',name:seo.title.split('|')[0].trim(),description:seo.desc,applicationCategory:'HealthcareApplication',operatingSystem:'Web',offers:{'@type':'Offer',price:'0',priceCurrency:'USD',description:'Contact for pricing'},brand:{'@type':'Organization',name:'Zynix AI'}});
+      schemas.push({
+        '@context':'https://schema.org','@type':'SoftwareApplication',
+        name:seo.title.split('|')[0].trim(),
+        description:seo.desc,
+        applicationCategory:'HealthcareApplication',
+        applicationSubCategory:'Healthcare AI',
+        operatingSystem:'Web Browser',
+        browserRequirements:'Any modern browser',
+        featureList:['HIPAA Compliant','EHR Integration','AI-Powered Automation','Real-time Analytics','Care Coordination'],
+        offers:{'@type':'Offer',price:'0',priceCurrency:'USD',description:'Contact for enterprise pricing'},
+        brand:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
+        publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
+        audience:{'@type':'Audience',audienceType:'Healthcare Organizations'},
+        url:'https://www.zynix.ai' + pagePath
+      });
     }
     if (seo.schema === 'MedicalBusiness') {
-      schemas.push({'@context':'https://schema.org','@type':'MedicalBusiness',name:'Zynix AI',description:seo.desc,address:orgSchema.address,geo:{'@type':'GeoCoordinates',latitude:28.1856,longitude:-82.6800},areaServed:'United States',medicalSpecialty:'Value-Based Care',url:'https://www.zynix.ai'});
+      schemas.push({
+        '@context':'https://schema.org','@type':'MedicalBusiness',
+        name:'Zynix AI',
+        description:seo.desc,
+        telephone:'+1-727-261-1297',
+        email:'info@zynix.ai',
+        address:orgSchema.address,
+        geo:orgSchema.geo,
+        areaServed:'United States',
+        medicalSpecialty:'Value-Based Care',
+        url:'https://www.zynix.ai',
+        priceRange:'$$$$'
+      });
     }
     if (seo.schema === 'Article') {
-      schemas.push({'@context':'https://schema.org','@type':'Article',headline:seo.title.split('|')[0].trim(),description:seo.desc,image:seo.img||IMG.hero,author:{'@type':'Organization',name:'Zynix AI'},publisher:{'@type':'Organization',name:'Zynix AI',logo:{'@type':'ImageObject',url:IMG.logo}},datePublished:seo.datePublished||'2026-01-15',dateModified:seo.dateModified||'2026-01-15',mainEntityOfPage:'https://www.zynix.ai'+pagePath});
+      schemas.push({
+        '@context':'https://schema.org','@type':'Article',
+        headline:seo.title.split('|')[0].trim(),
+        description:seo.desc,
+        image:{'@type':'ImageObject',url:seo.img||IMG.hero,width:1200,height:630},
+        author:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
+        publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization',name:'Zynix AI',logo:{'@type':'ImageObject',url:IMG.logo}},
+        datePublished:seo.datePublished||'2026-01-15',
+        dateModified:seo.dateModified||seo.datePublished||'2026-03-01',
+        mainEntityOfPage:{'@type':'WebPage','@id':'https://www.zynix.ai'+pagePath},
+        speakable:{'@type':'SpeakableSpecification',cssSelector:['h1','h2','p:first-of-type']},
+        about:[{'@type':'Thing',name:'Healthcare AI'},{'@type':'Thing',name:'Value-Based Care'}],
+        keywords:seo.title.split('|')[0].trim() + ', healthcare AI, value-based care'
+      });
+    }
+    if (seo.schema === 'HowTo') {
+      schemas.push({
+        '@context':'https://schema.org','@type':'HowTo',
+        name:seo.title.split('|')[0].trim(),
+        description:seo.desc,
+        image:{'@type':'ImageObject',url:seo.img||IMG.hero,width:1200,height:630},
+        totalTime:'PT14D',
+        supply:[{'@type':'HowToSupply',name:'Zynix AI Platform'},{'@type':'HowToSupply',name:'EHR or Data Feed'}],
+        tool:[{'@type':'HowToTool',name:'AI Agents'},{'@type':'HowToTool',name:'Care Plan Templates'}],
+        step:[
+          {'@type':'HowToStep',position:1,name:'Connect your clinical data',text:'Integrate EHR, claims, ADT, and SDOH data into the Zynix Data Platform with 97%+ patient matching accuracy.',url:'https://www.zynix.ai/products-data-platform'},
+          {'@type':'HowToStep',position:2,name:'Configure AI agents and care plans',text:'Select from 12 purpose-built AI agents and deployable care plans for TCM, CCM, AWV, gap closure, and more.',url:'https://www.zynix.ai/agents'},
+          {'@type':'HowToStep',position:3,name:'Launch automated outreach',text:'Agents begin patient outreach, scheduling, triage, and documentation automatically — 24/7 across channels.',url:'https://www.zynix.ai/platform'},
+          {'@type':'HowToStep',position:4,name:'Monitor outcomes and optimize',text:'Track contact rates, gap closure, readmission rates, and revenue in real-time dashboards.',url:'https://www.zynix.ai/products-analytics'}
+        ]
+      });
     }
 
-    // FAQPage schema — detect FAQ items on ANY page, not just /faq
+    // FAQPage schema — from DOM elements OR hardcoded for /resources-faq
     var faqEls = document.querySelectorAll('.zynix-faq-item');
     var mainEntity = [];
     faqEls.forEach(function(f) {
@@ -317,7 +415,23 @@
       var a = f.querySelector('.zynix-faq-a');
       if (q && a) mainEntity.push({'@type':'Question',name:q.textContent.trim(),acceptedAnswer:{'@type':'Answer',text:a.textContent.trim()}});
     });
+    // Hardcoded FAQ for the FAQ page (ensures crawlers see schema even without JS execution)
+    if (!mainEntity.length && (pagePath === '/resources-faq' || pagePath === '/faq')) {
+      mainEntity = [
+        {'@type':'Question',name:'Is Zynix AI HIPAA compliant?',acceptedAnswer:{'@type':'Answer',text:'Yes. Zynix AI is fully HIPAA compliant and SOC 2 Type II certified. We sign Business Associate Agreements (BAAs) with all healthcare customers and maintain enterprise-grade security controls including encryption at rest and in transit, audit logging, and role-based access controls.'}},
+        {'@type':'Question',name:'How does Zynix AI integrate with Epic and other EHRs?',acceptedAnswer:{'@type':'Answer',text:'Zynix AI integrates natively with Epic, athenahealth, eClinicalWorks, Cerner/Oracle Health, and other major EHR systems via FHIR R4, HL7 v2, and direct ADT feeds. Most integrations go live in 2-4 weeks with our pre-built connectors.'}},
+        {'@type':'Question',name:'How long does it take to deploy Zynix AI?',acceptedAnswer:{'@type':'Answer',text:'Most organizations are live within 2-6 weeks. The Zynix Data Platform connects to your EHR in 2-4 weeks. AI agents can be activated within days of data connection. Full platform deployment typically takes 4-8 weeks depending on complexity.'}},
+        {'@type':'Question',name:'What types of healthcare organizations use Zynix AI?',acceptedAnswer:{'@type':'Answer',text:'Zynix AI serves ACOs and MSOs, health systems, federally qualified health centers (FQHCs), Medicare Advantage health plans, independent physician practices, and ambulatory surgery centers (ASCs). The platform is purpose-built for value-based care organizations.'}},
+        {'@type':'Question',name:'What results can I expect from Zynix AI?',acceptedAnswer:{'@type':'Answer',text:'Customers typically see: 85%+ TCM contact rates (vs 30-40% industry average), 40% improvement in care gap closure, 40% reduction in patient no-shows, 70% reduction in documentation time with ZynScribe, 60% reduction in prior auth turnaround with ZynAuth, and 20-30% reduction in avoidable ER visits with ZynAfterHours.'}},
+        {'@type':'Question',name:'What is the pricing for Zynix AI?',acceptedAnswer:{'@type':'Answer',text:'Zynix AI is priced on a per-member-per-month (PMPM) or per-patient basis depending on the product and organization type. Contact our team at info@zynix.ai or call +1-727-261-1297 to get a custom quote for your organization.'}}
+      ];
+    }
     if (mainEntity.length) schemas.push({'@context':'https://schema.org','@type':'FAQPage',mainEntity:mainEntity});
+
+    // Speakable spec for GEO — on key pages helps AI voice search and LLM citation
+    if (!pagePath || pagePath === '/' || seo.schema === 'Article' || seo.schema === 'HowTo') {
+      schemas.push({'@context':'https://schema.org','@type':'WebPage','@id':'https://www.zynix.ai'+(pagePath||'/'),speakable:{'@type':'SpeakableSpecification',cssSelector:['h1','.z-h1','.z-body','h2','[data-speakable]']},name:seo.title,description:seo.desc,url:'https://www.zynix.ai'+(pagePath||'/'),isPartOf:{'@id':'https://www.zynix.ai/#website'},about:{'@id':'https://www.zynix.ai/#organization'}});
+    }
 
     schemas.forEach(function(s) {
       var sc = document.createElement('script');

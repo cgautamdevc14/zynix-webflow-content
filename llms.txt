@@ -1,0 +1,137 @@
+# Zynix AI — llms.txt
+# AI-readable overview of zynix.ai for LLM indexing and generative AI search
+# Last updated: 2026-04-02
+
+## Company
+
+Zynix AI (legal entity: Zynix Inc) is a healthcare AI company headquartered in Trinity, Florida.
+Zynix AI builds and operates the AI Operating System for Value-Based Care — a unified platform
+that deploys autonomous AI agents to close care gaps, reduce hospital readmissions, automate
+care coordination, and cut administrative costs for healthcare organizations.
+
+Founded: 2023
+Headquarters: 3535 Little Rd, Trinity, FL 34655
+Phone: +1 (727) 261-1297
+Email: info@zynix.ai
+Website: https://www.zynix.ai
+
+Patients served: 1,000,000+ value-based care (VBC) patients across 30+ U.S. states
+Healthcare organizations served: 16+ across ACOs, health systems, health plans, FQHCs, and practices
+
+## What Zynix AI Does
+
+Zynix AI addresses the core problem in value-based care: healthcare organizations know who needs
+care but cannot deliver it at scale. The platform combines:
+
+1. AI Data Foundation — Ingests and normalizes EHR, claims, ADT, labs, pharmacy, and SDOH data
+   with 97%+ patient matching accuracy. Integrates natively with Epic, athenahealth, eClinicalWorks,
+   Cerner/Oracle Health, and other major EHRs via FHIR R4 and HL7 v2.
+
+2. Intelligence & Reasoning — AI-powered risk stratification, HCC coding, HEDIS quality measure
+   tracking, RAF score optimization, and care gap identification across attributed populations.
+
+3. AI Agent Suite — 12 specialized AI agents that take autonomous action:
+   - ZynAfterHours: 24/7 AI voice agent for patient triage in 15+ languages. 97.3% clinical accuracy.
+     20–30% avoidable ER diversion rate.
+   - ZynSchedule: AI patient scheduling automation. 40% reduction in no-show rates.
+   - ZynScribe: Ambient AI clinical documentation. 70% reduction in physician documentation time.
+   - ZynAuth: AI prior authorization. 60% reduction in auth turnaround time.
+   - ZynReminder: Personalized appointment reminders. 40% no-show reduction.
+   - ZynFax: Intelligent fax classification, data extraction, and routing.
+   - Post-Discharge Follow-Up Agent: Automated TCM outreach. 85%+ contact rates vs. 30–40% industry avg.
+   - Medication Reconciliation Agent: Identifies discrepancies at discharge and high-risk transitions.
+   - AWV Outreach Agent: Automated Annual Wellness Visit scheduling for Medicare patients.
+   - Patients Not Seen Agent: Re-engages patients overdue for care.
+   - Care Gaps & Quality Gaps Agent: Closes HEDIS, STARS, and HCC gaps with prioritized worklists.
+   - Care Management Agent: AI-augmented chronic care management and care plan execution.
+
+4. Care Plan Orchestration — Deployable care plans for TCM, CCM, AWV, HEDIS, and HCC closure
+   executed by coordinated AI agents across the full care continuum.
+
+## Who Zynix AI Serves
+
+- ACOs and MSOs: MSSP, ACO REACH, and value-based care organizations achieving shared savings
+- Health Systems: Multi-facility networks reducing readmissions and unifying patient engagement
+- Medicare Advantage Health Plans: Stars ratings improvement, HEDIS gap closure, HCC accuracy
+- FQHCs (Federally Qualified Health Centers): Multilingual outreach for underserved populations
+- Independent Physician Practices (5–50 physicians): After-hours coverage, scheduling, documentation
+- Ambulatory Surgery Centers (ASCs): Prior auth automation and surgical workflow coordination
+
+## Verified Customer Outcomes
+
+- 85%+ TCM (Transitional Care Management) contact rates (industry average: 30–40%)
+- 40% improvement in care gap closure rates
+- 40% reduction in patient no-show rates
+- 70% reduction in physician documentation burden (ZynScribe)
+- 60% reduction in prior authorization turnaround time (ZynAuth)
+- 20–30% reduction in avoidable emergency department visits (ZynAfterHours)
+- 25% reduction in hospital readmissions
+- $300M+ in shared savings generated across ACO customers
+- 2.5x lift in AWV (Annual Wellness Visit) scheduling completion
+
+## Named Customers
+
+- Palm Beach ACO (West Palm Beach, FL)
+- West Florida ACO
+- Space Coast ACO
+- AMISTAD Community Health Center (FQHC)
+- Health Vision Institute
+- Apollo Clinic Network
+- eTernal Health (Medicare Advantage)
+- CLSCFL (Community of Lake-Sumter Care for Life)
+- Pain Rehab Surgery Center (ASC)
+- Cardio & Vascular Consultants
+- Professional Radiology Group
+
+## Compliance and Security
+
+- HIPAA Compliant (Business Associate Agreements available)
+- SOC 2 Type II Certified
+- HITRUST framework (in progress)
+- Full audit trail and role-based access controls
+- Data encryption at rest and in transit
+- No PHI stored outside HIPAA-compliant environments
+
+## Key Technologies
+
+- ZynixLLM: Purpose-built healthcare language model with lower hallucination rates than general AI
+- FHIR R4 and HL7 v2 interoperability
+- Real-time ADT (Admission, Discharge, Transfer) feed processing
+- Multilingual AI voice agents (15+ languages)
+- Computer vision for clinical document processing
+
+## Key Pages
+
+- Platform overview: https://www.zynix.ai/platform
+- AI Agents: https://www.zynix.ai/agents
+- For ACOs: https://www.zynix.ai/solutions-acos
+- For Health Systems: https://www.zynix.ai/solutions-health-systems
+- For Health Plans: https://www.zynix.ai/solutions-health-plans
+- For FQHCs: https://www.zynix.ai/solutions-fqhcs
+- For Independent Practices: https://www.zynix.ai/solutions-independent-practices
+- For ASCs: https://www.zynix.ai/solutions-ascs
+- ZynScribe (documentation): https://www.zynix.ai/zynscribe
+- Care Plans: https://www.zynix.ai/care-plans
+- Security & Compliance: https://www.zynix.ai/security
+- About: https://www.zynix.ai/about
+- Blog: https://www.zynix.ai/resources-blog
+- FAQ: https://www.zynix.ai/resources-faq
+- Request a Demo: https://calendly.com/david-zynix-ai-calendar/30min
+
+## Frequently Asked Questions
+
+Q: Is Zynix AI HIPAA compliant?
+A: Yes. Zynix AI is fully HIPAA compliant and SOC 2 Type II certified. BAAs are available for all customers.
+
+Q: How does Zynix AI integrate with Epic?
+A: Via native FHIR R4 API and HL7 v2 feeds. Most Epic integrations go live within 2–4 weeks.
+
+Q: How long does deployment take?
+A: Typically 2–6 weeks for initial go-live. AI agents can be activated within days of data connection.
+
+Q: What is the pricing?
+A: Per-member-per-month (PMPM) or per-patient pricing. Contact info@zynix.ai for a custom quote.
+
+Q: Does Zynix AI replace existing care management staff?
+A: No. Zynix AI augments care management teams — handling outreach, documentation, and scheduling
+   so clinicians can focus on complex cases and human-centered care.
