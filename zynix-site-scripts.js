@@ -218,10 +218,11 @@
   };
 
   // ── SEO Injection ──
-  function injectSEO(pagePath) {
-    var seo = PAGE_SEO[pagePath];
+  // canonicalPath: optional override — use the 200-returning URL as canonical when pagePath is a redirect destination that 404s server-side
+  function injectSEO(pagePath, canonicalPath) {
+    var seo = PAGE_SEO[pagePath] || PAGE_SEO[canonicalPath];
     if (!seo) return;
-    var canonical = SITE_DOMAIN + (pagePath || '/');
+    var canonical = SITE_DOMAIN + (canonicalPath || pagePath || '/');
     document.title = seo.title;
     function setMeta(attr, val, content) {
       var el = document.querySelector('meta[' + attr + '="' + val + '"]');
@@ -3310,6 +3311,7 @@
 
   // ── PAGE ROUTER ──
   var path = window.location.pathname.replace(/\/$/, '').toLowerCase();
+  var originalPath = path; // Save pre-redirect path (used as canonical when destination 404s server-side)
 
   // Check redirects first — replaceState mimics 301 for SPA
   if (REDIRECTS[path]) {
@@ -6649,7 +6651,8 @@ function renderDataAnalyticsV7() {
 
   if (routes[path]) {
     var doInject = function() {
-      injectSEO(path);
+      // Pass originalPath as canonical override so redirected pages use their 200-returning URL as canonical
+      injectSEO(path, originalPath !== path ? originalPath : null);
       injectMegaMenu();
       // Build page content, inserting cross-links BEFORE CTA/Footer
       var pageContent = routes[path]();
