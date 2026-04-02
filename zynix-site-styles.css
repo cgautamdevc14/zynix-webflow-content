@@ -1336,3 +1336,21 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
     max-height: 70vh !important;
   }
 }
+
+/* ── SEO: H1 VISIBILITY FIX ──
+   The page-hiding CSS (body>section *, .z-hero *) hides H1 elements with
+   display:none!important before JS loads. This override ensures H1 tags
+   remain technically visible to crawlers (not display:none) while still
+   being visually hidden during load via position:absolute/clip.
+   JS restores full display immediately when it runs. ── */
+h1 {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
+  width: auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  white-space: nowrap !important;
+}
