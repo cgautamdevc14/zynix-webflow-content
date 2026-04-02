@@ -223,21 +223,6 @@
     if (schemaTypes.indexOf('MedicalBusiness') > -1) {
       schemas.push({'@context':'https://schema.org','@type':'MedicalBusiness',name:'Zynix AI',description:seo.desc,address:orgSchema.address,geo:{'@type':'GeoCoordinates',latitude:28.1856,longitude:-82.6800},areaServed:'United States',medicalSpecialty:'Value-Based Care',url:'https://www.zynix.ai'});
     }
-    // Auto-detect FAQ items on page (works for any page with .zynix-faq-item elements)
-    var faqEls = document.querySelectorAll('.zynix-faq-item');
-    if (faqEls.length) {
-      var mainEntity = [];
-      faqEls.forEach(function(f) {
-        var q = f.querySelector('.zynix-faq-q');
-        var a = f.querySelector('.zynix-faq-a');
-        if (q && a) {
-          var qText = (q.querySelector('span') || q).textContent.trim();
-          var aText = (a.querySelector('p') || a).textContent.trim();
-          if (qText && aText) mainEntity.push({'@type':'Question',name:qText,acceptedAnswer:{'@type':'Answer',text:aText}});
-        }
-      });
-      if (mainEntity.length) schemas.push({'@context':'https://schema.org','@type':'FAQPage',mainEntity:mainEntity});
-    }
     // BreadcrumbList schema for inner pages
     var pathParts = pagePath ? pagePath.replace(/^\//, '').split('-') : [];
     var sectionKey = pathParts[0];
@@ -2343,6 +2328,26 @@
       injectAfterNav(renderBreadcrumb(path) + pageContent);
       initAnimations();
       animateCounters();
+      // FAQ schema — must run after content is in DOM so .zynix-faq-item elements exist
+      (function() {
+        var faqEls = document.querySelectorAll('.zynix-faq-item');
+        if (!faqEls.length) return;
+        var mainEntity = [];
+        faqEls.forEach(function(f) {
+          var q = f.querySelector('.zynix-faq-q');
+          var a = f.querySelector('.zynix-faq-a');
+          if (q && a) {
+            var qText = (q.querySelector('span') || q).textContent.trim();
+            var aText = (a.querySelector('p') || a).textContent.trim();
+            if (qText && aText) mainEntity.push({'@type':'Question',name:qText,acceptedAnswer:{'@type':'Answer',text:aText}});
+          }
+        });
+        if (!mainEntity.length) return;
+        var sc = document.createElement('script');
+        sc.type = 'application/ld+json';
+        sc.textContent = JSON.stringify({'@context':'https://schema.org','@type':'FAQPage',mainEntity:mainEntity});
+        document.head.appendChild(sc);
+      })();
       // FAQ accordion toggle
       document.querySelectorAll('.zynix-faq-q').forEach(function(q) {
         q.addEventListener('click', function() {
