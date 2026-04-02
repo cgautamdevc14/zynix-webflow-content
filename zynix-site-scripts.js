@@ -239,12 +239,18 @@
     setMeta('property','og:description', seo.desc);
     setMeta('property','og:image', seo.img || IMG.hero);
     setMeta('property','og:url', canonical);
-    setMeta('property','og:type','website');
+    setMeta('property','og:type', seo.schema === 'Article' ? 'article' : 'website');
     setMeta('property','og:site_name','Zynix AI');
+    setMeta('property','og:locale','en_US');
     setMeta('name','twitter:card','summary_large_image');
+    setMeta('name','twitter:site','@zynixai_');
+    setMeta('name','twitter:creator','@zynixai_');
     setMeta('name','twitter:title', seo.title);
     setMeta('name','twitter:description', seo.desc);
     setMeta('name','twitter:image', seo.img || IMG.hero);
+    setMeta('name','twitter:image:alt', seo.title);
+    setMeta('name','author','Zynix AI');
+    setMeta('name','copyright','Zynix Inc');
     var link = document.querySelector('link[rel="canonical"]');
     if (!link) { link = document.createElement('link'); link.rel = 'canonical'; document.head.appendChild(link); }
     link.href = canonical;
@@ -385,8 +391,12 @@
         dateModified:seo.dateModified||seo.datePublished||'2026-03-01',
         mainEntityOfPage:{'@type':'WebPage','@id':'https://www.zynix.ai'+pagePath},
         speakable:{'@type':'SpeakableSpecification',cssSelector:['h1','h2','p:first-of-type']},
-        about:[{'@type':'Thing',name:'Healthcare AI'},{'@type':'Thing',name:'Value-Based Care'}],
-        keywords:seo.title.split('|')[0].trim() + ', healthcare AI, value-based care'
+        about:[{'@type':'Thing',name:'Healthcare AI'},{'@type':'Thing',name:'Value-Based Care'},{'@type':'Thing',name:'AI Agents for Healthcare'}],
+        isAccessibleForFree:true,
+        inLanguage:'en-US',
+        accessMode:['textual','visual'],
+        accessModeSufficient:[{'@type':'itemList',itemListElement:['textual']}],
+        keywords:seo.title.split('|')[0].trim() + ', healthcare AI, value-based care, AI agents, ACO'
       });
     }
     if (seo.schema === 'HowTo') {
@@ -428,9 +438,10 @@
     }
     if (mainEntity.length) schemas.push({'@context':'https://schema.org','@type':'FAQPage',mainEntity:mainEntity});
 
-    // Speakable spec for GEO — on key pages helps AI voice search and LLM citation
-    if (!pagePath || pagePath === '/' || seo.schema === 'Article' || seo.schema === 'HowTo') {
-      schemas.push({'@context':'https://schema.org','@type':'WebPage','@id':'https://www.zynix.ai'+(pagePath||'/'),speakable:{'@type':'SpeakableSpecification',cssSelector:['h1','.z-h1','.z-body','h2','[data-speakable]']},name:seo.title,description:seo.desc,url:'https://www.zynix.ai'+(pagePath||'/'),isPartOf:{'@id':'https://www.zynix.ai/#website'},about:{'@id':'https://www.zynix.ai/#organization'}});
+    // WebPage + Speakable spec for GEO — helps AI voice search and LLM citation on all pages
+    var noindexPage = seo.noindex;
+    if (!noindexPage) {
+      schemas.push({'@context':'https://schema.org','@type':'WebPage','@id':'https://www.zynix.ai'+(pagePath||'/'),speakable:{'@type':'SpeakableSpecification',cssSelector:['h1','.z-h1','.z-body','h2','[data-speakable]','[data-geo]','.hero-headline','.section-headline']},name:seo.title,description:seo.desc,url:'https://www.zynix.ai'+(pagePath||'/'),inLanguage:'en-US',isPartOf:{'@id':'https://www.zynix.ai/#website'},about:{'@id':'https://www.zynix.ai/#organization'},isAccessibleForFree:true,license:'https://www.zynix.ai/company-terms'});
     }
 
     schemas.forEach(function(s) {
