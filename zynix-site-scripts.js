@@ -145,7 +145,7 @@
     '/solutions-use-case-gap-closure': { title: 'HCC & Quality Gap Closure | AI-Prioritized Worklists', desc: 'Close HCC and quality gaps 40% faster with AI-prioritized worklists and automated outreach. Deployed across ACOs and health plans nationwide.', img: IMG.analytics, schema: ['Product','FAQPage'] },
     '/solutions-use-case-after-hours': { title: 'After-Hours Triage & Access | AI Call Handling', desc: '24/7 AI after-hours call handling with intelligent triage. 97.3% accuracy, 20-30% ER diversion rate. Serving practices and FQHCs nationwide.', img: IMG.doctor, schema: ['Product','FAQPage'] },
     '/solutions-use-case-prior-auth': { title: 'Prior Authorization Automation | AI Workflow', desc: 'Reduce prior auth turnaround by 60% with AI-powered submission, tracking, and approval workflows. Used by ASCs and health systems nationwide.', img: IMG.enterprise, schema: ['Product','FAQPage'] },
-    '/solutions-use-case-preventive-screening': { title: 'Preventive Screening Completion | AI Outreach', desc: 'Increase preventive screening completion with targeted outreach and scheduling. Deployed by FQHCs, ACOs, and health plans nationwide.', img: IMG.patients, schema: 'Product' },
+    '/solutions-use-case-preventive-screening': { title: 'Preventive Screening Completion | AI Outreach', desc: 'Increase preventive screening completion with targeted outreach and scheduling. Deployed by FQHCs, ACOs, and health plans nationwide.', img: IMG.patients, schema: ['Product','FAQPage'] },
     '/solutions-use-case-readmission-prevention': { title: 'Readmission Prevention | AI Post-Discharge Intervention', desc: 'Reduce hospital readmissions with AI-driven risk stratification and automated post-discharge intervention. 25% reduction in avoidable readmissions.', img: IMG.care, schema: ['Product','FAQPage'] },
     '/company-about': { title: 'About Zynix AI | Healthcare AI Built for America', desc: 'Purpose-built AI for value-based care. 1 million VBC patients onboarded. Headquartered in Trinity, FL. Serving ACOs, health systems, health plans, and FQHCs.', img: IMG.patients, schema: 'MedicalBusiness' },
     '/company-careers': { title: 'Careers at Zynix AI | Join the Healthcare AI Revolution', desc: 'Join the team building healthcare\u2019s AI operating system. Engineering, clinical, and operations roles in Trinity, FL and remote.', img: IMG.hero, schema: 'Organization' },
@@ -1939,22 +1939,36 @@
 
   function renderUseCasePreventiveScreening() {
     return renderUseCasePage('Preventive Screening Completion',
-      'Move preventive screening from order to completion, especially in populations with access barriers.',
+      'Move preventive screenings from overdue to completed \u2014 especially in populations with access, language, and logistics barriers. Zynix AI identifies the right patients, handles outreach, scheduling, prep support, and results follow-through.',
       [
-        { icon: '&#128269;', title: 'Overdue Screenings', desc: 'Patients avoid screenings due to anxiety, confusion, and scheduling friction.' },
-        { icon: '&#128683;', title: 'Prep Barriers', desc: 'Colonoscopy prep confusion, mammogram scheduling difficulty -logistics kill compliance.' },
-        { icon: '&#128268;', title: 'No Follow-Through', desc: 'Results come back but follow-up actions are not tracked to completion.' }
+        { icon: '&#128269;', title: 'Screenings Ordered But Not Done', desc: 'Patients avoid screenings due to anxiety, confusion, transportation barriers, and scheduling friction. Orders expire unused.' },
+        { icon: '&#128683;', title: 'Prep and Logistics Barriers', desc: 'Colonoscopy prep confusion, mammogram scheduling difficulty, and language barriers kill compliance before the appointment is even made.' },
+        { icon: '&#128268;', title: 'Results Without Follow-Through', desc: 'Abnormal results come back but follow-up actions are not tracked to completion \u2014 creating liability and missed care opportunities.' }
       ],
       [
-        { title: 'Identify overdue cohort', desc: 'ZynGap identifies patients overdue for colon, breast, cervical, and other screenings.', tag: 'ZynGap' },
-        { title: 'Outreach with education', desc: 'Simple explanation and scheduling options sent to patients.', tag: 'ZynReminder' },
-        { title: 'Schedule the screening', desc: 'Book the appointment based on patient availability and facility capacity.', tag: 'ZynSchedule' },
-        { title: 'Prep instructions', desc: 'Timed reminders with plain-language prep guidance.', tag: 'ZynReminder' },
-        { title: 'Results follow-through', desc: 'If results require follow-up, route to scheduling and clinical review.', tag: 'Analytics' }
+        { title: 'Identify overdue screening cohort', desc: 'ZynGap identifies patients overdue for colorectal, breast, cervical, lung, and other preventive screenings by age and risk criteria.', tag: 'ZynGap' },
+        { title: 'Outreach with plain-language education', desc: 'Personalized outreach explaining the screening, why it matters, and scheduling options in the patient\u2019s preferred language.', tag: 'ZynReminder' },
+        { title: 'Schedule the screening appointment', desc: 'Book the appointment based on patient availability, facility capacity, and transportation constraints.', tag: 'ZynSchedule' },
+        { title: 'Send timed prep instructions', desc: 'Plain-language prep guidance sent at the right time before the appointment \u2014 reducing no-shows from prep confusion.', tag: 'ZynReminder' },
+        { title: 'Track results to follow-through', desc: 'When results require action, route to scheduling and clinical review. Gap stays open until follow-up is confirmed completed.', tag: 'Analytics' }
       ],
-      ['Manual screening outreach', 'Generic reminder letters', 'No prep support', 'Results not tracked to completion'],
-      ['Screening completion rate', 'Time from identification to completion', 'Patient response rate', 'Follow-up action completion rate'],
-      'A patient avoids colon screening due to prep anxiety and scheduling confusion. The care plan provides plain-language guidance, sets a concrete appointment during a time that works, sends timed reminders including prep instructions, and ensures results follow-through when findings require action.'
+      ['Manual screening outreach with low response rates', 'Generic reminder letters that patients ignore', 'No prep support for complex screenings', 'Abnormal results without tracked follow-up'],
+      ['Preventive screening completion rate', 'Time from identification to completed screening', 'Patient outreach response rate', 'No-show rate for screening appointments', 'Abnormal result follow-up completion rate', 'HEDIS measure performance (colorectal, breast, cervical)'],
+      'A patient avoids colon screening for three years due to prep anxiety and scheduling confusion. The care plan provides plain-language prep guidance, sets a concrete appointment during an evening slot, sends timed reminders with prep instructions, and when the result returns with a polyp finding, schedules the surveillance colonoscopy and confirms it was completed.',
+      {
+        steps: 'How Zynix AI Drives Preventive Screening Completion',
+        replaces: 'Manual Screening Approaches Zynix Replaces',
+        kpis: 'Preventive Screening KPIs That Drive Quality Scores',
+        story: 'Screening Scenario: Colorectal Screening Completion',
+        faq: 'Preventive Screening FAQs'
+      },
+      [
+        { q: 'Which preventive screenings are measured by HEDIS?', a: 'Key HEDIS screening measures include Colorectal Cancer Screening (COL-E), Breast Cancer Screening (BCS-E), Cervical Cancer Screening (CCS), Chlamydia Screening (CHL), and Lead Screening in Children (LSC). These measures directly affect Stars ratings for Medicare Advantage plans and quality bonuses for ACOs and FQHCs.' },
+        { q: 'Why do patients skip preventive screenings even when ordered?', a: 'The top barriers are: scheduling friction (hard to book, limited hours), prep anxiety and confusion (especially for colonoscopy), transportation barriers, language barriers in non-English speaking populations, fear of findings, and not understanding why the screening matters. Zynix\u2019s outreach addresses each of these systematically.' },
+        { q: 'How does AI increase colonoscopy screening completion rates?', a: 'AI improves colonoscopy completion by identifying overdue patients from EHR data, personalizing outreach with anxiety-reducing messaging, providing timed plain-language prep instructions (not just a PDF to download), proactively rescheduling when patients miss appointments, and tracking completion in the gap closure system rather than leaving it to manual chart review.' },
+        { q: 'What happens when a screening result is abnormal?', a: 'Zynix keeps the gap open until follow-up is complete. When an abnormal result returns (abnormal mammogram, positive FOBT, abnormal Pap), the system routes a scheduling task to book the appropriate follow-up (biopsy, diagnostic colonoscopy, colposcopy), sends the patient scheduling options, and confirms the follow-up appointment was completed.' },
+        { q: 'How does screening completion affect FQHC quality payments?', a: 'FQHCs are evaluated on UDS quality measures that include preventive screening rates. Higher completion rates improve UDS reporting, support PCMH recognition, and affect value-based payment arrangements. Zynix is specifically designed for the multilingual patient populations and access barriers common in FQHC settings.' }
+      ]
     );
   }
 
