@@ -128,20 +128,20 @@
     '/products-zynscribe': { title: 'ZynScribe | AI Clinical Documentation', desc: 'Ambient AI documentation that captures structured clinical notes in real-time. Reduce documentation burden by 70%. Serving physicians across health systems nationwide.', img: IMG.scribe, schema: 'Product' },
     '/products-care-plans': { title: 'Zynix Care Plans | Orchestrated AI Workflows', desc: 'Deployable care plans for TCM, CCM, AWV, HEDIS, and HCC closure -executed by AI agents. 85%+ TCM contact rates. Deployed by ACOs nationwide.', img: IMG.care, schema: 'Product' },
     '/company-zynixllm': { title: 'ZynixLLM | Purpose-Built Healthcare Language Model', desc: 'Healthcare-native language model powering the Zynix platform. Lower hallucination rates than general-purpose models. Gets smarter with every patient interaction.', img: IMG.mesh, schema: 'Product' },
-    '/products-ai-agents-zynafterhours': { title: 'ZynAfterHours | 24/7 AI Triage & After-Hours Call Agent', desc: 'AI-powered patient triage handling inbound calls 24/7 in 15+ languages. 97.3% triage accuracy, 20-30% ER diversion. Trusted by healthcare organizations across 30 states.', img: IMG.doctor, schema: 'Product' },
-    '/products-ai-agents-zynschedule': { title: 'ZynSchedule | AI Appointment Scheduling Agent', desc: 'Always-on scheduling that captures every slot, reduces no-shows, and books appointments 24/7. Deployed across practices and ACOs nationwide.', img: IMG.patient, schema: 'Product' },
+    '/products-ai-agents-zynafterhours': { title: 'ZynAfterHours | 24/7 AI Triage & After-Hours Call Agent', desc: 'AI-powered patient triage handling inbound calls 24/7 in 15+ languages. 97.3% triage accuracy, 20-30% ER diversion. Trusted by healthcare organizations across 30 states.', img: IMG.doctor, schema: ['Product','FAQPage'] },
+    '/products-ai-agents-zynschedule': { title: 'ZynSchedule | AI Appointment Scheduling Agent', desc: 'Always-on scheduling that captures every slot, reduces no-shows, and books appointments 24/7. Deployed across practices and ACOs nationwide.', img: IMG.patient, schema: ['Product','FAQPage'] },
     '/products-ai-agents-post-discharge': { title: 'Post-Discharge Follow-Up Agent | Zynix AI', desc: 'Automated post-discharge outreach for TCM workflows. 85%+ contact rates vs. 30-40% industry average. Used by ACOs and health systems nationwide.', img: IMG.care, schema: 'Product' },
     '/products-ai-agents-med-rec': { title: 'Medication Reconciliation Agent | Zynix AI', desc: 'AI-powered medication reconciliation for discharge and high-risk transitions. Identify discrepancies, capture confirmations, route issues for follow-up.', img: IMG.care, schema: 'Product' },
     '/products-ai-agents-zynreminder': { title: 'ZynReminder | AI Appointment Reminder Agent', desc: 'Reduce no-shows by 40% with personalized reminders and patient confirmation workflows. Serving practices and community health centers nationwide.', img: IMG.patient, schema: 'Product' },
     '/products-ai-agents-zynfax': { title: 'ZynFax | AI Fax Processing Agent', desc: 'Intelligent fax classification, data extraction, and routing for healthcare. Eliminate manual fax processing. Deployed by health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
-    '/products-ai-agents-zynauth': { title: 'ZynAuth | AI Prior Authorization Agent', desc: 'Streamline prior auth with AI-powered submission, tracking, and follow-up. Reduce auth turnaround by 60%. Used by ASCs and health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
+    '/products-ai-agents-zynauth': { title: 'ZynAuth | AI Prior Authorization Agent', desc: 'Streamline prior auth with AI-powered submission, tracking, and follow-up. Reduce auth turnaround by 60%. Used by ASCs and health systems nationwide.', img: IMG.enterprise, schema: ['Product','FAQPage'] },
     '/solutions-acos': { title: 'Zynix for ACOs & MSOs | Hit Shared Savings with AI', desc: 'Maximize AWV completion, achieve 85% TCM contact rates, and close HCC gaps. Trusted by Palm Beach ACO, West Florida ACO, Space Coast ACO, and 7+ ACOs nationwide.', img: IMG.care, schema: 'Product' },
     '/solutions-health-systems': { title: 'Zynix for Health Systems | Reduce Readmissions with AI', desc: 'Unified patient engagement, post-discharge coordination, and documentation at scale. Serving Health Vision Institute, CLSCFL, and health networks nationwide.', img: IMG.enterprise, schema: 'Product' },
     '/solutions-health-plans': { title: 'Zynix for Health Plans | Improve Stars & Close Gaps', desc: 'Stars ratings improvement, HCC gap closure, member engagement at scale. Trusted by eTernal Health and value-based payers nationwide.', img: IMG.analytics, schema: 'Product' },
     '/solutions-fqhcs': { title: 'Zynix for FQHCs | Multilingual AI for Community Health', desc: 'Multilingual AI for underserved populations, quality payments maximization, care management at scale. Serving AMISTAD CHC and community health centers nationwide.', img: IMG.patients, schema: 'Product' },
     '/solutions-independent-practices': { title: 'Zynix for Independent Practices | Reduce No-Shows & Burnout', desc: 'After-hours coverage, appointment scheduling, no-show reduction, documentation savings. Serving Cardio & Vascular Consultants, Professional Radiology Group, and practices nationwide.', img: IMG.doctor, schema: 'Product' },
     '/solutions-ascs': { title: 'Zynix for ASCs | Prior Auth & Patient Coordination', desc: 'Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination. Serving Pain Rehab Surgery Center and ASCs nationwide.', img: IMG.enterprise, schema: 'Product' },
-    '/solutions-use-case-tcm': { title: 'Transitional Care Management (TCM) | AI-Powered Workflow', desc: 'Automate the 30-day post-discharge TCM workflow. 85%+ contact rates vs. 30-40% industry average. Deployed by ACOs and health systems nationwide.', img: IMG.care, schema: 'Product' },
+    '/solutions-use-case-tcm': { title: 'Transitional Care Management (TCM) | AI-Powered Workflow', desc: 'Automate the 30-day post-discharge TCM workflow. 85%+ contact rates vs. 30-40% industry average. Deployed by ACOs and health systems nationwide.', img: IMG.care, schema: ['Product','FAQPage'] },
     '/solutions-use-case-gap-closure': { title: 'HCC & Quality Gap Closure | AI-Prioritized Worklists', desc: 'Close HCC and quality gaps 40% faster with AI-prioritized worklists and automated outreach. Deployed across ACOs and health plans nationwide.', img: IMG.analytics, schema: 'Product' },
     '/solutions-use-case-after-hours': { title: 'After-Hours Triage & Access | AI Call Handling', desc: '24/7 AI after-hours call handling with intelligent triage. 97.3% accuracy, 20-30% ER diversion rate. Serving practices and FQHCs nationwide.', img: IMG.doctor, schema: 'Product' },
     '/solutions-use-case-prior-auth': { title: 'Prior Authorization Automation | AI Workflow', desc: 'Reduce prior auth turnaround by 60% with AI-powered submission, tracking, and approval workflows. Used by ASCs and health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
@@ -216,21 +216,39 @@
       sameAs:['https://www.linkedin.com/company/zynix-ai']
     };
     var schemas = [orgSchema];
-    if (seo.schema === 'Product') {
+    var schemaTypes = Array.isArray(seo.schema) ? seo.schema : [seo.schema];
+    if (schemaTypes.indexOf('Product') > -1) {
       schemas.push({'@context':'https://schema.org','@type':'SoftwareApplication',name:seo.title.split('|')[0].trim(),description:seo.desc,applicationCategory:'HealthcareApplication',operatingSystem:'Web',offers:{'@type':'Offer',price:'0',priceCurrency:'USD',description:'Contact for pricing'},brand:{'@type':'Organization',name:'Zynix AI'}});
     }
-    if (seo.schema === 'MedicalBusiness') {
+    if (schemaTypes.indexOf('MedicalBusiness') > -1) {
       schemas.push({'@context':'https://schema.org','@type':'MedicalBusiness',name:'Zynix AI',description:seo.desc,address:orgSchema.address,geo:{'@type':'GeoCoordinates',latitude:28.1856,longitude:-82.6800},areaServed:'United States',medicalSpecialty:'Value-Based Care',url:'https://www.zynix.ai'});
     }
-    if (seo.schema === 'FAQPage') {
-      var faqEls = document.querySelectorAll('.zynix-faq-item');
+    // Auto-detect FAQ items on page (works for any page with .zynix-faq-item elements)
+    var faqEls = document.querySelectorAll('.zynix-faq-item');
+    if (faqEls.length) {
       var mainEntity = [];
       faqEls.forEach(function(f) {
         var q = f.querySelector('.zynix-faq-q');
         var a = f.querySelector('.zynix-faq-a');
-        if (q && a) mainEntity.push({'@type':'Question',name:q.textContent,acceptedAnswer:{'@type':'Answer',text:a.textContent}});
+        if (q && a) {
+          var qText = (q.querySelector('span') || q).textContent.trim();
+          var aText = (a.querySelector('p') || a).textContent.trim();
+          if (qText && aText) mainEntity.push({'@type':'Question',name:qText,acceptedAnswer:{'@type':'Answer',text:aText}});
+        }
       });
       if (mainEntity.length) schemas.push({'@context':'https://schema.org','@type':'FAQPage',mainEntity:mainEntity});
+    }
+    // BreadcrumbList schema for inner pages
+    var pathParts = pagePath ? pagePath.replace(/^\//, '').split('-') : [];
+    var sectionKey = pathParts[0];
+    var sectionLabels = { products: 'Products', solutions: 'Solutions', company: 'Company', resources: 'Resources', contact: 'Contact' };
+    if (sectionLabels[sectionKey] && pagePath !== '/') {
+      var pageName = (LINK_NAMES[pagePath] || seo.title.split('|')[0]).trim();
+      schemas.push({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[
+        {'@type':'ListItem',position:1,name:'Home',item:'https://www.zynix.ai'},
+        {'@type':'ListItem',position:2,name:sectionLabels[sectionKey],item:'https://www.zynix.ai/' + sectionKey},
+        {'@type':'ListItem',position:3,name:pageName,item:'https://www.zynix.ai' + pagePath}
+      ]});
     }
     schemas.forEach(function(s) {
       var sc = document.createElement('script');
@@ -1536,8 +1554,8 @@
         '<div class="zynix-faq-list" style="max-width:720px;margin:0 auto">';
       faq.forEach(function(item) {
         html += '<div class="zynix-faq-item" style="border-bottom:1px solid rgba(255,255,255,0.08);padding:20px 0">' +
-          '<h3 style="font-size:17px;font-weight:600;color:#e8eaf0;margin:0 0 8px">' + item.q + '</h3>' +
-          '<p style="font-size:15px;color:#94a3b8;margin:0;line-height:1.7">' + item.a + '</p>' +
+          '<div class="zynix-faq-q" style="cursor:default"><span style="font-size:17px;font-weight:600;color:#e8eaf0">' + item.q + '</span></div>' +
+          '<div class="zynix-faq-a"><p style="font-size:15px;color:#94a3b8;margin:8px 0 0;line-height:1.7">' + item.a + '</p></div>' +
           '</div>';
       });
       html += '</div></div></section>';
