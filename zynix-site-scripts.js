@@ -143,10 +143,10 @@
     '/solutions-ascs': { title: 'Zynix for ASCs | Prior Auth & Patient Coordination', desc: 'Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination. Serving Pain Rehab Surgery Center and ASCs nationwide.', img: IMG.enterprise, schema: 'Product' },
     '/solutions-use-case-tcm': { title: 'Transitional Care Management (TCM) | AI-Powered Workflow', desc: 'Automate the 30-day post-discharge TCM workflow. 85%+ contact rates vs. 30-40% industry average. Deployed by ACOs and health systems nationwide.', img: IMG.care, schema: ['Product','FAQPage'] },
     '/solutions-use-case-gap-closure': { title: 'HCC & Quality Gap Closure | AI-Prioritized Worklists', desc: 'Close HCC and quality gaps 40% faster with AI-prioritized worklists and automated outreach. Deployed across ACOs and health plans nationwide.', img: IMG.analytics, schema: ['Product','FAQPage'] },
-    '/solutions-use-case-after-hours': { title: 'After-Hours Triage & Access | AI Call Handling', desc: '24/7 AI after-hours call handling with intelligent triage. 97.3% accuracy, 20-30% ER diversion rate. Serving practices and FQHCs nationwide.', img: IMG.doctor, schema: 'Product' },
+    '/solutions-use-case-after-hours': { title: 'After-Hours Triage & Access | AI Call Handling', desc: '24/7 AI after-hours call handling with intelligent triage. 97.3% accuracy, 20-30% ER diversion rate. Serving practices and FQHCs nationwide.', img: IMG.doctor, schema: ['Product','FAQPage'] },
     '/solutions-use-case-prior-auth': { title: 'Prior Authorization Automation | AI Workflow', desc: 'Reduce prior auth turnaround by 60% with AI-powered submission, tracking, and approval workflows. Used by ASCs and health systems nationwide.', img: IMG.enterprise, schema: ['Product','FAQPage'] },
     '/solutions-use-case-preventive-screening': { title: 'Preventive Screening Completion | AI Outreach', desc: 'Increase preventive screening completion with targeted outreach and scheduling. Deployed by FQHCs, ACOs, and health plans nationwide.', img: IMG.patients, schema: 'Product' },
-    '/solutions-use-case-readmission-prevention': { title: 'Readmission Prevention | AI Post-Discharge Intervention', desc: 'Reduce hospital readmissions with AI-driven risk stratification and automated post-discharge intervention. 25% reduction in avoidable readmissions.', img: IMG.care, schema: 'Product' },
+    '/solutions-use-case-readmission-prevention': { title: 'Readmission Prevention | AI Post-Discharge Intervention', desc: 'Reduce hospital readmissions with AI-driven risk stratification and automated post-discharge intervention. 25% reduction in avoidable readmissions.', img: IMG.care, schema: ['Product','FAQPage'] },
     '/company-about': { title: 'About Zynix AI | Healthcare AI Built for America', desc: 'Purpose-built AI for value-based care. 1 million VBC patients onboarded. Headquartered in Trinity, FL. Serving ACOs, health systems, health plans, and FQHCs.', img: IMG.patients, schema: 'MedicalBusiness' },
     '/company-careers': { title: 'Careers at Zynix AI | Join the Healthcare AI Revolution', desc: 'Join the team building healthcare\u2019s AI operating system. Engineering, clinical, and operations roles in Trinity, FL and remote.', img: IMG.hero, schema: 'Organization' },
     '/company-press': { title: 'Press & News | Zynix AI', desc: 'Latest news, press releases, and media coverage about Zynix AI -the operating system for value-based healthcare.', img: IMG.hero, schema: 'Organization' },
@@ -1869,22 +1869,36 @@
 
   function renderUseCaseAfterHours() {
     return renderUseCasePage('After-Hours & Access Optimization',
-      'Reduce after-hours bottlenecks and ensure inbound requests become completed next steps.',
+      'Ensure every after-hours patient call results in a completed next step \u2014 not a voicemail. Zynix AI triages symptoms, routes urgent cases, and books appointments 24/7 without nurse staffing.',
       [
-        { icon: '&#127769;', title: 'After-Hours Black Hole', desc: 'Calls go to voicemail. Patients get frustrated. They go to the ER or delay care.' },
-        { icon: '&#128683;', title: 'Loose Ends', desc: 'Messages taken but never routed. Callbacks happen too late. No tracking to completion.' },
-        { icon: '&#128101;', title: 'Staffing Constraints', desc: 'Cannot afford 24/7 nurse staffing. Current answering services just take messages.' }
+        { icon: '&#127769;', title: 'After-Hours Black Hole', desc: 'Calls go to voicemail. Patients get frustrated, go to the ER, or delay care until it becomes an acute episode.' },
+        { icon: '&#128683;', title: 'Loose Ends at Every Handoff', desc: 'Messages taken but never routed. Callbacks happen too late or not at all. No tracking to completion.' },
+        { icon: '&#128101;', title: 'Staffing Constraints', desc: 'Cannot afford 24/7 nurse staffing. Current answering services just take messages \u2014 they don\u2019t resolve anything.' }
       ],
       [
-        { title: 'Intake after-hours call', desc: 'Gather symptoms and context from the caller.', tag: 'ZynAfterHours' },
-        { title: 'Route by governance', desc: 'Urgent escalation vs. next-day appointment vs. self-care guidance.', tag: 'Triage Protocol' },
-        { title: 'Schedule immediately', desc: 'If appointment needed, book immediately or queue first-available.', tag: 'ZynSchedule' },
-        { title: 'Confirm and remind', desc: 'Patient receives confirmation and appointment reminders.', tag: 'ZynReminder' },
-        { title: 'Track completion', desc: 'Appointment kept or rescheduled. Escalation completed.', tag: 'Analytics' }
+        { title: 'Intake and triage the after-hours call', desc: 'Gather symptoms and clinical context. Apply evidence-based triage protocols (Schmitt-Thompson). Assess urgency level 1-5.', tag: 'ZynAfterHours' },
+        { title: 'Route by clinical governance', desc: 'Urgent cases escalate to on-call clinician. Moderate cases get next-day appointments. Low-acuity cases receive self-care guidance.', tag: 'Triage Protocol' },
+        { title: 'Schedule immediately when needed', desc: 'If appointment needed, book immediately into the next-available slot or queue for first-available morning opening.', tag: 'ZynSchedule' },
+        { title: 'Confirm and remind patient', desc: 'Patient receives appointment confirmation and pre-visit reminders via preferred channel.', tag: 'ZynReminder' },
+        { title: 'Track escalation to completion', desc: 'Appointment kept or rescheduled. On-call escalation resolved. Every case has a documented outcome.', tag: 'Analytics' }
       ],
-      ['Voicemail-based after-hours', 'Answering services that only take messages', 'Next-day callback delays', 'No completion tracking'],
-      ['After-hours call resolution rate', 'Time to first response', 'ER diversion rate', 'Appointment completion rate', 'Patient satisfaction score'],
-      'A parent calls about a child\u2019s fever and rash at 11 PM. The care plan captures red flag status, escalates to the on-call clinician when the rash is concerning, or schedules a next-day visit and sends confirmations. The case does not disappear into a voicemail box.'
+      ['Voicemail-based after-hours coverage', 'Answering services that only take messages', 'Next-day callback delays with no tracking', 'No ER diversion pathway'],
+      ['After-hours call resolution rate', 'Time to first response', 'ER diversion rate', '30-day readmission rate from after-hours cases', 'Appointment completion rate', 'Patient satisfaction score'],
+      'A parent calls about a child\u2019s fever and rash at 11 PM. The care plan captures red flag status, escalates to the on-call clinician when the rash is concerning, or schedules a next-day visit and sends confirmations. The case is documented and resolved \u2014 it does not disappear into a voicemail box.',
+      {
+        steps: 'How Zynix AI Handles After-Hours Calls End-to-End',
+        replaces: 'After-Hours Gaps Zynix Eliminates',
+        kpis: 'After-Hours Access KPIs to Track',
+        story: 'After-Hours Scenario: 11 PM Pediatric Call',
+        faq: 'After-Hours Patient Access FAQs'
+      },
+      [
+        { q: 'What is after-hours triage in healthcare?', a: 'After-hours triage is the process of assessing patient symptoms and routing calls to the appropriate care level outside of normal business hours \u2014 urgent escalation, next-day appointment, or self-care guidance. Done well, it reduces avoidable ER visits and ensures patients receive timely guidance without requiring 24/7 nurse staffing.' },
+        { q: 'How much does an avoidable ER visit cost?', a: 'The average emergency department visit costs $1,500-$3,000 out-of-pocket and $15,000+ in total healthcare system cost. For ACOs and health systems responsible for total cost of care, ER diversion through after-hours triage directly improves quality metrics and reduces shared savings risk.' },
+        { q: 'Can AI triage replace nurse triage lines?', a: 'AI can handle 70-80% of routine after-hours inquiries (appointment requests, minor symptom questions, medication questions, refill needs) \u2014 freeing nurses for complex clinical decisions. Zynix\u2019s ZynAfterHours uses evidence-based protocols and achieves 97.3% triage accuracy validated against clinical review, with immediate escalation to human staff for high-acuity cases.' },
+        { q: 'What happens in a real emergency?', a: 'Zynix recognizes emergency keywords and high-acuity symptom patterns immediately and escalates to 911 instruction or live clinical staff within seconds \u2014 never after a lengthy triage flow. Red flag detection is the first step in every call.' },
+        { q: 'How do after-hours workflows integrate with EHR scheduling?', a: 'Zynix integrates with Epic, athenahealth, Cerner, and eClinicalWorks to book directly into the EHR schedule during after-hours calls. Every interaction is documented and uploaded to the patient chart, with structured encounter notes ready for the next-day provider.' }
+      ]
     );
   }
 
@@ -1946,22 +1960,36 @@
 
   function renderUseCaseReadmission() {
     return renderUseCasePage('Readmission Prevention',
-      'Reduce repeat ED utilization by creating reliable pathways for rapid access and barrier resolution.',
+      'Reduce hospital readmissions and repeat ED utilization by creating reliable post-discharge pathways. Zynix AI identifies high-risk patients, addresses root causes, and ensures every follow-up is completed.',
       [
-        { icon: '&#127973;', title: 'Repeat ED Visits', desc: 'High-utilizer patients cycle through the ED because they lack reliable access to primary care.' },
-        { icon: '&#128138;', title: 'Medication Barriers', desc: 'Cost, access, and confusion drive non-adherence that leads to acute episodes.' },
-        { icon: '&#128268;', title: 'Fragmented Follow-Up', desc: 'Post-discharge plans fall apart when patients can\u2019t navigate the system.' }
+        { icon: '&#127973;', title: 'Repeat ED Visits', desc: 'High-utilizer patients cycle through the ED because they lack reliable access to primary care and have unresolved medication or social barriers.' },
+        { icon: '&#128138;', title: 'Medication Non-Adherence', desc: 'Cost, access, and confusion drive non-adherence that leads to acute episodes \u2014 discovered only at the next ED visit.' },
+        { icon: '&#128268;', title: 'Fragmented Follow-Up', desc: 'Post-discharge plans fall apart when patients can\u2019t navigate the system. No one owns completion.' }
       ],
       [
-        { title: 'Identify high-utilizer cohort', desc: 'ZynPredict flags patients with repeated ED visits or utilization risk signals.', tag: 'ZynPredict' },
-        { title: 'Understand real drivers', desc: 'Outreach to discover symptoms, meds, and access barriers.', tag: 'Post-Discharge Agent' },
-        { title: 'Schedule rapid follow-up', desc: 'Book timely follow-up appointment with appropriate provider.', tag: 'ZynSchedule' },
-        { title: 'Address medication barriers', desc: 'Identify cost, access, and adherence issues. Route for resolution.', tag: 'Med Rec Agent' },
-        { title: 'Establish after-hours pathway', desc: 'Educate patient on when and how to reach after-hours care.', tag: 'ZynAfterHours' }
+        { title: 'Identify high-risk patients before readmission', desc: 'ZynPredict flags patients with repeated ED visits or readmission risk signals using clinical, claims, and SDOH data.', tag: 'ZynPredict' },
+        { title: 'Understand the real drivers via outreach', desc: 'Structured outreach to discover symptoms, medication barriers, social barriers, and access gaps \u2014 before the next acute episode.', tag: 'Post-Discharge Agent' },
+        { title: 'Schedule rapid follow-up with the right provider', desc: 'Book timely follow-up appointment with appropriate provider based on acuity and urgency.', tag: 'ZynSchedule' },
+        { title: 'Address medication and access barriers', desc: 'Identify cost, access, and adherence issues. Route for pharmacist review, medication assistance programs, or telehealth.', tag: 'Med Rec Agent' },
+        { title: 'Establish after-hours access pathway', desc: 'Educate patient on when and how to reach after-hours care so the ED is a last resort, not the default.', tag: 'ZynAfterHours' }
       ],
-      ['Reactive post-ED outreach', 'No root cause investigation', 'Fragmented care team communication', 'No completion tracking'],
-      ['30-day readmission rate', 'ED utilization frequency', 'Follow-up completion rate', 'Medication adherence improvement', 'Patient-reported access satisfaction'],
-      'A patient repeatedly goes to the ED for COPD flares. Outreach reveals they stopped inhalers due to cost and can\u2019t get timely clinic visits. The care plan routes medication assistance review, schedules a follow-up, sets reminders, and ensures the patient knows how to reach the after-hours line instead of the ED.'
+      ['Reactive outreach only after readmission occurs', 'No root cause investigation for repeat utilizers', 'Fragmented care team communication post-discharge', 'No tracking of follow-up completion'],
+      ['30-day readmission rate', 'ED utilization frequency per patient', 'Follow-up visit completion rate within 7 days', 'Medication adherence rate', 'Time from discharge to first outreach contact', 'Patient-reported access satisfaction'],
+      'A patient repeatedly goes to the ED for COPD flares. Outreach reveals they stopped inhalers due to cost and can\u2019t get timely clinic visits. The care plan routes medication assistance review, schedules a follow-up, sets reminders, and ensures the patient knows how to reach the after-hours line. The next ED visit doesn\u2019t happen.',
+      {
+        steps: 'How Zynix AI Prevents Hospital Readmissions',
+        replaces: 'Reactive Readmission Approaches Zynix Replaces',
+        kpis: 'Readmission Prevention KPIs for ACOs and Health Systems',
+        story: 'Readmission Scenario: COPD High-Utilizer',
+        faq: 'Hospital Readmission Prevention FAQs'
+      },
+      [
+        { q: 'What is the CMS 30-day readmission penalty?', a: 'The Hospital Readmissions Reduction Program (HRRP) penalizes hospitals up to 3% of Medicare base operating DRG payments for excess readmissions in six conditions: AMI, heart failure, pneumonia, COPD, hip/knee arthroplasty, and CABG. For ACOs under MSSP and ACO REACH, readmissions also directly reduce shared savings.' },
+        { q: 'What are the most common causes of 30-day readmissions?', a: 'The most common root causes are medication non-adherence (40% of post-discharge adverse events), inadequate follow-up within 7 days, unresolved social determinants of health (transportation, food insecurity, housing instability), and patients lacking a reliable after-hours care pathway that keeps them out of the ED.' },
+        { q: 'How does AI reduce hospital readmission rates?', a: 'AI reduces readmissions by identifying high-risk patients immediately after discharge, automating 24-48 hour post-discharge contact to detect early warning signs, resolving medication barriers before they cause acute episodes, ensuring follow-up visits are scheduled and completed, and providing patients with an after-hours care pathway as an ED alternative.' },
+        { q: 'What readmission rate reduction can we expect?', a: 'Healthcare organizations using systematic post-discharge outreach programs typically see 20-30% reductions in 30-day readmission rates. The improvement scales with contact rate and speed \u2014 organizations achieving 85%+ contact within 48 hours see the largest reductions.' },
+        { q: 'How does readmission prevention work for ACOs?', a: 'For ACOs under MSSP and ACO REACH, every avoided readmission reduces total cost of care and improves shared savings performance. Readmission prevention also affects quality measure scores (CAHPS, utilization metrics) that determine bonus eligibility. Zynix connects readmission prevention directly to shared savings attribution and reporting.' }
+      ]
     );
   }
 
