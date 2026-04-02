@@ -3286,7 +3286,7 @@
     '/blog': '/resources/blog',
     '/resources-blog': '/resources/blog',
     '/resources-blog-1m-patients': '/resources/blog/1m-patients',
-    '/resources-case-studies': '/case-studies',
+    // '/resources-case-studies': '/case-studies', // kept at /resources-case-studies (Webflow page)
     '/resources-glossary': '/resources/glossary',
     '/resources-webinars': '/resources/webinars',
     '/resources-whitepapers': '/resources/whitepapers',
