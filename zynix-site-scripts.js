@@ -120,7 +120,7 @@
   // ── SEO Data ──
   var SITE_DOMAIN = (window.location.hostname.indexOf('zynix.ai') > -1) ? 'https://www.zynix.ai' : window.location.origin;
   var PAGE_SEO = {
-    '': { title: 'AI That Executes Care | Zynix AI', desc: 'Zynix deploys AI agents that execute care, not just analyze it. Agents that call patients, close gaps, and capture revenue for ACOs and health systems.', img: IMG.hero, schema: 'Organization' },
+    '': { title: 'AI That Executes Care | Zynix AI', desc: 'Zynix deploys AI agents that execute care, not just analyze it. Agents that call patients, close gaps, and capture revenue for ACOs and health systems.', img: IMG.hero, schema: ['Organization','WebSite'] },
     '/products-zynix-os': { title: 'Zynix OS | AI Operating System for Healthcare', desc: 'The integrated AI platform where agents work together to deliver measurable patient and financial outcomes. Serving 1M+ VBC patients across ACOs and health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
     '/products-data-platform': { title: 'Zynix Data Platform | Unified Healthcare Data Layer', desc: 'Ingest, clean, and normalize data from every clinical and administrative source. Real-time ADT processing, 97%+ patient matching. Trusted by healthcare organizations across 30 states.', img: IMG.data, schema: 'Product' },
     '/products-analytics': { title: 'Zynix Analytics | Population Health Intelligence', desc: 'AI-powered analytics for HCC gap closure, risk prediction, and clinical decision support. 40% improvement in gap closure rates. Deployed across ACOs nationwide.', img: IMG.analytics, schema: 'Product' },
@@ -142,9 +142,9 @@
     '/solutions-independent-practices': { title: 'Zynix for Independent Practices | Reduce No-Shows & Burnout', desc: 'After-hours coverage, appointment scheduling, no-show reduction, documentation savings. Serving Cardio & Vascular Consultants, Professional Radiology Group, and practices nationwide.', img: IMG.doctor, schema: 'Product' },
     '/solutions-ascs': { title: 'Zynix for ASCs | Prior Auth & Patient Coordination', desc: 'Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination. Serving Pain Rehab Surgery Center and ASCs nationwide.', img: IMG.enterprise, schema: 'Product' },
     '/solutions-use-case-tcm': { title: 'Transitional Care Management (TCM) | AI-Powered Workflow', desc: 'Automate the 30-day post-discharge TCM workflow. 85%+ contact rates vs. 30-40% industry average. Deployed by ACOs and health systems nationwide.', img: IMG.care, schema: ['Product','FAQPage'] },
-    '/solutions-use-case-gap-closure': { title: 'HCC & Quality Gap Closure | AI-Prioritized Worklists', desc: 'Close HCC and quality gaps 40% faster with AI-prioritized worklists and automated outreach. Deployed across ACOs and health plans nationwide.', img: IMG.analytics, schema: 'Product' },
+    '/solutions-use-case-gap-closure': { title: 'HCC & Quality Gap Closure | AI-Prioritized Worklists', desc: 'Close HCC and quality gaps 40% faster with AI-prioritized worklists and automated outreach. Deployed across ACOs and health plans nationwide.', img: IMG.analytics, schema: ['Product','FAQPage'] },
     '/solutions-use-case-after-hours': { title: 'After-Hours Triage & Access | AI Call Handling', desc: '24/7 AI after-hours call handling with intelligent triage. 97.3% accuracy, 20-30% ER diversion rate. Serving practices and FQHCs nationwide.', img: IMG.doctor, schema: 'Product' },
-    '/solutions-use-case-prior-auth': { title: 'Prior Authorization Automation | AI Workflow', desc: 'Reduce prior auth turnaround by 60% with AI-powered submission, tracking, and approval workflows. Used by ASCs and health systems nationwide.', img: IMG.enterprise, schema: 'Product' },
+    '/solutions-use-case-prior-auth': { title: 'Prior Authorization Automation | AI Workflow', desc: 'Reduce prior auth turnaround by 60% with AI-powered submission, tracking, and approval workflows. Used by ASCs and health systems nationwide.', img: IMG.enterprise, schema: ['Product','FAQPage'] },
     '/solutions-use-case-preventive-screening': { title: 'Preventive Screening Completion | AI Outreach', desc: 'Increase preventive screening completion with targeted outreach and scheduling. Deployed by FQHCs, ACOs, and health plans nationwide.', img: IMG.patients, schema: 'Product' },
     '/solutions-use-case-readmission-prevention': { title: 'Readmission Prevention | AI Post-Discharge Intervention', desc: 'Reduce hospital readmissions with AI-driven risk stratification and automated post-discharge intervention. 25% reduction in avoidable readmissions.', img: IMG.care, schema: 'Product' },
     '/company-about': { title: 'About Zynix AI | Healthcare AI Built for America', desc: 'Purpose-built AI for value-based care. 1 million VBC patients onboarded. Headquartered in Trinity, FL. Serving ACOs, health systems, health plans, and FQHCs.', img: IMG.patients, schema: 'MedicalBusiness' },
@@ -154,7 +154,7 @@
     '/contact': { title: 'Contact Zynix AI | Request a Demo', desc: 'Schedule a 30-minute demo with the Zynix AI team. See how AI can transform your healthcare operations. Based in Trinity, FL.', img: IMG.hero, schema: 'MedicalBusiness' },
     '/resources-faq': { title: 'FAQ | Zynix AI Healthcare Platform', desc: 'Answers to common questions about Zynix AI implementation, HIPAA compliance, EHR integration, pricing, and support for healthcare organizations.', img: IMG.hero, schema: 'FAQPage' },
     '/resources-blog': { title: 'Blog | Zynix AI Healthcare Insights', desc: 'Insights on healthcare AI, value-based care, population health, and operational transformation from the Zynix AI team.', img: IMG.hero, schema: 'Organization' },
-    '/resources-blog-1m-patients': { title: 'Zynix AI Surpasses 1 Million VBC Patients | Zynix AI', desc: 'Zynix AI announces 1 million value-based care patients onboarded across healthcare organizations in 30 states. Read about our milestone in AI-powered healthcare.', img: IMG.hero, schema: 'Article' },
+    '/resources-blog-1m-patients': { title: 'Zynix AI Surpasses 1 Million VBC Patients | Zynix AI', desc: 'Zynix AI announces 1 million value-based care patients onboarded across healthcare organizations in 30 states. Read about our milestone in AI-powered healthcare.', img: IMG.hero, schema: ['Organization','Article'] },
     '/resources-case-studies': { title: 'Case Studies | Zynix AI Customer Results', desc: 'See how ACOs, health systems, and practices nationwide use Zynix AI to improve outcomes. 1M+ VBC patients served.', img: IMG.care, schema: 'Organization' },
     '/resources-glossary': { title: 'Healthcare AI Glossary | Zynix AI', desc: 'Comprehensive glossary of healthcare AI, value-based care, interoperability, coding, claims, and compliance terminology.', img: IMG.hero, schema: 'Organization' },
     '/resources-webinars': { title: 'Webinars & Events | Zynix AI', desc: 'Upcoming and on-demand webinars on healthcare AI, value-based care operations, and care management best practices.', img: IMG.hero, schema: 'Organization' },
@@ -222,6 +222,12 @@
     }
     if (schemaTypes.indexOf('MedicalBusiness') > -1) {
       schemas.push({'@context':'https://schema.org','@type':'MedicalBusiness',name:'Zynix AI',description:seo.desc,address:orgSchema.address,geo:{'@type':'GeoCoordinates',latitude:28.1856,longitude:-82.6800},areaServed:'United States',medicalSpecialty:'Value-Based Care',url:'https://www.zynix.ai'});
+    }
+    if (schemaTypes.indexOf('WebSite') > -1) {
+      schemas.push({'@context':'https://schema.org','@type':'WebSite',name:'Zynix AI',url:'https://www.zynix.ai',description:seo.desc,publisher:{'@type':'Organization',name:'Zynix AI',logo:IMG.logo}});
+    }
+    if (schemaTypes.indexOf('Article') > -1) {
+      schemas.push({'@context':'https://schema.org','@type':'Article',headline:seo.title.split('|')[0].trim(),description:seo.desc,image:seo.img || IMG.hero,author:{'@type':'Organization',name:'Zynix AI'},publisher:{'@type':'Organization',name:'Zynix AI',logo:{'@type':'ImageObject',url:IMG.logo}},datePublished:'2026-03-17',url:'https://www.zynix.ai' + pagePath});
     }
     // BreadcrumbList schema for inner pages
     var pathParts = pagePath ? pagePath.replace(/^\//, '').split('-') : [];
@@ -1828,22 +1834,36 @@
 
   function renderUseCaseGapClosure() {
     return renderUseCasePage('Gap Closure (HCC / HEDIS / Quality)',
-      'Turn gap identification into completed closures -labs done, visits completed, documentation aligned.',
+      'Turn HCC, HEDIS, and quality gap identification into completed closures at scale. Zynix AI automates outreach, scheduling, and verification so gaps close before the measurement window expires.',
       [
         { icon: '&#128202;', title: 'Gaps Identified But Not Closed', desc: 'Analytics flags 2,000 patients with HCC gaps. Nobody has time to call them all. Insights die in dashboards.' },
         { icon: '&#128683;', title: 'Manual Outreach Doesn\u2019t Scale', desc: 'Care coordinators can reach a fraction of the population. High-impact patients get lost in the queue.' },
-        { icon: '&#9203;', title: 'Timing Windows Expire', desc: 'HCC and quality measure windows close. Revenue opportunity lost forever.' }
+        { icon: '&#9203;', title: 'Timing Windows Expire', desc: 'HCC and quality measure windows close. Revenue opportunity and Stars credit lost forever.' }
       ],
       [
-        { title: 'Identify and prioritize gaps', desc: 'ZynGap identifies HCC, HEDIS, and preventive gaps and ranks by impact and timing.', tag: 'ZynGap' },
-        { title: 'Segment and outreach', desc: 'Patients segmented: needs lab vs. needs visit vs. needs documentation alignment. Outreach launched.', tag: 'ZynReminder' },
-        { title: 'Book appointments', desc: 'AWV/chronic visits or lab appointments scheduled based on patient availability.', tag: 'ZynSchedule' },
-        { title: 'Prepare visit readiness packets', desc: 'Clinic receives day-of packets: what to address, which gaps to close, suggested actions.', tag: 'ZynGuide' },
-        { title: 'Verify closure', desc: 'Lab completed and reviewed. Visit completed. Gap marked closed only when action is confirmed.', tag: 'Analytics' }
+        { title: 'Identify and prioritize HCC and HEDIS gaps', desc: 'ZynGap identifies HCC, HEDIS, and preventive care gaps and ranks by revenue impact and measurement window timing.', tag: 'ZynGap' },
+        { title: 'Segment patients and launch outreach', desc: 'Patients segmented by needed action: lab vs. visit vs. documentation alignment. Multi-channel outreach launched automatically.', tag: 'ZynReminder' },
+        { title: 'Book the required appointment', desc: 'AWV, chronic visit, or lab appointment scheduled based on patient availability and urgency.', tag: 'ZynSchedule' },
+        { title: 'Prepare visit readiness packets', desc: 'Clinic receives day-of packets: which gaps to close, suggested documentation actions, prior results.', tag: 'ZynGuide' },
+        { title: 'Verify and close the gap', desc: 'Lab result reviewed. Visit completed. Gap marked closed only when the closure action is confirmed in the record.', tag: 'Analytics' }
       ],
-      ['Static gap reports that expire', 'Manual patient outreach calls', 'Spreadsheet-based tracking', 'Visit prep done from memory', 'Closure verification by chart review'],
-      ['HCC gap closure rate', 'Time from gap identification to closure', 'AWV completion rate', 'Patient response rate', 'Revenue impact per closed gap'],
-      'A diabetic patient is overdue for A1c and retinal exam. The care plan pushes an outreach sequence, captures that the patient works nights, schedules an after-hours lab, and sets reminders. When results return abnormal, a follow-up visit is scheduled and tracked until completed.'
+      ['Static gap reports that expire', 'Manual patient outreach calls', 'Spreadsheet-based HCC tracking', 'Visit prep done from memory', 'Closure verification by chart review'],
+      ['HCC gap closure rate', 'Time from gap identification to closure', 'AWV completion rate', 'Patient outreach response rate', 'Revenue impact per closed gap', 'HEDIS measure performance'],
+      'A diabetic patient is overdue for A1c and retinal exam. The care plan pushes an outreach sequence, captures that the patient works nights, schedules an after-hours lab, and sets reminders. When results return abnormal, a follow-up visit is scheduled and tracked until completed and documented.',
+      {
+        steps: 'How Zynix AI Closes HCC and HEDIS Gaps at Scale',
+        replaces: 'Manual Gap Closure Processes Zynix Eliminates',
+        kpis: 'HCC and Quality Gap Closure KPIs to Track',
+        story: 'Gap Closure Scenario: Diabetic Patient Outreach',
+        faq: 'HCC and HEDIS Gap Closure FAQs'
+      },
+      [
+        { q: 'What is HCC gap closure?', a: 'HCC (Hierarchical Condition Category) gap closure is the process of identifying patients with chronic conditions not yet documented or coded in the current measurement year, then engaging them with visits or chart reviews to ensure accurate risk adjustment and appropriate RAF (Risk Adjustment Factor) scores for Medicare Advantage and ACO programs.' },
+        { q: 'What is the difference between HCC gaps and HEDIS gaps?', a: 'HCC gaps relate to chronic condition documentation and risk adjustment \u2014 they affect RAF scores and revenue under Medicare Advantage. HEDIS gaps relate to preventive and chronic care quality measures (A1c control, breast cancer screening, etc.) that affect Stars ratings and quality bonuses. Both require patient engagement but have different documentation requirements and timelines.' },
+        { q: 'How does Zynix prioritize which gaps to close first?', a: 'Zynix ranks gaps by RAF impact (revenue per gap), measurement window urgency, patient engagement likelihood, and provider capacity. High-value gaps closing to narrow measurement windows are worked first so no revenue opportunity expires unaddressed.' },
+        { q: 'What happens when a patient doesn\u2019t respond to outreach?', a: 'Zynix runs multi-wave outreach across voice, text, and mail \u2014 with timing and channel optimized by patient engagement history. Non-responders are re-segmented for escalation to care coordinators with full context, so human time is spent on truly hard-to-reach patients only.' },
+        { q: 'How does gap closure integrate with our EHR?', a: 'Zynix connects to Epic, athenahealth, Cerner, and eClinicalWorks via FHIR and HL7 to pull existing problem lists, lab results, and visit history. Once a gap is closed, the documentation flows back into the EHR and the gap is updated in the analytics layer.' }
+      ]
     );
   }
 
@@ -1870,22 +1890,36 @@
 
   function renderUseCasePriorAuth() {
     return renderUseCasePage('Prior Authorization Acceleration',
-      'Reduce stalled prior auth cases by making each auth a tracked, owned workflow with clear next steps.',
+      'Reduce prior authorization delays by turning each auth into a tracked, owned workflow with clear documentation requirements, payer follow-up, and denial management \u2014 from order to approved procedure.',
       [
-        { icon: '&#128203;', title: 'Stalled Authorizations', desc: 'Missing notes, incomplete forms, and payer back-and-forth cause weeks of delays.' },
-        { icon: '&#128176;', title: 'Revenue Impact', desc: 'Denied or delayed auths lead to cancelled procedures and lost revenue.' },
-        { icon: '&#128683;', title: 'No Ownership', desc: 'Auth requests sit between departments with no clear owner or deadline.' }
+        { icon: '&#128203;', title: 'Stalled Authorizations', desc: 'Missing clinical notes, incomplete forms, and payer back-and-forth cause weeks of delays and delayed patient care.' },
+        { icon: '&#128176;', title: 'Revenue and Care Impact', desc: 'Denied or delayed auths lead to cancelled procedures, lost revenue, and deteriorating patient conditions.' },
+        { icon: '&#128683;', title: 'No Ownership or Tracking', desc: 'Auth requests sit between departments with no clear owner, deadline, or visibility into payer status.' }
       ],
       [
-        { title: 'Create auth case', desc: 'Case created with owner and due date. Documentation checklist assembled.', tag: 'ZynAuth' },
-        { title: 'Detect missing items early', desc: 'Incomplete documentation flagged before submission.', tag: 'ZynAuth' },
-        { title: 'Submit and track', desc: 'Submit via portal/fax. Track status. Follow up on payer requests.', tag: 'ZynAuth + ZynFax' },
-        { title: 'Handle denials', desc: 'If denied, route to clinician for peer-to-peer or appeal steps.', tag: 'Escalation' },
-        { title: 'Schedule service', desc: 'Once approved, schedule the procedure and remind the patient.', tag: 'ZynSchedule + ZynReminder' }
+        { title: 'Create auth case with owner and checklist', desc: 'Case created with assigned owner and due date. Required documentation checklist assembled from payer and procedure requirements.', tag: 'ZynAuth' },
+        { title: 'Detect missing clinical documentation early', desc: 'Incomplete documentation flagged before submission \u2014 conservative therapy notes, prior imaging, clinical justification.', tag: 'ZynAuth' },
+        { title: 'Submit and track payer status', desc: 'Submit via payer portal or fax. Track status across all payers in one dashboard. Auto-follow-up on payer requests.', tag: 'ZynAuth + ZynFax' },
+        { title: 'Manage denials and appeals', desc: 'Denial reasons analyzed. Appeal documentation prepared. Peer-to-peer requests routed to the right clinician with full context.', tag: 'Escalation' },
+        { title: 'Schedule service on approval', desc: 'Once approved, procedure is scheduled automatically and patient receives confirmation and reminders.', tag: 'ZynSchedule + ZynReminder' }
       ],
-      ['Manual payer portal navigation', 'Phone calls and fax follow-ups', 'Spreadsheet status tracking', 'Reactive denial management'],
-      ['Time from order to approval', 'First-pass approval rate', 'Denial appeal success rate', 'Authorization turnaround time', 'Staff hours per auth'],
-      'A patient needs an MRI. The clinic previously lost weeks to back-and-forth. This workflow creates an auth case, flags missing conservative therapy notes before submission, tracks payer requests, schedules the MRI immediately after approval, and keeps the patient from repeatedly calling with no answers.'
+      ['Manual payer portal navigation', 'Phone and fax follow-ups with payers', 'Spreadsheet authorization status tracking', 'Reactive denial management after the fact'],
+      ['Time from order to approval', 'First-pass approval rate', 'Denial appeal success rate', 'Prior authorization turnaround time', 'Staff hours per authorization'],
+      'A patient needs an MRI. The clinic previously lost weeks to back-and-forth. This workflow creates an auth case, flags missing conservative therapy notes before submission, tracks payer requests, routes a denial for peer-to-peer, schedules the MRI immediately after approval, and keeps the patient informed throughout.',
+      {
+        steps: 'How Zynix AI Accelerates Prior Authorization Workflows',
+        replaces: 'Manual Prior Auth Processes Zynix Eliminates',
+        kpis: 'Prior Authorization KPIs That Drive Performance',
+        story: 'Prior Auth Scenario: MRI Authorization Delay',
+        faq: 'Prior Authorization FAQs'
+      },
+      [
+        { q: 'Why do prior authorizations take so long?', a: 'Prior authorizations are delayed by incomplete clinical documentation at submission, slow payer portal response times, unclear ownership within the clinic, and reactive (rather than proactive) denial management. Studies show 94% of physicians say prior auth delays patient care, and the average auth takes 5-10 business days even when documentation is complete.' },
+        { q: 'How does Zynix reduce prior authorization turnaround time?', a: 'Zynix flags missing documentation before submission (eliminating payer rejections), submits via the fastest available channel (portal vs. fax based on payer preference), tracks status across all payers in a single queue, and auto-follows-up on payer requests \u2014 reducing the back-and-forth that causes most delays.' },
+        { q: 'What is a first-pass approval rate and why does it matter?', a: 'First-pass approval rate is the percentage of prior auth requests approved without additional information requests, denials, or appeals. A higher first-pass rate means faster approval and less staff time per authorization. Zynix improves first-pass rates by ensuring complete clinical documentation before submission.' },
+        { q: 'What happens when a prior authorization is denied?', a: 'Zynix analyzes the denial reason, prepares appeal documentation, and routes peer-to-peer requests to the appropriate clinician with full context. Appeal timelines are tracked to ensure nothing falls outside the payer\u2019s appeal window.' },
+        { q: 'Which payers does Zynix support for prior authorization?', a: 'Zynix supports all major commercial payers, Medicare Advantage plans, and Medicaid managed care organizations. We use a combination of payer portal APIs, direct integrations, and intelligent fax (ZynFax) for payers without API access.' }
+      ]
     );
   }
 
