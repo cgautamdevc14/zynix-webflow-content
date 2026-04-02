@@ -2480,10 +2480,11 @@
     var doBlogPost = function() {
       var slug = path.replace(/^\/blog-posts\/?/, '');
       injectMegaMenu();
-      // Hide Webflow native nav
-      document.querySelectorAll('.w-nav,.navbar,header,[data-collapse]').forEach(function(el) {
-        el.style.setProperty('display','none','important');
-      });
+      // Nuke ALL native Webflow content — hide every body child that isn't ours
+      // This handles CMS templates, native navs, hero sections, etc.
+      var nukeStyle = document.createElement('style');
+      nukeStyle.textContent = 'body>*:not(.zynix-announcement-bar):not(.zynix-mega-nav):not(.zynix-injected):not(.zynix-mobile-menu){display:none!important}';
+      document.head.appendChild(nukeStyle);
       // Remove anti-flicker overlay
       var zaf = document.getElementById('zaf');
       if (zaf) zaf.remove();
