@@ -439,7 +439,7 @@ body {
   background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
   pointer-events: none;
 }
-.zynix-cta-section h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 600; margin: 0 0 16px; color: #fff; position: relative; }
+.zynix-cta-section h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 600; margin: 0 0 16px; color: #fff !important; position: relative; }
 .zynix-cta-section p { font-size: 17px; color: rgba(255,255,255,0.75); margin: 0 0 32px; position: relative; }
 .zynix-cta-section .zynix-btn-primary {
   background: var(--z-accent);
