@@ -1349,7 +1349,7 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
 .zynix-cta-trust span { font-size: 13px; color: rgba(255,255,255,0.7); display: inline-flex; align-items: center; gap: 5px; }
 
 /* ── Footer Compliance Badges ── */
-.zynix-footer-compliance { display: flex; flex-wrap: wrap; gap: 24px; padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 32px; }
+.zynix-footer-compliance { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; max-width: 1200px; margin: 32px auto 0; padding: 24px 40px; border-top: 1px solid rgba(255,255,255,0.1); }
 .zynix-compliance-badge { display: flex; align-items: center; gap: 10px; }
 .zynix-compliance-icon { width: 32px; height: 32px; flex-shrink: 0; }
 .zynix-compliance-badge > div strong { display: block; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9); line-height: 1.2; }
