@@ -1054,7 +1054,7 @@ body.has-announcement-bar { padding-top: 40px; }
   pointer-events: none;
 }
 .zynix-results-section .zynix-tag { color: rgba(255,255,255,0.8); }
-.zynix-results-section h2 { color: #fff; }
+.zynix-results-section h2 { color: #fff !important; }
 .zynix-results-section .zynix-metric-value { color: #fff; }
 .zynix-results-section .zynix-metric-label { color: rgba(255,255,255,0.65); }
 
@@ -1335,7 +1335,7 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
 .zynix-testimonials-section { padding: 100px 0; background: var(--z-bg-dark); }
 .zynix-testimonials-section .zynix-container { text-align: center; }
 .zynix-testimonials-section .zynix-tag { color: var(--z-accent); background: rgba(196,75,22,0.12); border-color: rgba(196,75,22,0.3); }
-.zynix-testimonials-section h2 { color: #fff; }
+.zynix-testimonials-section h2 { color: #fff !important; }
 .zynix-testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; text-align: left; }
 .zynix-testimonial-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 28px; }
 .zynix-testimonial-stars { color: #F59E0B; font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
