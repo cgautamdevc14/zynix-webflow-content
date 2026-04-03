@@ -616,10 +616,10 @@
       '<a href="https://x.com/zynixai_" target="_blank" rel="noopener" aria-label="X">' + SVG_X + '</a>' +
       '<a href="https://www.instagram.com/zynixai/" target="_blank" rel="noopener" aria-label="Instagram">' + SVG_INSTAGRAM + '</a>' +
       '</div></div>' +
-      '<div class="zynix-footer-col"><h4>SOLUTIONS</h4><a href="/platform">Platform</a><a href="/solutions/zynix-data-analytics">Data Analytics</a><a href="/agents">AI Agents</a><a href="/zynscribe">ZynScribe</a><a href="/care-plans">Care Plans</a><a href="/company/zynixllm">ZynixLLM</a></div>' +
+      '<div class="zynix-footer-col"><h4>SOLUTIONS</h4><a href="/platform">Platform</a><a href="/products-analytics">Data Analytics</a><a href="/agents">AI Agents</a><a href="/zynscribe">ZynScribe</a><a href="/care-plans">Care Plans</a><a href="/company-zynixllm">ZynixLLM</a></div>' +
       '<div class="zynix-footer-col"><h4>WHO WE SERVE</h4><a href="/solutions-health-systems">Health Systems</a><a href="/solutions-acos">ACOs &amp; MSOs</a><a href="/solutions-health-plans">Health Plans</a><a href="/solutions-independent-practices">Group Practices</a><a href="/solutions-ascs">ASCs</a><a href="/solutions-fqhcs">FQHCs</a></div>' +
-      '<div class="zynix-footer-col"><h4>COMPANY</h4><a href="/about">About</a><a href="/newsroom">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a><a href="/contact">Contact</a></div>' +
-      '<div class="zynix-footer-col"><h4>RESOURCES</h4><a href="/case-studies">Case Studies</a><a href="/resources/blog">Blog</a><a href="/resources/faq">FAQ</a><a href="/resources/webinars">Webinars</a><a href="/resources/whitepapers">Whitepapers</a><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a></div>' +
+      '<div class="zynix-footer-col"><h4>COMPANY</h4><a href="/about">About</a><a href="/press">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a><a href="/contact">Contact</a></div>' +
+      '<div class="zynix-footer-col"><h4>RESOURCES</h4><a href="/resources-case-studies">Case Studies</a><a href="/resources-blog">Blog</a><a href="/resources-faq">FAQ</a><a href="/resources-webinars">Webinars</a><a href="/resources-whitepapers">Whitepapers</a><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a></div>' +
       '</div>' +
       '<div class="zynix-footer-compliance">' +
       '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_HIPAA + '</div><div><strong>HIPAA</strong><span>Compliant</span></div></div>' +
@@ -1876,7 +1876,7 @@
           '<div class="zynix-mega-col"><h5>Platform Overview</h5>' +
             al('/platform','Zynix Intelligent Platform','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>','The AI Operating System for VBC') +
           '<h5 style="margin-top:16px">Data &amp; Documentation</h5>' +
-            al('/solutions/zynix-data-analytics','Zynix Data Analytics','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>','Population health intelligence and gap closure') +
+            al('/products-analytics','Zynix Data Analytics','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>','Population health intelligence and gap closure') +
             al('/zynscribe','ZynScribe','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>','Ambient AI clinical documentation') +
             al('/care-plans','Deployable Care Plans','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>','Configurable evidence-based care workflows') +
           '</div>' +
@@ -1932,8 +1932,8 @@
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Company <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
         '<div class="zynix-dropdown-panel"><div class="zynix-dropdown-panel-inner">' +
           al('/about','About','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>') +
-          al('/company/zynixllm','ZynixLLM','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>') +
-          al('/newsroom','Newsroom','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>') +
+          al('/company-zynixllm','ZynixLLM','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>') +
+          al('/press','Newsroom','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>') +
           al('/careers','Careers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>') +
           al('/security','Security','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>') +
           '<div class="zynix-dropdown-featured"><p>AI built for healthcare, by healthcare leaders.</p><a href="/about#team">Meet Our Leadership &rarr;</a></div>' +
@@ -1941,12 +1941,12 @@
         // 5. Resources — narrow dropdown
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Resources <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
         '<div class="zynix-dropdown-panel"><div class="zynix-dropdown-panel-inner">' +
-          al('/case-studies','Case Studies','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>') +
-          al('/resources/blog','Blog','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>') +
-          al('/resources/webinars','Webinars &amp; Events','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>') +
-          al('/resources/faq','FAQ','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>') +
-          al('/resources/glossary','Glossary','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>') +
-          al('/resources/whitepapers','Whitepapers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>') +
+          al('/resources-case-studies','Case Studies','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>') +
+          al('/resources-blog','Blog','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>') +
+          al('/resources-webinars','Webinars &amp; Events','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>') +
+          al('/resources-faq','FAQ','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>') +
+          al('/resources-glossary','Glossary','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>') +
+          al('/resources-whitepapers','Whitepapers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>') +
           '<div class="zynix-dropdown-featured"><a href="' + CALENDLY + '" target="_blank">Request a Demo &rarr;</a></div>' +
         '</div></div></div>' +
       '</div>' +
@@ -1975,15 +1975,15 @@
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Whom We Serve &#9662;</button><div class="zynix-mobile-section-links">' +
       '<a href="/solutions-health-systems">Health Systems</a><a href="/solutions-acos">ACOs &amp; MSOs</a><a href="/solutions-health-plans">Health Plans</a><a href="/solutions-independent-practices">Group Practices</a><a href="/solutions-ascs">ASCs</a><a href="/solutions-fqhcs">FQHCs</a></div></div>' +
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Company &#9662;</button><div class="zynix-mobile-section-links">' +
-      '<a href="/about">About</a><a href="/company/zynixllm">ZynixLLM</a><a href="/newsroom">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a></div></div>' +
+      '<a href="/about">About</a><a href="/company-zynixllm">ZynixLLM</a><a href="/press">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a></div></div>' +
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Resources &#9662;</button><div class="zynix-mobile-section-links">' +
-      '<a href="/case-studies">Case Studies</a><a href="/resources/blog">Blog</a><a href="/resources/webinars">Webinars &amp; Events</a><a href="/resources/faq">FAQ</a><a href="/resources/glossary">Glossary</a><a href="/resources/whitepapers">Whitepapers</a></div></div>' +
+      '<a href="/resources-case-studies">Case Studies</a><a href="/resources-blog">Blog</a><a href="/resources-webinars">Webinars &amp; Events</a><a href="/resources-faq">FAQ</a><a href="/resources-glossary">Glossary</a><a href="/resources-whitepapers">Whitepapers</a></div></div>' +
       '<a href="' + CALENDLY + '" class="zynix-mobile-cta" target="_blank">Request a Demo</a>';
 
     // Announcement banner
     var announceBanner = document.createElement('div');
     announceBanner.className = 'zynix-announcement-bar';
-    announceBanner.innerHTML = '🎉 Zynix AI surpasses 1 Million VBC patients onboarded across 30 states <a href="/resources/blog/1m-patients">Read more</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
+    announceBanner.innerHTML = '🎉 Zynix AI surpasses 1 Million VBC patients onboarded across 30 states <a href="/resources-blog-1m-patients">Read more</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
 
     document.body.prepend(mobile);
     document.body.prepend(nav);
@@ -3363,15 +3363,14 @@
     '/use-cases/after-hours-triage-health-systems': '/use-cases/after-hours-triage-multi-site',
     '/use-cases/prior-auth-health-systems': '/use-cases/prior-auth-high-volume-specialty',
     '/use-cases/physician-documentation-health-systems': '/use-cases/physician-documentation-ambient-ai',
-    // Products → Platform / Solutions
-    '/platform': '/platform',
-    '/products-data-platform': '/platform',
-    '/products-analytics': '/solutions/zynix-data-analytics',
-    '/agents': '/agents',
-    '/zynscribe': '/zynscribe',
-    '/care-plans': '/care-plans',
-    '/company-zynixllm': '/company/zynixllm',
-    '/products-zynixllm': '/company/zynixllm',
+    // Products → Platform / Solutions (old /products-* → new canonical paths)
+    '/products-zynix-os': '/platform',
+    '/products-data-platform': '/products-data-platform',
+    '/products-analytics': '/products-analytics',
+    '/products-ai-agents': '/agents',
+    '/products-zynscribe': '/zynscribe',
+    '/products-care-plans': '/care-plans',
+    '/products-zynixllm': '/company-zynixllm',
 
     // AI Agent Detail Pages → Agents hierarchy
     '/products-ai-agents-zynafterhours': '/agents/operational-efficiency/zynafterhours-triage',
@@ -3405,16 +3404,10 @@
     '/trust-center': '/security',
     '/company-trust-center': '/security',
 
-    // Resources (hyphen → slash)
-    '/faq': '/resources/faq',
-    '/resources-faq': '/resources/faq',
-    '/blog': '/resources/blog',
-    '/resources-blog': '/resources/blog',
-    '/resources-blog-1m-patients': '/resources/blog/1m-patients',
-    // '/resources-case-studies': '/case-studies', // kept at /resources-case-studies (Webflow page)
-    '/resources-glossary': '/resources/glossary',
-    '/resources-webinars': '/resources/webinars',
-    '/resources-whitepapers': '/resources/whitepapers',
+    // Resources — redirect old short paths to Webflow canonical pages
+    '/faq': '/resources-faq',
+    '/blog': '/resources-blog',
+    // Note: /resources-faq, /resources-blog, etc. are canonical Webflow pages — no redirect needed
 
     // Legal aliases
     '/company-privacy': '/privacy-policy',
@@ -5952,7 +5945,7 @@ function renderDataAnalyticsV7() {
     '/agents': renderAIAgents,
     '/zynscribe': renderZynScribe,
     '/care-plans': renderCarePlans,
-    '/company-zynixllm': renderZynixLLM,
+    '/company-zynixllm': renderZynixLLMV7,
     '/products-zynixllm': renderZynixLLM,
     // Products - AI Agent Detail Pages (NEW)
     '/products-ai-agents-zynafterhours': renderZynAfterHours,
