@@ -935,7 +935,7 @@ body.has-announcement-bar { padding-top: 40px; }
   pointer-events: none;
 }
 .zynix-homepage-hero .zynix-inner-hero-grid { position: relative; z-index: 1; }
-.zynix-homepage-hero h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 700; line-height: 1.08; margin: 0 0 20px; letter-spacing: -1.5px; color: var(--z-text); }
+.zynix-homepage-hero h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 700; line-height: 1.08; margin: 0 0 20px; letter-spacing: -1.5px; color: var(--z-text); position: static !important; }
 .zynix-homepage-hero p { font-size: 1.0625rem; line-height: 1.7; color: var(--z-text-secondary); max-width: 540px; }
 
 /* ── Customer Trust Strip ── */
@@ -1335,22 +1335,4 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
     bottom: 68px !important;
     max-height: 70vh !important;
   }
-}
-
-/* ── SEO: H1 VISIBILITY FIX ──
-   The page-hiding CSS (body>section *, .z-hero *) hides H1 elements with
-   display:none!important before JS loads. This override ensures H1 tags
-   remain technically visible to crawlers (not display:none) while still
-   being visually hidden during load via position:absolute/clip.
-   JS restores full display immediately when it runs. ── */
-h1 {
-  display: block !important;
-  visibility: visible !important;
-  height: auto !important;
-  width: auto !important;
-  overflow: visible !important;
-  opacity: 1 !important;
-  position: absolute !important;
-  clip: rect(1px, 1px, 1px, 1px) !important;
-  white-space: nowrap !important;
 }
