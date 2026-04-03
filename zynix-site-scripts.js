@@ -4796,10 +4796,15 @@ function renderPrivacyV7() {
     '<li>Scheduling changes and notifications</li>' +
     '<li>Account service notifications</li>' +
     '</ul>' +
+    '<p><strong>Opt-In:</strong> You may opt in to SMS by completing the opt-in form at <a href="https://www.zynix.ai/contact" style="color:var(--z-blue)">https://www.zynix.ai/contact</a>. By submitting the form and providing your phone number, you expressly consent to receive text messages from Zynix AI. <strong>Consent is not a condition of purchase.</strong></p>' +
     '<p><strong>Message frequency:</strong> Message frequency varies based on your activity and scheduled appointments.</p>' +
     '<p><strong>Message and data rates:</strong> Standard message and data rates may apply depending on your mobile carrier and plan.</p>' +
-    '<p><strong>Opt-out:</strong> You may opt out of SMS notifications at any time by replying <strong>STOP</strong> to any message. You will receive a confirmation message and no further texts will be sent.</p>' +
-    '<p><strong>Help:</strong> Reply <strong>HELP</strong> to any message for support contact information, or email us at <a href="mailto:info@zynix.ai" style="color:var(--z-blue)">info@zynix.ai</a>.</p>' +
+    '<p><strong>Keywords and Auto-Responses:</strong></p>' +
+    '<ul>' +
+    '<li><strong>START</strong> &mdash; Opt-in confirmation: <em>"Zynix AI: Thanks for subscribing to customer care and account notifications! Reply HELP for help. Message frequency may vary. Msg &amp; data rates may apply. Consent is not a condition of purchase. Reply STOP to opt out."</em></li>' +
+    '<li><strong>STOP</strong> &mdash; Opt-out confirmation: <em>"Zynix AI: You are unsubscribed and will receive no further messages."</em></li>' +
+    '<li><strong>HELP</strong> &mdash; Help response: <em>"Zynix AI: Please reach out to us at zynix.ai/contact or info@zynix.ai for help."</em></li>' +
+    '</ul>' +
     '<p><strong>Carriers supported:</strong> Compatible with all major US carriers including AT&amp;T, T-Mobile, Verizon, and Sprint.</p>' +
     '<p>We do not send marketing, promotional, or lead generation messages via SMS. SMS communications are limited to customer care and account-related notifications. Your phone number will not be shared with third parties for marketing purposes. For questions about our SMS program, contact <a href="mailto:info@zynix.ai" style="color:var(--z-blue)">info@zynix.ai</a>.</p>' +
 
@@ -4873,12 +4878,17 @@ function renderTermsV7() {
 
     '<h2>9. SMS/Text Messaging Program</h2>' +
     '<p><strong>Program Name:</strong> Zynix AI Customer Care SMS</p>' +
-    '<p><strong>Program Description:</strong> Zynix AI sends SMS messages exclusively for customer care and account-related notifications to users who have explicitly opted in via the Zynix.ai website or sign-up flow. Message types include: appointment confirmations, appointment reminders, care coordination updates, scheduling changes, and account service notifications. This program does not send marketing, promotional, or lead generation messages.</p>' +
+    '<p><strong>Program Description:</strong> Zynix AI sends SMS messages exclusively for customer care and account-related notifications to users who have explicitly opted in. Message types include: appointment confirmations, appointment reminders, care coordination updates, scheduling changes, and account service notifications. This program does not send marketing, promotional, or lead generation messages.</p>' +
+    '<p><strong>Opt-In Method:</strong> You may opt in to SMS by completing the opt-in form at <a href="https://www.zynix.ai/contact">https://www.zynix.ai/contact</a>. By submitting the form and providing your phone number, you expressly consent to receive text messages from Zynix AI. Consent is not a condition of purchase.</p>' +
     '<p><strong>Message Frequency:</strong> Message frequency varies based on user activity, scheduled appointments, and care coordination needs. You will only receive messages relevant to your account and care programs.</p>' +
     '<p><strong>Message and Data Rates:</strong> Message and data rates may apply. Please check with your mobile carrier for details about your messaging plan.</p>' +
-    '<p><strong>Opt-Out:</strong> You may opt out of receiving SMS messages at any time by replying <strong>STOP</strong> to any message. Upon opting out, you will receive a final confirmation message and will no longer receive SMS communications from Zynix AI.</p>' +
-    '<p><strong>Help:</strong> For support or questions about SMS messages, reply <strong>HELP</strong> to any message, or contact us at <a href="mailto:info@zynix.ai">info@zynix.ai</a> or call (727) 264-5582.</p>' +
-    '<p><strong>Supported Carriers:</strong> Zynix AI SMS is supported on all major US carriers including AT&T, T-Mobile, Verizon, and Sprint, as well as most regional carriers.</p>' +
+    '<p><strong>Keywords and Confirmation Messages:</strong></p>' +
+    '<ul>' +
+    '<li><strong>Opt-In Keyword: START</strong> &mdash; Confirmation: <em>"Zynix AI: Thanks for subscribing to customer care and account notifications! Reply HELP for help. Message frequency may vary. Msg &amp; data rates may apply. Consent is not a condition of purchase. Reply STOP to opt out."</em></li>' +
+    '<li><strong>Opt-Out Keyword: STOP</strong> &mdash; Confirmation: <em>"Zynix AI: You are unsubscribed and will receive no further messages."</em></li>' +
+    '<li><strong>Help Keyword: HELP</strong> &mdash; Response: <em>"Zynix AI: Please reach out to us at zynix.ai/contact or info@zynix.ai for help."</em></li>' +
+    '</ul>' +
+    '<p><strong>Supported Carriers:</strong> Zynix AI SMS is supported on all major US carriers including AT&amp;T, T-Mobile, Verizon, and Sprint, as well as most regional carriers.</p>' +
     '<p><strong>Privacy:</strong> Your phone number and messaging data will not be shared with third parties for marketing purposes. See our <a href="/privacy-policy">Privacy Policy</a> for complete details on how we handle your information.</p>' +
 
     '<h2>10. Changes to the Site and Terms</h2>' +
