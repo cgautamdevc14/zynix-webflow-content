@@ -1244,6 +1244,8 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-comparison-grid { grid-template-columns: 1fr; }
   .zynix-related-grid { grid-template-columns: repeat(2, 1fr); }
   .zynix-screenshot-gallery { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .zynix-roi-calculator { grid-template-columns: 1fr; }
+  .zynix-testimonials-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 767px) {
   .zynix-inner-hero { padding: 100px 0 60px; }
@@ -1312,6 +1314,46 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
   height: 100%;
   object-fit: contain;
 }
+
+/* ── ROI Calculator ── */
+.zynix-roi-section { padding: 100px 0; }
+.zynix-roi-calculator { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 48px; background: #fff; border: 1px solid var(--z-border); border-radius: 20px; padding: 40px; box-shadow: var(--z-shadow-md); }
+.zynix-roi-inputs { display: flex; flex-direction: column; gap: 28px; }
+.zynix-roi-input-group label { font-size: 14px; font-weight: 600; color: var(--z-text); display: block; margin-bottom: 10px; }
+.zynix-roi-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #e5e7eb; outline: none; cursor: pointer; }
+.zynix-roi-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--z-blue); cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+.zynix-roi-slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--z-blue); cursor: pointer; border: 2px solid #fff; }
+.zynix-roi-value { font-size: 22px; font-weight: 700; color: var(--z-blue); margin-top: 8px; }
+.zynix-roi-results { background: var(--z-bg-alt); border-radius: 16px; padding: 32px; }
+.zynix-roi-results h3 { font-size: 18px; font-weight: 700; color: var(--z-text); margin: 0 0 24px; }
+.zynix-roi-result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.zynix-roi-result { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid var(--z-border); }
+.zynix-roi-number { display: block; font-size: 28px; font-weight: 800; color: var(--z-blue); margin-bottom: 4px; line-height: 1.1; }
+.zynix-roi-label { display: block; font-size: 13px; color: var(--z-text-secondary); font-weight: 500; line-height: 1.4; }
+
+/* ── Testimonials Section ── */
+.zynix-testimonials-section { padding: 100px 0; background: var(--z-bg-dark); }
+.zynix-testimonials-section .zynix-container { text-align: center; }
+.zynix-testimonials-section .zynix-tag { color: var(--z-accent); background: rgba(196,75,22,0.12); border-color: rgba(196,75,22,0.3); }
+.zynix-testimonials-section h2 { color: #fff; }
+.zynix-testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; text-align: left; }
+.zynix-testimonial-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 28px; }
+.zynix-testimonial-stars { color: #F59E0B; font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
+.zynix-testimonial-quote { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.8); margin: 0 0 20px; font-style: italic; }
+.zynix-testimonial-author strong { display: block; font-size: 14px; font-weight: 700; color: #fff; }
+.zynix-testimonial-author span { display: block; font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+/* ── CTA Section Extra ── */
+.zynix-cta-btns { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 24px; position: relative; }
+.zynix-cta-trust { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; position: relative; }
+.zynix-cta-trust span { font-size: 13px; color: rgba(255,255,255,0.7); display: inline-flex; align-items: center; gap: 5px; }
+
+/* ── Footer Compliance Badges ── */
+.zynix-footer-compliance { display: flex; flex-wrap: wrap; gap: 24px; padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 32px; }
+.zynix-compliance-badge { display: flex; align-items: center; gap: 10px; }
+.zynix-compliance-icon { width: 32px; height: 32px; flex-shrink: 0; }
+.zynix-compliance-badge > div strong { display: block; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9); line-height: 1.2; }
+.zynix-compliance-badge > div span { display: block; font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.3; }
 
 /* ── AI Chat Widget ── */
 @keyframes zynixPulse {
