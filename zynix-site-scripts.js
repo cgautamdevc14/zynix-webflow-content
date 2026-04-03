@@ -610,7 +610,7 @@
 
   function renderFooter() {
     return '<footer class="zynix-footer"><div class="zynix-footer-inner">' +
-      '<div class="zynix-footer-brand"><img src="' + IMG.logoWhite + '" alt="Zynix AI" style="height:48px;margin-bottom:16px;"><p>The operating system that executes care, not just analyzes it. Purpose-built AI for value-based healthcare.</p>' +
+      '<div class="zynix-footer-brand"><img src="' + IMG.logoWhite + '" alt="Zynix AI" style="height:72px;margin-bottom:8px;"><div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:12px;letter-spacing:-0.5px">zynix<span style="color:var(--z-accent)">.ai</span></div><p>The operating system that executes care, not just analyzes it. Purpose-built AI for value-based healthcare.</p>' +
       '<div class="zynix-footer-social">' +
       '<a href="https://www.linkedin.com/company/zynix/" target="_blank" rel="noopener" aria-label="LinkedIn">' + SVG_LINKEDIN + '</a>' +
       '<a href="https://x.com/zynixai_" target="_blank" rel="noopener" aria-label="X">' + SVG_X + '</a>' +
@@ -1637,7 +1637,7 @@
   }
 
   function renderContact() {
-    return '<section class="zynix-inner-hero" style="padding:140px 0 60px"><div class="zynix-container">' +
+    return '<section class="zynix-inner-hero" style="padding:140px 0 60px;background:var(--z-bg-dark)"><div class="zynix-container">' +
     '<div style="text-align:center;position:relative;z-index:1">' +
     '<span class="zynix-tag">CONTACT US</span>' +
     '<h1 style="color:#fff;font-size:42px;font-weight:800;margin:0 0 16px">Get in Touch</h1>' +
@@ -1818,7 +1818,7 @@
 
   // ── PAGE: Privacy Policy ──
   function renderPrivacy() {
-    return '<section class="zynix-inner-hero" style="padding:140px 0 60px"><div class="zynix-container" style="text-align:center;position:relative;z-index:1">' +
+    return '<section class="zynix-inner-hero" style="padding:140px 0 60px;background:var(--z-bg-dark)"><div class="zynix-container" style="text-align:center;position:relative;z-index:1">' +
     '<h1 style="color:#fff;font-size:42px;font-weight:800;margin:0 0 16px">Privacy Policy</h1>' +
     '<p style="color:rgba(255,255,255,0.8);font-size:16px">Last updated: March 2026</p>' +
     '</div></section>' +
@@ -1836,7 +1836,7 @@
 
   // ── PAGE: Terms of Service ──
   function renderTerms() {
-    return '<section class="zynix-inner-hero" style="padding:140px 0 60px"><div class="zynix-container" style="text-align:center;position:relative;z-index:1">' +
+    return '<section class="zynix-inner-hero" style="padding:140px 0 60px;background:var(--z-bg-dark)"><div class="zynix-container" style="text-align:center;position:relative;z-index:1">' +
     '<h1 style="color:#fff;font-size:42px;font-weight:800;margin:0 0 16px">Terms of Service</h1>' +
     '<p style="color:rgba(255,255,255,0.8);font-size:16px">Last updated: March 2026</p>' +
     '</div></section>' +
@@ -2499,7 +2499,7 @@
 
   // ── NEW PAGES: Placeholder Pages ──
   function renderPlaceholderPage(tag, title, subtitle, extraHtml) {
-    return '<section class="zynix-inner-hero"><div class="zynix-container" style="position:relative;z-index:1;text-align:center">' +
+    return '<section class="zynix-inner-hero" style="background:var(--z-bg-dark)"><div class="zynix-container" style="position:relative;z-index:1;text-align:center">' +
       '<span class="zynix-tag" style="display:inline-block">' + tag + '</span>' +
       '<h1 style="color:#fff;font-size:42px;font-weight:800;margin:0 0 20px">' + title + '</h1>' +
       '<p style="color:rgba(255,255,255,0.8);font-size:18px;line-height:1.7;max-width:600px;margin:0 auto">' + subtitle + '</p>' +
