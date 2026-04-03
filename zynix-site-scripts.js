@@ -497,10 +497,11 @@
       sectionLabel = legacyLabels[legacyParts[0]] || '';
     }
     var pageName = (LINK_NAMES[pagePath] || '').replace(/ \| .*/, '');
-    if (!sectionLabel || !pageName) return '';
+    if (!pageName) return '';
     return '<div class="zynix-breadcrumb"><div class="zynix-container">' +
-      '<a href="/">Home</a><span class="zynix-bc-sep">/</span>' +
-      (sectionHref ? '<a href="' + sectionHref + '">' + sectionLabel + '</a>' : '<span>' + sectionLabel + '</span>') + '<span class="zynix-bc-sep">/</span>' +
+      '<a href="/">Home</a>' +
+      (sectionHref ? '<span class="zynix-bc-sep">/</span><a href="' + sectionHref + '">' + sectionLabel + '</a>' : '') +
+      '<span class="zynix-bc-sep">/</span>' +
       '<span class="zynix-bc-current">' + pageName + '</span>' +
       '</div></div>';
   }
@@ -3388,6 +3389,14 @@
     '/who-we-serve/independent-group-practices': '/solutions-independent-practices',
     '/who-we-serve/ascs': '/solutions-ascs',
     '/who-we-serve/fqhcs': '/solutions-fqhcs',
+
+    // Slash-based solution URLs → canonical dash-based (catches broken nav links)
+    '/solutions/health-systems': '/solutions-health-systems',
+    '/solutions/acos': '/solutions-acos',
+    '/solutions/health-plans': '/solutions-health-plans',
+    '/solutions/independent-practices': '/solutions-independent-practices',
+    '/solutions/ascs': '/solutions-ascs',
+    '/solutions/fqhcs': '/solutions-fqhcs',
 
     // Solutions by Use Case → Use Cases CMS
     '/solutions-use-case-tcm': '/use-cases/post-discharge-follow-up',
