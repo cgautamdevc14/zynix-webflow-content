@@ -610,7 +610,7 @@
 
   function renderFooter() {
     return '<footer class="zynix-footer"><div class="zynix-footer-inner">' +
-      '<div class="zynix-footer-brand"><img src="' + IMG.logoWhite + '" alt="Zynix AI" style="height:72px;margin-bottom:8px;"><div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:12px;letter-spacing:-0.5px">zynix<span style="color:var(--z-accent)">.ai</span></div><p>The operating system that executes care, not just analyzes it. Purpose-built AI for value-based healthcare.</p>' +
+      '<div class="zynix-footer-brand"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><img src="' + IMG.symbol + '" alt="Zynix AI" style="height:40px;width:40px;"><div style="font-size:26px;font-weight:700;color:#fff;letter-spacing:-0.5px;line-height:1">zynix<span style="color:var(--z-accent)">.ai</span></div></div><p>The operating system that executes care, not just analyzes it. Purpose-built AI for value-based healthcare.</p>' +
       '<div class="zynix-footer-social">' +
       '<a href="https://www.linkedin.com/company/zynix/" target="_blank" rel="noopener" aria-label="LinkedIn">' + SVG_LINKEDIN + '</a>' +
       '<a href="https://x.com/zynixai_" target="_blank" rel="noopener" aria-label="X">' + SVG_X + '</a>' +
