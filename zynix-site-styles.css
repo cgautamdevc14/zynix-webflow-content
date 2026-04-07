@@ -1463,13 +1463,16 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
     font-size: 16px;
   }
 
-  /* ── Hero Section: breathable, premium ── */
+  /* ── Hero Section: breathable, premium, centered ── */
   .zynix-inner-hero {
     padding: 88px 0 48px;
   }
   .zynix-inner-hero-grid {
     grid-template-columns: 1fr;
     gap: 28px;
+  }
+  .zynix-inner-hero-text {
+    text-align: center;
   }
   .zynix-inner-hero-text .zynix-tag {
     font-size: 11px;
@@ -1486,10 +1489,14 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
     font-size: 0.9375rem;
     line-height: 1.65;
     margin-bottom: 24px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
   .zynix-hero-btns {
     flex-direction: column;
     gap: 10px;
+    align-items: center;
   }
   .zynix-hero-btns .zynix-btn-primary,
   .zynix-hero-btns .zynix-btn-secondary {
@@ -1497,14 +1504,21 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
     justify-content: center;
     text-align: center;
   }
+  .zynix-inner-hero-img {
+    text-align: center;
+  }
   .zynix-inner-hero-img img {
     max-width: 100%;
     border-radius: 16px;
+    margin: 0 auto;
   }
 
   /* ── Homepage Hero ── */
   .zynix-homepage-hero {
     padding: 88px 0 48px;
+  }
+  .zynix-homepage-hero .zynix-inner-hero-text {
+    text-align: center;
   }
   .zynix-homepage-hero h1 {
     font-size: clamp(1.625rem, 6.5vw, 2rem);
@@ -1513,6 +1527,15 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
   }
   .zynix-homepage-hero p {
     font-size: 0.9375rem;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .zynix-homepage-hero .zynix-inner-hero-img {
+    text-align: center;
+  }
+  .zynix-homepage-hero .zynix-inner-hero-img img {
+    margin: 0 auto;
   }
 
   /* ── Section Spacing: balanced rhythm ── */
