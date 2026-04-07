@@ -1378,3 +1378,813 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
     max-height: 70vh !important;
   }
 }
+/* ══════════════════════════════════════════════════════════════
+   iPHONE / MOBILE-FIRST OPTIMIZATION
+   Targets: 375px, 390px, 393px, 414px, 430px
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── iOS Safe Areas ── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .zynix-inner-page {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  .zynix-footer {
+    padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  }
+  .zynix-cta-section {
+    padding-bottom: calc(100px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ── Global touch & iOS fixes ── */
+@media (max-width: 480px) {
+  /* Prevent iOS zoom on input focus (must be ≥16px) */
+  input, select, textarea,
+  .zynix-form-group input,
+  .zynix-form-group select,
+  .zynix-form-group textarea {
+    font-size: 16px !important;
+  }
+
+  /* Touch optimization */
+  a, button,
+  .zynix-btn-primary,
+  .zynix-btn-secondary,
+  .zynix-nav-cta,
+  .zynix-mobile-cta,
+  .zynix-faq-q {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Enforce 48px min tap targets (Apple HIG = 44px, we use 48 for comfort) */
+  .zynix-btn-primary,
+  .zynix-btn-secondary,
+  .zynix-nav-cta,
+  .zynix-mobile-cta {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Container: 20px side padding ── */
+  .zynix-container {
+    padding: 0 20px;
+  }
+
+  /* ── Navigation: compact 64px height ── */
+  .zynix-mega-nav {
+    height: 64px;
+    padding: 0 16px;
+  }
+  .zynix-nav-logo img {
+    height: 130px;
+    margin: -32px 0;
+  }
+  .zynix-nav-cta {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+  .zynix-mobile-menu {
+    top: 64px;
+    padding: 20px;
+  }
+  /* Push banner-adjusted nav */
+  .zynix-mega-nav.has-banner { top: 36px; }
+  .zynix-announcement-bar {
+    font-size: 12px;
+    padding: 8px 36px 8px 16px;
+    line-height: 1.4;
+  }
+  .zynix-announcement-bar .zynix-announce-close {
+    right: 8px;
+    font-size: 16px;
+  }
+
+  /* ── Hero Section: breathable, premium ── */
+  .zynix-inner-hero {
+    padding: 88px 0 48px;
+  }
+  .zynix-inner-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .zynix-inner-hero-text .zynix-tag {
+    font-size: 11px;
+    padding: 5px 12px;
+    margin-bottom: 12px;
+  }
+  .zynix-inner-hero-text h1 {
+    font-size: clamp(1.625rem, 6.5vw, 2rem);
+    letter-spacing: -1px;
+    line-height: 1.12;
+    margin-bottom: 14px;
+  }
+  .zynix-inner-hero-text p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .zynix-hero-btns {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .zynix-hero-btns .zynix-btn-primary,
+  .zynix-hero-btns .zynix-btn-secondary {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .zynix-inner-hero-img img {
+    max-width: 100%;
+    border-radius: 16px;
+  }
+
+  /* ── Homepage Hero ── */
+  .zynix-homepage-hero {
+    padding: 88px 0 48px;
+  }
+  .zynix-homepage-hero h1 {
+    font-size: clamp(1.625rem, 6.5vw, 2rem);
+    letter-spacing: -1px;
+    line-height: 1.12;
+  }
+  .zynix-homepage-hero p {
+    font-size: 0.9375rem;
+  }
+
+  /* ── Section Spacing: balanced rhythm ── */
+  .zynix-inner-page section {
+    padding: 56px 0;
+  }
+  .zynix-inner-page section > .zynix-container > h2 {
+    font-size: clamp(1.375rem, 5.5vw, 1.75rem);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .zynix-section-sub {
+    font-size: 0.9375rem;
+    margin-bottom: 32px;
+    line-height: 1.6;
+    padding: 0 4px;
+  }
+  .zynix-inner-page .zynix-tag {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
+
+  /* ── Problem Cards: single col with tighter padding ── */
+  .zynix-problem-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .zynix-problem-card {
+    padding: 24px 20px;
+  }
+  .zynix-problem-card h3 {
+    font-size: 16px;
+  }
+  .zynix-problem-card p {
+    font-size: 13px;
+  }
+
+  /* ── Feature Cards: single col ── */
+  .zynix-feature-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .zynix-feature-card {
+    padding: 24px 20px;
+  }
+  .zynix-feature-card h3 {
+    font-size: 15px;
+  }
+  .zynix-feature-card p {
+    font-size: 13px;
+  }
+  .zynix-feature-metric span {
+    font-size: 20px;
+  }
+
+  /* ── Metrics Bar ── */
+  .zynix-metrics-bar {
+    flex-direction: column;
+    gap: 20px;
+    padding: 32px 20px;
+    border-radius: 16px;
+  }
+  .zynix-metric-value {
+    font-size: 28px;
+  }
+  .zynix-metric-label {
+    font-size: 13px;
+  }
+
+  /* ── Architecture Cards ── */
+  .zynix-arch-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .zynix-arch-card {
+    padding: 24px 20px;
+  }
+  .zynix-arch-card h3 {
+    font-size: 17px;
+  }
+
+  /* ── Agent Cards ── */
+  .zynix-agents-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .zynix-agent-card {
+    padding: 24px 20px;
+  }
+  .zynix-agent-header h3 {
+    font-size: 16px;
+  }
+  .zynix-agent-card p {
+    font-size: 13px;
+  }
+  .zynix-agent-metrics span {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  /* ── Safety Cards ── */
+  .zynix-safety-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 32px;
+  }
+  .zynix-safety-card {
+    padding: 20px 14px;
+  }
+  .zynix-safety-card h4 {
+    font-size: 13px;
+  }
+  .zynix-safety-card p {
+    font-size: 12px;
+  }
+
+  /* ── Care Plan Cards ── */
+  .zynix-careplan-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 32px;
+  }
+  .zynix-careplan-card {
+    padding: 20px 16px;
+  }
+  .zynix-careplan-card h4 {
+    font-size: 15px;
+  }
+  .zynix-careplan-card p {
+    font-size: 12px;
+  }
+
+  /* ── Flywheel & Orchestration ── */
+  .zynix-flywheel-grid,
+  .zynix-orch-flow {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 32px;
+  }
+  .zynix-flywheel-step,
+  .zynix-orch-step {
+    min-width: auto;
+    width: 100%;
+    padding: 18px 16px;
+  }
+  .zynix-flywheel-arrow,
+  .zynix-orch-arrow {
+    display: none;
+  }
+
+  /* ── Data Layers ── */
+  .zynix-data-layers {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .zynix-data-layer {
+    padding: 24px 20px;
+  }
+
+  /* ── Analytics Tracks ── */
+  .zynix-track-header {
+    padding: 18px 20px;
+    gap: 12px;
+  }
+  .zynix-track-header h3 {
+    font-size: 16px;
+  }
+  .zynix-track-body {
+    padding: 18px 20px;
+  }
+  .zynix-track-body li {
+    font-size: 13px;
+    padding: 8px 0 8px 20px;
+  }
+
+  /* ── Comparison Grid ── */
+  .zynix-compare-grid,
+  .zynix-comparison-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .zynix-compare-card,
+  .zynix-comparison-col {
+    padding: 24px 20px;
+  }
+  .zynix-compare-card h3 {
+    font-size: 17px;
+  }
+
+  /* ── Comparison Table ── */
+  .zynix-compare-table {
+    font-size: 11px;
+  }
+  .zynix-compare-table th,
+  .zynix-compare-table td {
+    padding: 8px 10px;
+  }
+
+  /* ── Blog Cards ── */
+  .zynix-blog-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .zynix-blog-card {
+    padding: 22px 20px;
+  }
+  .zynix-blog-card h3 {
+    font-size: 15px;
+  }
+  .zynix-blog-featured h3 {
+    font-size: 18px;
+  }
+
+  /* ── Case Study Cards ── */
+  .zynix-case-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .zynix-case-card {
+    padding: 22px 20px;
+  }
+  .zynix-case-card h3 {
+    font-size: 15px;
+  }
+  .zynix-case-metric span {
+    font-size: 24px;
+  }
+
+  /* ── FAQ Accordion ── */
+  .zynix-faq-q {
+    padding: 16px 20px;
+    font-size: 14px;
+    min-height: 48px;
+  }
+  .zynix-faq-a p {
+    padding: 0 20px 16px;
+    font-size: 13px;
+  }
+
+  /* ── Contact Form ── */
+  .zynix-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .zynix-contact-form-wrap {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+  .zynix-contact-form-wrap h3 {
+    font-size: 18px;
+  }
+  .zynix-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .zynix-form-group label {
+    font-size: 13px;
+  }
+  .zynix-form-group input,
+  .zynix-form-group select,
+  .zynix-form-group textarea {
+    padding: 14px 16px;
+    border-radius: 10px;
+    min-height: 48px;
+  }
+
+  /* ── CTA Section ── */
+  .zynix-cta-section {
+    padding: 64px 20px;
+  }
+  .zynix-cta-section h2 {
+    font-size: clamp(1.375rem, 5.5vw, 1.75rem);
+    line-height: 1.2;
+  }
+  .zynix-cta-section p {
+    font-size: 0.9375rem;
+    margin-bottom: 24px;
+  }
+  .zynix-cta-section .zynix-hero-btns {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .zynix-cta-section .zynix-btn-primary,
+  .zynix-cta-section .zynix-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ── Footer ── */
+  .zynix-footer {
+    padding: 56px 20px 32px;
+  }
+  .zynix-footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .zynix-footer-brand {
+    grid-column: 1 / -1;
+  }
+  .zynix-footer-brand p {
+    font-size: 13px;
+  }
+  .zynix-footer-col h4 {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+  .zynix-footer-col a {
+    font-size: 13px;
+    padding: 5px 0;
+  }
+  .zynix-footer-bottom {
+    margin-top: 28px;
+    padding-top: 20px;
+  }
+  .zynix-footer-bottom p {
+    font-size: 12px;
+  }
+
+  /* ── KPI Chips ── */
+  .zynix-kpi-grid {
+    gap: 10px;
+  }
+  .zynix-kpi-chip {
+    padding: 14px 18px;
+    min-width: auto;
+    flex: 1 1 calc(50% - 10px);
+  }
+  .zynix-kpi-chip strong {
+    font-size: 13px;
+  }
+  .zynix-kpi-chip span {
+    font-size: 12px;
+  }
+
+  /* ── Customer Chips ── */
+  .zynix-customer-list {
+    gap: 8px;
+  }
+  .zynix-customer-chip {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  /* ── Workflow Steps ── */
+  .zynix-wf-step-card {
+    padding: 22px 18px;
+    gap: 14px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .zynix-wf-step-card h4 {
+    font-size: 15px;
+  }
+  .zynix-wf-step-card p {
+    font-size: 13px;
+  }
+
+  /* ── Story Block ── */
+  .zynix-story-block {
+    padding: 28px 22px;
+    border-radius: 16px;
+  }
+  .zynix-story-block h3 {
+    font-size: 16px;
+  }
+  .zynix-story-block p {
+    font-size: 14px;
+  }
+
+  /* ── Related Content ── */
+  .zynix-related-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .zynix-related-card {
+    padding: 16px;
+  }
+
+  /* ── Screenshot Gallery ── */
+  .zynix-screenshot-gallery {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* ── Legal Pages ── */
+  .zynix-legal-content h2 {
+    font-size: 18px;
+    margin-top: 32px;
+  }
+  .zynix-legal-content p {
+    font-size: 14px;
+  }
+
+  /* ── Trust Strip ── */
+  .zynix-trust-strip {
+    padding: 20px 0;
+  }
+  .zynix-trust-label {
+    font-size: 10px;
+    margin-bottom: 12px;
+  }
+  .zynix-trust-track {
+    gap: 28px;
+  }
+  .zynix-trust-track span {
+    font-size: 12px;
+  }
+
+  /* ── Breadcrumb ── */
+  .zynix-breadcrumb {
+    font-size: 12px;
+    padding: 10px 0;
+  }
+
+  /* ── About Quote ── */
+  .zynix-about-quote blockquote {
+    font-size: 15px;
+    padding-left: 18px;
+  }
+
+  /* ── Mobile Menu polish ── */
+  .zynix-mobile-section-trigger {
+    font-size: 15px;
+    padding: 14px 0;
+    min-height: 48px;
+  }
+  .zynix-mobile-section-links a {
+    font-size: 14px;
+    padding: 12px 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .zynix-mobile-cta {
+    margin-top: 20px;
+    padding: 16px 32px;
+    border-radius: 10px;
+    font-size: 16px;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Results Section (blue bg) ── */
+  .zynix-results-section {
+    padding: 56px 0;
+  }
+
+  /* ── Placeholder / Careers ── */
+  .zynix-placeholder-section {
+    padding: 80px 20px;
+  }
+  .zynix-placeholder-section h2 {
+    font-size: 24px;
+  }
+  .zynix-placeholder-section p {
+    font-size: 14px;
+  }
+
+  /* ── Crisis Section ── */
+  .zynix-crisis-section {
+    padding: 56px 0;
+  }
+
+  /* ── Workflow Timeline (left-border style) ── */
+  .zynix-workflow-timeline {
+    margin-top: 32px;
+    padding-left: 20px;
+  }
+  .zynix-wf-step {
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .zynix-wf-dot {
+    left: -27px;
+  }
+  .zynix-wf-content h4 {
+    font-size: 15px;
+  }
+  .zynix-wf-content p {
+    font-size: 13px;
+  }
+
+  /* ── Agent Link Cards ── */
+  .zynix-agent-link-card {
+    padding: 20px 18px;
+  }
+  .zynix-agent-link-card h3 {
+    font-size: 15px;
+  }
+  .zynix-agent-link-card p {
+    font-size: 12px;
+  }
+}
+
+/* ── Extra-small iPhone (375px and below) ── */
+@media (max-width: 375px) {
+  .zynix-container {
+    padding: 0 16px;
+  }
+
+  .zynix-inner-hero-text h1,
+  .zynix-homepage-hero h1 {
+    font-size: 1.5rem;
+    letter-spacing: -0.8px;
+  }
+
+  .zynix-inner-page section > .zynix-container > h2 {
+    font-size: 1.25rem;
+  }
+
+  .zynix-safety-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .zynix-footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .zynix-kpi-chip {
+    flex: 1 1 100%;
+  }
+
+  .zynix-mega-nav {
+    padding: 0 12px;
+  }
+
+  .zynix-nav-cta {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+
+/* ── Live-site additional components (testimonials, pipeline diagram, ROI, discharge) ── */
+
+/* Tablet collapse for wider grids */
+@media (max-width: 991px) {
+  .zynix-testimonials-grid { grid-template-columns: 1fr; }
+  .zpa-diagram { grid-template-columns: 1fr; gap: 24px; }
+  .zpa-nodes { flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .zpa-flow { display: none; }
+  .zd-grid { grid-template-columns: 1fr; gap: 16px; }
+  .zd-vs { text-align: center; }
+  .zynix-roi-calculator { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  /* ── Testimonials ── */
+  .zynix-testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .zynix-testimonial-card {
+    padding: 24px 20px;
+  }
+  .zynix-testimonial-quote {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .zynix-testimonial-author {
+    font-size: 13px;
+  }
+  .zynix-testimonial-stars {
+    font-size: 14px;
+  }
+
+  /* ── Architecture Pipeline Diagram ── */
+  .zpa-diagram {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    overflow-x: hidden;
+  }
+  .zpa-nodes {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .zpa-node {
+    min-width: auto;
+    flex: 0 0 calc(33% - 8px);
+  }
+  .zpa-flow,
+  .zpa-flow-line {
+    display: none;
+  }
+  .zpa-box {
+    width: 100%;
+  }
+  .zpa-src-box,
+  .zpa-box {
+    padding: 16px;
+  }
+  .zpa-src-item {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+  .zpa-circle {
+    width: 56px;
+    height: 56px;
+  }
+  .zpa-ico {
+    font-size: 18px;
+  }
+
+  /* ── Discharge / Before-After Grid ── */
+  .zd-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .zd-vs {
+    text-align: center;
+    font-size: 14px;
+    padding: 8px 0;
+  }
+  .zd-mob-without,
+  .zd-mob-with {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+  .zd-mob-label {
+    font-size: 13px;
+  }
+  .zd-mob-item {
+    font-size: 13px;
+    padding: 8px 0;
+  }
+
+  /* ── ROI Calculator ── */
+  .zynix-roi-calculator {
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+  .zynix-roi-inputs {
+    width: 100%;
+  }
+  .zynix-roi-input-group label {
+    font-size: 13px;
+  }
+  .zynix-roi-slider {
+    width: 100%;
+  }
+  .zynix-roi-value {
+    font-size: 14px;
+  }
+  .zynix-roi-results {
+    width: 100%;
+  }
+  .zynix-roi-result-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .zynix-roi-result {
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .zynix-roi-number {
+    font-size: 20px;
+  }
+  .zynix-roi-label {
+    font-size: 12px;
+  }
+
+  /* ── FAQ Section (homepage version) ── */
+  .zynix-faq-section .zynix-faq-list {
+    max-width: 100%;
+  }
+}
