@@ -1378,6 +1378,14 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
     max-height: 70vh !important;
   }
 }
+  #zynix-chat-panel {
+    width: calc(100vw - 32px) !important;
+    right: -8px !important;
+    bottom: 68px !important;
+    max-height: 70vh !important;
+  }
+}
+
 /* ══════════════════════════════════════════════════════════════
    iPHONE / MOBILE-FIRST OPTIMIZATION
    Targets: 375px, 390px, 393px, 414px, 430px
