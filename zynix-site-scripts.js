@@ -78,7 +78,21 @@
     '/solutions-use-case-prior-auth': 'Prior Authorization',
     '/solutions-use-case-preventive-screening': 'Preventive Screening',
     '/solutions-use-case-readmission-prevention': 'Readmission Prevention',
-    '/integrations': 'Integrations'
+    '/integrations': 'Integrations',
+    '/case-studies': 'Case Studies',
+    '/case-studies/palm-beach-aco': 'Palm Beach ACO',
+    '/case-studies/amistad': 'AMISTAD CHC',
+    '/case-studies/apollo-clinic': 'Apollo Clinic',
+    '/case-studies/nhs': 'NHS Health System',
+    '/case-studies/west-florida-aco': 'West Florida ACO',
+    '/case-studies/space-coast-aco': 'Space Coast ACO',
+    '/case-studies/central-florida-aco': 'Central Florida ACO',
+    '/case-studies/eternal-health': 'eTernal Health',
+    '/case-studies/health-systems': 'Health Systems',
+    '/case-studies/acos': 'ACOs & MSOs',
+    '/case-studies/health-plans': 'Health Plans',
+    '/case-studies/practices': 'Independent Practices',
+    '/case-studies/fqhcs': 'FQHCs'
   };
 
   var CROSS_LINKS = {
@@ -1795,10 +1809,10 @@
       { title: 'AMISTAD CHC', metric: '15+', label: 'Languages Supported', seg: 'FQHC', desc: 'ZynAfterHours, Preventive & Quality Activation Agents, SDoH Agent', slug: '/case-studies/amistad' },
       { title: 'Apollo Clinic', metric: '40%', label: 'No-Show Reduction', seg: 'Practice', desc: 'ZynSchedule, ZynReminder, ZynAuth', slug: '/case-studies/apollo-clinic' },
       { title: 'NHS Health System', metric: '40%', label: 'Gap Closure Improvement', seg: 'Health System', desc: 'Full Zynix Platform, ZynAfterHours, ZynScribe, ToC Agent', slug: '/case-studies/nhs' },
-      { title: 'West Florida ACO', metric: '40%', label: 'Quality Gap Closure Improvement', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics' },
-      { title: 'Space Coast ACO', metric: '85%+', label: 'TCM Contact Rate', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics' },
-      { title: 'Central Florida ACO', metric: '2.5x', label: 'ROI in Year One', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics' },
-      { title: 'eTernal Health', metric: '45%', label: 'Medication Adherence Improvement', seg: 'Health Plan', desc: 'PDV Agents, Medication Adherence Programs' }
+      { title: 'West Florida ACO', metric: '40%', label: 'Quality Gap Closure Improvement', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies/west-florida-aco' },
+      { title: 'Space Coast ACO', metric: '85%+', label: 'TCM Contact Rate', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies/space-coast-aco' },
+      { title: 'Central Florida ACO', metric: '2.5x', label: 'ROI in Year One', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies/central-florida-aco' },
+      { title: 'eTernal Health', metric: '45%', label: 'Medication Adherence Improvement', seg: 'Health Plan', desc: 'PDV Agents, Medication Adherence Programs', slug: '/case-studies/eternal-health' }
     ];
     var html = '<div class="zynix-case-grid">';
     studies.forEach(function(s) {
@@ -6150,6 +6164,16 @@ function renderDataAnalyticsV7() {
     '/resources/webinars': renderWebinars,
     '/resources/whitepapers': renderWhitepapers,
     '/case-studies/pbaco': renderCaseStudyPalmBeach,
+    '/case-studies/west-florida-aco': renderCaseStudyWestFlorida,
+    '/case-studies/space-coast-aco': renderCaseStudySpaceCoast,
+    '/case-studies/central-florida-aco': renderCaseStudyCentralFlorida,
+    '/case-studies/eternal-health': renderCaseStudyEternalHealth,
+    // V7: Case Studies by Audience Segment
+    '/case-studies/health-systems': renderCaseStudiesHealthSystems,
+    '/case-studies/acos': renderCaseStudiesACOs,
+    '/case-studies/health-plans': renderCaseStudiesHealthPlans,
+    '/case-studies/practices': renderCaseStudiesPractices,
+    '/case-studies/fqhcs': renderCaseStudiesFQHCs,
     // V7: Use Cases (all 30)
     '/use-cases/post-discharge-follow-up': USE_CASE_ROUTES['/use-cases/post-discharge-follow-up'],
     '/use-cases/after-hours-triage-multi-site': USE_CASE_ROUTES['/use-cases/after-hours-triage-multi-site'],
@@ -6808,6 +6832,213 @@ function renderDataAnalyticsV7() {
     '</div></div></section>' +
     renderCTA('Achieve Results Like Palm Beach ACO', 'See how Zynix can transform your organization\u2019s value-based care performance in weeks, not months.', 'Request a Demo') +
     renderFooter();
+  }
+
+  // ── CASE STUDY: West Florida ACO ──
+  function renderCaseStudyWestFlorida() {
+    return renderInnerHero('CASE STUDY', 'West Florida ACO', 'AI-Powered Quality Gap Closure Drives 40% Improvement Across ACO Network', IMG.care, 'West Florida ACO case study with Zynix AI') +
+    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
+
+    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">40%</span><span style="font-size:14px;color:var(--z-text-secondary)">Quality Gap Closure Improvement</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">6</span><span style="font-size:14px;color:var(--z-text-secondary)">Weeks to Go-Live</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↑</span><span style="font-size:14px;color:var(--z-text-secondary)">RAF Accuracy</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↓</span><span style="font-size:14px;color:var(--z-text-secondary)">Readmission Rate</span></div>' +
+    '</div>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">West Florida ACO manages a growing attributed population under MSSP. The ACO struggled with:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>Manual gap worklists:</strong> Quality teams relied on quarterly claims refreshes, missing the optimal intervention window for many patients.</li>' +
+    '<li style="margin-bottom:8px"><strong>Incomplete HCC capture:</strong> Risk adjustment coding depended on chart reviews that lagged behind encounter volume, leaving revenue on the table.</li>' +
+    '<li style="margin-bottom:8px"><strong>Fragmented outreach:</strong> Each practice handled patient outreach independently, creating inconsistent engagement across the network.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">West Florida ACO deployed the Zynix AI Data Platform with inbound and outbound AI agents and predictive analytics:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>AI Data Platform:</strong> Real-time claims and clinical data aggregation replaced quarterly worklist refreshes with continuous gap identification.</li>' +
+    '<li style="margin-bottom:8px"><strong>Outbound Agents:</strong> Automated patient outreach for gap closure, AWV scheduling, and TCM follow-up, coordinated centrally across all practices.</li>' +
+    '<li style="margin-bottom:8px"><strong>Predictive Analytics:</strong> Risk stratification identified rising-risk patients before acute events, enabling proactive intervention.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>40% quality gap closure improvement:</strong> Continuous gap identification and automated outreach closed care gaps at rates far exceeding prior manual workflows.</li>' +
+    '<li style="margin-bottom:8px"><strong>Improved RAF accuracy:</strong> Real-time HCC suspect identification and chart review automation improved risk adjustment accuracy and financial performance.</li>' +
+    '<li style="margin-bottom:8px"><strong>Reduced readmissions:</strong> Predictive analytics flagged high-risk patients for proactive outreach, reducing avoidable readmissions across the network.</li>' +
+    '<li style="margin-bottom:8px"><strong>Go-live in 6 weeks:</strong> Full platform deployment including EHR integration, data onboarding, and agent configuration was completed in under two months.</li>' +
+    '</ul>' +
+
+    '</div></div></section>' +
+    renderCTA('Close Gaps Like West Florida ACO', 'See how Zynix AI can improve your ACO\u2019s quality performance and shared savings.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  // ── CASE STUDY: Space Coast ACO ──
+  function renderCaseStudySpaceCoast() {
+    return renderInnerHero('CASE STUDY', 'Space Coast ACO', 'AI Agents Achieve 85%+ TCM Contact Rate for MSSP ACO', IMG.care, 'Space Coast ACO case study with Zynix AI') +
+    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
+
+    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">85%+</span><span style="font-size:14px;color:var(--z-text-secondary)">TCM Contact Rate</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↑</span><span style="font-size:14px;color:var(--z-text-secondary)">Shared Savings</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↓</span><span style="font-size:14px;color:var(--z-text-secondary)">Avoidable ED Visits</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">4</span><span style="font-size:14px;color:var(--z-text-secondary)">Weeks to Go-Live</span></div>' +
+    '</div>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Space Coast ACO, an MSSP participant serving Medicare beneficiaries in Brevard County, struggled with transitions of care:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>Low TCM contact rates:</strong> Manual outreach reached fewer than 35% of discharged patients within the CMS 2-business-day window.</li>' +
+    '<li style="margin-bottom:8px"><strong>Missed TCM revenue:</strong> Without timely contact, the ACO could not bill for TCM services on the majority of discharge episodes.</li>' +
+    '<li style="margin-bottom:8px"><strong>Readmission risk:</strong> Patients discharged without follow-up were more likely to return to the ED or be readmitted, increasing total cost of care.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Space Coast ACO deployed the Zynix AI Data Platform with inbound and outbound agents focused on post-discharge workflows:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>Post-Discharge AI Agent:</strong> Automated outreach to every discharged patient within 48 hours, handling medication reconciliation, follow-up scheduling, and barrier identification.</li>' +
+    '<li style="margin-bottom:8px"><strong>Predictive Analytics:</strong> Risk scores identified patients most likely to be readmitted, enabling the care team to prioritize high-acuity follow-ups.</li>' +
+    '<li style="margin-bottom:8px"><strong>Inbound AI Agent:</strong> 24/7 availability for patients calling back with post-discharge questions, reducing unnecessary ED utilization.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>85%+ TCM contact rate:</strong> AI agents reached the vast majority of discharged patients within the CMS window, up from under 35% with manual outreach.</li>' +
+    '<li style="margin-bottom:8px"><strong>Increased shared savings:</strong> Higher TCM billing rates and reduced readmissions improved the ACO\u2019s financial performance under MSSP.</li>' +
+    '<li style="margin-bottom:8px"><strong>Reduced avoidable ED visits:</strong> 24/7 inbound triage gave patients an alternative to the ED for post-discharge concerns.</li>' +
+    '<li style="margin-bottom:8px"><strong>Go-live in 4 weeks:</strong> Rapid deployment leveraging pre-built connectors and Zynix\u2019s EHR integration framework.</li>' +
+    '</ul>' +
+
+    '</div></div></section>' +
+    renderCTA('Transform TCM Like Space Coast ACO', 'See how Zynix AI can improve your post-discharge contact rates and reduce readmissions.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  // ── CASE STUDY: Central Florida ACO ──
+  function renderCaseStudyCentralFlorida() {
+    return renderInnerHero('CASE STUDY', 'Central Florida ACO', '2.5x ROI in Year One with Full-Stack AI Care Operations', IMG.care, 'Central Florida ACO case study with Zynix AI') +
+    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
+
+    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">2.5x</span><span style="font-size:14px;color:var(--z-text-secondary)">ROI in Year One</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↑</span><span style="font-size:14px;color:var(--z-text-secondary)">Quality Score</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↓</span><span style="font-size:14px;color:var(--z-text-secondary)">Total Cost of Care</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">8</span><span style="font-size:14px;color:var(--z-text-secondary)">Weeks to Full Deploy</span></div>' +
+    '</div>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Central Florida ACO manages a large MSSP population across multiple practice sites. Despite strong clinical leadership, the ACO faced persistent headwinds:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>Rising total cost of care:</strong> Avoidable ED visits, readmissions, and fragmented care transitions drove costs above benchmarks.</li>' +
+    '<li style="margin-bottom:8px"><strong>Quality measure performance:</strong> Manual workflows could not keep pace with the volume of HCC gaps, quality measures, and outreach needed across the attributed population.</li>' +
+    '<li style="margin-bottom:8px"><strong>Provider engagement:</strong> Participating practices needed tools that integrated into their workflows without adding administrative burden.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Central Florida ACO deployed the full Zynix AI stack:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>AI Data Platform:</strong> Unified data layer aggregating claims, clinical, ADT, and lab data in real time across all participating practices.</li>' +
+    '<li style="margin-bottom:8px"><strong>Inbound & Outbound Agents:</strong> AI-powered patient engagement including post-discharge follow-up, gap closure outreach, AWV scheduling, and 24/7 after-hours triage.</li>' +
+    '<li style="margin-bottom:8px"><strong>Predictive Analytics:</strong> Risk stratification and predictive models identifying patients likely to drive avoidable utilization, enabling proactive care management.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>2.5x ROI in year one:</strong> The combined impact of improved TCM revenue, gap closure, reduced readmissions, and lower ED utilization delivered ROI well above investment.</li>' +
+    '<li style="margin-bottom:8px"><strong>Quality score improvement:</strong> Automated gap closure and AWV campaigns lifted quality measure performance across the ACO.</li>' +
+    '<li style="margin-bottom:8px"><strong>Total cost of care reduction:</strong> Proactive risk management and transitions of care support reduced avoidable utilization and brought per-member costs below benchmarks.</li>' +
+    '<li style="margin-bottom:8px"><strong>Full deployment in 8 weeks:</strong> Platform went live across all practices with EHR integration, agent configuration, and predictive model calibration completed in under two months.</li>' +
+    '</ul>' +
+
+    '</div></div></section>' +
+    renderCTA('Achieve ROI Like Central Florida ACO', 'See how the full Zynix platform can drive measurable financial and quality results for your ACO.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  // ── CASE STUDY: eTernal Health (Health Plan) ──
+  function renderCaseStudyEternalHealth() {
+    return renderInnerHero('CASE STUDY', 'eTernal Health', 'AI-Driven Medication Adherence Programs Improve Star Ratings for Medicare Advantage Plan', IMG.patients, 'eTernal Health case study with Zynix AI') +
+    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
+
+    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">45%</span><span style="font-size:14px;color:var(--z-text-secondary)">Medication Adherence Improvement</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↑</span><span style="font-size:14px;color:var(--z-text-secondary)">Star Rating Improvement</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↓</span><span style="font-size:14px;color:var(--z-text-secondary)">Avoidable Hospitalizations</span></div>' +
+    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">6</span><span style="font-size:14px;color:var(--z-text-secondary)">Weeks to Go-Live</span></div>' +
+    '</div>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">eTernal Health is a Medicare Advantage health plan managing a growing membership. Medication non-adherence was undermining both clinical outcomes and Star Ratings:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>Low PDC scores:</strong> Proportion of Days Covered (PDC) for diabetes, hypertension, and cholesterol medications fell below CMS Star Rating thresholds.</li>' +
+    '<li style="margin-bottom:8px"><strong>Manual outreach limitations:</strong> Care management teams could only reach a fraction of non-adherent members through phone-based outreach campaigns.</li>' +
+    '<li style="margin-bottom:8px"><strong>Avoidable utilization:</strong> Non-adherent members drove disproportionate ED and inpatient utilization, increasing medical loss ratio.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">eTernal Health deployed Zynix AI\u2019s medication adherence program with AI-powered outreach agents:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>Post-Discharge Verification Agents:</strong> Automated medication reconciliation calls after every discharge, verifying prescriptions were filled and identifying barriers to adherence.</li>' +
+    '<li style="margin-bottom:8px"><strong>Medication Adherence Programs:</strong> Ongoing AI-powered outreach to members approaching PDC gaps, with barrier identification and pharmacy coordination.</li>' +
+    '<li style="margin-bottom:8px"><strong>Predictive Risk Models:</strong> Identification of members most likely to become non-adherent, enabling proactive intervention before gaps occur.</li>' +
+    '</ul>' +
+
+    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
+    '<li style="margin-bottom:8px"><strong>45% medication adherence improvement:</strong> PDC scores improved significantly across D08 (diabetes), D09 (hypertension), and D10 (cholesterol) measures.</li>' +
+    '<li style="margin-bottom:8px"><strong>Star Rating improvement:</strong> Medication adherence gains contributed to measurable improvement in the plan\u2019s overall CMS Star Rating.</li>' +
+    '<li style="margin-bottom:8px"><strong>Reduced avoidable hospitalizations:</strong> Better medication adherence correlated with fewer preventable ED visits and inpatient admissions among targeted members.</li>' +
+    '<li style="margin-bottom:8px"><strong>Go-live in 6 weeks:</strong> Full deployment including claims data integration, member stratification, and agent configuration.</li>' +
+    '</ul>' +
+
+    '</div></div></section>' +
+    renderCTA('Improve Star Ratings Like eTernal Health', 'See how Zynix AI can drive medication adherence and quality improvement for your health plan.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  // ── CASE STUDIES: Audience-Segmented Landing Pages ──
+  function renderCaseStudiesBySegment(segTitle, segDesc, segTag, filterSeg) {
+    var allStudies = [
+      { title: 'Palm Beach ACO', metric: '3x', label: 'AWV Completion Improvement', seg: 'ACO', desc: 'Outbound Agents (PDV & AWV), AI Scribe', slug: '/case-studies/palm-beach-aco' },
+      { title: 'AMISTAD CHC', metric: '15+', label: 'Languages Supported', seg: 'FQHC', desc: 'ZynAfterHours, Preventive & Quality Activation Agents, SDoH Agent', slug: '/case-studies/amistad' },
+      { title: 'Apollo Clinic', metric: '40%', label: 'No-Show Reduction', seg: 'Practice', desc: 'ZynSchedule, ZynReminder, ZynAuth', slug: '/case-studies/apollo-clinic' },
+      { title: 'NHS Health System', metric: '40%', label: 'Gap Closure Improvement', seg: 'Health System', desc: 'Full Zynix Platform, ZynAfterHours, ZynScribe, ToC Agent', slug: '/case-studies/nhs' },
+      { title: 'West Florida ACO', metric: '40%', label: 'Quality Gap Closure Improvement', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies/west-florida-aco' },
+      { title: 'Space Coast ACO', metric: '85%+', label: 'TCM Contact Rate', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies/space-coast-aco' },
+      { title: 'Central Florida ACO', metric: '2.5x', label: 'ROI in Year One', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies/central-florida-aco' },
+      { title: 'eTernal Health', metric: '45%', label: 'Medication Adherence Improvement', seg: 'Health Plan', desc: 'PDV Agents, Medication Adherence Programs', slug: '/case-studies/eternal-health' }
+    ];
+    var filtered = allStudies.filter(function(s) { return s.seg === filterSeg; });
+    var html = '<div class="zynix-case-grid">';
+    filtered.forEach(function(s) {
+      var cardInner = '<span class="zynix-case-seg">' + s.seg + '</span><h3>' + s.title + '</h3><div class="zynix-case-metric"><span>' + s.metric + '</span><small>' + s.label + '</small></div>' + (s.desc ? '<p style="font-size:13px;color:var(--z-text-secondary);margin-top:12px;line-height:1.5">' + s.desc + '</p>' : '');
+      html += '<a href="' + s.slug + '" class="zynix-case-card fade-in-up" style="text-decoration:none;color:inherit;display:block">' + cardInner + '<span style="display:inline-block;margin-top:12px;color:var(--z-primary);font-size:14px;font-weight:600">Read case study &rarr;</span></a>';
+    });
+    html += '</div>';
+    return renderInnerHero('CASE STUDIES', segTitle, segDesc, null, '') +
+    '<section class="zynix-case-section"><div class="zynix-container">' +
+    '<div style="margin-bottom:32px"><a href="/case-studies" style="color:var(--z-primary);font-size:14px;font-weight:600;text-decoration:none">&larr; All Case Studies</a></div>' +
+    html + '</div></section>' +
+    renderCTA('Ready to Write Your Success Story?', 'Join the organizations already achieving measurable results with Zynix.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  function renderCaseStudiesHealthSystems() {
+    return renderCaseStudiesBySegment('Case Studies for Health Systems', 'See how health systems are transforming population health management, after-hours coverage, and clinical operations with Zynix AI.', 'HEALTH SYSTEMS', 'Health System');
+  }
+  function renderCaseStudiesACOs() {
+    return renderCaseStudiesBySegment('Case Studies for ACOs & MSOs', 'See how ACOs are improving quality gap closure, TCM contact rates, and shared savings performance with Zynix AI.', 'ACOs & MSOs', 'ACO');
+  }
+  function renderCaseStudiesHealthPlans() {
+    return renderCaseStudiesBySegment('Case Studies for Health Plans', 'See how health plans are improving Star Ratings, medication adherence, and member engagement with Zynix AI.', 'HEALTH PLANS', 'Health Plan');
+  }
+  function renderCaseStudiesPractices() {
+    return renderCaseStudiesBySegment('Case Studies for Independent Practices', 'See how independent and group practices are reducing no-shows, automating scheduling, and improving operational efficiency with Zynix AI.', 'INDEPENDENT PRACTICES', 'Practice');
+  }
+  function renderCaseStudiesFQHCs() {
+    return renderCaseStudiesBySegment('Case Studies for FQHCs', 'See how Federally Qualified Health Centers are delivering multilingual care coordination and improving UDS quality measures with Zynix AI.', 'FQHCs', 'FQHC');
   }
 
   // ── Custom 404 page renderer ──
