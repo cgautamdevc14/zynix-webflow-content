@@ -656,8 +656,8 @@
       (tag ? '<span class="zynix-tag">' + tag + '</span>' : '') +
       '<h1>' + title + '</h1>' +
       '<p>' + subtitle + '</p>' +
-      '<div class="zynix-hero-btns"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a>' + secondaryBtn + '</div>' +
-      '<div class="zynix-hero-trust">' +
+      '<div class="zynix-hero-btns" style="margin-bottom:20px"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a>' + secondaryBtn + '</div>' +
+      '<div class="zynix-hero-trust" style="margin-top:4px">' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> HIPAA Compliant</span>' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> SOC 2 Type II</span>' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0D9B6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> HITRUST Ready</span>' +
@@ -1872,8 +1872,15 @@
     nav.innerHTML =
       '<a href="/" class="zynix-nav-logo"><img src="' + IMG.logo + '" alt="Zynix AI"><span class="zynix-nav-logo-text">zynix<span class="zynix-logo-dot">.ai</span></span></a>' +
       '<div class="zynix-nav-items">' +
-        // 0. ZIP — standalone link to Zynix Intelligent Platform
-        '<a href="/platform" class="zynix-nav-trigger" style="text-decoration:none">ZIP</a>' +
+        // 0. ZIP — narrow dropdown for Zynix Intelligent Platform
+        '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">ZIP <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
+        '<div class="zynix-dropdown-panel"><div class="zynix-dropdown-panel-inner">' +
+          al('/platform','Zynix OS','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>','Platform overview') +
+          al('/company-zynixllm','ZynixLLM','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>','Healthcare language model') +
+          al('/care-plans','Deployable Care Plans','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>','Configurable care workflows') +
+          al('/security','Security','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>','HIPAA, SOC 2, HITRUST') +
+          al('/integrations','Integrations','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>','EHR &amp; data connectors') +
+        '</div></div></div>' +
         // 1. Solutions — merged mega panel
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Solutions <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
         '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
@@ -1956,7 +1963,8 @@
     var mobile = document.createElement('div');
     mobile.className = 'zynix-mobile-menu';
     mobile.innerHTML =
-      '<a href="/platform" style="display:block;padding:12px 20px;font-weight:700;font-size:15px;color:var(--z-accent,#F16529);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.06)">ZIP &mdash; Zynix Intelligent Platform</a>' +
+      '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger" style="color:var(--z-accent,#F16529);font-weight:700">ZIP &#9662;</button><div class="zynix-mobile-section-links">' +
+      '<a href="/platform"><strong>Zynix OS</strong></a><a href="/company-zynixllm">ZynixLLM</a><a href="/care-plans">Deployable Care Plans</a><a href="/security">Security</a><a href="/integrations">Integrations</a></div></div>' +
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Solutions &#9662;</button><div class="zynix-mobile-section-links">' +
       '<a href="/platform"><strong>Zynix Intelligent Platform</strong></a>' +
       '<strong>Data &amp; Documentation</strong>' +
