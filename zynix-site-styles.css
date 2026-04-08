@@ -2759,3 +2759,75 @@ body > .w-footer {
 .zynix-inner-page [style*="color:#5A6478"] {
   color: var(--z-text-secondary) !important;
 }
+
+/* ── DARK MODE — Image Treatments ── */
+
+/* Client logos: invert to white on dark bg */
+.zynix-trust-marquee img,
+.zynix-trust-track img,
+[class*="trust-marquee"] img,
+[class*="trust-track"] img {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.7 !important;
+  transition: opacity 0.3s ease !important;
+}
+.zynix-trust-marquee img:hover,
+.zynix-trust-track img:hover,
+[class*="trust-marquee"] img:hover,
+[class*="trust-track"] img:hover {
+  opacity: 1 !important;
+}
+
+/* Dashboard screenshots: rounded corners + dark border + subtle shadow */
+.zynix-screenshot-card img,
+.zynix-platform-screenshot img,
+[class*="screenshot"] img {
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+}
+
+/* Product suite card images: darken slightly to blend */
+.zynix-feature-card img {
+  border-radius: 12px !important;
+  opacity: 0.85 !important;
+  transition: opacity 0.3s ease !important;
+}
+.zynix-feature-card:hover img {
+  opacity: 1 !important;
+}
+
+/* Architecture cards: dark bg override */
+.zynix-arch-card,
+.zynix-arch-grid {
+  background: var(--z-bg-card) !important;
+  color: var(--z-text) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* Screenshot section: dark bg */
+.zynix-screenshot-section {
+  background: var(--z-bg-surface) !important;
+}
+
+/* Hero badges: dark mode treatment */
+.zynix-hero-badge {
+  background: var(--z-bg-card) !important;
+  color: var(--z-text-secondary) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+/* Inner hero images */
+.zynix-inner-hero-img img {
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+}
+
+/* Dropdown icons: remove blue background for dark mode */
+.zynix-dropdown-panel-inner .zynix-nav-icon,
+.zynix-mega-panel-inner .zynix-nav-icon {
+  background: rgba(75,123,245,0.12) !important;
+  border-radius: 10px !important;
+  padding: 4px !important;
+}
