@@ -2660,11 +2660,15 @@ body > .w-footer {
 /* Override hardcoded white backgrounds in discharge section */
 [style*="background: #FEF2F2"],
 [style*="background:#FEF2F2"],
+[style*="background:#fef2f2"],
+[style*="background: #fef2f2"],
 [style*="background: rgb(254, 242, 242)"] {
   background: rgba(220,38,38,0.08) !important;
 }
 [style*="background: #F0FDF4"],
 [style*="background:#F0FDF4"],
+[style*="background:#f0fdf4"],
+[style*="background: #f0fdf4"],
 [style*="background: rgb(240, 253, 244)"] {
   background: rgba(16,185,129,0.08) !important;
 }
