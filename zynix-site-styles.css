@@ -2595,3 +2595,153 @@ body > .w-footer {
 .zynix-arch-card {
   border-left-color: #4B7BF5;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   DARK MODE FIX — JS-rendered inline style overrides
+   These elements have hardcoded colors in zynix-site-scripts.js
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Architecture Pipeline Diagram (homepage) ── */
+.zpa-src-box,
+.zpa-box,
+[class*="zpa-"] {
+  background: var(--z-bg-card) !important;
+  color: var(--z-text) !important;
+  border-color: var(--z-border) !important;
+}
+.zpa-src-item {
+  background: rgba(75,123,245,0.08) !important;
+  color: var(--z-text) !important;
+  border-color: var(--z-border) !important;
+}
+.zpa-circle {
+  background: var(--z-bg-alt) !important;
+  border-color: rgba(75,123,245,0.3) !important;
+}
+.zpa-flow-line,
+.zpa-flow {
+  background: var(--z-border) !important;
+}
+.zpa-label,
+.zpa-box h4,
+.zpa-src-box h4 {
+  color: var(--z-text) !important;
+}
+.zpa-box p,
+.zpa-src-box p,
+.zpa-desc {
+  color: var(--z-text-secondary) !important;
+}
+
+/* ── Discharge Before/After Grid (homepage) ── */
+.zd-mob-without {
+  background: rgba(220,38,38,0.08) !important;
+  border-color: rgba(220,38,38,0.2) !important;
+  color: var(--z-text) !important;
+}
+.zd-mob-with {
+  background: rgba(16,185,129,0.08) !important;
+  border-color: rgba(52,211,153,0.2) !important;
+  color: var(--z-text) !important;
+}
+.zd-mob-label {
+  color: var(--z-text) !important;
+}
+.zd-mob-item {
+  color: var(--z-text-secondary) !important;
+  border-bottom-color: var(--z-border) !important;
+}
+.zd-vs {
+  color: var(--z-text-muted) !important;
+}
+.zd-grid {
+  background: transparent !important;
+}
+/* Override hardcoded white backgrounds in discharge section */
+[style*="background: #FEF2F2"],
+[style*="background:#FEF2F2"],
+[style*="background: rgb(254, 242, 242)"] {
+  background: rgba(220,38,38,0.08) !important;
+}
+[style*="background: #F0FDF4"],
+[style*="background:#F0FDF4"],
+[style*="background: rgb(240, 253, 244)"] {
+  background: rgba(16,185,129,0.08) !important;
+}
+
+/* ── FAQ items (JS-rendered with inline styles) ── */
+.zynix-faq-item {
+  background: var(--z-bg-card) !important;
+  border-color: var(--z-border) !important;
+}
+.zynix-faq-q {
+  color: var(--z-text) !important;
+  background: transparent !important;
+}
+.zynix-faq-a,
+.zynix-faq-a p {
+  color: var(--z-text-secondary) !important;
+  background: transparent !important;
+}
+
+/* ── ROI Calculator inline styles ── */
+.zynix-roi-calculator {
+  background: var(--z-bg-card) !important;
+  border-color: var(--z-border) !important;
+}
+.zynix-roi-result {
+  background: var(--z-bg-alt) !important;
+  border-color: var(--z-border) !important;
+}
+.zynix-roi-number {
+  color: var(--z-accent) !important;
+}
+.zynix-roi-label {
+  color: var(--z-text-secondary) !important;
+}
+.zynix-roi-input-group label {
+  color: var(--z-text) !important;
+}
+
+/* ── Testimonial cards ── */
+.zynix-testimonial-card {
+  background: var(--z-bg-card) !important;
+  border-color: var(--z-border) !important;
+}
+.zynix-testimonial-quote {
+  color: var(--z-text-secondary) !important;
+}
+.zynix-testimonial-author {
+  color: var(--z-text) !important;
+}
+
+/* ── Homepage platform architecture interactive diagram ── */
+[style*="background: white"],
+[style*="background: #fff"],
+[style*="background: #ffffff"],
+[style*="background:#fff"],
+[style*="background:#ffffff"],
+[style*="background-color: white"],
+[style*="background-color: #fff"],
+[style*="background-color: #ffffff"] {
+  background: var(--z-bg-card) !important;
+  color: var(--z-text) !important;
+}
+
+/* ── KPI / chip badges with inline light bg ── */
+[style*="background: #EBF0FA"],
+[style*="background:#EBF0FA"],
+[style*="background: rgb(235, 240, 250)"] {
+  background: rgba(75,123,245,0.12) !important;
+}
+
+/* ── Ensure all text in JS-rendered sections is readable ── */
+.zynix-inner-page [style*="color: #1A1F2E"],
+.zynix-inner-page [style*="color:#1A1F2E"],
+.zynix-inner-page [style*="color: rgb(26, 31, 46)"] {
+  color: var(--z-text) !important;
+}
+.zynix-inner-page [style*="color: #5A6478"],
+.zynix-inner-page [style*="color:#5A6478"] {
+  color: var(--z-text-secondary) !important;
+}
