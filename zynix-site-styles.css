@@ -2824,10 +2824,246 @@ body > .w-footer {
   box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
 }
 
-/* Dropdown icons: remove blue background for dark mode */
+/* Dropdown icons: dark mode treatment */
 .zynix-dropdown-panel-inner .zynix-nav-icon,
 .zynix-mega-panel-inner .zynix-nav-icon {
   background: rgba(75,123,245,0.12) !important;
   border-radius: 10px !important;
   padding: 4px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — Hero Dashboard Card Override
+   The hero card uses inline styles with white/light colors.
+   These !important rules force dark theme on all child elements.
+   ═══════════════════════════════════════════════════════════ */
+
+/* Main card container */
+.zynix-homepage-hero .zynix-inner-hero-img > div {
+  background: var(--z-bg-card) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2) !important;
+}
+
+/* Title bar */
+.zynix-homepage-hero .zynix-inner-hero-img > div > div:first-child {
+  background: var(--z-bg-surface) !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+
+/* All text inside hero card */
+.zynix-homepage-hero .zynix-inner-hero-img div {
+  color: var(--z-text) !important;
+}
+.zynix-homepage-hero .zynix-inner-hero-img [style*="color:#1a1a2e"],
+.zynix-homepage-hero .zynix-inner-hero-img [style*="color: #1a1a2e"],
+.zynix-homepage-hero .zynix-inner-hero-img [style*="color:#1a1a"] {
+  color: var(--z-text) !important;
+}
+.zynix-homepage-hero .zynix-inner-hero-img [style*="color:rgba(0,0,0,0.6"],
+.zynix-homepage-hero .zynix-inner-hero-img [style*="color:rgba(0,0,0,0.65"],
+.zynix-homepage-hero .zynix-inner-hero-img [style*="color: rgba(0,0,0"] {
+  color: var(--z-text-secondary) !important;
+}
+
+/* Tab bar in hero card */
+.zynix-homepage-hero .zynix-inner-hero-img [style*="border-bottom:1px solid rgba(0,0,0"] {
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+.zynix-homepage-hero .zynix-inner-hero-img [style*="border-bottom:2px solid"] {
+  border-bottom-color: var(--z-accent) !important;
+}
+
+/* Stat boxes */
+.zynix-homepage-hero .zynix-inner-hero-img [style*="background:#f8f9fb"],
+.zynix-homepage-hero .zynix-inner-hero-img [style*="background: #f8f9fb"],
+.zynix-homepage-hero .zynix-inner-hero-img [style*="background:#fafbfc"],
+.zynix-homepage-hero .zynix-inner-hero-img [style*="background: #fafbfc"] {
+  background: rgba(255,255,255,0.04) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Row separators */
+.zynix-homepage-hero .zynix-inner-hero-img [style*="border-bottom:1px solid rgba(0,0,0,0.04)"] {
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Progress bar backgrounds */
+.zynix-homepage-hero .zynix-inner-hero-img [style*="background:rgba(0,0,0,0.04)"],
+.zynix-homepage-hero .zynix-inner-hero-img [style*="background:rgba(0,0,0,0.06)"],
+.zynix-homepage-hero .zynix-inner-hero-img [style*="background: rgba(0,0,0"] {
+  background: rgba(255,255,255,0.06) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — Architecture Diagram Section
+   ═══════════════════════════════════════════════════════════ */
+.zynix-architecture-diagram-section [style*="background:#fff"],
+.zynix-architecture-diagram-section [style*="background: #fff"],
+.zynix-architecture-diagram-section [style*="background:white"],
+[class*="zd-"] [style*="background:#fff"],
+[class*="zd-"] [style*="background:white"] {
+  background: var(--z-bg-card) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+[class*="zd-"] [style*="color:#1a1a2e"],
+[class*="zd-"] [style*="color: #1a1a2e"],
+[class*="zd-"] [style*="color:#111827"] {
+  color: var(--z-text) !important;
+}
+[class*="zd-"] [style*="color:#4B5563"],
+[class*="zd-"] [style*="color: #4B5563"],
+[class*="zd-"] [style*="color:#5A6478"],
+[class*="zd-"] [style*="color:rgba(0,0,0"] {
+  color: var(--z-text-secondary) !important;
+}
+[class*="zd-"] [style*="border"][style*="rgba(0,0,0"] {
+  border-color: rgba(255,255,255,0.06) !important;
+}
+[class*="zd-"] [style*="background:#f8f9fb"],
+[class*="zd-"] [style*="background:#fafbfc"],
+[class*="zd-"] [style*="background:#f3f4f6"],
+[class*="zd-"] [style*="background: #f"] {
+  background: rgba(255,255,255,0.04) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — Global inline style overrides
+   Catches any JS-rendered element with light-mode inline styles
+   ═══════════════════════════════════════════════════════════ */
+
+/* White backgrounds inside injected content */
+.zynix-inner-page [style*="background:#fff"],
+.zynix-inner-page [style*="background: #fff"],
+.zynix-inner-page [style*="background:white"],
+.zynix-inner-page [style*="background: white"] {
+  background: var(--z-bg-card) !important;
+}
+
+/* Light gray backgrounds */
+.zynix-inner-page [style*="background:#f8f9fb"],
+.zynix-inner-page [style*="background:#fafbfc"],
+.zynix-inner-page [style*="background:#f3f4f6"],
+.zynix-inner-page [style*="background:#f9fafb"] {
+  background: rgba(255,255,255,0.04) !important;
+}
+
+/* Dark text colors on light mode */
+.zynix-inner-page [style*="color:#1a1a2e"],
+.zynix-inner-page [style*="color: #1a1a2e"],
+.zynix-inner-page [style*="color:#111827"],
+.zynix-inner-page [style*="color: #111827"] {
+  color: var(--z-text) !important;
+}
+
+/* Muted text */
+.zynix-inner-page [style*="color:#4B5563"],
+.zynix-inner-page [style*="color: #4B5563"],
+.zynix-inner-page [style*="color:#5A6478"],
+.zynix-inner-page [style*="color:rgba(0,0,0,0.6"],
+.zynix-inner-page [style*="color:rgba(0,0,0,0.65"],
+.zynix-inner-page [style*="color: rgba(0,0,0,0.6"] {
+  color: var(--z-text-secondary) !important;
+}
+
+/* Light borders */
+.zynix-inner-page [style*="border:1px solid rgba(0,0,0"],
+.zynix-inner-page [style*="border-bottom:1px solid rgba(0,0,0"],
+.zynix-inner-page [style*="border:1px solid #E5E7EB"],
+.zynix-inner-page [style*="border:1px solid #e5e7eb"] {
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Box shadows with black alpha */
+.zynix-inner-page [style*="box-shadow:0 1px 3px rgba(0,0,0,0.04)"],
+.zynix-inner-page [style*="box-shadow: 0 1px 3px rgba(0,0,0"] {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — Comparison/ROI Tables
+   ═══════════════════════════════════════════════════════════ */
+.zynix-compare-table th,
+.zynix-compare-table td {
+  border-color: rgba(255,255,255,0.06) !important;
+}
+.zynix-compare-table thead th {
+  background: var(--z-bg-surface) !important;
+}
+.zynix-compare-table tbody td {
+  background: var(--z-bg-card) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — Problem/Crisis Cards
+   ═══════════════════════════════════════════════════════════ */
+.zynix-problem-card {
+  background: var(--z-bg-card) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — Caption text under screenshots
+   ═══════════════════════════════════════════════════════════ */
+.zynix-screenshot-card .caption {
+  color: var(--z-text-secondary) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — CTA section refinements
+   ═══════════════════════════════════════════════════════════ */
+.zynix-cta-section {
+  border-top: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — Testimonial Cards
+   ═══════════════════════════════════════════════════════════ */
+.zynix-testimonial-card {
+  background: var(--z-bg-card) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — ROI Calculator
+   ═══════════════════════════════════════════════════════════ */
+.zynix-roi-section [style*="background:#fff"],
+.zynix-roi-section [style*="background:white"] {
+  background: var(--z-bg-card) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — Serve Cards (audience cards)
+   ═══════════════════════════════════════════════════════════ */
+.zynix-serve-card {
+  background: var(--z-bg-card) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — Agent Cards
+   ═══════════════════════════════════════════════════════════ */
+.zynix-agent-card {
+  background: var(--z-bg-card) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — Care Plan Cards
+   ═══════════════════════════════════════════════════════════ */
+.zynix-careplan-card {
+  background: var(--z-bg-card) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE — Footer refinements
+   ═══════════════════════════════════════════════════════════ */
+.zynix-footer {
+  border-top: 1px solid rgba(255,255,255,0.06) !important;
+}
+.zynix-footer a {
+  color: var(--z-text-secondary) !important;
+}
+.zynix-footer a:hover {
+  color: var(--z-text) !important;
 }
