@@ -2723,9 +2723,19 @@ body > .w-footer {
 [style*="background:#ffffff"],
 [style*="background-color: white"],
 [style*="background-color: #fff"],
-[style*="background-color: #ffffff"] {
+[style*="background-color: #ffffff"],
+[style*="background: rgb(255, 255, 255)"],
+[style*="background: rgb(255,255,255)"] {
   background: var(--z-bg-card) !important;
   color: var(--z-text) !important;
+}
+/* ── Gray dividers in discharge table ── */
+[style*="background: rgb(226, 232, 240)"],
+[style*="background: #e2e8f0"],
+[style*="background:#e2e8f0"],
+[style*="background:#E2E8F0"],
+[style*="background: #E2E8F0"] {
+  background: var(--z-border) !important;
 }
 
 /* ── KPI / chip badges with inline light bg ── */
