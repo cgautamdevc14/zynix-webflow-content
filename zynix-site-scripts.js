@@ -77,7 +77,8 @@
     '/solutions-use-case-after-hours': 'After-Hours & Access',
     '/solutions-use-case-prior-auth': 'Prior Authorization',
     '/solutions-use-case-preventive-screening': 'Preventive Screening',
-    '/solutions-use-case-readmission-prevention': 'Readmission Prevention'
+    '/solutions-use-case-readmission-prevention': 'Readmission Prevention',
+    '/integrations': 'Integrations'
   };
 
   var CROSS_LINKS = {
@@ -5962,6 +5963,74 @@ function renderDataAnalyticsV7() {
 
 
 
+  // ── PAGE: Integrations ──
+  function renderIntegrations() {
+    return renderInnerHero('INTEGRATIONS', 'Connected to the Systems You Already Use',
+      'Zynix integrates with every major EHR, claims pipeline, and data source in healthcare — so AI agents act on real-time clinical context from day one.',
+      IMG.data, 'Zynix Integrations', 'Explore Connectors') +
+
+    '<div class="zynix-container"><div class="zynix-summary-block"><p><strong>Zynix Integrations</strong> connect your EHR, claims, ADT feeds, labs, pharmacy, and scheduling systems into a single unified data layer. Pre-built connectors go live in 2-4 weeks — no custom development required. Every data stream flows in real time, powering AI agents with the clinical context they need to act.</p></div></div>' +
+
+    renderProblemSection('Why Integration Matters', [
+      { icon: IC_ALERT, title: 'Data Silos Kill Execution', desc: 'AI that can\u2019t see the full patient picture delivers partial results. Zynix connects everything into one view.' },
+      { icon: IC_ZAP, title: 'Slow Integrations Delay ROI', desc: 'Most platforms take 6-12 months to integrate. Zynix pre-built connectors go live in 2-4 weeks.' },
+      { icon: IC_GEAR, title: 'Maintenance Overhead', desc: 'Standards change, APIs evolve. Zynix manages all connector maintenance and version updates.' }
+    ]) +
+
+    '<section class="zynix-capabilities-section" id="connectors"><div class="zynix-container">' +
+    '<span class="zynix-tag">EHR CONNECTORS</span>' +
+    '<h2>Pre-Built EHR Integrations</h2>' +
+    '<p class="zynix-section-sub">Native connectors for the EHR systems that power American healthcare.</p>' +
+    '<div class="zynix-feature-grid" style="margin-top:40px">' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>Epic</h3><p>FHIR R4, CDS Hooks, ADT feeds, and bidirectional scheduling. Certified App Orchard integration.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>Oracle Health (Cerner)</h3><p>Real-time ADT, patient search, clinical documents, and scheduling via Millennium APIs and FHIR.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>athenahealth</h3><p>Patient demographics, clinical data, scheduling, and claims via the athenaNet API and Marketplace.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>eClinicalWorks</h3><p>HL7v2 ADT, clinical documents, and scheduling integration via direct API and FHIR endpoints.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>NextGen Healthcare</h3><p>Patient records, scheduling, and claims data via NextGen API and HL7 feeds.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>Allscripts / Veradigm</h3><p>Clinical data, ADT notifications, and scheduling via Open API and HL7v2 interfaces.</p></div>' +
+    '</div></div></section>' +
+
+    '<section style="padding:80px 0;background:var(--z-bg-alt)"><div class="zynix-container">' +
+    '<span class="zynix-tag">DATA PIPELINES</span>' +
+    '<h2>Claims, Labs & Operational Data</h2>' +
+    '<p class="zynix-section-sub">Beyond the EHR — every data source that matters for value-based care.</p>' +
+    '<div class="zynix-data-layers" style="margin-top:40px">' +
+    '<div class="zynix-data-layer fade-in-up"><h3>' + IC_FILE + ' Claims Data</h3><p>837/835 claims, eligibility (270/271), ERA/EOB processing. Payer feeds, clearinghouses, and direct uploads.</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>' + IC_ZAP + ' ADT Feeds</h3><p>Real-time admit, discharge, and transfer notifications. HL7v2 ADT-A01 through A08 and FHIR Encounter resources.</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>' + IC_SEARCH + ' Lab & Pharmacy</h3><p>ORU lab results, medication dispensing (NCPDP), and pharmacy benefit data — flowing in real time to power clinical intelligence.</p></div>' +
+    '<div class="zynix-data-layer fade-in-up"><h3>' + IC_CALENDAR + ' Scheduling Systems</h3><p>Bidirectional scheduling with Epic Cadence, athena Scheduling, Cerner SurgiNet, and standalone PM systems.</p></div>' +
+    '</div></div></section>' +
+
+    '<section style="padding:80px 0"><div class="zynix-container">' +
+    '<span class="zynix-tag">STANDARDS</span>' +
+    '<h2>Interoperability Standards</h2>' +
+    '<div class="zynix-feature-grid" style="margin-top:40px">' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_GEAR + '</div><h3>FHIR R4</h3><p>Full FHIR R4 support including US Core profiles, Bulk Data Access, and SMART on FHIR authorization.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_GEAR + '</div><h3>HL7v2</h3><p>ADT, ORM, ORU, SIU, and MDM message types over MLLP, TCP/IP, and VPN connections.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_GEAR + '</div><h3>X12 EDI</h3><p>837P/I professional and institutional claims, 835 remittance, 270/271 eligibility, and 276/277 claim status.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_GEAR + '</div><h3>CCDA / CDA</h3><p>Consolidated CDA documents for transitions of care, discharge summaries, and referral documents.</p></div>' +
+    '</div></div></section>' +
+
+    renderMetricsBar([
+      { value: '2-4 wks', label: 'Integration go-live' },
+      { value: '20+', label: 'Pre-built connectors' },
+      { value: 'Real-time', label: 'Data flow speed' },
+      { value: '99.9%', label: 'Uptime SLA' }
+    ]) +
+
+    '<section class="zynix-page-faq"><div class="zynix-container">' +
+    '<span class="zynix-tag">FAQ</span>' +
+    '<h2>Integration Questions</h2>' +
+    '<div class="zynix-faq-list">' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How long does an EHR integration take?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Most EHR integrations go live in 2-4 weeks using our pre-built connectors. Epic and Cerner integrations include certified connectors that have been deployed across dozens of health systems. Custom integrations for niche systems typically take 4-6 weeks.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Do you support bidirectional data flow?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Yes. Zynix supports bidirectional data exchange with supported EHRs — reading patient data and writing back scheduling confirmations, documentation, and care plan updates. Bidirectional scheduling is available for Epic, athenahealth, and Cerner.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What if my EHR isn\u2019t listed?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Zynix supports any EHR that exposes HL7v2 or FHIR endpoints. Our integration team builds custom connectors for niche and legacy systems, typically within 4-6 weeks. Contact us for a compatibility assessment.</p></div></div>' +
+    '</div></div></section>' +
+
+    renderCTA('Ready to Connect Your Systems?', 'See how Zynix integrates with your EHR and data sources in a 30-minute demo.', 'Schedule a Demo') +
+    renderFooter();
+  }
+
   var routes = {
     // Homepage
     '': renderHomepage,
@@ -6062,6 +6131,8 @@ function renderDataAnalyticsV7() {
     '/who-we-serve/independent-group-practices': renderWhoWeServeIndependentPractices,
     '/who-we-serve/ascs': renderWhoWeServeASCs,
     '/who-we-serve/fqhcs': renderWhoWeServeFQHCs,
+    // V7: Integrations
+    '/integrations': renderIntegrations,
     // V7: Company
     '/company/zynixllm': renderZynixLLMV7,
     '/security': renderSecurityV7,
