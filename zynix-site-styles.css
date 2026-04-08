@@ -13,9 +13,9 @@
   --z-bg-card: #FFFFFF;
   --z-text: #1A1F2E;
   --z-text-secondary: #5A6478;
-  --z-text-muted: #6B7280;
-  --z-accent: #C44B16;
-  --z-accent-hover: #A33D0F;
+  --z-text-muted: #8E95A5;
+  --z-accent: #F16529;
+  --z-accent-hover: #d9561f;
   --z-accent-light: rgba(241,101,41,0.08);
   --z-blue: #20449B;
   --z-blue-light: #EBF0FA;
@@ -129,26 +129,6 @@ body {
   transition: all 0.25s;
 }
 .zynix-btn-secondary:hover { border-color: var(--z-blue); color: var(--z-blue) !important; background: var(--z-blue-light); }
-
-/* ── Hero Trust Badges ── */
-.zynix-hero-trust {
-  display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap;
-}
-.zynix-hero-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-size: 12px; font-weight: 500; color: var(--z-text-muted);
-  padding: 6px 12px;
-  background: var(--z-bg-alt);
-  border: 1px solid var(--z-border);
-  border-radius: 20px;
-  letter-spacing: 0.3px;
-}
-.zynix-inner-hero .zynix-hero-badge {
-  color: rgba(255,255,255,0.9);
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.25);
-}
-
 .zynix-inner-hero-img img {
   width: 100%;
   border-radius: 20px;
@@ -439,7 +419,7 @@ body {
   background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
   pointer-events: none;
 }
-.zynix-cta-section h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 600; margin: 0 0 16px; color: #fff !important; position: relative; }
+.zynix-cta-section h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 600; margin: 0 0 16px; color: #fff; position: relative; }
 .zynix-cta-section p { font-size: 17px; color: rgba(255,255,255,0.75); margin: 0 0 32px; position: relative; }
 .zynix-cta-section .zynix-btn-primary {
   background: var(--z-accent);
@@ -470,14 +450,14 @@ body {
   display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px;
 }
 .zynix-footer-brand p { font-size: 14px; line-height: 1.7; margin: 0; color: rgba(255,255,255,0.5); }
-.zynix-footer-col h4 { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; color: rgba(255,255,255,0.6); margin: 0 0 16px; text-transform: uppercase; }
+.zynix-footer-col h4 { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; color: rgba(255,255,255,0.35); margin: 0 0 16px; text-transform: uppercase; }
 .zynix-footer-col a { display: block; font-size: 14px; color: rgba(255,255,255,0.55); text-decoration: none; padding: 4px 0; transition: color 0.2s; }
 .zynix-footer-col a:hover { color: var(--z-accent); }
 .zynix-footer-bottom {
   max-width: 1200px; margin: 40px auto 0;
   padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);
 }
-.zynix-footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.55); margin: 0; }
+.zynix-footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); margin: 0; }
 
 /* ── Fade-in animations ── */
 .fade-in-up { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
@@ -643,7 +623,6 @@ body {
   color: #fff;
   text-align: center;
   padding: 10px 20px;
-  padding-top: calc(env(safe-area-inset-top, 0px) + 10px);
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.3px;
@@ -935,7 +914,7 @@ body.has-announcement-bar { padding-top: 40px; }
   pointer-events: none;
 }
 .zynix-homepage-hero .zynix-inner-hero-grid { position: relative; z-index: 1; }
-.zynix-homepage-hero h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 700; line-height: 1.08; margin: 0 0 20px; letter-spacing: -1.5px; color: var(--z-text); position: static !important; }
+.zynix-homepage-hero h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 700; line-height: 1.08; margin: 0 0 20px; letter-spacing: -1.5px; color: var(--z-text); }
 .zynix-homepage-hero p { font-size: 1.0625rem; line-height: 1.7; color: var(--z-text-secondary); max-width: 540px; }
 
 /* ── Customer Trust Strip ── */
@@ -1054,7 +1033,7 @@ body.has-announcement-bar { padding-top: 40px; }
   pointer-events: none;
 }
 .zynix-results-section .zynix-tag { color: rgba(255,255,255,0.8); }
-.zynix-results-section h2 { color: #fff !important; }
+.zynix-results-section h2 { color: #fff; }
 .zynix-results-section .zynix-metric-value { color: #fff; }
 .zynix-results-section .zynix-metric-label { color: rgba(255,255,255,0.65); }
 
@@ -1224,7 +1203,15 @@ body.has-announcement-bar { padding-top: 40px; }
 /* ── RESPONSIVE ── */
 @media (max-width: 991px) {
   .zynix-inner-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .zynix-inner-hero-text { text-align: center; }
   .zynix-inner-hero-text h1 { font-size: 36px; }
+  .zynix-inner-hero-text p { max-width: 100%; margin-left: auto; margin-right: auto; }
+  .zynix-hero-btns { justify-content: center; }
+  .zynix-inner-hero-img { text-align: center; overflow: hidden; }
+  .zynix-inner-hero-img img { margin: 0 auto; }
+  .zynix-homepage-hero .zynix-inner-hero-text { text-align: center; }
+  .zynix-homepage-hero .zynix-inner-hero-img { text-align: center; overflow: hidden; max-width: 100%; }
+  .zynix-hero-trust { justify-content: center; display: flex; flex-wrap: wrap; gap: 8px; }
   .zynix-problem-grid { grid-template-columns: 1fr; }
   .zynix-feature-grid { grid-template-columns: repeat(2, 1fr); }
   .zynix-agents-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1244,8 +1231,6 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-comparison-grid { grid-template-columns: 1fr; }
   .zynix-related-grid { grid-template-columns: repeat(2, 1fr); }
   .zynix-screenshot-gallery { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-  .zynix-roi-calculator { grid-template-columns: 1fr; }
-  .zynix-testimonials-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 767px) {
   .zynix-inner-hero { padding: 100px 0 60px; }
@@ -1315,46 +1300,6 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
   object-fit: contain;
 }
 
-/* ── ROI Calculator ── */
-.zynix-roi-section { padding: 100px 0; }
-.zynix-roi-calculator { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 48px; background: #fff; border: 1px solid var(--z-border); border-radius: 20px; padding: 40px; box-shadow: var(--z-shadow-md); }
-.zynix-roi-inputs { display: flex; flex-direction: column; gap: 28px; }
-.zynix-roi-input-group label { font-size: 14px; font-weight: 600; color: var(--z-text); display: block; margin-bottom: 10px; }
-.zynix-roi-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #e5e7eb; outline: none; cursor: pointer; }
-.zynix-roi-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--z-blue); cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
-.zynix-roi-slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--z-blue); cursor: pointer; border: 2px solid #fff; }
-.zynix-roi-value { font-size: 22px; font-weight: 700; color: var(--z-blue); margin-top: 8px; }
-.zynix-roi-results { background: var(--z-bg-alt); border-radius: 16px; padding: 32px; }
-.zynix-roi-results h3 { font-size: 18px; font-weight: 700; color: var(--z-text); margin: 0 0 24px; }
-.zynix-roi-result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.zynix-roi-result { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid var(--z-border); }
-.zynix-roi-number { display: block; font-size: 28px; font-weight: 800; color: var(--z-blue); margin-bottom: 4px; line-height: 1.1; }
-.zynix-roi-label { display: block; font-size: 13px; color: var(--z-text-secondary); font-weight: 500; line-height: 1.4; }
-
-/* ── Testimonials Section ── */
-.zynix-testimonials-section { padding: 100px 0; background: var(--z-bg-dark); }
-.zynix-testimonials-section .zynix-container { text-align: center; }
-.zynix-testimonials-section .zynix-tag { color: var(--z-accent); background: rgba(196,75,22,0.12); border-color: rgba(196,75,22,0.3); }
-.zynix-testimonials-section h2 { color: #fff !important; }
-.zynix-testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; text-align: left; }
-.zynix-testimonial-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 28px; }
-.zynix-testimonial-stars { color: #F59E0B; font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
-.zynix-testimonial-quote { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.8); margin: 0 0 20px; font-style: italic; }
-.zynix-testimonial-author strong { display: block; font-size: 14px; font-weight: 700; color: #fff; }
-.zynix-testimonial-author span { display: block; font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; }
-
-/* ── CTA Section Extra ── */
-.zynix-cta-btns { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 24px; position: relative; }
-.zynix-cta-trust { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; position: relative; }
-.zynix-cta-trust span { font-size: 13px; color: rgba(255,255,255,0.7); display: inline-flex; align-items: center; gap: 5px; }
-
-/* ── Footer Compliance Badges ── */
-.zynix-footer-compliance { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; max-width: 1200px; margin: 32px auto 0; padding: 24px 40px; border-top: 1px solid rgba(255,255,255,0.1); }
-.zynix-compliance-badge { display: flex; align-items: center; gap: 10px; }
-.zynix-compliance-icon { width: 32px; height: 32px; flex-shrink: 0; }
-.zynix-compliance-badge > div strong { display: block; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9); line-height: 1.2; }
-.zynix-compliance-badge > div span { display: block; font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.3; }
-
 /* ── AI Chat Widget ── */
 @keyframes zynixPulse {
   0%, 100% { box-shadow: 0 4px 20px rgba(32,68,155,0.3); }
@@ -1371,13 +1316,6 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
   to { opacity: 1; transform: translateY(0); }
 }
 @media (max-width: 480px) {
-  #zynix-chat-panel {
-    width: calc(100vw - 32px) !important;
-    right: -8px !important;
-    bottom: 68px !important;
-    max-height: 70vh !important;
-  }
-}
   #zynix-chat-panel {
     width: calc(100vw - 32px) !important;
     right: -8px !important;
@@ -2218,4 +2156,442 @@ body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inn
   .zynix-faq-section .zynix-faq-list {
     max-width: 100%;
   }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DARK MODE — Zynix AI Premium Dark Theme
+   Overrides all CSS custom properties + hardcoded colors
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Core backgrounds ── */
+  --z-bg: #0B0F1A;
+  --z-bg-alt: #111827;
+  --z-bg-warm: #131A2B;
+  --z-bg-dark: #060A12;
+  --z-bg-card: #151D2E;
+  /* ── Text hierarchy ── */
+  --z-text: #E8ECF4;
+  --z-text-secondary: #94A3B8;
+  --z-text-muted: #64748B;
+  /* ── Accent colors ── */
+  --z-accent: #F47A42;
+  --z-accent-hover: #E8652E;
+  --z-accent-light: rgba(244,122,66,0.12);
+  /* ── Blue brand ── */
+  --z-blue: #4B7BF5;
+  --z-blue-light: rgba(75,123,245,0.12);
+  --z-blue-hover: #3B6AE0;
+  /* ── Borders ── */
+  --z-border: rgba(148,163,184,0.12);
+  --z-border-hover: rgba(148,163,184,0.22);
+  /* ── Tinted surfaces ── */
+  --z-purple: rgba(139,92,246,0.12);
+  --z-green: rgba(16,185,129,0.10);
+  --z-sky: rgba(56,189,248,0.10);
+  --z-peach: rgba(244,122,66,0.12);
+  --z-yellow: rgba(250,204,21,0.10);
+  --z-mint: rgba(16,185,129,0.10);
+  --z-success: #34D399;
+  /* ── Shadows (subtle glow for dark) ── */
+  --z-shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --z-shadow-md: 0 4px 16px rgba(0,0,0,0.35), 0 1px 3px rgba(0,0,0,0.2);
+  --z-shadow-lg: 0 12px 40px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.25);
+  --z-shadow-xl: 0 20px 60px rgba(0,0,0,0.45), 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* ── Body base ── */
+body {
+  background: var(--z-bg);
+  color: var(--z-text);
+}
+
+/* ── Hero gradient orbs: brighter for dark ── */
+.zynix-inner-hero::before {
+  background: radial-gradient(circle, rgba(75,123,245,0.08) 0%, transparent 70%);
+}
+.zynix-inner-hero::after {
+  background: radial-gradient(circle, rgba(244,122,66,0.06) 0%, transparent 70%);
+}
+.zynix-homepage-hero::before {
+  background: radial-gradient(circle, rgba(75,123,245,0.07) 0%, transparent 60%);
+}
+.zynix-homepage-hero::after {
+  background: radial-gradient(circle, rgba(244,122,66,0.05) 0%, transparent 60%);
+}
+
+/* ── Navigation: dark glass ── */
+.zynix-mega-nav {
+  background: rgba(11,15,26,0.92);
+  border-bottom: 1px solid rgba(148,163,184,0.08);
+}
+.zynix-mega-nav.scrolled {
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.zynix-nav-logo-text {
+  color: var(--z-text);
+}
+.zynix-nav-trigger {
+  color: var(--z-text-secondary);
+}
+.zynix-nav-trigger:hover,
+.zynix-nav-dropdown:hover .zynix-nav-trigger {
+  color: var(--z-text);
+}
+
+/* ── Mega panel dropdowns: dark glass ── */
+.zynix-mega-panel-inner {
+  background: rgba(21,29,46,0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(148,163,184,0.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.zynix-dropdown-panel-inner {
+  background: rgba(21,29,46,0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(148,163,184,0.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.zynix-mega-col a:hover,
+.zynix-dropdown-panel-inner a:hover {
+  background: rgba(75,123,245,0.08);
+  color: var(--z-text);
+}
+.zynix-mega-col a.active,
+.zynix-dropdown-panel-inner a.active {
+  color: #4B7BF5;
+  background: rgba(75,123,245,0.12);
+}
+
+/* ── Hamburger lines ── */
+.zynix-nav-hamburger span {
+  background: var(--z-text);
+}
+
+/* ── Mobile menu overlay: dark ── */
+.zynix-mobile-menu {
+  background: rgba(11,15,26,0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.zynix-mobile-section-trigger {
+  color: var(--z-text);
+  border-bottom-color: var(--z-border);
+}
+.zynix-mobile-section-links a {
+  color: var(--z-text-secondary);
+  border-bottom-color: var(--z-border);
+}
+.zynix-mobile-section-links a:hover {
+  color: #4B7BF5;
+}
+
+/* ── Announcement Banner: slightly brighter ── */
+.zynix-announcement-bar {
+  background: #1E3A8A;
+}
+
+/* ── Comparison Cards: dark variants ── */
+.zynix-compare-bad {
+  background: rgba(220,38,38,0.08);
+  border-color: rgba(220,38,38,0.2);
+}
+.zynix-compare-good {
+  background: rgba(16,185,129,0.08);
+  border-color: rgba(52,211,153,0.2);
+}
+.zynix-compare-bad h3 { color: #F87171; }
+.zynix-compare-good h3 { color: #34D399; }
+.zynix-compare-bad li::before { color: #F87171; }
+.zynix-compare-card li { border-bottom-color: rgba(148,163,184,0.08); color: var(--z-text-secondary); }
+
+/* ── Comparison Section (homepage before/after) ── */
+.zynix-comparison-before {
+  background: rgba(220,38,38,0.08);
+  border-color: rgba(220,38,38,0.2);
+}
+.zynix-comparison-before h3 { color: #F87171; }
+.zynix-comparison-after {
+  background: rgba(16,185,129,0.08);
+  border-color: rgba(52,211,153,0.2);
+}
+.zynix-comparison-after h3 { color: #34D399; }
+.zynix-comparison-col ul li {
+  border-bottom-color: rgba(148,163,184,0.08);
+}
+
+/* ── Metrics Bar: deeper blue ── */
+.zynix-metrics-bar {
+  background: #1E3A8A;
+}
+
+/* ── Results Section: deeper blue ── */
+.zynix-results-section {
+  background: #1E3A8A;
+}
+.zynix-results-section::before {
+  background: radial-gradient(circle, rgba(244,122,66,0.15) 0%, transparent 60%);
+}
+
+/* ── CTA Section: dark blue gradient ── */
+.zynix-cta-section {
+  background: linear-gradient(135deg, #1E3A8A 0%, #172554 100%);
+}
+.zynix-cta-section::before {
+  background: radial-gradient(circle, rgba(244,122,66,0.12) 0%, transparent 60%);
+}
+.zynix-cta-section::after {
+  background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 60%);
+}
+.zynix-cta-section .zynix-btn-secondary {
+  color: rgba(255,255,255,0.9) !important;
+  border-color: rgba(255,255,255,0.2);
+}
+.zynix-cta-section .zynix-btn-secondary:hover {
+  border-color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.08);
+}
+
+/* ── Track headers: deeper blue ── */
+.zynix-track-header {
+  background: #1E3A8A;
+}
+
+/* ── Footer: even darker ── */
+.zynix-footer {
+  background: #060A12;
+  border-top: 1px solid rgba(148,163,184,0.06);
+}
+.zynix-footer-bottom {
+  border-top-color: rgba(148,163,184,0.06);
+}
+
+/* ── Contact Form: dark surface ── */
+.zynix-contact-form-wrap {
+  background: var(--z-bg-card);
+  border-color: var(--z-border);
+}
+.zynix-form-group input,
+.zynix-form-group select,
+.zynix-form-group textarea {
+  background: var(--z-bg);
+  color: var(--z-text);
+  border-color: var(--z-border);
+}
+.zynix-form-group input:focus,
+.zynix-form-group select:focus,
+.zynix-form-group textarea:focus {
+  border-color: #4B7BF5;
+  box-shadow: 0 0 0 3px rgba(75,123,245,0.15);
+}
+.zynix-form-group select {
+  color: var(--z-text);
+}
+.zynix-form-group select option {
+  background: var(--z-bg-card);
+  color: var(--z-text);
+}
+
+/* ── Contact Divider ── */
+.zynix-contact-divider {
+  background: var(--z-border);
+}
+
+/* ── Blog featured card: dark gradient ── */
+.zynix-blog-featured {
+  background: linear-gradient(135deg, rgba(75,123,245,0.1) 0%, var(--z-bg-card) 100%);
+  border-color: rgba(75,123,245,0.25);
+  border-left: 4px solid #4B7BF5;
+}
+
+/* ── About Quote ── */
+.zynix-about-quote blockquote {
+  border-left-color: #4B7BF5;
+}
+
+/* ── Trust Strip ── */
+.zynix-trust-strip {
+  background: var(--z-bg-alt);
+  border-top-color: var(--z-border);
+  border-bottom-color: var(--z-border);
+}
+
+/* ── Comparison Table ── */
+.zynix-compare-table th:nth-child(2) {
+  color: #4B7BF5;
+  background: rgba(75,123,245,0.08);
+}
+.zynix-compare-table td:nth-child(2) {
+  background: rgba(75,123,245,0.06);
+  color: #34D399;
+}
+
+/* ── Button secondary in dark: light border ── */
+.zynix-btn-secondary {
+  color: var(--z-text) !important;
+  border-color: rgba(148,163,184,0.2);
+}
+.zynix-btn-secondary:hover {
+  border-color: #4B7BF5;
+  color: #4B7BF5 !important;
+  background: rgba(75,123,245,0.08);
+}
+
+/* ── Primary button glow ── */
+.zynix-btn-primary:hover {
+  box-shadow: 0 8px 24px rgba(244,122,66,0.3), 0 0 40px rgba(244,122,66,0.1);
+}
+
+/* ── Card hover glow effects for dark mode ── */
+.zynix-feature-card:hover,
+.zynix-agent-card:hover,
+.zynix-problem-card:hover {
+  box-shadow: var(--z-shadow-md), 0 0 20px rgba(75,123,245,0.06);
+  border-color: rgba(75,123,245,0.3);
+}
+.zynix-agent-link-card:hover {
+  box-shadow: var(--z-shadow-md), 0 0 20px rgba(75,123,245,0.06);
+}
+
+/* ── Glow Effects: amplified for dark ── */
+.zynix-glow-accent {
+  box-shadow: 0 0 40px rgba(244,122,66,0.1), 0 0 80px rgba(244,122,66,0.04);
+}
+.zynix-glow-blue {
+  box-shadow: 0 0 40px rgba(75,123,245,0.1), 0 0 80px rgba(75,123,245,0.05);
+}
+
+/* ── Gradient Border: brighter for dark ── */
+.zynix-gradient-border::before {
+  background: linear-gradient(135deg, rgba(244,122,66,0.3), rgba(75,123,245,0.3));
+}
+
+/* ── ROI Calculator ── */
+.zynix-roi-calculator {
+  background: var(--z-bg-card);
+  border-color: var(--z-border);
+}
+
+/* ── Webflow template overrides: ensure hidden elements are still hidden ── */
+body > .w-nav,
+body > .navbar,
+body > [data-collapse="medium"],
+body > header:not(.zynix-mega-nav),
+body > footer:not(.zynix-footer),
+body > .footer,
+body > .w-footer {
+  display: none !important;
+}
+
+/* ── Scrollbar dark mode ── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--z-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148,163,184,0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148,163,184,0.35);
+}
+
+/* ── Selection highlight ── */
+::selection {
+  background: rgba(75,123,245,0.3);
+  color: #fff;
+}
+
+/* ── Nav CTA button: brighter glow ── */
+.zynix-nav-cta:hover {
+  box-shadow: 0 8px 24px rgba(244,122,66,0.35);
+}
+
+/* ── Flywheel step numbers ── */
+.zynix-flywheel-step span {
+  background: #1E3A8A;
+}
+
+/* ── Workflow step numbers ── */
+.zynix-wf-step-num,
+.zynix-cp-num {
+  background: #1E3A8A;
+}
+
+/* ── Workflow timeline line ── */
+.zynix-workflow-timeline {
+  border-left-color: rgba(148,163,184,0.15);
+}
+.zynix-wf-dot {
+  background: #4B7BF5;
+  border-color: var(--z-bg);
+  box-shadow: 0 0 0 2px #4B7BF5;
+}
+
+/* ── Expect item circles ── */
+.zynix-expect-item span {
+  background: #1E3A8A;
+}
+
+/* ── Pulse animation for chat widget: dark mode ── */
+@keyframes zynixPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(75,123,245,0.4); }
+  50% { box-shadow: 0 4px 30px rgba(244,122,66,0.5), 0 0 0 8px rgba(75,123,245,0.1); }
+}
+
+/* ── Agent metrics badges ── */
+.zynix-agent-metrics span {
+  color: #4B7BF5;
+  background: rgba(75,123,245,0.12);
+  border-color: rgba(75,123,245,0.2);
+}
+
+/* ── Hero image border for dark ── */
+.zynix-inner-hero-img img {
+  border-color: rgba(148,163,184,0.1);
+  box-shadow: var(--z-shadow-xl), 0 0 40px rgba(75,123,245,0.05);
+}
+
+/* ── FAQ open toggle ── */
+.zynix-faq-item.open .zynix-faq-toggle { color: #4B7BF5; }
+
+/* ── Related card icon bg ── */
+.zynix-related-card .zynix-rc-icon {
+  background: rgba(244,122,66,0.12);
+}
+
+/* ── Safety number circles ── */
+.zynix-safety-num {
+  background: rgba(75,123,245,0.12);
+  color: #4B7BF5;
+}
+
+/* ── Feature icon bg ── */
+.zynix-feature-icon {
+  background: rgba(75,123,245,0.12);
+}
+
+/* ── Agent icon bg ── */
+.zynix-agent-icon {
+  background: rgba(244,122,66,0.12);
+}
+
+/* ── Screenshot card ── */
+.zynix-screenshot-card {
+  border-color: var(--z-border);
+  background: var(--z-bg-card);
+}
+.zynix-screenshot-card:hover {
+  border-color: rgba(75,123,245,0.3);
+  box-shadow: var(--z-shadow-lg), 0 0 20px rgba(75,123,245,0.06);
+}
+
+/* ── Arch card left border ── */
+.zynix-arch-card {
+  border-left-color: #4B7BF5;
 }
