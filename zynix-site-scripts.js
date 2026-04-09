@@ -2931,17 +2931,17 @@
 
     // -- CUSTOMER TRUST STRIP (Navina-style: small, grayscale, uniform) --
     var trustLogos = [
-      { name: 'Palm Beach ACO', logo: 'https://cdn.prod.website-files.com/6818da6a953b7f1e582f8191/682e6a2ca7d7d2df4e89db1d_pbacologohighres.png' },
+      { name: 'Palm Beach ACO', logo: null },
       { name: 'West Florida ACO', logo: 'https://westfloridaaco.com/assets/img/New_WestFlorida_ACO_logo_color.svg' },
       { name: 'Space Coast ACO', logo: 'https://spacecoastaco.com/assets/img/New_Space_Coast_ACO_logo_color.svg' },
       { name: 'Central Florida ACO', logo: null },
       { name: 'GoldenCare ACO', logo: 'https://static.wixstatic.com/media/ca9ca7_8186b443254b49ada16878821eca400a~mv2.png/v1/fill/w_184,h_92,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GoldenCare%20ACO%20(2).png' },
       { name: 'NEXT Healthcare', logo: 'https://nexthealthcaresolutions.com/assets/img/next-logo.svg' },
-      { name: 'eTernal Health', logo: 'https://www.eternalhealth.com/wp-content/uploads/2022/08/HR_eH-InfinityIcon-Logo.jpg' },
+      { name: 'eTernal Health', logo: null },
       { name: 'AMISTAD CHC', logo: 'https://amistadchc.com/wp-content/uploads/2018/10/image.png' },
       { name: 'Professional Radiology', logo: 'https://www.professionalradiology.com/layout/images/logo.png' },
       { name: 'Sunflower ACO', logo: 'https://static.wixstatic.com/media/ca9ca7_43571900261a4d69bb69dab454fd7439~mv2.png/v1/fill/w_184,h_92,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Sunflower%20ACO%20Logo.png' },
-      { name: 'CLSCFL', logo: 'https://clscfl.com/wp-content/uploads/2022/08/Complete-Local-Specialty-Care.png' }
+      { name: 'CLSCFL', logo: null }
     ];
     var logoStyle = 'height:40px;width:auto;max-width:150px;filter:grayscale(1) opacity(0.65);transition:filter 0.3s,opacity 0.3s;object-fit:contain';
     var trustSpans = '';
