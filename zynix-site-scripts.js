@@ -891,9 +891,9 @@
     '<h2>Built for Healthcare Operations</h2>' +
     '<p class="zynix-section-sub">Real screenshots from the Zynix OS portal showing dashboards, analytics, and AI-powered insights.</p>' +
     '<div class="zynix-screenshot-gallery">' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACO + '" alt="ACO Dashboard"><div class="caption">ACO Owner Dashboard</div></div>' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalProvider + '" alt="Provider Dashboard"><div class="caption">Provider Clinical Dashboard</div></div>' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalChatbot + '" alt="AI Chatbot"><div class="caption">AI Data Query Chatbot</div></div>' +
+    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACO + '" alt="Zynix AI ACO performance dashboard showing quality measures and shared savings"><div class="caption">ACO Owner Dashboard</div></div>' +
+    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalProvider + '" alt="Zynix AI provider clinical dashboard with patient risk scores and care gaps"><div class="caption">Provider Clinical Dashboard</div></div>' +
+    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalChatbot + '" alt="Zynix AI patient chatbot interface for healthcare data queries"><div class="caption">AI Data Query Chatbot</div></div>' +
     '</div></div></section>' +
 
     '<section class="zynix-flywheel-section"><div class="zynix-container">' +
@@ -1030,9 +1030,9 @@
     '<h2>See the Zynix Portal in Action</h2>' +
     '<p class="zynix-section-sub">Real product screenshots from the Zynix analytics and quality dashboards.</p>' +
     '<div class="zynix-screenshot-gallery">' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalQuality + '" alt="Quality Dashboard"><div class="caption">Provider Quality Dashboard</div></div>' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalPredictive + '" alt="Predictive Analytics"><div class="caption">Predictive Analytics & Risk</div></div>' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACOQuality + '" alt="ACO Quality Dashboard"><div class="caption">ACO Quality Performance</div></div>' +
+    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalQuality + '" alt="Zynix AI quality measures dashboard tracking HEDIS and Star ratings"><div class="caption">Provider Quality Dashboard</div></div>' +
+    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalPredictive + '" alt="Zynix AI predictive analytics engine for readmission risk scoring"><div class="caption">Predictive Analytics & Risk</div></div>' +
+    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACOQuality + '" alt="Zynix AI ACO quality dashboard with HEDIS gap closure metrics"><div class="caption">ACO Quality Performance</div></div>' +
     '</div></div></section>' +
 
     renderMetricsBar([
@@ -3350,12 +3350,12 @@
       '<h2>See What You Get on Day One</h2>' +
       '<p class="zynix-section-sub">Real product screenshots from live deployments across healthcare organizations in 30 states.</p>' +
       '<div class="zynix-screenshot-gallery">' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACO + '" alt="ACO Dashboard" loading="lazy"><div class="caption">ACO Performance Dashboard</div></div>' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalProvider + '" alt="Provider View" loading="lazy"><div class="caption">Clinical Quality Metrics</div></div>' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalPredictive + '" alt="Predictive Analytics" loading="lazy"><div class="caption">Predictive Analytics Engine</div></div>' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalChatbot + '" alt="AI Chatbot" loading="lazy"><div class="caption">AI Patient Chatbot</div></div>' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalQuality + '" alt="Quality Measures" loading="lazy"><div class="caption">Quality Measures Tracker</div></div>' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACORisk + '" alt="Risk Stratification" loading="lazy"><div class="caption">Risk Stratification Engine</div></div>' +
+      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACO + '" alt="Zynix AI ACO performance dashboard showing quality measures and shared savings" loading="lazy"><div class="caption">ACO Performance Dashboard</div></div>' +
+      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalProvider + '" alt="Zynix AI clinical quality metrics view for healthcare providers" loading="lazy"><div class="caption">Clinical Quality Metrics</div></div>' +
+      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalPredictive + '" alt="Zynix AI predictive analytics engine for readmission risk scoring" loading="lazy"><div class="caption">Predictive Analytics Engine</div></div>' +
+      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalChatbot + '" alt="Zynix AI patient chatbot interface for healthcare data queries" loading="lazy"><div class="caption">AI Patient Chatbot</div></div>' +
+      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalQuality + '" alt="Zynix AI quality measures tracking for healthcare compliance" loading="lazy"><div class="caption">Quality Measures Tracker</div></div>' +
+      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACORisk + '" alt="Zynix AI risk stratification engine for population health management" loading="lazy"><div class="caption">Risk Stratification Engine</div></div>' +
       '</div></div></section>';
 
     // -- PROOF POINTS --
@@ -6087,9 +6087,9 @@ function renderDataAnalyticsV7() {
     '<h2>See the Zynix Portal in Action</h2>' +
     '<p class="zynix-section-sub">Real product screenshots from the Zynix analytics and quality dashboards.</p>' +
     '<div class="zynix-screenshot-gallery">' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalQuality + '" alt="Quality Dashboard"><div class="caption">Provider Quality Dashboard</div></div>' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalPredictive + '" alt="Predictive Analytics"><div class="caption">Predictive Analytics & Risk</div></div>' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACOQuality + '" alt="ACO Quality Dashboard"><div class="caption">ACO Quality Performance</div></div>' +
+    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalQuality + '" alt="Zynix AI quality measures dashboard tracking HEDIS and Star ratings"><div class="caption">Provider Quality Dashboard</div></div>' +
+    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalPredictive + '" alt="Zynix AI predictive analytics engine for readmission risk scoring"><div class="caption">Predictive Analytics & Risk</div></div>' +
+    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACOQuality + '" alt="Zynix AI ACO quality dashboard with HEDIS gap closure metrics"><div class="caption">ACO Quality Performance</div></div>' +
     '</div></div></section>';
 
   html += '<section><div class="zynix-container">' +
@@ -8947,7 +8947,7 @@ function renderDataAnalyticsV7() {
       '<div id="zynix-chat-panel" style="display:none;position:absolute;bottom:72px;right:0;width:380px;max-height:520px;background:#101d35;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,0.4);overflow:hidden;border:1px solid rgba(255,255,255,0.1);">' +
         '<div style="background:linear-gradient(135deg,#20449B,#2a5cc7);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">' +
           '<div style="display:flex;align-items:center;gap:10px;">' +
-            '<img src="' + IMG.symbol + '" alt="" style="height:28px;width:28px;border-radius:6px;">' +
+            '<img src="' + IMG.symbol + '" alt="Zynix AI" style="height:28px;width:28px;border-radius:6px;">' +
             '<div><div style="color:white;font-weight:700;font-size:15px;">Zynix AI Assistant</div><div style="color:rgba(255,255,255,0.7);font-size:11px;">Powered by ZynixLLM</div></div>' +
           '</div>' +
           '<button id="zynix-chat-close" style="background:none;border:none;color:white;cursor:pointer;font-size:20px;padding:0;line-height:1;">&times;</button>' +
