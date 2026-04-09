@@ -6194,6 +6194,15 @@ function renderDataAnalyticsV7() {
     '/case-studies-health-plans': renderCaseStudiesHealthPlans,
     '/case-studies-practices': renderCaseStudiesPractices,
     '/case-studies-fqhcs': renderCaseStudiesFQHCs,
+    // Blog flat-slug aliases (Webflow pages for HTTP 200)
+    '/blog-what-is-value-based-care-ai': renderBlogVBCAI,
+    '/blog-how-ai-closes-care-gaps': renderBlogCareGaps,
+    '/blog-ai-agents-vs-chatbots-healthcare': renderBlogAgentsVsChatbots,
+    '/blog-prior-auth-delays-cost-fix': renderBlogPriorAuth,
+    '/blog-hcc-risk-adjustment-year-round': renderBlogHCCRiskAdjustment,
+    '/blog-ai-medical-scribes-rollout': renderBlogAIScribes,
+    '/blog-rising-risk-patients-ai': renderBlogRisingRisk,
+    '/blog-reducing-no-shows-ai-scheduling': renderBlogNoShows,
     // V7: Use Cases (all 30)
     '/use-cases/post-discharge-follow-up': USE_CASE_ROUTES['/use-cases/post-discharge-follow-up'],
     '/use-cases/after-hours-triage-multi-site': USE_CASE_ROUTES['/use-cases/after-hours-triage-multi-site'],
