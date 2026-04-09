@@ -6174,6 +6174,16 @@ function renderDataAnalyticsV7() {
     '/case-studies/health-plans': renderCaseStudiesHealthPlans,
     '/case-studies/practices': renderCaseStudiesPractices,
     '/case-studies/fqhcs': renderCaseStudiesFQHCs,
+    // Flat-slug aliases (Webflow pages for HTTP 200)
+    '/case-studies-west-florida-aco': renderCaseStudyWestFlorida,
+    '/case-studies-space-coast-aco': renderCaseStudySpaceCoast,
+    '/case-studies-central-florida-aco': renderCaseStudyCentralFlorida,
+    '/case-studies-eternal-health': renderCaseStudyEternalHealth,
+    '/case-studies-health-systems': renderCaseStudiesHealthSystems,
+    '/case-studies-acos': renderCaseStudiesACOs,
+    '/case-studies-health-plans': renderCaseStudiesHealthPlans,
+    '/case-studies-practices': renderCaseStudiesPractices,
+    '/case-studies-fqhcs': renderCaseStudiesFQHCs,
     // V7: Use Cases (all 30)
     '/use-cases/post-discharge-follow-up': USE_CASE_ROUTES['/use-cases/post-discharge-follow-up'],
     '/use-cases/after-hours-triage-multi-site': USE_CASE_ROUTES['/use-cases/after-hours-triage-multi-site'],
