@@ -2944,7 +2944,7 @@
       { name: 'Innovacare Health', logo: GH + 'innovacare-health.svg' },
       { name: 'CLSCFL', logo: GH + 'clscfl.png' }
     ];
-    var logoStyle = 'height:40px;width:auto;max-width:150px;filter:grayscale(1) brightness(2) opacity(0.55);mix-blend-mode:screen;transition:filter 0.3s,opacity 0.3s;object-fit:contain';
+    var logoStyle = 'height:40px;width:auto;max-width:150px;filter:brightness(0) invert(1) opacity(0.5);transition:filter 0.3s,opacity 0.3s;object-fit:contain';
     var trustSpans = '';
     for (var ti = 0; ti < 2; ti++) {
       for (var tj = 0; tj < trustLogos.length; tj++) {
