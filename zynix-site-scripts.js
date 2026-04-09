@@ -23,6 +23,9 @@
     patients: GH + 'enterprise-command-center.png',        // Enterprise platform — FQHCs, About
     enterprise: GH + 'enterprise-command-center.png',      // Enterprise platform — Zynix OS
     mesh: GH + 'data-platform.png',            // Data network — ZynixLLM
+    // Aliases used by blog posts
+    platform: GH + 'enterprise-command-center.png',        // Platform alias for blog posts
+    agents: GH + 'doctor-voice-agent.png',                 // Agents alias for blog posts
     // Background overlay
     overlay: GH + 'analytics-dashboard.png',         // Dashboard overlay — section backgrounds
     // GIF clips (kept for optional use)
@@ -49,6 +52,135 @@
     portalACOQuality: GH + 'zynix-aco-quality.png',
     portalACORisk: GH + 'zynix-aco-risk.png'
   };
+
+  // ── Hero Visual System ── (HTML/CSS visuals replace PNGs for SEO + dark-mode)
+  var hvs = 'position:relative;width:100%;height:100%;min-height:320px;border-radius:16px;overflow:hidden;';
+  var hvBg = 'background:linear-gradient(135deg,rgba(14,24,42,0.95),rgba(30,58,95,0.9));';
+  var hvGlow = 'position:absolute;border-radius:50%;filter:blur(40px);opacity:0.3;';
+  function heroCard(x,y,w,label,val,clr){return '<div style="position:absolute;left:'+x+';top:'+y+';width:'+w+';background:rgba(255,255,255,0.06);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 16px"><div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">'+label+'</div><div style="font-size:22px;font-weight:700;color:'+(clr||'#E8612D')+'">'+val+'</div></div>';}
+  function heroBar(x,y,w,pct,clr){return '<div style="position:absolute;left:'+x+';top:'+y+';width:'+w+';height:6px;background:rgba(255,255,255,0.08);border-radius:3px"><div style="width:'+pct+'%;height:100%;background:'+(clr||'#E8612D')+';border-radius:3px"></div></div>';}
+  function heroDot(x,y,r,clr){return '<div style="'+hvGlow+'left:'+x+';top:'+y+';width:'+r+'px;height:'+r+'px;background:'+(clr||'#E8612D')+'"></div>';}
+
+  // Platform / Enterprise visual — command center dashboard
+  var VIS_PLATFORM = '<div style="'+hvs+hvBg+'" role="img" aria-label="Zynix AI enterprise healthcare command center dashboard">' +
+    heroDot('10%','20%',120,'#E8612D') + heroDot('70%','60%',100,'#3b82f6') +
+    '<div style="position:absolute;top:16px;left:16px;right:16px;height:32px;background:rgba(255,255,255,0.05);border-radius:8px 8px 0 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;padding:0 12px"><div style="width:8px;height:8px;border-radius:50%;background:#ef4444;margin-right:6px"></div><div style="width:8px;height:8px;border-radius:50%;background:#eab308;margin-right:6px"></div><div style="width:8px;height:8px;border-radius:50%;background:#22c55e;margin-right:12px"></div><span style="font-size:11px;color:rgba(255,255,255,0.4)">zynix.ai/dashboard</span></div>' +
+    heroCard('5%','22%','40%','Patients Managed','12,480','#E8612D') +
+    heroCard('5%','48%','40%','Gap Closure','87%','#22c55e') +
+    heroCard('52%','22%','42%','Active Agents','12','#3b82f6') +
+    heroCard('52%','48%','42%','Savings YTD','$2.4M','#E8612D') +
+    heroBar('5%','78%','42%',87,'#22c55e') + heroBar('52%','78%','42%',62,'#3b82f6') +
+    '<div style="position:absolute;bottom:12px;left:5%;font-size:9px;color:rgba(255,255,255,0.3)">Quality Measures</div>' +
+    '<div style="position:absolute;bottom:12px;left:52%;font-size:9px;color:rgba(255,255,255,0.3)">Risk Scores</div>' +
+    '</div>';
+
+  // Doctor / Agents visual — AI conversation interface
+  var VIS_AGENTS = '<div style="'+hvs+hvBg+'" role="img" aria-label="Zynix AI autonomous healthcare agent conversation interface">' +
+    heroDot('60%','10%',100,'#8b5cf6') + heroDot('20%','70%',80,'#E8612D') +
+    '<div style="position:absolute;top:16px;left:16px;right:16px;height:32px;background:rgba(255,255,255,0.05);border-radius:8px 8px 0 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;padding:0 12px"><div style="width:8px;height:8px;border-radius:50%;background:#8b5cf6"></div><span style="font-size:11px;color:rgba(255,255,255,0.4);margin-left:8px">AI Agent Console</span><span style="margin-left:auto;font-size:10px;padding:2px 10px;background:rgba(34,197,94,0.2);color:#22c55e;border-radius:10px">● LIVE</span></div>' +
+    '<div style="position:absolute;top:60px;left:16px;right:16px;display:flex;flex-direction:column;gap:10px">' +
+    '<div style="align-self:flex-start;max-width:70%;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.2);border-radius:12px 12px 12px 2px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,0.8)">Patient Maria Chen has an open HCC gap (E11.65 — Type 2 diabetes with hyperglycemia). Last A1C was 8.2% on Jan 15.</div>' +
+    '<div style="align-self:flex-end;max-width:65%;background:rgba(232,97,45,0.15);border:1px solid rgba(232,97,45,0.2);border-radius:12px 12px 2px 12px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,0.8)">Scheduling follow-up with Dr. Patel for recapture. Preferred time: Tue/Thu mornings.</div>' +
+    '<div style="align-self:flex-start;max-width:70%;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.2);border-radius:12px 12px 12px 2px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,0.8)">Appointment confirmed: Tue Mar 18, 9:30 AM. SMS reminder queued for 24h prior.</div>' +
+    '</div>' +
+    heroCard('5%','76%','42%','Calls Today','847','#8b5cf6') +
+    heroCard('52%','76%','42%','Success Rate','94%','#22c55e') +
+    '</div>';
+
+  // Patient / Scheduling visual
+  var VIS_PATIENT = '<div style="'+hvs+hvBg+'" role="img" aria-label="AI-powered patient scheduling and engagement dashboard">' +
+    heroDot('70%','20%',100,'#06b6d4') + heroDot('10%','60%',80,'#E8612D') +
+    '<div style="position:absolute;top:16px;left:16px;right:16px;height:32px;background:rgba(255,255,255,0.05);border-radius:8px 8px 0 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;padding:0 12px"><span style="font-size:11px;color:rgba(255,255,255,0.4)">Patient Engagement</span></div>' +
+    heroCard('5%','22%','42%','No-Show Rate','8.2%','#22c55e') +
+    heroCard('52%','22%','42%','Scheduled Today','142','#06b6d4') +
+    '<div style="position:absolute;top:52%;left:5%;right:5%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 16px">' +
+    '<div style="font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Upcoming Appointments</div>' +
+    '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:11px;color:rgba(255,255,255,0.7)"><span>James Wilson</span><span style="color:#06b6d4">9:00 AM — AWV</span></div>' +
+    '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:11px;color:rgba(255,255,255,0.7)"><span>Sarah Martinez</span><span style="color:#E8612D">10:30 AM — TCM</span></div>' +
+    '<div style="display:flex;justify-content:space-between;padding:6px 0;font-size:11px;color:rgba(255,255,255,0.7)"><span>Robert Kim</span><span style="color:#22c55e">2:00 PM — CCM</span></div>' +
+    '</div>' +
+    '</div>';
+
+  // Data / Platform visual — data flow integration
+  var VIS_DATA = '<div style="'+hvs+hvBg+'" role="img" aria-label="Healthcare data integration and unification platform">' +
+    heroDot('50%','30%',140,'#3b82f6') + heroDot('20%','70%',80,'#22c55e') +
+    '<div style="position:absolute;top:20px;left:50%;transform:translateX(-50%);text-align:center"><div style="font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px">Data Sources Connected</div><div style="font-size:28px;font-weight:700;color:#3b82f6">24</div></div>' +
+    '<div style="position:absolute;top:35%;left:5%;width:28%;display:flex;flex-direction:column;gap:6px">' +
+    '<div style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f3e5; EHR Systems</div>' +
+    '<div style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f4cb; Claims &amp; BCDA</div>' +
+    '<div style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f9ea; Labs &amp; Imaging</div>' +
+    '<div style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f48a; Pharmacy Data</div>' +
+    '</div>' +
+    '<div style="position:absolute;top:40%;left:38%;width:24%;text-align:center"><div style="width:64px;height:64px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 0 30px rgba(59,130,246,0.3)">&#x1f517;</div><div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:6px">UNIFIED RECORD</div></div>' +
+    '<div style="position:absolute;top:35%;right:5%;width:28%;display:flex;flex-direction:column;gap:6px">' +
+    '<div style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f4ca; Analytics</div>' +
+    '<div style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f916; AI Agents</div>' +
+    '<div style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f4dd; Care Plans</div>' +
+    '</div>' +
+    heroBar('5%','88%','90%',100,'linear-gradient(90deg,#3b82f6,#8b5cf6,#22c55e)') +
+    '</div>';
+
+  // Analytics / Dashboard visual
+  var VIS_ANALYTICS = '<div style="'+hvs+hvBg+'" role="img" aria-label="Population health analytics and predictive modeling dashboard">' +
+    heroDot('20%','20%',100,'#E8612D') + heroDot('70%','60%',80,'#8b5cf6') +
+    '<div style="position:absolute;top:16px;left:16px;right:16px;height:32px;background:rgba(255,255,255,0.05);border-radius:8px 8px 0 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;padding:0 12px;gap:16px"><span style="font-size:11px;color:#E8612D;border-bottom:2px solid #E8612D;padding-bottom:6px">Overview</span><span style="font-size:11px;color:rgba(255,255,255,0.4)">Quality</span><span style="font-size:11px;color:rgba(255,255,255,0.4)">Risk</span><span style="font-size:11px;color:rgba(255,255,255,0.4)">Financial</span></div>' +
+    heroCard('5%','22%','28%','RAF Score','1.24','#E8612D') +
+    heroCard('36%','22%','28%','HEDIS Rate','91%','#22c55e') +
+    heroCard('67%','22%','28%','Star Rating','4.5 ★','#eab308') +
+    '<div style="position:absolute;top:52%;left:5%;right:5%;height:35%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 14px">' +
+    '<div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:8px">QUALITY TREND — 12 MONTHS</div>' +
+    '<svg viewBox="0 0 400 80" style="width:100%;height:60px"><polyline points="0,60 35,52 70,48 105,42 140,38 175,40 210,32 245,28 280,22 315,18 350,14 385,10" fill="none" stroke="#E8612D" stroke-width="2"/><polyline points="0,70 35,65 70,58 105,55 140,50 175,48 210,42 245,38 280,35 315,30 350,25 385,20" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4,3"/></svg>' +
+    '</div>' +
+    '</div>';
+
+  // Care coordination visual
+  var VIS_CARE = '<div style="'+hvs+hvBg+'" role="img" aria-label="AI-powered care coordination and gap closure workflow">' +
+    heroDot('60%','20%',100,'#22c55e') + heroDot('10%','60%',80,'#E8612D') +
+    '<div style="position:absolute;top:16px;left:16px;right:16px;height:32px;background:rgba(255,255,255,0.05);border-radius:8px 8px 0 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;padding:0 12px"><span style="font-size:11px;color:rgba(255,255,255,0.4)">Care Plan Orchestration</span><span style="margin-left:auto;font-size:10px;padding:2px 10px;background:rgba(34,197,94,0.2);color:#22c55e;border-radius:10px">3 Active</span></div>' +
+    '<div style="position:absolute;top:58px;left:16px;right:16px;display:flex;flex-direction:column;gap:8px">' +
+    '<div style="background:rgba(34,197,94,0.1);border-left:3px solid #22c55e;border-radius:0 8px 8px 0;padding:10px 14px"><div style="font-size:11px;color:rgba(255,255,255,0.8);font-weight:600">TCM — Post-Discharge</div><div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px">Day 2 of 30 · Call completed · Follow-up scheduled</div>' + '<div style="margin-top:6px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px"><div style="width:7%;height:100%;background:#22c55e;border-radius:2px"></div></div></div>' +
+    '<div style="background:rgba(232,97,45,0.1);border-left:3px solid #E8612D;border-radius:0 8px 8px 0;padding:10px 14px"><div style="font-size:11px;color:rgba(255,255,255,0.8);font-weight:600">AWV — Annual Wellness</div><div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px">Patient contacted · Appointment confirmed Mar 22</div>' + '<div style="margin-top:6px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px"><div style="width:60%;height:100%;background:#E8612D;border-radius:2px"></div></div></div>' +
+    '<div style="background:rgba(59,130,246,0.1);border-left:3px solid #3b82f6;border-radius:0 8px 8px 0;padding:10px 14px"><div style="font-size:11px;color:rgba(255,255,255,0.8);font-weight:600">HCC — Risk Recapture</div><div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px">E11.65 gap identified · Scheduling with PCP</div>' + '<div style="margin-top:6px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px"><div style="width:30%;height:100%;background:#3b82f6;border-radius:2px"></div></div></div>' +
+    '</div>' +
+    heroCard('5%','82%','42%','Gaps Closed','1,247','#22c55e') +
+    heroCard('52%','82%','42%','Contact Rate','85%','#E8612D') +
+    '</div>';
+
+  // Scribe / Documentation visual
+  var VIS_SCRIBE = '<div style="'+hvs+hvBg+'" role="img" aria-label="Ambient AI clinical documentation scribe interface">' +
+    heroDot('70%','20%',100,'#8b5cf6') + heroDot('10%','70%',80,'#22c55e') +
+    '<div style="position:absolute;top:16px;left:16px;right:16px;height:32px;background:rgba(255,255,255,0.05);border-radius:8px 8px 0 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;padding:0 12px"><span style="font-size:11px;color:rgba(255,255,255,0.4)">ZynScribe — Ambient Documentation</span><span style="margin-left:auto;display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:#ef4444;animation:pulse 1.5s infinite"></span><span style="font-size:10px;color:#ef4444">Recording</span></span></div>' +
+    '<div style="position:absolute;top:58px;left:16px;width:45%;display:flex;flex-direction:column;gap:6px">' +
+    '<div style="font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px">Live Transcript</div>' +
+    '<div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.5"><strong style="color:#8b5cf6">Dr. Patel:</strong> Blood pressure is 142/88 today. Let&rsquo;s increase the lisinopril to 20mg.</div>' +
+    '<div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.5"><strong style="color:#06b6d4">Patient:</strong> I&rsquo;ve been getting dizzy in the mornings.</div>' +
+    '<div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:1.5;opacity:0.7"><strong style="color:#8b5cf6">Dr. Patel:</strong> We should check orthostatic...</div>' +
+    '</div>' +
+    '<div style="position:absolute;top:58px;right:16px;width:42%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px">' +
+    '<div style="font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Structured Note</div>' +
+    '<div style="font-size:10px;color:rgba(139,92,246,0.8);font-weight:600;margin-bottom:2px">ASSESSMENT</div>' +
+    '<div style="font-size:10px;color:rgba(255,255,255,0.6);margin-bottom:6px">HTN, uncontrolled (I10)</div>' +
+    '<div style="font-size:10px;color:rgba(139,92,246,0.8);font-weight:600;margin-bottom:2px">PLAN</div>' +
+    '<div style="font-size:10px;color:rgba(255,255,255,0.6)">&#x2022; Increase lisinopril 10mg &rarr; 20mg<br>&#x2022; Orthostatic BP check<br>&#x2022; Follow-up 2 weeks</div>' +
+    '</div>' +
+    heroCard('5%','82%','42%','Notes Today','34','#8b5cf6') +
+    heroCard('52%','82%','42%','Time Saved','4.2 hrs','#22c55e') +
+    '</div>';
+
+  // Build HERO_VIS lookup: image URL → HTML visual
+  var HERO_VIS = {};
+  HERO_VIS[IMG.enterprise] = VIS_PLATFORM;
+  HERO_VIS[IMG.patients] = VIS_PLATFORM;
+  HERO_VIS[IMG.platform] = VIS_PLATFORM;
+  HERO_VIS[IMG.doctor] = VIS_AGENTS;
+  HERO_VIS[IMG.agents] = VIS_AGENTS;
+  HERO_VIS[IMG.scribe] = VIS_SCRIBE;
+  HERO_VIS[IMG.patient] = VIS_PATIENT;
+  HERO_VIS[IMG.data] = VIS_DATA;
+  HERO_VIS[IMG.mesh] = VIS_DATA;
+  HERO_VIS[IMG.analytics] = VIS_ANALYTICS;
+  HERO_VIS[IMG.hero] = VIS_ANALYTICS;
+  HERO_VIS[IMG.care] = VIS_CARE;
 
   // ── Cross-Linking Data Model ──
   var LINK_NAMES = {
@@ -678,7 +810,7 @@
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0D9B6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> HITRUST Ready</span>' +
       '</div>' +
       '</div>' +
-      (image ? '<div class="zynix-inner-hero-img"><img src="' + image + '" alt="' + (imgAlt || '') + '" loading="lazy"></div>' : '') +
+      (image ? '<div class="zynix-inner-hero-img">' + (HERO_VIS[image] || '<img src="' + image + '" alt="' + (imgAlt || '') + '" loading="lazy">') + '</div>' : '') +
       '</div></section>';
   }
 
@@ -2989,77 +3121,76 @@
       '</div></section>';
 
     // -- PLATFORM ARCHITECTURE DIAGRAM (V3 Visual Flow) --
-    html += '<section class="zynix-architecture-diagram-section" style="padding:60px 0 80px;background:#FAFAFC;overflow:hidden"><div class="zynix-container">' +
+    html += '<section class="zynix-architecture-diagram-section" style="padding:60px 0 80px;background:transparent;overflow:hidden"><div class="zynix-container">' +
       '<style>' +
-      ':root{--zpa-blue-core:#20449B;--zpa-blue-mid:#2863BA;--zpa-blue-bright:#3286E0;--zpa-blue-pale:#EAF0FA;--zpa-orange:#F16529;--zpa-orange-light:#FEF0E9;--zpa-gray-line:#DFDFE1;--zpa-gray-card:#F4F4F6;--zpa-text-body:#414142;--zpa-text-muted:#747475}' +
+      ':root{--zpa-blue-core:#60a5fa;--zpa-blue-mid:#3b82f6;--zpa-blue-bright:#60a5fa;--zpa-blue-pale:rgba(59,130,246,0.1);--zpa-orange:#f97316;--zpa-orange-light:rgba(249,115,22,0.12);--zpa-gray-line:rgba(255,255,255,0.08);--zpa-gray-card:rgba(255,255,255,0.04);--zpa-text-body:rgba(255,255,255,0.78);--zpa-text-muted:rgba(255,255,255,0.45)}' +
       '.zpa-diagram{position:relative;z-index:1;display:grid;grid-template-columns:148px 1fr 148px;align-items:center;max-width:1100px;margin:0 auto;gap:0}' +
-      '.zpa-box{background:#fff;border:1px solid var(--zpa-gray-line);border-radius:12px;padding:14px 12px;box-shadow:0 2px 10px rgba(32,68,155,.06)}' +
+      '.zpa-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 12px;box-shadow:none}' +
       '.zpa-box-label{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-bottom:10px;display:block;text-align:center}' +
       '.zpa-src-box .zpa-box-label{color:var(--zpa-blue-mid)}' +
       '.zpa-usr-box .zpa-box-label{color:var(--zpa-orange)}' +
-      '.zpa-src-item,.zpa-usr-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;background:var(--zpa-blue-pale);margin-bottom:5px;border:1px solid #D0DAF0}' +
+      '.zpa-src-item,.zpa-usr-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;background:rgba(59,130,246,0.06);margin-bottom:5px;border:1px solid rgba(59,130,246,0.12)}' +
       '.zpa-src-item:last-child,.zpa-usr-item:last-child{margin-bottom:0}' +
-      '.zpa-src-ic,.zpa-usr-ic{width:24px;height:24px;border-radius:50%;background:#fff;border:1px solid #BCC6E6;display:flex;align-items:center;justify-content:center;flex-shrink:0}' +
-      '.zpa-src-ic svg{width:12px;height:12px;stroke:var(--zpa-blue-mid);fill:none;stroke-width:1.5}' +
-      '.zpa-usr-ic svg{width:12px;height:12px;fill:var(--zpa-blue-mid)}' +
-      '.zpa-src-name,.zpa-usr-name{font-size:10.5px;font-weight:600;color:var(--zpa-blue-core);flex:1}' +
-      '.zpa-usr-item.highlight{background:var(--zpa-orange-light);border-color:#F5BEAA}' +
-      '.zpa-usr-item.highlight .zpa-usr-ic{border-color:#F5BEAA}' +
+      '.zpa-src-ic,.zpa-usr-ic{width:24px;height:24px;border-radius:50%;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}' +
+      '.zpa-src-ic svg{width:12px;height:12px;stroke:var(--zpa-blue-bright);fill:none;stroke-width:1.5}' +
+      '.zpa-usr-ic svg{width:12px;height:12px;fill:var(--zpa-blue-bright)}' +
+      '.zpa-src-name,.zpa-usr-name{font-size:10.5px;font-weight:600;color:rgba(255,255,255,0.7);flex:1}' +
+      '.zpa-usr-item.highlight{background:rgba(249,115,22,0.08);border-color:rgba(249,115,22,0.2)}' +
+      '.zpa-usr-item.highlight .zpa-usr-ic{border-color:rgba(249,115,22,0.3)}' +
       '.zpa-usr-item.highlight .zpa-usr-ic svg{fill:var(--zpa-orange)}' +
       '.zpa-usr-item.highlight .zpa-usr-name{color:var(--zpa-orange);font-weight:700}' +
       '.zpa-flow{position:relative;padding:88px 0 64px}' +
-      '.zpa-flow-line{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:2.5px;background:linear-gradient(90deg,var(--zpa-blue-pale) 0%,var(--zpa-blue-mid) 35%,var(--zpa-blue-bright) 62%,var(--zpa-orange) 100%);z-index:0}' +
+      '.zpa-flow-line{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:2px;background:linear-gradient(90deg,rgba(59,130,246,0.1) 0%,rgba(59,130,246,0.4) 35%,rgba(96,165,250,0.4) 62%,rgba(249,115,22,0.4) 100%);z-index:0}' +
       '.zpa-nodes{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}' +
       '.zpa-node{display:flex;flex-direction:column;align-items:center;position:relative;cursor:pointer;flex:1}' +
-      '.zpa-tip{position:absolute;bottom:calc(100% + 10px);width:116px;background:#fff;border:1px solid var(--zpa-gray-line);border-radius:8px;padding:8px 10px;font-size:10px;line-height:1.55;color:var(--zpa-text-muted);text-align:center;box-shadow:0 3px 12px rgba(32,68,155,.09);pointer-events:none;opacity:0;transition:opacity .3s}' +
-      '.zpa-tip::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--zpa-gray-line)}' +
-      '.zpa-tip::before{content:"";position:absolute;top:calc(100% - 1px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#fff;z-index:1}' +
+      '.zpa-tip{position:absolute;bottom:calc(100% + 10px);width:116px;background:rgba(15,23,42,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 10px;font-size:10px;line-height:1.55;color:rgba(255,255,255,0.6);text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.4);pointer-events:none;opacity:0;transition:opacity .3s;backdrop-filter:blur(8px)}' +
+      '.zpa-tip::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:rgba(255,255,255,0.1)}' +
+      '.zpa-tip::before{content:"";position:absolute;top:calc(100% - 1px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:rgba(15,23,42,0.95);z-index:1}' +
       '.zpa-node.on .zpa-tip{opacity:1}' +
-      '.zpa-ring{width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(32,68,155,.06);transition:background .35s,transform .35s;flex-shrink:0}' +
-      '.zpa-node.on .zpa-ring{background:rgba(32,68,155,.14);transform:scale(1.1)}' +
-      '.zpa-node[data-n="5"].on .zpa-ring{background:rgba(241,101,41,.14)}' +
-      '.zpa-circle{width:70px;height:70px;border-radius:50%;background:var(--zpa-blue-core);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(32,68,155,.28);border:3px solid #fff;transition:all .35s;flex-shrink:0}' +
-      '.zpa-node.on .zpa-circle{width:80px;height:80px;box-shadow:0 8px 28px rgba(32,68,155,.42)}' +
-      '.zpa-node[data-n="5"] .zpa-circle{background:linear-gradient(135deg,var(--zpa-blue-mid),var(--zpa-orange))}' +
-      '.zpa-node[data-n="5"].on .zpa-circle{box-shadow:0 8px 28px rgba(241,101,41,.36)}' +
+      '.zpa-ring{width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(59,130,246,.06);transition:background .35s,transform .35s;flex-shrink:0}' +
+      '.zpa-node.on .zpa-ring{background:rgba(59,130,246,.15);transform:scale(1.1)}' +
+      '.zpa-node[data-n="5"].on .zpa-ring{background:rgba(249,115,22,.15)}' +
+      '.zpa-circle{width:70px;height:70px;border-radius:50%;background:rgba(59,130,246,0.15);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(59,130,246,.2);border:2px solid rgba(59,130,246,0.3);transition:all .35s;flex-shrink:0}' +
+      '.zpa-node.on .zpa-circle{width:80px;height:80px;box-shadow:0 0 32px rgba(59,130,246,.35);border-color:rgba(59,130,246,0.5)}' +
+      '.zpa-node[data-n="5"] .zpa-circle{background:rgba(249,115,22,0.12);border-color:rgba(249,115,22,0.3);box-shadow:0 0 20px rgba(249,115,22,.15)}' +
+      '.zpa-node[data-n="5"].on .zpa-circle{box-shadow:0 0 32px rgba(249,115,22,.3);border-color:rgba(249,115,22,0.5)}' +
       '.zpa-lbadge{font-size:20px;font-weight:800;line-height:1}' +
-      '.zpa-lname{font-size:8px;font-weight:700;text-align:center;line-height:1.25;margin-top:2px;padding:0 4px}' +
+      '.zpa-lname{font-size:8px;font-weight:700;text-align:center;line-height:1.25;margin-top:2px;padding:0 4px;opacity:0.7}' +
       '.zpa-nlabel{margin-top:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--zpa-text-muted);text-align:center;transition:color .35s}' +
-      '.zpa-node.on .zpa-nlabel{color:var(--zpa-blue-core)}' +
+      '.zpa-node.on .zpa-nlabel{color:var(--zpa-blue-bright)}' +
       '.zpa-node[data-n="5"].on .zpa-nlabel{color:var(--zpa-orange)}' +
-      '.zpa-ico{width:32px;height:32px;border-radius:8px;background:var(--zpa-blue-pale);border:1px solid #BCC6E6;display:flex;align-items:center;justify-content:center;transition:background .35s,border-color .35s}' +
+      '.zpa-ico{width:32px;height:32px;border-radius:8px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);display:flex;align-items:center;justify-content:center;transition:background .35s,border-color .35s}' +
       '.zpa-ico svg{width:15px;height:15px;fill:var(--zpa-blue-mid);stroke:none}' +
-      '.zpa-node.on .zpa-ico{background:var(--zpa-blue-mid);border-color:var(--zpa-blue-mid)}' +
-      '.zpa-node.on .zpa-ico svg{fill:#fff}' +
-      '.zpa-node[data-n="5"] .zpa-ico{background:var(--zpa-orange-light);border-color:#F5BEAA}' +
+      '.zpa-node.on .zpa-ico{background:rgba(59,130,246,0.2);border-color:rgba(59,130,246,0.35)}' +
+      '.zpa-node.on .zpa-ico svg{fill:var(--zpa-blue-bright)}' +
+      '.zpa-node[data-n="5"] .zpa-ico{background:rgba(249,115,22,0.08);border-color:rgba(249,115,22,0.15)}' +
       '.zpa-node[data-n="5"] .zpa-ico svg{fill:var(--zpa-orange)}' +
-      '.zpa-node[data-n="5"].on .zpa-ico{background:var(--zpa-orange);border-color:var(--zpa-orange)}' +
-      '.zpa-node[data-n="5"].on .zpa-ico svg{fill:#fff}' +
+      '.zpa-node[data-n="5"].on .zpa-ico{background:rgba(249,115,22,0.2);border-color:rgba(249,115,22,0.35)}' +
+      '.zpa-node[data-n="5"].on .zpa-ico svg{fill:var(--zpa-orange)}' +
       '.zpa-ico-wrap{display:flex;flex-direction:column;align-items:center;gap:6px}' +
       '.zpa-ico-wrap.below{flex-direction:column-reverse}' +
-      '.zpa-detail{max-width:1100px;margin:28px auto 0;background:#fff;border-radius:16px;border:1px solid var(--zpa-gray-line);box-shadow:0 4px 24px rgba(32,68,155,.09);overflow:hidden;position:relative;z-index:1}' +
-      '.zpa-prog{height:3px;background:var(--zpa-gray-line);position:relative}' +
-      '.zpa-prog-fill{height:3px;width:0%;position:absolute;left:0;top:0;transition:width .08s linear}' +
+      '.zpa-detail{max-width:1100px;margin:28px auto 0;background:rgba(255,255,255,0.03);border-radius:16px;border:1px solid rgba(255,255,255,0.08);box-shadow:none;overflow:hidden;position:relative;z-index:1}' +
+      '.zpa-prog{height:2px;background:rgba(255,255,255,0.06);position:relative}' +
+      '.zpa-prog-fill{height:2px;width:0%;position:absolute;left:0;top:0;transition:width .08s linear}' +
       '.zpa-slide{display:none;padding:26px 36px}' +
       '.zpa-slide.on{display:block;animation:zpaSlideIn .35s ease}' +
       '@keyframes zpaSlideIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}' +
       '.zpa-slide-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}' +
-      '.zpa-slide-badge{flex-shrink:0;font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;background:var(--zpa-blue-pale);color:var(--zpa-blue-core);margin-top:2px;white-space:nowrap}' +
-      '.zpa-slide[data-n="5"] .zpa-slide-badge{background:var(--zpa-orange-light);color:var(--zpa-orange)}' +
-      '.zpa-slide-title{font-size:17px;font-weight:800;color:var(--zpa-blue-core);line-height:1.25}' +
+      '.zpa-slide-badge{flex-shrink:0;font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;background:rgba(59,130,246,0.1);color:var(--zpa-blue-bright);margin-top:2px;white-space:nowrap}' +
+      '.zpa-slide[data-n="5"] .zpa-slide-badge{background:rgba(249,115,22,0.1);color:var(--zpa-orange)}' +
+      '.zpa-slide-title{font-size:17px;font-weight:800;color:#fff;line-height:1.25}' +
       '.zpa-slide[data-n="5"] .zpa-slide-title{color:var(--zpa-orange)}' +
       '.zpa-slide-body{font-size:13.5px;color:var(--zpa-text-body);line-height:1.78;max-width:800px}' +
       '.zpa-slide-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}' +
-      '.zpa-slide-tag{font-size:11px;font-weight:500;padding:3px 9px;border-radius:4px;background:var(--zpa-blue-pale);color:var(--zpa-blue-mid)}' +
-      '.zpa-slide[data-n="5"] .zpa-slide-tag{background:var(--zpa-orange-light);color:#b14619}' +
-      '.zpa-nav{display:flex;align-items:center;justify-content:space-between;padding:13px 36px 16px;border-top:1px solid var(--zpa-gray-line)}' +
-      '.zpa-nav-btn{width:30px;height:30px;border-radius:50%;background:var(--zpa-gray-card);border:1px solid var(--zpa-gray-line);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:var(--zpa-text-muted);transition:background .2s,color .2s;user-select:none}' +
-      '.zpa-nav-btn:hover{background:var(--zpa-blue-pale);color:var(--zpa-blue-core)}' +
+      '.zpa-slide-tag{font-size:11px;font-weight:500;padding:3px 9px;border-radius:4px;background:rgba(59,130,246,0.08);color:rgba(96,165,250,0.9)}' +
+      '.zpa-slide[data-n="5"] .zpa-slide-tag{background:rgba(249,115,22,0.08);color:rgba(249,115,22,0.85)}' +
+      '.zpa-nav{display:flex;align-items:center;justify-content:space-between;padding:13px 36px 16px;border-top:1px solid rgba(255,255,255,0.06)}' +
+      '.zpa-nav-btn{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:rgba(255,255,255,0.4);transition:background .2s,color .2s;user-select:none}' +
+      '.zpa-nav-btn:hover{background:rgba(59,130,246,0.12);color:var(--zpa-blue-bright)}' +
       '.zpa-dots-v3{display:flex;gap:7px;align-items:center}' +
-      '.zpa-dot-v3{width:8px;height:8px;border-radius:50%;background:var(--zpa-gray-line);cursor:pointer;transition:all .25s}' +
-      '.zpa-dot-v3.on{background:var(--zpa-blue-core);width:20px;border-radius:4px}' +
+      '.zpa-dot-v3{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.12);cursor:pointer;transition:all .25s}' +
+      '.zpa-dot-v3.on{background:var(--zpa-blue-mid);width:20px;border-radius:4px}' +
       '.zpa-dot-v3[data-n="5"].on{background:var(--zpa-orange)}' +
-      /* V3 responsive */
       '@media(max-width:767px){' +
         '.zpa-diagram{display:flex;flex-direction:column;gap:0}' +
         '.zpa-src-box,.zpa-usr-box{display:none}' +
@@ -3070,7 +3201,7 @@
         '.zpa-ring{width:52px;height:52px}' +
         '.zpa-circle{width:42px;height:42px;border-width:2px}' +
         '.zpa-node.on .zpa-ring{transform:scale(1.15)}' +
-        '.zpa-node.on .zpa-circle{width:46px;height:46px;box-shadow:0 4px 16px rgba(32,68,155,.35)}' +
+        '.zpa-node.on .zpa-circle{width:46px;height:46px;box-shadow:0 0 20px rgba(59,130,246,.3)}' +
         '.zpa-lbadge{font-size:13px}' +
         '.zpa-lname{display:none}' +
         '.zpa-nlabel{font-size:8px;margin-top:6px;letter-spacing:.04em}' +
@@ -3095,7 +3226,7 @@
           '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><path d="M7 3v8l-3 5h12l-3-5V3"/><line x1="7" y1="7" x2="13" y2="7"/></svg></div><span class="zpa-src-name">Labs &amp; imaging</span></div>' +
           '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><rect x="5" y="3" width="10" height="14" rx="2"/><line x1="10" y1="7" x2="10" y2="13"/><line x1="7" y1="10" x2="13" y2="10"/></svg></div><span class="zpa-src-name">Pharmacy data</span></div>' +
           '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><circle cx="10" cy="8" r="3"/><path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></div><span class="zpa-src-name">SDoH screening</span></div>' +
-          '<div style="display:flex;align-items:center;margin-top:12px;padding:0 4px"><div style="flex:1;height:2px;background:linear-gradient(90deg,var(--zpa-blue-pale),var(--zpa-blue-mid))"></div><div style="width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:10px solid var(--zpa-blue-mid)"></div></div>' +
+          '<div style="display:flex;align-items:center;margin-top:12px;padding:0 4px"><div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(59,130,246,0.1),rgba(59,130,246,0.4))"></div><div style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid rgba(59,130,246,0.4)"></div></div>' +
         '</div>' +
         '<div class="zpa-flow">' +
           '<div class="zpa-flow-line"></div>' +
@@ -3109,7 +3240,7 @@
         '</div>' +
         '<div class="zpa-box zpa-usr-box">' +
           '<span class="zpa-box-label">Output to</span>' +
-          '<div style="display:flex;align-items:center;margin-bottom:10px;padding:0 4px"><div style="width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:10px solid var(--zpa-blue-mid)"></div><div style="flex:1;height:2px;background:linear-gradient(90deg,var(--zpa-blue-mid),var(--zpa-blue-pale))"></div></div>' +
+          '<div style="display:flex;align-items:center;margin-bottom:10px;padding:0 4px"><div style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid rgba(59,130,246,0.4)"></div><div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(59,130,246,0.4),rgba(59,130,246,0.1))"></div></div>' +
           '<div class="zpa-usr-item"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.5"/><path d="M3 18c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></div><span class="zpa-usr-name">Clinicians</span></div>' +
           '<div class="zpa-usr-item"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><circle cx="8" cy="7" r="3"/><path d="M2 18c0-3.3 2.7-6 6-6"/><circle cx="14" cy="9" r="2.5"/><path d="M11 18c0-2.8 2.1-5 5-5"/></svg></div><span class="zpa-usr-name">Care coordinators</span></div>' +
           '<div class="zpa-usr-item"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><polyline points="3 7 10 3 17 7 10 11 3 7"/><polyline points="3 12 10 16 17 12"/></svg></div><span class="zpa-usr-name">Pop. health directors</span></div>' +
