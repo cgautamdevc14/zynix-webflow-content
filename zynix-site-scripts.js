@@ -2931,28 +2931,31 @@
 
     // -- CUSTOMER TRUST STRIP (Navina-style: small, grayscale, uniform) --
     var trustLogos = [
-      { name: 'Palm Beach ACO', logo: GH + 'palm-beach-aco.png' },
+      { name: 'Palm Beach ACO', logo: GH + 'palm-beach-aco.png', showName: true },
       { name: 'West Florida ACO', logo: GH + 'west-florida-aco.svg' },
       { name: 'Space Coast ACO', logo: GH + 'space-coast-aco.svg' },
       { name: 'Central Florida ACO', logo: GH + 'central-florida-aco-logo.svg' },
       { name: 'GoldenCare ACO', logo: GH + 'goldencare-aco.png' },
       { name: 'NEXT Healthcare', logo: GH + 'next-healthcare.svg' },
-      { name: 'eTernal Health', logo: GH + 'eternal-health.jpg' },
+      { name: 'eTernal Health' },
       { name: 'AMISTAD CHC', logo: GH + 'amistad-chc.png' },
       { name: 'Professional Radiology', logo: GH + 'professional-radiology.png' },
       { name: 'Sunflower ACO', logo: GH + 'sunflower-aco.png' },
       { name: 'Innovacare Health', logo: GH + 'innovacare-health.svg' },
-      { name: 'CLSCFL', logo: GH + 'clscfl.png' }
+      { name: 'CLSCFL' }
     ];
     var logoStyle = 'height:40px;width:auto;max-width:150px;filter:brightness(0) invert(1) opacity(0.5);transition:filter 0.3s,opacity 0.3s;object-fit:contain';
+    var txtStyle = 'display:inline-flex;align-items:center;height:40px;flex-shrink:0;font-size:14px;font-weight:700;color:#64748b;white-space:nowrap;letter-spacing:0.5px;text-transform:uppercase;opacity:0.6;font-family:var(--z-font)';
     var trustSpans = '';
     for (var ti = 0; ti < 2; ti++) {
       for (var tj = 0; tj < trustLogos.length; tj++) {
         var tl = trustLogos[tj];
-        if (tl.logo) {
+        if (tl.logo && tl.showName) {
+          trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;gap:8px;height:40px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"><span style="font-size:13px;font-weight:700;color:#64748b;white-space:nowrap;letter-spacing:0.5px;text-transform:uppercase;opacity:0.6">' + tl.name + '</span></span>';
+        } else if (tl.logo) {
           trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"></span>';
         } else {
-          trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0;font-size:15px;font-weight:700;color:#64748b;white-space:nowrap;letter-spacing:0.5px;text-transform:uppercase;opacity:0.6;font-family:var(--z-font)">' + tl.name + '</span>';
+          trustSpans += '<span title="' + tl.name + '" style="' + txtStyle + '">' + tl.name + '</span>';
         }
       }
     }
