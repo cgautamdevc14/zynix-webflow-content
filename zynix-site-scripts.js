@@ -3136,7 +3136,8 @@
       '.zynix-hero-card .zhc-footer strong{color:#16a34a!important}' +
       '</style>' +
       '<div class="zynix-inner-hero-img" style="max-width:580px">' +
-      '<div class="zynix-hero-card" style="background:#fff;border-radius:20px;border:1px solid rgba(0,0,0,0.08);box-shadow:0 20px 60px rgba(0,0,0,0.08),0 1px 3px rgba(0,0,0,0.06);overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">' +
+      // NOTE: no inline background on .zynix-hero-card — the site-wide dark-mode stylesheet uses [style*="background:#fff"] to flip light cards dark, so we move the white background into the scoped <style> rule above.
+      '<div class="zynix-hero-card" style="border-radius:20px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">' +
       '<div class="zhc-chrome" style="display:flex;align-items:center;padding:14px 20px">' +
         '<div style="display:flex;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:#ef4444;display:block"></span><span style="width:12px;height:12px;border-radius:50%;background:#f59e0b;display:block"></span><span style="width:12px;height:12px;border-radius:50%;background:#22c55e;display:block"></span></div>' +
         '<div class="zhc-chrome-title" style="flex:1;text-align:center;font-size:13px;font-weight:500">zynix.ai</div>' +
