@@ -2931,7 +2931,7 @@
 
     // -- CUSTOMER TRUST STRIP (Navina-style: small, grayscale, uniform) --
     var trustLogos = [
-      { name: 'Palm Beach ACO', logo: GH + 'palm-beach-aco.png', showName: true },
+      { name: 'Palm Beach ACO' },
       { name: 'West Florida ACO', logo: GH + 'west-florida-aco.svg' },
       { name: 'Space Coast ACO', logo: GH + 'space-coast-aco.svg' },
       { name: 'Central Florida ACO', logo: GH + 'central-florida-aco-logo.svg' },
