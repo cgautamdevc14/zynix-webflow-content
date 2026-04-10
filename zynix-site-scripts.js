@@ -3391,7 +3391,7 @@
       '<div class="zynix-testimonial-card fade-in-up">' +
       '<div class="zynix-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
       '<p class="zynix-testimonial-quote">&ldquo;We evaluated six VBC platforms. Zynix was the only one that could ingest our data, deploy agents, and show ROI within 30 days. It\u2019s not a dashboard. It\u2019s an operating system.&rdquo;</p>' +
-      '<div class="zynix-testimonial-author"><strong>Ronda Mill</strong><span>Senior Care Manager, West Florida ACO</span></div></div>' +
+      '<div class="zynix-testimonial-author"><strong>Ronda Miller</strong><span>Senior Care Manager, West Florida ACO</span></div></div>' +
       '<div class="zynix-testimonial-card fade-in-up">' +
       '<div class="zynix-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
       '<p class="zynix-testimonial-quote">&ldquo;The multilingual AI agents were a game-changer for our FQHC. Our Spanish-speaking patients finally get the follow-up calls they deserve, on time, every time.&rdquo;</p>' +
