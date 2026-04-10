@@ -2893,66 +2893,12 @@ body > .w-footer {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   DARK MODE — Hero Dashboard Card Override
-   The hero card uses inline styles with white/light colors.
-   These !important rules force dark theme on all child elements.
+   HERO VISUAL — v3 editorial SVG (dark-native, no overrides)
+   The new hero visual is built with dark-native inline styles.
+   Legacy light-mode override rules have been removed.
    ═══════════════════════════════════════════════════════════ */
-
-/* Main card container */
 .zynix-homepage-hero .zynix-inner-hero-img > div {
-  background: var(--z-bg-card) !important;
-  border-color: rgba(255,255,255,0.08) !important;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2) !important;
-}
-
-/* Title bar */
-.zynix-homepage-hero .zynix-inner-hero-img > div > div:first-child {
-  background: var(--z-bg-surface) !important;
-  border-bottom-color: rgba(255,255,255,0.06) !important;
-}
-
-/* All text inside hero card */
-.zynix-homepage-hero .zynix-inner-hero-img div {
-  color: var(--z-text) !important;
-}
-.zynix-homepage-hero .zynix-inner-hero-img [style*="color:#1a1a2e"],
-.zynix-homepage-hero .zynix-inner-hero-img [style*="color: #1a1a2e"],
-.zynix-homepage-hero .zynix-inner-hero-img [style*="color:#1a1a"] {
-  color: var(--z-text) !important;
-}
-.zynix-homepage-hero .zynix-inner-hero-img [style*="color:rgba(0,0,0,0.6"],
-.zynix-homepage-hero .zynix-inner-hero-img [style*="color:rgba(0,0,0,0.65"],
-.zynix-homepage-hero .zynix-inner-hero-img [style*="color: rgba(0,0,0"] {
-  color: var(--z-text-secondary) !important;
-}
-
-/* Tab bar in hero card */
-.zynix-homepage-hero .zynix-inner-hero-img [style*="border-bottom:1px solid rgba(0,0,0"] {
-  border-bottom-color: rgba(255,255,255,0.06) !important;
-}
-.zynix-homepage-hero .zynix-inner-hero-img [style*="border-bottom:2px solid"] {
-  border-bottom-color: var(--z-accent) !important;
-}
-
-/* Stat boxes */
-.zynix-homepage-hero .zynix-inner-hero-img [style*="background:#f8f9fb"],
-.zynix-homepage-hero .zynix-inner-hero-img [style*="background: #f8f9fb"],
-.zynix-homepage-hero .zynix-inner-hero-img [style*="background:#fafbfc"],
-.zynix-homepage-hero .zynix-inner-hero-img [style*="background: #fafbfc"] {
-  background: rgba(255,255,255,0.04) !important;
-  border-color: rgba(255,255,255,0.06) !important;
-}
-
-/* Row separators */
-.zynix-homepage-hero .zynix-inner-hero-img [style*="border-bottom:1px solid rgba(0,0,0,0.04)"] {
-  border-bottom-color: rgba(255,255,255,0.06) !important;
-}
-
-/* Progress bar backgrounds */
-.zynix-homepage-hero .zynix-inner-hero-img [style*="background:rgba(0,0,0,0.04)"],
-.zynix-homepage-hero .zynix-inner-hero-img [style*="background:rgba(0,0,0,0.06)"],
-.zynix-homepage-hero .zynix-inner-hero-img [style*="background: rgba(0,0,0"] {
-  background: rgba(255,255,255,0.06) !important;
+  /* No overrides — inline gradient background is authoritative */
 }
 
 /* ═══════════════════════════════════════════════════════════

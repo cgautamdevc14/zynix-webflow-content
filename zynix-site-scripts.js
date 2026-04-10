@@ -53,118 +53,299 @@
     portalACORisk: GH + 'zynix-aco-risk.png'
   };
 
-  // ── Hero Visual System ── (HTML/CSS visuals replace PNGs for SEO + dark-mode)
-  var hvs = 'position:relative;width:100%;height:100%;min-height:320px;border-radius:16px;overflow:hidden;';
-  var hvBg = 'background:linear-gradient(135deg,rgba(14,24,42,0.95),rgba(30,58,95,0.9));';
-  var hvGlow = 'position:absolute;border-radius:50%;filter:blur(40px);opacity:0.3;';
-  function heroCard(x,y,w,label,val,clr){return '<div style="position:absolute;left:'+x+';top:'+y+';width:'+w+';background:rgba(255,255,255,0.06);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 16px"><div style="font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">'+label+'</div><div style="font-size:22px;font-weight:700;color:'+(clr||'#E8612D')+'">'+val+'</div></div>';}
-  function heroBar(x,y,w,pct,clr){return '<div style="position:absolute;left:'+x+';top:'+y+';width:'+w+';height:6px;background:rgba(255,255,255,0.08);border-radius:3px"><div style="width:'+pct+'%;height:100%;background:'+(clr||'#E8612D')+';border-radius:3px"></div></div>';}
-  function heroDot(x,y,r,clr){return '<div style="'+hvGlow+'left:'+x+';top:'+y+';width:'+r+'px;height:'+r+'px;background:'+(clr||'#E8612D')+'"></div>';}
+  // ── Hero Visual System ── (Editorial SVG compositions, no fake UI chrome)
+  // Design language: deep navy gradient + subtle grid + SVG line art focal piece + monospace labels
+  var hvs = 'position:relative;width:100%;height:100%;min-height:360px;border-radius:20px;overflow:hidden;background:radial-gradient(ellipse 55% 45% at 22% 18%,rgba(232,97,45,0.22),transparent 60%),radial-gradient(ellipse 50% 40% at 82% 85%,rgba(59,130,246,0.18),transparent 60%),linear-gradient(155deg,#060D1C 0%,#0B1830 52%,#0E1E3A 100%);border:1px solid rgba(255,255,255,0.08);box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 20px 60px -20px rgba(0,0,0,0.6);';
+  var hvGrid = '<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.4;pointer-events:none" aria-hidden="true"><defs><pattern id="zgrid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M 36 0 L 0 0 0 36" fill="none" stroke="rgba(255,255,255,0.045)" stroke-width="1"/></pattern><radialGradient id="zgridFade" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(6,13,28,0.8)"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#zgrid)"/><rect width="100%" height="100%" fill="url(#zgridFade)"/></svg>';
+  var hvMono = 'font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;';
+  function hvHeader(left, status) {
+    return '<div style="position:absolute;top:20px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:center;z-index:3">' +
+      '<div style="'+hvMono+'font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.48)">'+left+'</div>' +
+      '<div style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e"></span><span style="'+hvMono+'font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(34,197,94,0.85)">'+status+'</span></div>' +
+      '</div>';
+  }
+  function hvFooter(text) {
+    return '<div style="position:absolute;bottom:20px;left:24px;right:24px;'+hvMono+'font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.42);z-index:3;display:flex;justify-content:space-between;align-items:center"><span>'+text+'</span><span style="opacity:0.6">zynix&nbsp;//&nbsp;ai</span></div>';
+  }
+  function hvCenterLabel(eyebrow, title) {
+    return '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none"><div style="text-align:center"><div style="'+hvMono+'font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px">'+eyebrow+'</div><div style="font-size:22px;font-weight:600;color:rgba(255,255,255,0.95);letter-spacing:-0.01em;font-feature-settings:\'ss01\'">'+title+'</div></div></div>';
+  }
 
-  // Platform / Enterprise visual — command center dashboard
-  var VIS_PLATFORM = '<div style="'+hvs+hvBg+'" role="img" aria-label="Zynix AI enterprise healthcare command center dashboard">' +
-    heroDot('10%','20%',120,'#E8612D') + heroDot('70%','60%',100,'#3b82f6') +
-    '<div style="position:absolute;top:16px;left:16px;right:16px;height:32px;background:rgba(255,255,255,0.05);border-radius:8px 8px 0 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;padding:0 12px"><div style="width:8px;height:8px;border-radius:50%;background:#ef4444;margin-right:6px"></div><div style="width:8px;height:8px;border-radius:50%;background:#eab308;margin-right:6px"></div><div style="width:8px;height:8px;border-radius:50%;background:#22c55e;margin-right:12px"></div><span style="font-size:11px;color:rgba(255,255,255,0.4)">zynix.ai/dashboard</span></div>' +
-    heroCard('5%','22%','40%','Patients Managed','12,480','#E8612D') +
-    heroCard('5%','48%','40%','Gap Closure','87%','#22c55e') +
-    heroCard('52%','22%','42%','Active Agents','12','#3b82f6') +
-    heroCard('52%','48%','42%','Savings YTD','$2.4M','#E8612D') +
-    heroBar('5%','78%','42%',87,'#22c55e') + heroBar('52%','78%','42%',62,'#3b82f6') +
-    '<div style="position:absolute;bottom:12px;left:5%;font-size:9px;color:rgba(255,255,255,0.3)">Quality Measures</div>' +
-    '<div style="position:absolute;bottom:12px;left:52%;font-size:9px;color:rgba(255,255,255,0.3)">Risk Scores</div>' +
+  // Platform / Enterprise visual — orbital operating-system metaphor
+  var VIS_PLATFORM = '<div style="'+hvs+'" role="img" aria-label="Zynix AI operating system for value-based care">' + hvGrid +
+    hvHeader('Operating System', 'Online') +
+    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
+    '<defs>' +
+    '<radialGradient id="pCore" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.9"/><stop offset="60%" stop-color="#E8612D" stop-opacity="0.15"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
+    '<linearGradient id="pRing" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.05"/><stop offset="50%" stop-color="#E8612D" stop-opacity="0.55"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.05"/></linearGradient>' +
+    '<linearGradient id="pRing2" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.05"/><stop offset="50%" stop-color="#3b82f6" stop-opacity="0.45"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.05"/></linearGradient>' +
+    '</defs>' +
+    '<ellipse cx="400" cy="260" rx="340" ry="115" fill="none" stroke="url(#pRing2)" stroke-width="1"/>' +
+    '<ellipse cx="400" cy="260" rx="260" ry="85" fill="none" stroke="url(#pRing)" stroke-width="1"/>' +
+    '<ellipse cx="400" cy="260" rx="175" ry="58" fill="none" stroke="url(#pRing)" stroke-width="1.3"/>' +
+    '<circle cx="400" cy="260" r="120" fill="url(#pCore)"/>' +
+    '<circle cx="400" cy="260" r="32" fill="none" stroke="#E8612D" stroke-width="1.2" opacity="0.7"/>' +
+    '<circle cx="400" cy="260" r="8" fill="#E8612D"/>' +
+    '<circle cx="740" cy="260" r="5" fill="#E8612D"/><circle cx="740" cy="260" r="14" fill="#E8612D" opacity="0.18"/>' +
+    '<circle cx="60" cy="260" r="4" fill="#3b82f6"/><circle cx="60" cy="260" r="12" fill="#3b82f6" opacity="0.18"/>' +
+    '<circle cx="575" cy="188" r="4" fill="#8b5cf6"/><circle cx="575" cy="188" r="10" fill="#8b5cf6" opacity="0.18"/>' +
+    '<circle cx="225" cy="332" r="4" fill="#22c55e"/><circle cx="225" cy="332" r="10" fill="#22c55e" opacity="0.18"/>' +
+    '<circle cx="635" cy="315" r="3.5" fill="#06b6d4"/>' +
+    '<circle cx="165" cy="205" r="3.5" fill="#eab308"/>' +
+    '</svg>' +
+    hvCenterLabel('Operating System', 'ZYNIX&nbsp;OS') +
+    hvFooter('Value-Based Care · Integrated Intelligence') +
     '</div>';
 
-  // Doctor / Agents visual — AI conversation interface
-  var VIS_AGENTS = '<div style="'+hvs+hvBg+'" role="img" aria-label="Zynix AI autonomous healthcare agent conversation interface">' +
-    heroDot('60%','10%',100,'#8b5cf6') + heroDot('20%','70%',80,'#E8612D') +
-    '<div style="position:absolute;top:16px;left:16px;right:16px;height:32px;background:rgba(255,255,255,0.05);border-radius:8px 8px 0 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;padding:0 12px"><div style="width:8px;height:8px;border-radius:50%;background:#8b5cf6"></div><span style="font-size:11px;color:rgba(255,255,255,0.4);margin-left:8px">AI Agent Console</span><span style="margin-left:auto;font-size:10px;padding:2px 10px;background:rgba(34,197,94,0.2);color:#22c55e;border-radius:10px">● LIVE</span></div>' +
-    '<div style="position:absolute;top:60px;left:16px;right:16px;display:flex;flex-direction:column;gap:10px">' +
-    '<div style="align-self:flex-start;max-width:70%;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.2);border-radius:12px 12px 12px 2px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,0.8)">Patient Maria Chen has an open HCC gap (E11.65 — Type 2 diabetes with hyperglycemia). Last A1C was 8.2% on Jan 15.</div>' +
-    '<div style="align-self:flex-end;max-width:65%;background:rgba(232,97,45,0.15);border:1px solid rgba(232,97,45,0.2);border-radius:12px 12px 2px 12px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,0.8)">Scheduling follow-up with Dr. Patel for recapture. Preferred time: Tue/Thu mornings.</div>' +
-    '<div style="align-self:flex-start;max-width:70%;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.2);border-radius:12px 12px 12px 2px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,0.8)">Appointment confirmed: Tue Mar 18, 9:30 AM. SMS reminder queued for 24h prior.</div>' +
-    '</div>' +
-    heroCard('5%','76%','42%','Calls Today','847','#8b5cf6') +
-    heroCard('52%','76%','42%','Success Rate','94%','#22c55e') +
+  // Agents visual — connected agent network graph
+  var VIS_AGENTS = '<div style="'+hvs+'" role="img" aria-label="Zynix AI autonomous agent network">' + hvGrid +
+    hvHeader('Agent Network', 'Active') +
+    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
+    '<defs>' +
+    '<radialGradient id="aCore"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.85"/><stop offset="70%" stop-color="#E8612D" stop-opacity="0.1"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
+    '<linearGradient id="aEdge" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.05"/></linearGradient>' +
+    '</defs>' +
+    '<g stroke="url(#aEdge)" stroke-width="1.2" fill="none">' +
+    '<line x1="400" y1="260" x2="180" y2="140"/>' +
+    '<line x1="400" y1="260" x2="620" y2="140"/>' +
+    '<line x1="400" y1="260" x2="140" y2="260"/>' +
+    '<line x1="400" y1="260" x2="660" y2="260"/>' +
+    '<line x1="400" y1="260" x2="200" y2="380"/>' +
+    '<line x1="400" y1="260" x2="600" y2="380"/>' +
+    '</g>' +
+    '<g stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none" stroke-dasharray="2,4">' +
+    '<line x1="180" y1="140" x2="620" y2="140"/>' +
+    '<line x1="140" y1="260" x2="660" y2="260"/>' +
+    '<line x1="200" y1="380" x2="600" y2="380"/>' +
+    '</g>' +
+    '<circle cx="400" cy="260" r="110" fill="url(#aCore)"/>' +
+    '<circle cx="400" cy="260" r="26" fill="rgba(232,97,45,0.15)" stroke="#E8612D" stroke-width="1.5"/>' +
+    '<circle cx="400" cy="260" r="6" fill="#E8612D"/>' +
+    // Outer nodes with labels
+    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.55)" text-anchor="middle">' +
+    '<circle cx="180" cy="140" r="14" fill="rgba(139,92,246,0.15)" stroke="#8b5cf6" stroke-width="1.2"/><text x="180" y="112">AWV</text>' +
+    '<circle cx="620" cy="140" r="14" fill="rgba(6,182,212,0.15)" stroke="#06b6d4" stroke-width="1.2"/><text x="620" y="112">TCM</text>' +
+    '<circle cx="140" cy="260" r="14" fill="rgba(59,130,246,0.15)" stroke="#3b82f6" stroke-width="1.2"/><text x="140" y="238">HCC</text>' +
+    '<circle cx="660" cy="260" r="14" fill="rgba(234,179,8,0.15)" stroke="#eab308" stroke-width="1.2"/><text x="660" y="238">CCM</text>' +
+    '<circle cx="200" cy="380" r="14" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="1.2"/><text x="200" y="412">RPM</text>' +
+    '<circle cx="600" cy="380" r="14" fill="rgba(236,72,153,0.15)" stroke="#ec4899" stroke-width="1.2"/><text x="600" y="412">SDOH</text>' +
+    '</g>' +
+    '</svg>' +
+    hvFooter('Autonomous Agents · Specialized Workflows') +
     '</div>';
 
-  // Patient / Scheduling visual
-  var VIS_PATIENT = '<div style="'+hvs+hvBg+'" role="img" aria-label="AI-powered patient scheduling and engagement dashboard">' +
-    heroDot('70%','20%',100,'#06b6d4') + heroDot('10%','60%',80,'#E8612D') +
-    '<div style="position:absolute;top:16px;left:16px;right:16px;height:32px;background:rgba(255,255,255,0.05);border-radius:8px 8px 0 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;padding:0 12px"><span style="font-size:11px;color:rgba(255,255,255,0.4)">Patient Engagement</span></div>' +
-    heroCard('5%','22%','42%','No-Show Rate','8.2%','#22c55e') +
-    heroCard('52%','22%','42%','Scheduled Today','142','#06b6d4') +
-    '<div style="position:absolute;top:52%;left:5%;right:5%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 16px">' +
-    '<div style="font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Upcoming Appointments</div>' +
-    '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:11px;color:rgba(255,255,255,0.7)"><span>James Wilson</span><span style="color:#06b6d4">9:00 AM — AWV</span></div>' +
-    '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:11px;color:rgba(255,255,255,0.7)"><span>Sarah Martinez</span><span style="color:#E8612D">10:30 AM — TCM</span></div>' +
-    '<div style="display:flex;justify-content:space-between;padding:6px 0;font-size:11px;color:rgba(255,255,255,0.7)"><span>Robert Kim</span><span style="color:#22c55e">2:00 PM — CCM</span></div>' +
+  // Patient engagement visual — ECG pulse
+  var VIS_PATIENT = '<div style="'+hvs+'" role="img" aria-label="AI patient engagement and scheduling">' + hvGrid +
+    hvHeader('Patient Engagement', 'Streaming') +
+    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
+    '<defs>' +
+    '<linearGradient id="ecgFade" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0"/><stop offset="15%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="85%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></linearGradient>' +
+    '<linearGradient id="ecgGhost" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0"/><stop offset="50%" stop-color="#3b82f6" stop-opacity="0.4"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/></linearGradient>' +
+    '</defs>' +
+    // Ghost line (background)
+    '<path d="M 0 260 L 120 260 L 150 260 L 180 220 L 200 300 L 220 260 L 340 260 L 370 260 L 400 200 L 420 320 L 440 260 L 560 260 L 590 260 L 620 210 L 640 310 L 660 260 L 800 260" fill="none" stroke="url(#ecgGhost)" stroke-width="1.2" stroke-dasharray="3,4" opacity="0.5"/>' +
+    // Main pulse
+    '<path d="M 0 260 L 100 260 L 130 260 L 160 180 L 185 340 L 210 260 L 330 260 L 365 260 L 395 140 L 425 360 L 455 260 L 580 260 L 615 260 L 645 190 L 670 330 L 695 260 L 800 260" fill="none" stroke="url(#ecgFade)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>' +
+    // Pulse node
+    '<circle cx="395" cy="140" r="6" fill="#E8612D"/>' +
+    '<circle cx="395" cy="140" r="16" fill="#E8612D" opacity="0.2"/>' +
+    // Tick marks
+    '<g stroke="rgba(255,255,255,0.15)" stroke-width="1">' +
+    '<line x1="100" y1="410" x2="100" y2="420"/><line x1="250" y1="410" x2="250" y2="420"/><line x1="400" y1="410" x2="400" y2="420"/><line x1="550" y1="410" x2="550" y2="420"/><line x1="700" y1="410" x2="700" y2="420"/>' +
+    '</g>' +
+    '</svg>' +
+    '<div style="position:absolute;left:24px;bottom:60px;z-index:2">' +
+    '<div style="'+hvMono+'font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px">Next Touchpoint</div>' +
+    '<div style="font-size:15px;color:rgba(255,255,255,0.88);font-weight:500">Tue 9:30 AM · Annual Wellness</div>' +
     '</div>' +
+    '<div style="position:absolute;right:24px;bottom:60px;text-align:right;z-index:2">' +
+    '<div style="'+hvMono+'font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px">Contact Rate</div>' +
+    '<div style="font-size:15px;color:#E8612D;font-weight:500">Above target</div>' +
+    '</div>' +
+    hvFooter('Behavioral AI · Multilingual Outreach') +
     '</div>';
 
-  // Data / Platform visual — data flow integration
-  var VIS_DATA = '<div style="'+hvs+hvBg+'" role="img" aria-label="Healthcare data integration and unification platform">' +
-    heroDot('50%','30%',140,'#3b82f6') + heroDot('20%','70%',80,'#22c55e') +
-    '<div style="position:absolute;top:20px;left:50%;transform:translateX(-50%);text-align:center"><div style="font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px">Data Sources Connected</div><div style="font-size:28px;font-weight:700;color:#3b82f6">24</div></div>' +
-    '<div style="position:absolute;top:35%;left:5%;width:28%;display:flex;flex-direction:column;gap:6px">' +
-    '<div style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f3e5; EHR Systems</div>' +
-    '<div style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f4cb; Claims &amp; BCDA</div>' +
-    '<div style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f9ea; Labs &amp; Imaging</div>' +
-    '<div style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f48a; Pharmacy Data</div>' +
-    '</div>' +
-    '<div style="position:absolute;top:40%;left:38%;width:24%;text-align:center"><div style="width:64px;height:64px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 0 30px rgba(59,130,246,0.3)">&#x1f517;</div><div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:6px">UNIFIED RECORD</div></div>' +
-    '<div style="position:absolute;top:35%;right:5%;width:28%;display:flex;flex-direction:column;gap:6px">' +
-    '<div style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f4ca; Analytics</div>' +
-    '<div style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f916; AI Agents</div>' +
-    '<div style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,0.7)">&#x1f4dd; Care Plans</div>' +
-    '</div>' +
-    heroBar('5%','88%','90%',100,'linear-gradient(90deg,#3b82f6,#8b5cf6,#22c55e)') +
+  // Data platform visual — hexagonal mesh
+  var VIS_DATA = '<div style="'+hvs+'" role="img" aria-label="Zynix AI unified healthcare data platform">' + hvGrid +
+    hvHeader('Data Fabric', 'Unified') +
+    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
+    '<defs>' +
+    '<radialGradient id="dCore"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.8"/><stop offset="60%" stop-color="#E8612D" stop-opacity="0.12"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
+    '<linearGradient id="dEdge" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.1"/><stop offset="50%" stop-color="#3b82f6" stop-opacity="0.55"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.1"/></linearGradient>' +
+    '</defs>' +
+    // Hex lattice — 12 hexagons arranged around center
+    '<g fill="none" stroke="url(#dEdge)" stroke-width="1">' +
+    // Row 1
+    '<polygon points="200,160 240,140 280,160 280,200 240,220 200,200"/>' +
+    '<polygon points="320,160 360,140 400,160 400,200 360,220 320,200"/>' +
+    '<polygon points="440,160 480,140 520,160 520,200 480,220 440,200"/>' +
+    '<polygon points="560,160 600,140 640,160 640,200 600,220 560,200"/>' +
+    // Row 2 (center — highlighted)
+    '<polygon points="260,240 300,220 340,240 340,280 300,300 260,280"/>' +
+    '<polygon points="500,240 540,220 580,240 580,280 540,300 500,280"/>' +
+    // Row 3
+    '<polygon points="200,320 240,300 280,320 280,360 240,380 200,360"/>' +
+    '<polygon points="320,320 360,300 400,320 400,360 360,380 320,360"/>' +
+    '<polygon points="440,320 480,300 520,320 520,360 480,380 440,360"/>' +
+    '<polygon points="560,320 600,300 640,320 640,360 600,380 560,360"/>' +
+    '</g>' +
+    // Central highlighted hex
+    '<polygon points="380,240 420,220 460,240 460,280 420,300 380,280" fill="rgba(232,97,45,0.18)" stroke="#E8612D" stroke-width="1.6"/>' +
+    '<circle cx="420" cy="260" r="100" fill="url(#dCore)"/>' +
+    '<circle cx="420" cy="260" r="5" fill="#E8612D"/>' +
+    // Connecting lines from center
+    '<g stroke="#E8612D" stroke-width="0.8" opacity="0.3">' +
+    '<line x1="420" y1="260" x2="240" y2="180"/><line x1="420" y1="260" x2="600" y2="180"/><line x1="420" y1="260" x2="240" y2="340"/><line x1="420" y1="260" x2="600" y2="340"/>' +
+    '</g>' +
+    // Small source nodes
+    '<g fill="rgba(255,255,255,0.9)">' +
+    '<circle cx="240" cy="180" r="2.5"/><circle cx="360" cy="180" r="2.5"/><circle cx="480" cy="180" r="2.5"/><circle cx="600" cy="180" r="2.5"/>' +
+    '<circle cx="240" cy="340" r="2.5"/><circle cx="360" cy="340" r="2.5"/><circle cx="480" cy="340" r="2.5"/><circle cx="600" cy="340" r="2.5"/>' +
+    '</g>' +
+    // Small labels
+    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="8" fill="rgba(255,255,255,0.45)" text-anchor="middle">' +
+    '<text x="240" y="130">EHR</text><text x="360" y="130">CLAIMS</text><text x="480" y="130">LABS</text><text x="600" y="130">RX</text>' +
+    '<text x="240" y="410">FHIR</text><text x="360" y="410">HL7</text><text x="480" y="410">ADT</text><text x="600" y="410">BCDA</text>' +
+    '</g>' +
+    '</svg>' +
+    hvFooter('Unified Patient Record · 24+ Connectors') +
     '</div>';
 
-  // Analytics / Dashboard visual
-  var VIS_ANALYTICS = '<div style="'+hvs+hvBg+'" role="img" aria-label="Population health analytics and predictive modeling dashboard">' +
-    heroDot('20%','20%',100,'#E8612D') + heroDot('70%','60%',80,'#8b5cf6') +
-    '<div style="position:absolute;top:16px;left:16px;right:16px;height:32px;background:rgba(255,255,255,0.05);border-radius:8px 8px 0 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;padding:0 12px;gap:16px"><span style="font-size:11px;color:#E8612D;border-bottom:2px solid #E8612D;padding-bottom:6px">Overview</span><span style="font-size:11px;color:rgba(255,255,255,0.4)">Quality</span><span style="font-size:11px;color:rgba(255,255,255,0.4)">Risk</span><span style="font-size:11px;color:rgba(255,255,255,0.4)">Financial</span></div>' +
-    heroCard('5%','22%','28%','RAF Score','1.24','#E8612D') +
-    heroCard('36%','22%','28%','HEDIS Rate','91%','#22c55e') +
-    heroCard('67%','22%','28%','Star Rating','4.5 ★','#eab308') +
-    '<div style="position:absolute;top:52%;left:5%;right:5%;height:35%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 14px">' +
-    '<div style="font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:8px">QUALITY TREND — 12 MONTHS</div>' +
-    '<svg viewBox="0 0 400 80" style="width:100%;height:60px"><polyline points="0,60 35,52 70,48 105,42 140,38 175,40 210,32 245,28 280,22 315,18 350,14 385,10" fill="none" stroke="#E8612D" stroke-width="2"/><polyline points="0,70 35,65 70,58 105,55 140,50 175,48 210,42 245,38 280,35 315,30 350,25 385,20" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4,3"/></svg>' +
+  // Analytics visual — layered trend chart
+  var VIS_ANALYTICS = '<div style="'+hvs+'" role="img" aria-label="Population health analytics and predictive modeling">' + hvGrid +
+    hvHeader('Predictive Analytics', 'Live') +
+    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
+    '<defs>' +
+    '<linearGradient id="area1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.45"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></linearGradient>' +
+    '<linearGradient id="area2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/></linearGradient>' +
+    '</defs>' +
+    // Y-axis grid lines
+    '<g stroke="rgba(255,255,255,0.06)" stroke-width="1">' +
+    '<line x1="80" y1="110" x2="720" y2="110"/>' +
+    '<line x1="80" y1="190" x2="720" y2="190"/>' +
+    '<line x1="80" y1="270" x2="720" y2="270"/>' +
+    '<line x1="80" y1="350" x2="720" y2="350"/>' +
+    '<line x1="80" y1="430" x2="720" y2="430"/>' +
+    '</g>' +
+    // Blue area (baseline)
+    '<path d="M 80 380 C 160 360 240 340 320 320 C 400 300 480 290 560 270 C 620 260 680 250 720 245 L 720 430 L 80 430 Z" fill="url(#area2)"/>' +
+    '<path d="M 80 380 C 160 360 240 340 320 320 C 400 300 480 290 560 270 C 620 260 680 250 720 245" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-dasharray="5,4"/>' +
+    // Orange area (forecast)
+    '<path d="M 80 340 C 160 310 240 280 320 250 C 400 220 480 200 560 165 C 620 140 680 120 720 100 L 720 430 L 80 430 Z" fill="url(#area1)"/>' +
+    '<path d="M 80 340 C 160 310 240 280 320 250 C 400 220 480 200 560 165 C 620 140 680 120 720 100" fill="none" stroke="#E8612D" stroke-width="2.4" stroke-linecap="round"/>' +
+    // Data point markers on orange
+    '<g fill="#E8612D">' +
+    '<circle cx="80" cy="340" r="3"/><circle cx="240" cy="280" r="3"/><circle cx="400" cy="225" r="3"/><circle cx="560" cy="165" r="3"/><circle cx="720" cy="100" r="4"/>' +
+    '</g>' +
+    '<circle cx="720" cy="100" r="12" fill="#E8612D" opacity="0.2"/>' +
+    // X-axis labels
+    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.35)" text-anchor="middle">' +
+    '<text x="80" y="455">Q1</text><text x="240" y="455">Q2</text><text x="400" y="455">Q3</text><text x="560" y="455">Q4</text><text x="720" y="455">FCST</text>' +
+    '</g>' +
+    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.35)">' +
+    '<text x="56" y="114" text-anchor="end">100</text><text x="56" y="194" text-anchor="end">80</text><text x="56" y="274" text-anchor="end">60</text><text x="56" y="354" text-anchor="end">40</text>' +
+    '</g>' +
+    '</svg>' +
+    // Legend
+    '<div style="position:absolute;top:60px;right:28px;'+hvMono+'font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.55);z-index:3;text-align:right">' +
+    '<div style="display:flex;align-items:center;gap:6px;justify-content:flex-end;margin-bottom:4px"><span style="width:16px;height:2px;background:#E8612D"></span> Actual</div>' +
+    '<div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span style="width:16px;height:2px;background:#3b82f6;border-top:1px dashed #3b82f6"></span> Baseline</div>' +
     '</div>' +
+    hvFooter('Quality · Risk · Financial Forecasting') +
     '</div>';
 
-  // Care coordination visual
-  var VIS_CARE = '<div style="'+hvs+hvBg+'" role="img" aria-label="AI-powered care coordination and gap closure workflow">' +
-    heroDot('60%','20%',100,'#22c55e') + heroDot('10%','60%',80,'#E8612D') +
-    '<div style="position:absolute;top:16px;left:16px;right:16px;height:32px;background:rgba(255,255,255,0.05);border-radius:8px 8px 0 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;padding:0 12px"><span style="font-size:11px;color:rgba(255,255,255,0.4)">Care Plan Orchestration</span><span style="margin-left:auto;font-size:10px;padding:2px 10px;background:rgba(34,197,94,0.2);color:#22c55e;border-radius:10px">3 Active</span></div>' +
-    '<div style="position:absolute;top:58px;left:16px;right:16px;display:flex;flex-direction:column;gap:8px">' +
-    '<div style="background:rgba(34,197,94,0.1);border-left:3px solid #22c55e;border-radius:0 8px 8px 0;padding:10px 14px"><div style="font-size:11px;color:rgba(255,255,255,0.8);font-weight:600">TCM — Post-Discharge</div><div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px">Day 2 of 30 · Call completed · Follow-up scheduled</div>' + '<div style="margin-top:6px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px"><div style="width:7%;height:100%;background:#22c55e;border-radius:2px"></div></div></div>' +
-    '<div style="background:rgba(232,97,45,0.1);border-left:3px solid #E8612D;border-radius:0 8px 8px 0;padding:10px 14px"><div style="font-size:11px;color:rgba(255,255,255,0.8);font-weight:600">AWV — Annual Wellness</div><div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px">Patient contacted · Appointment confirmed Mar 22</div>' + '<div style="margin-top:6px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px"><div style="width:60%;height:100%;background:#E8612D;border-radius:2px"></div></div></div>' +
-    '<div style="background:rgba(59,130,246,0.1);border-left:3px solid #3b82f6;border-radius:0 8px 8px 0;padding:10px 14px"><div style="font-size:11px;color:rgba(255,255,255,0.8);font-weight:600">HCC — Risk Recapture</div><div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px">E11.65 gap identified · Scheduling with PCP</div>' + '<div style="margin-top:6px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px"><div style="width:30%;height:100%;background:#3b82f6;border-radius:2px"></div></div></div>' +
-    '</div>' +
-    heroCard('5%','82%','42%','Gaps Closed','1,247','#22c55e') +
-    heroCard('52%','82%','42%','Contact Rate','85%','#E8612D') +
+  // Care coordination visual — flowing workflow arc
+  var VIS_CARE = '<div style="'+hvs+'" role="img" aria-label="Care coordination and gap closure workflow">' + hvGrid +
+    hvHeader('Care Orchestration', 'Deployed') +
+    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
+    '<defs>' +
+    '<linearGradient id="cArc" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.15"/><stop offset="50%" stop-color="#E8612D" stop-opacity="0.85"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.15"/></linearGradient>' +
+    '<radialGradient id="cNode"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.8"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
+    '</defs>' +
+    // Main arc
+    '<path d="M 80 360 Q 260 120 400 260 T 720 160" fill="none" stroke="url(#cArc)" stroke-width="2.2" stroke-linecap="round"/>' +
+    // Ghost arc
+    '<path d="M 80 380 Q 260 160 400 290 T 720 200" fill="none" stroke="rgba(59,130,246,0.25)" stroke-width="1.3" stroke-dasharray="4,5"/>' +
+    // Milestone nodes
+    '<g>' +
+    '<circle cx="80" cy="360" r="22" fill="url(#cNode)"/>' +
+    '<circle cx="80" cy="360" r="8" fill="rgba(232,97,45,0.2)" stroke="#E8612D" stroke-width="1.5"/>' +
+    '<circle cx="80" cy="360" r="3" fill="#E8612D"/>' +
+    '<circle cx="260" cy="200" r="22" fill="url(#cNode)"/>' +
+    '<circle cx="260" cy="200" r="8" fill="rgba(232,97,45,0.2)" stroke="#E8612D" stroke-width="1.5"/>' +
+    '<circle cx="260" cy="200" r="3" fill="#E8612D"/>' +
+    '<circle cx="450" cy="280" r="22" fill="url(#cNode)"/>' +
+    '<circle cx="450" cy="280" r="8" fill="rgba(232,97,45,0.2)" stroke="#E8612D" stroke-width="1.5"/>' +
+    '<circle cx="450" cy="280" r="3" fill="#E8612D"/>' +
+    '<circle cx="620" cy="190" r="22" fill="url(#cNode)"/>' +
+    '<circle cx="620" cy="190" r="8" fill="rgba(232,97,45,0.2)" stroke="#E8612D" stroke-width="1.5"/>' +
+    '<circle cx="620" cy="190" r="3" fill="#E8612D"/>' +
+    '<circle cx="720" cy="160" r="22" fill="url(#cNode)" opacity="0.7"/>' +
+    '<circle cx="720" cy="160" r="10" fill="rgba(34,197,94,0.2)" stroke="#22c55e" stroke-width="1.6"/>' +
+    '<circle cx="720" cy="160" r="4" fill="#22c55e"/>' +
+    '</g>' +
+    // Stage labels
+    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.55)" text-anchor="middle">' +
+    '<text x="80" y="410">IDENTIFY</text>' +
+    '<text x="260" y="170">OUTREACH</text>' +
+    '<text x="450" y="250">SCHEDULE</text>' +
+    '<text x="620" y="160">VISIT</text>' +
+    '<text x="720" y="130" fill="#22c55e">CLOSED</text>' +
+    '</g>' +
+    '</svg>' +
+    hvFooter('Gap Closure · TCM · AWV · HCC Recapture') +
     '</div>';
 
-  // Scribe / Documentation visual
-  var VIS_SCRIBE = '<div style="'+hvs+hvBg+'" role="img" aria-label="Ambient AI clinical documentation scribe interface">' +
-    heroDot('70%','20%',100,'#8b5cf6') + heroDot('10%','70%',80,'#22c55e') +
-    '<div style="position:absolute;top:16px;left:16px;right:16px;height:32px;background:rgba(255,255,255,0.05);border-radius:8px 8px 0 0;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;padding:0 12px"><span style="font-size:11px;color:rgba(255,255,255,0.4)">ZynScribe — Ambient Documentation</span><span style="margin-left:auto;display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:#ef4444;animation:pulse 1.5s infinite"></span><span style="font-size:10px;color:#ef4444">Recording</span></span></div>' +
-    '<div style="position:absolute;top:58px;left:16px;width:45%;display:flex;flex-direction:column;gap:6px">' +
-    '<div style="font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px">Live Transcript</div>' +
-    '<div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.5"><strong style="color:#8b5cf6">Dr. Patel:</strong> Blood pressure is 142/88 today. Let&rsquo;s increase the lisinopril to 20mg.</div>' +
-    '<div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.5"><strong style="color:#06b6d4">Patient:</strong> I&rsquo;ve been getting dizzy in the mornings.</div>' +
-    '<div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:1.5;opacity:0.7"><strong style="color:#8b5cf6">Dr. Patel:</strong> We should check orthostatic...</div>' +
-    '</div>' +
-    '<div style="position:absolute;top:58px;right:16px;width:42%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px">' +
-    '<div style="font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Structured Note</div>' +
-    '<div style="font-size:10px;color:rgba(139,92,246,0.8);font-weight:600;margin-bottom:2px">ASSESSMENT</div>' +
-    '<div style="font-size:10px;color:rgba(255,255,255,0.6);margin-bottom:6px">HTN, uncontrolled (I10)</div>' +
-    '<div style="font-size:10px;color:rgba(139,92,246,0.8);font-weight:600;margin-bottom:2px">PLAN</div>' +
-    '<div style="font-size:10px;color:rgba(255,255,255,0.6)">&#x2022; Increase lisinopril 10mg &rarr; 20mg<br>&#x2022; Orthostatic BP check<br>&#x2022; Follow-up 2 weeks</div>' +
-    '</div>' +
-    heroCard('5%','82%','42%','Notes Today','34','#8b5cf6') +
-    heroCard('52%','82%','42%','Time Saved','4.2 hrs','#22c55e') +
+  // Scribe visual — concentric audio rings + transcript flow
+  var VIS_SCRIBE = '<div style="'+hvs+'" role="img" aria-label="Ambient AI clinical documentation">' + hvGrid +
+    hvHeader('Ambient Scribe', 'Recording') +
+    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
+    '<defs>' +
+    '<radialGradient id="sCore"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.9"/><stop offset="60%" stop-color="#E8612D" stop-opacity="0.12"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
+    '</defs>' +
+    // Concentric rings (sound waves)
+    '<g fill="none" stroke="#E8612D" stroke-width="1.2">' +
+    '<circle cx="280" cy="260" r="40" opacity="0.8"/>' +
+    '<circle cx="280" cy="260" r="70" opacity="0.55"/>' +
+    '<circle cx="280" cy="260" r="105" opacity="0.35"/>' +
+    '<circle cx="280" cy="260" r="145" opacity="0.2"/>' +
+    '<circle cx="280" cy="260" r="190" opacity="0.1"/>' +
+    '</g>' +
+    '<circle cx="280" cy="260" r="160" fill="url(#sCore)"/>' +
+    '<circle cx="280" cy="260" r="14" fill="rgba(232,97,45,0.2)" stroke="#E8612D" stroke-width="1.8"/>' +
+    '<circle cx="280" cy="260" r="4" fill="#E8612D"/>' +
+    // Waveform bars on the right side (audio → text flow)
+    '<g fill="rgba(232,97,45,0.55)">' +
+    '<rect x="450" y="248" width="3" height="24" rx="1.5"/>' +
+    '<rect x="460" y="235" width="3" height="50" rx="1.5"/>' +
+    '<rect x="470" y="242" width="3" height="36" rx="1.5"/>' +
+    '<rect x="480" y="225" width="3" height="70" rx="1.5"/>' +
+    '<rect x="490" y="238" width="3" height="44" rx="1.5"/>' +
+    '<rect x="500" y="230" width="3" height="60" rx="1.5"/>' +
+    '<rect x="510" y="245" width="3" height="30" rx="1.5"/>' +
+    '<rect x="520" y="220" width="3" height="80" rx="1.5"/>' +
+    '<rect x="530" y="240" width="3" height="40" rx="1.5"/>' +
+    '<rect x="540" y="232" width="3" height="56" rx="1.5"/>' +
+    '<rect x="550" y="248" width="3" height="24" rx="1.5"/>' +
+    '<rect x="560" y="228" width="3" height="64" rx="1.5"/>' +
+    '<rect x="570" y="240" width="3" height="40" rx="1.5"/>' +
+    '<rect x="580" y="234" width="3" height="52" rx="1.5"/>' +
+    '</g>' +
+    // Connector line (audio to text)
+    '<line x1="600" y1="260" x2="640" y2="260" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="2,3"/>' +
+    // Text lines (simulated structured note)
+    '<g fill="rgba(255,255,255,0.4)">' +
+    '<rect x="650" y="210" width="90" height="3" rx="1.5"/>' +
+    '<rect x="650" y="222" width="120" height="3" rx="1.5"/>' +
+    '<rect x="650" y="240" width="70" height="3" rx="1.5" fill="rgba(232,97,45,0.7)"/>' +
+    '<rect x="650" y="252" width="100" height="3" rx="1.5"/>' +
+    '<rect x="650" y="264" width="85" height="3" rx="1.5"/>' +
+    '<rect x="650" y="282" width="60" height="3" rx="1.5" fill="rgba(232,97,45,0.7)"/>' +
+    '<rect x="650" y="294" width="110" height="3" rx="1.5"/>' +
+    '<rect x="650" y="306" width="75" height="3" rx="1.5"/>' +
+    '</g>' +
+    '</svg>' +
+    hvFooter('Audio → Structured Note · HIPAA Compliant') +
     '</div>';
 
   // Build HERO_VIS lookup: image URL → HTML visual
@@ -2883,37 +3064,69 @@
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0D9B6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> HITRUST Ready</span>' +
       '</div>' +
       '</div>' +
-      '<div class="zynix-inner-hero-img" style="max-width:520px;overflow:hidden">' +
-      '<div style="background:var(--z-bg-card,#1a2236);border-radius:20px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 20px 60px rgba(0,0,0,0.3),0 1px 3px rgba(0,0,0,0.15);overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;width:100%">' +
-      '<div style="display:flex;align-items:center;padding:14px 20px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.06)">' +
-        '<div style="display:flex;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:#ef4444;display:block"></span><span style="width:12px;height:12px;border-radius:50%;background:#f59e0b;display:block"></span><span style="width:12px;height:12px;border-radius:50%;background:#22c55e;display:block"></span></div>' +
-        '<div style="flex:1;text-align:center;font-size:13px;color:rgba(255,255,255,0.5);font-weight:500">zynix.ai</div>' +
+      '<div class="zynix-inner-hero-img" style="max-width:560px;overflow:hidden">' +
+      '<div role="img" aria-label="Zynix AI execution engine orchestrating autonomous care agents" style="position:relative;width:100%;aspect-ratio:1/1.05;min-height:440px;border-radius:24px;overflow:hidden;background:radial-gradient(ellipse 55% 45% at 30% 20%,rgba(232,97,45,0.28),transparent 62%),radial-gradient(ellipse 50% 40% at 78% 82%,rgba(59,130,246,0.22),transparent 62%),linear-gradient(155deg,#060D1C 0%,#0B1830 52%,#0E1E3A 100%);border:1px solid rgba(255,255,255,0.09);box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 30px 80px -20px rgba(0,0,0,0.65)">' +
+      // Grid overlay
+      '<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.4;pointer-events:none" aria-hidden="true"><defs><pattern id="zhgrid" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M 34 0 L 0 0 0 34" fill="none" stroke="rgba(255,255,255,0.045)" stroke-width="1"/></pattern><radialGradient id="zhFade" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(6,13,28,0.8)"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#zhgrid)"/><rect width="100%" height="100%" fill="url(#zhFade)"/></svg>' +
+      // Header
+      '<div style="position:absolute;top:22px;left:26px;right:26px;display:flex;justify-content:space-between;align-items:center;z-index:3;font-family:ui-monospace,SFMono-Regular,Menlo,monospace">' +
+        '<div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.5)">Execution Engine</div>' +
+        '<div style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e"></span><span style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(34,197,94,0.9)">Running</span></div>' +
       '</div>' +
-      '<div style="display:flex;align-items:center;gap:8px;padding:16px 16px 0"><svg viewBox="0 0 32 32" width="22" height="22" fill="none"><path d="M16 2L4 8v8c0 8.4 5.1 16.2 12 19 6.9-2.8 12-10.6 12-19V8L16 2z" fill="#20449B" opacity="0.25"/><path d="M12 16l3 3 7-7" stroke="#F16529" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span style="font-size:14px;font-weight:600;color:var(--z-text,#e2e8f0)">zynix<span style="color:#F16529">.ai</span></span></div>' +
-      '<div style="display:flex;gap:0;padding:12px 16px 0;border-bottom:1px solid rgba(255,255,255,0.06);overflow-x:auto">' +
-        '<div style="padding:8px 12px 10px;font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);display:flex;align-items:center;gap:5px;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:block;flex-shrink:0"></span> Care Gap</div>' +
-        '<div style="padding:8px 12px 10px;font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);display:flex;align-items:center;gap:5px;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:#3b82f6;display:block;flex-shrink:0"></span> Outreach</div>' +
-        '<div style="padding:8px 12px 10px;font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);display:flex;align-items:center;gap:5px;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:#C44B16;display:block;flex-shrink:0"></span> AWV</div>' +
-        '<div style="padding:8px 12px 10px;font-size:12px;font-weight:500;color:var(--z-text,#e2e8f0);border-bottom:2px solid #F16529;display:flex;align-items:center;gap:5px;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:block;flex-shrink:0"></span> Care Team</div>' +
+      // Core SVG composition
+      '<svg viewBox="0 0 560 560" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
+      '<defs>' +
+      '<radialGradient id="zhCore" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.95"/><stop offset="50%" stop-color="#E8612D" stop-opacity="0.18"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
+      '<linearGradient id="zhRingA" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.08"/><stop offset="50%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.08"/></linearGradient>' +
+      '<linearGradient id="zhRingB" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.08"/><stop offset="50%" stop-color="#3b82f6" stop-opacity="0.55"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.08"/></linearGradient>' +
+      '<linearGradient id="zhSpoke" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.08"/></linearGradient>' +
+      '</defs>' +
+      // Orbital rings
+      '<circle cx="280" cy="290" r="230" fill="none" stroke="url(#zhRingB)" stroke-width="1" opacity="0.7"/>' +
+      '<circle cx="280" cy="290" r="170" fill="none" stroke="url(#zhRingA)" stroke-width="1.1"/>' +
+      '<circle cx="280" cy="290" r="115" fill="none" stroke="url(#zhRingA)" stroke-width="1.3"/>' +
+      // Spokes from center
+      '<g stroke="url(#zhSpoke)" stroke-width="1">' +
+      '<line x1="280" y1="290" x2="280" y2="75"/>' +
+      '<line x1="280" y1="290" x2="480" y2="180"/>' +
+      '<line x1="280" y1="290" x2="480" y2="400"/>' +
+      '<line x1="280" y1="290" x2="280" y2="505"/>' +
+      '<line x1="280" y1="290" x2="80" y2="400"/>' +
+      '<line x1="280" y1="290" x2="80" y2="180"/>' +
+      '</g>' +
+      // Core glow
+      '<circle cx="280" cy="290" r="150" fill="url(#zhCore)"/>' +
+      // Outer action nodes (6)
+      '<g>' +
+      '<circle cx="280" cy="75" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="280" cy="75" r="4" fill="#E8612D"/>' +
+      '<circle cx="480" cy="180" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="480" cy="180" r="4" fill="#E8612D"/>' +
+      '<circle cx="480" cy="400" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="480" cy="400" r="4" fill="#E8612D"/>' +
+      '<circle cx="280" cy="505" r="20" fill="rgba(34,197,94,0.14)" stroke="#22c55e" stroke-width="1.4"/><circle cx="280" cy="505" r="4" fill="#22c55e"/>' +
+      '<circle cx="80" cy="400" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="80" cy="400" r="4" fill="#E8612D"/>' +
+      '<circle cx="80" cy="180" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="80" cy="180" r="4" fill="#E8612D"/>' +
+      '</g>' +
+      // Labels around the orbit
+      '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" fill="rgba(255,255,255,0.6)" text-anchor="middle">' +
+      '<text x="280" y="45">CALL</text>' +
+      '<text x="505" y="150">SCHEDULE</text>' +
+      '<text x="510" y="430">VERIFY</text>' +
+      '<text x="280" y="540" fill="rgba(34,197,94,0.85)">CLOSE</text>' +
+      '<text x="55" y="430">FOLLOW-UP</text>' +
+      '<text x="60" y="150">DOCUMENT</text>' +
+      '</g>' +
+      // Inner core ring + dot
+      '<circle cx="280" cy="290" r="40" fill="rgba(232,97,45,0.1)" stroke="#E8612D" stroke-width="1.5" opacity="0.8"/>' +
+      '<circle cx="280" cy="290" r="10" fill="#E8612D"/>' +
+      '<circle cx="280" cy="290" r="20" fill="#E8612D" opacity="0.25"/>' +
+      '</svg>' +
+      // Center label overlay
+      '<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;z-index:2;pointer-events:none">' +
+        '<div style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:6px;margin-top:90px">Agent Runtime</div>' +
       '</div>' +
-      '<div style="display:flex;justify-content:space-between;align-items:center;padding:16px 16px 0">' +
-        '<div><div style="font-size:16px;font-weight:600;color:var(--z-text,#e2e8f0);display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F16529" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg> Care Team + AI Agents</div><div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px">Humans and agents working together to close gaps</div></div>' +
-        '<div style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#4ade80;background:rgba(74,222,128,0.12);padding:4px 12px;border-radius:20px"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:block;animation:zynixPulse 2s infinite"></span> LIVE</div>' +
-      '</div>' +
-      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px">' +
-        '<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:14px 10px;text-align:center"><div style="font-size:24px;font-weight:700;color:#60a5fa;letter-spacing:-1px">5,120</div><div style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.5px;margin-top:4px">Patients Managed</div></div>' +
-        '<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:14px 10px;text-align:center"><div style="font-size:24px;font-weight:700;color:#4ade80;letter-spacing:-1px">40%</div><div style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.5px;margin-top:4px">Gap Closure Rate</div></div>' +
-        '<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:14px 10px;text-align:center"><div style="font-size:24px;font-weight:700;color:#F16529;letter-spacing:-1px">2.5x</div><div style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.5px;margin-top:4px">ROI Year One</div></div>' +
-      '</div>' +
-      '<div style="padding:0 16px 12px">' +
-        '<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#2563eb);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">SP</div><div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--z-text,#e2e8f0)">Dr. Sarah Patel</div><div style="font-size:11px;color:rgba(255,255,255,0.5)">Lead Physician</div></div><div style="font-size:20px;font-weight:700;color:var(--z-text,#e2e8f0)">34</div></div>' +
-        '<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#16a34a);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">MJ</div><div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--z-text,#e2e8f0)">Maria Johnson, RN</div><div style="font-size:11px;color:rgba(255,255,255,0.5)">Care Manager</div></div><div style="font-size:20px;font-weight:700;color:var(--z-text,#e2e8f0)">52</div></div>' +
-        '<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#C44B16,#ea580c);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff">AI</div><div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--z-text,#e2e8f0)">Care Gap Agent</div><div style="font-size:11px;color:rgba(255,255,255,0.5)">AI, Autonomous</div></div><div style="font-size:20px;font-weight:700;color:var(--z-text,#e2e8f0)">247</div></div>' +
-        '<div style="display:flex;align-items:center;gap:12px;padding:10px 0"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#C44B16,#ea580c);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff">AI</div><div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--z-text,#e2e8f0)">Outreach Agent</div><div style="font-size:11px;color:rgba(255,255,255,0.5)">AI, Autonomous</div></div><div style="font-size:20px;font-weight:700;color:var(--z-text,#e2e8f0)">183</div></div>' +
-      '</div>' +
-      '<div style="display:flex;align-items:center;gap:8px;padding:10px 16px 12px;background:rgba(74,222,128,0.06);border-top:1px solid rgba(255,255,255,0.04)">' +
-        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
-        '<span style="font-size:12px;color:rgba(255,255,255,0.6)"><strong style="color:#4ade80">247 gaps closed today</strong> across 12 ACOs &mdash; 18% above daily target</span>' +
+      // Footer caption
+      '<div style="position:absolute;bottom:22px;left:26px;right:26px;display:flex;justify-content:space-between;align-items:center;z-index:3;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45)">' +
+        '<span>Autonomous · Continuous · Measurable</span>' +
+        '<span style="opacity:0.6">zynix&nbsp;//&nbsp;ai</span>' +
       '</div>' +
       '</div>' +
       '</div></section>';
