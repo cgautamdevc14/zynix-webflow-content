@@ -2936,7 +2936,7 @@
       { name: 'Space Coast ACO', logo: GH + 'space-coast-aco.svg' },
       { name: 'Central Florida ACO', logo: GH + 'central-florida-aco-logo.svg' },
       { name: 'GoldenCare ACO' },
-      { name: 'NEXT Healthcare', logo: GH + 'next-healthcare.svg' },
+      { name: 'NEXT Healthcare' },
       { name: 'eTernal Health' },
       { name: 'AMISTAD CHC' },
       { name: 'Professional Radiology' },
