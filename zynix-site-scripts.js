@@ -2935,12 +2935,12 @@
       { name: 'West Florida ACO', logo: GH + 'west-florida-aco.svg' },
       { name: 'Space Coast ACO', logo: GH + 'space-coast-aco.svg' },
       { name: 'Central Florida ACO', logo: GH + 'central-florida-aco-logo.svg' },
-      { name: 'GoldenCare ACO', logo: GH + 'goldencare-aco.png' },
+      { name: 'GoldenCare ACO' },
       { name: 'NEXT Healthcare', logo: GH + 'next-healthcare.svg' },
       { name: 'eTernal Health' },
-      { name: 'AMISTAD CHC', logo: GH + 'amistad-chc.png' },
-      { name: 'Professional Radiology', logo: GH + 'professional-radiology.png' },
-      { name: 'Sunflower ACO', logo: GH + 'sunflower-aco.png' },
+      { name: 'AMISTAD CHC' },
+      { name: 'Professional Radiology' },
+      { name: 'Sunflower ACO' },
       { name: 'Innovacare Health', logo: GH + 'innovacare-health.svg' },
       { name: 'CLSCFL' }
     ];
