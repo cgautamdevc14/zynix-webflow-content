@@ -3112,69 +3112,8 @@
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0D9B6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> HITRUST Ready</span>' +
       '</div>' +
       '</div>' +
-      '<div class="zynix-inner-hero-img" style="max-width:560px;overflow:hidden">' +
-      '<div role="img" aria-label="Zynix AI execution engine orchestrating autonomous care agents" style="position:relative;width:100%;aspect-ratio:1/1.05;min-height:440px;border-radius:24px;overflow:hidden;background:radial-gradient(ellipse 55% 45% at 30% 20%,rgba(232,97,45,0.28),transparent 62%),radial-gradient(ellipse 50% 40% at 78% 82%,rgba(59,130,246,0.22),transparent 62%),linear-gradient(155deg,#060D1C 0%,#0B1830 52%,#0E1E3A 100%);border:1px solid rgba(255,255,255,0.09);box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 30px 80px -20px rgba(0,0,0,0.65)">' +
-      // Grid overlay
-      '<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.4;pointer-events:none" aria-hidden="true"><defs><pattern id="zhgrid" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M 34 0 L 0 0 0 34" fill="none" stroke="rgba(255,255,255,0.045)" stroke-width="1"/></pattern><radialGradient id="zhFade" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(6,13,28,0.8)"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#zhgrid)"/><rect width="100%" height="100%" fill="url(#zhFade)"/></svg>' +
-      // Header
-      '<div style="position:absolute;top:22px;left:26px;right:26px;display:flex;justify-content:space-between;align-items:center;z-index:3;font-family:ui-monospace,SFMono-Regular,Menlo,monospace">' +
-        '<div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.5)">Execution Engine</div>' +
-        '<div style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e"></span><span style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(34,197,94,0.9)">Running</span></div>' +
-      '</div>' +
-      // Core SVG composition
-      '<svg viewBox="0 0 560 560" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-      '<defs>' +
-      '<radialGradient id="zhCore" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.95"/><stop offset="50%" stop-color="#E8612D" stop-opacity="0.18"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
-      '<linearGradient id="zhRingA" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.08"/><stop offset="50%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.08"/></linearGradient>' +
-      '<linearGradient id="zhRingB" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.08"/><stop offset="50%" stop-color="#3b82f6" stop-opacity="0.55"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.08"/></linearGradient>' +
-      '<linearGradient id="zhSpoke" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.08"/></linearGradient>' +
-      '</defs>' +
-      // Orbital rings (centered slightly higher so bottom node clears the footer)
-      '<circle cx="280" cy="280" r="220" fill="none" stroke="url(#zhRingB)" stroke-width="1" opacity="0.7"/>' +
-      '<circle cx="280" cy="280" r="162" fill="none" stroke="url(#zhRingA)" stroke-width="1.1"/>' +
-      '<circle cx="280" cy="280" r="110" fill="none" stroke="url(#zhRingA)" stroke-width="1.3"/>' +
-      // Spokes from center
-      '<g stroke="url(#zhSpoke)" stroke-width="1">' +
-      '<line x1="280" y1="280" x2="280" y2="80"/>' +
-      '<line x1="280" y1="280" x2="470" y2="175"/>' +
-      '<line x1="280" y1="280" x2="470" y2="385"/>' +
-      '<line x1="280" y1="280" x2="280" y2="480"/>' +
-      '<line x1="280" y1="280" x2="90" y2="385"/>' +
-      '<line x1="280" y1="280" x2="90" y2="175"/>' +
-      '</g>' +
-      // Core glow
-      '<circle cx="280" cy="280" r="145" fill="url(#zhCore)"/>' +
-      // Outer action nodes (6)
-      '<g>' +
-      '<circle cx="280" cy="80" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="280" cy="80" r="4" fill="#E8612D"/>' +
-      '<circle cx="470" cy="175" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="470" cy="175" r="4" fill="#E8612D"/>' +
-      '<circle cx="470" cy="385" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="470" cy="385" r="4" fill="#E8612D"/>' +
-      '<circle cx="280" cy="480" r="20" fill="rgba(34,197,94,0.14)" stroke="#22c55e" stroke-width="1.4"/><circle cx="280" cy="480" r="4" fill="#22c55e"/>' +
-      '<circle cx="90" cy="385" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="90" cy="385" r="4" fill="#E8612D"/>' +
-      '<circle cx="90" cy="175" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="90" cy="175" r="4" fill="#E8612D"/>' +
-      '</g>' +
-      // Labels around the orbit (CLOSE label now sits above the bottom node to avoid footer collision)
-      '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" fill="rgba(255,255,255,0.6)" text-anchor="middle">' +
-      '<text x="280" y="52">CALL</text>' +
-      '<text x="495" y="148">SCHEDULE</text>' +
-      '<text x="500" y="415">VERIFY</text>' +
-      '<text x="280" y="516" fill="rgba(34,197,94,0.85)">CLOSE</text>' +
-      '<text x="65" y="415">FOLLOW-UP</text>' +
-      '<text x="70" y="148">DOCUMENT</text>' +
-      '</g>' +
-      // Inner core ring + dot
-      '<circle cx="280" cy="280" r="40" fill="rgba(232,97,45,0.1)" stroke="#E8612D" stroke-width="1.5" opacity="0.8"/>' +
-      '<circle cx="280" cy="280" r="10" fill="#E8612D"/>' +
-      '<circle cx="280" cy="280" r="20" fill="#E8612D" opacity="0.25"/>' +
-      // Center label rendered inside the SVG so it scales with the viewBox
-      '<text x="280" y="248" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" letter-spacing="2.5" fill="rgba(255,255,255,0.55)" text-anchor="middle">AGENT RUNTIME</text>' +
-      '</svg>' +
-      // Footer caption
-      '<div style="position:absolute;bottom:22px;left:26px;right:26px;display:flex;justify-content:space-between;align-items:center;z-index:3;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45)">' +
-        '<span>Autonomous · Continuous · Measurable</span>' +
-        '<span style="opacity:0.6">zynix&nbsp;//&nbsp;ai</span>' +
-      '</div>' +
-      '</div>' +
+      '<div class="zynix-inner-hero-img" style="max-width:580px">' +
+      '<img src="' + IMG.gifHero + '" alt="Zynix AI Dashboard — Care Gap Closure in real time" style="width:100%;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3),0 1px 3px rgba(0,0,0,0.2)" loading="eager">' +
       '</div></section>';
 
 
