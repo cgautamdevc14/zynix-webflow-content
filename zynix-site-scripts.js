@@ -57,7 +57,8 @@
   // Design language: deep navy gradient + subtle grid + SVG line art focal piece + monospace labels
   var hvs = 'position:relative;width:100%;height:100%;min-height:360px;border-radius:20px;overflow:hidden;background:radial-gradient(ellipse 55% 45% at 22% 18%,rgba(232,97,45,0.22),transparent 60%),radial-gradient(ellipse 50% 40% at 82% 85%,rgba(59,130,246,0.18),transparent 60%),linear-gradient(155deg,#060D1C 0%,#0B1830 52%,#0E1E3A 100%);border:1px solid rgba(255,255,255,0.08);box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 20px 60px -20px rgba(0,0,0,0.6);';
   var hvGrid = '<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.4;pointer-events:none" aria-hidden="true"><defs><pattern id="zgrid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M 36 0 L 0 0 0 36" fill="none" stroke="rgba(255,255,255,0.045)" stroke-width="1"/></pattern><radialGradient id="zgridFade" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(6,13,28,0.8)"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#zgrid)"/><rect width="100%" height="100%" fill="url(#zgridFade)"/></svg>';
-  var hvMono = 'font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;';
+  // Use single quotes inside the style value so embedding in style="..." doesn't break the attribute.
+  var hvMono = 'font-family:ui-monospace,SFMono-Regular,\'SF Mono\',Menlo,Consolas,monospace;';
   function hvHeader(left, status) {
     return '<div style="position:absolute;top:20px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:center;z-index:3">' +
       '<div style="'+hvMono+'font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.48)">'+left+'</div>' +
@@ -348,20 +349,67 @@
     hvFooter('Audio → Structured Note · HIPAA Compliant') +
     '</div>';
 
-  // Build HERO_VIS lookup: image URL → HTML visual
+  // Build HERO_VIS lookup: image URL → HTML visual (fallback)
+  // NOTE: Multiple IMG keys share URLs (e.g., doctor/scribe/agents all point to doctor-voice-agent.png).
+  // That makes URL-keyed lookup lossy — later assignments clobber earlier ones. Primary mapping
+  // is therefore pathname-based (PATH_VIS) and URL-based is only a safety net.
   var HERO_VIS = {};
   HERO_VIS[IMG.enterprise] = VIS_PLATFORM;
   HERO_VIS[IMG.patients] = VIS_PLATFORM;
   HERO_VIS[IMG.platform] = VIS_PLATFORM;
-  HERO_VIS[IMG.doctor] = VIS_AGENTS;
-  HERO_VIS[IMG.agents] = VIS_AGENTS;
-  HERO_VIS[IMG.scribe] = VIS_SCRIBE;
   HERO_VIS[IMG.patient] = VIS_PATIENT;
   HERO_VIS[IMG.data] = VIS_DATA;
   HERO_VIS[IMG.mesh] = VIS_DATA;
   HERO_VIS[IMG.analytics] = VIS_ANALYTICS;
   HERO_VIS[IMG.hero] = VIS_ANALYTICS;
   HERO_VIS[IMG.care] = VIS_CARE;
+  HERO_VIS[IMG.doctor] = VIS_AGENTS;
+  HERO_VIS[IMG.agents] = VIS_AGENTS;
+  HERO_VIS[IMG.scribe] = VIS_SCRIBE; // This clobbers IMG.doctor since they share a URL — PATH_VIS handles disambiguation below.
+
+  // Authoritative pathname → visual mapping. Keys are the raw location.pathname (no trailing slash).
+  var PATH_VIS = {
+    '': VIS_ANALYTICS,                                 // homepage handled inline, here for completeness
+    '/': VIS_ANALYTICS,
+    '/platform': VIS_PLATFORM,
+    '/products-data-platform': VIS_DATA,
+    '/products-analytics': VIS_ANALYTICS,
+    '/agents': VIS_AGENTS,
+    '/zynscribe': VIS_SCRIBE,
+    '/care-plans': VIS_CARE,
+    '/company-zynixllm': VIS_DATA,
+    '/products-zynixllm': VIS_DATA,
+    '/products-ai-agents-zynafterhours': VIS_AGENTS,
+    '/products-ai-agents-zynschedule': VIS_PATIENT,
+    '/products-ai-agents-post-discharge': VIS_CARE,
+    '/products-ai-agents-med-rec': VIS_CARE,
+    '/products-ai-agents-zynreminder': VIS_PATIENT,
+    '/products-ai-agents-zynfax': VIS_DATA,
+    '/products-ai-agents-zynauth': VIS_PLATFORM,
+    '/solutions-acos': VIS_CARE,
+    '/solutions-health-systems': VIS_PLATFORM,
+    '/solutions-health-plans': VIS_ANALYTICS,
+    '/solutions-fqhcs': VIS_PLATFORM,
+    '/solutions-independent-practices': VIS_AGENTS,
+    '/solutions-ascs': VIS_PLATFORM,
+    '/solutions-use-case-tcm': VIS_CARE,
+    '/solutions-use-case-gap-closure': VIS_ANALYTICS,
+    '/solutions-use-case-after-hours': VIS_AGENTS,
+    '/solutions-use-case-prior-auth': VIS_PLATFORM,
+    '/solutions-use-case-preventive-screening': VIS_PLATFORM,
+    '/solutions-use-case-readmission-prevention': VIS_CARE,
+    '/company-about': VIS_PLATFORM,
+    '/company-trust-center': VIS_PLATFORM,
+    '/compare/zynix-vs-point-solutions': VIS_PLATFORM,
+    '/compare/zynix-vs-innovaccer': VIS_PLATFORM,
+    '/compare/zynix-vs-commure': VIS_PLATFORM
+  };
+  function getPathVis() {
+    try {
+      var p = (location.pathname || '').replace(/\/$/, '');
+      return PATH_VIS[p] || PATH_VIS[p + '/'] || null;
+    } catch (e) { return null; }
+  }
 
   // ── Cross-Linking Data Model ──
   var LINK_NAMES = {
@@ -991,7 +1039,7 @@
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0D9B6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> HITRUST Ready</span>' +
       '</div>' +
       '</div>' +
-      (image ? '<div class="zynix-inner-hero-img">' + (HERO_VIS[image] || '<img src="' + image + '" alt="' + (imgAlt || '') + '" loading="lazy">') + '</div>' : '') +
+      (image ? '<div class="zynix-inner-hero-img">' + (getPathVis() || HERO_VIS[image] || '<img src="' + image + '" alt="' + (imgAlt || '') + '" loading="lazy">') + '</div>' : '') +
       '</div></section>';
   }
 
@@ -3081,48 +3129,46 @@
       '<linearGradient id="zhRingB" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.08"/><stop offset="50%" stop-color="#3b82f6" stop-opacity="0.55"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.08"/></linearGradient>' +
       '<linearGradient id="zhSpoke" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.08"/></linearGradient>' +
       '</defs>' +
-      // Orbital rings
-      '<circle cx="280" cy="290" r="230" fill="none" stroke="url(#zhRingB)" stroke-width="1" opacity="0.7"/>' +
-      '<circle cx="280" cy="290" r="170" fill="none" stroke="url(#zhRingA)" stroke-width="1.1"/>' +
-      '<circle cx="280" cy="290" r="115" fill="none" stroke="url(#zhRingA)" stroke-width="1.3"/>' +
+      // Orbital rings (centered slightly higher so bottom node clears the footer)
+      '<circle cx="280" cy="280" r="220" fill="none" stroke="url(#zhRingB)" stroke-width="1" opacity="0.7"/>' +
+      '<circle cx="280" cy="280" r="162" fill="none" stroke="url(#zhRingA)" stroke-width="1.1"/>' +
+      '<circle cx="280" cy="280" r="110" fill="none" stroke="url(#zhRingA)" stroke-width="1.3"/>' +
       // Spokes from center
       '<g stroke="url(#zhSpoke)" stroke-width="1">' +
-      '<line x1="280" y1="290" x2="280" y2="75"/>' +
-      '<line x1="280" y1="290" x2="480" y2="180"/>' +
-      '<line x1="280" y1="290" x2="480" y2="400"/>' +
-      '<line x1="280" y1="290" x2="280" y2="505"/>' +
-      '<line x1="280" y1="290" x2="80" y2="400"/>' +
-      '<line x1="280" y1="290" x2="80" y2="180"/>' +
+      '<line x1="280" y1="280" x2="280" y2="80"/>' +
+      '<line x1="280" y1="280" x2="470" y2="175"/>' +
+      '<line x1="280" y1="280" x2="470" y2="385"/>' +
+      '<line x1="280" y1="280" x2="280" y2="480"/>' +
+      '<line x1="280" y1="280" x2="90" y2="385"/>' +
+      '<line x1="280" y1="280" x2="90" y2="175"/>' +
       '</g>' +
       // Core glow
-      '<circle cx="280" cy="290" r="150" fill="url(#zhCore)"/>' +
+      '<circle cx="280" cy="280" r="145" fill="url(#zhCore)"/>' +
       // Outer action nodes (6)
       '<g>' +
-      '<circle cx="280" cy="75" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="280" cy="75" r="4" fill="#E8612D"/>' +
-      '<circle cx="480" cy="180" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="480" cy="180" r="4" fill="#E8612D"/>' +
-      '<circle cx="480" cy="400" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="480" cy="400" r="4" fill="#E8612D"/>' +
-      '<circle cx="280" cy="505" r="20" fill="rgba(34,197,94,0.14)" stroke="#22c55e" stroke-width="1.4"/><circle cx="280" cy="505" r="4" fill="#22c55e"/>' +
-      '<circle cx="80" cy="400" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="80" cy="400" r="4" fill="#E8612D"/>' +
-      '<circle cx="80" cy="180" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="80" cy="180" r="4" fill="#E8612D"/>' +
+      '<circle cx="280" cy="80" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="280" cy="80" r="4" fill="#E8612D"/>' +
+      '<circle cx="470" cy="175" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="470" cy="175" r="4" fill="#E8612D"/>' +
+      '<circle cx="470" cy="385" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="470" cy="385" r="4" fill="#E8612D"/>' +
+      '<circle cx="280" cy="480" r="20" fill="rgba(34,197,94,0.14)" stroke="#22c55e" stroke-width="1.4"/><circle cx="280" cy="480" r="4" fill="#22c55e"/>' +
+      '<circle cx="90" cy="385" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="90" cy="385" r="4" fill="#E8612D"/>' +
+      '<circle cx="90" cy="175" r="20" fill="rgba(232,97,45,0.14)" stroke="#E8612D" stroke-width="1.4"/><circle cx="90" cy="175" r="4" fill="#E8612D"/>' +
       '</g>' +
-      // Labels around the orbit
+      // Labels around the orbit (CLOSE label now sits above the bottom node to avoid footer collision)
       '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="11" fill="rgba(255,255,255,0.6)" text-anchor="middle">' +
-      '<text x="280" y="45">CALL</text>' +
-      '<text x="505" y="150">SCHEDULE</text>' +
-      '<text x="510" y="430">VERIFY</text>' +
-      '<text x="280" y="540" fill="rgba(34,197,94,0.85)">CLOSE</text>' +
-      '<text x="55" y="430">FOLLOW-UP</text>' +
-      '<text x="60" y="150">DOCUMENT</text>' +
+      '<text x="280" y="52">CALL</text>' +
+      '<text x="495" y="148">SCHEDULE</text>' +
+      '<text x="500" y="415">VERIFY</text>' +
+      '<text x="280" y="516" fill="rgba(34,197,94,0.85)">CLOSE</text>' +
+      '<text x="65" y="415">FOLLOW-UP</text>' +
+      '<text x="70" y="148">DOCUMENT</text>' +
       '</g>' +
       // Inner core ring + dot
-      '<circle cx="280" cy="290" r="40" fill="rgba(232,97,45,0.1)" stroke="#E8612D" stroke-width="1.5" opacity="0.8"/>' +
-      '<circle cx="280" cy="290" r="10" fill="#E8612D"/>' +
-      '<circle cx="280" cy="290" r="20" fill="#E8612D" opacity="0.25"/>' +
+      '<circle cx="280" cy="280" r="40" fill="rgba(232,97,45,0.1)" stroke="#E8612D" stroke-width="1.5" opacity="0.8"/>' +
+      '<circle cx="280" cy="280" r="10" fill="#E8612D"/>' +
+      '<circle cx="280" cy="280" r="20" fill="#E8612D" opacity="0.25"/>' +
+      // Center label rendered inside the SVG so it scales with the viewBox
+      '<text x="280" y="248" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" letter-spacing="2.5" fill="rgba(255,255,255,0.55)" text-anchor="middle">AGENT RUNTIME</text>' +
       '</svg>' +
-      // Center label overlay
-      '<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;z-index:2;pointer-events:none">' +
-        '<div style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:6px;margin-top:90px">Agent Runtime</div>' +
-      '</div>' +
       // Footer caption
       '<div style="position:absolute;bottom:22px;left:26px;right:26px;display:flex;justify-content:space-between;align-items:center;z-index:3;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45)">' +
         '<span>Autonomous · Continuous · Measurable</span>' +
