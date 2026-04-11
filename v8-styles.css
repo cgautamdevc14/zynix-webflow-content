@@ -14,6 +14,8 @@
    .z-hero, .z-section, .z-cta-section, .w-nav, [data-wf-component] globally.
    ========================================================================== */
 
+/* Unhide page content sections — but NOT nav mega-menu dropdowns (those
+   must stay hidden by default and only open on hover). */
 body > section,
 body > section *,
 .z-hero, .z-hero *,
@@ -28,8 +30,6 @@ body > section *,
 .zynix-customers-section, .zynix-customers-section *,
 .zynix-cta-section, .zynix-cta-section *,
 .zynix-footer, .zynix-footer *,
-.zynix-mega-nav, .zynix-mega-nav *,
-.w-nav, .w-nav *,
 [data-wf-component] {
   display: revert !important;
   visibility: visible !important;
@@ -37,6 +37,68 @@ body > section *,
   width: auto !important;
   overflow: visible !important;
   opacity: 1 !important;
+}
+
+/* Nav shell only — do NOT unhide mega-menu descendants so dropdowns stay
+   collapsed until hovered. */
+.zynix-mega-nav,
+.w-nav,
+.zynix-mega-nav > *,
+.zynix-mega-nav .zynix-nav-logo,
+.zynix-mega-nav .zynix-nav-logo *,
+.zynix-mega-nav .zynix-nav-items,
+.zynix-mega-nav .zynix-nav-dropdown,
+.zynix-mega-nav .zynix-nav-trigger,
+.zynix-mega-nav .zynix-nav-actions,
+.zynix-mega-nav .zynix-nav-actions *,
+.zynix-mega-nav .w-nav-brand,
+.zynix-mega-nav .w-nav-brand *,
+.zynix-mega-nav .w-nav-menu,
+.zynix-mega-nav .w-nav-link,
+.zynix-mega-nav .w-button {
+  display: revert !important;
+  visibility: visible !important;
+  height: auto !important;
+  width: auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+}
+
+/* Mega menu dropdown panels — keep hidden by default, show on hover.
+   Override any inherited unhide from parent rules above. */
+.zynix-mega-menu,
+.zynix-dropdown-panel,
+.zynix-dropdown-panel-inner,
+.zynix-mega-col,
+.zynix-nav-mega,
+.w-dropdown-list:not(.w--open) {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 220ms var(--zv2-ease), visibility 220ms var(--zv2-ease) !important;
+}
+
+/* Reveal the mega menu only when the parent .zynix-nav-dropdown is hovered. */
+.zynix-mega-nav .zynix-nav-dropdown:hover .zynix-mega-menu,
+.zynix-mega-nav .zynix-nav-dropdown:hover .zynix-dropdown-panel,
+.zynix-mega-nav .zynix-nav-dropdown:hover .zynix-nav-mega,
+.zynix-mega-nav .zynix-nav-dropdown:focus-within .zynix-mega-menu,
+.zynix-mega-nav .zynix-nav-dropdown:focus-within .zynix-dropdown-panel,
+.zynix-mega-nav .zynix-nav-dropdown.open .zynix-mega-menu,
+.w-dropdown.w--open .w-dropdown-list,
+.w-dropdown-list.w--open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* When mega menu is visible, its inner items should be visible too */
+.zynix-mega-nav .zynix-nav-dropdown:hover .zynix-mega-menu *,
+.zynix-mega-nav .zynix-nav-dropdown:hover .zynix-dropdown-panel *,
+.w-dropdown.w--open .w-dropdown-list *,
+.w-dropdown-list.w--open * {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .zynix-mega-nav, .w-nav { display: flex !important; }
