@@ -16,19 +16,13 @@
 
 /* Unhide page content sections — but NOT nav mega-menu dropdowns (those
    must stay hidden by default and only open on hover).
-   CRITICAL: must also match body>[class^="z-"] which is the exact selector
-   the production FOUC hide uses. Without this, our !important loses to
-   theirs because both are !important and theirs is an attribute selector. */
+   NOTE: DO NOT add body>[class^="z-"] here — the production JS-injection
+   architecture DEPENDS on hiding native Webflow sections via that selector
+   before replacing them with its own rendered content. Unhiding them breaks
+   the entire page rendering pipeline. We only override the specific classes
+   used by the v8 design system. */
 body > section,
 body > section *,
-body > [class^="z-"],
-body > [class^="z-"] *,
-body > [class*="z-section"],
-body > [class*="z-section"] *,
-body > [class*="z-hero"],
-body > [class*="z-hero"] *,
-body > [class*="z-cta"],
-body > [class*="z-cta"] *,
 .z-hero, .z-hero *,
 .z-section, .z-section *,
 .z-section-alt, .z-section-alt *,
