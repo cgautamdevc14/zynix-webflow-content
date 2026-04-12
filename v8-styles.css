@@ -15,9 +15,20 @@
    ========================================================================== */
 
 /* Unhide page content sections — but NOT nav mega-menu dropdowns (those
-   must stay hidden by default and only open on hover). */
+   must stay hidden by default and only open on hover).
+   CRITICAL: must also match body>[class^="z-"] which is the exact selector
+   the production FOUC hide uses. Without this, our !important loses to
+   theirs because both are !important and theirs is an attribute selector. */
 body > section,
 body > section *,
+body > [class^="z-"],
+body > [class^="z-"] *,
+body > [class*="z-section"],
+body > [class*="z-section"] *,
+body > [class*="z-hero"],
+body > [class*="z-hero"] *,
+body > [class*="z-cta"],
+body > [class*="z-cta"] *,
 .z-hero, .z-hero *,
 .z-section, .z-section *,
 .z-section-alt, .z-section-alt *,
