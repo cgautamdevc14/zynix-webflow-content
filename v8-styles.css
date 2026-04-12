@@ -295,6 +295,7 @@ body { padding-top: 76px !important; }
   border: 1px solid var(--v-border) !important;
   border-radius: var(--v-radius-lg) !important;
   padding: 36px 28px !important;
+  box-shadow: var(--v-shadow) !important;
   transition: transform 320ms var(--v-ease),
               box-shadow 320ms var(--v-ease),
               border-color 320ms var(--v-ease) !important;
@@ -338,10 +339,13 @@ body { padding-top: 76px !important; }
   margin: 0 !important;
 }
 
-/* ── CTA SECTION ────────────────────────────────────────────────────── */
-.cta-section {
+/* ── CTA SECTION — extra specificity to beat Webflow generated CSS ─── */
+section.cta-section,
+.cta-section,
+body .cta-section {
   padding: 100px 24px !important;
-  background: linear-gradient(135deg, var(--v-bg-dark) 0%, var(--v-blue-deep) 100%) !important;
+  background-color: var(--v-bg-dark) !important;
+  background-image: linear-gradient(135deg, var(--v-bg-dark) 0%, var(--v-blue-deep) 100%) !important;
   color: #FFFFFF !important;
   text-align: center !important;
   position: relative !important;
@@ -376,9 +380,12 @@ body { padding-top: 76px !important; }
   z-index: 1 !important;
 }
 
-/* ── FOOTER ─────────────────────────────────────────────────────────── */
-.footer {
-  background: var(--v-bg-darker) !important;
+/* ── FOOTER — extra specificity ─────────────────────────────────────── */
+section.footer,
+.footer,
+body .footer {
+  background-color: var(--v-bg-darker) !important;
+  background-image: none !important;
   color: rgba(255,255,255,0.7) !important;
   padding: 80px 24px 40px !important;
   position: relative !important;
