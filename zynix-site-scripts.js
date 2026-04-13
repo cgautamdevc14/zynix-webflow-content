@@ -2323,22 +2323,39 @@
     nav.innerHTML =
       '<a href="/" class="zynix-nav-logo"><img src="' + IMG.logo + '" alt="Zynix AI"><span class="zynix-nav-logo-text">zynix<span class="zynix-logo-dot">.ai</span></span></a>' +
       '<div class="zynix-nav-items">' +
-        // 1. Platform — dropdown
+        // 1. Platform — dropdown with NAACOS promo
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Platform <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
         '<div class="zynix-dropdown-panel"><div class="zynix-dropdown-panel-inner">' +
           al('/platform','Zynix OS','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>','Platform overview') +
           al('/company-zynixllm','ZynixLLM','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>','Healthcare language model') +
           al('/security','Security','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>','HIPAA, SOC 2, HITRUST') +
           al('/integrations','Integrations','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>','EHR &amp; data connectors') +
+          '<div class="zynix-dropdown-promo" style="margin-top:12px;padding:14px 16px;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:10px;text-align:center">' +
+            '<p style="margin:0 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:#F16529;font-weight:700">NAACOS 2026</p>' +
+            '<p style="margin:0 0 8px;font-size:14px;color:#fff;font-weight:600">Visit us at Booth V</p>' +
+            '<p style="margin:0 0 10px;font-size:12px;color:#94a3b8;line-height:1.4">See live demos of Zynix AI agents in action</p>' +
+            '<a href="' + CALENDLY + '" target="_blank" style="display:inline-block;padding:6px 16px;background:#F16529;color:#fff;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none">Book a Meeting &rarr;</a>' +
+          '</div>' +
         '</div></div></div>' +
-        // 2. Solutions — dropdown with 4 products
+        // 2. Solutions — mega panel with Products + Use Cases
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Solutions <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-        '<div class="zynix-dropdown-panel"><div class="zynix-dropdown-panel-inner">' +
-          al('/zynix-data-analytics','Zynix Data Analytics','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>','Population health intelligence') +
-          al('/zynix-ai-agents','Zynix AI Agents','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>','12 purpose-built AI agents') +
-          al('/care-plans','Deployable Care Plans','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>','Configurable care workflows') +
-          al('/zynscribe','ZynScribe','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>','Ambient AI clinical documentation') +
-          '<div class="zynix-dropdown-featured"><a href="/solutions">View All Solutions &rarr;</a></div>' +
+        '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
+          '<div class="zynix-mega-col"><h5>Products</h5>' +
+            al('/zynix-data-analytics','Zynix Data Analytics','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>','Population health intelligence') +
+            al('/zynix-ai-agents','Zynix AI Agents','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>','12 purpose-built AI agents') +
+            al('/care-plans','Deployable Care Plans','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>','Configurable care workflows') +
+            al('/zynscribe','ZynScribe','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>','Ambient AI clinical documentation') +
+            '<div class="zynix-dropdown-featured"><a href="/solutions">View All Solutions &rarr;</a></div>' +
+          '</div>' +
+          '<div class="zynix-mega-col"><h5>Use Cases</h5>' +
+            al('/solutions-use-case-tcm','Transitional Care (TCM)','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>','Post-discharge outreach') +
+            al('/solutions-use-case-gap-closure','Gap Closure','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>','HCC &amp; HEDIS gaps') +
+            al('/solutions-use-case-readmission-prevention','Readmission Prevention','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>','Reduce 30-day readmits') +
+            al('/solutions-use-case-after-hours','After-Hours &amp; Access','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>','24/7 patient triage') +
+            al('/solutions-use-case-prior-auth','Prior Authorization','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>','Automate auth workflows') +
+            al('/solutions-use-case-preventive-screening','Preventive Screening','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>','Proactive care outreach') +
+            '<div class="zynix-dropdown-featured"><a href="/solutions">Browse All Use Cases &rarr;</a></div>' +
+          '</div>' +
         '</div></div></div>' +
         // 3. Who We Serve — mega panel
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Who We Serve <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
@@ -2387,7 +2404,10 @@
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Platform &#9662;</button><div class="zynix-mobile-section-links">' +
       '<a href="/platform"><strong>Zynix OS</strong></a><a href="/company-zynixllm">ZynixLLM</a><a href="/security">Security</a><a href="/integrations">Integrations</a></div></div>' +
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Solutions &#9662;</button><div class="zynix-mobile-section-links">' +
+      '<p style="margin:0 0 4px;padding:0 20px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;font-weight:600">Products</p>' +
       '<a href="/zynix-data-analytics">Zynix Data Analytics</a><a href="/zynix-ai-agents">Zynix AI Agents</a><a href="/care-plans">Deployable Care Plans</a><a href="/zynscribe">ZynScribe</a>' +
+      '<p style="margin:12px 0 4px;padding:0 20px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;font-weight:600;border-top:1px solid rgba(148,163,184,0.15);padding-top:12px">Use Cases</p>' +
+      '<a href="/solutions-use-case-tcm">Transitional Care (TCM)</a><a href="/solutions-use-case-gap-closure">Gap Closure</a><a href="/solutions-use-case-readmission-prevention">Readmission Prevention</a><a href="/solutions-use-case-after-hours">After-Hours &amp; Access</a><a href="/solutions-use-case-prior-auth">Prior Authorization</a><a href="/solutions-use-case-preventive-screening">Preventive Screening</a>' +
       '<a href="/solutions" style="color:#F16529;font-weight:600;margin-top:8px;display:block">View All Solutions &rarr;</a>' +
       '</div></div>' +
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Who We Serve &#9662;</button><div class="zynix-mobile-section-links">' +
