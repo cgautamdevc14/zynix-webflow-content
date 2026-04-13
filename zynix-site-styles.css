@@ -495,7 +495,7 @@ body {
 }
 .zynix-footer-inner {
   max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px;
+  display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr 1fr; gap: 32px;
 }
 .zynix-footer-brand p { font-size: 14px; line-height: 1.7; margin: 0; color: rgba(255,255,255,0.5); }
 .zynix-footer-col h4 { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; color: rgba(255,255,255,0.35); margin: 0 0 16px; text-transform: uppercase; }
