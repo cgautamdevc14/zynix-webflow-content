@@ -505,6 +505,8 @@
     '/products-ai-agents-zynfax': { title: 'AI Fax Processing Healthcare | Zynix AI', desc: 'Eliminate manual fax processing with intelligent automation that classifies, extracts data, and routes healthcare documents automatically.', img: IMG.enterprise, schema: 'Product' },
     '/products-ai-agents-zynauth': { title: 'Prior Authorization Automation | Zynix AI', desc: 'Cut prior auth turnaround by 60% with AI-powered submission, tracking, and follow-up. Streamline workflows for ASCs and health systems.', img: IMG.enterprise, schema: 'Product' },
     '/solutions': { title: 'Solutions | AI-Powered Healthcare Products | Zynix AI', desc: 'Explore Zynix AI solutions: Data Analytics, AI Agents, Deployable Care Plans, and ZynScribe. Purpose-built for value-based care.', img: IMG.enterprise, schema: 'Product' },
+    '/zynix-data-analytics': { title: 'Zynix Data Analytics | Population Health Intelligence | Zynix AI', desc: 'AI-powered population health analytics with HCC gap closure, risk stratification, and HEDIS quality tracking for ACOs and health systems.', img: IMG.analytics, schema: 'Product' },
+    '/zynix-ai-agents': { title: 'Zynix AI Agents | Autonomous Healthcare AI | Zynix AI', desc: '12 purpose-built AI agents for value-based care: clinical performance, predictive activation, and operational efficiency.', img: IMG.agents, schema: 'Product' },
     '/solutions-acos': { title: 'AI for ACOs | MSSP & ACO REACH | Zynix AI', desc: 'Drive shared savings in MSSP and ACO REACH with AI-powered TCM workflows, HCC gap closure, and automated outreach. 85% TCM contact rates.', img: IMG.care, schema: 'Product' },
     '/solutions-health-systems': { title: 'AI for Health Systems | Zynix AI', desc: 'Unify population health management with AI-driven patient engagement, post-discharge coordination, and documentation. Reduce readmissions 25%.', img: IMG.enterprise, schema: 'Product' },
     '/solutions-health-plans': { title: 'AI for Health Plans | Zynix AI', desc: 'Improve Stars ratings, close HEDIS quality gaps, and scale member engagement with autonomous AI agents trusted by value-based payers nationwide.', img: IMG.analytics, schema: 'Product' },
@@ -6463,6 +6465,8 @@ function renderDataAnalyticsV7() {
     '/company-zynixllm': renderZynixLLMV7,
     '/products-zynixllm': renderZynixLLM,
     '/solutions': renderSolutionsOverview,
+    '/zynix-data-analytics': renderDataAnalyticsV7,
+    '/zynix-ai-agents': renderAIAgents,
     // Products - AI Agent Detail Pages (NEW)
     '/products-ai-agents-zynafterhours': renderZynAfterHours,
     '/products-ai-agents-zynschedule': renderZynSchedule,
