@@ -833,31 +833,73 @@
   }
 
   // ── Cross-Link Renderers ──
+  var CROSS_ICONS = {
+    '/platform': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+    '/products-data-platform': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>',
+    '/products-analytics': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+    '/agents': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
+    '/zynscribe': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>',
+    '/care-plans': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+    '/security': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    '/company-zynixllm': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>'
+  };
+  var CROSS_DESCS = {
+    '/platform': 'The AI operating system for VBC',
+    '/products-data-platform': 'Unified clinical and claims data',
+    '/products-analytics': 'Population health intelligence',
+    '/agents': '12 purpose-built AI agents',
+    '/zynscribe': 'Ambient AI documentation',
+    '/care-plans': 'Configurable care workflows',
+    '/security': 'HIPAA, SOC 2, HITRUST',
+    '/company-zynixllm': 'Healthcare language model',
+    '/solutions-acos': 'Shared savings optimization',
+    '/solutions-health-systems': 'Enterprise AI at scale',
+    '/solutions-health-plans': 'Stars and HEDIS improvement',
+    '/solutions-fqhcs': 'Community health AI',
+    '/solutions-independent-practices': 'Reduce burnout and no-shows',
+    '/solutions-ascs': 'Surgical workflow AI',
+    '/solutions-use-case-tcm': 'Post-discharge follow-up',
+    '/solutions-use-case-gap-closure': 'HCC and quality gaps',
+    '/solutions-use-case-after-hours': '24/7 AI call handling',
+    '/solutions-use-case-prior-auth': 'Accelerate approvals',
+    '/solutions-use-case-preventive-screening': 'Screening outreach',
+    '/solutions-use-case-readmission-prevention': 'Reduce readmissions'
+  };
+
   function renderRelatedSection(title, tag, slugs) {
     if (!slugs || !slugs.length) return '';
-    var html = '<section class="zynix-related-section"><div class="zynix-container">' +
-      '<span class="zynix-tag">' + tag + '</span>' +
-      '<h2>' + title + '</h2>' +
-      '<div class="zynix-related-grid">';
+    var items = '';
     slugs.forEach(function(slug) {
       var name = LINK_NAMES[slug] || slug.replace(/\//g,'').replace(/-/g,' ');
-      html += '<a href="' + slug + '" class="zynix-related-card">' +
-        '<div class="zynix-rc-text"><h4>' + name + '</h4></div>' +
-        '<span class="zynix-rc-arrow">&rarr;</span></a>';
+      var icon = CROSS_ICONS[slug] || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>';
+      var desc = CROSS_DESCS[slug] || '';
+      items += '<a href="' + slug + '" style="display:flex;align-items:center;gap:14px;padding:16px 20px;background:#fff;border:1px solid var(--z-border,#E5E7EB);border-radius:12px;text-decoration:none;transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)" onmouseover="this.style.borderColor=\'#20449B\';this.style.boxShadow=\'0 4px 12px rgba(32,68,155,0.1)\';this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.borderColor=\'#E5E7EB\';this.style.boxShadow=\'0 1px 3px rgba(0,0,0,0.04)\';this.style.transform=\'none\'">' +
+        '<div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;background:var(--z-bg-light,#EEF2FB);display:flex;align-items:center;justify-content:center;color:#20449B">' + icon + '</div>' +
+        '<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--z-text,#1A1A2E);margin:0">' + name + '</div>' +
+        (desc ? '<div style="font-size:12px;color:var(--z-text-light,#6B7280);margin-top:2px">' + desc + '</div>' : '') +
+        '</div>' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" style="flex-shrink:0"><polyline points="9 18 15 12 9 6"/></svg>' +
+      '</a>';
     });
-    html += '</div></div></section>';
-    return html;
+    return '<div style="margin-bottom:12px">' +
+      '<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#20449B;margin-bottom:8px">' + tag + '</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">' + items + '</div>' +
+    '</div>';
   }
 
   function renderCrossLinks(pagePath) {
     var cl = CROSS_LINKS[pagePath];
     if (!cl) return '';
-    var html = '';
-    if (cl.products) html += renderRelatedSection('Products That Power This', 'PRODUCTS', cl.products);
-    if (cl.useCases) html += renderRelatedSection('Related Use Cases', 'USE CASES', cl.useCases);
-    if (cl.solutions) html += renderRelatedSection('Built For', 'SOLUTIONS', cl.solutions);
-    if (cl.related) html += renderRelatedSection('Explore More', 'RELATED', cl.related);
-    return html;
+    var sections = '';
+    if (cl.products) sections += renderRelatedSection('', 'PRODUCTS', cl.products);
+    if (cl.useCases) sections += renderRelatedSection('', 'USE CASES', cl.useCases);
+    if (cl.solutions) sections += renderRelatedSection('', 'BUILT FOR', cl.solutions);
+    if (cl.related) sections += renderRelatedSection('', 'EXPLORE MORE', cl.related);
+    if (!sections) return '';
+    return '<section style="padding:48px 0;background:var(--z-bg-light,#F8FAFC);border-top:1px solid var(--z-border,#E5E7EB)"><div class="zynix-container">' +
+      '<h2 style="font-size:22px;font-weight:700;color:var(--z-text,#1A1A2E);margin:0 0 24px;text-align:center">Continue Exploring</h2>' +
+      sections +
+    '</div></section>';
   }
 
   function renderBreadcrumb(pagePath) {
