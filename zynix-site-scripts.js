@@ -3084,17 +3084,20 @@
       'Upcoming webinars, events, and on-demand content from the Zynix team.',
       null, '') +
     '<section class="zynix-section"><div class="zynix-container">' +
-    '<h2 class="zynix-section-title">Upcoming Events</h2>' +
+    '<h2 class="zynix-section-title">On-Demand Webinars</h2>' +
     '<div class="zynix-feature-grid" style="grid-template-columns:1fr">' +
     '<div class="zynix-feature-card" style="border:2px solid var(--z-blue);position:relative;overflow:hidden">' +
-    '<span class="zynix-tag" style="margin-bottom:16px">LIVE WEBINAR + VBC EXHIBIT HALL</span>' +
+    '<span class="zynix-tag" style="margin-bottom:16px">RECORDED WEBINAR + VBC EXHIBIT HALL</span>' +
     '<h3 style="font-size:24px;margin-bottom:12px">Automation with Accountability: How ACOs Can Scale Patient Engagement Without Burning Out Teams</h3>' +
     '<div style="display:flex;gap:24px;flex-wrap:wrap;margin:16px 0 20px">' +
-    '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Thu, Apr 17, 2026</div>' +
-    '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 10:00 AM \u2013 11:00 AM PDT</div>' +
+    '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Recorded Mar 19, 2026</div>' +
+    '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Available On-Demand</div>' +
     '</div>' +
-    '<p style="font-size:16px;line-height:1.7;color:var(--z-text-secondary);margin-bottom:24px">Join Zynix AI at the VBC Exhibit Hall to explore how AI-powered automation is helping ACOs scale patient engagement, from post-discharge follow-ups to preventive screenings, without adding staff burnout. Learn real strategies for balancing accountability and efficiency in value-based care.</p>' +
-    '<a href="https://register.gotowebinar.com/register/6452881364816065371?source=Newsletter" class="zynix-btn-primary" target="_blank" rel="noopener">Register Now &rarr;</a>' +
+    '<p style="font-size:16px;line-height:1.7;color:var(--z-text-secondary);margin-bottom:24px">Watch the recording from VBC Exhibit Hall where Zynix AI explored how AI-powered automation is helping ACOs scale patient engagement, from post-discharge follow-ups to preventive screenings, without adding staff burnout. Learn real strategies for balancing accountability and efficiency in value-based care.</p>' +
+    '<div style="display:flex;gap:12px;flex-wrap:wrap">' +
+    '<a href="https://library.vbcexhibithall.com/recorded-webinar-automation-with-accountability-how-acos-can-scale-patient-engagement-without-burning-out-teams/" class="zynix-btn-primary" target="_blank" rel="noopener">Watch Recording &rarr;</a>' +
+    '<a href="https://library.vbcexhibithall.com/recorded-webinar-automation-with-accountability-how-acos-can-scale-patient-engagement-without-burning-out-teams/" class="zynix-btn-secondary" target="_blank" rel="noopener" style="text-decoration:none">Download Slides</a>' +
+    '</div>' +
     '</div></div>' +
     '</div></section>' +
     '<section class="zynix-section" style="background:var(--z-blue-light)">' +
