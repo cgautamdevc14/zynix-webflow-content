@@ -994,10 +994,9 @@
       '<a href="https://x.com/zynixai_" target="_blank" rel="noopener" aria-label="X">' + SVG_X + '</a>' +
       '<a href="https://www.instagram.com/zynixai/" target="_blank" rel="noopener" aria-label="Instagram">' + SVG_INSTAGRAM + '</a>' +
       '</div></div>' +
-      '<div class="zynix-footer-col"><h4>PLATFORM</h4><a href="/platform">Zynix OS</a><a href="/company-zynixllm">ZynixLLM</a><a href="/security">Security</a><a href="/integrations">Integrations</a></div>' +
-      '<div class="zynix-footer-col"><h4>SOLUTIONS</h4><a href="/zynix-data-analytics">Data Analytics</a><a href="/zynix-ai-agents">AI Agents</a><a href="/care-plans">Care Plans</a><a href="/zynscribe">ZynScribe</a><a href="/solutions">All Solutions</a></div>' +
+      '<div class="zynix-footer-col"><h4>SOLUTIONS</h4><a href="/platform">Platform</a><a href="/zynix-data-analytics">Data Analytics</a><a href="/zynix-ai-agents">AI Agents</a><a href="/care-plans">Care Plans</a><a href="/zynscribe">ZynScribe</a><a href="/integrations">Integrations</a></div>' +
       '<div class="zynix-footer-col"><h4>WHO WE SERVE</h4><a href="/who-we-serve/health-systems">Health Systems</a><a href="/who-we-serve/acos-msos">ACOs &amp; MSOs</a><a href="/who-we-serve/health-plans">Health Plans</a><a href="/who-we-serve/independent-group-practices">Group Practices</a><a href="/who-we-serve/ascs">ASCs</a><a href="/who-we-serve/fqhcs">FQHCs</a></div>' +
-      '<div class="zynix-footer-col"><h4>COMPANY</h4><a href="/about">About</a><a href="/press">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a><a href="/contact">Contact Us</a></div>' +
+      '<div class="zynix-footer-col"><h4>COMPANY</h4><a href="/about">About</a><a href="/company-zynixllm">ZynixLLM</a><a href="/press">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a><a href="/contact">Contact Us</a></div>' +
       '<div class="zynix-footer-col"><h4>RESOURCES</h4><a href="/resources-case-studies">Case Studies</a><a href="/resources-blog">Blog</a><a href="/resources-faq">FAQ</a><a href="/resources-webinars">Webinars</a><a href="/resources-whitepapers">Whitepapers</a><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a></div>' +
       '</div>' +
       '<div class="zynix-footer-compliance">' +
