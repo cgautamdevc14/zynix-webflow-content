@@ -504,6 +504,7 @@
     '/products-ai-agents-zynreminder': { title: 'AI Appointment Reminders | Zynix AI', desc: 'Boost patient engagement and cut no-shows by 40% with personalized AI reminders and confirmation workflows. Serving practices and health centers.', img: IMG.patient, schema: 'Product' },
     '/products-ai-agents-zynfax': { title: 'AI Fax Processing Healthcare | Zynix AI', desc: 'Eliminate manual fax processing with intelligent automation that classifies, extracts data, and routes healthcare documents automatically.', img: IMG.enterprise, schema: 'Product' },
     '/products-ai-agents-zynauth': { title: 'Prior Authorization Automation | Zynix AI', desc: 'Cut prior auth turnaround by 60% with AI-powered submission, tracking, and follow-up. Streamline workflows for ASCs and health systems.', img: IMG.enterprise, schema: 'Product' },
+    '/solutions': { title: 'Solutions | AI-Powered Healthcare Products | Zynix AI', desc: 'Explore Zynix AI solutions: Data Analytics, AI Agents, Deployable Care Plans, and ZynScribe. Purpose-built for value-based care.', img: IMG.enterprise, schema: 'Product' },
     '/solutions-acos': { title: 'AI for ACOs | MSSP & ACO REACH | Zynix AI', desc: 'Drive shared savings in MSSP and ACO REACH with AI-powered TCM workflows, HCC gap closure, and automated outreach. 85% TCM contact rates.', img: IMG.care, schema: 'Product' },
     '/solutions-health-systems': { title: 'AI for Health Systems | Zynix AI', desc: 'Unify population health management with AI-driven patient engagement, post-discharge coordination, and documentation. Reduce readmissions 25%.', img: IMG.enterprise, schema: 'Product' },
     '/solutions-health-plans': { title: 'AI for Health Plans | Zynix AI', desc: 'Improve Stars ratings, close HEDIS quality gaps, and scale member engagement with autonomous AI agents trusted by value-based payers nationwide.', img: IMG.analytics, schema: 'Product' },
@@ -6273,6 +6274,59 @@ function renderCarePlansV7() {
 }
 
 
+function renderSolutionsOverview() {
+    return renderInnerHero('SOLUTIONS', 'Purpose-Built AI for Every Layer of Care',
+      'From data intelligence to autonomous AI agents, deployable care plans to clinical documentation \u2014 Zynix delivers the complete toolkit for value-based care.',
+      IMG.enterprise, 'Zynix Solutions Overview', 'Explore Solutions') +
+
+    '<section class="zynix-section"><div class="zynix-container">' +
+    '<span class="zynix-tag">PRODUCT SUITE</span>' +
+    '<h2 style="text-align:center;margin-bottom:48px">Four Solutions. One Outcome: Better Care at Scale.</h2>' +
+    '<div class="zynix-feature-grid">' +
+      '<div class="zynix-feature-card fade-in-up">' +
+        '<div class="zynix-feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>' +
+        '<h3>Zynix Data Analytics</h3>' +
+        '<p>Population health intelligence that identifies HCC gaps, stratifies risk, tracks quality measures, and surfaces actionable insights across your entire patient population.</p>' +
+        '<div class="zynix-feature-metric"><span>40%</span><small>Faster gap closure</small></div>' +
+        '<a href="/zynix-data-analytics" style="color:var(--z-accent);font-weight:600;margin-top:12px;display:inline-block">Learn More \u2192</a>' +
+      '</div>' +
+      '<div class="zynix-feature-card fade-in-up">' +
+        '<div class="zynix-feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>' +
+        '<h3>Zynix AI Agents</h3>' +
+        '<p>12 purpose-built autonomous agents that execute care workflows: outreach calls, scheduling, triage, chronic care management, transitions of care, and more.</p>' +
+        '<div class="zynix-feature-metric"><span>12</span><small>Specialized agents</small></div>' +
+        '<a href="/zynix-ai-agents" style="color:var(--z-accent);font-weight:600;margin-top:12px;display:inline-block">Learn More \u2192</a>' +
+      '</div>' +
+      '<div class="zynix-feature-card fade-in-up">' +
+        '<div class="zynix-feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>' +
+        '<h3>Deployable Care Plans</h3>' +
+        '<p>Configurable care workflows for TCM, AWV, chronic care, and preventive screenings. Orchestrate multi-step protocols that agents execute autonomously.</p>' +
+        '<div class="zynix-feature-metric"><span>85%+</span><small>TCM contact rate</small></div>' +
+        '<a href="/care-plans" style="color:var(--z-accent);font-weight:600;margin-top:12px;display:inline-block">Learn More \u2192</a>' +
+      '</div>' +
+      '<div class="zynix-feature-card fade-in-up">' +
+        '<div class="zynix-feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg></div>' +
+        '<h3>ZynScribe</h3>' +
+        '<p>Ambient AI clinical documentation that listens, understands, and generates accurate notes in real time. Reduce documentation burden and give clinicians time back.</p>' +
+        '<div class="zynix-feature-metric"><span>70%</span><small>Less documentation time</small></div>' +
+        '<a href="/zynscribe" style="color:var(--z-accent);font-weight:600;margin-top:12px;display:inline-block">Learn More \u2192</a>' +
+      '</div>' +
+    '</div></div></section>' +
+
+    '<section class="zynix-section-dark"><div class="zynix-container" style="text-align:center">' +
+    '<h2 style="color:#fff">Built for Outcomes. Measured in Impact.</h2>' +
+    renderMetricsBar([
+      { value: '1M+', label: 'Patients Served' },
+      { value: '85%+', label: 'TCM Contact Rate' },
+      { value: '40%', label: 'Gap Closure Improvement' },
+      { value: '30', label: 'States Deployed' }
+    ]) +
+    '</div></section>' +
+
+    renderCTA('See Zynix Solutions in Action', 'Discover how our integrated platform can transform your care delivery and drive measurable outcomes.', 'Request a Demo') +
+    renderFooter();
+  }
+
 function renderDataAnalyticsV7() {
   var html = '';
 
@@ -6408,6 +6462,7 @@ function renderDataAnalyticsV7() {
     '/care-plans': renderCarePlans,
     '/company-zynixllm': renderZynixLLMV7,
     '/products-zynixllm': renderZynixLLM,
+    '/solutions': renderSolutionsOverview,
     // Products - AI Agent Detail Pages (NEW)
     '/products-ai-agents-zynafterhours': renderZynAfterHours,
     '/products-ai-agents-zynschedule': renderZynSchedule,
