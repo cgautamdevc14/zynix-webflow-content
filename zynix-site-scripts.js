@@ -2352,9 +2352,13 @@
       document.body.classList.remove('has-announcement-bar');
     });
 
-    // Hide Webflow nav
-    var wfNav = document.querySelector('.w-nav, .navbar, [data-collapse="medium"]');
-    if (wfNav) wfNav.style.display = 'none';
+    // Hide ALL Webflow native navbars — inject style with !important to override any CSS
+    var hideNavStyle = document.createElement('style');
+    hideNavStyle.textContent = 'section.navbar, .w-nav, [data-collapse="medium"] { display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; }';
+    document.head.appendChild(hideNavStyle);
+    document.querySelectorAll('.w-nav, .navbar, [data-collapse="medium"], section.navbar').forEach(function(el) {
+      el.style.cssText = 'display:none!important;visibility:hidden!important;height:0!important;overflow:hidden!important;';
+    });
 
     // Hamburger toggle
     var burger = nav.querySelector('.zynix-nav-hamburger');
