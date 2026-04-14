@@ -25,22 +25,22 @@
   var GH = 'https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@0387b1e/images/';
   var GHG = GH + 'gifs/';
   var IMG = {
-    // Premium AI-generated page hero images (OpenAI gpt-image-1)
-    hero: GH + 'hero-dashboard.png',           // 3D glass dashboard — homepage hero
-    doctor: GH + 'doctor-voice-agent.png',          // AI Agent — doctors, AI agents pages
-    patient: GH + 'patient-engagement.png',         // Patient engagement — scheduling, reminders
-    analytics: GH + 'hero-dashboard.png',       // Hero dashboard — analytics pages
-    data: GH + 'data-platform.png',            // Data network — data platform, ZynFax
-    care: GH + 'care-team-insights.png',            // Care coordination — care plans, ACOs
-    scribe: GH + 'doctor-voice-agent.png',          // AI Agent — ZynScribe
-    patients: GH + 'enterprise-command-center.png',        // Enterprise platform — FQHCs, About
-    enterprise: GH + 'enterprise-command-center.png',      // Enterprise platform — Zynix OS
-    mesh: GH + 'data-platform.png',            // Data network — ZynixLLM
+    // Real product screenshots — used for OG meta images, social previews, and inline showcases
+    hero: GH + 'zynix-aco-dashboard.png',               // ACO dashboard — homepage OG fallback
+    doctor: GH + 'zynix-predictive-analytics.png',      // Risk/AI view — agents, triage pages
+    patient: GH + 'zynix-provider-view.png',            // Provider dashboard — scheduling, engagement
+    analytics: GH + 'zynix-aco-dashboard.png',          // ACO dashboard — analytics pages
+    data: GH + 'zynix-chatbot.png',                     // AI data query — data platform, ZynFax
+    care: GH + 'zynix-aco-quality.png',                 // Quality metrics — care plans, ACOs
+    scribe: GH + 'zynix-quality-measures.png',          // Quality measures — ZynScribe
+    patients: GH + 'zynix-provider-view.png',           // Provider view — FQHCs, About
+    enterprise: GH + 'zynix-aco-risk.png',              // Risk stratification — Zynix OS
+    mesh: GH + 'zynix-chatbot.png',                     // AI chatbot — ZynixLLM
     // Aliases used by blog posts
-    platform: GH + 'enterprise-command-center.png',        // Platform alias for blog posts
-    agents: GH + 'doctor-voice-agent.png',                 // Agents alias for blog posts
+    platform: GH + 'zynix-aco-dashboard.png',           // ACO dashboard for blog posts
+    agents: GH + 'zynix-predictive-analytics.png',      // Predictive analytics for blog posts
     // Background overlay
-    overlay: GH + 'analytics-dashboard.png',         // Dashboard overlay — section backgrounds
+    overlay: GH + 'zynix-aco-dashboard.png',            // Dashboard — section backgrounds
     // GIF clips (kept for optional use)
     gifDashboard: GHG + 'dashboard-walkthrough.gif',
     gifMetrics: GHG + 'dashboard-metrics.gif',
@@ -1094,7 +1094,7 @@
       child.style.display = 'none';
     }
     // Also hide main/header/footer from Webflow template
-    var wfElements = document.querySelectorAll('main, header, footer:not(.zynix-footer), .w-nav, .navbar, [data-collapse], .hero-section, .section, .w-container');
+    var wfElements = document.querySelectorAll('main, header, footer:not(.zynix-footer), .w-nav, .navbar, [data-collapse], .hero-section, .section, .w-container, .z-hero, .z-section, .z-section-alt, .z-section-dark, .z-cta-section, .footer:not(.zynix-footer)');
     wfElements.forEach(function(el) {
       if (!el.closest('.zynix-injected') && !el.classList.contains('zynix-mega-nav')) {
         el.style.display = 'none';
@@ -1252,6 +1252,37 @@
       '</div></section>';
   }
 
+  // ── Browser Frame Mockup for product screenshots ──
+  function renderBrowserFrame(imgSrc, alt, url) {
+    url = url || 'app.zynix.ai/dashboard';
+    return '<div class="zynix-browser-frame">' +
+      '<div class="zynix-browser-bar">' +
+      '<div class="zynix-browser-dots"><span></span><span></span><span></span></div>' +
+      '<div class="zynix-browser-url">' + url + '</div>' +
+      '</div>' +
+      '<img src="' + imgSrc + '" alt="' + (alt || 'Zynix AI product screenshot') + '" loading="lazy" width="1200" height="800">' +
+      '</div>';
+  }
+
+  // ── Product Showcase — screenshot + description side by side ──
+  function renderProductShowcase(imgSrc, alt, url, title, desc, reverse) {
+    var visual = '<div class="zynix-product-showcase-visual">' + renderBrowserFrame(imgSrc, alt, url) + '</div>';
+    var text = '<div class="zynix-product-showcase-text"><h3>' + title + '</h3><p>' + desc + '</p></div>';
+    return '<div class="zynix-product-showcase"' + (reverse ? ' style="direction:rtl"' : '') + '>' +
+      (reverse ? visual + text : text + visual) +
+      '</div>';
+  }
+
+  // ── Screenshot Strip — horizontal row of framed screenshots ──
+  function renderScreenshotStrip(items) {
+    var html = '<div class="zynix-screenshot-strip">';
+    items.forEach(function(item) {
+      html += renderBrowserFrame(item.img, item.alt, item.url || 'app.zynix.ai/dashboard');
+    });
+    html += '</div>';
+    return html;
+  }
+
   function renderFeatureCards(cards) {
     var html = '<div class="zynix-feature-grid">';
     cards.forEach(function(c) {
@@ -1328,10 +1359,10 @@
     '<span class="zynix-tag">INSIDE THE PLATFORM</span>' +
     '<h2>Built for Healthcare Operations</h2>' +
     '<p class="zynix-section-sub">Real screenshots from the Zynix OS portal showing dashboards, analytics, and AI-powered insights.</p>' +
-    '<div class="zynix-screenshot-gallery">' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACO + '" alt="Zynix AI ACO performance dashboard showing quality measures and shared savings"><div class="caption">ACO Owner Dashboard</div></div>' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalProvider + '" alt="Zynix AI provider clinical dashboard with patient risk scores and care gaps"><div class="caption">Provider Clinical Dashboard</div></div>' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalChatbot + '" alt="Zynix AI patient chatbot interface for healthcare data queries"><div class="caption">AI Data Query Chatbot</div></div>' +
+    '<div class="zynix-screenshot-strip">' +
+    renderBrowserFrame(IMG.portalACO, 'Zynix AI ACO performance dashboard showing quality measures and shared savings', 'app.zynix.ai/aco/dashboard') +
+    renderBrowserFrame(IMG.portalProvider, 'Zynix AI provider clinical dashboard with patient risk scores and care gaps', 'app.zynix.ai/provider/clinical') +
+    renderBrowserFrame(IMG.portalChatbot, 'Zynix AI patient chatbot interface for healthcare data queries', 'app.zynix.ai/ai/chatbot') +
     '</div></div></section>' +
 
     '<section class="zynix-flywheel-section"><div class="zynix-container">' +
@@ -1467,10 +1498,10 @@
     '<span class="zynix-tag">THE PLATFORM</span>' +
     '<h2>See the Zynix Portal in Action</h2>' +
     '<p class="zynix-section-sub">Real product screenshots from the Zynix analytics and quality dashboards.</p>' +
-    '<div class="zynix-screenshot-gallery">' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalQuality + '" alt="Zynix AI quality measures dashboard tracking HEDIS and Star ratings"><div class="caption">Provider Quality Dashboard</div></div>' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalPredictive + '" alt="Zynix AI predictive analytics engine for readmission risk scoring"><div class="caption">Predictive Analytics & Risk</div></div>' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACOQuality + '" alt="Zynix AI ACO quality dashboard with HEDIS gap closure metrics"><div class="caption">ACO Quality Performance</div></div>' +
+    '<div class="zynix-screenshot-strip">' +
+    renderBrowserFrame(IMG.portalQuality, 'Zynix AI quality measures dashboard tracking HEDIS and Star ratings', 'app.zynix.ai/quality/measures') +
+    renderBrowserFrame(IMG.portalPredictive, 'Zynix AI predictive analytics engine for readmission risk scoring', 'app.zynix.ai/analytics/risk') +
+    renderBrowserFrame(IMG.portalACOQuality, 'Zynix AI ACO quality dashboard with HEDIS gap closure metrics', 'app.zynix.ai/aco/quality') +
     '</div></div></section>' +
 
     renderMetricsBar([
@@ -1796,6 +1827,18 @@
       html += renderMetricsBar(metrics);
     }
 
+    // Product screenshots section — shows real platform UI
+    if (opts.screenshots && opts.screenshots.length) {
+      html += '<section class="zynix-section" style="padding:60px 0;background:#f8fafc"><div class="zynix-container">' +
+        '<span class="zynix-tag">THE PLATFORM</span>' +
+        '<h2 style="margin-bottom:40px">See the Zynix Dashboard in Action</h2>' +
+        '<div class="zynix-screenshot-strip">';
+      opts.screenshots.forEach(function(s) {
+        html += renderBrowserFrame(s.img, s.alt, s.url || 'app.zynix.ai/dashboard');
+      });
+      html += '</div></div></section>';
+    }
+
     if (customers && customers.length) {
       html += '<section class="zynix-customers-section"><div class="zynix-container">' +
         '<span class="zynix-tag">TRUSTED BY</span>' +
@@ -1851,6 +1894,11 @@
       ['Palm Beach ACO', 'West Florida ACO', 'Space Coast ACO', 'Central Florida ACO', 'Assurity ACO REACH', 'Advanced ACO & Affiliates', 'Sun Flower ACO'],
       {
         summary: '<strong>Zynix for ACOs</strong> is an AI-powered operating system that helps Accountable Care Organizations maximize shared savings, achieve 85%+ TCM contact rates, close HCC and quality gaps, and automate care coordination across their attributed populations. Trusted by 7+ ACOs nationwide including Palm Beach ACO, West Florida ACO, and Space Coast ACO.',
+        screenshots: [
+          { img: IMG.portalACO, alt: 'Zynix ACO performance dashboard with shared savings and quality metrics', url: 'app.zynix.ai/aco/dashboard' },
+          { img: IMG.portalACOQuality, alt: 'Zynix ACO quality measures and HEDIS gap closure tracking', url: 'app.zynix.ai/aco/quality' },
+          { img: IMG.portalACORisk, alt: 'Zynix risk stratification engine for ACO population health', url: 'app.zynix.ai/aco/risk' }
+        ],
         faqs: [
           { q: 'How can ACOs use AI to close care gaps?', a: 'Zynix uses AI to identify open HCC and quality gaps across your attributed population, prioritize them by RAF impact, and automatically deploy outreach campaigns to schedule patients for gap-closing visits. The system achieves 40% improvement in gap closure rates compared to manual worklist management.' },
           { q: 'What ROI can ACOs expect from Zynix?', a: 'Most ACOs see positive ROI within 8-12 weeks. Key financial impacts include increased TCM revenue from 85%+ contact rates (vs 30-40% industry average), improved RAF scores from HCC gap closure, and reduced administrative costs through AI agent automation. Typical annual savings range from $500K to $5M+ depending on attributed lives.' },
@@ -1888,6 +1936,11 @@
       ['Health Vision Institute', 'CLSCFL'],
       {
         summary: '<strong>Zynix for Health Systems</strong> provides unified AI-powered patient engagement, post-discharge coordination, and clinical documentation across multi-facility health networks. The platform reduces 30-day readmissions by 25%, cuts documentation burden by 40%, and automates care transitions at enterprise scale.',
+        screenshots: [
+          { img: IMG.portalProvider, alt: 'Zynix provider clinical dashboard with quality metrics and care gaps', url: 'app.zynix.ai/provider/dashboard' },
+          { img: IMG.portalPredictive, alt: 'Zynix predictive analytics for readmission risk scoring', url: 'app.zynix.ai/analytics/risk' },
+          { img: IMG.portalQuality, alt: 'Zynix quality measures tracking for health system compliance', url: 'app.zynix.ai/quality/measures' }
+        ],
         faqs: [
           { q: 'How does AI reduce hospital readmissions?', a: 'Zynix uses predictive analytics to identify high-risk patients at discharge, then automatically deploys the Post-Discharge Follow-Up Agent to contact patients within 48 hours. The agent confirms safe arrival, reviews medications, and schedules follow-up visits, achieving 85%+ contact rates and 25% reduction in avoidable readmissions.' },
           { q: 'Can Zynix scale across multiple facilities?', a: 'Yes. Zynix is built for enterprise-scale deployment. The platform normalizes data across multiple EHR instances, departments, and facilities into one unified layer. AI agents can be configured per facility or department while maintaining system-wide analytics and reporting.' },
@@ -1924,6 +1977,10 @@
       ['AMISTAD CHC'],
       {
         summary: '<strong>Zynix for FQHCs</strong> provides multilingual AI-powered outreach in 15+ languages, quality payment optimization, and automated care management for community health centers serving underserved populations. The platform helps FQHCs maximize UDS quality metrics while extending limited staff resources.',
+        screenshots: [
+          { img: IMG.portalQuality, alt: 'Zynix quality measures dashboard for FQHC UDS reporting', url: 'app.zynix.ai/fqhc/quality' },
+          { img: IMG.portalProvider, alt: 'Zynix provider dashboard for community health center care coordination', url: 'app.zynix.ai/fqhc/provider' }
+        ],
         faqs: [
           { q: 'How do FQHCs use AI for multilingual patient outreach?', a: 'Zynix AI agents communicate with patients in 15+ languages via phone calls, text messages, and voice. The agents handle appointment reminders, preventive care nudges, and after-hours triage in the patient\u2019s preferred language, improving engagement with diverse, underserved populations without adding staff.' },
           { q: 'Can Zynix help FQHCs improve UDS reporting?', a: 'Yes. Zynix tracks UDS clinical quality measures in real-time, identifies patients who need preventive screenings or follow-up care, and deploys automated outreach to schedule visits. This directly improves quality measure performance for HRSA reporting.' },
@@ -1961,6 +2018,11 @@
       ['eTernal Health'],
       {
         summary: '<strong>Zynix for Health Plans</strong> helps payers improve CMS Stars ratings, close HCC and quality gaps at population scale, and drive member engagement through AI-powered outreach. The platform identifies high-impact intervention opportunities and deploys autonomous agents to reach 85%+ of targeted members.',
+        screenshots: [
+          { img: IMG.portalACO, alt: 'Zynix population health dashboard with care gap tracking', url: 'app.zynix.ai/health-plan/population' },
+          { img: IMG.portalACORisk, alt: 'Zynix HCC risk stratification for health plan members', url: 'app.zynix.ai/health-plan/risk' },
+          { img: IMG.portalChatbot, alt: 'Zynix AI data query chatbot for member analytics', url: 'app.zynix.ai/health-plan/query' }
+        ],
         faqs: [
           { q: 'How can health plans use AI to improve Stars ratings?', a: 'Zynix identifies members with open quality gaps that impact Stars measures, prioritizes them by potential impact, and deploys AI agents to schedule preventive visits, close care gaps, and ensure proper documentation. The system tracks HEDIS measures in real-time and proactively intervenes before measurement periods close.' },
           { q: 'How does Zynix help with HCC risk adjustment?', a: 'Zynix Analytics identifies suspected HCC gaps by analyzing claims history, clinical data, and predictive models. The platform prioritizes members by RAF impact and deploys automated outreach to schedule visits with providers who can validate and document chronic conditions, improving risk adjustment accuracy.' },
@@ -1997,6 +2059,10 @@
       ['Cardio & Vascular Consultants', 'Professional Radiology Group', 'Pain Rehab Surgery Center'],
       {
         summary: '<strong>Zynix for Independent Practices</strong> brings enterprise-grade AI to small and mid-size medical practices. The platform reduces no-shows by 40%, provides 24/7 AI-powered after-hours coverage, automates appointment scheduling, and saves physicians 1-2 hours daily on documentation, all without adding staff.',
+        screenshots: [
+          { img: IMG.portalProvider, alt: 'Zynix clinical dashboard for independent medical practices', url: 'app.zynix.ai/practice/dashboard' },
+          { img: IMG.portalPredictive, alt: 'Zynix predictive analytics for patient risk management', url: 'app.zynix.ai/practice/analytics' }
+        ],
         faqs: [
           { q: 'How does AI reduce no-shows for medical practices?', a: 'Zynix ZynReminder sends personalized appointment reminders via phone call, text message, and email at optimal intervals before the visit. Patients can confirm, reschedule, or cancel directly through the AI agent. Practices using Zynix see 40% reduction in no-shows, directly recovering lost revenue.' },
           { q: 'What does AI after-hours coverage look like for a small practice?', a: 'ZynAfterHours answers patient calls 24/7 in 15+ languages. The AI agent triages symptoms using clinical protocols, directs emergencies to 911, schedules urgent next-day appointments, and handles routine questions, all without waking your on-call physician. You get a detailed report every morning.' },
@@ -2033,6 +2099,10 @@
       ['Pain Rehab Surgery Center'],
       {
         summary: '<strong>Zynix for ASCs</strong> automates prior authorization workflows, reduces surgical cancellations, and coordinates pre-op and post-op patient communication for ambulatory surgery centers. The platform achieves 60% faster auth turnaround and 35% reduction in day-of-surgery cancellations.',
+        screenshots: [
+          { img: IMG.portalChatbot, alt: 'Zynix AI chatbot interface for ASC patient data queries', url: 'app.zynix.ai/asc/chatbot' },
+          { img: IMG.portalACO, alt: 'Zynix performance dashboard for ambulatory surgery center operations', url: 'app.zynix.ai/asc/performance' }
+        ],
         faqs: [
           { q: 'How does AI speed up prior authorization for ASCs?', a: 'ZynAuth automates the entire prior auth workflow: gathering clinical documentation, submitting authorization requests to payers, tracking approval status, and following up on pending authorizations. The AI agent works 24/7 and reduces auth turnaround time by 60%, ensuring surgeries aren\u2019t delayed by administrative bottlenecks.' },
           { q: 'Can Zynix reduce surgical cancellations?', a: 'Yes. Zynix sends automated pre-op reminders that verify patient readiness by confirming fasting instructions, medication holds, transportation arrangements, and required lab work. By ensuring patients arrive fully prepared, ASCs using Zynix see 35% reduction in day-of-surgery cancellations.' },
@@ -2769,7 +2839,30 @@
       '.zynix-email-capture { background: linear-gradient(180deg, #f8fafc 0%, #fff 100%); border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }' +
       '.zynix-capture-email:focus { border-color: #20449B !important; box-shadow: 0 0 0 3px rgba(32,68,155,0.12) !important; }' +
       '.zynix-capture-btn:hover { background: #1a3880 !important; }' +
-      '@media (max-width: 600px) { .zynix-capture-form { flex-direction: column !important; } .zynix-capture-btn { width: 100%; } }';
+      '@media (max-width: 600px) { .zynix-capture-form { flex-direction: column !important; } .zynix-capture-btn { width: 100%; } }' +
+      /* Browser mockup frame for product screenshots */
+      '.zynix-browser-frame { background: #1a1f2e; border-radius: 12px; overflow: hidden; box-shadow: 0 25px 60px -12px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06); }' +
+      '.zynix-browser-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #151922; border-bottom: 1px solid rgba(255,255,255,0.06); }' +
+      '.zynix-browser-dots { display: flex; gap: 6px; }' +
+      '.zynix-browser-dots span { width: 10px; height: 10px; border-radius: 50%; }' +
+      '.zynix-browser-dots span:nth-child(1) { background: #ff5f57; }' +
+      '.zynix-browser-dots span:nth-child(2) { background: #febc2e; }' +
+      '.zynix-browser-dots span:nth-child(3) { background: #28c840; }' +
+      '.zynix-browser-url { flex: 1; margin-left: 8px; padding: 5px 12px; background: rgba(255,255,255,0.06); border-radius: 6px; font-size: 11px; color: rgba(255,255,255,0.45); font-family: ui-monospace, SFMono-Regular, monospace; letter-spacing: 0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }' +
+      '.zynix-browser-frame img { display: block; width: 100%; height: auto; }' +
+      /* Product showcase — side-by-side layout */
+      '.zynix-product-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin: 48px 0; }' +
+      '.zynix-product-showcase-text { }' +
+      '.zynix-product-showcase-text h3 { font-size: 28px; font-weight: 700; margin: 0 0 16px; color: var(--z-text-primary, #0f172a); }' +
+      '.zynix-product-showcase-text p { font-size: 16px; line-height: 1.7; color: var(--z-text-secondary, #475569); margin: 0 0 20px; }' +
+      '.zynix-product-showcase-visual { }' +
+      '@media (max-width: 768px) { .zynix-product-showcase { grid-template-columns: 1fr; gap: 32px; } }' +
+      /* Screenshot strip — horizontal scroll on mobile */
+      '.zynix-screenshot-strip { display: flex; gap: 24px; overflow-x: auto; padding: 8px 0 24px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }' +
+      '.zynix-screenshot-strip::-webkit-scrollbar { height: 4px; }' +
+      '.zynix-screenshot-strip::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }' +
+      '.zynix-screenshot-strip .zynix-browser-frame { flex: 0 0 340px; scroll-snap-align: start; }' +
+      '@media (min-width: 769px) { .zynix-screenshot-strip .zynix-browser-frame { flex: 1 1 0; } }';
     document.head.appendChild(hideNavStyle);
     document.querySelectorAll('.w-nav, .navbar, [data-collapse="medium"], section.navbar').forEach(function(el) {
       el.style.cssText = 'display:none!important;visibility:hidden!important;height:0!important;overflow:hidden!important;';
@@ -4014,13 +4107,13 @@
       '<span class="zynix-tag">INSIDE THE PLATFORM</span>' +
       '<h2>See What You Get on Day One</h2>' +
       '<p class="zynix-section-sub">Real product screenshots from live deployments across healthcare organizations in 30 states.</p>' +
-      '<div class="zynix-screenshot-gallery">' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACO + '" alt="Zynix AI ACO performance dashboard showing quality measures and shared savings" loading="lazy"><div class="caption">ACO Performance Dashboard</div></div>' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalProvider + '" alt="Zynix AI clinical quality metrics view for healthcare providers" loading="lazy"><div class="caption">Clinical Quality Metrics</div></div>' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalPredictive + '" alt="Zynix AI predictive analytics engine for readmission risk scoring" loading="lazy"><div class="caption">Predictive Analytics Engine</div></div>' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalChatbot + '" alt="Zynix AI patient chatbot interface for healthcare data queries" loading="lazy"><div class="caption">AI Patient Chatbot</div></div>' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalQuality + '" alt="Zynix AI quality measures tracking for healthcare compliance" loading="lazy"><div class="caption">Quality Measures Tracker</div></div>' +
-      '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACORisk + '" alt="Zynix AI risk stratification engine for population health management" loading="lazy"><div class="caption">Risk Stratification Engine</div></div>' +
+      '<div class="zynix-screenshot-strip">' +
+      renderBrowserFrame(IMG.portalACO, 'Zynix AI ACO performance dashboard showing quality measures and shared savings', 'app.zynix.ai/aco/dashboard') +
+      renderBrowserFrame(IMG.portalProvider, 'Zynix AI clinical quality metrics view for healthcare providers', 'app.zynix.ai/provider/clinical') +
+      renderBrowserFrame(IMG.portalPredictive, 'Zynix AI predictive analytics engine for readmission risk scoring', 'app.zynix.ai/analytics/risk') +
+      renderBrowserFrame(IMG.portalChatbot, 'Zynix AI patient chatbot interface for healthcare data queries', 'app.zynix.ai/ai/chatbot') +
+      renderBrowserFrame(IMG.portalQuality, 'Zynix AI quality measures tracking for healthcare compliance', 'app.zynix.ai/quality/measures') +
+      renderBrowserFrame(IMG.portalACORisk, 'Zynix AI risk stratification engine for population health management', 'app.zynix.ai/population/risk') +
       '</div></div></section>';
 
     // -- PROOF POINTS --
@@ -7031,10 +7124,10 @@ function renderDataAnalyticsV7() {
     '<span class="zynix-tag">THE PLATFORM</span>' +
     '<h2>See the Zynix Portal in Action</h2>' +
     '<p class="zynix-section-sub">Real product screenshots from the Zynix analytics and quality dashboards.</p>' +
-    '<div class="zynix-screenshot-gallery">' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalQuality + '" alt="Zynix AI quality measures dashboard tracking HEDIS and Star ratings"><div class="caption">Provider Quality Dashboard</div></div>' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalPredictive + '" alt="Zynix AI predictive analytics engine for readmission risk scoring"><div class="caption">Predictive Analytics & Risk</div></div>' +
-    '<div class="zynix-screenshot-card fade-in-up"><img src="' + IMG.portalACOQuality + '" alt="Zynix AI ACO quality dashboard with HEDIS gap closure metrics"><div class="caption">ACO Quality Performance</div></div>' +
+    '<div class="zynix-screenshot-strip">' +
+    renderBrowserFrame(IMG.portalQuality, 'Zynix AI quality measures dashboard tracking HEDIS and Star ratings', 'app.zynix.ai/quality/measures') +
+    renderBrowserFrame(IMG.portalPredictive, 'Zynix AI predictive analytics engine for readmission risk scoring', 'app.zynix.ai/analytics/risk') +
+    renderBrowserFrame(IMG.portalACOQuality, 'Zynix AI ACO quality dashboard with HEDIS gap closure metrics', 'app.zynix.ai/aco/quality') +
     '</div></div></section>';
 
   html += '<section><div class="zynix-container">' +
