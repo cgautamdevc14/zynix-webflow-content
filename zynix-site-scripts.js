@@ -9,7 +9,7 @@
   var CALENDLY = 'https://calendly.com/david-zynix-ai-calendar/30min';
 
   // ── Image URLs ──
-  var GH = 'https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@c8191a8/images/';
+  var GH = 'https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@87cc4ca/images/';
   var GHG = GH + 'gifs/';
   var IMG = {
     // Premium AI-generated page hero images (OpenAI gpt-image-1)
