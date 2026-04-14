@@ -3592,7 +3592,7 @@
       '</div></section>';
 
     // -- PLATFORM ARCHITECTURE DIAGRAM (V3 Visual Flow) --
-    html += '<section class="zynix-architecture-diagram-section" style="padding:60px 0 80px;background:transparent;overflow:hidden"><div class="zynix-container">' +
+    html += '<section class="zynix-architecture-diagram-section" style="padding:60px 0 80px;background:linear-gradient(135deg,#060D1C 0%,#0B1830 52%,#0E1E3A 100%);overflow:hidden"><div class="zynix-container">' +
       '<style>' +
       ':root{--zpa-blue-core:#60a5fa;--zpa-blue-mid:#3b82f6;--zpa-blue-bright:#60a5fa;--zpa-blue-pale:rgba(59,130,246,0.1);--zpa-orange:#f97316;--zpa-orange-light:rgba(249,115,22,0.12);--zpa-gray-line:rgba(255,255,255,0.08);--zpa-gray-card:rgba(255,255,255,0.04);--zpa-text-body:rgba(255,255,255,0.78);--zpa-text-muted:rgba(255,255,255,0.45)}' +
       '.zpa-diagram{position:relative;z-index:1;display:grid;grid-template-columns:148px 1fr 148px;align-items:center;max-width:1100px;margin:0 auto;gap:0}' +
@@ -3688,6 +3688,11 @@
         '.zpa-nav{padding:10px 16px 12px}' +
       '}' +
       '</style>' +
+      '<div style="text-align:center;margin-bottom:40px">' +
+        '<span class="zynix-tag" style="color:var(--zpa-blue-bright);border-color:rgba(59,130,246,0.3)">PLATFORM ARCHITECTURE</span>' +
+        '<h2 style="color:#fff;font-size:clamp(1.75rem,3.5vw,2.5rem);margin-top:12px">From Data Sources to Patient Outcomes</h2>' +
+        '<p style="color:rgba(255,255,255,0.6);max-width:600px;margin:8px auto 0;font-size:15px">Five layers working in sequence — every signal ingested, reasoned over, and acted on.</p>' +
+      '</div>' +
       '<div class="zpa-diagram">' +
         '<div class="zpa-box zpa-src-box">' +
           '<span class="zpa-box-label">Data sources</span>' +
