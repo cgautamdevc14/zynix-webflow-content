@@ -22,7 +22,7 @@
   });
 
   // ── Image URLs ──
-  var GH = 'https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@0387b1e/images/';
+  var GH = 'https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@f79e10a/images/';
   var GHG = GH + 'gifs/';
   var IMG = {
     // Real product screenshots — used for OG meta images, social previews, and inline showcases
