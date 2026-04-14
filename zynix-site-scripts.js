@@ -663,6 +663,8 @@
     '/case-studies': { title: 'Case Studies | Healthcare AI Results | Zynix AI', desc: 'See real healthcare AI results from ACOs, health systems, and practices using Zynix AI. Proven outcomes across 1M+ value-based care patients.', img: IMG.care, schema: 'Organization' },
     '/faq': { title: 'FAQ | Zynix AI', desc: 'Find answers about the Zynix healthcare AI platform including HIPAA compliance, EHR integration, pricing, deployment timelines, and support options.', img: IMG.hero, schema: 'FAQPage' },
     '/privacy-policy': { title: 'Privacy Policy | Zynix AI', desc: 'Zynix AI privacy policy detailing how we collect, use, and protect your personal and health-related information across our healthcare AI platform.', img: IMG.hero, schema: 'Organization' },
+    '/sms-program': { title: 'SMS Program Info | Zynix AI', desc: 'Zynix AI SMS program details: opt-in, opt-out (STOP), help (HELP), message frequency, supported carriers, and privacy for text notifications.', img: IMG.hero, schema: 'Organization', noindex: true },
+    '/sms-consent': { title: 'SMS Opt-In | Zynix AI', desc: 'Sign up to receive appointment reminders, care coordination updates, and account notifications from Zynix AI via text message.', img: IMG.hero, schema: 'Organization', noindex: true },
     '/terms-of-service': { title: 'Terms of Service | Zynix AI', desc: 'Review the Zynix AI terms of service governing use of our healthcare AI platform, data processing agreements, and professional services.', img: IMG.hero, schema: 'Organization' },
     '/trust-center': { title: 'Trust & Security | Zynix AI', desc: 'Zynix AI is HIPAA compliant and SOC 2 Type II certified. Explore our security practices, data governance, and compliance for healthcare AI.', img: IMG.enterprise, schema: 'Organization' },
     '/resources/blog/1m-patients': { title: 'Zynix AI Reaches 1M VBC Patients | Zynix AI', desc: 'Zynix AI announces 1 million value-based care patients onboarded across healthcare organizations in 30 states. Read about this milestone.', img: IMG.hero, schema: 'Article', datePublished: '2026-01-15' },
@@ -1197,7 +1199,7 @@
       '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_HITRUST + '</div><div><strong>HITRUST</strong><span>CSF Ready</span></div></div>' +
       '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_GDPR + '</div><div><strong>GDPR</strong><span>Compliant</span></div></div>' +
       '</div>' +
-      '<div class="zynix-footer-bottom"><p>&copy; 2026 Zynix AI. All rights reserved. &middot; <a href="/privacy-policy">Privacy Policy</a> &middot; <a href="/terms-of-service">Terms of Service</a> &middot; <a href="/security">Security</a></p></div></footer>';
+      '<div class="zynix-footer-bottom"><p>&copy; 2026 Zynix AI. All rights reserved. &middot; <a href="/privacy-policy">Privacy Policy</a> &middot; <a href="/terms-of-service">Terms of Service</a> &middot; <a href="/sms-program">SMS Program</a> &middot; <a href="/security">Security</a></p></div></footer>';
   }
 
   function renderCTA(title, subtitle, btnText) {
@@ -2253,9 +2255,9 @@
     '<div class="zynix-form-group"><label>Message (Optional)</label><textarea name="message" rows="4" placeholder="Tell us about your goals..."></textarea></div>' +
     '<div class="zynix-form-group" style="margin-bottom:16px"><label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-weight:400;font-size:13px;line-height:1.5;color:var(--z-text-secondary)">' +
     '<input type="checkbox" name="sms_consent" style="margin-top:3px;width:18px;height:18px;flex-shrink:0;accent-color:var(--z-accent)">' +
-    '<span>I agree to receive SMS notifications from Zynix AI related to my account, appointments, and care coordination. Message frequency varies. Message and data rates may apply. Reply STOP to opt out at any time. Reply HELP for support. View our <a href="/privacy-policy" style="color:var(--z-blue);text-decoration:underline">Privacy Policy</a> and <a href="/terms-of-service" style="color:var(--z-blue);text-decoration:underline">Terms of Service</a>.</span></label></div>' +
+    '<span>I agree to receive SMS notifications from Zynix Inc. (Zynix AI) related to my account, appointments, and care coordination. Up to 8 msgs/month. Msg &amp; data rates may apply. Reply STOP to opt out of all messages at any time. Reply HELP for help (info@zynix.ai, 727-261-1297). Consent is not a condition of purchase. <a href="/privacy-policy" style="color:var(--z-blue);text-decoration:underline">Privacy Policy</a> &middot; <a href="/sms-program" style="color:var(--z-blue);text-decoration:underline">SMS Program Info</a></span></label></div>' +
     '<button type="submit" class="zynix-btn-primary" style="width:100%;text-align:center">Request a Demo &rarr;</button>' +
-    '<p style="font-size:11px;color:var(--z-text-muted);margin-top:12px;text-align:center;line-height:1.5">By submitting this form, you consent to receive communications from Zynix AI. For SMS, reply STOP to unsubscribe or HELP for help. Msg &amp; data rates may apply. Msg frequency varies. See our <a href="/privacy-policy" style="color:var(--z-text-muted);text-decoration:underline">Privacy Policy</a>.</p>' +
+    '<p style="font-size:11px;color:var(--z-text-muted);margin-top:12px;text-align:center;line-height:1.5">By submitting this form, you consent to receive communications from Zynix Inc. (Zynix AI). For SMS: reply STOP to opt out of all messages, reply HELP for help (info@zynix.ai or 727-261-1297). Msg &amp; data rates may apply. Up to 8 msgs/month. <a href="/privacy-policy" style="color:var(--z-text-muted);text-decoration:underline">Privacy Policy</a> &middot; <a href="/sms-program" style="color:var(--z-text-muted);text-decoration:underline">SMS Program</a></p>' +
     '</form></div></div></div></section>' +
     renderFooter();
   }
@@ -5571,6 +5573,192 @@ function renderPressV7() {
 }
 
 
+// ── SMS Program Info Page (10DLC / TCR compliance) ──
+function renderSMSProgram() {
+  var html = '';
+
+  html += '<section class="zynix-inner-hero" style="padding:140px 0 60px;background:var(--z-bg-dark)"><div class="zynix-container">' +
+    '<div style="text-align:center;position:relative;z-index:1">' +
+    '<span class="zynix-tag">SMS PROGRAM</span>' +
+    '<h1 style="color:#fff;font-size:42px;font-weight:800;margin:0 0 16px">Zynix AI SMS Program</h1>' +
+    '<p style="color:rgba(255,255,255,0.8);font-size:18px;max-width:640px;margin:0 auto">Information about text messages from Zynix AI, including how to opt in, opt out, and get help.</p>' +
+    '</div></div></section>';
+
+  html += '<section class="zynix-legal-section"><div class="zynix-container"><div class="zynix-legal-content">' +
+
+    '<div style="background:#EEF2FB;border:1px solid #c7d4f0;border-radius:12px;padding:24px 28px;margin-bottom:32px">' +
+    '<h2 style="font-size:20px;margin:0 0 12px;color:#20449B">Program Summary</h2>' +
+    '<ul style="margin:0;padding-left:20px;color:var(--z-text-secondary);line-height:1.8">' +
+    '<li><strong>Program Name:</strong> Zynix AI Customer Care &amp; Account Notifications</li>' +
+    '<li><strong>Sender:</strong> Zynix Inc. (d/b/a Zynix AI)</li>' +
+    '<li><strong>Message Types:</strong> Appointment reminders, care coordination updates, scheduling notifications, account service alerts</li>' +
+    '<li><strong>Frequency:</strong> Up to 8 messages per month per user (more if you request scheduling or reply to messages)</li>' +
+    '<li><strong>Cost:</strong> Message and data rates may apply. Zynix AI does not charge for SMS.</li>' +
+    '<li><strong>Consent:</strong> Consent is not a condition of purchase of any goods or services.</li>' +
+    '</ul></div>' +
+
+    '<h2>1. Who Sends These Messages</h2>' +
+    '<p>Text messages are sent by <strong>Zynix Inc.</strong> (doing business as <strong>Zynix AI</strong>), a healthcare AI company headquartered at 3535 Little Rd, Trinity, FL 34655. Messages are sent from a dedicated business phone number registered under our Zynix Inc. brand.</p>' +
+
+    '<h2>2. How You Opt In</h2>' +
+    '<p>You can opt in to receive SMS messages from Zynix AI in the following ways:</p>' +
+    '<ul>' +
+    '<li><strong>Website opt-in form:</strong> Complete the SMS consent form at <a href="/sms-consent" style="color:#20449B;text-decoration:underline">https://www.zynix.ai/sms-consent</a> by entering your phone number and checking the consent checkbox.</li>' +
+    '<li><strong>Demo request form:</strong> When requesting a demo at <a href="/contact" style="color:#20449B;text-decoration:underline">https://www.zynix.ai/contact</a>, check the SMS opt-in checkbox and provide your phone number.</li>' +
+    '</ul>' +
+    '<p>By opting in, you expressly agree to receive text messages from Zynix AI at the phone number you provide. You understand that:</p>' +
+    '<ul>' +
+    '<li>Consent is <strong>not required</strong> to purchase any product or service from Zynix AI.</li>' +
+    '<li>Message frequency is typically <strong>up to 8 messages per month</strong>. Frequency may increase if you actively request scheduling or respond to messages.</li>' +
+    '<li><strong>Message and data rates may apply</strong> based on your mobile carrier and plan.</li>' +
+    '</ul>' +
+
+    '<h2>3. What Messages You Will Receive</h2>' +
+    '<p>Zynix AI sends <strong>customer care and account notifications only</strong>. Examples include:</p>' +
+    '<ul>' +
+    '<li>Appointment confirmations and reminders</li>' +
+    '<li>Care coordinator match updates</li>' +
+    '<li>Scheduling changes and notifications</li>' +
+    '<li>Account service alerts (e.g., login verification, status updates)</li>' +
+    '</ul>' +
+    '<p><strong>We do not send marketing, promotional, or lead-generation messages via SMS.</strong> Your phone number will not be shared with third parties for marketing purposes.</p>' +
+
+    '<h2>4. Sample Messages</h2>' +
+    '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:20px;margin:16px 0">' +
+    '<p style="margin:0 0 12px;font-weight:600;color:#0f172a">Appointment Reminder:</p>' +
+    '<p style="margin:0;padding:12px 16px;background:#fff;border-radius:6px;border:1px solid #e2e8f0;font-family:monospace;font-size:14px;line-height:1.6;color:#334155">' +
+    'Zynix AI: Reminder — You have an appointment with Dr. Smith on Thu, Apr 17 at 2:00 PM. Reply YES to confirm or call (555) 123-4567 to reschedule. Reply STOP to opt out. Reply HELP for help. Msg &amp; data rates may apply. Privacy: https://www.zynix.ai/privacy-policy</p>' +
+    '</div>' +
+    '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:20px;margin:16px 0">' +
+    '<p style="margin:0 0 12px;font-weight:600;color:#0f172a">Care Coordination Update:</p>' +
+    '<p style="margin:0;padding:12px 16px;background:#fff;border-radius:6px;border:1px solid #e2e8f0;font-family:monospace;font-size:14px;line-height:1.6;color:#334155">' +
+    'Zynix AI: Your care coordinator Sarah has an update on your care plan. Check your portal or reply to connect. Reply STOP to opt out. Reply HELP for help. Msg &amp; data rates may apply. Privacy: https://www.zynix.ai/privacy-policy</p>' +
+    '</div>' +
+    '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:20px;margin:16px 0">' +
+    '<p style="margin:0 0 12px;font-weight:600;color:#0f172a">Scheduling Notification:</p>' +
+    '<p style="margin:0;padding:12px 16px;background:#fff;border-radius:6px;border:1px solid #e2e8f0;font-family:monospace;font-size:14px;line-height:1.6;color:#334155">' +
+    'Zynix AI: Your follow-up visit has been scheduled for Mon, Apr 21 at 10:30 AM at Central Florida Primary Care. Reply STOP to opt out. Reply HELP for help. Msg &amp; data rates may apply. Privacy: https://www.zynix.ai/privacy-policy</p>' +
+    '</div>' +
+
+    '<h2>5. How to Opt Out (STOP)</h2>' +
+    '<p>You can opt out of SMS messages at any time by replying <strong>STOP</strong> to any message from Zynix AI.</p>' +
+    '<p>When you reply STOP, you will receive one final confirmation message:</p>' +
+    '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px 20px;margin:16px 0">' +
+    '<p style="margin:0;font-family:monospace;font-size:14px;color:#334155">"Zynix AI: You are unsubscribed and will receive no further messages from this program."</p>' +
+    '</div>' +
+    '<p>After opting out, <strong>you will not receive any additional text messages from Zynix AI</strong> unless you opt in again by completing the form at <a href="/sms-consent" style="color:#20449B">https://www.zynix.ai/sms-consent</a>.</p>' +
+
+    '<h2>6. How to Get Help (HELP)</h2>' +
+    '<p>If you need assistance, reply <strong>HELP</strong> to any message from Zynix AI. You will receive:</p>' +
+    '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px 20px;margin:16px 0">' +
+    '<p style="margin:0;font-family:monospace;font-size:14px;color:#334155">"Zynix AI SMS Program: For help, email info@zynix.ai, visit https://www.zynix.ai/contact, or call (727) 261-1297. Reply STOP to opt out. Msg &amp; data rates may apply."</p>' +
+    '</div>' +
+    '<p>You can also reach our support team directly:</p>' +
+    '<ul>' +
+    '<li><strong>Email:</strong> <a href="mailto:info@zynix.ai" style="color:#20449B">info@zynix.ai</a></li>' +
+    '<li><strong>Phone:</strong> (727) 261-1297</li>' +
+    '<li><strong>Web:</strong> <a href="/contact" style="color:#20449B">https://www.zynix.ai/contact</a></li>' +
+    '</ul>' +
+
+    '<h2>7. Message Frequency</h2>' +
+    '<p>Zynix AI sends up to <strong>8 messages per month per user</strong>. Message frequency may increase if:</p>' +
+    '<ul>' +
+    '<li>You actively request appointment scheduling or rescheduling</li>' +
+    '<li>You reply to messages initiating a care coordination conversation</li>' +
+    '<li>Your care team sends time-sensitive notifications (e.g., post-discharge follow-up within 48 hours)</li>' +
+    '</ul>' +
+    '<p>You will never receive more than 4 messages in a single day. <strong>Message and data rates may apply</strong> depending on your mobile carrier and plan.</p>' +
+
+    '<h2>8. Supported Carriers</h2>' +
+    '<p>Zynix AI SMS is compatible with all major US mobile carriers, including:</p>' +
+    '<p>AT&amp;T, T-Mobile, Verizon, Sprint, US Cellular, Boost Mobile, Cricket Wireless, Metro by T-Mobile, and others. Carriers are not liable for delayed or undelivered messages.</p>' +
+
+    '<h2>9. Privacy</h2>' +
+    '<p>Your phone number and SMS data are protected under our Privacy Policy. Key points:</p>' +
+    '<ul>' +
+    '<li>Your phone number is collected solely for the purpose of sending account and care-related notifications.</li>' +
+    '<li><strong>We do not sell, rent, or share your phone number</strong> with third parties for marketing purposes.</li>' +
+    '<li>SMS data (phone number, opt-in status, message logs) is stored securely and retained only as long as necessary to provide the service.</li>' +
+    '<li>Our full privacy policy, including the SMS-specific section, is available at <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">https://www.zynix.ai/privacy-policy</a> (see Section 9: SMS Communications).</li>' +
+    '</ul>' +
+
+    '<h2>10. Contact</h2>' +
+    '<p>For any questions about our SMS program:</p>' +
+    '<p><strong>Zynix Health Technologies Inc. (d/b/a Zynix AI)</strong><br>' +
+    '3535 Little Rd, Trinity, FL 34655<br>' +
+    'Email: <a href="mailto:info@zynix.ai" style="color:#20449B">info@zynix.ai</a><br>' +
+    'Phone: (727) 261-1297<br>' +
+    'Web: <a href="/contact" style="color:#20449B">https://www.zynix.ai/contact</a></p>' +
+
+    '</div></div></section>';
+
+  html += renderFooter();
+  return html;
+}
+
+
+// ── SMS Consent / Opt-In Page ──
+function renderSMSConsent() {
+  var html = '';
+
+  html += '<section class="zynix-inner-hero" style="padding:140px 0 60px;background:var(--z-bg-dark)"><div class="zynix-container">' +
+    '<div style="text-align:center;position:relative;z-index:1">' +
+    '<span class="zynix-tag">SMS OPT-IN</span>' +
+    '<h1 style="color:#fff;font-size:42px;font-weight:800;margin:0 0 16px">Sign Up for SMS Notifications</h1>' +
+    '<p style="color:rgba(255,255,255,0.8);font-size:18px;max-width:640px;margin:0 auto">Receive appointment reminders, care coordination updates, and account notifications from Zynix AI via text message.</p>' +
+    '</div></div></section>';
+
+  html += '<section style="padding:60px 0"><div class="zynix-container" style="max-width:600px">' +
+
+    '<div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:40px;box-shadow:0 4px 24px rgba(0,0,0,0.06)">' +
+    '<h2 style="font-size:24px;font-weight:700;margin:0 0 8px;color:#0f172a">Opt In to SMS</h2>' +
+    '<p style="font-size:15px;color:#64748b;margin:0 0 28px;line-height:1.6">By submitting this form, you agree to receive text messages from Zynix Inc. (d/b/a Zynix AI) at the number you provide.</p>' +
+
+    '<form class="zynix-sms-consent-form" id="zynix-sms-form" onsubmit="event.preventDefault();var f=this;var phone=f.querySelector(\'[name=phone]\').value;var consent=f.querySelector(\'[name=sms_consent]\').checked;if(!consent){alert(\'Please check the consent box to continue.\');return;}var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'phone\',value:phone},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'sms_consent\',value:\'Yes\'}]};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><svg width=48 height=48 viewBox=&quot;0 0 24 24&quot; fill=none stroke=#0D9B6A stroke-width=2><circle cx=12 cy=12 r=10/><polyline points=&quot;8 12 11 15 16 9&quot;/></svg><h3 style=color:#0f172a;margin:16px\\ 0\\ 8px>You\\&#39;re signed up!</h3><p style=color:#64748b;font-size:15px>You\\&#39;ll receive a confirmation text shortly. Reply STOP at any time to opt out.</p></div>\'}).catch(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#0f172a>Thank you!</h3><p style=color:#64748b>Your opt-in has been recorded.</p></div>\'})">' +
+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">' +
+    '<div class="zynix-form-group"><label style="font-size:14px;font-weight:600;color:#0f172a;display:block;margin-bottom:6px">First Name</label><input type="text" name="firstname" placeholder="John" required style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px"></div>' +
+    '<div class="zynix-form-group"><label style="font-size:14px;font-weight:600;color:#0f172a;display:block;margin-bottom:6px">Last Name</label><input type="text" name="lastname" placeholder="Smith" required style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px"></div>' +
+    '</div>' +
+
+    '<div class="zynix-form-group" style="margin-bottom:16px"><label style="font-size:14px;font-weight:600;color:#0f172a;display:block;margin-bottom:6px">Mobile Phone Number <span style="color:#ef4444">*</span></label>' +
+    '<input type="tel" name="phone" placeholder="(555) 123-4567" required style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px">' +
+    '</div>' +
+
+    '<div class="zynix-form-group" style="margin-bottom:20px"><label style="font-size:14px;font-weight:600;color:#0f172a;display:block;margin-bottom:6px">Email (Optional)</label>' +
+    '<input type="email" name="email" placeholder="john@organization.com" style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px">' +
+    '</div>' +
+
+    '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin-bottom:24px">' +
+    '<h3 style="font-size:15px;font-weight:700;color:#0f172a;margin:0 0 12px">SMS Program Terms</h3>' +
+    '<ul style="margin:0 0 16px;padding-left:20px;font-size:13px;color:#475569;line-height:1.7">' +
+    '<li><strong>Sender:</strong> Zynix Inc. (d/b/a Zynix AI)</li>' +
+    '<li><strong>Message types:</strong> Appointment reminders, care coordination updates, scheduling notifications, and account alerts</li>' +
+    '<li><strong>Frequency:</strong> Up to 8 messages per month (more if you request scheduling or reply to messages)</li>' +
+    '<li><strong>Message and data rates may apply</strong></li>' +
+    '<li>Reply <strong>STOP</strong> to opt out of all messages from this program at any time</li>' +
+    '<li>Reply <strong>HELP</strong> for help — you will receive support contact info (email: info@zynix.ai, phone: 727-261-1297)</li>' +
+    '<li>Consent is <strong>not a condition of purchase</strong></li>' +
+    '</ul>' +
+
+    '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:14px;line-height:1.6;color:#334155">' +
+    '<input type="checkbox" name="sms_consent" required style="margin-top:4px;width:20px;height:20px;flex-shrink:0;accent-color:#20449B">' +
+    '<span>I agree to receive SMS notifications from <strong>Zynix Inc. (Zynix AI)</strong> at the phone number provided. I understand that message frequency is up to 8 messages/month, message and data rates may apply, consent is not required to make a purchase, and I can reply STOP to opt out at any time. <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">Privacy Policy</a> &middot; <a href="/terms-of-service" style="color:#20449B;text-decoration:underline">Terms of Service</a> &middot; <a href="/sms-program" style="color:#20449B;text-decoration:underline">SMS Program Details</a></span>' +
+    '</label></div>' +
+
+    '<button type="submit" class="zynix-btn-primary" style="width:100%;text-align:center;padding:14px 24px;font-size:16px">Sign Up for SMS Notifications &rarr;</button>' +
+
+    '<p style="font-size:11px;color:#94a3b8;margin-top:16px;text-align:center;line-height:1.6">By submitting, you consent to receive text messages from Zynix AI. Reply STOP to unsubscribe from all messages. Reply HELP for help (info@zynix.ai or 727-261-1297). Msg &amp; data rates may apply. Msg frequency: up to 8/month. <a href="/privacy-policy" style="color:#94a3b8;text-decoration:underline">Privacy Policy</a></p>' +
+
+    '</form></div>' +
+
+    '</div></section>';
+
+  html += renderFooter();
+  return html;
+}
+
+
 function renderPrivacyV7() {
   var html = '';
 
@@ -5663,14 +5851,14 @@ function renderPrivacyV7() {
     '<li>Scheduling changes and notifications</li>' +
     '<li>Account service notifications</li>' +
     '</ul>' +
-    '<p><strong>Opt-In:</strong> You may opt in to SMS by completing the opt-in form at <a href="https://www.zynix.ai/contact" style="color:var(--z-blue)">https://www.zynix.ai/contact</a>. By submitting the form and providing your phone number, you expressly consent to receive text messages from Zynix AI. <strong>Consent is not a condition of purchase.</strong></p>' +
-    '<p><strong>Message frequency:</strong> Message frequency varies based on your activity and scheduled appointments.</p>' +
+    '<p><strong>Opt-In:</strong> You may opt in to SMS by completing the opt-in form at <a href="/sms-consent" style="color:var(--z-blue)">https://www.zynix.ai/sms-consent</a> or by checking the SMS consent box on our contact form at <a href="/contact" style="color:var(--z-blue)">https://www.zynix.ai/contact</a>. By submitting the form and providing your phone number, you expressly consent to receive text messages from Zynix Inc. (d/b/a Zynix AI). <strong>Consent is not a condition of purchase.</strong></p>' +
+    '<p><strong>Message frequency:</strong> Up to 8 messages per month per user. Frequency may increase if you actively request scheduling or respond to messages.</p>' +
     '<p><strong>Message and data rates:</strong> Standard message and data rates may apply depending on your mobile carrier and plan.</p>' +
     '<p><strong>Keywords and Auto-Responses:</strong></p>' +
     '<ul>' +
     '<li><strong>START</strong> &mdash; Opt-in confirmation: <em>"Zynix AI: Thanks for subscribing to customer care and account notifications! Reply HELP for help. Message frequency may vary. Msg &amp; data rates may apply. Consent is not a condition of purchase. Reply STOP to opt out."</em></li>' +
     '<li><strong>STOP</strong> &mdash; Opt-out confirmation: <em>"Zynix AI: You are unsubscribed and will receive no further messages."</em></li>' +
-    '<li><strong>HELP</strong> &mdash; Help response: <em>"Zynix AI: Please reach out to us at zynix.ai/contact or info@zynix.ai for help."</em></li>' +
+    '<li><strong>HELP</strong> &mdash; Help response: <em>"Zynix AI SMS Program: For help, email info@zynix.ai, visit https://www.zynix.ai/contact, or call (727) 261-1297. Reply STOP to opt out. Msg &amp; data rates may apply."</em></li>' +
     '</ul>' +
     '<p><strong>Carriers supported:</strong> Compatible with all major US carriers including AT&amp;T, T-Mobile, Verizon, and Sprint.</p>' +
     '<p>We do not send marketing, promotional, or lead generation messages via SMS. SMS communications are limited to customer care and account-related notifications. Your phone number will not be shared with third parties for marketing purposes. For questions about our SMS program, contact <a href="mailto:info@zynix.ai" style="color:var(--z-blue)">info@zynix.ai</a>.</p>' +
@@ -6996,6 +7184,8 @@ function renderDataAnalyticsV7() {
     '/privacy-policy': renderPrivacyV7,
     '/company-privacy': renderPrivacyV7,
     '/terms-of-service': renderTermsV7,
+    '/sms-program': renderSMSProgram,
+    '/sms-consent': renderSMSConsent,
     '/company-terms': renderTermsV7,
     // Comparison Pages
     '/compare/zynix-vs-point-solutions': renderComparePointSolutions,
