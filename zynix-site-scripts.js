@@ -518,7 +518,16 @@
     '/blog/ai-medical-scribes-physician-burnout': { related: ['/blog/ai-medical-scribes-rollout','/blog/documentation-crisis-physician-burnout','/zynscribe'] },
     '/blog/documentation-crisis-physician-burnout': { related: ['/blog/ai-medical-scribes-physician-burnout','/blog/ai-medical-scribes-rollout','/zynscribe'] },
     '/blog/why-tcm-fails-real-workflows': { related: ['/blog/aco-30-day-post-discharge-program','/use-cases/post-discharge-follow-up','/use-cases/post-discharge-tcm-readmission'] },
-    '/blog/aco-30-day-post-discharge-program': { related: ['/blog/why-tcm-fails-real-workflows','/blog/innovative-patient-recovery-satisfaction','/use-cases/post-discharge-follow-up'] }
+    '/blog/aco-30-day-post-discharge-program': { related: ['/blog/why-tcm-fails-real-workflows','/blog/innovative-patient-recovery-satisfaction','/use-cases/post-discharge-follow-up'] },
+    // Comparison pages — high-intent SEO
+    '/compare/zynix-vs-point-solutions': { products: ['/platform','/agents','/care-plans','/zynscribe'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/compare/zynix-vs-innovaccer','/compare/zynix-vs-commure'] },
+    '/compare/zynix-vs-innovaccer': { products: ['/platform','/zynix-data-analytics','/agents'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/compare/zynix-vs-point-solutions','/compare/zynix-vs-commure'] },
+    '/compare/zynix-vs-commure': { products: ['/platform','/agents','/integrations'], solutions: ['/solutions-health-systems','/solutions-acos'], related: ['/compare/zynix-vs-point-solutions','/compare/zynix-vs-innovaccer'] },
+    // Case studies — link to relevant products and solutions
+    '/case-studies/palm-beach-aco': { products: ['/agents','/care-plans','/zynscribe'], solutions: ['/solutions-acos'], related: ['/case-studies/west-florida-aco','/case-studies/space-coast-aco'] },
+    '/case-studies/amistad': { products: ['/agents','/care-plans'], solutions: ['/solutions-fqhcs'], related: ['/case-studies/nhs','/use-cases/after-hours-triage-multi-site'] },
+    '/case-studies/apollo-clinic': { products: ['/agents','/zynscribe'], solutions: ['/solutions-independent-practices'], related: ['/case-studies/palm-beach-aco','/use-cases/post-discharge-follow-up'] },
+    '/case-studies/nhs': { products: ['/platform','/agents','/zynscribe','/care-plans'], solutions: ['/solutions-health-systems'], related: ['/case-studies/palm-beach-aco','/case-studies/amistad'] }
   };
 
   // ── SEO Data ──
