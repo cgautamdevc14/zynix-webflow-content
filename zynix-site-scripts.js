@@ -531,6 +531,7 @@
     '/roi-calculator': { title: 'ROI Calculator | Zynix AI', desc: 'Calculate your projected savings from AI-powered value-based care. Estimate TCM revenue lift, gap closure impact, and readmission reduction.', img: IMG.hero },
     '/resources-faq': { title: 'FAQ | Zynix AI', desc: 'Find answers about the Zynix healthcare AI platform including HIPAA compliance, EHR integration, pricing, deployment timelines, and support.', img: IMG.hero, schema: 'FAQPage' },
     '/resources-blog': { title: 'Blog | Healthcare AI Insights | Zynix AI', desc: 'Expert healthcare AI insights on value-based care, population health, care coordination, and operational transformation from the Zynix AI team.', img: IMG.hero, schema: 'Organization' },
+    '/resources-blog-lead-model-cms': { title: 'CMS LEAD Model Explained: What Replaces ACO REACH in 2026 | Zynix AI', desc: 'CMS is replacing ACO REACH with the LEAD Model. Learn what changes for ACOs, new financial benchmarks, quality requirements, and how AI can help organizations prepare.', img: IMG.enterprise, schema: 'Article' },
     '/resources-blog-1m-patients': { title: 'Zynix AI Reaches 1M VBC Patients | Zynix AI', desc: 'Zynix AI announces 1 million value-based care patients onboarded across healthcare organizations in 30 states. Read about this milestone.', img: IMG.hero, schema: 'Article' },
     '/resources-case-studies': { title: 'Case Studies | Healthcare AI Results | Zynix AI', desc: 'See real healthcare AI results from ACOs, health systems, and practices using Zynix AI. Proven outcomes across 1M+ value-based care patients.', img: IMG.care, schema: 'Organization' },
     '/resources-glossary': { title: 'Healthcare AI Glossary | Zynix AI', desc: 'Browse the complete healthcare AI glossary covering value-based care, interoperability, HCC coding, claims processing, and compliance terms.', img: IMG.hero, schema: 'Organization' },
@@ -2158,7 +2159,8 @@
   // ── PAGE: Blog ──
   function renderBlog() {
     var posts = [
-      { title: 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States', cat: 'Company News', date: 'Mar 15, 2026', slug: '/resources/blog/1m-patients', featured: true },
+      { title: 'CMS LEAD Model: What ACOs Need to Know About the ACO REACH Replacement', cat: 'CMS Policy & Regulation', date: 'Apr 13, 2026', slug: '/resources-blog-lead-model-cms', featured: true },
+      { title: 'Zynix AI Surpasses 1 Million VBC Patients Onboarded Across 30 States', cat: 'Company News', date: 'Mar 15, 2026', slug: '/resources/blog/1m-patients' },
       { title: 'Healthcare AI Agents vs. Chatbots: What\u2019s the Difference?', cat: 'AI Implementation', date: 'Mar 15, 2026', slug: '/resources/blog/ai-agents-vs-chatbots-healthcare' },
       { title: 'How AI Closes Care Gaps: From Identification to Resolution', cat: 'Population Health & Analytics', date: 'Mar 10, 2026', slug: '/resources/blog/how-ai-closes-care-gaps' },
       { title: 'What Is Value-Based Care AI? A Complete Guide for 2026', cat: 'Value-Based Care Strategy', date: 'Mar 1, 2026', slug: '/resources/blog/what-is-value-based-care-ai' },
@@ -2235,6 +2237,92 @@
     '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary)">To learn more about how Zynix can transform your organization\u2019s value-based care performance, visit <a href="/" style="color:var(--z-blue);font-weight:600">zynix.ai</a> or <a href="/contact" style="color:var(--z-blue);font-weight:600">request a demo</a>.</p>' +
     '</article></div></section>' +
     renderCTA('Ready to Join the 1 Million?', 'See how Zynix can transform your organization\u2019s value-based care performance.', 'Request a Demo') +
+    renderFooter();
+  }
+
+  // ── PAGE: Blog — LEAD Model CMS Article ──
+  function renderBlogLeadModel() {
+    var h2s = 'font-size:28px;font-weight:700;margin:48px 0 16px;color:var(--z-text)';
+    var ps = 'font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin-bottom:16px';
+    var lis = 'font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin-bottom:8px';
+    return renderInnerHero('CMS POLICY & REGULATION', 'CMS LEAD Model: What ACOs Need to Know About the ACO REACH Replacement',
+      'April 13, 2026 \u00b7 By Zynix AI Policy Team \u00b7 8 min read',
+      null, '') +
+    '<section class="zynix-blog-post-section"><div class="zynix-container" style="max-width:780px;margin:0 auto">' +
+    '<article class="zynix-blog-post-content">' +
+
+    '<p style="font-size:18px;line-height:1.9;color:var(--z-text)">CMS has signaled the most significant restructuring of accountable care since the launch of the Medicare Shared Savings Program. The <strong>LEAD Model</strong> (Leveraging Equity and Accountability in Delivery) is set to replace ACO REACH (Realizing Equity, Access, and Community Health), which itself succeeded the controversial Global and Professional Direct Contracting (GPDC) model. For ACOs navigating value-based care, understanding LEAD is not optional\u2014it is existential.</p>' +
+
+    '<div style="background:linear-gradient(135deg,#f0f4ff,#e8f0fe);border-radius:12px;padding:28px 32px;margin:32px 0">' +
+    '<h3 style="font-size:18px;font-weight:700;color:var(--z-text);margin:0 0 16px">\ud83d\udcca Key Takeaways</h3>' +
+    '<ul style="margin:0;padding-left:20px">' +
+    '<li style="' + lis + '"><strong>LEAD replaces ACO REACH</strong> as the next-generation risk-bearing ACO model</li>' +
+    '<li style="' + lis + '"><strong>Stronger equity requirements</strong> with mandatory health equity plans and SDOH screening benchmarks</li>' +
+    '<li style="' + lis + '"><strong>Revised financial benchmarks</strong> intended to close the gap between one-sided and two-sided risk</li>' +
+    '<li style="' + lis + '"><strong>Enhanced quality measures</strong> tied directly to shared savings distribution</li>' +
+    '<li style="' + lis + '"><strong>Greater oversight</strong> of third-party conveners and management organizations</li>' +
+    '</ul></div>' +
+
+    '<h2 style="' + h2s + '">Why CMS Is Moving Beyond ACO REACH</h2>' +
+    '<p style="' + ps + '">ACO REACH launched in 2023 as a replacement for GPDC, itself a Trump-era experiment in full-risk contracting for Medicare beneficiaries. While REACH improved upon GPDC by adding guardrails around beneficiary protections and health equity, critics argued it still allowed private equity-backed entities to profit from Medicare risk contracts without meaningful accountability.</p>' +
+    '<p style="' + ps + '">Congressional scrutiny intensified through 2025. MedPAC repeatedly recommended consolidating direct contracting models under a tighter regulatory framework. Advocacy groups pushed for stronger beneficiary notification requirements and limits on passive enrollment. CMS responded with LEAD\u2014a model designed to retain the innovation of risk-based contracting while addressing the accountability gaps that plagued its predecessors.</p>' +
+
+    '<h2 style="' + h2s + '">What Changes Under LEAD</h2>' +
+
+    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">1. Equity Is No Longer Optional</h3>' +
+    '<p style="' + ps + '">Under ACO REACH, health equity plans were required but loosely enforced. LEAD makes equity a gating criterion for shared savings. ACOs must demonstrate measurable progress on SDOH screening, culturally competent care delivery, and disparity reduction across race, ethnicity, and geography. Failure to meet equity benchmarks directly reduces shared savings payouts.</p>' +
+
+    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">2. Financial Benchmarks Recalibrated</h3>' +
+    '<p style="' + ps + '">LEAD introduces prospective regional benchmarking that accounts for local market conditions, historical spending trajectories, and case-mix adjustments. The intent is to eliminate the \u201ccherry-picking\u201d concern\u2014where ACOs could generate savings simply by selecting healthier-than-average populations. Risk corridors are narrower, pushing ACOs to generate genuine efficiency rather than benefiting from favorable attribution.</p>' +
+
+    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">3. Quality Measures Directly Tied to Shared Savings</h3>' +
+    '<p style="' + ps + '">LEAD expands the quality measure set and creates a direct multiplier between quality performance and financial outcomes. ACOs scoring below the 30th percentile on key measures (preventive screening, chronic disease management, patient experience) face shared savings haircuts of up to 25%. Top-quartile performers receive enhanced savings rates\u2014creating genuine financial incentive for quality, not just cost reduction.</p>' +
+
+    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">4. Third-Party Convener Oversight</h3>' +
+    '<p style="' + ps + '">One of the most significant changes: LEAD imposes direct reporting requirements on management services organizations (MSOs) and third-party conveners. CMS will require financial transparency, conflict-of-interest disclosures, and limits on management fees as a percentage of total cost of care. This directly addresses the private equity concern that dogged GPDC and REACH.</p>' +
+
+    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">5. Beneficiary Protections Strengthened</h3>' +
+    '<p style="' + ps + '">Voluntary alignment remains the primary enrollment mechanism, but LEAD adds active notification requirements, simplified opt-out processes, and mandatory annual re-confirmation. Beneficiaries must receive clear, plain-language communication about their ACO participation and rights.</p>' +
+
+    '<h2 style="' + h2s + '">What This Means for ACOs Right Now</h2>' +
+    '<p style="' + ps + '">The transition from REACH to LEAD is not a distant policy discussion. ACOs currently operating under REACH need to prepare for several operational shifts:</p>' +
+    '<ul style="padding-left:20px;margin-bottom:24px">' +
+    '<li style="' + lis + '"><strong>Invest in SDOH data infrastructure.</strong> Equity benchmarks require structured, auditable SDOH data\u2014not ad hoc screening. Organizations need systematic workflows for collecting Z-codes and integrating community-level social determinant data.</li>' +
+    '<li style="' + lis + '"><strong>Upgrade quality measurement capabilities.</strong> The expanded measure set means ACOs need real-time visibility into gaps across preventive screening, chronic disease management, and patient experience. Annual retrospective analysis will not suffice.</li>' +
+    '<li style="' + lis + '"><strong>Automate patient outreach at scale.</strong> Narrower financial benchmarks mean every missed care gap, every unscheduled AWV, and every failed TCM contact directly impacts the bottom line. Manual outreach cannot keep pace.</li>' +
+    '<li style="' + lis + '"><strong>Prepare for financial transparency.</strong> ACOs working with third-party conveners should expect CMS scrutiny of management fee structures and financial arrangements. Clean governance now avoids compliance risk later.</li>' +
+    '</ul>' +
+
+    '<h2 style="' + h2s + '">How AI Enables LEAD Readiness</h2>' +
+    '<p style="' + ps + '">The operational demands of LEAD\u2014equity tracking, quality optimization, proactive outreach, real-time gap closure\u2014align precisely with what AI-powered platforms are designed to do. Organizations that can:</p>' +
+    '<ul style="padding-left:20px;margin-bottom:24px">' +
+    '<li style="' + lis + '">Ingest and normalize multi-source clinical and social determinant data in real time</li>' +
+    '<li style="' + lis + '">Identify and prioritize care gaps across HCC, HEDIS, and equity measures simultaneously</li>' +
+    '<li style="' + lis + '">Deploy autonomous outreach agents that contact patients within TCM windows, schedule AWVs, and close gaps without adding staff</li>' +
+    '<li style="' + lis + '">Generate audit-ready documentation of equity initiatives and quality improvements</li>' +
+    '</ul>' +
+    '<p style="' + ps + '">\u2026will be positioned not just to survive LEAD, but to thrive under it. The ACOs that treat LEAD as a compliance exercise will struggle. The ones that treat it as a catalyst for genuine operational transformation will capture outsized shared savings.</p>' +
+
+    '<blockquote style="border-left:4px solid var(--z-blue);padding:20px 24px;margin:32px 0;background:var(--z-blue-light);border-radius:0 8px 8px 0"><p style="font-size:16px;line-height:1.8;color:var(--z-text);margin:0;font-style:italic">"The organizations that will win under LEAD are the ones investing now in the data infrastructure and AI capabilities to meet equity, quality, and efficiency requirements simultaneously\u2014not sequentially."</p><cite style="display:block;margin-top:12px;font-size:14px;color:var(--z-text-secondary);font-style:normal"><strong>Jay Chowdappa, MD</strong>, Co-Founder & CEO, Zynix AI</cite></blockquote>' +
+
+    '<h2 style="' + h2s + '">Timeline: What to Watch</h2>' +
+    '<div style="margin:24px 0 32px">' +
+    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px"><div style="min-width:90px;font-size:14px;font-weight:700;color:var(--z-primary)">Q2 2026</div><div style="' + ps + ';margin:0">CMS publishes LEAD Model proposed rule with comment period</div></div>' +
+    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px"><div style="min-width:90px;font-size:14px;font-weight:700;color:var(--z-primary)">Q3 2026</div><div style="' + ps + ';margin:0">Final rule expected; ACO application window opens</div></div>' +
+    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px"><div style="min-width:90px;font-size:14px;font-weight:700;color:var(--z-primary)">Jan 2027</div><div style="' + ps + ';margin:0">LEAD Model performance year begins; ACO REACH sunsets</div></div>' +
+    '</div>' +
+
+    '<h2 style="' + h2s + '">Bottom Line</h2>' +
+    '<p style="' + ps + '">LEAD represents CMS\u2019s clearest signal yet: the future of Medicare belongs to accountable organizations that can demonstrate equity, quality, and efficiency simultaneously. The bar is higher. The financial stakes are larger. And the organizations that automate their way to compliance\u2014rather than staffing their way there\u2014will define the next era of value-based care.</p>' +
+    '<p style="' + ps + '">If your ACO is currently in REACH, MSSP, or evaluating risk-based models, the time to prepare is now. Not Q4.</p>' +
+    '<div style="margin:40px 0;padding:28px 32px;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:14px;text-align:center">' +
+    '<p style="font-size:18px;font-weight:600;color:#fff;margin:0 0 8px">Ready to prepare your ACO for LEAD?</p>' +
+    '<p style="font-size:14px;color:#94a3b8;margin:0 0 20px">See how Zynix AI helps ACOs meet equity, quality, and efficiency requirements with AI-powered automation.</p>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" style="text-decoration:none">Schedule a Strategy Call &rarr;</a>' +
+    '</div>' +
+
+    '</article></div></section>' +
+    renderCTA('See Zynix in Action', 'Discover how leading ACOs use AI to close gaps, reduce readmissions, and maximize shared savings under evolving CMS models.', 'Request a Demo') +
     renderFooter();
   }
 
@@ -2323,21 +2411,23 @@
     nav.innerHTML =
       '<a href="/" class="zynix-nav-logo"><img src="' + IMG.logo + '" alt="Zynix AI"><span class="zynix-nav-logo-text">zynix<span class="zynix-logo-dot">.ai</span></span></a>' +
       '<div class="zynix-nav-items">' +
-        // 1. Platform — dropdown with NAACOS promo
+        // 1. Platform — Navina-style: items left + ACCESS webinar recording right
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Platform <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-        '<div class="zynix-dropdown-panel"><div class="zynix-dropdown-panel-inner">' +
-          al('/platform','Zynix OS','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>','Platform overview') +
-          al('/company-zynixllm','ZynixLLM','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>','Healthcare language model') +
-          al('/security','Security','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>','HIPAA, SOC 2, HITRUST') +
-          al('/integrations','Integrations','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>','EHR &amp; data connectors') +
-          '<div class="zynix-dropdown-promo" style="margin-top:12px;padding:14px 16px;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:10px;text-align:center">' +
-            '<p style="margin:0 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:#F16529;font-weight:700">NAACOS 2026</p>' +
-            '<p style="margin:0 0 8px;font-size:14px;color:#fff;font-weight:600">Visit us at Booth V</p>' +
-            '<p style="margin:0 0 10px;font-size:12px;color:#94a3b8;line-height:1.4">See live demos of Zynix AI agents in action</p>' +
-            '<a href="' + CALENDLY + '" target="_blank" style="display:inline-block;padding:6px 16px;background:#F16529;color:#fff;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none">Book a Meeting &rarr;</a>' +
+        '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
+          '<div class="zynix-mega-col">' +
+            al('/platform','Zynix OS','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>','Unified healthcare operating system') +
+            al('/company-zynixllm','ZynixLLM','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>','Healthcare language model') +
+            al('/security','Security','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>','HIPAA, SOC 2, HITRUST') +
+            al('/integrations','Integrations','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>','EHR &amp; data connectors') +
+          '</div>' +
+          '<div class="zynix-nav-promo-card">' +
+            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><img src="' + IMG.logo + '" alt="Zynix AI" style="width:24px;height:24px;border-radius:4px"><span style="font-size:11px;font-weight:700;color:#F16529;text-transform:uppercase;letter-spacing:1px">Recorded Webinar</span></div>' +
+            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">Automation with Accountability: How ACOs Can Scale Patient Engagement</p>' +
+            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">Featuring Jay Chowdappa, MD &mdash; Co-Founder &amp; CEO, Zynix AI</p>' +
+            '<a href="https://library.vbcexhibithall.com/recorded-webinar-automation-with-accountability-how-acos-can-scale-patient-engagement-without-burning-out-teams/" target="_blank" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Watch on-demand</a>' +
           '</div>' +
         '</div></div></div>' +
-        // 2. Solutions — mega panel with Products + Use Cases
+        // 2. Solutions — Navina-style: Products + Use Cases left, conference promo right
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Solutions <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
         '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
           '<div class="zynix-mega-col"><h5>Products</h5>' +
@@ -2354,10 +2444,21 @@
             al('/solutions-use-case-after-hours','After-Hours &amp; Access','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>','24/7 patient triage') +
             al('/solutions-use-case-prior-auth','Prior Authorization','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>','Automate auth workflows') +
             al('/solutions-use-case-preventive-screening','Preventive Screening','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>','Proactive care outreach') +
-            '<div class="zynix-dropdown-featured"><a href="/solutions">Browse All Use Cases &rarr;</a></div>' +
+          '</div>' +
+          '<div class="zynix-nav-promo-card">' +
+            '<p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#F16529;font-weight:700">Meet Us In Person</p>' +
+            '<div style="margin:12px 0;padding:12px;background:rgba(255,255,255,0.06);border-radius:8px">' +
+              '<p style="margin:0 0 2px;font-size:14px;font-weight:600;color:#fff">NAACOS Spring 2026</p>' +
+              '<p style="margin:0;font-size:12px;color:#94a3b8">Apr 22 &ndash; 24 &middot; Booth V</p>' +
+            '</div>' +
+            '<div style="margin:0 0 14px;padding:12px;background:rgba(255,255,255,0.06);border-radius:8px">' +
+              '<p style="margin:0 0 2px;font-size:14px;font-weight:600;color:#fff">TXACOS 2026</p>' +
+              '<p style="margin:0;font-size:12px;color:#94a3b8">May 4 &ndash; 6</p>' +
+            '</div>' +
+            '<a href="' + CALENDLY + '" target="_blank" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Book a Meeting &rarr;</a>' +
           '</div>' +
         '</div></div></div>' +
-        // 3. Who We Serve — mega panel
+        // 3. Who We Serve — Navina-style: orgs left, case study spotlight right
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Who We Serve <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
         '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
           '<div class="zynix-mega-col"><h5>By Organization</h5>' +
@@ -2368,27 +2469,46 @@
             al('/who-we-serve/ascs','ASCs','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>','Surgical workflow AI') +
             al('/who-we-serve/fqhcs','FQHCs','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>','Community health AI') +
           '</div>' +
+          '<div class="zynix-nav-promo-card">' +
+            '<p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#F16529;font-weight:700">Case Study Spotlight</p>' +
+            '<p style="margin:8px 0;font-size:14px;font-weight:500;color:#fff;line-height:1.5">See real outcomes from organizations using Zynix AI</p>' +
+            '<a href="/resources-case-studies" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">View Case Studies &rarr;</a>' +
+          '</div>' +
         '</div></div></div>' +
-        // 4. Resources — narrow dropdown
+        // 4. Resources — Navina-style: links left, LEAD model article promo right
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Resources <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-        '<div class="zynix-dropdown-panel"><div class="zynix-dropdown-panel-inner">' +
-          al('/resources-case-studies','Case Studies','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>') +
-          al('/resources-blog','Blog','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>') +
-          al('/resources-webinars','Webinars &amp; Events','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>') +
-          al('/resources-faq','FAQ','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>') +
-          al('/resources-glossary','Glossary','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>') +
-          al('/resources-whitepapers','Whitepapers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>') +
-          '<div class="zynix-dropdown-featured"><a href="' + CALENDLY + '" target="_blank">Request a Demo &rarr;</a></div>' +
+        '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
+          '<div class="zynix-mega-col">' +
+            al('/resources-case-studies','Case Studies','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>','Real customer outcomes') +
+            al('/resources-blog','Blog','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>','Insights &amp; analysis') +
+            al('/resources-webinars','Webinars &amp; Events','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>','On-demand &amp; live sessions') +
+            al('/resources-faq','FAQ','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>','Common questions') +
+            al('/resources-glossary','Glossary','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>','Healthcare AI terms') +
+            al('/resources-whitepapers','Whitepapers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>','Research &amp; reports') +
+          '</div>' +
+          '<div class="zynix-nav-promo-card">' +
+            '<span style="display:inline-block;padding:3px 10px;background:rgba(241,101,41,0.15);color:#F16529;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">New Article</span>' +
+            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">CMS LEAD Model: What ACOs Need to Know About the ACO REACH Replacement</p>' +
+            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">The biggest CMS policy shift in a decade. We break down what changes and how to prepare.</p>' +
+            '<a href="/resources-blog-lead-model-cms" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Read Article &rarr;</a>' +
+          '</div>' +
         '</div></div></div>' +
-        // 5. Company — narrow dropdown
+        // 5. Company — Navina-style: links left, webinar promo right
         '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Company <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-        '<div class="zynix-dropdown-panel"><div class="zynix-dropdown-panel-inner">' +
-          al('/about','About','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>') +
-          al('/company-zynixllm','ZynixLLM','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>') +
-          al('/press','Newsroom','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>') +
-          al('/careers','Careers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>') +
-          al('/security','Security','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>') +
-          '<div class="zynix-dropdown-featured"><p>AI built for healthcare, by healthcare leaders.</p><a href="/about#team">Meet Our Leadership &rarr;</a></div>' +
+        '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
+          '<div class="zynix-mega-col">' +
+            al('/about','About Us','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>','Our mission and story') +
+            al('/company-zynixllm','Core Technology','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>','ZynixLLM &mdash; proprietary AI engine') +
+            al('/careers','Careers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>','Shape the future of healthcare') +
+            al('/press','Newsroom','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>','Press &amp; announcements') +
+            al('/security','Security','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>','HIPAA, SOC 2, HITRUST') +
+          '</div>' +
+          '<div class="zynix-nav-promo-card">' +
+            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><img src="' + IMG.logo + '" alt="Zynix AI" style="width:24px;height:24px;border-radius:4px"><span style="font-size:11px;font-weight:700;color:#F16529;text-transform:uppercase;letter-spacing:1px">Webinar</span></div>' +
+            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">Automation with Accountability: How ACOs Can Scale Patient Engagement</p>' +
+            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">Featuring Jay Chowdappa, MD &mdash; Co-Founder &amp; CEO</p>' +
+            '<a href="https://library.vbcexhibithall.com/recorded-webinar-automation-with-accountability-how-acos-can-scale-patient-engagement-without-burning-out-teams/" target="_blank" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Watch on-demand</a>' +
+          '</div>' +
         '</div></div></div>' +
       '</div>' +
       '<div class="zynix-nav-actions">' +
@@ -2448,7 +2568,12 @@
 
     // Hide ALL Webflow native navbars — inject style with !important to override any CSS
     var hideNavStyle = document.createElement('style');
-    hideNavStyle.textContent = 'section.navbar, .w-nav, [data-collapse="medium"] { display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; }';
+    hideNavStyle.textContent = 'section.navbar, .w-nav, [data-collapse="medium"] { display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; }' +
+      '.zynix-nav-promo-card { min-width: 260px; max-width: 280px; background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; justify-content: center; }' +
+      '.zynix-nav-promo-card a:hover { opacity: 0.92; transform: translateY(-1px); }' +
+      '.zynix-dropdown-featured { margin-top: 8px; padding: 8px 12px; border-top: 1px solid var(--z-border, #e5e7eb); }' +
+      '.zynix-dropdown-featured a { color: #F16529 !important; font-size: 13px; font-weight: 600; text-decoration: none; }' +
+      '.zynix-dropdown-featured a:hover { text-decoration: underline; }';
     document.head.appendChild(hideNavStyle);
     document.querySelectorAll('.w-nav, .navbar, [data-collapse="medium"], section.navbar').forEach(function(el) {
       el.style.cssText = 'display:none!important;visibility:hidden!important;height:0!important;overflow:hidden!important;';
@@ -6600,6 +6725,7 @@ function renderDataAnalyticsV7() {
     '/blog': renderBlog,
     '/resources-blog': renderBlog,
     '/resources-blog-1m-patients': renderBlog1MPatients,
+    '/resources-blog-lead-model-cms': renderBlogLeadModel,
     '/case-studies': renderCaseStudies,
     '/resources-case-studies': renderCaseStudies,
     '/resources-glossary': renderGlossary,
