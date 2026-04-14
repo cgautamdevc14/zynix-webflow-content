@@ -22,7 +22,7 @@
   });
 
   // ── Image URLs ──
-  var GH = 'https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@72e3c11/images/';
+  var GH = 'https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@7fa25db/images/';
   var GHG = GH + 'gifs/';
   var IMG = {
     // Premium AI-generated page hero images (OpenAI gpt-image-1)
