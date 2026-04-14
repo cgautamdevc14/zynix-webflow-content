@@ -2603,7 +2603,14 @@
       '.zynix-dropdown-featured a { color: #F16529 !important; font-size: 13px; font-weight: 600; text-decoration: none; }' +
       '.zynix-dropdown-featured a:hover { text-decoration: underline; }' +
       '.zynix-trust-marquee img, .zynix-trust-track img, [class*="trust-marquee"] img, [class*="trust-track"] img { filter: grayscale(100%) brightness(0.45) contrast(1.2) !important; opacity: 1 !important; }' +
-      '.zynix-trust-marquee img:hover, .zynix-trust-track img:hover, [class*="trust-marquee"] img:hover, [class*="trust-track"] img:hover { filter: grayscale(0%) brightness(1) contrast(1) !important; }';
+      '.zynix-trust-marquee img:hover, .zynix-trust-track img:hover, [class*="trust-marquee"] img:hover, [class*="trust-track"] img:hover { filter: grayscale(0%) brightness(1) contrast(1) !important; }' +
+      /* ROI slider styling — custom track + thumb */
+      '.zynix-roi-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #20449B var(--slider-pct, 50%), #e2e8f0 var(--slider-pct, 50%)); outline: none; cursor: pointer; transition: background 0.15s; }' +
+      '.zynix-roi-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #20449B; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(32,68,155,0.35); cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }' +
+      '.zynix-roi-slider::-webkit-slider-thumb:hover { transform: scale(1.15); box-shadow: 0 3px 12px rgba(32,68,155,0.5); }' +
+      '.zynix-roi-slider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: #20449B; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(32,68,155,0.35); cursor: pointer; }' +
+      '.zynix-roi-slider::-moz-range-track { height: 8px; border-radius: 4px; background: #e2e8f0; }' +
+      '.zynix-roi-slider::-moz-range-progress { height: 8px; border-radius: 4px; background: #20449B; }';
     document.head.appendChild(hideNavStyle);
     document.querySelectorAll('.w-nav, .navbar, [data-collapse="medium"], section.navbar').forEach(function(el) {
       el.style.cssText = 'display:none!important;visibility:hidden!important;height:0!important;overflow:hidden!important;';
@@ -7099,7 +7106,8 @@ function renderDataAnalyticsV7() {
       var max = parseFloat(el.max) || 100;
       var val = parseFloat(el.value);
       var pct = ((val - min) / (max - min)) * 100;
-      el.style.background = 'linear-gradient(90deg, var(--z-primary) 0%, var(--z-primary) ' + pct + '%, #e5e7eb ' + pct + '%, #e5e7eb 100%)';
+      el.style.setProperty('--slider-pct', pct + '%');
+      el.style.background = 'linear-gradient(90deg, #20449B 0%, #20449B ' + pct + '%, #e2e8f0 ' + pct + '%, #e2e8f0 100%)';
     }
 
     [lives, discharges, tcm, gaps].forEach(function(el) {
