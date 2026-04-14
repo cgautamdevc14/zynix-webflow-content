@@ -1040,6 +1040,8 @@
 
   function injectAfterNav(html) {
     var wrapper = el('div', 'zynix-injected zynix-inner-page');
+    wrapper.id = 'main-content';
+    wrapper.setAttribute('role', 'main');
     wrapper.innerHTML = html;
     var zynixNav = document.querySelector('.zynix-mega-nav');
     if (zynixNav) {
@@ -1150,6 +1152,20 @@
       '<span>&#127760; GDPR</span><span>&#128100; 1M+ Patients</span><span>&#127961; 30 States</span>' +
       '</div>' +
       '<p style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:16px">Trusted by 1M+ VBC patients across 30 states</p>' +
+      '</div></section>';
+  }
+
+  // Email capture for non-demo visitors (newsletter / content updates)
+  function renderEmailCapture() {
+    return '<section class="zynix-email-capture"><div class="zynix-container" style="max-width:720px;text-align:center;padding:48px 24px">' +
+      '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(32,68,155,0.08);color:#20449B;font-size:12px;font-weight:600;letter-spacing:0.08em;padding:6px 14px;border-radius:20px;margin-bottom:16px">STAY INFORMED</div>' +
+      '<h3 style="font-size:24px;font-weight:700;color:#0f172a;margin:0 0 8px">Get VBC Intelligence, Weekly</h3>' +
+      '<p style="font-size:15px;color:#64748b;margin:0 0 24px;max-width:520px;margin-left:auto;margin-right:auto">AI insights, risk adjustment strategies, and care coordination best practices for value-based care leaders.</p>' +
+      '<form class="zynix-capture-form" style="display:flex;gap:10px;max-width:480px;margin:0 auto" onsubmit="return false">' +
+      '<input type="email" class="zynix-capture-email" placeholder="Enter your work email" required style="flex:1;padding:12px 16px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px;outline:none;transition:border-color 0.2s;background:#fff;color:#0f172a">' +
+      '<button type="submit" class="zynix-capture-btn" style="padding:12px 24px;background:#20449B;color:#fff;font-size:14px;font-weight:600;border:none;border-radius:8px;cursor:pointer;white-space:nowrap;transition:background 0.2s">Subscribe</button>' +
+      '</form>' +
+      '<p style="font-size:11px;color:#94a3b8;margin-top:12px">No spam. Unsubscribe anytime. Read our <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">Privacy Policy</a>.</p>' +
       '</div></section>';
   }
 
@@ -2683,7 +2699,12 @@
       '.zynix-roi-slider::-webkit-slider-thumb:hover { transform: scale(1.15); box-shadow: 0 3px 12px rgba(32,68,155,0.5); }' +
       '.zynix-roi-slider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: #20449B; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(32,68,155,0.35); cursor: pointer; }' +
       '.zynix-roi-slider::-moz-range-track { height: 8px; border-radius: 4px; background: #e2e8f0; }' +
-      '.zynix-roi-slider::-moz-range-progress { height: 8px; border-radius: 4px; background: #20449B; }';
+      '.zynix-roi-slider::-moz-range-progress { height: 8px; border-radius: 4px; background: #20449B; }' +
+      /* Email capture section */
+      '.zynix-email-capture { background: linear-gradient(180deg, #f8fafc 0%, #fff 100%); border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }' +
+      '.zynix-capture-email:focus { border-color: #20449B !important; box-shadow: 0 0 0 3px rgba(32,68,155,0.12) !important; }' +
+      '.zynix-capture-btn:hover { background: #1a3880 !important; }' +
+      '@media (max-width: 600px) { .zynix-capture-form { flex-direction: column !important; } .zynix-capture-btn { width: 100%; } }';
     document.head.appendChild(hideNavStyle);
     document.querySelectorAll('.w-nav, .navbar, [data-collapse="medium"], section.navbar').forEach(function(el) {
       el.style.cssText = 'display:none!important;visibility:hidden!important;height:0!important;overflow:hidden!important;';
@@ -2691,8 +2712,11 @@
 
     // Hamburger toggle
     var burger = nav.querySelector('.zynix-nav-hamburger');
+    burger.setAttribute('aria-expanded', 'false');
     burger.addEventListener('click', function() {
       burger.classList.toggle('open');
+      var isOpen = burger.classList.contains('open');
+      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       // Always set mobile menu top to exactly below the nav bar
       var navBottom = nav.getBoundingClientRect().bottom;
       mobile.style.top = navBottom + 'px';
@@ -4103,13 +4127,14 @@
     '/products-ai-agents-zynfax': '/agents/operational-efficiency',
     '/products-ai-agents-zynauth': '/agents/operational-efficiency',
 
-    // Who We Serve (old URLs) → Solutions by Org Type (canonical Webflow pages)
-    '/who-we-serve/health-systems': '/solutions-health-systems',
-    '/who-we-serve/acos-msos': '/solutions-acos',
-    '/who-we-serve/health-plans': '/solutions-health-plans',
-    '/who-we-serve/independent-group-practices': '/solutions-independent-practices',
-    '/who-we-serve/ascs': '/solutions-ascs',
-    '/who-we-serve/fqhcs': '/solutions-fqhcs',
+    // Who We Serve → V7 audience pages exist at these paths (routes 6928-6933)
+    // Do NOT redirect — let the V7 renderWhoWeServe* functions handle them
+    // '/who-we-serve/health-systems': '/solutions-health-systems',
+    // '/who-we-serve/acos-msos': '/solutions-acos',
+    // '/who-we-serve/health-plans': '/solutions-health-plans',
+    // '/who-we-serve/independent-group-practices': '/solutions-independent-practices',
+    // '/who-we-serve/ascs': '/solutions-ascs',
+    // '/who-we-serve/fqhcs': '/solutions-fqhcs',
 
     // Slash-based solution URLs → canonical dash-based (catches broken nav links)
     '/solutions/health-systems': '/solutions-health-systems',
@@ -9012,19 +9037,18 @@ function renderDataAnalyticsV7() {
       // Build page content, inserting cross-links BEFORE CTA/Footer
       var pageContent = routes[path]();
       var crossLinks = renderCrossLinks(path);
-      if (crossLinks) {
-        // Insert cross-links before the CTA section (which precedes footer)
-        var ctaPos = pageContent.indexOf('<section class="zynix-cta-section"');
-        if (ctaPos > -1) {
-          pageContent = pageContent.substring(0, ctaPos) + crossLinks + pageContent.substring(ctaPos);
+      // Insert email capture + cross-links before the CTA section
+      var emailCapture = renderEmailCapture();
+      var extras = (crossLinks || '') + emailCapture;
+      var ctaPos = pageContent.indexOf('<section class="zynix-cta-section"');
+      if (ctaPos > -1) {
+        pageContent = pageContent.substring(0, ctaPos) + extras + pageContent.substring(ctaPos);
+      } else {
+        var footerPos = pageContent.indexOf('<footer class="zynix-footer"');
+        if (footerPos > -1) {
+          pageContent = pageContent.substring(0, footerPos) + extras + pageContent.substring(footerPos);
         } else {
-          // Fallback: insert before footer
-          var footerPos = pageContent.indexOf('<footer class="zynix-footer"');
-          if (footerPos > -1) {
-            pageContent = pageContent.substring(0, footerPos) + crossLinks + pageContent.substring(footerPos);
-          } else {
-            pageContent += crossLinks;
-          }
+          pageContent += extras;
         }
       }
       injectAfterNav(renderBreadcrumb(path) + pageContent);
@@ -9032,6 +9056,25 @@ function renderDataAnalyticsV7() {
       animateCounters();
       initROICalculator();
       initAnalytics();
+      // Email capture form handler
+      document.querySelectorAll('.zynix-capture-form').forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var email = form.querySelector('.zynix-capture-email');
+          if (!email || !email.value) return;
+          var btn = form.querySelector('.zynix-capture-btn');
+          btn.textContent = 'Subscribing...';
+          btn.disabled = true;
+          // Store locally + fire analytics event
+          var subs = JSON.parse(localStorage.getItem('zynix_email_subs') || '[]');
+          subs.push({ email: email.value, ts: Date.now(), page: window.location.pathname });
+          localStorage.setItem('zynix_email_subs', JSON.stringify(subs));
+          if (window.gtag) window.gtag('event', 'newsletter_signup', { email_domain: email.value.split('@')[1] });
+          setTimeout(function() {
+            form.innerHTML = '<p style="color:#20449B;font-weight:600;font-size:15px">&#10003; You\'re subscribed! Check your inbox for a confirmation.</p>';
+          }, 600);
+        });
+      });
       // V2 Interactive Architecture Component (zPick)
       (function(){
         var _c=1,_e=0,_DUR=5000,_T=80,_iv=null,_paused=false;
