@@ -684,10 +684,19 @@
     setMeta('property','og:title', seo.title);
     setMeta('property','og:description', seo.desc);
     setMeta('property','og:image', seo.img || IMG.hero);
+    setMeta('property','og:image:width', '1200');
+    setMeta('property','og:image:height', '630');
+    setMeta('property','og:image:type', 'image/png');
     setMeta('property','og:url', canonical);
     setMeta('property','og:type', seo.schema === 'Article' ? 'article' : 'website');
     setMeta('property','og:site_name','Zynix AI');
     setMeta('property','og:locale','en_US');
+    // Article-specific OG meta
+    if (seo.schema === 'Article') {
+      setMeta('property','article:published_time', seo.datePublished || '2026-01-15');
+      setMeta('property','article:author', 'Zynix AI');
+      setMeta('property','article:section', 'Healthcare AI');
+    }
     setMeta('name','twitter:card','summary_large_image');
     setMeta('name','twitter:site','@zynixai_');
     setMeta('name','twitter:creator','@zynixai_');
@@ -697,9 +706,18 @@
     setMeta('name','twitter:image:alt', seo.title);
     setMeta('name','author','Zynix AI');
     setMeta('name','copyright','Zynix Inc');
+    // Canonical URL
     var link = document.querySelector('link[rel="canonical"]');
     if (!link) { link = document.createElement('link'); link.rel = 'canonical'; document.head.appendChild(link); }
     link.href = canonical;
+    // Language / hreflang (English-only site)
+    document.documentElement.lang = 'en';
+    var hreflang = document.querySelector('link[hreflang="en"]');
+    if (!hreflang) { hreflang = document.createElement('link'); hreflang.rel = 'alternate'; hreflang.hreflang = 'en'; document.head.appendChild(hreflang); }
+    hreflang.href = canonical;
+    var xDefault = document.querySelector('link[hreflang="x-default"]');
+    if (!xDefault) { xDefault = document.createElement('link'); xDefault.rel = 'alternate'; xDefault.hreflang = 'x-default'; document.head.appendChild(xDefault); }
+    xDefault.href = canonical;
     // Favicon
     var fi = document.querySelector('link[rel="icon"]');
     if (!fi) { fi = document.createElement('link'); fi.rel = 'icon'; fi.type = 'image/png'; fi.sizes = '32x32'; document.head.appendChild(fi); }
