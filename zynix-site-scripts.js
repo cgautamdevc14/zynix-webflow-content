@@ -2602,8 +2602,8 @@
       '.zynix-dropdown-featured { margin-top: 8px; padding: 8px 12px; border-top: 1px solid var(--z-border, #e5e7eb); }' +
       '.zynix-dropdown-featured a { color: #F16529 !important; font-size: 13px; font-weight: 600; text-decoration: none; }' +
       '.zynix-dropdown-featured a:hover { text-decoration: underline; }' +
-      '.zynix-trust-marquee img, .zynix-trust-track img, [class*="trust-marquee"] img, [class*="trust-track"] img { filter: grayscale(100%) opacity(0.55) !important; opacity: 1 !important; }' +
-      '.zynix-trust-marquee img:hover, .zynix-trust-track img:hover, [class*="trust-marquee"] img:hover, [class*="trust-track"] img:hover { filter: grayscale(0%) opacity(1) !important; }';
+      '.zynix-trust-marquee img, .zynix-trust-track img, [class*="trust-marquee"] img, [class*="trust-track"] img { filter: grayscale(100%) brightness(0.45) contrast(1.2) !important; opacity: 1 !important; }' +
+      '.zynix-trust-marquee img:hover, .zynix-trust-track img:hover, [class*="trust-marquee"] img:hover, [class*="trust-track"] img:hover { filter: grayscale(0%) brightness(1) contrast(1) !important; }';
     document.head.appendChild(hideNavStyle);
     document.querySelectorAll('.w-nav, .navbar, [data-collapse="medium"], section.navbar').forEach(function(el) {
       el.style.cssText = 'display:none!important;visibility:hidden!important;height:0!important;overflow:hidden!important;';
@@ -3413,7 +3413,7 @@
       { name: 'Innovacare Health', logo: GH + 'innovacare-health.svg' },
       { name: 'CLSCFL', logo: GH + 'clscfl.png' }
     ];
-    var logoStyle = 'height:52px;width:auto;max-width:180px;filter:grayscale(100%) opacity(0.55);transition:filter 0.3s,opacity 0.3s;object-fit:contain';
+    var logoStyle = 'height:52px;width:auto;max-width:180px;filter:grayscale(100%) brightness(0.45) contrast(1.2);transition:filter 0.3s;object-fit:contain';
     var trustSpans = '';
     for (var ti = 0; ti < 2; ti++) {
       for (var tj = 0; tj < trustLogos.length; tj++) {
