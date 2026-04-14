@@ -8,6 +8,19 @@
 
   var CALENDLY = 'https://calendly.com/david-zynix-ai-calendar/30min';
 
+  // ── Performance: preconnect to critical origins ──
+  ['https://cdn.jsdelivr.net', 'https://calendly.com', 'https://www.googletagmanager.com'].forEach(function(origin) {
+    var link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = origin;
+    link.crossOrigin = 'anonymous';
+    document.head.appendChild(link);
+    var dns = document.createElement('link');
+    dns.rel = 'dns-prefetch';
+    dns.href = origin;
+    document.head.appendChild(dns);
+  });
+
   // ── Image URLs ──
   var GH = 'https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@87cc4ca/images/';
   var GHG = GH + 'gifs/';
@@ -392,12 +405,12 @@
     '/solutions-fqhcs': VIS_PLATFORM,
     '/solutions-independent-practices': VIS_AGENTS,
     '/solutions-ascs': VIS_PLATFORM,
-    '/solutions-use-case-tcm': VIS_CARE,
-    '/solutions-use-case-gap-closure': VIS_ANALYTICS,
-    '/solutions-use-case-after-hours': VIS_AGENTS,
-    '/solutions-use-case-prior-auth': VIS_PLATFORM,
-    '/solutions-use-case-preventive-screening': VIS_PLATFORM,
-    '/solutions-use-case-readmission-prevention': VIS_CARE,
+    '/use-cases/post-discharge-follow-up': VIS_CARE,
+    '/use-cases/hcc-gap-closure-health-system-aco': VIS_ANALYTICS,
+    '/use-cases/after-hours-triage-multi-site': VIS_AGENTS,
+    '/use-cases/prior-auth-high-volume-specialty': VIS_PLATFORM,
+    '/use-cases/preventive-screening-gap-fqhc': VIS_PLATFORM,
+    '/use-cases/post-discharge-tcm-readmission': VIS_CARE,
     '/company-about': VIS_PLATFORM,
     '/company-trust-center': VIS_PLATFORM,
     '/compare/zynix-vs-point-solutions': VIS_PLATFORM,
@@ -433,12 +446,12 @@
     '/solutions-fqhcs': 'FQHCs',
     '/solutions-independent-practices': 'Independent Practices',
     '/solutions-ascs': 'ASCs',
-    '/solutions-use-case-tcm': 'Transitional Care (TCM)',
-    '/solutions-use-case-gap-closure': 'Gap Closure (HCC/HEDIS)',
-    '/solutions-use-case-after-hours': 'After-Hours & Access',
-    '/solutions-use-case-prior-auth': 'Prior Authorization',
-    '/solutions-use-case-preventive-screening': 'Preventive Screening',
-    '/solutions-use-case-readmission-prevention': 'Readmission Prevention',
+    '/use-cases/post-discharge-follow-up': 'Transitional Care (TCM)',
+    '/use-cases/hcc-gap-closure-health-system-aco': 'Gap Closure (HCC/HEDIS)',
+    '/use-cases/after-hours-triage-multi-site': 'After-Hours & Access',
+    '/use-cases/prior-auth-high-volume-specialty': 'Prior Authorization',
+    '/use-cases/preventive-screening-gap-fqhc': 'Preventive Screening',
+    '/use-cases/post-discharge-tcm-readmission': 'Readmission Prevention',
     '/integrations': 'Integrations',
     '/case-studies': 'Case Studies',
     '/case-studies/palm-beach-aco': 'Palm Beach ACO',
@@ -457,35 +470,55 @@
   };
 
   var CROSS_LINKS = {
-    '/platform': { useCases: ['/solutions-use-case-tcm','/solutions-use-case-gap-closure','/solutions-use-case-readmission-prevention'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/products-data-platform','/products-analytics','/agents','/care-plans'] },
-    '/products-data-platform': { useCases: ['/solutions-use-case-tcm','/solutions-use-case-gap-closure'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans','/solutions-fqhcs'], related: ['/products-analytics','/platform'] },
-    '/products-analytics': { useCases: ['/solutions-use-case-gap-closure','/solutions-use-case-readmission-prevention','/solutions-use-case-preventive-screening'], solutions: ['/solutions-acos','/solutions-health-plans','/solutions-health-systems'], related: ['/products-data-platform','/care-plans'] },
-    '/agents': { useCases: ['/solutions-use-case-tcm','/solutions-use-case-after-hours','/solutions-use-case-gap-closure','/solutions-use-case-prior-auth'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-independent-practices','/solutions-fqhcs'], related: ['/platform','/care-plans','/zynscribe'] },
-    '/zynscribe': { useCases: ['/solutions-use-case-tcm','/solutions-use-case-gap-closure'], solutions: ['/solutions-health-systems','/solutions-independent-practices','/solutions-acos'], related: ['/agents','/care-plans'] },
-    '/care-plans': { useCases: ['/solutions-use-case-tcm','/solutions-use-case-gap-closure','/solutions-use-case-readmission-prevention'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/agents','/products-analytics','/platform'] },
-    '/company-zynixllm': { useCases: ['/solutions-use-case-tcm','/solutions-use-case-gap-closure','/solutions-use-case-after-hours'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/platform','/products-data-platform','/agents'] },
-    '/products-ai-agents-zynafterhours': { useCases: ['/solutions-use-case-after-hours','/solutions-use-case-readmission-prevention'], solutions: ['/solutions-independent-practices','/solutions-fqhcs','/solutions-health-systems'], related: ['/products-ai-agents-zynschedule','/products-ai-agents-zynreminder'] },
-    '/products-ai-agents-zynschedule': { useCases: ['/solutions-use-case-tcm','/solutions-use-case-after-hours','/solutions-use-case-preventive-screening'], solutions: ['/solutions-independent-practices','/solutions-acos','/solutions-ascs'], related: ['/products-ai-agents-zynreminder','/products-ai-agents-zynafterhours'] },
-    '/products-ai-agents-post-discharge': { useCases: ['/solutions-use-case-tcm','/solutions-use-case-readmission-prevention'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/products-ai-agents-med-rec','/products-ai-agents-zynschedule','/products-ai-agents-zynreminder'] },
-    '/products-ai-agents-med-rec': { useCases: ['/solutions-use-case-tcm','/solutions-use-case-readmission-prevention'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/products-ai-agents-post-discharge','/products-ai-agents-zynreminder'] },
-    '/products-ai-agents-zynreminder': { useCases: ['/solutions-use-case-preventive-screening','/solutions-use-case-gap-closure','/solutions-use-case-after-hours'], solutions: ['/solutions-independent-practices','/solutions-acos','/solutions-fqhcs'], related: ['/products-ai-agents-zynschedule','/products-ai-agents-zynafterhours'] },
-    '/products-ai-agents-zynfax': { useCases: ['/solutions-use-case-prior-auth'], solutions: ['/solutions-health-systems','/solutions-ascs'], related: ['/products-ai-agents-zynauth'] },
-    '/products-ai-agents-zynauth': { useCases: ['/solutions-use-case-prior-auth'], solutions: ['/solutions-ascs','/solutions-health-systems','/solutions-independent-practices'], related: ['/products-ai-agents-zynfax','/products-ai-agents-zynschedule'] },
-    '/solutions-acos': { products: ['/platform','/products-data-platform','/products-analytics','/agents','/care-plans'], useCases: ['/solutions-use-case-tcm','/solutions-use-case-gap-closure','/solutions-use-case-readmission-prevention','/solutions-use-case-preventive-screening'], related: ['/solutions-health-systems','/solutions-health-plans'] },
-    '/solutions-health-systems': { products: ['/platform','/zynscribe','/products-ai-agents-post-discharge','/products-ai-agents-med-rec'], useCases: ['/solutions-use-case-tcm','/solutions-use-case-readmission-prevention','/solutions-use-case-prior-auth'], related: ['/solutions-acos','/solutions-ascs'] },
-    '/solutions-health-plans': { products: ['/products-analytics','/care-plans','/agents'], useCases: ['/solutions-use-case-gap-closure','/solutions-use-case-preventive-screening'], related: ['/solutions-acos'] },
-    '/solutions-fqhcs': { products: ['/products-ai-agents-zynafterhours','/products-ai-agents-zynschedule','/products-ai-agents-zynreminder','/products-analytics'], useCases: ['/solutions-use-case-after-hours','/solutions-use-case-preventive-screening','/solutions-use-case-gap-closure'], related: ['/solutions-independent-practices'] },
-    '/solutions-independent-practices': { products: ['/products-ai-agents-zynreminder','/products-ai-agents-zynafterhours','/products-ai-agents-zynschedule','/zynscribe'], useCases: ['/solutions-use-case-after-hours','/solutions-use-case-gap-closure'], related: ['/solutions-fqhcs'] },
-    '/solutions-ascs': { products: ['/products-ai-agents-zynauth','/products-ai-agents-zynfax','/products-ai-agents-zynschedule'], useCases: ['/solutions-use-case-prior-auth'], related: ['/solutions-health-systems'] },
-    '/solutions-use-case-tcm': { products: ['/products-ai-agents-post-discharge','/products-ai-agents-zynschedule','/products-ai-agents-med-rec','/zynscribe','/products-data-platform'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/solutions-use-case-readmission-prevention','/solutions-use-case-gap-closure'] },
-    '/solutions-use-case-gap-closure': { products: ['/products-analytics','/products-ai-agents-zynreminder','/products-ai-agents-zynschedule','/care-plans'], solutions: ['/solutions-acos','/solutions-health-plans'], related: ['/solutions-use-case-preventive-screening','/solutions-use-case-tcm'] },
-    '/solutions-use-case-after-hours': { products: ['/products-ai-agents-zynafterhours','/products-ai-agents-zynschedule','/products-ai-agents-zynreminder'], solutions: ['/solutions-independent-practices','/solutions-fqhcs'], related: ['/solutions-use-case-readmission-prevention'] },
-    '/solutions-use-case-prior-auth': { products: ['/products-ai-agents-zynauth','/products-ai-agents-zynfax','/products-ai-agents-zynschedule'], solutions: ['/solutions-ascs','/solutions-health-systems'], related: ['/solutions-use-case-gap-closure'] },
-    '/solutions-use-case-preventive-screening': { products: ['/products-analytics','/products-ai-agents-zynreminder','/products-ai-agents-zynschedule'], solutions: ['/solutions-fqhcs','/solutions-acos','/solutions-health-plans'], related: ['/solutions-use-case-gap-closure'] },
-    '/solutions-use-case-readmission-prevention': { products: ['/products-ai-agents-post-discharge','/products-ai-agents-med-rec','/products-ai-agents-zynafterhours','/products-ai-agents-zynschedule'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/solutions-use-case-tcm','/solutions-use-case-after-hours'] },
+    '/platform': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/post-discharge-tcm-readmission'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/products-data-platform','/products-analytics','/agents','/care-plans'] },
+    '/products-data-platform': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/hcc-gap-closure-health-system-aco'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans','/solutions-fqhcs'], related: ['/products-analytics','/platform'] },
+    '/products-analytics': { useCases: ['/use-cases/hcc-gap-closure-health-system-aco','/use-cases/post-discharge-tcm-readmission','/use-cases/preventive-screening-gap-fqhc'], solutions: ['/solutions-acos','/solutions-health-plans','/solutions-health-systems'], related: ['/products-data-platform','/care-plans'] },
+    '/agents': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/after-hours-triage-multi-site','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/prior-auth-high-volume-specialty'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-independent-practices','/solutions-fqhcs'], related: ['/platform','/care-plans','/zynscribe'] },
+    '/zynscribe': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/hcc-gap-closure-health-system-aco'], solutions: ['/solutions-health-systems','/solutions-independent-practices','/solutions-acos'], related: ['/agents','/care-plans'] },
+    '/care-plans': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/post-discharge-tcm-readmission'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/agents','/products-analytics','/platform'] },
+    '/company-zynixllm': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/after-hours-triage-multi-site'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/platform','/products-data-platform','/agents'] },
+    '/products-ai-agents-zynafterhours': { useCases: ['/use-cases/after-hours-triage-multi-site','/use-cases/post-discharge-tcm-readmission'], solutions: ['/solutions-independent-practices','/solutions-fqhcs','/solutions-health-systems'], related: ['/products-ai-agents-zynschedule','/products-ai-agents-zynreminder'] },
+    '/products-ai-agents-zynschedule': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/after-hours-triage-multi-site','/use-cases/preventive-screening-gap-fqhc'], solutions: ['/solutions-independent-practices','/solutions-acos','/solutions-ascs'], related: ['/products-ai-agents-zynreminder','/products-ai-agents-zynafterhours'] },
+    '/products-ai-agents-post-discharge': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/post-discharge-tcm-readmission'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/products-ai-agents-med-rec','/products-ai-agents-zynschedule','/products-ai-agents-zynreminder'] },
+    '/products-ai-agents-med-rec': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/post-discharge-tcm-readmission'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/products-ai-agents-post-discharge','/products-ai-agents-zynreminder'] },
+    '/products-ai-agents-zynreminder': { useCases: ['/use-cases/preventive-screening-gap-fqhc','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/after-hours-triage-multi-site'], solutions: ['/solutions-independent-practices','/solutions-acos','/solutions-fqhcs'], related: ['/products-ai-agents-zynschedule','/products-ai-agents-zynafterhours'] },
+    '/products-ai-agents-zynfax': { useCases: ['/use-cases/prior-auth-high-volume-specialty'], solutions: ['/solutions-health-systems','/solutions-ascs'], related: ['/products-ai-agents-zynauth'] },
+    '/products-ai-agents-zynauth': { useCases: ['/use-cases/prior-auth-high-volume-specialty'], solutions: ['/solutions-ascs','/solutions-health-systems','/solutions-independent-practices'], related: ['/products-ai-agents-zynfax','/products-ai-agents-zynschedule'] },
+    '/solutions-acos': { products: ['/platform','/products-data-platform','/products-analytics','/agents','/care-plans'], useCases: ['/use-cases/post-discharge-follow-up','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/post-discharge-tcm-readmission','/use-cases/preventive-screening-gap-fqhc'], related: ['/solutions-health-systems','/solutions-health-plans'] },
+    '/solutions-health-systems': { products: ['/platform','/zynscribe','/products-ai-agents-post-discharge','/products-ai-agents-med-rec'], useCases: ['/use-cases/post-discharge-follow-up','/use-cases/post-discharge-tcm-readmission','/use-cases/prior-auth-high-volume-specialty'], related: ['/solutions-acos','/solutions-ascs'] },
+    '/solutions-health-plans': { products: ['/products-analytics','/care-plans','/agents'], useCases: ['/use-cases/hcc-gap-closure-health-system-aco','/use-cases/preventive-screening-gap-fqhc'], related: ['/solutions-acos'] },
+    '/solutions-fqhcs': { products: ['/products-ai-agents-zynafterhours','/products-ai-agents-zynschedule','/products-ai-agents-zynreminder','/products-analytics'], useCases: ['/use-cases/after-hours-triage-multi-site','/use-cases/preventive-screening-gap-fqhc','/use-cases/hcc-gap-closure-health-system-aco'], related: ['/solutions-independent-practices'] },
+    '/solutions-independent-practices': { products: ['/products-ai-agents-zynreminder','/products-ai-agents-zynafterhours','/products-ai-agents-zynschedule','/zynscribe'], useCases: ['/use-cases/after-hours-triage-multi-site','/use-cases/hcc-gap-closure-health-system-aco'], related: ['/solutions-fqhcs'] },
+    '/solutions-ascs': { products: ['/products-ai-agents-zynauth','/products-ai-agents-zynfax','/products-ai-agents-zynschedule'], useCases: ['/use-cases/prior-auth-high-volume-specialty'], related: ['/solutions-health-systems'] },
+    '/use-cases/post-discharge-follow-up': { products: ['/products-ai-agents-post-discharge','/products-ai-agents-zynschedule','/products-ai-agents-med-rec','/zynscribe','/products-data-platform'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/use-cases/post-discharge-tcm-readmission','/use-cases/hcc-gap-closure-health-system-aco'] },
+    '/use-cases/hcc-gap-closure-health-system-aco': { products: ['/products-analytics','/products-ai-agents-zynreminder','/products-ai-agents-zynschedule','/care-plans'], solutions: ['/solutions-acos','/solutions-health-plans'], related: ['/use-cases/preventive-screening-gap-fqhc','/use-cases/post-discharge-follow-up'] },
+    '/use-cases/after-hours-triage-multi-site': { products: ['/products-ai-agents-zynafterhours','/products-ai-agents-zynschedule','/products-ai-agents-zynreminder'], solutions: ['/solutions-independent-practices','/solutions-fqhcs'], related: ['/use-cases/post-discharge-tcm-readmission'] },
+    '/use-cases/prior-auth-high-volume-specialty': { products: ['/products-ai-agents-zynauth','/products-ai-agents-zynfax','/products-ai-agents-zynschedule'], solutions: ['/solutions-ascs','/solutions-health-systems'], related: ['/use-cases/hcc-gap-closure-health-system-aco'] },
+    '/use-cases/preventive-screening-gap-fqhc': { products: ['/products-analytics','/products-ai-agents-zynreminder','/products-ai-agents-zynschedule'], solutions: ['/solutions-fqhcs','/solutions-acos','/solutions-health-plans'], related: ['/use-cases/hcc-gap-closure-health-system-aco'] },
+    '/use-cases/post-discharge-tcm-readmission': { products: ['/products-ai-agents-post-discharge','/products-ai-agents-med-rec','/products-ai-agents-zynafterhours','/products-ai-agents-zynschedule'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/use-cases/post-discharge-follow-up','/use-cases/after-hours-triage-multi-site'] },
     '/solutions': { solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans','/solutions-fqhcs'], related: ['/platform','/agents','/zynscribe','/care-plans'] },
-    '/zynix-data-analytics': { useCases: ['/solutions-use-case-gap-closure','/solutions-use-case-readmission-prevention','/solutions-use-case-preventive-screening'], solutions: ['/solutions-acos','/solutions-health-plans','/solutions-health-systems'], related: ['/products-analytics','/platform','/care-plans'] },
-    '/zynix-ai-agents': { useCases: ['/solutions-use-case-tcm','/solutions-use-case-after-hours','/solutions-use-case-gap-closure','/solutions-use-case-prior-auth'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-independent-practices','/solutions-fqhcs'], related: ['/platform','/care-plans','/zynscribe'] }
+    '/zynix-data-analytics': { useCases: ['/use-cases/hcc-gap-closure-health-system-aco','/use-cases/post-discharge-tcm-readmission','/use-cases/preventive-screening-gap-fqhc'], solutions: ['/solutions-acos','/solutions-health-plans','/solutions-health-systems'], related: ['/products-analytics','/platform','/care-plans'] },
+    '/zynix-ai-agents': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/after-hours-triage-multi-site','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/prior-auth-high-volume-specialty'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-independent-practices','/solutions-fqhcs'], related: ['/platform','/care-plans','/zynscribe'] },
+    // Blog cross-links — group by topic cluster
+    '/blog/what-is-value-based-care-ai': { related: ['/blog/vbc-analytics-ai-driven','/blog/tools-driving-value-based-healthcare','/platform','/use-cases/hcc-gap-closure-health-system-aco'] },
+    '/blog/how-ai-closes-care-gaps': { related: ['/blog/hcc-risk-adjustment-year-round','/blog/aco-year-end-gap-closure','/agents','/use-cases/hcc-gap-closure-health-system-aco'] },
+    '/blog/ai-agents-vs-chatbots-healthcare': { related: ['/blog/autonomous-ai-agents-healthcare-automation','/blog/essential-ai-tools-medical-professionals','/agents'] },
+    '/blog/prior-auth-delays-cost-fix': { related: ['/blog/prior-auth-bottlenecks-ai-automation','/blog/eligibility-verification-automation','/use-cases/prior-auth-high-volume-specialty'] },
+    '/blog/hcc-risk-adjustment-year-round': { related: ['/blog/hcc-risk-adjustment-cms-changes','/blog/how-ai-closes-care-gaps','/use-cases/hcc-gap-closure-health-system-aco'] },
+    '/blog/ai-medical-scribes-rollout': { related: ['/blog/ai-medical-scribes-physician-burnout','/blog/documentation-crisis-physician-burnout','/zynscribe'] },
+    '/blog/rising-risk-patients-ai': { related: ['/blog/predictive-analytics-population-health','/blog/strategies-coordinating-patient-care','/care-plans'] },
+    '/blog/reducing-no-shows-ai-scheduling': { related: ['/blog/innovative-patient-recovery-satisfaction','/use-cases/after-hours-triage-multi-site','/agents'] },
+    '/blog/ehr-not-broken-never-built-to-think': { related: ['/blog/ai-breakthroughs-medicine','/blog/ai-transforming-medical-field','/platform'] },
+    '/blog/generative-ai-applications-healthcare': { related: ['/blog/generative-ai-in-healthcare','/blog/generative-ai-trust-safety-healthcare','/platform'] },
+    '/blog/prior-auth-bottlenecks-ai-automation': { related: ['/blog/prior-auth-delays-cost-fix','/blog/eligibility-verification-automation','/use-cases/prior-auth-high-volume-specialty'] },
+    '/blog/hcc-risk-adjustment-cms-changes': { related: ['/blog/hcc-risk-adjustment-year-round','/blog/aco-year-end-gap-closure','/use-cases/hcc-gap-closure-health-system-aco'] },
+    '/blog/aco-year-end-gap-closure': { related: ['/blog/hcc-risk-adjustment-year-round','/blog/how-ai-closes-care-gaps','/solutions-acos'] },
+    '/blog/generative-ai-in-healthcare': { related: ['/blog/generative-ai-applications-healthcare','/blog/generative-ai-trust-safety-healthcare','/platform'] },
+    '/blog/autonomous-ai-agents-healthcare-automation': { related: ['/blog/ai-agents-vs-chatbots-healthcare','/blog/essential-ai-tools-medical-professionals','/agents'] },
+    '/blog/ai-medical-scribes-physician-burnout': { related: ['/blog/ai-medical-scribes-rollout','/blog/documentation-crisis-physician-burnout','/zynscribe'] },
+    '/blog/documentation-crisis-physician-burnout': { related: ['/blog/ai-medical-scribes-physician-burnout','/blog/ai-medical-scribes-rollout','/zynscribe'] },
+    '/blog/why-tcm-fails-real-workflows': { related: ['/blog/aco-30-day-post-discharge-program','/use-cases/post-discharge-follow-up','/use-cases/post-discharge-tcm-readmission'] },
+    '/blog/aco-30-day-post-discharge-program': { related: ['/blog/why-tcm-fails-real-workflows','/blog/innovative-patient-recovery-satisfaction','/use-cases/post-discharge-follow-up'] }
   };
 
   // ── SEO Data ──
@@ -517,12 +550,12 @@
     '/solutions-fqhcs': { title: 'AI for FQHCs | Zynix AI', desc: 'Empower community health centers with multilingual AI outreach in 15+ languages, quality measure tracking, and automated care management.', img: IMG.patients, schema: 'Product' },
     '/solutions-independent-practices': { title: 'AI for Medical Practices | Zynix AI', desc: 'Automate your practice with AI-powered after-hours coverage, scheduling, and documentation. Reduce no-shows 40% and deploy in weeks.', img: IMG.doctor, schema: 'Product' },
     '/solutions-ascs': { title: 'AI for Ambulatory Surgery Centers | Zynix AI', desc: 'Accelerate prior auth approvals 60%, reduce surgical cancellations, and streamline pre-op and post-op coordination for ASCs.', img: IMG.enterprise, schema: 'Product' },
-    '/solutions-use-case-tcm': { title: 'TCM Automation | Zynix AI', desc: 'Automate transitional care management AI workflows and achieve 85%+ contact rates versus the 30-40% industry average. CMS-reimbursable and fully automated.', img: IMG.care, schema: 'Product' },
-    '/solutions-use-case-gap-closure': { title: 'Care Gap Closure AI | Zynix AI', desc: 'Close HCC, RAF, and quality gaps 40% faster with AI-prioritized worklists and automated patient outreach. Deployed across ACOs and health plans.', img: IMG.analytics, schema: 'Product' },
-    '/solutions-use-case-after-hours': { title: 'After-Hours Patient Care AI | Zynix AI', desc: 'Deliver 24/7 nurse-level triage with AI call handling that achieves 97.3% accuracy and diverts 20-30% of ER visits. Serving practices and FQHCs nationwide.', img: IMG.doctor, schema: 'Product' },
-    '/solutions-use-case-prior-auth': { title: 'Prior Auth AI Workflow | Zynix AI', desc: 'Slash prior authorization turnaround 60% with AI-powered submission, tracking, and approval workflows. Trusted by ASCs and health systems.', img: IMG.enterprise, schema: 'Product' },
-    '/solutions-use-case-preventive-screening': { title: 'Preventive Screening AI | Zynix AI', desc: 'Increase HEDIS quality measure completion with AI-driven preventive screening outreach and automated scheduling. Deployed by FQHCs, ACOs, and health plans.', img: IMG.patients, schema: 'Product' },
-    '/solutions-use-case-readmission-prevention': { title: 'Hospital Readmission Prevention AI | Zynix AI', desc: 'Reduce avoidable hospital readmissions 25% with AI risk stratification and automated post-discharge intervention. Proven across ACOs and health systems.', img: IMG.care, schema: 'Product' },
+    '/use-cases/post-discharge-follow-up': { title: 'TCM Automation | Zynix AI', desc: 'Automate transitional care management AI workflows and achieve 85%+ contact rates versus the 30-40% industry average. CMS-reimbursable and fully automated.', img: IMG.care, schema: 'Product' },
+    '/use-cases/hcc-gap-closure-health-system-aco': { title: 'Care Gap Closure AI | Zynix AI', desc: 'Close HCC, RAF, and quality gaps 40% faster with AI-prioritized worklists and automated patient outreach. Deployed across ACOs and health plans.', img: IMG.analytics, schema: 'Product' },
+    '/use-cases/after-hours-triage-multi-site': { title: 'After-Hours Patient Care AI | Zynix AI', desc: 'Deliver 24/7 nurse-level triage with AI call handling that achieves 97.3% accuracy and diverts 20-30% of ER visits. Serving practices and FQHCs nationwide.', img: IMG.doctor, schema: 'Product' },
+    '/use-cases/prior-auth-high-volume-specialty': { title: 'Prior Auth AI Workflow | Zynix AI', desc: 'Slash prior authorization turnaround 60% with AI-powered submission, tracking, and approval workflows. Trusted by ASCs and health systems.', img: IMG.enterprise, schema: 'Product' },
+    '/use-cases/preventive-screening-gap-fqhc': { title: 'Preventive Screening AI | Zynix AI', desc: 'Increase HEDIS quality measure completion with AI-driven preventive screening outreach and automated scheduling. Deployed by FQHCs, ACOs, and health plans.', img: IMG.patients, schema: 'Product' },
+    '/use-cases/post-discharge-tcm-readmission': { title: 'Hospital Readmission Prevention AI | Zynix AI', desc: 'Reduce avoidable hospital readmissions 25% with AI risk stratification and automated post-discharge intervention. Proven across ACOs and health systems.', img: IMG.care, schema: 'Product' },
     '/company-about': { title: 'About Zynix AI | Healthcare AI Company', desc: 'Zynix AI is a healthcare AI company purpose-built for value-based care with 1M+ patients onboarded across 30 states serving ACOs and health systems.', img: IMG.patients, schema: 'MedicalBusiness' },
     '/company-careers': { title: 'Careers | Zynix AI', desc: 'Join the team building the AI operating system for value-based healthcare. Engineering, clinical, and operations roles in Trinity, FL and remote positions.', img: IMG.hero, schema: 'Organization', noindex: true },
     '/company-press': { title: 'Press & News | Zynix AI', desc: 'Latest news, press releases, and media coverage about Zynix AI and the future of AI-powered value-based healthcare across the United States.', img: IMG.hero, schema: 'Organization', noindex: true },
@@ -906,12 +939,12 @@
     '/solutions-fqhcs': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>',
     '/solutions-independent-practices': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33"/></svg>',
     '/solutions-ascs': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>',
-    '/solutions-use-case-tcm': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.09 5.18 2 2 0 0 1 5.11 3h3"/><polyline points="16 2 16 8 22 8"/></svg>',
-    '/solutions-use-case-gap-closure': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
-    '/solutions-use-case-after-hours': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
-    '/solutions-use-case-prior-auth': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
-    '/solutions-use-case-preventive-screening': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
-    '/solutions-use-case-readmission-prevention': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>',
+    '/use-cases/post-discharge-follow-up': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.09 5.18 2 2 0 0 1 5.11 3h3"/><polyline points="16 2 16 8 22 8"/></svg>',
+    '/use-cases/hcc-gap-closure-health-system-aco': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+    '/use-cases/after-hours-triage-multi-site': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+    '/use-cases/prior-auth-high-volume-specialty': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+    '/use-cases/preventive-screening-gap-fqhc': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    '/use-cases/post-discharge-tcm-readmission': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>',
     '/products-ai-agents-zynafterhours': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
     '/products-ai-agents-zynschedule': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>',
     '/products-ai-agents-post-discharge': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
@@ -935,12 +968,12 @@
     '/solutions-fqhcs': 'Community health AI',
     '/solutions-independent-practices': 'Reduce burnout and no-shows',
     '/solutions-ascs': 'Surgical workflow AI',
-    '/solutions-use-case-tcm': 'Post-discharge follow-up',
-    '/solutions-use-case-gap-closure': 'HCC and quality gaps',
-    '/solutions-use-case-after-hours': '24/7 AI call handling',
-    '/solutions-use-case-prior-auth': 'Accelerate approvals',
-    '/solutions-use-case-preventive-screening': 'Screening outreach',
-    '/solutions-use-case-readmission-prevention': 'Reduce readmissions',
+    '/use-cases/post-discharge-follow-up': 'Post-discharge follow-up',
+    '/use-cases/hcc-gap-closure-health-system-aco': 'HCC and quality gaps',
+    '/use-cases/after-hours-triage-multi-site': '24/7 AI call handling',
+    '/use-cases/prior-auth-high-volume-specialty': 'Accelerate approvals',
+    '/use-cases/preventive-screening-gap-fqhc': 'Screening outreach',
+    '/use-cases/post-discharge-tcm-readmission': 'Reduce readmissions',
     '/products-ai-agents-zynafterhours': '24/7 AI call handling',
     '/products-ai-agents-zynschedule': 'Smart appointment scheduling',
     '/products-ai-agents-post-discharge': 'Post-discharge automation',
@@ -2752,6 +2785,15 @@
         btn.innerHTML = btn.textContent.trim() + ' ' + svgChevron;
       });
     });
+
+    // Close mobile menu when a link is clicked
+    mobile.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        mobile.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+      });
+    });
   }
 
   // ── Shared: Agent Detail Page Template ──
@@ -4147,12 +4189,12 @@
     '/solutions/fqhcs': '/solutions-fqhcs',
 
     // Solutions by Use Case → Use Cases CMS
-    '/solutions-use-case-tcm': '/use-cases/post-discharge-follow-up',
-    '/solutions-use-case-gap-closure': '/use-cases/hcc-gap-closure-health-system-aco',
-    '/solutions-use-case-after-hours': '/use-cases/after-hours-triage-multi-site',
-    '/solutions-use-case-prior-auth': '/use-cases/prior-auth-high-volume-specialty',
-    '/solutions-use-case-preventive-screening': '/use-cases/preventive-screening-gap-fqhc',
-    '/solutions-use-case-readmission-prevention': '/use-cases/post-discharge-tcm-readmission',
+    '/use-cases/post-discharge-follow-up': '/use-cases/post-discharge-follow-up',
+    '/use-cases/hcc-gap-closure-health-system-aco': '/use-cases/hcc-gap-closure-health-system-aco',
+    '/use-cases/after-hours-triage-multi-site': '/use-cases/after-hours-triage-multi-site',
+    '/use-cases/prior-auth-high-volume-specialty': '/use-cases/prior-auth-high-volume-specialty',
+    '/use-cases/preventive-screening-gap-fqhc': '/use-cases/preventive-screening-gap-fqhc',
+    '/use-cases/post-discharge-tcm-readmission': '/use-cases/post-discharge-tcm-readmission',
 
     // Company aliases
     '/company-about': '/about',
@@ -6895,12 +6937,12 @@ function renderDataAnalyticsV7() {
     '/solutions-independent-practices': renderPractices,
     '/solutions-ascs': renderASCs,
     // Solutions - By Use Case (NEW)
-    '/solutions-use-case-tcm': renderUseCaseTCM,
-    '/solutions-use-case-gap-closure': renderUseCaseGapClosure,
-    '/solutions-use-case-after-hours': renderUseCaseAfterHours,
-    '/solutions-use-case-prior-auth': renderUseCasePriorAuth,
-    '/solutions-use-case-preventive-screening': renderUseCasePreventiveScreening,
-    '/solutions-use-case-readmission-prevention': renderUseCaseReadmission,
+    '/use-cases/post-discharge-follow-up': renderUseCaseTCM,
+    '/use-cases/hcc-gap-closure-health-system-aco': renderUseCaseGapClosure,
+    '/use-cases/after-hours-triage-multi-site': renderUseCaseAfterHours,
+    '/use-cases/prior-auth-high-volume-specialty': renderUseCasePriorAuth,
+    '/use-cases/preventive-screening-gap-fqhc': renderUseCasePreventiveScreening,
+    '/use-cases/post-discharge-tcm-readmission': renderUseCaseReadmission,
     // Company
     '/company-about': renderAbout,
     '/about': renderAbout,
