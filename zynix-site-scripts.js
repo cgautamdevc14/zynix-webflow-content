@@ -413,9 +413,9 @@
     '/use-cases/post-discharge-tcm-readmission': VIS_CARE,
     '/company-about': VIS_PLATFORM,
     '/company-trust-center': VIS_PLATFORM,
-    '/compare/zynix-vs-point-solutions': VIS_PLATFORM,
-    '/compare/zynix-vs-innovaccer': VIS_PLATFORM,
-    '/compare/zynix-vs-commure': VIS_PLATFORM
+    '/compare-zynix-vs-point-solutions': VIS_PLATFORM,
+    '/compare-zynix-vs-innovaccer': VIS_PLATFORM,
+    '/compare-zynix-vs-commure': VIS_PLATFORM
   };
   function getPathVis() {
     try {
@@ -520,9 +520,9 @@
     '/blog/why-tcm-fails-real-workflows': { related: ['/blog/aco-30-day-post-discharge-program','/use-cases/post-discharge-follow-up','/use-cases/post-discharge-tcm-readmission'] },
     '/blog/aco-30-day-post-discharge-program': { related: ['/blog/why-tcm-fails-real-workflows','/blog/innovative-patient-recovery-satisfaction','/use-cases/post-discharge-follow-up'] },
     // Comparison pages — high-intent SEO
-    '/compare/zynix-vs-point-solutions': { products: ['/platform','/agents','/care-plans','/zynscribe'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/compare/zynix-vs-innovaccer','/compare/zynix-vs-commure'] },
-    '/compare/zynix-vs-innovaccer': { products: ['/platform','/zynix-data-analytics','/agents'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/compare/zynix-vs-point-solutions','/compare/zynix-vs-commure'] },
-    '/compare/zynix-vs-commure': { products: ['/platform','/agents','/integrations'], solutions: ['/solutions-health-systems','/solutions-acos'], related: ['/compare/zynix-vs-point-solutions','/compare/zynix-vs-innovaccer'] },
+    '/compare-zynix-vs-point-solutions': { products: ['/platform','/agents','/care-plans','/zynscribe'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/compare-zynix-vs-innovaccer','/compare-zynix-vs-commure'] },
+    '/compare-zynix-vs-innovaccer': { products: ['/platform','/zynix-data-analytics','/agents'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/compare-zynix-vs-point-solutions','/compare-zynix-vs-commure'] },
+    '/compare-zynix-vs-commure': { products: ['/platform','/agents','/integrations'], solutions: ['/solutions-health-systems','/solutions-acos'], related: ['/compare-zynix-vs-point-solutions','/compare-zynix-vs-innovaccer'] },
     // Case studies — link to relevant products and solutions
     '/case-studies/palm-beach-aco': { products: ['/agents','/care-plans','/zynscribe'], solutions: ['/solutions-acos'], related: ['/case-studies/west-florida-aco','/case-studies/space-coast-aco'] },
     '/case-studies/amistad': { products: ['/agents','/care-plans'], solutions: ['/solutions-fqhcs'], related: ['/case-studies/nhs','/use-cases/after-hours-triage-multi-site'] },
@@ -582,9 +582,9 @@
     '/resources-whitepapers': { title: 'Whitepapers & Reports | Zynix AI', desc: 'Download research on healthcare AI including AWV optimization, post-discharge follow-up, and care management at scale from Zynix AI.', img: IMG.hero, schema: 'Organization' },
     '/company-privacy': { title: 'Privacy Policy | Zynix AI', desc: 'Zynix AI privacy policy detailing how we collect, use, and protect your personal and health-related information across our healthcare AI platform.', img: IMG.hero, schema: 'Organization' },
     '/company-terms': { title: 'Terms of Service | Zynix AI', desc: 'Review the Zynix AI terms of service governing use of our healthcare AI platform, data processing agreements, and related professional services offerings.', img: IMG.hero, schema: 'Organization' },
-    '/compare/zynix-vs-point-solutions': { title: 'Zynix AI vs Point Solutions | Zynix AI', desc: 'Compare the Zynix unified AI operating system against fragmented point solutions for value-based care. See why leading ACOs choose one platform.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare/zynix-vs-innovaccer': { title: 'Zynix AI vs Innovaccer | Zynix AI', desc: 'Compare Zynix AI and Innovaccer head to head. Zynix delivers autonomous AI agents that take action while Innovaccer focuses on data aggregation.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare/zynix-vs-commure': { title: 'Zynix AI vs Commure | Zynix AI', desc: 'Compare Zynix AI and Commure for healthcare operations. Zynix is a turnkey AI operating system while Commure requires custom engineering.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-point-solutions': { title: 'Zynix AI vs Point Solutions | Zynix AI', desc: 'Compare the Zynix unified AI operating system against fragmented point solutions for value-based care. See why leading ACOs choose one platform.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-innovaccer': { title: 'Zynix AI vs Innovaccer | Zynix AI', desc: 'Compare Zynix AI and Innovaccer head to head. Zynix delivers autonomous AI agents that take action while Innovaccer focuses on data aggregation.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-commure': { title: 'Zynix AI vs Commure | Zynix AI', desc: 'Compare Zynix AI and Commure for healthcare operations. Zynix is a turnkey AI operating system while Commure requires custom engineering.', img: IMG.enterprise, schema: 'Organization' },
     '/blog/what-is-value-based-care-ai': { title: 'What is Value-Based Care AI? Guide [2026]', desc: 'Value-based care AI automates care coordination, closes quality gaps, and optimizes risk adjustment for ACOs and health systems. Learn how VBC AI works.', img: IMG.analytics, schema: 'Article', datePublished: '2026-03-01' },
     '/blog/how-ai-closes-care-gaps': { title: 'How AI Closes Care Gaps | Zynix AI', desc: 'Discover how AI automates HCC, RAF, and quality measure gap closure from identification through patient outreach to confirmed resolution.', img: IMG.care, schema: 'Article', datePublished: '2026-03-10' },
     '/blog/ai-agents-vs-chatbots-healthcare': { title: 'AI Agents vs Chatbots in Healthcare', desc: 'Healthcare AI agents take autonomous action while chatbots only answer questions. Learn the key differences and why agents deliver better outcomes.', img: IMG.doctor, schema: 'Article', datePublished: '2026-03-15' },
@@ -4336,9 +4336,9 @@
     '/company-terms': '/terms-of-service',
 
     // Comparison pages (re-enabled — high-intent SEO pages)
-    // '/compare/zynix-vs-point-solutions': '/platform',
-    // '/compare/zynix-vs-innovaccer': '/platform',
-    // '/compare/zynix-vs-commure': '/platform',
+    // '/compare-zynix-vs-point-solutions': '/platform',
+    // '/compare-zynix-vs-innovaccer': '/platform',
+    // '/compare-zynix-vs-commure': '/platform',
 
     // Blog posts (blog/ → resources/blog/)
     '/blog/what-is-value-based-care-ai': '/resources/blog/what-is-value-based-care-ai',
@@ -7283,9 +7283,9 @@ function renderDataAnalyticsV7() {
     '/sms-consent': renderSMSConsent,
     '/company-terms': renderTermsV7,
     // Comparison Pages
-    '/compare/zynix-vs-point-solutions': renderComparePointSolutions,
-    '/compare/zynix-vs-innovaccer': renderCompareInnovaccer,
-    '/compare/zynix-vs-commure': renderCompareCommure,
+    '/compare-zynix-vs-point-solutions': renderComparePointSolutions,
+    '/compare-zynix-vs-innovaccer': renderCompareInnovaccer,
+    '/compare-zynix-vs-commure': renderCompareCommure,
     // Blog Posts
     '/blog/what-is-value-based-care-ai': renderBlogVBCAI,
     '/blog/how-ai-closes-care-gaps': renderBlogCareGaps,
