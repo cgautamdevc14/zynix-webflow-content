@@ -2513,6 +2513,7 @@
             al('/resources-faq','FAQ','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>','Common questions') +
             al('/resources-glossary','Glossary','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>','Healthcare AI terms') +
             al('/resources-whitepapers','Whitepapers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>','Research &amp; reports') +
+            al('/roi-calculator','ROI Calculator','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>','Calculate your projected savings') +
           '</div>' +
           '<div class="zynix-nav-promo-card">' +
             '<span style="display:inline-block;padding:3px 10px;background:rgba(241,101,41,0.15);color:#F16529;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">New Article</span>' +
@@ -2526,10 +2527,9 @@
         '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
           '<div class="zynix-mega-col">' +
             al('/about','About Us','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>','Our mission and story') +
-            al('/company-zynixllm','Core Technology','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>','ZynixLLM &mdash; proprietary AI engine') +
             al('/careers','Careers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>','Shape the future of healthcare') +
             al('/press','Newsroom','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>','Press &amp; announcements') +
-            al('/security','Security','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>','HIPAA, SOC 2, HITRUST') +
+            al('/contact','Contact Us','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>','Get in touch with our team') +
           '</div>' +
           '<div class="zynix-nav-promo-card">' +
             '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><img src="' + IMG.logo + '" alt="Zynix AI" style="width:24px;height:24px;border-radius:4px"><span style="font-size:11px;font-weight:700;color:#F16529;text-transform:uppercase;letter-spacing:1px">Webinar</span></div>' +
@@ -4054,10 +4054,10 @@
     '/company-privacy': '/privacy-policy',
     '/company-terms': '/terms-of-service',
 
-    // Comparison pages (retired)
-    '/compare/zynix-vs-point-solutions': '/platform',
-    '/compare/zynix-vs-innovaccer': '/platform',
-    '/compare/zynix-vs-commure': '/platform',
+    // Comparison pages (re-enabled — high-intent SEO pages)
+    // '/compare/zynix-vs-point-solutions': '/platform',
+    // '/compare/zynix-vs-innovaccer': '/platform',
+    // '/compare/zynix-vs-commure': '/platform',
 
     // Blog posts (blog/ → resources/blog/)
     '/blog/what-is-value-based-care-ai': '/resources/blog/what-is-value-based-care-ai',
@@ -4746,7 +4746,7 @@ function renderWhoWeServeHealthSystems() {
   return renderAudiencePageV7({
     audienceName: 'Health Systems',
     breadcrumb: 'Who We Serve &gt; Health Systems',
-    eyebrow: 'Who We Serve: Page 1 of 6',
+    eyebrow: 'WHO WE SERVE',
     headline: 'Reach every patient. Close every gap. Run every care program at health system scale.',
     subhead: 'You have the staff, the data, and the clinical programs. The gap is execution at the scale of a health system attribution. Post-discharge follow-up that misses the highest-risk patients, after-hours calls that default to the ED, HCC documentation that closes short of year-end targets, and prior auth backlogs that delay care for patients already scheduled.',
     challengeIntro: 'Health systems managing large attributed populations face the same structural problem across every care management program: the analytics layer identifies who needs attention. The execution infrastructure cannot keep up with the volume of acting on it.',
@@ -4806,7 +4806,7 @@ function renderWhoWeServeACOs() {
   return renderAudiencePageV7({
     audienceName: 'ACOs & MSOs',
     breadcrumb: 'Who We Serve &gt; ACOs &amp; MSOs',
-    eyebrow: 'Who We Serve: Page 2 of 6',
+    eyebrow: 'WHO WE SERVE',
     headline: 'Better post-discharge rates. Higher HCC closure. More shared savings, without adding headcount.',
     subhead: 'Your analytics tell you who needs attention. Your care management program tracks the work. The gap is getting it done at the scale of your attributed panel, across a full performance year, without adding coordinator headcount you don\'t have budget for.',
     challengeIntro: 'MSSP ACOs and risk-bearing MSOs operate with a clear financial equation: shared savings depend on keeping total cost of care below benchmark, which depends on care management execution quality. The data to identify the work is usually adequate. The execution infrastructure to complete it at panel scale is not.',
@@ -4870,7 +4870,7 @@ function renderWhoWeServeHealthPlans() {
   return renderAudiencePageV7({
     audienceName: 'Health Plans',
     breadcrumb: 'Who We Serve &gt; Health Plans',
-    eyebrow: 'Who We Serve: Page 3 of 6',
+    eyebrow: 'WHO WE SERVE',
     headline: 'Move your Star Rating. Close your HCC gaps. Reach every member who needs outreach this performance year.',
     subhead: 'Your population health analytics are sophisticated. The gap between identifying a member who needs outreach and completing that outreach at full-member-population scale, across the measures that move your Star Rating, is where revenue is won or lost.',
     challengeIntro: 'Medicare Advantage plans compete on Star Ratings and risk adjustment accuracy. Both depend on member engagement, clinical documentation, and care coordination that most plans cannot execute at full-member-population scale. The analytics to identify the gap are sophisticated. The workflow execution layer to close it is the missing piece.',
@@ -4929,7 +4929,7 @@ function renderWhoWeServeIndependentPractices() {
   return renderAudiencePageV7({
     audienceName: 'Independent Group Practices',
     breadcrumb: 'Who We Serve &gt; Independent Group Practices',
-    eyebrow: 'Who We Serve: Page 4 of 6',
+    eyebrow: 'WHO WE SERVE',
     headline: 'Handle more after-hours calls. Capture more CCM billing. Spend less coordinator time on prior auth.',
     subhead: 'Your front desk manages inbound calls, scheduling, prior auth, and refill requests at the same time. Your care quality programs need coordinator time you don\'t have to spare. After-hours calls go to voicemail. These are solvable workflow problems, and they don\'t require health system infrastructure to solve.',
     challengeIntro: 'Independent physician groups carry the full operational weight of value-based care without health system infrastructure. Coordinators wear multiple hats. Care quality programs that require consistent monthly patient contact produce inconsistent results because the capacity isn\'t there.',
@@ -4980,7 +4980,7 @@ function renderWhoWeServeASCs() {
   return renderAudiencePageV7({
     audienceName: 'Ambulatory Surgery Centers',
     breadcrumb: 'Who We Serve &gt; Ambulatory Surgery Centers',
-    eyebrow: 'Who We Serve: Page 5 of 6',
+    eyebrow: 'WHO WE SERVE',
     headline: 'Fewer prior auth delays. Faster referral-to-schedule. More OR days that run on plan.',
     subhead: 'Your margin runs on procedure throughput. The administrative workflows surrounding that throughput, including prior authorizations, referral intake, patient scheduling, pre-procedure preparation, and post-procedure follow-up, are where delays originate, where referrals stall, and where recoverable revenue goes unrecovered.',
     challengeIntro: 'ASCs run on procedure throughput and margin. Every stalled prior auth is a delayed surgery. Every incomplete referral packet delays scheduling and frustrates the referring surgeon. Every day-of cancellation is a gap the OR schedule absorbs. The administrative workflows before and after the procedure are where operational efficiency is won or lost.',
@@ -5033,7 +5033,7 @@ function renderWhoWeServeFQHCs() {
   return renderAudiencePageV7({
     audienceName: 'Federally Qualified Health Centers',
     breadcrumb: 'Who We Serve &gt; FQHCs',
-    eyebrow: 'Who We Serve: Page 6 of 6',
+    eyebrow: 'WHO WE SERVE',
     headline: 'Reach more patients in their language. Close more care gaps. Reduce avoidable ED visits for your highest-barrier population.',
     subhead: 'FQHCs serve the most complex patient populations in US healthcare, with some of the leanest care management staffing ratios in the ambulatory sector. The clinical mission is clear. The execution gap is structural: too many patients, too few coordinators, too many barriers between a clinical need and a completed clinical action.',
     challengeIntro: 'FQHCs serve patients with high chronic disease burden, significant social determinants of health, linguistic diversity, and limited access to alternative care settings. The execution gap is structural. The ratio of care management staff to patients makes full-panel execution impossible without an execution layer that handles contact volume, barrier identification, and multilingual outreach.',
