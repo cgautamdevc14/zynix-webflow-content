@@ -531,7 +531,7 @@
     '/roi-calculator': { title: 'ROI Calculator | Zynix AI', desc: 'Calculate your projected savings from AI-powered value-based care. Estimate TCM revenue lift, gap closure impact, and readmission reduction.', img: IMG.hero },
     '/resources-faq': { title: 'FAQ | Zynix AI', desc: 'Find answers about the Zynix healthcare AI platform including HIPAA compliance, EHR integration, pricing, deployment timelines, and support.', img: IMG.hero, schema: 'FAQPage' },
     '/resources-blog': { title: 'Blog | Healthcare AI Insights | Zynix AI', desc: 'Expert healthcare AI insights on value-based care, population health, care coordination, and operational transformation from the Zynix AI team.', img: IMG.hero, schema: 'Organization' },
-    '/resources-blog-lead-model-cms': { title: 'CMS LEAD Model Explained: What Replaces ACO REACH in 2026 | Zynix AI', desc: 'CMS is replacing ACO REACH with the LEAD Model. Learn what changes for ACOs, new financial benchmarks, quality requirements, and how AI can help organizations prepare.', img: IMG.enterprise, schema: 'Article' },
+    '/resources-blog-lead-model-cms': { title: 'CMS LEAD Model: What ACOs Need to Know Before May 17th | Zynix AI', desc: 'The LEAD Model (Long-term Enhanced ACO Design) replaces ACO REACH on Jan 1, 2027. 10-year no-rebasing benchmarks, CARA specialist integration, 1.5% admin add-on. Applications close May 17, 2026.', img: IMG.enterprise, schema: 'Article' },
     '/resources-blog-1m-patients': { title: 'Zynix AI Reaches 1M VBC Patients | Zynix AI', desc: 'Zynix AI announces 1 million value-based care patients onboarded across healthcare organizations in 30 states. Read about this milestone.', img: IMG.hero, schema: 'Article' },
     '/resources-case-studies': { title: 'Case Studies | Healthcare AI Results | Zynix AI', desc: 'See real healthcare AI results from ACOs, health systems, and practices using Zynix AI. Proven outcomes across 1M+ value-based care patients.', img: IMG.care, schema: 'Organization' },
     '/resources-glossary': { title: 'Healthcare AI Glossary | Zynix AI', desc: 'Browse the complete healthcare AI glossary covering value-based care, interoperability, HCC coding, claims processing, and compliance terms.', img: IMG.hero, schema: 'Organization' },
@@ -2245,84 +2245,112 @@
     var h2s = 'font-size:28px;font-weight:700;margin:48px 0 16px;color:var(--z-text)';
     var ps = 'font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin-bottom:16px';
     var lis = 'font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin-bottom:8px';
-    return renderInnerHero('CMS POLICY & REGULATION', 'CMS LEAD Model: What ACOs Need to Know About the ACO REACH Replacement',
-      'April 13, 2026 \u00b7 By Zynix AI Policy Team \u00b7 8 min read',
+    return renderInnerHero('CMS POLICY & REGULATION', 'The CMS LEAD Model Is Here: What Every ACO Needs to Know Before May 17th',
+      'April 13, 2026 \u00b7 By Zynix AI Policy Team \u00b7 10 min read',
       null, '') +
     '<section class="zynix-blog-post-section"><div class="zynix-container" style="max-width:780px;margin:0 auto">' +
     '<article class="zynix-blog-post-content">' +
 
-    '<p style="font-size:18px;line-height:1.9;color:var(--z-text)">CMS has signaled the most significant restructuring of accountable care since the launch of the Medicare Shared Savings Program. The <strong>LEAD Model</strong> (Leveraging Equity and Accountability in Delivery) is set to replace ACO REACH (Realizing Equity, Access, and Community Health), which itself succeeded the controversial Global and Professional Direct Contracting (GPDC) model. For ACOs navigating value-based care, understanding LEAD is not optional\u2014it is existential.</p>' +
+    '<p style="font-size:18px;line-height:1.9;color:var(--z-text)">On December 18, 2025, the CMS Innovation Center announced the <strong>LEAD Model</strong>\u2014<strong>Long-term Enhanced ACO Design</strong>\u2014the direct successor to ACO REACH. With ACO REACH sunsetting on December 31, 2026, and LEAD launching January 1, 2027, this is not a distant policy shift. <strong>Applications close May 17, 2026.</strong> For ACOs in REACH, MSSP, or evaluating risk-based models for the first time, the window to act is measured in weeks, not quarters.</p>' +
 
     '<div style="background:linear-gradient(135deg,#f0f4ff,#e8f0fe);border-radius:12px;padding:28px 32px;margin:32px 0">' +
     '<h3 style="font-size:18px;font-weight:700;color:var(--z-text);margin:0 0 16px">\ud83d\udcca Key Takeaways</h3>' +
     '<ul style="margin:0;padding-left:20px">' +
-    '<li style="' + lis + '"><strong>LEAD replaces ACO REACH</strong> as the next-generation risk-bearing ACO model</li>' +
-    '<li style="' + lis + '"><strong>Stronger equity requirements</strong> with mandatory health equity plans and SDOH screening benchmarks</li>' +
-    '<li style="' + lis + '"><strong>Revised financial benchmarks</strong> intended to close the gap between one-sided and two-sided risk</li>' +
-    '<li style="' + lis + '"><strong>Enhanced quality measures</strong> tied directly to shared savings distribution</li>' +
-    '<li style="' + lis + '"><strong>Greater oversight</strong> of third-party conveners and management organizations</li>' +
+    '<li style="' + lis + '"><strong>LEAD = Long-term Enhanced ACO Design</strong> \u2014 replaces ACO REACH effective January 1, 2027</li>' +
+    '<li style="' + lis + '"><strong>10-year performance period</strong> with no benchmark rebasing \u2014 the longest commitment CMS has ever offered ACOs</li>' +
+    '<li style="' + lis + '"><strong>Application deadline: May 17, 2026</strong> \u2014 for Performance Year 2027 participation</li>' +
+    '<li style="' + lis + '"><strong>1.5% administrative add-on</strong> for higher-spending ACOs \u2014 not subject to reconciliation or repayment</li>' +
+    '<li style="' + lis + '"><strong>CARA system</strong> for specialist integration with episode-level risk arrangements</li>' +
+    '<li style="' + lis + '"><strong>Part D premium buy-down</strong> available by 2029 as a beneficiary engagement tool</li>' +
+    '<li style="' + lis + '"><strong>Medicaid integration pilot</strong> launching March 2026 for dually eligible beneficiaries</li>' +
     '</ul></div>' +
 
-    '<h2 style="' + h2s + '">Why CMS Is Moving Beyond ACO REACH</h2>' +
-    '<p style="' + ps + '">ACO REACH launched in 2023 as a replacement for GPDC, itself a Trump-era experiment in full-risk contracting for Medicare beneficiaries. While REACH improved upon GPDC by adding guardrails around beneficiary protections and health equity, critics argued it still allowed private equity-backed entities to profit from Medicare risk contracts without meaningful accountability.</p>' +
-    '<p style="' + ps + '">Congressional scrutiny intensified through 2025. MedPAC repeatedly recommended consolidating direct contracting models under a tighter regulatory framework. Advocacy groups pushed for stronger beneficiary notification requirements and limits on passive enrollment. CMS responded with LEAD\u2014a model designed to retain the innovation of risk-based contracting while addressing the accountability gaps that plagued its predecessors.</p>' +
+    '<h2 style="' + h2s + '">Why LEAD Exists: The ACO REACH Legacy</h2>' +
+    '<p style="' + ps + '">ACO REACH launched in 2023 as a replacement for the Global and Professional Direct Contracting (GPDC) model. While REACH improved upon GPDC by adding guardrails around beneficiary protections and health equity, the model had structural limitations. Benchmark rebasing created uncertainty for ACOs that invested in long-term care management infrastructure\u2014reduce costs one year, and your benchmark would reset, erasing the financial benefit of your investment.</p>' +
+    '<p style="' + ps + '">Congressional scrutiny of third-party convener arrangements intensified through 2025. MedPAC recommended consolidating direct contracting under tighter oversight. Advocacy groups pushed for stronger beneficiary notification requirements. CMS responded with LEAD\u2014a model that fundamentally changes the economic equation for accountable care.</p>' +
 
-    '<h2 style="' + h2s + '">What Changes Under LEAD</h2>' +
+    '<h2 style="' + h2s + '">What Changes: LEAD vs. ACO REACH</h2>' +
 
-    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">1. Equity Is No Longer Optional</h3>' +
-    '<p style="' + ps + '">Under ACO REACH, health equity plans were required but loosely enforced. LEAD makes equity a gating criterion for shared savings. ACOs must demonstrate measurable progress on SDOH screening, culturally competent care delivery, and disparity reduction across race, ethnicity, and geography. Failure to meet equity benchmarks directly reduces shared savings payouts.</p>' +
+    '<div style="overflow-x:auto;margin:24px 0 32px"><table style="width:100%;border-collapse:collapse;font-size:14px">' +
+    '<thead><tr style="background:var(--z-bg-dark,#0a0a0a);color:#fff"><th style="padding:14px 16px;text-align:left;border-radius:8px 0 0 0">Dimension</th><th style="padding:14px 16px;text-align:left">ACO REACH</th><th style="padding:14px 16px;text-align:left;border-radius:0 8px 0 0">LEAD Model</th></tr></thead>' +
+    '<tbody>' +
+    '<tr style="background:var(--z-bg-alt,#f8fafc)"><td style="padding:12px 16px;font-weight:600">Duration</td><td style="padding:12px 16px">4 years (2023\u20132026)</td><td style="padding:12px 16px;color:var(--z-primary);font-weight:600">10 years (2027\u20132036)</td></tr>' +
+    '<tr><td style="padding:12px 16px;font-weight:600">Benchmark Rebasing</td><td style="padding:12px 16px">Reset periodically, penalizing efficient ACOs</td><td style="padding:12px 16px;color:var(--z-primary);font-weight:600">No rebasing for full 10-year period</td></tr>' +
+    '<tr style="background:var(--z-bg-alt,#f8fafc)"><td style="padding:12px 16px;font-weight:600">Risk Tracks</td><td style="padding:12px 16px">Global (100%) &amp; Professional (50%)</td><td style="padding:12px 16px">Same: Global (100%) &amp; Professional (50%)</td></tr>' +
+    '<tr><td style="padding:12px 16px;font-weight:600">Infrastructure Support</td><td style="padding:12px 16px">Limited</td><td style="padding:12px 16px;color:var(--z-primary);font-weight:600">1.5% admin add-on (not reconciled)</td></tr>' +
+    '<tr style="background:var(--z-bg-alt,#f8fafc)"><td style="padding:12px 16px;font-weight:600">Specialist Integration</td><td style="padding:12px 16px">Preferred provider arrangements</td><td style="padding:12px 16px;color:var(--z-primary);font-weight:600">CARA: episode-level risk arrangements</td></tr>' +
+    '<tr><td style="padding:12px 16px;font-weight:600">Beneficiary Engagement</td><td style="padding:12px 16px">Limited tools</td><td style="padding:12px 16px;color:var(--z-primary);font-weight:600">Part D buy-down, nutrition therapy, rewards</td></tr>' +
+    '<tr style="background:var(--z-bg-alt,#f8fafc)"><td style="padding:12px 16px;font-weight:600">Medicaid Coordination</td><td style="padding:12px 16px">Medicare-only focus</td><td style="padding:12px 16px;color:var(--z-primary);font-weight:600">Two-state dual-eligible pilot</td></tr>' +
+    '</tbody></table></div>' +
 
-    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">2. Financial Benchmarks Recalibrated</h3>' +
-    '<p style="' + ps + '">LEAD introduces prospective regional benchmarking that accounts for local market conditions, historical spending trajectories, and case-mix adjustments. The intent is to eliminate the \u201ccherry-picking\u201d concern\u2014where ACOs could generate savings simply by selecting healthier-than-average populations. Risk corridors are narrower, pushing ACOs to generate genuine efficiency rather than benefiting from favorable attribution.</p>' +
+    '<h2 style="' + h2s + '">The 6 Changes That Matter Most</h2>' +
 
-    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">3. Quality Measures Directly Tied to Shared Savings</h3>' +
-    '<p style="' + ps + '">LEAD expands the quality measure set and creates a direct multiplier between quality performance and financial outcomes. ACOs scoring below the 30th percentile on key measures (preventive screening, chronic disease management, patient experience) face shared savings haircuts of up to 25%. Top-quartile performers receive enhanced savings rates\u2014creating genuine financial incentive for quality, not just cost reduction.</p>' +
+    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">1. No Benchmark Rebasing for 10 Years</h3>' +
+    '<p style="' + ps + '">This is the single most consequential design change. Under REACH, ACOs that reduced costs saw their benchmarks reset\u2014effectively punishing success. LEAD eliminates rebasing entirely. The \u201csavings wedge\u201d compounds: every year you reduce costs, the gap between your benchmark and actual spend widens. This fundamentally changes the ROI calculation for investing in care management infrastructure, AI, and population health technology. For the first time, ACOs can make 5-year technology investments knowing their financial framework won\u2019t shift beneath them.</p>' +
 
-    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">4. Third-Party Convener Oversight</h3>' +
-    '<p style="' + ps + '">One of the most significant changes: LEAD imposes direct reporting requirements on management services organizations (MSOs) and third-party conveners. CMS will require financial transparency, conflict-of-interest disclosures, and limits on management fees as a percentage of total cost of care. This directly addresses the private equity concern that dogged GPDC and REACH.</p>' +
+    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">2. The 1.5% Administrative Add-On</h3>' +
+    '<p style="' + ps + '">Higher-spending ACOs receive a 1.5% capitated administrative payment that is <strong>explicitly not subject to reconciliation or repayment</strong>. This is essentially startup capital for organizations spending above regional averages\u2014recognizing that these ACOs need to invest more to bend their cost curves. For organizations evaluating ACO participation for the first time, this significantly de-risks the initial investment.</p>' +
 
-    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">5. Beneficiary Protections Strengthened</h3>' +
-    '<p style="' + ps + '">Voluntary alignment remains the primary enrollment mechanism, but LEAD adds active notification requirements, simplified opt-out processes, and mandatory annual re-confirmation. Beneficiaries must receive clear, plain-language communication about their ACO participation and rights.</p>' +
+    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">3. CARA: Specialist Episode-Based Risk</h3>' +
+    '<p style="' + ps + '">The CMS Administered Risk Arrangements (CARA) system introduces episode-level data sharing with specialists, standardized contracting templates, and CMS-administered payments. This is CMS\u2019s most serious attempt to bring specialists into the accountability framework. The falls prevention program is the first use case, with broader specialty episodes expected to follow. For ACOs, this means a new lever to manage total cost of care beyond primary care.</p>' +
 
-    '<h2 style="' + h2s + '">What This Means for ACOs Right Now</h2>' +
-    '<p style="' + ps + '">The transition from REACH to LEAD is not a distant policy discussion. ACOs currently operating under REACH need to prepare for several operational shifts:</p>' +
+    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">4. Part D Premium Buy-Down</h3>' +
+    '<p style="' + ps + '">Starting in 2029, ACOs can use shared savings to reduce Part D premiums for their attributed beneficiaries. This is a powerful retention tool\u2014giving patients a tangible financial reason to remain with their ACO. It also creates a direct link between ACO performance and member experience that has been missing from previous models.</p>' +
+
+    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">5. Expanded Capitation Options</h3>' +
+    '<p style="' + ps + '">LEAD offers four capitation pathways: Primary Care Capitation, Non-Primary Care Capitation, Total Care Capitation, and Add-On Capitation. This flexibility allows ACOs to take risk incrementally\u2014starting with primary care and expanding as capabilities mature. It\u2019s a deliberate on-ramp for organizations new to capitated arrangements.</p>' +
+
+    '<h3 style="font-size:22px;font-weight:600;margin:32px 0 12px;color:var(--z-text)">6. Medicaid Dual-Eligible Pilot</h3>' +
+    '<p style="' + ps + '">A two-state pilot (March 2026 through December 2027) will test coordinated care delivery for dually eligible beneficiaries. For ACOs with significant dual-eligible populations, this pilot could provide a framework for managing the costliest, most complex patients in their panel\u2014patients who today fall through gaps between Medicare and Medicaid.</p>' +
+
+    '<h2 style="' + h2s + '">What ACOs Must Do Before May 17th</h2>' +
+    '<p style="' + ps + '">The application deadline is May 17, 2026. Implementation begins September 15, 2026. Here\u2019s what leadership teams should be doing right now:</p>' +
     '<ul style="padding-left:20px;margin-bottom:24px">' +
-    '<li style="' + lis + '"><strong>Invest in SDOH data infrastructure.</strong> Equity benchmarks require structured, auditable SDOH data\u2014not ad hoc screening. Organizations need systematic workflows for collecting Z-codes and integrating community-level social determinant data.</li>' +
-    '<li style="' + lis + '"><strong>Upgrade quality measurement capabilities.</strong> The expanded measure set means ACOs need real-time visibility into gaps across preventive screening, chronic disease management, and patient experience. Annual retrospective analysis will not suffice.</li>' +
-    '<li style="' + lis + '"><strong>Automate patient outreach at scale.</strong> Narrower financial benchmarks mean every missed care gap, every unscheduled AWV, and every failed TCM contact directly impacts the bottom line. Manual outreach cannot keep pace.</li>' +
-    '<li style="' + lis + '"><strong>Prepare for financial transparency.</strong> ACOs working with third-party conveners should expect CMS scrutiny of management fee structures and financial arrangements. Clean governance now avoids compliance risk later.</li>' +
+    '<li style="' + lis + '"><strong>Assess your financial readiness.</strong> Model your total cost of care against regional benchmarks. The no-rebasing structure means your starting benchmark defines your financial trajectory for a decade.</li>' +
+    '<li style="' + lis + '"><strong>Build SDOH data infrastructure.</strong> Equity and social determinant data will factor into quality scoring. Systematic Z-code collection and community-level SDOH integration are no longer nice-to-haves.</li>' +
+    '<li style="' + lis + '"><strong>Invest in scalable outreach.</strong> Narrower benchmarks mean every missed care gap, every unscheduled AWV, every failed TCM contact directly impacts shared savings. At 10-year scale, the compounding cost of manual inefficiency is enormous.</li>' +
+    '<li style="' + lis + '"><strong>Evaluate specialist partnerships.</strong> CARA creates new specialist engagement pathways. Identify high-impact specialty episodes (orthopedics, cardiology, falls prevention) and begin partnership discussions now.</li>' +
+    '<li style="' + lis + '"><strong>Prepare governance for transparency.</strong> If you work with third-party conveners or MSOs, expect CMS to scrutinize fee structures and financial arrangements. Clean governance now prevents compliance risk later.</li>' +
     '</ul>' +
 
-    '<h2 style="' + h2s + '">How AI Enables LEAD Readiness</h2>' +
-    '<p style="' + ps + '">The operational demands of LEAD\u2014equity tracking, quality optimization, proactive outreach, real-time gap closure\u2014align precisely with what AI-powered platforms are designed to do. Organizations that can:</p>' +
+    '<h2 style="' + h2s + '">Why AI Is the LEAD Model\u2019s Force Multiplier</h2>' +
+    '<p style="' + ps + '">The 10-year no-rebasing structure fundamentally changes the technology investment calculus. Under REACH, a 4-year horizon made large platform investments risky\u2014your benchmark might reset before you recouped the cost. Under LEAD, organizations that deploy AI now will compound savings for a decade. The math is unambiguous.</p>' +
+    '<p style="' + ps + '">Specifically, AI-powered platforms that can:</p>' +
     '<ul style="padding-left:20px;margin-bottom:24px">' +
-    '<li style="' + lis + '">Ingest and normalize multi-source clinical and social determinant data in real time</li>' +
-    '<li style="' + lis + '">Identify and prioritize care gaps across HCC, HEDIS, and equity measures simultaneously</li>' +
-    '<li style="' + lis + '">Deploy autonomous outreach agents that contact patients within TCM windows, schedule AWVs, and close gaps without adding staff</li>' +
-    '<li style="' + lis + '">Generate audit-ready documentation of equity initiatives and quality improvements</li>' +
+    '<li style="' + lis + '">Ingest and normalize claims, clinical, ADT, lab, pharmacy, and SDOH data in real time</li>' +
+    '<li style="' + lis + '">Identify HCC, HEDIS, and equity gaps across entire attributed populations simultaneously</li>' +
+    '<li style="' + lis + '">Deploy autonomous agents that contact patients within TCM windows, schedule AWVs, manage prior auth, and close gaps without adding headcount</li>' +
+    '<li style="' + lis + '">Generate audit-ready documentation of quality performance and equity initiatives</li>' +
     '</ul>' +
-    '<p style="' + ps + '">\u2026will be positioned not just to survive LEAD, but to thrive under it. The ACOs that treat LEAD as a compliance exercise will struggle. The ones that treat it as a catalyst for genuine operational transformation will capture outsized shared savings.</p>' +
+    '<p style="' + ps + '">\u2026will define which ACOs capture outsized shared savings under LEAD and which struggle to break even. This is not a technology question anymore. It is a survival question.</p>' +
 
-    '<blockquote style="border-left:4px solid var(--z-blue);padding:20px 24px;margin:32px 0;background:var(--z-blue-light);border-radius:0 8px 8px 0"><p style="font-size:16px;line-height:1.8;color:var(--z-text);margin:0;font-style:italic">"The organizations that will win under LEAD are the ones investing now in the data infrastructure and AI capabilities to meet equity, quality, and efficiency requirements simultaneously\u2014not sequentially."</p><cite style="display:block;margin-top:12px;font-size:14px;color:var(--z-text-secondary);font-style:normal"><strong>Jay Chowdappa, MD</strong>, Co-Founder & CEO, Zynix AI</cite></blockquote>' +
+    '<blockquote style="border-left:4px solid var(--z-blue);padding:20px 24px;margin:32px 0;background:var(--z-blue-light);border-radius:0 8px 8px 0"><p style="font-size:16px;line-height:1.8;color:var(--z-text);margin:0;font-style:italic">"LEAD\u2019s 10-year no-rebasing structure is the most ACO-friendly financial design CMS has ever produced. But it only rewards organizations that invest in infrastructure now. The compounding benefit accrues to first movers\u2014not to organizations that wait until 2028 to automate."</p><cite style="display:block;margin-top:12px;font-size:14px;color:var(--z-text-secondary);font-style:normal"><strong>Jay Chowdappa, MD</strong>, Co-Founder & CEO, Zynix AI</cite></blockquote>' +
 
-    '<h2 style="' + h2s + '">Timeline: What to Watch</h2>' +
+    '<h2 style="' + h2s + '">Timeline: Key Dates</h2>' +
     '<div style="margin:24px 0 32px">' +
-    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px"><div style="min-width:90px;font-size:14px;font-weight:700;color:var(--z-primary)">Q2 2026</div><div style="' + ps + ';margin:0">CMS publishes LEAD Model proposed rule with comment period</div></div>' +
-    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px"><div style="min-width:90px;font-size:14px;font-weight:700;color:var(--z-primary)">Q3 2026</div><div style="' + ps + ';margin:0">Final rule expected; ACO application window opens</div></div>' +
-    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px"><div style="min-width:90px;font-size:14px;font-weight:700;color:var(--z-primary)">Jan 2027</div><div style="' + ps + ';margin:0">LEAD Model performance year begins; ACO REACH sunsets</div></div>' +
+    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px"><div style="min-width:120px;font-size:14px;font-weight:700;color:var(--z-text-secondary)">Dec 18, 2025</div><div style="' + ps + ';margin:0">CMS announces LEAD Model</div></div>' +
+    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px"><div style="min-width:120px;font-size:14px;font-weight:700;color:var(--z-text-secondary)">Mar 2026</div><div style="' + ps + ';margin:0">Applications open; RFA released; Medicaid pilot begins</div></div>' +
+    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;padding:16px;background:#fff3e0;border-radius:10px;border:2px solid #F16529"><div style="min-width:120px;font-size:14px;font-weight:700;color:#F16529">May 17, 2026</div><div style="font-size:16px;line-height:1.8;color:var(--z-text);font-weight:600;margin:0">APPLICATION DEADLINE for PY 2027</div></div>' +
+    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px"><div style="min-width:120px;font-size:14px;font-weight:700;color:var(--z-text-secondary)">Sep \u2013 Dec 2026</div><div style="' + ps + ';margin:0">Implementation period for accepted ACOs</div></div>' +
+    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px"><div style="min-width:120px;font-size:14px;font-weight:700;color:var(--z-text-secondary)">Dec 31, 2026</div><div style="' + ps + ';margin:0">ACO REACH concludes</div></div>' +
+    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px;border:2px solid var(--z-blue)"><div style="min-width:120px;font-size:14px;font-weight:700;color:var(--z-primary)">Jan 1, 2027</div><div style="font-size:16px;line-height:1.8;color:var(--z-text);font-weight:600;margin:0">LEAD Model Performance Year 1 begins</div></div>' +
+    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px"><div style="min-width:120px;font-size:14px;font-weight:700;color:var(--z-text-secondary)">2029</div><div style="' + ps + ';margin:0">Part D premium buy-down becomes available</div></div>' +
+    '<div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;padding:16px;background:var(--z-bg-alt,#f8fafc);border-radius:10px"><div style="min-width:120px;font-size:14px;font-weight:700;color:var(--z-text-secondary)">Dec 31, 2036</div><div style="' + ps + ';margin:0">LEAD Model concludes</div></div>' +
     '</div>' +
 
     '<h2 style="' + h2s + '">Bottom Line</h2>' +
-    '<p style="' + ps + '">LEAD represents CMS\u2019s clearest signal yet: the future of Medicare belongs to accountable organizations that can demonstrate equity, quality, and efficiency simultaneously. The bar is higher. The financial stakes are larger. And the organizations that automate their way to compliance\u2014rather than staffing their way there\u2014will define the next era of value-based care.</p>' +
-    '<p style="' + ps + '">If your ACO is currently in REACH, MSSP, or evaluating risk-based models, the time to prepare is now. Not Q4.</p>' +
+    '<p style="' + ps + '">LEAD is the most consequential CMS model design in a decade. Ten years. No benchmark rebasing. Infrastructure capital for new entrants. Specialist integration via CARA. Part D retention tools. This is CMS signaling, in the strongest possible terms, that the future of Medicare belongs to accountable organizations that invest in long-term capabilities\u2014not organizations that optimize for short-term benchmark arbitrage.</p>' +
+    '<p style="' + ps + '">The ACOs that deploy AI, automate outreach, build equity infrastructure, and close gaps at scale starting <em>now</em> will compound savings for a decade under LEAD. The ones that wait will spend those ten years trying to catch up.</p>' +
+    '<p style="font-size:16px;line-height:1.8;color:var(--z-text);font-weight:600;margin-bottom:16px">Applications close May 17, 2026. The clock is running.</p>' +
+
     '<div style="margin:40px 0;padding:28px 32px;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:14px;text-align:center">' +
-    '<p style="font-size:18px;font-weight:600;color:#fff;margin:0 0 8px">Ready to prepare your ACO for LEAD?</p>' +
-    '<p style="font-size:14px;color:#94a3b8;margin:0 0 20px">See how Zynix AI helps ACOs meet equity, quality, and efficiency requirements with AI-powered automation.</p>' +
+    '<p style="font-size:18px;font-weight:600;color:#fff;margin:0 0 8px">Is your ACO ready for LEAD?</p>' +
+    '<p style="font-size:14px;color:#94a3b8;margin:0 0 20px">See how Zynix AI helps ACOs meet quality, equity, and efficiency requirements with AI-powered automation\u2014and compound savings over a 10-year horizon.</p>' +
     '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" style="text-decoration:none">Schedule a Strategy Call &rarr;</a>' +
     '</div>' +
 
     '</article></div></section>' +
-    renderCTA('See Zynix in Action', 'Discover how leading ACOs use AI to close gaps, reduce readmissions, and maximize shared savings under evolving CMS models.', 'Request a Demo') +
+    renderCTA('Meet Us at NAACOS', 'Visit Zynix AI at Booth V (April 22\u201324) to discuss LEAD readiness and see live demos of our AI agents.', 'Book a Meeting') +
     renderFooter();
   }
 
@@ -2488,8 +2516,8 @@
           '</div>' +
           '<div class="zynix-nav-promo-card">' +
             '<span style="display:inline-block;padding:3px 10px;background:rgba(241,101,41,0.15);color:#F16529;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">New Article</span>' +
-            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">CMS LEAD Model: What ACOs Need to Know About the ACO REACH Replacement</p>' +
-            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">The biggest CMS policy shift in a decade. We break down what changes and how to prepare.</p>' +
+            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">The CMS LEAD Model Is Here: What Every ACO Needs to Know Before May 17th</p>' +
+            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">10-year no-rebasing benchmarks. CARA specialist integration. Applications close May 17.</p>' +
             '<a href="/resources-blog-lead-model-cms" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Read Article &rarr;</a>' +
           '</div>' +
         '</div></div></div>' +
