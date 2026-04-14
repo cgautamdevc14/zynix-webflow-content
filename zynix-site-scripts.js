@@ -2601,7 +2601,9 @@
       '.zynix-nav-promo-card a:hover { opacity: 0.92; transform: translateY(-1px); }' +
       '.zynix-dropdown-featured { margin-top: 8px; padding: 8px 12px; border-top: 1px solid var(--z-border, #e5e7eb); }' +
       '.zynix-dropdown-featured a { color: #F16529 !important; font-size: 13px; font-weight: 600; text-decoration: none; }' +
-      '.zynix-dropdown-featured a:hover { text-decoration: underline; }';
+      '.zynix-dropdown-featured a:hover { text-decoration: underline; }' +
+      '.zynix-trust-marquee img, .zynix-trust-track img, [class*="trust-marquee"] img, [class*="trust-track"] img { filter: grayscale(100%) opacity(0.55) !important; opacity: 1 !important; }' +
+      '.zynix-trust-marquee img:hover, .zynix-trust-track img:hover, [class*="trust-marquee"] img:hover, [class*="trust-track"] img:hover { filter: grayscale(0%) opacity(1) !important; }';
     document.head.appendChild(hideNavStyle);
     document.querySelectorAll('.w-nav, .navbar, [data-collapse="medium"], section.navbar').forEach(function(el) {
       el.style.cssText = 'display:none!important;visibility:hidden!important;height:0!important;overflow:hidden!important;';
@@ -3396,34 +3398,27 @@
       '<p>How is it different? Unlike analytics dashboards that show you what to do, Zynix actually does it. The platform achieves 85%+ TCM contact rates with 1M+ patients across 30 states.</p>' +
       '</div>';
 
-    // -- CUSTOMER TRUST STRIP (Navina-style: small, grayscale, uniform) --
+    // -- CUSTOMER TRUST STRIP (logo-only, grayscale, uniform height) --
     var trustLogos = [
-      { name: 'Palm Beach ACO' },
+      { name: 'Palm Beach ACO', logo: GH + 'palm-beach-aco.png' },
       { name: 'West Florida ACO', logo: GH + 'west-florida-aco.svg' },
       { name: 'Space Coast ACO', logo: GH + 'space-coast-aco.svg' },
       { name: 'Central Florida ACO', logo: GH + 'central-florida-aco-logo.svg' },
-      { name: 'GoldenCare ACO' },
-      { name: 'NEXT Healthcare' },
-      { name: 'eTernal Health' },
-      { name: 'AMISTAD CHC' },
-      { name: 'Professional Radiology' },
-      { name: 'Sunflower ACO' },
+      { name: 'GoldenCare ACO', logo: GH + 'goldencare-aco.png' },
+      { name: 'NEXT Healthcare', logo: GH + 'next-healthcare.svg' },
+      { name: 'eTernal Health', logo: GH + 'eternal-health.jpg' },
+      { name: 'AMISTAD CHC', logo: GH + 'amistad-chc.png' },
+      { name: 'Professional Radiology', logo: GH + 'professional-radiology.png' },
+      { name: 'Sunflower ACO', logo: GH + 'sunflower-aco.png' },
       { name: 'Innovacare Health', logo: GH + 'innovacare-health.svg' },
-      { name: 'CLSCFL' }
+      { name: 'CLSCFL', logo: GH + 'clscfl.png' }
     ];
-    var logoStyle = 'height:40px;width:auto;max-width:150px;filter:brightness(0) invert(1) opacity(0.5);transition:filter 0.3s,opacity 0.3s;object-fit:contain';
-    var txtStyle = 'display:inline-flex;align-items:center;height:40px;flex-shrink:0;font-size:14px;font-weight:700;color:#64748b;white-space:nowrap;letter-spacing:0.5px;text-transform:uppercase;opacity:0.6;font-family:var(--z-font)';
+    var logoStyle = 'height:52px;width:auto;max-width:180px;filter:grayscale(100%) opacity(0.55);transition:filter 0.3s,opacity 0.3s;object-fit:contain';
     var trustSpans = '';
     for (var ti = 0; ti < 2; ti++) {
       for (var tj = 0; tj < trustLogos.length; tj++) {
         var tl = trustLogos[tj];
-        if (tl.logo && tl.showName) {
-          trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;gap:8px;height:40px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"><span style="font-size:13px;font-weight:700;color:#64748b;white-space:nowrap;letter-spacing:0.5px;text-transform:uppercase;opacity:0.6">' + tl.name + '</span></span>';
-        } else if (tl.logo) {
-          trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:40px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"></span>';
-        } else {
-          trustSpans += '<span title="' + tl.name + '" style="' + txtStyle + '">' + tl.name + '</span>';
-        }
+        trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:52px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"></span>';
       }
     }
     html += '<section class="zynix-trust-strip"><div class="zynix-container">' +
