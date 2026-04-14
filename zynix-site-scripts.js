@@ -9,7 +9,7 @@
   var CALENDLY = 'https://calendly.com/david-zynix-ai-calendar/30min';
 
   // ── Image URLs ──
-  var GH = 'https://raw.githubusercontent.com/cgautamdevc14/zynix-webflow-content/main/images/';
+  var GH = 'https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@c8191a8/images/';
   var GHG = GH + 'gifs/';
   var IMG = {
     // Premium AI-generated page hero images (OpenAI gpt-image-1)
@@ -509,6 +509,7 @@
     '/solutions': { title: 'Solutions | AI-Powered Healthcare Products | Zynix AI', desc: 'Explore Zynix AI solutions: Data Analytics, AI Agents, Deployable Care Plans, and ZynScribe. Purpose-built for value-based care.', img: IMG.enterprise, schema: 'Product' },
     '/zynix-data-analytics': { title: 'Zynix Data Analytics | Zynix AI', desc: 'AI-powered population health analytics with HCC gap closure, risk stratification, and HEDIS quality tracking for ACOs and health systems.', img: IMG.analytics, schema: 'Product' },
     '/integrations': { title: 'EHR Integrations | Epic, Cerner, athena | Zynix AI', desc: 'Zynix AI integrates with Epic, Cerner, athenahealth, eClinicalWorks via FHIR and HL7. Real-time ADT, claims, labs, and pharmacy data.', img: IMG.data, schema: 'Product' },
+    '/use-cases': { title: 'AI Use Cases for Value-Based Care | Zynix AI', desc: '30 real-world use cases showing how healthcare AI automates care coordination, prior auth, documentation, and patient engagement at scale.', img: IMG.enterprise, schema: 'CollectionPage' },
     '/zynix-ai-agents': { title: 'Zynix AI Agents | Autonomous Healthcare AI | Zynix AI', desc: '12 purpose-built AI agents for value-based care: clinical performance, predictive activation, and operational efficiency.', img: IMG.agents, schema: 'Product' },
     '/solutions-acos': { title: 'AI for ACOs | MSSP & ACO REACH | Zynix AI', desc: 'Drive shared savings in MSSP and ACO REACH with AI-powered TCM workflows, HCC gap closure, and automated outreach. 85% TCM contact rates.', img: IMG.care, schema: 'Product' },
     '/solutions-health-systems': { title: 'AI for Health Systems | Zynix AI', desc: 'Unify population health management with AI-driven patient engagement, post-discharge coordination, and documentation. Reduce readmissions 25%.', img: IMG.enterprise, schema: 'Product' },
@@ -4795,9 +4796,50 @@ USE_CASES.UC29 = { id: 'UC29', slug: 'medication-adherence-complex-chronic', tit
 USE_CASES.UC30 = { id: 'UC30', slug: 'post-discharge-followup-fqhc', title: 'Post-Discharge Follow-Up for High-Risk FQHC Patients', h1: 'An FQHC patient was discharged from the hospital two days ago. The discharge instructions were in English. The patient\u2019s primary language is Haitian Creole. Transportation to the follow-up appointment is not available. The FQHC did not know they were admitted until they called to reschedule a different appointment.', subhead: 'FQHC patients discharged from a hospital face the same post-discharge risks as any population, including medication confusion, missed follow-up, and unresolved barriers, with added complexity. Transportation, language barriers, and delayed notification to the FQHC compound the risk. Zynix AI contacts every high-risk discharged patient within 48 hours and addresses the social barriers that prevent follow-through in the same interaction.', problemHeading: 'FQHC patients face the same post-discharge risks as any population, with compounding barriers that the standard follow-up workflow was not designed for', problem: '<p>A post-discharge follow-up program that relies on the patient reading and understanding English-language discharge instructions, arranging their own transportation to a follow-up appointment, and knowing to call their FQHC primary care team within a week will fail for a significant portion of FQHC patient populations.</p><p>Transportation barriers are among the most common reasons FQHC patients miss post-discharge follow-up appointments. A patient who was hospitalized at a facility across town, discharged with instructions to see their primary care provider within seven days, and who relies on public transit has a scheduling problem that no appointment reminder can solve.</p><p>The FQHC is often the last to know the patient was discharged. Without real-time ADT connectivity, the FQHC learns about the hospitalization when the patient calls, when claims data arrives weeks later, or when the patient presents to the clinic with unresolved post-discharge issues.</p>', shortfalls: [ { tool: 'ADT Notification Systems', description: 'ADT notification systems alert the FQHC when an attributed patient is admitted or discharged from a connected hospital. They provide the signal. They do not initiate outreach, conduct the follow-up interaction, identify the social barriers that prevent follow-through, or connect the patient back to their care team.' }, { tool: 'Standard Post-Discharge Follow-Up Programs', description: 'Post-discharge follow-up programs designed for general clinical populations assume the patient can navigate phone contact in English, arrange transportation independently, and understand standard discharge instructions. For FQHC patient populations where language barriers, transportation limitations, and health literacy challenges are common, a standard follow-up program produces lower-than-expected contact rates.' } ], solutionHeading: 'Post-discharge contact in the right language, with social barriers addressed in the same interaction', solution: '<p>The Transitions of Care Agent contacts FQHC patients within 24 to 48 hours of discharge, in the patient\u2019s primary language, using consistent clinical triage logic to assess medication status, identify discharge instruction confusion, and route clinical concerns to the FQHC care team. The interaction does not assume the patient read the discharge paperwork. It asks.</p><p>The SDoH Determination Agent is embedded in the same interaction, identifying transportation barriers, financial constraints, language comprehension gaps, and other social circumstances that affect the patient\u2019s ability to complete follow-up. ZynSchedule confirms the follow-up appointment with the patient\u2019s FQHC primary care team.</p><p>For FQHCs tracking 30-day readmission rates and post-discharge follow-up completion as a quality metric, the change is in how many discharged patients are reached within the intervention window and how many have their barriers addressed before those barriers result in a preventable readmission.</p>', products: [ { name: 'Transitions of Care Agent', descriptor: 'Post-discharge outreach in patient\u2019s primary language, clinical assessment, escalation routing, and follow-up scheduling', url: '/agents/transitions-of-care', status: 'Active' }, { name: 'SDoH Determination Agent', descriptor: 'Identifies social barriers during post-discharge interaction and routes to community resources or care navigators', url: '/agents/clinical-performance', status: 'Planned' }, { name: 'ZynSchedule', descriptor: 'Follow-up appointment scheduling with FQHC primary care team in the post-discharge interaction', url: '/agents/operational-efficiency/zynschedule', status: 'Active' }, { name: 'Medication Reconciliation', descriptor: 'Post-discharge medication discrepancy identification and clinical routing', url: '/agents/transitions-of-care', status: 'Active' } ], cta: { headline: 'Every high-risk FQHC patient reached within 48 hours of discharge, in their language, with barriers addressed.', label: 'Talk to our team' }, readNext: [ { id: 'UC27', title: 'SDoH Screening, Identification, and Care Navigation', slug: 'sdoh-screening-care-navigation' }, { id: 'UC26', title: 'After-Hours Triage for Multilingual and Underserved Populations', slug: 'after-hours-triage-multilingual-fqhc' }, { id: 'UC06', title: 'Post-Discharge TCM and Readmission Prevention', slug: 'post-discharge-tcm-readmission' } ], segments: { primary: 'FQHCs', alsoTagged: ['ACOs & MSOs'] }, seo: { title: 'Post-Discharge Follow-Up High-Risk FQHC Patients | Zynix AI', desc: 'Reach high-risk FQHC patients within 48 hours of discharge, in their primary language, with social barriers addressed in the same interaction.', schema: 'HowTo' } };
 
 
+// ── Use Cases Listing Page ──────────────────────────────────
+
+function renderUseCasesListing() {
+  var keys = Object.keys(USE_CASES);
+  // Group by primary segment
+  var bySegment = {};
+  for (var i = 0; i < keys.length; i++) {
+    var uc = USE_CASES[keys[i]];
+    var seg = uc.segments && uc.segments.primary ? uc.segments.primary : 'Other';
+    if (!bySegment[seg]) bySegment[seg] = [];
+    bySegment[seg].push(uc);
+  }
+  var segOrder = ['Health Systems', 'ACOs & MSOs', 'Health Plans', 'Independent & Group Practices', 'ASCs', 'FQHCs'];
+  var html = renderInnerHero('USE CASES', 'Real-World AI Use Cases for Value-Based Care',
+    'See how Zynix AI solves specific operational challenges across healthcare organizations — from post-discharge follow-up to prior authorization automation.',
+    IMG.enterprise, 'Zynix AI use cases for healthcare', 'Browse Use Cases') +
+    '<section class="zynix-section" style="padding:64px 0"><div class="zynix-container">';
+  for (var s = 0; s < segOrder.length; s++) {
+    var seg = segOrder[s];
+    var ucs = bySegment[seg];
+    if (!ucs || !ucs.length) continue;
+    html += '<h2 style="font-size:22px;font-weight:700;color:#0f172a;margin:40px 0 20px;padding-bottom:12px;border-bottom:2px solid #e2e8f0">' + seg + '</h2>' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;margin-bottom:32px">';
+    for (var u = 0; u < ucs.length; u++) {
+      html += '<a href="/use-cases/' + ucs[u].slug + '" style="display:block;padding:24px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;text-decoration:none;transition:border-color 0.2s,box-shadow 0.2s"' +
+        ' onmouseover="this.style.borderColor=\'#20449B\';this.style.boxShadow=\'0 4px 12px rgba(32,68,155,0.08)\'"' +
+        ' onmouseout="this.style.borderColor=\'#e2e8f0\';this.style.boxShadow=\'none\'">' +
+        '<div style="font-size:11px;font-weight:600;color:#20449B;letter-spacing:0.06em;margin-bottom:8px">' + ucs[u].id + '</div>' +
+        '<h3 style="font-size:16px;font-weight:600;color:#0f172a;margin:0 0 8px;line-height:1.4">' + ucs[u].title + '</h3>' +
+        '<p style="font-size:13px;color:#64748b;margin:0;line-height:1.5">' + (ucs[u].seo.desc.length > 120 ? ucs[u].seo.desc.substring(0, 117) + '...' : ucs[u].seo.desc) + '</p>' +
+        '</a>';
+    }
+    html += '</div>';
+  }
+  html += '</div></section>' +
+    renderCTA('Find Your Use Case', 'Schedule a 30-minute call to see how Zynix AI addresses your specific operational challenges.', 'Request a Demo') +
+    renderFooter();
+  return html;
+}
+
 // ── Route Entries ───────────────────────────────────────────
 
 var USE_CASE_ROUTES = {};
+USE_CASE_ROUTES['/use-cases'] = renderUseCasesListing;
 
 (function () {
   var keys = Object.keys(USE_CASES);
@@ -7056,7 +7098,8 @@ function renderDataAnalyticsV7() {
     '/blog-aco-30-day-post-discharge-program': renderBlogACOPostDischarge,
     '/blog-why-tcm-fails-real-workflows': renderBlogTCMFails,
     '/blog-documentation-crisis-physician-burnout': renderBlogDocumentationCrisis,
-    // V7: Use Cases (all 30)
+    // V7: Use Cases listing + all 30 individual pages
+    '/use-cases': USE_CASE_ROUTES['/use-cases'],
     '/use-cases/post-discharge-follow-up': USE_CASE_ROUTES['/use-cases/post-discharge-follow-up'],
     '/use-cases/after-hours-triage-multi-site': USE_CASE_ROUTES['/use-cases/after-hours-triage-multi-site'],
     '/use-cases/hcc-gap-closure-health-system-aco': USE_CASE_ROUTES['/use-cases/hcc-gap-closure-health-system-aco'],
@@ -9031,8 +9074,6 @@ function renderDataAnalyticsV7() {
 
   if (routes[path]) {
     var doInject = function() {
-      // Pass originalPath as canonical override so redirected pages use their 200-returning URL as canonical
-      injectSEO(path, originalPath !== path ? originalPath : null);
       injectMegaMenu();
       // Build page content, inserting cross-links BEFORE CTA/Footer
       var pageContent = routes[path]();
@@ -9052,6 +9093,8 @@ function renderDataAnalyticsV7() {
         }
       }
       injectAfterNav(renderBreadcrumb(path) + pageContent);
+      // Inject SEO AFTER DOM insertion so FAQ schema can query .zynix-faq-item elements
+      injectSEO(path, originalPath !== path ? originalPath : null);
       initAnimations();
       animateCounters();
       initROICalculator();

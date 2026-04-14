@@ -179,6 +179,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Use Cases Listing (Priority 0.8) -->
+  <url>
+    <loc>https://www.zynix.ai/use-cases</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Use Cases (Priority 0.7) -->
   <url>
     <loc>https://www.zynix.ai/use-cases/post-discharge-follow-up</loc>
