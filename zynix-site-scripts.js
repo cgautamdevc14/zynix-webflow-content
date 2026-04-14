@@ -679,7 +679,11 @@
         {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynScribe',description:'Ambient AI clinical documentation that reduces physician documentation burden by 70%'}},
         {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynAuth',description:'AI prior authorization automation that reduces approval turnaround time by 60%'}}
       ]},
-      sameAs:['https://www.linkedin.com/company/zynix/','https://x.com/zynixai_','https://www.instagram.com/zynixai/']
+      sameAs:['https://www.linkedin.com/company/zynix/','https://x.com/zynixai_','https://www.instagram.com/zynixai/'],
+      founder:[
+        {'@type':'Person',name:'Jay Chowdappa, MD',jobTitle:'Co-Founder & CEO'},
+        {'@type':'Person',name:'Gautamdev Chowdary',jobTitle:'Co-Founder & CTO'}
+      ]
     };
     var schemas = [orgSchema];
 
@@ -708,6 +712,18 @@
         featureList:['HIPAA Compliant','SOC 2 Type II Certified','Epic EHR Integration','athenahealth Integration','Real-time ADT Processing','AI Voice Agents','Care Gap Closure','TCM Automation','AWV Outreach'],
         screenshot:IMG.hero,
         url:'https://www.zynix.ai/platform'
+      });
+      // SiteNavigationElement
+      schemas.push({
+        '@context':'https://schema.org','@type':'SiteNavigationElement',
+        name:'Main Navigation',url:'https://www.zynix.ai',
+        hasPart:[
+          {'@type':'SiteNavigationElement',name:'Platform',url:'https://www.zynix.ai/platform'},
+          {'@type':'SiteNavigationElement',name:'Solutions',url:'https://www.zynix.ai/solutions'},
+          {'@type':'SiteNavigationElement',name:'AI Agents',url:'https://www.zynix.ai/agents'},
+          {'@type':'SiteNavigationElement',name:'Resources',url:'https://www.zynix.ai/resources-blog'},
+          {'@type':'SiteNavigationElement',name:'Contact',url:'https://www.zynix.ai/contact'}
+        ]
       });
     }
 
@@ -761,6 +777,15 @@
         medicalSpecialty:'Value-Based Care',
         url:'https://www.zynix.ai',
         priceRange:'$$$$'
+      });
+    }
+    if (pagePath === '/contact') {
+      schemas.push({
+        '@context':'https://schema.org','@type':'ContactPage',
+        name:'Contact Zynix AI',
+        description:seo.desc,
+        url:'https://www.zynix.ai/contact',
+        mainEntity:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'}
       });
     }
     if (seo.schema === 'Article') {
@@ -2572,9 +2597,20 @@
     announceBanner.className = 'zynix-announcement-bar';
     announceBanner.innerHTML = '🎉 Zynix AI surpasses 1 Million VBC patients onboarded across 30 states <a href="/resources-blog-1m-patients">Read more</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
 
+    // Skip navigation link (WCAG 2.1 AA)
+    var skipNav = document.createElement('a');
+    skipNav.href = '#main-content';
+    skipNav.className = 'zynix-skip-nav';
+    skipNav.textContent = 'Skip to main content';
+
+    // ARIA landmarks
+    nav.setAttribute('role', 'navigation');
+    nav.setAttribute('aria-label', 'Main navigation');
+
     document.body.prepend(mobile);
     document.body.prepend(nav);
     document.body.prepend(announceBanner);
+    document.body.prepend(skipNav);
 
     // Push nav down to sit below the fixed announcement bar — use actual height
     function adjustNavForBanner() {
@@ -2604,6 +2640,15 @@
       '.zynix-dropdown-featured a:hover { text-decoration: underline; }' +
       '.zynix-trust-marquee img, .zynix-trust-track img, [class*="trust-marquee"] img, [class*="trust-track"] img { filter: grayscale(100%) brightness(0.45) contrast(1.2) !important; opacity: 1 !important; }' +
       '.zynix-trust-marquee img:hover, .zynix-trust-track img:hover, [class*="trust-marquee"] img:hover, [class*="trust-track"] img:hover { filter: grayscale(0%) brightness(1) contrast(1) !important; }' +
+      /* Skip nav (WCAG) */
+      '.zynix-skip-nav { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999999; padding: 16px 24px; background: #20449B; color: #fff; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 0 0 8px 0; }' +
+      '.zynix-skip-nav:focus { position: fixed; left: 0; top: 0; width: auto; height: auto; }' +
+      /* Cookie consent banner */
+      '.zynix-cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #0f172a; padding: 16px 24px; z-index: 99998; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid rgba(255,255,255,0.1); }' +
+      '.zynix-cookie-banner p { color: rgba(255,255,255,0.8); font-size: 14px; margin: 0; flex: 1 1 300px; }' +
+      '.zynix-cookie-banner a { color: #F16529; text-decoration: underline; }' +
+      '.zynix-cookie-btn-reject { padding: 8px 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; background: transparent; color: #fff; cursor: pointer; font-size: 13px; }' +
+      '.zynix-cookie-btn-accept { padding: 8px 20px; border: none; border-radius: 6px; background: #F16529; color: #fff; cursor: pointer; font-size: 13px; font-weight: 600; }' +
       /* ROI slider styling — custom track + thumb */
       '.zynix-roi-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #20449B var(--slider-pct, 50%), #e2e8f0 var(--slider-pct, 50%)); outline: none; cursor: pointer; transition: background 0.15s; }' +
       '.zynix-roi-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #20449B; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(32,68,155,0.35); cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }' +
@@ -2626,6 +2671,23 @@
       mobile.style.height = 'calc(100vh - ' + navBottom + 'px)';
       mobile.classList.toggle('open');
     });
+
+    // Cookie consent banner (GDPR compliance)
+    if (!localStorage.getItem('zynix_cookie_consent')) {
+      var cookieBanner = document.createElement('div');
+      cookieBanner.className = 'zynix-cookie-banner';
+      cookieBanner.innerHTML = '<p>We use cookies for analytics and site functionality. See our <a href="/privacy-policy">Privacy Policy</a>.</p>' +
+        '<div style="display:flex;gap:8px"><button class="zynix-cookie-btn-reject">Reject</button><button class="zynix-cookie-btn-accept">Accept</button></div>';
+      document.body.appendChild(cookieBanner);
+      cookieBanner.querySelector('.zynix-cookie-btn-accept').addEventListener('click', function() {
+        localStorage.setItem('zynix_cookie_consent', 'accepted');
+        cookieBanner.remove();
+      });
+      cookieBanner.querySelector('.zynix-cookie-btn-reject').addEventListener('click', function() {
+        localStorage.setItem('zynix_cookie_consent', 'rejected');
+        cookieBanner.remove();
+      });
+    }
 
     // Mobile accordion
     mobile.querySelectorAll('.zynix-mobile-section-trigger').forEach(function(btn) {
