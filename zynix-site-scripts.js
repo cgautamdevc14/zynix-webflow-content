@@ -1129,7 +1129,7 @@
       '<div class="zynix-footer-col"><h4>SOLUTIONS</h4><a href="/platform">Platform</a><a href="/zynix-data-analytics">Data Analytics</a><a href="/zynix-ai-agents">AI Agents</a><a href="/care-plans">Care Plans</a><a href="/zynscribe">ZynScribe</a><a href="/integrations">Integrations</a></div>' +
       '<div class="zynix-footer-col"><h4>WHO WE SERVE</h4><a href="/who-we-serve/health-systems">Health Systems</a><a href="/who-we-serve/acos-msos">ACOs &amp; MSOs</a><a href="/who-we-serve/health-plans">Health Plans</a><a href="/who-we-serve/independent-group-practices">Group Practices</a><a href="/who-we-serve/ascs">ASCs</a><a href="/who-we-serve/fqhcs">FQHCs</a></div>' +
       '<div class="zynix-footer-col"><h4>COMPANY</h4><a href="/about">About</a><a href="/company-zynixllm">ZynixLLM</a><a href="/press">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a><a href="/contact">Contact Us</a></div>' +
-      '<div class="zynix-footer-col"><h4>RESOURCES</h4><a href="/resources-case-studies">Case Studies</a><a href="/resources-blog">Blog</a><a href="/resources-faq">FAQ</a><a href="/resources-webinars">Webinars</a><a href="/resources-whitepapers">Whitepapers</a><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a></div>' +
+      '<div class="zynix-footer-col"><h4>RESOURCES</h4><a href="/resources-case-studies">Case Studies</a><a href="/use-cases">Use Cases</a><a href="/resources-blog">Blog</a><a href="/resources-faq">FAQ</a><a href="/resources-webinars">Webinars</a><a href="/resources-whitepapers">Whitepapers</a><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a></div>' +
       '</div>' +
       '<div class="zynix-footer-compliance">' +
       '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_HIPAA + '</div><div><strong>HIPAA</strong><span>Compliant</span></div></div>' +
@@ -1185,7 +1185,7 @@
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0D9B6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> HITRUST Ready</span>' +
       '</div>' +
       '</div>' +
-      (image ? '<div class="zynix-inner-hero-img">' + (getPathVis() || HERO_VIS[image] || '<img src="' + image + '" alt="' + (imgAlt || '') + '" loading="lazy">') + '</div>' : '') +
+      (image ? '<div class="zynix-inner-hero-img">' + (getPathVis() || HERO_VIS[image] || '<img src="' + image + '" alt="' + (imgAlt || title || 'Zynix AI') + '" loading="lazy">') + '</div>' : '') +
       '</div></section>';
   }
 
@@ -2536,12 +2536,13 @@
             '<div class="zynix-dropdown-featured"><a href="/solutions">View All Solutions &rarr;</a></div>' +
           '</div>' +
           '<div class="zynix-mega-col"><h5>Use Cases</h5>' +
-            al('/solutions-use-case-tcm','Transitional Care (TCM)','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>','Post-discharge outreach') +
-            al('/solutions-use-case-gap-closure','Gap Closure','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>','HCC &amp; HEDIS gaps') +
-            al('/solutions-use-case-readmission-prevention','Readmission Prevention','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>','Reduce 30-day readmits') +
-            al('/solutions-use-case-after-hours','After-Hours &amp; Access','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>','24/7 patient triage') +
-            al('/solutions-use-case-prior-auth','Prior Authorization','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>','Automate auth workflows') +
-            al('/solutions-use-case-preventive-screening','Preventive Screening','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>','Proactive care outreach') +
+            al('/use-cases/post-discharge-follow-up','Transitional Care (TCM)','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>','Post-discharge outreach') +
+            al('/use-cases/hcc-gap-closure-health-system-aco','Gap Closure','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>','HCC &amp; HEDIS gaps') +
+            al('/use-cases/post-discharge-tcm-readmission','Readmission Prevention','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>','Reduce 30-day readmits') +
+            al('/use-cases/after-hours-triage-multi-site','After-Hours &amp; Access','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>','24/7 patient triage') +
+            al('/use-cases/prior-auth-high-volume-specialty','Prior Authorization','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>','Automate auth workflows') +
+            al('/use-cases/preventive-screening-gap-fqhc','Preventive Screening','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>','Proactive care outreach') +
+            '<div class="zynix-dropdown-featured"><a href="/use-cases">View All 30 Use Cases &rarr;</a></div>' +
           '</div>' +
           '<div class="zynix-nav-promo-card">' +
             '<p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#F16529;font-weight:700">Meet Us In Person</p>' +
@@ -2631,7 +2632,7 @@
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Who We Serve &#9662;</button><div class="zynix-mobile-section-links">' +
       '<a href="/who-we-serve/health-systems">Health Systems</a><a href="/who-we-serve/acos-msos">ACOs &amp; MSOs</a><a href="/who-we-serve/health-plans">Health Plans</a><a href="/who-we-serve/independent-group-practices">Group Practices</a><a href="/who-we-serve/ascs">ASCs</a><a href="/who-we-serve/fqhcs">FQHCs</a></div></div>' +
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Resources &#9662;</button><div class="zynix-mobile-section-links">' +
-      '<a href="/resources-case-studies">Case Studies</a><a href="/resources-blog">Blog</a><a href="/resources-webinars">Webinars &amp; Events</a><a href="/resources-faq">FAQ</a><a href="/resources-glossary">Glossary</a><a href="/resources-whitepapers">Whitepapers</a></div></div>' +
+      '<a href="/resources-case-studies">Case Studies</a><a href="/use-cases">Use Cases</a><a href="/resources-blog">Blog</a><a href="/resources-webinars">Webinars &amp; Events</a><a href="/resources-faq">FAQ</a><a href="/resources-glossary">Glossary</a><a href="/resources-whitepapers">Whitepapers</a></div></div>' +
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Company &#9662;</button><div class="zynix-mobile-section-links">' +
       '<a href="/about">About</a><a href="/company-zynixllm">ZynixLLM</a><a href="/press">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a></div></div>' +
       '<a href="/contact" class="zynix-mobile-link" style="display:block;padding:14px 20px;font-weight:600;color:var(--z-text)">Contact Us</a>' +
