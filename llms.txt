@@ -1,6 +1,6 @@
 # Zynix AI — llms.txt
 # AI-readable overview of zynix.ai for LLM indexing and generative AI search
-# Last updated: 2026-04-14
+# Last updated: 2026-04-15
 
 ## Latest Announcement (2026-04-14)
 
@@ -117,18 +117,25 @@ care but cannot deliver it at scale. The platform combines:
 
 - Platform overview: https://www.zynix.ai/platform
 - AI Agents: https://www.zynix.ai/agents
-- For ACOs: https://www.zynix.ai/solutions-acos
-- For Health Systems: https://www.zynix.ai/solutions-health-systems
-- For Health Plans: https://www.zynix.ai/solutions-health-plans
-- For FQHCs: https://www.zynix.ai/solutions-fqhcs
-- For Independent Practices: https://www.zynix.ai/solutions-independent-practices
-- For ASCs: https://www.zynix.ai/solutions-ascs
-- ZynScribe (documentation): https://www.zynix.ai/zynscribe
+- Solutions hub (audiences + use cases): https://www.zynix.ai/solutions
+- ZynScribe (ambient documentation): https://www.zynix.ai/zynscribe
 - Care Plans: https://www.zynix.ai/care-plans
 - Security & Compliance: https://www.zynix.ai/security
 - About: https://www.zynix.ai/about
+- Press & Announcements: https://www.zynix.ai/press
 - Blog: https://www.zynix.ai/resources-blog
 - FAQ: https://www.zynix.ai/resources-faq
+- Case Studies (ACOs): https://www.zynix.ai/case-studies-acos
+- Case Studies (Health Systems): https://www.zynix.ai/case-studies-health-systems
+- Case Studies (Health Plans): https://www.zynix.ai/case-studies-health-plans
+- Case Studies (FQHCs): https://www.zynix.ai/case-studies-fqhcs
+- Case Studies (Practices): https://www.zynix.ai/case-studies-practices
+- Use Case — TCM / Post-Discharge: https://www.zynix.ai/solutions-use-case-tcm
+- Use Case — Gap Closure: https://www.zynix.ai/solutions-use-case-gap-closure
+- Use Case — After-Hours Triage: https://www.zynix.ai/solutions-use-case-after-hours
+- Use Case — Prior Auth: https://www.zynix.ai/solutions-use-case-prior-auth
+- Use Case — Preventive Screening: https://www.zynix.ai/solutions-use-case-preventive-screening
+- Use Case — Readmission Prevention: https://www.zynix.ai/solutions-use-case-readmission-prevention
 - Request a Demo: https://calendly.com/david-zynix-ai-calendar/30min
 
 ## Frequently Asked Questions
