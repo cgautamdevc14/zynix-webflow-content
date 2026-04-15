@@ -5009,7 +5009,35 @@
     '/blog/ai-agents-vs-chatbots-healthcare': '/resources/blog/ai-agents-vs-chatbots-healthcare',
 
     // Case studies
-    '/case-studies/palm-beach-aco': '/case-studies/pbaco'
+    '/case-studies/palm-beach-aco': '/case-studies/pbaco',
+
+    // ── SEMrush-flagged legacy 4XX URLs (Apr 2026 audit) ──
+    // Legacy /blog-<slug> → new CMS path /blog-posts/<slug>
+    '/blog-beyond-chatbots-autonomous-ai-agents-healthcare': '/blog-posts/beyond-chatbots-autonomous-ai-agents-healthcare',
+    '/blog-prior-authorization-bottlenecks-ai-automation-helps-providers': '/blog-posts/prior-authorization-bottlenecks-ai-automation-helps-providers',
+    '/blog-predictive-analytics-healthcare-ai-population-health-management': '/blog-posts/predictive-analytics-healthcare-ai-population-health-management',
+    '/blog-ai-changing-decision-making-healthcare': '/blog-posts/ai-changing-decision-making-healthcare',
+    '/blog-ai-medical-scribes-reduce-physician-burnout': '/blog-posts/ai-medical-scribes-reduce-physician-burnout',
+    '/blog-reducing-no-shows-behaviorally-intelligent-ai-scheduling-agents': '/blog-posts/reducing-no-shows-behaviorally-intelligent-ai-scheduling-agents',
+    '/blog-zynix-ai-surpasses-1-million-vbc-patients': '/blog-posts/zynix-ai-surpasses-1-million-vbc-patients',
+    '/blog-tools-driving-shift-value-based-healthcare': '/blog-posts/tools-driving-shift-value-based-healthcare',
+    '/blog-acos-consistent-30-day-post-discharge-program': '/blog-posts/acos-consistent-30-day-post-discharge-program',
+
+    // Legacy press deep-link → Press hub (fragment will be re-appended post-redirect)
+    '/press/pbaco-partnership': '/press',
+
+    // Legacy nested /agents/* → /agents hub (these paths 404 in Webflow routing)
+    '/agents/transitions-of-care': '/agents',
+    '/agents/operational-efficiency': '/agents',
+    '/agents/clinical-performance': '/agents',
+    '/agents/operational-efficiency/zynafterhours-triage': '/agents',
+    '/agents/operational-efficiency/zynschedule': '/agents',
+    '/agents/preventive-quality-activation/zynreminder': '/agents',
+
+    // Legacy /who-we-serve/* → /audience-segments/* (new V7 CMS path)
+    '/who-we-serve/acos-msos': '/audience-segments/acos-msos',
+    '/who-we-serve/health-plans': '/audience-segments/health-plans',
+    '/who-we-serve/fqhcs': '/audience-segments/fqhcs'
   };
 
   // ── PAGE ROUTER ──
@@ -11063,6 +11091,24 @@ function renderDataAnalyticsV7() {
       if (canonical !== p) {
         setMetaByAttr('name', 'robots', 'noindex, follow');
       }
+      // ── Self-referencing hreflang ──
+      // SEMrush flags pages missing a self-referencing hreflang ("No
+      // self-referencing hreflang"). Inject <link rel="alternate" hreflang="x-default">
+      // and hreflang="en" for every page, pointing at the canonical URL. This
+      // is a no-op for non-multilingual sites but satisfies SEMrush and Google
+      // hreflang validation.
+      function setAlternate(hreflang, href) {
+        var el = document.querySelector('link[rel="alternate"][hreflang="' + hreflang + '"]');
+        if (!el) {
+          el = document.createElement('link');
+          el.setAttribute('rel', 'alternate');
+          el.setAttribute('hreflang', hreflang);
+          document.head.appendChild(el);
+        }
+        el.setAttribute('href', href);
+      }
+      setAlternate('en', SITE_DOMAIN + canonical);
+      setAlternate('x-default', SITE_DOMAIN + canonical);
       // ── Social meta fallback ──
       // Inject og:* and twitter:* at parse time so scrapers that don't
       // execute injectSEO() (Facebook, LinkedIn, Slack, SEMrush crawlers)
