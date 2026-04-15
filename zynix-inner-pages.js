@@ -1352,7 +1352,7 @@
     // Announcement banner
     var announceBanner = document.createElement('div');
     announceBanner.className = 'zynix-announcement-bar';
-    announceBanner.innerHTML = '🎉 Zynix AI surpasses 1 Million VBC patients onboarded across 30 states <a href="/resources-blog-1m-patients">Read more</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
+    announceBanner.innerHTML = '<span style="background:#F16529;color:#fff;font-size:10px;font-weight:700;letter-spacing:1.5px;padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:middle">NEW</span> Zynix AI partners with Palm Beach ACO (PBACO Holding) to scale AI-driven patient outreach across value-based care <a href="/press#pbaco-partnership">Read the press release</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
 
     document.body.prepend(mobile);
     document.body.prepend(nav);
