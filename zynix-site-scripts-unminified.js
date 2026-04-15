@@ -1220,6 +1220,13 @@
     '/case-studies/apollo-clinic': { title: "Apollo Clinic Case Study | Zynix AI", desc: "Apollo Clinic Network reduced no-shows by 40% and recovered significant revenue with AI-powered scheduling and automated prior auth.", img: IMG.care, schema: 'Article' },
     '/case-studies/amistad': { title: "AMISTAD CHC Case Study | Zynix AI", desc: "AMISTAD Community Health Center deployed multilingual AI outreach in 15+ languages to close preventive care gaps and reduce ED utilization.", img: IMG.care, schema: 'Article' },
     '/case-studies/pbaco': { title: "Palm Beach ACO Case Study | Zynix AI", desc: "Palm Beach ACO achieved 85% TCM contact rates, 40% gap closure improvement, and 3x AWV lift using Zynix AI.", img: IMG.care, schema: 'Article' },
+    // Audience-segment CMS pages — override Webflow collection-template default "— AI Healthcare Solutions"
+    '/audience-segments/acos-msos': { title: "AI for ACOs & MSOs | Zynix AI", desc: "Drive shared savings in MSSP and ACO REACH with AI-powered TCM, HCC gap closure, and patient outreach. 85%+ TCM contact rates, 25% readmit reduction.", img: IMG.care, schema: 'Product' },
+    '/audience-segments/health-systems': { title: "AI for Health Systems | Zynix AI", desc: "Unified AI across multi-site health systems: ambient documentation, post-discharge coordination, prior auth, and gap closure at enterprise scale.", img: IMG.enterprise, schema: 'Product' },
+    '/audience-segments/health-plans': { title: "AI for Medicare Advantage Plans | Zynix AI", desc: "Improve Stars ratings, close HEDIS gaps, and scale member engagement with AI agents trusted by leading value-based payers nationwide.", img: IMG.analytics, schema: 'Product' },
+    '/audience-segments/fqhcs': { title: "AI for FQHCs | Zynix AI", desc: "Multilingual AI outreach in 15+ languages, SDoH routing, UDS quality measure tracking, and barrier-aware care for underserved populations.", img: IMG.patients, schema: 'Product' },
+    '/audience-segments/independent-group-practices': { title: "AI for Independent Practices | Zynix AI", desc: "Automate after-hours coverage, scheduling, and documentation across 5–50 physician practices. Cut no-shows 40% and deploy in weeks.", img: IMG.doctor, schema: 'Product' },
+    '/audience-segments/ascs': { title: "AI for Ambulatory Surgery Centers | Zynix AI", desc: "Accelerate prior auth 60%, reduce surgical cancellations, and streamline pre-op and post-op coordination for ambulatory surgery centers.", img: IMG.enterprise, schema: 'Product' },
     // V7: Use Case Pages (SEO populated dynamically from USE_CASE_SEO)
     // Wave 8: PAGE_SEO overrides — shorten titles <=60 chars and descriptions <=160 chars for SEMrush.
     '/platform-legacy': { title: 'Zynix Platform | Zynix AI', desc: 'Four-layer AI platform for value-based care: data, intelligence, agents, and care plan orchestration in one connected system.', img: IMG.enterprise, schema: 'Product' },
@@ -4736,7 +4743,7 @@
       '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_BOT + '</div><h3>AI Agents</h3><p>Seven specialized agents for outreach, scheduling, triage, documentation, reminders, prior auth, and fax processing.</p><a href="/agents" class="zynix-card-link">Learn more &rarr;</a></div>' +
       '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_FILE + '</div><h3>ZynScribe</h3><p>Ambient AI documentation that captures structured clinical notes in real-time during patient encounters.</p><a href="/zynscribe" class="zynix-card-link">Learn more &rarr;</a></div>' +
       '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_CLIPBOARD + '</div><h3>Care Plans</h3><p>Deployable, orchestrated care plans for TCM, CCM, AWV, HEDIS, and HCC closure, executed by AI agents.</p><a href="/care-plans" class="zynix-card-link">Learn more &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_BRAIN + '</div><h3>ZynixLLM</h3><p>Purpose-built healthcare language model that powers the entire platform. Gets smarter with every patient interaction.</p><a href="/company/zynixllm" class="zynix-card-link">Learn more &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_BRAIN + '</div><h3>ZynixLLM</h3><p>Purpose-built healthcare language model that powers the entire platform. Gets smarter with every patient interaction.</p><a href="/company-zynixllm" class="zynix-card-link">Learn more &rarr;</a></div>' +
       '</div></div></section>';
 
     // -- PLATFORM SCREENSHOTS --
@@ -4961,6 +4968,7 @@
     '/company-terms': '/terms-of-service',
     '/trust-center': '/security',
     '/company-trust-center': '/security',
+    '/company/zynixllm': '/company-zynixllm', // legacy nested path that 404s in Webflow
 
     // Resources — redirect old short paths to Webflow canonical pages
     '/faq': '/resources-faq',
