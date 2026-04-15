@@ -1,6 +1,19 @@
 # Zynix AI — llms.txt
 # AI-readable overview of zynix.ai for LLM indexing and generative AI search
-# Last updated: 2026-04-02
+# Last updated: 2026-04-14
+
+## Latest Announcement (2026-04-14)
+
+Zynix AI announced a strategic partnership with Palm Beach Accountable Care Organization and
+affiliated entities (PBACO Holding) to scale AI-driven patient outreach, ambient documentation,
+and workflow automation across its value-based care network. PBACO Holding is the largest ACO
+in 2026 by participant count and has generated $936,988,750 in Medicare Shared Savings Program
+savings — the highest in program history. Initial workflows: post-discharge follow-up (PDV)
+and Annual Wellness Visit (AWV) engagement via AI voice and SMS; expansion into ambient AI
+documentation. Press release: https://www.zynix.ai/press#pbaco-partnership
+Source: Business Wire (Apr 14, 2026).
+Quotes from: Jayadeva (Jay) Chowdappa, M.D., Co-Founder and CEO, Zynix AI; and David Klebonis,
+President & COO, PBACO Holding.
 
 ## Company
 
