@@ -27,3 +27,9 @@ Old path,New path
 /agents/operational-efficiency/zynafterhours-triage,/agents
 /agents/operational-efficiency/zynschedule,/agents
 /agents/preventive-quality-activation/zynreminder,/agents
+/solutions-use-case-tcm,/use-cases/post-discharge-follow-up
+/solutions-use-case-gap-closure,/use-cases/hcc-gap-closure-health-system-aco
+/solutions-use-case-readmission-prevention,/use-cases/post-discharge-tcm-readmission
+/solutions-use-case-after-hours,/use-cases/after-hours-triage-multi-site
+/solutions-use-case-prior-auth,/use-cases/prior-auth-high-volume-specialty
+/solutions-use-case-preventive-screening,/use-cases/preventive-screening-gap-fqhc

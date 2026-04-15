@@ -3373,7 +3373,7 @@
       '<p style="margin:0 0 4px;padding:0 20px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;font-weight:600">Products</p>' +
       '<a href="/zynix-data-analytics">Zynix Data Analytics</a><a href="/zynix-ai-agents">Zynix AI Agents</a><a href="/care-plans">Deployable Care Plans</a><a href="/zynscribe">ZynScribe</a>' +
       '<p style="margin:12px 0 4px;padding:0 20px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;font-weight:600;border-top:1px solid rgba(148,163,184,0.15);padding-top:12px">Use Cases</p>' +
-      '<a href="/solutions-use-case-tcm">Transitional Care (TCM)</a><a href="/solutions-use-case-gap-closure">Gap Closure</a><a href="/solutions-use-case-readmission-prevention">Readmission Prevention</a><a href="/solutions-use-case-after-hours">After-Hours &amp; Access</a><a href="/solutions-use-case-prior-auth">Prior Authorization</a><a href="/solutions-use-case-preventive-screening">Preventive Screening</a>' +
+      '<a href="/use-cases/post-discharge-follow-up">Transitional Care (TCM)</a><a href="/use-cases/hcc-gap-closure-health-system-aco">Gap Closure</a><a href="/use-cases/post-discharge-tcm-readmission">Readmission Prevention</a><a href="/use-cases/after-hours-triage-multi-site">After-Hours &amp; Access</a><a href="/use-cases/prior-auth-high-volume-specialty">Prior Authorization</a><a href="/use-cases/preventive-screening-gap-fqhc">Preventive Screening</a>' +
       '<a href="/solutions" style="color:#F16529;font-weight:600;margin-top:8px;display:block">View All Solutions &rarr;</a>' +
       '</div></div>' +
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Who We Serve &#9662;</button><div class="zynix-mobile-section-links">' +
@@ -5037,7 +5037,18 @@
     // Legacy /who-we-serve/* → /audience-segments/* (new V7 CMS path)
     '/who-we-serve/acos-msos': '/audience-segments/acos-msos',
     '/who-we-serve/health-plans': '/audience-segments/health-plans',
-    '/who-we-serve/fqhcs': '/audience-segments/fqhcs'
+    '/who-we-serve/fqhcs': '/audience-segments/fqhcs',
+    '/who-we-serve/health-systems': '/audience-segments/health-systems',
+    '/who-we-serve/ascs': '/audience-segments/ascs',
+    '/who-we-serve/independent-group-practices': '/audience-segments/independent-group-practices',
+
+    // Legacy /solutions-use-case-* → /use-cases/* CMS (SEMrush issue #8 — broken internal links)
+    '/solutions-use-case-tcm': '/use-cases/post-discharge-follow-up',
+    '/solutions-use-case-gap-closure': '/use-cases/hcc-gap-closure-health-system-aco',
+    '/solutions-use-case-readmission-prevention': '/use-cases/post-discharge-tcm-readmission',
+    '/solutions-use-case-after-hours': '/use-cases/after-hours-triage-multi-site',
+    '/solutions-use-case-prior-auth': '/use-cases/prior-auth-high-volume-specialty',
+    '/solutions-use-case-preventive-screening': '/use-cases/preventive-screening-gap-fqhc'
   };
 
   // ── PAGE ROUTER ──
