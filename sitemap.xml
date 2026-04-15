@@ -22,6 +22,24 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.zynix.ai/clinical-performance</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/operational-efficiency</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.zynix.ai/predictive-activation</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.zynix.ai/zynscribe</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
