@@ -6586,18 +6586,15 @@ function renderSMSProgram() {
     '<h2>4. Sample Messages</h2>' +
     '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:20px;margin:16px 0">' +
     '<p style="margin:0 0 12px;font-weight:600;color:#0f172a">Appointment Reminder:</p>' +
-    '<p style="margin:0;padding:12px 16px;background:#fff;border-radius:6px;border:1px solid #e2e8f0;font-family:monospace;font-size:14px;line-height:1.6;color:#334155">' +
-    'Zynix AI: Reminder — You have an appointment with Dr. Smith on Thu, Apr 17 at 2:00 PM. Reply YES to confirm or call (555) 123-4567 to reschedule. Reply STOP to opt out. Reply HELP for help. Msg &amp; data rates may apply. Privacy: https://www.zynix.ai/privacy-policy</p>' +
+    '<p style="margin:0;padding:12px 16px;background:#fff;border-radius:6px;border:1px solid #e2e8f0;font-family:monospace;font-size:14px;line-height:1.6;color:#334155">Zynix AI: Reminder &ndash; you have an appointment scheduled for tomorrow at 10 AM. Reply STOP to opt out.</p>' +
     '</div>' +
     '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:20px;margin:16px 0">' +
     '<p style="margin:0 0 12px;font-weight:600;color:#0f172a">Care Coordination Update:</p>' +
-    '<p style="margin:0;padding:12px 16px;background:#fff;border-radius:6px;border:1px solid #e2e8f0;font-family:monospace;font-size:14px;line-height:1.6;color:#334155">' +
-    'Zynix AI: Your care coordinator Sarah has an update on your care plan. Check your portal or reply to connect. Reply STOP to opt out. Reply HELP for help. Msg &amp; data rates may apply. Privacy: https://www.zynix.ai/privacy-policy</p>' +
+    '<p style="margin:0;padding:12px 16px;background:#fff;border-radius:6px;border:1px solid #e2e8f0;font-family:monospace;font-size:14px;line-height:1.6;color:#334155">Zynix AI: Your care team has an update regarding your recent visit. Reply STOP to opt out.</p>' +
     '</div>' +
     '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:20px;margin:16px 0">' +
-    '<p style="margin:0 0 12px;font-weight:600;color:#0f172a">Scheduling Notification:</p>' +
-    '<p style="margin:0;padding:12px 16px;background:#fff;border-radius:6px;border:1px solid #e2e8f0;font-family:monospace;font-size:14px;line-height:1.6;color:#334155">' +
-    'Zynix AI: Your follow-up visit has been scheduled for Mon, Apr 21 at 10:30 AM at Central Florida Primary Care. Reply STOP to opt out. Reply HELP for help. Msg &amp; data rates may apply. Privacy: https://www.zynix.ai/privacy-policy</p>' +
+    '<p style="margin:0 0 12px;font-weight:600;color:#0f172a">Welcome / Confirmation Message:</p>' +
+    '<p style="margin:0;padding:12px 16px;background:#fff;border-radius:6px;border:1px solid #e2e8f0;font-family:monospace;font-size:14px;line-height:1.6;color:#334155">Zynix AI: You&rsquo;re subscribed to appointment reminders &amp; care updates. Msg frequency varies. Msg &amp; data rates may apply. Reply HELP for help. Reply STOP to opt out.</p>' +
     '</div>' +
 
     '<h2>5. How to Opt Out (STOP)</h2>' +
