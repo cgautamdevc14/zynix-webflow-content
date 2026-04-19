@@ -5094,7 +5094,18 @@
     '/untitled-28': '/products-analytics',
     '/untitled-29': '/agents',
     '/untitled-30': '/resources-blog',
-    '/untitled-31': '/resources-blog'
+    '/untitled-31': '/resources-blog',
+
+    // Apr 19, 2026 — legacy /blog-<competitor>-alternative-zynix-ai URLs currently 404
+    // but ranking #1 for "<competitor> alternative" queries in SEMrush. Redirect to the
+    // comparison pages to preserve ranking and serve real content on arrival.
+    '/blog-innovaccer-alternative-zynix-ai': '/compare-zynix-vs-innovaccer',
+    '/blog-health-catalyst-alternative-zynix-ai': '/compare-zynix-vs-health-catalyst',
+    '/blog-commure-alternative-zynix-ai': '/compare-zynix-vs-commure',
+    '/blog-abridge-alternative-zynix-ai': '/compare-zynix-vs-abridge',
+    '/blog-navina-alternative-zynix-ai': '/compare-zynix-vs-navina',
+    '/blog-olive-ai-alternative-zynix-ai': '/compare-zynix-vs-olive-ai',
+    '/blog-notable-health-alternative-zynix-ai': '/compare-zynix-vs-notable-health'
   };
 
   // ── PAGE ROUTER ──
