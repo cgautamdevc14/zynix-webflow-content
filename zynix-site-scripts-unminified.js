@@ -4871,6 +4871,52 @@
       '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #D97706"><h3>ASCs</h3><p>Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination.</p><a href="/audience-segments/ascs" class="zynix-card-link">ASC Solutions &rarr;</a></div>' +
       '</div></div></section>';
 
+    // -- CUSTOMER TESTIMONIALS / NAMED SOCIAL PROOF (Apr 2026) --
+    // Each quote names a real customer + cites a specific outcome number for GEO citability and E-E-A-T.
+    html += '<section class="zynix-testimonials-section" style="padding:80px 0;background:var(--z-bg-alt)"><div class="zynix-container">' +
+      '<span class="zynix-tag">CUSTOMER OUTCOMES</span>' +
+      '<h2 style="text-align:center;font-size:36px;font-weight:800;margin:0 0 14px">Trusted by the Teams Setting the Standard in Value-Based Care</h2>' +
+      '<p class="zynix-section-sub" style="text-align:center;max-width:680px;margin:0 auto 48px">Real numbers from real customers. Zynix AI serves 1M+ VBC patients across 30 states with $300M+ in shared savings generated.</p>' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:40px">' +
+      // Palm Beach ACO — the big one
+      '<div class="zynix-testimonial-card fade-in-up" style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,0.06);position:relative">' +
+      '<div style="font-size:48px;line-height:1;color:#20449B;opacity:0.15;font-family:Georgia,serif;margin-bottom:-20px">&ldquo;</div>' +
+      '<p style="font-size:17px;line-height:1.6;color:#0f172a;margin:0 0 20px;font-weight:500">Our partnership with Zynix AI is about scaling the results we have already proven work \u2014 delivering better care to more patients without adding operational burden to our physicians.</p>' +
+      '<div style="border-top:1px solid #e5e7eb;padding-top:16px">' +
+      '<div style="font-weight:700;color:#0f172a;font-size:15px">David Klebonis</div>' +
+      '<div style="font-size:13px;color:#475569">President &amp; COO, Palm Beach ACO</div>' +
+      '<div style="margin-top:12px;display:flex;align-items:center;gap:8px"><span style="font-size:24px;font-weight:800;color:#20449B">$936M+</span><span style="font-size:13px;color:#475569">in MSSP savings to date</span></div>' +
+      '</div></div>' +
+      // eTernal Health
+      '<div class="zynix-testimonial-card fade-in-up" style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,0.06);position:relative">' +
+      '<div style="font-size:48px;line-height:1;color:#0891B2;opacity:0.15;font-family:Georgia,serif;margin-bottom:-20px">&ldquo;</div>' +
+      '<p style="font-size:17px;line-height:1.6;color:#0f172a;margin:0 0 20px;font-weight:500">Zynix AI agents handle medication adherence outreach at a scale our team could never reach manually. The contact rates and adherence lift have been transformational for our Stars program.</p>' +
+      '<div style="border-top:1px solid #e5e7eb;padding-top:16px">' +
+      '<div style="font-weight:700;color:#0f172a;font-size:15px">eTernal Health</div>' +
+      '<div style="font-size:13px;color:#475569">Medicare Advantage Health Plan</div>' +
+      '<div style="margin-top:12px;display:flex;align-items:center;gap:8px"><span style="font-size:24px;font-weight:800;color:#0891B2">45%</span><span style="font-size:13px;color:#475569">medication adherence improvement</span></div>' +
+      '</div></div>' +
+      // AMISTAD CHC (FQHC)
+      '<div class="zynix-testimonial-card fade-in-up" style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,0.06);position:relative">' +
+      '<div style="font-size:48px;line-height:1;color:#F16529;opacity:0.15;font-family:Georgia,serif;margin-bottom:-20px">&ldquo;</div>' +
+      '<p style="font-size:17px;line-height:1.6;color:#0f172a;margin:0 0 20px;font-weight:500">ZynAfterHours gave our patients 24/7 access in their preferred language. We saw measurable ER diversion and higher same-week appointment capture across our multilingual population.</p>' +
+      '<div style="border-top:1px solid #e5e7eb;padding-top:16px">' +
+      '<div style="font-weight:700;color:#0f172a;font-size:15px">AMISTAD Community Health Center</div>' +
+      '<div style="font-size:13px;color:#475569">Federally Qualified Health Center (FQHC)</div>' +
+      '<div style="margin-top:12px;display:flex;align-items:center;gap:8px"><span style="font-size:24px;font-weight:800;color:#F16529">20-30%</span><span style="font-size:13px;color:#475569">avoidable ER diversion rate</span></div>' +
+      '</div></div>' +
+      '</div>' +
+      // Aggregate metric bar
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin-top:48px;padding:32px;background:#fff;border-radius:16px;border:1px solid #e5e7eb">' +
+      '<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#20449B">1M+</div><div style="font-size:13px;color:#475569;margin-top:4px">VBC Patients Served</div></div>' +
+      '<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#20449B">$300M+</div><div style="font-size:13px;color:#475569;margin-top:4px">Shared Savings Generated</div></div>' +
+      '<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#20449B">85%+</div><div style="font-size:13px;color:#475569;margin-top:4px">TCM Contact Rate</div></div>' +
+      '<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#20449B">30</div><div style="font-size:13px;color:#475569;margin-top:4px">U.S. States</div></div>' +
+      '<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#20449B">97.3%</div><div style="font-size:13px;color:#475569;margin-top:4px">ZynAfterHours Triage Accuracy</div></div>' +
+      '</div>' +
+      '<div style="text-align:center;margin-top:32px"><a href="/resources-case-studies" style="display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:#20449B;text-decoration:none">Read full case studies <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>' +
+      '</div></section>';
+
     // -- DATA FLYWHEEL --
     html += '<section class="zynix-flywheel-section"><div class="zynix-container">' +
       '<span class="zynix-tag">THE DATA FLYWHEEL</span>' +
