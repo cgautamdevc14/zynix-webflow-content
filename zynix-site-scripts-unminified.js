@@ -1819,9 +1819,9 @@
       '<a href="https://www.instagram.com/zynixai/" target="_blank" rel="noopener" aria-label="Instagram">' + SVG_INSTAGRAM + '</a>' +
       '</div></div>' +
       '<div class="zynix-footer-col"><h4>SOLUTIONS</h4><a href="/platform">Platform</a><a href="/zynix-data-analytics">Data Analytics</a><a href="/zynix-ai-agents">AI Agents</a><a href="/care-plans">Care Plans</a><a href="/zynscribe">ZynScribe</a><a href="/integrations">Integrations</a></div>' +
-      '<div class="zynix-footer-col"><h4>WHO WE SERVE</h4><a href="/who-we-serve/health-systems">Health Systems</a><a href="/who-we-serve/acos-msos">ACOs &amp; MSOs</a><a href="/who-we-serve/health-plans">Health Plans</a><a href="/who-we-serve/independent-group-practices">Group Practices</a><a href="/who-we-serve/ascs">ASCs</a><a href="/who-we-serve/fqhcs">FQHCs</a></div>' +
+      '<div class="zynix-footer-col"><h4>WHO WE SERVE</h4><a href="/audience-segments/health-systems">Health Systems</a><a href="/audience-segments/acos-msos">ACOs &amp; MSOs</a><a href="/audience-segments/health-plans">Health Plans</a><a href="/audience-segments/independent-group-practices">Group Practices</a><a href="/audience-segments/ascs">ASCs</a><a href="/audience-segments/fqhcs">FQHCs</a></div>' +
       '<div class="zynix-footer-col"><h4>COMPANY</h4><a href="/about">About</a><a href="/company-zynixllm">ZynixLLM</a><a href="/press">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a><a href="/contact">Contact Us</a></div>' +
-      '<div class="zynix-footer-col"><h4>RESOURCES</h4><a href="/resources-case-studies">Case Studies</a><a href="/use-cases">Use Cases</a><a href="/resources-blog">Blog</a><a href="/resources-faq">FAQ</a><a href="/resources-webinars">Webinars</a><a href="/resources-whitepapers">Whitepapers</a><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a></div>' +
+      '<div class="zynix-footer-col"><h4>RESOURCES</h4><a href="/resources-case-studies">Case Studies</a><a href="/use-cases">Use Cases</a><a href="/resources-blog">Blog</a><a href="/press">Press Releases</a><a href="/resources-faq">FAQ</a><a href="/resources-webinars">Webinars</a><a href="/resources-whitepapers">Whitepapers</a><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a></div>' +
       '</div>' +
       '<div class="zynix-footer-compliance">' +
       '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_HIPAA + '</div><div><strong>HIPAA</strong><span>Compliant</span></div></div>' +
@@ -1984,15 +1984,7 @@
     ]) +
     '</div></section>' +
 
-    '<section class="zynix-screenshot-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">INSIDE THE PLATFORM</span>' +
-    '<h2>Built for Healthcare Operations</h2>' +
-    '<p class="zynix-section-sub">Real product screenshots from the Zynix AI platform — provider dashboards, care management, and AI agent workflows.</p>' +
-    '<div class="zynix-screenshot-strip">' +
-    renderBrowserFrame(IMG.ssPortal, 'Zynix AI provider dashboard with clinical quality metrics, AWV completion, operational KPIs, and care gap overview', 'app.zynix.ai/dashboard') +
-    renderBrowserFrame(IMG.ssCareManagement, 'Zynix AI care management console showing attributed patients, readmission risk scores, and care coordinator workflows', 'app.zynix.ai/care-management') +
-    renderBrowserFrame(IMG.ssACO, 'Zynix AI ACO owner dashboard with population-level quality metrics, financial impact, utilization trends, and risk recapture', 'app.zynix.ai/aco/overview') +
-    '</div></div></section>' +
+    // (Inside the Platform screenshot strip removed per Apr 2026 request — dashboard images had inconsistent dimensions; revisit when unified product shot set is available)
 
     '<section class="zynix-flywheel-section"><div class="zynix-container">' +
     '<span class="zynix-tag">THE DATA FLYWHEEL</span>' +
@@ -2777,7 +2769,7 @@
     '<section id="team" style="padding:80px 0"><div class="zynix-container">' +
     '<span class="zynix-tag">OUR TEAM</span>' +
     '<h2>Leadership</h2>' +
-    '<p class="zynix-section-sub">60+ team members across Seattle, Tampa, and Bengaluru. Physician-led. Engineer-driven.</p>' +
+    '<p class="zynix-section-sub">Physician-led. Engineer-driven. Building the AI operating system that executes value-based care at scale.</p>' +
     '<div class="zynix-feature-grid" style="margin-top:40px">' +
 
     // Jay
@@ -2818,10 +2810,10 @@
     // TEAM STATS
     '<section style="padding:60px 0;background:var(--z-bg-alt)"><div class="zynix-container">' +
     '<div class="zynix-metrics-bar" style="margin:0">' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">60+</span><span class="zynix-metric-label">Team Members</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">3</span><span class="zynix-metric-label">Offices (Seattle, Tampa, Bengaluru)</span></div>' +
     '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">1M+</span><span class="zynix-metric-label">Patients Served</span></div>' +
     '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">30</span><span class="zynix-metric-label">States</span></div>' +
+    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">10+</span><span class="zynix-metric-label">ACOs</span></div>' +
+    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">$150M+</span><span class="zynix-metric-label">Shared Savings</span></div>' +
     '</div></div></section>' +
 
     renderCTA('Join Us in Transforming Healthcare', 'See how Zynix is building the future of healthcare intelligence.', 'Request a Demo') +
@@ -3342,6 +3334,7 @@
           '<div class="zynix-mega-col">' +
             al('/resources-case-studies','Case Studies','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>','Real customer outcomes') +
             al('/resources-blog','Blog','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>','Insights &amp; analysis') +
+            al('/press','Press Releases','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>','Newsroom &amp; announcements') +
             al('/resources-webinars','Webinars &amp; Events','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>','On-demand &amp; live sessions') +
             al('/resources-faq','FAQ','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>','Common questions') +
             al('/resources-glossary','Glossary','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>','Healthcare AI terms') +
@@ -3392,9 +3385,9 @@
       '<a href="/solutions" style="color:#F16529;font-weight:600;margin-top:8px;display:block">View All Solutions &rarr;</a>' +
       '</div></div>' +
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Who We Serve &#9662;</button><div class="zynix-mobile-section-links">' +
-      '<a href="/who-we-serve/health-systems">Health Systems</a><a href="/who-we-serve/acos-msos">ACOs &amp; MSOs</a><a href="/who-we-serve/health-plans">Health Plans</a><a href="/who-we-serve/independent-group-practices">Group Practices</a><a href="/who-we-serve/ascs">ASCs</a><a href="/who-we-serve/fqhcs">FQHCs</a></div></div>' +
+      '<a href="/audience-segments/health-systems">Health Systems</a><a href="/audience-segments/acos-msos">ACOs &amp; MSOs</a><a href="/audience-segments/health-plans">Health Plans</a><a href="/audience-segments/independent-group-practices">Group Practices</a><a href="/audience-segments/ascs">ASCs</a><a href="/audience-segments/fqhcs">FQHCs</a></div></div>' +
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Resources &#9662;</button><div class="zynix-mobile-section-links">' +
-      '<a href="/resources-case-studies">Case Studies</a><a href="/use-cases">Use Cases</a><a href="/resources-blog">Blog</a><a href="/resources-webinars">Webinars &amp; Events</a><a href="/resources-faq">FAQ</a><a href="/resources-glossary">Glossary</a><a href="/resources-whitepapers">Whitepapers</a></div></div>' +
+      '<a href="/resources-case-studies">Case Studies</a><a href="/use-cases">Use Cases</a><a href="/resources-blog">Blog</a><a href="/press">Press Releases</a><a href="/resources-webinars">Webinars &amp; Events</a><a href="/resources-faq">FAQ</a><a href="/resources-glossary">Glossary</a><a href="/resources-whitepapers">Whitepapers</a></div></div>' +
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Company &#9662;</button><div class="zynix-mobile-section-links">' +
       '<a href="/about">About</a><a href="/company-zynixllm">ZynixLLM</a><a href="/press">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a></div></div>' +
       '<a href="/contact" class="zynix-mobile-link" style="display:block;padding:14px 20px;font-weight:600;color:var(--z-text)">Contact Us</a>' +
@@ -4858,12 +4851,12 @@
       '<h2>Purpose-Built for Value-Based Healthcare</h2>' +
       '<p class="zynix-section-sub">Zynix serves organizations responsible for outcomes, cost, quality, and operations.</p>' +
       '<div class="zynix-feature-grid">' +
-      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid var(--z-blue)"><h3>ACOs &amp; MSOs</h3><p>TCM execution, AWV completion, shared savings optimization, and quality performance.</p><a href="/who-we-serve/acos-msos" class="zynix-card-link">ACO Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid var(--z-accent)"><h3>Health Systems</h3><p>Readmission reduction, unified patient engagement, post-discharge coordination at scale.</p><a href="/who-we-serve/health-systems" class="zynix-card-link">Health System Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid var(--z-success)"><h3>Health Plans</h3><p>Stars ratings improvement, HCC gap closure, member engagement, avoidable ER reduction.</p><a href="/who-we-serve/health-plans" class="zynix-card-link">Health Plan Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #7C3AED"><h3>FQHCs</h3><p>Multilingual AI for underserved populations, quality payments maximization, care management at scale.</p><a href="/who-we-serve/fqhcs" class="zynix-card-link">FQHC Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #0891B2"><h3>Independent Practices</h3><p>No-show reduction, after-hours coverage, appointment scheduling, documentation time savings.</p><a href="/who-we-serve/independent-group-practices" class="zynix-card-link">Practice Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #D97706"><h3>ASCs</h3><p>Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination.</p><a href="/who-we-serve/ascs" class="zynix-card-link">ASC Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid var(--z-blue)"><h3>ACOs &amp; MSOs</h3><p>TCM execution, AWV completion, shared savings optimization, and quality performance.</p><a href="/audience-segments/acos-msos" class="zynix-card-link">ACO Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid var(--z-accent)"><h3>Health Systems</h3><p>Readmission reduction, unified patient engagement, post-discharge coordination at scale.</p><a href="/audience-segments/health-systems" class="zynix-card-link">Health System Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid var(--z-success)"><h3>Health Plans</h3><p>Stars ratings improvement, HCC gap closure, member engagement, avoidable ER reduction.</p><a href="/audience-segments/health-plans" class="zynix-card-link">Health Plan Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #7C3AED"><h3>FQHCs</h3><p>Multilingual AI for underserved populations, quality payments maximization, care management at scale.</p><a href="/audience-segments/fqhcs" class="zynix-card-link">FQHC Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #0891B2"><h3>Independent Practices</h3><p>No-show reduction, after-hours coverage, appointment scheduling, documentation time savings.</p><a href="/audience-segments/independent-group-practices" class="zynix-card-link">Practice Solutions &rarr;</a></div>' +
+      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #D97706"><h3>ASCs</h3><p>Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination.</p><a href="/audience-segments/ascs" class="zynix-card-link">ASC Solutions &rarr;</a></div>' +
       '</div></div></section>';
 
     // -- DATA FLYWHEEL --
