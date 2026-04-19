@@ -1,437 +1,422 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Zynix AI sitemap — generated 2026-04-14. Only canonical URLs returning 200. -->
+  <!-- Zynix AI sitemap — updated 2026-04-19. Only canonical URLs returning 200 with index,follow. -->
 
   <url>
     <loc>https://www.zynix.ai/</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/platform</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/agents</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/clinical-performance</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/operational-efficiency</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/predictive-activation</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/zynscribe</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/care-plans</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/products-data-platform</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/products-analytics</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/company-zynixllm</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/solutions</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Audience Segments — canonical /audience-segments/* CMS paths -->
+  <url>
+    <loc>https://www.zynix.ai/audience-segments/acos-msos</loc>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/acos-msos</loc>
-    <lastmod>2026-04-14</lastmod>
+    <loc>https://www.zynix.ai/audience-segments/health-systems</loc>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/ascs</loc>
-    <lastmod>2026-04-14</lastmod>
+    <loc>https://www.zynix.ai/audience-segments/health-plans</loc>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/fqhcs</loc>
-    <lastmod>2026-04-14</lastmod>
+    <loc>https://www.zynix.ai/audience-segments/fqhcs</loc>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/health-plans</loc>
-    <lastmod>2026-04-14</lastmod>
+    <loc>https://www.zynix.ai/audience-segments/ascs</loc>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/health-systems</loc>
-    <lastmod>2026-04-14</lastmod>
+    <loc>https://www.zynix.ai/audience-segments/independent-group-practices</loc>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://www.zynix.ai/independent-group-practices</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+
   <url>
     <loc>https://www.zynix.ai/use-cases</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/solutions-use-case-after-hours</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/about</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/company-trust-center</loc>
-    <lastmod>2026-04-14</lastmod>
+    <loc>https://www.zynix.ai/security</loc>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/integrations</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.zynix.ai/careers</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.zynix.ai/security</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/roi-calculator</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/contact</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/press</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/case-studies/amistad</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/case-studies/apollo-clinic</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/case-studies/nhs</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/case-studies/pbaco</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/resources-blog</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/resources-case-studies</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/resources-faq</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/resources-glossary</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources-webinars</loc>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.zynix.ai/resources-whitepapers</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/resources-blog-1m-patients</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/resources-blog-lead-model-cms</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/after-hours-call-handling-group-practices</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/after-hours-ed-diversion</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/after-hours-triage-multi-site</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/after-hours-triage-multilingual-fqhc</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/appointment-scheduling-no-show</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/ccm-billing-chronic-care</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/chronic-care-coordination-scale</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/fax-inbound-document-routing</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/hcc-gap-closure-health-system-aco</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/hcc-gap-raf-optimization</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/hcc-risk-adjustment-ma</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/hedis-stars-quality-improvement</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/high-utilizer-member-management</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/medication-adherence-chronic-populations</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/medication-adherence-complex-chronic</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/physician-documentation-ambient-ai</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/post-discharge-follow-up</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/post-discharge-followup-fqhc</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/post-discharge-ma-members</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/post-discharge-tcm-readmission</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/post-procedure-followup-complication</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/preventive-screening-gap-fqhc</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/prior-auth-high-volume-specialty</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/prior-auth-surgical-procedures</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/prior-auth-workflow-management</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/referral-coordination-leakage</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/referral-intake-asc</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/rising-risk-patient-outreach</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/sdoh-screening-care-navigation</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/use-cases/surgical-scheduling-pre-procedure</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/privacy-policy</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.zynix.ai/terms-of-service</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

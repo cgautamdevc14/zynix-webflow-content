@@ -1117,7 +1117,7 @@
     '/compare-zynix-vs-commure': { title: 'Zynix AI vs Commure: The Turnkey Commure Alternative for Healthcare', desc: 'Looking for a Commure alternative? Zynix AI is a turnkey healthcare AI operating system \u2014 no custom engineering required. Deploy in 4\u20138 weeks with pre-built care plans and 7 autonomous agents.', img: IMG.enterprise, schema: 'Organization' },
     '/compare-zynix-vs-health-catalyst': { title: 'Zynix AI vs Health Catalyst: The Health Catalyst Alternative Built to Act', desc: 'Looking for a Health Catalyst alternative? Zynix AI combines the data platform Health Catalyst is known for with autonomous AI agents that take clinical action \u2014 closing gaps, reducing readmissions, and capturing shared savings.', img: IMG.enterprise, schema: 'Organization' },
     '/compare-zynix-vs-abridge': { title: 'Zynix AI vs Abridge: The Abridge Alternative With a Full Care Platform', desc: 'Looking for an Abridge alternative? ZynScribe matches Abridge on ambient clinical documentation, then extends into 11 more AI agents covering care coordination, TCM, scheduling, and HCC closure.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare-zynix-vs-navina': { title: 'Zynix AI vs Navina: The Navina Alternative That Executes, Not Just Summarizes', desc: 'Looking for a Navina alternative? Navina summarizes patient charts at the point of care. Zynix AI executes the care itself \u2014 calling patients, closing gaps, scheduling AWVs, and running full TCM workflows.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-navina': { title: 'Zynix AI vs Navina: AI That Executes, Not Just Summarizes', desc: 'Looking for a Navina alternative? Navina summarizes patient charts at the point of care. Zynix AI executes the care itself \u2014 calling patients, closing gaps, scheduling AWVs, and running full TCM workflows.', img: IMG.enterprise, schema: 'Organization' },
     '/compare-zynix-vs-olive-ai': { title: 'Zynix AI vs Olive AI: The Olive AI Alternative Focused on Value-Based Care', desc: 'Looking for an Olive AI alternative now that Olive has wound down? Zynix AI is the healthcare AI operating system purpose-built for value-based care \u2014 ACOs, health plans, and FQHCs. 1M+ patients served.', img: IMG.enterprise, schema: 'Organization' },
     '/compare-zynix-vs-notable-health': { title: 'Zynix AI vs Notable Health: The Notable Alternative for ACOs and VBC', desc: 'Looking for a Notable Health alternative? Zynix AI is the ACO-native healthcare AI platform. 85%+ TCM contact rates, HCC gap closure, and $300M+ in shared savings across 30 states.', img: IMG.enterprise, schema: 'Organization' },
     '/blog/what-is-value-based-care-ai': { title: 'What is Value-Based Care AI? Guide [2026]', desc: 'Value-based care AI automates care coordination, closes quality gaps, and optimizes risk adjustment for ACOs and health systems. Learn how VBC AI works.', img: IMG.analytics, schema: 'Article', datePublished: '2026-03-01' },
@@ -5151,7 +5151,23 @@
     '/blog-abridge-alternative-zynix-ai': '/compare-zynix-vs-abridge',
     '/blog-navina-alternative-zynix-ai': '/compare-zynix-vs-navina',
     '/blog-olive-ai-alternative-zynix-ai': '/compare-zynix-vs-olive-ai',
-    '/blog-notable-health-alternative-zynix-ai': '/compare-zynix-vs-notable-health'
+    '/blog-notable-health-alternative-zynix-ai': '/compare-zynix-vs-notable-health',
+
+    // Apr 19, 2026 — Webflow CMS /blog-posts/* template URLs → canonical /blog/* paths
+    // Fixes: SEMrush non-canonical sitemap entries + hreflang conflict (no self-referencing)
+    '/blog-posts/essential-ai-tools-medical-professionals': '/blog/essential-ai-tools-medical-professionals',
+    '/blog-posts/documentation-crisis-physician-burnout': '/blog/documentation-crisis-physician-burnout',
+
+    // Archived/legacy pages → canonical destinations
+    '/zz-archived-products-ai-agents-zynauth': '/agents',
+
+    // Flat audience-segment slugs → canonical /audience-segments/* CMS paths
+    '/acos-msos': '/audience-segments/acos-msos',
+    '/health-systems': '/audience-segments/health-systems',
+    '/health-plans': '/audience-segments/health-plans',
+    '/fqhcs': '/audience-segments/fqhcs',
+    '/ascs': '/audience-segments/ascs',
+    '/independent-group-practices': '/audience-segments/independent-group-practices'
   };
 
   // ── PAGE ROUTER ──
@@ -8339,6 +8355,13 @@ function renderDataAnalyticsV7() {
     '/who-we-serve/independent-group-practices': renderWhoWeServeIndependentPractices,
     '/who-we-serve/ascs': renderWhoWeServeASCs,
     '/who-we-serve/fqhcs': renderWhoWeServeFQHCs,
+    // Audience Segments CMS template paths (Webflow generates /audience-segments/{slug})
+    '/audience-segments/health-systems': renderWhoWeServeHealthSystems,
+    '/audience-segments/acos-msos': renderWhoWeServeACOs,
+    '/audience-segments/health-plans': renderWhoWeServeHealthPlans,
+    '/audience-segments/independent-group-practices': renderWhoWeServeIndependentPractices,
+    '/audience-segments/ascs': renderWhoWeServeASCs,
+    '/audience-segments/fqhcs': renderWhoWeServeFQHCs,
     // V7: Integrations
     '/integrations': renderIntegrations,
     // V7: Company
@@ -11010,6 +11033,17 @@ function renderDataAnalyticsV7() {
         var metaDesc = document.querySelector('meta[name="description"]');
         if (!metaDesc) { metaDesc = document.createElement('meta'); metaDesc.name = 'description'; document.head.appendChild(metaDesc); }
         metaDesc.content = post.s || '';
+        // Fix hreflang: add self-referencing en + x-default (fixes SEMrush "no self-referencing hreflang" error)
+        var postCanonical = 'https://www.zynix.ai' + path;
+        var cnl=document.querySelector('link[rel="canonical"]');
+        if(!cnl){cnl=document.createElement('link');cnl.rel='canonical';document.head.appendChild(cnl);}
+        cnl.href=postCanonical;
+        var hrel=document.querySelector('link[hreflang="en"]');
+        if(!hrel){hrel=document.createElement('link');hrel.rel='alternate';hrel.hreflang='en';document.head.appendChild(hrel);}
+        hrel.href=postCanonical;
+        var xdef=document.querySelector('link[hreflang="x-default"]');
+        if(!xdef){xdef=document.createElement('link');xdef.rel='alternate';xdef.hreflang='x-default';document.head.appendChild(xdef);}
+        xdef.href=postCanonical;
         var sc = document.createElement('script');
         sc.type = 'application/ld+json';
         sc.textContent = JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':post.t,'description':post.s,'author':{'@type':'Person','name':post.a || 'Zynix AI'},'publisher':{'@type':'Organization','name':'Zynix AI','url':'https://www.zynix.ai'},'datePublished':post.d,'mainEntityOfPage':{'@type':'WebPage','@id':'https://www.zynix.ai' + path}});
@@ -11047,6 +11081,9 @@ function renderDataAnalyticsV7() {
     // 404 — unmatched route: show branded 404 page
     var do404 = function() {
       document.title = 'Page Not Found | Zynix AI';
+      var rbt=document.querySelector('meta[name="robots"]');
+      if(!rbt){rbt=document.createElement('meta');rbt.setAttribute('name','robots');document.head.appendChild(rbt);}
+      rbt.setAttribute('content','noindex, nofollow');
       injectMegaMenu();
       injectAfterNav(render404());
       initAnimations();
