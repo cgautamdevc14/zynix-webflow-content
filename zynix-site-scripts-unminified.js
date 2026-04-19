@@ -2780,7 +2780,7 @@
     '<h3 style="font-size:20px;font-weight:700;margin:0 0 4px">Jay Chowdappa, MD</h3>' +
     '<p style="font-size:14px;color:var(--z-accent);font-weight:600;margin:0 0 12px">CEO & Co-Founder</p>' +
     '<p style="font-size:13px;color:var(--z-text-secondary);line-height:1.7;max-width:320px;margin:0 auto">Physician executive with 30+ years in healthcare. Founded and operated six successful Medicare ACOs with over $300M in total shared savings. Co-founded Assurity DCE. Built Zynix to close the gap between healthcare intelligence and execution.</p>' +
-    '<a href="https://www.linkedin.com/in/jaychowdappa/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--z-blue);font-weight:500;text-decoration:none">' + SVG_LINKEDIN + ' LinkedIn</a>' +
+    '<a href="https://www.linkedin.com/in/jayadeva-jay-chowdappa-m-d-6b221616/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--z-blue);font-weight:500;text-decoration:none">' + SVG_LINKEDIN + ' LinkedIn</a>' +
     '</div>' +
 
     // Gautamdev
@@ -2791,7 +2791,7 @@
     '<h3 style="font-size:20px;font-weight:700;margin:0 0 4px">Gautamdev Chowdary</h3>' +
     '<p style="font-size:14px;color:var(--z-accent);font-weight:600;margin:0 0 12px">CTO & Co-Founder</p>' +
     '<p style="font-size:13px;color:var(--z-text-secondary);line-height:1.7;max-width:320px;margin:0 auto">Technology leader who built AI systems for the USDA achieving 94.6% accuracy and saving millions. Architected ZynixLLM and the four-layer platform powering autonomous healthcare agents across 30 states.</p>' +
-    '<a href="https://www.linkedin.com/in/gautamdevchowdary/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--z-blue);font-weight:500;text-decoration:none">' + SVG_LINKEDIN + ' LinkedIn</a>' +
+    '<a href="https://www.linkedin.com/in/cgautamdevc/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--z-blue);font-weight:500;text-decoration:none">' + SVG_LINKEDIN + ' LinkedIn</a>' +
     '</div>' +
 
     // David
@@ -2802,7 +2802,7 @@
     '<h3 style="font-size:20px;font-weight:700;margin:0 0 4px">David McDonald</h3>' +
     '<p style="font-size:14px;color:var(--z-accent);font-weight:600;margin:0 0 12px">VP of Sales</p>' +
     '<p style="font-size:13px;color:var(--z-text-secondary);line-height:1.7;max-width:320px;margin:0 auto">Healthcare sales executive specializing in value-based care technology. Leads go-to-market for ACOs, health systems, and health plans. Connects healthcare operations leaders with AI solutions that deliver measurable ROI.</p>' +
-    '<a href="https://www.linkedin.com/in/david-mcdonald-healthcare/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--z-blue);font-weight:500;text-decoration:none">' + SVG_LINKEDIN + ' LinkedIn</a>' +
+    '<a href="https://www.linkedin.com/in/mcdonalddavidl/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--z-blue);font-weight:500;text-decoration:none">' + SVG_LINKEDIN + ' LinkedIn</a>' +
     '</div>' +
 
     '</div></div></section>' +
@@ -4346,7 +4346,7 @@
       { name: 'Central Florida ACO', logo: GH + 'central-florida-aco-logo.svg' },
       { name: 'GoldenCare ACO', logo: GH + 'goldencare-aco.png' },
       { name: 'NEXT Healthcare', logo: GH + 'next-healthcare.svg' },
-      { name: 'eTernal Health', logo: GH + 'eternal-health.jpg' },
+      { name: 'eTernal Health', logo: GH + 'eternal-health.png' },
       { name: 'AMISTAD CHC', logo: GH + 'amistad-chc.png' },
       { name: 'Professional Radiology', logo: GH + 'professional-radiology.png' },
       { name: 'Sunflower ACO', logo: GH + 'sunflower-aco.png' },
