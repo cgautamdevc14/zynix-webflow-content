@@ -1111,6 +1111,7 @@
     '/resources-whitepapers': { title: 'Whitepapers & Reports | Zynix AI', desc: 'Download research on healthcare AI including AWV optimization, post-discharge follow-up, and care management at scale from Zynix AI.', img: IMG.hero, schema: 'Organization' },
     '/company-privacy': { title: 'Privacy Policy | Zynix AI', desc: 'Zynix AI privacy policy detailing how we collect, use, and protect your personal and health-related information across our healthcare AI platform.', img: IMG.hero, schema: 'Organization' },
     '/company-terms': { title: 'Terms of Service | Zynix AI', desc: 'Review the Zynix AI terms of service governing use of our healthcare AI platform, data processing agreements, and related professional services offerings.', img: IMG.hero, schema: 'Organization' },
+    '/alternatives': { title: 'Healthcare AI Alternatives: Zynix AI Compared | Zynix AI', desc: 'Zynix AI compared against Innovaccer, Health Catalyst, Commure, Abridge, Navina, Olive AI, and Notable Health. See why teams switch: autonomous AI agents, 4\u20138 week deployment, $300M+ in shared savings.', img: IMG.enterprise, schema: 'Organization' },
     '/compare-zynix-vs-point-solutions': { title: 'Zynix AI vs Point Solutions: A Unified Healthcare AI Alternative', desc: 'Looking for a healthcare AI alternative to fragmented point solutions? Compare Zynix AI\u2019s unified operating system against single-feature tools. 85%+ TCM contact rates, 30 states, 1M+ patients.', img: IMG.enterprise, schema: 'Organization' },
     '/compare-zynix-vs-innovaccer': { title: 'Zynix AI vs Innovaccer: The Innovaccer Alternative That Executes Care', desc: 'Looking for an Innovaccer alternative? Zynix AI deploys autonomous AI agents that act on insights \u2014 calling patients, closing gaps, and documenting care \u2014 while Innovaccer stops at analytics.', img: IMG.enterprise, schema: 'Organization' },
     '/compare-zynix-vs-commure': { title: 'Zynix AI vs Commure: The Turnkey Commure Alternative for Healthcare', desc: 'Looking for a Commure alternative? Zynix AI is a turnkey healthcare AI operating system \u2014 no custom engineering required. Deploy in 4\u20138 weeks with pre-built care plans and 7 autonomous agents.', img: IMG.enterprise, schema: 'Organization' },
@@ -3344,6 +3345,7 @@
           '<div class="zynix-mega-col">' +
             al('/resources-case-studies','Case Studies','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>','Real customer outcomes') +
             al('/resources-blog','Blog','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>','Insights &amp; analysis') +
+            al('/alternatives','Zynix Alternatives','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3"/></svg>','Compared vs Innovaccer, Abridge &amp; more') +
             al('/press','Press Releases','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>','Newsroom &amp; announcements') +
             al('/resources-webinars','Webinars &amp; Events','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>','On-demand &amp; live sessions') +
             al('/resources-faq','FAQ','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>','Common questions') +
@@ -5096,11 +5098,9 @@
     '/untitled-30': '/resources-blog',
     '/untitled-31': '/resources-blog',
 
-    // Apr 19, 2026 — legacy /blog-<competitor>-alternative-zynix-ai URLs currently 404
-    // but ranking #1 for "<competitor> alternative" queries in SEMrush. Redirect to the
-    // comparison pages to preserve ranking and serve real content on arrival.
-    '/blog-innovaccer-alternative-zynix-ai': '/compare-zynix-vs-innovaccer',
-    '/blog-health-catalyst-alternative-zynix-ai': '/compare-zynix-vs-health-catalyst',
+    // Apr 19, 2026 — legacy /blog-<competitor>-alternative-zynix-ai URLs that still 404.
+    // Note: /blog-innovaccer-alternative-zynix-ai and /blog-health-catalyst-alternative-zynix-ai
+    // are NOT redirected — they exist as dedicated pages now (created Apr 19 2026).
     '/blog-commure-alternative-zynix-ai': '/compare-zynix-vs-commure',
     '/blog-abridge-alternative-zynix-ai': '/compare-zynix-vs-abridge',
     '/blog-navina-alternative-zynix-ai': '/compare-zynix-vs-navina',
@@ -8217,6 +8217,7 @@ function renderDataAnalyticsV7() {
     '/sms-consent': renderSMSConsent,
     '/company-terms': renderTermsV7,
     // Comparison Pages
+    '/alternatives': renderAlternativesHub,
     '/compare-zynix-vs-point-solutions': renderComparePointSolutions,
     '/compare-zynix-vs-innovaccer': renderCompareInnovaccer,
     '/compare-zynix-vs-commure': renderCompareCommure,
@@ -8668,6 +8669,59 @@ function renderDataAnalyticsV7() {
       }
     }
     window.addEventListener('scroll', scrollDepthHandler, { passive: true });
+  }
+
+  // ── PAGE: /alternatives hub — concentrates internal PageRank to every competitor compare page ──
+  function renderAlternativesHub() {
+    var comps = [
+      { name: 'Innovaccer', slug: 'innovaccer', blurb: 'The Innovaccer alternative that executes care. Autonomous AI agents that call patients, close HCC gaps, and run TCM workflows — not just analytics dashboards.' },
+      { name: 'Health Catalyst', slug: 'health-catalyst', blurb: 'The Health Catalyst alternative built for value-based care. Data platform + AI agents that act on insights, close gaps, and capture shared savings.' },
+      { name: 'Commure', slug: 'commure', blurb: 'The Commure alternative that deploys in 4–8 weeks with zero custom engineering. Turnkey AI operating system for ACOs, health systems, and practices.' },
+      { name: 'Abridge', slug: 'abridge', blurb: 'The Abridge alternative with a full care platform. ZynScribe matches Abridge on ambient documentation, then extends into 11 more AI agents covering TCM, scheduling, and HCC closure.' },
+      { name: 'Navina', slug: 'navina', blurb: 'The Navina alternative that executes, not just summarizes. Point-of-care HCC prep plus autonomous agents that operate between visits.' },
+      { name: 'Olive AI', slug: 'olive-ai', blurb: 'The Olive AI replacement for teams migrating off the shutdown. Stable, VBC-native platform covering prior auth, TCM, and care coordination.' },
+      { name: 'Notable Health', slug: 'notable-health', blurb: 'The Notable Health alternative for value-based care. ACO-native platform with $300M+ in shared savings generated and HCC closure workflows.' },
+      { name: 'Point Solutions', slug: 'point-solutions', blurb: 'The unified alternative to stitched-together vendor stacks. One platform, one contract, one integration for the entire VBC workflow.' }
+    ];
+    var cards = '';
+    comps.forEach(function(c) {
+      cards += '<a href="/compare-zynix-vs-' + c.slug + '" class="zx-alt-card" style="display:block;padding:28px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-decoration:none;transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">' +
+        '<h3 style="font-size:20px;font-weight:700;color:#0f172a;margin:0">' + c.name + '</h3>' +
+        '<span style="font-size:14px;color:#20449B;font-weight:600">See comparison &rarr;</span>' +
+        '</div>' +
+        '<p style="font-size:15px;line-height:1.6;color:#475569;margin:0">' + c.blurb + '</p>' +
+        '</a>';
+    });
+    return renderInnerHero('THE ZYNIX ALTERNATIVE', 'Zynix AI Compared Against Every Major Healthcare AI Platform',
+      'One place to see how Zynix AI stacks up against Innovaccer, Health Catalyst, Commure, Abridge, Navina, Olive AI, Notable Health, and more. Autonomous AI agents. Turnkey deployment. Purpose-built for value-based care.',
+      IMG.enterprise, 'Zynix AI alternatives hub') +
+    '<section style="padding:60px 0;background:var(--z-bg-alt)"><div class="zynix-container">' +
+    '<div class="zynix-summary-block">Healthcare AI buyers typically evaluate 5–10 vendors before choosing a platform. This page summarizes how Zynix AI compares to the most commonly evaluated alternatives — on execution, time to value, pricing, and outcomes.</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;margin-top:40px">' +
+    cards +
+    '</div></div></section>' +
+    '<section style="padding:60px 0"><div class="zynix-container"><div style="max-width:820px;margin:0 auto">' +
+    '<h2 style="font-size:32px;font-weight:800;margin:0 0 24px">Why teams switch to Zynix AI</h2>' +
+    '<ul style="font-size:17px;line-height:1.8;color:#334155;padding-left:24px">' +
+    '<li><strong>Autonomous AI agents, not dashboards.</strong> 12 production agents that call patients, schedule visits, reconcile medications, and close care gaps. 1M+ patient interactions completed.</li>' +
+    '<li><strong>Purpose-built for value-based care.</strong> $300M+ in Medicare Shared Savings generated across ACO customers. 85%+ TCM contact rates vs 30–40% industry average.</li>' +
+    '<li><strong>Turnkey deployment.</strong> 4–8 weeks to go live. No custom development, no data warehouse build, no dedicated IT team required.</li>' +
+    '<li><strong>Transparent pricing.</strong> PMPM or per-patient with no implementation surcharge. Organizations typically achieve positive ROI within the first quarter.</li>' +
+    '<li><strong>Native EHR integration.</strong> Epic, Cerner/Oracle Health, athenahealth, eClinicalWorks, NextGen via FHIR R4 and HL7 v2. Most integrations live in 2–4 weeks.</li>' +
+    '<li><strong>SOC 2 Type II certified, HIPAA compliant, HITRUST ready.</strong> No PHI stored outside HIPAA-compliant environments.</li>' +
+    '</ul>' +
+    '<h2 style="font-size:32px;font-weight:800;margin:40px 0 24px">FAQ: Choosing a Healthcare AI Alternative</h2>' +
+    '<div class="zynix-faq-list">' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Which Innovaccer alternative is best for ACOs?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>For ACOs specifically, Zynix AI is the strongest Innovaccer alternative because it combines the data platform Innovaccer provides with autonomous AI agents that execute TCM, HCC gap closure, and patient outreach — the operational work that actually drives shared savings. Zynix has generated $300M+ in MSSP shared savings across ACO customers and partners with Palm Beach ACO, the largest ACO in the country.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Is there a Health Catalyst alternative for smaller organizations?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Yes. Zynix AI is designed for healthcare organizations of any size — ACOs, MSOs, health plans, FQHCs, and independent practices — not just large enterprise health systems with mature analytics teams. Zynix deploys in 4–8 weeks with no dedicated IT staff required, compared to Health Catalyst enterprise deployments that typically take 9–18 months.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Is Zynix AI a good Abridge alternative for clinical documentation?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Yes. ZynScribe matches Abridge on ambient clinical documentation — SOAP note generation, ICD-10/CPT coding, direct EHR upload. The differentiator is that ZynScribe ships inside a full care platform. Pre-visit HCC gap prep flows into each encounter, and scribe outputs flow into RAF optimization and quality measure tracking.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What should organizations migrating off Olive AI consider?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Olive AI shut down in 2024, leaving customers needing alternatives for revenue cycle, prior authorization, and utilization management. Zynix AI is a stable, VBC-focused replacement: ZynAuth reduces prior-auth turnaround by 60%, and the broader agent suite covers post-discharge, HCC gap closure, and care coordination. Migration typically completes in 4–8 weeks.</p></div></div>' +
+    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How long does a typical Zynix AI migration from another platform take?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Most migrations complete in 4–8 weeks from kickoff to go-live. Zynix ingests data from the same sources most competitor platforms use (EHR via FHIR R4 and HL7 v2, claims, ADT, labs, pharmacy, SDOH) and can run in parallel with the legacy system during transition if needed. Pre-built VBC care plan templates mean workflows are live on day one.</p></div></div>' +
+    '</div>' +
+    '</div></div></section>' +
+    renderCTA('Ready to Compare Zynix AI?', 'Schedule a 30-minute demo showing exactly how Zynix outperforms your current platform.', 'Request a Demo') +
+    renderFooter();
   }
 
   // ── PAGE: Compare — Zynix vs Point Solutions ──
