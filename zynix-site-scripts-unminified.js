@@ -945,7 +945,12 @@
     // Compare pages — keep the operating-system metaphor (that's the comparison frame)
     '/compare-zynix-vs-point-solutions': VIS_PLATFORM,
     '/compare-zynix-vs-innovaccer': VIS_PLATFORM,
-    '/compare-zynix-vs-commure': VIS_PLATFORM
+    '/compare-zynix-vs-commure': VIS_PLATFORM,
+    '/compare-zynix-vs-health-catalyst': VIS_PLATFORM,
+    '/compare-zynix-vs-abridge': VIS_PLATFORM,
+    '/compare-zynix-vs-navina': VIS_PLATFORM,
+    '/compare-zynix-vs-olive-ai': VIS_PLATFORM,
+    '/compare-zynix-vs-notable-health': VIS_PLATFORM
   };
   function getPathVis() {
     try {
@@ -1106,9 +1111,14 @@
     '/resources-whitepapers': { title: 'Whitepapers & Reports | Zynix AI', desc: 'Download research on healthcare AI including AWV optimization, post-discharge follow-up, and care management at scale from Zynix AI.', img: IMG.hero, schema: 'Organization' },
     '/company-privacy': { title: 'Privacy Policy | Zynix AI', desc: 'Zynix AI privacy policy detailing how we collect, use, and protect your personal and health-related information across our healthcare AI platform.', img: IMG.hero, schema: 'Organization' },
     '/company-terms': { title: 'Terms of Service | Zynix AI', desc: 'Review the Zynix AI terms of service governing use of our healthcare AI platform, data processing agreements, and related professional services offerings.', img: IMG.hero, schema: 'Organization' },
-    '/compare-zynix-vs-point-solutions': { title: 'Zynix AI vs Point Solutions | Zynix AI', desc: 'Compare the Zynix unified AI operating system against fragmented point solutions for value-based care. See why leading ACOs choose one platform.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare-zynix-vs-innovaccer': { title: 'Zynix AI vs Innovaccer | Zynix AI', desc: 'Compare Zynix AI and Innovaccer head to head. Zynix delivers autonomous AI agents that take action while Innovaccer focuses on data aggregation.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare-zynix-vs-commure': { title: 'Zynix AI vs Commure | Zynix AI', desc: 'Compare Zynix AI and Commure for healthcare operations. Zynix is a turnkey AI operating system while Commure requires custom engineering.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-point-solutions': { title: 'Zynix AI vs Point Solutions: A Unified Healthcare AI Alternative', desc: 'Looking for a healthcare AI alternative to fragmented point solutions? Compare Zynix AI\u2019s unified operating system against single-feature tools. 85%+ TCM contact rates, 30 states, 1M+ patients.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-innovaccer': { title: 'Zynix AI vs Innovaccer: The Innovaccer Alternative That Executes Care', desc: 'Looking for an Innovaccer alternative? Zynix AI deploys autonomous AI agents that act on insights \u2014 calling patients, closing gaps, and documenting care \u2014 while Innovaccer stops at analytics.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-commure': { title: 'Zynix AI vs Commure: The Turnkey Commure Alternative for Healthcare', desc: 'Looking for a Commure alternative? Zynix AI is a turnkey healthcare AI operating system \u2014 no custom engineering required. Deploy in 4\u20138 weeks with pre-built care plans and 7 autonomous agents.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-health-catalyst': { title: 'Zynix AI vs Health Catalyst: The Health Catalyst Alternative Built to Act', desc: 'Looking for a Health Catalyst alternative? Zynix AI combines the data platform Health Catalyst is known for with autonomous AI agents that take clinical action \u2014 closing gaps, reducing readmissions, and capturing shared savings.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-abridge': { title: 'Zynix AI vs Abridge: The Abridge Alternative With a Full Care Platform', desc: 'Looking for an Abridge alternative? ZynScribe matches Abridge on ambient clinical documentation, then extends into 11 more AI agents covering care coordination, TCM, scheduling, and HCC closure.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-navina': { title: 'Zynix AI vs Navina: The Navina Alternative That Executes, Not Just Summarizes', desc: 'Looking for a Navina alternative? Navina summarizes patient charts at the point of care. Zynix AI executes the care itself \u2014 calling patients, closing gaps, scheduling AWVs, and running full TCM workflows.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-olive-ai': { title: 'Zynix AI vs Olive AI: The Olive AI Alternative Focused on Value-Based Care', desc: 'Looking for an Olive AI alternative now that Olive has wound down? Zynix AI is the healthcare AI operating system purpose-built for value-based care \u2014 ACOs, health plans, and FQHCs. 1M+ patients served.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-notable-health': { title: 'Zynix AI vs Notable Health: The Notable Alternative for ACOs and VBC', desc: 'Looking for a Notable Health alternative? Zynix AI is the ACO-native healthcare AI platform. 85%+ TCM contact rates, HCC gap closure, and $300M+ in shared savings across 30 states.', img: IMG.enterprise, schema: 'Organization' },
     '/blog/what-is-value-based-care-ai': { title: 'What is Value-Based Care AI? Guide [2026]', desc: 'Value-based care AI automates care coordination, closes quality gaps, and optimizes risk adjustment for ACOs and health systems. Learn how VBC AI works.', img: IMG.analytics, schema: 'Article', datePublished: '2026-03-01' },
     '/blog/how-ai-closes-care-gaps': { title: 'How AI Closes Care Gaps | Zynix AI', desc: 'Discover how AI automates HCC, RAF, and quality measure gap closure from identification through patient outreach to confirmed resolution.', img: IMG.care, schema: 'Article', datePublished: '2026-03-10' },
     '/blog/ai-agents-vs-chatbots-healthcare': { title: 'AI Agents vs Chatbots in Healthcare', desc: 'Healthcare AI agents take autonomous action while chatbots only answer questions. Learn the key differences and why agents deliver better outcomes.', img: IMG.doctor, schema: 'Article', datePublished: '2026-03-15' },
@@ -8199,6 +8209,11 @@ function renderDataAnalyticsV7() {
     '/compare-zynix-vs-point-solutions': renderComparePointSolutions,
     '/compare-zynix-vs-innovaccer': renderCompareInnovaccer,
     '/compare-zynix-vs-commure': renderCompareCommure,
+    '/compare-zynix-vs-health-catalyst': renderCompareHealthCatalyst,
+    '/compare-zynix-vs-abridge': renderCompareAbridge,
+    '/compare-zynix-vs-navina': renderCompareNavina,
+    '/compare-zynix-vs-olive-ai': renderCompareOliveAI,
+    '/compare-zynix-vs-notable-health': renderCompareNotableHealth,
     // Blog Posts
     '/blog/what-is-value-based-care-ai': renderBlogVBCAI,
     '/blog/how-ai-closes-care-gaps': renderBlogCareGaps,
@@ -8777,6 +8792,134 @@ function renderDataAnalyticsV7() {
     renderCTA('Build vs. Deploy: See the Difference', 'Request a demo and see how Zynix delivers results in weeks, not months of development.', 'Request a Demo') +
     renderFooter();
   }
+
+  // ── Generic comparison page builder — used by all new /compare-zynix-vs-* routes ──
+  function renderCompareVs(cfg) {
+    // cfg: { name, summary, rows[{label, them, us}], verdict, faqs[{q,a}] }
+    var html = renderInnerHero('COMPARISON', 'Zynix AI vs. ' + cfg.name, 'Looking for a ' + cfg.name + ' alternative for value-based care? Compare Zynix AI against ' + cfg.name + ' on the capabilities that move clinical and financial outcomes.', IMG.enterprise, 'Zynix AI vs ' + cfg.name + ' comparison — the ' + cfg.name + ' alternative for value-based care') +
+    '<section class="zynix-compare-section" style="padding:80px 0"><div class="zynix-container">' +
+    '<div class="zynix-summary-block">' + cfg.summary + '</div>' +
+    '<h2 style="text-align:center;font-size:32px;font-weight:700;margin:48px 0 32px;color:var(--z-text)">Feature-by-Feature Comparison</h2>' +
+    '<div class="zynix-compare-two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px">' +
+    '<div class="zynix-compare-card" style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:32px">' +
+    '<h3 style="font-size:20px;font-weight:700;margin:0 0 20px;color:var(--z-text)">' + cfg.name + '</h3>';
+    cfg.rows.forEach(function(r, i) {
+      var last = (i === cfg.rows.length - 1);
+      html += '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 ' + (last ? '0' : '16px') + '"><strong>' + r.label + ':</strong> ' + r.them + '</p>';
+    });
+    html += '</div>' +
+    '<div class="zynix-compare-card zynix-card-zynix" style="background:linear-gradient(135deg,#f0f7ff 0%,#fff 100%);border:2px solid var(--z-primary);border-radius:12px;padding:32px">' +
+    '<h3 style="font-size:20px;font-weight:700;margin:0 0 20px;color:var(--z-primary)">Zynix AI</h3>';
+    cfg.rows.forEach(function(r, i) {
+      var last = (i === cfg.rows.length - 1);
+      html += '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0 0 ' + (last ? '0' : '16px') + '"><strong>' + r.label + ':</strong> ' + r.us + '</p>';
+    });
+    html += '</div></div>' +
+    '<div class="zynix-compare-verdict" style="background:var(--z-blue-light);border-radius:12px;padding:40px;text-align:center;margin:40px 0">' +
+    '<h3 style="font-size:24px;font-weight:700;color:var(--z-text);margin:0 0 16px">The Verdict</h3>' +
+    '<p style="font-size:17px;line-height:1.8;color:var(--z-text-secondary);margin:0 auto 24px;max-width:700px">' + cfg.verdict + '</p>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">See the Zynix Difference &rarr;</a>' +
+    '</div>' +
+    '<div class="zynix-page-faq" style="max-width:720px;margin:48px auto 0">' +
+    '<h2 style="font-size:28px;font-weight:700;text-align:center;margin:0 0 32px;color:var(--z-text)">Frequently Asked Questions</h2>';
+    cfg.faqs.forEach(function(f) {
+      html += '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">' + f.q + '</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>' + f.a + '</p></div></div>';
+    });
+    html += '</div></div></section>' +
+    renderCTA('See How Zynix Compares to ' + cfg.name, 'Request a personalized demo and see why leading healthcare organizations choose Zynix over ' + cfg.name + '.', 'Request a Demo') +
+    renderFooter();
+    return html;
+  }
+
+  function renderCompareHealthCatalyst() { return renderCompareVs({
+    name: 'Health Catalyst',
+    summary: '<strong>Zynix AI</strong> is a healthcare AI operating system for value-based care that deploys autonomous AI agents to close care gaps, reduce readmissions, and capture shared savings. <strong>Health Catalyst</strong> is a data platform and analytics provider focused on enterprise data warehousing, BI dashboards, and professional services. The core difference: Zynix executes the work; Health Catalyst reports on it.',
+    rows: [
+      { label: 'AI Agents', them: 'Health Catalyst provides analytics dashboards and population health reporting but does not operate autonomous AI agents that call patients, schedule visits, reconcile medications, or close care gaps. Execution is left to the health system\u2019s staff.', us: 'Seven autonomous AI agents for post-discharge follow-up, HCC gap closure, after-hours triage, scheduling, medication reconciliation, prior auth, and reminders \u2014 all executing against your attributed population 24/7.' },
+      { label: 'Value-Based Care Focus', them: 'Broad analytics use cases across quality, finance, and operations. VBC is one vertical among many. Not purpose-built for ACO, MSSP, or REACH economics.', us: 'Purpose-built for value-based care. $300M+ in shared savings generated. 85%+ TCM contact rates vs. 30\u201340% industry average. Pre-built care plans for TCM, CCM, AWV, HEDIS, and HCC.' },
+      { label: 'Time to Value', them: 'Enterprise data warehouse implementations typically take 9\u201318 months. Analytics-led engagements rely on ongoing professional services and internal analytics teams to realize value.', us: '4\u20138 weeks to go live with measurable outcomes in the first quarter. No data warehouse build required \u2014 Zynix normalizes data as it ingests.' },
+      { label: 'Total Cost', them: 'Enterprise licensing, implementation services, and dedicated analytics staffing drive total cost of ownership into seven figures annually for large health systems.', us: 'Transparent PMPM or per-patient pricing with no implementation surcharge. Organizations typically achieve positive ROI within the first year from gap closure and avoided readmissions alone.' },
+      { label: 'Who It\u2019s Built For', them: 'Large health systems with mature analytics teams and multi-year digital transformation budgets.', us: 'ACOs, MSOs, health plans, FQHCs, health systems, and independent practices of any size. No analytics team required.' }
+    ],
+    verdict: 'Health Catalyst is a strong analytics platform for organizations with the budget, staff, and timeline to build out a full data warehouse program. Zynix AI is the operating layer that turns those insights into action \u2014 and for most value-based care organizations, it\u2019s the direct path to measurable outcomes without the 18-month analytics build.',
+    faqs: [
+      { q: 'Is Zynix AI a Health Catalyst alternative?', a: 'Yes. Zynix AI is used by ACOs, health plans, and health systems as an alternative to analytics-only platforms like Health Catalyst. Zynix includes the data layer Health Catalyst provides, then adds autonomous AI agents that execute care \u2014 closing gaps, running TCM workflows, and capturing shared savings automatically.' },
+      { q: 'Can I replace Health Catalyst with Zynix?', a: 'Many organizations do. Zynix ingests, normalizes, and analyzes the same data sources Health Catalyst uses (EHR, claims, ADT, labs), then extends into care execution. For value-based care use cases specifically, Zynix typically replaces the Health Catalyst deployment entirely.' },
+      { q: 'How does pricing compare?', a: 'Health Catalyst is typically priced as an enterprise license plus professional services, reaching seven figures annually for large deployments. Zynix is priced per-member-per-month or per-patient with a transparent model and no implementation surcharge. Contact info@zynix.ai for a custom quote.' }
+    ]
+  }); }
+
+  function renderCompareAbridge() { return renderCompareVs({
+    name: 'Abridge',
+    summary: '<strong>Zynix AI</strong> is a full healthcare AI operating system that includes ambient clinical documentation (ZynScribe) alongside 11 other autonomous AI agents covering care coordination, TCM, scheduling, and HCC closure. <strong>Abridge</strong> is an ambient scribe \u2014 an excellent one \u2014 but it focuses on a single workflow: the visit note.',
+    rows: [
+      { label: 'Scope', them: 'Ambient clinical documentation only. Captures the patient-provider conversation and generates SOAP notes. Does not touch pre-visit prep, post-visit follow-up, care coordination, or population health.', us: 'Ambient scribe (ZynScribe) plus 11 more AI agents: post-discharge follow-up, HCC gap closure, after-hours triage, scheduling, medication reconciliation, prior auth, reminders, fax, AWV outreach, patients-not-seen re-engagement, and care management.' },
+      { label: 'EHR Workflow', them: 'Standalone ambient scribe that uploads notes to the EHR. No workflow integration beyond note delivery.', us: 'ZynScribe ships as both a Chrome extension embedded inside your EHR (eClinicalWorks, Epic, athenahealth) and a mobile app. Includes pre-visit HCC gap prep, real-time coding suggestions, and direct EHR upload.' },
+      { label: 'Value-Based Care', them: 'Not focused on VBC outcomes. Abridge\u2019s outputs do not feed into shared-savings calculations, HCC RAF optimization, or HEDIS measures.', us: 'Purpose-built for VBC. Scribe output flows into RAF optimization, HCC closure workflows, and quality measure tracking. 1M+ VBC patients served across 30+ states.' },
+      { label: 'Customer Outcomes', them: 'Reported 70\u201380% reduction in documentation time for participating clinicians.', us: '70% reduction in physician documentation burden (ZynScribe), plus 85%+ TCM contact rates, 40% no-show reduction, 25% readmission reduction, and $300M+ in shared savings across the full agent suite.' },
+      { label: 'Pricing', them: 'Per-clinician subscription pricing. Scales with documentation volume.', us: 'PMPM or per-patient pricing that covers the entire agent suite. Organizations get scribe plus 11 more agents for typically less than the per-clinician cost of a standalone scribe product.' }
+    ],
+    verdict: 'Abridge is best-in-class for ambient clinical documentation. If that\u2019s the only problem you\u2019re solving, Abridge is a great pick. But for healthcare organizations that need documentation plus care coordination, TCM, HCC closure, and population-health execution, Zynix AI delivers the scribe and eleven more AI agents in a unified platform \u2014 typically at lower total cost.',
+    faqs: [
+      { q: 'How does ZynScribe compare to Abridge for ambient documentation?', a: 'ZynScribe delivers comparable note quality, speaker diarization, and ICD-10/CPT coding suggestions as Abridge. The differentiation isn\u2019t the scribe itself \u2014 it\u2019s that ZynScribe ships inside a full care platform. Pre-visit HCC gap prep flows into the encounter, and scribe outputs flow back into RAF optimization and quality measure tracking.' },
+      { q: 'Can I just use Abridge for scribe and Zynix for everything else?', a: 'Technically yes, but most organizations consolidate on Zynix because a single platform keeps data, coding, and clinical decision support synchronized. Running two systems introduces integration complexity and data gaps that reduce ROI on both.' },
+      { q: 'Does Zynix have Epic and Cerner integrations like Abridge?', a: 'Yes. Zynix integrates with Epic, Cerner/Oracle Health, athenahealth, eClinicalWorks, NextGen, and any FHIR R4 or HL7 v2-capable EHR. Most Epic deployments go live in 2\u20134 weeks.' }
+    ]
+  }); }
+
+  function renderCompareNavina() { return renderCompareVs({
+    name: 'Navina',
+    summary: '<strong>Zynix AI</strong> is a healthcare AI operating system that executes care \u2014 autonomous agents calling patients, closing gaps, scheduling visits, and running end-to-end TCM workflows. <strong>Navina</strong> is a clinical decision support tool that summarizes the patient chart at the point of care for the physician. The core difference: Navina informs the visit; Zynix runs the care program around it.',
+    rows: [
+      { label: 'Scope', them: 'Point-of-care AI copilot that summarizes patient history, flags risk factors, and surfaces coding opportunities for the clinician during the visit. Action is left to the clinician and care team.', us: 'Point-of-care coding support (via ZynScribe pre-visit review) plus autonomous AI agents that operate outside the visit \u2014 calling patients, closing gaps, scheduling AWVs, and completing TCM workflows between encounters.' },
+      { label: 'Between-Visit Execution', them: 'Minimal. Navina\u2019s value concentrates at the visit itself. Patient outreach, follow-up calls, gap closure, and TCM are handled by existing care staff without Navina\u2019s help.', us: 'Between-visit execution is the core of the Zynix offering. Post-Discharge agent calls within 48 hours of discharge. HCC agent closes gaps on attributed populations. ZynSchedule handles patient scheduling requests 24/7.' },
+      { label: 'Value-Based Care Outcomes', them: 'Reported 20\u201340% lift in HCC capture when physicians adopt Navina during visits.', us: '85%+ TCM contact rates (vs. 30\u201340% industry average), 40% gap closure improvement, 25% readmission reduction, $300M+ in shared savings. Outcomes span the full population, not just patients who show up for visits.' },
+      { label: 'Complementary or Competitive', them: 'Complementary to many platforms \u2014 Navina plugs in at the point of care.', us: 'Zynix includes Navina-style pre-visit prep via ZynScribe and extends it with execution agents. Most Navina customers can consolidate onto Zynix; some keep both temporarily during transition.' },
+      { label: 'Target Buyer', them: 'CMO or chief quality officer focused on visit-level HCC capture and coding accuracy.', us: 'CMO, COO, chief population health officer, chief growth officer at ACOs, health systems, health plans, FQHCs, and practices. Zynix covers the full VBC stack, not just the visit.' }
+    ],
+    verdict: 'Navina is a strong point-of-care copilot for physicians focused on HCC capture during the encounter. Zynix AI delivers that same pre-visit intelligence through ZynScribe, plus the population-level execution \u2014 calling patients, closing gaps, running TCM \u2014 that actually drives shared savings and star ratings.',
+    faqs: [
+      { q: 'Is Zynix AI a Navina alternative?', a: 'Yes. Zynix AI includes Navina-style pre-visit HCC gap prep inside ZynScribe, and extends into autonomous agents that operate between visits. Most Navina customers evaluating broader VBC platforms consolidate onto Zynix.' },
+      { q: 'Can we keep Navina and add Zynix?', a: 'Yes, though most organizations consolidate over time. Zynix ingests the same data sources Navina uses and surfaces the same HCC gap intelligence at the point of care, plus executes outreach workflows Navina doesn\u2019t cover.' },
+      { q: 'Does Zynix work during the patient encounter the way Navina does?', a: 'Yes. ZynScribe runs as a Chrome extension inside Epic, athenahealth, eClinicalWorks, and other EHRs \u2014 surfacing open HCC gaps, recent ADT events, and coding opportunities as the clinician opens the chart.' }
+    ]
+  }); }
+
+  function renderCompareOliveAI() { return renderCompareVs({
+    name: 'Olive AI',
+    summary: '<strong>Zynix AI</strong> is a healthcare AI operating system purpose-built for value-based care \u2014 ACOs, health plans, FQHCs, and health systems. <strong>Olive AI</strong> wound down operations in 2024, leaving customers needing to migrate off its revenue cycle and prior-auth automation products. Zynix is a stable, ACO-native destination for teams transitioning from Olive.',
+    rows: [
+      { label: 'Business Continuity', them: 'Olive AI shut down in 2024 after raising over $800M. Former customers have been migrating to alternatives for revenue cycle automation, prior auth, and utilization management.', us: 'Zynix is a stable, growing company with a 2026 partnership with Palm Beach ACO (the largest ACO in the country), 1M+ VBC patients served, and 30+ state deployments.' },
+      { label: 'Product Scope', them: 'Olive focused on revenue cycle management, prior authorization automation, and utilization management. Minimal focus on clinical care coordination or value-based care outcomes.', us: 'Zynix covers VBC end-to-end: 12 AI agents spanning post-discharge TCM, HCC gap closure, after-hours triage, scheduling, ambient documentation, medication reconciliation, and prior auth.' },
+      { label: 'Target Market', them: 'Large health systems with RCM automation budgets and dedicated IT teams.', us: 'ACOs, MSOs, health plans, FQHCs, health systems, and independent practices. Turnkey deployment with no dedicated IT team required.' },
+      { label: 'Prior Auth', them: 'Olive\u2019s prior auth product (Olive Helps) was a flagship offering and is no longer supported.', us: 'ZynAuth reduces prior-auth turnaround by 60%. Deployed across ASCs, health systems, and specialty practices. Still growing and fully supported.' },
+      { label: 'Data Integration', them: 'Olive required significant integration investment for each customer deployment.', us: 'Zynix integrates with Epic, Cerner, athenahealth, eClinicalWorks, and NextGen via FHIR R4 and HL7 v2. Most deployments go live in 2\u20134 weeks.' }
+    ],
+    verdict: 'Olive AI is no longer a viable choice. If your organization is migrating off Olive \u2014 particularly for prior authorization, utilization management, or care coordination \u2014 Zynix AI is the most direct path forward. Zynix is stable, VBC-focused, and typically deploys in weeks rather than the months Olive\u2019s implementations required.',
+    faqs: [
+      { q: 'Is Zynix a good replacement for Olive AI?', a: 'Yes. Zynix is a stable, production-ready healthcare AI platform with active customers across 30 states. Organizations migrating from Olive typically find Zynix covers their prior auth and care coordination needs, plus extends into TCM, HCC closure, and ambient documentation.' },
+      { q: 'How quickly can we migrate from Olive to Zynix?', a: 'Most migrations complete in 4\u20138 weeks from kickoff to go-live. Zynix integrates with the same EHRs Olive did, and our implementation team has supported multiple Olive migrations.' },
+      { q: 'Is Zynix AI stable, unlike Olive?', a: 'Yes. Zynix has 1M+ VBC patients under management, a 2026 strategic partnership with the largest ACO in the country (Palm Beach ACO), and a growing customer base across ACOs, health plans, and health systems.' }
+    ]
+  }); }
+
+  function renderCompareNotableHealth() { return renderCompareVs({
+    name: 'Notable Health',
+    summary: '<strong>Zynix AI</strong> is a healthcare AI operating system purpose-built for value-based care organizations \u2014 ACOs, health plans, FQHCs, and multi-specialty health systems. <strong>Notable Health</strong> focuses on administrative workflow automation for medical groups and ambulatory networks. The core difference: Zynix is VBC-native; Notable is ambulatory-admin-native.',
+    rows: [
+      { label: 'Value-Based Care Focus', them: 'Administrative workflow automation for ambulatory networks \u2014 registration, intake, eligibility, check-in. Some care coordination features but not designed around ACO economics or shared savings.', us: 'Purpose-built for value-based care. $300M+ in shared savings generated across ACO customers. 85%+ TCM contact rates. Pre-built care plans for MSSP, REACH, and MA populations.' },
+      { label: 'ACO Support', them: 'Notable serves large medical groups and ambulatory networks. Not an ACO-native platform. No specific MSSP or REACH tooling.', us: 'ACO-native. Deployed across six founder-led ACOs before Zynix was founded. Strategic partnership with Palm Beach ACO (the largest ACO in the U.S. by participant count).' },
+      { label: 'Care Coordination', them: 'Notable offers some care coordination features layered onto its admin automation. TCM and HCC closure are secondary use cases.', us: 'Core product. 12 autonomous AI agents covering post-discharge TCM, HCC gap closure, after-hours triage, medication reconciliation, AWV scheduling, patients-not-seen re-engagement, and full care management.' },
+      { label: 'Clinical Documentation', them: 'Notable Assistant provides ambient AI documentation, focused on ambulatory encounters.', us: 'ZynScribe delivers ambient documentation with pre-visit HCC gap prep, real-time coding suggestions, and direct EHR upload \u2014 available as a Chrome extension and mobile app.' },
+      { label: 'Target Customer', them: 'Large medical groups and ambulatory networks looking to automate admin workflows at scale.', us: 'ACOs, MSOs, health plans, FQHCs, health systems, and practices running under VBC contracts.' }
+    ],
+    verdict: 'Notable Health is a strong choice for large medical groups and ambulatory networks prioritizing admin automation. Zynix AI is the better choice for value-based care organizations \u2014 ACOs, health plans, FQHCs \u2014 whose success is measured in shared savings, star ratings, and HCC capture rather than front-office throughput.',
+    faqs: [
+      { q: 'Is Zynix AI a Notable Health alternative?', a: 'Yes, for value-based care organizations specifically. Zynix covers the care coordination, TCM, and HCC closure workflows that ACOs, health plans, and FQHCs need to capture shared savings and improve star ratings \u2014 workflows that Notable treats as secondary to its admin-automation focus.' },
+      { q: 'Can Zynix replace Notable Health\u2019s admin automation?', a: 'Zynix automates patient-facing admin through ZynSchedule (scheduling), ZynReminder (appointment reminders), ZynAfterHours (24/7 triage), and ZynAuth (prior auth). For intake, registration, and check-in automation specifically, Notable is the stronger fit.' },
+      { q: 'Do Zynix and Notable compete for the same customer?', a: 'Sometimes. Large medical groups exploring both platforms typically pick Notable for admin-heavy workflows and Zynix for VBC-heavy workflows. ACOs and health plans consistently choose Zynix.' }
+    ]
+  }); }
 
   // ── PAGE: Blog — What Is Value-Based Care AI? ──
   function renderBlogVBCAI() {
