@@ -5019,14 +5019,6 @@
     '/solutions/ascs': '/solutions-ascs',
     '/solutions/fqhcs': '/solutions-fqhcs',
 
-    // Solutions by Use Case → Use Cases CMS
-    '/use-cases/post-discharge-follow-up': '/use-cases/post-discharge-follow-up',
-    '/use-cases/hcc-gap-closure-health-system-aco': '/use-cases/hcc-gap-closure-health-system-aco',
-    '/use-cases/after-hours-triage-multi-site': '/use-cases/after-hours-triage-multi-site',
-    '/use-cases/prior-auth-high-volume-specialty': '/use-cases/prior-auth-high-volume-specialty',
-    '/use-cases/preventive-screening-gap-fqhc': '/use-cases/preventive-screening-gap-fqhc',
-    '/use-cases/post-discharge-tcm-readmission': '/use-cases/post-discharge-tcm-readmission',
-
     // Company aliases
     '/company-about': '/about',
     '/company-careers': '/careers',
