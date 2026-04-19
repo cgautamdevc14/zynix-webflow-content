@@ -222,25 +222,25 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/case-studies/west-florida-aco</loc>
+    <loc>https://www.zynix.ai/case-studies-west-florida-aco</loc>
     <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/case-studies/space-coast-aco</loc>
+    <loc>https://www.zynix.ai/case-studies-space-coast-aco</loc>
     <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/case-studies/central-florida-aco</loc>
+    <loc>https://www.zynix.ai/case-studies-central-florida-aco</loc>
     <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/case-studies/eternal-health</loc>
+    <loc>https://www.zynix.ai/case-studies-eternal-health</loc>
     <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -292,193 +292,193 @@
 
   <!-- Blog Articles — canonical /resources/blog/* paths -->
   <url>
-    <loc>https://www.zynix.ai/resources/blog/what-is-value-based-care-ai</loc>
+    <loc>https://www.zynix.ai/blog-what-is-value-based-care-ai</loc>
     <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/how-ai-closes-care-gaps</loc>
+    <loc>https://www.zynix.ai/blog-how-ai-closes-care-gaps</loc>
     <lastmod>2026-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/ai-agents-vs-chatbots-healthcare</loc>
+    <loc>https://www.zynix.ai/blog-ai-agents-vs-chatbots-healthcare</loc>
     <lastmod>2026-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/prior-auth-delays-cost-fix</loc>
+    <loc>https://www.zynix.ai/blog-prior-auth-delays-cost-fix</loc>
     <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/ehr-not-broken-never-built-to-think</loc>
+    <loc>https://www.zynix.ai/blog-ehr-not-broken-never-built-to-think</loc>
     <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/hcc-risk-adjustment-year-round</loc>
+    <loc>https://www.zynix.ai/blog-hcc-risk-adjustment-year-round</loc>
     <lastmod>2026-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/ai-medical-scribes-rollout</loc>
+    <loc>https://www.zynix.ai/blog-ai-medical-scribes-rollout</loc>
     <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/rising-risk-patients-ai</loc>
+    <loc>https://www.zynix.ai/blog-rising-risk-patients-ai</loc>
     <lastmod>2026-03-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/reducing-no-shows-ai-scheduling</loc>
+    <loc>https://www.zynix.ai/blog-reducing-no-shows-ai-scheduling</loc>
     <lastmod>2026-03-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/generative-ai-applications-healthcare</loc>
+    <loc>https://www.zynix.ai/blog-generative-ai-applications-healthcare</loc>
     <lastmod>2026-03-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/ai-breakthroughs-medicine</loc>
+    <loc>https://www.zynix.ai/blog-ai-breakthroughs-medicine</loc>
     <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/predictive-analytics-population-health</loc>
+    <loc>https://www.zynix.ai/blog-predictive-analytics-population-health</loc>
     <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/autonomous-ai-agents-healthcare-automation</loc>
+    <loc>https://www.zynix.ai/blog-autonomous-ai-agents-healthcare-automation</loc>
     <lastmod>2026-03-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/generative-ai-in-healthcare</loc>
+    <loc>https://www.zynix.ai/blog-generative-ai-in-healthcare</loc>
     <lastmod>2026-04-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/generative-ai-trust-safety-healthcare</loc>
+    <loc>https://www.zynix.ai/blog-generative-ai-trust-safety-healthcare</loc>
     <lastmod>2026-04-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/hcc-risk-adjustment-cms-changes</loc>
+    <loc>https://www.zynix.ai/blog-hcc-risk-adjustment-cms-changes</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/ai-medical-scribes-physician-burnout</loc>
+    <loc>https://www.zynix.ai/blog-ai-medical-scribes-physician-burnout</loc>
     <lastmod>2026-04-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/ai-changing-healthcare-decision-making</loc>
+    <loc>https://www.zynix.ai/blog-ai-changing-healthcare-decision-making</loc>
     <lastmod>2026-04-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/ai-transforming-medical-field</loc>
+    <loc>https://www.zynix.ai/blog-ai-transforming-medical-field</loc>
     <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/revolutionizing-healthcare-role-of-ai</loc>
+    <loc>https://www.zynix.ai/blog-revolutionizing-healthcare-role-of-ai</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/vbc-analytics-ai-driven</loc>
+    <loc>https://www.zynix.ai/blog-vbc-analytics-ai-driven</loc>
     <lastmod>2026-04-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/tools-driving-value-based-healthcare</loc>
+    <loc>https://www.zynix.ai/blog-tools-driving-value-based-healthcare</loc>
     <lastmod>2026-04-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/strategies-coordinating-patient-care</loc>
+    <loc>https://www.zynix.ai/blog-strategies-coordinating-patient-care</loc>
     <lastmod>2026-04-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/innovative-patient-recovery-satisfaction</loc>
+    <loc>https://www.zynix.ai/blog-innovative-patient-recovery-satisfaction</loc>
     <lastmod>2026-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/eligibility-verification-automation</loc>
+    <loc>https://www.zynix.ai/blog-eligibility-verification-automation</loc>
     <lastmod>2026-04-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/prior-auth-bottlenecks-ai-automation</loc>
+    <loc>https://www.zynix.ai/blog-prior-auth-bottlenecks-ai-automation</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/essential-ai-tools-medical-professionals</loc>
+    <loc>https://www.zynix.ai/blog-essential-ai-tools-medical-professionals</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/documentation-crisis-physician-burnout</loc>
+    <loc>https://www.zynix.ai/blog-documentation-crisis-physician-burnout</loc>
     <lastmod>2026-04-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/why-tcm-fails-real-workflows</loc>
+    <loc>https://www.zynix.ai/blog-why-tcm-fails-real-workflows</loc>
     <lastmod>2026-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/aco-year-end-gap-closure</loc>
+    <loc>https://www.zynix.ai/blog-aco-year-end-gap-closure</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/aco-30-day-post-discharge-program</loc>
+    <loc>https://www.zynix.ai/blog-aco-30-day-post-discharge-program</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.zynix.ai/resources/blog/1m-patients</loc>
+    <loc>https://www.zynix.ai/blog-1m-patients</loc>
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
