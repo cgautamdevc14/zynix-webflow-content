@@ -5056,7 +5056,35 @@
     '/solutions-use-case-readmission-prevention': '/use-cases/post-discharge-tcm-readmission',
     '/solutions-use-case-after-hours': '/use-cases/after-hours-triage-multi-site',
     '/solutions-use-case-prior-auth': '/use-cases/prior-auth-high-volume-specialty',
-    '/solutions-use-case-preventive-screening': '/use-cases/preventive-screening-gap-fqhc'
+    '/solutions-use-case-preventive-screening': '/use-cases/preventive-screening-gap-fqhc',
+
+    // Apr 2026 sitemap cleanup — legacy pages renamed to zz-archived-*, redirect originals (SEMrush non-canonical fix)
+    '/products-ai-agents-awv-outreach': '/agents',
+    '/products-ai-agents-care-gaps': '/agents',
+    '/products-ai-agents-care-management': '/agents',
+    '/products-ai-agents-patients-not-seen': '/agents',
+    '/products-ai-agents-post-discharge': '/agents',
+    '/products-ai-agents-zynafterhours': '/agents',
+    '/products-ai-agents-zynauth': '/agents',
+    '/products-ai-agents-zynfax': '/agents',
+    '/products-ai-agents-zynreminder': '/agents',
+    '/products-ai-agents-zynschedule': '/agents',
+    '/products-ai-agents-med-rec': '/agents',
+    '/clinical-performance': '/agents',
+    '/operational-efficiency': '/agents',
+    '/predictive-activation': '/agents',
+    '/blog-why-tcm-fails-real-workflows': '/blog-posts/why-tcm-fails-real-workflows',
+    '/deprecated-blog': '/resources-blog',
+    '/deprecated-case-studies': '/resources-case-studies',
+    '/deprecated-faq': '/resources-faq',
+    '/deprecated-trust-center': '/security',
+    '/untitled-22': '/solutions',
+    '/untitled-26': '/solutions',
+    '/untitled-27': '/products-analytics',
+    '/untitled-28': '/products-analytics',
+    '/untitled-29': '/agents',
+    '/untitled-30': '/resources-blog',
+    '/untitled-31': '/resources-blog'
   };
 
   // ── PAGE ROUTER ──
