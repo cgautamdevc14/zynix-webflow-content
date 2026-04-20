@@ -4764,12 +4764,12 @@
       '<span class="zynix-tag">PRODUCT SUITE</span>' +
       '<h2>Everything You Need. Nothing You Don\u2019t.</h2>' +
       '<div class="zynix-feature-grid">' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_DATABASE + '</div><h3>Data Platform</h3><p>Unified healthcare data layer that ingests, cleans, and normalizes data from every clinical and administrative source.</p><a href="/platform" class="zynix-card-link">Learn more &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_CHART + '</div><h3>Analytics</h3><p>Population health analytics, predictive modeling, and real-time decision support. ZynGap, ZynPredict, ZynGuide.</p><a href="/solutions/zynix-data-analytics" class="zynix-card-link">Learn more &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_BOT + '</div><h3>AI Agents</h3><p>Seven specialized agents for outreach, scheduling, triage, documentation, reminders, prior auth, and fax processing.</p><a href="/agents" class="zynix-card-link">Learn more &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_FILE + '</div><h3>ZynScribe</h3><p>Ambient AI documentation that captures structured clinical notes in real-time during patient encounters.</p><a href="/zynscribe" class="zynix-card-link">Learn more &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_CLIPBOARD + '</div><h3>Care Plans</h3><p>Deployable, orchestrated care plans for TCM, CCM, AWV, HEDIS, and HCC closure, executed by AI agents.</p><a href="/care-plans" class="zynix-card-link">Learn more &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_BRAIN + '</div><h3>ZynixLLM</h3><p>Purpose-built healthcare language model that powers the entire platform. Gets smarter with every patient interaction.</p><a href="/company-zynixllm" class="zynix-card-link">Learn more &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_DATABASE + '</div><h3>Data Platform</h3><p>Unified healthcare data layer that ingests, cleans, and normalizes data from every clinical and administrative source.</p><a href="/platform" class="zynix-card-link">Explore Data Platform &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_CHART + '</div><h3>Analytics</h3><p>Population health analytics, predictive modeling, and real-time decision support. ZynGap, ZynPredict, ZynGuide.</p><a href="/solutions/zynix-data-analytics" class="zynix-card-link">Explore Analytics &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_BOT + '</div><h3>AI Agents</h3><p>Seven specialized agents for outreach, scheduling, triage, documentation, reminders, prior auth, and fax processing.</p><a href="/agents" class="zynix-card-link">Explore AI Agents &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_FILE + '</div><h3>ZynScribe</h3><p>Ambient AI documentation that captures structured clinical notes in real-time during patient encounters.</p><a href="/zynscribe" class="zynix-card-link">Explore ZynScribe &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_CLIPBOARD + '</div><h3>Care Plans</h3><p>Deployable, orchestrated care plans for TCM, CCM, AWV, HEDIS, and HCC closure, executed by AI agents.</p><a href="/care-plans" class="zynix-card-link">Explore Care Plans &rarr;</a></div>' +
+      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_BRAIN + '</div><h3>ZynixLLM</h3><p>Purpose-built healthcare language model that powers the entire platform. Gets smarter with every patient interaction.</p><a href="/company-zynixllm" class="zynix-card-link">Explore ZynixLLM &rarr;</a></div>' +
       '</div></div></section>';
 
     // -- PLATFORM SCREENSHOTS --
@@ -5228,7 +5228,7 @@ function renderUseCaseV7(data) {
       '<h3>' + data.products[p].name + '</h3>' +
       '<p>' + data.products[p].descriptor + '</p>' +
       (data.products[p].status !== 'Available' ? '<div class="zynix-feature-metric"><span style="color:var(--z-accent)">' + data.products[p].status + '</span></div>' : '') +
-      '<a href="' + data.products[p].url + '" class="zynix-card-link">Learn more &rarr;</a>' +
+      '<a href="' + data.products[p].url + '" class="zynix-card-link">Explore ' + data.products[p].name + ' &rarr;</a>' +
       '</div>';
   }
   html += '</div></div></section>';
@@ -6665,8 +6665,8 @@ function renderSMSProgram() {
     '<h2>2. How You Opt In</h2>' +
     '<p>You can opt in to receive SMS messages from Zynix AI in the following ways:</p>' +
     '<ul>' +
-    '<li><strong>Website opt-in form:</strong> Complete the SMS consent form at <a href="/sms-consent" style="color:#20449B;text-decoration:underline">https://www.zynix.ai/sms-consent</a> by entering your phone number and checking the consent checkbox.</li>' +
-    '<li><strong>Demo request form:</strong> When requesting a demo at <a href="/contact" style="color:#20449B;text-decoration:underline">https://www.zynix.ai/contact</a>, check the SMS opt-in checkbox and provide your phone number.</li>' +
+    '<li><strong>Website opt-in form:</strong> Complete the <a href="/sms-consent" style="color:#20449B;text-decoration:underline">SMS consent form</a> by entering your phone number and checking the consent checkbox.</li>' +
+    '<li><strong>Demo request form:</strong> When <a href="/contact" style="color:#20449B;text-decoration:underline">requesting a demo</a>, check the SMS opt-in checkbox and provide your phone number.</li>' +
     '</ul>' +
     '<p>By opting in, you expressly agree to receive text messages from Zynix AI at the phone number you provide. You understand that:</p>' +
     '<ul>' +
@@ -6705,7 +6705,7 @@ function renderSMSProgram() {
     '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px 20px;margin:16px 0">' +
     '<p style="margin:0;font-family:monospace;font-size:14px;color:#334155">"Zynix AI: You are unsubscribed and will receive no further messages from this program."</p>' +
     '</div>' +
-    '<p>After opting out, <strong>you will not receive any additional text messages from Zynix AI</strong> unless you opt in again by completing the form at <a href="/sms-consent" style="color:#20449B">https://www.zynix.ai/sms-consent</a>.</p>' +
+    '<p>After opting out, <strong>you will not receive any additional text messages from Zynix AI</strong> unless you opt in again by completing the <a href="/sms-consent" style="color:#20449B">SMS consent form</a>.</p>' +
 
     '<h2>6. How to Get Help (HELP)</h2>' +
     '<p>If you need assistance, reply <strong>HELP</strong> to any message from Zynix AI. You will receive:</p>' +
@@ -6716,7 +6716,7 @@ function renderSMSProgram() {
     '<ul>' +
     '<li><strong>Email:</strong> <a href="mailto:info@zynix.ai" style="color:#20449B">info@zynix.ai</a></li>' +
     '<li><strong>Phone:</strong> (727) 261-1297</li>' +
-    '<li><strong>Web:</strong> <a href="/contact" style="color:#20449B">https://www.zynix.ai/contact</a></li>' +
+    '<li><strong>Web:</strong> <a href="/contact" style="color:#20449B">Contact form</a></li>' +
     '</ul>' +
 
     '<h2>7. Message Frequency</h2>' +
@@ -6747,7 +6747,7 @@ function renderSMSProgram() {
     '3535 Little Rd, Trinity, FL 34655<br>' +
     'Email: <a href="mailto:info@zynix.ai" style="color:#20449B">info@zynix.ai</a><br>' +
     'Phone: (727) 261-1297<br>' +
-    'Web: <a href="/contact" style="color:#20449B">https://www.zynix.ai/contact</a></p>' +
+    'Web: <a href="/contact" style="color:#20449B">Contact form</a></p>' +
 
     '</div></div></section>';
 
@@ -6984,7 +6984,7 @@ function renderPrivacyV7() {
     '<li>Scheduling changes and notifications</li>' +
     '<li>Account service notifications</li>' +
     '</ul>' +
-    '<p><strong>Opt-In:</strong> You may opt in to SMS by completing the opt-in form at <a href="/sms-consent" style="color:var(--z-blue)">https://www.zynix.ai/sms-consent</a> or by checking the SMS consent box on our contact form at <a href="/contact" style="color:var(--z-blue)">https://www.zynix.ai/contact</a>. By submitting the form and providing your phone number, you expressly consent to receive text messages from Zynix Inc. (d/b/a Zynix AI). <strong>Consent is not a condition of purchase.</strong></p>' +
+    '<p><strong>Opt-In:</strong> You may opt in to SMS by completing the <a href="/sms-consent" style="color:var(--z-blue)">SMS opt-in form</a> or by checking the SMS consent box on our <a href="/contact" style="color:var(--z-blue)">contact form</a>. By submitting the form and providing your phone number, you expressly consent to receive text messages from Zynix Inc. (d/b/a Zynix AI). <strong>Consent is not a condition of purchase.</strong></p>' +
     '<p><strong>Message frequency:</strong> Up to 8 messages per month per user. Frequency may increase if you actively request scheduling or respond to messages.</p>' +
     '<p><strong>Message and data rates:</strong> Standard message and data rates may apply depending on your mobile carrier and plan.</p>' +
     '<p><strong>Keywords and Auto-Responses:</strong></p>' +
@@ -7286,7 +7286,7 @@ function renderAgentsHub() {
       '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
       '<p>' + agent.desc + '</p>' +
       '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      '<p><a href="' + agent.url + '">Learn more &rarr;</a></p>' +
+      '<p><a href="' + agent.url + '">Explore ' + agent.name + ' &rarr;</a></p>' +
       '</div>';
   });
 
@@ -7335,7 +7335,7 @@ function renderAgentsHub() {
       '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
       '<p>' + agent.desc + '</p>' +
       '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      (agent.url ? '<p><a href="' + agent.url + '">Learn more &rarr;</a></p>' : '') +
+      (agent.url ? '<p><a href="' + agent.url + '">Explore ' + agent.name + ' &rarr;</a></p>' : '') +
       '</div>';
   });
 
@@ -7394,7 +7394,7 @@ function renderClinicalPerformanceHub() {
       '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
       '<p>' + agent.desc + '</p>' +
       '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      '<p><a href="' + agent.url + '">Learn more &rarr;</a></p>' +
+      '<p><a href="' + agent.url + '">Explore ' + agent.name + ' &rarr;</a></p>' +
       '</div>';
   });
 
@@ -7485,7 +7485,7 @@ function renderOperationalEfficiencyHub() {
       '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
       '<p>' + agent.desc + '</p>' +
       '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      (agent.url ? '<p><a href="' + agent.url + '">Learn more &rarr;</a></p>' : '') +
+      (agent.url ? '<p><a href="' + agent.url + '">Explore ' + agent.name + ' &rarr;</a></p>' : '') +
       '</div>';
   });
 
