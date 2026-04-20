@@ -1740,6 +1740,12 @@
         el.style.display = 'none';
       }
     });
+    // Remove native Webflow H1s from DOM to prevent duplicate-H1 SEO errors
+    document.querySelectorAll('h1').forEach(function(h1) {
+      if (!h1.closest('.zynix-injected') && !h1.closest('.zynix-mega-nav')) {
+        h1.parentNode.removeChild(h1);
+      }
+    });
   }
 
   function injectAfterNav(html) {
@@ -6811,6 +6817,80 @@ function renderSMSConsent() {
   return html;
 }
 
+// ── llms.txt — AI crawler manifest ──
+function renderLLMsTxt() {
+  var text = [
+    '# Zynix AI',
+    '',
+    '> AI healthcare platform that executes care coordination for value-based care organizations. Autonomous AI agents for post-discharge follow-up, HCC gap closure, AWV scheduling, prior authorization, medication adherence, and more.',
+    '',
+    'Zynix AI serves ACOs, health systems, Medicare Advantage plans, FQHCs, ASCs, and independent practices managing 1M+ VBC patients across 30 states.',
+    '',
+    '## Platform',
+    '',
+    '- [Platform Overview](https://www.zynix.ai/platform): Zynix OS — the operating system for value-based care',
+    '- [AI Agents](https://www.zynix.ai/agents): Autonomous AI agents for clinical, operational, and population health workflows',
+    '- [ZynScribe](https://www.zynix.ai/zynscribe): AI medical scribe with real-time ambient documentation and clinical decision support',
+    '- [Care Plans](https://www.zynix.ai/care-plans): Deployable care plans for chronic disease management and transitions of care',
+    '- [Data Platform](https://www.zynix.ai/products-data-platform): Unified claims and clinical data integration with risk stratification',
+    '- [Analytics](https://www.zynix.ai/products-analytics): Population health performance analytics and gap identification',
+    '- [ZynixLLM](https://www.zynix.ai/company-zynixllm): Healthcare-specific large language model built on clinical and claims data',
+    '- [Integrations](https://www.zynix.ai/integrations): Epic, Cerner, athenahealth, and 50+ EHR integrations',
+    '',
+    '## Who We Serve',
+    '',
+    '- [ACOs & MSOs](https://www.zynix.ai/audience-segments/acos-msos): MSSP and Next Gen ACOs managing shared savings and quality performance',
+    '- [Health Systems](https://www.zynix.ai/audience-segments/health-systems): Large hospital networks and integrated delivery systems',
+    '- [Health Plans](https://www.zynix.ai/audience-segments/health-plans): Medicare Advantage plans managing Stars ratings and member outcomes',
+    '- [FQHCs](https://www.zynix.ai/audience-segments/fqhcs): Federally Qualified Health Centers with multilingual patient populations',
+    '- [ASCs](https://www.zynix.ai/audience-segments/ascs): Ambulatory Surgery Centers managing prior auth and referral workflows',
+    '- [Independent Practices](https://www.zynix.ai/audience-segments/independent-group-practices): Group and independent physician practices',
+    '',
+    '## Use Cases',
+    '',
+    '- [All Use Cases](https://www.zynix.ai/use-cases): 30 healthcare AI use cases across care coordination, quality, and operations',
+    '- [Post-Discharge Follow-Up](https://www.zynix.ai/use-cases/post-discharge-follow-up): Reduce 30-day readmissions with automated TCM outreach',
+    '- [HCC Gap Closure](https://www.zynix.ai/use-cases/hcc-gap-closure-health-system-aco): Identify and close HCC coding gaps before year-end',
+    '- [AWV Outreach](https://www.zynix.ai/use-cases/preventive-screening-gap-fqhc): Annual Wellness Visit scheduling and completion automation',
+    '- [Prior Authorization](https://www.zynix.ai/use-cases/prior-auth-high-volume-specialty): Automate high-volume prior auth for specialty and surgical procedures',
+    '- [Medication Adherence](https://www.zynix.ai/use-cases/medication-adherence-chronic-populations): Improve PDC scores for chronic disease populations',
+    '',
+    '## Case Studies',
+    '',
+    '- [Palm Beach ACO](https://www.zynix.ai/case-studies/pbaco): 85% TCM contact rate, 40% gap closure improvement, 3x AWV lift',
+    '- [AMISTAD CHC](https://www.zynix.ai/case-studies/amistad): Multilingual care coordination across 15+ languages',
+    '- [Apollo Clinic](https://www.zynix.ai/case-studies/apollo-clinic): 40% no-show reduction with AI scheduling',
+    '- [NHS Health System](https://www.zynix.ai/case-studies/nhs): Full platform deployment across enterprise health system',
+    '',
+    '## Resources',
+    '',
+    '- [Blog](https://www.zynix.ai/resources-blog): Healthcare AI insights, implementation guides, and industry analysis',
+    '- [FAQ](https://www.zynix.ai/resources-faq): Implementation, pricing, compliance, and technical FAQs',
+    '- [Whitepapers](https://www.zynix.ai/resources-whitepapers): Clinical research and value-based care strategy papers',
+    '- [Glossary](https://www.zynix.ai/resources-glossary): Healthcare AI terminology reference',
+    '',
+    '## Company',
+    '',
+    '- [About](https://www.zynix.ai/about): Company overview, mission, and leadership team',
+    '- [Security & Compliance](https://www.zynix.ai/security): HIPAA, SOC 2 Type II, HITRUST compliance documentation',
+    '- [Careers](https://www.zynix.ai/careers): Open positions at Zynix AI',
+    '- [Contact](https://www.zynix.ai/contact): Sales inquiries and product demonstrations',
+    '- [Privacy Policy](https://www.zynix.ai/privacy-policy): Data handling and patient privacy practices',
+    '- [Terms of Service](https://www.zynix.ai/terms-of-service): Platform usage terms and conditions'
+  ].join('\n');
+
+  document.title = 'llms.txt | Zynix AI';
+  var meta = document.querySelector('meta[name="robots"]');
+  if (!meta) { meta = document.createElement('meta'); meta.setAttribute('name', 'robots'); document.head.appendChild(meta); }
+  meta.setAttribute('content', 'noindex');
+
+  return '<section style="padding:40px 24px;max-width:800px;margin:0 auto">' +
+    '<pre style="font-family:monospace;font-size:14px;line-height:1.7;white-space:pre-wrap;color:#1e293b;background:#f8fafc;padding:32px;border-radius:8px;border:1px solid #e2e8f0">' +
+    text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') +
+    '</pre>' +
+    '<p style="margin-top:16px;font-size:12px;color:#94a3b8;text-align:center">Raw file: <a href="https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@main/llms.txt" style="color:#20449B">cdn.jsdelivr.net/.../llms.txt</a></p>' +
+    '</section>';
+}
 
 function renderPrivacyV7() {
   var html = '';
