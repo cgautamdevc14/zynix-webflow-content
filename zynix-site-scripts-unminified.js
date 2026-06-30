@@ -1185,7 +1185,7 @@
     '/security': { title: 'Security & Compliance | Zynix AI', desc: 'Zynix AI is SOC 2 Type II certified and HIPAA-aligned with enterprise-grade security, encryption, and access controls for healthcare AI deployments.', schema: 'Organization' },
     '/press': { title: 'Newsroom & Press Releases | Zynix AI', desc: 'Latest Zynix AI press releases and newsroom announcements, including the strategic partnership with Palm Beach Accountable Care Organization (PBACO Holding) to scale AI-driven patient outreach, documentation, and workflow automation across value-based care.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' },
     '/newsroom': { title: 'Newsroom & Press Releases | Zynix AI', desc: 'Latest Zynix AI press releases and newsroom announcements, including the strategic partnership with Palm Beach Accountable Care Organization (PBACO Holding).', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' },
-    '/press/pbaco-partnership': { title: 'Zynix AI + PBACO Holding Partnership | Zynix AI', desc: 'Zynix AI announces strategic partnership with Palm Beach Accountable Care Organization (PBACO Holding) to scale AI-driven patient outreach, documentation, and workflow automation.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' },
+    '/press/pbaco-partnership': { title: 'Zynix AI + PBACO Holding Partnership | Zynix AI', desc: 'Zynix AI announces strategic partnership with Palm Beach Accountable Care Organization (PBACO Holding) to scale AI-driven patient outreach, documentation, and workflow automation.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' },'/press/eternalhealth-zynix-ai-nirvanahealth-partnership': { title: 'eternalHealth + Zynix AI + nirvanaHealth Partnership | Zynix AI', desc: 'eternalHealth partners with Zynix AI and nirvanaHealth to scale AI-enabled care management and member engagement across Massachusetts and Arizona.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-06-02' },
     '/careers': { title: 'Careers | Zynix AI', desc: 'Join the team building the AI operating system for value-based healthcare. Engineering, clinical, and operations roles in Trinity, FL and remote.', schema: 'Organization', noindex: true },
     '/resources/blog': { title: 'Blog | Healthcare AI Insights | Zynix AI', desc: 'Expert healthcare AI insights on value-based care, population health, and care coordination from the Zynix AI team. Updated weekly.', schema: 'Organization' },
     '/resources/faq': { title: 'FAQ | Zynix AI', desc: 'Find answers about the Zynix healthcare AI platform including HIPAA compliance, EHR integration, pricing, deployment timelines, and support options.', schema: 'FAQPage' },
@@ -5088,7 +5088,7 @@
     '/blog-acos-consistent-30-day-post-discharge-program': '/blog-posts/acos-consistent-30-day-post-discharge-program',
 
     // Legacy press deep-link → Press hub (fragment will be re-appended post-redirect)
-    '/press/pbaco-partnership': '/press',
+    '/press/pbaco-partnership': '/press','/press/eternalhealth-zynix-ai-nirvanahealth-partnership': '/press',
 
     // Legacy nested /agents/* → /agents hub (these paths 404 in Webflow routing)
     '/agents/transitions-of-care': '/agents',
@@ -7162,7 +7162,7 @@ var AUDIENCE_COMPANY_ROUTES = {
   '/company/zynixllm': renderZynixLLMV7,
   '/security': renderSecurityV7,
   '/press': renderPressV7,
-  '/press/pbaco-partnership': function () { return renderPressReleaseDetail(PRESS_RELEASES_BY_SLUG['pbaco-partnership']); },
+  '/press/pbaco-partnership': function () { return renderPressReleaseDetail(PRESS_RELEASES_BY_SLUG['pbaco-partnership']); },'/press/eternalhealth-zynix-ai-nirvanahealth-partnership': function () { return renderPressReleaseDetail(PRESS_RELEASES_BY_SLUG['eternalhealth-zynix-ai-nirvanahealth-partnership']); },
   '/privacy-policy': renderPrivacyV7,
   '/terms-of-service': renderTermsV7
 };
@@ -8487,7 +8487,7 @@ function renderDataAnalyticsV7() {
     '/security': renderSecurityV7,
     '/press': renderPressV7,
     '/newsroom': renderPressV7,
-    '/press/pbaco-partnership': function () { return renderPressReleaseDetail(PRESS_RELEASES_BY_SLUG['pbaco-partnership']); },
+    '/press/pbaco-partnership': function () { return renderPressReleaseDetail(PRESS_RELEASES_BY_SLUG['pbaco-partnership']); },'/press/eternalhealth-zynix-ai-nirvanahealth-partnership': function () { return renderPressReleaseDetail(PRESS_RELEASES_BY_SLUG['eternalhealth-zynix-ai-nirvanahealth-partnership']); },
     '/careers': renderCareers,
     // V7: Resources (new URLs)
     '/resources/blog': renderBlog,
