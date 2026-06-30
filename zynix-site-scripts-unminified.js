@@ -6521,6 +6521,52 @@ function renderPressV7() {
 // ============================================================================
 var PRESS_RELEASES = [
   {
+    slug: 'eternalhealth-zynix-ai-nirvanahealth-partnership',
+    date: '2026-06-02',
+    dateDisplay: 'June 2, 2026',
+    location: 'Boston, MA & Tampa, FL',
+    outlet: 'Business Wire',
+    outletUrl: 'https://www.businesswire.com/news/home/20260602667552/en/eternalHealth-Zynix-AI-and-nirvanaHealth-Announce-Integrated-Partnership-to-Scale-AI-Enabled-Care-Management-and-Member-Engagement',
+    category: 'Partnership',
+    headline: 'eternalHealth, Zynix AI, and nirvanaHealth Announce Integrated Partnership to Scale AI-Enabled Care Management and Member Engagement',
+    cardHeadline: 'eternalHealth + Zynix AI + nirvanaHealth: Scaling AI-Enabled Care Management',
+    excerpt: 'eternalHealth, a Medicare Advantage plan serving Massachusetts and Arizona, partners with Zynix AI and nirvanaHealth to scale AI-enabled care management and member engagement — combining agentic outreach, centralized data infrastructure, and real-time connectivity.',
+    seoTitle: 'eternalHealth + Zynix AI + nirvanaHealth Partnership | Zynix AI',
+    seoDesc: 'eternalHealth partners with Zynix AI and nirvanaHealth to scale AI-enabled care management and member engagement for Medicare Advantage members in Massachusetts and Arizona.',
+    bodyHtml:
+      `<p><strong>BOSTON &amp; TAMPA, Fla.</strong> &mdash; eternalHealth, a Medicare Advantage plan serving Medicare beneficiaries in Massachusetts and Arizona, today announced an integrated partnership with Zynix AI, a healthcare AI platform built to operationalize care management, patient engagement, and quality improvement at scale, and nirvanaHealth, a cloud-native enterprise platform supporting pharmacy benefit management, claims adjudication, and centralized healthcare data infrastructure.</p>` +
+      `<p>Since January 1, 2026, eternalHealth has been leveraging Zynix AI&rsquo;s agentic outreach capabilities and care management workflows to expand member engagement, improve care coordination, and support quality initiatives tied to Star Ratings, member satisfaction, and operational efficiency.</p>` +
+      `<p>The collaboration is designed to help eternalHealth reach more members &mdash; and the right members at the right time &mdash; to support preventive care, chronic condition management, and timely follow-up, while enabling care teams to focus on higher-acuity needs. Zynix AI&rsquo;s workflows also serve as a prioritization tool for care managers, helping them identify which members need to be contacted first when resources are constrained.</p>` +
+      `<p>nirvanaHealth&rsquo;s platform helps keep key operational and member information centralized, while supporting the real-time, bidirectional connectivity that is critical to timely and accurate care management execution. In coordination with Zynix AI, this infrastructure helps create a more responsive and connected workflow across outreach, documentation, and follow-up.</p>` +
+      `<blockquote style="border-left:4px solid #20449B;background:#EEF2FB;padding:20px 24px;margin:24px 0;border-radius:0 12px 12px 0;font-size:18px;line-height:1.6;color:#1a1a2e">` +
+        `<p style="margin:0 0 12px;font-style:italic">&ldquo;Medicare Advantage is won or lost in execution &mdash; timely outreach, closed-loop follow-up, and meaningful member experience. eternalHealth has a strong member-first mission, and we&rsquo;re excited to help their teams operationalize engagement at scale by pairing action-taking AI agents with clinician-led care management workflows. Together with nirvanaHealth&rsquo;s connectivity infrastructure, we believe this model can drive measurable improvement in quality, satisfaction, and efficiency.&rdquo;</p>` +
+        `<footer style="font-size:14px;font-style:normal;color:var(--z-text-secondary,#4B5563)"><strong>Jayadeva (Jay) Chowdappa, MD</strong>, Co-Founder and CEO, Zynix AI</footer>` +
+      `</blockquote>` +
+      `<blockquote style="border-left:4px solid #F16529;background:#FFF7F2;padding:20px 24px;margin:24px 0;border-radius:0 12px 12px 0;font-size:18px;line-height:1.6;color:#1a1a2e">` +
+        `<p style="margin:0 0 12px;font-style:italic">&ldquo;eternalHealth is committed to meeting members where they are with proactive support that improves outcomes and experience. Partnering with Zynix AI strengthens our ability to engage members consistently and efficiently, support our care management teams, and advance our quality goals in Massachusetts and Arizona. Combined with nirvanaHealth&rsquo;s centralized infrastructure, this partnership helps us deliver high-touch care with smart, modern, and cost-sensitive tools.&rdquo;</p>` +
+        `<footer style="font-size:14px;font-style:normal;color:var(--z-text-secondary,#4B5563)"><strong>Pooja Ika</strong>, Founder and CEO, eternalHealth</footer>` +
+      `</blockquote>` +
+      `<p style="margin:24px 0 8px"><strong>Partnership focus areas include:</strong></p>` +
+      `<ul style="margin:0 0 16px;padding-left:22px;line-height:1.7">` +
+        `<li><strong>Care management enablement:</strong> AI-assisted workflows to support care manager productivity, prioritization, and follow-up.</li>` +
+        `<li><strong>Patient engagement at scale:</strong> Outreach to close preventive care and chronic care gaps, with compliant escalation paths.</li>` +
+        `<li><strong>Quality and satisfaction support:</strong> Targeted initiatives to improve key measures and member experience through timely follow-up.</li>` +
+        `<li><strong>Operational integration:</strong> Structured workflows that connect outreach to next best actions, supported by centralized data and real-time connectivity.</li>` +
+      `</ul>` +
+      `<p>The organizations will collaborate on phased implementation, performance monitoring, and ongoing optimization, with shared governance and reporting to ensure responsible deployment and measurable results.</p>` +
+      `<h3 style="font-size:22px;margin:36px 0 12px">About eternalHealth</h3>` +
+      `<p>Headquartered in Boston&rsquo;s Back Bay, eternalHealth is a women-run, women-built, and women-owned Medicare Advantage company whose mission is to bring accessible, affordable, and high-quality healthcare to communities in Massachusetts, Arizona, and beyond. Its focus on preventive and chronic care management aligns with its commitment to removing barriers older adults may face and helping members live the lives they deserve. eternalHealth serves Medicare beneficiaries in Massachusetts and Arizona and is focused on improving outcomes, enhancing access, and elevating the member experience.</p>` +
+      `<h3 style="font-size:22px;margin:28px 0 12px">About Zynix AI</h3>` +
+      `<p>Zynix AI is a healthcare AI platform built to help payer and provider organizations move from insights to action by combining agentic outreach, predictive analytics, and operational workflows with human oversight and compliant processes. Zynix AI supports care management, patient engagement, quality improvement, and performance enablement across value-based care environments. Visit <a href="/" style="color:#20449B;font-weight:600">Zynix.ai</a> for more information.</p>` +
+      `<h3 style="font-size:22px;margin:28px 0 12px">About nirvanaHealth</h3>` +
+      `<p>nirvanaHealth is a cloud-native enterprise platform supporting pharmacy benefit management, claims adjudication, and centralized healthcare data infrastructure. Its platform enables real-time connectivity and interoperability across administrative and care management workflows.</p>` +
+      `<h3 style="font-size:22px;margin:28px 0 12px">Media Contacts</h3>` +
+      `<p style="margin:0 0 6px"><strong>eternalHealth:</strong> Jena Boyce, Marketing and Communications Specialist &middot; <a href="mailto:Jena.Boyce@eternalhealth.com" style="color:#20449B">Jena.Boyce@eternalhealth.com</a> &middot; 617-930-6074</p>` +
+      `<p style="margin:0 0 6px"><strong>Zynix AI:</strong> Philip Petrini &middot; <a href="mailto:Philip@zynix.ai" style="color:#20449B">Philip@zynix.ai</a> &middot; 727-277-6502</p>` +
+      `<p style="margin:20px 0 0"><a href="https://www.businesswire.com/news/home/20260602667552/en/eternalHealth-Zynix-AI-and-nirvanaHealth-Announce-Integrated-Partnership-to-Scale-AI-Enabled-Care-Management-and-Member-Engagement" rel="noopener" target="_blank" style="color:#20449B;font-weight:600">Read the full announcement on Business Wire &rarr;</a></p>`
+  },
+
+  {
     slug: 'pbaco-partnership',
     date: '2026-04-14',
     dateDisplay: 'April 14, 2026',
