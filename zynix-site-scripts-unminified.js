@@ -1367,7 +1367,7 @@
       slogan:'AI That Executes Care. Not Just Analyzes It.',
       telephone:'+1-727-261-1297',
       email:'info@zynix.ai',
-      address:{'@type':'PostalAddress',streetAddress:'3535 Little Rd',addressLocality:'Trinity',addressRegion:'FL',postalCode:'34655',addressCountry:'US'},
+      address:{'@type':'PostalAddress',streetAddress:'3535 Little Creek Drive',addressLocality:'Trinity',addressRegion:'FL',postalCode:'34655',addressCountry:'US'},
       geo:{'@type':'GeoCoordinates',latitude:28.1856,longitude:-82.6800},
       contactPoint:[
         {'@type':'ContactPoint',telephone:'+1-727-261-1297',contactType:'sales',areaServed:'US',availableLanguage:'English'},
@@ -2944,7 +2944,7 @@
     '<div class="zynix-contact-info">' +
     '<h3>Contact Information</h3>' +
     '<div class="zynix-contact-item"><strong>Email</strong><p><a href="mailto:info@zynix.ai" style="color:#F16529">info@zynix.ai</a></p></div>' +
-    '<div class="zynix-contact-item"><strong>Address</strong><p>3535 Little Rd<br>Trinity, FL 34655</p></div>' +
+    '<div class="zynix-contact-item"><strong>Address</strong><p>3535 Little Creek Drive<br>Trinity, FL 34655</p></div>' +
     '<div class="zynix-contact-divider"></div>' +
     '<h3>What to Expect</h3>' +
     '<div class="zynix-expect-list">' +
@@ -3239,7 +3239,7 @@
     '<h2>4. Data Security</h2><p>We implement industry-standard security measures including AES-256 encryption at rest, TLS 1.3 in transit, role-based access controls, and continuous security monitoring. We maintain SOC 2 Type II certification and HIPAA alignment.</p>' +
     '<h2>5. HIPAA Compliance</h2><p>For customers who are Covered Entities or Business Associates under HIPAA, we enter into Business Associate Agreements (BAAs) and comply with all applicable HIPAA requirements for the protection of PHI.</p>' +
     '<h2>6. Your Rights</h2><p>You have the right to access, correct, or delete your personal information. You may also opt out of marketing communications at any time. For GDPR-covered individuals, additional rights apply including data portability and the right to restrict processing.</p>' +
-    '<h2>7. Contact Us</h2><p>For privacy-related inquiries, contact us at <a href="mailto:info@zynix.ai" style="color:#F16529">info@zynix.ai</a> or write to: Zynix AI, 3535 Little Rd, Trinity, FL 34655.</p>' +
+    '<h2>7. Contact Us</h2><p>For privacy-related inquiries, contact us at <a href="mailto:info@zynix.ai" style="color:#F16529">info@zynix.ai</a> or write to: Zynix AI, 3535 Little Creek Drive, Trinity, FL 34655.</p>' +
     '</div></section>' +
     renderFooter();
   }
@@ -6503,7 +6503,7 @@ function renderPressV7() {
     '<div class="zynix-feature-grid">' +
     '<div class="zynix-feature-card"><div class="zynix-feature-icon">' + IC_MAIL + '</div><h3>Press Contact</h3><p>Jayadeva (Jay) Chowdappa, M.D.<br>Co-Founder & CEO<br><a href="mailto:press@zynix.ai">press@zynix.ai</a></p></div>' +
     '<div class="zynix-feature-card"><div class="zynix-feature-icon">' + IC_GLOBE + '</div><h3>Website</h3><p>zynix.ai</p></div>' +
-    '<div class="zynix-feature-card"><div class="zynix-feature-icon">' + IC_MAPPIN + '</div><h3>Headquarters</h3><p>3535 Little Rd<br>Trinity, FL 34655, USA</p></div>' +
+    '<div class="zynix-feature-card"><div class="zynix-feature-icon">' + IC_MAPPIN + '</div><h3>Headquarters</h3><p>3535 Little Creek Drive<br>Trinity, FL 34655, USA</p></div>' +
     '</div></div></section>';
 
   html += renderFooter();
@@ -6706,7 +6706,7 @@ function renderSMSProgram() {
     '</ul></div>' +
 
     '<h2>1. Who Sends These Messages</h2>' +
-    '<p>Text messages are sent by <strong>Zynix Inc.</strong> (doing business as <strong>Zynix AI</strong>), a healthcare AI company headquartered at 3535 Little Rd, Trinity, FL 34655. Messages are sent from a dedicated business phone number registered under our Zynix Inc. brand.</p>' +
+    '<p>Text messages are sent by <strong>Zynix Inc.</strong> (doing business as <strong>Zynix AI</strong>), a healthcare AI company headquartered at 3535 Little Creek Drive, Trinity, FL 34655. Messages are sent from a dedicated business phone number registered under our Zynix Inc. brand.</p>' +
 
     '<h2>2. How You Opt In</h2>' +
     '<p>You can opt in to receive SMS messages from Zynix AI in the following ways:</p>' +
@@ -6790,7 +6790,7 @@ function renderSMSProgram() {
     '<h2>10. Contact</h2>' +
     '<p>For any questions about our SMS program:</p>' +
     '<p><strong>Zynix Health Technologies Inc. (d/b/a Zynix AI)</strong><br>' +
-    '3535 Little Rd, Trinity, FL 34655<br>' +
+    '3535 Little Creek Drive, Trinity, FL 34655<br>' +
     'Email: <a href="mailto:info@zynix.ai" style="color:#20449B">info@zynix.ai</a><br>' +
     'Phone: (727) 261-1297<br>' +
     'Web: <a href="/contact" style="color:#20449B">Contact form</a></p>' +
@@ -7051,7 +7051,7 @@ function renderPrivacyV7() {
     '<h2>11. Contact</h2>' +
     '<p>For privacy-related questions or to submit a data rights request:</p>' +
     '<p><strong>Email:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a></p>' +
-    '<p><strong>Address:</strong> Zynix Health Technologies Inc., 3535 Little Rd, Trinity, FL 34655, USA</p>' +
+    '<p><strong>Address:</strong> Zynix Health Technologies Inc., 3535 Little Creek Drive, Trinity, FL 34655, USA</p>' +
     '</div></div></section>';
 
   html += '<section class="zynix-cta-section"><div class="zynix-container" style="text-align:center;position:relative;z-index:1">' +
@@ -7077,7 +7077,7 @@ function renderTermsV7() {
     '<h2>1. Who We Are</h2>' +
     '<p>Zynix AI (referred to as \u201cZynix,\u201d \u201cwe,\u201d \u201cus,\u201d or \u201cour\u201d) operates this website.</p>' +
     '<p><strong>Contact:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a></p>' +
-    '<p><strong>Address:</strong> Zynix Health Technologies Inc., 3535 Little Rd, Trinity, FL 34655, USA</p>' +
+    '<p><strong>Address:</strong> Zynix Health Technologies Inc., 3535 Little Creek Drive, Trinity, FL 34655, USA</p>' +
 
     '<h2>2. Permitted Use</h2>' +
     '<p>You may use this website for lawful business purposes, including learning about Zynix AI and contacting us.</p>' +
@@ -7134,7 +7134,7 @@ function renderTermsV7() {
     '<h2>12. Contact</h2>' +
     '<p>For questions about these Terms:</p>' +
     '<p><strong>Email:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a></p>' +
-    '<p><strong>Address:</strong> Zynix Health Technologies Inc., 3535 Little Rd, Trinity, FL 34655, USA</p>' +
+    '<p><strong>Address:</strong> Zynix Health Technologies Inc., 3535 Little Creek Drive, Trinity, FL 34655, USA</p>' +
     '</div></div></section>';
 
   html += '<section class="zynix-cta-section"><div class="zynix-container" style="text-align:center;position:relative;z-index:1">' +
