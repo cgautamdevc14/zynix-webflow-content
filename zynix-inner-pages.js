@@ -6,7 +6,7 @@
 (function() {
   'use strict';
 
-  var CALENDLY = 'https://calendly.com/david-zynix-ai-calendar/30min';
+  var CALENDLY = 'https://calendly.com/jay-reeser-zynix/30min';
 
   // ── Image URLs (GitHub raw) ──
   var GH = 'https://raw.githubusercontent.com/cgautamdevc14/zynix-webflow-content/main/images/';

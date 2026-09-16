@@ -6,7 +6,7 @@
 (function() {
   'use strict';
 
-  var CALENDLY = 'https://calendly.com/david-zynix-ai-calendar/30min';
+  var CALENDLY = 'https://calendly.com/jay-reeser-zynix/30min';
 
   // ── Performance: preconnect to critical origins ──
   ['https://cdn.jsdelivr.net', 'https://calendly.com', 'https://www.googletagmanager.com'].forEach(function(origin) {
@@ -8936,7 +8936,7 @@ function renderDataAnalyticsV7() {
     <h2 id="cta-heading">If your ACO is evaluating AI ROI, start here</h2>
     <p>Calculate where execution gaps are already increasing avoidable cost. Then prioritize AI workflows that help complete those actions faster and more consistently. We can help you with that.</p>
     <div class="cta-btns">
-      <a href="https://calendly.com/david-zynix-ai-calendar/30min" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">Schedule a Quick Call</a>
+      <a href="https://calendly.com/jay-reeser-zynix/30min" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">Schedule a Quick Call</a>
     </div>
   </div>
 </section>
@@ -10069,7 +10069,7 @@ function renderDataAnalyticsV7() {
     <div class="cta-section-inner">
       <h2>Ready to evaluate agentic AI for your ACO?</h2>
       <p>If your ACO is assessing where execution gaps affect cost, quality, and patient access, let's start with the right workflows.</p>
-      <a href="https://calendly.com/david-zynix-ai-calendar/30min"
+      <a href="https://calendly.com/jay-reeser-zynix/30min"
          target="_blank"
          rel="noopener"
          class="cta-btn"
@@ -10528,7 +10528,7 @@ function renderDataAnalyticsV7() {
         <!-- Sentence case: "Is your ACO..." -->
         <p class="cta-headline">Is your ACO ready to execute at scale before 2027?</p>
         <p class="cta-body">Find out whether your current operating model can identify, prioritize, reach, document, and close the loop before LEAD performance begins. Our team can walk through your workflows in a quick call.</p>
-        <a href="https://calendly.com/david-zynix-ai-calendar/30min"
+        <a href="https://calendly.com/jay-reeser-zynix/30min"
            class="cta-btn"
            target="_blank"
            rel="noopener noreferrer">Check Your LEAD Readiness</a>
