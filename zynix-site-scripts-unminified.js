@@ -3373,9 +3373,9 @@
           '</div>' +
           '<div class="zynix-nav-promo-card">' +
             '<span style="display:inline-block;padding:3px 10px;background:rgba(241,101,41,0.15);color:#F16529;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">New Article</span>' +
-            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">The CMS LEAD Model Is Here: What Every ACO Needs to Know Before May 17th</p>' +
-            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">10-year no-rebasing benchmarks. CARA specialist integration. Applications close May 17.</p>' +
-            '<a href="/resources-blog-lead-model-cms" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Read Article &rarr;</a>' +
+            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">ACO LEAD Model: Why 2027 Rewards ACOs That Execute Between Visits</p>' +
+            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">Most ACOs can already see who needs attention. The question is whether they can follow through at scale.</p>' +
+            '<a href="/resources-blog-aco-lead-model-execution-infrastructure-2027" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Read Article &rarr;</a>' +
           '</div>' +
         '</div></div></div>' +
         // 5. Company — Navina-style: links left, webinar promo right
@@ -4184,7 +4184,7 @@
       null, '') +
     '<section class="zynix-section"><div class="zynix-container">' +
     '<div class="zynix-feature-card" style="margin-bottom:48px;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;border:none">' +
-    '<span class="zynix-tag" style="margin-bottom:16px">UPCOMING EVENT</span>' +
+    '<span class="zynix-tag" style="margin-bottom:16px;background:rgba(241,101,41,0.18);color:#F16529">UPCOMING EVENT</span>' +
     '<h2 style="font-size:26px;margin:0 0 8px;color:#fff">NAACOS Fall 2026 Conference</h2>' +
     '<p style="margin:0 0 16px;color:#cbd5e1;font-size:16px">October 14&ndash;16, 2026 &middot; Marriott Marquis, Washington, DC</p>' +
     '<p style="margin:0 0 24px;color:#94a3b8;font-size:16px;line-height:1.7">The Zynix AI team will be at NAACOS Fall. Book time with us to see the AI operating layer in action: patient prioritization, automated outreach and scheduling, HCC and quality-gap closure, and AI scribe, all with human-in-the-loop governance.</p>' +
