@@ -3206,7 +3206,7 @@
     '</div>' +
 
     '</article></div></section>' +
-    renderCTA('Meet Us at NAACOS', 'Visit Zynix AI at Booth V (April 22\u201324) to discuss LEAD readiness and see live demos of our AI agents.', 'Book a Meeting') +
+    renderCTA('Meet Us at NAACOS Fall 2026', 'Find Zynix AI at the NAACOS Fall Conference (October 14\u201316, Washington, DC) to discuss LEAD readiness and see live demos of our AI agents.', 'Book a Meeting') +
     renderFooter();
   }
 
@@ -3306,9 +3306,9 @@
           '</div>' +
           '<div class="zynix-nav-promo-card">' +
             '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><img src="' + IMG.logo + '" alt="Zynix AI" style="width:24px;height:24px;border-radius:4px"><span style="font-size:11px;font-weight:700;color:#F16529;text-transform:uppercase;letter-spacing:1px">Recorded Webinar</span></div>' +
-            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">Automation with Accountability: How ACOs Can Scale Patient Engagement</p>' +
-            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">Featuring Jay Chowdappa, MD &mdash; Co-Founder &amp; CEO, Zynix AI</p>' +
-            '<a href="https://library.vbcexhibithall.com/recorded-webinar-automation-with-accountability-how-acos-can-scale-patient-engagement-without-burning-out-teams/" target="_blank" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Watch on-demand</a>' +
+            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">The Future Operating Model for Value-Based Care: Why the Next-Generation ACO Needs an AI Operating Layer</p>' +
+            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">VBC Exhibit Hall &middot; Recorded Sep 10, 2026</p>' +
+            '<a href="https://library.vbcexhibithall.com/recorded-webinar-the-future-operating-model-for-value-based-care-why-the-next-generation-aco-needs-an-ai-operating-layer/" target="_blank" rel="noopener" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Watch on-demand</a>' +
           '</div>' +
         '</div></div></div>' +
         // 2. Solutions — Navina-style: Products + Use Cases left, conference promo right
@@ -3333,13 +3333,10 @@
           '<div class="zynix-nav-promo-card">' +
             '<p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#F16529;font-weight:700">Meet Us In Person</p>' +
             '<div style="margin:12px 0;padding:12px;background:rgba(255,255,255,0.06);border-radius:8px">' +
-              '<p style="margin:0 0 2px;font-size:14px;font-weight:600;color:#fff">NAACOS Spring 2026</p>' +
-              '<p style="margin:0;font-size:12px;color:#94a3b8">Apr 22 &ndash; 24 &middot; Booth V</p>' +
+              '<p style="margin:0 0 2px;font-size:14px;font-weight:600;color:#fff">NAACOS Fall 2026</p>' +
+              '<p style="margin:0;font-size:12px;color:#94a3b8">Oct 14 &ndash; 16 &middot; Marriott Marquis, Washington, DC</p>' +
             '</div>' +
-            '<div style="margin:0 0 14px;padding:12px;background:rgba(255,255,255,0.06);border-radius:8px">' +
-              '<p style="margin:0 0 2px;font-size:14px;font-weight:600;color:#fff">TXACOS 2026</p>' +
-              '<p style="margin:0;font-size:12px;color:#94a3b8">May 4 &ndash; 6</p>' +
-            '</div>' +
+            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">Meet the team and see our AI agents live. Book time in advance.</p>' +
             '<a href="' + CALENDLY + '" target="_blank" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Book a Meeting &rarr;</a>' +
           '</div>' +
         '</div></div></div>' +
@@ -3392,9 +3389,9 @@
           '</div>' +
           '<div class="zynix-nav-promo-card">' +
             '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><img src="' + IMG.logo + '" alt="Zynix AI" style="width:24px;height:24px;border-radius:4px"><span style="font-size:11px;font-weight:700;color:#F16529;text-transform:uppercase;letter-spacing:1px">Webinar</span></div>' +
-            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">Automation with Accountability: How ACOs Can Scale Patient Engagement</p>' +
-            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">Featuring Jay Chowdappa, MD &mdash; Co-Founder &amp; CEO</p>' +
-            '<a href="https://library.vbcexhibithall.com/recorded-webinar-automation-with-accountability-how-acos-can-scale-patient-engagement-without-burning-out-teams/" target="_blank" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Watch on-demand</a>' +
+            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">The Future Operating Model for Value-Based Care: Why the Next-Generation ACO Needs an AI Operating Layer</p>' +
+            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">VBC Exhibit Hall &middot; Recorded Sep 10, 2026</p>' +
+            '<a href="https://library.vbcexhibithall.com/recorded-webinar-the-future-operating-model-for-value-based-care-why-the-next-generation-aco-needs-an-ai-operating-layer/" target="_blank" rel="noopener" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Watch on-demand</a>' +
           '</div>' +
         '</div></div></div>' +
       '</div>' +
@@ -3429,7 +3426,7 @@
     // Announcement banner
     var announceBanner = document.createElement('div');
     announceBanner.className = 'zynix-announcement-bar';
-    announceBanner.innerHTML = '🎉 Zynix AI surpasses 1 Million VBC patients onboarded across 30 states <a href="/resources-blog-1m-patients">Read more</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
+    announceBanner.innerHTML = '📍 Meet Zynix AI at NAACOS Fall 2026 &middot; Oct 14&ndash;16 &middot; Washington, DC <a href="' + CALENDLY + '" target="_blank" rel="noopener">Book a meeting</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
 
     // Skip navigation link (WCAG 2.1 AA)
     var skipNav = document.createElement('a');
@@ -4186,8 +4183,38 @@
       'Upcoming webinars, events, and on-demand content from the Zynix team.',
       null, '') +
     '<section class="zynix-section"><div class="zynix-container">' +
+    '<div class="zynix-feature-card" style="margin-bottom:48px;background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;border:none">' +
+    '<span class="zynix-tag" style="margin-bottom:16px">UPCOMING EVENT</span>' +
+    '<h2 style="font-size:26px;margin:0 0 8px;color:#fff">NAACOS Fall 2026 Conference</h2>' +
+    '<p style="margin:0 0 16px;color:#cbd5e1;font-size:16px">October 14&ndash;16, 2026 &middot; Marriott Marquis, Washington, DC</p>' +
+    '<p style="margin:0 0 24px;color:#94a3b8;font-size:16px;line-height:1.7">The Zynix AI team will be at NAACOS Fall. Book time with us to see the AI operating layer in action: patient prioritization, automated outreach and scheduling, HCC and quality-gap closure, and AI scribe, all with human-in-the-loop governance.</p>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener" style="text-decoration:none">Book a Meeting at NAACOS &rarr;</a>' +
+    '</div>' +
     '<h2 class="zynix-section-title">On-Demand Webinars</h2>' +
     '<div class="zynix-feature-grid" style="grid-template-columns:1fr">' +
+    '<div class="zynix-feature-card" style="border:2px solid var(--z-blue);position:relative;overflow:hidden">' +
+    '<span class="zynix-tag" style="margin-bottom:16px">NEW &middot; RECORDED WEBINAR + VBC EXHIBIT HALL</span>' +
+    '<h3 style="font-size:24px;margin-bottom:12px">The Future Operating Model for Value-Based Care: Why the Next-Generation ACO Needs an AI Operating Layer</h3>' +
+    '<div style="display:flex;gap:24px;flex-wrap:wrap;margin:16px 0 20px">' +
+    '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Recorded Sep 10, 2026</div>' +
+    '<div style="display:flex;align-items:center;gap:8px;color:var(--z-text-secondary)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Available On-Demand</div>' +
+    '</div>' +
+    '<div style="position:relative;padding-top:56.25%;margin:0 0 24px;border-radius:12px;overflow:hidden;background:#000"><iframe src="https://www.youtube-nocookie.com/embed/EwYirYt3lYM" title="' + 'The Future Operating Model for Value-Based Care' + '" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>' +
+    '<p style="font-size:16px;line-height:1.7;color:var(--z-text-secondary);margin-bottom:16px">ACOs already have plenty of data and analytics. The next challenge is turning those insights into consistent, closed-loop action at scale. This session steps up from point solutions and dashboards to the operating model ACOs will need as AI becomes part of value-based care: a connected AI operating layer that helps:</p>' +
+    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 24px;padding-left:20px">' +
+    '<li>Identify and prioritize patients who need action</li>' +
+    '<li>Automate patient outreach and scheduling</li>' +
+    '<li>Support care-management workflows and quality-gap closure</li>' +
+    '<li>Strengthen HCC and risk-capture workflows</li>' +
+    '<li>Enable provider-facing tools such as AI scribe and pre-visit support</li>' +
+    '<li>Integrate human-in-the-loop escalation and governance</li>' +
+    '<li>Connect analytics and prediction to actual care execution</li>' +
+    '</ul>' +
+    '<div style="display:flex;gap:12px;flex-wrap:wrap">' +
+    '<a href="https://library.vbcexhibithall.com/recorded-webinar-the-future-operating-model-for-value-based-care-why-the-next-generation-aco-needs-an-ai-operating-layer/" class="zynix-btn-primary" target="_blank" rel="noopener">Watch Recording &rarr;</a>' +
+    '<a href="https://library.vbcexhibithall.com/wp-content/uploads/2026/09/Zynix-VBCEH-webinar-slides-9.10.26.pdf" class="zynix-btn-secondary" target="_blank" rel="noopener" style="text-decoration:none">Download Slides</a>' +
+    '</div>' +
+    '</div>' +
     '<div class="zynix-feature-card" style="border:2px solid var(--z-blue);position:relative;overflow:hidden">' +
     '<span class="zynix-tag" style="margin-bottom:16px">RECORDED WEBINAR + VBC EXHIBIT HALL</span>' +
     '<h3 style="font-size:24px;margin-bottom:12px">Automation with Accountability: How ACOs Can Scale Patient Engagement Without Burning Out Teams</h3>' +
