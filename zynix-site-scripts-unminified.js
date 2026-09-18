@@ -5206,9 +5206,12 @@ function renderUseCaseV7(data) {
   var html = '';
 
   var segLabel = (data.segments && data.segments.primary) ? data.segments.primary.toUpperCase() : 'USE CASE';
-  html += renderInnerHero(segLabel, data.h1, data.subhead, IMG.care, data.title, 'Explore Capabilities');
+  // Short title as the H1; the narrative hook becomes the hero lead line, and the
+  // longer intro opens the problem section so no copy is dropped.
+  html += renderInnerHero(segLabel, data.title, data.h1, IMG.care, data.title, 'Explore Capabilities');
 
   html += '<section style="padding:80px 0"><div class="zynix-container" style="max-width:800px">' +
+    (data.subhead ? '<p style="font-size:18px;line-height:1.7;color:var(--z-text);margin:0 0 40px">' + data.subhead + '</p>' : '') +
     '<span class="zynix-tag">THE PROBLEM</span>' +
     '<h2>' + data.problemHeading + '</h2>' +
     '<div style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin-top:24px">' + data.problem + '</div>' +

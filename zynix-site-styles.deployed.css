@@ -2231,3 +2231,18 @@ body.has-announcement-bar { padding-top: 40px; }
     max-width: 100%;
   }
 }
+
+/* ── Nav: keep logo visible + no label wrapping; hamburger up to 1199px (full nav needs ~1110px) ── */
+.zynix-mega-nav .zynix-nav-logo,
+.zynix-mega-nav .zynix-nav-logo img { flex-shrink: 0; }
+.zynix-mega-nav .zynix-nav-items > *,
+.zynix-mega-nav .zynix-nav-items a,
+.zynix-mega-nav .zynix-nav-items button,
+.zynix-mega-nav .zynix-nav-actions > *,
+.zynix-mega-nav .zynix-nav-actions a { white-space: nowrap; }
+@media (min-width: 992px) and (max-width: 1199px) {
+  .zynix-mega-nav { padding: 0 20px; }
+  .zynix-nav-items,
+  .zynix-nav-actions .zynix-nav-contact { display: none; }
+  .zynix-nav-hamburger { display: flex; }
+}
