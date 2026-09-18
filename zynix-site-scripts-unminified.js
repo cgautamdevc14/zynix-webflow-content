@@ -6,6 +6,15 @@
 (function() {
   'use strict';
 
+  // Pages built natively in Webflow (blog hub + CMS blog posts) stand down entirely,
+  // so the Designer is the source of truth for them. The head custom code sets
+  // window.__ZX_WF_NATIVE; the path test here is a fallback if that is ever removed.
+  var __zxNative = location.pathname.replace(/\/$/, '').toLowerCase();
+  if (window.__ZX_WF_NATIVE || __zxNative === '/resources-blog' || __zxNative === '/blog-posts' ||
+      __zxNative.indexOf('/blog-posts/') === 0) {
+    return;
+  }
+
   var CALENDLY = 'https://calendly.com/jay-reeser-zynix/30min';
 
   // ── Performance: preconnect to critical origins ──
