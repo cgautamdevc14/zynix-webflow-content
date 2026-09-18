@@ -6,12 +6,12 @@
 (function() {
   'use strict';
 
-  // Pages built natively in Webflow (blog hub + CMS blog posts) stand down entirely,
-  // so the Designer is the source of truth for them. The head custom code sets
-  // window.__ZX_WF_NATIVE; the path test here is a fallback if that is ever removed.
+  // Pages built natively in Webflow stand down entirely, so the Designer is the
+  // source of truth for them. The site head code owns the list and sets
+  // window.__ZX_WF_NATIVE; to hand another page to Webflow, add it there only.
+  // The path test below is just a safety net for CMS blog posts.
   var __zxNative = location.pathname.replace(/\/$/, '').toLowerCase();
-  if (window.__ZX_WF_NATIVE || __zxNative === '/resources-blog' || __zxNative === '/blog-posts' ||
-      __zxNative.indexOf('/blog-posts/') === 0) {
+  if (window.__ZX_WF_NATIVE || __zxNative === '/blog-posts' || __zxNative.indexOf('/blog-posts/') === 0) {
     return;
   }
 
