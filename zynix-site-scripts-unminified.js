@@ -6862,7 +6862,7 @@ function renderSMSConsent() {
 
     '<div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:40px;box-shadow:0 4px 24px rgba(0,0,0,0.06)">' +
     '<h2 style="font-size:24px;font-weight:700;margin:0 0 8px;color:#0f172a">Opt In to SMS</h2>' +
-    '<p style="font-size:15px;color:#64748b;margin:0 0 28px;line-height:1.6">By submitting this form, you agree to receive text messages from Zynix Inc. (d/b/a Zynix AI) at the number you provide.</p>' +
+    '<p style="font-size:15px;color:#64748b;margin:0 0 28px;line-height:1.6">Zynix Inc. (d/b/a Zynix AI) sends text messages for customer care and account purposes only: appointment reminders, care coordination updates, scheduling notifications, and account service alerts. No marketing messages.</p>' +
 
     '<form class="zynix-sms-consent-form" id="zynix-sms-form" onsubmit="event.preventDefault();var f=this;var phone=f.querySelector(\'[name=phone]\').value;var consent=f.querySelector(\'[name=sms_consent]\').checked;if(!consent){alert(\'Please check the consent box to continue.\');return;}var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'phone\',value:phone},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'sms_consent\',value:\'Yes\'}]};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><svg width=48 height=48 viewBox=&quot;0 0 24 24&quot; fill=none stroke=#0D9B6A stroke-width=2><circle cx=12 cy=12 r=10/><polyline points=&quot;8 12 11 15 16 9&quot;/></svg><h3 style=color:#0f172a;margin:16px\\ 0\\ 8px>You\\&#39;re signed up!</h3><p style=color:#64748b;font-size:15px>You\\&#39;ll receive a confirmation text shortly. Reply STOP at any time to opt out.</p></div>\'}).catch(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#0f172a>Thank you!</h3><p style=color:#64748b>Your opt-in has been recorded.</p></div>\'})">' +
 
@@ -6883,8 +6883,8 @@ function renderSMSConsent() {
     '<h3 style="font-size:15px;font-weight:700;color:#0f172a;margin:0 0 12px">SMS Program Terms</h3>' +
     '<ul style="margin:0 0 16px;padding-left:20px;font-size:13px;color:#475569;line-height:1.7">' +
     '<li><strong>Sender:</strong> Zynix Inc. (d/b/a Zynix AI)</li>' +
-    '<li><strong>Message types:</strong> Appointment reminders, care coordination updates, scheduling notifications, and account alerts</li>' +
-    '<li><strong>Frequency:</strong> Up to 8 messages per month (more if you request scheduling or reply to messages)</li>' +
+    '<li><strong>Message types:</strong> Appointment reminders, care coordination updates, scheduling notifications, and account service alerts. No marketing or promotional messages.</li>' +
+    '<li><strong>Frequency:</strong> Message frequency varies, up to 8 messages per month</li>' +
     '<li><strong>Message and data rates may apply</strong></li>' +
     '<li>Reply <strong>STOP</strong> to opt out of all messages from this program at any time</li>' +
     '<li>Reply <strong>HELP</strong> for help — you will receive support contact info (email: info@zynix.ai, phone: 727-261-1297)</li>' +
@@ -6893,12 +6893,12 @@ function renderSMSConsent() {
 
     '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:14px;line-height:1.6;color:#334155">' +
     '<input type="checkbox" name="sms_consent" required style="margin-top:4px;width:20px;height:20px;flex-shrink:0;accent-color:#20449B">' +
-    '<span>I agree to receive SMS notifications from <strong>Zynix Inc. (Zynix AI)</strong> at the phone number provided. I understand that message frequency is up to 8 messages/month, message and data rates may apply, consent is not required to make a purchase, and I can reply STOP to opt out at any time. <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">Privacy Policy</a> &middot; <a href="/terms-of-service" style="color:#20449B;text-decoration:underline">Terms of Service</a> &middot; <a href="/sms-program" style="color:#20449B;text-decoration:underline">SMS Program Details</a></span>' +
+    '<span>By checking this box, I agree to receive text messages from Zynix AI at the mobile number provided, including appointment reminders, care coordination updates, scheduling notifications, and account service alerts. Consent is not a condition of purchase. Message frequency varies, up to 8 messages per month. Message and data rates may apply. Reply STOP to opt out at any time, or HELP for help. <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">Privacy Policy</a> &middot; <a href="/terms-of-service" style="color:#20449B;text-decoration:underline">Terms of Service</a> &middot; <a href="/sms-program" style="color:#20449B;text-decoration:underline">SMS Program Details</a></span>' +
     '</label></div>' +
 
     '<button type="submit" class="zynix-btn-primary" style="width:100%;text-align:center;padding:14px 24px;font-size:16px">Sign Up for SMS Notifications &rarr;</button>' +
 
-    '<p style="font-size:11px;color:#94a3b8;margin-top:16px;text-align:center;line-height:1.6">By submitting, you consent to receive text messages from Zynix AI. Reply STOP to unsubscribe from all messages. Reply HELP for help (info@zynix.ai or 727-261-1297). Msg &amp; data rates may apply. Msg frequency: up to 8/month. <a href="/privacy-policy" style="color:#94a3b8;text-decoration:underline">Privacy Policy</a></p>' +
+    '<p style="font-size:11px;color:#94a3b8;margin-top:16px;text-align:center;line-height:1.6">By submitting, you consent to receive text messages from Zynix AI: appointment reminders, care coordination updates, scheduling notifications, and account service alerts. Reply STOP to unsubscribe from all messages. Reply HELP for help (info@zynix.ai or 727-261-1297). Msg &amp; data rates may apply. Msg frequency: up to 8/month. <a href="/privacy-policy" style="color:#94a3b8;text-decoration:underline">Privacy Policy</a></p>' +
 
     '</form></div>' +
 
