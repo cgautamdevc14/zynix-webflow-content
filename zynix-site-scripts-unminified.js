@@ -4278,7 +4278,7 @@
       '</div>' +
       '<p style="font-size:14px;color:var(--z-text-secondary);margin:0 0 8px;line-height:1.6"><strong>Topics covered:</strong> AWV utilization gap analysis, patient and provider barriers, AI-based scheduling and outreach workflows, HCC/quality coding matrix, cost reduction modeling</p>' +
       '<p style="font-size:13px;color:var(--z-text-secondary);margin:0 0 24px">14 peer-reviewed references cited</p>' +
-      '<a href="' + GH + 'Zynix-AWV-Whitepaper.pdf" class="zynix-btn-primary" target="_blank" rel="noopener" style="text-decoration:none">Download Whitepaper &rarr;</a>' +
+      '<a href="/contact" class="zynix-btn-primary" style="text-decoration:none">Request the Whitepaper &rarr;</a>' +
     '</div>';
 
     // Whitepaper 2: Post-Discharge Follow-Up (coming soon)
