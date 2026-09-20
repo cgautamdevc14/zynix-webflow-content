@@ -6832,7 +6832,7 @@ function renderSMSProgram() {
     '<p>Your phone number and SMS data are protected under our Privacy Policy. Key points:</p>' +
     '<ul>' +
     '<li>Your phone number is collected solely for the purpose of sending account and care-related notifications.</li>' +
-    '<li><strong>We do not sell, rent, or share your phone number.</strong> We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
+    '<li><strong>We do not sell, rent, or share your phone number.</strong> We do not share or sell your mobile information with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
     '<li>SMS data (phone number, opt-in status, message logs) is stored securely and retained only as long as necessary to provide the service.</li>' +
     '<li>Our full privacy policy, including the SMS-specific section, is available at <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">https://www.zynix.ai/privacy-policy</a> (see Section 9: SMS Communications).</li>' +
     '</ul>' +
@@ -6894,7 +6894,7 @@ function renderSMSConsent() {
     '<li>Reply <strong>STOP</strong> to opt out of all messages from this program at any time</li>' +
     '<li>Reply <strong>HELP</strong> for help — you will receive support contact info (email: info@zynix.ai, phone: 727-261-1297)</li>' +
     '<li>Consent is <strong>not a condition of purchase</strong></li>' +
-    '<li>We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
+    '<li>We do not share or sell your mobile information with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
     '</ul>' +
 
     '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:14px;line-height:1.6;color:#334155">' +
@@ -7091,7 +7091,7 @@ function renderPrivacyV7() {
     '<li><strong>HELP</strong> &mdash; Help response: <em>"Zynix AI: For help, email info@zynix.ai or call (727) 261-1297. Reply STOP to opt out. Msg &amp; data rates may apply."</em></li>' +
     '</ul>' +
     '<p><strong>Carriers supported:</strong> Compatible with all major US carriers including AT&amp;T, T-Mobile, Verizon, and Sprint.</p>' +
-    '<p>We do not send marketing, promotional, or lead generation messages via SMS. SMS communications are limited to customer care and account-related notifications. We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. For questions about our SMS program, contact <a href="mailto:info@zynix.ai" style="color:var(--z-blue)">info@zynix.ai</a>.</p>' +
+    '<p>We do not send marketing, promotional, or lead generation messages via SMS. SMS communications are limited to customer care and account-related notifications. We do not share or sell your mobile information with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. For questions about our SMS program, contact <a href="mailto:info@zynix.ai" style="color:var(--z-blue)">info@zynix.ai</a>.</p>' +
 
     '<h2>10. Children\u2019s Privacy</h2>' +
     '<p>Our website and services are directed to healthcare and business professionals. We do not knowingly collect personal information from children under the age of 13. If we become aware that we have inadvertently collected such information, we will take steps to delete it promptly.</p>' +
@@ -7174,7 +7174,7 @@ function renderTermsV7() {
     '<li><strong>Help Keyword: HELP</strong> &mdash; Response: <em>"Zynix AI: For help, email info@zynix.ai or call (727) 261-1297. Reply STOP to opt out. Msg &amp; data rates may apply."</em></li>' +
     '</ul>' +
     '<p><strong>Supported Carriers:</strong> Zynix AI SMS is supported on all major US carriers including AT&amp;T, T-Mobile, Verizon, and Sprint, as well as most regional carriers.</p>' +
-    '<p><strong>Privacy:</strong> We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. See our <a href="/privacy-policy">Privacy Policy</a> for complete details on how we handle your information.</p>' +
+    '<p><strong>Privacy:</strong> We do not share or sell your mobile information with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. See our <a href="/privacy-policy">Privacy Policy</a> for complete details on how we handle your information.</p>' +
 
     '<h2>10. Changes to the Site and Terms</h2>' +
     '<p>We may update this website or these Terms at any time without prior notice. When we update these Terms, we will post the revised version on this page and update the \u201cLast Updated\u201d date at the top. Your continued use of this website after any update constitutes your acceptance of the revised Terms.</p>' +
