@@ -42,9 +42,9 @@ Zynix AI (legal entity Zynix Inc, dba Zyncare for patient SMS) is headquartered 
 - [Prior Authorization](https://www.zynix.ai/use-cases/prior-auth-high-volume-specialty): High-volume specialty auth automation
 - [Preventive Screening](https://www.zynix.ai/use-cases/preventive-screening-gap-fqhc): HEDIS gap closure for underserved populations
 - [Readmission Prevention](https://www.zynix.ai/use-cases/post-discharge-tcm-readmission): Post-discharge TCM bundle
-- [AWV Scheduling](https://www.zynix.ai/use-cases/awv-scheduling-engagement-aco): Annual Wellness Visit outreach for Medicare
-- [Chronic Care Management](https://www.zynix.ai/use-cases/chronic-care-management-fqhc): CCM workflow automation
-- [Patient Re-Engagement](https://www.zynix.ai/use-cases/patient-reengagement-pns-health-plan): Patients Not Seen outreach
+- [Preventive Screening Gap Closure](https://www.zynix.ai/use-cases/preventive-screening-gap-fqhc): Preventive screening and wellness-visit outreach
+- [Chronic Care Management](https://www.zynix.ai/use-cases/chronic-care-coordination-scale): CCM workflow automation
+- [Rising-Risk Patient Outreach](https://www.zynix.ai/use-cases/rising-risk-patient-outreach): Proactive outreach to rising-risk patients
 - [SDoH Screening](https://www.zynix.ai/use-cases/sdoh-screening-care-navigation): Social determinants screening and navigation
 - [Ambient Documentation](https://www.zynix.ai/use-cases/physician-documentation-ambient-ai): ZynScribe physician documentation
 - [HCC RAF Optimization](https://www.zynix.ai/use-cases/hcc-gap-raf-optimization): Continuous RAF accuracy

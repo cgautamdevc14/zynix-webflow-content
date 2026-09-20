@@ -497,7 +497,7 @@
     '<rect x="310" y="102" width="40" height="6" rx="3" fill="rgba(255,255,255,0.15)"/>' +
     // Header bar
     '<rect x="250" y="120" width="160" height="24" rx="4" fill="rgba(232,97,45,0.12)"/>' +
-    '<text x="330" y="136" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#E8612D" letter-spacing="1.5">ZYNCARE</text>' +
+    '<text x="330" y="136" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#E8612D" letter-spacing="1.5">ZYNIX AI</text>' +
     // Incoming bubble 1
     '<rect x="254" y="160" width="130" height="40" rx="12" fill="rgba(255,255,255,0.08)"/>' +
     '<text x="264" y="178" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="8" fill="rgba(255,255,255,0.85)">Hi Maria, your AWV</text>' +
@@ -2967,7 +2967,7 @@
     '</div></div>' +
     '<div class="zynix-contact-form-wrap">' +
     '<h3>Request a Demo</h3>' +
-    '<form class="zynix-contact-form" id="zynix-demo-form" onsubmit="event.preventDefault();var f=this;var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'phone\',value:f.querySelector(\'[name=phone]\').value},{name:\'company\',value:f.querySelector(\'[name=company]\').value},{name:\'healthcare_segment\',value:f.querySelector(\'[name=segment]\').value},{name:\'message\',value:f.querySelector(\'[name=message]\').value},{name:\'sms_consent\',value:\'No\'}]};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#F16529>Thank you!</h3><p>We\\\'ll be in touch within 24 hours.</p></div>\'}).catch(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#F16529>Thank you!</h3><p>We\\\'ll be in touch within 24 hours.</p></div>\'})">' +
+    '<form class="zynix-contact-form" id="zynix-demo-form" onsubmit="event.preventDefault();var f=this;var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'phone\',value:f.querySelector(\'[name=phone]\').value},{name:\'company\',value:f.querySelector(\'[name=company]\').value},{name:\'healthcare_segment\',value:f.querySelector(\'[name=segment]\').value},{name:\'message\',value:f.querySelector(\'[name=message]\').value},{name:\'sms_consent\',value:\'No\'}],context:{pageUri:location.href,pageName:document.title}};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(r){if(!r.ok){throw new Error(r.status)}f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#F16529>Thank you!</h3><p>We\\\'ll be in touch within 24 hours.</p></div>\'}).catch(function(){var m=f.querySelector(\'.zx-form-err\');if(!m){m=document.createElement(\'p\');m.className=\'zx-form-err\';m.setAttribute(\'role\',\'alert\');m.style.cssText=\'color:#b91c1c;font-size:14px;line-height:1.5;margin:12px 0 0;text-align:center\';f.appendChild(m)}m.textContent=\'We could not send your request. Please email info@zynix.ai or call (727) 261-1297.\'})">' +
     '<div class="zynix-form-row"><div class="zynix-form-group"><label>First Name</label><input type="text" name="firstname" placeholder="John" required></div><div class="zynix-form-group"><label>Last Name</label><input type="text" name="lastname" placeholder="Smith" required></div></div>' +
     '<div class="zynix-form-group"><label>Work Email</label><input type="email" name="email" placeholder="john@organization.com" required></div>' +
     '<div class="zynix-form-group"><label>Phone Number</label><input type="tel" name="phone" placeholder="(555) 123-4567"></div>' +
@@ -6058,7 +6058,7 @@ function renderWhoWeServeHealthPlans() {
     subhead: 'Your population health analytics are sophisticated. The gap between identifying a member who needs outreach and completing that outreach at full-member-population scale, across the measures that move your Star Rating, is where revenue is won or lost.',
     challengeIntro: 'Medicare Advantage plans compete on Star Ratings and risk adjustment accuracy. Both depend on member engagement, clinical documentation, and care coordination that most plans cannot execute at full-member-population scale. The analytics to identify the gap are sophisticated. The workflow execution layer to close it is the missing piece.',
     challenges: [
-      { title: 'Quality Measure Completion at Scale\u2019, body: \u2018HEDIS measures that move Stars like medication adherence, diabetes care, blood pressure control, colorectal screening, require member contact, appointment scheduling, and clinical follow-through that plan-level care management cannot execute at full-population scale.' },
+      { title: 'Quality Measure Completion at Scale', body: 'HEDIS measures that move Stars like medication adherence, diabetes care, blood pressure control, colorectal screening, require member contact, appointment scheduling, and clinical follow-through that plan-level care management cannot execute at full-population scale.' },
       { title: 'HCC Documentation Accuracy', body: 'Members with chronic conditions present but underdocumented suppress risk adjustment revenue. Closing documentation gaps requires outreach, visit completion, and documentation alignment that internal teams can\'t sustain across the full member population.' },
       { title: 'High-Cost Member Engagement Before the Clinical Event', body: 'The members who drive the highest total cost of care are often the hardest to engage proactively. Reaching them before a hospitalization or ED visit requires outreach capacity that case manager caseloads cannot sustain across the full high-risk cohort.' },
       { title: 'Medication Adherence and PDC Scores', body: 'PDC scores for diabetes, hypertension, and cholesterol medications directly affect Star Ratings. Moving PDC scores requires consistent member contact and barrier resolution (cost, pharmacy access, side effects), not just fill reminders that generate no-responses.' }
@@ -6814,7 +6814,7 @@ function renderSMSProgram() {
     '<p>Your phone number and SMS data are protected under our Privacy Policy. Key points:</p>' +
     '<ul>' +
     '<li>Your phone number is collected solely for the purpose of sending account and care-related notifications.</li>' +
-    '<li><strong>We do not sell, rent, or share your phone number.</strong> No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
+    '<li><strong>We do not sell, rent, or share your phone number.</strong> We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
     '<li>SMS data (phone number, opt-in status, message logs) is stored securely and retained only as long as necessary to provide the service.</li>' +
     '<li>Our full privacy policy, including the SMS-specific section, is available at <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">https://www.zynix.ai/privacy-policy</a> (see Section 9: SMS Communications).</li>' +
     '</ul>' +
@@ -6851,7 +6851,7 @@ function renderSMSConsent() {
     '<h2 style="font-size:24px;font-weight:700;margin:0 0 8px;color:#0f172a">Opt In to SMS</h2>' +
     '<p style="font-size:15px;color:#64748b;margin:0 0 28px;line-height:1.6">Zynix Inc. (d/b/a Zynix AI) sends text messages for customer care and account purposes only: appointment reminders, care coordination updates, scheduling notifications, and account service alerts. No marketing messages.</p>' +
 
-    '<form class="zynix-sms-consent-form" id="zynix-sms-form" onsubmit="event.preventDefault();var f=this;var phone=f.querySelector(\'[name=phone]\').value;var consent=f.querySelector(\'[name=sms_consent]\').checked;if(!consent){alert(\'Please check the consent box to continue.\');return;}var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'phone\',value:phone},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'sms_consent\',value:\'Yes\'}]};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><svg width=48 height=48 viewBox=&quot;0 0 24 24&quot; fill=none stroke=#0D9B6A stroke-width=2><circle cx=12 cy=12 r=10/><polyline points=&quot;8 12 11 15 16 9&quot;/></svg><h3 style=color:#0f172a;margin:16px\\ 0\\ 8px>You\\&#39;re signed up!</h3><p style=color:#64748b;font-size:15px>You\\&#39;ll receive a confirmation text shortly. Reply STOP at any time to opt out.</p></div>\'}).catch(function(){f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#0f172a>Thank you!</h3><p style=color:#64748b>Your opt-in has been recorded.</p></div>\'})">' +
+    '<form class="zynix-sms-consent-form" id="zynix-sms-form" onsubmit="event.preventDefault();var f=this;var phone=f.querySelector(\'[name=phone]\').value;var consent=f.querySelector(\'[name=sms_consent]\').checked;if(!consent){alert(\'Please check the consent box to continue.\');return;}var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'phone\',value:phone},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'sms_consent\',value:\'Yes\'}],context:{pageUri:location.href,pageName:document.title}};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(r){if(!r.ok){throw new Error(r.status)}f.innerHTML=\'<div style=padding:40px;text-align:center><svg width=48 height=48 viewBox=&quot;0 0 24 24&quot; fill=none stroke=#0D9B6A stroke-width=2><circle cx=12 cy=12 r=10/><polyline points=&quot;8 12 11 15 16 9&quot;/></svg><h3 style=color:#0f172a;margin:16px\\ 0\\ 8px>You\\&#39;re signed up!</h3><p style=color:#64748b;font-size:15px>You\\&#39;ll receive a confirmation text shortly. Reply STOP at any time to opt out.</p></div>\'}).catch(function(){var m=f.querySelector(\'.zx-form-err\');if(!m){m=document.createElement(\'p\');m.className=\'zx-form-err\';m.setAttribute(\'role\',\'alert\');m.style.cssText=\'color:#b91c1c;font-size:14px;line-height:1.5;margin:12px 0 0;text-align:center\';f.appendChild(m)}m.textContent=\'We could not record your opt-in, so you have not been signed up. Please try again, or email info@zynix.ai or call (727) 261-1297.\'})">' +
 
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">' +
     '<div class="zynix-form-group"><label style="font-size:14px;font-weight:600;color:#0f172a;display:block;margin-bottom:6px">First Name</label><input type="text" name="firstname" placeholder="John" required style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px"></div>' +
@@ -6876,12 +6876,12 @@ function renderSMSConsent() {
     '<li>Reply <strong>STOP</strong> to opt out of all messages from this program at any time</li>' +
     '<li>Reply <strong>HELP</strong> for help — you will receive support contact info (email: info@zynix.ai, phone: 727-261-1297)</li>' +
     '<li>Consent is <strong>not a condition of purchase</strong></li>' +
-    '<li>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
+    '<li>We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
     '</ul>' +
 
     '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:14px;line-height:1.6;color:#334155">' +
     '<input type="checkbox" name="sms_consent" required style="margin-top:4px;width:20px;height:20px;flex-shrink:0;accent-color:#20449B">' +
-    '<span>By checking this box, I agree to receive text messages from Zynix AI at the mobile number provided, including appointment reminders, care coordination updates, scheduling notifications, and account service alerts. Consent is not a condition of purchase. Message frequency varies, up to 8 messages per month. Message and data rates may apply. Reply STOP to opt out at any time, or HELP for help. <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">Privacy Policy</a> &middot; <a href="/terms-of-service" style="color:#20449B;text-decoration:underline">Terms of Service</a> &middot; <a href="/sms-program" style="color:#20449B;text-decoration:underline">SMS Program Details</a></span>' +
+    '<span>By checking this box, I agree to receive text messages from Zynix AI at the mobile number provided, including appointment reminders, care coordination updates, scheduling notifications, and account service alerts. Consent is not a condition of purchase. Message frequency varies, up to 8 messages per month. Message and data rates may apply. Reply STOP to opt out at any time, or HELP for help. <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">Privacy Policy</a> &middot; <a href="/terms-of-service" style="color:#20449B;text-decoration:underline">Terms of Service</a> &middot; <a href="/sms-program" style="color:#20449B;text-decoration:underline">SMS Program Terms</a></span>' +
     '</label></div>' +
 
     '<button type="submit" class="zynix-btn-primary" style="width:100%;text-align:center;padding:14px 24px;font-size:16px">Sign Up for SMS Notifications &rarr;</button>' +
@@ -7073,7 +7073,7 @@ function renderPrivacyV7() {
     '<li><strong>HELP</strong> &mdash; Help response: <em>"Zynix AI: For help, email info@zynix.ai or call (727) 261-1297. Reply STOP to opt out. Msg &amp; data rates may apply."</em></li>' +
     '</ul>' +
     '<p><strong>Carriers supported:</strong> Compatible with all major US carriers including AT&amp;T, T-Mobile, Verizon, and Sprint.</p>' +
-    '<p>We do not send marketing, promotional, or lead generation messages via SMS. SMS communications are limited to customer care and account-related notifications. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. For questions about our SMS program, contact <a href="mailto:info@zynix.ai" style="color:var(--z-blue)">info@zynix.ai</a>.</p>' +
+    '<p>We do not send marketing, promotional, or lead generation messages via SMS. SMS communications are limited to customer care and account-related notifications. We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. For questions about our SMS program, contact <a href="mailto:info@zynix.ai" style="color:var(--z-blue)">info@zynix.ai</a>.</p>' +
 
     '<h2>10. Children\u2019s Privacy</h2>' +
     '<p>Our website and services are directed to healthcare and business professionals. We do not knowingly collect personal information from children under the age of 13. If we become aware that we have inadvertently collected such information, we will take steps to delete it promptly.</p>' +
@@ -7156,7 +7156,7 @@ function renderTermsV7() {
     '<li><strong>Help Keyword: HELP</strong> &mdash; Response: <em>"Zynix AI: For help, email info@zynix.ai or call (727) 261-1297. Reply STOP to opt out. Msg &amp; data rates may apply."</em></li>' +
     '</ul>' +
     '<p><strong>Supported Carriers:</strong> Zynix AI SMS is supported on all major US carriers including AT&amp;T, T-Mobile, Verizon, and Sprint, as well as most regional carriers.</p>' +
-    '<p><strong>Privacy:</strong> No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. See our <a href="/privacy-policy">Privacy Policy</a> for complete details on how we handle your information.</p>' +
+    '<p><strong>Privacy:</strong> We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. See our <a href="/privacy-policy">Privacy Policy</a> for complete details on how we handle your information.</p>' +
 
     '<h2>10. Changes to the Site and Terms</h2>' +
     '<p>We may update this website or these Terms at any time without prior notice. When we update these Terms, we will post the revised version on this page and update the \u201cLast Updated\u201d date at the top. Your continued use of this website after any update constitutes your acceptance of the revised Terms.</p>' +
@@ -13079,14 +13079,23 @@ function renderDataAnalyticsV7() {
           var btn = form.querySelector('.zynix-capture-btn');
           btn.textContent = 'Subscribing...';
           btn.disabled = true;
-          // Store locally + fire analytics event
-          var subs = JSON.parse(localStorage.getItem('zynix_email_subs') || '[]');
-          subs.push({ email: email.value, ts: Date.now(), page: window.location.pathname });
-          localStorage.setItem('zynix_email_subs', JSON.stringify(subs));
-          if (window.gtag) window.gtag('event', 'newsletter_signup', { email_domain: email.value.split('@')[1] });
-          setTimeout(function() {
-            form.innerHTML = '<p style="color:#20449B;font-weight:600;font-size:15px">&#10003; You\'re subscribed! Check your inbox for a confirmation.</p>';
-          }, 600);
+          // Submit to HubSpot (portal 242472215). ZX_HS_NEWSLETTER_FORM: swap in a dedicated newsletter form GUID when one exists.
+          var ZX_HS_NEWSLETTER_FORM = '66a6d29e-8c74-4f74-8235-0205ed4d6ed3';
+          var payload = { fields: [ { name: 'email', value: email.value }, { name: 'message', value: 'Newsletter signup: VBC Intelligence Weekly' }, { name: 'sms_consent', value: 'No' } ], context: { pageUri: window.location.href, pageName: document.title } };
+          var fail = function() {
+            btn.textContent = 'Subscribe';
+            btn.disabled = false;
+            var m = form.parentNode.querySelector('.zx-form-err');
+            if (!m) { m = document.createElement('p'); m.className = 'zx-form-err'; m.setAttribute('role', 'alert'); m.style.cssText = 'color:#b91c1c;font-size:14px;margin:12px 0 0'; form.parentNode.insertBefore(m, form.nextSibling); }
+            m.textContent = 'We could not subscribe you right now. Please email info@zynix.ai and we will add you.';
+          };
+          fetch('https://api.hsforms.com/submissions/v3/integration/submit/242472215/' + ZX_HS_NEWSLETTER_FORM, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+            .then(function(r) {
+              if (!r.ok) throw new Error('HubSpot ' + r.status);
+              if (window.gtag) window.gtag('event', 'newsletter_signup', { email_domain: email.value.split('@')[1] });
+              form.innerHTML = '<p style="color:#20449B;font-weight:600;font-size:15px">&#10003; Thanks \u2014 you\'re on the list.</p>';
+            })
+            .catch(fail);
         });
       });
       // V2 Interactive Architecture Component (zPick)
@@ -13643,7 +13652,7 @@ function renderDataAnalyticsV7() {
         '<div style="background:linear-gradient(135deg,#20449B,#2a5cc7);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">' +
           '<div style="display:flex;align-items:center;gap:10px;">' +
             '<img src="' + IMG.symbol + '" alt="Zynix AI" style="height:28px;width:28px;border-radius:6px;">' +
-            '<div><div style="color:white;font-weight:700;font-size:15px;">Zynix AI Assistant</div><div style="color:rgba(255,255,255,0.7);font-size:11px;">Powered by ZynixLLM</div></div>' +
+            '<div><div style="color:white;font-weight:700;font-size:15px;">Zynix AI Assistant</div><div style="color:rgba(255,255,255,0.7);font-size:11px;">Guided answers and quick links</div></div>' +
           '</div>' +
           '<button id="zynix-chat-close" style="background:none;border:none;color:white;cursor:pointer;font-size:20px;padding:0;line-height:1;">&times;</button>' +
         '</div>' +
