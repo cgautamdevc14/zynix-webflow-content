@@ -5853,7 +5853,9 @@ function renderUseCasesListing() {
     if (!bySegment[seg]) bySegment[seg] = [];
     bySegment[seg].push(uc);
   }
-  var segOrder = ['Health Systems', 'ACOs & MSOs', 'Health Plans', 'Independent & Group Practices', 'ASCs', 'FQHCs'];
+  var segOrder = ['Health Systems', 'ACOs & MSOs', 'Health Plans', 'Independent Group Practices', 'ASCs', 'FQHCs'];
+  // Never drop a segment silently: a label that is not listed above is appended (UC16-UC20 were hidden by an '&' mismatch)
+  Object.keys(bySegment).forEach(function (k) { if (segOrder.indexOf(k) === -1) segOrder.push(k); });
   var html = renderInnerHero('USE CASES', 'Real-World AI Use Cases for Value-Based Care',
     'See how Zynix AI solves specific operational challenges across healthcare organizations — from post-discharge follow-up to prior authorization automation.',
     IMG.enterprise, 'Zynix AI use cases for healthcare', 'Browse Use Cases') +
