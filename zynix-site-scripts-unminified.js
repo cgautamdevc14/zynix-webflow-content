@@ -1866,7 +1866,7 @@
       '<h2>' + (title || 'See Zynix in Action') + '</h2>' +
       '<p>' + (subtitle || 'Join the healthcare organizations already transforming care with AI-powered intelligence.') + '</p>' +
       '<div class="zynix-cta-btns">' +
-      '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">' + (btnText || 'Request a Demo') + ' &rarr;</a>' +
+      '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener">' + (btnText || 'Request a Demo') + ' &rarr;</a>' +
       '<a href="/security" class="zynix-btn-secondary">Security & Compliance</a>' +
       '</div>' +
       '<div class="zynix-cta-trust">' +
@@ -1899,7 +1899,7 @@
       (tag ? '<span class="zynix-tag">' + tag + '</span>' : '') +
       '<h1>' + title + '</h1>' +
       '<p>' + subtitle + '</p>' +
-      '<div class="zynix-hero-btns" style="margin-bottom:20px"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a>' + secondaryBtn + '</div>' +
+      '<div class="zynix-hero-btns" style="margin-bottom:20px"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener">Request a Demo &rarr;</a>' + secondaryBtn + '</div>' +
       '<div class="zynix-hero-trust" style="margin-top:4px">' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> HIPAA Compliant</span>' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> SOC 2 Type II</span>' +
@@ -2532,7 +2532,7 @@
         { icon: IC_CHART, title: 'Analytics Platform', desc: 'Real-time visibility into performance metrics, shared savings progress, and population health across all providers.' },
         { icon: IC_BOT, title: 'AI Agent Suite', desc: 'Autonomous agents orchestrate care coordination, appointment scheduling, and patient engagement at scale.' },
         { icon: IC_ZAP, title: 'Unified Data Platform', desc: 'Unified data integration across providers, payers, and EHRs, providing a single source of truth for your ACO.' },
-        { icon: IC_HOSPITAL, title: 'CMS ACCESS Model Ready', desc: 'Purpose-built support for the CMS ACCESS model (Advancing All-Payer Health Equity Approaches and Development). Zynix enables health equity measurement across diverse payer mixes, multi-payer alignment for quality reporting, population health management for underserved communities, and SDoH-integrated care coordination, meeting ACCESS requirements for all-payer health equity approaches in value-based care.' }
+        { icon: IC_HOSPITAL, title: 'CMS ACCESS Model', desc: 'ACCESS (Advancing Chronic Care with Effective, Scalable Solutions) is a voluntary CMS Innovation Center model in Original Medicare that ties payment for technology-supported chronic-condition care to measured patient outcomes. Zynix AI\u2019s patient outreach, care coordination and population health tools are designed to support organizations delivering technology-enabled chronic care.' }
       ],
       [
         { value: '85%', label: 'TCM Contact Rate' },
@@ -2656,7 +2656,7 @@
         { icon: IC_FILE, title: 'Deployable Care Plans', desc: 'Standardized, evidence-based care plans deployed across your entire member population at scale.' },
         { icon: IC_BOT, title: 'AI Agent Suite', desc: 'Autonomous agents handle member outreach, appointment scheduling, and follow-up, reaching 85%+ of members.' },
         { icon: IC_SEARCH, title: 'Risk Stratification', desc: 'Predictive models identify members most likely to benefit from intervention before they become high-cost.' },
-        { icon: IC_HOSPITAL, title: 'CMS ACCESS Model Ready', desc: 'Built-in support for the CMS ACCESS model (Advancing All-Payer Health Equity Approaches and Development). Enable all-payer health equity measurement, multi-payer quality reporting alignment, population health management across diverse payer mixes, and SDoH-driven member engagement strategies that meet ACCESS program requirements.' }
+        { icon: IC_HOSPITAL, title: 'CMS ACCESS Model', desc: 'ACCESS (Advancing Chronic Care with Effective, Scalable Solutions) is a voluntary CMS Innovation Center model in Original Medicare that ties payment for technology-supported chronic-condition care to measured patient outcomes. Zynix AI\u2019s patient outreach, care coordination and population health tools are designed to support organizations delivering technology-enabled chronic care.' }
       ],
       [
         { value: '85%', label: 'Contact Rates' },
@@ -2928,7 +2928,7 @@
           '<div><span class="zynix-roi-number" id="roi-gaps-closed">4,000</span><span class="zynix-roi-label">Additional Gaps Closed</span></div>' +
           '<div><span class="zynix-roi-number" id="roi-readmit">-23%</span><span class="zynix-roi-label">Readmission Reduction</span></div>' +
         '</div>' +
-        '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" style="margin-top:24px">Get Your Custom ROI Report &rarr;</a>' +
+        '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener" style="margin-top:24px">Get Your Custom ROI Report &rarr;</a>' +
       '</div>' +
       '</div>' +
     '</div></section>' +
@@ -2936,7 +2936,7 @@
     '<section style="padding:60px 0;background:var(--z-bg-alt)"><div class="zynix-container" style="text-align:center">' +
     '<h2 style="font-size:24px;margin:0 0 16px">Want a detailed ROI analysis for your organization?</h2>' +
     '<p class="zynix-section-sub">Our team will build a custom projection based on your specific patient population, payer mix, and operational workflows.</p>' +
-    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" style="margin-top:16px">Schedule a Custom Analysis &rarr;</a>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener" style="margin-top:16px">Schedule a Custom Analysis &rarr;</a>' +
     '</div></section>' +
 
     renderCTA('See Zynix in Action', 'Request a personalized demo to see how Zynix transforms your value-based care operations.', 'Request a Demo') +
@@ -2968,12 +2968,12 @@
     '<div class="zynix-contact-form-wrap">' +
     '<h3>Request a Demo</h3>' +
     '<form class="zynix-contact-form" id="zynix-demo-form" onsubmit="event.preventDefault();var f=this;var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'phone\',value:f.querySelector(\'[name=phone]\').value},{name:\'company\',value:f.querySelector(\'[name=company]\').value},{name:\'healthcare_segment\',value:f.querySelector(\'[name=segment]\').value},{name:\'message\',value:f.querySelector(\'[name=message]\').value},{name:\'sms_consent\',value:\'No\'}],context:{pageUri:location.href,pageName:document.title}};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(r){if(!r.ok){throw new Error(r.status)}f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#F16529>Thank you!</h3><p>We\\\'ll be in touch within 24 hours.</p></div>\'}).catch(function(){var m=f.querySelector(\'.zx-form-err\');if(!m){m=document.createElement(\'p\');m.className=\'zx-form-err\';m.setAttribute(\'role\',\'alert\');m.style.cssText=\'color:#b91c1c;font-size:14px;line-height:1.5;margin:12px 0 0;text-align:center\';f.appendChild(m)}m.textContent=\'We could not send your request. Please email info@zynix.ai or call (727) 261-1297.\'})">' +
-    '<div class="zynix-form-row"><div class="zynix-form-group"><label>First Name</label><input type="text" name="firstname" placeholder="John" required></div><div class="zynix-form-group"><label>Last Name</label><input type="text" name="lastname" placeholder="Smith" required></div></div>' +
-    '<div class="zynix-form-group"><label>Work Email</label><input type="email" name="email" placeholder="john@organization.com" required></div>' +
-    '<div class="zynix-form-group"><label>Phone Number</label><input type="tel" name="phone" placeholder="(555) 123-4567"></div>' +
-    '<div class="zynix-form-group"><label>Organization</label><input type="text" name="company" placeholder="Your organization name"></div>' +
-    '<div class="zynix-form-group"><label>Healthcare Segment</label><select name="segment"><option value="">Select your segment</option><option>ACO / MSO</option><option>Health System</option><option>FQHC</option><option>Health Plan</option><option>Independent Practice</option><option>ASC</option><option>Other</option></select></div>' +
-    '<div class="zynix-form-group"><label>Message (Optional)</label><textarea name="message" rows="4" placeholder="Tell us about your goals..."></textarea></div>' +
+    '<div class="zynix-form-row"><div class="zynix-form-group"><label>First Name</label><input type="text" name="firstname" aria-label="First Name" autocomplete="given-name" placeholder="John" required></div><div class="zynix-form-group"><label>Last Name</label><input type="text" name="lastname" aria-label="Last Name" autocomplete="family-name" placeholder="Smith" required></div></div>' +
+    '<div class="zynix-form-group"><label>Work Email</label><input type="email" name="email" aria-label="Work Email" autocomplete="email" placeholder="john@organization.com" required></div>' +
+    '<div class="zynix-form-group"><label>Phone Number</label><input type="tel" name="phone" aria-label="Phone Number" autocomplete="tel" placeholder="(555) 123-4567"></div>' +
+    '<div class="zynix-form-group"><label>Organization</label><input type="text" name="company" aria-label="Organization" autocomplete="organization" placeholder="Your organization name"></div>' +
+    '<div class="zynix-form-group"><label>Healthcare Segment</label><select name="segment" aria-label="Healthcare Segment"><option value="">Select your segment</option><option>ACO / MSO</option><option>Health System</option><option>FQHC</option><option>Health Plan</option><option>Independent Practice</option><option>ASC</option><option>Other</option></select></div>' +
+    '<div class="zynix-form-group"><label>Message (Optional)</label><textarea name="message" aria-label="Message (Optional)" rows="4" placeholder="Tell us about your goals..."></textarea></div>' +
         '<button type="submit" class="zynix-btn-primary" style="width:100%;text-align:center">Request a Demo &rarr;</button>' +
     '<p style="font-size:11px;color:var(--z-text-muted);margin-top:12px;text-align:center;line-height:1.5">We use your details only to respond to your demo request. This form does not sign you up for text messages; to receive SMS notifications, use our <a href="/sms-consent" style="color:var(--z-text-muted);text-decoration:underline">SMS opt-in form</a>. <a href="/privacy-policy" style="color:var(--z-text-muted);text-decoration:underline">Privacy Policy</a></p>' +
     '</form></div></div></div></section>' +
@@ -3199,7 +3199,7 @@
     '<div style="margin:40px 0;padding:28px 32px;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:14px;text-align:center">' +
     '<p style="font-size:18px;font-weight:600;color:#fff;margin:0 0 8px">Is your ACO ready for LEAD?</p>' +
     '<p style="font-size:14px;color:#94a3b8;margin:0 0 20px">See how Zynix AI helps ACOs meet quality, equity, and efficiency requirements with AI-powered automation\u2014and compound savings over a 10-year horizon.</p>' +
-    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" style="text-decoration:none">Schedule a Strategy Call &rarr;</a>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener" style="text-decoration:none">Schedule a Strategy Call &rarr;</a>' +
     '</div>' +
 
     '</article></div></section>' +
@@ -3334,7 +3334,7 @@
               '<p style="margin:0;font-size:12px;color:#94a3b8">Oct 14 &ndash; 16 &middot; Marriott Marquis, Washington, DC</p>' +
             '</div>' +
             '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">Meet the team and see our AI agents live. Book time in advance.</p>' +
-            '<a href="' + CALENDLY + '" target="_blank" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Book a Meeting &rarr;</a>' +
+            '<a href="' + CALENDLY + '" target="_blank" rel="noopener" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Book a Meeting &rarr;</a>' +
           '</div>' +
         '</div></div></div>' +
         // 3. Who We Serve — Navina-style: orgs left, case study spotlight right
@@ -3394,7 +3394,7 @@
       '</div>' +
       '<div class="zynix-nav-actions">' +
         '<a href="/contact" class="zynix-nav-contact">Contact Us</a>' +
-        '<a href="' + CALENDLY + '" class="zynix-nav-cta" target="_blank">Request a Demo</a>' +
+        '<a href="' + CALENDLY + '" class="zynix-nav-cta" target="_blank" rel="noopener">Request a Demo</a>' +
       '</div>' +
       '<button class="zynix-nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>';
 
@@ -3418,7 +3418,7 @@
       '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Company &#9662;</button><div class="zynix-mobile-section-links">' +
       '<a href="/about">About</a><a href="/company-zynixllm">ZynixLLM</a><a href="/press">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a></div></div>' +
       '<a href="/contact" class="zynix-mobile-link" style="display:block;padding:14px 20px;font-weight:600;color:var(--z-text)">Contact Us</a>' +
-      '<a href="' + CALENDLY + '" class="zynix-mobile-cta" target="_blank">Request a Demo</a>';
+      '<a href="' + CALENDLY + '" class="zynix-mobile-cta" target="_blank" rel="noopener">Request a Demo</a>';
 
     // Announcement banner
     var announceBanner = document.createElement('div');
@@ -3457,6 +3457,14 @@
       document.body.style.paddingTop = '64px';
       document.body.classList.remove('has-announcement-bar');
     });
+
+    // Event promos expire on their own: NAACOS Fall 2026 ends Oct 16 (midnight ET = 04:00 UTC Oct 17)
+    if (Date.now() >= Date.UTC(2026, 9, 17, 4, 0, 0)) {
+      announceBanner.querySelector('.zynix-announce-close').click();
+      Array.prototype.forEach.call(nav.querySelectorAll('.zynix-nav-promo-card'), function(card) {
+        if (/NAACOS Fall 2026/.test(card.textContent)) card.style.display = 'none';
+      });
+    }
 
     // Hide ALL Webflow native navbars — inject style with !important to override any CSS
     var hideNavStyle = document.createElement('style');
@@ -3535,6 +3543,14 @@
       mobile.classList.toggle('open');
     });
 
+    // Escape closes the mobile menu and returns focus to the hamburger (WCAG 2.1.1 / 2.4.3)
+    document.addEventListener('keydown', function(e) {
+      if ((e.key === 'Escape' || e.key === 'Esc') && mobile.classList.contains('open')) {
+        burger.click();
+        burger.focus();
+      }
+    });
+
     // Cookie consent banner (GDPR compliance)
     if (!localStorage.getItem('zynix_cookie_consent')) {
       var cookieBanner = document.createElement('div');
@@ -3554,9 +3570,11 @@
 
     // Mobile accordion
     mobile.querySelectorAll('.zynix-mobile-section-trigger').forEach(function(btn) {
+      btn.setAttribute('aria-expanded', 'false');
       btn.addEventListener('click', function() {
         var links = btn.nextElementSibling;
         links.classList.toggle('open');
+        btn.setAttribute('aria-expanded', links.classList.contains('open') ? 'true' : 'false');
         var svgChevron = '<svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" style="margin-left:6px;transition:transform 0.25s;' + (links.classList.contains('open') ? 'transform:rotate(180deg)' : '') + '"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         btn.innerHTML = btn.textContent.trim() + ' ' + svgChevron;
       });
@@ -3621,7 +3639,7 @@
       '<span class="zynix-tag" style="display:inline-block">USE CASE</span>' +
       '<h1 style="font-size:42px;font-weight:600;margin:0 0 20px">' + name + '</h1>' +
       '<p style="color:var(--z-text-secondary,#94a3b8);font-size:18px;line-height:1.7">' + subtitle + '</p>' +
-      '<div class="zynix-hero-btns" style="justify-content:center;margin-top:32px"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a></div>' +
+      '<div class="zynix-hero-btns" style="justify-content:center;margin-top:32px"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener">Request a Demo &rarr;</a></div>' +
       '</div></section>';
 
     // AEO definition block
@@ -4043,7 +4061,7 @@
       '<h1 style="color:#fff;font-size:42px;font-weight:800;margin:0 0 20px">' + title + '</h1>' +
       '<p style="color:rgba(255,255,255,0.8);font-size:18px;line-height:1.7;max-width:600px;margin:0 auto">' + subtitle + '</p>' +
       '</div></section>' +
-      (extraHtml || '<section class="zynix-placeholder-section"><div class="zynix-container"><h2>Coming Soon</h2><p>We\u2019re building something great. Check back soon for updates.</p><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a></div></section>') +
+      (extraHtml || '<section class="zynix-placeholder-section"><div class="zynix-container"><h2>Coming Soon</h2><p>We\u2019re building something great. Check back soon for updates.</p><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener">Request a Demo &rarr;</a></div></section>') +
       renderFooter();
   }
 
@@ -4148,7 +4166,7 @@
       { term: 'Chronic Care Management (CCM)', definition: 'Chronic Care Management (CCM) is a CMS-reimbursable program that provides ongoing care coordination and management for Medicare beneficiaries with two or more chronic conditions expected to last at least 12 months. CCM services include development and revision of comprehensive care plans, medication management, coordination between providers and specialists, 24/7 access to care management services, and enhanced communication through patient portals or phone. CMS reimburses CCM through CPT codes 99490 (20+ minutes per month), 99439 (each additional 20 minutes), and 99491 (clinical staff time). CCM represents a significant revenue opportunity for value-based care organizations while improving outcomes for patients with complex chronic conditions such as diabetes, heart failure, COPD, and chronic kidney disease. AI platforms automate CCM enrollment identification, patient consent collection, monthly touchpoints, care plan updates, and time tracking, allowing organizations to scale CCM programs across large populations without proportional staffing increases.' },
       { term: 'Medicare Shared Savings Program (MSSP)', definition: 'The Medicare Shared Savings Program (MSSP) is CMS\u2019s flagship accountable care organization program, in which groups of doctors, hospitals, and other healthcare providers voluntarily coordinate care for Medicare fee-for-service beneficiaries. MSSP ACOs that meet quality benchmarks and reduce total cost of care below a spending benchmark earn a share of the savings (typically 40\u201375% depending on the track). Two-sided risk tracks also require ACOs to repay a portion of losses if spending exceeds benchmarks. MSSP quality measures span four domains: patient experience, care coordination, preventive health, and at-risk populations. As of 2026, over 480 ACOs participate in MSSP, covering more than 11 million Medicare beneficiaries. Success in MSSP requires sophisticated data analytics, population health management, care gap closure, transitional care coordination, and efficient administrative operations. AI platforms help MSSP ACOs optimize performance by automating quality measure tracking, HCC gap closure, TCM workflows, and patient outreach at scale across attributed populations.' },
       { term: 'HL7 / FHIR', definition: 'HL7 (Health Level Seven) is the international standards organization that develops frameworks for the exchange, integration, sharing, and retrieval of electronic health information. FHIR (Fast Healthcare Interoperability Resources) is HL7\u2019s modern standard for exchanging healthcare data electronically, using RESTful APIs, JSON, and XML formats that are familiar to web developers. FHIR defines standardized resources for clinical concepts such as patients, encounters, observations, medications, and conditions, enabling healthcare applications to read and write data across different EHR systems. CMS mandates FHIR-based APIs for patient access and payer-to-payer data exchange, making FHIR proficiency essential for healthcare technology platforms. FHIR enables interoperability between EHRs, health plans, labs, pharmacies, and third-party applications without requiring custom point-to-point integrations. Healthcare AI platforms leverage FHIR APIs to ingest clinical data from multiple EHR systems, enabling unified population health management across diverse provider networks.' },
-      { term: 'ADT (Admit-Discharge-Transfer) Feed', definition: 'An ADT (Admit-Discharge-Transfer) feed is a real-time or near-real-time electronic notification that alerts care teams when a patient is admitted to a hospital, discharged, or transferred between care settings. ADT feeds use the HL7 messaging standard (typically ADT^A01, ADT^A03, ADT^A02 message types) and are transmitted through Health Information Exchanges (HIEs) or direct EHR interfaces. ADT notifications are critical for value-based care because they trigger time-sensitive workflows such as transitional care management (TCM), post-discharge follow-up, medication reconciliation, and readmission prevention. CMS requires Medicare Advantage plans and ACOs to receive and act upon ADT notifications. AI platforms process ADT feeds in real time to automatically initiate care coordination workflows within minutes of a discharge event, ensuring that patients receive timely follow-up and organizations capture TCM reimbursement within CMS-mandated timeframes.' },
+      { term: 'ADT (Admit-Discharge-Transfer) Feed', definition: 'An ADT (Admit-Discharge-Transfer) feed is a real-time or near-real-time electronic notification that alerts care teams when a patient is admitted to a hospital, discharged, or transferred between care settings. ADT feeds use the HL7 messaging standard (typically ADT^A01, ADT^A03, ADT^A02 message types) and are transmitted through Health Information Exchanges (HIEs) or direct EHR interfaces. ADT notifications are critical for value-based care because they trigger time-sensitive workflows such as transitional care management (TCM), post-discharge follow-up, medication reconciliation, and readmission prevention. Under CMS\u2019s Interoperability and Patient Access final rule (CMS-9115-F), hospitals, psychiatric hospitals and critical access hospitals with capable EHR systems must send electronic ADT notifications to a patient\u2019s primary care practitioner or practice and to applicable post-acute providers. The rule does not require ACOs or health plans to receive or act on these notifications, but organizations that do receive ADT feeds can use them to trigger timely follow-up. AI platforms process ADT feeds in real time to automatically initiate care coordination workflows within minutes of a discharge event, ensuring that patients receive timely follow-up and organizations capture TCM reimbursement within CMS-mandated timeframes.' },
       { term: 'Revenue Cycle Management (RCM)', definition: 'Revenue Cycle Management (RCM) encompasses the financial processes healthcare organizations use to track patient care episodes from registration and appointment scheduling through final payment. RCM includes patient registration, insurance verification, charge capture, claims submission, payment posting, denial management, and patient collections. In value-based care, RCM extends to managing shared savings calculations, quality-based incentive payments, risk adjustment revenue, and care management billing codes such as TCM, CCM, and AWV. Healthcare organizations lose an estimated 5\u201310% of net revenue due to RCM inefficiencies including coding errors, claim denials, and delayed submissions. AI is transforming RCM by automating prior authorization, improving coding accuracy through natural language processing of clinical documentation, predicting claim denials before submission, and optimizing charge capture for value-based billing codes.' },
       { term: 'Clinical Decision Support (CDS)', definition: 'Clinical Decision Support (CDS) systems provide clinicians, staff, and patients with knowledge and person-specific information at the point of care to enhance health and healthcare decisions. CDS tools include computerized alerts for drug interactions, clinical guidelines presented during documentation, risk calculators, diagnostic suggestions based on patient data, and evidence-based order sets. Modern AI-powered CDS goes beyond rule-based alerts to offer predictive insights such as readmission risk scores, medication adherence predictions, and personalized treatment recommendations generated by machine learning models trained on population health data. Effective CDS improves clinical quality, reduces unnecessary utilization, and helps organizations meet value-based care quality benchmarks. The CMS Promoting Interoperability program incentivizes CDS adoption, and accreditation organizations increasingly evaluate CDS implementation as part of quality assessments.' },
       { term: 'Health Information Exchange (HIE)', definition: 'A Health Information Exchange (HIE) is both the electronic movement of health-related information among organizations and the entities that facilitate that exchange. HIEs enable hospitals, clinics, labs, pharmacies, health plans, and public health agencies to share patient data securely and efficiently, regardless of which EHR system each organization uses. HIEs provide three key capabilities: directed exchange (secure point-to-point messaging), query-based exchange (finding and requesting patient records), and consumer-mediated exchange (patient-controlled access). In value-based care, HIEs are essential for receiving ADT notifications, aggregating clinical data from multiple providers, and coordinating care across settings. National frameworks such as TEFCA (Trusted Exchange Framework and Common Agreement) aim to create a nationwide interoperability infrastructure. AI platforms integrate with HIEs to aggregate comprehensive patient records and trigger automated workflows based on clinical events detected across the healthcare ecosystem.' },
@@ -4260,7 +4278,7 @@
       '</div>' +
       '<p style="font-size:14px;color:var(--z-text-secondary);margin:0 0 8px;line-height:1.6"><strong>Topics covered:</strong> AWV utilization gap analysis, patient and provider barriers, AI-based scheduling and outreach workflows, HCC/quality coding matrix, cost reduction modeling</p>' +
       '<p style="font-size:13px;color:var(--z-text-secondary);margin:0 0 24px">14 peer-reviewed references cited</p>' +
-      '<a href="' + GH + 'Zynix-AWV-Whitepaper.pdf" class="zynix-btn-primary" target="_blank" rel="noopener" style="text-decoration:none">Download Whitepaper &rarr;</a>' +
+      '<a href="/contact" class="zynix-btn-primary" style="text-decoration:none">Request the Whitepaper &rarr;</a>' +
     '</div>';
 
     // Whitepaper 2: Post-Discharge Follow-Up (coming soon)
@@ -4296,7 +4314,7 @@
       '<span class="zynix-tag">AI-POWERED VALUE-BASED CARE PLATFORM</span>' +
       '<h1>AI That <span style="color:var(--z-accent)">Executes</span> Care.<br>Not Just Analyzes It.</h1>' +
       '<p>Zynix deploys AI agents that call patients, close care gaps, schedule visits, and document outcomes. All without adding headcount.</p>' +
-      '<div class="zynix-hero-btns" style="margin-bottom:20px"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">Request a Demo &rarr;</a><a href="#how-it-works" class="zynix-btn-secondary">See How It Works</a></div>' +
+      '<div class="zynix-hero-btns" style="margin-bottom:20px"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener">Request a Demo &rarr;</a><a href="#how-it-works" class="zynix-btn-secondary">See How It Works</a></div>' +
       '<div class="zynix-hero-trust" style="margin-top:4px">' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> HIPAA Compliant</span>' +
       '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> SOC 2 Type II</span>' +
@@ -4898,7 +4916,7 @@
           '<div class="zynix-roi-result"><span class="zynix-roi-number" id="roi-gaps-closed">4,000</span><span class="zynix-roi-label">Additional Gaps Closed</span></div>' +
           '<div class="zynix-roi-result"><span class="zynix-roi-number" id="roi-readmit">-23%</span><span class="zynix-roi-label">Readmission Reduction</span></div>' +
         '</div>' +
-        '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" style="margin-top:24px">Get Your Custom ROI Report &rarr;</a>' +
+        '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener" style="margin-top:24px">Get Your Custom ROI Report &rarr;</a>' +
       '</div>' +
       '</div></div></section>';
 
@@ -5351,7 +5369,7 @@ function renderAudiencePageV7(data) {
   for (var ci = 0; ci < data.citations.length; ci++) {
     var c = data.citations[ci];
     html += '<div class="zynix-data-layer fade-in-up"><h3>' + c.stat + '</h3><p>' + c.context + '</p>' +
-      (c.sourceUrl ? '<p><small><a href="' + c.sourceUrl + '" target="_blank">' + c.sourceName + ' &#8599;</a></small></p>' : '<p><small><em>' + c.sourceName + '</em></small></p>') +
+      (c.sourceUrl ? '<p><small><a href="' + c.sourceUrl + '" target="_blank" rel="noopener">' + c.sourceName + ' &#8599;</a></small></p>' : '<p><small><em>' + c.sourceName + '</em></small></p>') +
       '</div>';
   }
   html += '</div></div></section>';
@@ -6005,7 +6023,7 @@ function renderWhoWeServeACOs() {
       { title: 'Performance-Year Programs That Run to Completion', body: 'The HCC + Quality Gap Closure Sprint coordinates outreach, scheduling, and documentation on a performance-year timeline, prioritizing by RAF impact and closure window. Programs don\'t stall in Q4 when coordinator bandwidth is already stretched.' },
       { title: 'Total Cost of Care Protection Through Proactive Outreach', body: 'Predictive signals on rising-risk and readmission-risk patients trigger outreach before the clinical event. Barrier capture routes resolution through the same interaction. The cost that doesn\'t happen is the shared savings that does.' },
       { title: 'After-Hours Access That Keeps Attributed Patients Out of the ED', body: 'Every non-emergent ED visit by an attributed patient is a direct hit to TCOC. Consistent after-hours access with clinical triage, self-care guidance, and next-day scheduling, keeps routine care needs from defaulting to the ED.' },
-      { title: 'CMS ACCESS Model Alignment', body: 'Zynix AI supports the CMS ACCESS model (Advancing All-Payer Health Equity Approaches and Development) requirements. The platform enables health equity measurement across all-payer populations, multi-payer quality alignment, SDoH-integrated outreach for underserved communities, and population health management that meets ACCESS program standards for advancing health equity in value-based care. CMS ACCESS model AI capabilities are built into the core platform.' }
+      { title: 'CMS ACCESS Model', body: 'ACCESS (Advancing Chronic Care with Effective, Scalable Solutions) is a voluntary CMS Innovation Center model in Original Medicare that ties payment for technology-supported chronic-condition care to measured patient outcomes. Zynix AI\u2019s patient outreach, care coordination and population health tools are designed to support organizations delivering technology-enabled chronic care.' }
     ],
     primaryUseCases: [
       { title: 'Post-Discharge TCM and Readmission Prevention', teaser: 'The 48-hour post-discharge window is where ACO performance is won or lost, with full workflow from ADT trigger through 30-day close, including TCM billing capture.', url: '/use-cases/post-discharge-tcm-readmission' },
@@ -6069,7 +6087,7 @@ function renderWhoWeServeHealthPlans() {
       { title: 'Barrier Resolution Built Into the Outreach Interaction', body: 'Two-way conversations identify cost, access, transportation, and language barriers in the same interaction where the clinical need is surfaced and route each barrier to resolution without requiring a second follow-up. PDC scores and quality measure completion both depend on this step.' },
       { title: 'Risk Adjustment Documentation Closed Before the Deadline', body: 'HCC gaps prioritized by revenue impact. Outreach, scheduling, visit completion, and documentation coordinated in sequence. The risk adjustment deadline is a fixed constraint. The execution layer runs to meet it.' },
       { title: 'High-Risk Member Engagement Before the Claim Arrives', body: 'ZynPredict surfaces members on a deterioration trajectory before a hospitalization or ED visit. Proactive outreach engages them at the right window, identifying the barriers driving the risk and connecting to chronic care management for stabilization.' },
-      { title: 'CMS ACCESS Model Alignment', body: 'Zynix AI supports the CMS ACCESS model (Advancing All-Payer Health Equity Approaches and Development) requirements for health plans. The platform enables health equity measurement and quality reporting across all-payer populations, multi-payer data alignment for ACCESS program participation, SDoH-integrated member outreach for underserved populations, and population health management that meets ACCESS standards for advancing health equity across diverse payer mixes.' }
+      { title: 'CMS ACCESS Model', body: 'ACCESS (Advancing Chronic Care with Effective, Scalable Solutions) is a voluntary CMS Innovation Center model in Original Medicare that ties payment for technology-supported chronic-condition care to measured patient outcomes. Zynix AI\u2019s patient outreach, care coordination and population health tools are designed to support organizations delivering technology-enabled chronic care.' }
     ],
     primaryUseCases: [
       { title: 'HEDIS and Stars Quality Measure Improvement', teaser: 'Star Ratings are earned member by member. How quality measure completion moves at full-member-population scale, not just for the members a case manager reached.', url: '/use-cases/hedis-stars-quality-improvement' },
@@ -6252,7 +6270,7 @@ function renderWhoWeServeFQHCs() {
       { name: 'Transitions of Care Agent', url: '/agents/transitions-of-care', description: 'Post-discharge follow-up with multilingual outreach, medication reconciliation for polypharmacy FQHC patients, transportation-accommodated follow-up scheduling, and clinical escalation based on risk tier.' }
     ],
     citations: [
-      { stat: 'FQHCs with higher patient outreach completion rates consistently outperform on HRSA UDS preventive care quality measures, with the performance gap most visible on measures that require patient-initiated follow-through.', context: 'For high-barrier populations, the outreach must navigate the barrier in the same interaction, not schedule a second touch. Contact rate and barrier resolution are the leading indicators.', sourceName: 'HRSA Uniform Data System (UDS) Mapper', sourceUrl: 'https://data.hrsa.gov/tools/uds-mapper' },
+      { stat: 'FQHCs with higher patient outreach completion rates consistently outperform on HRSA UDS preventive care quality measures, with the performance gap most visible on measures that require patient-initiated follow-through.', context: 'For high-barrier populations, the outreach must navigate the barrier in the same interaction, not schedule a second touch. Contact rate and barrier resolution are the leading indicators.', sourceName: 'HRSA GeoCare Navigator (formerly the UDS Mapper)', sourceUrl: 'https://geocarenavigator.hrsa.gov/' },
       { stat: 'Multilingual patient communication in the patient\'s primary language, without a third-party interpreter, improves engagement, care plan adherence, and follow-up completion rates in underserved populations.', context: 'For patients whose primary language is not English, language-matched outreach is the threshold between contacted and unreached. This is not a marginal issue for FQHCs with diverse panels.', sourceName: 'Published health equity and community health outcomes research', sourceUrl: null },
       { stat: 'FQHCs that close the loop between SDoH screening and barrier resolution show measurably better chronic care quality measure performance than those that screen and document without routing.', context: 'PCMH quality measures and HRSA UDS metrics both reward SDoH identification and action. The action step is what separates documentation from impact.', sourceName: 'PCMH quality measure data and HRSA program guidelines', sourceUrl: null },
       { stat: 'FQHC patients face a higher 30-day readmission risk than the general ambulatory population, driven by post-discharge follow-up gaps, language barriers in the discharge process, and medication reconciliation failures in the 24\u201348 hour window.', context: 'For FQHCs under value-based contracts, readmission risk in the discharged patient cohort is both a care quality issue and a cost exposure. The 48-hour contact window is the highest-leverage intervention point.', sourceName: 'Post-discharge outcomes research in FQHC and community health center populations', sourceUrl: null }
@@ -6681,7 +6699,7 @@ function renderPressReleaseDetail(release) {
       release.bodyHtml +
       (release.outletUrl ? '<p style="margin-top:24px;padding-top:20px;border-top:1px solid var(--z-border,#E5E7EB);font-size:14px;color:var(--z-text-secondary,#4B5563)">Source: <a href="' + release.outletUrl + '" rel="noopener" target="_blank" style="color:#20449B">' + (release.outlet || 'Original release') + '</a></p>' : '') +
       '<div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">' +
-        '<a href="' + CALENDLY + '" target="_blank" class="zynix-btn-primary">Request a Demo &rarr;</a>' +
+        '<a href="' + CALENDLY + '" target="_blank" rel="noopener" class="zynix-btn-primary">Request a Demo &rarr;</a>' +
         (release.ctaSecondary ? '<a href="' + release.ctaSecondary.href + '" class="zynix-btn-secondary">' + release.ctaSecondary.label + '</a>' : '') +
       '</div>' +
       '<div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--z-border,#E5E7EB);display:flex;align-items:center;gap:14px;flex-wrap:wrap">' +
@@ -6814,7 +6832,7 @@ function renderSMSProgram() {
     '<p>Your phone number and SMS data are protected under our Privacy Policy. Key points:</p>' +
     '<ul>' +
     '<li>Your phone number is collected solely for the purpose of sending account and care-related notifications.</li>' +
-    '<li><strong>We do not sell, rent, or share your phone number.</strong> We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
+    '<li><strong>We do not sell, rent, or share your phone number.</strong> No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
     '<li>SMS data (phone number, opt-in status, message logs) is stored securely and retained only as long as necessary to provide the service.</li>' +
     '<li>Our full privacy policy, including the SMS-specific section, is available at <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">https://www.zynix.ai/privacy-policy</a> (see Section 9: SMS Communications).</li>' +
     '</ul>' +
@@ -6854,16 +6872,16 @@ function renderSMSConsent() {
     '<form class="zynix-sms-consent-form" id="zynix-sms-form" onsubmit="event.preventDefault();var f=this;var phone=f.querySelector(\'[name=phone]\').value;var consent=f.querySelector(\'[name=sms_consent]\').checked;if(!consent){alert(\'Please check the consent box to continue.\');return;}var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'phone\',value:phone},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'sms_consent\',value:\'Yes\'}],context:{pageUri:location.href,pageName:document.title}};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(r){if(!r.ok){throw new Error(r.status)}f.innerHTML=\'<div style=padding:40px;text-align:center><svg width=48 height=48 viewBox=&quot;0 0 24 24&quot; fill=none stroke=#0D9B6A stroke-width=2><circle cx=12 cy=12 r=10/><polyline points=&quot;8 12 11 15 16 9&quot;/></svg><h3 style=color:#0f172a;margin:16px\\ 0\\ 8px>You\\&#39;re signed up!</h3><p style=color:#64748b;font-size:15px>You\\&#39;ll receive a confirmation text shortly. Reply STOP at any time to opt out.</p></div>\'}).catch(function(){var m=f.querySelector(\'.zx-form-err\');if(!m){m=document.createElement(\'p\');m.className=\'zx-form-err\';m.setAttribute(\'role\',\'alert\');m.style.cssText=\'color:#b91c1c;font-size:14px;line-height:1.5;margin:12px 0 0;text-align:center\';f.appendChild(m)}m.textContent=\'We could not record your opt-in, so you have not been signed up. Please try again, or email info@zynix.ai or call (727) 261-1297.\'})">' +
 
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">' +
-    '<div class="zynix-form-group"><label style="font-size:14px;font-weight:600;color:#0f172a;display:block;margin-bottom:6px">First Name</label><input type="text" name="firstname" placeholder="John" required style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px"></div>' +
-    '<div class="zynix-form-group"><label style="font-size:14px;font-weight:600;color:#0f172a;display:block;margin-bottom:6px">Last Name</label><input type="text" name="lastname" placeholder="Smith" required style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px"></div>' +
+    '<div class="zynix-form-group"><label style="font-size:14px;font-weight:600;color:#0f172a;display:block;margin-bottom:6px">First Name</label><input type="text" name="firstname" aria-label="First Name" autocomplete="given-name" placeholder="John" required style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px"></div>' +
+    '<div class="zynix-form-group"><label style="font-size:14px;font-weight:600;color:#0f172a;display:block;margin-bottom:6px">Last Name</label><input type="text" name="lastname" aria-label="Last Name" autocomplete="family-name" placeholder="Smith" required style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px"></div>' +
     '</div>' +
 
     '<div class="zynix-form-group" style="margin-bottom:16px"><label style="font-size:14px;font-weight:600;color:#0f172a;display:block;margin-bottom:6px">Mobile Phone Number <span style="color:#ef4444">*</span></label>' +
-    '<input type="tel" name="phone" placeholder="(555) 123-4567" required style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px">' +
+    '<input type="tel" name="phone" aria-label="Mobile Phone Number" autocomplete="tel" placeholder="(555) 123-4567" required style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px">' +
     '</div>' +
 
     '<div class="zynix-form-group" style="margin-bottom:20px"><label style="font-size:14px;font-weight:600;color:#0f172a;display:block;margin-bottom:6px">Email (Optional)</label>' +
-    '<input type="email" name="email" placeholder="john@organization.com" style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px">' +
+    '<input type="email" name="email" aria-label="Email (Optional)" autocomplete="email" placeholder="john@organization.com" style="width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px">' +
     '</div>' +
 
     '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px;margin-bottom:24px">' +
@@ -6876,7 +6894,7 @@ function renderSMSConsent() {
     '<li>Reply <strong>STOP</strong> to opt out of all messages from this program at any time</li>' +
     '<li>Reply <strong>HELP</strong> for help — you will receive support contact info (email: info@zynix.ai, phone: 727-261-1297)</li>' +
     '<li>Consent is <strong>not a condition of purchase</strong></li>' +
-    '<li>We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
+    '<li>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
     '</ul>' +
 
     '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:14px;line-height:1.6;color:#334155">' +
@@ -7073,7 +7091,7 @@ function renderPrivacyV7() {
     '<li><strong>HELP</strong> &mdash; Help response: <em>"Zynix AI: For help, email info@zynix.ai or call (727) 261-1297. Reply STOP to opt out. Msg &amp; data rates may apply."</em></li>' +
     '</ul>' +
     '<p><strong>Carriers supported:</strong> Compatible with all major US carriers including AT&amp;T, T-Mobile, Verizon, and Sprint.</p>' +
-    '<p>We do not send marketing, promotional, or lead generation messages via SMS. SMS communications are limited to customer care and account-related notifications. We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. For questions about our SMS program, contact <a href="mailto:info@zynix.ai" style="color:var(--z-blue)">info@zynix.ai</a>.</p>' +
+    '<p>We do not send marketing, promotional, or lead generation messages via SMS. SMS communications are limited to customer care and account-related notifications. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. For questions about our SMS program, contact <a href="mailto:info@zynix.ai" style="color:var(--z-blue)">info@zynix.ai</a>.</p>' +
 
     '<h2>10. Children\u2019s Privacy</h2>' +
     '<p>Our website and services are directed to healthcare and business professionals. We do not knowingly collect personal information from children under the age of 13. If we become aware that we have inadvertently collected such information, we will take steps to delete it promptly.</p>' +
@@ -7156,7 +7174,7 @@ function renderTermsV7() {
     '<li><strong>Help Keyword: HELP</strong> &mdash; Response: <em>"Zynix AI: For help, email info@zynix.ai or call (727) 261-1297. Reply STOP to opt out. Msg &amp; data rates may apply."</em></li>' +
     '</ul>' +
     '<p><strong>Supported Carriers:</strong> Zynix AI SMS is supported on all major US carriers including AT&amp;T, T-Mobile, Verizon, and Sprint, as well as most regional carriers.</p>' +
-    '<p><strong>Privacy:</strong> We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. See our <a href="/privacy-policy">Privacy Policy</a> for complete details on how we handle your information.</p>' +
+    '<p><strong>Privacy:</strong> No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties. See our <a href="/privacy-policy">Privacy Policy</a> for complete details on how we handle your information.</p>' +
 
     '<h2>10. Changes to the Site and Terms</h2>' +
     '<p>We may update this website or these Terms at any time without prior notice. When we update these Terms, we will post the revised version on this page and update the \u201cLast Updated\u201d date at the top. Your continued use of this website after any update constitutes your acceptance of the revised Terms.</p>' +
@@ -8313,7 +8331,7 @@ function renderDataAnalyticsV7() {
     '<h2>Pre-Built EHR Integrations</h2>' +
     '<p class="zynix-section-sub">Native connectors for the EHR systems that power American healthcare.</p>' +
     '<div class="zynix-feature-grid" style="margin-top:40px">' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>Epic</h3><p>FHIR R4, CDS Hooks, ADT feeds, and bidirectional scheduling. Certified App Orchard integration.</p></div>' +
+    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>Epic</h3><p>FHIR R4, CDS Hooks, ADT feeds, and bidirectional scheduling.</p></div>' +
     '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>Oracle Health (Cerner)</h3><p>Real-time ADT, patient search, clinical documents, and scheduling via Millennium APIs and FHIR.</p></div>' +
     '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>athenahealth</h3><p>Patient demographics, clinical data, scheduling, and claims via the athenaNet API and Marketplace.</p></div>' +
     '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>eClinicalWorks</h3><p>HL7v2 ADT, clinical documents, and scheduling integration via direct API and FHIR endpoints.</p></div>' +
@@ -11183,7 +11201,7 @@ function renderDataAnalyticsV7() {
     '<div class="zynix-compare-verdict" style="background:var(--z-blue-light);border-radius:12px;padding:40px;text-align:center;margin:40px 0">' +
     '<h3 style="font-size:24px;font-weight:700;color:var(--z-text);margin:0 0 16px">The Verdict</h3>' +
     '<p style="font-size:17px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 24px;max-width:700px;margin-left:auto;margin-right:auto">Point solutions solve individual problems. Zynix solves the operating system problem. When your data, analytics, agents, and care plans work together in one platform, you eliminate integration complexity, reduce vendor management overhead, and achieve measurably better outcomes for your patient population.</p>' +
-    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">See Zynix in Action &rarr;</a>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener">See Zynix in Action &rarr;</a>' +
     '</div>' +
 
     '<div class="zynix-page-faq" style="max-width:720px;margin:48px auto 0">' +
@@ -11227,7 +11245,7 @@ function renderDataAnalyticsV7() {
     '<div class="zynix-compare-verdict" style="background:var(--z-blue-light);border-radius:12px;padding:40px;text-align:center;margin:40px 0">' +
     '<h3 style="font-size:24px;font-weight:700;color:var(--z-text);margin:0 0 16px">The Verdict</h3>' +
     '<p style="font-size:17px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 24px;max-width:700px;margin-left:auto;margin-right:auto">Innovaccer is a strong data platform for organizations that need a foundation for data aggregation and analytics, and in February 2025 it launched a suite of AI agents called \u201cAgents of Care\u201d (Innovaccer news release, 17 Feb 2025). Zynix AI unifies data and deploys autonomous AI agents that act on insights, calling patients, closing gaps, and executing care plans without manual intervention. If your organization needs AI that does the work, Zynix delivers.</p>' +
-    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">See the Zynix Difference &rarr;</a>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener">See the Zynix Difference &rarr;</a>' +
     '</div>' +
 
     '<div class="zynix-page-faq" style="max-width:720px;margin:48px auto 0">' +
@@ -11271,7 +11289,7 @@ function renderDataAnalyticsV7() {
     '<div class="zynix-compare-verdict" style="background:var(--z-blue-light);border-radius:12px;padding:40px;text-align:center;margin:40px 0">' +
     '<h3 style="font-size:24px;font-weight:700;color:var(--z-text);margin:0 0 16px">The Verdict</h3>' +
     '<p style="font-size:17px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 24px;max-width:700px;margin-left:auto;margin-right:auto">Commure describes itself as delivering AI infrastructure for health systems that integrates ambient workflows, agentic AI, and revenue cycle automation, and states that more than 130 large health systems use its platform alongside thousands of physician-owned practices (Commure news release, 19 May 2026). Zynix is the right choice for organizations that need a complete, production-ready AI operating system that delivers measurable clinical and financial outcomes without requiring a software development team.</p>' +
-    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">See Zynix in Action &rarr;</a>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener">See Zynix in Action &rarr;</a>' +
     '</div>' +
 
     '<div class="zynix-page-faq" style="max-width:720px;margin:48px auto 0">' +
@@ -11311,7 +11329,7 @@ function renderDataAnalyticsV7() {
     '<div class="zynix-compare-verdict" style="background:var(--z-blue-light);border-radius:12px;padding:40px;text-align:center;margin:40px 0">' +
     '<h3 style="font-size:24px;font-weight:700;color:var(--z-text);margin:0 0 16px">The Verdict</h3>' +
     '<p style="font-size:17px;line-height:1.8;color:var(--z-text-secondary);margin:0 auto 24px;max-width:700px">' + cfg.verdict + '</p>' +
-    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank">See the Zynix Difference &rarr;</a>' +
+    '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener">See the Zynix Difference &rarr;</a>' +
     '</div>' +
     '<div class="zynix-page-faq" style="max-width:720px;margin:48px auto 0">' +
     '<h2 style="font-size:28px;font-weight:700;text-align:center;margin:0 0 32px;color:var(--z-text)">Frequently Asked Questions</h2>';
@@ -13333,7 +13351,7 @@ function renderDataAnalyticsV7() {
       // Sticky CTA bar - appears after scrolling past hero
       var stickyBar = document.createElement('div');
       stickyBar.className = 'zynix-sticky-cta';
-      stickyBar.innerHTML = '<div style="display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 24px"><span style="font-size:14px;font-weight:600;color:var(--z-text)">Ready to transform your value-based care operations?</span><a href="' + CALENDLY + '" target="_blank" class="zynix-btn-primary" style="padding:10px 24px;font-size:13px">Request a Demo &rarr;</a></div>';
+      stickyBar.innerHTML = '<div style="display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 24px"><span style="font-size:14px;font-weight:600;color:var(--z-text)">Ready to transform your value-based care operations?</span><a href="' + CALENDLY + '" target="_blank" rel="noopener" class="zynix-btn-primary" style="padding:10px 24px;font-size:13px">Request a Demo &rarr;</a></div>';
       document.body.appendChild(stickyBar);
 
       window.addEventListener('scroll', function() {
@@ -13702,7 +13720,7 @@ function renderDataAnalyticsV7() {
         step.options.forEach(function(opt) {
           if (opt.link) {
             var href = opt.link.startsWith('http') ? opt.link : opt.link;
-            var target = opt.link.startsWith('http') ? ' target="_blank"' : '';
+            var target = opt.link.startsWith('http') ? ' target="_blank" rel="noopener"' : '';
             html += '<a href="' + href + '"' + target + ' style="display:block;padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;font-size:13px;color:#94a3b8;text-decoration:none;transition:all 0.2s;cursor:pointer;background:rgba(255,255,255,0.04);" onmouseover="this.style.background=\'rgba(32,68,155,0.2)\';this.style.borderColor=\'rgba(32,68,155,0.5)\';this.style.color=\'#e8eaf0\'" onmouseout="this.style.background=\'rgba(255,255,255,0.04)\';this.style.borderColor=\'rgba(255,255,255,0.1)\';this.style.color=\'#94a3b8\'">' + opt.label + '</a>';
           } else {
             html += '<button class="zynix-chat-opt" data-next="' + opt.next + '" style="display:block;width:100%;text-align:left;padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;font-size:13px;color:#94a3b8;background:rgba(255,255,255,0.04);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background=\'rgba(32,68,155,0.2)\';this.style.borderColor=\'rgba(32,68,155,0.5)\';this.style.color=\'#e8eaf0\'" onmouseout="this.style.background=\'rgba(255,255,255,0.04)\';this.style.borderColor=\'rgba(255,255,255,0.1)\';this.style.color=\'#94a3b8\'">' + opt.label + '</button>';
@@ -13725,7 +13743,7 @@ function renderDataAnalyticsV7() {
         // Add restart + demo buttons
         html += '<div style="display:flex;gap:8px;margin-top:12px;">' +
           '<button class="zynix-chat-opt" data-next="start" style="flex:1;padding:10px;border:1px solid #e0e4f0;border-radius:10px;font-size:12px;color:#666;background:white;cursor:pointer;">↩ Start Over</button>' +
-          '<a href="' + CALENDLY + '" target="_blank" style="flex:1;padding:10px;border:none;border-radius:10px;font-size:12px;color:white;background:#F16529;cursor:pointer;text-decoration:none;text-align:center;font-weight:600;">📅 Book a Demo</a>' +
+          '<a href="' + CALENDLY + '" target="_blank" rel="noopener" style="flex:1;padding:10px;border:none;border-radius:10px;font-size:12px;color:white;background:#F16529;cursor:pointer;text-decoration:none;text-align:center;font-weight:600;">📅 Book a Demo</a>' +
         '</div>';
       }
 
