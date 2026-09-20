@@ -2246,3 +2246,9 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-nav-actions .zynix-nav-contact { display: none; }
   .zynix-nav-hamburger { display: flex; }
 }
+
+/* a11y 2026-09-19: footer legal links + social icons were default browser blue on navy (1.85:1) */
+.zynix-footer-bottom a,.zynix-footer-bottom a:visited{color:#cbd5e1;text-decoration:underline;text-underline-offset:2px}
+.zynix-footer-bottom a:hover,.zynix-footer-bottom a:focus-visible{color:#ffffff}
+.zynix-footer-social a,.zynix-footer-social a:visited{color:#cbd5e1}
+.zynix-footer-social a:hover,.zynix-footer-social a:focus-visible{color:#ffffff}
