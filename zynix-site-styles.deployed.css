@@ -1390,13 +1390,6 @@ body.has-announcement-bar { padding-top: 40px; }
     max-height: 70vh !important;
   }
 }
-  #zynix-chat-panel {
-    width: calc(100vw - 32px) !important;
-    right: -8px !important;
-    bottom: 68px !important;
-    max-height: 70vh !important;
-  }
-}
 
 /* ══════════════════════════════════════════════════════════════
    iPHONE / MOBILE-FIRST OPTIMIZATION
