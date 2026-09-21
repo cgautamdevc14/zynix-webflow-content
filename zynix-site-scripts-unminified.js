@@ -6934,7 +6934,7 @@ function renderSMSConsent() {
 
     '<button type="submit" class="zynix-btn-primary" style="width:100%;text-align:center;padding:14px 24px;font-size:16px">Sign Up for SMS Notifications &rarr;</button>' +
 
-    '<p style="font-size:11px;color:#94a3b8;margin-top:16px;text-align:center;line-height:1.6">By submitting, you consent to receive text messages from Zynix AI: appointment reminders, care coordination updates, scheduling notifications, and account service alerts. Reply STOP to unsubscribe from all messages. Reply HELP for help (info@zynix.ai or 727-261-1297). Msg &amp; data rates may apply. Msg frequency: up to 8/month. <a href="/privacy-policy" style="color:#94a3b8;text-decoration:underline">Privacy Policy</a></p>' +
+    '<p style="font-size:11px;color:#94a3b8;margin-top:16px;text-align:center;line-height:1.6">By checking the box above and submitting, you consent to receive text messages from Zynix AI: appointment reminders, care coordination updates, scheduling notifications, and account service alerts. Reply STOP to unsubscribe from all messages. Reply HELP for help (info@zynix.ai or 727-261-1297). Msg &amp; data rates may apply. Msg frequency: up to 8/month. <a href="/privacy-policy" style="color:#94a3b8;text-decoration:underline">Privacy Policy</a></p>' +
 
     '</form></div>' +
 
@@ -7027,7 +7027,7 @@ function renderPrivacyV7() {
     IMG.hero, 'Zynix AI Privacy Policy');
 
   html += '<section class="zynix-legal-section"><div class="zynix-container"><div class="zynix-legal-content">' +
-    '<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> March 22, 2026</p>' +
+    '<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> September 21, 2026</p>' +
 
     '<h2>1. Who This Policy Applies To</h2>' +
     '<p>This policy applies to:</p>' +
@@ -7126,10 +7126,10 @@ function renderPrivacyV7() {
     '<h2>10. Children\u2019s Privacy</h2>' +
     '<p>Our website and services are directed to healthcare and business professionals. We do not knowingly collect personal information from children under the age of 13. If we become aware that we have inadvertently collected such information, we will take steps to delete it promptly.</p>' +
 
-    '<h2>10. Changes to This Policy</h2>' +
+    '<h2>11. Changes to This Policy</h2>' +
     '<p>We may update this policy from time to time to reflect changes in our practices or applicable law. When we do, we will post the updated version on this page and update the \u201cLast Updated\u201d date above. We encourage you to review this policy periodically.</p>' +
 
-    '<h2>11. Contact</h2>' +
+    '<h2>12. Contact</h2>' +
     '<p>For privacy-related questions or to submit a data rights request:</p>' +
     '<p><strong>Email:</strong> <a href="mailto:info@zynix.ai">info@zynix.ai</a></p>' +
     '<p><strong>Address:</strong> Zynix Inc., 3535 Little Rd, Trinity, FL 34655, USA</p>' +
@@ -7153,7 +7153,7 @@ function renderTermsV7() {
     IMG.hero, 'Zynix AI Terms');
 
   html += '<section class="zynix-legal-section"><div class="zynix-container"><div class="zynix-legal-content">' +
-    '<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> March 22, 2026</p>' +
+    '<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> September 21, 2026</p>' +
 
     '<h2>1. Who We Are</h2>' +
     '<p>Zynix AI (referred to as \u201cZynix,\u201d \u201cwe,\u201d \u201cus,\u201d or \u201cour\u201d) operates this website.</p>' +
