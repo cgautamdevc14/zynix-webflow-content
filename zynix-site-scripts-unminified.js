@@ -1244,7 +1244,7 @@
     '/faq': { title: 'FAQ | Zynix AI', desc: 'Find answers about the Zynix healthcare AI platform including HIPAA compliance, EHR integration, pricing, deployment timelines, and support options.', img: IMG.hero, schema: 'FAQPage' },
     '/privacy-policy': { title: 'Privacy Policy | Zynix AI', desc: 'Zynix AI privacy policy detailing how we collect, use, and protect your personal and health-related information across our healthcare AI platform.', img: IMG.hero, schema: 'Organization' },
     '/sms': { title: 'SMS Program Info | Zynix AI', desc: 'Zynix AI SMS program details: opt-in, opt-out (STOP), help (HELP), message frequency, supported carriers, and privacy for text notifications.', img: IMG.hero, schema: 'Organization', noindex: true },
-    '/sms-program': { title: 'SMS Program Info | Zynix AI', desc: 'Zynix AI SMS program details: opt-in, opt-out (STOP), help (HELP), message frequency, supported carriers, and privacy for text notifications.', img: IMG.hero, schema: 'Organization', noindex: true },
+    '/sms-program': { title: 'SMS Program Terms & Conditions | Zynix AI', desc: 'Zynix AI SMS Program Terms & Conditions: message frequency, Msg & data rates may apply, STOP to opt out, HELP for help, support contact, and privacy.', img: IMG.hero, schema: 'Organization', noindex: true },
     '/sms-consent': { title: 'SMS Opt-In | Zynix AI', desc: 'Sign up to receive appointment reminders, care coordination updates, and account notifications from Zynix AI via text message.', img: IMG.hero, schema: 'Organization', noindex: true },
     '/terms-of-service': { title: 'Terms of Service | Zynix AI', desc: 'Review the Zynix AI terms of service governing use of our healthcare AI platform, data processing agreements, and professional services.', img: IMG.hero, schema: 'Organization' },
     '/trust-center': { title: 'Trust & Security | Zynix AI', desc: 'Zynix AI is HIPAA compliant and SOC 2 Type II certified. Explore our security practices, data governance, and compliance for healthcare AI.', img: IMG.enterprise, schema: 'Organization' },
@@ -6777,23 +6777,27 @@ function renderSMSProgram() {
 
   html += '<section class="zynix-inner-hero" style="padding:140px 0 60px;background:var(--z-bg-dark)"><div class="zynix-container">' +
     '<div style="text-align:center;position:relative;z-index:1">' +
-    '<span class="zynix-tag">SMS PROGRAM</span>' +
-    '<h1 style="color:#fff;font-size:42px;font-weight:800;margin:0 0 16px">Zynix AI SMS Program</h1>' +
-    '<p style="color:rgba(255,255,255,0.8);font-size:18px;max-width:640px;margin:0 auto">Information about text messages from Zynix AI, including how to opt in, opt out, and get help.</p>' +
+    '<span class="zynix-tag">ZYNIX AI SMS PROGRAM</span>' +
+    '<h1 style="color:#fff;font-size:42px;font-weight:800;margin:0 0 16px">SMS Program Terms &amp; Conditions</h1>' +
+    '<p style="color:rgba(255,255,255,0.8);font-size:18px;max-width:640px;margin:0 auto">Terms for text messages from Zynix Inc. (d/b/a Zynix AI): message frequency, rates, how to opt out, how to get help, and how to reach support.</p>' +
     '</div></div></section>';
 
   html += '<section class="zynix-legal-section"><div class="zynix-container"><div class="zynix-legal-content">' +
 
+    '<p style="font-size:14px;color:var(--z-text-secondary);margin:0 0 16px"><strong>Last updated:</strong> September 21, 2026</p>' +
+    '<p>These SMS Program Terms &amp; Conditions (the &ldquo;Terms&rdquo;) apply to the Zynix AI Customer Care &amp; Account Notifications text message program (the &ldquo;Program&rdquo;) operated by Zynix Inc. (d/b/a Zynix AI). By opting in to the Program, you agree to these Terms.</p>' +
     '<div style="background:#EEF2FB;border:1px solid #c7d4f0;border-radius:12px;padding:24px 28px;margin-bottom:32px">' +
-    '<h2 style="font-size:20px;margin:0 0 12px;color:#20449B">Program Summary</h2>' +
-    '<ul style="margin:0;padding-left:20px;color:var(--z-text-secondary);line-height:1.8">' +
-    '<li><strong>Program Name:</strong> Zynix AI Customer Care &amp; Account Notifications</li>' +
-    '<li><strong>Sender:</strong> Zynix Inc. (d/b/a Zynix AI)</li>' +
-    '<li><strong>Message Types:</strong> Appointment reminders, care coordination updates, scheduling notifications, account service alerts</li>' +
-    '<li><strong>Frequency:</strong> Message frequency varies, up to 8 messages per month</li>' +
-    '<li><strong>Cost:</strong> Message and data rates may apply. Zynix AI does not charge for SMS.</li>' +
+    '<h2 style="font-size:20px;margin:0 0 12px;color:#20449B">SMS Program Terms</h2>' +
+    '<ol style="margin:0;padding-left:20px;color:var(--z-text-secondary);line-height:1.8">' +
+    '<li><strong>Program:</strong> Zynix AI Customer Care &amp; Account Notifications. Zynix Inc. (d/b/a Zynix AI) sends appointment reminders, care coordination updates, scheduling notifications, and account service alerts to patients and users who opt in at https://www.zynix.ai/sms-consent. No marketing or promotional messages are sent.</li>' +
+    '<li><strong>Message frequency:</strong> Message frequency varies, up to 8 messages per month.</li>' +
+    '<li><strong>Cost:</strong> Msg &amp; data rates may apply. Zynix AI does not charge for text messages; contact your wireless provider with questions about your text or data plan.</li>' +
+    '<li><strong>Opt out:</strong> Reply <strong>STOP</strong> to any message to cancel at any time. You will receive one confirmation message and no further messages unless you opt in again.</li>' +
+    '<li><strong>Help:</strong> Reply <strong>HELP</strong> to any message for help, or contact support at <a href="mailto:info@zynix.ai" style="color:#20449B">info@zynix.ai</a> or (727) 261-1297.</li>' +
+    '<li><strong>Carriers:</strong> Carriers are not liable for any delayed or undelivered messages.</li>' +
     '<li><strong>Consent:</strong> Consent is not a condition of purchase of any goods or services.</li>' +
-    '</ul></div>' +
+    '<li><strong>Privacy:</strong> See our <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">Privacy Policy</a> at https://www.zynix.ai/privacy-policy. Mobile opt-in data and consent are never shared with third parties.</li>' +
+    '</ol></div>' +
 
     '<h2>1. Who Sends These Messages</h2>' +
     '<p>Text messages are sent by <strong>Zynix Inc.</strong> (doing business as <strong>Zynix AI</strong>), a healthcare AI company headquartered at 3535 Little Rd, Trinity, FL 34655. Messages are sent from a dedicated business phone number registered under our Zynix Inc. brand.</p>' +
