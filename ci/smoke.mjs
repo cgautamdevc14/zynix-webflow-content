@@ -63,6 +63,11 @@ for (const [p, min] of ROUTES) { const pg = await open(p); const r = await pg.ev
 { const pg = await open('/sms-consent'); const r = await pg.ev(`(()=>{const f=document.querySelector('#zynix-sms-form');const c=f&&f.querySelector('[name=sms_consent]');return f?{checkbox:!!c,checkedByDefault:!!(c&&c.checked)}:null})()`); check('/sms-consent form present; consent box unchecked by default', r && r.checkbox && !r.checkedByDefault, JSON.stringify(r)); await pg.close(); }
 { const pg = await open('/use-cases'); const n = await pg.ev(`[...new Set([...document.querySelectorAll('a[href^="/use-cases/"]')].map(a=>a.innerText.trim().slice(0,4)).filter(x=>/^UC\\d\\d$/.test(x)))].length`); check('/use-cases lists all 30 use cases', n === 30, String(n)); await pg.close(); }
 
+// 2b. every case-study link the bundle renders must exist on the server (a 404 document is not a page, even if JS paints over it)
+{ const pg = await open('/resources-case-studies'); const hrefs = await pg.ev(`[...new Set([...document.querySelectorAll('a[href^="/case-stud"]')].map(a=>a.getAttribute('href').split('#')[0]))]`); await pg.close();
+  const bad = []; for (const h of hrefs || []) { try { const r = await fetch(BASE + h, { method: 'GET', redirect: 'manual', headers: { 'User-Agent': 'Mozilla/5.0 (zynix-ci-smoke)' } }); if (r.status !== 200) bad.push(`${h} -> ${r.status}`); } catch (e) { bad.push(`${h} -> ${e.message}`); } }
+  check(`case-study hub: all ${hrefs ? hrefs.length : 0} case-study links answer HTTP 200`, hrefs && hrefs.length >= 8 && bad.length === 0, bad.join(', ')); }
+
 // 3. mobile: no horizontal overflow, menu opens
 { const pg = await open('/', { mobile: true }); const r = await pg.ev(`(()=>{const b=document.querySelector('.zynix-nav-hamburger');if(b)b.click();const m=document.querySelector('.zynix-mobile-menu');return {overflow:document.documentElement.scrollWidth-window.innerWidth,menu:!!(m&&m.classList.contains('open'))}})()`); check('mobile home: no horizontal overflow, menu opens', r && r.overflow <= 2 && r.menu, JSON.stringify(r)); check('mobile home: no exceptions', pg.st.errors.length === 0, pg.st.errors.join(' | ')); await pg.close(); }
 

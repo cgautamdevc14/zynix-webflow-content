@@ -1022,6 +1022,11 @@
     '/integrations': 'Integrations',
     '/case-studies': 'Case Studies',
     '/case-studies/palm-beach-aco': 'Palm Beach ACO',
+    '/case-studies/pbaco': 'Palm Beach ACO',
+    '/case-studies-west-florida-aco': 'West Florida ACO',
+    '/case-studies-space-coast-aco': 'Space Coast ACO',
+    '/case-studies-central-florida-aco': 'Central Florida ACO',
+    '/case-studies-eternal-health': 'eTernal Health',
     '/case-studies/amistad': 'AMISTAD CHC',
     '/case-studies/apollo-clinic': 'Apollo Clinic',
     '/case-studies/nhs': 'NHS Health System',
@@ -1091,10 +1096,10 @@
     '/compare-zynix-vs-innovaccer': { products: ['/platform','/zynix-data-analytics','/agents'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/compare-zynix-vs-point-solutions','/compare-zynix-vs-commure'] },
     '/compare-zynix-vs-commure': { products: ['/platform','/agents','/integrations'], solutions: ['/solutions-health-systems','/solutions-acos'], related: ['/compare-zynix-vs-point-solutions','/compare-zynix-vs-innovaccer'] },
     // Case studies — link to relevant products and solutions
-    '/case-studies/palm-beach-aco': { products: ['/agents','/care-plans','/zynscribe'], solutions: ['/solutions-acos'], related: ['/case-studies/west-florida-aco','/case-studies/space-coast-aco'] },
+    '/case-studies/palm-beach-aco': { products: ['/agents','/care-plans','/zynscribe'], solutions: ['/solutions-acos'], related: ['/case-studies-west-florida-aco','/case-studies-space-coast-aco'] },
     '/case-studies/amistad': { products: ['/agents','/care-plans'], solutions: ['/solutions-fqhcs'], related: ['/case-studies/nhs','/use-cases/after-hours-triage-multi-site'] },
-    '/case-studies/apollo-clinic': { products: ['/agents','/zynscribe'], solutions: ['/solutions-independent-practices'], related: ['/case-studies/palm-beach-aco','/use-cases/post-discharge-follow-up'] },
-    '/case-studies/nhs': { products: ['/platform','/agents','/zynscribe','/care-plans'], solutions: ['/solutions-health-systems'], related: ['/case-studies/palm-beach-aco','/case-studies/amistad'] }
+    '/case-studies/apollo-clinic': { products: ['/agents','/zynscribe'], solutions: ['/solutions-independent-practices'], related: ['/case-studies/pbaco','/use-cases/post-discharge-follow-up'] },
+    '/case-studies/nhs': { products: ['/platform','/agents','/zynscribe','/care-plans'], solutions: ['/solutions-health-systems'], related: ['/case-studies/pbaco','/case-studies/amistad'] }
   };
 
   // ── SEO Data ──
@@ -3237,10 +3242,10 @@
       { title: 'AMISTAD CHC', metric: '15+', label: 'Languages Supported', seg: 'FQHC', desc: 'ZynAfterHours, Preventive & Quality Activation Agents, SDoH Agent', slug: '/case-studies/amistad' },
       { title: 'Apollo Clinic', metric: '40%', label: 'No-Show Reduction', seg: 'Practice', desc: 'ZynSchedule, ZynReminder, ZynAuth', slug: '/case-studies/apollo-clinic' },
       { title: 'NHS Health System', metric: '40%', label: 'Gap Closure Improvement', seg: 'Health System', desc: 'Full Zynix Platform, ZynAfterHours, ZynScribe, ToC Agent', slug: '/case-studies/nhs' },
-      { title: 'West Florida ACO', metric: '40%', label: 'Quality Gap Closure Improvement', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies/west-florida-aco' },
-      { title: 'Space Coast ACO', metric: '85%+', label: 'TCM Contact Rate', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies/space-coast-aco' },
-      { title: 'Central Florida ACO', metric: '2.5x', label: 'ROI in Year One', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies/central-florida-aco' },
-      { title: 'eTernal Health', metric: '45%', label: 'Medication Adherence Improvement', seg: 'Health Plan', desc: 'PDV Agents, Medication Adherence Programs', slug: '/case-studies/eternal-health' }
+      { title: 'West Florida ACO', metric: '40%', label: 'Quality Gap Closure Improvement', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies-west-florida-aco' },
+      { title: 'Space Coast ACO', metric: '85%+', label: 'TCM Contact Rate', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies-space-coast-aco' },
+      { title: 'Central Florida ACO', metric: '2.5x', label: 'ROI in Year One', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies-central-florida-aco' },
+      { title: 'eTernal Health', metric: '45%', label: 'Medication Adherence Improvement', seg: 'Health Plan', desc: 'PDV Agents, Medication Adherence Programs', slug: '/case-studies-eternal-health' }
     ];
     var html = '<div class="zynix-case-grid">';
     studies.forEach(function(s) {
@@ -6664,7 +6669,7 @@ var PRESS_RELEASES = [
     excerpt: 'Zynix AI partners with Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding) — one of the nation\u2019s largest risk-bearing ACOs — to deploy AI-driven patient outreach, ambient documentation, and workflow automation across its provider network.',
     seoTitle: 'Zynix AI + PBACO Holding Partnership | Zynix AI',
     seoDesc: 'Zynix AI announces strategic partnership with Palm Beach Accountable Care Organization (PBACO Holding) to scale AI-driven patient outreach, documentation, and workflow automation across value-based care.',
-    ctaSecondary: { href: '/case-studies/palm-beach-aco', label: 'Read the Palm Beach ACO Case Study' },
+    ctaSecondary: { href: '/case-studies/pbaco', label: 'Read the Palm Beach ACO Case Study' },
     bodyHtml:
       '<p>Zynix AI today announced a strategic partnership with <a href="https://www.pbaco.com" rel="noopener" target="_blank" style="color:#20449B;font-weight:600">Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding)</a>, one of the nation\u2019s largest and most successful risk-bearing accountable care organizations, to deploy advanced AI-driven patient outreach and workflow automation solutions across its affiliated provider network. The partnership is designed to enhance patient follow-up, engagement, operational efficiency, and quality performance, while supporting total cost of care improvement in value-based care models.</p>' +
       '<p>Under the agreement, Zynix AI will support critical workflows including post-discharge follow-up (PDV) and Annual Wellness Visit (AWV) engagement. Its AI-enabled voice and SMS capabilities will help practices more effectively reach patients, streamline appointment scheduling, and strengthen care continuity. The collaboration also creates opportunities to expand the use of ambient AI documentation tools to reduce clinician administrative burden, improve note quality, and enable more efficient care delivery.</p>' +
@@ -12984,14 +12989,14 @@ function renderDataAnalyticsV7() {
   // ── CASE STUDIES: Audience-Segmented Landing Pages ──
   function renderCaseStudiesBySegment(segTitle, segDesc, segTag, filterSeg) {
     var allStudies = [
-      { title: 'Palm Beach ACO', metric: '3x', label: 'AWV Completion Improvement', seg: 'ACO', desc: 'Outbound Agents (PDV & AWV), AI Scribe', slug: '/case-studies/palm-beach-aco' },
+      { title: 'Palm Beach ACO', metric: '3x', label: 'AWV Completion Improvement', seg: 'ACO', desc: 'Outbound Agents (PDV & AWV), AI Scribe', slug: '/case-studies/pbaco' },
       { title: 'AMISTAD CHC', metric: '15+', label: 'Languages Supported', seg: 'FQHC', desc: 'ZynAfterHours, Preventive & Quality Activation Agents, SDoH Agent', slug: '/case-studies/amistad' },
       { title: 'Apollo Clinic', metric: '40%', label: 'No-Show Reduction', seg: 'Practice', desc: 'ZynSchedule, ZynReminder, ZynAuth', slug: '/case-studies/apollo-clinic' },
       { title: 'NHS Health System', metric: '40%', label: 'Gap Closure Improvement', seg: 'Health System', desc: 'Full Zynix Platform, ZynAfterHours, ZynScribe, ToC Agent', slug: '/case-studies/nhs' },
-      { title: 'West Florida ACO', metric: '40%', label: 'Quality Gap Closure Improvement', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies/west-florida-aco' },
-      { title: 'Space Coast ACO', metric: '85%+', label: 'TCM Contact Rate', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies/space-coast-aco' },
-      { title: 'Central Florida ACO', metric: '2.5x', label: 'ROI in Year One', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies/central-florida-aco' },
-      { title: 'eTernal Health', metric: '45%', label: 'Medication Adherence Improvement', seg: 'Health Plan', desc: 'PDV Agents, Medication Adherence Programs', slug: '/case-studies/eternal-health' }
+      { title: 'West Florida ACO', metric: '40%', label: 'Quality Gap Closure Improvement', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies-west-florida-aco' },
+      { title: 'Space Coast ACO', metric: '85%+', label: 'TCM Contact Rate', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies-space-coast-aco' },
+      { title: 'Central Florida ACO', metric: '2.5x', label: 'ROI in Year One', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies-central-florida-aco' },
+      { title: 'eTernal Health', metric: '45%', label: 'Medication Adherence Improvement', seg: 'Health Plan', desc: 'PDV Agents, Medication Adherence Programs', slug: '/case-studies-eternal-health' }
     ];
     var filtered = allStudies.filter(function(s) { return s.seg === filterSeg; });
     var html = '<div class="zynix-case-grid">';
