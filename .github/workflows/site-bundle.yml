@@ -34,8 +34,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - name: Syntax
@@ -63,7 +63,7 @@ jobs:
       CDN: https://cdn.jsdelivr.net/gh/${{ github.repository }}@main
       PURGE: https://purge.jsdelivr.net/gh/${{ github.repository }}@main
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Purge jsDelivr @main
         run: |
           for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css; do
