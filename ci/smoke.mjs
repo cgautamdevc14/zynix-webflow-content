@@ -14,7 +14,9 @@ let wsUrl; for (let i = 0; i < 80; i++) { try { wsUrl = (await (await fetch(`htt
 if (!wsUrl) { console.log('INCONCLUSIVE: Chrome did not start (' + CHROME + ')'); process.exit(2); }
 const ws = new WebSocket(wsUrl); await new Promise(r => ws.addEventListener('open', r)); let id = 0; const pend = new Map(); const hs = new Map();
 ws.addEventListener('message', e => { const m = JSON.parse(e.data); if (m.id && pend.has(m.id)) { pend.get(m.id)(m.result || {}); pend.delete(m.id); } else if (m.method && hs.has(m.sessionId)) hs.get(m.sessionId)(m.method, m.params); });
-const send = (method, params = {}, sessionId) => new Promise(res => { const i = ++id; pend.set(i, res); ws.send(JSON.stringify({ id: i, method, params, ...(sessionId ? { sessionId } : {}) })); });
+// Every CDP call has a deadline: a request left paused or a wedged renderer must fail a check, never hang the job.
+const send = (method, params = {}, sessionId) => new Promise(res => { const i = ++id; const t = setTimeout(() => { if (pend.has(i)) { pend.delete(i); console.log(`WARN  CDP ${method} gave no answer in 45 s`); res({}); } }, 45000); pend.set(i, r => { clearTimeout(t); res(r); }); ws.send(JSON.stringify({ id: i, method, params, ...(sessionId ? { sessionId } : {}) })); });
+const WATCHDOG = setTimeout(() => { console.log('\nFAIL  smoke test watchdog: the run did not finish within 15 minutes'); try { chrome.kill(); } catch {} process.exit(1); }, 15 * 60 * 1000);
 
 async function open(pathname, opts = {}) {
   const { targetId } = await send('Target.createTarget', { url: 'about:blank' }); const { sessionId } = await send('Target.attachToTarget', { targetId, flatten: true }); const S = (m, p) => send(m, p, sessionId);
@@ -70,6 +72,34 @@ for (const [p, min] of ROUTES) { const pg = await open(p); const r = await pg.ev
 { const pg = await open('/resources-case-studies'); const hrefs = await pg.ev(`[...new Set([...document.querySelectorAll('a[href^="/case-stud"]')].map(a=>a.getAttribute('href').split('#')[0]))]`); await pg.close();
   const bad = []; for (const h of hrefs || []) { try { const r = await fetch(BASE + h, { method: 'GET', redirect: 'manual', headers: { 'User-Agent': 'Mozilla/5.0 (zynix-ci-smoke)' } }); if (r.status !== 200) bad.push(`${h} -> ${r.status}`); } catch (e) { bad.push(`${h} -> ${e.message}`); } }
   check(`case-study hub: all ${hrefs ? hrefs.length : 0} case-study links answer HTTP 200`, hrefs && hrefs.length >= 8 && bad.length === 0, bad.join(', ')); }
+
+
+// 2c. A2P 10DLC checklist (Twilio "A2P 10DLC Campaign Onboarding Guide": web form, Privacy policy, Terms & Conditions).
+//     The T&C URL registered with Twilio is /sms-program; the privacy URL is /privacy-policy; the opt-in is /sms-consent.
+const A2P = `(()=>{const vis=e=>!!(e.offsetWidth||e.offsetHeight);const main=document.querySelector('.zynix-injected')||document.body;const t=main.innerText.replace(/\\s+/g,' ');
+ const kw=[];const it=document.createTreeWalker(main,NodeFilter.SHOW_TEXT);let n;while(n=it.nextNode()){const el=n.parentElement;if(!el||!vis(el))continue;const re=/\\b(STOP|HELP)\\b/g;let m;while(m=re.exec(n.nodeValue)){kw.push(parseInt(getComputedStyle(el).fontWeight,10))}}
+ const nums=[...main.querySelectorAll('h2')].filter(vis).map(h=>(h.innerText.match(/^(\\d+)\\./)||[])[1]).filter(Boolean);
+ return {title:document.title,h1:[...document.querySelectorAll('h1')].filter(vis).map(h=>h.innerText.trim()),robots:[...document.querySelectorAll('meta[name=robots]')].map(m=>m.content).join('|'),forms:[...document.querySelectorAll('form')].filter(vis).map(f=>f.id||f.className),
+  kwTotal:kw.length,kwNotBold:kw.filter(w=>w<600).length,dupNumbers:nums.filter((x,i)=>nums.indexOf(x)!==i),
+  quotedReplies:/Zynix AI: For help, email|You are unsubscribed and will receive|you will receive support contact info/.test(t),
+  rates:/Msg & data rates may apply|Message and data rates may apply/i.test(t),freq:/up to 8 messages per month/i.test(t),contact:/info@zynix\\.ai/.test(t)&&/\\(727\\) 261-1297|727-261-1297/.test(t),
+  carrier:/Carriers are not liable for any delayed or undelivered messages\\./.test(t),privacyLink:[...main.querySelectorAll('a[href]')].some(a=>/\\/privacy-policy$/.test(a.getAttribute('href'))&&vis(a)),
+  termsLink:[...main.querySelectorAll('a[href]')].some(a=>/\\/sms-program$/.test(a.getAttribute('href'))&&vis(a)),program:/Zynix AI Customer Care & Account Notifications/.test(t),brand:/Zynix Inc\\./.test(t),
+  twilioPrivacy:/We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes\\./.test(t),
+  consentBox:(()=>{const c=document.querySelector('#zynix-sms-form [name=sms_consent]');return c?{checked:c.checked,required:c.required}:null})()}})()`;
+{ const pg = await open('/sms-program'); const r = await pg.ev(A2P); await pg.close();
+  check('A2P T&C /sms-program: titled "SMS Program Terms & Conditions" (title and H1)', r && /SMS Program Terms & Conditions/.test(r.title) && r.h1.includes('SMS Program Terms & Conditions'), r && JSON.stringify({ title: r.title, h1: r.h1 }));
+  check('A2P T&C /sms-program: program name, frequency, "Msg & data rates may apply", support contact, privacy link, carrier sentence', r && r.program && r.freq && r.rates && r.contact && r.privacyLink && r.carrier, r && JSON.stringify({ program: r.program, freq: r.freq, rates: r.rates, contact: r.contact, privacyLink: r.privacyLink, carrier: r.carrier }));
+  check('A2P T&C /sms-program: every STOP and HELP is displayed in bold', r && r.kwTotal >= 6 && r.kwNotBold === 0, r && `${r.kwTotal} occurrences, ${r.kwNotBold} not bold`);
+  check('A2P T&C /sms-program: a terms document only (no form), indexable, no quoted reply texts that differ from the registration', r && r.forms.length === 0 && !/noindex/.test(r.robots) && !r.quotedReplies, r && JSON.stringify({ forms: r.forms, robots: r.robots, quotedReplies: r.quotedReplies })); }
+{ const pg = await open('/privacy-policy'); const r = await pg.ev(A2P); await pg.close();
+  check('A2P privacy /privacy-policy: page titled "Privacy Policy" (title and H1), names Zynix Inc., carries Twilio\'s sentence', r && /^Privacy Policy/.test(r.title) && r.h1.includes('Privacy Policy') && r.brand && r.twilioPrivacy, r && JSON.stringify({ title: r.title, h1: r.h1, brand: r.brand, twilioPrivacy: r.twilioPrivacy }));
+  check('A2P privacy /privacy-policy: section numbers unique, no quoted reply texts', r && r.dupNumbers.length === 0 && !r.quotedReplies, r && JSON.stringify({ dup: r.dupNumbers, quotedReplies: r.quotedReplies })); }
+{ const pg = await open('/sms-consent'); const r = await pg.ev(A2P); await pg.close();
+  check('A2P opt-in /sms-consent: one form (the SMS form), consent box unchecked and required, links to /sms-program and /privacy-policy', r && r.forms.length === 1 && r.forms[0] === 'zynix-sms-form' && r.consentBox && !r.consentBox.checked && r.consentBox.required && r.termsLink && r.privacyLink, r && JSON.stringify({ forms: r.forms, box: r.consentBox, termsLink: r.termsLink, privacyLink: r.privacyLink }));
+  check('A2P opt-in /sms-consent: frequency, rates, STOP/HELP, support contact; indexable; no reply promises that differ from the registration', r && r.freq && r.rates && r.kwTotal >= 2 && r.contact && !/noindex/.test(r.robots) && !r.quotedReplies, r && JSON.stringify({ freq: r.freq, rates: r.rates, kw: r.kwTotal, contact: r.contact, robots: r.robots, quotedReplies: r.quotedReplies })); }
+{ const pg = await open('/terms-of-service'); const r = await pg.ev(A2P); await pg.close();
+  check('A2P /terms-of-service: carrier sentence, no quoted reply texts', r && r.carrier && !r.quotedReplies, r && JSON.stringify({ carrier: r.carrier, quotedReplies: r.quotedReplies })); }
 
 // 3. mobile: no horizontal overflow, menu opens
 { const pg = await open('/', { mobile: true }); const r = await pg.ev(`(()=>{const b=document.querySelector('.zynix-nav-hamburger');if(b)b.click();const m=document.querySelector('.zynix-mobile-menu');return {overflow:document.documentElement.scrollWidth-window.innerWidth,menu:!!(m&&m.classList.contains('open'))}})()`); check('mobile home: no horizontal overflow, menu opens', r && r.overflow <= 2 && r.menu, JSON.stringify(r)); check('mobile home: no exceptions', pg.st.errors.length === 0, pg.st.errors.join(' | ')); await pg.close(); }
