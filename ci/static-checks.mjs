@@ -1,5 +1,5 @@
 // Static guards for the two files that production loads. Fails the build on anything that would break or embarrass the site.
-import fs from 'node:fs';
+import fs from 'node:fs'; import crypto from 'node:crypto'; import { extractFunction } from './extract-function.mjs';
 const JS = 'zynix-site-scripts-unminified.js', CSS = 'zynix-site-styles.deployed.css';
 const js = fs.readFileSync(JS, 'utf8'), css = fs.readFileSync(CSS, 'utf8');
 let failed = 0; const check = (name, ok, detail = '') => { console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? '  — ' + detail : ''}`); if (!ok) failed++; };
@@ -20,4 +20,16 @@ check(`${JS}: Twilio no-sharing sentence present`, js.includes('No mobile inform
 check(`${JS}: forms check the HubSpot response before saying thank you`, (js.match(/if\(!r\.ok\)\{throw new Error\(r\.status\)\}/g) || []).length >= 2 && js.includes("if (!r.ok) throw new Error('HubSpot '"));
 check(`${JS}: newsletter no longer fakes a subscription`, !js.includes('Check your inbox for a confirmation'));
 
+
+// A2P freeze: while a campaign is in carrier review, the four renderers Twilio's reviewers read must not change.
+// With continuous deployment a merge to main is live within minutes, so this is enforced here, not by memory.
+const FREEZE = JSON.parse(fs.readFileSync('ci/a2p-freeze.json', 'utf8'));
+if (FREEZE.active) {
+  const changed = [];
+  for (const [name, want] of Object.entries(FREEZE.functions)) {
+    let got = null; try { got = crypto.createHash('sha256').update(extractFunction(js, name)).digest('hex'); } catch (e) { changed.push(`${name} (could not extract: ${e.message})`); continue; }
+    if (got !== want) changed.push(name);
+  }
+  check(`A2P freeze since ${FREEZE.since}: SMS/legal renderers unchanged since ${FREEZE.reference_commit}`, changed.length === 0, changed.length ? `changed: ${changed.join(', ')}. ${FREEZE.reason} ${FREEZE.to_unfreeze}` : 'frozen');
+} else console.log('INFO  A2P freeze inactive (ci/a2p-freeze.json)');
 console.log(`\n${failed ? failed + ' static check(s) FAILED' : 'all static checks passed'}`); process.exit(failed ? 1 : 0);
