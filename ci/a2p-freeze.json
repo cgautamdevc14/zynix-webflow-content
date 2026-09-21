@@ -2,12 +2,20 @@
   "active": true,
   "since": "2026-09-21T20:34:28Z",
   "reason": "A2P 10DLC campaign (round 5) is in carrier review. Twilio reviewers read /sms-consent, /sms-program, /privacy-policy and /terms-of-service; keep what these four renderers produce byte-identical to what was live at submission until Twilio's verdict. Requested by the A2P session on Gautamdev's resubmission.",
-  "reference_commit": "136dfc2",
+  "reference_commit": "136dfc2 (renderSMSProgram: a4fca00)",
   "functions": {
-    "renderSMSProgram": "44ad6c9a83a5fb8ae4be409314191ed4738102f346c32dd59c9164cc35bfa176",
+    "renderSMSProgram": "1ea629a7266b17e72992cb3210b82b412fa9457f493801ca86e5cbd797c50089",
     "renderSMSConsent": "ea685b4fd5fac704251b857da425cd7c7ea62e263d3bc401b18b504e77eb3acb",
     "renderPrivacyV7": "9580d47a6fb9803e264be8baa074d3c0015eb5232ad92109d8e3f942d202d065",
     "renderTermsV7": "eeb4596cc4da0693bae99ad09ea440e9f6004db9cbee9f54a0492a06027f6851"
   },
-  "to_unfreeze": "After Twilio's verdict, set active to false in its own pull request (or update a hash deliberately, with the matching native Webflow page and the registered campaign)."
+  "to_unfreeze": "After Twilio's verdict, set active to false in its own pull request (or update a hash deliberately, with the matching native Webflow page and the registered campaign).",
+  "repinned": [
+    {
+      "function": "renderSMSProgram",
+      "commit": "a4fca00",
+      "date": "2026-09-21",
+      "why": "Carrier reviewer's note that the T&C URL did not read as SMS program terms. PR #12 (A2P session, on Gautamdev's instruction) made /sms-program an SMS Program Terms & Conditions page; the native Webflow page was changed to match."
+    }
+  ]
 }
