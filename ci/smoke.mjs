@@ -39,6 +39,9 @@ async function open(pathname, opts = {}) {
   await S('Network.setBlockedURLs', { urls: ['*google-analytics.com*', '*googletagmanager.com*', '*facebook.net*', '*facebook.com/tr*', '*claydar.com*', '*/ag/g/c*', '*snap.licdn.com*', '*doubleclick.net*', '*hs-analytics*', '*hs-scripts.com*'] });
   await S('Fetch.enable', { patterns: [{ urlPattern: '*zynix-site-scripts-unminified.js*' }, { urlPattern: '*zynix-site-styles.deployed.css*' }, { urlPattern: '*api.hsforms.com*' }, { urlPattern: BASE + '/*', resourceType: 'Document', requestStage: 'Response' }] });
   await S('Emulation.setDeviceMetricsOverride', opts.mobile ? { width: 390, height: 844, deviceScaleFactor: 2, mobile: true } : { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
+  // Production itself loads @main now, so every earlier page in this run already set the bundle's 10-minute
+  // re-validation throttle in localStorage. Clear it for the check that needs a first visit.
+  if (opts.firstVisit) await S('Page.addScriptToEvaluateOnNewDocument', { source: "try{localStorage.removeItem('zx_asset_check')}catch(e){}" });
   await S('Page.navigate', { url: BASE + pathname }); await sleep(opts.wait || 6500);
   const ev = async expr => { const r = await S('Runtime.evaluate', { expression: expr, returnByValue: true, awaitPromise: true }); return r.result ? r.result.value : undefined; };
   return { ev, st, close: async () => { hs.delete(sessionId); await send('Target.closeTarget', { targetId }); } };
@@ -72,7 +75,7 @@ for (const [p, min] of ROUTES) { const pg = await open(p); const r = await pg.ev
 { const pg = await open('/', { mobile: true }); const r = await pg.ev(`(()=>{const b=document.querySelector('.zynix-nav-hamburger');if(b)b.click();const m=document.querySelector('.zynix-mobile-menu');return {overflow:document.documentElement.scrollWidth-window.innerWidth,menu:!!(m&&m.classList.contains('open'))}})()`); check('mobile home: no horizontal overflow, menu opens', r && r.overflow <= 2 && r.menu, JSON.stringify(r)); check('mobile home: no exceptions', pg.st.errors.length === 0, pg.st.errors.join(' | ')); await pg.close(); }
 
 // 4. the page as it will be once Webflow loads @main: background cache revalidation fires and nothing throws
-{ const pg = await open('/', { asMain: true, wait: 16000 }); const r = await pg.ev(`({main:[...document.scripts].some(s=>/@main\\/zynix-site-scripts-unminified\\.js/.test(s.src)),words:document.body.innerText.split(/\\s+/).length,stamp:(()=>{try{return !!localStorage.getItem('zx_asset_check')}catch(e){return null}})()})`);
+{ const pg = await open('/', { asMain: true, firstVisit: true, wait: 16000 }); const r = await pg.ev(`({main:[...document.scripts].some(s=>/@main\\/zynix-site-scripts-unminified\\.js/.test(s.src)),words:document.body.innerText.split(/\\s+/).length,stamp:(()=>{try{return !!localStorage.getItem('zx_asset_check')}catch(e){return null}})()})`);
   check('@main simulation: page renders from the @main URLs', r && r.main && r.words > 1200, JSON.stringify(r)); check('@main simulation: bundle and stylesheet are re-validated in the background (2 requests each)', pg.st.js >= 2 && pg.st.css >= 2, `bundle ${pg.st.js}x, stylesheet ${pg.st.css}x`); check('@main simulation: no exceptions', pg.st.errors.length === 0, pg.st.errors.join(' | ')); await pg.close(); }
 
 const failed = results.filter(r => !r.ok); console.log(`\n${results.length - failed.length}/${results.length} smoke checks passed`);
