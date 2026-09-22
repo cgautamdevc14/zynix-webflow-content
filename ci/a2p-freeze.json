@@ -5,7 +5,7 @@
   "reference_commit": "this change (a2p-pass, 2026-09-21)",
   "functions": {
     "renderSMSProgram": "cfa8c2acc25668b8753b965b98b810f2d2d0162999772b4f9b4b98a53e097140",
-    "renderSMSConsent": "d42d0618c836fa5cbc844533a392771d84fe71eef9cfad6cdf430beb198050ae",
+    "renderSMSConsent": "3dc0b6c16d9d7abcb29a800638c8f50341011b3c1cbbb96802d6b2b5bdcc52c2",
     "renderPrivacyV7": "8355529ce87781d973a7c83c8de2e8b50cc3124180dc5b8c5864d3416b24021c",
     "renderTermsV7": "df00e71910398f843307da86f5960326f3fd8a6bc63864b34424dffd0ae50bcf"
   },
@@ -22,6 +22,12 @@
       "commit": "a2p-pass",
       "date": "2026-09-21",
       "why": "Gautamdev: 'make sure it passes, do everything to pass everything'. Twilio onboarding-guide checklist: HELP/STOP in bold, privacy page titled Privacy Policy, no quoted HELP/STOP replies that differ from the registered (default) replies, unique section numbers, Last Updated dates, SMS pages indexable and single-purpose."
+    },
+    {
+      "function": "renderSMSConsent",
+      "commit": "a2p-optional-consent",
+      "date": "2026-09-22",
+      "why": "Carrier rejection 30923 (forced consent) on both placeholder campaigns, citing https://www.zynix.ai/sms-consent: consent was bundled with the Terms of Service link inside the consent label and the form gave no way to decline. Policy links moved out of the label, label marked Optional and states consent is not required to use Zynix AI, an optional-notice line was added above the checkbox, and a skip link below the button."
     }
   ]
 }
