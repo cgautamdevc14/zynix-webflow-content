@@ -6927,14 +6927,19 @@ function renderSMSConsent() {
     '<li>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</li>' +
     '</ul>' +
 
+    '<p style="font-size:13px;color:#0f172a;margin:0 0 10px"><strong>Text messages are optional.</strong> You can use Zynix AI&rsquo;s website and services, and request a demo, without opting in.</p>' +
     '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:14px;line-height:1.6;color:#334155">' +
     '<input type="checkbox" name="sms_consent" required style="margin-top:4px;width:20px;height:20px;flex-shrink:0;accent-color:#20449B">' +
-    '<span>By checking this box, I agree to receive text messages from Zynix AI at the mobile number provided, including appointment reminders, care coordination updates, scheduling notifications, and account service alerts. Consent is not a condition of purchase. Message frequency varies, up to 8 messages per month. Message and data rates may apply. Reply STOP to opt out at any time, or HELP for help. <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">Privacy Policy</a> &middot; <a href="/terms-of-service" style="color:#20449B;text-decoration:underline">Terms of Service</a> &middot; <a href="/sms-program" style="color:#20449B;text-decoration:underline">SMS Program Terms</a></span>' +
-    '</label></div>' +
+    '<span>Optional: By checking this box, I agree to receive text messages from Zynix AI at the mobile number provided, including appointment reminders, care coordination updates, scheduling notifications, and account service alerts. Consent is not a condition of purchase and is not required to use Zynix AI or to receive care. Message frequency varies, up to 8 messages per month. Message and data rates may apply. Reply STOP to opt out at any time, or HELP for help.</span>' +
+    '</label>' +
+    '<p style="font-size:12px;color:#64748b;margin:10px 0 0;line-height:1.6">Read our <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">Privacy Policy</a>, <a href="/terms-of-service" style="color:#20449B;text-decoration:underline">Terms of Service</a> and <a href="/sms-program" style="color:#20449B;text-decoration:underline">SMS Program Terms</a>.</p>' +
+    '</div>' +
 
     '<button type="submit" class="zynix-btn-primary" style="width:100%;text-align:center;padding:14px 24px;font-size:16px">Sign Up for SMS Notifications &rarr;</button>' +
 
     '<p style="font-size:11px;color:#94a3b8;margin-top:16px;text-align:center;line-height:1.6">By checking the box above and submitting, you consent to receive text messages from Zynix AI: appointment reminders, care coordination updates, scheduling notifications, and account service alerts. Reply <strong>STOP</strong> to unsubscribe from all messages. Reply <strong>HELP</strong> for help (info@zynix.ai or 727-261-1297). Msg &amp; data rates may apply. Msg frequency: up to 8/month. <a href="/privacy-policy" style="color:#94a3b8;text-decoration:underline">Privacy Policy</a></p>' +
+
+    '<p style="font-size:13px;margin-top:14px;text-align:center"><a href="/" style="color:#20449B;text-decoration:underline">No thanks &mdash; continue without text messages</a></p>' +
 
     '</form></div>' +
 
