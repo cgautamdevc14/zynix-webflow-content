@@ -7038,7 +7038,7 @@ function renderPrivacyV7() {
     '<p>This policy applies to:</p>' +
     '<ul>' +
     '<li>Visitors to the Zynix AI website (zynix.ai)</li>' +
-    '<li>People who contact us (for example, to request a demo, ask a question, or submit a form</li>' +
+    '<li>People who contact us (for example, to request a demo, ask a question, or submit a form)</li>' +
     '<li>Business contacts interacting with Zynix AI for procurement, security reviews, or partnership inquiries</li>' +
     '</ul>' +
     '<p>If you are a customer using the Zynix AI platform, your organization\u2019s agreement with Zynix AI governs data handling in addition to this policy.</p>' +
@@ -7197,9 +7197,9 @@ function renderTermsV7() {
     '<p>You agree to indemnify, defend, and hold harmless Zynix AI and its officers, directors, employees, and agents from and against any claims, damages, liabilities, losses, and expenses (including reasonable attorneys\u2019 fees) arising out of or related to your misuse of this website or your violation of these Terms.</p>' +
 
     '<h2>9. SMS/Text Messaging Program</h2>' +
-    '<p><strong>Program Name:</strong> Zynix AI Customer Care SMS</p>' +
+    '<p><strong>Program Name:</strong> Zynix AI Customer Care &amp; Account Notifications</p>' +
     '<p><strong>Program Description:</strong> Zynix AI sends SMS messages exclusively for customer care and account-related notifications to users who have explicitly opted in. Message types: appointment reminders, care coordination updates, scheduling notifications, and account service alerts. This program does not send marketing, promotional, or lead generation messages.</p>' +
-    '<p><strong>Opt-In Method:</strong> You may opt in to SMS only by completing the SMS opt-in form at <a href="https://www.zynix.ai/sms-consent">https://www.zynix.ai/sms-consent</a> and checking the consent checkbox. By checking the consent box and submitting the form, you expressly consent to receive text messages from Zynix AI. Consent is not a condition of purchase.</p>' +
+    '<p><strong>Opt-In Method:</strong> You may opt in to SMS only by completing the SMS opt-in form at <a href="https://www.zynix.ai/sms-consent">https://www.zynix.ai/sms-consent</a> and checking the consent checkbox. No other form on this website signs you up for text messages. By checking the consent box and submitting the form, you expressly consent to receive text messages from Zynix AI. Consent is not a condition of purchase.</p>' +
     '<p><strong>Message Frequency:</strong> Message frequency varies, up to 8 messages per month.</p>' +
     '<p><strong>Message and Data Rates:</strong> Message and data rates may apply. Please check with your mobile carrier for details about your messaging plan.</p>' +
     '<p><strong>Keywords and Confirmation Messages:</strong></p>' +
