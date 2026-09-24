@@ -6837,12 +6837,12 @@ function renderSMSProgram() {
     '<p style="margin:0;padding:12px 16px;background:#fff;border-radius:6px;border:1px solid #e2e8f0;font-family:monospace;font-size:14px;line-height:1.6;color:#334155">Zynix AI: You&rsquo;re subscribed to appointment reminders, care coordination updates, scheduling notifications &amp; account alerts. Up to 8 msgs/month. Msg &amp; data rates may apply. Reply <strong>HELP</strong> for help, <strong>STOP</strong> to opt out.</p>' +
     '</div>' +
 
-    '<h2>5. How to Opt Out (STOP)</h2>' +
+    '<h2>5. How to Opt Out (<strong>STOP</strong>)</h2>' +
     '<p>You can opt out of SMS messages at any time by replying <strong>STOP</strong> to any message from Zynix AI.</p>' +
     '<p>After you reply <strong>STOP</strong>, you will receive one confirmation message that you have been unsubscribed, and no further messages will be sent. To resubscribe, reply <strong>START</strong>.</p>' +
     '<p>After opting out, <strong>you will not receive any additional text messages from Zynix AI</strong> unless you opt in again by completing the <a href="/sms-consent" style="color:#20449B">SMS consent form</a>.</p>' +
 
-    '<h2>6. How to Get Help (HELP)</h2>' +
+    '<h2>6. How to Get Help (<strong>HELP</strong>)</h2>' +
     '<p>If you need assistance, reply <strong>HELP</strong> to any message from Zynix AI, or contact our support team directly:</p>' +
     '<ul>' +
     '<li><strong>Email:</strong> <a href="mailto:info@zynix.ai" style="color:#20449B">info@zynix.ai</a></li>' +
@@ -10686,7 +10686,7 @@ function renderDataAnalyticsV7() {
     '/privacy-policy': renderPrivacyV7,
     '/company-privacy': renderPrivacyV7,
     '/terms-of-service': renderTermsV7,
-    '/sms': renderSMSProgram,
+    '/sms': function () { location.replace('/sms-program'); return ''; },   // unregistered alias -> the registered T&C URL
     '/sms-program': renderSMSProgram,
     '/sms-consent': renderSMSConsent,
     '/company-terms': renderTermsV7,
