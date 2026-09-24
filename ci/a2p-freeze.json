@@ -4,7 +4,7 @@
   "reason": "All three Zynix A2P campaigns were rejected on 2026-09-22 (round 5 = 30882 terms and conditions; both placeholders = 30923 forced consent), so nothing is in carrier review right now. The freeze stays ON so that the four renderers Twilio reviewers read only ever change deliberately, with the matching native Webflow page and the registered campaign text. Re-pin a hash in the PR that changes it; set active to false only when the A2P work is finished.",
   "reference_commit": "this change (a2p-legal-consistency, 2026-09-22)",
   "functions": {
-    "renderSMSProgram": "cfa8c2acc25668b8753b965b98b810f2d2d0162999772b4f9b4b98a53e097140",
+    "renderSMSProgram": "fc361125b8d4cccefa9867b928b051aa6239adb5e8f2fac86f04a2b3eeb8a88e",
     "renderSMSConsent": "3dc0b6c16d9d7abcb29a800638c8f50341011b3c1cbbb96802d6b2b5bdcc52c2",
     "renderPrivacyV7": "564abd893045071f60fc604fe2d2a292386b63436f6a01f3d14691dbb48f131f",
     "renderTermsV7": "c578f5d5771ef575ad97a20df4dc6abd9fd1ff0992832e11803f3330642af226"
@@ -34,6 +34,12 @@
       "commit": "a2p-legal-consistency",
       "date": "2026-09-22",
       "why": "Audit F1/F8/F9: /terms-of-service named the program \"Zynix AI Customer Care SMS\" while the registered T&C page names it \"Zynix AI Customer Care & Account Notifications\"; the single-opt-in-path sentence was missing from the JS terms; the privacy policy had an unclosed parenthesis."
+    },
+    {
+      "function": "renderSMSProgram",
+      "commit": "a2p-final-polish",
+      "date": "2026-09-23",
+      "why": "Audit F3: the two section headings on the registered T&C page showed STOP and HELP without <strong>; Twilio asks for the opt-out instructions in bold. Text unchanged."
     }
   ]
 }
