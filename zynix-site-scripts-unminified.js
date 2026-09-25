@@ -13955,4 +13955,120 @@ function renderDataAnalyticsV7() {
     __pageSeoH1Fallback();
   }
 
+  // ── SMS opt-in form: abuse guard ──────────────────────────────────────────
+  // The consent form posts a name and mobile number straight to HubSpot from
+  // the browser, and nothing stopped a script from submitting other people's
+  // numbers. Junk leads today; unsolicited texts the moment the opt-in
+  // confirmation message is switched on, which is a TCPA problem and a carrier
+  // complaint. These checks are deliberately invisible: no extra field for a
+  // person to fill in and no visible change to the page a carrier reviewer
+  // reads, so the registered message flow still describes the form exactly.
+  // Kept out of renderSMSConsent on purpose — that function is frozen by
+  // ci/a2p-freeze.json while a campaign is in review.
+  function __smsFormAbuseGuard() {
+    var FORM_ID = 'zynix-sms-form';
+    var HONEY = 'zx_contact_url';      // bots fill every field they find
+    var MIN_FILL_MS = 2500;            // a person cannot type a name and number faster
+    var MAX_PER_WINDOW = 3;
+    var WINDOW_MS = 10 * 60 * 1000;
+    var seenAt = 0;
+
+    function armed(form) {
+      if (!form || form.__zxArmed) return;
+      form.__zxArmed = true;
+      seenAt = Date.now();
+      try {
+        var hp = document.createElement('input');
+        hp.type = 'text';
+        hp.name = HONEY;
+        hp.tabIndex = -1;
+        hp.autocomplete = 'off';
+        hp.setAttribute('aria-hidden', 'true');
+        hp.style.cssText = 'position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0;pointer-events:none';
+        form.appendChild(hp);
+      } catch (e) {}
+    }
+
+    function recent() {
+      try {
+        var raw = sessionStorage.getItem('zxSmsSubmits');
+        var list = raw ? JSON.parse(raw) : [];
+        var now = Date.now();
+        return list.filter(function (t) { return now - t < WINDOW_MS; });
+      } catch (e) { return []; }
+    }
+
+    function record() {
+      try {
+        var list = recent();
+        list.push(Date.now());
+        sessionStorage.setItem('zxSmsSubmits', JSON.stringify(list));
+      } catch (e) {}
+    }
+
+    function say(form, msg) {
+      try {
+        var n = form.querySelector('[data-zx-form-msg]');
+        if (!n) {
+          n = document.createElement('p');
+          n.setAttribute('data-zx-form-msg', '1');
+          n.setAttribute('role', 'alert');
+          n.style.cssText = 'margin:12px 0 0;font-size:14px;line-height:1.5;color:#b42318';
+          form.appendChild(n);
+        }
+        n.textContent = msg;
+      } catch (e) {}
+    }
+
+    function block(e) {
+      e.preventDefault();
+      e.stopImmediatePropagation();   // the inline onsubmit never runs
+    }
+
+    // Capture on document: ancestor capture listeners run before the form's own
+    // inline onsubmit handler, which is the only way to stop it from here.
+    document.addEventListener('submit', function (e) {
+      var form = e.target;
+      if (!form || form.id !== FORM_ID) return;
+      armed(form);
+
+      var hp = form.querySelector('[name="' + HONEY + '"]');
+      if (hp && hp.value) { block(e); return; }                 // bot: stay silent
+
+      if (seenAt && Date.now() - seenAt < MIN_FILL_MS) { block(e); return; }  // too fast
+
+      if (recent().length >= MAX_PER_WINDOW) {
+        block(e);
+        say(form, 'You have already submitted this form a few times. Please email info@zynix.ai if you need help.');
+        return;
+      }
+
+      var phoneEl = form.querySelector('[name=phone]');
+      var digits = (phoneEl && phoneEl.value || '').replace(/\D/g, '');
+      if (digits.length === 11 && digits.charAt(0) === '1') digits = digits.slice(1);
+      if (digits.length !== 10 || /^(\d)\1{9}$/.test(digits)) {
+        block(e);
+        say(form, 'Please enter a 10-digit US mobile number so we can text you.');
+        return;
+      }
+
+      record();
+    }, true);
+
+    function look() {
+      var f = document.getElementById(FORM_ID);
+      if (f) armed(f);
+    }
+    look();
+    try {
+      new MutationObserver(look).observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', __smsFormAbuseGuard);
+  } else {
+    __smsFormAbuseGuard();
+  }
+
+
 })();
