@@ -7,12 +7,10 @@ name: Site bundle — check and deploy
 #   push to main -> the same checks, then purge jsDelivr's @main cache and prove the CDN serves the new bytes
 
 on:
+  # No paths filter here on purpose: 'checks' is a required status check on main,
+  # so it must report on EVERY pull request or a PR that touches only images or
+  # HTML would wait forever for a check that never runs.
   pull_request:
-    paths:
-      - 'zynix-site-scripts-unminified.js'
-      - 'zynix-site-styles.deployed.css'
-      - 'ci/**'
-      - '.github/workflows/site-bundle.yml'
   push:
     branches: [main]
     paths:
