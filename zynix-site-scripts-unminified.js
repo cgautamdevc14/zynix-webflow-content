@@ -565,7 +565,6 @@
     '': { title: 'Value-based care AI for ACOs and health plans | Zynix AI', desc: 'Connect claims, EHR and ADT data, flag discharges, care gaps and AWVs due, and give care teams outreach agents. For ACOs, health plans, MSOs and IPAs.', img: IMG.hero, schema: 'Organization' },
     '/products-data-platform': { title: 'Healthcare data foundation: one patient record | Zynix AI', desc: 'Bring claims, EHR, ADT, lab and pharmacy data into one patient record. Codes standardized, identities resolved, ready for worklists. 30+ EHR systems.', img: IMG.data, schema: 'Product' },
     '/products-analytics': { title: 'Population health analytics for VBC | Zynix AI', desc: 'Risk, quality and HCC gap analytics on your claims and clinical data, ranked into worklists your care team can act on this week.', img: IMG.analytics, schema: 'Product' },
-    // '/agents', '/zynscribe', '/care-plans' — moved to V7 block to avoid duplicates
     '/company-zynixllm': { title: 'ZynixLLM: how Zynix AI works safely | Zynix AI', desc: 'How ZynixLLM supports value-based care workflows, when clinicians step in, and how agents stay within the escalation rules your team sets.', img: IMG.mesh, schema: 'Product' },
     '/products-ai-agents-zynafterhours': { title: 'ZynAfterHours after-hours call handling | Zynix AI', desc: 'After-hours calls answered: the reason captured, routine visits booked and symptom questions routed to your on-call clinician by rule.', img: IMG.doctor, schema: 'Product' },
     '/products-ai-agents-zynschedule': { title: 'ZynSchedule patient scheduling | Zynix AI', desc: 'Patient scheduling by phone, text and web, with confirmations, reschedules and exceptions handed to your front-office staff.', img: IMG.patient, schema: 'Product' },
@@ -643,7 +642,6 @@
     '/blog/why-tcm-fails-real-workflows': { title: 'Why TCM programs fail in real workflows | Zynix AI', desc: 'Transitional care management looks good on paper and breaks down in practice. What a workable TCM workflow needs, step by step.', img: IMG.care, schema: 'Article', datePublished: '2026-04-09' },
     '/blog/documentation-crisis-physician-burnout': { title: 'Documentation burden and physician burnout | Zynix AI', desc: 'Documentation burden drives physician burnout. How ambient AI scribes help, and why physicians should approve every note.', img: IMG.scribe, schema: 'Article', datePublished: '2026-04-13' },
     '/case-studies/palm-beach-aco': { title: 'Palm Beach ACO customer story | Zynix AI', desc: 'How Palm Beach ACO (PBACO Holding) uses Zynix for post-discharge follow-up and annual wellness visit outreach across its provider network.', img: IMG.care, schema: 'Article', datePublished: '2026-02-01' },
-    // V7: Platform + Agent Pages
     '/platform': { title: 'The Zynix platform for value-based care | Zynix AI', desc: 'One platform to connect claims, EHR and ADT data, rank the patients who need attention, and run follow-up with care plans, agents and your care team.', img: IMG.enterprise, schema: 'Product' },
     '/agents': { title: 'AI agents for care operations | Zynix AI', desc: 'Agents for post-discharge outreach, chronic care, wellness visits, after-hours calls, scheduling and fax intake, with clinician escalation by rule.', img: IMG.doctor, schema: 'Product' },
     '/agents/clinical-performance': { title: 'Clinical performance agents | Zynix AI', desc: 'Agents for chronic care management, transitions of care and preventive and quality activation, with clinical questions escalated to your team.', schema: 'Product' },
@@ -657,9 +655,7 @@
     '/agents/sdoh-determination': { title: 'Social needs screening | Zynix AI', desc: 'How social needs questions fit into outreach conversations and route patients to the community resources your team selects.', schema: 'Product' },
     '/zynscribe': { title: 'ZynScribe ambient clinical documentation | Zynix AI', desc: 'ZynScribe drafts structured SOAP notes from the visit conversation. Nothing is filed or used for billing until the physician reviews and approves it.', img: IMG.scribe, schema: 'Product' },
     '/care-plans': { title: 'Care plans for TCM, CCM, AWVs and gap closure | Zynix AI', desc: 'Pre-built care plans sequence agents and care team tasks for TCM, CCM, wellness visits and gap closure, and close only when each step is documented.', img: IMG.care, schema: 'Product' },
-    // V7: Company Pages
     '/press/pbaco-partnership': { title: 'Zynix AI and PBACO Holding partnership | Zynix AI', desc: 'Zynix AI announces a strategic partnership with Palm Beach ACO (PBACO Holding) to scale patient outreach, documentation and workflow automation.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' },'/press/eternalhealth-zynix-ai-nirvanahealth-partnership': { title: 'eternalHealth, Zynix AI and nirvanaHealth partner | Zynix AI', desc: 'eternalHealth partners with Zynix AI and nirvanaHealth to scale AI-enabled care management and member engagement across Massachusetts and Arizona.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-06-02' },
-    // V7: Missing route aliases
     '/sms': { title: 'SMS Program Info | Zynix AI', desc: 'Zynix AI SMS program details: opt-in, opt-out (STOP), help (HELP), message frequency, supported carriers, and privacy for text notifications.', img: IMG.hero, schema: 'Organization', noindex: true },
     '/sms-program': { title: 'SMS Program Terms & Conditions | Zynix AI', desc: 'Zynix AI SMS Program Terms & Conditions: message frequency, Msg & data rates may apply, STOP to opt out, HELP for help, support contact, and privacy.', img: IMG.hero, schema: 'Organization' },
     '/sms-consent': { title: 'SMS Opt-In | Zynix AI', desc: 'Sign up to receive appointment reminders, care coordination updates, and account notifications from Zynix AI via text message.', img: IMG.hero, schema: 'Organization' },
@@ -697,17 +693,15 @@
     '/case-studies/nhs': { title: 'NHS Health System customer story | Zynix AI', desc: 'How NHS Health System uses the Zynix platform for care gap outreach, after-hours access and documentation support across its sites.', img: IMG.care, schema: 'Article' },
     '/case-studies/apollo-clinic': { title: 'Apollo Clinic Network customer story | Zynix AI', desc: 'How Apollo Clinic Network uses scheduling, reminders and outreach agents to keep patients on track between visits.', img: IMG.care, schema: 'Article' },
     '/case-studies/amistad': { title: 'AMISTAD Community Health Center story | Zynix AI', desc: 'How AMISTAD Community Health Center uses multilingual outreach and after-hours access to reach patients and close preventive care gaps.', img: IMG.care, schema: 'Article' },
-    // V7: Use Case Pages (SEO populated dynamically from USE_CASE_SEO)
-    // Wave 8: PAGE_SEO overrides — shorten titles <=60 chars and descriptions <=160 chars for SEMrush.
+    // Use-case pages get their entries from USE_CASE_SEO at load time.
     '/platform-legacy': { title: 'The Zynix platform | Zynix AI', desc: 'Four layers for value-based care operations: a data foundation, intelligence that ranks the work, agents, and care plans that see each episode through.', img: IMG.enterprise, schema: 'Product' },
     '/solutions-use-case-gap-closure': { title: 'Care gap closure workflows | Zynix AI', desc: 'Ranked worklists, outreach and scheduling for HCC and quality gaps, with each gap tracked until the visit is completed and documented.', img: IMG.care, schema: 'Product' },
     '/solutions-use-case-readmission-prevention': { title: 'Post-discharge follow-up to prevent readmissions | Zynix AI', desc: 'ADT-triggered outreach inside the TCM window, follow-up visit scheduling and escalation of clinical questions to your care team.', img: IMG.care, schema: 'Product' },
     '/products-ai-agents-patients-not-seen': { title: 'Outreach to patients overdue for care | Zynix AI', desc: 'Find patients who have not been seen, reach them by phone and text, and book the follow-up visit, with exceptions routed to your staff.', img: IMG.patient, schema: 'Product' },
     '/case-study-awv-acos': { title: 'Annual wellness visits in ACOs | Zynix AI', desc: 'How ACOs can raise annual wellness visit completion with ranked outreach lists, scheduling and follow-through. Read the research.', img: IMG.care, schema: 'Article' }
   };
-  // Paths that share another path's title and description (legacy slugs, nested twins, Webflow-authored aliases): [path,
-  // source] copies the source entry; [path, source, fields] takes its title and description and sets its own other fields.
-  // Each alias gets its own copy at load time, so the runtime table equals the one written out in full.
+  // Aliases (legacy slugs, nested twins): [path, source] copies the source entry; [path, source, fields] takes its title and
+  // description and sets its own other fields. Each alias gets its own copy at load time.
   [['/products-zynixllm', '/company-zynixllm'],
    ['/zynix-data-analytics', '/products-analytics'],
    ['/roi-calculator', '/roi', { img: IMG.hero }],
@@ -773,8 +767,7 @@
     var s = PAGE_SEO[a[1]];
     PAGE_SEO[a[0]] = a[2] ? Object.assign({ title: s.title, desc: s.desc }, a[2]) : Object.assign({}, s);
   });
-  // A live article URL whose slug trips the claims ratchet (it cannot tell a URL slug from copy), so this one entry is set
-  // here instead of inside the table. Same key, same values at runtime; the title and description are claims-clean.
+  // Set outside the table because this URL slug trips the claims ratchet (the copy itself is claims-clean).
   zxSeo('/blog/autonomous-ai-agents-healthcare-automation', { title: 'AI agents in healthcare operations | Zynix AI', desc: 'How AI agents handle healthcare workflows such as scheduling, patient communication and follow-up, with escalation to staff by rule.', img: IMG.agents, schema: 'Article', datePublished: '2026-03-03' });
 
   // ── SEO Injection ──
@@ -851,7 +844,7 @@
   }
 
   function injectJSONLD(pagePath, seo) {
-    // ── Organization schema — comprehensive entity for GEO + SEO ──
+    // Organization (every page)
     var orgSchema = {
       '@context':'https://schema.org','@type':'Organization',
       '@id':'https://www.zynix.ai/#organization',
@@ -901,7 +894,7 @@
         potentialAction:{'@type':'SearchAction',target:{'@type':'EntryPoint',urlTemplate:'https://www.zynix.ai/resources-glossary?q={search_term_string}'},'query-input':'required name=search_term_string'},
         inLanguage:'en-US'
       });
-      // SoftwareApplication for the platform — on homepage
+      // SoftwareApplication (the platform)
       schemas.push({
         '@context':'https://schema.org','@type':'SoftwareApplication',
         name:'Zynix AI Platform',
@@ -1055,7 +1048,7 @@
       });
     }
 
-    // FAQPage schema — from DOM elements OR hardcoded for /resources-faq
+    // FAQPage: from the DOM, else the /resources-faq list below
     var faqEls = document.querySelectorAll('.zynix-faq-item');
     var mainEntity = [];
     faqEls.forEach(function(f) {
@@ -1063,9 +1056,8 @@
       var a = f.querySelector('.zynix-faq-a');
       if (q && a) mainEntity.push({'@type':'Question',name:q.textContent.replace(/\s*\+\s*$/, '').trim(),acceptedAnswer:{'@type':'Answer',text:a.textContent.trim()}});   // legacy markup carries a "+" toggle glyph inside the button
     });
-    // Hardcoded FAQ for the FAQ page (ensures crawlers see schema even without JS execution)
     if (!mainEntity.length && (pagePath === '/resources-faq' || pagePath === '/faq')) {
-      // The same questions and answers renderFAQ renders on /resources-faq (keep the two in step).
+      // The questions and answers renderFAQ renders on /resources-faq (keep the two in step).
       mainEntity = [
         {'@type':'Question',name:'What is Zynix AI?',acceptedAnswer:{'@type':'Answer',text:'Zynix AI is AI infrastructure and workflows for value-based care. The Zynix platform connects claims, EHR and ADT data into one patient record, ranks the patients and care gaps that need attention, and carries the follow-up through care plans, outreach agents and ambient documentation. Clinicians make the clinical decisions.'}},
         {'@type':'Question',name:'What types of healthcare organizations use Zynix?',acceptedAnswer:{'@type':'Answer',text:'ACOs, MSOs, health systems, FQHCs, health plans, independent practices, and ASCs. Any organization accountable for patient outcomes and operational efficiency.'}},
@@ -1079,7 +1071,7 @@
     }
     if (mainEntity.length) schemas.push({'@context':'https://schema.org','@type':'FAQPage',mainEntity:mainEntity});
 
-    // WebPage + Speakable spec for GEO — helps AI voice search and LLM citation on all pages
+    // WebPage + speakable (indexable pages)
     var noindexPage = seo.noindex;
     if (!noindexPage) {
       schemas.push({'@context':'https://schema.org','@type':'WebPage','@id':'https://www.zynix.ai'+(pagePath||'/'),speakable:{'@type':'SpeakableSpecification',cssSelector:['h1','.z-h1','.z-body','h2','[data-speakable]','[data-geo]','.hero-headline','.section-headline']},name:seo.title,description:seo.desc,url:'https://www.zynix.ai'+(pagePath||'/'),inLanguage:'en-US',isPartOf:{'@id':'https://www.zynix.ai/#website'},about:{'@id':'https://www.zynix.ai/#organization'},isAccessibleForFree:true,license:'https://www.zynix.ai/company-terms'});
@@ -1217,16 +1209,12 @@
     '/compare-zynix-vs-commure': 'Side-by-side comparison'
   };
 
-  // Legacy signature (§2.16): one group of links; labels, descriptors and icons from LINK_NAMES / CROSS_DESCS / CROSS_ICONS.
-  // An unknown slug is skipped (no "compare zynix vs …" fallbacks), and so is a link to the current page.
+  // Related-link items for slugs (§2.16) from LINK_NAMES / CROSS_DESCS / CROSS_ICONS; unknown slugs and the current page are skipped.
   function zxRelatedItems(slugs) {
     var here = zxPath();
     return (slugs || []).filter(function (slug) { return slug && LINK_NAMES[slug] && zxHrefPath(slug) !== here; }).map(function (slug) {
       return { href: slug, label: String(LINK_NAMES[slug]).replace(/ \| .*/, ''), desc: CROSS_DESCS[slug] || '', icon: CROSS_ICONS[slug] || '' };
     });
-  }
-  function renderRelatedSection(title, tag, slugs) {
-    return renderRelatedLinks({ title: title || 'Related', groups: [{ label: tag, items: zxRelatedItems(slugs) }] });
   }
 
   // One related block per page (§2.16): CROSS_LINKS[pagePath] flattened to at most 6 links in at most 3 groups.
@@ -1336,9 +1324,7 @@
   var SVG_X = '<svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>';
   var SVG_INSTAGRAM = '<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>';
 
-  // ── SVG Icon Library (Lucide-style, 24x24, stroke-based) ──
-  // zxIc() wraps an icon's shapes in the shared 24x24 stroke <svg>, so each IC_* string is exactly what it was when it was
-  // written out in full. Append new icons the same way; never change an existing one.
+  // ── Icons (Lucide-style 24x24 stroke): zxIc() adds the shared <svg> wrapper. Append new icons; never change one. ──
   function zxIc(shapes) { return '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + shapes + '</svg>'; }
   var IC_SHIELD = zxIc('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>');
   var IC_LOCK = zxIc('<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>');
@@ -1392,14 +1378,17 @@
   var IC_TREE = zxIc('<path d="M12 22V8"/><path d="M5 12l7-8 7 8"/><path d="M3 17l9-6 9 6"/>');
 
   // ==== ZX:BEGIN components (owner S2) ====
-  // Shared component helpers (DESIGN_SPEC.md §2 and §4). Helpers return HTML strings and never touch the DOM.
-  // Text arguments (title, lead, body, labels) are trusted internal HTML; attribute values always go through zxAttr().
-  // Facts come only from the facts block (SITE_FACTS, CUSTOMERS, NAMES, NAV). GH, IMG, IC_* and PAGE_SEO are read at
-  // call time, never at load time. Signatures are final; Phase 1b may change bodies only.
+  // Component helpers (DESIGN_SPEC §2, §4) return HTML strings and never touch the DOM. Text arguments are trusted HTML;
+  // attribute values go through zxAttr(). Facts come from the facts block only; globals are read at call time. Signatures are final.
 
   // ── Utilities ──
   function zxAttr(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function zxImg(file) { return GH + file; }
+  function zxCls(c) { return c ? ' ' + c : ''; }   // an optional extra class
+  function zxA(name, v) { return v ? ' ' + name + '="' + zxAttr(v) + '"' : ''; }   // an optional attribute
+  function zxEl(tag, cls, html) { return html ? '<' + tag + ' class="' + cls + '">' + html + '</' + tag + '>' : ''; }   // an optional element
+  // New-tab attributes: flag when given, else any absolute http(s) URL.
+  function zxNewTab(href, flag) { return (flag != null ? flag : /^https?:/i.test(href || '')) ? ' target="_blank" rel="noopener" aria-describedby="zx-newtab-desc"' : ''; }
   function zxIcon(key) {
     var m = { shield: IC_SHIELD, lock: IC_LOCK, brain: IC_BRAIN, chart: IC_CHART, users: IC_USERS, phone: IC_PHONE,
       calendar: IC_CALENDAR, file: IC_FILE, bot: IC_BOT, target: IC_TARGET, search: IC_SEARCH, eye: IC_EYE, globe: IC_GLOBE,
@@ -1410,16 +1399,16 @@
       megaphone: IC_MEGAPHONE, book: IC_BOOK, mappin: IC_MAPPIN };
     return (Object.prototype.hasOwnProperty.call(m, key) ? m[key] : '').replace('<svg ', '<svg aria-hidden="true" focusable="false" ');
   }
-  // An icon given either as a zxIcon() key or as a legacy IC_* SVG string (legacy renderers pass the string).
+  // A zxIcon() key or a legacy IC_* SVG string.
   function zxIconHtml(icon) {
     if (!icon) return '';
     if (/^\s*<svg[\s>]/.test(icon)) return icon.indexOf('aria-hidden') > -1 ? icon : icon.replace(/<svg(?=[\s>])/, '<svg aria-hidden="true" focusable="false"');
     return zxIcon(icon);
   }
-  // ASSET_SIZES key of an image path or URL: the path relative to images/, whether given with or without the GH prefix.
+  // ASSET_SIZES key (path under images/) of a path or GH URL; zxAssetUrl makes a bare path a GH URL.
   function zxAssetKey(src) { src = String(src || ''); return src.indexOf(GH) === 0 ? src.slice(GH.length) : src.replace(/^\/+/, ''); }
   function zxAssetUrl(src) { src = String(src || ''); return /^(https?:|data:|\/)/i.test(src) ? src : zxImg(src); }
-  // The path part of a same-site href ('' for the homepage), or null for another site, a fragment or a mailto/tel link.
+  // Path of a same-site href ('' = homepage); null for another site, a fragment, mailto or tel.
   function zxHrefPath(href) {
     href = String(href || '');
     var m = href.match(/^(?:https?:\/\/(?:www\.)?zynix\.ai)?(\/[^?#]*)/i);
@@ -1433,7 +1422,7 @@
   function zxFact(key) { return key && Object.prototype.hasOwnProperty.call(SITE_FACTS.stats, key) ? SITE_FACTS.stats[key] : null; }
   function zxAccessLine() { var a = SITE_FACTS.access; return a.line + ', ' + a.clause + '. ' + a.through; }
   function zxComplianceProse() { var c = SITE_FACTS.compliance; return [c.soc2.prose, c.hipaa.prose, c.hitrust.prose].join(' · '); }
-  // Confirmed governance statements only, in the order asked for (default: declaration order). A 'hold' entry never comes back.
+  // Confirmed governance entries in the order asked (default: declaration order); a 'hold' entry never comes back.
   function zxGovernance(keys) {
     var g = SITE_FACTS.governance, out = [];
     if (keys == null) keys = Object.keys(g); else if (typeof keys === 'string') keys = [keys];
@@ -1443,7 +1432,7 @@
     });
     return out;
   }
-  // Hero preset for a path (§2.10). The /company-* aliases and /press/<slug> follow their canonical pages.
+  // Hero preset for a path (§2.10); /company-* aliases and /press/<slug> follow their canonical pages.
   function zxHeroPreset(path) {
     var p = String(path == null ? zxPath() : path).replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
     if (['/about', '/careers', '/press', '/contact', '/company-about', '/company-careers', '/company-press'].indexOf(p) > -1 || p.indexOf('/press/') === 0) return 'company';
@@ -1455,20 +1444,18 @@
   }
 
   // ── Buttons and links (§2.3) ──
-  // opts.anchorFixed (optional, chrome only) stamps data-z-anchor-fixed="1" (§3.10).
+  // opts.anchorFixed (chrome only) stamps data-z-anchor-fixed="1" (§3.10).
   function renderButton(label, href, opts) {
     opts = opts || {};
     var variant = ['primary', 'secondary', 'quiet', 'inverse'].indexOf(opts.variant || 'primary') > -1 ? (opts.variant || 'primary') : 'secondary';
-    var cls = 'zynix-btn zynix-btn--' + variant + (opts.size === 'lg' ? ' zynix-btn--lg' : '') + (opts.className ? ' ' + opts.className : '');
-    var id = opts.id ? ' id="' + zxAttr(opts.id) + '"' : '';
-    var cta = opts.cta ? ' data-zx-cta="' + zxAttr(opts.cta) + '"' : '';
-    var aria = opts.ariaLabel ? ' aria-label="' + zxAttr(opts.ariaLabel) + '"' : '';
+    var cls = 'zynix-btn zynix-btn--' + variant + (opts.size === 'lg' ? ' zynix-btn--lg' : '') + zxCls(opts.className);
+    var id = zxA('id', opts.id);
+    var cta = zxA('data-zx-cta', opts.cta);
+    var aria = zxA('aria-label', opts.ariaLabel);
     if (opts.type === 'button' || opts.type === 'submit') {
       return '<button type="' + opts.type + '" class="' + cls + '"' + id + cta + aria + '>' + label + '</button>';
     }
-    var newTab = opts.newTab != null ? !!opts.newTab : /^https?:/i.test(href || '');
-    return '<a class="' + cls + '"' + id + ' href="' + zxAttr(href) + '"' +
-      (newTab ? ' target="_blank" rel="noopener" aria-describedby="zx-newtab-desc"' : '') + cta +
+    return '<a class="' + cls + '"' + id + ' href="' + zxAttr(href) + '"' + zxNewTab(href, opts.newTab) + cta +
       (opts.anchorFixed ? ' data-z-anchor-fixed="1"' : '') + aria + '>' + label + '</a>';
   }
   function renderDemoButton(opts) {
@@ -1478,11 +1465,9 @@
   }
   function renderLinkArrow(label, href, opts) {
     opts = opts || {};
-    var newTab = opts.newTab != null ? !!opts.newTab : /^https?:/i.test(href || '');
-    return '<a class="zynix-link-arrow' + (opts.className ? ' ' + opts.className : '') + '" href="' + zxAttr(href) + '"' +
-      (newTab ? ' target="_blank" rel="noopener" aria-describedby="zx-newtab-desc"' : '') +
+    return '<a class="zynix-link-arrow' + zxCls(opts.className) + '" href="' + zxAttr(href) + '"' + zxNewTab(href, opts.newTab) +
       (opts.anchorFixed ? ' data-z-anchor-fixed="1"' : '') +
-      (opts.ariaLabel ? ' aria-label="' + zxAttr(opts.ariaLabel) + '"' : '') + '>' +
+      zxA('aria-label', opts.ariaLabel) + '>' +
       label + '<span class="zynix-link-arrow__icon" aria-hidden="true">→</span></a>';
   }
 
@@ -1491,7 +1476,7 @@
     opts = opts || {};
     var t = ['brand', 'success', 'warning', 'danger', 'sample'].indexOf(tone) > -1 ? ' zynix-chip--' + tone : '';
     if (!text && tone === 'sample') text = 'Sample data';
-    var extra = opts.className ? ' ' + opts.className : '';
+    var extra = zxCls(opts.className);
     if (opts.href) return '<a class="zynix-chip' + t + ' zynix-chip--link' + extra + '" href="' + zxAttr(opts.href) + '">' + text + '</a>';
     return '<span class="zynix-chip' + t + extra + '">' + text + '</span>';
   }
@@ -1514,60 +1499,56 @@
     var items = keys.map(function (k) { return renderBadge(k, { href: opts.href }); }).join('');
     if (!items) return '';
     return '<ul class="zynix-trust-row' + (opts.inverse ? ' zynix-trust-row--inverse' : '') + (opts.plain ? ' zynix-trust-row--plain' : '') +
-      (opts.className ? ' ' + opts.className : '') + '" aria-label="Security and compliance">' + items + '</ul>';
+      zxCls(opts.className) + '" aria-label="Security and compliance">' + items + '</ul>';
   }
 
-  // ── Card (§2.6): static <article>/<div>, or the whole card is the link when href is set ──
+  // ── Card (§2.6): static <article>/<div>, or the whole card is the link ──
   function renderCard(opts) {
     opts = opts || {};
     var variant = ['subtle', 'inverse', 'row'].indexOf(opts.variant) > -1 ? opts.variant : 'default';
     var lvl = opts.level || 3, linked = !!opts.href;
-    var cls = 'zynix-card' + (linked ? ' zynix-card--link' : '') + (variant !== 'default' ? ' zynix-card--' + variant : '') + (opts.className ? ' ' + opts.className : '');
+    var cls = 'zynix-card' + (linked ? ' zynix-card--link' : '') + (variant !== 'default' ? ' zynix-card--' + variant : '') + zxCls(opts.className);
     var media = '';
     if (opts.media && typeof opts.media === 'object' && opts.media.src) {
       var src = opts.media.src, sz = ASSET_SIZES[zxAssetKey(src)] || [];
       var w = opts.media.width || sz[0], h = opts.media.height || sz[1];
       media = '<span class="zynix-card__media"><img src="' + zxAttr(zxAssetUrl(src)) + '" alt="' + zxAttr(opts.media.alt) + '"' +
-        (w ? ' width="' + zxAttr(w) + '"' : '') + (h ? ' height="' + zxAttr(h) + '"' : '') + ' loading="lazy" decoding="async"></span>';
+        zxA('width', w) + zxA('height', h) + ' loading="lazy" decoding="async"></span>';
     } else if (typeof opts.media === 'string' && opts.media) {
       media = '<span class="zynix-card__media">' + opts.media + '</span>';
     }
     var svg = zxIconHtml(opts.icon);
     var icon = svg ? '<span class="zynix-card__icon" aria-hidden="true">' + svg + '</span>' : '';
-    var text = (opts.eyebrow ? '<p class="zynix-card__eyebrow">' + opts.eyebrow + '</p>' : '') +
+    var text = zxEl('p', 'zynix-card__eyebrow', opts.eyebrow) +
       (opts.title ? '<h' + lvl + ' class="zynix-card__title">' + opts.title + '</h' + lvl + '>' : '') +
-      (opts.body ? '<p class="zynix-card__body">' + opts.body + '</p>' : '') +
-      (opts.meta ? '<div class="zynix-card__footer">' + opts.meta + '</div>' : '') +
+      zxEl('p', 'zynix-card__body', opts.body) +
+      zxEl('div', 'zynix-card__footer', opts.meta) +
       (linked && opts.cta ? '<span class="zynix-card__cta">' + opts.cta + '<span aria-hidden="true"> →</span></span>' : '');
     if (variant === 'row') text = '<div class="zynix-card__text">' + text + '</div>';   // keeps the text stacked beside the icon
     var inner = media + icon + text;
-    if (linked) {
-      var newTab = opts.newTab != null ? !!opts.newTab : /^https?:/i.test(opts.href);
-      return '<a class="' + cls + '" href="' + zxAttr(opts.href) + '"' +
-        (newTab ? ' target="_blank" rel="noopener" aria-describedby="zx-newtab-desc"' : '') + '>' + inner + '</a>';
-    }
+    if (linked) return '<a class="' + cls + '" href="' + zxAttr(opts.href) + '"' + zxNewTab(opts.href, opts.newTab) + '>' + inner + '</a>';
     var tag = opts.tag === 'div' ? 'div' : 'article';
     return '<' + tag + ' class="' + cls + '">' + inner + '</' + tag + '>';
   }
 
-  // ── Count-aware grid (§2.7, reference implementation) ──
+  // ── Count-aware grid (§2.7) ──
   function renderGrid(items, renderItem, opts) {
     opts = opts || {}; var n = (items || []).length; if (!n) return '';
     var tag = opts.tag || 'ul', itemTag = tag === 'div' ? 'div' : 'li';
-    var cls = 'zynix-cgrid' + (opts.layout === '2x2' ? ' zynix-cgrid--2x2' : '') + (opts.className ? ' ' + opts.className : '');
+    var cls = 'zynix-cgrid' + (opts.layout === '2x2' ? ' zynix-cgrid--2x2' : '') + zxCls(opts.className);
     return '<' + tag + ' class="' + cls + '" data-count="' + n + '"' + (tag === 'div' ? '' : ' role="list"') + '>' +
       items.map(function (it, i) { return '<' + itemTag + ' class="zynix-cgrid__item">' + renderItem(it, i) + '</' + itemTag + '>'; }).join('') +
       '</' + tag + '>';
   }
 
-  // ── Section head (§2.1, reference implementation) ──
+  // ── Section head (§2.1) ──
   function renderSectionHead(eyebrow, title, lead, opts) {
     opts = opts || {};
     var align = opts.align || 'left', lvl = opts.level || 2;
-    var cls = 'zynix-section-head' + (align !== 'left' ? ' zynix-section-head--' + align : '') + (opts.className ? ' ' + opts.className : '');
-    var eb = eyebrow ? '<p class="zynix-eyebrow">' + eyebrow + '</p>' : '';
-    var h = '<h' + lvl + ' class="zynix-section-head__title"' + (opts.id ? ' id="' + zxAttr(opts.id) + '"' : '') + '>' + title + '</h' + lvl + '>';
-    var ld = lead ? '<p class="zynix-lead">' + lead + '</p>' : '';
+    var cls = 'zynix-section-head' + (align !== 'left' ? ' zynix-section-head--' + align : '') + zxCls(opts.className);
+    var eb = zxEl('p', 'zynix-eyebrow', eyebrow);
+    var h = '<h' + lvl + ' class="zynix-section-head__title"' + zxA('id', opts.id) + '>' + title + '</h' + lvl + '>';
+    var ld = zxEl('p', 'zynix-lead', lead);
     var act = opts.action ? '<div class="zynix-section-head__action">' + renderLinkArrow(opts.action.label, opts.action.href) + '</div>' : '';
     if (align === 'split') return '<header class="' + cls + '"><div class="zynix-section-head__main">' + eb + h + '</div><div class="zynix-section-head__aside">' + ld + act + '</div></header>';
     return '<header class="' + cls + '">' + eb + h + ld + act + '</header>';
@@ -1579,12 +1560,12 @@
     var preset = ['product', 'company', 'resource', 'legal', 'case', 'error'].indexOf(opts.preset) > -1 ? opts.preset : 'product';
     var id = opts.id || 'hero', tid = id + '-title', demoHref = SITE_FACTS.demo.href;
     var action = function (a, variant) {
-      if (!a || !a.label || !a.href || a.href === '#') return '';                 // a real anchor or URL only
-      if (preset === 'company' && a.href === demoHref) return '';               // company pages never show a demo button
+      if (!a || !a.label || !a.href || a.href === '#') return '';  // a real anchor or URL only
+      if (preset === 'company' && a.href === demoHref) return '';  // company pages never show a demo button
       return renderButton(a.label, a.href, { variant: variant, size: a.size, newTab: a.newTab, cta: a.cta || (a.href === demoHref ? 'demo' : null) });
     };
     var primary = '', secondary = '';
-    if (preset !== 'legal') {                                                    // legal: no buttons
+    if (preset !== 'legal') {  // legal: no buttons
       primary = opts.primary === undefined ? (preset === 'product' || preset === 'case' ? renderDemoButton() : '') : action(opts.primary, 'primary');
       secondary = action(opts.secondary, 'secondary');
     }
@@ -1605,32 +1586,31 @@
       if (logo || dl || more) mediaHtml = '<aside class="zynix-hero-proof" aria-label="Customer facts">' + logo + dl + more + '</aside>';
     }
     var mt = mediaHtml ? m.type : 'none';
-    // The preset class never reuses a media-slot name: "zynix-hero--product" means "has a product frame" (two-column grid),
-    // so a product-preset hero without media carries only zynix-hero--none.
+    // "zynix-hero--product" means "has a product frame", so a product-preset hero without media is only zynix-hero--none.
     var presetCls = preset === mt || ['product', 'proof', 'none'].indexOf(preset) > -1 ? '' : ' zynix-hero--' + preset;
     var cls = 'zynix-hero zynix-hero--' + mt + (compact ? ' zynix-hero--compact' : '') + presetCls;
     var actions = primary + secondary;
     return '<section class="' + cls + '" id="' + zxAttr(id) + '" aria-labelledby="' + zxAttr(tid) + '">' +
       '<div class="zynix-container zynix-hero__grid"><div class="zynix-hero__text">' +
-      (opts.eyebrow ? '<p class="zynix-eyebrow">' + opts.eyebrow + '</p>' : '') +
+      zxEl('p', 'zynix-eyebrow', opts.eyebrow) +
       '<h1 class="zynix-hero__title" id="' + zxAttr(tid) + '">' + (opts.title || '') + '</h1>' +
-      (opts.lead ? '<p class="zynix-hero__lead">' + opts.lead + '</p>' : '') +
-      (actions ? '<div class="zynix-hero__actions">' + actions + '</div>' : '') +
+      zxEl('p', 'zynix-hero__lead', opts.lead) +
+      zxEl('div', 'zynix-hero__actions', actions) +
       (badges && badges.length ? renderTrustRow(badges) : '') +
-      '</div>' + (mediaHtml ? '<div class="zynix-hero__media">' + mediaHtml + '</div>' : '') + '</div></section>';
+      '</div>' + zxEl('div', 'zynix-hero__media', mediaHtml) + '</div></section>';
   }
 
-  // ── Section (§2.1): aria-labelledby defaults to "{id}-title" only when that heading is inside innerHtml ──
+  // ── Section (§2.1): aria-labelledby defaults to "{id}-title" when that heading is inside ──
   function renderSection(opts, innerHtml) {
     opts = opts || {}; innerHtml = innerHtml || '';
     var id = opts.id || '';
     var surface = ['subtle', 'inverse', 'brand'].indexOf(opts.surface) > -1 ? ' zynix-section--' + opts.surface : '';
     var cls = 'zynix-section' + surface + (opts.compact ? ' zynix-section--compact' : '') + (opts.rule ? ' zynix-section--rule' : '') +
-      (opts.className ? ' ' + opts.className : '');
+      zxCls(opts.className);
     var cont = 'zynix-container' + (opts.container === 'wide' || opts.container === 'narrow' ? ' zynix-container--' + opts.container : '');
     var lb = opts.labelledBy !== undefined ? opts.labelledBy : (id && innerHtml.indexOf('id="' + id + '-title"') > -1 ? id + '-title' : '');
     return '<section class="' + cls + '"' + (id ? ' id="' + zxAttr(id) + '" data-zx-section="' + zxAttr(id) + '"' : '') +
-      (lb ? ' aria-labelledby="' + zxAttr(lb) + '"' : '') + '><div class="' + cont + '">' + innerHtml + '</div></section>';
+      zxA('aria-labelledby', lb) + '><div class="' + cont + '">' + innerHtml + '</div></section>';
   }
 
   // ── Eyebrow (§2.2) ──
@@ -1639,10 +1619,10 @@
     if (!text) return '';
     var tag = opts.tag === 'span' ? 'span' : 'p';
     var v = opts.variant === 'rule' || opts.variant === 'muted' ? ' zynix-eyebrow--' + opts.variant : '';
-    return '<' + tag + ' class="zynix-eyebrow' + v + (opts.className ? ' ' + opts.className : '') + '">' + text + '</' + tag + '>';
+    return '<' + tag + ' class="zynix-eyebrow' + v + zxCls(opts.className) + '">' + text + '</' + tag + '>';
   }
 
-  // ── Stat row (§2.8, reference implementation): a stat without its own source or opts.source is DROPPED ──
+  // ── Stat row (§2.8): a stat without its own source or opts.source is DROPPED ──
   function renderStatRow(stats, opts) {
     opts = opts || {}; var kept = [], sources = [];
     (stats || []).forEach(function (s) {
@@ -1655,13 +1635,13 @@
     });
     if (!kept.length) return '';
     var attributed = kept.every(function (s) { return /^Reported by\b/.test(String(s.source)); });
-    return '<div class="zynix-stat-row' + (opts.inverse ? ' zynix-stat-row--inverse' : '') + (opts.className ? ' ' + opts.className : '') + '" data-count="' + kept.length + '"' +
+    return '<div class="zynix-stat-row' + (opts.inverse ? ' zynix-stat-row--inverse' : '') + zxCls(opts.className) + '" data-count="' + kept.length + '"' +
       (attributed ? ' data-zx-attributed="1"' : '') + '><dl class="zynix-stat-row__list">' +
       kept.map(function (s) { return '<div class="zynix-stat"><dt class="zynix-stat__label">' + s.label + '</dt><dd class="zynix-stat__value"' + (opts.tick === false ? '' : ' data-zx-final="' + zxAttr(s.value) + '"') + '>' + s.value + '</dd></div>'; }).join('') +
       '</dl><p class="zynix-stat-row__source">Source: ' + sources.join('; ') + '.</p></div>';
   }
 
-  // ── Product frame (§2.9): no faux browser chrome by default; a URL renders only with chrome:'bar' (real product host only) ──
+  // ── Product frame (§2.9): no faux browser chrome; a URL only with chrome:'bar' (real product host) ──
   function renderProductFrame(opts) {
     opts = opts || {};
     var media = '';
@@ -1678,42 +1658,42 @@
     var sample = opts.sample !== false;
     var cls = 'zynix-product-frame' + (opts.bare ? ' zynix-product-frame--bare' : '') +
       (['16x10', '4x3', '3x2'].indexOf(opts.ratio) > -1 ? ' zynix-product-frame--ratio-' + opts.ratio : '') +
-      (opts.crop === 'top' || opts.crop === 'center' ? ' zynix-product-frame--crop-' + opts.crop : '') + (opts.className ? ' ' + opts.className : '');
+      (opts.crop === 'top' || opts.crop === 'center' ? ' zynix-product-frame--crop-' + opts.crop : '') + zxCls(opts.className);
     var bar = opts.chrome === 'bar' && opts.url ? '<div class="zynix-product-frame__bar" aria-hidden="true"><span class="zynix-product-frame__url">' + zxAttr(opts.url) + '</span></div>' : '';
     return '<figure class="' + cls + '"' + (sample ? ' data-zx-sample' : '') + '>' + bar +
       '<div class="zynix-product-frame__media">' + media + '</div>' +
       (sample ? '<span class="zynix-chip zynix-chip--sample zynix-product-frame__label">' + (opts.sampleLabel || 'Sample data') + '</span>' : '') +
-      (opts.caption ? '<figcaption class="zynix-product-frame__caption">' + opts.caption + '</figcaption>' : '') + '</figure>';
+      zxEl('figcaption', 'zynix-product-frame__caption', opts.caption) + '</figure>';
   }
 
-  // ── Numbered callouts beside a product frame (§2.9) ──
+  // ── Numbered callouts (§2.9) ──
   function renderCallouts(items) {
     items = (items || []).filter(function (it) { return it && (it.title || it.body); });
     if (!items.length) return '';
     return '<ol class="zynix-callouts">' + items.map(function (it, i) {
       return '<li class="zynix-callouts__item"><span class="zynix-callouts__n" aria-hidden="true">' + (i + 1) + '</span><div>' +
-        (it.title ? '<p class="zynix-callouts__title">' + it.title + '</p>' : '') + (it.body ? '<p class="zynix-callouts__body">' + it.body + '</p>' : '') + '</div></li>';
+        zxEl('p', 'zynix-callouts__title', it.title) + zxEl('p', 'zynix-callouts__body', it.body) + '</div></li>';
     }).join('') + '</ol>';
   }
 
-  // ── Illustrative UI kit (§2.9): honest sample panels. Role labels only, operational counts only, always labelled. ──
+  // ── Illustrative UI kit (§2.9): sample panels, role labels and operational counts only, always labelled ──
   function renderUiPanel(model) {
     model = model || {};
-    var tone = function (t) { return ['brand', 'success', 'warning', 'danger'].indexOf(t) > -1 ? t : 'neutral'; };
+    var status = function (st) { return st ? '<span class="zynix-chip zynix-chip--' + (['brand', 'success', 'warning', 'danger'].indexOf(st.tone) > -1 ? st.tone : 'neutral') + ' zynix-ui__status">' + st.label + '</span>' : ''; };
     var ownerIcon = { agent: 'bot', staff: 'user', system: 'layers' };
     var chip = model.chip === null ? '' : renderChip(model.chip || 'Sample data', 'sample');
     var bar = model.chrome === false ? '' : '<div class="zynix-ui__bar">' +
       '<span class="zynix-ui__brand"><img src="' + zxAttr(zxImg(SITE_FACTS.brand.symbol)) + '" alt="" width="20" height="20"> ' + (model.brand || 'Zynix platform') + '</span>' +
       (model.badge === null ? '' : '<span class="zynix-ui__badge">' + (model.badge || 'Demo') + '</span>') + chip + '</div>';
-    var head = model.title || model.meta ? '<div class="zynix-ui__head">' + (model.title ? '<p class="zynix-ui__title">' + model.title + '</p>' : '') +
-      (model.meta ? '<p class="zynix-ui__meta">' + model.meta + '</p>' : '') + '</div>' : '';
+    var head = model.title || model.meta ? '<div class="zynix-ui__head">' + zxEl('p', 'zynix-ui__title', model.title) +
+      zxEl('p', 'zynix-ui__meta', model.meta) + '</div>' : '';
     var tiles = model.tiles && model.tiles.length ? '<dl class="zynix-ui__tiles">' + model.tiles.map(function (t) {
       return '<div class="zynix-ui__tile"><dt class="zynix-ui__tile-label">' + t.label + '</dt><dd class="zynix-ui__tile-value">' + t.value + '</dd></div>'; }).join('') + '</dl>' : '';
     var rows = model.rows && model.rows.length ? '<ul class="zynix-ui__rows" role="list">' + model.rows.map(function (r) {
-      var o = r.owner || null, st = r.status || null;
-      return '<li class="zynix-ui__row"><div class="zynix-ui__row-main"><p class="zynix-ui__row-title">' + r.title + '</p>' + (r.sub ? '<p class="zynix-ui__row-sub">' + r.sub + '</p>' : '') + '</div>' +
+      var o = r.owner || null;
+      return '<li class="zynix-ui__row"><div class="zynix-ui__row-main"><p class="zynix-ui__row-title">' + r.title + '</p>' + zxEl('p', 'zynix-ui__row-sub', r.sub) + '</div>' +
         (o ? '<span class="zynix-ui__owner zynix-ui__owner--' + (ownerIcon[o.type] ? o.type : 'system') + '">' + zxIcon(ownerIcon[o.type] || 'layers') + ' ' + o.label + '</span>' : '') +
-        (st ? '<span class="zynix-chip zynix-chip--' + tone(st.tone) + ' zynix-ui__status">' + st.label + '</span>' : '') + '</li>';
+        status(r.status) + '</li>';
     }).join('') + '</ul>' : '';
     var max = 0; (model.pipeline || []).forEach(function (p) { if (+p.value > max) max = +p.value; });
     var pipeline = model.pipeline && model.pipeline.length ? '<ol class="zynix-ui__pipeline">' + model.pipeline.map(function (p) {
@@ -1721,20 +1701,19 @@
       return '<li class="zynix-ui__stage" style="--zx-bar:' + ratio + '"><span class="zynix-ui__stage-label">' + p.label + '</span><span class="zynix-ui__stage-bar" aria-hidden="true"></span><span class="zynix-ui__stage-value">' + p.value + '</span></li>';
     }).join('') + '</ol>' : '';
     var steps = model.steps && model.steps.length ? '<ol class="zynix-ui__steps">' + model.steps.map(function (s) {
-      var st = s.status || null;
-      return '<li class="zynix-ui__step">' + (s.time ? '<span class="zynix-ui__step-time">' + s.time + '</span>' : '') +
+      return '<li class="zynix-ui__step">' + zxEl('span', 'zynix-ui__step-time', s.time) +
         '<div class="zynix-ui__step-main"><p class="zynix-ui__step-title">' + s.title + '</p>' + (s.owner ? '<p class="zynix-ui__step-owner">' + (s.owner.label || s.owner) + '</p>' : '') + '</div>' +
-        (st ? '<span class="zynix-chip zynix-chip--' + tone(st.tone) + ' zynix-ui__status">' + st.label + '</span>' : '') + '</li>';
+        status(s.status) + '</li>';
     }).join('') + '</ol>' : '';
     var note = model.note && model.note.sections && model.note.sections.length ? '<div class="zynix-ui__note">' + model.note.sections.map(function (n) {
       return '<div class="zynix-ui__note-section"><p class="zynix-ui__note-label">' + n.label + '</p><p class="zynix-ui__note-text">' + n.text + '</p></div>'; }).join('') + '</div>' : '';
-    var foot = model.footer ? '<p class="zynix-ui__footer">' + model.footer + '</p>' : '';
+    var foot = zxEl('p', 'zynix-ui__footer', model.footer);
     var label = model.label || ((model.title || 'Sample panel') + ', illustrative data');
-    return '<div class="zynix-ui' + (model.className ? ' ' + model.className : '') + '" role="group" aria-label="' + zxAttr(label) + '" data-zx-sample>' + bar +
+    return '<div class="zynix-ui' + zxCls(model.className) + '" role="group" aria-label="' + zxAttr(label) + '" data-zx-sample>' + bar +
       '<div class="zynix-ui__body">' + head + tiles + rows + pipeline + steps + note + foot + '</div></div>';
   }
 
-  // ── Quote (§2.11): renders NOTHING unless the words are from a published release or an approved source ──
+  // ── Quote (§2.11): renders NOTHING unless the source is a published release or approved ──
   function renderQuote(opts) {
     opts = opts || {};
     var c = opts.customer ? zxCustomer(opts.customer) : null;
@@ -1746,18 +1725,18 @@
     var logo = '';
     if (opts.logo !== null) {
       var lg = opts.logo || (c && c.logo ? { src: zxImg(c.logo.file), alt: c.name, width: Math.round(c.logo.w / c.logo.h * 32), height: 32 } : null);
-      if (lg && lg.src) logo = '<img class="zynix-quote__logo" src="' + zxAttr(lg.src) + '" alt="' + zxAttr(lg.alt || '') + '"' + (lg.width ? ' width="' + zxAttr(lg.width) + '"' : '') +
-        (lg.height ? ' height="' + zxAttr(lg.height) + '"' : '') + ' loading="lazy" decoding="async">';
+      if (lg && lg.src) logo = '<img class="zynix-quote__logo" src="' + zxAttr(lg.src) + '" alt="' + zxAttr(lg.alt || '') + '"' + zxA('width', lg.width) +
+        zxA('height', lg.height) + ' loading="lazy" decoding="async">';
     }
     var href = opts.href !== undefined ? opts.href : (c && c.release ? c.release.href : null);
     var link = href ? renderLinkArrow(opts.linkLabel || 'Read the announcement', href) : '';
     var v = opts.variant === 'inverse' || opts.variant === 'large' ? ' zynix-quote--' + opts.variant : '';
     return '<figure class="zynix-quote' + v + '"><blockquote class="zynix-quote__text"><p>“' + text + '”</p></blockquote>' +
-      '<figcaption class="zynix-quote__cite">' + logo + (name ? '<span class="zynix-quote__name">' + name + '</span>' : '') +
-      (role ? '<span class="zynix-quote__role">' + role + '</span>' : '') + link + '</figcaption></figure>';
+      '<figcaption class="zynix-quote__cite">' + logo + zxEl('span', 'zynix-quote__name', name) +
+      zxEl('span', 'zynix-quote__role', role) + link + '</figcaption></figure>';
   }
 
-  // ── Comparison table (§2.12): every mark is paired with visible text; below 768 the rows become labelled blocks (CSS) ──
+  // ── Comparison table (§2.12): every mark has visible text; rows become labelled blocks below 768 (CSS) ──
   function renderCompareTable(opts) {
     opts = opts || {};
     var cols = opts.columns || [], rows = opts.rows || [];
@@ -1775,7 +1754,7 @@
     return '<div class="zynix-table-wrap"><table class="zynix-compare-table">' + cap + head + body + '</table></div>';
   }
 
-  // ── FAQ list (§2.13): the question is the button's only text (the chevron is an SVG), so FAQPage JSON-LD stays clean ──
+  // ── FAQ list (§2.13): the question is the button's only text, so FAQPage JSON-LD stays clean ──
   var ZX_FAQ_CHEVRON = '<svg class="zynix-faq-q__icon" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   function renderFaqList(items, opts) {
     opts = opts || {};
@@ -1791,9 +1770,8 @@
     }).join('') + '</div>';
   }
 
-  // Binds every button.zynix-faq-q and every [data-zx-disclosure] button inside root once (idempotent).
-  // New markup (aria-controls): toggles the target's `hidden` with a grid-template-rows reveal. Legacy markup (no aria-controls):
-  // toggles .open on the closest .zynix-faq-item, as the old router handler did (closest(), because the button may sit in an <h3>).
+  // Binds button.zynix-faq-q and [data-zx-disclosure] buttons in root once. With aria-controls it toggles the panel's `hidden`
+  // (grid-rows reveal); legacy markup toggles .open on the closest .zynix-faq-item.
   function initDisclosures(root) {
     root = root || document;
     if (!root.querySelectorAll) return;
@@ -1809,13 +1787,13 @@
         var open = btn.getAttribute('aria-expanded') !== 'true';
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         if (item) item.classList.toggle('open', open);
-        if (!panel) return;                                     // legacy markup: the .open class drives the answer
+        if (!panel) return;  // legacy markup: the .open class drives the answer
         if (panel.__zxTimer) { clearTimeout(panel.__zxTimer); panel.__zxTimer = null; }
         if (open) {
           panel.hidden = false;
           if (reduce()) { panel.classList.remove('is-animating'); return; }
           panel.classList.add('is-animating');
-          void panel.offsetHeight;                              // reflow, so 0fr -> 1fr transitions
+          void panel.offsetHeight;  // reflow, so 0fr -> 1fr transitions
           panel.classList.remove('is-animating');
         } else {
           if (reduce()) { panel.hidden = true; panel.classList.remove('is-animating'); return; }
@@ -1823,7 +1801,7 @@
           var done = function () { panel.removeEventListener('transitionend', done); if (panel.__zxTimer) clearTimeout(panel.__zxTimer); panel.__zxTimer = null;
             if (btn.getAttribute('aria-expanded') !== 'true') panel.hidden = true; panel.classList.remove('is-animating'); };
           panel.addEventListener('transitionend', done);
-          panel.__zxTimer = setTimeout(done, 320);              // no transition (no CSS yet, or zero duration): close anyway
+          panel.__zxTimer = setTimeout(done, 320);  // no transition (no CSS yet, or zero duration): close anyway
         }
       });
     });
@@ -1833,10 +1811,10 @@
   function renderProse(html, opts) {
     opts = opts || {};
     if (!html) return '';
-    return '<div class="zynix-prose' + (opts.wide ? ' zynix-prose--wide' : '') + (opts.className ? ' ' + opts.className : '') + '">' + html + '</div>';
+    return '<div class="zynix-prose' + (opts.wide ? ' zynix-prose--wide' : '') + zxCls(opts.className) + '">' + html + '</div>';
   }
 
-  // ── Logo row (§2.15): registry customers only (CUSTOMERS), static, logos at their optical height class ──
+  // ── Logo row (§2.15): registry customers only, static, at their optical height class ──
   function renderLogoRow(ids, opts) {
     opts = opts || {};
     if (!ids || !ids.length) {
@@ -1849,7 +1827,7 @@
     var lid = (opts.id || 'logos') + '-label';
     var hs = [20, 24, 28, 32, 36, 40];
     var link = opts.link === null ? null : (opts.link || { label: 'Customer stories', href: '/resources-case-studies' });
-    return '<div class="zynix-logo-row' + (opts.inverse ? ' zynix-logo-row--inverse' : '') + (opts.className ? ' ' + opts.className : '') + '" aria-labelledby="' + zxAttr(lid) + '">' +
+    return '<div class="zynix-logo-row' + (opts.inverse ? ' zynix-logo-row--inverse' : '') + zxCls(opts.className) + '" aria-labelledby="' + zxAttr(lid) + '">' +
       '<div class="zynix-logo-row__head"><p class="zynix-logo-row__label" id="' + zxAttr(lid) + '">' + (opts.label || 'Used by ACOs, health plans and provider organizations') + '</p>' +
       (link ? renderLinkArrow(link.label, link.href, { anchorFixed: true }) : '') + '</div>' +
       '<ul class="zynix-logo-row__list" data-count="' + list.length + '" role="list">' + list.map(function (c) {
@@ -1859,7 +1837,7 @@
       }).join('') + '</ul></div>';
   }
 
-  // ── Related-links block (§2.16): one per page, at most 6 links, group labels only when there are 2+ groups ──
+  // ── Related links (§2.16): one per page, at most 6 links, group labels only with 2+ groups ──
   function renderRelatedLinks(opts) {
     opts = opts || {};
     var here = zxPath(), seen = {}, left = 6, groups = [];
@@ -1867,7 +1845,7 @@
       var items = (g && g.items || []).filter(function (it) {
         if (!it || !it.href || !it.label || left <= 0) return false;
         var p = zxHrefPath(it.href);
-        if (p !== null && p === here) return false;              // never a link to the current page
+        if (p !== null && p === here) return false;  // never a link to the current page
         if (seen[it.href]) return false;
         seen[it.href] = 1; left--; return true;
       });
@@ -1876,11 +1854,11 @@
     if (!groups.length) return '';
     var title = opts.title || 'Related';
     var inner = groups.map(function (g) {
-      return (groups.length > 1 && g.label ? '<p class="zynix-related__group">' + g.label + '</p>' : '') + '<ul class="zynix-related__list" role="list">' +
+      return (groups.length > 1 ? zxEl('p', 'zynix-related__group', g.label) : '') + '<ul class="zynix-related__list" role="list">' +
         g.items.map(function (it) {
           var svg = zxIconHtml(it.icon);
           return '<li><a class="zynix-related__link" href="' + zxAttr(it.href) + '">' + (svg ? '<span class="zynix-related__icon" aria-hidden="true">' + svg + '</span>' : '') +
-            '<span class="zynix-related__text"><span class="zynix-related__name">' + it.label + '</span>' + (it.desc ? '<span class="zynix-related__desc">' + it.desc + '</span>' : '') + '</span>' +
+            '<span class="zynix-related__text"><span class="zynix-related__name">' + it.label + '</span>' + zxEl('span', 'zynix-related__desc', it.desc) + '</span>' +
             '<span class="zynix-related__arrow" aria-hidden="true">→</span></a></li>';
         }).join('') + '</ul>';
     }).join('');
@@ -1888,24 +1866,27 @@
       '<div class="zynix-container"><h2 class="zynix-related__title" id="related-title">' + title + '</h2>' + inner + '</div></section>';
   }
 
-  // ── Split layout (§2.18): visual reversal by grid placement only; DOM order stays text then media ──
+  // ── Split layout (§2.18): reversal by grid placement only; DOM order stays text then media ──
   function renderSplit(a, b, opts) {
     opts = opts || {};
     var ratio = ['5-7', '7-5', '6-6', '4-8'].indexOf(opts.ratio) > -1 ? opts.ratio : '6-6';
     return '<div class="zynix-split zynix-split--' + ratio + (opts.reverse ? ' zynix-split--reverse' : '') + (opts.center ? ' zynix-split--center' : '') +
-      (opts.mediaFirst ? ' zynix-split--media-first' : '') + (opts.className ? ' ' + opts.className : '') + '">' +
+      (opts.mediaFirst ? ' zynix-split--media-first' : '') + zxCls(opts.className) + '">' +
       '<div class="zynix-split__a">' + (a || '') + '</div><div class="zynix-split__b">' + (b || '') + '</div></div>';
   }
 
-  // ── Form field (§2.19): a real <label for>, required marked in text, hint and error wired with aria-describedby ──
+  // ── Form field (§2.19): real <label for>, required in text, hint wired with aria-describedby ──
   function renderField(opts) {
     opts = opts || {};
     if (!opts.id || !opts.label) return '';
     var id = zxAttr(opts.id), name = zxAttr(opts.name || opts.id), type = opts.type || 'text';
     var req = opts.required ? '<span class="zynix-field__req" aria-hidden="true">*</span><span class="zx-visually-hidden">(required)</span>' : '';
     var hintId = opts.hint ? opts.id + '-hint' : '', errId = opts.id + '-err';
-    var desc = hintId ? ' aria-describedby="' + zxAttr(hintId) + '"' : '';
-    var common = ' id="' + id + '" name="' + name + '"' + (opts.required ? ' required' : '') + (opts.autocomplete ? ' autocomplete="' + zxAttr(opts.autocomplete) + '"' : '') + desc;
+    var desc = zxA('aria-describedby', hintId);
+    var common = ' id="' + id + '" name="' + name + '"' + (opts.required ? ' required' : '') + zxA('autocomplete', opts.autocomplete) + desc;
+    var label = '<label class="zynix-field__label" for="' + id + '">' + opts.label + (req ? ' ' + req : '') + '</label>';
+    var tail = (opts.hint ? '<p class="zynix-field__hint" id="' + zxAttr(hintId) + '">' + opts.hint + '</p>' : '') +
+      '<p class="zynix-field__error" id="' + zxAttr(errId) + '" role="alert" hidden></p></div>';
     var control;
     if (type === 'select') {
       control = '<select class="zynix-input"' + common + '>' + (opts.options || []).map(function (o) {
@@ -1913,35 +1894,29 @@
     } else if (type === 'textarea') {
       control = '<textarea class="zynix-input"' + common + ' rows="' + (+opts.rows || 4) + '"></textarea>';
     } else if (type === 'checkbox') {
-      return '<div class="zynix-field zynix-field--checkbox"><input type="checkbox" class="zynix-checkbox"' + common + '>' +
-        '<label class="zynix-field__label" for="' + id + '">' + opts.label + (req ? ' ' + req : '') + '</label>' +
-        (opts.hint ? '<p class="zynix-field__hint" id="' + zxAttr(hintId) + '">' + opts.hint + '</p>' : '') +
-        '<p class="zynix-field__error" id="' + zxAttr(errId) + '" role="alert" hidden></p></div>';
+      return '<div class="zynix-field zynix-field--checkbox"><input type="checkbox" class="zynix-checkbox"' + common + '>' + label + tail;
     } else {
       control = '<input class="zynix-input" type="' + zxAttr(['text', 'email', 'tel', 'url', 'number'].indexOf(type) > -1 ? type : 'text') + '"' + common + '>';
     }
-    return '<div class="zynix-field"><label class="zynix-field__label" for="' + id + '">' + opts.label + (req ? ' ' + req : '') + '</label>' + control +
-      (opts.hint ? '<p class="zynix-field__hint" id="' + zxAttr(hintId) + '">' + opts.hint + '</p>' : '') +
-      '<p class="zynix-field__error" id="' + zxAttr(errId) + '" role="alert" hidden></p></div>';
+    return '<div class="zynix-field">' + label + control + tail;
   }
   // ==== ZX:END components ====
 
-  // ── Footer (§3.5): columns from NAV, brand block from SITE_FACTS.company; /sms-program stays in the bottom bar (A2P) ──
+  // ── Footer (§3.5): columns from NAV, brand from SITE_FACTS.company; /sms-program stays in the bottom bar (A2P) ──
   function renderFooter() {
     var co = SITE_FACTS.company, year = new Date().getFullYear();
     var svgs = { linkedin: SVG_LINKEDIN, x: SVG_X, instagram: SVG_INSTAGRAM };
     var cols = NAV.filter(function (s) { return s.footer !== false && s.columns; }).map(function (s) {
       var hid = 'zx-f-' + s.id, links = [];
       s.columns.forEach(function (col) {
-        (col.items || []).forEach(function (it) { if (it.footer !== false) links.push({ label: it.footerLabel || it.label, href: it.href }); });
-        (col.more || []).forEach(function (it) { if (it.footer !== false) links.push({ label: it.footerLabel || it.label, href: it.href }); });
+        (col.items || []).concat(col.more || []).forEach(function (it) { if (it.footer !== false) links.push({ label: it.footerLabel || it.label, href: it.href }); });
       });
       return '<div class="zynix-footer-col"><p class="zynix-footer__heading" id="' + hid + '">' + s.label + '</p>' +
         '<ul role="list" aria-labelledby="' + hid + '">' + links.map(function (l) {
           return '<li><a href="' + zxAttr(l.href) + '" data-z-anchor-fixed="1">' + l.label + '</a></li>'; }).join('') + '</ul></div>';
     }).join('');
     var social = co.social.map(function (s) {
-      return '<li><a href="' + zxAttr(s.href) + '" target="_blank" rel="noopener" aria-describedby="zx-newtab-desc" aria-label="' + zxAttr(s.label) + '" data-z-anchor-fixed="1">' +
+      return '<li><a href="' + zxAttr(s.href) + '"' + zxNewTab(s.href, true) + ' aria-label="' + zxAttr(s.label) + '" data-z-anchor-fixed="1">' +
         zxIconHtml(svgs[s.id] || '') + '</a></li>';
     }).join('');
     var tel = co.phoneHref, here = zxPath();
@@ -1969,8 +1944,8 @@
     '</footer>';
   }
 
-  // ── CTA band (§2.21). Legacy-compatible signature: btnText is IGNORED. One orange action at most; no self-links. ──
-  // Company-preset pages (/about, /careers, /press, /contact) get no demo button and no trust row unless opts say otherwise.
+  // ── CTA band (§2.21): btnText is ignored; one orange action at most; no self-links. Company-preset pages get no demo
+  // button and no trust row unless opts say otherwise. ──
   function renderCTA(title, subtitle, btnText, opts) {
     opts = opts || {};
     var here = zxPath(), company = zxHeroPreset(here) === 'company';
@@ -1979,21 +1954,17 @@
     var ok = function (a) {
       if (!a || !a.label || !a.href || a.href === '#') return false;
       var p = zxHrefPath(a.href);
-      return !(p !== null && p === here);                    // never a link to the current page
+      return !(p !== null && p === here);  // never a link to the current page
     };
-    var tab = function (a) { return a.newTab != null ? !!a.newTab : /^(https?:|mailto:)/i.test(a.href); };
     var isDemo = function (a) { return a && a.href === SITE_FACTS.demo.href; };
-    var secVariant = surface === 'inverse' ? 'inverse' : 'secondary';
+    var btn = function (a, variant, cta) {   // mailto: opens a new tab too
+      return renderButton(a.label, a.href, { variant: variant, size: 'lg', newTab: a.newTab != null ? !!a.newTab : /^(https?:|mailto:)/i.test(a.href), cta: isDemo(a) ? 'demo' : cta });
+    };
     var primary = '', secondary = '';
-    if (opts.primary && ok(opts.primary) && !(hideDemo && isDemo(opts.primary))) {
-      primary = renderButton(opts.primary.label, opts.primary.href, { variant: 'primary', size: 'lg', newTab: tab(opts.primary), cta: isDemo(opts.primary) ? 'demo' : (opts.primary.cta || 'primary') });
-    } else if (!hideDemo) {
-      primary = renderDemoButton({ size: 'lg' });
-    }
+    if (opts.primary && ok(opts.primary) && !(hideDemo && isDemo(opts.primary))) primary = btn(opts.primary, 'primary', opts.primary.cta || 'primary');
+    else if (!hideDemo) primary = renderDemoButton({ size: 'lg' });
     var sec = opts.secondary === undefined ? { label: 'Contact us', href: '/contact' } : opts.secondary;
-    if (sec && ok(sec) && !(hideDemo && isDemo(sec)) && !(isDemo(sec) && !opts.primary)) {
-      secondary = renderButton(sec.label, sec.href, { variant: secVariant, size: 'lg', newTab: tab(sec), cta: isDemo(sec) ? 'demo' : (sec.cta || null) });
-    }
+    if (sec && ok(sec) && !(hideDemo && isDemo(sec)) && !(isDemo(sec) && !opts.primary)) secondary = btn(sec, surface === 'inverse' ? 'inverse' : 'secondary', sec.cta || null);
     var badges = opts.badges !== undefined ? (opts.badges || []) : (company ? [] : ['soc2', 'hipaa', 'hitrust']);
     var trust = badges.length ? renderTrustRow(badges, { inverse: surface === 'inverse', href: here === '/security' ? null : '/security' }) : '';
     var id = opts.id || 'final-cta', tid = id + '-title';
@@ -2002,68 +1973,47 @@
       '<div class="zynix-container zynix-cta-section__inner">' +
         '<h2 class="zynix-cta-section__title" id="' + zxAttr(tid) + '">' + (title || 'See Zynix on a workflow you run today') + '</h2>' +
         '<p class="zynix-lead">' + (subtitle || 'Book 30 minutes with our team. We’ll walk through post-discharge follow-up, care gap closure or wellness visit outreach on sample data, and map it to your programs.') + '</p>' +
-        (actions ? '<div class="zynix-cta-section__actions">' + actions + '</div>' : '') +
+        zxEl('div', 'zynix-cta-section__actions', actions) +
         trust +
       '</div></section>';
   }
 
-  // ── Email capture (§2.22): the compact footer signup, or the resource-page block. Never on /contact or the SMS pages
-  // (/sms-consent must keep exactly one visible form). Class names zynix-capture-form / -email / -btn are what the
-  // HubSpot newsletter handler binds to (router, portal 242472215).
+  // ── Email capture (§2.22): footer signup or resource block; never on /contact or the SMS pages (/sms-consent keeps one
+  // visible form). The router's HubSpot newsletter handler binds to the zynix-capture-* classes. ──
   function renderEmailCapture(opts) {
     opts = opts || {};
     if (['/contact', '/sms', '/sms-program', '/sms-consent'].indexOf(zxPath()) > -1) return '';
     var title = 'Get new research and webinars by email';
     var note = 'Occasional emails when we publish new research, webinars or product updates. Unsubscribe anytime. <a href="/privacy-policy">Privacy Policy</a>';
+    var field = function (id, by) {
+      return '<label class="zx-visually-hidden" for="' + id + '">Work email</label>' +
+        '<input class="zynix-input zynix-capture-email" id="' + id + '" type="email" autocomplete="email" placeholder="Work email" required aria-describedby="' + by + '">' +
+        '<button type="submit" class="zynix-btn zynix-btn--quiet zynix-capture-btn">Subscribe</button>';
+    };
     if (opts.variant === 'footer') {
       return '<form class="zynix-capture-form zynix-footer__signup" novalidate>' +
-        '<p class="zynix-footer__signup-title" id="zx-footer-signup-title">' + title + '</p>' +
-        '<label class="zx-visually-hidden" for="zx-footer-email">Work email</label>' +
-        '<input class="zynix-input zynix-capture-email" id="zx-footer-email" type="email" autocomplete="email" placeholder="Work email" required aria-describedby="zx-footer-signup-title">' +
-        '<button type="submit" class="zynix-btn zynix-btn--quiet zynix-capture-btn">Subscribe</button>' +
-        '<p class="zynix-footer__signup-note">' + note + '</p>' +
-      '</form>';
+        '<p class="zynix-footer__signup-title" id="zx-footer-signup-title">' + title + '</p>' + field('zx-footer-email', 'zx-footer-signup-title') +
+        '<p class="zynix-footer__signup-note">' + note + '</p></form>';
     }
     return '<section class="zynix-section zynix-section--compact zynix-section--subtle zynix-email-capture" id="newsletter" aria-labelledby="newsletter-title">' +
-      '<div class="zynix-container zynix-container--narrow">' +
-        '<h2 class="zynix-email-capture__title" id="newsletter-title">' + title + '</h2>' +
-        '<form class="zynix-capture-form zynix-email-capture__form" novalidate>' +
-          '<label class="zx-visually-hidden" for="zx-block-email">Work email</label>' +
-          '<input class="zynix-input zynix-capture-email" id="zx-block-email" type="email" autocomplete="email" placeholder="Work email" required aria-describedby="newsletter-title">' +
-          '<button type="submit" class="zynix-btn zynix-btn--quiet zynix-capture-btn">Subscribe</button>' +
-        '</form>' +
-        '<p class="zynix-email-capture__note">' + note + '</p>' +
-      '</div></section>';
+      '<div class="zynix-container zynix-container--narrow"><h2 class="zynix-email-capture__title" id="newsletter-title">' + title + '</h2>' +
+      '<form class="zynix-capture-form zynix-email-capture__form" novalidate>' + field('zx-block-email', 'newsletter-title') + '</form>' +
+      '<p class="zynix-email-capture__note">' + note + '</p></div></section>';
   }
 
-  // ── Legacy hero adapter (§2.10). Signature unchanged (92 call sites, including the A2P-frozen privacy and terms renderers).
-  // The image argument is ignored (this retired the old glow-card hero visuals) and so is secondaryBtnText (the old
-  // href="#" "Learn More" button). The preset comes from the path: company, legal, resource, case or product.
+  // ── Legacy hero adapter (§2.10), signature unchanged (92 call sites incl. the A2P-frozen legal renderers). image and
+  // secondaryBtnText are ignored (the old glow-card visuals and href="#" button); the preset comes from the path. ──
   function renderInnerHero(tag, title, subtitle, image, imgAlt, secondaryBtnText) {
     if (tag && typeof tag === 'object') return renderHero(tag);
     return renderHero({ preset: zxHeroPreset(zxPath()), eyebrow: tag, title: title, lead: subtitle, media: { type: 'none' } });
   }
 
-  // ── Legacy product-screenshot helpers (§2.9 legacy mapping) ──
-  // The legacy url argument is ignored: those app URLs were invented. Sizes come from ASSET_SIZES.
+  // Legacy screenshot frame (§2.9 legacy mapping): the invented app url argument is ignored; sizes come from ASSET_SIZES.
   function renderBrowserFrame(imgSrc, alt, url) {
     return renderProductFrame({ src: imgSrc, alt: alt || '', chrome: 'none' });
   }
 
-  function renderProductShowcase(imgSrc, alt, url, title, desc, reverse) {
-    var text = (title ? '<h3 class="zynix-card__title">' + title + '</h3>' : '') + (desc ? '<p class="zynix-lead">' + desc + '</p>' : '');
-    return renderSplit(text, renderBrowserFrame(imgSrc, alt), { ratio: '5-7', reverse: !!reverse, center: true });
-  }
-
-  // A count-aware grid of frames, top-aligned (no horizontal strip).
-  function renderScreenshotStrip(items) {
-    return renderGrid((items || []).filter(function (it) { return it && it.img; }), function (it) {
-      return renderBrowserFrame(it.img, it.alt);
-    }, { className: 'zynix-cgrid--top' });
-  }
-
-  // Count-aware grid of static cards. Legacy metric pills carry no source, so they are marked data-zx-unsourced
-  // (page streams remove them, §6).
+  // Count-aware grid of static cards; legacy metric pills carry no source, so they are marked data-zx-unsourced (§6).
   function renderFeatureCards(cards) {
     return renderGrid(cards || [], function (c) {
       var metric = c.metric ? '<span class="zynix-chip zynix-chip--brand zynix-card__metric" data-zx-unsourced="1">' + c.metric +
@@ -2072,7 +2022,7 @@
     });
   }
 
-  // Legacy metrics bar, restyled as a stat row by CSS. Legacy metrics carry no source: data-zx-unsourced (page streams remove it).
+  // Legacy metrics bar, styled as a stat row; unsourced, so marked data-zx-unsourced (§6).
   function renderMetricsBar(metrics) {
     metrics = (metrics || []).filter(function (m) { return m && m.value; });
     if (!metrics.length) return '';
@@ -2081,7 +2031,7 @@
     }).join('') + '</div>';
   }
 
-  // The problem framing: a left-aligned section head and a count-aware grid of static cards (no default alert icon).
+  // Problem framing: left-aligned head and a count-aware grid of static cards (no default alert icon).
   function renderProblemSection(title, problems) {
     return '<section class="zynix-section zynix-section--subtle zynix-problem-section"><div class="zynix-container">' +
       renderSectionHead('The challenge', title, '') +
@@ -11086,9 +11036,8 @@ function renderDataAnalyticsV7() {
     '/use-cases/post-discharge-followup-fqhc': USE_CASE_ROUTES['/use-cases/post-discharge-followup-fqhc']
   };
 
-  // Reveal (§1.6, §7.1): nothing is hidden unless html.zx-motion is present, and it is added only when the visitor has not
-  // asked for reduced motion and IntersectionObserver exists. Elements already on screen are revealed before the class is
-  // added, so the first screen never blinks. .fade-in-up is for section heads and media only.
+  // Reveal (§1.6, §7.1): html.zx-motion (the only thing that hides anything) is added only without reduced motion and with
+  // IntersectionObserver, after on-screen elements are revealed, so the first screen never blinks.
   function initAnimations() {
     var root = document.documentElement;
     var fadeEls = document.querySelectorAll('.fade-in-up');
@@ -11117,9 +11066,8 @@ function renderDataAnalyticsV7() {
     });
   }
 
-  // ── Stat tick (§2.8, §1.6): one tick per element on first intersection, only under html.zx-motion, only when the
-  // numeric part is >= 10, never longer than 1,200ms, and it always ends on the exact final text (data-zx-final, or the
-  // element's own text for legacy markup). Anything else is left alone: no opacity tricks, no re-runs.
+  // ── Stat tick (§2.8, §1.6): once per element on first intersection, only under html.zx-motion and for numbers >= 10,
+  // at most 1,200ms, always ending on the exact final text (data-zx-final, or the element's own text). ──
   function animateCounters() {
     var counters = document.querySelectorAll('.zynix-stat__value[data-zx-final], .zynix-stat-value, .zynix-metric-value');
     if (!counters.length || !('IntersectionObserver' in window)) return;
@@ -11308,9 +11256,8 @@ function renderDataAnalyticsV7() {
   }
 
   function initAnalytics() {
-    // GA4 - Live measurement ID (also configured natively in Webflow)
-    // DECISIONS 25: this second gtag loader stays until event delivery through Webflow's native gtag alone is verified on
-    // production (the preview strips analytics, so it cannot be verified there). Reported for Gautamdev.
+    // GA4 (also configured natively in Webflow). DECISIONS 25: this second loader stays until event delivery through the
+    // native gtag alone is verified on production (the preview strips analytics). Reported for Gautamdev.
     var gaId = 'G-LJSSJVVXNB';
     if (!gaId) return;
     var s = document.createElement('script');
