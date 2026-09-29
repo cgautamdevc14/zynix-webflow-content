@@ -137,7 +137,10 @@
       sizeNote: 'one of the nation’s largest and most successful risk-bearing accountable care organizations',   // release wording; attribute to the release
       quote: { source: 'release', name: 'David Klebonis', role: 'President &amp; COO, PBACO Holding',
         text: 'PBACO is focused on building practical, scalable solutions that help providers succeed in value-based care. We believe this partnership with Zynix AI will strengthen patient outreach, improve follow-through, reduce administrative burden, and support better performance across both quality and cost of care. Importantly, we remain committed to ensuring that automation enhances—rather than compromises—the quality of care delivered to our beneficiaries.' },
-      metrics: [] },
+      metrics: [   // P4, DECISIONS 16: kept from the pre-redesign case study, attributed, [VERIFY] with PBACO (n unknown; not approved)
+        { value: '85%', label: 'TCM contact rate: discharged patients contacted within 2 business days', baseline: '32%', period: 'first quarter of deployment', n: null, source: 'Reported by Palm Beach ACO', approved: null },
+        { value: '3x', label: 'Annual wellness visits completed, compared with before deployment', baseline: null, period: 'first quarter of deployment', n: null, source: 'Reported by Palm Beach ACO', approved: null }
+      ] },
     eternalhealth: { name: 'eternalHealth', segment: 'health-plan', segmentLabel: 'Medicare Advantage plan', logoRow: 2,
       logo: { file: 'logos/eternal-health.webp', source: 'eternal-health.png', h: 20, w: 111 },
       caseStudy: '/case-studies-eternal-health',
@@ -164,7 +167,9 @@
       logo: { file: 'logos/professional-radiology.webp', source: 'professional-radiology.png', h: 36, w: 60 }, caseStudy: null, metrics: [] },
     clsc: { name: 'CLSC', segment: null, segmentLabel: null, logoRow: null,   // [VERIFY] full name
       logo: { file: 'logos/clsc.webp', source: 'clscfl.png', h: 24, w: 86 }, caseStudy: null, metrics: [] },
-    apolloclinic: { name: 'Apollo Clinic Network', segment: 'practice', segmentLabel: 'Physician group', logoRow: null, logo: null, caseStudy: '/case-studies/apollo-clinic', metrics: [] },   // [VERIFY] segment
+    apolloclinic: { name: 'Apollo Clinic Network', segment: 'practice', segmentLabel: 'Physician group', logoRow: null, logo: null, caseStudy: '/case-studies/apollo-clinic', metrics: [   // [VERIFY] segment
+      { value: 'Under 14%', label: 'No-show rate', baseline: '22%', period: 'first quarter of deployment', n: null, source: 'Reported by Apollo Clinic Network', approved: null }   // P4, DECISIONS 16 [VERIFY]
+    ] },
     nhs: { name: 'NHS Health System', segment: 'health-system', segmentLabel: 'Health system', logoRow: null, logo: null, caseStudy: '/case-studies/nhs', metrics: [] },
     advancedmanagement: { name: 'Advanced Management', segment: null, segmentLabel: null, logoRow: null, logo: null, caseStudy: null, metrics: [] },
     incentivecareipa: { name: 'IncentiveCare IPA', segment: 'ipa', segmentLabel: 'IPA', logoRow: null, logo: null, caseStudy: null, metrics: [] }
@@ -3058,34 +3063,67 @@
 
   // ── PAGE: Case Studies ──
   function renderCaseStudies() {
-    var studies = [
-      { title: 'Palm Beach ACO', metric: '3x', label: 'AWV Completion Improvement', seg: 'ACO', desc: 'Outbound Agents (PDV & AWV), AI Scribe', slug: '/case-studies/pbaco' },
-      { title: 'AMISTAD CHC', metric: '15+', label: 'Languages Supported', seg: 'FQHC', desc: 'ZynAfterHours, Preventive & Quality Activation Agents, SDoH Agent', slug: '/case-studies/amistad' },
-      { title: 'Apollo Clinic', metric: '40%', label: 'No-Show Reduction', seg: 'Practice', desc: 'ZynSchedule, ZynReminder, ZynAuth', slug: '/case-studies/apollo-clinic' },
-      { title: 'NHS Health System', metric: '40%', label: 'Gap Closure Improvement', seg: 'Health System', desc: 'Full Zynix Platform, ZynAfterHours, ZynScribe, ToC Agent', slug: '/case-studies/nhs' },
-      { title: 'West Florida ACO', metric: '40%', label: 'Quality Gap Closure Improvement', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies-west-florida-aco' },
-      { title: 'Space Coast ACO', metric: '85%+', label: 'TCM Contact Rate', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies-space-coast-aco' },
-      { title: 'Central Florida ACO', metric: '2.5x', label: 'ROI in Year One', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies-central-florida-aco' },
-      { title: 'eTernal Health', metric: '45%', label: 'Medication Adherence Improvement', seg: 'Health Plan', desc: 'PDV Agents, Medication Adherence Programs', slug: '/case-studies-eternal-health' }
+    // Customer hub (owner P4; DESIGN_SPEC §6 case-study template, COPY_DECK §4 and §5.5). No metric on any card
+    // (DECISIONS 16): attributed customer figures appear only on that customer's own story page.
+    var featured = [
+      ['pbaco', 'Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding), one of the nation’s largest risk-bearing ACOs, partnered with Zynix in April 2026, starting with outreach for post-discharge follow-up and annual wellness visits.'],
+      ['eternalhealth', 'eternalHealth, a Medicare Advantage plan serving members in Massachusetts and Arizona, has used Zynix outreach and care management workflows since January 1, 2026.']
     ];
-    var html = '<div class="zynix-case-grid">';
-    studies.forEach(function(s) {
-      var cardInner = '<span class="zynix-case-seg">' + s.seg + '</span><h3>' + s.title + '</h3><div class="zynix-case-metric"><span>' + s.metric + '</span><small>' + s.label + '</small></div>' + (s.desc ? '<p style="font-size:13px;color:var(--z-text-secondary);margin-top:12px;line-height:1.5">' + s.desc + '</p>' : '');
-      if (s.slug) {
-        html += '<a href="' + s.slug + '" class="zynix-case-card fade-in-up" style="text-decoration:none;color:inherit;display:block">' + cardInner + '<span style="display:inline-block;margin-top:12px;color:var(--z-primary);font-size:14px;font-weight:600">Read case study &rarr;</span></a>';
-      } else {
-        html += '<div class="zynix-case-card fade-in-up">' + cardInner + '</div>';
-      }
-    });
-    html += '</div>';
-
-    return renderInnerHero('CASE STUDIES', 'Real Results from Real Organizations',
-      'See how healthcare organizations are transforming operations and improving outcomes with Zynix.',
-      null, '') +
-    '<section class="zynix-case-section"><div class="zynix-container">' + html + '</div></section>' +
-    renderCTA('Ready to Write Your Success Story?', 'Join the organizations already achieving measurable results with Zynix.', 'Request a Demo') +
-    renderFooter();
+    var others = ['goldencareaco', 'sunfloweraco', 'nexthealthcare', 'professionalradiology', 'clsc', 'incentivecareipa', 'advancedmanagement'];
+    return renderHero({ preset: 'resource', eyebrow: 'Customers', title: 'How value-based care teams use Zynix',
+        lead: 'ACOs, health plans, health systems, FQHCs and physician groups in 30 states. See what each one runs, and what their leaders have said on the record.',
+        primary: { label: SITE_FACTS.demo.label, href: SITE_FACTS.demo.href }, secondary: { label: 'Read the latest release', href: '/press' } }) +
+      renderSection({ id: 'customer-logos', compact: true, className: 'zynix-section--flush-top zx-cust-logos' },
+        renderLogoRow(null, { id: 'zx-cust-logos', label: 'Organizations working with Zynix include', link: null, eager: true })) +
+      renderSection({ id: 'on-the-record', surface: 'subtle' },
+        renderSectionHead('On the record', 'Partnerships, announced in their own words',
+          'Palm Beach ACO and eternalHealth announced their work with Zynix in releases published on Business Wire.', { id: 'on-the-record-title' }) +
+        '<div class="zx-cust-featured">' + featured.map(function (f) { return zxCustFeatured(f[0], f[1]); }).join('') + '</div>') +
+      renderSection({ id: 'stories', className: 'zx-cust-stories' },
+        renderSectionHead('Customer stories', 'What each organization runs on Zynix',
+          'Pick an organization type, or read them all. Each story names the workflows, who does what, and what changed.', { id: 'stories-title' }) +
+        zxCustFilter() + zxCustGrid(ZX_CUST_ORDER) +
+        '<p class="zx-cust-method">Results on story pages are reported by the customer and dated.</p>' + zxCustSegNav('')) +
+      renderSection({ id: 'more-customers', compact: true, rule: true },
+        '<div class="zx-cust-also">' + renderSectionHead(null, 'Also working with Zynix', 'ACOs, IPAs and provider organizations beyond the stories above.', { id: 'more-customers-title' }) +
+        '<ul class="zx-cust-also__list" role="list">' + others.map(function (id) {
+          var c = zxCustomer(id); if (!c) return '';
+          var img = c.logo ? '<img class="zx-cust-also__logo" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + zxAttr(c.logo.w) + '" height="' + zxAttr(c.logo.h) + '" loading="lazy" decoding="async">' : '';
+          return '<li class="zx-cust-also__item">' + img + '<span class="zx-cust-also__name">' + c.name + '</span></li>';
+        }).join('') + '</ul></div>') +
+      renderRelatedLinks({ groups: [
+        { label: 'Built for', items: [
+          { href: '/audience-segments/acos-msos', label: 'ACOs', desc: 'TCM, wellness visits and HCC gaps across your panel', icon: 'users' },
+          { href: '/audience-segments/health-plans', label: 'Health plans', desc: 'Member outreach for quality programs', icon: 'shield' },
+          { href: '/audience-segments/health-systems', label: 'Health systems', desc: 'Post-discharge follow-up across sites', icon: 'hospital' } ] },
+        { label: 'Explore more', items: [
+          { href: '/platform', label: 'Platform overview', desc: 'One platform for value-based care operations', icon: 'layers' },
+          { href: '/agents', label: 'All AI agents', desc: 'Agents for care operations, with clinicians in charge', icon: 'bot' },
+          { href: '/press', label: 'Newsroom', desc: 'Announcements and press releases', icon: 'megaphone' } ] } ] }) +
+      renderCTA(null, null, null, { secondary: { label: 'Model the impact on your population', href: '/roi-calculator' } }) +
+      renderFooter();
   }
+
+  // ==== ZX:BEGIN seo (owner P4) ====
+  // Titles <= 60 and descriptions <= 155 characters (COPY_DECK §6 for the hub and /press). The flat story and segment pages had
+  // no PAGE_SEO entry, so Webflow's page-settings strings (with removed metrics) showed through; these entries replace them.
+  // Story pages carry dateModified = the rewrite date (the Article default, 2026-03-01, predates the eternalHealth release it cites).
+  zxSeo('/resources-case-studies', { title: 'Customer stories | Zynix AI', desc: 'How ACOs, health plans, health systems, FQHCs and physician groups use Zynix, with what their leaders have said on the record.' });
+  zxSeo('/press', { title: 'Newsroom and press releases | Zynix AI', desc: 'Zynix AI announcements, including partnerships with PBACO Holding and with eternalHealth and nirvanaHealth, plus media resources.' });
+  zxSeo('/case-studies/pbaco', { title: 'Palm Beach ACO customer story | Zynix AI', desc: 'How Palm Beach ACO (PBACO Holding) runs post-discharge follow-up and annual wellness visit outreach by voice and SMS across its provider network.', dateModified: '2026-09-29' });
+  zxSeo('/case-studies/amistad', { title: 'AMISTAD Community Health Center story | Zynix AI', desc: 'How AMISTAD Community Health Center answers after-hours calls and runs preventive screening outreach in the languages its patients speak.', dateModified: '2026-09-29' });
+  zxSeo('/case-studies/apollo-clinic', { title: 'Apollo Clinic Network customer story | Zynix AI', desc: 'How Apollo Clinic Network uses scheduling and reminder agents to fill open slots and reach patients before a missed appointment.', dateModified: '2026-09-29' });
+  zxSeo('/case-studies/nhs', { title: 'NHS Health System customer story | Zynix AI', desc: 'How NHS Health System runs post-discharge outreach, after-hours access and physician-reviewed documentation across its sites.', dateModified: '2026-09-29' });
+  zxSeo('/case-studies-west-florida-aco', { title: 'West Florida ACO customer story | Zynix AI', desc: 'How West Florida ACO uses the Zynix data foundation, outreach agents and risk analytics to find care gaps sooner and work them across its practices.', img: IMG.care, schema: 'Article', dateModified: '2026-09-29' });
+  zxSeo('/case-studies-space-coast-aco', { title: 'Space Coast ACO customer story | Zynix AI', desc: 'How Space Coast ACO, an MSSP ACO in Brevard County, Florida, follows up with patients after discharge using outreach agents and risk analytics.', img: IMG.care, schema: 'Article', dateModified: '2026-09-29' });
+  zxSeo('/case-studies-central-florida-aco', { title: 'Central Florida ACO customer story | Zynix AI', desc: 'How Central Florida ACO runs post-discharge follow-up, gap outreach and wellness visit scheduling across its participating practices.', img: IMG.care, schema: 'Article', dateModified: '2026-09-29' });
+  zxSeo('/case-studies-eternal-health', { title: 'eternalHealth customer story | Zynix AI', desc: 'How eternalHealth, a Medicare Advantage plan in Massachusetts and Arizona, uses Zynix outreach and care management workflows for its members.', img: IMG.care, schema: 'Article', dateModified: '2026-09-29' });
+  zxSeo('/case-studies-acos', { title: 'ACO customer stories | Zynix AI', desc: 'How Palm Beach ACO, West Florida ACO, Space Coast ACO and Central Florida ACO run follow-up, wellness visits and gap work on Zynix.', img: IMG.care, schema: 'Organization' });
+  zxSeo('/case-studies-health-plans', { title: 'Health plan customer stories | Zynix AI', desc: 'How eternalHealth, a Medicare Advantage plan, uses Zynix for member outreach and care management, with its leaders on the record.', img: IMG.care, schema: 'Organization' });
+  zxSeo('/case-studies-health-systems', { title: 'Health system customer stories | Zynix AI', desc: 'How NHS Health System runs post-discharge outreach, after-hours access and physician-reviewed documentation across its sites with Zynix.', img: IMG.care, schema: 'Organization' });
+  zxSeo('/case-studies-fqhcs', { title: 'FQHC and community health stories | Zynix AI', desc: 'How AMISTAD Community Health Center uses Zynix for after-hours access and preventive outreach in the languages its patients speak.', img: IMG.care, schema: 'Organization' });
+  zxSeo('/case-studies-practices', { title: 'Physician group customer stories | Zynix AI', desc: 'How Apollo Clinic Network, a multi-site physician group, uses Zynix scheduling and reminder agents to keep visits on schedule.', img: IMG.care, schema: 'Organization' });
+  // ==== ZX:END seo ====
 
   // ── PAGE: Privacy Policy ──
   function renderPrivacy() {
@@ -7090,86 +7128,68 @@ function renderSecurityV7() {
 
 
 function renderPressV7() {
-  var html = '';
-
-  html += renderInnerHero('NEWSROOM', 'Newsroom &amp; Press Releases',
-    'Latest Zynix AI news, press releases, and media coverage. Plus press resources, leadership bios, and brand assets for journalists covering AI-powered value-based healthcare.',
-    IMG.hero, 'Zynix AI Newsroom');
-
-  // ── PRESS RELEASES LISTING (data-driven from PRESS_RELEASES) ──
-  html += '<section class="zynix-press-listing" style="padding:56px 0"><div class="zynix-container">' +
-    '<span class="zynix-tag">PRESS RELEASES</span>' +
-    '<h2 style="font-size:30px;margin:0 0 8px">All Announcements</h2>' +
-    '<p class="zynix-section-sub" style="margin:0 0 28px">Official Zynix AI press releases and company announcements. Click any release to read the full article.</p>' +
-    '<div class="zynix-press-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px">';
-  var _pr = (typeof PRESS_RELEASES !== 'undefined' && PRESS_RELEASES) ? PRESS_RELEASES.slice() : [];
-  _pr.sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
-  for (var _i = 0; _i < _pr.length; _i++) {
-    var _r = _pr[_i];
-    html += '<a href="/press/' + _r.slug + '" class="zynix-press-card fade-in-up" style="display:block;background:#fff;border:1px solid var(--z-border,#E5E7EB);border-radius:12px;padding:24px;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s">' +
-      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">' +
-        '<span style="font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#F16529">' + (_r.dateDisplay || _r.date) + '</span>' +
-        (_r.outlet ? '<span style="font-size:10px;font-weight:600;color:var(--z-text-secondary,#4B5563);background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);padding:2px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:1px">' + _r.outlet + '</span>' : '') +
-      '</div>' +
-      '<h3 style="font-size:19px;line-height:1.35;margin:0 0 10px;color:var(--z-text-primary,#111827);font-weight:700">' + (_r.cardHeadline || _r.headline) + '</h3>' +
-      '<p style="font-size:14px;line-height:1.6;color:var(--z-text-secondary,#4B5563);margin:0 0 16px">' + (_r.excerpt || '') + '</p>' +
-      '<span style="font-size:13px;font-weight:600;color:#20449B">Read release &rarr;</span>' +
-      '</a>';
-  }
-  if (!_pr.length) {
-    html += '<p class="zynix-section-sub">No press releases yet. Check back soon.</p>';
-  }
-  html += '</div></div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">ABOUT</span>' +
-    '<h2>About Zynix AI</h2>' +
-    '<p class="zynix-section-sub">Zynix AI is an AI operating layer for value-based care. The platform connects healthcare data, clinical intelligence, and workflow execution so care teams can act on the right patient, at the right time, through the right channel. It is built on ZynixLLM, a healthcare-native language model, and is used by MSSP ACOs, risk-bearing MSOs, Medicare Advantage plans, and value-based care organizations throughout the United States. Headquartered in Florida, co-founded by Jayadeva (Jay) Chowdappa, M.D. and Gautamdev Chowdary.</p>' +
-    '</div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">MEDIA KIT</span>' +
-    '<h2>Download the Press Kit</h2>' +
-    '<p class="zynix-section-sub">The Zynix AI Press Kit includes official logos, brand color and typography guidelines, leadership bios and headshots, company boilerplate, and product visuals guide. All assets are cleared for editorial use.</p>' +
-    renderFeatureCards([
-      { icon: IC_PALETTE, title: 'Logo Assets', desc: 'SVG, PNG 1080px, and high-resolution PNG formats. Light and dark background versions.' },
-      { icon: IC_CLIPBOARD, title: 'Brand Guidelines', desc: 'Colors, typography, usage rules, and brand voice guidance.' },
-      { icon: IC_USER, title: 'Leadership Bios', desc: 'Full bios and headshots for co-founders and executive team.' }
-    ]) +
-    '</div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">OUR TEAM</span>' +
-    '<h2>Leadership Team</h2>' +
-    '<div class="zynix-agents-grid">' +
-    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_STETHOSCOPE + '</span><h3>Jayadeva (Jay) Chowdappa, M.D.</h3></div><p style="font-size:13px;color:var(--z-accent);font-weight:600;margin-bottom:8px">Co-Founder & CEO</p><p>Dr. Jay Chowdappa is a physician executive with more than 30 years of experience. He built Next Healthcare Solutions into a multi-state ACO network serving 35,000+ Medicare patients.</p></div>' +
-    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_MONITOR + '</span><h3>Gautamdev Chowdary</h3></div><p style="font-size:13px;color:var(--z-accent);font-weight:600;margin-bottom:8px">Co-Founder & CTO</p><p>Leads technology and platform development. Architects Kubernetes-orchestrated microservices, production ML pipelines, and HIPAA-secure LLM agents.</p></div>' +
-    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_CHART + '</span><h3>David McDonald</h3></div><p style="font-size:13px;color:var(--z-accent);font-weight:600;margin-bottom:8px">Vice President, Sales</p><p>31 years of healthcare industry experience spanning population health, clinical analytics, risk adjustment, and commercial partnerships.</p></div>' +
-    '</div></div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">PRESS CONTACT</span>' +
-    '<h2>Talk to Us</h2>' +
-    '<p class="zynix-section-sub">For press inquiries, interview requests, background briefings, analyst calls, or permission to use Zynix AI brand assets, contact our press team directly. We aim to respond to all media inquiries within one business day.</p>' +
-    '<div class="zynix-feature-grid">' +
-    '<div class="zynix-feature-card"><div class="zynix-feature-icon">' + IC_MAIL + '</div><h3>Press Contact</h3><p>Jayadeva (Jay) Chowdappa, M.D.<br>Co-Founder & CEO<br><a href="mailto:press@zynix.ai">press@zynix.ai</a></p></div>' +
-    '<div class="zynix-feature-card"><div class="zynix-feature-icon">' + IC_GLOBE + '</div><h3>Website</h3><p>zynix.ai</p></div>' +
-    '<div class="zynix-feature-card"><div class="zynix-feature-icon">' + IC_MAPPIN + '</div><h3>Headquarters</h3><p>3535 Little Rd<br>Trinity, FL 34655, USA</p></div>' +
-    '</div></div></section>';
-
-  html += renderFooter();
-  return html;
+  // Newsroom (owner P4; DESIGN_SPEC §6 company template, §6.1 ids, COPY_DECK §4). Company preset: no demo button, no badges.
+  // Releases render inline under their slug ids (the /press/<slug> URLs 301 to /press); one media contact for the page.
+  var rels = PRESS_RELEASES.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+  var co = SITE_FACTS.company, st = SITE_FACTS.stats;
+  var boiler = 'Zynix AI builds ' + SITE_FACTS.category.long + '. The Zynix platform connects claims, EHR and ADT data, identifies patients and care gaps that need attention, and helps care teams follow through with care plans, outreach agents and ambient documentation, while clinicians make clinical decisions. Zynix serves ACOs, health plans, MSOs, IPAs and health systems, with ' +
+    st.states.sentence + ', ' + st.patients.sentence + ' and ' + SITE_FACTS.ehr.line + '. Zynix is ' + SITE_FACTS.compliance.soc2.prose + '. ' + co.legalLine + ' is physician-led and based in Trinity, Florida.';
+  var file = function (src, alt, w, h, label, meta, cls) {
+    return '<li class="zx-cust-kit__item' + (cls ? ' ' + cls : '') + '"><span class="zx-cust-kit__preview"><img src="' + zxAttr(zxImg(src)) + '" alt="' + zxAttr(alt) + '" width="' + w + '" height="' + h + '" loading="lazy" decoding="async"></span>' +
+      '<span class="zx-cust-kit__name">' + label + '</span><span class="zx-cust-kit__meta">' + meta + '</span>' + renderLinkArrow('Open the file', zxImg(src), { ariaLabel: 'Open the file: ' + label }) + '</li>';
+  };
+  return renderHero({ preset: 'company', eyebrow: 'Newsroom', title: 'News and announcements from Zynix AI',
+      lead: 'Partnership announcements, company news and media resources. For press inquiries, contact our media team.',
+      primary: rels.length ? { label: 'Read the latest release', href: '#' + rels[0].slug } : null, secondary: { label: 'Media contact', href: '#media-contact' } }) +
+    renderSection({ id: 'releases', className: 'zx-cust-news' },
+      renderSectionHead('Press releases', 'Announcements', 'Official announcements from Zynix AI, as distributed on Business Wire. Full text below.', { id: 'releases-title' }) +
+      '<ol class="zx-cust-news__index" role="list">' + rels.map(function (r) {
+        return '<li><a class="zx-cust-news__jump" href="#' + zxAttr(r.slug) + '"><time datetime="' + zxAttr(r.date) + '">' + r.dateDisplay + '</time><span>' + r.cardHeadline + '</span></a></li>';
+      }).join('') + '</ol>' + rels.map(function (r) { return zxCustReleaseArticle(r, { level: 3 }); }).join('')) +
+    renderSection({ id: 'media-kit', surface: 'subtle', className: 'zx-cust-kitsec' },
+      renderSectionHead('Media resources', 'Logos, photos and boilerplate', 'Cleared for editorial use. For any other use, contact the media team.', { id: 'media-kit-title' }) +
+      '<div class="zx-cust-kit">' +
+        '<div class="zx-cust-kit__group"><h3 class="zx-cust-kit__title">Logos</h3><ul class="zx-cust-kit__list" role="list">' +
+          file('zynix-fill-horizontal.png', 'Zynix AI logo in full color', 1080, 1080, 'Zynix AI logo, full color', 'PNG · 1080 × 1080 · for light backgrounds', 'zx-cust-kit__item--logo') +
+          file('logo-horizontal.png', 'Zynix AI logo for dark backgrounds', 1080, 1080, 'Zynix AI logo, reversed', 'PNG · 1080 × 1080 · for dark backgrounds', 'zx-cust-kit__item--logo zx-cust-kit__item--dark') +
+        '</ul></div>' +
+        '<div class="zx-cust-kit__group"><h3 class="zx-cust-kit__title">Leadership photos</h3><ul class="zx-cust-kit__list" role="list">' +
+          file('headshot-jay.png', 'Jay Chowdappa, MD', 400, 400, SITE_FACTS.founder.name, SITE_FACTS.founder.title + ' · PNG', 'zx-cust-kit__item--photo') +
+          file('headshot-gautam.png', 'Gautamdev Chowdary', 300, 400, 'Gautamdev Chowdary', 'Co-founder and CTO · PNG', 'zx-cust-kit__item--photo') +
+        '</ul></div>' +
+        '<div class="zx-cust-kit__group zx-cust-kit__group--wide"><h3 class="zx-cust-kit__title">About Zynix AI</h3><p class="zx-cust-kit__boiler">' + boiler + '</p></div>' +
+      '</div>') +
+    renderSection({ id: 'media-contact', className: 'zx-cust-media' },
+      renderSplit(renderSectionHead('Media contact', 'Talk to the Zynix media team', 'For interviews, background briefings and permission to use Zynix AI brand assets.', { id: 'media-contact-title' }),
+        '<dl class="zx-cust-contact">' +
+          '<div><dt>Email</dt><dd><a href="mailto:' + co.email + '?subject=Media%20inquiry">' + co.email + '</a></dd></div>' +
+          '<div><dt>Phone</dt><dd><a href="' + co.phoneHref + '">' + co.phone + '</a></dd></div>' +
+          '<div><dt>Company</dt><dd>' + co.legalLine + '<br>' + co.addressLine + '</dd></div>' +
+        '</dl>', { ratio: '5-7' })) +
+    renderRelatedLinks({ groups: [
+      { label: 'Customers in the news', items: [
+        { href: '/case-studies/pbaco', label: 'Palm Beach ACO', desc: 'Customer story · ACO', icon: 'book' },
+        { href: '/case-studies-eternal-health', label: 'eternalHealth', desc: 'Customer story · Medicare Advantage plan', icon: 'book' },
+        { href: '/resources-case-studies', label: 'Customer stories', desc: 'How value-based care teams use Zynix', icon: 'users' } ] },
+      { label: 'Company', items: [
+        { href: '/about', label: 'About', desc: 'Our story and leadership', icon: 'user' },
+        { href: '/security', label: 'Security & trust', desc: 'SOC 2 Type II · BAA available', icon: 'shield' } ] } ] }) +
+    renderCTA('Talk to our team', 'Questions about Zynix, partnerships or working with us.', null,
+      { hideDemo: true, primary: { label: 'Contact us', href: '/contact' }, secondary: { label: 'About Zynix AI', href: '/about' }, badges: [] }) +
+    renderFooter();
 }
 
 
 // ============================================================================
-// PRESS RELEASES — data-driven newsroom
-// To add a release: append an object to PRESS_RELEASES, then register the route
-// `/press/<slug>` in the main routes map (see renderPressReleaseDetail usage).
-// Required fields: slug, date (YYYY-MM-DD), dateDisplay, location, outlet,
-// outletUrl, category, headline, excerpt, seoTitle, seoDesc, bodyHtml.
-// Optional: cardHeadline (shorter title for listing card), ctaSecondary{href,label}.
+// PRESS RELEASES: data for the newsroom (owner P4). Text is verbatim from the Business Wire releases; markup is class-based
+// (no inline styles). Each release renders inline on /press under id = slug; the per-release media-contact lines are left
+// to the original release (linked), so the page has one media contact (DESIGN_SPEC §6). Required fields: slug, date,
+// dateDisplay, location, outlet, outletUrl, category, headline, cardHeadline, excerpt, bodyHtml.
 // ============================================================================
+function zxCustReleaseQuote(text, name, role) {
+  return '<figure class="zynix-quote zx-cust-release__quote"><blockquote class="zynix-quote__text"><p>“' + text + '”</p></blockquote>' +
+    '<figcaption class="zynix-quote__cite"><span class="zynix-quote__name">' + name + '</span><span class="zynix-quote__role">' + role + '</span></figcaption></figure>';
+}
 var PRESS_RELEASES = [
   {
     slug: 'eternalhealth-zynix-ai-nirvanahealth-partnership',
@@ -7180,41 +7200,32 @@ var PRESS_RELEASES = [
     outletUrl: 'https://www.businesswire.com/news/home/20260602667552/en/eternalHealth-Zynix-AI-and-nirvanaHealth-Announce-Integrated-Partnership-to-Scale-AI-Enabled-Care-Management-and-Member-Engagement',
     category: 'Partnership',
     headline: 'eternalHealth, Zynix AI, and nirvanaHealth Announce Integrated Partnership to Scale AI-Enabled Care Management and Member Engagement',
-    cardHeadline: 'eternalHealth + Zynix AI + nirvanaHealth: Scaling AI-Enabled Care Management',
-    excerpt: 'eternalHealth, a Medicare Advantage plan serving Massachusetts and Arizona, partners with Zynix AI and nirvanaHealth to scale AI-enabled care management and member engagement — combining agentic outreach, centralized data infrastructure, and real-time connectivity.',
-    seoTitle: 'eternalHealth + Zynix AI + nirvanaHealth Partnership | Zynix AI',
+    cardHeadline: 'eternalHealth, Zynix AI and nirvanaHealth partner to scale AI-enabled care management and member engagement',
+    excerpt: 'eternalHealth, a Medicare Advantage plan serving Massachusetts and Arizona, partners with Zynix AI and nirvanaHealth to scale AI-enabled care management and member engagement.',
+    seoTitle: 'eternalHealth, Zynix AI and nirvanaHealth partnership | Zynix AI',
     seoDesc: 'eternalHealth partners with Zynix AI and nirvanaHealth to scale AI-enabled care management and member engagement for Medicare Advantage members in Massachusetts and Arizona.',
+    ctaSecondary: { href: '/case-studies-eternal-health', label: 'Read the eternalHealth story' },
     bodyHtml:
-      `<p><strong>BOSTON &amp; TAMPA, Fla.</strong> &mdash; eternalHealth, a Medicare Advantage plan serving Medicare beneficiaries in Massachusetts and Arizona, today announced an integrated partnership with Zynix AI, a healthcare AI platform built to operationalize care management, patient engagement, and quality improvement at scale, and nirvanaHealth, a cloud-native enterprise platform supporting pharmacy benefit management, claims adjudication, and centralized healthcare data infrastructure.</p>` +
-      `<p>Since January 1, 2026, eternalHealth has been leveraging Zynix AI&rsquo;s agentic outreach capabilities and care management workflows to expand member engagement, improve care coordination, and support quality initiatives tied to Star Ratings, member satisfaction, and operational efficiency.</p>` +
-      `<p>The collaboration is designed to help eternalHealth reach more members &mdash; and the right members at the right time &mdash; to support preventive care, chronic condition management, and timely follow-up, while enabling care teams to focus on higher-acuity needs. Zynix AI&rsquo;s workflows also serve as a prioritization tool for care managers, helping them identify which members need to be contacted first when resources are constrained.</p>` +
-      `<p>nirvanaHealth&rsquo;s platform helps keep key operational and member information centralized, while supporting the real-time, bidirectional connectivity that is critical to timely and accurate care management execution. In coordination with Zynix AI, this infrastructure helps create a more responsive and connected workflow across outreach, documentation, and follow-up.</p>` +
-      `<blockquote style="border-left:4px solid #20449B;background:#EEF2FB;padding:20px 24px;margin:24px 0;border-radius:0 12px 12px 0;font-size:18px;line-height:1.6;color:#1a1a2e">` +
-        `<p style="margin:0 0 12px;font-style:italic">&ldquo;Medicare Advantage is won or lost in execution &mdash; timely outreach, closed-loop follow-up, and meaningful member experience. eternalHealth has a strong member-first mission, and we&rsquo;re excited to help their teams operationalize engagement at scale by pairing action-taking AI agents with clinician-led care management workflows. Together with nirvanaHealth&rsquo;s connectivity infrastructure, we believe this model can drive measurable improvement in quality, satisfaction, and efficiency.&rdquo;</p>` +
-        `<footer style="font-size:14px;font-style:normal;color:var(--z-text-secondary,#4B5563)"><strong>Jayadeva (Jay) Chowdappa, MD</strong>, Co-Founder and CEO, Zynix AI</footer>` +
-      `</blockquote>` +
-      `<blockquote style="border-left:4px solid #F16529;background:#FFF7F2;padding:20px 24px;margin:24px 0;border-radius:0 12px 12px 0;font-size:18px;line-height:1.6;color:#1a1a2e">` +
-        `<p style="margin:0 0 12px;font-style:italic">&ldquo;eternalHealth is committed to meeting members where they are with proactive support that improves outcomes and experience. Partnering with Zynix AI strengthens our ability to engage members consistently and efficiently, support our care management teams, and advance our quality goals in Massachusetts and Arizona. Combined with nirvanaHealth&rsquo;s centralized infrastructure, this partnership helps us deliver high-touch care with smart, modern, and cost-sensitive tools.&rdquo;</p>` +
-        `<footer style="font-size:14px;font-style:normal;color:var(--z-text-secondary,#4B5563)"><strong>Pooja Ika</strong>, Founder and CEO, eternalHealth</footer>` +
-      `</blockquote>` +
-      `<p style="margin:24px 0 8px"><strong>Partnership focus areas include:</strong></p>` +
-      `<ul style="margin:0 0 16px;padding-left:22px;line-height:1.7">` +
-        `<li><strong>Care management enablement:</strong> AI-assisted workflows to support care manager productivity, prioritization, and follow-up.</li>` +
-        `<li><strong>Patient engagement at scale:</strong> Outreach to close preventive care and chronic care gaps, with compliant escalation paths.</li>` +
-        `<li><strong>Quality and satisfaction support:</strong> Targeted initiatives to improve key measures and member experience through timely follow-up.</li>` +
-        `<li><strong>Operational integration:</strong> Structured workflows that connect outreach to next best actions, supported by centralized data and real-time connectivity.</li>` +
-      `</ul>` +
-      `<p>The organizations will collaborate on phased implementation, performance monitoring, and ongoing optimization, with shared governance and reporting to ensure responsible deployment and measurable results.</p>` +
-      `<h3 style="font-size:22px;margin:36px 0 12px">About eternalHealth</h3>` +
-      `<p>Headquartered in Boston&rsquo;s Back Bay, eternalHealth is a women-run, women-built, and women-owned Medicare Advantage company whose mission is to bring accessible, affordable, and high-quality healthcare to communities in Massachusetts, Arizona, and beyond. Its focus on preventive and chronic care management aligns with its commitment to removing barriers older adults may face and helping members live the lives they deserve. eternalHealth serves Medicare beneficiaries in Massachusetts and Arizona and is focused on improving outcomes, enhancing access, and elevating the member experience.</p>` +
-      `<h3 style="font-size:22px;margin:28px 0 12px">About Zynix AI</h3>` +
-      `<p>Zynix AI is a healthcare AI platform built to help payer and provider organizations move from insights to action by combining agentic outreach, predictive analytics, and operational workflows with human oversight and compliant processes. Zynix AI supports care management, patient engagement, quality improvement, and performance enablement across value-based care environments. Visit <a href="/" style="color:#20449B;font-weight:600">Zynix.ai</a> for more information.</p>` +
-      `<h3 style="font-size:22px;margin:28px 0 12px">About nirvanaHealth</h3>` +
-      `<p>nirvanaHealth is a cloud-native enterprise platform supporting pharmacy benefit management, claims adjudication, and centralized healthcare data infrastructure. Its platform enables real-time connectivity and interoperability across administrative and care management workflows.</p>` +
-      `<h3 style="font-size:22px;margin:28px 0 12px">Media Contacts</h3>` +
-      `<p style="margin:0 0 6px"><strong>eternalHealth:</strong> Jena Boyce, Marketing and Communications Specialist &middot; <a href="mailto:Jena.Boyce@eternalhealth.com" style="color:#20449B">Jena.Boyce@eternalhealth.com</a> &middot; 617-930-6074</p>` +
-      `<p style="margin:0 0 6px"><strong>Zynix AI:</strong> Philip Petrini &middot; <a href="mailto:Philip@zynix.ai" style="color:#20449B">Philip@zynix.ai</a> &middot; 727-277-6502</p>` +
-      `<p style="margin:20px 0 0"><a href="https://www.businesswire.com/news/home/20260602667552/en/eternalHealth-Zynix-AI-and-nirvanaHealth-Announce-Integrated-Partnership-to-Scale-AI-Enabled-Care-Management-and-Member-Engagement" rel="noopener" target="_blank" style="color:#20449B;font-weight:600">Read the full announcement on Business Wire &rarr;</a></p>`
+      '<p><strong>BOSTON &amp; TAMPA, Fla.</strong> — eternalHealth, a Medicare Advantage plan serving Medicare beneficiaries in Massachusetts and Arizona, today announced an integrated partnership with Zynix AI, a healthcare AI platform built to operationalize care management, patient engagement, and quality improvement at scale, and nirvanaHealth, a cloud-native enterprise platform supporting pharmacy benefit management, claims adjudication, and centralized healthcare data infrastructure.</p>' +
+      '<p>Since January 1, 2026, eternalHealth has been leveraging Zynix AI’s agentic outreach capabilities and care management workflows to expand member engagement, improve care coordination, and support quality initiatives tied to Star Ratings, member satisfaction, and operational efficiency.</p>' +
+      '<p>The collaboration is designed to help eternalHealth reach more members — and the right members at the right time — to support preventive care, chronic condition management, and timely follow-up, while enabling care teams to focus on higher-acuity needs. Zynix AI’s workflows also serve as a prioritization tool for care managers, helping them identify which members need to be contacted first when resources are constrained.</p>' +
+      '<p>nirvanaHealth’s platform helps keep key operational and member information centralized, while supporting the real-time, bidirectional connectivity that is critical to timely and accurate care management execution. In coordination with Zynix AI, this infrastructure helps create a more responsive and connected workflow across outreach, documentation, and follow-up.</p>' +
+      zxCustReleaseQuote('Medicare Advantage is won or lost in execution — timely outreach, closed-loop follow-up, and meaningful member experience. eternalHealth has a strong member-first mission, and we’re excited to help their teams operationalize engagement at scale by pairing action-taking AI agents with clinician-led care management workflows. Together with nirvanaHealth’s connectivity infrastructure, we believe this model can drive measurable improvement in quality, satisfaction, and efficiency.', 'Jayadeva (Jay) Chowdappa, MD', 'Co-Founder and CEO, Zynix AI') +
+      zxCustReleaseQuote('eternalHealth is committed to meeting members where they are with proactive support that improves outcomes and experience. Partnering with Zynix AI strengthens our ability to engage members consistently and efficiently, support our care management teams, and advance our quality goals in Massachusetts and Arizona. Combined with nirvanaHealth’s centralized infrastructure, this partnership helps us deliver high-touch care with smart, modern, and cost-sensitive tools.', 'Pooja Ika', 'Founder and CEO, eternalHealth') +
+      '<p><strong>Partnership focus areas include:</strong></p>' +
+      '<ul>' +
+        '<li><strong>Care management enablement:</strong> AI-assisted workflows to support care manager productivity, prioritization, and follow-up.</li>' +
+        '<li><strong>Patient engagement at scale:</strong> Outreach to close preventive care and chronic care gaps, with compliant escalation paths.</li>' +
+        '<li><strong>Quality and satisfaction support:</strong> Targeted initiatives to improve key measures and member experience through timely follow-up.</li>' +
+        '<li><strong>Operational integration:</strong> Structured workflows that connect outreach to next best actions, supported by centralized data and real-time connectivity.</li>' +
+      '</ul>' +
+      '<p>The organizations will collaborate on phased implementation, performance monitoring, and ongoing optimization, with shared governance and reporting to ensure responsible deployment and measurable results.</p>' +
+      '<h4 class="zx-cust-release__sub">About eternalHealth</h4>' +
+      '<p>Headquartered in Boston’s Back Bay, eternalHealth is a women-run, women-built, and women-owned Medicare Advantage company whose mission is to bring accessible, affordable, and high-quality healthcare to communities in Massachusetts, Arizona, and beyond. Its focus on preventive and chronic care management aligns with its commitment to removing barriers older adults may face and helping members live the lives they deserve. eternalHealth serves Medicare beneficiaries in Massachusetts and Arizona and is focused on improving outcomes, enhancing access, and elevating the member experience.</p>' +
+      '<h4 class="zx-cust-release__sub">About Zynix AI</h4>' +
+      '<p>Zynix AI is a healthcare AI platform built to help payer and provider organizations move from insights to action by combining agentic outreach, predictive analytics, and operational workflows with human oversight and compliant processes. Zynix AI supports care management, patient engagement, quality improvement, and performance enablement across value-based care environments. Visit <a href="/">Zynix.ai</a> for more information.</p>' +
+      '<h4 class="zx-cust-release__sub">About nirvanaHealth</h4>' +
+      '<p>nirvanaHealth is a cloud-native enterprise platform supporting pharmacy benefit management, claims adjudication, and centralized healthcare data infrastructure. Its platform enables real-time connectivity and interoperability across administrative and care management workflows.</p>'
   },
 
   {
@@ -7226,32 +7237,22 @@ var PRESS_RELEASES = [
     outletUrl: 'https://www.businesswire.com/news/home/20260414590241/en/',
     category: 'Partnership',
     headline: 'Zynix AI Announces Strategic Partnership with Palm Beach Accountable Care Organization and Affiliated Entities (PBACO Holding) to Scale AI-Driven Patient Outreach, Documentation, and Workflow Automation Across Value-Based Care Network',
-    cardHeadline: 'Zynix AI + PBACO Holding: Strategic Partnership to Scale AI-Driven Value-Based Care',
-    excerpt: 'Zynix AI partners with Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding) — one of the nation\u2019s largest risk-bearing ACOs — to deploy AI-driven patient outreach, ambient documentation, and workflow automation across its provider network.',
-    seoTitle: 'Zynix AI + PBACO Holding Partnership | Zynix AI',
-    seoDesc: 'Zynix AI announces strategic partnership with Palm Beach Accountable Care Organization (PBACO Holding) to scale AI-driven patient outreach, documentation, and workflow automation across value-based care.',
-    ctaSecondary: { href: '/case-studies/pbaco', label: 'Read the Palm Beach ACO Case Study' },
+    cardHeadline: 'Zynix AI and PBACO Holding announce a strategic partnership to scale AI-driven patient outreach',
+    excerpt: 'Zynix AI partners with Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding), one of the nation’s largest risk-bearing ACOs, to deploy AI-driven patient outreach and workflow automation across its affiliated provider network.',
+    seoTitle: 'Zynix AI and PBACO Holding partnership | Zynix AI',
+    seoDesc: 'Zynix AI announces a strategic partnership with Palm Beach Accountable Care Organization (PBACO Holding) to scale AI-driven patient outreach and workflow automation.',
+    ctaSecondary: { href: '/case-studies/pbaco', label: 'Read the Palm Beach ACO story' },
     bodyHtml:
-      '<p>Zynix AI today announced a strategic partnership with <a href="https://www.pbaco.com" rel="noopener" target="_blank" style="color:#20449B;font-weight:600">Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding)</a>, one of the nation\u2019s largest and most successful risk-bearing accountable care organizations, to deploy advanced AI-driven patient outreach and workflow automation solutions across its affiliated provider network. The partnership is designed to enhance patient follow-up, engagement, operational efficiency, and quality performance, while supporting total cost of care improvement in value-based care models.</p>' +
+      '<p>Zynix AI today announced a strategic partnership with <a href="https://www.pbaco.com" target="_blank" rel="noopener" aria-describedby="zx-newtab-desc">Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding)</a>, one of the nation’s largest and most successful risk-bearing accountable care organizations, to deploy advanced AI-driven patient outreach and workflow automation solutions across its affiliated provider network. The partnership is designed to enhance patient follow-up, engagement, operational efficiency, and quality performance, while supporting total cost of care improvement in value-based care models.</p>' +
       '<p>Under the agreement, Zynix AI will support critical workflows including post-discharge follow-up (PDV) and Annual Wellness Visit (AWV) engagement. Its AI-enabled voice and SMS capabilities will help practices more effectively reach patients, streamline appointment scheduling, and strengthen care continuity. The collaboration also creates opportunities to expand the use of ambient AI documentation tools to reduce clinician administrative burden, improve note quality, and enable more efficient care delivery.</p>' +
-      '<p>Zynix AI\u2019s platform combines patient outreach, workflow orchestration, ambient documentation, predictive analytics, and operational automation to help healthcare organizations close care gaps, improve follow-up performance, and drive better clinical and financial outcomes. PBACO Holding will leverage these capabilities as part of its broader commitment to innovation in patient engagement and value-based care execution.</p>' +
-      '<blockquote style="border-left:4px solid #F16529;background:#FFF7F2;padding:20px 24px;margin:24px 0;border-radius:0 12px 12px 0;font-size:18px;line-height:1.6;color:#1a1a2e">' +
-        '<p style="margin:0 0 12px;font-style:italic">&ldquo;PBACO is focused on building practical, scalable solutions that help providers succeed in value-based care. We believe this partnership with Zynix AI will strengthen patient outreach, improve follow-through, reduce administrative burden, and support better performance across both quality and cost of care. Importantly, we remain committed to ensuring that automation enhances\u2014rather than compromises\u2014the quality of care delivered to our beneficiaries.&rdquo;</p>' +
-        '<footer style="font-size:14px;font-style:normal;color:var(--z-text-secondary,#4B5563)"><strong>David Klebonis</strong>, President &amp; COO, PBACO Holding</footer>' +
-      '</blockquote>' +
-      '<blockquote style="border-left:4px solid #20449B;background:#EEF2FB;padding:20px 24px;margin:24px 0;border-radius:0 12px 12px 0;font-size:18px;line-height:1.6;color:#1a1a2e">' +
-        '<p style="margin:0 0 12px;font-style:italic">&ldquo;We are excited to partner with PBACO Holding on this important initiative. Healthcare organizations don\u2019t have a knowledge problem\u2014they have a follow-through and execution problem. This collaboration is about helping practices translate insight into action at scale through AI-enabled workflows that improve outreach, scheduling, documentation, and coordination while contributing to better outcomes and lower costs.&rdquo;</p>' +
-        '<footer style="font-size:14px;font-style:normal;color:var(--z-text-secondary,#4B5563)"><strong>Jayadeva (Jay) Chowdappa, M.D.</strong>, Co-Founder and CEO, Zynix AI</footer>' +
-      '</blockquote>' +
+      '<p>Zynix AI’s platform combines patient outreach, workflow orchestration, ambient documentation, predictive analytics, and operational automation to help healthcare organizations close care gaps, improve follow-up performance, and drive better clinical and financial outcomes. PBACO Holding will leverage these capabilities as part of its broader commitment to innovation in patient engagement and value-based care execution.</p>' +
+      zxCustReleaseQuote('PBACO is focused on building practical, scalable solutions that help providers succeed in value-based care. We believe this partnership with Zynix AI will strengthen patient outreach, improve follow-through, reduce administrative burden, and support better performance across both quality and cost of care. Importantly, we remain committed to ensuring that automation enhances—rather than compromises—the quality of care delivered to our beneficiaries.', 'David Klebonis', 'President &amp; COO, PBACO Holding') +
+      zxCustReleaseQuote('We are excited to partner with PBACO Holding on this important initiative. Healthcare organizations don’t have a knowledge problem—they have a follow-through and execution problem. This collaboration is about helping practices translate insight into action at scale through AI-enabled workflows that improve outreach, scheduling, documentation, and coordination while contributing to better outcomes and lower costs.', 'Jayadeva (Jay) Chowdappa, M.D.', 'Co-Founder and CEO, Zynix AI') +
       '<p>The initial phase of the partnership will focus on AI-enabled outreach for transitional and preventive care workflows, with opportunities to expand into additional patient engagement, care coordination, documentation, and operational use cases over time.</p>' +
-      '<h3 style="font-size:22px;margin:36px 0 12px">About Palm Beach Accountable Care Organization and Affiliated Entities (PBACO Holding)</h3>' +
-      '<p>Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding) support provider organizations in value-based care through aligned operational, clinical, and technology-enabled strategies designed to improve outcomes, quality performance, and financial results across risk-based programs. PBACO Holding, LLC is the largest ACO in 2026 by participant count and has generated <strong>$936,988,750</strong> in savings for the Medicare Shared Savings Program, the highest in program history.</p>' +
-      '<h3 style="font-size:22px;margin:28px 0 12px">About Zynix Inc. d/b/a Zynix AI</h3>' +
-      '<p>Zynix AI is a healthcare technology company focused on patient outreach, predictive intelligence, ambient documentation, workflow automation, and care execution. Its AI-driven platform enables healthcare organizations to improve follow-through, close care gaps, enhance documentation, improve quality performance, reduce total cost of care, and scale high-value workflows efficiently. Visit <a href="/" style="color:#20449B;font-weight:600">Zynix.ai</a> for more information.</p>' +
-      '<h3 style="font-size:22px;margin:28px 0 12px">Media Contact</h3>' +
-      '<p style="margin:0 0 6px"><strong>David McDonald</strong><br>VP of Business Development, Zynix AI<br>' +
-        '<a href="mailto:DMcdonald@zynix.ai" style="color:#20449B">DMcdonald@zynix.ai</a><br>' +
-        '<a href="tel:+18643136976" style="color:#20449B">864-313-6976</a></p>'
+      '<h4 class="zx-cust-release__sub">About Palm Beach Accountable Care Organization and Affiliated Entities (PBACO Holding)</h4>' +
+      '<p>Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding) support provider organizations in value-based care through aligned operational, clinical, and technology-enabled strategies designed to improve outcomes, quality performance, and financial results across risk-based programs. PBACO Holding, LLC is the largest ACO in 2026 by participant count and has generated $936,988,750 in savings for the Medicare Shared Savings Program, the highest in program history.</p>' +
+      '<h4 class="zx-cust-release__sub">About Zynix Inc. d/b/a Zynix AI</h4>' +
+      '<p>Zynix AI is a healthcare technology company focused on patient outreach, predictive intelligence, ambient documentation, workflow automation, and care execution. Its AI-driven platform enables healthcare organizations to improve follow-through, close care gaps, enhance documentation, improve quality performance, reduce total cost of care, and scale high-value workflows efficiently. Visit <a href="/">Zynix.ai</a> for more information.</p>'
   }
 ];
 
@@ -7262,73 +7263,31 @@ var PRESS_RELEASES_BY_SLUG = (function () {
   return m;
 })();
 
-// Render a full press release detail page for a given release object.
+// One release as an article: a meta rail (date, dateline, outlet, source link, customer story) beside the verbatim text.
+// opts.level = the headline's level (3 on /press under the section H2; 2 on a detail page under the hero H1).
+function zxCustReleaseArticle(r, opts) {
+  opts = opts || {};
+  var lvl = opts.level === 2 ? 2 : 3, tid = r.slug + '-title';
+  var body = lvl === 2 ? r.bodyHtml.replace(/<h4 /g, '<h3 ').replace(/<\/h4>/g, '</h3>') : r.bodyHtml;
+  var story = r.ctaSecondary ? renderLinkArrow(r.ctaSecondary.label, r.ctaSecondary.href) : '';
+  return '<article class="zx-cust-release" id="' + zxAttr(r.slug) + '" aria-labelledby="' + zxAttr(tid) + '">' +
+    '<div class="zx-cust-release__meta"><p class="zx-cust-release__date"><time datetime="' + zxAttr(r.date) + '">' + r.dateDisplay + '</time></p>' +
+      '<dl class="zx-cust-release__facts"><div><dt>Dateline</dt><dd>' + r.location + '</dd></div><div><dt>Distributed by</dt><dd>' + r.outlet + '</dd></div>' +
+      '<div><dt>Type</dt><dd>' + r.category + '</dd></div></dl>' +
+      '<p class="zx-cust-release__links">' + renderLinkArrow('Read on ' + r.outlet, r.outletUrl) + story + '</p></div>' +
+    '<div class="zx-cust-release__main"><h' + lvl + ' class="zx-cust-release__title" id="' + zxAttr(tid) + '">' + r.headline + '</h' + lvl + '>' +
+      renderProse(body, { className: 'zx-cust-release__body' }) + '</div></article>';
+}
+
+// Release detail (/press/<slug>). Unreachable while the Webflow 301s send /press/* to /press; kept consistent for when they go.
 function renderPressReleaseDetail(release) {
   if (!release) { return renderPressV7(); }
-  var canonicalUrl = 'https://www.zynix.ai/press/' + release.slug;
-  var shareUrl = encodeURIComponent(canonicalUrl);
-  var shareText = encodeURIComponent((release.cardHeadline || release.headline).substring(0, 220));
-  var isoDate = release.date + 'T13:00:00-04:00';
-  var html = '';
-
-  html += renderInnerHero('NEWSROOM', 'Press Release',
-    'Official press release from Zynix AI newsroom.',
-    IMG.hero, 'Zynix AI Newsroom');
-
-  html += '<section id="' + release.slug + '" class="zynix-press-release" itemscope itemtype="https://schema.org/NewsArticle" style="padding:40px 0 56px"><div class="zynix-container">' +
-    '<div style="margin-bottom:20px"><a href="/press" style="font-size:14px;color:#20449B;text-decoration:none;font-weight:600">&larr; All press releases</a></div>' +
-    '<div style="display:flex;align-items:center;gap:12px;margin:8px 0 6px;flex-wrap:wrap">' +
-      '<span style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#F16529">' + (release.dateDisplay || release.date) + (release.location ? ' &middot; ' + release.location.toUpperCase() : '') + '</span>' +
-      (release.outlet ? '<span style="font-size:11px;font-weight:600;color:var(--z-text-secondary,#4B5563);background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:1px">' + release.outlet + '</span>' : '') +
-    '</div>' +
-    '<h1 itemprop="headline" style="font-size:32px;line-height:1.25;max-width:900px;margin:0 0 16px">' + release.headline + '</h1>' +
-    '<meta itemprop="datePublished" content="' + isoDate + '">' +
-    '<meta itemprop="dateModified" content="' + isoDate + '">' +
-    '<meta itemprop="author" content="Zynix AI">' +
-    '<meta itemprop="publisher" content="Zynix AI">' +
-    '<div class="zynix-press-body" itemprop="articleBody" style="max-width:820px;font-size:17px;line-height:1.7;color:var(--z-text-primary,#111827)">' +
-      release.bodyHtml +
-      (release.outletUrl ? '<p style="margin-top:24px;padding-top:20px;border-top:1px solid var(--z-border,#E5E7EB);font-size:14px;color:var(--z-text-secondary,#4B5563)">Source: <a href="' + release.outletUrl + '" rel="noopener" target="_blank" style="color:#20449B">' + (release.outlet || 'Original release') + '</a></p>' : '') +
-      '<div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">' +
-        '<a href="' + CALENDLY + '" target="_blank" rel="noopener" class="zynix-btn-primary">Request a Demo &rarr;</a>' +
-        (release.ctaSecondary ? '<a href="' + release.ctaSecondary.href + '" class="zynix-btn-secondary">' + release.ctaSecondary.label + '</a>' : '') +
-      '</div>' +
-      '<div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--z-border,#E5E7EB);display:flex;align-items:center;gap:14px;flex-wrap:wrap">' +
-        '<span style="font-size:13px;font-weight:600;color:var(--z-text-secondary,#4B5563);letter-spacing:0.5px">SHARE:</span>' +
-        '<a href="https://www.linkedin.com/sharing/share-offsite/?url=' + shareUrl + '" target="_blank" rel="noopener" aria-label="Share on LinkedIn" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#0A66C2;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">LinkedIn</a>' +
-        '<a href="https://twitter.com/intent/tweet?url=' + shareUrl + '&amp;text=' + shareText + '" target="_blank" rel="noopener" aria-label="Share on X" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#000;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">X (Twitter)</a>' +
-        '<a href="mailto:?subject=' + encodeURIComponent(release.cardHeadline || release.headline) + '&amp;body=' + encodeURIComponent('Read the press release: ' + canonicalUrl) + '" aria-label="Share by email" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#f3f4f6;color:#1a1a2e;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid #e5e7eb">Email</a>' +
-        (release.outletUrl ? '<a href="' + release.outletUrl + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:transparent;color:#20449B;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid #20449B">View on ' + (release.outlet || 'source') + ' &rarr;</a>' : '') +
-      '</div>' +
-    '</div>' +
-    '</div></section>';
-
-  // "Other releases" strip
-  var others = PRESS_RELEASES.filter(function (r) { return r.slug !== release.slug; });
-  if (others.length) {
-    others.sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
-    html += '<section style="padding:40px 0 56px;background:var(--z-bg-alt,#F9FAFB)"><div class="zynix-container">' +
-      '<h2 style="font-size:22px;margin:0 0 20px">Other Press Releases</h2>' +
-      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">';
-    for (var j = 0; j < Math.min(others.length, 3); j++) {
-      var o = others[j];
-      html += '<a href="/press/' + o.slug + '" style="display:block;background:#fff;border:1px solid var(--z-border,#E5E7EB);border-radius:10px;padding:20px;text-decoration:none;color:inherit">' +
-        '<span style="font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#F16529">' + (o.dateDisplay || o.date) + '</span>' +
-        '<h3 style="font-size:16px;line-height:1.4;margin:8px 0 6px;color:var(--z-text-primary,#111827)">' + (o.cardHeadline || o.headline) + '</h3>' +
-        '<span style="font-size:13px;font-weight:600;color:#20449B">Read &rarr;</span>' +
-        '</a>';
-    }
-    html += '</div></div></section>';
-  }
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">PRESS CONTACT</span>' +
-    '<h2>Media Inquiries</h2>' +
-    '<p class="zynix-section-sub">For press inquiries, interview requests, or brand assets, contact our press team at <a href="mailto:press@zynix.ai">press@zynix.ai</a>. We respond within one business day.</p>' +
-    '</div></section>';
-
-  html += renderFooter();
-  return html;
+  return renderHero({ preset: 'company', eyebrow: 'Press release · ' + release.dateDisplay, title: release.cardHeadline || release.headline, lead: release.excerpt,
+      primary: null, secondary: { label: 'All press releases', href: '/press' } }) +
+    renderSection({ id: 'release', className: 'zx-cust-news' }, zxCustReleaseArticle(release, { level: 2 })) +
+    renderCTA('Talk to our team', 'Questions about Zynix, partnerships or working with us.', null,
+      { hideDemo: true, primary: { label: 'Contact us', href: '/contact' }, secondary: { label: 'Media contact', href: '/press#media-contact' }, badges: [] }) +
+    renderFooter();
 }
 
 
@@ -12943,393 +12902,460 @@ function renderDataAnalyticsV7() {
     renderFooter();
   }
 
-  // ── PAGE: Case Study — Palm Beach ACO ──
-  function renderCaseStudyAmistad() {
-    return renderInnerHero('CASE STUDY', 'AMISTAD Community Health Center', 'Multilingual AI Outreach Closes Care Gaps for Underserved Populations', IMG.patients, 'AMISTAD CHC case study with Zynix AI') +
-    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
+  // ── Customer stories (owner P4): one template for the 8 story pages, the hub cards and the 5 segment pages ──
+  // DESIGN_SPEC §6 case-study template: proof hero (logo + facts on file) → challenge → what they run (agent / team split,
+  // DECISIONS 17b) → what changed (attributed metrics only from CUSTOMERS[id].metrics, DECISIONS 16) → release quote only →
+  // related → CTA. Facts, products and before/after lines come from the pre-redesign story copy with every unverified number
+  // removed; each story's product lines are [VERIFY] (COPY_DECK §5.5). Illustrative panels carry a sample chip and a caption.
+  var ZX_CUST_ORDER = ['pbaco', 'eternalhealth', 'amistad', 'nhs', 'westfloridaaco', 'spacecoastaco', 'centralfloridaaco', 'apolloclinic'];
+  var ZX_CUST_SEGS = {
+    'aco': { label: 'ACOs', one: 'ACO', path: '/case-studies-acos', audience: '/audience-segments/acos-msos', audienceLabel: 'See Zynix for ACOs',
+      uc: [['/use-cases/post-discharge-tcm-readmission', 'Post-discharge outreach and TCM follow-up'], ['/use-cases/hcc-gap-raf-optimization', 'HCC gap closure and documentation'], ['/use-cases/rising-risk-patient-outreach', 'Outreach before a clinical event']],
+      h1: 'How ACOs use Zynix', lead: 'Palm Beach ACO, West Florida ACO, Space Coast ACO and Central Florida ACO run post-discharge follow-up, wellness visits and gap work on the Zynix platform.',
+      title: 'What ACOs run on Zynix', what: 'Post-discharge follow-up, wellness visits and HCC gap closure across an attributed panel. Agents handle outreach, scheduling and reminders; licensed clinical staff keep every clinical decision.', flows: 'post-discharge follow-up, wellness visits and HCC gap closure', quote: 'pbaco',
+      cta: { title: 'See what Zynix runs for ACOs', secondary: { label: 'Read the Palm Beach ACO story', href: '/case-studies/pbaco' } } },
+    'health-plan': { label: 'Health plans', one: 'Health plan', path: '/case-studies-health-plans', audience: '/audience-segments/health-plans', audienceLabel: 'See Zynix for health plans',
+      uc: [['/use-cases/hedis-stars-quality-improvement', 'HEDIS gap outreach for Stars measures'], ['/use-cases/chronic-care-coordination-scale', 'Chronic care check-ins and adherence'], ['/use-cases/post-discharge-ma-members', 'Post-discharge follow-up for members']],
+      h1: 'How health plans use Zynix', lead: 'eternalHealth, a Medicare Advantage plan in Massachusetts and Arizona, uses Zynix outreach and care management workflows to engage members and support its care managers.',
+      title: 'What health plans run on Zynix', what: 'HEDIS gap outreach, adherence check-ins and post-discharge follow-up for members. Agents handle outreach and reminders; care managers take every escalation.', flows: 'HEDIS gap outreach, adherence check-ins and post-discharge follow-up', quote: 'eternalhealth',
+      cta: { title: 'See what Zynix runs for health plans', secondary: { label: 'Read the eternalHealth announcement', href: '/press#eternalhealth-zynix-ai-nirvanahealth-partnership' } } },
+    'health-system': { label: 'Health systems', one: 'Health system', path: '/case-studies-health-systems', audience: '/audience-segments/health-systems', audienceLabel: 'See Zynix for health systems',
+      uc: [['/use-cases/post-discharge-follow-up', 'Post-discharge calls at health system volume'], ['/use-cases/after-hours-triage-multi-site', 'After-hours intake across locations'], ['/use-cases/physician-documentation-ambient-ai', 'Ambient documentation with physician review']],
+      h1: 'How health systems use Zynix', lead: 'NHS Health System runs post-discharge outreach, after-hours access and physician-reviewed documentation on the Zynix platform across its sites.',
+      title: 'What health systems run on Zynix', what: 'Post-discharge follow-up, after-hours access and ambient documentation across hospitals and clinics. Agents handle outreach and intake; physicians approve every note.', flows: 'post-discharge follow-up, after-hours access and ambient documentation', quote: null,
+      cta: { title: 'See what Zynix runs for health systems', secondary: { label: 'Read the NHS Health System story', href: '/case-studies/nhs' } } },
+    'fqhc': { label: 'FQHCs', one: 'FQHC', path: '/case-studies-fqhcs', audience: '/audience-segments/fqhcs', audienceLabel: 'See Zynix for community health centers',
+      uc: [['/use-cases/preventive-screening-gap-fqhc', 'Screening outreach for high-barrier patients'], ['/use-cases/after-hours-triage-multilingual-fqhc', 'After-hours intake in the patient’s language'], ['/use-cases/post-discharge-followup-fqhc', 'Post-discharge follow-up for health center patients']],
+      h1: 'How community health centers use Zynix', lead: 'AMISTAD Community Health Center uses Zynix for after-hours access and preventive screening outreach in the languages its patients speak.',
+      title: 'What community health centers run on Zynix', what: 'Multilingual outreach, after-hours access and preventive screening follow-up for high-barrier populations, with care team escalation built in.', flows: 'multilingual outreach, after-hours access and preventive screening follow-up', quote: null,
+      cta: { title: 'See what Zynix runs for community health centers', secondary: { label: 'Read the AMISTAD story', href: '/case-studies/amistad' } } },
+    'practice': { label: 'Physician groups', one: 'Physician group', path: '/case-studies-practices', audience: '/audience-segments/independent-group-practices', audienceLabel: 'See Zynix for physician organizations',
+      uc: [['/use-cases/appointment-scheduling-no-show', 'Scheduling and appointment reminders'], ['/use-cases/after-hours-call-handling-group-practices', 'After-hours calls for group practices'], ['/use-cases/chronic-care-coordination-scale', 'Chronic care check-ins and adherence']],
+      h1: 'How physician groups use Zynix', lead: 'Apollo Clinic Network, a multi-site physician group, uses Zynix scheduling and reminder agents to keep visits on schedule.',
+      title: 'What physician organizations run on Zynix', what: 'Wellness visits, transitions of care and chronic care across a multi-practice network, whatever EHR each practice runs.', flows: 'wellness visits, transitions of care and chronic care across a multi-practice network', quote: null,
+      cta: { title: 'See what Zynix runs for physician organizations', secondary: null } }
+  };
+  var ZX_CUST_STORIES = {
+    pbaco: { short: 'PBACO', team: 'PBACO team', panel: 'episode',
+      h1: 'How Palm Beach ACO scales patient follow-up',
+      lead: 'PBACO Holding, one of the nation’s largest risk-bearing ACOs, uses Zynix for post-discharge follow-up and annual wellness visit outreach by voice and SMS across its affiliated provider network.',
+      card: 'Post-discharge follow-up and annual wellness visit outreach by voice and SMS across PBACO Holding’s affiliated provider network.',
+      facts: [['Segment', 'Risk-bearing ACO'], ['Region', 'South Florida'], ['Workflows', 'Post-discharge follow-up, wellness visits'], ['Announced', 'April 14, 2026']],
+      challengeTitle: 'Every discharge starts a clock',
+      challenge: 'PBACO Holding supports provider organizations in value-based care across its affiliated network. For transitional care management, CMS expects an interactive contact with the patient within 2 business days of discharge and a visit within 7 or 14 days. Coordinators were calling patients one at a time, and annual wellness visit outreach competed with everything else on their lists.',
+      cite: 'TCM timing: CMS, Transitional Care Management Services.',
+      runsTitle: 'What PBACO runs on Zynix',
+      runsLead: 'The first phase of the partnership covers outreach for transitional and preventive care. Agents make the calls and texts; PBACO’s care teams keep every clinical conversation.',
+      runs: [
+        { name: 'Post-discharge follow-up', auto: 'Calls or texts the patient after a discharge, confirms the follow-up plan and books the visit.',
+          team: 'Nurses and care managers make the TCM interactive contact and answer every clinical question the agent routes to them.', link: ['Transitions of care agent', '/agents#clinical-performance'] },
+        { name: 'Annual wellness visit outreach', auto: 'Works the list of patients due for a wellness visit by phone and text, books the visit and tries again when a patient doesn’t answer.',
+          team: 'Practice staff take the patients who ask for a person or need a different visit type.', link: ['Preventive and quality activation agent', '/agents#clinical-performance'] }
+      ],
+      next: 'The announcement describes room to expand into documentation, care coordination and other workflows over time.',
+      changed: [
+        ['Post-discharge contact', 'Coordinators called discharged patients one at a time, between other work.', 'Every discharge gets an outreach attempt by phone or text; exceptions route to the care team.'],
+        ['Follow-up visits', 'Booked when a coordinator reached the patient.', 'Booked by the agent during the call.'],
+        ['Wellness visits', 'Outreach competed with other work on coordinators’ lists.', 'Patients due for a wellness visit are worked from one list by phone and text.']
+      ],
+      related: null },
+    eternalhealth: { short: 'eternalHealth', team: 'Care managers', panel: 'members',
+      h1: 'How eternalHealth engages Medicare Advantage members',
+      lead: 'eternalHealth, a Medicare Advantage plan serving members in Massachusetts and Arizona, has used Zynix outreach and care management workflows since January 1, 2026.',
+      card: 'Outreach and care management workflows for Medicare Advantage members in Massachusetts and Arizona.',
+      facts: [['Segment', 'Medicare Advantage plan'], ['Markets', 'Massachusetts, Arizona'], ['Using Zynix since', 'January 1, 2026'], ['Announced', 'June 2, 2026']],
+      challengeTitle: 'Reach the right members at the right time',
+      challenge: 'eternalHealth focuses on preventive and chronic care management for older adults. Its care managers wanted to reach more members, and the right members at the right time, for preventive care, chronic condition management and timely follow-up, and to know whom to contact first when resources are constrained.',
+      cite: 'Source: joint announcement by eternalHealth, Zynix AI and nirvanaHealth, June 2, 2026.',
+      runsTitle: 'What eternalHealth runs on Zynix',
+      runsLead: 'Zynix outreach and care management workflows run alongside nirvanaHealth, which keeps member and operational information centralized with real-time connectivity.',
+      runs: [
+        { name: 'Prioritized worklists', autoLabel: 'Zynix', auto: 'Ranks members by open care needs, so care managers know whom to contact first.',
+          team: 'Care managers decide the plan for each member and own every clinical conversation.', link: ['Analytics', '/zynix-data-analytics'] },
+        { name: 'Member outreach', auto: 'Reaches members to close preventive and chronic care gaps, and follows up on time.',
+          team: 'Escalations go to eternalHealth’s care managers.', link: ['AI agents', '/agents'] },
+        { name: 'Connected operations', autoLabel: 'Zynix', auto: 'Connects outreach to the next action, with member information kept central through nirvanaHealth.',
+          team: 'The organizations share governance and reporting, with phased implementation and performance monitoring.', link: ['Integrations', '/integrations'] }
+      ],
+      next: null,
+      changedEyebrow: 'Goals', changedTitle: 'What the partnership is built to do',
+      changedCols: ['Focus area', 'The goal', 'How Zynix supports it'],
+      changed: [
+        ['Member engagement', 'Reach more members, and the right members at the right time.', 'Outreach agents contact members for preventive care, chronic condition follow-up and reminders.'],
+        ['Care manager capacity', 'Know whom to contact first when resources are constrained.', 'Worklists ranked by care need, with escalations routed to care managers.'],
+        ['Quality and experience', 'Support quality initiatives tied to Star Ratings and member satisfaction.', 'Timely follow-up on the measures and members the plan targets.']
+      ],
+      related: [
+        { label: 'More customer stories', items: [
+          { href: '/case-studies/pbaco', label: 'Palm Beach ACO', desc: 'Customer story · ACO', icon: 'book' },
+          { href: '/case-studies/nhs', label: 'NHS Health System', desc: 'Customer story · health system', icon: 'book' } ] },
+        { label: 'Built for', items: [ { href: '/audience-segments/health-plans', label: 'Health plans', desc: 'Member outreach for quality programs', icon: 'shield' } ] },
+        { label: 'Products', items: [
+          { href: '/agents', label: 'All AI agents', desc: 'Agents for care operations, with clinicians in charge', icon: 'bot' },
+          { href: '/care-plans', label: 'Care plans', desc: 'TCM, AWV, CCM and gap closure workflows', icon: 'clipboard' } ] } ] },
+    amistad: { short: 'AMISTAD', team: 'Care team', panel: 'afterhours',
+      h1: 'How AMISTAD reaches patients in their language',
+      lead: 'AMISTAD Community Health Center, an FQHC in Central Florida, uses Zynix for after-hours access and preventive screening outreach for a predominantly Spanish-speaking patient population.',
+      card: 'After-hours access and preventive outreach for a multilingual patient population.',
+      facts: [['Segment', 'FQHC'], ['Region', 'Central Florida'], ['Languages', 'Spanish, Haitian Creole, Portuguese'], ['Workflows', 'After-hours access, screening outreach']],
+      challengeTitle: 'After hours, help came only in English',
+      challenge: 'AMISTAD serves a diverse, predominantly Spanish-speaking population. After hours, calls went to an English-only answering service, so many patients could not get help in their own language. Preventive screening reminders had the same gap, and the health center’s UDS quality reporting depends on those screenings being completed.',
+      cite: null,
+      runsTitle: 'What AMISTAD runs on Zynix',
+      runsLead: 'Two agents, both working in the patient’s preferred language, with the health center’s care team taking every clinical question.',
+      runs: [
+        { name: 'After-hours calls', auto: 'Answers in the caller’s language, captures the reason for the call and books routine visits. Callers describing an emergency are told to call 911.',
+          team: 'Symptom questions go to the on-call clinician by rule.', link: ['ZynAfterHours', '/agents#operational-efficiency'] },
+        { name: 'Preventive screening outreach', auto: 'Contacts patients due for screenings such as mammograms, colonoscopies and A1C tests in their preferred language, and books the visit.',
+          team: 'Care team staff follow up with patients who need more than a booking.', link: ['Preventive and quality activation agent', '/agents#clinical-performance'] }
+      ],
+      next: null,
+      changed: [
+        ['After-hours calls', 'An English-only answering service.', 'Answered in the caller’s language: routine visits booked, symptom questions routed to the on-call clinician.'],
+        ['Screening reminders', 'Outreach in one language.', 'Outreach in each patient’s preferred language, with the visit booked during the call.']
+      ],
+      related: null },
+    nhs: { short: 'NHS Health System', team: 'Clinical staff', panel: 'note',
+      h1: 'How NHS Health System standardizes follow-up across sites',
+      lead: 'NHS Health System runs the Zynix platform across its sites for post-discharge outreach, after-hours access and ambient documentation that physicians review before anything is filed.',
+      card: 'The Zynix platform with after-hours access, transitions-of-care outreach and ZynScribe.',
+      facts: [['Segment', 'Health system'], ['Scope', 'System-wide, multiple sites'], ['Workflows', 'Transitions of care, after-hours access, documentation']],
+      challengeTitle: 'Every site did follow-up its own way',
+      challenge: 'NHS Health System manages population health across multiple sites. Each site handled after-hours calls differently, care coordination and risk adjustment needed more capacity than manual workflows could deliver, and physicians carried a heavy documentation load.',
+      cite: null,
+      runsTitle: 'What NHS Health System runs on Zynix',
+      runsLead: 'One platform across every site: shared data, the same outreach and after-hours rules, and documentation that stays with the physician.',
+      runs: [
+        { name: 'Transitions of care', auto: 'Contacts patients after discharge, confirms the follow-up plan and books the visit.',
+          team: 'Clinical staff make the TCM interactive contact and take every clinical question.', link: ['Transitions of care agent', '/agents#clinical-performance'] },
+        { name: 'After-hours access', auto: 'Answers after-hours calls the same way at every site, captures the reason for the call and books routine visits.',
+          team: 'Symptom questions go to the on-call clinician by rule; callers describing an emergency are told to call 911.', link: ['ZynAfterHours', '/agents#operational-efficiency'] },
+        { name: 'Ambient documentation', autoLabel: 'ZynScribe', auto: 'Drafts a structured note from the visit conversation.',
+          team: 'The physician reviews and approves every note before it is filed.', link: ['ZynScribe', '/zynscribe'] }
+      ],
+      next: null,
+      changed: [
+        ['After-hours calls', 'Handled differently at each site.', 'One process at every site, with symptom questions routed to the on-call clinician.'],
+        ['Post-discharge follow-up', 'Manual, limited by staff capacity.', 'A system-wide outreach attempt after each discharge.'],
+        ['Visit notes', 'Written from scratch by the physician.', 'Drafted from the visit conversation; the physician reviews and approves.']
+      ],
+      related: null },
+    westfloridaaco: { short: 'West Florida ACO', team: 'ACO team', panel: 'gaps',
+      h1: 'How West Florida ACO works its quality gaps',
+      lead: 'West Florida ACO, an MSSP ACO, uses the Zynix data foundation, outreach agents and risk analytics to find open care gaps sooner and work them across its practices.',
+      card: 'Continuous care gap identification and one outreach queue across the ACO’s practices.',
+      facts: [['Segment', 'ACO'], ['Program', 'Medicare Shared Savings Program'], ['Workflows', 'Gap closure, wellness visits, post-discharge follow-up']],
+      challengeTitle: 'Gap lists that arrived a quarter late',
+      challenge: 'West Florida ACO manages a growing attributed population under the Medicare Shared Savings Program. Gap worklists came from quarterly claims refreshes, risk adjustment coding lagged behind encounter volume, and each practice ran its own outreach, so patient engagement varied across the network.',
+      cite: null,
+      runsTitle: 'What West Florida ACO runs on Zynix',
+      runsLead: 'One data layer and one outreach process for the whole network, with the ACO’s care team deciding who needs a clinician.',
+      runs: [
+        { name: 'Continuous gap identification', autoLabel: 'Zynix', auto: 'Brings claims and clinical data together and updates gap lists as new data arrives.',
+          team: 'The ACO’s quality team reviews suspected HCCs.', link: ['Data foundation', '/products-data-platform'] },
+        { name: 'Central outreach', auto: 'Reaches patients for gap closure, wellness visit scheduling and post-discharge follow-up, for every practice from one queue.',
+          team: 'Care coordinators take the patients the agent routes to them.', link: ['AI agents', '/agents'] },
+        { name: 'Rising-risk flags', autoLabel: 'Zynix', auto: 'Flags patients whose risk is rising.',
+          team: 'Care managers decide how and when to reach them.', link: ['Analytics', '/zynix-data-analytics'] }
+      ],
+      next: null,
+      changed: [
+        ['Gap lists', 'Refreshed quarterly from claims.', 'Updated as claims and clinical data arrive.'],
+        ['Outreach', 'Run separately by each practice.', 'One queue for the whole network.'],
+        ['Rising risk', 'Identified from periodic reports.', 'Flagged for care managers for proactive follow-up.']
+      ],
+      related: [
+        { label: 'More customer stories', items: [
+          { href: '/case-studies/pbaco', label: 'Palm Beach ACO', desc: 'Customer story · ACO', icon: 'book' },
+          { href: '/case-studies-central-florida-aco', label: 'Central Florida ACO', desc: 'Customer story · ACO', icon: 'book' } ] },
+        { label: 'Built for', items: [ { href: '/audience-segments/acos-msos', label: 'ACOs', desc: 'TCM, wellness visits and HCC gaps across your panel', icon: 'users' } ] },
+        { label: 'Products', items: [
+          { href: '/products-data-platform', label: 'Data foundation', desc: 'One patient record from every source', icon: 'database' },
+          { href: '/zynix-data-analytics', label: 'Analytics', desc: 'Know who needs attention this week, and why', icon: 'chart' } ] } ] },
+    spacecoastaco: { short: 'Space Coast ACO', team: 'Clinical staff', panel: 'episode',
+      h1: 'How Space Coast ACO follows up after discharge',
+      lead: 'Space Coast ACO, an MSSP ACO serving Medicare beneficiaries in Brevard County, Florida, uses Zynix outreach agents and readmission risk analytics for follow-up after discharge.',
+      card: 'Post-discharge outreach ranked by readmission risk, for an MSSP ACO in Brevard County.',
+      facts: [['Segment', 'ACO'], ['Program', 'Medicare Shared Savings Program'], ['Region', 'Brevard County, Florida'], ['Workflows', 'Post-discharge follow-up, patient callbacks']],
+      challengeTitle: 'Too few patients reached inside the TCM window',
+      challenge: 'For transitional care management, CMS expects an interactive contact within 2 business days of discharge. Manual outreach reached too few of Space Coast ACO’s discharged patients inside that window, so the ACO could not bill TCM for many discharges, and patients without follow-up were more likely to return to the emergency department.',
+      cite: 'TCM timing: CMS, Transitional Care Management Services.',
+      runsTitle: 'What Space Coast ACO runs on Zynix',
+      runsLead: 'Outreach after every discharge, ranked by readmission risk, with clinical staff keeping every clinical conversation.',
+      runs: [
+        { name: 'Post-discharge outreach', auto: 'Contacts each discharged patient, checks that a follow-up visit is booked and notes barriers such as transportation.',
+          team: 'Clinical staff make the TCM interactive contact and handle medication questions.', link: ['Transitions of care agent', '/agents#clinical-performance'] },
+        { name: 'Readmission risk', autoLabel: 'Zynix', auto: 'Ranks recent discharges by readmission risk.',
+          team: 'The care team calls the highest-risk patients first.', link: ['Readmission risk agent', '/agents#predictive-activation'] },
+        { name: 'Patient callbacks', auto: 'Answers patients calling back after discharge and captures the reason for the call.',
+          team: 'Clinical questions go to the care team by rule.', link: ['AI agents', '/agents'] }
+      ],
+      next: null,
+      changed: [
+        ['Post-discharge contact', 'Manual calls reached too few patients inside the window.', 'Every discharge gets an outreach attempt; exceptions route to the care team.'],
+        ['Prioritization', 'Worked in discharge order.', 'Ranked by readmission risk.']
+      ],
+      related: [
+        { label: 'More customer stories', items: [
+          { href: '/case-studies/pbaco', label: 'Palm Beach ACO', desc: 'Customer story · ACO', icon: 'book' },
+          { href: '/case-studies-west-florida-aco', label: 'West Florida ACO', desc: 'Customer story · ACO', icon: 'book' } ] },
+        { label: 'Built for', items: [ { href: '/audience-segments/acos-msos', label: 'ACOs', desc: 'TCM, wellness visits and HCC gaps across your panel', icon: 'users' } ] },
+        { label: 'Products', items: [
+          { href: '/care-plans', label: 'Care plans', desc: 'TCM, AWV, CCM and gap closure workflows', icon: 'clipboard' },
+          { href: '/agents', label: 'All AI agents', desc: 'Agents for care operations, with clinicians in charge', icon: 'bot' } ] } ] },
+    centralfloridaaco: { short: 'Central Florida ACO', team: 'Care team', panel: 'rising',
+      h1: 'How Central Florida ACO coordinates care across practices',
+      lead: 'Central Florida ACO, an MSSP ACO with multiple practice sites, runs the Zynix data foundation, outreach agents and risk analytics across its participating practices.',
+      card: 'One data layer, outreach agents and risk analytics across its participating practices.',
+      facts: [['Segment', 'ACO'], ['Program', 'Medicare Shared Savings Program'], ['Scope', 'Multiple practice sites'], ['Workflows', 'Follow-up, gap outreach, wellness visits']],
+      challengeTitle: 'More gaps and outreach than staff could cover',
+      challenge: 'Central Florida ACO manages a large MSSP population across multiple practice sites. Avoidable ED visits, readmissions and fragmented care transitions pushed costs up, manual workflows could not keep pace with HCC gaps, quality measures and outreach, and participating practices needed tools that fit their workflows without adding administrative work.',
+      cite: null,
+      runsTitle: 'What Central Florida ACO runs on Zynix',
+      runsLead: 'The data foundation, outreach agents and risk analytics across every participating practice, with the practices’ clinicians making clinical decisions.',
+      runs: [
+        { name: 'One data layer', autoLabel: 'Zynix', auto: 'Brings claims, clinical, ADT and lab data together across all participating practices.',
+          team: 'Practices keep working in their own EHRs.', link: ['Data foundation', '/products-data-platform'] },
+        { name: 'Outreach and access', auto: 'Runs post-discharge follow-up, gap closure outreach, wellness visit scheduling and after-hours call intake.',
+          team: 'Care coordinators and on-call clinicians take everything clinical, by rule.', link: ['AI agents', '/agents'] },
+        { name: 'Risk analytics', autoLabel: 'Zynix', auto: 'Flags patients likely to need avoidable acute care.',
+          team: 'Care managers decide how and when to reach them.', link: ['Analytics', '/zynix-data-analytics'] }
+      ],
+      next: null,
+      changed: [
+        ['Data', 'Separate claims, clinical and ADT feeds.', 'One patient record across participating practices.'],
+        ['Outreach', 'Practice by practice, as time allowed.', 'Central outreach for follow-up, gaps and wellness visits.'],
+        ['Rising risk', 'Seen in retrospective reports.', 'Flagged for care managers to act on.']
+      ],
+      related: [
+        { label: 'More customer stories', items: [
+          { href: '/case-studies-west-florida-aco', label: 'West Florida ACO', desc: 'Customer story · ACO', icon: 'book' },
+          { href: '/case-studies-space-coast-aco', label: 'Space Coast ACO', desc: 'Customer story · ACO', icon: 'book' } ] },
+        { label: 'Built for', items: [ { href: '/audience-segments/acos-msos', label: 'ACOs', desc: 'TCM, wellness visits and HCC gaps across your panel', icon: 'users' } ] },
+        { label: 'Products', items: [
+          { href: '/products-data-platform', label: 'Data foundation', desc: 'One patient record from every source', icon: 'database' },
+          { href: '/agents', label: 'All AI agents', desc: 'Agents for care operations, with clinicians in charge', icon: 'bot' } ] } ] },
+    apolloclinic: { short: 'Apollo', team: 'Front desk', panel: 'schedule',
+      h1: 'How Apollo Clinic Network keeps visits on schedule',
+      lead: 'Apollo Clinic Network, a physician group with multiple locations, uses Zynix scheduling and reminder agents to fill open slots and reach patients before a missed appointment.',
+      card: 'Scheduling and reminders across a multi-site practice.',
+      facts: [['Segment', 'Physician group'], ['Locations', 'Multiple sites'], ['Workflows', 'Scheduling, reminders']],
+      challengeTitle: 'Gaps in the schedule, reminders by hand',
+      challenge: 'Apollo Clinic Network is an independent group practice with multiple locations. No-shows left gaps in the schedule, front desk staff spent hours each day on reminder calls, and when a patient cancelled, the waitlist was worked by hand, so open slots often stayed empty.',
+      cite: null,
+      runsTitle: 'What Apollo runs on Zynix',
+      runsLead: 'Scheduling and reminder agents work alongside the front desk, which keeps every exception.',
+      runs: [
+        { name: 'Scheduling and waitlist', auto: 'Takes booking requests by phone and text, keeps the waitlist and offers open slots when a patient cancels.',
+          team: 'Front desk staff handle anything the agent routes to them.', link: ['ZynSchedule', '/agents#operational-efficiency'] },
+        { name: 'Appointment reminders', auto: 'Confirms upcoming visits, asks about barriers such as transportation, and reschedules when a patient can’t make it.',
+          team: 'Staff follow up on the barriers patients report.', link: ['Preventive and quality activation agent', '/agents#clinical-performance'] }
+      ],
+      next: null,
+      changed: [
+        ['Reminder calls', 'Made by front desk staff, one at a time.', 'Made by the agent, with barriers flagged for staff.'],
+        ['Cancellations', 'Waitlist worked by hand.', 'Open slots offered to waitlisted patients.'],
+        ['Booking requests', 'Taken during office hours.', 'Taken by phone or text at any hour.']
+      ],
+      related: null }
+  };
 
-    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">15+</span><span style="font-size:14px;color:var(--z-text-secondary)">Languages Supported</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">24/7</span><span style="font-size:14px;color:var(--z-text-secondary)">Multilingual Triage</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">\u2191</span><span style="font-size:14px;color:var(--z-text-secondary)">Preventive Screening Improvement</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">\u2193</span><span style="font-size:14px;color:var(--z-text-secondary)">Non-Urgent ED Utilization</span></div>' +
-    '</div>' +
+  // Illustrative panels (§2.9 kit): role labels, sample identifiers and statuses only; no names, %, $ or outcomes.
+  var ZX_CUST_PANELS = {
+    episode: { label: 'Example post-discharge episode, illustrative data', brand: 'Care management', chip: 'Example episode · sample data',
+      title: 'Post-discharge episode', meta: 'Pt 1042 · 72 · CHF',
+      steps: [
+        { time: 'Day 0', title: 'Discharge notice received from the hospital', owner: 'System', status: { tone: 'neutral', label: 'Logged' } },
+        { time: 'Day 0', title: 'Outreach call placed; patient reached', owner: 'Outreach agent', status: { tone: 'success', label: 'Reached' } },
+        { time: 'Day 1', title: 'Follow-up visit booked for day 6', owner: 'Outreach agent', status: { tone: 'success', label: 'Booked' } },
+        { time: 'Day 1', title: 'Medication question routed to the care team', owner: 'Outreach agent', status: { tone: 'warning', label: 'Escalated' } },
+        { time: 'Day 1', title: 'TCM interactive contact', owner: 'Care manager, RN', status: { tone: 'success', label: 'Completed' } },
+        { time: 'Day 6', title: 'Face-to-face visit', owner: 'Physician lead', status: { tone: 'neutral', label: 'Queued' } } ],
+      footer: 'The agent makes the calls and books the visit. The RN owns the clinical contact.' },
+    members: { label: 'Sample member outreach queue, illustrative data', brand: 'Care management', title: 'Member outreach queue', meta: 'Today · ranked by care need',
+      rows: [
+        { title: 'Mbr 3108 · Colorectal screening due', sub: 'Preventive care', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'neutral', label: 'Queued' } },
+        { title: 'Mbr 2215 · Discharged two days ago', sub: 'Follow-up call', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Reached' } },
+        { title: 'Mbr 1904 · Asked to speak with a nurse', sub: 'Routed from outreach', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'warning', label: 'Escalated' } },
+        { title: 'Mbr 2750 · Diabetes follow-up due', sub: 'Chronic care', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Booked' } } ],
+      footer: 'Care managers see whom to contact first; questions route back to them.' },
+    afterhours: { label: 'Sample after-hours intake queue, illustrative data', brand: 'After-hours access', title: 'After-hours intake', meta: 'Overnight · all languages',
+      rows: [
+        { title: 'Call 118 · Spanish', sub: 'Routine visit request', owner: { type: 'agent', label: 'After-hours agent' }, status: { tone: 'success', label: 'Booked' } },
+        { title: 'Call 121 · Haitian Creole', sub: 'Symptom question', owner: { type: 'staff', label: 'On-call clinician' }, status: { tone: 'warning', label: 'Escalated' } },
+        { title: 'Call 124 · Portuguese', sub: 'Prescription refill', owner: { type: 'staff', label: 'Care coordinator' }, status: { tone: 'neutral', label: 'Queued' } },
+        { title: 'Call 127 · Spanish', sub: 'Lab results question', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'neutral', label: 'Queued' } } ],
+      footer: 'Routine requests are booked; symptom questions go to the on-call clinician by rule.' },
+    schedule: { label: 'Sample schedule and waitlist, illustrative data', brand: 'Scheduling', title: 'Schedule and waitlist', meta: 'Today · all locations',
+      rows: [
+        { title: 'Pt 2031 · Follow-up visit', sub: 'Reminder answered', owner: { type: 'agent', label: 'Scheduling agent' }, status: { tone: 'success', label: 'Confirmed' } },
+        { title: 'Pt 1187 · Cancelled a morning slot', sub: 'Slot offered to the waitlist', owner: { type: 'agent', label: 'Scheduling agent' }, status: { tone: 'brand', label: 'In progress' } },
+        { title: 'Pt 2410 · Needs a ride to the visit', sub: 'Barrier reported', owner: { type: 'staff', label: 'Front desk' }, status: { tone: 'neutral', label: 'Review' } },
+        { title: 'Pt 1966 · New patient request', sub: 'Booked by text', owner: { type: 'agent', label: 'Scheduling agent' }, status: { tone: 'success', label: 'Booked' } } ],
+      footer: 'Open slots go to the waitlist; barriers go to the front desk.' },
+    note: { label: 'Sample draft visit note, illustrative data', brand: 'ZynScribe', title: 'Draft visit note', meta: 'Follow-up visit · awaiting physician review',
+      note: { sections: [
+        { label: 'Subjective', text: 'Breathing better since discharge. No chest pain. Taking medications as prescribed.' },
+        { label: 'Assessment', text: 'Heart failure, stable on the current regimen.' },
+        { label: 'Plan', text: 'Continue current medications. Recheck labs in two weeks. Follow up in one month.' } ] },
+      footer: 'Nothing is filed until the physician reviews and approves the note.' },
+    gaps: { label: 'Sample care gap worklist, illustrative data', brand: 'Care management', title: 'Open care gaps', meta: 'All practices · updated today',
+      rows: [
+        { title: 'Pt 1042 · Annual wellness visit due', sub: 'Practice 3', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Booked' } },
+        { title: 'Pt 2288 · Suspected HCC to review', sub: 'Practice 1', owner: { type: 'staff', label: 'Care coordinator' }, status: { tone: 'neutral', label: 'Review' } },
+        { title: 'Pt 3175 · Diabetic eye exam open', sub: 'Practice 5', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'brand', label: 'In progress' } },
+        { title: 'Pt 1520 · Colorectal screening open', sub: 'Practice 2', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'neutral', label: 'Queued' } } ],
+      footer: 'Agents work routine outreach; suspected HCCs go to the quality team.' },
+    rising: { label: 'Sample rising-risk worklist, illustrative data', brand: 'Analytics', title: 'Rising-risk patients', meta: 'This week · all practices',
+      rows: [
+        { title: 'Pt 2604 · Two ED visits this month', sub: 'Practice 4', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'neutral', label: 'Review' } },
+        { title: 'Pt 1379 · Missed medication refills', sub: 'Practice 2', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'brand', label: 'In progress' } },
+        { title: 'Pt 3321 · New heart failure diagnosis', sub: 'Practice 1', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'neutral', label: 'Queued' } },
+        { title: 'Pt 1855 · Discharged, no visit booked', sub: 'Practice 3', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Booked' } } ],
+      footer: 'Analytics flags the change; the care manager decides what happens next.' }
+  };
 
-    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">AMISTAD Community Health Center is an FQHC serving a diverse, predominantly Spanish-speaking population across Central Florida. The health center faced persistent challenges:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>Language barriers:</strong> English-only answering services meant Spanish, Haitian Creole, and Portuguese-speaking patients could not communicate after hours or during outreach campaigns.</li>' +
-    '<li style="margin-bottom:8px"><strong>Preventive screening gaps:</strong> Without proactive outreach in patients\u2019 primary language, preventive screening completion rates remained well below benchmarks.</li>' +
-    '<li style="margin-bottom:8px"><strong>SDoH barriers unidentified:</strong> Social determinants like food insecurity, transportation, and housing instability went undetected because screening was not happening consistently.</li>' +
-    '<li style="margin-bottom:8px"><strong>Reporting pressure:</strong> HRSA UDS reporting requirements demanded better quality data and higher measure completion rates.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">AMISTAD deployed three Zynix AI products tailored to the needs of their multilingual patient population:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>ZynAfterHours:</strong> 24/7 multilingual AI triage covering Spanish, Haitian Creole, Portuguese, and 12+ additional languages. Patients can call after hours and receive clinically accurate triage in their own language.</li>' +
-    '<li style="margin-bottom:8px"><strong>Preventive & Quality Activation Agents:</strong> Automated outreach campaigns for preventive screenings delivered in each patient\u2019s preferred language, driving completion of mammograms, colonoscopies, A1C tests, and more.</li>' +
-    '<li style="margin-bottom:8px"><strong>SDoH Determination Agent:</strong> Proactive social determinant screening integrated into outreach workflows, identifying food insecurity, transportation barriers, and housing instability and routing patients to community resources.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Within the first two quarters of deployment, AMISTAD saw meaningful improvements across quality and patient engagement:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>Preventive screening improvement:</strong> Multilingual outreach campaigns significantly increased completion rates for key preventive screenings, directly improving UDS quality measures.</li>' +
-    '<li style="margin-bottom:8px"><strong>Reduced non-urgent ED utilization:</strong> 24/7 multilingual triage gave patients an alternative to the emergency department for after-hours concerns, reducing unnecessary ED visits.</li>' +
-    '<li style="margin-bottom:8px"><strong>Improved HRSA UDS reporting:</strong> Better data capture from screening campaigns and SDoH assessments strengthened AMISTAD\u2019s annual UDS submission.</li>' +
-    '<li style="margin-bottom:8px"><strong>SDoH identification at scale:</strong> The AI agent identified social determinant barriers that had gone undetected through manual processes, enabling the care team to connect patients with community resources.</li>' +
-    '</ul>' +
-
-    '<blockquote style="border-left:4px solid var(--z-blue);padding:20px 24px;margin:40px 0;background:var(--z-blue-light);border-radius:0 8px 8px 0"><p style="font-size:16px;line-height:1.8;color:var(--z-text);margin:0;font-style:italic">"The multilingual AI agents were a game-changer for our FQHC. Our Spanish-speaking patients finally get the follow-up calls they deserve, on time, every time."</p><cite style="display:block;margin-top:12px;font-size:14px;color:var(--z-text-secondary);font-style:normal"><strong>Ganesh Karra</strong>, Systems Engineer, AMISTAD CHC</cite></blockquote>' +
-
-    '</div></div></section>' +
-    renderCTA('Serve Your Community Better with AI', 'See how Zynix helps FQHCs deliver multilingual care coordination at scale.', 'Request a Demo') +
-    renderFooter();
+  // Hub and segment cards: segment, name, what they run, logo when one exists. No metrics (DECISIONS 16).
+  function zxCustCard(id) {
+    var c = zxCustomer(id), s = ZX_CUST_STORIES[id], g = c && ZX_CUST_SEGS[c.segment];
+    if (!c || !s || !c.caseStudy) return '';
+    var logo = c.logo ? '<img class="zx-cust-card__logo" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + zxAttr(c.logo.w) + '" height="' + zxAttr(c.logo.h) + '" loading="lazy" decoding="async">' : '';
+    return '<a class="zynix-card zynix-card--link zx-cust-card" href="' + zxAttr(c.caseStudy) + '">' +
+      '<span class="zx-cust-card__logo-slot">' + logo + '</span><span class="zynix-card__eyebrow">' + (g ? g.one : c.segmentLabel) + '</span>' +
+      '<h3 class="zynix-card__title">' + c.name + '</h3><p class="zynix-card__body">' + s.card + '</p>' +
+      '<span class="zynix-card__cta">Read the story<span aria-hidden="true"> →</span></span></a>';
+  }
+  function zxCustGrid(ids) {
+    ids = (ids || []).filter(function (id) { return zxCustomer(id) && ZX_CUST_STORIES[id]; });
+    return '<ul class="zynix-cgrid zx-cust-grid" data-count="' + ids.length + '" role="list">' + ids.map(function (id) {
+      return '<li class="zynix-cgrid__item" data-zx-seg="' + zxAttr(CUSTOMERS[id].segment) + '">' + zxCustCard(id) + '</li>';
+    }).join('') + '</ul>';
+  }
+  // Organization-type filter: native radio buttons, filtered by CSS (:has) in page:customers, so it needs no script and
+  // shows every story where :has is unsupported.
+  function zxCustFilter() {
+    var opts = [['all', 'All']].concat(Object.keys(ZX_CUST_SEGS).map(function (k) { return [k, ZX_CUST_SEGS[k].label]; }));
+    return '<fieldset class="zx-cust-filter"><legend class="zx-cust-filter__legend">Show stories from</legend><div class="zx-cust-filter__options">' +
+      opts.map(function (o, i) {
+        var id = 'zx-cust-f-' + o[0];
+        return '<input class="zx-cust-filter__input" type="radio" name="zx-cust-seg" id="' + id + '" value="' + o[0] + '"' + (i ? '' : ' checked') + '>' +
+          '<label class="zx-cust-filter__chip" for="' + id + '">' + o[1] + '</label>';
+      }).join('') + '</div></fieldset>';
+  }
+  // Links to the five segment pages (crawlable; the filter above is the in-page equivalent).
+  function zxCustSegNav(current) {
+    return '<nav class="zx-cust-segnav" aria-label="Customer stories by organization type"><p class="zx-cust-segnav__label">Stories by organization type</p><ul class="zx-cust-segnav__list" role="list">' +
+      Object.keys(ZX_CUST_SEGS).filter(function (k) { return k !== current; }).map(function (k) {
+        return '<li>' + renderLinkArrow(ZX_CUST_SEGS[k].label, ZX_CUST_SEGS[k].path) + '</li>';
+      }).join('') + '</ul></nav>';
+  }
+  // A published release quote with its context and both links (hub and segment pages).
+  function zxCustFeatured(id, context) {
+    var c = zxCustomer(id); if (!c || !c.quote) return '';
+    return '<article class="zx-cust-featured__item">' + renderQuote({ customer: id, href: null }) +
+      '<p class="zx-cust-featured__context">' + context + '</p>' +
+      '<p class="zx-cust-featured__links">' + renderLinkArrow('Read the story', c.caseStudy) + (c.release ? renderLinkArrow('Read the announcement', c.release.href) : '') + '</p></article>';
+  }
+  function zxCustPanel(kind, c) {
+    var m = ZX_CUST_PANELS[kind]; if (!m || !c) return '';
+    return '<figure class="zx-cust-panel">' + renderUiPanel(m) +
+      '<figcaption class="zx-cust-panel__note">Illustration of the workflow with sample data. Not ' + (c.shortName || c.name) + ' patient data.</figcaption></figure>';
+  }
+  function zxCustRuns(s) {
+    return '<ol class="zx-cust-runs" role="list">' + s.runs.map(function (r) {
+      return '<li class="zx-cust-run"><h3 class="zx-cust-run__name">' + r.name + '</h3><dl class="zx-cust-run__split">' +
+        '<div class="zx-cust-run__row"><dt>' + (r.autoLabel || 'Agent') + '</dt><dd>' + r.auto + '</dd></div>' +
+        '<div class="zx-cust-run__row"><dt>' + s.team + '</dt><dd>' + r.team + '</dd></div></dl>' +
+        (r.link ? renderLinkArrow(r.link[0], r.link[1]) : '') + '</li>';
+    }).join('') + '</ol>' + (s.next ? '<p class="zx-cust-next">' + s.next + '</p>' : '');
+  }
+  // Results: attributed metrics only (CUSTOMERS[id].metrics, DECISIONS 16) with period and baseline, then before/after.
+  function zxCustResults(c, s) {
+    var ms = c.metrics || [];
+    var cap = function (t) { return t ? t.charAt(0).toUpperCase() + t.slice(1) : ''; };
+    var stats = ms.length ? renderStatRow(ms.map(function (m) {
+      return { value: m.value, label: m.label + '<span class="zx-cust-stat-meta">' + cap(m.period) + (m.baseline ? ' · before: ' + m.baseline : '') + '</span>', source: m.source };
+    }), { className: 'zx-cust-stats', tick: false }) +
+      '<p class="zx-cust-method">Customer-reported figures for the period shown. Results depend on each organization’s population, staffing and workflows.</p>' : '';
+    var cols = s.changedCols || ['Workflow', 'Before', 'With Zynix'];
+    var table = renderCompareTable({ caption: (s.changedTitle || 'What changed') + ' at ' + c.name, captionHidden: true,
+      columns: [{ label: cols[0] }, { label: cols[1] }, { label: cols[2], highlight: true }],
+      rows: s.changed.map(function (r) { return { label: r[0], cells: [{ text: r[1] }, { text: r[2] }] }; }) });
+    return renderSection({ id: 'results', className: 'zx-cust-results' },
+      renderSectionHead(s.changedEyebrow || (ms.length ? 'Results' : 'Before and after'), s.changedTitle || 'What changed', null, { id: 'results-title' }) +
+      stats + table);
+  }
+  // One story page. Nested stories get their related block from CROSS_LINKS (router); flat ones render their own.
+  function zxCustStoryPage(id) {
+    var c = zxCustomer(id), s = ZX_CUST_STORIES[id];
+    if (!c || !s) return renderCaseStudies();
+    var here = zxPath();
+    var related = (typeof CROSS_LINKS !== 'undefined' && CROSS_LINKS[here]) || !s.related ? '' : renderRelatedLinks({ groups: s.related });
+    return renderHero({ preset: 'case', eyebrow: 'Customer story', title: s.h1, lead: s.lead,
+        secondary: { label: 'See the workflows', href: '#workflows' },
+        media: { type: 'proof', customer: id, facts: s.facts.map(function (f) { return { label: f[0], value: f[1] }; }), link: c.release ? undefined : null } }) +
+      renderSection({ id: 'challenge', className: 'zx-cust-challenge' },
+        renderSplit(renderSectionHead('The challenge', s.challengeTitle, null, { id: 'challenge-title' }),
+          '<p class="zx-cust-challenge__text">' + s.challenge + '</p>' + (s.cite ? '<p class="zx-cust-cite">' + s.cite + '</p>' : ''), { ratio: '5-7' })) +
+      renderSection({ id: 'workflows', surface: 'subtle', className: 'zx-cust-workflows' },
+        renderSectionHead('Workflows', s.runsTitle, s.runsLead, { id: 'workflows-title' }) +
+        renderSplit(zxCustRuns(s), zxCustPanel(s.panel, c), { ratio: '5-7' })) +
+      zxCustResults(c, s) +
+      (c.quote ? renderSection({ id: 'on-the-record', rule: true, className: 'zx-cust-onrecord' },
+        renderSplit('<p class="zynix-eyebrow">On the record</p><h2 class="zx-cust-onrecord__title" id="on-the-record-title">From the ' +
+          ((c.release && PRESS_RELEASES_BY_SLUG[c.release.slug]) ? PRESS_RELEASES_BY_SLUG[c.release.slug].dateDisplay + ' ' : '') + 'announcement</h2>',
+          renderQuote({ customer: id }), { ratio: '4-8' })) : '') +
+      related +
+      renderCTA('Talk to us about a program like this', 'We’ll show the workflows ' + s.short + ' uses, on sample data, and what it would take to run them in your organization.', null,
+        { secondary: { label: 'More customer stories', href: '/resources-case-studies' } }) +
+      renderFooter();
   }
 
-  function renderCaseStudyApollo() {
-    return renderInnerHero('CASE STUDY', 'Apollo Clinic Network', 'AI Scheduling Reduces No-Shows by 40% Across Multi-Site Practice', IMG.patient, 'Apollo Clinic case study with Zynix AI') +
-    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
+  function renderCaseStudyAmistad() { return zxCustStoryPage('amistad'); }
+  function renderCaseStudyApollo() { return zxCustStoryPage('apolloclinic'); }
+  function renderCaseStudyNHS() { return zxCustStoryPage('nhs'); }
+  function renderCaseStudyPalmBeach() { return zxCustStoryPage('pbaco'); }
+  function renderCaseStudyWestFlorida() { return zxCustStoryPage('westfloridaaco'); }
+  function renderCaseStudySpaceCoast() { return zxCustStoryPage('spacecoastaco'); }
+  function renderCaseStudyCentralFlorida() { return zxCustStoryPage('centralfloridaaco'); }
+  function renderCaseStudyEternalHealth() { return zxCustStoryPage('eternalhealth'); }
 
-    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">40%</span><span style="font-size:14px;color:var(--z-text-secondary)">No-Show Reduction</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">\u2191</span><span style="font-size:14px;color:var(--z-text-secondary)">Revenue Recovery</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">60%</span><span style="font-size:14px;color:var(--z-text-secondary)">Staff Time Savings</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">\u2191</span><span style="font-size:14px;color:var(--z-text-secondary)">Prior Auth Acceleration</span></div>' +
-    '</div>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Apollo Clinic Network is an independent group practice operating multiple locations. Despite strong clinical quality, operational inefficiencies were holding the practice back:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>22% no-show rate:</strong> More than one in five appointments went unfilled, costing the practice significant revenue and creating scheduling gaps that were difficult to backfill.</li>' +
-    '<li style="margin-bottom:8px"><strong>Manual reminder calls:</strong> Front desk staff spent hours each day making reminder calls, with limited ability to reach patients who didn\u2019t answer.</li>' +
-    '<li style="margin-bottom:8px"><strong>Reactive waitlist management:</strong> When patients cancelled, the waitlist was managed manually and slots often went unfilled because staff couldn\u2019t react fast enough.</li>' +
-    '<li style="margin-bottom:8px"><strong>Prior auth backlogs:</strong> Prior authorization submissions were handled manually, creating delays that led to appointment cancellations and revenue leakage.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Apollo Clinic deployed three Zynix AI products to transform scheduling and operational workflows:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>ZynSchedule:</strong> Intelligent AI-powered scheduling that handles inbound booking requests 24/7, manages waitlists automatically, and fills cancellation slots in real time.</li>' +
-    '<li style="margin-bottom:8px"><strong>ZynReminder:</strong> Barrier-aware appointment confirmation that goes beyond simple reminders by identifying transportation, financial, or scheduling barriers and offering solutions before the patient no-shows.</li>' +
-    '<li style="margin-bottom:8px"><strong>ZynAuth:</strong> Automated prior authorization submission, tracking, and follow-up that eliminates manual bottlenecks and ensures approvals are in place before scheduled procedures.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Within the first quarter, Apollo Clinic saw dramatic improvements across scheduling and operations:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>No-shows dropped from 22% to under 14%:</strong> A 40% reduction in no-shows meant more patients seen, more revenue captured, and better continuity of care.</li>' +
-    '<li style="margin-bottom:8px"><strong>Revenue recovery:</strong> Filling previously empty slots and reducing last-minute cancellations delivered meaningful revenue gains across all locations.</li>' +
-    '<li style="margin-bottom:8px"><strong>60% staff time savings:</strong> Front desk staff were freed from manual reminder calls and waitlist management, allowing them to focus on in-office patient experience.</li>' +
-    '<li style="margin-bottom:8px"><strong>Prior auth acceleration:</strong> Automated prior auth submission and tracking eliminated backlogs and reduced appointment cancellations due to missing authorizations.</li>' +
-    '</ul>' +
-
-    '</div></div></section>' +
-    renderCTA('Reduce No-Shows Like Apollo Clinic', 'See how Zynix AI can transform your practice\u2019s scheduling and operational efficiency.', 'Request a Demo') +
-    renderFooter();
+  // ── Customer stories by organization type (the five /case-studies-{segment} pages) ──
+  function renderCaseStudiesBySegment(segId) {
+    var g = ZX_CUST_SEGS[segId];
+    if (!g) return renderCaseStudies();
+    var ids = ZX_CUST_ORDER.filter(function (id) { return CUSTOMERS[id] && CUSTOMERS[id].segment === segId; });
+    var q = g.quote ? zxCustomer(g.quote) : null;
+    var ctx = { pbaco: 'Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding), one of the nation’s largest risk-bearing ACOs, partnered with Zynix in April 2026, starting with outreach for post-discharge follow-up and annual wellness visits.',
+      eternalhealth: 'eternalHealth, a Medicare Advantage plan serving members in Massachusetts and Arizona, has used Zynix outreach and care management workflows since January 1, 2026.' };
+    return renderHero({ preset: 'resource', eyebrow: 'Customer stories', title: g.h1, lead: g.lead,
+        primary: { label: SITE_FACTS.demo.label, href: SITE_FACTS.demo.href }, secondary: { label: 'All customer stories', href: '/resources-case-studies' } }) +
+      renderSection({ id: 'stories', className: 'zx-cust-stories zx-cust-stories--first' },
+        renderSectionHead(null, g.one + ' customer ' + (ids.length > 1 ? 'stories' : 'story'), null, { id: 'stories-title' }) + zxCustGrid(ids) +
+        '<p class="zx-cust-method">Results on story pages are reported by the customer and dated.</p>' + zxCustSegNav(segId)) +
+      (q ? renderSection({ id: 'on-the-record', surface: 'subtle' },
+        renderSectionHead('On the record', 'In their own words', null, { id: 'on-the-record-title' }) +
+        '<div class="zx-cust-featured zx-cust-featured--one">' + zxCustFeatured(g.quote, ctx[g.quote] || '') + '</div>') : '') +
+      renderSection({ id: 'workflows', rule: true, className: 'zx-cust-segflows' },
+        renderSplit(renderSectionHead(g.label + ' on Zynix', g.title, g.what, { id: 'workflows-title', action: { label: g.audienceLabel, href: g.audience } }),
+          '<p class="zx-cust-uc__label">Workflows, step by step</p><ol class="zx-cust-uc" role="list">' + g.uc.map(function (u) {
+            return '<li><a class="zx-cust-uc__link" href="' + zxAttr(u[0]) + '"><span class="zx-cust-uc__name">' + u[1] + '</span><span class="zx-cust-uc__arrow" aria-hidden="true">→</span></a></li>';
+          }).join('') + '</ol>', { ratio: '6-6' })) +
+      renderRelatedLinks({ groups: [{ label: 'Explore more', items: [
+        { href: '/resources-case-studies', label: 'Customer stories', desc: 'How value-based care teams use Zynix', icon: 'book' },
+        { href: '/platform', label: 'Platform overview', desc: 'One platform for value-based care operations', icon: 'layers' },
+        { href: '/agents', label: 'All AI agents', desc: 'Agents for care operations, with clinicians in charge', icon: 'bot' },
+        { href: '/press', label: 'Newsroom', desc: 'Announcements and press releases', icon: 'megaphone' } ] }] }) +
+      renderCTA(g.cta.title, 'We’ll walk through ' + g.flows + ' on sample data, then map them to your contracts and programs.', null, g.cta.secondary ? { secondary: g.cta.secondary } : {}) +
+      renderFooter();
   }
 
-  function renderCaseStudyNHS() {
-    return renderInnerHero('CASE STUDY', 'NHS Health System', 'Enterprise-Scale Population Health Management with AI Agents', IMG.enterprise, 'NHS Health System case study with Zynix AI') +
-    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
+  function renderCaseStudiesHealthSystems() { return renderCaseStudiesBySegment('health-system'); }
+  function renderCaseStudiesACOs() { return renderCaseStudiesBySegment('aco'); }
+  function renderCaseStudiesHealthPlans() { return renderCaseStudiesBySegment('health-plan'); }
+  function renderCaseStudiesPractices() { return renderCaseStudiesBySegment('practice'); }
+  function renderCaseStudiesFQHCs() { return renderCaseStudiesBySegment('fqhc'); }
 
-    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">40%</span><span style="font-size:14px;color:var(--z-text-secondary)">Gap Closure Improvement</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">12</span><span style="font-size:14px;color:var(--z-text-secondary)">Sites Covered</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">\u2193</span><span style="font-size:14px;color:var(--z-text-secondary)">Documentation Time Reduction</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">24/7</span><span style="font-size:14px;color:var(--z-text-secondary)">Consistent After-Hours Coverage</span></div>' +
-    '</div>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">NHS Health System is a multi-hospital system managing population health across hundreds of thousands of attributed lives. At enterprise scale, several systemic challenges undermined performance:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>Population health at scale:</strong> Managing HCC gaps, quality measures, and care coordination across hundreds of thousands of lives required more capacity than manual workflows could deliver.</li>' +
-    '<li style="margin-bottom:8px"><strong>HCC gaps:</strong> Risk adjustment accuracy suffered because chart reviews and suspect coding could not keep pace with the volume of patient encounters across 12 sites.</li>' +
-    '<li style="margin-bottom:8px"><strong>Inconsistent after-hours coverage:</strong> Each site handled after-hours calls differently, resulting in variable patient experience and missed triage opportunities.</li>' +
-    '<li style="margin-bottom:8px"><strong>Physician documentation burden:</strong> Providers across the system spent excessive time on documentation, contributing to burnout and limiting throughput.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">NHS Health System deployed the full Zynix AI platform across all 12 sites in a phased rollout:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>Full Zynix Platform:</strong> Unified data ingestion, intelligence engine, and AI agent orchestration layer deployed across the entire health system for consistent population health management.</li>' +
-    '<li style="margin-bottom:8px"><strong>ZynAfterHours:</strong> Standardized 24/7 AI-powered after-hours triage across all 12 sites, providing consistent patient experience and clinically accurate call handling.</li>' +
-    '<li style="margin-bottom:8px"><strong>ZynScribe:</strong> Ambient AI documentation deployed to providers across the system, dramatically reducing time spent on notes and freeing up clinical capacity.</li>' +
-    '<li style="margin-bottom:8px"><strong>Transitions of Care Agent:</strong> Automated post-discharge follow-up across the system, ensuring timely TCM contact and reducing readmission risk at scale.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">The full platform deployment delivered enterprise-scale improvements:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>40% HCC gap closure improvement:</strong> AI-powered chart review and automated outreach closed risk adjustment gaps at a rate far exceeding manual workflows, improving RAF accuracy and financial performance.</li>' +
-    '<li style="margin-bottom:8px"><strong>Consistent after-hours coverage across 12 sites:</strong> Standardized AI triage replaced inconsistent answering services, improving patient satisfaction and reducing unnecessary ED visits system-wide.</li>' +
-    '<li style="margin-bottom:8px"><strong>Documentation time reduction:</strong> ZynScribe reduced provider documentation burden significantly, improving provider satisfaction and increasing the number of patients seen per day.</li>' +
-    '<li style="margin-bottom:8px"><strong>Scalable care coordination:</strong> The unified platform enabled centralized visibility into population health metrics while agents executed outreach autonomously across all locations.</li>' +
-    '</ul>' +
-
-    '</div></div></section>' +
-    renderCTA('Scale Population Health Like NHS', 'See how the full Zynix platform can transform care delivery across your health system.', 'Request a Demo') +
-    renderFooter();
-  }
-
-  function renderCaseStudyPalmBeach() {
-    return renderInnerHero('CASE STUDY', 'Palm Beach ACO', 'How a South Florida ACO transformed value-based care operations with AI-powered outreach, documentation, and care coordination.', IMG.care, 'Palm Beach ACO case study with Zynix AI') +
-    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
-    // Press release callout linking to the newsroom
-    '<aside class="zynix-press-callout" role="region" aria-label="Related press release" style="background:linear-gradient(135deg,#EEF2FB 0%,#FFF7F2 100%);border:1px solid #c7d4f0;border-radius:12px;padding:20px 24px;margin-bottom:36px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">' +
-      '<span style="background:#F16529;color:#fff;font-size:10px;font-weight:700;letter-spacing:1.5px;padding:4px 10px;border-radius:4px;flex-shrink:0">APR 14, 2026</span>' +
-      '<p style="margin:0;flex:1;min-width:240px;font-size:15px;line-height:1.5;color:#1a1a2e"><strong>Press Release:</strong> Zynix AI and Palm Beach ACO (PBACO Holding) announce a strategic partnership to scale AI-driven patient outreach across value-based care.</p>' +
-      '<a href="/press#pbaco-partnership" style="color:#20449B;font-weight:600;font-size:14px;text-decoration:none;white-space:nowrap">Read the announcement &rarr;</a>' +
-    '</aside>' +
-
-    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">85%</span><span style="font-size:14px;color:var(--z-text-secondary)">TCM Contact Rate</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">40%</span><span style="font-size:14px;color:var(--z-text-secondary)">Gap Closure Improvement</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">3x</span><span style="font-size:14px;color:var(--z-text-secondary)">AWV Completion Lift</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">8</span><span style="font-size:14px;color:var(--z-text-secondary)">Weeks to ROI</span></div>' +
-    '</div>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Palm Beach ACO is a Medicare Shared Savings Program (MSSP) ACO serving a large attributed patient population across South Florida. Like many ACOs, Palm Beach faced a persistent set of operational challenges that undermined their value-based care performance:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>Low TCM contact rates:</strong> Manual post-discharge outreach achieved only 30\u201335% contact rates. Care coordinators spent hours each day leaving voicemails, with most discharged patients never receiving timely follow-up contact within the CMS-mandated 2-business-day window.</li>' +
-    '<li style="margin-bottom:8px"><strong>Missed HCC and quality gaps:</strong> Without real-time gap identification, the quality team relied on quarterly claims data to generate worklists. By the time gaps were identified, the optimal intervention window had often closed. Annual Wellness Visit completion was far below potential.</li>' +
-    '<li style="margin-bottom:8px"><strong>Documentation burden:</strong> Providers spent 2\u20133 hours per day on documentation after clinic hours, contributing to burnout and limiting the number of patients each provider could see.</li>' +
-    '<li style="margin-bottom:8px"><strong>Missed shared savings:</strong> The combination of low contact rates, missed quality measures, and incomplete HCC capture meant the ACO was leaving significant shared savings on the table each performance year.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Palm Beach ACO deployed the Zynix AI platform as their comprehensive care operations solution. Implementation was completed in 6 weeks, including full EHR integration, data onboarding, care plan configuration, and AI agent deployment. The deployment included:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>Post-Discharge AI Agent:</strong> Autonomous outreach to every discharged patient within 48 hours, handling the initial TCM contact call including medication review and follow-up scheduling.</li>' +
-    '<li style="margin-bottom:8px"><strong>Gap Closure Engine:</strong> Real-time identification of HCC recapture gaps and HEDIS quality measure gaps, with AI-prioritized worklists and automated patient outreach for appointment scheduling.</li>' +
-    '<li style="margin-bottom:8px"><strong>AWV Campaign Agent:</strong> Proactive scheduling outreach targeting eligible patients for Annual Wellness Visits, with intelligent retry logic and multichannel engagement.</li>' +
-    '<li style="margin-bottom:8px"><strong>ZynScribe:</strong> Ambient AI documentation deployed across participating providers to reduce documentation burden and capture structured clinical notes during encounters.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Within the first quarter of deployment, Palm Beach ACO saw transformative improvements across every key performance metric:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>TCM contact rate increased from 32% to 85%:</strong> AI agents successfully contacted the vast majority of discharged patients within the 2-business-day CMS window, ensuring timely follow-up and enabling TCM billing for significantly more episodes.</li>' +
-    '<li style="margin-bottom:8px"><strong>40% improvement in care gap closure:</strong> Real-time gap identification combined with automated outreach closed HCC and quality gaps at a rate far exceeding manual workflows, improving quality scores and RAF accuracy.</li>' +
-    '<li style="margin-bottom:8px"><strong>3x AWV completion:</strong> Proactive scheduling outreach tripled the number of Annual Wellness Visits completed, creating more touchpoints for chronic condition documentation, preventive screening, and care plan updates.</li>' +
-    '<li style="margin-bottom:8px"><strong>ROI achieved in 8 weeks:</strong> The combination of increased TCM revenue, improved gap closure, higher AWV completion, and reduced administrative costs delivered positive ROI within the first two months of deployment.</li>' +
-    '</ul>' +
-
-    '<blockquote style="border-left:4px solid var(--z-blue);padding:20px 24px;margin:40px 0;background:var(--z-blue-light);border-radius:0 8px 8px 0"><p style="font-size:16px;line-height:1.8;color:var(--z-text);margin:0;font-style:italic">"Zynix transformed our TCM workflow overnight. We went from a 32% contact rate to over 85% within the first quarter. The AI agents handle the outreach while our nurses focus on clinical care."</p><cite style="display:block;margin-top:12px;font-size:14px;color:var(--z-text-secondary);font-style:normal"><strong>David Klebonis</strong>, COO, Palm Beach ACO</cite></blockquote>' +
-
-    '</div></div></section>' +
-    renderCTA('Achieve Results Like Palm Beach ACO', 'See how Zynix can transform your organization\u2019s value-based care performance in weeks, not months.', 'Request a Demo') +
-    renderFooter();
-  }
-
-  // ── CASE STUDY: West Florida ACO ──
-  function renderCaseStudyWestFlorida() {
-    return renderInnerHero('CASE STUDY', 'West Florida ACO', 'AI-Powered Quality Gap Closure Drives 40% Improvement Across ACO Network', IMG.care, 'West Florida ACO case study with Zynix AI') +
-    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
-
-    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">40%</span><span style="font-size:14px;color:var(--z-text-secondary)">Quality Gap Closure Improvement</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">6</span><span style="font-size:14px;color:var(--z-text-secondary)">Weeks to Go-Live</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↑</span><span style="font-size:14px;color:var(--z-text-secondary)">RAF Accuracy</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↓</span><span style="font-size:14px;color:var(--z-text-secondary)">Readmission Rate</span></div>' +
-    '</div>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">West Florida ACO manages a growing attributed population under MSSP. The ACO struggled with:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>Manual gap worklists:</strong> Quality teams relied on quarterly claims refreshes, missing the optimal intervention window for many patients.</li>' +
-    '<li style="margin-bottom:8px"><strong>Incomplete HCC capture:</strong> Risk adjustment coding depended on chart reviews that lagged behind encounter volume, leaving revenue on the table.</li>' +
-    '<li style="margin-bottom:8px"><strong>Fragmented outreach:</strong> Each practice handled patient outreach independently, creating inconsistent engagement across the network.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">West Florida ACO deployed the Zynix AI Data Platform with inbound and outbound AI agents and predictive analytics:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>AI Data Platform:</strong> Real-time claims and clinical data aggregation replaced quarterly worklist refreshes with continuous gap identification.</li>' +
-    '<li style="margin-bottom:8px"><strong>Outbound Agents:</strong> Automated patient outreach for gap closure, AWV scheduling, and TCM follow-up, coordinated centrally across all practices.</li>' +
-    '<li style="margin-bottom:8px"><strong>Predictive Analytics:</strong> Risk stratification identified rising-risk patients before acute events, enabling proactive intervention.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>40% quality gap closure improvement:</strong> Continuous gap identification and automated outreach closed care gaps at rates far exceeding prior manual workflows.</li>' +
-    '<li style="margin-bottom:8px"><strong>Improved RAF accuracy:</strong> Real-time HCC suspect identification and chart review automation improved risk adjustment accuracy and financial performance.</li>' +
-    '<li style="margin-bottom:8px"><strong>Reduced readmissions:</strong> Predictive analytics flagged high-risk patients for proactive outreach, reducing avoidable readmissions across the network.</li>' +
-    '<li style="margin-bottom:8px"><strong>Go-live in 6 weeks:</strong> Full platform deployment including EHR integration, data onboarding, and agent configuration was completed in under two months.</li>' +
-    '</ul>' +
-
-    '</div></div></section>' +
-    renderCTA('Close Gaps Like West Florida ACO', 'See how Zynix AI can improve your ACO\u2019s quality performance and shared savings.', 'Request a Demo') +
-    renderFooter();
-  }
-
-  // ── CASE STUDY: Space Coast ACO ──
-  function renderCaseStudySpaceCoast() {
-    return renderInnerHero('CASE STUDY', 'Space Coast ACO', 'AI Agents Achieve 85%+ TCM Contact Rate for MSSP ACO', IMG.care, 'Space Coast ACO case study with Zynix AI') +
-    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
-
-    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">85%+</span><span style="font-size:14px;color:var(--z-text-secondary)">TCM Contact Rate</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↑</span><span style="font-size:14px;color:var(--z-text-secondary)">Shared Savings</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↓</span><span style="font-size:14px;color:var(--z-text-secondary)">Avoidable ED Visits</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">4</span><span style="font-size:14px;color:var(--z-text-secondary)">Weeks to Go-Live</span></div>' +
-    '</div>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Space Coast ACO, an MSSP participant serving Medicare beneficiaries in Brevard County, struggled with transitions of care:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>Low TCM contact rates:</strong> Manual outreach reached fewer than 35% of discharged patients within the CMS 2-business-day window.</li>' +
-    '<li style="margin-bottom:8px"><strong>Missed TCM revenue:</strong> Without timely contact, the ACO could not bill for TCM services on the majority of discharge episodes.</li>' +
-    '<li style="margin-bottom:8px"><strong>Readmission risk:</strong> Patients discharged without follow-up were more likely to return to the ED or be readmitted, increasing total cost of care.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Space Coast ACO deployed the Zynix AI Data Platform with inbound and outbound agents focused on post-discharge workflows:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>Post-Discharge AI Agent:</strong> Automated outreach to every discharged patient within 48 hours, handling medication reconciliation, follow-up scheduling, and barrier identification.</li>' +
-    '<li style="margin-bottom:8px"><strong>Predictive Analytics:</strong> Risk scores identified patients most likely to be readmitted, enabling the care team to prioritize high-acuity follow-ups.</li>' +
-    '<li style="margin-bottom:8px"><strong>Inbound AI Agent:</strong> 24/7 availability for patients calling back with post-discharge questions, reducing unnecessary ED utilization.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>85%+ TCM contact rate:</strong> AI agents reached the vast majority of discharged patients within the CMS window, up from under 35% with manual outreach.</li>' +
-    '<li style="margin-bottom:8px"><strong>Increased shared savings:</strong> Higher TCM billing rates and reduced readmissions improved the ACO\u2019s financial performance under MSSP.</li>' +
-    '<li style="margin-bottom:8px"><strong>Reduced avoidable ED visits:</strong> 24/7 inbound triage gave patients an alternative to the ED for post-discharge concerns.</li>' +
-    '<li style="margin-bottom:8px"><strong>Go-live in 4 weeks:</strong> Rapid deployment leveraging pre-built connectors and Zynix\u2019s EHR integration framework.</li>' +
-    '</ul>' +
-
-    '</div></div></section>' +
-    renderCTA('Transform TCM Like Space Coast ACO', 'See how Zynix AI can improve your post-discharge contact rates and reduce readmissions.', 'Request a Demo') +
-    renderFooter();
-  }
-
-  // ── CASE STUDY: Central Florida ACO ──
-  function renderCaseStudyCentralFlorida() {
-    return renderInnerHero('CASE STUDY', 'Central Florida ACO', '2.5x ROI in Year One with Full-Stack AI Care Operations', IMG.care, 'Central Florida ACO case study with Zynix AI') +
-    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
-
-    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">2.5x</span><span style="font-size:14px;color:var(--z-text-secondary)">ROI in Year One</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↑</span><span style="font-size:14px;color:var(--z-text-secondary)">Quality Score</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↓</span><span style="font-size:14px;color:var(--z-text-secondary)">Total Cost of Care</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">8</span><span style="font-size:14px;color:var(--z-text-secondary)">Weeks to Full Deploy</span></div>' +
-    '</div>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Central Florida ACO manages a large MSSP population across multiple practice sites. Despite strong clinical leadership, the ACO faced persistent headwinds:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>Rising total cost of care:</strong> Avoidable ED visits, readmissions, and fragmented care transitions drove costs above benchmarks.</li>' +
-    '<li style="margin-bottom:8px"><strong>Quality measure performance:</strong> Manual workflows could not keep pace with the volume of HCC gaps, quality measures, and outreach needed across the attributed population.</li>' +
-    '<li style="margin-bottom:8px"><strong>Provider engagement:</strong> Participating practices needed tools that integrated into their workflows without adding administrative burden.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">Central Florida ACO deployed the full Zynix AI stack:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>AI Data Platform:</strong> Unified data layer aggregating claims, clinical, ADT, and lab data in real time across all participating practices.</li>' +
-    '<li style="margin-bottom:8px"><strong>Inbound & Outbound Agents:</strong> AI-powered patient engagement including post-discharge follow-up, gap closure outreach, AWV scheduling, and 24/7 after-hours triage.</li>' +
-    '<li style="margin-bottom:8px"><strong>Predictive Analytics:</strong> Risk stratification and predictive models identifying patients likely to drive avoidable utilization, enabling proactive care management.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>2.5x ROI in year one:</strong> The combined impact of improved TCM revenue, gap closure, reduced readmissions, and lower ED utilization delivered ROI well above investment.</li>' +
-    '<li style="margin-bottom:8px"><strong>Quality score improvement:</strong> Automated gap closure and AWV campaigns lifted quality measure performance across the ACO.</li>' +
-    '<li style="margin-bottom:8px"><strong>Total cost of care reduction:</strong> Proactive risk management and transitions of care support reduced avoidable utilization and brought per-member costs below benchmarks.</li>' +
-    '<li style="margin-bottom:8px"><strong>Full deployment in 8 weeks:</strong> Platform went live across all practices with EHR integration, agent configuration, and predictive model calibration completed in under two months.</li>' +
-    '</ul>' +
-
-    '</div></div></section>' +
-    renderCTA('Achieve ROI Like Central Florida ACO', 'See how the full Zynix platform can drive measurable financial and quality results for your ACO.', 'Request a Demo') +
-    renderFooter();
-  }
-
-  // ── CASE STUDY: eTernal Health (Health Plan) ──
-  function renderCaseStudyEternalHealth() {
-    return renderInnerHero('CASE STUDY', 'eTernal Health', 'AI-Driven Medication Adherence Programs Improve Star Ratings for Medicare Advantage Plan', IMG.patients, 'eTernal Health case study with Zynix AI') +
-    '<section style="padding:60px 0"><div class="zynix-container"><div class="zynix-case-detail" style="max-width:860px;margin:0 auto">' +
-
-    '<div class="zynix-case-highlight" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px">' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">45%</span><span style="font-size:14px;color:var(--z-text-secondary)">Medication Adherence Improvement</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↑</span><span style="font-size:14px;color:var(--z-text-secondary)">Star Rating Improvement</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">↓</span><span style="font-size:14px;color:var(--z-text-secondary)">Avoidable Hospitalizations</span></div>' +
-    '<div class="zynix-case-stat fade-in-up" style="background:var(--z-blue-light);border-radius:12px;padding:24px;text-align:center"><span class="zynix-metric-value" style="font-size:32px;font-weight:800;color:var(--z-primary);display:block">6</span><span style="font-size:14px;color:var(--z-text-secondary)">Weeks to Go-Live</span></div>' +
-    '</div>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:0 0 16px;color:var(--z-text)">The Challenge</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">eTernal Health is a Medicare Advantage health plan managing a growing membership. Medication non-adherence was undermining both clinical outcomes and Star Ratings:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>Low PDC scores:</strong> Proportion of Days Covered (PDC) for diabetes, hypertension, and cholesterol medications fell below CMS Star Rating thresholds.</li>' +
-    '<li style="margin-bottom:8px"><strong>Manual outreach limitations:</strong> Care management teams could only reach a fraction of non-adherent members through phone-based outreach campaigns.</li>' +
-    '<li style="margin-bottom:8px"><strong>Avoidable utilization:</strong> Non-adherent members drove disproportionate ED and inpatient utilization, increasing medical loss ratio.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Solution</h2>' +
-    '<p style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin:0 0 16px">eTernal Health deployed Zynix AI\u2019s medication adherence program with AI-powered outreach agents:</p>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>Post-Discharge Verification Agents:</strong> Automated medication reconciliation calls after every discharge, verifying prescriptions were filled and identifying barriers to adherence.</li>' +
-    '<li style="margin-bottom:8px"><strong>Medication Adherence Programs:</strong> Ongoing AI-powered outreach to members approaching PDC gaps, with barrier identification and pharmacy coordination.</li>' +
-    '<li style="margin-bottom:8px"><strong>Predictive Risk Models:</strong> Identification of members most likely to become non-adherent, enabling proactive intervention before gaps occur.</li>' +
-    '</ul>' +
-
-    '<h2 style="font-size:28px;font-weight:700;margin:40px 0 16px;color:var(--z-text)">The Results</h2>' +
-    '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 16px">' +
-    '<li style="margin-bottom:8px"><strong>45% medication adherence improvement:</strong> PDC scores improved significantly across D08 (diabetes), D09 (hypertension), and D10 (cholesterol) measures.</li>' +
-    '<li style="margin-bottom:8px"><strong>Star Rating improvement:</strong> Medication adherence gains contributed to measurable improvement in the plan\u2019s overall CMS Star Rating.</li>' +
-    '<li style="margin-bottom:8px"><strong>Reduced avoidable hospitalizations:</strong> Better medication adherence correlated with fewer preventable ED visits and inpatient admissions among targeted members.</li>' +
-    '<li style="margin-bottom:8px"><strong>Go-live in 6 weeks:</strong> Full deployment including claims data integration, member stratification, and agent configuration.</li>' +
-    '</ul>' +
-
-    '</div></div></section>' +
-    renderCTA('Improve Star Ratings Like eTernal Health', 'See how Zynix AI can drive medication adherence and quality improvement for your health plan.', 'Request a Demo') +
-    renderFooter();
-  }
-
-  // ── CASE STUDIES: Audience-Segmented Landing Pages ──
-  function renderCaseStudiesBySegment(segTitle, segDesc, segTag, filterSeg) {
-    var allStudies = [
-      { title: 'Palm Beach ACO', metric: '3x', label: 'AWV Completion Improvement', seg: 'ACO', desc: 'Outbound Agents (PDV & AWV), AI Scribe', slug: '/case-studies/pbaco' },
-      { title: 'AMISTAD CHC', metric: '15+', label: 'Languages Supported', seg: 'FQHC', desc: 'ZynAfterHours, Preventive & Quality Activation Agents, SDoH Agent', slug: '/case-studies/amistad' },
-      { title: 'Apollo Clinic', metric: '40%', label: 'No-Show Reduction', seg: 'Practice', desc: 'ZynSchedule, ZynReminder, ZynAuth', slug: '/case-studies/apollo-clinic' },
-      { title: 'NHS Health System', metric: '40%', label: 'Gap Closure Improvement', seg: 'Health System', desc: 'Full Zynix Platform, ZynAfterHours, ZynScribe, ToC Agent', slug: '/case-studies/nhs' },
-      { title: 'West Florida ACO', metric: '40%', label: 'Quality Gap Closure Improvement', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies-west-florida-aco' },
-      { title: 'Space Coast ACO', metric: '85%+', label: 'TCM Contact Rate', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies-space-coast-aco' },
-      { title: 'Central Florida ACO', metric: '2.5x', label: 'ROI in Year One', seg: 'ACO', desc: 'AI Data Platform, Inbound & Outbound Agents, Predictive Analytics', slug: '/case-studies-central-florida-aco' },
-      { title: 'eTernal Health', metric: '45%', label: 'Medication Adherence Improvement', seg: 'Health Plan', desc: 'PDV Agents, Medication Adherence Programs', slug: '/case-studies-eternal-health' }
-    ];
-    var filtered = allStudies.filter(function(s) { return s.seg === filterSeg; });
-    var html = '<div class="zynix-case-grid">';
-    filtered.forEach(function(s) {
-      var cardInner = '<span class="zynix-case-seg">' + s.seg + '</span><h3>' + s.title + '</h3><div class="zynix-case-metric"><span>' + s.metric + '</span><small>' + s.label + '</small></div>' + (s.desc ? '<p style="font-size:13px;color:var(--z-text-secondary);margin-top:12px;line-height:1.5">' + s.desc + '</p>' : '');
-      html += '<a href="' + s.slug + '" class="zynix-case-card fade-in-up" style="text-decoration:none;color:inherit;display:block">' + cardInner + '<span style="display:inline-block;margin-top:12px;color:var(--z-primary);font-size:14px;font-weight:600">Read case study &rarr;</span></a>';
-    });
-    html += '</div>';
-    return renderInnerHero('CASE STUDIES', segTitle, segDesc, null, '') +
-    '<section class="zynix-case-section"><div class="zynix-container">' +
-    '<div style="margin-bottom:32px"><a href="/case-studies" style="color:var(--z-primary);font-size:14px;font-weight:600;text-decoration:none">&larr; All Case Studies</a></div>' +
-    html + '</div></section>' +
-    renderCTA('Ready to Write Your Success Story?', 'Join the organizations already achieving measurable results with Zynix.', 'Request a Demo') +
-    renderFooter();
-  }
-
-  function renderCaseStudiesHealthSystems() {
-    return renderCaseStudiesBySegment('Case Studies for Health Systems', 'See how health systems are transforming population health management, after-hours coverage, and clinical operations with Zynix AI.', 'HEALTH SYSTEMS', 'Health System');
-  }
-  function renderCaseStudiesACOs() {
-    return renderCaseStudiesBySegment('Case Studies for ACOs & MSOs', 'See how ACOs are improving quality gap closure, TCM contact rates, and shared savings performance with Zynix AI.', 'ACOs & MSOs', 'ACO');
-  }
-  function renderCaseStudiesHealthPlans() {
-    return renderCaseStudiesBySegment('Case Studies for Health Plans', 'See how health plans are improving Star Ratings, medication adherence, and member engagement with Zynix AI.', 'HEALTH PLANS', 'Health Plan');
-  }
-  function renderCaseStudiesPractices() {
-    return renderCaseStudiesBySegment('Case Studies for Independent Practices', 'See how independent and group practices are reducing no-shows, automating scheduling, and improving operational efficiency with Zynix AI.', 'INDEPENDENT PRACTICES', 'Practice');
-  }
-  function renderCaseStudiesFQHCs() {
-    return renderCaseStudiesBySegment('Case Studies for FQHCs', 'See how Federally Qualified Health Centers are delivering multilingual care coordination and improving UDS quality measures with Zynix AI.', 'FQHCs', 'FQHC');
-  }
 
   // ── Custom 404 page renderer ──
   function render404() {
