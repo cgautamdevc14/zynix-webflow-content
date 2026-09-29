@@ -3683,7 +3683,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-sol-group[hidden] { display:none; }
 .zx-sol-group .zynix-section-head { margin-bottom:var(--zx-space-6); }
 .zx-sol-group .zynix-section-head--split { align-items:start; }
-.zx-sol-group .zynix-section-head--split .zynix-section-head__aside { padding-top:var(--zx-space-6); }
+@media (min-width:1024px) { .zx-sol-group .zynix-section-head--split .zynix-section-head__aside { padding-top:var(--zx-space-6); } }
 .zx-sol-group__runs { display:block; margin-top:var(--zx-space-3); font-size:var(--zx-fs-sm); line-height:1.5; color:var(--zx-text-muted); }
 .zx-sol-group__runs-label { font-weight:var(--zx-fw-semibold); color:var(--zx-text-secondary); }
 .zx-sol-uclist { display:grid; grid-template-columns:minmax(0,1fr); list-style:none; margin:0; padding:0; border-top:1px solid var(--zx-border); }
