@@ -2107,146 +2107,243 @@
 
   // ── PAGE: Data Platform ──
   function renderDataPlatform() {
-    return renderInnerHero('DATA PLATFORM', 'Your Data. Finally Useful.',
-      'The unified healthcare data layer that ingests, cleans, normalizes, and organizes data from every clinical and administrative source in real time.',
-      IMG.data, 'Zynix Data Platform', 'Explore Capabilities') +
+    // Data foundation (§6 "Product / layer"; COPY_DECK §4, §2.6, §7 #42–43).
+    var html = renderHero({ preset: 'product', eyebrow: 'Data foundation', title: 'One patient record from every source',
+      lead: 'Zynix brings in claims, EHR, ADT, lab and pharmacy data, standardizes the codes and resolves identity, so every worklist starts from the same record.',
+      secondary: { label: 'See integrations', href: '/integrations' },
+      media: { type: 'product', frame: zxPlatPanel({ label: 'Sample patient record, illustrative data', brand: 'Data foundation',
+        title: 'Pt 1042 · 72 · CHF', meta: 'One record · matched across sources',
+        tiles: [{ value: '1', label: 'Discharge this week' }, { value: '2', label: 'Open care gaps' }, { value: '1', label: 'Care plan open' }],
+        rows: [
+          { title: 'Hospital discharge', sub: 'Discharged yesterday · partner hospital', owner: { type: 'system', label: 'HL7 v2 ADT' }, status: { tone: 'brand', label: 'Received' } },
+          { title: 'Medicare claims', sub: 'Diagnoses and utilization, last 12 months', owner: { type: 'system', label: 'CCLF' }, status: { tone: 'success', label: 'Matched' } },
+          { title: 'Practice EHR', sub: 'Problem list, medications and last visit', owner: { type: 'system', label: 'FHIR' }, status: { tone: 'success', label: 'Matched' } },
+          { title: 'Pharmacy fills', sub: 'Refill gap on a heart-failure medication', owner: { type: 'system', label: 'NCPDP' }, status: { label: 'Review' } }
+        ],
+        footer: 'Codes standardized to ICD-10, CPT, SNOMED and LOINC; identity resolved across sources.' },
+        'One patient, matched across claims, ADT, EHR and pharmacy data · sample data') } });
 
-    '<div class="zynix-container"><div class="zynix-summary-block"><p><strong>Zynix Data Platform</strong> is the unified healthcare data layer that ingests, normalizes, and organizes clinical and administrative data from every source in real time. It connects EHRs, claims, ADT streams, labs, pharmacy, and SDOH data into a single clean patient record, creating the data foundation that powers AI agents, risk stratification, and population health analytics.</p></div></div>' +
+    html += zxPlatSplit('problem', ['The problem', 'Every source tells part of the story', null],
+      '<p class="zx-plat-text">Claims arrive in monthly files, discharges arrive as ADT messages and each practice keeps its own EHR. Until those records are matched to one patient, worklists miss discharges, count the same gap twice and reach patients at out-of-date contact details.</p>',
+      { ratio: '5-7', rule: true });
 
-    renderProblemSection('Why Your Data Isn\u2019t Working', [
-      { icon: IC_ZAP, title: 'Fragmented Data', desc: 'Claims in one system, clinical in another, labs in a third. You\u2019re flying blind with partial information.' },
-      { icon: IC_ALERT, title: 'Insights Without Action', desc: 'Your BI tool tells you 2,000 patients have gaps. Nobody has time to call them. Insights gather dust.' },
-      { icon: IC_ALERT, title: 'Bad Data for AI', desc: 'AI agents need clean, unified, real-time data. Garbage in, garbage out. Zynix solves this from day one.' }
-    ]) +
+    html += renderSection({ id: 'how-it-works', surface: 'subtle' },
+      renderSectionHead('How it works', 'From source to worklist', 'The same four steps run for every feed, so every workflow downstream reads one matched record.', { id: 'how-it-works-title' }) +
+      zxPlatSteps([
+        { title: 'Connect', body: 'Claims (Medicare CCLF and BCDA, payer X12 837 and 835), EHR data, HL7 v2 ADT messages, lab results, pharmacy fills and SDoH screening arrive over standard interfaces.' },
+        { title: 'Standardize', body: 'Codes are mapped to ICD-10, CPT, SNOMED and LOINC, and duplicate records are removed.' },
+        { title: 'Match', body: 'Patient identity is resolved across sources into one longitudinal record, using identifiers such as name, date of birth, MRN and address.' },
+        { title: 'Deliver', body: 'The record feeds risk and gap analytics, care-team worklists, care plans and agent tasks.' }
+      ]));
 
-    '<section class="zynix-capabilities-section" id="capabilities"><div class="zynix-container">' +
-    '<span class="zynix-tag">CAPABILITIES</span>' +
-    '<h2>End-to-End Data Intelligence</h2>' +
-    '<div class="zynix-data-layers">' +
-    '<div class="zynix-data-layer fade-in-up"><h3>' + IC_DOWNLOAD + ' Ingestion Layer</h3><p>EHRs (Epic, Cerner, athena, eCW, NextGen, Allscripts), Claims, ADT, Labs, Pharmacy, SDOH. Every data source. Every format. Connected.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>' + IC_GEAR + ' Processing Layer</h3><p>De-duplication, standardized coding (ICD-10, CPT, SNOMED, LOINC), golden record creation, risk prediction, gap identification, and worklist generation.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>' + IC_ZAP + ' Real-Time Feeds</h3><p>EHR APIs, HL7/FHIR feeds, claims (837/835), ADT streams, labs, pharmacy, SDOH, scheduling, and financial data, all flowing in real time.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>' + IC_FILE + ' Outputs</h3><p>Unified patient records, risk-stratified views, gap closure worklists, dashboards, scorecards, and API endpoints for AI agents.</p></div>' +
-    '</div></div></section>' +
+    html += zxPlatSplit('what-changes', ['What changes for your team', 'One record behind every workflow', null],
+      zxPlatRows([
+        { title: 'One view of each patient', body: 'Claims history, the latest ADT event, pharmacy fills and open gaps sit on one record, whatever EHR the practice runs.' },
+        { title: 'The same record everywhere', body: 'Analytics, care plans, agents and ZynScribe read the same matched record, so the worklist and the outreach agree.' },
+        { title: 'Standard interfaces', body: SITE_FACTS.ehr.standards.join(' · ') + '.' },
+        { title: 'Protected in transit and at rest', body: 'Data is encrypted in transit and at rest, and access follows least-privilege controls.' }
+      ], { split: true }));
 
-    '<section class="zynix-audience-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">BUILT FOR LEADERS</span>' +
-    '<h2>Healthcare Leaders Trust Zynix Data</h2>' +
-    renderFeatureCards([
-      { icon: IC_STETHOSCOPE, title: 'Chief Medical Officers', desc: 'Deep insight into population health across your entire attributed patient base.' },
-      { icon: IC_CLIPBOARD, title: 'Quality Officers', desc: 'Track metrics and documentation compliance with real-time quality dashboards.' },
-      { icon: IC_HOSPITAL, title: 'Population Health Officers', desc: 'Optimize populations at scale with unified, actionable data intelligence.' },
-      { icon: IC_DOLLAR, title: 'Finance Leaders', desc: 'Measure care impact and ROI with transparent financial data integration.' }
-    ]) +
-    '</div></section>' +
+    html += zxPlatProof({ title: 'Who uses the data foundation',
+      lead: 'Every Zynix customer starts here: their worklists, care plans and agents all read the same matched record.', story: 'pbaco' });
+    html += zxPlatStack();
 
-    renderMetricsBar([
-      { value: '30 days', label: 'Time to measurable impact' },
-      { value: '6-12 mo', label: 'Full ROI realization' },
-      { value: '100%', label: 'Data sources connected' },
-      { value: 'Real-time', label: 'Data processing speed' }
-    ]) +
+    html += zxPlatFaq('faq-data', [
+      { q: 'What data sources does Zynix connect?', a: 'Zynix connects to ' + SITE_FACTS.ehr.line + ', including Epic, Oracle Health (Cerner), athenahealth, eClinicalWorks, NextGen and Allscripts, plus claims (Medicare CCLF and BCDA, payer X12 837 and 835), HL7 v2 ADT messages, lab results, pharmacy fills and SDoH screening data.' },
+      { q: 'How does patient matching work?', a: 'Zynix matches records from every source to one record per patient, using identifiers such as name, date of birth, MRN and address, and resolves duplicates and discrepancies so analytics and outreach work from the same longitudinal profile.' },
+      { q: 'Is data encrypted at rest and in transit?', a: 'Yes. Patient data is encrypted in transit and at rest, and access follows least-privilege controls. Zynix is ' + SITE_FACTS.compliance.soc2.prose + ', with HIPAA-aligned safeguards and a BAA available.' }
+    ]);
 
-    '<section class="zynix-page-faq"><div class="zynix-container">' +
-    '<span class="zynix-tag">FAQ</span>' +
-    '<h2>Frequently Asked Questions</h2>' +
-    '<div class="zynix-faq-list">' +
-    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What data sources does Zynix integrate?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Zynix integrates with 30+ EHR systems across 300+ connected instances (including Epic, Cerner, athenahealth, eClinicalWorks, NextGen and Allscripts), claims data in 837/835 format, ADT notifications, laboratory results, pharmacy data, SDOH sources, scheduling systems, and financial data. Every data feed is connected via HL7/FHIR APIs, direct EHR integrations, and secure claims pipelines, all processed in real time.</p></div></div>' +
-    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How does patient matching work?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Zynix uses probabilistic and deterministic patient matching algorithms to create a single golden record for each patient across multiple data sources. The system de-duplicates records using identifiers such as name, date of birth, MRN, and address, resolving discrepancies and merging fragmented records into a unified longitudinal patient profile that drives accurate analytics and AI agent actions.</p></div></div>' +
-    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Is data encrypted at rest and in transit?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Yes. Zynix encrypts all patient data at rest using AES-256 encryption and in transit using TLS 1.2+. The platform is HIPAA-compliant, SOC 2 Type II certified, and supports customer-managed encryption keys for private cloud deployments. Comprehensive audit trails log all data access and are available for compliance reporting.</p></div></div>' +
-    '</div></div></section>' +
-
-    renderCTA('Ready to Transform Your Data Into Action?', 'Join healthcare leaders who\u2019ve made their data work for them. Schedule a 30-minute demo.', 'Schedule a Demo') +
-    renderFooter();
+    html += renderCTA('See the data foundation in a 30-minute demo', 'How claims, EHR and ADT data become one patient record and a worklist, shown on sample data.', null,
+      { secondary: { label: 'See integrations', href: '/integrations' } });
+    html += renderFooter();
+    return html;
   }
+
+  // ==== ZX:BEGIN seo (owner P1) ====
+  // Titles and descriptions for P1's routes (COPY_DECK §6). The alias table above copies entries at load time, so every
+  // routed alias gets its own call here.
+  [[['/platform'], 'The Zynix platform for value-based care | Zynix AI',
+     'One platform to connect claims, EHR and ADT data, rank the patients who need attention, and run follow-up with care plans, agents and your care team.'],
+   [['/products-data-platform'], 'Healthcare data foundation: one patient record | Zynix AI',
+     'Bring claims, EHR, ADT, lab and pharmacy data into one patient record. Codes standardized, identities resolved, ready for worklists. 30+ EHR systems.'],
+   [['/zynix-data-analytics', '/products-analytics', '/solutions/zynix-data-analytics'], 'Population health analytics for VBC | Zynix AI',
+     'Risk, quality and HCC gap analytics on your claims and clinical data, ranked into worklists your care team can act on this week.'],
+   [['/care-plans'], 'Care plans for TCM, CCM, AWVs and gap closure | Zynix AI',
+     'Pre-built care plans sequence agents and care team tasks for TCM, CCM, wellness visits and gap closure, and close only when each step is documented.'],
+   [['/zynscribe'], 'ZynScribe ambient clinical documentation | Zynix AI',
+     'ZynScribe drafts structured SOAP notes from the visit conversation. Nothing is filed or used for billing until the physician reviews and approves it.'],
+   [['/integrations'], 'EHR integrations: Epic, Oracle Health, athena | Zynix AI',
+     'Zynix connects to 30+ EHR systems across 300+ connected instances, plus claims, ADT, lab and pharmacy feeds, over FHIR, HL7 v2, C-CDA and X12.'],
+   [['/company-zynixllm', '/company/zynixllm'], 'ZynixLLM: how Zynix AI works safely | Zynix AI',
+     'How ZynixLLM supports value-based care workflows, when clinicians step in, and how agents stay within the escalation rules your team sets.'],
+   [['/security'], 'Security and compliance | Zynix AI',
+     'SOC 2 Type II audited, HIPAA-aligned safeguards with a BAA available, and HITRUST CSF certification in progress. Request the SOC 2 report.']
+  ].forEach(function (e) { e[0].forEach(function (p) { zxSeo(p, { title: e[1], desc: e[2] }); }); });
+  // ==== ZX:END seo ====
+
+  // ==== ZX:BEGIN platform (owner P1) ====
+  // Page-local helpers for the P1 product and layer pages (DESIGN_SPEC §6 "Product / layer" and "Platform overview"). They
+  // compose S2's §2 helpers and emit zx-plat-* markup, styled only in the page:platform CSS block. Facts come from
+  // SITE_FACTS, CUSTOMERS and NAMES; illustrative panels carry the "Sample data" chip and role labels only (§2.9).
+
+  // A zynix-ui sample panel inside a product frame (the panel carries its own chip, so the frame does not add one).
+  // zxPlatPanel returns hero frame options (trimmed below 480px to keep the hero within 1.2 screens, §2.10).
+  function zxPlatPanel(model, caption) {
+    return { html: renderUiPanel(model), sample: false, caption: caption, className: 'zx-plat-frame zx-plat-frame--hero' };
+  }
+  function zxPlatFrame(model, caption) { return renderProductFrame({ html: renderUiPanel(model), sample: false, caption: caption, className: 'zx-plat-frame' }); }
+
+  // Numbered steps: columns at >= 1024 (by count), a numbered list below. opts.stack keeps the list at every width.
+  function zxPlatSteps(items, opts) {
+    opts = opts || {};
+    return '<ol class="zx-plat-steps' + (opts.stack ? ' zx-plat-steps--stack' : '') + zxCls(opts.className) + '" data-count="' + items.length + '">' +
+      items.map(function (s, i) {
+        return '<li class="zx-plat-steps__item"><span class="zx-plat-steps__n" aria-hidden="true">' + (i < 9 ? '0' : '') + (i + 1) + '</span>' +
+          '<div class="zx-plat-steps__main"><h3 class="zx-plat-steps__title">' + s.title + '</h3>' + zxEl('p', 'zx-plat-steps__body', s.body) + '</div></li>';
+      }).join('') + '</ol>';
+  }
+
+  // Hairline rows: title, optional chip, text, optional bullet points and link. opts.split = title and body side by side at >= 1024.
+  function zxPlatRows(items, opts) {
+    opts = opts || {};
+    var lvl = opts.level || 3;
+    return '<ul class="zx-plat-rows' + (opts.split ? ' zx-plat-rows--split' : '') + zxCls(opts.className) + '" role="list">' + items.map(function (r) {
+      var pts = r.points && r.points.length ? '<ul class="zx-plat-rows__points" role="list">' + r.points.map(function (p) { return '<li>' + p + '</li>'; }).join('') + '</ul>' : '';
+      return '<li class="zx-plat-rows__item"><div class="zx-plat-rows__head"><h' + lvl + ' class="zx-plat-rows__title">' + r.title + '</h' + lvl + '>' +
+        (r.chip ? renderChip(r.chip.label, r.chip.tone) : '') + '</div><div class="zx-plat-rows__body">' + zxEl('p', 'zx-plat-rows__text', r.body) + pts +
+        (r.link ? renderLinkArrow(r.link.label, r.link.href) : '') + '</div></li>';
+    }).join('') + '</ul>';
+  }
+
+  // A section whose head sits beside its content at >= 1024 (4/8 or 5/7), stacked below.
+  function zxPlatSplit(id, head, body, opts) {
+    opts = opts || {};
+    return renderSection({ id: id, surface: opts.surface, rule: opts.rule, className: 'zx-plat-split' + zxCls(opts.className) },
+      renderSplit(renderSectionHead(head[0], head[1], head[2], { id: id + '-title', action: head[3] }), body, { ratio: opts.ratio || '4-8' }));
+  }
+
+  // Customer story card: registry customer, its case study, one release-backed line, no metric (DECISIONS 15).
+  var ZX_PLAT_STORIES = {
+    pbaco: 'Post-discharge follow-up and AWV engagement across PBACO Holding’s affiliated provider network.',
+    eternalhealth: 'Outreach and care management workflows for members in Massachusetts and Arizona, in use since January 1, 2026.',
+    amistad: 'After-hours access and preventive outreach for a multilingual patient population.'
+  };
+  function zxPlatStory(id) {
+    var c = zxCustomer(id);
+    if (!c || !c.caseStudy || !ZX_PLAT_STORIES[id]) return '';
+    var logo = c.logo ? '<img class="zx-plat-story__logo" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + Math.round(c.logo.w / c.logo.h * 32) +
+      '" height="32" loading="lazy" decoding="async">' : '';
+    return '<a class="zynix-card zynix-card--link zx-plat-story" href="' + zxAttr(c.caseStudy) + '">' + logo +
+      '<p class="zynix-card__eyebrow">Customer story · ' + c.segmentLabel + '</p><h3 class="zynix-card__title">' + c.name + '</h3>' +
+      '<p class="zynix-card__body">' + ZX_PLAT_STORIES[id] + '</p><span class="zynix-card__cta">Read the customer story<span aria-hidden="true"> →</span></span></a>';
+  }
+
+  // Proof module (§6): a release quote or one story card, the registry stat row with its source, and the logo row.
+  function zxPlatProof(opts) {
+    opts = opts || {};
+    var lead = opts.quote ? renderQuote({ customer: opts.quote, href: zxCustomer(opts.quote).caseStudy, linkLabel: 'Read the case study' }) : zxPlatStory(opts.story);
+    var stats = renderStatRow([{ fact: 'patients' }, { fact: 'states' }, { fact: 'ehrSystems' }, { fact: 'ehrInstances' }], { className: 'zx-plat-proof__stats' });
+    return renderSection({ id: 'customers', surface: opts.surface || 'subtle', rule: opts.surface === 'default', className: 'zx-plat-proof' },
+      renderSectionHead(opts.eyebrow || 'Customers', opts.title, opts.lead, { id: 'customers-title' }) +
+      (lead ? renderSplit(lead, stats, { ratio: '7-5', className: 'zx-plat-proof__grid' }) : stats) +
+      renderLogoRow(opts.logos || null, { id: 'zx-plat-logos', className: 'zx-plat-proof__logos' }));
+  }
+
+  // Interoperability and security strip (§6): the registry EHR line with the named EHRs, and the trust row.
+  function zxPlatStack(opts) {
+    opts = opts || {};
+    var ehr = SITE_FACTS.ehr, cols = '';
+    if (opts.interop !== false) {
+      cols += '<div class="zx-plat-stack__col">' + renderEyebrow('Interoperability') +
+        '<h2 class="zx-plat-stack__title" id="stack-title">Works with the systems you already run</h2>' +
+        '<p class="zx-plat-stack__text">' + ehr.line + ', plus claims, ADT, lab and pharmacy feeds.</p>' +
+        '<ul class="zx-plat-stack__names" role="list" aria-label="EHRs we connect to include">' + ehr.named.map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ul>' +
+        renderLinkArrow('See all integrations', '/integrations') + '</div>';
+    }
+    cols += '<div class="zx-plat-stack__col">' + renderEyebrow('Security') +
+      '<h2 class="zx-plat-stack__title"' + (opts.interop === false ? ' id="stack-title"' : '') + '>Built to be governed</h2>' +
+      '<p class="zx-plat-stack__text">Security reviews are part of every evaluation. Audit documentation is shared through our Drata trust portal on request.</p>' +
+      renderTrustRow(['soc2', 'hipaa', 'hitrust'], { href: '/security' }) + renderLinkArrow('Security and trust', '/security') + '</div>';
+    return renderSection({ id: 'stack', rule: true, className: 'zx-plat-stack' + (opts.interop === false ? ' zx-plat-stack--one' : '') },
+      '<div class="zx-plat-stack__grid">' + cols + '</div>');
+  }
+
+  // Compliance lines as rows (§3.8 wording), for pages that carry their own security section.
+  function zxPlatCompliance() {
+    var c = SITE_FACTS.compliance;
+    return [
+      { title: c.soc2.prose, body: 'The audit report and supporting documentation are shared through our Drata trust portal.' },
+      { title: c.hipaa.prose, body: 'A Business Associate Agreement is available for customers handling PHI.' },
+      { title: c.hitrust.prose, body: 'Readiness assessment completed.' }
+    ];
+  }
+
+  // FAQ section: head beside a disclosure list (§2.13; the list feeds FAQPage JSON-LD).
+  function zxPlatFaq(prefix, items, title) {
+    return zxPlatSplit('faq', ['FAQ', title || 'Questions teams ask', null], renderFaqList(items, { idPrefix: prefix }), { className: 'zx-plat-faq', rule: true });
+  }
+
+  // /platform data flow (§5.5, §6): H's renderDataFlow in expanded form when it is present; until it is merged, the same five
+  // steps as a static list with every step open at every width and each step linked to its layer page.
+  function zxPlatFlow() {
+    var head = renderSectionHead('Data flow', 'From source data to a documented outcome',
+      'Every signal takes the same path: in from your systems, cleaned and matched, read in context, ranked into work and carried through to a documented result.',
+      { id: 'data-flow-title' });
+    if (typeof renderDataFlow === 'function' && typeof HOME_FLOW === 'object' && HOME_FLOW) {
+      var h = renderDataFlow(HOME_FLOW, { expanded: true });
+      if (h) return h.indexOf('id="data-flow"') > -1 ? h : renderSection({ id: 'data-flow', surface: 'inverse', className: 'zx-plat-flow-host' }, head + h);
+    }
+    var L = {};
+    NAMES.layers.forEach(function (l) { L[l.id] = l; });
+    var copy = {
+      ingest: ['Bring every source in.', 'Claims, EHR, ADT, lab, pharmacy and SDoH data arrive over standard interfaces into one secure record.', ['EHR', 'CCLF', 'BCDA', 'HL7 v2 ADT', 'X12', 'NCPDP']],
+      normalize: ['Clean, code and match.', 'Codes are standardized to ICD-10, CPT, SNOMED and LOINC, and patient identity is resolved across systems.', ['ICD-10', 'CPT', 'SNOMED', 'LOINC', 'Identity resolution']],
+      reason: ['Read the record in context.', 'ZynixLLM and clinical risk models read diagnoses, notes and utilization to find gaps and risk.', ['ZynixLLM', 'Risk models']],
+      surface: ['Rank the work.', 'Patients and gaps are ranked into worklists by risk and deadline, then routed to the right program.',
+        NAMES.intelligence.map(function (p) { return p.showName ? p.name : p.capability; })],
+      execute: ['Carry it through.', 'Care plans give each step to an agent or a person. Clinicians make clinical decisions; episodes close only when complete.',
+        NAMES.agentFamilies.map(function (f) { return f.name; }).concat(['Care plans'])]
+    };
+    var li = function (t) { return '<li>' + t + '</li>'; };
+    var io = function (label, items, mod, fact) {
+      return '<div class="zx-plat-flow__io zx-plat-flow__io--' + mod + '"><p class="zx-plat-flow__io-label">' + label + '</p>' +
+        '<ul class="zx-plat-flow__chips" role="list">' + items.map(li).join('') + '</ul>' + zxEl('p', 'zx-plat-flow__fact', fact) + '</div>';
+    };
+    var steps = '<ol class="zx-plat-flow__steps">' + NAMES.flow.map(function (f, i) {
+      var c = copy[f.id];
+      var links = f.layers.map(function (id) { return '<a class="zx-plat-flow__layer" href="' + zxAttr(L[id].href) + '">' + L[id].name + '</a>'; }).join('<span aria-hidden="true"> · </span>');
+      return '<li class="zx-plat-flow__step"><div class="zx-plat-flow__head"><span class="zx-plat-flow__num" aria-hidden="true">' + (i + 1) + '</span>' +
+        '<h3 class="zx-plat-flow__name">' + f.name + '</h3></div><p class="zx-plat-flow__layers">' + links + '</p>' +
+        '<p class="zx-plat-flow__summary">' + c[0] + '</p><p class="zx-plat-flow__detail">' + c[1] + '</p>' +
+        '<ul class="zx-plat-flow__tags" role="list">' + c[2].map(li).join('') + '</ul></li>';
+    }).join('') + '</ol>';
+    return renderSection({ id: 'data-flow', surface: 'inverse', className: 'zx-plat-flow' }, head +
+      io('Your data sources', ['EHR systems', 'Claims', 'ADT events', 'Labs and imaging', 'Pharmacy fills', 'SDoH screening'], 'in', SITE_FACTS.ehr.short) + steps +
+      io('Where the work lands', ['Care-team worklists', 'Point-of-care prompts', 'Population and quality reporting', 'Agent outreach tasks', 'Documentation for physician review'], 'out'));
+  }
+  // ==== ZX:END platform ====
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // ── PAGE: Analytics ──
   function renderAnalytics() {
-    return renderInnerHero('ANALYTICS', 'Intelligence That Drives Action',
-      'AI-powered analytics that go beyond dashboards. Identify HCC opportunities, predict risk, close quality gaps, and support clinical decisions, all in real time.',
-      IMG.analytics, 'Zynix Analytics Dashboard', 'Explore Capabilities') +
-
-    '<div class="zynix-container"><div class="zynix-summary-block"><p><strong>Zynix Analytics</strong> is an AI-powered population health analytics platform purpose-built for value-based care. It identifies HCC documentation gaps, predicts readmission risk, closes HEDIS and STARS quality gaps, and delivers clinical decision support, all in real time, directly connected to the workflows that drive action.</p></div></div>' +
-
-    renderProblemSection('Why Traditional Analytics Fall Short', [
-      { icon: IC_CLOCK, title: 'Stale Data', desc: 'Most healthcare analytics are 3-6 months old. You\u2019re always analyzing yesterday\u2019s problems while today\u2019s patients need help now.' },
-      { icon: IC_CLOCK, title: 'Analysis Paralysis', desc: 'Too many dashboards, too much data, no clarity. Teams spend weeks interpreting instead of taking action.' },
-      { icon: IC_ZAP, title: 'Fragmented Insights', desc: 'Risk scores live in silos. Quality gaps aren\u2019t connected to HCC opportunities. Everything stays disconnected.' }
-    ]) +
-
-    '<section class="zynix-tracks-section" id="capabilities"><div class="zynix-container">' +
-    '<span class="zynix-tag">THREE TRACKS</span>' +
-    '<h2>Analytics That Actually Move the Needle</h2>' +
-
-    '<div class="zynix-track fade-in-up">' +
-    '<div class="zynix-track-header"><span class="zynix-track-num">01</span><h3>HCC & Quality Analytics</h3></div>' +
-    '<div class="zynix-track-body"><ul>' +
-    '<li>Identify all HCC opportunities with clinical documentation analysis</li>' +
-    '<li>Flag quality measures with actionable closure recommendations</li>' +
-    '<li>Rank by RAF impact, closure probability, and optimal timing</li>' +
-    '<li>Trigger gap closure workflows automatically</li>' +
-    '<li>Monitor closure completion and ROI in real-time</li>' +
-    '</ul></div></div>' +
-
-    '<div class="zynix-track fade-in-up">' +
-    '<div class="zynix-track-header"><span class="zynix-track-num">02</span><h3>Risk & Readmission Prediction</h3></div>' +
-    '<div class="zynix-track-body"><ul>' +
-    '<li>Predict hospitalizations weeks in advance for early intervention</li>' +
-    '<li>Identify high-risk patients at the moment of discharge</li>' +
-    '<li>Enable palliative care discussions for appropriate patients</li>' +
-    '<li>Industry-leading models validated against real outcomes</li>' +
-    '</ul></div></div>' +
-
-    '<div class="zynix-track fade-in-up">' +
-    '<div class="zynix-track-header"><span class="zynix-track-num">03</span><h3>Clinical Decision Support</h3></div>' +
-    '<div class="zynix-track-body"><ul>' +
-    '<li>Immediate alerts at point of care for critical decisions</li>' +
-    '<li>Guideline-aligned treatment recommendations in context</li>' +
-    '<li>Real-time allergy and contraindication warnings</li>' +
-    '<li>Seamlessly integrated with EHR workflows</li>' +
-    '</ul></div></div>' +
-
-    '</div></section>' +
-
-    '<section class="zynix-screenshot-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">THE PLATFORM</span>' +
-    '<h2>See the Zynix Portal in Action</h2>' +
-    '<p class="zynix-section-sub">Real product screenshots from the Zynix analytics and quality dashboards.</p>' +
-    '<div class="zynix-screenshot-strip">' +
-    renderBrowserFrame(IMG.ssQuality, 'Zynix AI quality measures dashboard showing HEDIS compliance rates, patients with quality gaps, and low-performing measure analysis', 'app.zynix.ai/quality/measures') +
-    renderBrowserFrame(IMG.ssPredictive, 'Zynix AI predictive analytics dashboard with readmission risk scoring and population health modeling', 'app.zynix.ai/analytics/risk') +
-    renderBrowserFrame(IMG.ssPerformance, 'Zynix AI care management performance overview showing clinical outcomes, care gap closure rates, and coordinator performance comparison', 'app.zynix.ai/care/performance') +
-    '</div></div></section>' +
-
-    renderMetricsBar([
-      { value: '30%', label: 'HCC Gap Closure Improvement' },
-      { value: '25%', label: 'Readmission Reduction' },
-      { value: 'Real-time', label: 'Analytics Processing' },
-      { value: '100+', label: 'Quality Measures Tracked' }
-    ]) +
-
-    '<section class="zynix-audience-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">WHO BENEFITS</span>' +
-    '<h2>Built for Every Healthcare Leader</h2>' +
-    renderFeatureCards([
-      { icon: IC_STETHOSCOPE, title: 'CMOs & Pop Health Officers', desc: 'Optimize outcomes across entire patient populations with predictive insights.' },
-      { icon: IC_CLIPBOARD, title: 'Quality & VBC Officers', desc: 'Meet quality targets and close HEDIS/STARS gaps with actionable intelligence.' },
-      { icon: IC_CHART, title: 'Risk Executives', desc: 'Maximize HCC capture and RAF scores with comprehensive documentation analysis.' },
-      { icon: IC_DOLLAR, title: 'CFOs & Revenue Cycle', desc: 'Drive revenue optimization and cost reduction with financial intelligence.' }
-    ]) +
-    '</div></section>' +
-
-    '<section class="zynix-page-faq"><div class="zynix-container">' +
-    '<span class="zynix-tag">FAQ</span>' +
-    '<h2>Frequently Asked Questions</h2>' +
-    '<div class="zynix-faq-list">' +
-    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What is population health analytics?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Population health analytics is the systematic analysis of health data across a defined patient population to identify care gaps, predict risk, and improve outcomes. Zynix population health analytics aggregates clinical, claims, and social data in real time, enabling healthcare organizations to prioritize interventions, close quality gaps, and reduce costs across their entire attributed population.</p></div></div>' +
-    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How does risk stratification work?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Zynix risk stratification uses machine learning models trained on clinical, claims, and social determinants data to assign each patient a risk score predicting hospitalization, readmission, or care gap likelihood. Patients are ranked by risk tier and surfaced in prioritized worklists, enabling care teams to focus on the highest-need patients and deploy AI agents for proactive outreach before a crisis occurs.</p></div></div>' +
-    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What is HCC gap closure?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>HCC (Hierarchical Condition Category) gap closure is the process of identifying chronic conditions that are clinically present but not yet documented in the current year, which directly impacts risk adjustment factor (RAF) scores and Medicare Advantage revenue. Zynix identifies open HCC opportunities across your attributed population using clinical documentation analysis, prioritizes them by RAF impact, and deploys AI agents to schedule patients for gap-closing visits.</p></div></div>' +
-    '</div></div></section>' +
-
-    renderCTA('Ready to Turn Analytics Into Action?', 'See how Zynix Analytics drives measurable outcomes for your organization.', 'Request a Demo') +
-    renderFooter();
+    // /products-analytics is a duplicate of /zynix-data-analytics; it renders the same page until its 301 exists (§6).
+    return renderDataAnalyticsV7();
   }
 
   // ── PAGE: AI Agents ──
@@ -6580,153 +6677,117 @@ function renderAboutV7() {
 
 
 function renderZynixLLMV7() {
-  var html = '';
+  // ZynixLLM, reframed as "How Zynix AI works safely" (§6, §8.4 P1): no competitor block, no model-provenance wording
+  // ([HOLD]: "healthcare-adapted", "fine-tuned…", "foundation model"), no deployment-model claims (on-prem, VPC, customer keys)
+  // and no data-use statement (SITE_FACTS.governance.dataUse is held). Governance lines come from zxGovernance().
+  var gov = zxGovernance(['escalation', 'review']);
+  var mark = function (kind) { return '<span class="zynix-mark zynix-mark--' + kind + '" aria-hidden="true"></span>'; };
+  var scope = function (title, kind, items, cls) {
+    return '<div class="zx-plat-scope__col' + (cls ? ' ' + cls : '') + '"><h3 class="zx-plat-scope__title">' + title + '</h3><ul class="zx-plat-scope__list" role="list">' +
+      items.map(function (it) { return '<li class="zx-plat-scope__item">' + mark(kind) + '<div><p class="zx-plat-scope__name">' + it[0] + '</p><p class="zx-plat-scope__text">' + it[1] + '</p></div></li>'; }).join('') +
+      '</ul></div>';
+  };
+  var html = renderHero({ preset: 'product', eyebrow: 'ZynixLLM', title: 'How Zynix AI works safely',
+    lead: 'ZynixLLM is the language model layer of the Zynix platform. Here is what it does, what it doesn’t, and when clinicians step in.',
+    secondary: { label: 'Security and trust', href: '/security' },
+    media: { type: 'product', frame: zxPlatPanel({ label: 'Sample escalation rules, illustrative data', brand: 'Care plans',
+      title: 'Escalation rules · post-discharge outreach', meta: 'Set by your clinical team',
+      rows: [
+        { title: 'Caller describes an emergency', sub: 'Tell the caller to call 911, then alert the care team', owner: { type: 'staff', label: NAMES.roles.rn }, status: { tone: 'warning', label: 'Escalate' } },
+        { title: 'New or worsening symptoms', sub: 'Hand off to a nurse with the conversation attached', owner: { type: 'staff', label: NAMES.roles.rn }, status: { tone: 'warning', label: 'Escalate' } },
+        { title: 'Medication discrepancy', sub: 'Route to a pharmacist or prescriber for review', owner: { type: 'staff', label: NAMES.roles.physician }, status: { tone: 'warning', label: 'Escalate' } },
+        { title: 'Visit booking or reschedule', sub: 'Book within your scheduling rules', owner: { type: 'agent', label: NAMES.roles.agent }, status: { tone: 'brand', label: 'Agent handles' } }
+      ],
+      footer: 'Agents follow the scripts, hours and escalation rules your team approves.' }, 'Escalation rules for a post-discharge plan · sample data') } });
 
-  html += renderInnerHero('COMPANY: TECHNOLOGY', 'Healthcare-Native Intelligence, Built for Real-World Care',
-    'ZynixLLM is the intelligence layer built into the Zynix AI platform. It was developed specifically for healthcare, trained on clinical language, built with safety guardrails, and designed to support the workflows that care teams depend on.',
-    IMG.mesh, 'ZynixLLM Healthcare AI');
+  html += zxPlatSplit('what-it-is', ['What it is', 'The language model layer of the Zynix platform', null],
+    '<p class="zx-plat-text">ZynixLLM isn’t a separate product. It works inside the platform’s workflows, alongside clinical risk models, where agents follow your rules and clinicians make the clinical decisions.</p>',
+    { ratio: '5-7', rule: true });
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">WHAT IS ZYNIXLLM</span>' +
-    '<h2>The Reasoning Engine Behind Every Workflow</h2>' +
-    '<p class="zynix-section-sub">ZynixLLM is Zynix AI\'s healthcare-adapted language model, built by fine-tuning foundational AI systems on US healthcare data, clinical documentation, care coordination language, and value-based care workflows. It is the intelligence infrastructure that powers everything on the platform. It is not a product customers buy separately. It is the reasoning engine built into every agent, analytics tool, and documentation workflow.</p>' +
-    '</div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">WHY HEALTHCARE NEEDS DIFFERENT AI</span>' +
-    '<h2>General-Purpose AI Falls Short in Clinical Settings</h2>' +
-    renderFeatureCards([
-      { icon: IC_SEARCH, title: 'The Language Is Specialized', desc: 'Healthcare documentation uses terminology, abbreviations, and coding conventions that general AI systems were not trained to handle with clinical precision.' },
-      { icon: IC_ALERT, title: 'Incomplete Context Creates Real Risk', desc: 'A model that cannot reason under uncertainty and does not flag gaps for human review is not appropriate for clinical environments.' },
-      { icon: IC_LOCK, title: 'Compliance Is Not Optional', desc: 'Healthcare organizations operate under HIPAA, CMS guidelines, and enterprise security requirements.' },
-      { icon: IC_GEAR, title: 'Workflows Are the Unit of Value', desc: 'AI that only produces outputs, without integrating into defined workflows, stops short of the problem.' }
+  html += renderSection({ id: 'scope', surface: 'subtle', className: 'zx-plat-scope-section' },
+    renderSectionHead('Scope', 'What it does, and what it doesn’t', null, { id: 'scope-title' }) +
+    '<div class="zx-plat-scope">' +
+    scope('What ZynixLLM does', 'yes', [
+      ['Reads the record in context', 'With clinical risk models, it reads diagnoses, notes and utilization to find care gaps and risk.'],
+      ['Drafts documentation', 'It drafts ZynScribe visit notes for the physician to review, edit and approve.'],
+      ['Understands patient conversations', 'It helps outreach agents understand what patients say on calls and texts, so they can answer from approved scripts and hand off the rest.']
     ]) +
-    '</div></section>';
+    scope('What it doesn’t do', 'no', [
+      ['Diagnose or recommend treatment', 'Clinical questions go to a licensed clinician.'],
+      ['File notes on its own', 'ZynScribe notes stay drafts until a physician approves them.'],
+      ['Act outside your rules', 'Agents follow the scripts, hours and escalation rules your team approves.']
+    ], 'zx-plat-scope__col--not') + '</div>');
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">DIFFERENTIATORS</span>' +
-    '<h2>What Makes ZynixLLM Different</h2>' +
-    '<div class="zynix-arch-grid">';
-  var diffs = [
-    { num: '01', title: 'Healthcare-Native Design', desc: 'Fine-tuned on clinical language, US healthcare workflows, care coordination documentation, and value-based care operations.' },
-    { num: '02', title: 'Multi-Modal Understanding', desc: 'Processes voice, structured EHR data, free-text notes, claims data, lab results, and diagnostic documentation together.' },
-    { num: '03', title: 'Safety-First Architecture', desc: 'Layered safety framework. Uncertainty is flagged rather than masked. Critical decisions include a human in the loop.' },
-    { num: '04', title: 'Workflow Integration', desc: 'Designed to support defined clinical and operational workflows where outputs feed into the next step of a process.' },
-    { num: '05', title: 'Flexible Deployment', desc: 'Supports secure cloud, customer-controlled cloud, on-premise, and hybrid configurations.' }
-  ];
-  // Use 5 cards - first 4 in arch-grid (2x2), last one below
-  for (var d = 0; d < 4; d++) {
-    html += '<div class="zynix-arch-card fade-in-up"><div class="zynix-arch-num">' + diffs[d].num + '</div><h3>' + diffs[d].title + '</h3><p>' + diffs[d].desc + '</p></div>';
-  }
-  html += '</div>' +
-    '<div class="zynix-arch-grid" style="grid-template-columns:1fr"><div class="zynix-arch-card fade-in-up"><div class="zynix-arch-num">' + diffs[4].num + '</div><h3>' + diffs[4].title + '</h3><p>' + diffs[4].desc + '</p></div></div>' +
-    '</div></section>';
+  html += zxPlatSplit('governance', ['Governance', 'When clinicians step in', 'Agents handle operational steps. Clinical judgment stays with your team, and the rules are yours to set.'],
+    zxPlatRows(gov.map(function (g) { return { title: g.title, body: g.text }; }).concat([
+      { title: 'Emergencies go to 911', body: 'Callers describing an emergency are told to call 911.' }
+    ]), { split: true }));
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">WHERE IT IS USED</span>' +
-    '<h2>ZynixLLM Powers Every Platform Layer</h2>' +
-    renderFeatureCards([
-      { icon: IC_PHONE, title: 'Patient Engagement & AI Voice Agents', desc: 'Powers clinical language understanding behind patient-facing AI voice agents for two-way outreach conversations.' },
-      { icon: IC_MIC, title: 'Ambient Clinical Documentation', desc: 'Enables real-time transcription and structuring of patient-clinician conversations into clinical notes.' },
-      { icon: IC_CHART, title: 'Care Gap Detection & Prioritization', desc: 'Identifies patients with open quality and risk gaps, prioritizes by clinical urgency and RAF impact.' },
-      { icon: IC_CHART, title: 'Predictive Analytics & Risk Stratification', desc: 'Interprets signals across claims, EHR data, labs, and SDoH to surface patients rising in risk.' },
-      { icon: IC_ZAP, title: 'Care Coordination & Workflow Orchestration', desc: 'Provides the reasoning backbone that moves work through multi-step clinical workflows to completion.' },
-      { icon: IC_LIGHTBULB, title: 'After-Hours Triage & Clinical Communication', desc: 'Supports triage logic and clinical communication in after-hours contexts in 15+ languages.' }
-    ]) +
-    '</div></section>';
+  html += zxPlatSplit('deployment', ['Security', 'Security and deployment', 'ZynixLLM runs inside the Zynix platform and is covered by the same security program.', { label: 'Security and trust', href: '/security' }],
+    zxPlatRows(zxPlatCompliance().concat([{ title: 'Deployment', body: 'Deployment options are agreed during scoping.' }]), { split: true }), { surface: 'subtle' });
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">COMPARISON</span>' +
-    '<h2>ZynixLLM vs General-Purpose AI</h2>' +
-    '<div class="zynix-compare-grid">' +
-    '<div class="zynix-compare-card zynix-compare-good"><h3>ZynixLLM</h3><ul>' +
-    '<li>Built specifically for healthcare workflows</li>' +
-    '<li>Optimized for clinical terminology and coding</li>' +
-    '<li>Safety checks, uncertainty flagging, and human escalation</li>' +
-    '<li>Supports multi-step care workflows to completion</li>' +
-    '<li>Tuned for healthcare conversation and triage logic</li>' +
-    '<li>Secure cloud, on-premise, hybrid deployment</li>' +
-    '<li>Built for HIPAA and enterprise security</li>' +
-    '</ul></div>' +
-    '<div class="zynix-compare-card zynix-compare-bad"><h3>General-Purpose AI</h3><ul>' +
-    '<li>Built for broad general-purpose language tasks</li>' +
-    '<li>Limited healthcare-specific language depth</li>' +
-    '<li>General content moderation only</li>' +
-    '<li>Response-based; no workflow execution</li>' +
-    '<li>Not optimized for clinical nuance</li>' +
-    '<li>Typically cloud-only</li>' +
-    '<li>Not healthcare-specific compliance</li>' +
-    '</ul></div>' +
-    '</div></div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">DEPLOYMENT FLEXIBILITY</span>' +
-    '<h2>Deploy ZynixLLM Where Your Data Lives</h2>' +
-    '<p class="zynix-section-sub">Healthcare organizations require control over where AI models run and where patient data is processed. ZynixLLM supports every deployment model, from fully managed cloud to air-gapped on-premises installations, ensuring HIPAA compliant AI deployment that meets your organization\'s data sovereignty requirements.</p>' +
-    '<div class="zynix-arch-grid">' +
-    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#ccfdcf"><div class="zynix-arch-num">' + IC_CLOUD + '</div><h3>Zynix Cloud</h3><p>Fully managed healthcare AI deployment on HIPAA-compliant, SOC 2 Type II certified infrastructure. Zero infrastructure management. Automatic updates and scaling. The fastest path to production.</p></div>' +
-    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#cebffa"><div class="zynix-arch-num">' + IC_LOCK + '</div><h3>Private Cloud (AWS / Azure / GCP)</h3><p>Dedicated ZynixLLM instance in your VPC. Private cloud healthcare AI with customer-managed encryption keys, network isolation, and full data residency control. All inference stays within your cloud boundary.</p></div>' +
-    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#fddbc8"><div class="zynix-arch-num">' + IC_HOSPITAL + '</div><h3>On-Premises</h3><p>Run the complete on-premises healthcare LLM stack in your own data center. Air-gapped medical AI deployment available for facilities requiring zero external connectivity. PHI never leaves your physical infrastructure.</p></div>' +
-    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#d7e9ff"><div class="zynix-arch-num">' + IC_REFRESH + '</div><h3>Hybrid</h3><p>Cloud orchestration with on-premises inference. Workflow management runs in the cloud while ZynixLLM clinical inference runs locally. Sensitive data never leaves the facility. Best of both deployment models.</p></div>' +
-    '</div></div></section>';
-
-  html += renderCTA('Healthcare AI That Understands How Care Actually Works', 'Talk to our team about how ZynixLLM powers intelligent workflows across the Zynix platform.', 'Talk to Our Team');
+  html += renderCTA('See how Zynix keeps clinicians in charge', 'We’ll walk through escalation rules and physician review on sample data.', null,
+    { secondary: { label: 'Security and trust', href: '/security' } });
   html += renderFooter();
   return html;
 }
 
 
 function renderSecurityV7() {
-  var html = '';
-
-  html += renderInnerHero('SECURITY & COMPLIANCE', 'Security and Compliance Built for Healthcare',
-    'Zynix AI is SOC 2 Type II certified and operates HIPAA-aligned safeguards across every deployment. This page summarizes our security posture for prospective customers, procurement teams, and compliance reviewers.',
-    IMG.enterprise, 'Zynix AI Security');
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">COMPLIANCE</span>' +
-    '<h2>Compliance Highlights</h2>' +
-    renderFeatureCards([
-      { icon: IC_LOCK, title: 'SOC 2 Type II', desc: 'Certified. Coverage: Zynix AI platform and supporting systems. Full audit documentation available through the Zynix AI Trust Portal powered by Drata. Contact info@zynix.ai to request access.', metric: 'Certified', metricLabel: 'Current' },
-      { icon: IC_SHIELD, title: 'HIPAA', desc: 'HIPAA-aligned safeguards and operating practices for all deployments involving PHI. Validated through our SOC 2 program. Business Associate Agreement (BAA) available for all covered entity customers.', metric: 'Aligned', metricLabel: 'BAA Available' },
-      { icon: IC_KEY, title: 'HITRUST CSF', desc: 'HITRUST CSF certification is in progress, following a completed readiness assessment. Controls are aligned to the framework for healthcare AI deployments.', metric: 'In Progress', metricLabel: 'Certification' }
-    ]) +
-    '</div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">SECURITY PROGRAM</span>' +
-    '<h2>Security Program Overview</h2>' +
-    '<div class="zynix-data-layers">' +
-    '<div class="zynix-data-layer fade-in-up"><h3>Data Protection</h3><p>Encryption in transit and at rest across all platform components. Access controls based on least-privilege principles. Separation of production and non-production environments.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>Identity & Access Management</h3><p>Role-based access controls (RBAC) across all systems. Multi-factor authentication (MFA) required for all administrative access. Periodic access reviews.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>Monitoring & Incident Response</h3><p>Continuous security monitoring across key systems. Documented incident response plan with defined escalation paths. Customer notification obligations defined in agreements.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>Business Continuity</h3><p>Backup and recovery procedures for all critical systems, tested periodically. Business continuity planning for operational resilience across healthcare deployments.</p></div>' +
-    '</div></div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">TRUST PORTAL</span>' +
-    '<h2>Access Our Security Documentation</h2>' +
-    '<p class="zynix-section-sub">Zynix AI\'s security and compliance documentation, including our SOC 2 Type II report, security policies, and compliance certificates, is available through our Trust Portal, powered by Drata. Contact <a href="mailto:info@zynix.ai">info@zynix.ai</a> to request access.</p>' +
-    '</div></section>';
-
-  html += '<section class="zynix-faq-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">FAQ</span>' +
-    '<h2>Frequently Asked Questions</h2>' +
-    '<div class="zynix-faq-list">';
-  var faqItems = [
-    { q: 'Are you SOC 2 Type II certified?', a: 'Yes. Zynix AI holds a current SOC 2 Type II certification covering our platform and supporting systems. The full report is available under NDA.' },
-    { q: 'Is a Business Associate Agreement (BAA) available?', a: 'Yes. A BAA is available for all customers operating under HIPAA-regulated workflows. Contact info@zynix.ai to initiate.' },
-    { q: 'How does Zynix AI handle protected health information (PHI)?', a: 'PHI is processed in accordance with our executed BAA and applicable HIPAA safeguards, including encryption in transit and at rest, access controls, and audit logging.' },
-    { q: 'Do you support customer security assessments?', a: 'Yes. We regularly support procurement and security review processes. Contact info@zynix.ai to submit a questionnaire.' },
-    { q: 'Do you conduct penetration testing?', a: 'Yes. Third-party penetration testing is conducted periodically. Results are available to customers under NDA.' },
-    { q: 'Do you run vulnerability management?', a: 'Yes. Vulnerability scanning, prioritized remediation, and tracking against defined SLAs are part of our ongoing security operations.' }
+  // Security & trust (§6: hero primary "Request the SOC 2 report" is the one orange action; specifics as a scannable list; no
+  // overclaiming compliance pill; CTA band through the /security preset of renderCTA, §2.21). Compliance wording: DECISIONS 17.
+  var c = SITE_FACTS.compliance, req = c.soc2.request;
+  var status = [
+    { icon: 'shield', chip: ['Audited', 'success'], title: 'SOC 2 Type II', body: c.soc2.prose + '. The report covers the Zynix AI platform and supporting systems.' },
+    { icon: 'lock', chip: ['BAA available', 'brand'], title: 'HIPAA', body: 'HIPAA-aligned safeguards and operating practices for every deployment involving PHI. A Business Associate Agreement is available for customers handling PHI.' },
+    { icon: 'clock', chip: ['In progress', 'neutral'], title: 'HITRUST CSF', body: c.hitrust.prose + ', following a completed readiness assessment.' }
   ];
-  for (var f = 0; f < faqItems.length; f++) {
-    html += '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">' + faqItems[f].q + '<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>' + faqItems[f].a + '</p></div></div>';
-  }
-  html += '</div></div></section>';
+  var html = renderHero({ preset: 'product', eyebrow: 'Security &amp; trust', title: 'Security and compliance for healthcare data',
+    lead: 'SOC 2 Type II audited with the report available on request, HIPAA-aligned safeguards with a BAA available, and HITRUST CSF certification in progress.',
+    primary: { label: req.label, href: req.href, cta: 'soc2-report' }, secondary: { label: 'Request a demo', href: CALENDLY },
+    badges: null, media: { type: 'none' }, compact: true });
 
-  html += renderCTA('Working Through a Security Review?', 'Our team supports questionnaires, documentation requests, and BAA execution as part of every customer evaluation.', 'Contact Our Security Team');
+  html += renderSection({ id: 'compliance', rule: true, className: 'zx-plat-compliance' },
+    renderSectionHead('Compliance', 'Where we stand', 'Audit documentation is shared through our Drata trust portal on request.', { id: 'compliance-title' }) +
+    renderGrid(status, function (s) {
+      return '<article class="zynix-card zx-plat-status"><div class="zx-plat-status__top"><span class="zynix-card__icon" aria-hidden="true">' + zxIcon(s.icon) + '</span>' +
+        renderChip(s.chip[0], s.chip[1]) + '</div><h3 class="zynix-card__title">' + s.title + '</h3><p class="zynix-card__body">' + s.body + '</p></article>';
+    }));
+
+  html += zxPlatSplit('program', ['Security program', 'How we protect customer data', 'A summary for procurement and compliance reviewers. The detail is in the SOC 2 report.'],
+    zxPlatRows([
+      { title: 'Data protection', points: ['Encryption in transit and at rest across platform components', 'Access based on least privilege', 'Production separated from non-production environments'] },
+      { title: 'Identity and access', points: ['Role-based access controls across systems', 'Multi-factor authentication for all administrative access', 'Periodic access reviews'] },
+      { title: 'Monitoring and incident response', points: ['Continuous security monitoring across key systems', 'A documented incident response plan with defined escalation paths', 'Customer notification obligations defined in agreements'] },
+      { title: 'Testing and vulnerabilities', points: ['Third-party penetration testing, conducted periodically', 'Vulnerability scanning with prioritized remediation'] },
+      { title: 'Business continuity', points: ['Backup and recovery procedures for critical systems, tested periodically', 'Business continuity planning for operational resilience'] }
+    ], { split: true }), { surface: 'subtle' });
+
+  html += renderSection({ id: 'ai-governance', className: 'zx-plat-governance' },
+    renderSectionHead('AI governance', 'How agents and models are kept in check', 'Two rules apply wherever agents or ZynScribe are used.',
+      { id: 'ai-governance-title', action: { label: 'How Zynix AI works safely', href: '/company-zynixllm' } }) +
+    renderGrid(zxGovernance(['escalation', 'review']), function (g, i) { return renderCard({ icon: i ? 'file' : 'users', title: g.title, body: g.text }); }));
+
+  html += zxPlatSplit('documents', ['For your review', 'What you can request', 'Write to <a href="mailto:' + SITE_FACTS.company.email + '">' + SITE_FACTS.company.email + '</a>, or use the request button on this page.'],
+    zxPlatRows([
+      { title: 'SOC 2 Type II report', body: 'Shared through our Drata trust portal, under NDA.' },
+      { title: 'Penetration test results', body: 'Results of third-party testing are available to customers under NDA.' },
+      { title: 'Security questionnaires', body: 'We complete procurement and security questionnaires as part of every evaluation.' },
+      { title: 'Business Associate Agreement', body: 'Available for customers operating HIPAA-regulated workflows.' },
+      { title: 'Deployment and data flows', body: 'Deployment options, data sources and interfaces are agreed during scoping.' }
+    ], { split: true }), { surface: 'subtle' });
+
+  html += zxPlatFaq('faq-security', [
+    { q: 'Is Zynix AI SOC 2 Type II audited?', a: 'Yes. Zynix AI is SOC 2 Type II audited. The report covers our platform and supporting systems and is available on request under NDA.' },
+    { q: 'Is a Business Associate Agreement (BAA) available?', a: 'Yes. A BAA is available for customers operating HIPAA-regulated workflows. Write to ' + SITE_FACTS.company.email + ' to start one.' },
+    { q: 'How does Zynix AI handle protected health information (PHI)?', a: 'PHI is processed under your executed BAA and our HIPAA-aligned safeguards, including encryption in transit and at rest and least-privilege access controls.' },
+    { q: 'What is your HITRUST status?', a: 'HITRUST CSF certification is in progress, following a completed readiness assessment.' },
+    { q: 'Do you support customer security assessments?', a: 'Yes. We support procurement and security reviews as part of every evaluation. Write to ' + SITE_FACTS.company.email + ' to send a questionnaire.' },
+    { q: 'Do you run penetration testing and vulnerability management?', a: 'Yes. Third-party penetration testing is conducted periodically, with results available to customers under NDA, and vulnerability scanning with prioritized remediation is part of ongoing security operations.' }
+  ], 'Security questions');
+
+  html += renderCTA('Working through a security review?', 'We support questionnaires, documentation requests and BAA execution in every evaluation.', null,
+    { primary: { label: req.label, href: req.href }, secondary: { label: 'Request a demo', href: CALENDLY } });
   html += renderFooter();
   return html;
 }
@@ -7462,58 +7523,65 @@ function renderAgentPageV7(data) {
 
 
 function renderPlatformHub() {
-  var html = '';
+  // Platform overview (§6, COPY_DECK §5.2): one-sentence hero, the data flow in expanded form, the four layers, the worklist,
+  // proof, security and deployment, CTA.
+  var solutions = NAV.filter(function (s) { return s.id === 'solutions'; })[0];
+  var audiences = solutions ? solutions.columns[0].items : [];
+  var layerCopy = {
+    'data-foundation': ['Claims, EHR, ADT, lab and pharmacy data, matched to one patient record.', 'See the data foundation'],
+    intelligence: ['Ranks the patients, gaps and risks that need action, and shows why.', 'Explore analytics'],
+    agents: ['Handle outreach, scheduling, intake and follow-up, and hand clinical questions to your team.', 'See how agents work'],
+    'care-plans': ['Sequence agents and people around one goal, and keep the episode open until it’s documented.', 'Browse care plans']
+  };
+  var html = renderHero({ preset: 'product', eyebrow: 'Platform', title: 'The Zynix platform for <span class="zx-plat-nowrap">value-based</span> care operations',
+    lead: 'Four layers that work as one: a data foundation, intelligence that ranks the work, agents that handle outreach and scheduling, and care plans that see each episode through.',
+    secondary: { label: 'See the data flow', href: '#data-flow' }, media: { type: 'none' }, compact: true });
 
-  html += renderInnerHero('THE PLATFORM', 'The AI Operating System for <span style="color:var(--z-accent)">Value-Based Care</span>',
-    'Zynix Intelligent Platform (ZIP) unifies healthcare data, clinical intelligence, autonomous AI agents, and deployable care plans into a single operating system. One platform replaces the patchwork of point solutions that fragment care delivery and limit performance improvement.',
-    IMG.enterprise, 'Zynix Intelligent Platform', 'Explore Capabilities');
+  html += renderSection({ id: 'overview', compact: true, rule: true, className: 'zx-plat-lede' },
+    '<p class="zx-plat-lede__text">The Zynix platform gives ACOs, health plans, MSOs, IPAs and health systems one place to connect their data, see who needs attention and get the follow-up done.</p>' +
+    '<div class="zx-plat-lede__for"><p class="zx-plat-lede__label" id="zx-plat-for">Built for</p><ul class="zx-plat-lede__links" role="list" aria-labelledby="zx-plat-for">' +
+    audiences.map(function (a) { return '<li>' + renderLinkArrow(a.label, a.href) + '</li>'; }).join('') + '</ul></div>');
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">OVERVIEW</span>' +
-    '<h2>What ZIP Is</h2>' +
-    '<p class="zynix-section-sub">ZIP is the unified platform that connects data ingestion, AI-driven intelligence, autonomous agent execution, and orchestrated care plans into a single system of record and action. It replaces the fragmented stack of analytics dashboards, outreach tools, scheduling software, and documentation platforms that most healthcare organizations operate today.</p>' +
-    '<p class="zynix-section-sub">Every component shares the same data layer, the same patient context, and the same security posture. ZIP is deployed across ACOs, health systems, health plans, FQHCs, and independent practices serving over 1 million patients in 30 states.</p>' +
-    '</div></section>';
+  html += zxPlatFlow();
 
-  html += '<section id="capabilities"><div class="zynix-container">' +
-    '<span class="zynix-tag">ARCHITECTURE</span>' +
-    '<h2>Four Layers. One Integrated Platform.</h2>' +
-    '<div class="zynix-arch-grid">' +
-    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#ccfdcf"><div class="zynix-arch-num">01</div><h3>AI Data Foundation</h3><p>Ingest, clean, normalize, and unify data from EHR systems (Epic, Cerner, athenahealth, eClinicalWorks, NextGen, Allscripts), claims feeds (837/835), ADT streams, lab results, pharmacy fills, and SDOH sources. 97%+ patient matching accuracy.</p></div>' +
-    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#cebffa"><div class="zynix-arch-num">02</div><h3>Intelligence & Reasoning</h3><p>ZynixLLM and proprietary clinical models power risk stratification, HCC gap detection, quality measure identification, readmission prediction, and clinical decision support. Intelligence feeds directly into agent workflows.</p></div>' +
-    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#fddbc8"><div class="zynix-arch-num">03</div><h3>AI Agent Suite</h3><p>Twelve specialized AI agents that take autonomous action: after-hours triage, scheduling, post-discharge outreach, medication reconciliation, prior authorization, fax processing, appointment reminders, AWV scheduling, chronic disease monitoring, and more.</p></div>' +
-    '<div class="zynix-arch-card fade-in-up" style="border-left-color:#d7e9ff"><div class="zynix-arch-num">04</div><h3>Deployable Care Plans</h3><p>Pre-built, configurable care plan templates that orchestrate multiple agents into end-to-end workflows: TCM 30-day follow-through, CCM longitudinal management, AWV identification-to-completion, quality gap closure, and prior authorization sequences.</p></div>' +
-    '</div></div></section>';
+  html += renderSection({ id: 'layers', className: 'zx-plat-layers' },
+    renderSectionHead('Layers', 'Four layers, one platform',
+      'The Zynix platform has four layers, and each one feeds the next. A flagged patient becomes a task with an owner, not a line in a report.', { id: 'layers-title' }) +
+    renderGrid(NAMES.layers, function (l) {
+      var c = layerCopy[l.id] || ['', 'Learn about ' + l.name];
+      return renderCard({ href: l.href, eyebrow: 'Layer ' + l.n, title: l.name, body: c[0], cta: c[1] });
+    }));
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">INTEGRATIONS</span>' +
-    '<h2>Connects to Everything You Already Use</h2>' +
-    '<div class="zynix-data-layers">' +
-    '<div class="zynix-data-layer fade-in-up"><h3>EHR Systems</h3><p>Epic, Cerner (Oracle Health), athenahealth, eClinicalWorks, NextGen, Allscripts</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>Data Feeds</h3><p>Claims (837/835), ADT (HL7 v2), FHIR R4 APIs, Lab results (ORU), Pharmacy fill data, SDOH databases</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>Communication</h3><p>Voice (SIP/PSTN), SMS/MMS, Email, Patient portals, Secure messaging</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>Payer Systems</h3><p>Prior auth portals, Eligibility verification, Claims adjudication, Quality measure reporting</p></div>' +
-    '</div></div></section>';
+  html += renderSection({ id: 'worklist', surface: 'subtle', className: 'zx-plat-worklist' },
+    renderSplit(
+      renderSectionHead('In the product', 'The worklist your care team opens every morning',
+        'One list, ranked by risk and deadline, showing who owns each step and what happened last.', { id: 'worklist-title' }) +
+      renderCallouts([
+        { title: 'Ranked by risk and deadline', body: 'Discharges and gaps are sorted so the team starts where the window is closing.' },
+        { title: 'An owner on every row', body: 'Each patient shows whether an agent or a named role has the next step.' },
+        { title: 'Escalations reach the RN', body: 'When a call raises a clinical question, the row moves to the care manager, RN.' }
+      ]),
+      zxPlatFrame({ label: 'Care-gap worklist, illustrative data', brand: 'Care management', title: 'Care-gap worklist', meta: 'Today · all practices',
+        tiles: [{ value: '18', label: 'Discharges this week' }, { value: '214', label: 'Open care gaps' }, { value: '96', label: 'AWVs due' }],
+        rows: [
+          { title: 'Pt 1042 · 72 · CHF', sub: 'Discharged yesterday · TCM contact due', owner: { type: 'agent', label: NAMES.roles.agent }, status: { tone: 'brand', label: 'In progress' } },
+          { title: 'Pt 3561 · 81 · CKD', sub: 'Medication question from the check-in call', owner: { type: 'staff', label: NAMES.roles.rn }, status: { tone: 'warning', label: 'Escalated' } },
+          { title: 'Pt 0884 · 75 · COPD', sub: 'AWV due · two open quality gaps', owner: { type: 'agent', label: NAMES.roles.agent }, status: { tone: 'success', label: 'Booked' } },
+          { title: 'Pt 2317 · 68 · Diabetes', sub: 'HCC not yet recaptured this year', owner: { type: 'staff', label: NAMES.roles.coordinator }, status: { label: 'Queued' } }
+        ],
+        footer: 'Clinical questions go to licensed staff by rule.' }, 'Care-gap worklist · illustrative sample data'),
+      { ratio: '5-7', center: true }));
 
-  html += renderMetricsBar([
-    { value: '1M+', label: 'Patients Served' },
-    { value: '30', label: 'States Active' },
-    { value: '97%+', label: 'Patient Matching' },
-    { value: 'SOC 2', label: 'Type II Certified' }
-  ]);
+  html += zxPlatProof({ title: 'Customers, on the record',
+    lead: 'Palm Beach ACO and eternalHealth announced their partnerships with Zynix in published releases. PBACO Holding, one of the nation’s largest risk-bearing ACOs, started with outreach for post-discharge follow-up and annual wellness visits.',
+    quote: 'pbaco', surface: 'default' });
 
-  html += '<section id="deployment"><div class="zynix-container">' +
-    '<span class="zynix-tag">DEPLOYMENT OPTIONS</span>' +
-    '<h2>Healthcare AI Deployment That Meets Your Requirements</h2>' +
-    '<p class="zynix-section-sub">Every healthcare organization has different data sovereignty, compliance, and infrastructure requirements. Zynix supports flexible HIPAA compliant AI deployment models, from fully managed cloud to air-gapped on-premises installations so sensitive patient data stays exactly where your policies require.</p>' +
-    '<div class="zynix-feature-grid">' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_CLOUD + '</div><h3>Cloud-Hosted (Zynix Cloud)</h3><p>Fully managed SaaS on HIPAA-compliant infrastructure. SOC 2 Type II certified. Automatic updates, managed scaling, and 99.9% uptime SLA. The fastest path to production for healthcare AI deployment with zero infrastructure management.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_LOCK + '</div><h3>Private Cloud</h3><p>Dedicated Zynix instance deployed on AWS, Azure, or GCP within your organization\'s own VPC. Full data isolation with private cloud healthcare AI controls. Customer-managed encryption keys, network policies, and access controls. Ideal for health systems with strict data residency requirements.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>On-Premises</h3><p>Deploy ZynixLLM and all AI agents within your hospital\'s own data center. Air-gapped medical AI option available for environments with no external network connectivity. On-premises healthcare LLM deployment ensures PHI never leaves your facility. Full operational control with Zynix support.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_REFRESH + '</div><h3>Hybrid</h3><p>Cloud orchestration with on-premises inference. Non-sensitive workloads run in Zynix Cloud while clinical AI inference happens locally. Sensitive patient data never leaves the facility. Combines the scalability of cloud with the data sovereignty of on-premises healthcare AI deployment.</p></div>' +
-    '</div></div></section>';
+  html += zxPlatSplit('security', ['Security', 'Security and deployment', 'Security reviews are part of every evaluation. Here is where we stand.', { label: 'Security and trust', href: '/security' }],
+    zxPlatRows(zxPlatCompliance().concat(zxGovernance(['escalation']).map(function (g) { return { title: g.title, body: g.text }; }),
+      [{ title: 'Deployment', body: 'Deployment options are agreed during scoping, along with your data sources and interfaces.' }]), { split: true }), { ratio: '4-8', surface: 'subtle' });
 
-  html += renderCTA('See the Platform in Action', 'Schedule a 30-minute demo to see how ZIP replaces your point-solution stack with one integrated operating system.', 'Request a Demo');
+  html += renderCTA('See the Zynix platform in a 30-minute demo', 'One discharge, one care gap and one wellness visit, from source data to a documented outcome.', null,
+    { secondary: { label: 'See integrations', href: '/integrations' } });
   html += renderFooter();
   return html;
 }
@@ -8233,134 +8301,126 @@ function renderSDoHAgent() {
 
 
 function renderZynScribeV7() {
-  var html = '';
+  // ZynScribe (§6 "Product / layer"; COPY_DECK §4, §2.6, §3.5 document row, §7 #5, #91). No EHR write-back claim, no
+  // documentation statistics, no audit-trail claim ([HOLD]); the physician-approval statement comes from zxGovernance().
+  var review = zxGovernance(['review'])[0];
+  var html = renderHero({ preset: 'product', eyebrow: 'ZynScribe', title: 'Ambient documentation your physicians approve',
+    lead: 'ZynScribe drafts a structured note from the visit conversation. Nothing is filed or used for billing until the physician reviews and approves it.',
+    secondary: { label: 'How physician review works', href: '#physician-control' },
+    media: { type: 'product', frame: zxPlatPanel({ label: 'Sample visit note draft, illustrative data', brand: 'ZynScribe',
+      title: 'Visit note · draft', meta: 'Follow-up visit · awaiting physician review',
+      note: { sections: [
+        { label: 'Subjective', text: 'Follow-up for hypertension. Brief morning dizziness that resolves on its own; home readings stable.' },
+        { label: 'Objective', text: 'BP 122/80 · HR 72 · taking lisinopril and amlodipine.' },
+        { label: 'Assessment and plan', text: 'Essential hypertension, controlled. Continue current medications; recheck in 3 months.' },
+        { label: 'Suggested codes, for physician review', text: 'ICD-10 I10 · CPT 99214' }
+      ] },
+      footer: 'Nothing is filed or used for billing until the physician approves the note.' }, 'A visit note drafted by ZynScribe, waiting for physician review · sample data') } });
 
-  html += renderInnerHero('AI CLINICAL DOCUMENTATION', 'Ambient AI Scribe for Healthcare',
-    'Transform patient encounters into accurate, structured clinical documentation instantly. ZynScribe captures natural conversation, generates SOAP notes, suggests ICD-10 and CPT codes, and uploads directly to your EHR.',
-    IMG.scribe, 'ZynScribe AI Clinical Documentation', 'Explore Capabilities');
+  html += zxPlatSplit('problem', ['The problem', 'Notes written after clinic miss what matters', null],
+    '<p class="zx-plat-text">When documentation waits until the evening, notes get shorter, and the details value-based contracts depend on, such as each chronic condition assessed at the visit, are easy to leave out.</p>',
+    { ratio: '5-7', rule: true });
 
-  html += renderProblemSection('The Documentation Crisis', [
-    { icon: IC_CLOCK, title: '2 Hours Per 1 Hour', desc: 'Physicians spend 2 hours on documentation for every 1 hour with patients. That\'s backwards.' },
-    { icon: IC_CLOCK, title: '16 Min Pajama Time', desc: '16 minutes of after-hours documentation every night. Burnout isn\'t a mystery. It\'s a math problem.' },
-    { icon: IC_HEART, title: '63% Report Burnout', desc: 'The #1 driver of physician dissatisfaction is documentation burden. ZynScribe eliminates it.' }
-  ]);
+  html += renderSection({ id: 'how-it-works', surface: 'subtle' },
+    renderSectionHead('How it works', 'Before, during and after the visit',
+      'ZynScribe works in the browser alongside your EHR, and in a mobile app for bedside and telehealth visits.', { id: 'how-it-works-title' }) +
+    zxPlatSteps([
+      { title: 'Before the visit', body: 'A pre-visit review shows the patient’s open HCC and quality gaps, so they can be addressed in the encounter.' },
+      { title: 'During the visit', body: 'ZynScribe listens to the conversation, separates the speakers and drafts a structured SOAP note.' },
+      { title: 'After the visit', body: 'The physician reviews and edits the draft and the suggested ICD-10 and CPT codes, then approves it.' }
+    ]));
 
-  html += '<section id="capabilities"><div class="zynix-container">' +
-    '<span class="zynix-tag">HOW IT WORKS</span>' +
-    '<h2>From Conversation to Completed Note</h2>' +
-    '<div class="zynix-orch-flow">' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_MIC + '</span><p>Ambient Capture</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_USERS + '</span><p>Speaker Recognition</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_FILE + '</span><p>Note Generation</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_SEARCH + '</span><p>Code Suggestions</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_CHECK + '</span><p>Review & Upload</p></div>' +
-    '</div></div></section>';
+  html += zxPlatSplit('physician-control', ['Physician control', 'Physicians approve every note', 'ZynScribe drafts. Physicians decide what goes in the record.'],
+    zxPlatRows([
+      { title: review ? review.title : 'Physicians approve clinical documentation', body: review ? review.text : '' },
+      { title: 'Nothing filed or billed before approval', body: 'Suggested codes are shown with the draft. Nothing is filed or used for billing until the physician approves the note.' },
+      { title: SITE_FACTS.compliance.hipaa.prose, body: 'Audio and notes are encrypted in transit and at rest.' },
+      { title: SITE_FACTS.compliance.soc2.prose, body: 'ZynScribe runs on the Zynix platform and is covered by the same security program.' }
+    ], { split: true }));
 
-  html += renderMetricsBar([
-    { value: '15K+', label: 'Notes Processed' },
-    { value: '40%', label: 'Time Savings' },
-    { value: '97%', label: 'Accuracy Rate' },
-    { value: '90+', label: 'Specialties Supported' }
-  ]);
+  html += renderSection({ id: 'what-changes', rule: true, className: 'zx-plat-roles' },
+    renderSectionHead('What changes for your team', 'A draft to review instead of a blank note', null, { id: 'what-changes-title' }) +
+    renderGrid([
+      { icon: 'stethoscope', title: 'Physicians', body: 'A structured draft to review and approve, with the patient’s open gaps in view.' },
+      { icon: 'clipboard', title: 'Coding and risk adjustment teams', body: 'Suggested ICD-10 and CPT codes that the physician has reviewed, attached to an approved note.' },
+      { icon: 'users', title: 'Care teams', body: 'Approved notes join the patient’s record in the Zynix platform, so open gaps and care plans reflect the visit.' }
+    ], renderCard));
 
-  // ZynScribe product screenshots — Chrome extension, SOAP notes, mobile app
-  html += '<section class="zynix-screenshot-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">SEE IT IN ACTION</span>' +
-    '<h2>ZynScribe Across Every Workflow</h2>' +
-    '<p class="zynix-section-sub">Chrome extension embedded in your EHR, SOAP note generation, and mobile app for on-the-go documentation.</p>' +
-    '<div class="zynix-screenshot-strip">' +
-    renderBrowserFrame(IMG.ssZynScribeExt, 'ZynScribe Chrome extension showing patient HCC gaps, gap closure actions, and previsit review embedded inside eClinicalWorks EHR', 'eclinicalworks.com + zynix.ai extension') +
-    renderBrowserFrame(IMG.ssZynScribeSoap, 'ZynScribe SOAP notes generation showing subjective, objective, assessment sections with vitals and medication data auto-populated from ambient capture', 'eclinicalworks.com + zynix.ai extension') +
-    '</div>' +
-    '<div style="max-width:320px;margin:40px auto 0">' +
-    '<p style="text-align:center;font-size:13px;font-weight:600;color:var(--z-text-secondary);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Mobile App</p>' +
-    '<img src="' + IMG.ssZynScribeMobile + '" alt="ZynScribe mobile app showing patient HCC gaps, quality gaps, previsit review, and ambient recording for bedside and telehealth encounters" loading="lazy" style="width:100%;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.3),0 2px 6px rgba(0,0,0,0.15)">' +
-    '</div>' +
-    '</div></section>';
+  html += zxPlatProof({ title: 'Part of the Zynix platform',
+    lead: 'ZynScribe runs on the same platform and patient record that ACOs, health plans and provider organizations use for outreach, care plans and analytics.' });
+  html += zxPlatStack();
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">INTEGRATIONS</span>' +
-    '<h2>Where It Connects</h2>' +
-    renderFeatureCards([
-      { icon: IC_GEAR, title: 'EHR Systems', desc: 'Direct upload to Epic, Cerner, athenahealth, eClinicalWorks, and NextGen with one-click physician review.' },
-      { icon: IC_DOLLAR, title: 'Billing & Coding', desc: 'ICD-10 and CPT code suggestions feed into billing workflows. Revenue cycle integration for claim optimization.' },
-      { icon: IC_ZAP, title: 'Zynix Platform', desc: 'Notes generated by ZynScribe feed into the Zynix data layer, enabling AI agents and analytics to leverage encounter documentation.' }
-    ]) +
-    '</div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">GOVERNANCE</span>' +
-    '<h2>Physician Control at Every Step</h2>' +
-    '<p class="zynix-section-sub">ZynScribe generates notes. Physicians approve them. No note is uploaded to the EHR or used for billing without explicit physician review and approval.</p>' +
-    '<div class="zynix-problem-grid">' +
-    '<div class="zynix-problem-card fade-in-up"><div class="zynix-problem-icon">' + IC_SHIELD + '</div><h3>Physician Review Required</h3><p>Every generated note must be reviewed and approved by the clinician before upload.</p></div>' +
-    '<div class="zynix-problem-card fade-in-up"><div class="zynix-problem-icon">' + IC_LOCK + '</div><h3>HIPAA Compliant</h3><p>Audio processing and note generation comply with HIPAA. All data encrypted in transit and at rest. SOC 2 Type II certified.</p></div>' +
-    '<div class="zynix-problem-card fade-in-up"><div class="zynix-problem-icon">' + IC_CLIPBOARD + '</div><h3>Audit Trail</h3><p>Complete record of original transcription, generated note, physician edits, and final approved version.</p></div>' +
-    '</div></div></section>';
-
-  html += renderCTA('Reclaim Your Time', 'See how ZynScribe saves physicians 1-2 hours daily with ambient AI documentation.', 'Request a Demo');
+  html += renderCTA('See ZynScribe in a 30-minute demo', 'A visit, a drafted note and the physician’s review, start to finish.', null,
+    { secondary: { label: 'Security and trust', href: '/security' } });
   html += renderFooter();
   return html;
 }
 
 
 function renderCarePlansV7() {
-  var html = '';
+  // Care plans (§6 "Product / layer"; COPY_DECK §4, §2.6, §3.4, §7 #35). Templates: NAMES.carePlans plus CCM (named in the
+  // hero). The interactive TCM contact and every clinical question stay with licensed staff (DECISIONS 17b; CMS-1).
+  var tpl = {
+    'Post-discharge TCM': ['An ADT discharge message for an attributed patient', 'A check-in call and discharge-instruction review by an agent; the interactive contact by clinical staff; the 7- or 14-day visit booked; reminders', 'The follow-up visit is documented'],
+    'HCC gap closure sprint': ['Suspected HCCs not yet recaptured this year', 'Patients ranked by RAF impact and closure window; visits booked; open gaps shown to the physician before the visit', 'The physician assesses each condition at a visit'],
+    'Medication safety and adherence': ['A medication change at discharge, or a gap in pharmacy refills', 'The medication list collected by phone or text; discrepancies and adherence barriers routed to a pharmacist, nurse or prescriber', 'A clinician reviews each flag'],
+    'High-utilizer ED diversion': ['Repeat ED visits in claims or ADT data', 'Outreach to connect the patient with primary care and after-hours options; a primary care visit booked; care manager review', 'The primary care visit is completed'],
+    'Chronic condition visit readiness': ['An upcoming visit for a patient with diabetes, CHF or COPD', 'Reminders, pre-visit labs and open gaps prepared for the care team', 'The visit is completed'],
+    'Preventive screening program': ['A patient is due for a screening, vaccination or annual wellness visit', 'Invitations by voice or SMS, booking, two-way reminders and tracking to completion', 'The screening or visit is completed']
+  };
+  var names = NAMES.carePlans.slice(0, 1).concat(['Chronic care management (CCM)'], NAMES.carePlans.slice(1));
+  tpl['Chronic care management (CCM)'] = ['A patient enrolls in CCM', 'Monthly check-ins on symptoms and medications; changes routed to the care manager; time and documentation sent to the billing provider for review', 'Runs month to month while the patient is enrolled'];
 
-  html += renderInnerHero('CARE ORCHESTRATION', 'Stop Managing Care. Start Deploying It.',
-    'Pre-built, configurable care plan templates that orchestrate multiple AI agents into end-to-end workflows. Deploy TCM, CCM, AWV, gap closure, and prior authorization care plans in days. Reach 85%+ of patients.',
-    IMG.care, 'Zynix Deployable Care Plans', 'Explore Capabilities');
+  var html = renderHero({ preset: 'product', eyebrow: 'Care plans', title: 'Care plans that see each episode through',
+    lead: 'Pre-built plans for TCM, CCM, wellness visits and gap closure sequence agents and care team tasks, and close only when each step is documented.',
+    secondary: { label: 'Browse the templates', href: '#templates' },
+    media: { type: 'product', frame: zxPlatPanel({ label: 'Sample post-discharge care plan, illustrative data', brand: 'Care plans',
+      title: 'Post-discharge TCM plan · Pt 1042', meta: 'Opened by an ADT discharge message',
+      steps: [
+        { time: 'Hour 0', title: 'Discharge matched to the patient record; plan opened', owner: 'Zynix platform', status: { tone: 'success', label: 'Completed' } },
+        { time: 'Day 1', title: 'Check-in call; discharge instructions reviewed', owner: NAMES.roles.agent, status: { tone: 'success', label: 'Reached' } },
+        { time: 'Day 1', title: 'Medication question escalated by rule; interactive TCM contact', owner: NAMES.roles.rn, status: { tone: 'warning', label: 'Escalated' } },
+        { time: 'Day 2', title: 'Follow-up visit booked in the 7-day window; reminders set', owner: 'Scheduling agent', status: { tone: 'success', label: 'Booked' } },
+        { time: 'Day 7', title: 'Follow-up visit', owner: NAMES.roles.physician, status: { label: 'Queued' } }
+      ],
+      footer: 'The plan stays open until the follow-up visit is documented.' }, 'A post-discharge care plan: each step belongs to an agent or a person · sample data') } });
 
-  html += renderProblemSection('Your Staff Cannot Scale to Your Population', [
-    { icon: IC_CHART, title: '50,000 Attributed Patients', desc: 'A typical large ACO or MA plan has 50,000 attributed patients requiring active outreach and coordination.' },
-    { icon: IC_USER, title: 'Manual Reaches 30-40%', desc: 'Manual care management reaches 30-40% of eligible patients. The rest fall through the cracks.' },
-    { icon: IC_DOLLAR, title: 'Missed Revenue', desc: 'Missed TCM billing windows, open quality gaps, and preventable readmissions are the result.' }
-  ]);
+  html += zxPlatSplit('problem', ['The problem', 'Knowing who is due isn’t the hard part', null],
+    '<p class="zx-plat-text">TCM, CCM, wellness visits and gap closure tend to fail the same way: a step slips, nobody owns it and the window closes. A care plan gives every step an owner and keeps the episode open until it’s done.</p>',
+    { ratio: '5-7', rule: true });
 
-  html += '<section id="capabilities"><div class="zynix-container">' +
-    '<span class="zynix-tag">10 PRE-BUILT TEMPLATES</span>' +
-    '<h2>Care Plans Ready to Deploy</h2>' +
-    '<p class="zynix-section-sub">Each template orchestrates multiple AI agents into coordinated workflows. Configurable to your population, protocols, and operational requirements.</p>' +
-    '<div class="zynix-careplan-grid">';
+  html += renderSection({ id: 'templates', surface: 'subtle', className: 'zx-plat-templates' },
+    renderSectionHead('Templates', 'Care plan templates',
+      'Start from a template, then set the steps, owners, timing and escalation rules for your population.', { id: 'templates-title' }) +
+    renderCompareTable({ caption: 'Care plan templates: what starts each plan, what runs and when it closes', captionHidden: true,
+      columns: [{ label: 'Care plan' }, { label: 'Starts when' }, { label: 'What runs' }, { label: 'Closes when' }],
+      rows: names.map(function (n) { var t = tpl[n] || ['', '', '']; return { label: n, cells: [{ text: t[0] }, { text: t[1] }, { text: t[2] }] }; }) }));
 
-  var carePlans = [
-    { num: '01', title: 'Hospital Discharge (TCM)', desc: '30-day post-discharge follow-through with TCM billing capture.' },
-    { num: '02', title: 'Quality & HCC Gap Closure', desc: 'Identification and closure of HEDIS, Stars, and HCC documentation gaps.' },
-    { num: '03', title: 'Prior Authorization', desc: 'Submission, tracking, denial management, and appeal preparation.' },
-    { num: '04', title: '24/7 Scheduling', desc: 'After-hours and weekend scheduling with triage integration.' },
-    { num: '05', title: 'Post-Medication Monitoring', desc: '30-day monitoring after medication changes.' },
-    { num: '06', title: 'Specialist Referral Management', desc: 'Track referrals from order to completed visit.' },
-    { num: '07', title: 'Abnormal Lab/Imaging Alerts', desc: 'Flag critical results, contact patient, escalate to provider.' },
-    { num: '08', title: 'Preventive Care & Screenings', desc: 'Cancer screenings, immunizations, wellness visits.' },
-    { num: '09', title: 'ED Diversion', desc: 'Identify high-utilizers, offer alternatives, schedule PCP visits.' },
-    { num: '10', title: 'Chronic Condition Pre-Visit', desc: 'Pre-visit preparation for diabetes, CHF, COPD.' }
-  ];
+  html += renderSection({ id: 'how-it-works', className: 'zx-plat-anatomy' },
+    renderSectionHead('Inside a care plan', 'Every step has an owner',
+      'A plan is a sequence of steps. Each one belongs to an agent or a named role, with rules for when to escalate.', { id: 'how-it-works-title' }) +
+    zxPlatSteps([
+      { title: 'Trigger', body: 'A data event opens the plan: a discharge, an open gap, a due date or an enrollment.' },
+      { title: 'Steps', body: 'Calls, texts, bookings, reminders and reviews run in order, timed to the program’s window.' },
+      { title: 'Owners', body: 'Agents take the operational steps. Licensed staff own the interactive TCM contact and every clinical question.' },
+      { title: 'Escalation', body: 'Rules your clinical team sets decide what goes to a nurse, pharmacist or physician.' },
+      { title: 'Close', body: 'The plan stays open until each step is complete and the outcome is documented.' }
+    ]));
 
-  carePlans.forEach(function(cp) {
-    html += '<div class="zynix-careplan-card fade-in-up"><div class="zynix-cp-num">' + cp.num + '</div><div><h4>' + cp.title + '</h4><p>' + cp.desc + '</p></div></div>';
-  });
+  html += zxPlatSplit('what-changes', ['What changes for your team', 'Follow-through that doesn’t depend on memory', null],
+    zxPlatRows([
+      { title: 'Nothing waits to be noticed', body: 'A discharge or a due date opens the plan, so the first step happens without anyone finding it in a report.' },
+      { title: 'People where judgment is needed', body: 'The interactive TCM contact and every clinical question stay with licensed staff.' },
+      { title: 'Closes only when complete', body: 'The plan stays open until the follow-up visit is documented.' }
+    ], { split: true }), { rule: true });
 
-  html += '</div></div></section>';
+  html += zxPlatProof({ title: 'Post-discharge and wellness-visit outreach at Palm Beach ACO',
+    lead: 'PBACO Holding, one of the nation’s largest risk-bearing ACOs, started with outreach for post-discharge follow-up and annual wellness visits.',
+    story: 'pbaco', logos: ['pbaco', 'westfloridaaco', 'spacecoastaco', 'centralfloridaaco', 'goldencareaco', 'sunfloweraco'] });
+  html += zxPlatStack();
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">TCM WORKFLOW EXAMPLE</span>' +
-    '<h2>See How a Care Plan Executes</h2>' +
-    '<div class="zynix-orch-flow">' +
-    '<div class="zynix-orch-step fade-in-up"><span>0</span><p>Day 0: Discharge</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>1</span><p>Day 1: Outreach</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>4</span><p>Day 4: Reminder</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>7</span><p>Day 7: Visit</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>30</span><p>Day 30: Outcome</p></div>' +
-    '</div></div></section>';
-
-  html += renderMetricsBar([
-    { value: '85%', label: 'Patient Contact Rate' },
-    { value: '3x', label: 'vs Traditional Models' },
-    { value: '60%', label: 'Coordinator Time Saved' },
-    { value: '40%', label: 'Readmission Reduction' }
-  ]);
-
-  html += renderCTA('Deploy Care Plans at Scale', 'Stop managing care manually. Deploy intelligent orchestration that reaches every patient who needs follow-through.', 'Request a Demo');
+  html += renderCTA('See a care plan run in a 30-minute demo', 'Follow one post-discharge plan from ADT message to documented visit.', null,
+    { secondary: { label: 'See how agents work', href: '/agents' } });
   html += renderFooter();
   return html;
 }
@@ -8420,54 +8480,73 @@ function renderSolutionsOverview() {
   }
 
 function renderDataAnalyticsV7() {
-  var html = '';
+  // Analytics (§6 "Product / layer"; COPY_DECK §4, §2.6, §7 #41, #44, #55, #74). Capabilities are named, never the
+  // unconfirmed product names (NAMES.intelligence showName flags, [VERIFY]).
+  var icons = { zyngap: 'target', zynpredict: 'activity', zynguide: 'stethoscope', zynanalytics: 'chart' };
+  var bodies = {
+    zyngap: 'Checks clinical diagnoses against current-year claims to find HCCs not yet recaptured and quality measures still open, ranked by RAF impact and closure window.',
+    zynpredict: 'Flags patients whose risk is rising and scores each discharge for readmission risk, so care managers see them first.',
+    zynguide: 'Puts the patient’s open HCC and quality gaps in front of the physician before and during the visit.',
+    zynanalytics: 'HEDIS, Stars and ACO quality measures, with attribution, utilization and cost views for program leaders.'
+  };
+  var html = renderHero({ preset: 'product', eyebrow: 'Analytics', title: 'Know who needs attention this week, and why',
+    lead: 'Risk, quality and HCC gap analytics built on your claims and clinical data, with each flagged patient ready to route into a care plan.',
+    secondary: { label: 'See how it connects', href: '/platform#data-flow' },
+    media: { type: 'product', frame: zxPlatPanel({ label: 'Sample priority worklist, illustrative data', brand: 'Analytics',
+      title: 'This week’s priorities', meta: 'Attributed panel · all practices',
+      tiles: [{ value: '14', label: 'High-risk discharges' }, { value: '312', label: 'Open HCC gaps' }, { value: '187', label: 'Quality gaps due' }],
+      rows: [
+        { title: 'Pt 1042 · 72 · CHF', sub: 'High readmission risk · discharged yesterday', owner: { type: 'staff', label: NAMES.roles.rn }, status: { tone: 'brand', label: 'In progress' } },
+        { title: 'Pt 2317 · 68 · Diabetes', sub: 'HCC not yet recaptured this year · no visit booked', owner: { type: 'staff', label: NAMES.roles.coordinator }, status: { label: 'Queued' } },
+        { title: 'Pt 0884 · 75 · COPD', sub: 'AWV due · two open quality gaps', owner: { type: 'agent', label: NAMES.roles.agent }, status: { tone: 'success', label: 'Booked' } },
+        { title: 'Pt 3561 · 81 · CKD', sub: 'Rising risk · three ED visits this quarter', owner: { type: 'staff', label: NAMES.roles.rn }, status: { label: 'Review' } }
+      ],
+      footer: 'Each row shows why the patient was flagged and who owns the next step.' }, 'A weekly priority list with the reason for every flag · sample data') } });
 
-  html += renderInnerHero('DATA INTELLIGENCE', 'Intelligence That Drives Action',
-    'AI-powered population health analytics that go beyond dashboards. Identify HCC opportunities, predict readmission risk, close quality gaps, and support clinical decisions, all in real time, all connected to agents that take action on findings.',
-    IMG.analytics, 'Zynix Data Analytics', 'Explore Capabilities');
+  html += renderSection({ id: 'capabilities', rule: true, className: 'zx-plat-caps' },
+    renderSectionHead('Capabilities', 'Analytics your care team can act on',
+      'Four views of the same matched record. Each one ends in a worklist, not a report.', { id: 'capabilities-title' }) +
+    renderGrid(NAMES.intelligence, function (p) {
+      return renderCard({ icon: icons[p.id] || 'chart', title: p.showName ? p.name : p.capability, body: bodies[p.id] || '' });
+    }, { layout: '2x2' }));
 
-  html += renderProblemSection('Why Traditional Analytics Fall Short', [
-    { icon: IC_CLOCK, title: 'Stale Data', desc: 'Most healthcare analytics are 3-6 months old. You\'re always analyzing yesterday\'s problems.' },
-    { icon: IC_CLOCK, title: 'Analysis Paralysis', desc: 'Too many dashboards, too much data, no clarity. Teams spend weeks interpreting instead of acting.' },
-    { icon: IC_ZAP, title: 'Fragmented Insights', desc: 'Risk scores live in silos. Quality gaps aren\'t connected to HCC opportunities. Everything stays disconnected.' }
+  html += renderSection({ id: 'follow-up', surface: 'subtle', className: 'zx-plat-worklist' },
+    renderSplit(
+      renderSectionHead('From flag to follow-up', 'A finding isn’t finished until someone acts on it',
+        'Analytics hands each flagged patient to a care plan with an owner, and keeps counting until the gap is closed.', { id: 'follow-up-title' }),
+      zxPlatFrame({ label: 'Sample quality measure progress, illustrative data', brand: 'Analytics', title: 'Diabetes care: A1c control',
+        meta: 'Sample measure · this quarter',
+        pipeline: [{ label: 'Open gaps', value: 412 }, { label: 'Outreach started', value: 318 }, { label: 'Visit booked', value: 196 }, { label: 'Gap closed', value: 142 }],
+        footer: 'Gaps close on documented visits and results, not on outreach alone.' }, 'One quality measure, from open gaps to closed gaps · sample data'),
+      { ratio: '5-7', center: true, className: 'zx-plat-follow' }) +
+      zxPlatSteps([
+        { title: 'Flag', body: 'A patient or gap enters the worklist with the reason it was flagged.' },
+        { title: 'Rank', body: 'Work is sorted by risk and deadline, so the team starts where the window is closing.' },
+        { title: 'Route', body: 'Each item moves into a care plan with an owner: an agent or a named role.' },
+        { title: 'Close', body: 'The gap closes when the visit or result is documented, not when the call is made.' }
+      ]));
+
+  html += zxPlatSplit('roles', ['What changes for your team', 'The same analytics, a different view for each role', null],
+    zxPlatRows([
+      { title: 'Program and quality leaders', body: 'Population, quality and utilization views by practice and measure, with the open work behind every number.' },
+      { title: 'Care managers and coordinators', body: 'A ranked list with the reason each patient was flagged and the next step already assigned.' },
+      { title: 'Physicians', body: 'The open HCC and quality gaps for the patient in front of them, before the visit starts.' },
+      { title: 'Risk adjustment teams', body: 'Suspected HCCs not yet recaptured this year, ranked by RAF impact and closure window.' }
+    ], { split: true }));
+
+  html += zxPlatProof({ title: 'Used by ACOs and health plans',
+    lead: 'eternalHealth, a Medicare Advantage plan, works with Zynix to engage members and advance its quality goals in Massachusetts and Arizona.',
+    story: 'eternalhealth', logos: ['pbaco', 'eternalhealth', 'westfloridaaco', 'spacecoastaco', 'centralfloridaaco', 'goldencareaco'] });
+  html += zxPlatStack();
+
+  html += zxPlatFaq('faq-analytics', [
+    { q: 'What is population health analytics?', a: 'The analysis of health data across a defined patient population to find care gaps, flag risk and track quality. Zynix runs it on your claims, clinical and utilization data, and turns each finding into a worklist item with an owner.' },
+    { q: 'How does risk stratification work?', a: 'Zynix scores patients using claims, clinical, utilization and social-needs data, groups them into risk tiers and surfaces them in ranked worklists, so care teams reach the highest-need patients first and route them into outreach or a care plan.' },
+    { q: 'What is HCC gap closure?', a: 'HCC (Hierarchical Condition Category) gap closure means finding chronic conditions that are clinically present but not yet documented this year, which affects risk adjustment factor (RAF) scores. Zynix ranks open HCCs by RAF impact and closure window and routes patients to visits where the physician can assess them.' }
   ]);
 
-  html += '<section id="capabilities"><div class="zynix-container">' +
-    '<span class="zynix-tag">THREE ANALYTICS TRACKS</span>' +
-    '<h2>Analytics That Actually Move the Needle</h2>' +
-    '<div class="zynix-track fade-in-up"><div class="zynix-track-header"><span class="zynix-track-num">01</span><h3>HCC & Quality Analytics</h3></div><div class="zynix-track-body"><ul><li>Identify all HCC opportunities with clinical documentation analysis</li><li>Flag quality measures with actionable closure recommendations</li><li>Rank by RAF impact, closure probability, and optimal timing</li><li>Trigger gap closure workflows automatically</li></ul></div></div>' +
-    '<div class="zynix-track fade-in-up"><div class="zynix-track-header"><span class="zynix-track-num">02</span><h3>Risk & Readmission Prediction</h3></div><div class="zynix-track-body"><ul><li>Predict hospitalizations weeks in advance for early intervention</li><li>Identify high-risk patients at the moment of discharge</li><li>Industry-leading models validated against real outcomes</li></ul></div></div>' +
-    '<div class="zynix-track fade-in-up"><div class="zynix-track-header"><span class="zynix-track-num">03</span><h3>Clinical Decision Support</h3></div><div class="zynix-track-body"><ul><li>Immediate alerts at point of care for critical decisions</li><li>Guideline-aligned treatment recommendations in context</li><li>Real-time allergy and contraindication warnings</li></ul></div></div>' +
-    '</div></section>';
-
-  html += renderMetricsBar([
-    { value: '30%', label: 'HCC Gap Closure Improvement' },
-    { value: '25%', label: 'Readmission Reduction' },
-    { value: 'Real-time', label: 'Analytics Processing' },
-    { value: '100+', label: 'Quality Measures Tracked' }
-  ]);
-
-  html += '<section class="zynix-screenshot-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">THE PLATFORM</span>' +
-    '<h2>See the Zynix Portal in Action</h2>' +
-    '<p class="zynix-section-sub">Real product screenshots from the Zynix analytics and quality dashboards.</p>' +
-    '<div class="zynix-screenshot-strip">' +
-    renderBrowserFrame(IMG.portalQuality, 'Zynix AI quality measures dashboard tracking HEDIS and Star ratings', 'app.zynix.ai/quality/measures') +
-    renderBrowserFrame(IMG.portalPredictive, 'Zynix AI predictive analytics engine for readmission risk scoring', 'app.zynix.ai/analytics/risk') +
-    renderBrowserFrame(IMG.portalACOQuality, 'Zynix AI ACO quality dashboard with HEDIS gap closure metrics', 'app.zynix.ai/aco/quality') +
-    '</div></div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">DATA SOURCES</span>' +
-    '<h2>Unified Data From Every Source</h2>' +
-    '<div class="zynix-data-layers">' +
-    '<div class="zynix-data-layer fade-in-up"><h3>EHR Systems</h3><p>Epic, Cerner, athenahealth, eClinicalWorks, NextGen, Allscripts. Clinical data, encounters, orders, and documentation.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>Claims & Financial</h3><p>837/835 claims, eligibility, enrollment, and attribution data. RAF scoring and financial performance analytics.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>Clinical Data Feeds</h3><p>ADT streams, lab results (ORU), pharmacy fill data, SDOH sources, and scheduling system data. Real-time processing.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>Quality & Compliance</h3><p>HEDIS measure tracking, Stars performance data, HCC documentation analysis, and compliance reporting.</p></div>' +
-    '</div></div></section>';
-
-  html += renderCTA('Turn Analytics Into Action', 'See how Zynix Data Analytics drives measurable outcomes with intelligence connected to autonomous agents.', 'Request a Demo');
+  html += renderCTA('See analytics in a 30-minute demo', 'How flagged patients move from a worklist to a care plan with an owner.', null,
+    { secondary: { label: 'See how agents work', href: '/agents' } });
   html += renderFooter();
   return html;
 }
@@ -8476,70 +8555,77 @@ function renderDataAnalyticsV7() {
 
   // ── PAGE: Integrations ──
   function renderIntegrations() {
-    return renderInnerHero('INTEGRATIONS', 'Connected to the Systems You Already Use',
-      'Zynix integrates with 30+ EHR systems across 300+ connected instances, including Epic, Cerner (Oracle Health), athenahealth and eClinicalWorks, plus the claims, ADT and lab feeds value-based care runs on — so AI agents act on real-time clinical context from day one.',
-      IMG.data, 'Zynix Integrations', 'Explore Connectors') +
+    // Integrations (§6: all 8 named EHRs as a table; "EHR · method · data", no direction column because no write-back or
+    // bidirectional flow is verified per EHR; no "24+ connectors", timelines, SLA or FHIR-version claims). Methods and data
+    // are the ones this page already listed, restated without version or direction claims [VERIFY per EHR].
+    var ehrRows = [
+      ['Epic', 'FHIR APIs · HL7 v2 ADT', 'Clinical data, admit, discharge and transfer events'],
+      ['Oracle Health (Cerner)', 'FHIR and Millennium APIs · HL7 v2 ADT', 'ADT events, patient search, clinical documents, scheduling'],
+      ['athenahealth', 'athenahealth API', 'Demographics, clinical data, scheduling, claims'],
+      ['eClinicalWorks', 'HL7 v2 · API · FHIR', 'ADT events, clinical documents, scheduling'],
+      ['NextGen', 'NextGen API · HL7 v2', 'Patient records, scheduling, claims data'],
+      ['Allscripts', 'Open API · HL7 v2', 'Clinical data, ADT notifications, scheduling'],
+      ['Greenway', 'Confirmed during scoping', 'Scoped with each practice'],
+      ['DrChrono', 'Confirmed during scoping', 'Scoped with each practice']
+    ];
+    var html = renderHero({ preset: 'product', eyebrow: 'Integrations', title: 'Works with the EHRs you already run',
+      lead: '30+ EHR systems across 300+ connected instances, plus claims, ADT, lab and pharmacy feeds, over FHIR, HL7 v2, C-CDA and X12.',
+      secondary: { label: 'Ask about your EHR', href: '/contact' },
+      media: { type: 'product', frame: zxPlatPanel({ label: 'Sample network connections, illustrative data', brand: 'Integrations',
+        title: 'Sample network', meta: 'Three EHRs · one patient record',
+        tiles: [{ value: '12', label: 'Practices' }, { value: '3', label: 'EHR systems' }, { value: '1', label: 'Hospital ADT feed' }],
+        rows: [
+          { title: 'Practices 1–7 · eClinicalWorks', sub: 'ADT events and clinical documents', owner: { type: 'system', label: 'HL7 v2' }, status: { tone: 'success', label: 'Connected' } },
+          { title: 'Practices 8–12 · athenahealth', sub: 'Demographics, clinical data and scheduling', owner: { type: 'system', label: 'API' }, status: { tone: 'success', label: 'Connected' } },
+          { title: 'Partner hospital · Epic', sub: 'Admit, discharge and transfer events', owner: { type: 'system', label: 'HL7 v2 ADT' }, status: { tone: 'success', label: 'Connected' } },
+          { title: 'Medicare claims', sub: 'Monthly CCLF files and BCDA', owner: { type: 'system', label: 'CCLF · BCDA' }, status: { tone: 'success', label: 'Loaded' } }
+        ],
+        footer: 'Each practice keeps its own EHR; the care team works from one record and one worklist.' },
+        'A sample network: 12 practices on three EHRs, feeding one patient record') } });
 
-    '<div class="zynix-container"><div class="zynix-summary-block"><p><strong>Zynix Integrations</strong> connect your EHR, claims, ADT feeds, labs, pharmacy, and scheduling systems into a single unified data layer. Pre-built connectors go live in 2-4 weeks — no custom development required. Every data stream flows in real time, powering AI agents with the clinical context they need to act.</p></div></div>' +
+    html += renderSection({ id: 'ehrs', rule: true, className: 'zx-plat-ehrs' },
+      renderSectionHead('EHRs', 'EHRs we connect to include',
+        'Zynix connects to ' + SITE_FACTS.ehr.line + '. These are the EHRs customers ask about most. Interfaces vary by EHR version and configuration, so we confirm each connection during scoping.',
+        { id: 'ehrs-title' }) +
+      renderCompareTable({ caption: 'EHR connections: how Zynix connects and the data it typically reads', captionHidden: true,
+        columns: [{ label: 'EHR' }, { label: 'How we connect' }, { label: 'Typical data' }],
+        rows: ehrRows.map(function (r) { return { label: r[0], cells: [{ text: r[1] }, { text: r[2] }] }; }) }));
 
-    renderProblemSection('Why Integration Matters', [
-      { icon: IC_ALERT, title: 'Data Silos Kill Execution', desc: 'AI that can\u2019t see the full patient picture delivers partial results. Zynix connects everything into one view.' },
-      { icon: IC_ZAP, title: 'Slow Integrations Delay ROI', desc: 'Most platforms take 6-12 months to integrate. Zynix pre-built connectors go live in 2-4 weeks.' },
-      { icon: IC_GEAR, title: 'Maintenance Overhead', desc: 'Standards change, APIs evolve. Zynix manages all connector maintenance and version updates.' }
-    ]) +
+    html += zxPlatSplit('data-feeds', ['Beyond the EHR', 'Claims, ADT, labs and pharmacy', 'Value-based care runs on more than the chart.'],
+      zxPlatRows([
+        { title: 'Claims', body: 'Medicare CCLF and BCDA for ACOs; payer X12 837 claims and 835 remittance; 270/271 eligibility and 276/277 claim status.' },
+        { title: 'ADT events', body: 'HL7 v2 admit, discharge and transfer messages from hospitals.' },
+        { title: 'Labs and pharmacy', body: 'Lab results over HL7 v2, and pharmacy fill data over NCPDP.' },
+        { title: 'Documents', body: 'C-CDA transition-of-care and discharge documents.' },
+        { title: 'SDoH screening', body: 'Screening results that feed risk and outreach priorities.' }
+      ], { split: true }) +
+      '<div class="zx-plat-standards"><p class="zx-plat-standards__label" id="zx-plat-standards">Standards we work with</p><ul class="zx-plat-standards__list" role="list" aria-labelledby="zx-plat-standards">' +
+      SITE_FACTS.ehr.standards.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ul></div>', { surface: 'subtle' });
 
-    '<section class="zynix-capabilities-section" id="connectors"><div class="zynix-container">' +
-    '<span class="zynix-tag">EHR CONNECTORS</span>' +
-    '<h2>Pre-Built EHR Integrations</h2>' +
-    '<p class="zynix-section-sub">Native connectors for the EHR systems that power American healthcare.</p>' +
-    '<div class="zynix-feature-grid" style="margin-top:40px">' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>Epic</h3><p>FHIR R4, CDS Hooks, ADT feeds, and bidirectional scheduling.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>Oracle Health (Cerner)</h3><p>Real-time ADT, patient search, clinical documents, and scheduling via Millennium APIs and FHIR.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>athenahealth</h3><p>Patient demographics, clinical data, scheduling, and claims via the athenaNet API and Marketplace.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>eClinicalWorks</h3><p>HL7v2 ADT, clinical documents, and scheduling integration via direct API and FHIR endpoints.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>NextGen Healthcare</h3><p>Patient records, scheduling, and claims data via NextGen API and HL7 feeds.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HOSPITAL + '</div><h3>Allscripts / Veradigm</h3><p>Clinical data, ADT notifications, and scheduling via Open API and HL7v2 interfaces.</p></div>' +
-    '</div></div></section>' +
+    html += renderSection({ id: 'how-it-works' },
+      renderSectionHead('How it works', 'How a connection comes together', 'Your IT team, each EHR vendor and our integration team work from one plan.', { id: 'how-it-works-title' }) +
+      zxPlatSteps([
+        { title: 'Scope', body: 'We confirm your EHRs, versions and the interfaces each one supports, plus your claims and ADT sources.' },
+        { title: 'Connect', body: 'Interfaces are set up with your IT team and each vendor over secure connections.' },
+        { title: 'Validate', body: 'Matched patient records are checked with your team before worklists go live.' },
+        { title: 'Maintain', body: 'We manage connector updates as standards and vendor APIs change.' }
+      ]));
 
-    '<section style="padding:80px 0;background:var(--z-bg-alt)"><div class="zynix-container">' +
-    '<span class="zynix-tag">DATA PIPELINES</span>' +
-    '<h2>Claims, Labs & Operational Data</h2>' +
-    '<p class="zynix-section-sub">Beyond the EHR — every data source that matters for value-based care.</p>' +
-    '<div class="zynix-data-layers" style="margin-top:40px">' +
-    '<div class="zynix-data-layer fade-in-up"><h3>' + IC_FILE + ' Claims Data</h3><p>837/835 claims, eligibility (270/271), ERA/EOB processing. Payer feeds, clearinghouses, and direct uploads.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>' + IC_ZAP + ' ADT Feeds</h3><p>Real-time admit, discharge, and transfer notifications. HL7v2 ADT-A01 through A08 and FHIR Encounter resources.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>' + IC_SEARCH + ' Lab & Pharmacy</h3><p>ORU lab results, medication dispensing (NCPDP), and pharmacy benefit data — flowing in real time to power clinical intelligence.</p></div>' +
-    '<div class="zynix-data-layer fade-in-up"><h3>' + IC_CALENDAR + ' Scheduling Systems</h3><p>Bidirectional scheduling with Epic Cadence, athena Scheduling, Cerner SurgiNet, and standalone PM systems.</p></div>' +
-    '</div></div></section>' +
+    html += zxPlatProof({ title: 'One record across practices',
+      lead: 'For a network of independent practices, Zynix means one record and one worklist, even when every practice runs a different EHR.',
+      story: 'pbaco' });
+    html += zxPlatStack({ interop: false });
 
-    '<section style="padding:80px 0"><div class="zynix-container">' +
-    '<span class="zynix-tag">STANDARDS</span>' +
-    '<h2>Interoperability Standards</h2>' +
-    '<div class="zynix-feature-grid" style="margin-top:40px">' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_GEAR + '</div><h3>FHIR R4</h3><p>Full FHIR R4 support including US Core profiles, Bulk Data Access, and SMART on FHIR authorization.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_GEAR + '</div><h3>HL7v2</h3><p>ADT, ORM, ORU, SIU, and MDM message types over MLLP, TCP/IP, and VPN connections.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_GEAR + '</div><h3>X12 EDI</h3><p>837P/I professional and institutional claims, 835 remittance, 270/271 eligibility, and 276/277 claim status.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_GEAR + '</div><h3>CCDA / CDA</h3><p>Consolidated CDA documents for transitions of care, discharge summaries, and referral documents.</p></div>' +
-    '</div></div></section>' +
+    html += zxPlatFaq('faq-integrations', [
+      { q: 'What if my EHR isn’t listed?', a: 'Zynix connects to ' + SITE_FACTS.ehr.line + '. Tell us which system and version you run, and we’ll confirm the interface it supports during scoping.' },
+      { q: 'How long does an integration take?', a: 'Timelines depend on your data sources and scope; we set one with you during scoping.' },
+      { q: 'Which claims and data formats do you accept?', a: 'Medicare CCLF and BCDA, X12 837, 835, 270/271 and 276/277, HL7 v2 ADT and results, C-CDA documents, FHIR APIs and NCPDP pharmacy data.' }
+    ], 'Integration questions');
 
-    renderMetricsBar([
-      { value: '2-4 wks', label: 'Integration go-live' },
-      { value: '30+', label: 'EHRs integrated' },
-      { value: 'Real-time', label: 'Data flow speed' },
-      { value: '99.9%', label: 'Uptime SLA' }
-    ]) +
-
-    '<section class="zynix-page-faq"><div class="zynix-container">' +
-    '<span class="zynix-tag">FAQ</span>' +
-    '<h2>Integration Questions</h2>' +
-    '<div class="zynix-faq-list">' +
-    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How long does an EHR integration take?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Most EHR integrations go live in 2-4 weeks using our pre-built connectors. Epic and Cerner integrations include certified connectors that have been deployed across dozens of health systems. Custom integrations for niche systems typically take 4-6 weeks.</p></div></div>' +
-    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Do you support bidirectional data flow?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Yes. Zynix supports bidirectional data exchange with supported EHRs — reading patient data and writing back scheduling confirmations, documentation, and care plan updates. Bidirectional scheduling is available for Epic, athenahealth, and Cerner.</p></div></div>' +
-    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What if my EHR isn\u2019t listed?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Zynix supports any EHR that exposes HL7v2 or FHIR endpoints. Our integration team builds custom connectors for niche and legacy systems, typically within 4-6 weeks. Contact us for a compatibility assessment.</p></div></div>' +
-    '</div></div></section>' +
-
-    renderCTA('Ready to Connect Your Systems?', 'See how Zynix integrates with your EHR and data sources in a 30-minute demo.', 'Schedule a Demo') +
-    renderFooter();
+    html += renderCTA('Ask about your EHR', 'Tell us which systems you run and we’ll walk through how Zynix connects to them.', null,
+      { secondary: { label: 'Contact us', href: '/contact' } });
+    html += renderFooter();
+    return html;
   }
 
   function renderBlogWillAIExpensive(){
