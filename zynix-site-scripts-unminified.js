@@ -5307,10 +5307,12 @@ function renderUseCaseV7(data) {
   var variants = zxSolAll().filter(function (u) { return u.group === data.group && u.slug !== data.slug; })
     .sort(function (a, b) { return ZX_SOL_AUD_ORDER.indexOf(a.audience) - ZX_SOL_AUD_ORDER.indexOf(b.audience); })
     .map(function (u) { return { href: '/use-cases/' + u.slug, label: u.title, kicker: ZX_SOL_AUD[u.audience] ? ZX_SOL_AUD[u.audience].label : '' }; });
+  var moreInGroup = variants.length > 5 && g ? renderLinkArrow('All ' + (variants.length + 1) + ' in ' + g.name.charAt(0).toLowerCase() + g.name.slice(1), '/use-cases#' + g.id, { className: 'zx-sol-fit__all' }) : '';
+  variants = variants.slice(0, 5);
   html += renderSection({ id: 'fit', className: 'zx-sol-fit' },
     renderSectionHead('Where it fits', 'Runs on the Zynix platform', 'The same data foundation, agents and care plans run every workflow on this site, whatever type of organization runs it.', { id: 'fit-title' }) +
     '<div class="zx-sol-fit__grid"><div class="zx-sol-fit__col"><h3 class="zx-sol-fit__title">Products used</h3>' + zxSolLinks(prods) + '</div>' +
-    (variants.length ? '<div class="zx-sol-fit__col"><h3 class="zx-sol-fit__title">More in ' + (g ? g.name.charAt(0).toLowerCase() + g.name.slice(1) : 'this program') + '</h3>' + zxSolLinks(variants, 'zx-sol-links--plain') + '</div>' : '') +
+    (variants.length ? '<div class="zx-sol-fit__col"><h3 class="zx-sol-fit__title">More in ' + (g ? g.name.charAt(0).toLowerCase() + g.name.slice(1) : 'this program') + '</h3>' + zxSolLinks(variants, 'zx-sol-links--plain') + moreInGroup + '</div>' : '') +
     '</div>');
 
   // One related block per page (§2.16). Six use cases still have a CROSS_LINKS entry, which the router inserts instead.
@@ -5326,7 +5328,6 @@ function renderUseCaseV7(data) {
     if (aud) more.push({ href: aud.href, label: aud.label, desc: 'What Zynix runs for this type of organization', icon: 'users' });
     var story = data.story ? zxCustomer(data.story) : null;
     if (story && story.caseStudy) more.push({ href: story.caseStudy, label: story.name, desc: 'Customer story' + (story.segmentLabel ? ' · ' + story.segmentLabel : ''), icon: 'book' });
-    more.push({ href: '/use-cases', label: 'All use cases', desc: 'Every workflow, by program and organization', icon: 'layers' });
     html += renderRelatedLinks({ title: 'Related', groups: [{ label: 'Use cases', items: rel }, { label: 'Explore more', items: more.slice(0, 3) }] });
   }
 
@@ -5340,7 +5341,9 @@ function renderUseCaseV7(data) {
 // ── Audience page (§6 "Audience", ~3,500px): hero + panel → proof → what we run → a plan at work → how it connects →
 // segment callout → (extra) → related (router, CROSS_LINKS) → CTA ──
 function renderAudiencePageV7(d) {
-  var html = renderHero({ preset: 'product', eyebrow: d.eyebrow, title: zxSolNw(d.title), lead: d.lead, secondary: d.secondary,
+  // The audience name is the eyebrow AND part of the H1 (the H1 names the organization type for readers and search),
+  // rendered as a kicker line inside the heading so the visible design is unchanged.
+  var html = renderHero({ preset: 'product', title: '<span class="zynix-eyebrow zx-sol-kicker">' + d.eyebrow + '</span> ' + zxSolNw(d.title), lead: d.lead, secondary: d.secondary,
     media: { type: 'product', frame: { html: renderUiPanel(d.panel), sample: false, className: 'zx-sol-frame', caption: d.panelCaption } } });
 
   // Proof: customers of this segment (registry only) and one release quote or customer story
@@ -5353,7 +5356,7 @@ function renderAudiencePageV7(d) {
       (p.names ? '<ul class="zx-sol-names__list" role="list">' + p.names.map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ul>' : '') +
       zxEl('p', 'zx-sol-names__note', p.note) + (p.link ? renderLinkArrow(p.link.label, p.link.href) : '') + '</div>';
     else who = renderLogoRow(null, { id: 'proof-logos' });
-    var side = p.quote ? renderQuote({ customer: p.quote, logo: p.logos ? null : undefined }) : (p.card ? renderCard(p.card) : '');
+    var side = p.quote ? renderQuote({ customer: p.quote, logo: p.logos ? null : undefined }) : (p.card ? renderCard(Object.assign({ level: 2 }, p.card)) : '');
     html += '<section class="zynix-section zynix-section--compact zynix-section--rule zx-sol-proof" id="proof" aria-labelledby="proof-title"><div class="zynix-container">' +
       '<h2 class="zx-visually-hidden" id="proof-title">Customers</h2>' + (side ? renderSplit(who, side, { ratio: '5-7', center: true }) : who) + '</div></section>';
   }

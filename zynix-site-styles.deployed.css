@@ -3511,6 +3511,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-sol-frame { width:100%; max-width:640px; justify-self:center; }
 .zx-sol-frame .zynix-ui__steps .zynix-ui__step { padding-block:11px; }
 
+/* Audience hero: the eyebrow is a kicker line inside the H1 */
+.zx-sol-kicker { display:flex; margin:0 0 var(--zx-space-3); }
+
 /* Hyphenated words stay on one line in headings */
 .zx-sol-nw { white-space:nowrap; }
 
@@ -3567,6 +3570,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-sol-fit__grid { display:grid; gap:var(--zx-space-10); }
 @media (min-width:1024px) { .zx-sol-fit__grid { grid-template-columns:repeat(2, minmax(0,1fr)); column-gap:var(--zx-space-12); } }
 .zx-sol-fit__title { margin:0 0 var(--zx-space-4); font-size:var(--zx-fs-h4); line-height:1.35; letter-spacing:0; }
+.zx-sol-fit__all { margin-top:var(--zx-space-4); }
 
 /* Audience proof strip */
 .zx-sol-proof .zynix-logo-row__list { grid-template-columns:repeat(3, minmax(0,1fr)); row-gap:var(--zx-space-5); }
