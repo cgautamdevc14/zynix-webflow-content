@@ -364,7 +364,7 @@
     care: GH + 'zynix-aco-quality.png',                 // Quality metrics — care plans, ACOs
     scribe: GH + 'zynix-quality-measures.png',          // Quality measures — ZynScribe
     patients: GH + 'zynix-provider-view.png',           // Provider view — FQHCs, About
-    enterprise: GH + 'zynix-aco-risk.png',              // Risk stratification — Zynix OS
+    enterprise: GH + 'zynix-aco-risk.png',
     mesh: GH + 'zynix-chatbot.png',                     // AI chatbot — ZynixLLM
     // Aliases used by blog posts
     platform: GH + 'zynix-aco-dashboard.png',           // ACO dashboard for blog posts
