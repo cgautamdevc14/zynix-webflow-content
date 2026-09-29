@@ -114,12 +114,18 @@
     'screenshots/quality-dashboard.png': [1920, 2512], 'screenshots/zynafterhours.png': [1920, 1066],
     'screenshots/zynpostdischarge.png': [1920, 1066], 'screenshots/zynschedule.png': [1920, 1066],
     'screenshots/zynscribe-extension.png': [1920, 1066], 'screenshots/zynscribe-mobile.png': [480, 1066],
-    'screenshots/zynscribe-soap.png': [1920, 1066]
+    'screenshots/zynscribe-soap.png': [1920, 1066],
+    // Legacy root images that legacy renderers still pass to renderBrowserFrame (measured 2026-09-29). Sizes only, so frames
+    // reserve their space; several are on the §2.9 blocked list and page streams replace them.
+    'zynix-aco-dashboard.png': [806, 1600], 'zynix-provider-view.png': [1174, 1600], 'zynix-quality-measures.png': [916, 1200],
+    'zynix-predictive-analytics.png': [1200, 732], 'zynix-aco-quality.png': [1138, 1600], 'zynix-aco-risk.png': [745, 1600],
+    'zynix-chatbot.png': [1200, 747]
   };
 
   // Registry customers only (REDESIGN_BRIEF.md). logo.h = optical height class (px) at desktop; logo.w = rendered width at that height.
   // logo.file is the trimmed, re-encoded asset S2 creates in images/logos/ (logo.source = the existing file it is made from).
-  // Recompute w after trimming: w = round(trimmedWidth / trimmedHeight * h).
+  // Recompute w after trimming: w = round(trimmedWidth / trimmedHeight * h). Done 2026-09-29 (S2): h is the optical class
+  // (20-40) whose area h x w is closest to ~2,400px2 for the trimmed aspect; SVG aspects come from their viewBox.
   // Not listed on purpose: "Innovacare Health" (images/innovacare-health.svg) and "MSPB Health" (images/mspb-health.jpg): [VERIFY], not registry.
   var CUSTOMERS = {
     pbaco: { name: 'Palm Beach ACO', legalName: 'Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding)',
@@ -133,7 +139,7 @@
         text: 'PBACO is focused on building practical, scalable solutions that help providers succeed in value-based care. We believe this partnership with Zynix AI will strengthen patient outreach, improve follow-through, reduce administrative burden, and support better performance across both quality and cost of care. Importantly, we remain committed to ensuring that automation enhances—rather than compromises—the quality of care delivered to our beneficiaries.' },
       metrics: [] },
     eternalhealth: { name: 'eternalHealth', segment: 'health-plan', segmentLabel: 'Medicare Advantage plan', logoRow: 2,
-      logo: { file: 'logos/eternal-health.webp', source: 'eternal-health.png', h: 20, w: 110 },
+      logo: { file: 'logos/eternal-health.webp', source: 'eternal-health.png', h: 20, w: 111 },
       caseStudy: '/case-studies-eternal-health',
       release: { slug: 'eternalhealth-zynix-ai-nirvanahealth-partnership', date: '2026-06-02', outlet: 'Business Wire', href: '/press#eternalhealth-zynix-ai-nirvanahealth-partnership',
                  outletUrl: 'https://www.businesswire.com/news/home/20260602667552/en/eternalHealth-Zynix-AI-and-nirvanaHealth-Announce-Integrated-Partnership-to-Scale-AI-Enabled-Care-Management-and-Member-Engagement' },
@@ -151,13 +157,13 @@
     nexthealthcare: { name: 'NEXT Healthcare Solutions', segment: null, segmentLabel: null, logoRow: 7,   // [VERIFY] segment
       logo: { file: 'logos/next-healthcare.svg', source: 'next-healthcare.svg', h: 28, w: 79 }, caseStudy: null, metrics: [] },
     goldencareaco: { name: 'GoldenCare ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: 8,
-      logo: { file: 'logos/goldencare-aco.webp', source: 'goldencare-aco.png', h: 36, w: 72 }, caseStudy: null, metrics: [] },
+      logo: { file: 'logos/goldencare-aco.webp', source: 'goldencare-aco.png', h: 32, w: 80 }, caseStudy: null, metrics: [] },
     sunfloweraco: { name: 'Sunflower ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: null,
-      logo: { file: 'logos/sunflower-aco.webp', source: 'sunflower-aco.png', h: 36, w: 72 }, caseStudy: null, metrics: [] },
+      logo: { file: 'logos/sunflower-aco.webp', source: 'sunflower-aco.png', h: 36, w: 63 }, caseStudy: null, metrics: [] },
     professionalradiology: { name: 'Professional Radiology', segment: null, segmentLabel: null, logoRow: null,
-      logo: { file: 'logos/professional-radiology.webp', source: 'professional-radiology.png', h: 36, w: 61 }, caseStudy: null, metrics: [] },
+      logo: { file: 'logos/professional-radiology.webp', source: 'professional-radiology.png', h: 36, w: 60 }, caseStudy: null, metrics: [] },
     clsc: { name: 'CLSC', segment: null, segmentLabel: null, logoRow: null,   // [VERIFY] full name
-      logo: { file: 'logos/clsc.webp', source: 'clscfl.png', h: 28, w: 85 }, caseStudy: null, metrics: [] },
+      logo: { file: 'logos/clsc.webp', source: 'clscfl.png', h: 24, w: 86 }, caseStudy: null, metrics: [] },
     apolloclinic: { name: 'Apollo Clinic Network', segment: 'practice', segmentLabel: 'Physician group', logoRow: null, logo: null, caseStudy: '/case-studies/apollo-clinic', metrics: [] },   // [VERIFY] segment
     nhs: { name: 'NHS Health System', segment: 'health-system', segmentLabel: 'Health system', logoRow: null, logo: null, caseStudy: '/case-studies/nhs', metrics: [] },
     advancedmanagement: { name: 'Advanced Management', segment: null, segmentLabel: null, logoRow: null, logo: null, caseStudy: null, metrics: [] },
@@ -393,883 +399,6 @@
     ssPredictive: GHS + 'predictive-analytics.png'
   };
 
-  // ── Hero Visual System ── (Editorial SVG compositions, no fake UI chrome)
-  // Design language: deep navy gradient + subtle grid + SVG line art focal piece + monospace labels
-  var hvs = 'position:relative;width:100%;height:100%;min-height:360px;border-radius:20px;overflow:hidden;background:radial-gradient(ellipse 55% 45% at 22% 18%,rgba(232,97,45,0.22),transparent 60%),radial-gradient(ellipse 50% 40% at 82% 85%,rgba(59,130,246,0.18),transparent 60%),linear-gradient(155deg,#060D1C 0%,#0B1830 52%,#0E1E3A 100%);border:1px solid rgba(255,255,255,0.08);box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 20px 60px -20px rgba(0,0,0,0.6);';
-  var hvGrid = '<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.4;pointer-events:none" aria-hidden="true"><defs><pattern id="zgrid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M 36 0 L 0 0 0 36" fill="none" stroke="rgba(255,255,255,0.045)" stroke-width="1"/></pattern><radialGradient id="zgridFade" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(6,13,28,0.8)"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#zgrid)"/><rect width="100%" height="100%" fill="url(#zgridFade)"/></svg>';
-  // Use single quotes inside the style value so embedding in style="..." doesn't break the attribute.
-  var hvMono = 'font-family:ui-monospace,SFMono-Regular,\'SF Mono\',Menlo,Consolas,monospace;';
-  function hvHeader(left, status) {
-    return '<div style="position:absolute;top:20px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:center;z-index:3">' +
-      '<div style="'+hvMono+'font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.48)">'+left+'</div>' +
-      '<div style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e"></span><span style="'+hvMono+'font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(34,197,94,0.85)">'+status+'</span></div>' +
-      '</div>';
-  }
-  function hvFooter(text) {
-    return '<div style="position:absolute;bottom:20px;left:24px;right:24px;'+hvMono+'font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.42);z-index:3;display:flex;justify-content:space-between;align-items:center"><span>'+text+'</span><span style="opacity:0.6">zynix&nbsp;//&nbsp;ai</span></div>';
-  }
-  function hvCenterLabel(eyebrow, title) {
-    return '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none"><div style="text-align:center"><div style="'+hvMono+'font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px">'+eyebrow+'</div><div style="font-size:22px;font-weight:600;color:rgba(255,255,255,0.95);letter-spacing:-0.01em;font-feature-settings:\'ss01\'">'+title+'</div></div></div>';
-  }
-
-  // Platform / Enterprise visual — orbital operating-system metaphor
-  var VIS_PLATFORM = '<div style="'+hvs+'" role="img" aria-label="Zynix AI operating system for value-based care">' + hvGrid +
-    hvHeader('Operating System', 'Online') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<radialGradient id="pCore" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.9"/><stop offset="60%" stop-color="#E8612D" stop-opacity="0.15"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
-    '<linearGradient id="pRing" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.05"/><stop offset="50%" stop-color="#E8612D" stop-opacity="0.55"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.05"/></linearGradient>' +
-    '<linearGradient id="pRing2" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.05"/><stop offset="50%" stop-color="#3b82f6" stop-opacity="0.45"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.05"/></linearGradient>' +
-    '</defs>' +
-    '<ellipse cx="400" cy="260" rx="340" ry="115" fill="none" stroke="url(#pRing2)" stroke-width="1"/>' +
-    '<ellipse cx="400" cy="260" rx="260" ry="85" fill="none" stroke="url(#pRing)" stroke-width="1"/>' +
-    '<ellipse cx="400" cy="260" rx="175" ry="58" fill="none" stroke="url(#pRing)" stroke-width="1.3"/>' +
-    '<circle cx="400" cy="260" r="120" fill="url(#pCore)"/>' +
-    '<circle cx="400" cy="260" r="32" fill="none" stroke="#E8612D" stroke-width="1.2" opacity="0.7"/>' +
-    '<circle cx="400" cy="260" r="8" fill="#E8612D"/>' +
-    '<circle cx="740" cy="260" r="5" fill="#E8612D"/><circle cx="740" cy="260" r="14" fill="#E8612D" opacity="0.18"/>' +
-    '<circle cx="60" cy="260" r="4" fill="#3b82f6"/><circle cx="60" cy="260" r="12" fill="#3b82f6" opacity="0.18"/>' +
-    '<circle cx="575" cy="188" r="4" fill="#8b5cf6"/><circle cx="575" cy="188" r="10" fill="#8b5cf6" opacity="0.18"/>' +
-    '<circle cx="225" cy="332" r="4" fill="#22c55e"/><circle cx="225" cy="332" r="10" fill="#22c55e" opacity="0.18"/>' +
-    '<circle cx="635" cy="315" r="3.5" fill="#06b6d4"/>' +
-    '<circle cx="165" cy="205" r="3.5" fill="#eab308"/>' +
-    '</svg>' +
-    hvCenterLabel('Operating System', 'ZYNIX&nbsp;OS') +
-    hvFooter('Value-Based Care · Integrated Intelligence') +
-    '</div>';
-
-  // Agents visual — connected agent network graph
-  var VIS_AGENTS = '<div style="'+hvs+'" role="img" aria-label="Zynix AI autonomous agent network">' + hvGrid +
-    hvHeader('Agent Network', 'Active') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<radialGradient id="aCore"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.85"/><stop offset="70%" stop-color="#E8612D" stop-opacity="0.1"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
-    '<linearGradient id="aEdge" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.05"/></linearGradient>' +
-    '</defs>' +
-    '<g stroke="url(#aEdge)" stroke-width="1.2" fill="none">' +
-    '<line x1="400" y1="260" x2="180" y2="140"/>' +
-    '<line x1="400" y1="260" x2="620" y2="140"/>' +
-    '<line x1="400" y1="260" x2="140" y2="260"/>' +
-    '<line x1="400" y1="260" x2="660" y2="260"/>' +
-    '<line x1="400" y1="260" x2="200" y2="380"/>' +
-    '<line x1="400" y1="260" x2="600" y2="380"/>' +
-    '</g>' +
-    '<g stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none" stroke-dasharray="2,4">' +
-    '<line x1="180" y1="140" x2="620" y2="140"/>' +
-    '<line x1="140" y1="260" x2="660" y2="260"/>' +
-    '<line x1="200" y1="380" x2="600" y2="380"/>' +
-    '</g>' +
-    '<circle cx="400" cy="260" r="110" fill="url(#aCore)"/>' +
-    '<circle cx="400" cy="260" r="26" fill="rgba(232,97,45,0.15)" stroke="#E8612D" stroke-width="1.5"/>' +
-    '<circle cx="400" cy="260" r="6" fill="#E8612D"/>' +
-    // Outer nodes with labels
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.55)" text-anchor="middle">' +
-    '<circle cx="180" cy="140" r="14" fill="rgba(139,92,246,0.15)" stroke="#8b5cf6" stroke-width="1.2"/><text x="180" y="112">AWV</text>' +
-    '<circle cx="620" cy="140" r="14" fill="rgba(6,182,212,0.15)" stroke="#06b6d4" stroke-width="1.2"/><text x="620" y="112">TCM</text>' +
-    '<circle cx="140" cy="260" r="14" fill="rgba(59,130,246,0.15)" stroke="#3b82f6" stroke-width="1.2"/><text x="140" y="238">HCC</text>' +
-    '<circle cx="660" cy="260" r="14" fill="rgba(234,179,8,0.15)" stroke="#eab308" stroke-width="1.2"/><text x="660" y="238">CCM</text>' +
-    '<circle cx="200" cy="380" r="14" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="1.2"/><text x="200" y="412">RPM</text>' +
-    '<circle cx="600" cy="380" r="14" fill="rgba(236,72,153,0.15)" stroke="#ec4899" stroke-width="1.2"/><text x="600" y="412">SDOH</text>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('Autonomous Agents · Specialized Workflows') +
-    '</div>';
-
-  // Patient engagement visual — ECG pulse
-  var VIS_PATIENT = '<div style="'+hvs+'" role="img" aria-label="AI patient engagement and scheduling">' + hvGrid +
-    hvHeader('Patient Engagement', 'Streaming') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<linearGradient id="ecgFade" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0"/><stop offset="15%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="85%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></linearGradient>' +
-    '<linearGradient id="ecgGhost" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0"/><stop offset="50%" stop-color="#3b82f6" stop-opacity="0.4"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/></linearGradient>' +
-    '</defs>' +
-    // Ghost line (background)
-    '<path d="M 0 260 L 120 260 L 150 260 L 180 220 L 200 300 L 220 260 L 340 260 L 370 260 L 400 200 L 420 320 L 440 260 L 560 260 L 590 260 L 620 210 L 640 310 L 660 260 L 800 260" fill="none" stroke="url(#ecgGhost)" stroke-width="1.2" stroke-dasharray="3,4" opacity="0.5"/>' +
-    // Main pulse
-    '<path d="M 0 260 L 100 260 L 130 260 L 160 180 L 185 340 L 210 260 L 330 260 L 365 260 L 395 140 L 425 360 L 455 260 L 580 260 L 615 260 L 645 190 L 670 330 L 695 260 L 800 260" fill="none" stroke="url(#ecgFade)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>' +
-    // Pulse node
-    '<circle cx="395" cy="140" r="6" fill="#E8612D"/>' +
-    '<circle cx="395" cy="140" r="16" fill="#E8612D" opacity="0.2"/>' +
-    // Tick marks
-    '<g stroke="rgba(255,255,255,0.15)" stroke-width="1">' +
-    '<line x1="100" y1="410" x2="100" y2="420"/><line x1="250" y1="410" x2="250" y2="420"/><line x1="400" y1="410" x2="400" y2="420"/><line x1="550" y1="410" x2="550" y2="420"/><line x1="700" y1="410" x2="700" y2="420"/>' +
-    '</g>' +
-    '</svg>' +
-    '<div style="position:absolute;left:24px;bottom:60px;z-index:2">' +
-    '<div style="'+hvMono+'font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px">Next Touchpoint</div>' +
-    '<div style="font-size:15px;color:rgba(255,255,255,0.88);font-weight:500">Tue 9:30 AM · Annual Wellness</div>' +
-    '</div>' +
-    '<div style="position:absolute;right:24px;bottom:60px;text-align:right;z-index:2">' +
-    '<div style="'+hvMono+'font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px">Contact Rate</div>' +
-    '<div style="font-size:15px;color:#E8612D;font-weight:500">Above target</div>' +
-    '</div>' +
-    hvFooter('Behavioral AI · Multilingual Outreach') +
-    '</div>';
-
-  // Data platform visual — hexagonal mesh
-  var VIS_DATA = '<div style="'+hvs+'" role="img" aria-label="Zynix AI unified healthcare data platform">' + hvGrid +
-    hvHeader('Data Fabric', 'Unified') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<radialGradient id="dCore"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.8"/><stop offset="60%" stop-color="#E8612D" stop-opacity="0.12"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
-    '<linearGradient id="dEdge" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.1"/><stop offset="50%" stop-color="#3b82f6" stop-opacity="0.55"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0.1"/></linearGradient>' +
-    '</defs>' +
-    // Hex lattice — 12 hexagons arranged around center
-    '<g fill="none" stroke="url(#dEdge)" stroke-width="1">' +
-    // Row 1
-    '<polygon points="200,160 240,140 280,160 280,200 240,220 200,200"/>' +
-    '<polygon points="320,160 360,140 400,160 400,200 360,220 320,200"/>' +
-    '<polygon points="440,160 480,140 520,160 520,200 480,220 440,200"/>' +
-    '<polygon points="560,160 600,140 640,160 640,200 600,220 560,200"/>' +
-    // Row 2 (center — highlighted)
-    '<polygon points="260,240 300,220 340,240 340,280 300,300 260,280"/>' +
-    '<polygon points="500,240 540,220 580,240 580,280 540,300 500,280"/>' +
-    // Row 3
-    '<polygon points="200,320 240,300 280,320 280,360 240,380 200,360"/>' +
-    '<polygon points="320,320 360,300 400,320 400,360 360,380 320,360"/>' +
-    '<polygon points="440,320 480,300 520,320 520,360 480,380 440,360"/>' +
-    '<polygon points="560,320 600,300 640,320 640,360 600,380 560,360"/>' +
-    '</g>' +
-    // Central highlighted hex
-    '<polygon points="380,240 420,220 460,240 460,280 420,300 380,280" fill="rgba(232,97,45,0.18)" stroke="#E8612D" stroke-width="1.6"/>' +
-    '<circle cx="420" cy="260" r="100" fill="url(#dCore)"/>' +
-    '<circle cx="420" cy="260" r="5" fill="#E8612D"/>' +
-    // Connecting lines from center
-    '<g stroke="#E8612D" stroke-width="0.8" opacity="0.3">' +
-    '<line x1="420" y1="260" x2="240" y2="180"/><line x1="420" y1="260" x2="600" y2="180"/><line x1="420" y1="260" x2="240" y2="340"/><line x1="420" y1="260" x2="600" y2="340"/>' +
-    '</g>' +
-    // Small source nodes
-    '<g fill="rgba(255,255,255,0.9)">' +
-    '<circle cx="240" cy="180" r="2.5"/><circle cx="360" cy="180" r="2.5"/><circle cx="480" cy="180" r="2.5"/><circle cx="600" cy="180" r="2.5"/>' +
-    '<circle cx="240" cy="340" r="2.5"/><circle cx="360" cy="340" r="2.5"/><circle cx="480" cy="340" r="2.5"/><circle cx="600" cy="340" r="2.5"/>' +
-    '</g>' +
-    // Small labels
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="8" fill="rgba(255,255,255,0.45)" text-anchor="middle">' +
-    '<text x="240" y="130">EHR</text><text x="360" y="130">CLAIMS</text><text x="480" y="130">LABS</text><text x="600" y="130">RX</text>' +
-    '<text x="240" y="410">FHIR</text><text x="360" y="410">HL7</text><text x="480" y="410">ADT</text><text x="600" y="410">BCDA</text>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('Unified Patient Record · 24+ Connectors') +
-    '</div>';
-
-  // Analytics visual — layered trend chart
-  var VIS_ANALYTICS = '<div style="'+hvs+'" role="img" aria-label="Population health analytics and predictive modeling">' + hvGrid +
-    hvHeader('Predictive Analytics', 'Live') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<linearGradient id="area1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.45"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></linearGradient>' +
-    '<linearGradient id="area2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/></linearGradient>' +
-    '</defs>' +
-    // Y-axis grid lines
-    '<g stroke="rgba(255,255,255,0.06)" stroke-width="1">' +
-    '<line x1="80" y1="110" x2="720" y2="110"/>' +
-    '<line x1="80" y1="190" x2="720" y2="190"/>' +
-    '<line x1="80" y1="270" x2="720" y2="270"/>' +
-    '<line x1="80" y1="350" x2="720" y2="350"/>' +
-    '<line x1="80" y1="430" x2="720" y2="430"/>' +
-    '</g>' +
-    // Blue area (baseline)
-    '<path d="M 80 380 C 160 360 240 340 320 320 C 400 300 480 290 560 270 C 620 260 680 250 720 245 L 720 430 L 80 430 Z" fill="url(#area2)"/>' +
-    '<path d="M 80 380 C 160 360 240 340 320 320 C 400 300 480 290 560 270 C 620 260 680 250 720 245" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-dasharray="5,4"/>' +
-    // Orange area (forecast)
-    '<path d="M 80 340 C 160 310 240 280 320 250 C 400 220 480 200 560 165 C 620 140 680 120 720 100 L 720 430 L 80 430 Z" fill="url(#area1)"/>' +
-    '<path d="M 80 340 C 160 310 240 280 320 250 C 400 220 480 200 560 165 C 620 140 680 120 720 100" fill="none" stroke="#E8612D" stroke-width="2.4" stroke-linecap="round"/>' +
-    // Data point markers on orange
-    '<g fill="#E8612D">' +
-    '<circle cx="80" cy="340" r="3"/><circle cx="240" cy="280" r="3"/><circle cx="400" cy="225" r="3"/><circle cx="560" cy="165" r="3"/><circle cx="720" cy="100" r="4"/>' +
-    '</g>' +
-    '<circle cx="720" cy="100" r="12" fill="#E8612D" opacity="0.2"/>' +
-    // X-axis labels
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.35)" text-anchor="middle">' +
-    '<text x="80" y="455">Q1</text><text x="240" y="455">Q2</text><text x="400" y="455">Q3</text><text x="560" y="455">Q4</text><text x="720" y="455">FCST</text>' +
-    '</g>' +
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.35)">' +
-    '<text x="56" y="114" text-anchor="end">100</text><text x="56" y="194" text-anchor="end">80</text><text x="56" y="274" text-anchor="end">60</text><text x="56" y="354" text-anchor="end">40</text>' +
-    '</g>' +
-    '</svg>' +
-    // Legend
-    '<div style="position:absolute;top:60px;right:28px;'+hvMono+'font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.55);z-index:3;text-align:right">' +
-    '<div style="display:flex;align-items:center;gap:6px;justify-content:flex-end;margin-bottom:4px"><span style="width:16px;height:2px;background:#E8612D"></span> Actual</div>' +
-    '<div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span style="width:16px;height:2px;background:#3b82f6;border-top:1px dashed #3b82f6"></span> Baseline</div>' +
-    '</div>' +
-    hvFooter('Quality · Risk · Financial Forecasting') +
-    '</div>';
-
-  // Care coordination visual — flowing workflow arc
-  var VIS_CARE = '<div style="'+hvs+'" role="img" aria-label="Care coordination and gap closure workflow">' + hvGrid +
-    hvHeader('Care Orchestration', 'Deployed') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<linearGradient id="cArc" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.15"/><stop offset="50%" stop-color="#E8612D" stop-opacity="0.85"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.15"/></linearGradient>' +
-    '<radialGradient id="cNode"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.8"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
-    '</defs>' +
-    // Main arc
-    '<path d="M 80 360 Q 260 120 400 260 T 720 160" fill="none" stroke="url(#cArc)" stroke-width="2.2" stroke-linecap="round"/>' +
-    // Ghost arc
-    '<path d="M 80 380 Q 260 160 400 290 T 720 200" fill="none" stroke="rgba(59,130,246,0.25)" stroke-width="1.3" stroke-dasharray="4,5"/>' +
-    // Milestone nodes
-    '<g>' +
-    '<circle cx="80" cy="360" r="22" fill="url(#cNode)"/>' +
-    '<circle cx="80" cy="360" r="8" fill="rgba(232,97,45,0.2)" stroke="#E8612D" stroke-width="1.5"/>' +
-    '<circle cx="80" cy="360" r="3" fill="#E8612D"/>' +
-    '<circle cx="260" cy="200" r="22" fill="url(#cNode)"/>' +
-    '<circle cx="260" cy="200" r="8" fill="rgba(232,97,45,0.2)" stroke="#E8612D" stroke-width="1.5"/>' +
-    '<circle cx="260" cy="200" r="3" fill="#E8612D"/>' +
-    '<circle cx="450" cy="280" r="22" fill="url(#cNode)"/>' +
-    '<circle cx="450" cy="280" r="8" fill="rgba(232,97,45,0.2)" stroke="#E8612D" stroke-width="1.5"/>' +
-    '<circle cx="450" cy="280" r="3" fill="#E8612D"/>' +
-    '<circle cx="620" cy="190" r="22" fill="url(#cNode)"/>' +
-    '<circle cx="620" cy="190" r="8" fill="rgba(232,97,45,0.2)" stroke="#E8612D" stroke-width="1.5"/>' +
-    '<circle cx="620" cy="190" r="3" fill="#E8612D"/>' +
-    '<circle cx="720" cy="160" r="22" fill="url(#cNode)" opacity="0.7"/>' +
-    '<circle cx="720" cy="160" r="10" fill="rgba(34,197,94,0.2)" stroke="#22c55e" stroke-width="1.6"/>' +
-    '<circle cx="720" cy="160" r="4" fill="#22c55e"/>' +
-    '</g>' +
-    // Stage labels
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.55)" text-anchor="middle">' +
-    '<text x="80" y="410">IDENTIFY</text>' +
-    '<text x="260" y="170">OUTREACH</text>' +
-    '<text x="450" y="250">SCHEDULE</text>' +
-    '<text x="620" y="160">VISIT</text>' +
-    '<text x="720" y="130" fill="#22c55e">CLOSED</text>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('Gap Closure · TCM · AWV · HCC Recapture') +
-    '</div>';
-
-  // Scribe visual — concentric audio rings + transcript flow
-  var VIS_SCRIBE = '<div style="'+hvs+'" role="img" aria-label="Ambient AI clinical documentation">' + hvGrid +
-    hvHeader('Ambient Scribe', 'Recording') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<radialGradient id="sCore"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.9"/><stop offset="60%" stop-color="#E8612D" stop-opacity="0.12"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
-    '</defs>' +
-    // Concentric rings (sound waves)
-    '<g fill="none" stroke="#E8612D" stroke-width="1.2">' +
-    '<circle cx="280" cy="260" r="40" opacity="0.8"/>' +
-    '<circle cx="280" cy="260" r="70" opacity="0.55"/>' +
-    '<circle cx="280" cy="260" r="105" opacity="0.35"/>' +
-    '<circle cx="280" cy="260" r="145" opacity="0.2"/>' +
-    '<circle cx="280" cy="260" r="190" opacity="0.1"/>' +
-    '</g>' +
-    '<circle cx="280" cy="260" r="160" fill="url(#sCore)"/>' +
-    '<circle cx="280" cy="260" r="14" fill="rgba(232,97,45,0.2)" stroke="#E8612D" stroke-width="1.8"/>' +
-    '<circle cx="280" cy="260" r="4" fill="#E8612D"/>' +
-    // Waveform bars on the right side (audio → text flow)
-    '<g fill="rgba(232,97,45,0.55)">' +
-    '<rect x="450" y="248" width="3" height="24" rx="1.5"/>' +
-    '<rect x="460" y="235" width="3" height="50" rx="1.5"/>' +
-    '<rect x="470" y="242" width="3" height="36" rx="1.5"/>' +
-    '<rect x="480" y="225" width="3" height="70" rx="1.5"/>' +
-    '<rect x="490" y="238" width="3" height="44" rx="1.5"/>' +
-    '<rect x="500" y="230" width="3" height="60" rx="1.5"/>' +
-    '<rect x="510" y="245" width="3" height="30" rx="1.5"/>' +
-    '<rect x="520" y="220" width="3" height="80" rx="1.5"/>' +
-    '<rect x="530" y="240" width="3" height="40" rx="1.5"/>' +
-    '<rect x="540" y="232" width="3" height="56" rx="1.5"/>' +
-    '<rect x="550" y="248" width="3" height="24" rx="1.5"/>' +
-    '<rect x="560" y="228" width="3" height="64" rx="1.5"/>' +
-    '<rect x="570" y="240" width="3" height="40" rx="1.5"/>' +
-    '<rect x="580" y="234" width="3" height="52" rx="1.5"/>' +
-    '</g>' +
-    // Connector line (audio to text)
-    '<line x1="600" y1="260" x2="640" y2="260" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="2,3"/>' +
-    // Text lines (simulated structured note)
-    '<g fill="rgba(255,255,255,0.4)">' +
-    '<rect x="650" y="210" width="90" height="3" rx="1.5"/>' +
-    '<rect x="650" y="222" width="120" height="3" rx="1.5"/>' +
-    '<rect x="650" y="240" width="70" height="3" rx="1.5" fill="rgba(232,97,45,0.7)"/>' +
-    '<rect x="650" y="252" width="100" height="3" rx="1.5"/>' +
-    '<rect x="650" y="264" width="85" height="3" rx="1.5"/>' +
-    '<rect x="650" y="282" width="60" height="3" rx="1.5" fill="rgba(232,97,45,0.7)"/>' +
-    '<rect x="650" y="294" width="110" height="3" rx="1.5"/>' +
-    '<rect x="650" y="306" width="75" height="3" rx="1.5"/>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('Audio → Structured Note · HIPAA Compliant') +
-    '</div>';
-
-  // ── New per-page visuals (topic-specific, not generic) ──
-
-  // After-hours triage — 24/7 clock face with multilingual waveform bubbles
-  var VIS_AFTERHOURS = '<div style="'+hvs+'" role="img" aria-label="24/7 AI voice triage after hours">' + hvGrid +
-    hvHeader('After-Hours Triage', 'On Call') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<radialGradient id="ahGlow"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="70%" stop-color="#E8612D" stop-opacity="0.08"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
-    '</defs>' +
-    '<circle cx="320" cy="260" r="160" fill="url(#ahGlow)"/>' +
-    // Clock face
-    '<circle cx="320" cy="260" r="118" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>' +
-    '<circle cx="320" cy="260" r="106" fill="none" stroke="rgba(232,97,45,0.35)" stroke-width="1.2"/>' +
-    // Hour ticks (12 total, highlight 12/3/6/9)
-    '<g stroke="rgba(255,255,255,0.35)" stroke-width="1.4" stroke-linecap="round">' +
-    '<line x1="320" y1="148" x2="320" y2="160"/>' +
-    '<line x1="430" y1="260" x2="418" y2="260"/>' +
-    '<line x1="320" y1="372" x2="320" y2="360"/>' +
-    '<line x1="210" y1="260" x2="222" y2="260"/>' +
-    '</g>' +
-    '<g stroke="rgba(255,255,255,0.18)" stroke-width="1" stroke-linecap="round">' +
-    '<line x1="375" y1="165" x2="370" y2="174"/>' +
-    '<line x1="415" y1="205" x2="406" y2="210"/>' +
-    '<line x1="415" y1="315" x2="406" y2="310"/>' +
-    '<line x1="375" y1="355" x2="370" y2="346"/>' +
-    '<line x1="265" y1="355" x2="270" y2="346"/>' +
-    '<line x1="225" y1="315" x2="234" y2="310"/>' +
-    '<line x1="225" y1="205" x2="234" y2="210"/>' +
-    '<line x1="265" y1="165" x2="270" y2="174"/>' +
-    '</g>' +
-    // Hands pointing to ~2:10 AM
-    '<line x1="320" y1="260" x2="380" y2="230" stroke="#E8612D" stroke-width="3" stroke-linecap="round"/>' +
-    '<line x1="320" y1="260" x2="320" y2="180" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-linecap="round"/>' +
-    '<circle cx="320" cy="260" r="6" fill="#E8612D"/>' +
-    // 24/7 label inside
-    '<text x="320" y="310" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12" letter-spacing="3" fill="rgba(255,255,255,0.55)">24 / 7</text>' +
-    // Multilingual voice bubbles on right
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.78)">' +
-    '<rect x="520" y="150" width="110" height="30" rx="14" fill="rgba(232,97,45,0.12)" stroke="rgba(232,97,45,0.45)" stroke-width="1"/><text x="575" y="170" text-anchor="middle">"Hola, doctor"</text>' +
-    '<rect x="550" y="195" width="130" height="30" rx="14" fill="rgba(59,130,246,0.12)" stroke="rgba(59,130,246,0.45)" stroke-width="1"/><text x="615" y="215" text-anchor="middle">"Bonjour, urgence"</text>' +
-    '<rect x="520" y="240" width="140" height="30" rx="14" fill="rgba(139,92,246,0.12)" stroke="rgba(139,92,246,0.45)" stroke-width="1"/><text x="590" y="260" text-anchor="middle">"请问，我不舒服"</text>' +
-    '<rect x="555" y="285" width="120" height="30" rx="14" fill="rgba(6,182,212,0.12)" stroke="rgba(6,182,212,0.45)" stroke-width="1"/><text x="615" y="305" text-anchor="middle">"I have chest pain"</text>' +
-    '<rect x="535" y="330" width="115" height="30" rx="14" fill="rgba(34,197,94,0.12)" stroke="rgba(34,197,94,0.45)" stroke-width="1"/><text x="592" y="350" text-anchor="middle">"Xin chào bác sĩ"</text>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('15+ Languages · 97.3% Clinical Accuracy') +
-    '</div>';
-
-  // AI scheduling — calendar grid with optimal slots glowing
-  var VIS_SCHEDULE = '<div style="'+hvs+'" role="img" aria-label="AI patient scheduling and slot optimization">' + hvGrid +
-    hvHeader('Smart Scheduling', 'Optimizing') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<linearGradient id="scSlot" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.55"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.15"/></linearGradient>' +
-    '</defs>' +
-    // Day header
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.45)" text-anchor="middle" letter-spacing="1.5">' +
-    '<text x="180" y="135">MON</text><text x="280" y="135">TUE</text><text x="380" y="135">WED</text><text x="480" y="135">THU</text><text x="580" y="135">FRI</text>' +
-    '</g>' +
-    // Time column labels
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.3)" text-anchor="end">' +
-    '<text x="115" y="170">8A</text><text x="115" y="210">10A</text><text x="115" y="250">12P</text><text x="115" y="290">2P</text><text x="115" y="330">4P</text>' +
-    '</g>' +
-    // Grid of slot cells — row/col
-    '<g stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="rgba(255,255,255,0.02)">' +
-    // 5 days × 5 rows = 25 slots
-    '<rect x="135" y="155" width="90" height="30" rx="4"/><rect x="235" y="155" width="90" height="30" rx="4"/><rect x="335" y="155" width="90" height="30" rx="4"/><rect x="435" y="155" width="90" height="30" rx="4"/><rect x="535" y="155" width="90" height="30" rx="4"/>' +
-    '<rect x="135" y="195" width="90" height="30" rx="4"/><rect x="235" y="195" width="90" height="30" rx="4"/><rect x="335" y="195" width="90" height="30" rx="4"/><rect x="435" y="195" width="90" height="30" rx="4"/><rect x="535" y="195" width="90" height="30" rx="4"/>' +
-    '<rect x="135" y="235" width="90" height="30" rx="4"/><rect x="235" y="235" width="90" height="30" rx="4"/><rect x="335" y="235" width="90" height="30" rx="4"/><rect x="435" y="235" width="90" height="30" rx="4"/><rect x="535" y="235" width="90" height="30" rx="4"/>' +
-    '<rect x="135" y="275" width="90" height="30" rx="4"/><rect x="235" y="275" width="90" height="30" rx="4"/><rect x="335" y="275" width="90" height="30" rx="4"/><rect x="435" y="275" width="90" height="30" rx="4"/><rect x="535" y="275" width="90" height="30" rx="4"/>' +
-    '<rect x="135" y="315" width="90" height="30" rx="4"/><rect x="235" y="315" width="90" height="30" rx="4"/><rect x="335" y="315" width="90" height="30" rx="4"/><rect x="435" y="315" width="90" height="30" rx="4"/><rect x="535" y="315" width="90" height="30" rx="4"/>' +
-    '</g>' +
-    // Filled (existing appointments) slots
-    '<g fill="rgba(59,130,246,0.18)" stroke="rgba(59,130,246,0.55)" stroke-width="1">' +
-    '<rect x="135" y="195" width="90" height="30" rx="4"/>' +
-    '<rect x="335" y="155" width="90" height="30" rx="4"/>' +
-    '<rect x="435" y="275" width="90" height="30" rx="4"/>' +
-    '<rect x="535" y="315" width="90" height="30" rx="4"/>' +
-    '</g>' +
-    // AI-recommended slots (glowing orange)
-    '<g fill="url(#scSlot)" stroke="#E8612D" stroke-width="1.6">' +
-    '<rect x="235" y="235" width="90" height="30" rx="4"/>' +
-    '<rect x="335" y="275" width="90" height="30" rx="4"/>' +
-    '<rect x="535" y="195" width="90" height="30" rx="4"/>' +
-    '</g>' +
-    // Ping on AI slots
-    '<circle cx="280" cy="250" r="4" fill="#E8612D"/>' +
-    '<circle cx="280" cy="250" r="10" fill="#E8612D" opacity="0.25"/>' +
-    // Bottom metrics
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.55)">' +
-    '<text x="135" y="395">NO-SHOW RISK</text><text x="215" y="395" fill="#E8612D" font-weight="600">LOW</text>' +
-    '<text x="335" y="395">PROVIDER UTIL</text><text x="435" y="395" fill="#22c55e" font-weight="600">94%</text>' +
-    '<text x="535" y="395">AWV ELIGIBLE</text><text x="625" y="395" fill="#3b82f6" font-weight="600">✓</text>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('Smart Slotting · 40% Fewer No-Shows') +
-    '</div>';
-
-  // Reminders — phone + SMS thread
-  var VIS_REMINDER = '<div style="'+hvs+'" role="img" aria-label="Personalized appointment reminders">' + hvGrid +
-    hvHeader('SMS Reminders', 'Delivered') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<linearGradient id="rmPhone" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="rgba(255,255,255,0.06)"/><stop offset="100%" stop-color="rgba(255,255,255,0.02)"/></linearGradient>' +
-    '</defs>' +
-    // Phone frame
-    '<rect x="230" y="80" width="200" height="360" rx="28" fill="url(#rmPhone)" stroke="rgba(255,255,255,0.18)" stroke-width="1.4"/>' +
-    '<rect x="240" y="95" width="180" height="330" rx="22" fill="rgba(6,13,28,0.7)" stroke="rgba(255,255,255,0.08)"/>' +
-    '<rect x="310" y="102" width="40" height="6" rx="3" fill="rgba(255,255,255,0.15)"/>' +
-    // Header bar
-    '<rect x="250" y="120" width="160" height="24" rx="4" fill="rgba(232,97,45,0.12)"/>' +
-    '<text x="330" y="136" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#E8612D" letter-spacing="1.5">ZYNIX AI</text>' +
-    // Incoming bubble 1
-    '<rect x="254" y="160" width="130" height="40" rx="12" fill="rgba(255,255,255,0.08)"/>' +
-    '<text x="264" y="178" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="8" fill="rgba(255,255,255,0.85)">Hi Maria, your AWV</text>' +
-    '<text x="264" y="192" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="8" fill="rgba(255,255,255,0.85)">is Wed 10:30 AM ✓</text>' +
-    // Outgoing bubble 2
-    '<rect x="276" y="210" width="130" height="32" rx="12" fill="rgba(232,97,45,0.18)" stroke="rgba(232,97,45,0.45)" stroke-width="1"/>' +
-    '<text x="286" y="230" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="8" fill="rgba(255,255,255,0.9)">Confirm appt</text>' +
-    // Incoming bubble 3
-    '<rect x="254" y="252" width="140" height="40" rx="12" fill="rgba(255,255,255,0.08)"/>' +
-    '<text x="264" y="270" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="8" fill="rgba(255,255,255,0.85)">¿Necesita transporte?</text>' +
-    '<text x="264" y="284" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="8" fill="rgba(255,255,255,0.85)">Reply SI or NO</text>' +
-    // Outgoing bubble 4
-    '<rect x="292" y="302" width="114" height="32" rx="12" fill="rgba(232,97,45,0.18)" stroke="rgba(232,97,45,0.45)" stroke-width="1"/>' +
-    '<text x="302" y="322" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="8" fill="rgba(255,255,255,0.9)">SI, por favor</text>' +
-    // Status
-    '<text x="330" y="368" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="8" fill="#22c55e">● Confirmed · transport booked</text>' +
-    // Floating stat cards around phone
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.7)">' +
-    '<rect x="80" y="160" width="125" height="58" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)"/>' +
-    '<text x="92" y="180" font-size="9" fill="rgba(255,255,255,0.45)" letter-spacing="1.5">NO-SHOW RATE</text>' +
-    '<text x="92" y="206" font-size="18" font-weight="600" fill="#E8612D">−40%</text>' +
-    '<rect x="80" y="240" width="125" height="58" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)"/>' +
-    '<text x="92" y="260" font-size="9" fill="rgba(255,255,255,0.45)" letter-spacing="1.5">REPLY RATE</text>' +
-    '<text x="92" y="286" font-size="18" font-weight="600" fill="#22c55e">78%</text>' +
-    '<rect x="460" y="160" width="130" height="58" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)"/>' +
-    '<text x="472" y="180" font-size="9" fill="rgba(255,255,255,0.45)" letter-spacing="1.5">SENT TODAY</text>' +
-    '<text x="472" y="206" font-size="18" font-weight="600" fill="rgba(255,255,255,0.9)">12,847</text>' +
-    '<rect x="460" y="240" width="130" height="58" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)"/>' +
-    '<text x="472" y="260" font-size="9" fill="rgba(255,255,255,0.45)" letter-spacing="1.5">LANGUAGES</text>' +
-    '<text x="472" y="286" font-size="18" font-weight="600" fill="#3b82f6">15+</text>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('Multilingual · SMS · Voice · Consent-Aware') +
-    '</div>';
-
-  // Fax — inbox stack with AI extracting fields
-  var VIS_FAX = '<div style="'+hvs+'" role="img" aria-label="Intelligent fax processing and data extraction">' + hvGrid +
-    hvHeader('Fax Intelligence', 'Processing') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    // Stack of incoming faxes on left (3 stacked)
-    '<g>' +
-    '<rect x="90" y="200" width="180" height="220" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" transform="rotate(-4 180 310)"/>' +
-    '<rect x="110" y="180" width="180" height="220" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)" transform="rotate(2 200 290)"/>' +
-    '<rect x="100" y="160" width="180" height="220" rx="6" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.2)"/>' +
-    '</g>' +
-    // Lines on top fax (document content)
-    '<g fill="rgba(255,255,255,0.25)">' +
-    '<rect x="120" y="185" width="80" height="3" rx="1.5" fill="rgba(255,255,255,0.55)"/>' +
-    '<rect x="120" y="210" width="140" height="2"/><rect x="120" y="220" width="120" height="2"/>' +
-    '<rect x="120" y="240" width="60" height="2" fill="rgba(232,97,45,0.8)"/><rect x="190" y="240" width="60" height="2"/>' +
-    '<rect x="120" y="260" width="140" height="2"/><rect x="120" y="270" width="110" height="2"/>' +
-    '<rect x="120" y="290" width="75" height="2" fill="rgba(232,97,45,0.8)"/><rect x="205" y="290" width="50" height="2"/>' +
-    '<rect x="120" y="310" width="130" height="2"/><rect x="120" y="320" width="100" height="2"/>' +
-    '<rect x="120" y="340" width="85" height="2" fill="rgba(232,97,45,0.8)"/>' +
-    '<rect x="120" y="360" width="140" height="2"/>' +
-    '</g>' +
-    // Flow arrows from fax to extracted data
-    '<g stroke="rgba(232,97,45,0.55)" stroke-width="1.3" fill="none" stroke-dasharray="4,4">' +
-    '<path d="M 285 255 Q 360 255 420 200"/>' +
-    '<path d="M 285 290 Q 360 290 420 270"/>' +
-    '<path d="M 285 325 Q 360 325 420 340"/>' +
-    '</g>' +
-    // Extracted fields panel on right
-    '<g>' +
-    '<rect x="420" y="170" width="290" height="60" rx="8" fill="rgba(232,97,45,0.1)" stroke="rgba(232,97,45,0.55)" stroke-width="1"/>' +
-    '<text x="438" y="193" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(232,97,45,0.9)" letter-spacing="1.5">PATIENT</text>' +
-    '<text x="438" y="215" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12" fill="rgba(255,255,255,0.95)">Maria Reyes · DOB 04/12/1962</text>' +
-    '<rect x="420" y="240" width="290" height="60" rx="8" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.5)" stroke-width="1"/>' +
-    '<text x="438" y="263" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(59,130,246,0.9)" letter-spacing="1.5">REFERRAL</text>' +
-    '<text x="438" y="285" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12" fill="rgba(255,255,255,0.95)">Cardiology · Priority: Routine</text>' +
-    '<rect x="420" y="310" width="290" height="60" rx="8" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.5)" stroke-width="1"/>' +
-    '<text x="438" y="333" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(34,197,94,0.9)" letter-spacing="1.5">ROUTED TO</text>' +
-    '<text x="438" y="355" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12" fill="rgba(255,255,255,0.95)">Dr. Kim · Queue · EHR task</text>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('OCR · NLP · Auto-Route · EHR Drop') +
-    '</div>';
-
-  // Prior Auth — pipeline with submit → AI → approved stages
-  var VIS_AUTH = '<div style="'+hvs+'" role="img" aria-label="AI prior authorization pipeline">' + hvGrid +
-    hvHeader('Prior Authorization', 'Submitting') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<linearGradient id="paFlow" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="rgba(232,97,45,0.1)"/><stop offset="50%" stop-color="rgba(232,97,45,0.7)"/><stop offset="100%" stop-color="rgba(34,197,94,0.7)"/></linearGradient>' +
-    '</defs>' +
-    // Horizontal rail
-    '<line x1="140" y1="260" x2="660" y2="260" stroke="url(#paFlow)" stroke-width="3" stroke-linecap="round"/>' +
-    '<line x1="140" y1="260" x2="660" y2="260" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="2,6"/>' +
-    // Stage 1 — Submit
-    '<g>' +
-    '<circle cx="140" cy="260" r="34" fill="rgba(232,97,45,0.12)" stroke="#E8612D" stroke-width="1.5"/>' +
-    '<rect x="126" y="246" width="28" height="28" rx="4" fill="none" stroke="#E8612D" stroke-width="1.5"/>' +
-    '<line x1="132" y1="256" x2="148" y2="256" stroke="#E8612D" stroke-width="1.3"/>' +
-    '<line x1="132" y1="262" x2="148" y2="262" stroke="#E8612D" stroke-width="1.3"/>' +
-    '<line x1="132" y1="268" x2="144" y2="268" stroke="#E8612D" stroke-width="1.3"/>' +
-    '<text x="140" y="325" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.65)" letter-spacing="1.5">SUBMIT</text>' +
-    '<text x="140" y="343" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.4)">CPT · ICD · Notes</text>' +
-    '</g>' +
-    // Stage 2 — AI match payer policy
-    '<g>' +
-    '<circle cx="310" cy="260" r="38" fill="rgba(232,97,45,0.15)" stroke="#E8612D" stroke-width="1.8"/>' +
-    '<circle cx="310" cy="260" r="60" fill="none" stroke="#E8612D" stroke-width="0.8" opacity="0.35"/>' +
-    '<text x="310" y="266" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="14" font-weight="600" fill="#E8612D">AI</text>' +
-    '<text x="310" y="335" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.65)" letter-spacing="1.5">POLICY MATCH</text>' +
-    '<text x="310" y="353" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.4)">Payer rules · LCD · NCD</text>' +
-    '</g>' +
-    // Stage 3 — Track + follow-up
-    '<g>' +
-    '<circle cx="480" cy="260" r="34" fill="rgba(59,130,246,0.12)" stroke="#3b82f6" stroke-width="1.5"/>' +
-    '<circle cx="480" cy="260" r="14" fill="none" stroke="#3b82f6" stroke-width="1.6"/>' +
-    '<line x1="480" y1="252" x2="480" y2="260" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round"/>' +
-    '<line x1="480" y1="260" x2="486" y2="264" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round"/>' +
-    '<text x="480" y="325" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.65)" letter-spacing="1.5">TRACK</text>' +
-    '<text x="480" y="343" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.4)">Status · Follow-up</text>' +
-    '</g>' +
-    // Stage 4 — Approved
-    '<g>' +
-    '<circle cx="660" cy="260" r="38" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="1.8"/>' +
-    '<polyline points="644,260 656,272 676,248" fill="none" stroke="#22c55e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-    '<text x="660" y="325" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="#22c55e" letter-spacing="1.5">APPROVED</text>' +
-    '<text x="660" y="343" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.4)">3.2 hrs avg</text>' +
-    '</g>' +
-    // Top stat
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace">' +
-    '<text x="400" y="160" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.4)" letter-spacing="2.5">TURNAROUND TIME</text>' +
-    '<text x="400" y="195" text-anchor="middle" font-size="28" font-weight="600" fill="#E8612D">−60%</text>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('CPT · LCD · NCD Aware · Payer-Specific') +
-    '</div>';
-
-  // Post-discharge follow-up — 30-day transition timeline
-  var VIS_POSTDISCHARGE = '<div style="'+hvs+'" role="img" aria-label="Post-discharge and transitional care follow-up">' + hvGrid +
-    hvHeader('Post-Discharge TCM', 'Day 2') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<linearGradient id="pdRail" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.7"/><stop offset="60%" stop-color="#E8612D" stop-opacity="0.45"/><stop offset="100%" stop-color="#22c55e" stop-opacity="0.55"/></linearGradient>' +
-    '</defs>' +
-    // Hospital icon (left)
-    '<g>' +
-    '<rect x="80" y="200" width="80" height="110" rx="4" fill="rgba(59,130,246,0.1)" stroke="rgba(59,130,246,0.5)" stroke-width="1.3"/>' +
-    '<rect x="112" y="220" width="16" height="16" fill="none" stroke="#3b82f6" stroke-width="1.3"/>' +
-    '<line x1="120" y1="222" x2="120" y2="234" stroke="#3b82f6" stroke-width="1.3"/>' +
-    '<line x1="114" y1="228" x2="126" y2="228" stroke="#3b82f6" stroke-width="1.3"/>' +
-    '<g fill="rgba(255,255,255,0.25)"><rect x="90" y="248" width="10" height="10" rx="1"/><rect x="105" y="248" width="10" height="10" rx="1"/><rect x="120" y="248" width="10" height="10" rx="1"/><rect x="135" y="248" width="10" height="10" rx="1"/><rect x="90" y="263" width="10" height="10" rx="1"/><rect x="105" y="263" width="10" height="10" rx="1"/><rect x="120" y="263" width="10" height="10" rx="1"/><rect x="135" y="263" width="10" height="10" rx="1"/><rect x="90" y="278" width="10" height="10" rx="1"/><rect x="105" y="278" width="10" height="10" rx="1"/><rect x="120" y="278" width="10" height="10" rx="1"/><rect x="135" y="278" width="10" height="10" rx="1"/></g>' +
-    '<text x="120" y="330" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.55)" letter-spacing="1.5">DISCHARGE</text>' +
-    '</g>' +
-    // Rail
-    '<path d="M 170 255 Q 400 180 640 255" fill="none" stroke="url(#pdRail)" stroke-width="3" stroke-linecap="round"/>' +
-    '<path d="M 170 255 Q 400 180 640 255" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="3,5"/>' +
-    // Checkpoints (Day 2 active, 7, 14, 30)
-    '<g>' +
-    '<circle cx="258" cy="223" r="18" fill="rgba(232,97,45,0.18)" stroke="#E8612D" stroke-width="2"/>' +
-    '<circle cx="258" cy="223" r="26" fill="none" stroke="#E8612D" stroke-width="1" opacity="0.4"/>' +
-    '<text x="258" y="227" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" font-weight="600" fill="#E8612D">D2</text>' +
-    '<text x="258" y="175" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#E8612D" letter-spacing="1.5">VOICE CALL</text>' +
-    '<circle cx="385" cy="195" r="14" fill="rgba(232,97,45,0.1)" stroke="#E8612D" stroke-width="1.4"/>' +
-    '<text x="385" y="199" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#E8612D">D7</text>' +
-    '<text x="385" y="152" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">MED REC</text>' +
-    '<circle cx="510" cy="200" r="14" fill="rgba(232,97,45,0.1)" stroke="#E8612D" stroke-width="1.4"/>' +
-    '<text x="510" y="204" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#E8612D">D14</text>' +
-    '<text x="510" y="160" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.5)" letter-spacing="1.5">PCP VISIT</text>' +
-    '<circle cx="620" cy="232" r="16" fill="rgba(34,197,94,0.12)" stroke="#22c55e" stroke-width="1.6"/>' +
-    '<polyline points="612,232 618,240 628,222" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
-    '<text x="620" y="195" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#22c55e" letter-spacing="1.5">D30 CLOSED</text>' +
-    '</g>' +
-    // Home icon (right)
-    '<g>' +
-    '<path d="M 700 300 L 700 260 L 720 245 L 740 260 L 740 300 Z" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.6)" stroke-width="1.4"/>' +
-    '<rect x="713" y="275" width="14" height="25" fill="none" stroke="rgba(34,197,94,0.55)" stroke-width="1.2"/>' +
-    '<text x="720" y="330" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.55)" letter-spacing="1.5">HOME</text>' +
-    '</g>' +
-    // Stats
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace">' +
-    '<text x="120" y="400" font-size="9" fill="rgba(255,255,255,0.4)" letter-spacing="2">CONTACT RATE</text>' +
-    '<text x="120" y="430" font-size="22" font-weight="600" fill="#E8612D">85%+</text>' +
-    '<text x="400" y="400" font-size="9" fill="rgba(255,255,255,0.4)" letter-spacing="2">READMITS</text>' +
-    '<text x="400" y="430" font-size="22" font-weight="600" fill="#22c55e">−25%</text>' +
-    '<text x="620" y="400" font-size="9" fill="rgba(255,255,255,0.4)" letter-spacing="2">TCM BILLED</text>' +
-    '<text x="620" y="430" font-size="22" font-weight="600" fill="rgba(255,255,255,0.92)">+3x</text>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('TCM 99495/99496 · 30-Day Readmit Prevention') +
-    '</div>';
-
-  // Med reconciliation — pill icons with reconciliation tags
-  var VIS_MEDREC = '<div style="'+hvs+'" role="img" aria-label="Medication reconciliation at discharge">' + hvGrid +
-    hvHeader('Med Reconciliation', 'Reviewing') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    // Inpatient list (left column)
-    '<g>' +
-    '<text x="180" y="155" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(59,130,246,0.85)" letter-spacing="2.5">INPATIENT</text>' +
-    '<g>' +
-    // Pill 1
-    '<rect x="100" y="175" width="160" height="38" rx="19" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.5)" stroke-width="1"/>' +
-    '<rect x="100" y="175" width="80" height="38" rx="19" fill="rgba(59,130,246,0.2)"/>' +
-    '<text x="180" y="198" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.9)">Lisinopril 20mg</text>' +
-    '<rect x="100" y="225" width="160" height="38" rx="19" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.5)" stroke-width="1"/>' +
-    '<rect x="100" y="225" width="80" height="38" rx="19" fill="rgba(59,130,246,0.2)"/>' +
-    '<text x="180" y="248" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.9)">Metformin 500mg</text>' +
-    '<rect x="100" y="275" width="160" height="38" rx="19" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.5)" stroke-width="1"/>' +
-    '<rect x="100" y="275" width="80" height="38" rx="19" fill="rgba(59,130,246,0.2)"/>' +
-    '<text x="180" y="298" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.9)">Atorvastatin 40mg</text>' +
-    '<rect x="100" y="325" width="160" height="38" rx="19" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.5)" stroke-width="1"/>' +
-    '<rect x="100" y="325" width="80" height="38" rx="19" fill="rgba(59,130,246,0.2)"/>' +
-    '<text x="180" y="348" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.9)">Aspirin 81mg</text>' +
-    '</g>' +
-    '</g>' +
-    // Arrows between
-    '<g stroke="rgba(255,255,255,0.25)" stroke-width="1.2" fill="none">' +
-    '<line x1="270" y1="194" x2="320" y2="194"/><polygon points="320,194 314,191 314,197" fill="#22c55e"/>' +
-    '<line x1="270" y1="244" x2="320" y2="244" stroke="#E8612D"/><polygon points="320,244 314,241 314,247" fill="#E8612D"/>' +
-    '<line x1="270" y1="294" x2="320" y2="294"/><polygon points="320,294 314,291 314,297" fill="#22c55e"/>' +
-    '<line x1="270" y1="344" x2="320" y2="344" stroke="rgba(236,72,153,0.7)"/><polygon points="320,344 314,341 314,347" fill="#ec4899"/>' +
-    '</g>' +
-    // Home list
-    '<g>' +
-    '<text x="460" y="155" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(34,197,94,0.85)" letter-spacing="2.5">DISCHARGE</text>' +
-    '<rect x="330" y="175" width="260" height="38" rx="19" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.5)" stroke-width="1"/>' +
-    '<text x="345" y="198" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.9)">Lisinopril 20mg</text>' +
-    '<rect x="555" y="183" width="30" height="22" rx="4" fill="rgba(34,197,94,0.25)"/><text x="570" y="198" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#22c55e" font-weight="600">OK</text>' +
-    '<rect x="330" y="225" width="260" height="38" rx="19" fill="rgba(232,97,45,0.12)" stroke="#E8612D" stroke-width="1.3"/>' +
-    '<text x="345" y="248" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.95)">Metformin 1000mg</text>' +
-    '<rect x="515" y="233" width="70" height="22" rx="4" fill="rgba(232,97,45,0.35)"/><text x="550" y="248" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#fff" font-weight="600">DOSE↑</text>' +
-    '<rect x="330" y="275" width="260" height="38" rx="19" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.5)" stroke-width="1"/>' +
-    '<text x="345" y="298" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.9)">Atorvastatin 40mg</text>' +
-    '<rect x="555" y="283" width="30" height="22" rx="4" fill="rgba(34,197,94,0.25)"/><text x="570" y="298" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#22c55e" font-weight="600">OK</text>' +
-    '<rect x="330" y="325" width="260" height="38" rx="19" fill="rgba(236,72,153,0.1)" stroke="rgba(236,72,153,0.65)" stroke-width="1.3"/>' +
-    '<text x="345" y="348" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.95)">Warfarin 5mg (new)</text>' +
-    '<rect x="505" y="333" width="80" height="22" rx="4" fill="rgba(236,72,153,0.35)"/><text x="545" y="348" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="#fff" font-weight="600">INTERACT</text>' +
-    '</g>' +
-    // Summary on right
-    '<g>' +
-    '<rect x="620" y="175" width="110" height="188" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/>' +
-    '<text x="675" y="200" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.45)" letter-spacing="1.5">DISCREPANCIES</text>' +
-    '<text x="675" y="240" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="32" font-weight="600" fill="#E8612D">2</text>' +
-    '<line x1="640" y1="265" x2="710" y2="265" stroke="rgba(255,255,255,0.1)"/>' +
-    '<text x="675" y="287" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.45)" letter-spacing="1.5">FLAGGED</text>' +
-    '<circle cx="655" cy="320" r="4" fill="#E8612D"/><text x="668" y="324" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.75)">Dose change</text>' +
-    '<circle cx="655" cy="343" r="4" fill="#ec4899"/><text x="668" y="347" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.75)">Interaction</text>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('Discharge · Transitions · Drug Interaction') +
-    '</div>';
-
-  // Health plan — Stars rating + HEDIS tracker
-  var VIS_HEALTHPLAN = '<div style="'+hvs+'" role="img" aria-label="Medicare Advantage Stars and HEDIS quality tracking">' + hvGrid +
-    hvHeader('Stars & HEDIS', 'Tracking') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<linearGradient id="hpStar" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#E8612D"/><stop offset="100%" stop-color="#eab308"/></linearGradient>' +
-    '<linearGradient id="hpBar" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.3"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.95"/></linearGradient>' +
-    '</defs>' +
-    // Big stars row (top)
-    '<g>' +
-    '<text x="140" y="150" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" fill="rgba(255,255,255,0.5)" letter-spacing="2">OVERALL STARS</text>' +
-    // 4.5 stars
-    '<g transform="translate(140,175)">' +
-    '<polygon points="0,0 10,25 36,25 15,42 23,68 0,52 -23,68 -15,42 -36,25 -10,25" fill="url(#hpStar)" stroke="#E8612D" stroke-width="0.8" transform="translate(40,0)"/>' +
-    '<polygon points="0,0 10,25 36,25 15,42 23,68 0,52 -23,68 -15,42 -36,25 -10,25" fill="url(#hpStar)" stroke="#E8612D" stroke-width="0.8" transform="translate(130,0)"/>' +
-    '<polygon points="0,0 10,25 36,25 15,42 23,68 0,52 -23,68 -15,42 -36,25 -10,25" fill="url(#hpStar)" stroke="#E8612D" stroke-width="0.8" transform="translate(220,0)"/>' +
-    '<polygon points="0,0 10,25 36,25 15,42 23,68 0,52 -23,68 -15,42 -36,25 -10,25" fill="url(#hpStar)" stroke="#E8612D" stroke-width="0.8" transform="translate(310,0)"/>' +
-    // Half star (clipped)
-    '<polygon points="0,0 10,25 36,25 15,42 23,68 0,52 -23,68 -15,42 -36,25 -10,25" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1" transform="translate(400,0)"/>' +
-    '<path d="M 400 0 L 400 52 L 377 68 L 385 42 L 364 25 L 390 25 Z" fill="url(#hpStar)" opacity="0.85"/>' +
-    '</g>' +
-    '<text x="610" y="215" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="36" font-weight="600" fill="#E8612D">4.5</text>' +
-    '<text x="663" y="215" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="16" fill="rgba(255,255,255,0.4)">/5.0</text>' +
-    '</g>' +
-    // HEDIS bars
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10">' +
-    '<text x="140" y="295" fill="rgba(255,255,255,0.5)" letter-spacing="2">HEDIS CLOSURE</text>' +
-    // Bar 1 — BCS (Breast Cancer Screening)
-    '<text x="140" y="325" fill="rgba(255,255,255,0.7)">BCS</text>' +
-    '<rect x="200" y="315" width="420" height="12" rx="6" fill="rgba(255,255,255,0.08)"/>' +
-    '<rect x="200" y="315" width="336" height="12" rx="6" fill="url(#hpBar)"/>' +
-    '<text x="635" y="325" fill="#E8612D" font-weight="600">80%</text>' +
-    // Bar 2 — CCS (Cervical)
-    '<text x="140" y="350" fill="rgba(255,255,255,0.7)">CCS</text>' +
-    '<rect x="200" y="340" width="420" height="12" rx="6" fill="rgba(255,255,255,0.08)"/>' +
-    '<rect x="200" y="340" width="294" height="12" rx="6" fill="url(#hpBar)"/>' +
-    '<text x="635" y="350" fill="#E8612D" font-weight="600">70%</text>' +
-    // Bar 3 — CDC (Diabetes HbA1c)
-    '<text x="140" y="375" fill="rgba(255,255,255,0.7)">CDC</text>' +
-    '<rect x="200" y="365" width="420" height="12" rx="6" fill="rgba(255,255,255,0.08)"/>' +
-    '<rect x="200" y="365" width="378" height="12" rx="6" fill="url(#hpBar)"/>' +
-    '<text x="635" y="375" fill="#E8612D" font-weight="600">90%</text>' +
-    // Bar 4 — COA (Care for Older Adults)
-    '<text x="140" y="400" fill="rgba(255,255,255,0.7)">COA</text>' +
-    '<rect x="200" y="390" width="420" height="12" rx="6" fill="rgba(255,255,255,0.08)"/>' +
-    '<rect x="200" y="390" width="260" height="12" rx="6" fill="url(#hpBar)"/>' +
-    '<text x="635" y="400" fill="#E8612D" font-weight="600">62%</text>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('Stars · HEDIS · HCC · RAF Optimization') +
-    '</div>';
-
-  // FQHC — Multilingual outreach ring with community center
-  var VIS_FQHC = '<div style="'+hvs+'" role="img" aria-label="FQHC multilingual community outreach">' + hvGrid +
-    hvHeader('Community Outreach', 'Active') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<radialGradient id="fqCore"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.75"/><stop offset="70%" stop-color="#E8612D" stop-opacity="0.1"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
-    '</defs>' +
-    '<circle cx="400" cy="260" r="170" fill="url(#fqCore)"/>' +
-    // Outer ring (dashed — community)
-    '<circle cx="400" cy="260" r="180" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3,5"/>' +
-    '<circle cx="400" cy="260" r="140" fill="none" stroke="rgba(232,97,45,0.3)" stroke-width="1"/>' +
-    // Central building (community health center)
-    '<g transform="translate(400,260)">' +
-    '<rect x="-36" y="-28" width="72" height="56" rx="4" fill="rgba(232,97,45,0.18)" stroke="#E8612D" stroke-width="1.4"/>' +
-    '<path d="M -36 -28 L 0 -48 L 36 -28 Z" fill="rgba(232,97,45,0.3)" stroke="#E8612D" stroke-width="1.4"/>' +
-    '<rect x="-8" y="-12" width="4" height="16" fill="#E8612D"/><rect x="-12" y="-6" width="12" height="4" fill="#E8612D"/>' +
-    '<rect x="8" y="-8" width="12" height="12" fill="none" stroke="rgba(255,255,255,0.45)"/>' +
-    '<rect x="-20" y="8" width="40" height="20" fill="none" stroke="rgba(255,255,255,0.35)"/>' +
-    '</g>' +
-    // Language nodes (12 languages around the ring)
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="10" text-anchor="middle">' +
-    '<g transform="translate(400,100)"><circle r="20" fill="rgba(232,97,45,0.12)" stroke="rgba(232,97,45,0.55)"/><text y="4" fill="rgba(255,255,255,0.85)">EN</text></g>' +
-    '<g transform="translate(540,150)"><circle r="20" fill="rgba(59,130,246,0.12)" stroke="rgba(59,130,246,0.55)"/><text y="4" fill="rgba(255,255,255,0.85)">ES</text></g>' +
-    '<g transform="translate(600,260)"><circle r="20" fill="rgba(139,92,246,0.12)" stroke="rgba(139,92,246,0.55)"/><text y="4" fill="rgba(255,255,255,0.85)">中</text></g>' +
-    '<g transform="translate(540,370)"><circle r="20" fill="rgba(6,182,212,0.12)" stroke="rgba(6,182,212,0.55)"/><text y="4" fill="rgba(255,255,255,0.85)">VI</text></g>' +
-    '<g transform="translate(400,420)"><circle r="20" fill="rgba(34,197,94,0.12)" stroke="rgba(34,197,94,0.55)"/><text y="4" fill="rgba(255,255,255,0.85)">HT</text></g>' +
-    '<g transform="translate(260,370)"><circle r="20" fill="rgba(234,179,8,0.12)" stroke="rgba(234,179,8,0.55)"/><text y="4" fill="rgba(255,255,255,0.85)">ع</text></g>' +
-    '<g transform="translate(200,260)"><circle r="20" fill="rgba(236,72,153,0.12)" stroke="rgba(236,72,153,0.55)"/><text y="4" fill="rgba(255,255,255,0.85)">FR</text></g>' +
-    '<g transform="translate(260,150)"><circle r="20" fill="rgba(232,97,45,0.1)" stroke="rgba(232,97,45,0.4)"/><text y="4" fill="rgba(255,255,255,0.85)">PT</text></g>' +
-    '</g>' +
-    // Connecting lines (center to each language)
-    '<g stroke="rgba(232,97,45,0.25)" stroke-width="1" fill="none">' +
-    '<line x1="400" y1="260" x2="400" y2="120"/>' +
-    '<line x1="400" y1="260" x2="522" y2="164"/>' +
-    '<line x1="400" y1="260" x2="580" y2="260"/>' +
-    '<line x1="400" y1="260" x2="522" y2="356"/>' +
-    '<line x1="400" y1="260" x2="400" y2="400"/>' +
-    '<line x1="400" y1="260" x2="278" y2="356"/>' +
-    '<line x1="400" y1="260" x2="220" y2="260"/>' +
-    '<line x1="400" y1="260" x2="278" y2="164"/>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('15+ Languages · UDS · Sliding-Scale Aware') +
-    '</div>';
-
-  // Trust / Compliance — shield + certifications grid
-  var VIS_TRUST = '<div style="'+hvs+'" role="img" aria-label="HIPAA, SOC 2 Type II and HITRUST (in progress) security and compliance">' + hvGrid +
-    hvHeader('Security Posture', 'Monitored') +
-    '<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
-    '<defs>' +
-    '<linearGradient id="trShield" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.25"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0.05"/></linearGradient>' +
-    '<radialGradient id="trGlow"><stop offset="0%" stop-color="#E8612D" stop-opacity="0.55"/><stop offset="100%" stop-color="#E8612D" stop-opacity="0"/></radialGradient>' +
-    '</defs>' +
-    '<circle cx="260" cy="260" r="150" fill="url(#trGlow)"/>' +
-    // Shield (left)
-    '<g transform="translate(260,260)">' +
-    '<path d="M 0 -90 L 80 -60 L 80 20 Q 80 70 0 100 Q -80 70 -80 20 L -80 -60 Z" fill="url(#trShield)" stroke="#E8612D" stroke-width="1.8"/>' +
-    '<path d="M 0 -75 L 65 -50 L 65 18 Q 65 58 0 82 Q -65 58 -65 18 L -65 -50 Z" fill="none" stroke="rgba(232,97,45,0.35)" stroke-width="1"/>' +
-    // Check mark inside
-    '<polyline points="-26,4 -6,26 28,-20" fill="none" stroke="#E8612D" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>' +
-    '</g>' +
-    // Badge grid (right)
-    '<g>' +
-    // HIPAA
-    '<rect x="440" y="140" width="140" height="70" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(232,97,45,0.55)" stroke-width="1.2"/>' +
-    '<circle cx="470" cy="175" r="14" fill="rgba(232,97,45,0.15)" stroke="#E8612D"/>' +
-    '<polyline points="463,175 468,180 477,170" fill="none" stroke="#E8612D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
-    '<text x="495" y="170" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12" font-weight="600" fill="rgba(255,255,255,0.95)">HIPAA</text>' +
-    '<text x="495" y="185" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.5)">BAA available</text>' +
-    // SOC 2
-    '<rect x="600" y="140" width="140" height="70" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(34,197,94,0.55)" stroke-width="1.2"/>' +
-    '<circle cx="630" cy="175" r="14" fill="rgba(34,197,94,0.15)" stroke="#22c55e"/>' +
-    '<polyline points="623,175 628,180 637,170" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
-    '<text x="655" y="170" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12" font-weight="600" fill="rgba(255,255,255,0.95)">SOC 2</text>' +
-    '<text x="655" y="185" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.5)">Type II certified</text>' +
-    // HITRUST
-    '<rect x="440" y="230" width="140" height="70" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(59,130,246,0.55)" stroke-width="1.2"/>' +
-    '<circle cx="470" cy="265" r="14" fill="rgba(59,130,246,0.15)" stroke="#3b82f6"/>' +
-    '<circle cx="470" cy="265" r="5" fill="#3b82f6"/>' +
-    '<text x="495" y="260" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12" font-weight="600" fill="rgba(255,255,255,0.95)">HITRUST</text>' +
-    '<text x="495" y="275" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.5)">In progress</text>' +
-    // Encryption
-    '<rect x="600" y="230" width="140" height="70" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(139,92,246,0.55)" stroke-width="1.2"/>' +
-    '<g transform="translate(620,265)"><rect x="-8" y="-2" width="16" height="14" rx="2" fill="rgba(139,92,246,0.2)" stroke="#8b5cf6" stroke-width="1.3"/><path d="M -5 -2 L -5 -7 Q -5 -12 0 -12 Q 5 -12 5 -7 L 5 -2" fill="none" stroke="#8b5cf6" stroke-width="1.3"/></g>' +
-    '<text x="655" y="260" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12" font-weight="600" fill="rgba(255,255,255,0.95)">AES-256</text>' +
-    '<text x="655" y="275" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.5)">At-rest · In-transit</text>' +
-    // Audit log
-    '<rect x="440" y="320" width="300" height="70" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/>' +
-    '<g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="9" fill="rgba(255,255,255,0.45)" letter-spacing="1">' +
-    '<text x="460" y="342">AUDIT TRAIL</text>' +
-    '<rect x="460" y="352" width="260" height="2" fill="rgba(34,197,94,0.5)"/>' +
-    '<rect x="460" y="362" width="230" height="2" fill="rgba(34,197,94,0.4)"/>' +
-    '<rect x="460" y="372" width="250" height="2" fill="rgba(34,197,94,0.5)"/>' +
-    '</g>' +
-    '</g>' +
-    '</svg>' +
-    hvFooter('HIPAA · SOC 2 Type II · HITRUST in progress · Full Audit') +
-    '</div>';
-
-  // Build HERO_VIS lookup: image URL → HTML visual (fallback)
-  // NOTE: Multiple IMG keys share URLs (e.g., doctor/scribe/agents all point to doctor-voice-agent.png).
-  // That makes URL-keyed lookup lossy — later assignments clobber earlier ones. Primary mapping
-  // is therefore pathname-based (PATH_VIS) and URL-based is only a safety net.
-  var HERO_VIS = {};
-  HERO_VIS[IMG.enterprise] = VIS_PLATFORM;
-  HERO_VIS[IMG.patients] = VIS_PLATFORM;
-  HERO_VIS[IMG.platform] = VIS_PLATFORM;
-  HERO_VIS[IMG.patient] = VIS_PATIENT;
-  HERO_VIS[IMG.data] = VIS_DATA;
-  HERO_VIS[IMG.mesh] = VIS_DATA;
-  HERO_VIS[IMG.analytics] = VIS_ANALYTICS;
-  HERO_VIS[IMG.hero] = VIS_ANALYTICS;
-  HERO_VIS[IMG.care] = VIS_CARE;
-  HERO_VIS[IMG.doctor] = VIS_AGENTS;
-  HERO_VIS[IMG.agents] = VIS_AGENTS;
-  HERO_VIS[IMG.scribe] = VIS_SCRIBE; // This clobbers IMG.doctor since they share a URL — PATH_VIS handles disambiguation below.
-
-  // Authoritative pathname → visual mapping. Keys are the raw location.pathname (no trailing slash).
-  // Each page gets a topic-specific visual — shared visuals only when topics are genuinely the same.
-  var PATH_VIS = {
-    '': VIS_ANALYTICS,                                 // homepage handled inline, here for completeness
-    '/': VIS_ANALYTICS,
-    '/platform': VIS_PLATFORM,
-    '/products-data-platform': VIS_DATA,
-    '/products-analytics': VIS_ANALYTICS,
-    '/agents': VIS_AGENTS,
-    '/zynscribe': VIS_SCRIBE,
-    '/care-plans': VIS_CARE,
-    '/company-zynixllm': VIS_DATA,
-    '/products-zynixllm': VIS_DATA,
-    // Agent pages — each now has its own artwork
-    '/products-ai-agents-zynafterhours': VIS_AFTERHOURS,
-    '/products-ai-agents-zynschedule': VIS_SCHEDULE,
-    '/products-ai-agents-post-discharge': VIS_POSTDISCHARGE,
-    '/products-ai-agents-med-rec': VIS_MEDREC,
-    '/products-ai-agents-zynreminder': VIS_REMINDER,
-    '/products-ai-agents-zynfax': VIS_FAX,
-    '/products-ai-agents-zynauth': VIS_AUTH,
-    // Audience pages — each gets a relevant metaphor
-    '/solutions-acos': VIS_CARE,
-    '/solutions-health-systems': VIS_AGENTS,
-    '/solutions-health-plans': VIS_HEALTHPLAN,
-    '/solutions-fqhcs': VIS_FQHC,
-    '/solutions-independent-practices': VIS_SCHEDULE,
-    '/solutions-ascs': VIS_AUTH,
-    // Use-case pages — each now matches its story
-    '/use-cases/post-discharge-follow-up': VIS_POSTDISCHARGE,
-    '/use-cases/hcc-gap-closure-health-system-aco': VIS_ANALYTICS,
-    '/use-cases/after-hours-triage-multi-site': VIS_AFTERHOURS,
-    '/use-cases/prior-auth-high-volume-specialty': VIS_AUTH,
-    '/use-cases/preventive-screening-gap-fqhc': VIS_FQHC,
-    '/use-cases/post-discharge-tcm-readmission': VIS_POSTDISCHARGE,
-    // Company / trust
-    '/company-about': VIS_PLATFORM,
-    '/company-trust-center': VIS_TRUST,
-    '/security': VIS_TRUST,
-    // Compare pages — keep the operating-system metaphor (that's the comparison frame)
-    '/compare-zynix-vs-point-solutions': VIS_PLATFORM,
-    '/compare-zynix-vs-innovaccer': VIS_PLATFORM,
-    '/compare-zynix-vs-commure': VIS_PLATFORM,
-    '/compare-zynix-vs-health-catalyst': VIS_PLATFORM,
-    '/compare-zynix-vs-abridge': VIS_PLATFORM,
-    '/compare-zynix-vs-navina': VIS_PLATFORM,
-    '/compare-zynix-vs-olive-ai': VIS_PLATFORM,
-    '/compare-zynix-vs-notable-health': VIS_PLATFORM
-  };
-  function getPathVis() {
-    try {
-      var p = (location.pathname || '').replace(/\/$/, '');
-      return PATH_VIS[p] || PATH_VIS[p + '/'] || null;
-    } catch (e) { return null; }
-  }
 
   // ── Cross-Linking Data Model ──
   var LINK_NAMES = {
@@ -1385,221 +514,221 @@
   // ── SEO Data ──
   var SITE_DOMAIN = (window.location.hostname.indexOf('zynix.ai') > -1) ? 'https://www.zynix.ai' : window.location.origin;
   var PAGE_SEO = {
-    '': { title: 'AI That Executes Care | Zynix AI', desc: 'Zynix deploys AI agents that execute care, not just analyze it. Agents that call patients, close gaps, and capture revenue for ACOs and health systems.', img: IMG.hero, schema: 'Organization' },
-    // '/platform' — moved to V7 block (line ~553) to avoid duplicate
-    // '/platform': { title: 'Value-Based Care Operating System | Zynix AI', desc: '...', img: IMG.enterprise, schema: 'Product' },
-    '/products-data-platform': { title: 'Healthcare Data Platform | Zynix AI', desc: 'Integrate EHR, claims, ADT, and SDOH data into one unified layer with 97%+ patient matching. Power real-time value-based care insights.', img: IMG.data, schema: 'Product' },
-    '/products-analytics': { title: 'Population Health Analytics | Zynix AI', desc: 'AI-driven risk stratification, HCC coding, and population health analytics that close quality gaps 40% faster. Built for ACOs and health plans.', img: IMG.analytics, schema: 'Product' },
+    '': { title: 'Value-based care AI for ACOs and health plans | Zynix AI', desc: 'Connect claims, EHR and ADT data, flag discharges, care gaps and AWVs due, and give care teams outreach agents. For ACOs, health plans, MSOs and IPAs.', img: IMG.hero, schema: 'Organization' },
+    '/products-data-platform': { title: 'Healthcare data foundation: one patient record | Zynix AI', desc: 'Bring claims, EHR, ADT, lab and pharmacy data into one patient record. Codes standardized, identities resolved, ready for worklists. 30+ EHR systems.', img: IMG.data, schema: 'Product' },
+    '/products-analytics': { title: 'Population health analytics for VBC | Zynix AI', desc: 'Risk, quality and HCC gap analytics on your claims and clinical data, ranked into worklists your care team can act on this week.', img: IMG.analytics, schema: 'Product' },
     // '/agents', '/zynscribe', '/care-plans' — moved to V7 block to avoid duplicates
-    '/company-zynixllm': { title: 'Healthcare AI Language Model | Zynix AI', desc: 'ZynixLLM is a clinical NLP model purpose-built for healthcare workflows with lower hallucination rates and deeper medical reasoning than general AI.', img: IMG.mesh, schema: 'Product' },
-    '/products-zynixllm': { title: 'Clinical NLP for Healthcare | Zynix AI', desc: 'ZynixLLM powers clinical NLP across the Zynix platform with healthcare-native language understanding trained on real clinical workflows.', img: IMG.mesh, schema: 'Product' },
-    '/products-ai-agents-zynafterhours': { title: 'AI After-Hours Triage | Zynix AI', desc: 'Provide 24/7 patient support with AI-powered after-hours triage in 15+ languages. Achieve 97.3% accuracy and divert 20-30% of unnecessary ER visits.', img: IMG.doctor, schema: 'Product' },
-    '/products-ai-agents-zynschedule': { title: 'AI Scheduling for Healthcare | Zynix AI', desc: 'Reduce no-shows and fill every appointment slot with always-on AI scheduling. ZynSchedule books patients 24/7 across practices and ACOs. See how it works.', img: IMG.patient, schema: 'Product' },
-    '/products-ai-agents-post-discharge': { title: 'Post-Discharge Follow-Up AI | Zynix AI', desc: 'Automate TCM post-discharge outreach and achieve 85%+ contact rates versus the 30-40% industry average. Trusted by ACOs and health systems. Request a demo.', img: IMG.care, schema: 'Product' },
-    '/products-ai-agents-med-rec': { title: 'Medication Reconciliation AI | Zynix AI', desc: 'AI-powered medication reconciliation identifies discrepancies at discharge and high-risk transitions. Capture confirmations and route issues automatically.', img: IMG.care, schema: 'Product' },
-    '/products-ai-agents-zynreminder': { title: 'AI Appointment Reminders | Zynix AI', desc: 'Boost patient engagement and cut no-shows by 40% with personalized AI reminders and confirmation workflows. Serving practices and health centers.', img: IMG.patient, schema: 'Product' },
-    '/products-ai-agents-zynfax': { title: 'AI Fax Processing Healthcare | Zynix AI', desc: 'Eliminate manual fax processing with intelligent automation that classifies, extracts data, and routes healthcare documents automatically.', img: IMG.enterprise, schema: 'Product' },
-    '/products-ai-agents-zynauth': { title: 'Prior Authorization Automation | Zynix AI', desc: 'Cut prior auth turnaround by 60% with AI-powered submission, tracking, and follow-up. Streamline workflows for ASCs and health systems.', img: IMG.enterprise, schema: 'Product' },
-    '/solutions': { title: 'Solutions | AI-Powered Healthcare Products | Zynix AI', desc: 'Explore Zynix AI solutions: Data Analytics, AI Agents, Deployable Care Plans, and ZynScribe. Purpose-built for value-based care.', img: IMG.enterprise, schema: 'Product' },
-    '/zynix-data-analytics': { title: 'Zynix Data Analytics | Zynix AI', desc: 'AI-powered population health analytics with HCC gap closure, risk stratification, and HEDIS quality tracking for ACOs and health systems.', img: IMG.analytics, schema: 'Product' },
-    '/integrations': { title: 'EHR Integrations | Epic, Cerner, athena | Zynix AI', desc: 'Zynix AI integrates with Epic, Cerner, athenahealth, eClinicalWorks via FHIR and HL7. Real-time ADT, claims, labs, and pharmacy data.', img: IMG.data, schema: 'Product' },
-    '/use-cases': { title: 'AI Use Cases for Value-Based Care | Zynix AI', desc: '30 real-world use cases showing how healthcare AI automates care coordination, prior auth, documentation, and patient engagement at scale.', img: IMG.enterprise, schema: 'CollectionPage' },
-    '/zynix-ai-agents': { title: 'Zynix AI Agents | Autonomous Healthcare AI | Zynix AI', desc: '12 purpose-built AI agents for value-based care: clinical performance, predictive activation, and operational efficiency.', img: IMG.agents, schema: 'Product' },
-    '/solutions-acos': { title: 'AI for ACOs | MSSP & ACO REACH | Zynix AI', desc: 'Drive shared savings in MSSP and ACO REACH with AI-powered TCM workflows, HCC gap closure, and automated outreach. 85% TCM contact rates.', img: IMG.care, schema: 'Product' },
-    '/solutions-health-systems': { title: 'AI for Health Systems | Zynix AI', desc: 'Unify population health management with AI-driven patient engagement, post-discharge coordination, and documentation. Reduce readmissions 25%.', img: IMG.enterprise, schema: 'Product' },
-    '/solutions-health-plans': { title: 'AI for Health Plans | Zynix AI', desc: 'Improve Stars ratings, close HEDIS quality gaps, and scale member engagement with autonomous AI agents trusted by value-based payers nationwide.', img: IMG.analytics, schema: 'Product' },
-    '/solutions-fqhcs': { title: 'AI for FQHCs | Zynix AI', desc: 'Empower community health centers with multilingual AI outreach in 15+ languages, quality measure tracking, and automated care management.', img: IMG.patients, schema: 'Product' },
-    '/solutions-independent-practices': { title: 'AI for Medical Practices | Zynix AI', desc: 'Automate your practice with AI-powered after-hours coverage, scheduling, and documentation. Reduce no-shows 40% and deploy in weeks.', img: IMG.doctor, schema: 'Product' },
-    '/solutions-ascs': { title: 'AI for Ambulatory Surgery Centers | Zynix AI', desc: 'Accelerate prior auth approvals 60%, reduce surgical cancellations, and streamline pre-op and post-op coordination for ASCs.', img: IMG.enterprise, schema: 'Product' },
-    '/company-about': { title: 'About Zynix AI | Healthcare AI Company', desc: 'Zynix AI is a healthcare AI company purpose-built for value-based care with 1M+ patients onboarded across 30 states serving ACOs and health systems.', img: IMG.patients, schema: 'MedicalBusiness' },
-    '/company-careers': { title: 'Careers | Zynix AI', desc: 'Join the team building the AI operating system for value-based healthcare. Engineering, clinical, and operations roles in Trinity, FL and remote positions.', img: IMG.hero, schema: 'Organization', noindex: true },
-    '/company-press': { title: 'Press & News | Zynix AI', desc: 'Latest news, press releases, and media coverage about Zynix AI and the future of AI-powered value-based healthcare across the United States.', img: IMG.hero, schema: 'Organization', noindex: true },
-    '/company-trust-center': { title: 'Trust & Security | Zynix AI', desc: 'Zynix AI is HIPAA compliant and SOC 2 Type II certified. Explore our security practices, data governance, and compliance for healthcare AI.', img: IMG.enterprise, schema: 'Organization' },
-    '/contact': { title: 'Contact Zynix AI | Request a Demo', desc: 'Request a personalized demo and see how Zynix AI transforms healthcare operations for ACOs, health systems, and practices. Based in Trinity, FL.', img: IMG.hero, schema: 'MedicalBusiness' },
-    '/roi': { title: 'Healthcare AI ROI Calculator | Zynix AI', desc: 'Estimate projected savings from AI-powered care coordination. Model TCM revenue lift, gap closure, and readmission reduction.', img: IMG.hero, noindex: true },
-    '/roi-calculator': { title: 'ROI Calculator | Zynix AI', desc: 'Calculate your projected savings from AI-powered value-based care. Estimate TCM revenue lift, gap closure impact, and readmission reduction.', img: IMG.hero },
-    '/resources-faq': { title: 'FAQ | Zynix AI', desc: 'Find answers about the Zynix healthcare AI platform including HIPAA compliance, EHR integration, pricing, deployment timelines, and support.', img: IMG.hero, schema: 'FAQPage' },
-    '/resources-blog': { title: 'Blog | Healthcare AI Insights | Zynix AI', desc: 'Expert healthcare AI insights on value-based care, population health, care coordination, and operational transformation from the Zynix AI team.', img: IMG.hero, schema: 'Organization' },
-    '/resources-blog-lead-model-cms': { title: 'CMS LEAD Model: What ACOs Must Know | Zynix AI', desc: 'The LEAD Model replaces ACO REACH on Jan 1, 2027. 10-year benchmarks, CARA integration, 1.5% admin add-on. Applications close May 17.', img: IMG.enterprise, schema: 'Article', datePublished: '2026-04-13' },
-    '/resources-blog-will-ai-make-healthcare-more-expensive': { title: 'Will AI Make Healthcare More Expensive? Only If It Optimizes the Wrong Workflows | Zynix AI Blog', desc: 'Will AI make healthcare more expensive? It depends on whether AI optimizes billing volume or value-based care execution. A framework for ACO leaders.', img: IMG.hero, schema: 'Article', datePublished: '2026-06-24' },
-    '/resources-blog-agentic-ai-healthcare-digital-workforce': { title: 'Agentic AI in Healthcare: From Copilots to Digital Workforce for Care Operations | Zynix AI', desc: 'Agentic AI in healthcare is moving beyond copilots. For ACOs, the opportunity is a governed digital workforce that executes care operations at scale.', img: IMG.hero, schema: 'Article', datePublished: '2026-07-02' },
-    '/resources-blog-aco-lead-model-execution-infrastructure-2027': { title: 'ACO LEAD Model: Why 2027 Will Reward ACOs That Can Execute Between Visits | Zynix AI Blog', desc: 'The ACO LEAD Model launches in 2027. Most ACOs can already see who needs attention. The question is whether they can follow through at scale.', img: IMG.hero, schema: 'Article', datePublished: '2026-07-02' },
-    '/resources-blog-1m-patients': { title: 'Zynix AI Reaches 1M VBC Patients | Zynix AI', desc: 'Zynix AI announces 1 million value-based care patients onboarded across healthcare organizations in 30 states. Read about this milestone.', img: IMG.hero, schema: 'Article' },
-    '/resources-case-studies': { title: 'Case Studies | Healthcare AI Results | Zynix AI', desc: 'See real healthcare AI results from ACOs, health systems, and practices using Zynix AI. Proven outcomes across 1M+ value-based care patients.', img: IMG.care, schema: 'Organization' },
-    '/resources-glossary': { title: 'Healthcare AI Glossary | Zynix AI', desc: 'Browse the complete healthcare AI glossary covering value-based care, interoperability, HCC coding, claims processing, and compliance terms.', img: IMG.hero, schema: 'Organization' },
-    '/resources-webinars': { title: 'Webinars & Events | Zynix AI', desc: 'Upcoming and on-demand webinars on healthcare AI, value-based care operations, and care management best practices from Zynix AI experts.', img: IMG.hero, schema: 'Organization', noindex: true },
-    '/resources-whitepapers': { title: 'Whitepapers & Reports | Zynix AI', desc: 'Download research on healthcare AI including AWV optimization, post-discharge follow-up, and care management at scale from Zynix AI.', img: IMG.hero, schema: 'Organization' },
+    '/company-zynixllm': { title: 'ZynixLLM: how Zynix AI works safely | Zynix AI', desc: 'How ZynixLLM supports value-based care workflows, when clinicians step in, and how agents stay within the escalation rules your team sets.', img: IMG.mesh, schema: 'Product' },
+    '/products-zynixllm': { title: 'ZynixLLM: how Zynix AI works safely | Zynix AI', desc: 'How ZynixLLM supports value-based care workflows, when clinicians step in, and how agents stay within the escalation rules your team sets.', img: IMG.mesh, schema: 'Product' },
+    '/products-ai-agents-zynafterhours': { title: 'ZynAfterHours after-hours call handling | Zynix AI', desc: 'After-hours calls answered: the reason captured, routine visits booked and symptom questions routed to your on-call clinician by rule.', img: IMG.doctor, schema: 'Product' },
+    '/products-ai-agents-zynschedule': { title: 'ZynSchedule patient scheduling | Zynix AI', desc: 'Patient scheduling by phone, text and web, with confirmations, reschedules and exceptions handed to your front-office staff.', img: IMG.patient, schema: 'Product' },
+    '/products-ai-agents-post-discharge': { title: 'Post-discharge follow-up | Zynix AI', desc: 'Post-discharge outreach inside the TCM window, follow-up scheduling, and medication questions routed to licensed staff for review.', img: IMG.care, schema: 'Product' },
+    '/products-ai-agents-med-rec': { title: 'Medication reconciliation support | Zynix AI', desc: 'Collect medication lists after discharge and flag discrepancies for a pharmacist, nurse or physician to review and reconcile.', img: IMG.care, schema: 'Product' },
+    '/products-ai-agents-zynreminder': { title: 'ZynReminder appointment reminders | Zynix AI', desc: 'Two-way appointment reminders by text and voice, with confirmations and reschedule requests routed back to your scheduling team.', img: IMG.patient, schema: 'Product' },
+    '/products-ai-agents-zynfax': { title: 'ZynFax fax intake and routing | Zynix AI', desc: 'Incoming faxes classified, matched to the patient and routed to the right staff queue, with anything unclear sent for human review.', img: IMG.enterprise, schema: 'Product' },
+    '/products-ai-agents-zynauth': { title: 'Prior authorization workflow support | Zynix AI', desc: 'How Zynix supports prior authorization paperwork and status tracking for your staff. Ask our team about availability for your organization.', img: IMG.enterprise, schema: 'Product' },
+    '/solutions': { title: 'Solutions for value-based care organizations | Zynix AI', desc: 'Workflows for ACOs, MSOs and IPAs, health plans, health systems and FQHCs: transitions of care, risk adjustment, quality, chronic care and access.', img: IMG.enterprise, schema: 'Product' },
+    '/zynix-data-analytics': { title: 'Population health analytics for VBC | Zynix AI', desc: 'Risk, quality and HCC gap analytics on your claims and clinical data, ranked into worklists your care team can act on this week.', img: IMG.analytics, schema: 'Product' },
+    '/integrations': { title: 'EHR integrations: Epic, Oracle Health, athena | Zynix AI', desc: 'Zynix connects to 30+ EHR systems across 300+ connected instances, plus claims, ADT, lab and pharmacy feeds, over FHIR, HL7 v2, C-CDA and X12.', img: IMG.data, schema: 'Product' },
+    '/use-cases': { title: 'Value-based care use cases | Zynix AI', desc: 'Workflows by program: transitions of care, risk adjustment and quality, chronic care, after-hours access, care navigation and front-office work.', img: IMG.enterprise, schema: 'CollectionPage' },
+    '/zynix-ai-agents': { title: 'How AI agents work with your care team | Zynix AI', desc: 'Agents handle outreach, scheduling, reminders and after-hours intake in three families. Clinical questions go to your care team by rule.', img: IMG.agents, schema: 'Product' },
+    '/solutions-acos': { title: 'AI for ACOs: TCM, AWVs and HCC gaps | Zynix AI', desc: 'TCM, wellness visits, HCC and quality gaps across your attributed panel, worked by agents and your care team, with clinicians making clinical decisions.', img: IMG.care, schema: 'Product' },
+    '/solutions-health-systems': { title: 'AI for health systems: post-discharge care | Zynix AI', desc: 'ADT-triggered outreach, follow-up scheduling, after-hours access and ambient documentation that work with your EHR across hospitals and clinics.', img: IMG.enterprise, schema: 'Product' },
+    '/solutions-health-plans': { title: 'AI for Medicare Advantage plans | Zynix AI', desc: 'Member outreach for HEDIS gaps, medication adherence and post-discharge follow-up, with your care managers setting the scripts and taking escalations.', img: IMG.analytics, schema: 'Product' },
+    '/solutions-fqhcs': { title: 'AI for FQHCs and community health | Zynix AI', desc: 'Multilingual outreach, after-hours access and preventive screening follow-up for high-barrier populations, with care team escalation built in.', img: IMG.patients, schema: 'Product' },
+    '/solutions-independent-practices': { title: 'For MSOs, IPAs and physician groups | Zynix AI', desc: 'Run wellness visits, transitions of care, chronic care and quality programs across independent practices, whatever EHR each one runs.', img: IMG.doctor, schema: 'Product' },
+    '/solutions-ascs': { title: 'AI for ambulatory surgery centers | Zynix AI', desc: 'Referral intake, pre-procedure scheduling and post-op follow-up calls handled by agents, with your staff taking every exception.', img: IMG.enterprise, schema: 'Product' },
+    '/company-about': { title: 'About Zynix AI: physician-led VBC infrastructure', desc: 'Zynix AI builds AI infrastructure and workflows for value-based care. Physician-led, based in Trinity, Florida, with organizations in 30 states.', img: IMG.patients, schema: 'MedicalBusiness' },
+    '/company-careers': { title: 'Careers | Zynix AI', desc: 'Help ACOs, health plans and health systems reach patients between visits. See open roles in engineering, clinical operations and go-to-market.', img: IMG.hero, schema: 'Organization', noindex: true },
+    '/company-press': { title: 'Newsroom and press releases | Zynix AI', desc: 'Zynix AI announcements, including partnerships with PBACO Holding and with eternalHealth and nirvanaHealth, plus media resources.', img: IMG.hero, schema: 'Organization', noindex: true },
+    '/company-trust-center': { title: 'Security and compliance | Zynix AI', desc: 'SOC 2 Type II audited, HIPAA-aligned safeguards with a BAA available, and HITRUST CSF certification in progress. Request the SOC 2 report.', img: IMG.enterprise, schema: 'Organization' },
+    '/contact': { title: 'Contact Zynix AI | Request a demo', desc: 'Book 30 minutes with our team or send a message. Zynix AI, 3535 Little Rd, Trinity, FL 34655. info@zynix.ai · (727) 261-1297.', img: IMG.hero, schema: 'MedicalBusiness' },
+    '/roi': { title: 'Value-based care ROI calculator | Zynix AI', desc: 'Model the impact on your population with your own panel size, discharges, open gaps and assumptions. An illustrative estimate, not a guarantee.', img: IMG.hero, noindex: true },
+    '/roi-calculator': { title: 'Value-based care ROI calculator | Zynix AI', desc: 'Model the impact on your population with your own panel size, discharges, open gaps and assumptions. An illustrative estimate, not a guarantee.', img: IMG.hero },
+    '/resources-faq': { title: 'FAQ | Zynix AI', desc: 'Answers on the Zynix platform, agents, data sources, EHR integrations, security, HIPAA-aligned safeguards and working with our team.', img: IMG.hero, schema: 'FAQPage' },
+    '/resources-blog': { title: 'Insights on value-based care operations | Zynix AI', desc: 'Articles on transitions of care, risk adjustment, quality programs, CMS models and how care teams put AI to work safely.', img: IMG.hero, schema: 'Organization' },
+    '/resources-blog-lead-model-cms': { title: 'CMS LEAD Model: what ACOs need to know | Zynix AI', desc: 'What the CMS LEAD Model means for ACOs moving on from ACO REACH: benchmarks, risk arrangements and what to prepare before it starts in 2027.', img: IMG.enterprise, schema: 'Article', datePublished: '2026-04-13' },
+    '/resources-blog-will-ai-make-healthcare-more-expensive': { title: 'Will AI make healthcare more expensive? | Zynix AI', desc: 'It depends on whether AI optimizes billing volume or value-based care execution. A framework for ACO leaders.', img: IMG.hero, schema: 'Article', datePublished: '2026-06-24' },
+    '/resources-blog-agentic-ai-healthcare-digital-workforce': { title: 'Agentic AI in healthcare: beyond copilots | Zynix AI', desc: 'Agentic AI in healthcare is moving beyond copilots. For ACOs, the opportunity is governed agents that run care operations with clinicians in charge.', img: IMG.hero, schema: 'Article', datePublished: '2026-07-02' },
+    '/resources-blog-aco-lead-model-execution-infrastructure-2027': { title: 'ACO LEAD Model: executing between visits | Zynix AI', desc: 'The ACO LEAD Model launches in 2027. Most ACOs can already see who needs attention. The question is whether they can follow through at scale.', img: IMG.hero, schema: 'Article', datePublished: '2026-07-02' },
+    '/resources-blog-1m-patients': { title: '1M+ value-based care patients onboarded | Zynix AI', desc: 'Zynix AI marks 1M+ value-based care patients onboarded, with customer organizations in 30 states. Read about the milestone.', img: IMG.hero, schema: 'Article' },
+    '/resources-case-studies': { title: 'Customer stories | Zynix AI', desc: 'How ACOs, health plans, health systems, FQHCs and physician groups use Zynix, with what their leaders have said on the record.', img: IMG.care, schema: 'Organization' },
+    '/resources-glossary': { title: 'Value-based care and healthcare AI glossary | Zynix AI', desc: 'Plain definitions of ACO, Medicare Advantage and care management terms, from ADT and AWV to HCC, HEDIS and TCM.', img: IMG.hero, schema: 'Organization' },
+    '/resources-webinars': { title: 'Webinars and events | Zynix AI', desc: 'Recorded sessions on ACO operating models, patient engagement and CMS programs, plus where to meet the Zynix team.', img: IMG.hero, schema: 'Organization', noindex: true },
+    '/resources-whitepapers': { title: 'Research and reports | Zynix AI', desc: 'Reports on annual wellness visits, post-discharge follow-up and care management operations for ACO and health plan leaders.', img: IMG.hero, schema: 'Organization' },
     '/company-privacy': { title: 'Privacy Policy | Zynix AI', desc: 'Zynix AI privacy policy detailing how we collect, use, and protect your personal and health-related information across our healthcare AI platform.', img: IMG.hero, schema: 'Organization' },
     '/company-terms': { title: 'Terms of Service | Zynix AI', desc: 'Review the Zynix AI terms of service governing use of our healthcare AI platform, data processing agreements, and related professional services offerings.', img: IMG.hero, schema: 'Organization' },
-    '/alternatives': { title: 'Healthcare AI Alternatives: Zynix AI Compared | Zynix AI', desc: 'Zynix AI compared against Innovaccer, Health Catalyst, Commure, Abridge, Navina, Olive AI, and Notable. See why teams switch: autonomous AI agents, 4\u20138 week deployment, and a founding team whose ACOs generated $300M+ in shared savings.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare-zynix-vs-point-solutions': { title: 'Zynix AI vs Point Solutions: A Unified Healthcare AI Alternative', desc: 'Looking for a healthcare AI alternative to fragmented point solutions? Compare Zynix AI\u2019s unified operating system against single-feature tools. 85%+ TCM contact rates, 30 states, 1M+ patients.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare-zynix-vs-innovaccer': { title: 'Zynix AI vs Innovaccer: The Innovaccer Alternative That Executes Care', desc: 'Looking for an Innovaccer alternative? Zynix AI deploys autonomous AI agents that act on insights \u2014 calling patients, closing gaps, and documenting care.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare-zynix-vs-commure': { title: 'Zynix AI vs Commure: The Turnkey Commure Alternative for Healthcare', desc: 'Looking for a Commure alternative? Zynix AI is a turnkey healthcare AI operating system. Deploy in 4\u20138 weeks with pre-built care plans and 7 autonomous agents.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare-zynix-vs-health-catalyst': { title: 'Zynix AI vs Health Catalyst: The Health Catalyst Alternative Built to Act', desc: 'Looking for a Health Catalyst alternative? Zynix AI combines the data platform Health Catalyst is known for with autonomous AI agents that take clinical action \u2014 closing gaps, reducing readmissions, and capturing shared savings.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare-zynix-vs-abridge': { title: 'Zynix AI vs Abridge: The Abridge Alternative With a Full Care Platform', desc: 'Looking for an Abridge alternative? ZynScribe provides ambient clinical documentation inside a full value-based care platform, with 11 more AI agents covering care coordination, TCM, scheduling, and HCC closure.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare-zynix-vs-navina': { title: 'Zynix AI vs Navina: AI That Executes, Not Just Summarizes', desc: 'Looking for a Navina alternative? Navina summarizes patient charts at the point of care. Zynix AI executes the care itself \u2014 calling patients, closing gaps, scheduling AWVs, and running full TCM workflows.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare-zynix-vs-olive-ai': { title: 'Zynix AI vs Olive AI: The Olive AI Alternative Focused on Value-Based Care', desc: 'Looking for an Olive AI alternative now that Olive has wound down? Zynix AI is the healthcare AI operating system purpose-built for value-based care \u2014 ACOs, health plans, and FQHCs. 1M+ patients served.', img: IMG.enterprise, schema: 'Organization' },
-    '/compare-zynix-vs-notable-health': { title: 'Zynix AI vs Notable: The Notable Alternative for ACOs and VBC', desc: 'Looking for a Notable alternative? Zynix AI is the ACO-native healthcare AI platform. 85%+ TCM contact rates, HCC gap closure, and 1M+ VBC patients across 30 states.', img: IMG.enterprise, schema: 'Organization' },
-    '/blog/what-is-value-based-care-ai': { title: 'What is Value-Based Care AI? Guide [2026]', desc: 'Value-based care AI automates care coordination, closes quality gaps, and optimizes risk adjustment for ACOs and health systems. Learn how VBC AI works.', img: IMG.analytics, schema: 'Article', datePublished: '2026-03-01' },
-    '/blog/how-ai-closes-care-gaps': { title: 'How AI Closes Care Gaps | Zynix AI', desc: 'Discover how AI automates HCC, RAF, and quality measure gap closure from identification through patient outreach to confirmed resolution.', img: IMG.care, schema: 'Article', datePublished: '2026-03-10' },
-    '/blog/ai-agents-vs-chatbots-healthcare': { title: 'AI Agents vs Chatbots in Healthcare', desc: 'Healthcare AI agents take autonomous action while chatbots only answer questions. Learn the key differences and why agents deliver better outcomes.', img: IMG.doctor, schema: 'Article', datePublished: '2026-03-15' },
-    '/blog/prior-auth-delays-cost-fix': { title: 'Prior Auth Delays: True Cost & Fix | Zynix AI', desc: 'Prior authorization delays cost practices thousands per provider monthly. Learn how AI-powered PA automation cuts turnaround time by 60%.', img: IMG.data, schema: 'Article', datePublished: '2025-09-05' },
-    '/blog/hcc-risk-adjustment-year-round': { title: 'Year-Round HCC Risk Adjustment | Zynix AI', desc: 'Stop scrambling in Q4. Discover how continuous AI-driven HCC risk adjustment captures accurate risk scores year-round and protects RAF revenue.', img: IMG.analytics, schema: 'Article', datePublished: '2025-09-18' },
-    '/blog/ai-medical-scribes-rollout': { title: 'AI Medical Scribes Rollout Guide | Zynix AI', desc: 'A practical guide to deploying ambient AI medical scribes across multi-site practices while maintaining clinical accuracy and physician trust.', img: IMG.scribe, schema: 'Article', datePublished: '2025-10-02' },
-    '/blog/rising-risk-patients-ai': { title: 'AI for Rising-Risk Patients | Zynix AI', desc: 'How predictive risk models and proactive AI intervention identify rising-risk patients before they deteriorate into costly acute episodes.', img: IMG.care, schema: 'Article', datePublished: '2025-10-15' },
-    '/blog/reducing-no-shows-ai-scheduling': { title: 'Reduce No-Shows With AI Scheduling | Zynix AI', desc: 'AI scheduling agents that understand patient behavior and communication preferences cut no-show rates and maximize appointment utilization.', img: IMG.patient, schema: 'Article', datePublished: '2025-10-28' },
-    '/blog/ehr-not-broken-never-built-to-think': { title: 'Your EHR Was Never Built to Think | Zynix AI', desc: 'Electronic health records were designed for billing, not clinical intelligence. Learn how an AI layer transforms your EHR into a thinking system.', img: IMG.platform, schema: 'Article', datePublished: '2025-11-08' },
-    '/blog/generative-ai-applications-healthcare': { title: 'Generative AI Applications in Healthcare', desc: 'Practical generative AI use cases delivering measurable results in clinical operations today, from documentation to care coordination workflows.', img: IMG.agents, schema: 'Article', datePublished: '2025-11-20' },
-    '/blog/ai-breakthroughs-medicine': { title: 'AI Breakthroughs in Medicine | Zynix AI', desc: 'Key AI breakthroughs reshaping clinical operations, from NLP-powered documentation to autonomous care coordination agents transforming outcomes.', img: IMG.data, schema: 'Article', datePublished: '2025-12-03' },
-    '/blog/eligibility-verification-automation': { title: 'Eligibility Verification Automation | Zynix AI', desc: 'Real-time eligibility verification before scheduling prevents downstream denials and accelerates the entire healthcare revenue cycle workflow.', img: IMG.patient, schema: 'Article', datePublished: '2025-12-16' },
-    '/blog/prior-auth-bottlenecks-ai-automation': { title: 'PA Bottlenecks: AI Automation Fix | Zynix AI', desc: 'A deep dive into structural causes of prior authorization bottlenecks and how AI automation returns hours of productive time to providers.', img: IMG.data, schema: 'Article', datePublished: '2026-01-06' },
-    '/blog/hcc-risk-adjustment-cms-changes': { title: 'HCC Risk Adjustment CMS Changes | Zynix AI', desc: 'How the CMS V28 model transition reshapes risk adjustment strategy and what providers must do now to protect their RAF scores and revenue.', img: IMG.analytics, schema: 'Article', datePublished: '2026-01-18' },
-    '/blog/aco-year-end-gap-closure': { title: 'ACO Year-End Gap Closure | Zynix AI', desc: 'Q4 gap closure strategies powered by AI-driven prioritization and automated outreach, with real-world results from ACO deployments nationwide.', img: IMG.care, schema: 'Article', datePublished: '2026-01-30' },
-    '/blog/generative-ai-in-healthcare': { title: 'Generative AI in Healthcare Guide | Zynix AI', desc: 'From foundation models to clinical applications, a practical overview of generative AI in healthcare and how to deploy it responsibly at scale.', img: IMG.agents, schema: 'Article', datePublished: '2026-02-05' },
-    '/blog/vbc-analytics-ai-driven': { title: 'AI-Driven VBC Analytics | Zynix AI', desc: 'How AI analytics platforms deliver real-time risk stratification, predictive cost modeling, and quality measure forecasting for value-based care.', img: IMG.analytics, schema: 'Article', datePublished: '2026-02-12' },
-    '/blog/revolutionizing-healthcare-role-of-ai': { title: 'The Role of AI in Healthcare | Zynix AI', desc: 'Where artificial intelligence delivers measurable impact across clinical, operational, and financial domains in modern healthcare organizations.', img: IMG.hero, schema: 'Article', datePublished: '2026-02-20' },
-    '/blog/generative-ai-trust-safety-healthcare': { title: 'AI Trust & Safety in Healthcare | Zynix AI', desc: 'How healthcare organizations harness generative AI responsibly with bias mitigation, clinical validation, and human-in-the-loop design patterns.', img: IMG.platform, schema: 'Article', datePublished: '2026-02-28' },
-    '/blog/autonomous-ai-agents-healthcare-automation': { title: 'Autonomous AI Agents in Healthcare | Zynix AI', desc: 'How purpose-built AI agents handle end-to-end healthcare workflows autonomously, from scheduling to patient communication and follow-ups.', img: IMG.agents, schema: 'Article', datePublished: '2026-03-03' },
-    '/blog/predictive-analytics-population-health': { title: 'Predictive Analytics for Population Health', desc: 'How ACOs and health systems use AI-powered predictive models to stratify risk, forecast utilization, and intervene before costly events occur.', img: IMG.data, schema: 'Article', datePublished: '2026-03-06' },
-    '/blog/ai-medical-scribes-physician-burnout': { title: 'AI Scribes Reduce Physician Burnout | Zynix AI', desc: 'How ambient AI documentation works, its clinical accuracy across specialties, and measurable impact on reducing physician burnout and attrition.', img: IMG.scribe, schema: 'Article', datePublished: '2026-03-12' },
-    '/blog/innovative-patient-recovery-satisfaction': { title: 'AI-Powered Patient Recovery | Zynix AI', desc: 'How AI-powered post-discharge follow-up, medication adherence programs, and remote monitoring transform the patient recovery experience.', img: IMG.patient, schema: 'Article', datePublished: '2026-03-17' },
-    '/blog/strategies-coordinating-patient-care': { title: 'Better Patient Care Coordination | Zynix AI', desc: 'How AI platforms unify fragmented data, bridge communication gaps, and automate care coordination workflows across the care continuum.', img: IMG.care, schema: 'Article', datePublished: '2026-03-20' },
-    '/blog/ai-transforming-medical-field': { title: 'AI Transforming the Medical Field | Zynix AI', desc: 'From diagnostics to patient engagement, AI is reshaping every layer of healthcare delivery. Organizations that adapt first define the next era.', img: IMG.hero, schema: 'Article', datePublished: '2026-03-23' },
-    '/blog/essential-ai-tools-medical-professionals': { title: 'Essential AI Tools for Clinicians | Zynix AI', desc: 'A practical guide to AI tools reshaping clinical workflows, operational efficiency, and patient engagement across healthcare organizations today.', img: IMG.doctor, schema: 'Article', datePublished: '2026-03-26' },
-    '/blog/ai-changing-healthcare-decision-making': { title: 'AI in Healthcare Decision-Making | Zynix AI', desc: 'From clinical diagnostics to resource allocation, AI gives healthcare leaders data-driven clarity to make faster, better decisions at every level.', img: IMG.analytics, schema: 'Article', datePublished: '2026-03-29' },
-    '/blog/tools-driving-value-based-healthcare': { title: 'Tools Driving Value-Based Care | Zynix AI', desc: 'The technology stack that separates value-based care leaders from organizations still struggling to move beyond fee-for-service economics.', img: IMG.platform, schema: 'Article', datePublished: '2026-04-01' },
-    '/blog/aco-30-day-post-discharge-program': { title: 'ACO 30-Day Post-Discharge Program | Zynix AI', desc: 'A tactical guide to building a reliable post-discharge program that hits TCM billing requirements, reduces readmissions, and scales with AI.', img: IMG.care, schema: 'Article', datePublished: '2026-04-05' },
-    '/blog/why-tcm-fails-real-workflows': { title: 'Why TCM Fails in Real Workflows | Zynix AI', desc: 'Transitional care management programs look great on paper but collapse in practice. Learn the AI-driven approach sustaining 85%+ contact rates.', img: IMG.care, schema: 'Article', datePublished: '2026-04-09' },
-    '/blog/documentation-crisis-physician-burnout': { title: 'Documentation Crisis & Burnout | Zynix AI', desc: 'Documentation burden is the leading cause of physician burnout. Ambient AI scribes are the most effective solution available to clinicians today.', img: IMG.scribe, schema: 'Article', datePublished: '2026-04-13' },
-    '/case-studies/palm-beach-aco': { title: 'Palm Beach ACO Case Study | Zynix AI', desc: 'Palm Beach ACO achieved 85% TCM contact rates, 40% gap closure improvement, and 3x AWV lift using Zynix AI. Read the full case study results.', img: IMG.care, schema: 'Article', datePublished: '2026-02-01' },
-    '/case-studies/amistad': { title: 'AMISTAD CHC Case Study | Zynix AI', desc: 'AMISTAD Community Health Center deployed multilingual AI outreach in 15+ languages to close preventive care gaps and reduce ED utilization for underserved populations.', img: IMG.patients, schema: 'Article', datePublished: '2026-03-01' },
-    '/case-studies/apollo-clinic': { title: 'Apollo Clinic Case Study | Zynix AI', desc: 'Apollo Clinic Network reduced no-shows by 40% and recovered significant revenue with AI-powered scheduling, barrier-aware reminders, and automated prior auth.', img: IMG.patient, schema: 'Article', datePublished: '2026-03-01' },
-    '/case-studies/nhs': { title: 'NHS Health System Case Study | Zynix AI', desc: 'NHS Health System deployed the full Zynix AI platform across 12 sites achieving 40% gap closure improvement, consistent after-hours coverage, and documentation time reduction.', img: IMG.enterprise, schema: 'Article', datePublished: '2026-03-01' },
+    '/alternatives': { title: 'Zynix alternatives and comparisons | Zynix AI', desc: 'How Zynix compares with Innovaccer, Health Catalyst, Navina, Abridge, Commure, Notable and point solutions, with competitor claims cited to source.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-point-solutions': { title: 'Zynix AI vs point solutions | Zynix AI', desc: 'One platform for data, worklists, care plans and outreach agents, compared with a separate point solution for each workflow.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-innovaccer': { title: 'Zynix AI vs Innovaccer: an Innovaccer alternative', desc: 'Comparing Innovaccer and Zynix AI for value-based care: data and analytics, care plans, outreach agents and the work that follows a flagged gap.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-commure': { title: 'Zynix AI vs Commure: a Commure alternative | Zynix AI', desc: 'A side-by-side look at Commure and Zynix AI for value-based care teams: data, documentation, care plans and outreach agents.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-health-catalyst': { title: 'Zynix AI vs Health Catalyst | Zynix AI', desc: 'A side-by-side look at Health Catalyst and Zynix AI: data platforms, analytics, and how each supports the follow-up work in value-based care.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-abridge': { title: 'Zynix AI vs Abridge: ambient documentation | Zynix AI', desc: 'Comparing Abridge and ZynScribe for ambient clinical documentation, and how ZynScribe fits inside the Zynix platform for value-based care.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-navina': { title: 'Zynix AI vs Navina: a Navina alternative | Zynix AI', desc: 'Navina focuses on chart summaries at the point of care. Zynix AI covers the follow-up: care plans, outreach agents and worklists for value-based care.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-olive-ai': { title: 'Zynix AI vs Olive AI: an Olive AI alternative | Zynix AI', desc: 'For teams replacing Olive AI: how Zynix AI supports value-based care operations for ACOs, health plans and FQHCs, from data to outreach agents.', img: IMG.enterprise, schema: 'Organization' },
+    '/compare-zynix-vs-notable-health': { title: 'Zynix AI vs Notable: a Notable alternative | Zynix AI', desc: 'A side-by-side look at Notable and Zynix AI for ACOs and value-based care teams: TCM, HCC gap closure, care plans and outreach agents.', img: IMG.enterprise, schema: 'Organization' },
+    '/blog/what-is-value-based-care-ai': { title: 'What is value-based care AI? A guide | Zynix AI', desc: 'What value-based care AI is, how it supports care coordination, quality gaps and risk adjustment, and what ACOs and health systems should ask.', img: IMG.analytics, schema: 'Article', datePublished: '2026-03-01' },
+    '/blog/how-ai-closes-care-gaps': { title: 'How AI helps close care gaps | Zynix AI', desc: 'How HCC, RAF and quality gaps move from identification to outreach, scheduling and a documented visit, and where AI helps care teams.', img: IMG.care, schema: 'Article', datePublished: '2026-03-10' },
+    '/blog/ai-agents-vs-chatbots-healthcare': { title: 'AI agents vs chatbots in healthcare | Zynix AI', desc: 'A chatbot answers questions. An agent completes a task inside your workflow and hands clinical questions to your team. The differences explained.', img: IMG.doctor, schema: 'Article', datePublished: '2026-03-15' },
+    '/blog/prior-auth-delays-cost-fix': { title: 'Prior authorization delays: cost and fixes | Zynix AI', desc: 'What prior authorization delays cost practices and patients, and how better workflows and automation give staff time back.', img: IMG.data, schema: 'Article', datePublished: '2025-09-05' },
+    '/blog/hcc-risk-adjustment-year-round': { title: 'Year-round HCC risk adjustment | Zynix AI', desc: 'Stop scrambling in Q4. How a year-round HCC process captures accurate risk scores with ranked worklists, outreach and pre-visit prep.', img: IMG.analytics, schema: 'Article', datePublished: '2025-09-18' },
+    '/blog/ai-medical-scribes-rollout': { title: 'AI medical scribes rollout guide | Zynix AI', desc: 'A practical guide to rolling out ambient AI scribes across multi-site practices while keeping physicians in control of every note.', img: IMG.scribe, schema: 'Article', datePublished: '2025-10-02' },
+    '/blog/rising-risk-patients-ai': { title: 'Reaching rising-risk patients earlier | Zynix AI', desc: 'How risk models and proactive outreach help care teams reach rising-risk patients before they end up in the hospital.', img: IMG.care, schema: 'Article', datePublished: '2025-10-15' },
+    '/blog/reducing-no-shows-ai-scheduling': { title: 'Reducing no-shows with smarter scheduling | Zynix AI', desc: 'How scheduling agents that respect patient preferences and send two-way reminders help fill appointment slots and reduce no-shows.', img: IMG.patient, schema: 'Article', datePublished: '2025-10-28' },
+    '/blog/ehr-not-broken-never-built-to-think': { title: 'Your EHR was never built to think | Zynix AI', desc: 'EHRs were designed for billing and records, not follow-through. How a layer on top of the EHR turns data into completed care tasks.', img: IMG.platform, schema: 'Article', datePublished: '2025-11-08' },
+    '/blog/generative-ai-applications-healthcare': { title: 'Generative AI applications in healthcare | Zynix AI', desc: 'Practical generative AI use cases in clinical operations today, from documentation drafts to care coordination workflows.', img: IMG.agents, schema: 'Article', datePublished: '2025-11-20' },
+    '/blog/ai-breakthroughs-medicine': { title: 'AI breakthroughs in medicine | Zynix AI', desc: 'AI developments reshaping clinical operations, from ambient documentation to care coordination agents that work alongside care teams.', img: IMG.data, schema: 'Article', datePublished: '2025-12-03' },
+    '/blog/eligibility-verification-automation': { title: 'Eligibility verification automation | Zynix AI', desc: 'Checking eligibility before scheduling prevents downstream denials and speeds up the revenue cycle. How automation helps front-office teams.', img: IMG.patient, schema: 'Article', datePublished: '2025-12-16' },
+    '/blog/prior-auth-bottlenecks-ai-automation': { title: 'Prior authorization bottlenecks and fixes | Zynix AI', desc: 'The structural causes of prior authorization bottlenecks, and how workflow automation gives time back to providers and staff.', img: IMG.data, schema: 'Article', datePublished: '2026-01-06' },
+    '/blog/hcc-risk-adjustment-cms-changes': { title: 'HCC risk adjustment: CMS V28 changes | Zynix AI', desc: 'How the CMS V28 model transition reshapes risk adjustment strategy, and what providers should do now to keep RAF scores accurate.', img: IMG.analytics, schema: 'Article', datePublished: '2026-01-18' },
+    '/blog/aco-year-end-gap-closure': { title: 'ACO year-end gap closure | Zynix AI', desc: 'Year-end gap closure for ACOs: ranked worklists, outreach and scheduling that get open gaps to a completed, documented visit.', img: IMG.care, schema: 'Article', datePublished: '2026-01-30' },
+    '/blog/generative-ai-in-healthcare': { title: 'Generative AI in healthcare: a guide | Zynix AI', desc: 'From foundation models to clinical applications, a practical overview of generative AI in healthcare and how to deploy it responsibly.', img: IMG.agents, schema: 'Article', datePublished: '2026-02-05' },
+    '/blog/vbc-analytics-ai-driven': { title: 'Analytics for value-based care | Zynix AI', desc: 'How analytics platforms support risk stratification, cost modeling and quality measure forecasting for value-based care organizations.', img: IMG.analytics, schema: 'Article', datePublished: '2026-02-12' },
+    '/blog/revolutionizing-healthcare-role-of-ai': { title: 'The role of AI in healthcare | Zynix AI', desc: 'Where artificial intelligence helps across clinical, operational and financial work in modern healthcare organizations.', img: IMG.hero, schema: 'Article', datePublished: '2026-02-20' },
+    '/blog/generative-ai-trust-safety-healthcare': { title: 'Generative AI trust and safety in healthcare | Zynix AI', desc: 'How healthcare organizations use generative AI responsibly: bias mitigation, clinical validation and human-in-the-loop design.', img: IMG.platform, schema: 'Article', datePublished: '2026-02-28' },
+    '/blog/predictive-analytics-population-health': { title: 'Predictive analytics for population health | Zynix AI', desc: 'How ACOs and health systems use predictive models to stratify risk, forecast utilization and reach patients before costly events.', img: IMG.data, schema: 'Article', datePublished: '2026-03-06' },
+    '/blog/ai-medical-scribes-physician-burnout': { title: 'AI scribes and physician burnout | Zynix AI', desc: 'How ambient AI documentation works, how physicians review what it drafts, and what it means for documentation burden and burnout.', img: IMG.scribe, schema: 'Article', datePublished: '2026-03-12' },
+    '/blog/innovative-patient-recovery-satisfaction': { title: 'Supporting patient recovery after discharge | Zynix AI', desc: 'How post-discharge follow-up, medication adherence programs and remote check-ins support patients as they recover at home.', img: IMG.patient, schema: 'Article', datePublished: '2026-03-17' },
+    '/blog/strategies-coordinating-patient-care': { title: 'Better patient care coordination | Zynix AI', desc: 'How healthcare organizations connect fragmented data, close communication gaps and coordinate care across settings.', img: IMG.care, schema: 'Article', datePublished: '2026-03-20' },
+    '/blog/ai-transforming-medical-field': { title: 'How AI is changing the medical field | Zynix AI', desc: 'From diagnostics to patient engagement, how AI is changing healthcare delivery, and what organizations should prepare for.', img: IMG.hero, schema: 'Article', datePublished: '2026-03-23' },
+    '/blog/essential-ai-tools-medical-professionals': { title: 'Essential AI tools for clinicians | Zynix AI', desc: 'A practical guide to AI tools for clinical workflows, operations and patient engagement, from ambient documentation to analytics.', img: IMG.doctor, schema: 'Article', datePublished: '2026-03-26' },
+    '/blog/ai-changing-healthcare-decision-making': { title: 'AI in healthcare decision-making | Zynix AI', desc: 'From clinical diagnostics to resource allocation, how AI gives healthcare leaders clearer data for decisions at every level.', img: IMG.analytics, schema: 'Article', datePublished: '2026-03-29' },
+    '/blog/tools-driving-value-based-healthcare': { title: 'Tools driving value-based care | Zynix AI', desc: 'The technology stack that helps value-based care organizations move beyond fee-for-service economics.', img: IMG.platform, schema: 'Article', datePublished: '2026-04-01' },
+    '/blog/aco-30-day-post-discharge-program': { title: 'Building an ACO 30-day post-discharge program | Zynix AI', desc: 'A tactical guide to a reliable post-discharge program that meets TCM requirements, supports readmission goals and scales with agents.', img: IMG.care, schema: 'Article', datePublished: '2026-04-05' },
+    '/blog/why-tcm-fails-real-workflows': { title: 'Why TCM programs fail in real workflows | Zynix AI', desc: 'Transitional care management looks good on paper and breaks down in practice. What a workable TCM workflow needs, step by step.', img: IMG.care, schema: 'Article', datePublished: '2026-04-09' },
+    '/blog/documentation-crisis-physician-burnout': { title: 'Documentation burden and physician burnout | Zynix AI', desc: 'Documentation burden drives physician burnout. How ambient AI scribes help, and why physicians should approve every note.', img: IMG.scribe, schema: 'Article', datePublished: '2026-04-13' },
+    '/case-studies/palm-beach-aco': { title: 'Palm Beach ACO customer story | Zynix AI', desc: 'How Palm Beach ACO (PBACO Holding) uses Zynix for post-discharge follow-up and annual wellness visit outreach across its provider network.', img: IMG.care, schema: 'Article', datePublished: '2026-02-01' },
+    '/case-studies/amistad': { title: 'AMISTAD Community Health Center story | Zynix AI', desc: 'How AMISTAD Community Health Center uses multilingual outreach and after-hours access to reach patients and close preventive care gaps.', img: IMG.patients, schema: 'Article', datePublished: '2026-03-01' },
+    '/case-studies/apollo-clinic': { title: 'Apollo Clinic Network customer story | Zynix AI', desc: 'How Apollo Clinic Network uses scheduling, reminders and outreach agents to keep patients on track between visits.', img: IMG.patient, schema: 'Article', datePublished: '2026-03-01' },
+    '/case-studies/nhs': { title: 'NHS Health System customer story | Zynix AI', desc: 'How NHS Health System uses the Zynix platform for care gap outreach, after-hours access and documentation support across its sites.', img: IMG.enterprise, schema: 'Article', datePublished: '2026-03-01' },
     // V7: Platform + Agent Pages
-    '/platform': { title: 'Value-Based Care Operating System | Zynix AI', desc: 'Zynix OS unifies data, analytics, AI agents, and care plans into one healthcare AI platform. Automate care delivery and hit quality targets.', img: IMG.enterprise, schema: 'Product' },
-    '/agents': { title: 'AI Agents for Healthcare | Zynix AI', desc: 'Twelve purpose-built AI agents automate care coordination, outreach, triage, scheduling, documentation, and prior auth across 30 states.', img: IMG.doctor, schema: 'Product' },
-    '/agents/clinical-performance': { title: 'Clinical Performance AI Agents | Zynix AI', desc: 'AI agents for chronic care management, transitions of care, preventive activation, AWV outreach, and SDoH determination. Built for value-based care teams.', schema: 'Product' },
-    '/agents/predictive-activation': { title: 'Predictive Activation AI Agents | Zynix AI', desc: 'AI agents that predict readmission risk, identify rising-risk patients, and trigger proactive outreach before clinical events occur in value-based care.', schema: 'Product' },
-    '/agents/operational-efficiency': { title: 'Operational Efficiency AI Agents | Zynix AI', desc: 'AI agents for after-hours triage, scheduling, prior authorization, referral management, and fax processing that reduce administrative burden by 60%.', schema: 'Product' },
-    '/agents/chronic-care-management': { title: 'Chronic Care Management AI Agent | Zynix AI', desc: 'Automate CCM workflows with AI-driven medication adherence tracking, risk-tiered outreach, and care plan reinforcement for value-based care programs.', schema: 'Product' },
-    '/agents/transitions-of-care': { title: 'Transitions of Care AI Agent | Zynix AI', desc: 'Automate post-discharge follow-up, medication reconciliation, and readmission prevention with 85%+ contact rates for ACOs and health systems.', schema: 'Product' },
-    '/agents/preventive-quality-activation': { title: 'Preventive & Quality Activation Agents | Zynix AI', desc: 'AI agents for AWV outreach, appointment reminders, vaccination scheduling, and HEDIS quality gap closure across value-based care populations.', schema: 'Product' },
-    '/agents/operational-efficiency/zynafterhours-triage': { title: 'ZynAfterHours AI Triage | Zynix AI', desc: '24/7 AI-powered after-hours call handling with 97.3% triage accuracy in 15+ languages. Reduce avoidable ER visits by 20-30% for healthcare organizations.', schema: 'Product' },
-    '/agents/operational-efficiency/zynschedule': { title: 'ZynSchedule AI Scheduling | Zynix AI', desc: 'Always-on AI appointment scheduling that reduces no-shows by 40% and books patients 24/7 across practices, ACOs, and health systems.', schema: 'Product' },
-    '/agents/preventive-quality-activation/zynreminder': { title: 'ZynReminder AI Appointment Reminders | Zynix AI', desc: 'Smart two-way appointment reminders that reduce no-shows by 40% with personalized outreach across SMS, voice, and patient portals.', schema: 'Product' },
-    '/agents/chronic-care-management/chronic-disease-monitoring': { title: 'Chronic Disease Monitoring | Zynix AI', desc: 'Continuous AI-powered chronic disease monitoring with symptom tracking, escalation workflows, and automated care team alerts for value-based programs.', schema: 'Product' },
-    '/agents/preventive-quality-activation/awv-outreach': { title: 'AWV Outreach AI Agent | Zynix AI', desc: 'Automate Annual Wellness Visit identification, outreach, scheduling, and completion tracking to maximize AWV rates and CMS reimbursement.', schema: 'Product' },
-    '/agents/sdoh-determination': { title: 'SDoH Determination AI Agent | Zynix AI', desc: 'Screen patients for social determinants of health and route to community resources with AI-powered assessment and closed-loop referral tracking.', schema: 'Product' },
-    '/zynscribe': { title: 'ZynScribe AI Clinical Documentation | Zynix AI', desc: 'Ambient AI documentation that captures clinical encounters and generates structured SOAP notes in seconds. Cut documentation burden by 70%.', img: IMG.scribe, schema: 'Product' },
-    '/care-plans': { title: 'Deployable Care Plans | Zynix AI', desc: 'AI-orchestrated care plans that coordinate agents across TCM, CCM, AWV, and gap closure workflows for automated value-based care management.', img: IMG.care, schema: 'Product' },
-    '/solutions/zynix-data-analytics': { title: 'Zynix Data Analytics | Zynix AI', desc: 'AI-powered population health analytics with HCC gap closure, risk stratification, and HEDIS quality tracking for ACOs and health systems.', schema: 'Product' },
+    '/platform': { title: 'The Zynix platform for value-based care | Zynix AI', desc: 'One platform to connect claims, EHR and ADT data, rank the patients who need attention, and run follow-up with care plans, agents and your care team.', img: IMG.enterprise, schema: 'Product' },
+    '/agents': { title: 'AI agents for care operations | Zynix AI', desc: 'Agents for post-discharge outreach, chronic care, wellness visits, after-hours calls, scheduling and fax intake, with clinician escalation by rule.', img: IMG.doctor, schema: 'Product' },
+    '/agents/clinical-performance': { title: 'Clinical performance agents | Zynix AI', desc: 'Agents for chronic care management, transitions of care and preventive and quality activation, with clinical questions escalated to your team.', schema: 'Product' },
+    '/agents/predictive-activation': { title: 'Predictive activation agents | Zynix AI', desc: 'Agents that act on readmission risk and rising-risk flags with outreach and scheduling, and route clinical questions to your care team by rule.', schema: 'Product' },
+    '/agents/operational-efficiency': { title: 'Operational efficiency agents | Zynix AI', desc: 'Agents for after-hours intake, scheduling, referral management and fax routing, so staff spend less time on phones and inboxes.', schema: 'Product' },
+    '/agents/chronic-care-management': { title: 'Chronic care management agent | Zynix AI', desc: 'Monthly CCM outreach, medication adherence check-ins and care plan reminders, with clinical questions routed to your care team.', schema: 'Product' },
+    '/agents/transitions-of-care': { title: 'Transitions of care agent | Zynix AI', desc: 'Post-discharge outreach inside the TCM window, follow-up scheduling, and medication questions routed to licensed staff for review.', schema: 'Product' },
+    '/agents/preventive-quality-activation': { title: 'Preventive and quality activation agent | Zynix AI', desc: 'Outreach for annual wellness visits, screenings, reminders and HEDIS gaps, with scheduling built in and your team setting the rules.', schema: 'Product' },
+    '/agents/operational-efficiency/zynafterhours-triage': { title: 'ZynAfterHours after-hours call handling | Zynix AI', desc: 'After-hours calls answered: the reason captured, routine visits booked and symptom questions routed to your on-call clinician by rule.', schema: 'Product' },
+    '/agents/operational-efficiency/zynschedule': { title: 'ZynSchedule patient scheduling | Zynix AI', desc: 'Patient scheduling by phone, text and web, with confirmations, reschedules and exceptions handed to your front-office staff.', schema: 'Product' },
+    '/agents/preventive-quality-activation/zynreminder': { title: 'ZynReminder appointment reminders | Zynix AI', desc: 'Two-way appointment reminders by text and voice, with confirmations and reschedule requests routed back to your scheduling team.', schema: 'Product' },
+    '/agents/chronic-care-management/chronic-disease-monitoring': { title: 'Chronic disease monitoring | Zynix AI', desc: 'Regular check-ins for patients with chronic conditions, with symptom answers and missed check-ins escalated to the care team by rule.', schema: 'Product' },
+    '/agents/preventive-quality-activation/awv-outreach': { title: 'Annual wellness visit outreach | Zynix AI', desc: 'Find patients due for an annual wellness visit, reach them, book the visit and track it to completion, with your care team setting the rules.', schema: 'Product' },
+    '/agents/sdoh-determination': { title: 'Social needs screening | Zynix AI', desc: 'How social needs questions fit into outreach conversations and route patients to the community resources your team selects.', schema: 'Product' },
+    '/zynscribe': { title: 'ZynScribe ambient clinical documentation | Zynix AI', desc: 'ZynScribe drafts structured SOAP notes from the visit conversation. Nothing is filed or used for billing until the physician reviews and approves it.', img: IMG.scribe, schema: 'Product' },
+    '/care-plans': { title: 'Care plans for TCM, CCM, AWVs and gap closure | Zynix AI', desc: 'Pre-built care plans sequence agents and care team tasks for TCM, CCM, wellness visits and gap closure, and close only when each step is documented.', img: IMG.care, schema: 'Product' },
+    '/solutions/zynix-data-analytics': { title: 'Population health analytics for VBC | Zynix AI', desc: 'Risk, quality and HCC gap analytics on your claims and clinical data, ranked into worklists your care team can act on this week.', schema: 'Product' },
     // V7: Audience Pages
-    '/who-we-serve/health-systems': { title: 'AI Care Coordination for Health Systems | Zynix AI', desc: 'Zynix AI helps health systems close the gap between care management strategy and execution at scale with autonomous AI agents and workflows.', schema: 'Product' },
-    '/who-we-serve/acos-msos': { title: 'AI for MSSP ACOs and MSOs | Zynix AI', desc: 'Zynix AI helps MSSP ACOs close the gap between care management analytics and execution with AI agents that drive shared savings performance.', schema: 'Product' },
-    '/who-we-serve/health-plans': { title: 'AI for Medicare Advantage Plans | Zynix AI', desc: 'Zynix AI helps Medicare Advantage plans close the gap between population analytics and member engagement with autonomous AI-powered outreach.', schema: 'Product' },
-    '/who-we-serve/independent-group-practices': { title: 'AI for Independent Group Practices | Zynix AI', desc: 'Zynix AI helps independent physician groups handle after-hours triage, scheduling, CCM billing, and prior auth with turnkey AI automation.', schema: 'Product' },
-    '/who-we-serve/ascs': { title: 'AI Workflow Automation for ASCs | Zynix AI', desc: 'Zynix AI helps ASCs streamline prior authorization, referral intake, OR scheduling, and post-procedure follow-up with AI workflow automation.', schema: 'Product' },
-    '/who-we-serve/fqhcs': { title: 'AI Care Coordination for FQHCs | Zynix AI', desc: 'Zynix AI helps FQHCs reach multilingual and high-barrier populations with AI care coordination in 15+ languages and automated quality tracking.', schema: 'Product' },
+    '/who-we-serve/health-systems': { title: 'AI for health systems: post-discharge care | Zynix AI', desc: 'ADT-triggered outreach, follow-up scheduling, after-hours access and ambient documentation that work with your EHR across hospitals and clinics.', schema: 'Product' },
+    '/who-we-serve/acos-msos': { title: 'AI for ACOs: TCM, AWVs and HCC gaps | Zynix AI', desc: 'TCM, wellness visits, HCC and quality gaps across your attributed panel, worked by agents and your care team, with clinicians making clinical decisions.', schema: 'Product' },
+    '/who-we-serve/health-plans': { title: 'AI for Medicare Advantage plans | Zynix AI', desc: 'Member outreach for HEDIS gaps, medication adherence and post-discharge follow-up, with your care managers setting the scripts and taking escalations.', schema: 'Product' },
+    '/who-we-serve/independent-group-practices': { title: 'For MSOs, IPAs and physician groups | Zynix AI', desc: 'Run wellness visits, transitions of care, chronic care and quality programs across independent practices, whatever EHR each one runs.', schema: 'Product' },
+    '/who-we-serve/ascs': { title: 'AI for ambulatory surgery centers | Zynix AI', desc: 'Referral intake, pre-procedure scheduling and post-op follow-up calls handled by agents, with your staff taking every exception.', schema: 'Product' },
+    '/who-we-serve/fqhcs': { title: 'AI for FQHCs and community health | Zynix AI', desc: 'Multilingual outreach, after-hours access and preventive screening follow-up for high-barrier populations, with care team escalation built in.', schema: 'Product' },
     // V7: Company Pages
-    '/company/zynixllm': { title: 'ZynixLLM Healthcare-Native AI | Zynix AI', desc: 'ZynixLLM is the healthcare-native intelligence layer powering the Zynix AI platform with clinical reasoning built for value-based care workflows.', schema: 'Product' },
-    '/security': { title: 'Security & Compliance | Zynix AI', desc: 'Zynix AI is SOC 2 Type II certified and HIPAA-aligned with enterprise-grade security, encryption, and access controls for healthcare AI deployments.', schema: 'Organization' },
-    '/press': { title: 'Newsroom & Press Releases | Zynix AI', desc: 'Latest Zynix AI press releases and newsroom announcements, including the strategic partnership with Palm Beach Accountable Care Organization (PBACO Holding) to scale AI-driven patient outreach, documentation, and workflow automation across value-based care.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' },
-    '/newsroom': { title: 'Newsroom & Press Releases | Zynix AI', desc: 'Latest Zynix AI press releases and newsroom announcements, including the strategic partnership with Palm Beach Accountable Care Organization (PBACO Holding).', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' },
-    '/press/pbaco-partnership': { title: 'Zynix AI + PBACO Holding Partnership | Zynix AI', desc: 'Zynix AI announces strategic partnership with Palm Beach Accountable Care Organization (PBACO Holding) to scale AI-driven patient outreach, documentation, and workflow automation.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' },'/press/eternalhealth-zynix-ai-nirvanahealth-partnership': { title: 'eternalHealth + Zynix AI + nirvanaHealth Partnership | Zynix AI', desc: 'eternalHealth partners with Zynix AI and nirvanaHealth to scale AI-enabled care management and member engagement across Massachusetts and Arizona.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-06-02' },
-    '/careers': { title: 'Careers | Zynix AI', desc: 'Join the team building the AI operating system for value-based healthcare. Engineering, clinical, and operations roles in Trinity, FL and remote.', schema: 'Organization', noindex: true },
-    '/resources/blog': { title: 'Blog | Healthcare AI Insights | Zynix AI', desc: 'Expert healthcare AI insights on value-based care, population health, and care coordination from the Zynix AI team. Updated weekly.', schema: 'Organization' },
-    '/resources/faq': { title: 'FAQ | Zynix AI', desc: 'Find answers about the Zynix healthcare AI platform including HIPAA compliance, EHR integration, pricing, deployment timelines, and support options.', schema: 'FAQPage' },
-    '/resources/glossary': { title: 'Healthcare AI Glossary | Zynix AI', desc: 'Browse the complete healthcare AI glossary covering value-based care, interoperability, HCC coding, and compliance terms for healthcare professionals.', schema: 'Organization' },
-    '/resources/webinars': { title: 'Webinars & Events | Zynix AI', desc: 'Upcoming and on-demand webinars on healthcare AI, value-based care operations, and care management best practices from Zynix AI experts.', schema: 'Organization', noindex: true },
-    '/resources/whitepapers': { title: 'Whitepapers & Reports | Zynix AI', desc: 'Download research on healthcare AI including AWV optimization, post-discharge follow-up, and care management at scale from Zynix AI.', schema: 'Organization' },
-    '/case-studies/pbaco': { title: 'Palm Beach ACO Case Study | Zynix AI', desc: 'Palm Beach ACO achieved 85% TCM contact rates, 40% gap closure improvement, and 3x AWV lift using Zynix AI. Read the full case study.', schema: 'Article', datePublished: '2026-02-01' },
+    '/company/zynixllm': { title: 'ZynixLLM: how Zynix AI works safely | Zynix AI', desc: 'How ZynixLLM supports value-based care workflows, when clinicians step in, and how agents stay within the escalation rules your team sets.', schema: 'Product' },
+    '/security': { title: 'Security and compliance | Zynix AI', desc: 'SOC 2 Type II audited, HIPAA-aligned safeguards with a BAA available, and HITRUST CSF certification in progress. Request the SOC 2 report.', schema: 'Organization' },
+    '/press': { title: 'Newsroom and press releases | Zynix AI', desc: 'Zynix AI announcements, including partnerships with PBACO Holding and with eternalHealth and nirvanaHealth, plus media resources.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' },
+    '/newsroom': { title: 'Newsroom and press releases | Zynix AI', desc: 'Zynix AI announcements, including partnerships with PBACO Holding and with eternalHealth and nirvanaHealth, plus media resources.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' },
+    '/press/pbaco-partnership': { title: 'Zynix AI and PBACO Holding partnership | Zynix AI', desc: 'Zynix AI announces a strategic partnership with Palm Beach ACO (PBACO Holding) to scale patient outreach, documentation and workflow automation.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' },'/press/eternalhealth-zynix-ai-nirvanahealth-partnership': { title: 'eternalHealth, Zynix AI and nirvanaHealth partner | Zynix AI', desc: 'eternalHealth partners with Zynix AI and nirvanaHealth to scale AI-enabled care management and member engagement across Massachusetts and Arizona.', img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-06-02' },
+    '/careers': { title: 'Careers | Zynix AI', desc: 'Help ACOs, health plans and health systems reach patients between visits. See open roles in engineering, clinical operations and go-to-market.', schema: 'Organization', noindex: true },
+    '/resources/blog': { title: 'Insights on value-based care operations | Zynix AI', desc: 'Articles on transitions of care, risk adjustment, quality programs, CMS models and how care teams put AI to work safely.', schema: 'Organization' },
+    '/resources/faq': { title: 'FAQ | Zynix AI', desc: 'Answers on the Zynix platform, agents, data sources, EHR integrations, security, HIPAA-aligned safeguards and working with our team.', schema: 'FAQPage' },
+    '/resources/glossary': { title: 'Value-based care and healthcare AI glossary | Zynix AI', desc: 'Plain definitions of ACO, Medicare Advantage and care management terms, from ADT and AWV to HCC, HEDIS and TCM.', schema: 'Organization' },
+    '/resources/webinars': { title: 'Webinars and events | Zynix AI', desc: 'Recorded sessions on ACO operating models, patient engagement and CMS programs, plus where to meet the Zynix team.', schema: 'Organization', noindex: true },
+    '/resources/whitepapers': { title: 'Research and reports | Zynix AI', desc: 'Reports on annual wellness visits, post-discharge follow-up and care management operations for ACO and health plan leaders.', schema: 'Organization' },
+    '/case-studies/pbaco': { title: 'Palm Beach ACO customer story | Zynix AI', desc: 'How Palm Beach ACO (PBACO Holding) uses Zynix for post-discharge follow-up and annual wellness visit outreach across its provider network.', schema: 'Article', datePublished: '2026-02-01' },
     // V7: Missing route aliases
-    '/about': { title: 'About Zynix AI | Healthcare AI Company', desc: 'Zynix AI is a healthcare AI company purpose-built for value-based care with 1M+ patients onboarded across 30 states serving ACOs and health systems.', img: IMG.patients, schema: 'MedicalBusiness' },
+    '/about': { title: 'About Zynix AI: physician-led VBC infrastructure', desc: 'Zynix AI builds AI infrastructure and workflows for value-based care. Physician-led, based in Trinity, Florida, with organizations in 30 states.', img: IMG.patients, schema: 'MedicalBusiness' },
     // Agent segment landing pages (Webflow-authored; inject canonical + hreflang to resolve SEMrush hreflang conflicts)
-    '/clinical-performance': { title: 'Clinical Performance AI Agents | Zynix AI', desc: 'AI agents for clinical performance: medication reconciliation, care management, and quality activation. Close care gaps and scale clinical workflows.', img: IMG.agents, schema: 'Product' },
-    '/operational-efficiency': { title: 'Operational Efficiency AI Agents | Zynix AI', desc: 'Operational efficiency AI agents that automate after-hours triage, scheduling, prior authorization, and fax routing across the care continuum.', img: IMG.agents, schema: 'Product' },
-    '/predictive-activation': { title: 'Predictive Activation AI Agents | Zynix AI', desc: 'Predictive activation agents reach high-risk patients flagged by risk scores \u2014 converting predictions into outreach, appointments, and closed gaps.', img: IMG.agents, schema: 'Product' },
-    '/blog': { title: 'Blog | Healthcare AI Insights | Zynix AI', desc: 'Expert healthcare AI insights on value-based care, population health, and care coordination from the Zynix AI team. Updated weekly.', img: IMG.hero, schema: 'Organization' },
-    '/case-studies': { title: 'Case Studies | Healthcare AI Results | Zynix AI', desc: 'See real healthcare AI results from ACOs, health systems, and practices using Zynix AI. Proven outcomes across 1M+ value-based care patients.', img: IMG.care, schema: 'Organization' },
-    '/faq': { title: 'FAQ | Zynix AI', desc: 'Find answers about the Zynix healthcare AI platform including HIPAA compliance, EHR integration, pricing, deployment timelines, and support options.', img: IMG.hero, schema: 'FAQPage' },
+    '/clinical-performance': { title: 'Clinical performance agents | Zynix AI', desc: 'Agents for chronic care management, transitions of care and preventive and quality activation, with clinical questions escalated to your team.', img: IMG.agents, schema: 'Product' },
+    '/operational-efficiency': { title: 'Operational efficiency agents | Zynix AI', desc: 'Agents for after-hours intake, scheduling, referral management and fax routing, so staff spend less time on phones and inboxes.', img: IMG.agents, schema: 'Product' },
+    '/predictive-activation': { title: 'Predictive activation agents | Zynix AI', desc: 'Agents that act on readmission risk and rising-risk flags with outreach and scheduling, and route clinical questions to your care team by rule.', img: IMG.agents, schema: 'Product' },
+    '/blog': { title: 'Insights on value-based care operations | Zynix AI', desc: 'Articles on transitions of care, risk adjustment, quality programs, CMS models and how care teams put AI to work safely.', img: IMG.hero, schema: 'Organization' },
+    '/case-studies': { title: 'Customer stories | Zynix AI', desc: 'How ACOs, health plans, health systems, FQHCs and physician groups use Zynix, with what their leaders have said on the record.', img: IMG.care, schema: 'Organization' },
+    '/faq': { title: 'FAQ | Zynix AI', desc: 'Answers on the Zynix platform, agents, data sources, EHR integrations, security, HIPAA-aligned safeguards and working with our team.', img: IMG.hero, schema: 'FAQPage' },
     '/privacy-policy': { title: 'Privacy Policy | Zynix AI', desc: 'Zynix AI privacy policy detailing how we collect, use, and protect your personal and health-related information across our healthcare AI platform.', img: IMG.hero, schema: 'Organization' },
     '/sms': { title: 'SMS Program Info | Zynix AI', desc: 'Zynix AI SMS program details: opt-in, opt-out (STOP), help (HELP), message frequency, supported carriers, and privacy for text notifications.', img: IMG.hero, schema: 'Organization', noindex: true },
     '/sms-program': { title: 'SMS Program Terms & Conditions | Zynix AI', desc: 'Zynix AI SMS Program Terms & Conditions: message frequency, Msg & data rates may apply, STOP to opt out, HELP for help, support contact, and privacy.', img: IMG.hero, schema: 'Organization' },
     '/sms-consent': { title: 'SMS Opt-In | Zynix AI', desc: 'Sign up to receive appointment reminders, care coordination updates, and account notifications from Zynix AI via text message.', img: IMG.hero, schema: 'Organization' },
     '/terms-of-service': { title: 'Terms of Service | Zynix AI', desc: 'Review the Zynix AI terms of service governing use of our healthcare AI platform, data processing agreements, and professional services.', img: IMG.hero, schema: 'Organization' },
-    '/trust-center': { title: 'Trust & Security | Zynix AI', desc: 'Zynix AI is HIPAA compliant and SOC 2 Type II certified. Explore our security practices, data governance, and compliance for healthcare AI.', img: IMG.enterprise, schema: 'Organization' },
-    '/resources/blog/1m-patients': { title: 'Zynix AI Reaches 1M VBC Patients | Zynix AI', desc: 'Zynix AI announces 1 million value-based care patients onboarded across healthcare organizations in 30 states. Read about this milestone.', img: IMG.hero, schema: 'Article', datePublished: '2026-01-15' },
-    '/resources/blog/what-is-value-based-care-ai': { title: 'What is Value-Based Care AI? Guide [2026]', desc: 'Value-based care AI automates care coordination, closes quality gaps, and optimizes risk adjustment for ACOs and health systems. Learn how VBC AI works.', img: IMG.analytics, schema: 'Article', datePublished: '2026-03-01' },
-    '/resources/blog/how-ai-closes-care-gaps': { title: 'How AI Closes Care Gaps | Zynix AI', desc: 'Discover how AI automates HCC, RAF, and quality measure gap closure from identification through patient outreach to confirmed resolution.', img: IMG.care, schema: 'Article', datePublished: '2026-03-10' },
-    '/resources/blog/ai-agents-vs-chatbots-healthcare': { title: 'AI Agents vs Chatbots in Healthcare', desc: 'Healthcare AI agents take autonomous action while chatbots only answer questions. Learn the key differences and why agents deliver better outcomes.', img: IMG.doctor, schema: 'Article', datePublished: '2026-03-15' },
-    '/use-cases/post-discharge-followup-fqhc': { title: "FQHC Post-Discharge Follow-Up AI | Zynix AI", desc: "Automate post-discharge follow-up for FQHC patients in their primary language. AI agents embed SDoH screening and schedule follow-ups.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/medication-adherence-complex-chronic': { title: "Medication Adherence AI for FQHCs | Zynix AI", desc: "Improve medication adherence for complex chronic patients at FQHCs. AI identifies barriers and routes to pharmacist, provider, or patient assistance.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/preventive-screening-gap-fqhc': { title: "Preventive Screening Gap Closure | Zynix AI", desc: "Close preventive screening gaps for FQHC patients with barrier-aware AI outreach. Schedule mammography, colorectal, and diabetes screenings.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/sdoh-screening-care-navigation': { title: "SDoH Screening AI for FQHCs | Zynix AI", desc: "Automate SDoH screening and care navigation for FQHCs. Identify transportation, food, and housing barriers during existing outreach interactions.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/after-hours-triage-multilingual-fqhc': { title: "Multilingual After-Hours Triage for FQHCs | Zynix", desc: "AI-powered after-hours triage in 15+ languages for FQHCs. Reduce ED utilization among multilingual and underserved patient populations.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/fax-inbound-document-routing': { title: "Healthcare Fax Automation | Zynix AI", desc: "Automate fax processing for healthcare organizations. AI reads, classifies, matches to patient, and routes 150+ weekly faxes to correct staff queues.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/post-procedure-followup-complication': { title: "Post-Procedure Follow-Up AI | Zynix AI", desc: "Automate post-procedure follow-up for ASCs. AI agents contact every patient within 24-72 hours, assess symptoms, and route clinical concerns.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/surgical-scheduling-pre-procedure': { title: "Surgical Scheduling AI for ASCs | Zynix AI", desc: "Reduce day-of surgical cancellations with AI-powered pre-procedure preparation. Verify labs, dietary restrictions, medication holds, and transportation.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/referral-intake-asc': { title: "ASC Referral Intake Automation | Zynix AI", desc: "Automate ASC referral intake with AI-powered fax processing. Read, classify, match to patient, and route documents to correct staff queues.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/prior-auth-surgical-procedures': { title: "Surgical Prior Auth Automation | Zynix AI", desc: "Automate prior authorization for ASC surgical procedures. AI handles documentation, submission, tracking, and denial management for 80+ monthly cases.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/referral-coordination-leakage': { title: "Referral Leakage Prevention AI | Zynix AI", desc: "Prevent referral leakage with AI-powered coordination. Track referrals, follow up with patients, and book specialist appointments automatically.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/ccm-billing-chronic-care': { title: "CCM Billing Automation | Zynix AI", desc: "Execute CCM billing at scale for group practices. AI agents handle monthly documented touchpoints for 200-400 eligible patients.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/prior-auth-workflow-management': { title: "Prior Auth Automation for Practices | Zynix AI", desc: "Automate prior authorization for group practices. AI handles documentation assembly, payer submission, tracking, and denial management.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/appointment-scheduling-no-show': { title: "No-Show Reduction AI for Practices | Zynix AI", desc: "Reduce patient no-shows by 40% with barrier-aware scheduling AI. Dynamic waitlist management and intelligent appointment confirmations.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/after-hours-call-handling-group-practices': { title: "After-Hours Triage for Group Practices | Zynix", desc: "AI-powered after-hours call handling for group practices. Clinical triage in 15+ languages replaces answering services and voicemail.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/medication-adherence-chronic-populations': { title: "Medication Adherence AI for Health Plans | Zynix", desc: "Improve medication adherence and PDC scores with AI-powered barrier identification. Two-way outreach resolves cost, side effect, and access issues.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/post-discharge-ma-members': { title: "MA Post-Discharge Care Automation | Zynix AI", desc: "Automate post-discharge care for Medicare Advantage members. Real-time ADT feeds enable same-day outreach within the 48-hour TCM window.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/high-utilizer-member-management': { title: "High-Cost Member Management AI | Zynix AI", desc: "Manage high-cost and high-utilizer members with AI-powered outreach between case management visits. Reduce total cost of care at population scale.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/hcc-risk-adjustment-ma': { title: "HCC Risk Adjustment for Health Plans | Zynix AI", desc: "Improve HCC risk adjustment accuracy for Medicare Advantage. AI connects gap identification to member outreach before CMS submission deadlines.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/hedis-stars-quality-improvement': { title: "Stars Rating Improvement AI | Zynix AI", desc: "Improve Medicare Advantage Stars ratings with AI-powered member outreach. Close HEDIS gaps through barrier-aware engagement at population scale.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/chronic-care-coordination-scale': { title: "CCM Automation at Scale | Zynix AI", desc: "Automate chronic care management for 3,000+ CCM patients. AI agents handle monthly documented contact, freeing coordinators for complex cases.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/after-hours-ed-diversion': { title: "ED Diversion AI for ACOs | Zynix AI", desc: "Reduce avoidable ED visits with AI-powered after-hours triage. Clinical-grade assessment in 15+ languages for ACO attributed populations.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/rising-risk-patient-outreach': { title: "Rising-Risk Patient Outreach AI | Zynix AI", desc: "Identify rising-risk patients and activate outreach before hospitalization. AI agents execute proactive engagement at population scale.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/hcc-gap-raf-optimization': { title: "RAF Score Optimization for ACOs | Zynix AI", desc: "Optimize RAF scores and close HCC gaps before performance year deadline. AI agents connect gap identification to outreach and scheduling.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/post-discharge-tcm-readmission': { title: "TCM Automation for ACOs | Zynix AI", desc: "Automate TCM workflows for MSSP ACOs. AI agents contact discharged patients within 48 hours, reconcile meds, and capture TCM billing codes.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/physician-documentation-ambient-ai': { title: "Ambient AI Clinical Documentation | Zynix AI", desc: "Reduce physician documentation burden with ambient AI. ZynScribe generates structured SOAP notes in real-time during patient encounters.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/prior-auth-high-volume-specialty': { title: "Prior Auth Automation for Health Systems | Zynix", desc: "Automate prior authorization across cardiology, orthopedics, and specialty services. Reduce OR delays and staff burden with AI-powered workflows.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/hcc-gap-closure-health-system-aco': { title: "HCC Gap Closure for Health Systems | Zynix AI", desc: "Close HCC documentation gaps at scale. AI agents handle outreach to unscheduled patients and deliver pre-visit briefs for scheduled encounters.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/after-hours-triage-multi-site': { title: "After-Hours Triage AI for Health Systems | Zynix", desc: "AI-powered after-hours patient triage across multiple sites. Clinical-grade symptom assessment in 15+ languages. Reduce avoidable ED visits.", img: IMG.agents, schema: 'Article' },
-    '/use-cases/post-discharge-follow-up': { title: "Post-Discharge Follow-Up Automation | Zynix AI", desc: "Automate post-discharge follow-up calls within 24-48 hours. AI agents contact every patient, review medications, and schedule follow-ups.", img: IMG.agents, schema: 'Article' },
-    '/case-studies/nhs': { title: "NHS Health System Case Study | Zynix AI", desc: "NHS Health System deployed the full Zynix AI platform across 12 sites achieving 40% gap closure improvement and consistent after-hours coverage.", img: IMG.care, schema: 'Article' },
-    '/case-studies/apollo-clinic': { title: "Apollo Clinic Case Study | Zynix AI", desc: "Apollo Clinic Network reduced no-shows by 40% and recovered significant revenue with AI-powered scheduling and automated prior auth.", img: IMG.care, schema: 'Article' },
-    '/case-studies/amistad': { title: "AMISTAD CHC Case Study | Zynix AI", desc: "AMISTAD Community Health Center deployed multilingual AI outreach in 15+ languages to close preventive care gaps and reduce ED utilization.", img: IMG.care, schema: 'Article' },
-    '/case-studies/pbaco': { title: "Palm Beach ACO Case Study | Zynix AI", desc: "Palm Beach ACO achieved 85% TCM contact rates, 40% gap closure improvement, and 3x AWV lift using Zynix AI.", img: IMG.care, schema: 'Article' },
+    '/trust-center': { title: 'Security and compliance | Zynix AI', desc: 'SOC 2 Type II audited, HIPAA-aligned safeguards with a BAA available, and HITRUST CSF certification in progress. Request the SOC 2 report.', img: IMG.enterprise, schema: 'Organization' },
+    '/resources/blog/1m-patients': { title: '1M+ value-based care patients onboarded | Zynix AI', desc: 'Zynix AI marks 1M+ value-based care patients onboarded, with customer organizations in 30 states. Read about the milestone.', img: IMG.hero, schema: 'Article', datePublished: '2026-01-15' },
+    '/resources/blog/what-is-value-based-care-ai': { title: 'What is value-based care AI? A guide | Zynix AI', desc: 'What value-based care AI is, how it supports care coordination, quality gaps and risk adjustment, and what ACOs and health systems should ask.', img: IMG.analytics, schema: 'Article', datePublished: '2026-03-01' },
+    '/resources/blog/how-ai-closes-care-gaps': { title: 'How AI helps close care gaps | Zynix AI', desc: 'How HCC, RAF and quality gaps move from identification to outreach, scheduling and a documented visit, and where AI helps care teams.', img: IMG.care, schema: 'Article', datePublished: '2026-03-10' },
+    '/resources/blog/ai-agents-vs-chatbots-healthcare': { title: 'AI agents vs chatbots in healthcare | Zynix AI', desc: 'A chatbot answers questions. An agent completes a task inside your workflow and hands clinical questions to your team. The differences explained.', img: IMG.doctor, schema: 'Article', datePublished: '2026-03-15' },
+    '/use-cases/post-discharge-followup-fqhc': { title: 'Post-discharge follow-up for FQHCs | Zynix AI', desc: 'Post-discharge follow-up for FQHC patients in their primary language, with social needs questions and follow-up scheduling built in.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/medication-adherence-complex-chronic': { title: 'Medication adherence for FQHC patients | Zynix AI', desc: 'Adherence outreach for complex chronic patients at FQHCs that finds barriers and routes them to a pharmacist, provider or assistance program.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/preventive-screening-gap-fqhc': { title: 'Preventive screening gap closure | Zynix AI', desc: 'Preventive screening outreach for FQHC patients that accounts for barriers and books mammography, colorectal and diabetes screenings.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/sdoh-screening-care-navigation': { title: 'Social needs screening and navigation | Zynix AI', desc: 'Ask about transportation, food and housing during existing outreach, and route patients to the resources your team selects.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/after-hours-triage-multilingual-fqhc': { title: 'Multilingual after-hours access for FQHCs | Zynix AI', desc: 'After-hours calls answered in the patient’s language, routine visits booked and symptom questions routed to your on-call clinician by rule.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/fax-inbound-document-routing': { title: 'Healthcare fax intake and routing | Zynix AI', desc: 'Incoming faxes read, classified, matched to the patient and routed to the right staff queue, with unclear documents sent for review.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/post-procedure-followup-complication': { title: 'Post-procedure follow-up for ASCs | Zynix AI', desc: 'Follow-up calls after surgery that check in with each patient and route clinical concerns to your staff.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/surgical-scheduling-pre-procedure': { title: 'Pre-procedure preparation for ASCs | Zynix AI', desc: 'Confirm labs, dietary instructions, medication holds and transportation before surgery day, with gaps flagged to your staff.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/referral-intake-asc': { title: 'ASC referral intake | Zynix AI', desc: 'Referral faxes read, classified, matched to the patient and routed to the right staff queue, so new referrals move faster.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/prior-auth-surgical-procedures': { title: 'Prior authorization for surgical procedures | Zynix AI', desc: 'Support for prior authorization paperwork and status tracking for surgical cases, with your staff handling every exception.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/referral-coordination-leakage': { title: 'Referral coordination and leakage | Zynix AI', desc: 'Track referrals, follow up with patients and book specialist appointments inside your network, with exceptions routed to staff.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/ccm-billing-chronic-care': { title: 'Chronic care management at scale | Zynix AI', desc: 'Monthly documented CCM touchpoints for eligible patients in group practices, with clinical questions routed to your care team.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/prior-auth-workflow-management': { title: 'Prior authorization workflow for practices | Zynix AI', desc: 'Support for prior authorization paperwork, submission tracking and follow-up in group practices, with staff handling every exception.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/appointment-scheduling-no-show': { title: 'Scheduling and no-show reduction | Zynix AI', desc: 'Scheduling that accounts for patient barriers, two-way confirmations and waitlist management to help fill appointment slots.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/after-hours-call-handling-group-practices': { title: 'After-hours call handling for practices | Zynix AI', desc: 'After-hours calls answered, routine visits booked and symptom questions routed to your on-call clinician by rule, in the patient’s language.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/medication-adherence-chronic-populations': { title: 'Medication adherence for health plans | Zynix AI', desc: 'Two-way adherence outreach that finds cost, side effect and access barriers and routes them to the right person on your team.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/post-discharge-ma-members': { title: 'Post-discharge follow-up for MA members | Zynix AI', desc: 'ADT-triggered outreach to Medicare Advantage members after discharge, with follow-up scheduling and clinical questions routed to care managers.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/high-utilizer-member-management': { title: 'High-utilizer member outreach | Zynix AI', desc: 'Outreach to high-cost and high-utilizer members between case management visits, with escalations routed to your care managers.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/hcc-risk-adjustment-ma': { title: 'HCC risk adjustment for health plans | Zynix AI', desc: 'Connect HCC gap identification to member outreach and visit scheduling before CMS submission deadlines.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/hedis-stars-quality-improvement': { title: 'HEDIS and Stars quality improvement | Zynix AI', desc: 'Member outreach that closes HEDIS gaps and supports Star Ratings, with your care managers setting the scripts and taking escalations.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/chronic-care-coordination-scale': { title: 'Chronic care coordination at scale | Zynix AI', desc: 'Monthly documented CCM contact handled by agents, so coordinators can focus on complex patients and clinical questions.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/after-hours-ed-diversion': { title: 'After-hours access for ACO patients | Zynix AI', desc: 'After-hours calls answered, routine visits booked and symptom questions routed to your on-call clinician by rule. Emergencies are told to call 911.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/rising-risk-patient-outreach': { title: 'Rising-risk patient outreach | Zynix AI', desc: 'Find patients whose risk is rising and reach them with outreach and scheduling before a hospitalization, with your care team in charge.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/hcc-gap-raf-optimization': { title: 'HCC gap closure and RAF accuracy for ACOs | Zynix AI', desc: 'Connect HCC gap identification to outreach and scheduling so visits happen before the performance year ends.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/post-discharge-tcm-readmission': { title: 'TCM and post-discharge follow-up for ACOs | Zynix AI', desc: 'Reach discharged patients inside the TCM window, schedule the follow-up visit and route medication questions to licensed staff.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/physician-documentation-ambient-ai': { title: 'Ambient clinical documentation | Zynix AI', desc: 'ZynScribe drafts structured SOAP notes from the visit conversation, and physicians review and approve every note before it is filed.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/prior-auth-high-volume-specialty': { title: 'Prior authorization for specialty services | Zynix AI', desc: 'Support for prior authorization paperwork and status tracking across specialty services, with staff handling every exception.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/hcc-gap-closure-health-system-aco': { title: 'HCC gap closure for health systems | Zynix AI', desc: 'Outreach to unscheduled patients with open HCC gaps and pre-visit briefs for scheduled encounters, so gaps are addressed at the visit.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/after-hours-triage-multi-site': { title: 'After-hours access across sites | Zynix AI', desc: 'After-hours calls answered across your sites, routine visits booked and symptom questions routed to the on-call clinician by rule.', img: IMG.agents, schema: 'Article' },
+    '/use-cases/post-discharge-follow-up': { title: 'Post-discharge follow-up | Zynix AI', desc: 'Follow-up calls after discharge that review medications, schedule the follow-up visit and route clinical questions to your care team.', img: IMG.agents, schema: 'Article' },
+    '/case-studies/nhs': { title: 'NHS Health System customer story | Zynix AI', desc: 'How NHS Health System uses the Zynix platform for care gap outreach, after-hours access and documentation support across its sites.', img: IMG.care, schema: 'Article' },
+    '/case-studies/apollo-clinic': { title: 'Apollo Clinic Network customer story | Zynix AI', desc: 'How Apollo Clinic Network uses scheduling, reminders and outreach agents to keep patients on track between visits.', img: IMG.care, schema: 'Article' },
+    '/case-studies/amistad': { title: 'AMISTAD Community Health Center story | Zynix AI', desc: 'How AMISTAD Community Health Center uses multilingual outreach and after-hours access to reach patients and close preventive care gaps.', img: IMG.care, schema: 'Article' },
+    '/case-studies/pbaco': { title: 'Palm Beach ACO customer story | Zynix AI', desc: 'How Palm Beach ACO (PBACO Holding) uses Zynix for post-discharge follow-up and annual wellness visit outreach across its provider network.', img: IMG.care, schema: 'Article' },
     // Audience-segment CMS pages — override Webflow collection-template default "— AI Healthcare Solutions"
-    '/audience-segments/acos-msos': { title: "AI for ACOs & MSOs | Zynix AI", desc: "Drive shared savings in MSSP and ACO REACH with AI-powered TCM, HCC gap closure, and patient outreach. 85%+ TCM contact rates, 25% readmit reduction.", img: IMG.care, schema: 'Product' },
-    '/audience-segments/health-systems': { title: "AI for Health Systems | Zynix AI", desc: "Unified AI across multi-site health systems: ambient documentation, post-discharge coordination, prior auth, and gap closure at enterprise scale.", img: IMG.enterprise, schema: 'Product' },
-    '/audience-segments/health-plans': { title: "AI for Medicare Advantage Plans | Zynix AI", desc: "Improve Stars ratings, close HEDIS gaps, and scale member engagement with AI agents trusted by leading value-based payers nationwide.", img: IMG.analytics, schema: 'Product' },
-    '/audience-segments/fqhcs': { title: "AI for FQHCs | Zynix AI", desc: "Multilingual AI outreach in 15+ languages, SDoH routing, UDS quality measure tracking, and barrier-aware care for underserved populations.", img: IMG.patients, schema: 'Product' },
-    '/audience-segments/independent-group-practices': { title: "AI for Independent Practices | Zynix AI", desc: "Automate after-hours coverage, scheduling, and documentation across 5–50 physician practices. Cut no-shows 40% and deploy in weeks.", img: IMG.doctor, schema: 'Product' },
-    '/audience-segments/ascs': { title: "AI for Ambulatory Surgery Centers | Zynix AI", desc: "Accelerate prior auth 60%, reduce surgical cancellations, and streamline pre-op and post-op coordination for ambulatory surgery centers.", img: IMG.enterprise, schema: 'Product' },
+    '/audience-segments/acos-msos': { title: 'AI for ACOs: TCM, AWVs and HCC gaps | Zynix AI', desc: 'TCM, wellness visits, HCC and quality gaps across your attributed panel, worked by agents and your care team, with clinicians making clinical decisions.', img: IMG.care, schema: 'Product' },
+    '/audience-segments/health-systems': { title: 'AI for health systems: post-discharge care | Zynix AI', desc: 'ADT-triggered outreach, follow-up scheduling, after-hours access and ambient documentation that work with your EHR across hospitals and clinics.', img: IMG.enterprise, schema: 'Product' },
+    '/audience-segments/health-plans': { title: 'AI for Medicare Advantage plans | Zynix AI', desc: 'Member outreach for HEDIS gaps, medication adherence and post-discharge follow-up, with your care managers setting the scripts and taking escalations.', img: IMG.analytics, schema: 'Product' },
+    '/audience-segments/fqhcs': { title: 'AI for FQHCs and community health | Zynix AI', desc: 'Multilingual outreach, after-hours access and preventive screening follow-up for high-barrier populations, with care team escalation built in.', img: IMG.patients, schema: 'Product' },
+    '/audience-segments/independent-group-practices': { title: 'For MSOs, IPAs and physician groups | Zynix AI', desc: 'Run wellness visits, transitions of care, chronic care and quality programs across independent practices, whatever EHR each one runs.', img: IMG.doctor, schema: 'Product' },
+    '/audience-segments/ascs': { title: 'AI for ambulatory surgery centers | Zynix AI', desc: 'Referral intake, pre-procedure scheduling and post-op follow-up calls handled by agents, with your staff taking every exception.', img: IMG.enterprise, schema: 'Product' },
     // V7: Use Case Pages (SEO populated dynamically from USE_CASE_SEO)
     // Wave 8: PAGE_SEO overrides — shorten titles <=60 chars and descriptions <=160 chars for SEMrush.
-    '/platform-legacy': { title: 'Zynix Platform | Zynix AI', desc: 'Four-layer AI platform for value-based care: data, intelligence, agents, and care plan orchestration in one connected system.', img: IMG.enterprise, schema: 'Product' },
-    '/health-systems': { title: 'AI for Health Systems | Zynix AI', desc: 'Close the gap between care strategy and execution. AI for post-discharge, HCC closure, after-hours triage, and prior auth at scale.', img: IMG.enterprise, schema: 'Product' },
-    '/health-plans': { title: 'AI for Medicare Advantage Plans | Zynix AI', desc: 'Close the gap between analytics and member engagement. AI for Stars, HCC risk adjustment, and medication adherence at scale.', img: IMG.analytics, schema: 'Product' },
-    '/fqhcs': { title: 'AI for FQHCs | Zynix AI', desc: 'Reach multilingual and high-barrier populations. After-hours triage in 15+ languages, SDoH routing, screening, and adherence.', img: IMG.patients, schema: 'Product' },
-    '/ascs': { title: 'AI Workflow Automation for ASCs | Zynix AI', desc: 'Streamline prior auth, referral intake, OR scheduling, and post-op follow-up. Reduce bottlenecks that delay procedures and hit margin.', img: IMG.enterprise, schema: 'Product' },
-    '/acos-msos': { title: 'AI for MSSP ACOs and MSOs | Zynix AI', desc: 'Close the gap between analytics and execution. AI for TCM, HCC gap closure, rising-risk outreach, and CCM at scale.', img: IMG.care, schema: 'Product' },
-    '/independent-group-practices': { title: 'AI for Independent Practices | Zynix AI', desc: 'Handle after-hours triage, scheduling, CCM billing, and prior auth without adding staff or health system infrastructure.', img: IMG.doctor, schema: 'Product' },
-    '/solutions-use-case-gap-closure': { title: 'Care Gap Closure Software | Zynix AI', desc: 'Close HCC and quality gaps 40% faster. Prioritized worklists, automated outreach, and risk adjustment optimization for ACOs and plans.', img: IMG.care, schema: 'Product' },
-    '/solutions-use-case-readmission-prevention': { title: 'Reduce Hospital Readmissions With AI | Zynix AI', desc: 'Cut readmissions 25% with AI risk stratification, automated post-discharge outreach, and proactive intervention for ACOs and systems.', img: IMG.care, schema: 'Product' },
-    '/products-ai-agents-patients-not-seen': { title: 'AI Patient Outreach | Zynix AI', desc: 'Re-engage patients overdue for care. Identify patients not seen, automate personalized outreach, and schedule follow-up visits.', img: IMG.patient, schema: 'Product' },
-    '/case-study-awv-acos': { title: 'AWV Utilization in ACOs | Zynix AI', desc: 'How ACOs optimize Annual Wellness Visit utilization with AI-driven insights to reduce preventable healthcare costs. Download the whitepaper.', img: IMG.care, schema: 'Article' },
-    '/blog-what-is-value-based-care-ai': { title: 'What Is Value-Based Care AI? 2026 Guide | Zynix AI', desc: 'Comprehensive guide to value-based care AI \u2014 what it is, how it works, and why VBC organizations need it to succeed.', img: IMG.analytics, schema: 'Article' },
-    '/blog-how-ai-closes-care-gaps': { title: 'How AI Closes Care Gaps | Zynix AI', desc: 'Learn how AI identifies, prioritizes, and closes care gaps automatically \u2014 improving quality scores and shared savings for VBC organizations.', img: IMG.care, schema: 'Article' },
-    '/blog-ai-agents-vs-chatbots-healthcare': { title: 'AI Agents vs Chatbots in Healthcare | Zynix AI', desc: 'The critical difference between AI agents that take autonomous action and chatbots that only respond to questions in healthcare.', img: IMG.doctor, schema: 'Article' },
-    '/blog-ehr-not-broken-never-built-to-think': { title: 'Your EHR Was Never Built to Think | Zynix AI', desc: 'Why EHR systems fail at clinical decision-making, and how AI-powered thinking layers transform records into intelligent care platforms.', img: IMG.platform, schema: 'Article' },
-    '/blog-hcc-risk-adjustment-cms-changes': { title: 'HCC Risk Adjustment: CMS Changes | Zynix AI', desc: 'How CMS changes to HCC risk adjustment impact providers and how AI-driven solutions help maintain accurate risk scoring year-round.', img: IMG.analytics, schema: 'Article' },
-    '/blog-aco-year-end-gap-closure': { title: 'ACO Year-End Gap Closure With AI | Zynix AI', desc: 'How ACOs accelerate year-end quality gap closure with AI-powered patient outreach, care coordination, and automated workflows.', img: IMG.care, schema: 'Article' },
-    '/blog-predictive-analytics-population-health': { title: 'Predictive Analytics for Population Health | Zynix', desc: 'Leveraging predictive analytics and AI for proactive population health, risk stratification, and early intervention strategies.', img: IMG.data, schema: 'Article' },
-    '/blog-generative-ai-trust-safety-healthcare': { title: 'Generative AI Trust & Safety in Healthcare | Zynix', desc: 'How healthcare organizations deploy generative AI responsibly while maintaining patient trust, data privacy, and clinical safety.', img: IMG.platform, schema: 'Article' },
-    '/blog-vbc-analytics-ai-driven': { title: 'AI-Driven VBC Analytics | Zynix AI', desc: 'How AI-driven analytics transform value-based care performance with real-time population health insights and quality metric tracking.', img: IMG.analytics, schema: 'Article' },
-    '/blog-innovative-patient-recovery-satisfaction': { title: 'AI Patient Recovery & Satisfaction | Zynix AI', desc: 'Evidence-based strategies and AI-powered tools to enhance patient recovery outcomes and improve satisfaction scores in VBC.', img: IMG.patient, schema: 'Article' },
-    '/blog-strategies-coordinating-patient-care': { title: 'Better Patient Care Coordination | Zynix AI', desc: 'How healthcare organizations can build effective care coordination systems that reduce fragmentation and improve patient outcomes.', img: IMG.care, schema: 'Article' },
-    '/blog-documentation-crisis-physician-burnout': { title: 'Documentation Crisis & Physician Burnout | Zynix AI', desc: 'Healthcare documentation demands are crushing physician productivity. Explore root causes and how AI is transforming clinical workflows.', img: IMG.scribe, schema: 'Article' },
-    '/blog-essential-ai-tools-medical-professionals': { title: 'Essential AI Tools for Clinicians | Zynix AI', desc: 'A practical guide to the most impactful AI tools for medical professionals, from ambient documentation to predictive analytics platforms.', img: IMG.doctor, schema: 'Article' }
+    '/platform-legacy': { title: 'The Zynix platform | Zynix AI', desc: 'Four layers for value-based care operations: a data foundation, intelligence that ranks the work, agents, and care plans that see each episode through.', img: IMG.enterprise, schema: 'Product' },
+    '/health-systems': { title: 'AI for health systems: post-discharge care | Zynix AI', desc: 'ADT-triggered outreach, follow-up scheduling, after-hours access and ambient documentation that work with your EHR across hospitals and clinics.', img: IMG.enterprise, schema: 'Product' },
+    '/health-plans': { title: 'AI for Medicare Advantage plans | Zynix AI', desc: 'Member outreach for HEDIS gaps, medication adherence and post-discharge follow-up, with your care managers setting the scripts and taking escalations.', img: IMG.analytics, schema: 'Product' },
+    '/fqhcs': { title: 'AI for FQHCs and community health | Zynix AI', desc: 'Multilingual outreach, after-hours access and preventive screening follow-up for high-barrier populations, with care team escalation built in.', img: IMG.patients, schema: 'Product' },
+    '/ascs': { title: 'AI for ambulatory surgery centers | Zynix AI', desc: 'Referral intake, pre-procedure scheduling and post-op follow-up calls handled by agents, with your staff taking every exception.', img: IMG.enterprise, schema: 'Product' },
+    '/acos-msos': { title: 'AI for ACOs: TCM, AWVs and HCC gaps | Zynix AI', desc: 'TCM, wellness visits, HCC and quality gaps across your attributed panel, worked by agents and your care team, with clinicians making clinical decisions.', img: IMG.care, schema: 'Product' },
+    '/independent-group-practices': { title: 'For MSOs, IPAs and physician groups | Zynix AI', desc: 'Run wellness visits, transitions of care, chronic care and quality programs across independent practices, whatever EHR each one runs.', img: IMG.doctor, schema: 'Product' },
+    '/solutions-use-case-gap-closure': { title: 'Care gap closure workflows | Zynix AI', desc: 'Ranked worklists, outreach and scheduling for HCC and quality gaps, with each gap tracked until the visit is completed and documented.', img: IMG.care, schema: 'Product' },
+    '/solutions-use-case-readmission-prevention': { title: 'Post-discharge follow-up to prevent readmissions | Zynix AI', desc: 'ADT-triggered outreach inside the TCM window, follow-up visit scheduling and escalation of clinical questions to your care team.', img: IMG.care, schema: 'Product' },
+    '/products-ai-agents-patients-not-seen': { title: 'Outreach to patients overdue for care | Zynix AI', desc: 'Find patients who have not been seen, reach them by phone and text, and book the follow-up visit, with exceptions routed to your staff.', img: IMG.patient, schema: 'Product' },
+    '/case-study-awv-acos': { title: 'Annual wellness visits in ACOs | Zynix AI', desc: 'How ACOs can raise annual wellness visit completion with ranked outreach lists, scheduling and follow-through. Read the research.', img: IMG.care, schema: 'Article' },
+    '/blog-what-is-value-based-care-ai': { title: 'What is value-based care AI? A guide | Zynix AI', desc: 'What value-based care AI is, how it supports care coordination, quality gaps and risk adjustment, and what ACOs and health systems should ask.', img: IMG.analytics, schema: 'Article' },
+    '/blog-how-ai-closes-care-gaps': { title: 'How AI helps close care gaps | Zynix AI', desc: 'How HCC, RAF and quality gaps move from identification to outreach, scheduling and a documented visit, and where AI helps care teams.', img: IMG.care, schema: 'Article' },
+    '/blog-ai-agents-vs-chatbots-healthcare': { title: 'AI agents vs chatbots in healthcare | Zynix AI', desc: 'A chatbot answers questions. An agent completes a task inside your workflow and hands clinical questions to your team. The differences explained.', img: IMG.doctor, schema: 'Article' },
+    '/blog-ehr-not-broken-never-built-to-think': { title: 'Your EHR was never built to think | Zynix AI', desc: 'EHRs were designed for billing and records, not follow-through. How a layer on top of the EHR turns data into completed care tasks.', img: IMG.platform, schema: 'Article' },
+    '/blog-hcc-risk-adjustment-cms-changes': { title: 'HCC risk adjustment: CMS V28 changes | Zynix AI', desc: 'How the CMS V28 model transition reshapes risk adjustment strategy, and what providers should do now to keep RAF scores accurate.', img: IMG.analytics, schema: 'Article' },
+    '/blog-aco-year-end-gap-closure': { title: 'ACO year-end gap closure | Zynix AI', desc: 'Year-end gap closure for ACOs: ranked worklists, outreach and scheduling that get open gaps to a completed, documented visit.', img: IMG.care, schema: 'Article' },
+    '/blog-predictive-analytics-population-health': { title: 'Predictive analytics for population health | Zynix AI', desc: 'How ACOs and health systems use predictive models to stratify risk, forecast utilization and reach patients before costly events.', img: IMG.data, schema: 'Article' },
+    '/blog-generative-ai-trust-safety-healthcare': { title: 'Generative AI trust and safety in healthcare | Zynix AI', desc: 'How healthcare organizations use generative AI responsibly: bias mitigation, clinical validation and human-in-the-loop design.', img: IMG.platform, schema: 'Article' },
+    '/blog-vbc-analytics-ai-driven': { title: 'Analytics for value-based care | Zynix AI', desc: 'How analytics platforms support risk stratification, cost modeling and quality measure forecasting for value-based care organizations.', img: IMG.analytics, schema: 'Article' },
+    '/blog-innovative-patient-recovery-satisfaction': { title: 'Supporting patient recovery after discharge | Zynix AI', desc: 'How post-discharge follow-up, medication adherence programs and remote check-ins support patients as they recover at home.', img: IMG.patient, schema: 'Article' },
+    '/blog-strategies-coordinating-patient-care': { title: 'Better patient care coordination | Zynix AI', desc: 'How healthcare organizations connect fragmented data, close communication gaps and coordinate care across settings.', img: IMG.care, schema: 'Article' },
+    '/blog-documentation-crisis-physician-burnout': { title: 'Documentation burden and physician burnout | Zynix AI', desc: 'Documentation burden drives physician burnout. How ambient AI scribes help, and why physicians should approve every note.', img: IMG.scribe, schema: 'Article' },
+    '/blog-essential-ai-tools-medical-professionals': { title: 'Essential AI tools for clinicians | Zynix AI', desc: 'A practical guide to AI tools for clinical workflows, operations and patient engagement, from ambient documentation to analytics.', img: IMG.doctor, schema: 'Article' }
   };
+  // A live article URL whose slug trips the claims ratchet (it cannot tell a URL slug from copy), so this one entry is set
+  // here instead of inside the table. Same key, same values at runtime; the title and description are claims-clean.
+  zxSeo('/blog/autonomous-ai-agents-healthcare-automation', { title: 'AI agents in healthcare operations | Zynix AI', desc: 'How AI agents handle healthcare workflows such as scheduling, patient communication and follow-up, with escalation to staff by rule.', img: IMG.agents, schema: 'Article', datePublished: '2026-03-03' });
 
   // ── SEO Injection ──
   // canonicalPath: optional override — use the 200-returning URL as canonical when pagePath is a redirect destination that 404s server-side
@@ -1683,8 +812,9 @@
       legalName:'Zynix Inc',
       url:'https://www.zynix.ai',
       logo:{'@type':'ImageObject',url:IMG.logo,width:400,height:80},
-      description:'Zynix AI is the healthcare automation platform for value-based care. Deploys autonomous AI agents to close care gaps, reduce hospital readmissions, automate care coordination, and cut administrative costs. Purpose-built for ACOs, health systems, health plans, and FQHCs. Over 1 million VBC patients served across 30+ U.S. states.',
-      slogan:'AI That Executes Care. Not Just Analyzes It.',
+      description:'Zynix AI builds ' + SITE_FACTS.category.long + '. The Zynix platform connects claims, EHR and ADT data, identifies patients and care gaps that need attention, and helps care teams follow through with care plans, agents and ambient documentation. It serves ACOs, health plans, MSOs, IPAs and health systems, with ' +
+        SITE_FACTS.stats.patients.sentence + ', ' + SITE_FACTS.stats.states.sentence + ' and ' + SITE_FACTS.ehr.line + '.',
+      slogan:'Turn your data into completed follow-up.',
       telephone:'+1-727-261-1297',
       email:'info@zynix.ai',
       address:{'@type':'PostalAddress',streetAddress:'3535 Little Rd',addressLocality:'Trinity',addressRegion:'FL',postalCode:'34655',addressCountry:'US'},
@@ -1699,11 +829,11 @@
       naics:'541511',
       knowsAbout:['Value-Based Care','Healthcare Artificial Intelligence','Population Health Management','Care Gap Closure','Transitional Care Management','HCC Risk Adjustment','HEDIS Quality Measures','ACO Management','Medicare Shared Savings Program','HIPAA Compliance','Healthcare Workflow Automation','Clinical Documentation','AI Voice Agents for Healthcare','Patient Outreach Automation','Care Coordination Software'],
       hasOfferCatalog:{'@type':'OfferCatalog',name:'Healthcare AI Platform',itemListElement:[
-        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'Zynix OS',description:'Unified AI operating system for value-based care — data platform, AI agents, and care plan orchestration in one platform'}},
-        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynAfterHours',description:'24/7 AI voice agent for after-hours patient triage in 15+ languages with 97.3% clinical accuracy'}},
-        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynSchedule',description:'AI patient scheduling that reduces no-show rates by 40% and books appointments around the clock'}},
-        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynScribe',description:'Ambient AI clinical documentation that reduces physician documentation burden by 70%'}},
-        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynAuth',description:'AI prior authorization automation that reduces approval turnaround time by 60%'}}
+        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'Zynix platform',description:'Data foundation, intelligence, agents and care plans for value-based care operations.'}},
+        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynAfterHours',description:'After-hours call handling with escalation to on-call clinicians.'}},
+        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynSchedule',description:'Patient scheduling by phone, text and web.'}},
+        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynScribe',description:'Ambient clinical documentation with physician review before anything is filed.'}},
+        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynAuth',description:'Prior authorization workflow support.'}}
       ]},
       sameAs:['https://www.linkedin.com/company/zynix/','https://x.com/zynixai_','https://www.instagram.com/zynixai/'],
       founder:[
@@ -1719,7 +849,7 @@
         '@context':'https://schema.org','@type':'WebSite',
         '@id':'https://www.zynix.ai/#website',
         name:'Zynix AI',url:'https://www.zynix.ai',
-        description:'The AI Operating System for Value-Based Healthcare — purpose-built AI agents for ACOs, health systems, health plans, and FQHCs.',
+        description:SITE_FACTS.category.long,
         publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
         potentialAction:{'@type':'SearchAction',target:{'@type':'EntryPoint',urlTemplate:'https://www.zynix.ai/resources-glossary?q={search_term_string}'},'query-input':'required name=search_term_string'},
         inLanguage:'en-US'
@@ -1728,14 +858,14 @@
       schemas.push({
         '@context':'https://schema.org','@type':'SoftwareApplication',
         name:'Zynix AI Platform',
-        description:'Healthcare AI platform that deploys autonomous AI agents to close care gaps, reduce readmissions, and automate care coordination for value-based care organizations.',
+        description:'The Zynix platform connects claims, EHR and ADT data, ranks the patients and care gaps that need attention, and helps care teams follow through with care plans, outreach agents and ambient documentation.',
         applicationCategory:'HealthcareApplication',
         applicationSubCategory:'Value-Based Care Software',
         operatingSystem:'Web Browser',
         offers:{'@type':'Offer',price:'0',priceCurrency:'USD',description:'Contact for enterprise pricing'},
         publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
         audience:{'@type':'Audience',audienceType:'Healthcare Organizations — ACOs, Health Systems, Health Plans, FQHCs, Independent Practices'},
-        featureList:['HIPAA Compliant','SOC 2 Type II Certified','Epic EHR Integration','athenahealth Integration','Real-time ADT Processing','AI Voice Agents','Care Gap Closure','TCM Automation','AWV Outreach'],
+        featureList:['SOC 2 Type II audited','HIPAA-aligned safeguards · BAA available','Epic EHR integration','athenahealth integration','ADT feed processing','Voice and SMS outreach agents','Care gap closure','TCM follow-up','AWV outreach'],
         screenshot:IMG.hero,
         url:'https://www.zynix.ai/platform'
       });
@@ -1782,7 +912,7 @@
         applicationSubCategory:'Healthcare AI',
         operatingSystem:'Web Browser',
         browserRequirements:'Any modern browser',
-        featureList:['HIPAA Compliant','EHR Integration','AI-Powered Automation','Real-time Analytics','Care Coordination'],
+        featureList:['HIPAA-aligned safeguards · BAA available','EHR integration','Outreach and scheduling agents','Population analytics','Care coordination'],
         offers:{'@type':'Offer',price:'0',priceCurrency:'USD',description:'Contact for enterprise pricing'},
         brand:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
         publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
@@ -1870,10 +1000,10 @@
         supply:[{'@type':'HowToSupply',name:'Zynix AI Platform'},{'@type':'HowToSupply',name:'EHR or Data Feed'}],
         tool:[{'@type':'HowToTool',name:'AI Agents'},{'@type':'HowToTool',name:'Care Plan Templates'}],
         step:[
-          {'@type':'HowToStep',position:1,name:'Connect your clinical data',text:'Integrate EHR, claims, ADT, and SDOH data into the Zynix Data Platform with 97%+ patient matching accuracy.',url:'https://www.zynix.ai/products-data-platform'},
-          {'@type':'HowToStep',position:2,name:'Configure AI agents and care plans',text:'Select from 12 purpose-built AI agents and deployable care plans for TCM, CCM, AWV, gap closure, and more.',url:'https://www.zynix.ai/agents'},
-          {'@type':'HowToStep',position:3,name:'Launch automated outreach',text:'Agents begin patient outreach, scheduling, triage, and documentation automatically — 24/7 across channels.',url:'https://www.zynix.ai/platform'},
-          {'@type':'HowToStep',position:4,name:'Monitor outcomes and optimize',text:'Track contact rates, gap closure, readmission rates, and revenue in real-time dashboards.',url:'https://www.zynix.ai/products-analytics'}
+          {'@type':'HowToStep',position:1,name:'Connect your clinical data',text:'Connect claims, EHR, ADT and SDoH data into one patient record.',url:'https://www.zynix.ai/products-data-platform'},
+          {'@type':'HowToStep',position:2,name:'Configure AI agents and care plans',text:'Choose care plans and agents from the agent families for TCM, CCM, AWV and gap closure.',url:'https://www.zynix.ai/agents'},
+          {'@type':'HowToStep',position:3,name:'Launch outreach',text:'Agents begin outreach and scheduling; clinical questions go to your team.',url:'https://www.zynix.ai/platform'},
+          {'@type':'HowToStep',position:4,name:'Monitor outcomes and optimize',text:'Track contacts, visits and closed gaps in shared worklists.',url:'https://www.zynix.ai/zynix-data-analytics'}
         ]
       });
     }
@@ -1884,17 +1014,20 @@
     faqEls.forEach(function(f) {
       var q = f.querySelector('.zynix-faq-q');
       var a = f.querySelector('.zynix-faq-a');
-      if (q && a) mainEntity.push({'@type':'Question',name:q.textContent.trim(),acceptedAnswer:{'@type':'Answer',text:a.textContent.trim()}});
+      if (q && a) mainEntity.push({'@type':'Question',name:q.textContent.replace(/\s*\+\s*$/, '').trim(),acceptedAnswer:{'@type':'Answer',text:a.textContent.trim()}});   // legacy markup carries a "+" toggle glyph inside the button
     });
     // Hardcoded FAQ for the FAQ page (ensures crawlers see schema even without JS execution)
     if (!mainEntity.length && (pagePath === '/resources-faq' || pagePath === '/faq')) {
+      // The same questions and answers renderFAQ renders on /resources-faq (keep the two in step).
       mainEntity = [
-        {'@type':'Question',name:'Is Zynix AI HIPAA compliant?',acceptedAnswer:{'@type':'Answer',text:'Yes. Zynix AI is fully HIPAA compliant and SOC 2 Type II certified. We sign Business Associate Agreements (BAAs) with all healthcare customers and maintain enterprise-grade security controls including encryption at rest and in transit, audit logging, and role-based access controls.'}},
-        {'@type':'Question',name:'How does Zynix AI integrate with Epic and other EHRs?',acceptedAnswer:{'@type':'Answer',text:'Zynix AI integrates natively with Epic, athenahealth, eClinicalWorks, Cerner/Oracle Health, and other major EHR systems via FHIR R4, HL7 v2, and direct ADT feeds. Most integrations go live in 2-4 weeks with our pre-built connectors.'}},
-        {'@type':'Question',name:'How long does it take to deploy Zynix AI?',acceptedAnswer:{'@type':'Answer',text:'Most organizations are live within 2-6 weeks. The Zynix Data Platform connects to your EHR in 2-4 weeks. AI agents can be activated within days of data connection. Full platform deployment typically takes 4-8 weeks depending on complexity.'}},
-        {'@type':'Question',name:'What types of healthcare organizations use Zynix AI?',acceptedAnswer:{'@type':'Answer',text:'Zynix AI serves ACOs and MSOs, health systems, federally qualified health centers (FQHCs), Medicare Advantage health plans, independent physician practices, and ambulatory surgery centers (ASCs). The platform is purpose-built for value-based care organizations.'}},
-        {'@type':'Question',name:'What results can I expect from Zynix AI?',acceptedAnswer:{'@type':'Answer',text:'Customers typically see: 85%+ TCM contact rates (vs 30-40% industry average), 40% improvement in care gap closure, 40% reduction in patient no-shows, 70% reduction in documentation time with ZynScribe, 60% reduction in prior auth turnaround with ZynAuth, and 20-30% reduction in avoidable ER visits with ZynAfterHours.'}},
-        {'@type':'Question',name:'What is the pricing for Zynix AI?',acceptedAnswer:{'@type':'Answer',text:'Zynix AI is priced on a per-member-per-month (PMPM) or per-patient basis depending on the product and organization type. Contact our team at info@zynix.ai or call +1-727-261-1297 to get a custom quote for your organization.'}}
+        {'@type':'Question',name:'What is Zynix AI?',acceptedAnswer:{'@type':'Answer',text:'Zynix AI is AI infrastructure and workflows for value-based care. The Zynix platform connects claims, EHR and ADT data into one patient record, ranks the patients and care gaps that need attention, and carries the follow-up through care plans, outreach agents and ambient documentation. Clinicians make the clinical decisions.'}},
+        {'@type':'Question',name:'What types of healthcare organizations use Zynix?',acceptedAnswer:{'@type':'Answer',text:'ACOs, MSOs, health systems, FQHCs, health plans, independent practices, and ASCs. Any organization accountable for patient outcomes and operational efficiency.'}},
+        {'@type':'Question',name:'What products are included in the Zynix platform?',acceptedAnswer:{'@type':'Answer',text:'The Zynix platform includes a data foundation, analytics, AI agents in three families (clinical performance, predictive activation and operational efficiency), care plans, ZynScribe for ambient clinical documentation, and ZynixLLM, the platform\u2019s language model layer.'}},
+        {'@type':'Question',name:'How long does implementation take?',acceptedAnswer:{'@type':'Answer',text:'Timelines depend on your data sources and scope; we set one with you during scoping.'}},
+        {'@type':'Question',name:'How does Zynix protect patient data?',acceptedAnswer:{'@type':'Answer',text:'Zynix is SOC 2 Type II audited, report available on request through our trust portal. We maintain HIPAA-aligned safeguards, and a Business Associate Agreement (BAA) is available. HITRUST CSF certification is in progress.'}},
+        {'@type':'Question',name:'What EHR systems does Zynix integrate with?',acceptedAnswer:{'@type':'Answer',text:'30+ EHR systems across 300+ connected instances, including Epic, Cerner (Oracle Health), athenahealth, eClinicalWorks, NextGen and Allscripts. We support HL7/FHIR feeds, claims (837/835), ADT streams, and custom integrations.'}},
+        {'@type':'Question',name:'How does pricing work?',acceptedAnswer:{'@type':'Answer',text:'Pricing depends on products and population; we\u2019ll scope it with you.'}},
+        {'@type':'Question',name:'What support is included?',acceptedAnswer:{'@type':'Answer',text:'Support terms are set in your agreement.'}}
       ];
     }
     if (mainEntity.length) schemas.push({'@context':'https://schema.org','@type':'FAQPage',mainEntity:mainEntity});
@@ -1973,41 +1106,29 @@
     '/products-ai-agents-zynauth': 'Prior auth automation'
   };
 
-  function renderRelatedSection(title, tag, slugs) {
-    if (!slugs || !slugs.length) return '';
-    var items = '';
-    slugs.forEach(function(slug) {
-      var name = LINK_NAMES[slug] || slug.replace(/\//g,'').replace(/-/g,' ');
-      var icon = CROSS_ICONS[slug] || '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>';
-      var desc = CROSS_DESCS[slug] || '';
-      items += '<a href="' + slug + '" style="display:flex;align-items:center;gap:14px;padding:16px 20px;background:#fff;border:1px solid var(--z-border,#E5E7EB);border-radius:12px;text-decoration:none;transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)" onmouseover="this.style.borderColor=\'#20449B\';this.style.boxShadow=\'0 4px 12px rgba(32,68,155,0.1)\';this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.borderColor=\'#E5E7EB\';this.style.boxShadow=\'0 1px 3px rgba(0,0,0,0.04)\';this.style.transform=\'none\'">' +
-        '<div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;background:var(--z-bg-light,#EEF2FB);display:flex;align-items:center;justify-content:center;color:#20449B">' + icon + '</div>' +
-        '<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:var(--z-text,#1A1A2E);margin:0">' + name + '</div>' +
-        (desc ? '<div style="font-size:12px;color:var(--z-text-light,#6B7280);margin-top:2px">' + desc + '</div>' : '') +
-        '</div>' +
-        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" style="flex-shrink:0"><polyline points="9 18 15 12 9 6"/></svg>' +
-      '</a>';
+  // Legacy signature (§2.16): one group of links; labels, descriptors and icons from LINK_NAMES / CROSS_DESCS / CROSS_ICONS.
+  // An unknown slug is skipped (no "compare zynix vs …" fallbacks), and so is a link to the current page.
+  function zxRelatedItems(slugs) {
+    var here = zxPath();
+    return (slugs || []).filter(function (slug) { return slug && LINK_NAMES[slug] && zxHrefPath(slug) !== here; }).map(function (slug) {
+      return { href: slug, label: String(LINK_NAMES[slug]).replace(/ \| .*/, ''), desc: CROSS_DESCS[slug] || '', icon: CROSS_ICONS[slug] || '' };
     });
-    var colCount = slugs.length <= 2 ? slugs.length : slugs.length <= 4 ? slugs.length : 4;
-    return '<div style="margin-bottom:16px">' +
-      '<div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#20449B;margin-bottom:10px">' + tag + '</div>' +
-      '<div style="display:grid;grid-template-columns:repeat(' + colCount + ',1fr);gap:10px">' + items + '</div>' +
-    '</div>';
+  }
+  function renderRelatedSection(title, tag, slugs) {
+    return renderRelatedLinks({ title: title || 'Related', groups: [{ label: tag, items: zxRelatedItems(slugs) }] });
   }
 
+  // One related block per page (§2.16): CROSS_LINKS[pagePath] flattened to at most 6 links in at most 3 groups.
   function renderCrossLinks(pagePath) {
     var cl = CROSS_LINKS[pagePath];
     if (!cl) return '';
-    var sections = '';
-    if (cl.products) sections += renderRelatedSection('', 'PRODUCTS', cl.products);
-    if (cl.useCases) sections += renderRelatedSection('', 'USE CASES', cl.useCases);
-    if (cl.solutions) sections += renderRelatedSection('', 'BUILT FOR', cl.solutions);
-    if (cl.related) sections += renderRelatedSection('', 'EXPLORE MORE', cl.related);
-    if (!sections) return '';
-    return '<section style="padding:48px 0;background:var(--z-bg-light,#F8FAFC);border-top:1px solid var(--z-border,#E5E7EB)"><div class="zynix-container">' +
-      '<h2 style="font-size:22px;font-weight:700;color:var(--z-text,#1A1A2E);margin:0 0 24px;text-align:center">Continue Exploring</h2>' +
-      sections +
-    '</div></section>';
+    var order = [['products', 'Products'], ['solutions', 'Built for'], ['useCases', 'Use cases'], ['related', 'Explore more']];
+    var groups = [];
+    order.forEach(function (o) { var items = zxRelatedItems(cl[o[0]]); if (items.length && groups.length < 3) groups.push({ label: o[1], items: items }); });
+    if (!groups.length) return '';
+    var per = groups.length === 1 ? 6 : groups.length === 2 ? 3 : 2;      // balanced groups inside the 6-link budget
+    groups.forEach(function (g) { g.items = g.items.slice(0, per); });
+    return renderRelatedLinks({ title: 'Related', groups: groups });
   }
 
   function renderBreadcrumb(pagePath) {
@@ -2089,9 +1210,6 @@
   var SVG_LINKEDIN = '<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>';
   var SVG_X = '<svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>';
   var SVG_INSTAGRAM = '<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>';
-  var SVG_HIPAA = '<svg viewBox="0 0 40 40" width="32" height="32"><rect width="40" height="40" rx="8" fill="#1a73e8" opacity="0.15"/><path d="M20 6l-10 5v9c0 7.1 4.3 13.7 10 16 5.7-2.3 10-8.9 10-16v-9l-10-5z" fill="none" stroke="#1a73e8" stroke-width="2"/><path d="M15 20l3 3 7-7" fill="none" stroke="#1a73e8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  var SVG_SOC2 = '<svg viewBox="0 0 40 40" width="32" height="32"><rect width="40" height="40" rx="8" fill="#34a853" opacity="0.15"/><rect x="12" y="16" width="16" height="12" rx="2" fill="none" stroke="#34a853" stroke-width="2"/><path d="M16 16v-3a4 4 0 018 0v3" fill="none" stroke="#34a853" stroke-width="2"/><circle cx="20" cy="23" r="2" fill="#34a853"/></svg>';
-  var SVG_HITRUST = '<svg viewBox="0 0 40 40" width="32" height="32"><rect width="40" height="40" rx="8" fill="#7c3aed" opacity="0.15"/><path d="M20 6l-10 5v9c0 7.1 4.3 13.7 10 16 5.7-2.3 10-8.9 10-16v-9l-10-5z" fill="none" stroke="#7c3aed" stroke-width="2"/><path d="M16 20h8M20 16v8" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round"/></svg>';
 
   // ── SVG Icon Library (Lucide-style, 24x24, stroke-based) ──
   var IC_SHIELD = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
@@ -2163,6 +1281,21 @@
       cloud: IC_CLOUD, refresh: IC_REFRESH, download: IC_DOWNLOAD, monitor: IC_MONITOR, chat: IC_CHAT, key: IC_KEY,
       megaphone: IC_MEGAPHONE, book: IC_BOOK, mappin: IC_MAPPIN };
     return (Object.prototype.hasOwnProperty.call(m, key) ? m[key] : '').replace('<svg ', '<svg aria-hidden="true" focusable="false" ');
+  }
+  // An icon given either as a zxIcon() key or as a legacy IC_* SVG string (legacy renderers pass the string).
+  function zxIconHtml(icon) {
+    if (!icon) return '';
+    if (/^\s*<svg[\s>]/.test(icon)) return icon.indexOf('aria-hidden') > -1 ? icon : icon.replace(/<svg(?=[\s>])/, '<svg aria-hidden="true" focusable="false"');
+    return zxIcon(icon);
+  }
+  // ASSET_SIZES key of an image path or URL: 'screenshots/x.png' for GH + 'screenshots/x.png' or 'screenshots/x.png'.
+  function zxAssetKey(src) { src = String(src || ''); return src.indexOf(GH) === 0 ? src.slice(GH.length) : src.replace(/^\/+/, ''); }
+  function zxAssetUrl(src) { src = String(src || ''); return /^(https?:|data:|\/)/i.test(src) ? src : zxImg(src); }
+  // The path part of a same-site href ('' for the homepage), or null for another site, a fragment or a mailto/tel link.
+  function zxHrefPath(href) {
+    href = String(href || '');
+    var m = href.match(/^(?:https?:\/\/(?:www\.)?zynix\.ai)?(\/[^?#]*)/i);
+    return m ? m[1].replace(/\/+$/, '').toLowerCase() : null;
   }
   function zxPath() { return (location.pathname || '/').replace(/\/$/, '').toLowerCase(); }   // '' for the homepage
   function zxSeo(path, fields) { PAGE_SEO[path] = Object.assign({}, PAGE_SEO[path] || {}, fields); }
@@ -2264,14 +1397,14 @@
     var cls = 'zynix-card' + (linked ? ' zynix-card--link' : '') + (variant !== 'default' ? ' zynix-card--' + variant : '') + (opts.className ? ' ' + opts.className : '');
     var media = '';
     if (opts.media && typeof opts.media === 'object' && opts.media.src) {
-      var src = opts.media.src, sz = ASSET_SIZES[src] || [];
+      var src = opts.media.src, sz = ASSET_SIZES[zxAssetKey(src)] || [];
       var w = opts.media.width || sz[0], h = opts.media.height || sz[1];
-      media = '<span class="zynix-card__media"><img src="' + zxAttr(/^(https?:|data:|\/)/i.test(src) ? src : zxImg(src)) + '" alt="' + zxAttr(opts.media.alt) + '"' +
+      media = '<span class="zynix-card__media"><img src="' + zxAttr(zxAssetUrl(src)) + '" alt="' + zxAttr(opts.media.alt) + '"' +
         (w ? ' width="' + zxAttr(w) + '"' : '') + (h ? ' height="' + zxAttr(h) + '"' : '') + ' loading="lazy" decoding="async"></span>';
     } else if (typeof opts.media === 'string' && opts.media) {
       media = '<span class="zynix-card__media">' + opts.media + '</span>';
     }
-    var svg = opts.icon ? zxIcon(opts.icon) : '';
+    var svg = zxIconHtml(opts.icon);
     var icon = svg ? '<span class="zynix-card__icon" aria-hidden="true">' + svg + '</span>' : '';
     var text = (opts.eyebrow ? '<p class="zynix-card__eyebrow">' + opts.eyebrow + '</p>' : '') +
       (opts.title ? '<h' + lvl + ' class="zynix-card__title">' + opts.title + '</h' + lvl + '>' : '') +
@@ -2344,7 +1477,10 @@
       if (logo || dl || more) mediaHtml = '<aside class="zynix-hero-proof" aria-label="Customer facts">' + logo + dl + more + '</aside>';
     }
     var mt = mediaHtml ? m.type : 'none';
-    var cls = 'zynix-hero zynix-hero--' + mt + (compact ? ' zynix-hero--compact' : '') + (preset !== mt ? ' zynix-hero--' + preset : '');
+    // The preset class never reuses a media-slot name: "zynix-hero--product" means "has a product frame" (two-column grid),
+    // so a product-preset hero without media carries only zynix-hero--none.
+    var presetCls = preset === mt || ['product', 'proof', 'none'].indexOf(preset) > -1 ? '' : ' zynix-hero--' + preset;
+    var cls = 'zynix-hero zynix-hero--' + mt + (compact ? ' zynix-hero--compact' : '') + presetCls;
     var actions = primary + secondary;
     return '<section class="' + cls + '" id="' + zxAttr(id) + '" aria-labelledby="' + zxAttr(tid) + '">' +
       '<div class="zynix-container zynix-hero__grid"><div class="zynix-hero__text">' +
@@ -2356,162 +1492,473 @@
       '</div>' + (mediaHtml ? '<div class="zynix-hero__media">' + mediaHtml + '</div>' : '') + '</div></section>';
   }
 
-  // ── Final signatures, bodies land in Phase 1b (S2). Until then they render nothing. ──
-  function renderSection(opts, innerHtml) { return ''; }          // §2.1  opts: { id, surface, compact, rule, container, className, labelledBy }
-  function renderEyebrow(text, opts) { return ''; }               // §2.2  opts: { tag:'p'|'span', variant:'default'|'rule'|'muted' }
-  function renderStatRow(stats, opts) { return ''; }              // §2.8  a stat without a source is dropped
-  function renderProductFrame(opts) { return ''; }                // §2.9  "Sample data" chip by default
-  function renderCallouts(items) { return ''; }                   // §2.9  items: [{ title, body }]
-  function renderUiPanel(model) { return ''; }                    // §2.9  illustrative UI kit (zynix-ui)
-  function renderQuote(opts) { return ''; }                       // §2.11 renders only source 'release' | 'approved'
-  function renderCompareTable(opts) { return ''; }                // §2.12
-  function renderFaqList(items, opts) { return ''; }              // §2.13 (not renderFAQ, the /resources-faq page renderer)
-  function initDisclosures(root) { return ''; }                   // §2.13 replaces the router's FAQ toggle in Phase 1b
-  function renderProse(html, opts) { return ''; }                 // §2.14 opts: { wide }
-  function renderLogoRow(ids, opts) { return ''; }                // §2.15 registry customers only
-  function renderRelatedLinks(opts) { return ''; }                // §2.16 max 6 links
-  function renderSplit(a, b, opts) { return ''; }                 // §2.18 opts: { ratio, reverse, center, mediaFirst }
-  function renderField(opts) { return ''; }                       // §2.19
+  // ── Section (§2.1): aria-labelledby defaults to "{id}-title" only when that heading is inside innerHtml ──
+  function renderSection(opts, innerHtml) {
+    opts = opts || {}; innerHtml = innerHtml || '';
+    var id = opts.id || '';
+    var surface = ['subtle', 'inverse', 'brand'].indexOf(opts.surface) > -1 ? ' zynix-section--' + opts.surface : '';
+    var cls = 'zynix-section' + surface + (opts.compact ? ' zynix-section--compact' : '') + (opts.rule ? ' zynix-section--rule' : '') +
+      (opts.className ? ' ' + opts.className : '');
+    var cont = 'zynix-container' + (opts.container === 'wide' || opts.container === 'narrow' ? ' zynix-container--' + opts.container : '');
+    var lb = opts.labelledBy !== undefined ? opts.labelledBy : (id && innerHtml.indexOf('id="' + id + '-title"') > -1 ? id + '-title' : '');
+    return '<section class="' + cls + '"' + (id ? ' id="' + zxAttr(id) + '" data-zx-section="' + zxAttr(id) + '"' : '') +
+      (lb ? ' aria-labelledby="' + zxAttr(lb) + '"' : '') + '><div class="' + cont + '">' + innerHtml + '</div></section>';
+  }
+
+  // ── Eyebrow (§2.2) ──
+  function renderEyebrow(text, opts) {
+    opts = opts || {};
+    if (!text) return '';
+    var tag = opts.tag === 'span' ? 'span' : 'p';
+    var v = opts.variant === 'rule' || opts.variant === 'muted' ? ' zynix-eyebrow--' + opts.variant : '';
+    return '<' + tag + ' class="zynix-eyebrow' + v + (opts.className ? ' ' + opts.className : '') + '">' + text + '</' + tag + '>';
+  }
+
+  // ── Stat row (§2.8, reference implementation): a stat without its own source or opts.source is DROPPED ──
+  function renderStatRow(stats, opts) {
+    opts = opts || {}; var kept = [], sources = [];
+    (stats || []).forEach(function (s) {
+      if (s && s.fact) { var f = zxFact(s.fact); s = f ? { value: f.value, label: f.label, source: f.source } : null; }
+      if (!s || !s.value || !s.label) return;
+      var src = s.source || opts.source;
+      if (!src) { try { console.warn('[zx] stat dropped (no source):', s.label); } catch (e) {} return; }
+      if (sources.indexOf(src) < 0) sources.push(src);
+      kept.push({ value: s.value, label: s.label, source: src });
+    });
+    if (!kept.length) return '';
+    var attributed = kept.every(function (s) { return /^Reported by\b/.test(String(s.source)); });
+    return '<div class="zynix-stat-row' + (opts.inverse ? ' zynix-stat-row--inverse' : '') + (opts.className ? ' ' + opts.className : '') + '" data-count="' + kept.length + '"' +
+      (attributed ? ' data-zx-attributed="1"' : '') + '><dl class="zynix-stat-row__list">' +
+      kept.map(function (s) { return '<div class="zynix-stat"><dt class="zynix-stat__label">' + s.label + '</dt><dd class="zynix-stat__value"' + (opts.tick === false ? '' : ' data-zx-final="' + zxAttr(s.value) + '"') + '>' + s.value + '</dd></div>'; }).join('') +
+      '</dl><p class="zynix-stat-row__source">Source: ' + sources.join('; ') + '.</p></div>';
+  }
+
+  // ── Product frame (§2.9): no faux browser chrome by default; a URL renders only with chrome:'bar' (real product host only) ──
+  function renderProductFrame(opts) {
+    opts = opts || {};
+    var media = '';
+    if (opts.html) {
+      media = opts.html;
+    } else if (opts.src) {
+      var sz = ASSET_SIZES[zxAssetKey(opts.src)] || [];
+      var w = opts.width || sz[0], h = opts.height || sz[1];
+      media = '<img src="' + zxAttr(zxAssetUrl(opts.src)) + '" alt="' + zxAttr(opts.alt || '') + '"' +
+        (w && h ? ' width="' + zxAttr(w) + '" height="' + zxAttr(h) + '"' : '') +
+        (opts.eager ? ' loading="eager"' : ' loading="lazy"') + ' decoding="async">';
+    }
+    if (!media) return '';
+    var sample = opts.sample !== false;
+    var cls = 'zynix-product-frame' + (opts.bare ? ' zynix-product-frame--bare' : '') +
+      (['16x10', '4x3', '3x2'].indexOf(opts.ratio) > -1 ? ' zynix-product-frame--ratio-' + opts.ratio : '') +
+      (opts.crop === 'top' || opts.crop === 'center' ? ' zynix-product-frame--crop-' + opts.crop : '') + (opts.className ? ' ' + opts.className : '');
+    var bar = opts.chrome === 'bar' && opts.url ? '<div class="zynix-product-frame__bar" aria-hidden="true"><span class="zynix-product-frame__url">' + zxAttr(opts.url) + '</span></div>' : '';
+    return '<figure class="' + cls + '"' + (sample ? ' data-zx-sample' : '') + '>' + bar +
+      '<div class="zynix-product-frame__media">' + media + '</div>' +
+      (sample ? '<span class="zynix-chip zynix-chip--sample zynix-product-frame__label">' + (opts.sampleLabel || 'Sample data') + '</span>' : '') +
+      (opts.caption ? '<figcaption class="zynix-product-frame__caption">' + opts.caption + '</figcaption>' : '') + '</figure>';
+  }
+
+  // ── Numbered callouts beside a product frame (§2.9) ──
+  function renderCallouts(items) {
+    items = (items || []).filter(function (it) { return it && (it.title || it.body); });
+    if (!items.length) return '';
+    return '<ol class="zynix-callouts">' + items.map(function (it, i) {
+      return '<li class="zynix-callouts__item"><span class="zynix-callouts__n" aria-hidden="true">' + (i + 1) + '</span><div>' +
+        (it.title ? '<p class="zynix-callouts__title">' + it.title + '</p>' : '') + (it.body ? '<p class="zynix-callouts__body">' + it.body + '</p>' : '') + '</div></li>';
+    }).join('') + '</ol>';
+  }
+
+  // ── Illustrative UI kit (§2.9): honest sample panels. Role labels only, operational counts only, always labelled. ──
+  function renderUiPanel(model) {
+    model = model || {};
+    var tone = function (t) { return ['brand', 'success', 'warning', 'danger'].indexOf(t) > -1 ? t : 'neutral'; };
+    var ownerIcon = { agent: 'bot', staff: 'user', system: 'layers' };
+    var chip = model.chip === null ? '' : renderChip(model.chip || 'Sample data', 'sample');
+    var bar = model.chrome === false ? '' : '<div class="zynix-ui__bar">' +
+      '<span class="zynix-ui__brand"><img src="' + zxAttr(zxImg(SITE_FACTS.brand.symbol)) + '" alt="" width="20" height="20"> ' + (model.brand || 'Zynix platform') + '</span>' +
+      (model.badge === null ? '' : '<span class="zynix-ui__badge">' + (model.badge || 'Demo') + '</span>') + chip + '</div>';
+    var head = model.title || model.meta ? '<div class="zynix-ui__head">' + (model.title ? '<p class="zynix-ui__title">' + model.title + '</p>' : '') +
+      (model.meta ? '<p class="zynix-ui__meta">' + model.meta + '</p>' : '') + '</div>' : '';
+    var tiles = model.tiles && model.tiles.length ? '<dl class="zynix-ui__tiles">' + model.tiles.map(function (t) {
+      return '<div class="zynix-ui__tile"><dt class="zynix-ui__tile-label">' + t.label + '</dt><dd class="zynix-ui__tile-value">' + t.value + '</dd></div>'; }).join('') + '</dl>' : '';
+    var rows = model.rows && model.rows.length ? '<ul class="zynix-ui__rows" role="list">' + model.rows.map(function (r) {
+      var o = r.owner || null, st = r.status || null;
+      return '<li class="zynix-ui__row"><div class="zynix-ui__row-main"><p class="zynix-ui__row-title">' + r.title + '</p>' + (r.sub ? '<p class="zynix-ui__row-sub">' + r.sub + '</p>' : '') + '</div>' +
+        (o ? '<span class="zynix-ui__owner zynix-ui__owner--' + (ownerIcon[o.type] ? o.type : 'system') + '">' + zxIcon(ownerIcon[o.type] || 'layers') + ' ' + o.label + '</span>' : '') +
+        (st ? '<span class="zynix-chip zynix-chip--' + tone(st.tone) + ' zynix-ui__status">' + st.label + '</span>' : '') + '</li>';
+    }).join('') + '</ul>' : '';
+    var max = 0; (model.pipeline || []).forEach(function (p) { if (+p.value > max) max = +p.value; });
+    var pipeline = model.pipeline && model.pipeline.length ? '<ol class="zynix-ui__pipeline">' + model.pipeline.map(function (p) {
+      var ratio = max ? Math.round((+p.value / max) * 100) / 100 : 0;
+      return '<li class="zynix-ui__stage" style="--zx-bar:' + ratio + '"><span class="zynix-ui__stage-label">' + p.label + '</span><span class="zynix-ui__stage-bar" aria-hidden="true"></span><span class="zynix-ui__stage-value">' + p.value + '</span></li>';
+    }).join('') + '</ol>' : '';
+    var steps = model.steps && model.steps.length ? '<ol class="zynix-ui__steps">' + model.steps.map(function (s) {
+      var st = s.status || null;
+      return '<li class="zynix-ui__step">' + (s.time ? '<span class="zynix-ui__step-time">' + s.time + '</span>' : '') +
+        '<div class="zynix-ui__step-main"><p class="zynix-ui__step-title">' + s.title + '</p>' + (s.owner ? '<p class="zynix-ui__step-owner">' + (s.owner.label || s.owner) + '</p>' : '') + '</div>' +
+        (st ? '<span class="zynix-chip zynix-chip--' + tone(st.tone) + ' zynix-ui__status">' + st.label + '</span>' : '') + '</li>';
+    }).join('') + '</ol>' : '';
+    var note = model.note && model.note.sections && model.note.sections.length ? '<div class="zynix-ui__note">' + model.note.sections.map(function (n) {
+      return '<div class="zynix-ui__note-section"><p class="zynix-ui__note-label">' + n.label + '</p><p class="zynix-ui__note-text">' + n.text + '</p></div>'; }).join('') + '</div>' : '';
+    var foot = model.footer ? '<p class="zynix-ui__footer">' + model.footer + '</p>' : '';
+    var label = model.label || ((model.title || 'Sample panel') + ', illustrative data');
+    return '<div class="zynix-ui' + (model.className ? ' ' + model.className : '') + '" role="group" aria-label="' + zxAttr(label) + '" data-zx-sample>' + bar +
+      '<div class="zynix-ui__body">' + head + tiles + rows + pipeline + steps + note + foot + '</div></div>';
+  }
+
+  // ── Quote (§2.11): renders NOTHING unless the words are from a published release or an approved source ──
+  function renderQuote(opts) {
+    opts = opts || {};
+    var c = opts.customer ? zxCustomer(opts.customer) : null;
+    var q = c && c.quote ? c.quote : {};
+    var source = opts.source || q.source;
+    var text = opts.text || q.text;
+    if (!text || (source !== 'release' && source !== 'approved')) return '';
+    var name = opts.name || q.name, role = opts.role || q.role;
+    var logo = '';
+    if (opts.logo !== null) {
+      var lg = opts.logo || (c && c.logo ? { src: zxImg(c.logo.file), alt: c.name, width: Math.round(c.logo.w / c.logo.h * 32), height: 32 } : null);
+      if (lg && lg.src) logo = '<img class="zynix-quote__logo" src="' + zxAttr(lg.src) + '" alt="' + zxAttr(lg.alt || '') + '"' + (lg.width ? ' width="' + zxAttr(lg.width) + '"' : '') +
+        (lg.height ? ' height="' + zxAttr(lg.height) + '"' : '') + ' loading="lazy" decoding="async">';
+    }
+    var href = opts.href !== undefined ? opts.href : (c && c.release ? c.release.href : null);
+    var link = href ? renderLinkArrow(opts.linkLabel || 'Read the announcement', href) : '';
+    var v = opts.variant === 'inverse' || opts.variant === 'large' ? ' zynix-quote--' + opts.variant : '';
+    return '<figure class="zynix-quote' + v + '"><blockquote class="zynix-quote__text"><p>“' + text + '”</p></blockquote>' +
+      '<figcaption class="zynix-quote__cite">' + logo + (name ? '<span class="zynix-quote__name">' + name + '</span>' : '') +
+      (role ? '<span class="zynix-quote__role">' + role + '</span>' : '') + link + '</figcaption></figure>';
+  }
+
+  // ── Comparison table (§2.12): every mark is paired with visible text; below 768 the rows become labelled blocks (CSS) ──
+  function renderCompareTable(opts) {
+    opts = opts || {};
+    var cols = opts.columns || [], rows = opts.rows || [];
+    if (!cols.length || !rows.length) return '';
+    var hl = function (c) { return c && c.highlight ? ' class="is-highlight"' : ''; };
+    var head = '<thead><tr>' + cols.map(function (c) { return '<th scope="col"' + hl(c) + '>' + c.label + '</th>'; }).join('') + '</tr></thead>';
+    var body = '<tbody>' + rows.map(function (r) {
+      return '<tr><th scope="row">' + r.label + '</th>' + (r.cells || []).map(function (cell, i) {
+        var col = cols[i + 1] || {}; cell = cell || {};
+        var mark = cell.mark === 'yes' || cell.mark === 'no' || cell.mark === 'partial' ? '<span class="zynix-mark zynix-mark--' + cell.mark + '" aria-hidden="true"></span>' : '';
+        return '<td data-label="' + zxAttr(String(col.label || '').replace(/<[^>]*>/g, '')) + '"' + hl(col) + '>' + mark + (cell.text || '') + '</td>';
+      }).join('') + '</tr>';
+    }).join('') + '</tbody>';
+    var cap = opts.caption ? '<caption class="zynix-compare-table__caption' + (opts.captionHidden ? ' zx-visually-hidden' : '') + '">' + opts.caption + '</caption>' : '';
+    return '<div class="zynix-table-wrap"><table class="zynix-compare-table">' + cap + head + body + '</table></div>';
+  }
+
+  // ── FAQ list (§2.13): the question is the button's only text (the chevron is an SVG), so FAQPage JSON-LD stays clean ──
+  var ZX_FAQ_CHEVRON = '<svg class="zynix-faq-q__icon" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function renderFaqList(items, opts) {
+    opts = opts || {};
+    items = (items || []).filter(function (it) { return it && it.q && it.a; });
+    if (!items.length) return '';
+    var pre = opts.idPrefix || 'faq', lvl = opts.headingLevel || 3;
+    return '<div class="zynix-faq-list" data-zx-faq="' + zxAttr(pre) + '">' + items.map(function (it, i) {
+      var qid = pre + '-' + (i + 1) + '-q', aid = pre + '-' + (i + 1) + '-a', open = !!opts.openFirst && i === 0;
+      var a = /^\s*<(p|ul|ol|div)[\s>]/i.test(it.a) ? it.a : '<p>' + it.a + '</p>';
+      return '<div class="zynix-faq-item' + (open ? ' open' : '') + '"><h' + lvl + ' class="zynix-faq-item__heading">' +
+        '<button type="button" class="zynix-faq-q" id="' + zxAttr(qid) + '" aria-expanded="' + (open ? 'true' : 'false') + '" aria-controls="' + zxAttr(aid) + '">' + it.q + ZX_FAQ_CHEVRON + '</button></h' + lvl + '>' +
+        '<div class="zynix-faq-a" id="' + zxAttr(aid) + '" role="region" aria-labelledby="' + zxAttr(qid) + '"' + (open ? '' : ' hidden') + '><div class="zynix-faq-a__inner">' + a + '</div></div></div>';
+    }).join('') + '</div>';
+  }
+
+  // Binds every button.zynix-faq-q and every [data-zx-disclosure] button inside root once (idempotent).
+  // New markup (aria-controls): toggles the target's `hidden` with a grid-template-rows reveal. Legacy markup (no aria-controls):
+  // toggles .open on the closest .zynix-faq-item, as the old router handler did (closest(), because the button may sit in an <h3>).
+  function initDisclosures(root) {
+    root = root || document;
+    if (!root.querySelectorAll) return;
+    var reduce = function () { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
+    var btns = root.querySelectorAll('button.zynix-faq-q, [data-zx-disclosure] button[aria-controls]');
+    Array.prototype.forEach.call(btns, function (btn) {
+      if (btn.__zxDisclosure) return;
+      btn.__zxDisclosure = true;
+      btn.addEventListener('click', function () {
+        var item = btn.closest('.zynix-faq-item');
+        var id = btn.getAttribute('aria-controls');
+        var panel = id ? document.getElementById(id) : null;
+        var open = btn.getAttribute('aria-expanded') !== 'true';
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (item) item.classList.toggle('open', open);
+        if (!panel) return;                                     // legacy markup: the .open class drives the answer
+        if (panel.__zxTimer) { clearTimeout(panel.__zxTimer); panel.__zxTimer = null; }
+        if (open) {
+          panel.hidden = false;
+          if (reduce()) { panel.classList.remove('is-animating'); return; }
+          panel.classList.add('is-animating');
+          void panel.offsetHeight;                              // reflow, so 0fr -> 1fr transitions
+          panel.classList.remove('is-animating');
+        } else {
+          if (reduce()) { panel.hidden = true; panel.classList.remove('is-animating'); return; }
+          panel.classList.add('is-animating');
+          var done = function () { panel.removeEventListener('transitionend', done); if (panel.__zxTimer) clearTimeout(panel.__zxTimer); panel.__zxTimer = null;
+            if (btn.getAttribute('aria-expanded') !== 'true') panel.hidden = true; panel.classList.remove('is-animating'); };
+          panel.addEventListener('transitionend', done);
+          panel.__zxTimer = setTimeout(done, 320);              // no transition (no CSS yet, or zero duration): close anyway
+        }
+      });
+    });
+  }
+
+  // ── Prose (§2.14) ──
+  function renderProse(html, opts) {
+    opts = opts || {};
+    if (!html) return '';
+    return '<div class="zynix-prose' + (opts.wide ? ' zynix-prose--wide' : '') + (opts.className ? ' ' + opts.className : '') + '">' + html + '</div>';
+  }
+
+  // ── Logo row (§2.15): registry customers only (CUSTOMERS), static, logos at their optical height class ──
+  function renderLogoRow(ids, opts) {
+    opts = opts || {};
+    if (!ids || !ids.length) {
+      ids = Object.keys(CUSTOMERS).filter(function (k) { return CUSTOMERS[k].logoRow; })
+        .sort(function (a, b) { return CUSTOMERS[a].logoRow - CUSTOMERS[b].logoRow; });
+    }
+    var max = opts.max || 8;
+    var list = ids.map(zxCustomer).filter(function (c) { return c && c.logo && c.logo.file; }).slice(0, max);
+    if (!list.length) return '';
+    var lid = (opts.id || 'logos') + '-label';
+    var hs = [20, 24, 28, 32, 36, 40];
+    var link = opts.link === null ? null : (opts.link || { label: 'Customer stories', href: '/resources-case-studies' });
+    return '<div class="zynix-logo-row' + (opts.inverse ? ' zynix-logo-row--inverse' : '') + (opts.className ? ' ' + opts.className : '') + '" aria-labelledby="' + zxAttr(lid) + '">' +
+      '<div class="zynix-logo-row__head"><p class="zynix-logo-row__label" id="' + zxAttr(lid) + '">' + (opts.label || 'Used by ACOs, health plans and provider organizations') + '</p>' +
+      (link ? renderLinkArrow(link.label, link.href, { anchorFixed: true }) : '') + '</div>' +
+      '<ul class="zynix-logo-row__list" data-count="' + list.length + '" role="list">' + list.map(function (c) {
+        var h = hs.indexOf(c.logo.h) > -1 ? c.logo.h : 32;
+        return '<li class="zynix-logo-row__item"><img class="zynix-logo-row__img zynix-logo-row__img--h' + h + '" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="' + zxAttr(c.name) + '"' +
+          ' width="' + zxAttr(c.logo.w) + '" height="' + zxAttr(h) + '" loading="' + (opts.eager ? 'eager' : 'lazy') + '" decoding="async"></li>';
+      }).join('') + '</ul></div>';
+  }
+
+  // ── Related-links block (§2.16): one per page, at most 6 links, group labels only when there are 2+ groups ──
+  function renderRelatedLinks(opts) {
+    opts = opts || {};
+    var here = zxPath(), seen = {}, left = 6, groups = [];
+    (opts.groups || []).forEach(function (g) {
+      var items = (g && g.items || []).filter(function (it) {
+        if (!it || !it.href || !it.label || left <= 0) return false;
+        var p = zxHrefPath(it.href);
+        if (p !== null && p === here) return false;              // never a link to the current page
+        if (seen[it.href]) return false;
+        seen[it.href] = 1; left--; return true;
+      });
+      if (items.length) groups.push({ label: g.label, items: items });
+    });
+    if (!groups.length) return '';
+    var title = opts.title || 'Related';
+    var inner = groups.map(function (g) {
+      return (groups.length > 1 && g.label ? '<p class="zynix-related__group">' + g.label + '</p>' : '') + '<ul class="zynix-related__list" role="list">' +
+        g.items.map(function (it) {
+          var svg = zxIconHtml(it.icon);
+          return '<li><a class="zynix-related__link" href="' + zxAttr(it.href) + '">' + (svg ? '<span class="zynix-related__icon" aria-hidden="true">' + svg + '</span>' : '') +
+            '<span class="zynix-related__text"><span class="zynix-related__name">' + it.label + '</span>' + (it.desc ? '<span class="zynix-related__desc">' + it.desc + '</span>' : '') + '</span>' +
+            '<span class="zynix-related__arrow" aria-hidden="true">→</span></a></li>';
+        }).join('') + '</ul>';
+    }).join('');
+    return '<section class="zynix-section zynix-section--compact zynix-section--rule zynix-related" id="related" aria-labelledby="related-title">' +
+      '<div class="zynix-container"><h2 class="zynix-related__title" id="related-title">' + title + '</h2>' + inner + '</div></section>';
+  }
+
+  // ── Split layout (§2.18): visual reversal by grid placement only; DOM order stays text then media ──
+  function renderSplit(a, b, opts) {
+    opts = opts || {};
+    var ratio = ['5-7', '7-5', '6-6', '4-8'].indexOf(opts.ratio) > -1 ? opts.ratio : '6-6';
+    return '<div class="zynix-split zynix-split--' + ratio + (opts.reverse ? ' zynix-split--reverse' : '') + (opts.center ? ' zynix-split--center' : '') +
+      (opts.mediaFirst ? ' zynix-split--media-first' : '') + (opts.className ? ' ' + opts.className : '') + '">' +
+      '<div class="zynix-split__a">' + (a || '') + '</div><div class="zynix-split__b">' + (b || '') + '</div></div>';
+  }
+
+  // ── Form field (§2.19): a real <label for>, required marked in text, hint and error wired with aria-describedby ──
+  function renderField(opts) {
+    opts = opts || {};
+    if (!opts.id || !opts.label) return '';
+    var id = zxAttr(opts.id), name = zxAttr(opts.name || opts.id), type = opts.type || 'text';
+    var req = opts.required ? '<span class="zynix-field__req" aria-hidden="true">*</span><span class="zx-visually-hidden">(required)</span>' : '';
+    var hintId = opts.hint ? opts.id + '-hint' : '', errId = opts.id + '-err';
+    var desc = hintId ? ' aria-describedby="' + zxAttr(hintId) + '"' : '';
+    var common = ' id="' + id + '" name="' + name + '"' + (opts.required ? ' required' : '') + (opts.autocomplete ? ' autocomplete="' + zxAttr(opts.autocomplete) + '"' : '') + desc;
+    var control;
+    if (type === 'select') {
+      control = '<select class="zynix-input"' + common + '>' + (opts.options || []).map(function (o) {
+        return '<option value="' + zxAttr(o.value) + '">' + o.label + '</option>'; }).join('') + '</select>';
+    } else if (type === 'textarea') {
+      control = '<textarea class="zynix-input"' + common + ' rows="' + (+opts.rows || 4) + '"></textarea>';
+    } else if (type === 'checkbox') {
+      return '<div class="zynix-field zynix-field--checkbox"><input type="checkbox" class="zynix-checkbox"' + common + '>' +
+        '<label class="zynix-field__label" for="' + id + '">' + opts.label + (req ? ' ' + req : '') + '</label>' +
+        (opts.hint ? '<p class="zynix-field__hint" id="' + zxAttr(hintId) + '">' + opts.hint + '</p>' : '') +
+        '<p class="zynix-field__error" id="' + zxAttr(errId) + '" role="alert" hidden></p></div>';
+    } else {
+      control = '<input class="zynix-input" type="' + zxAttr(['text', 'email', 'tel', 'url', 'number'].indexOf(type) > -1 ? type : 'text') + '"' + common + '>';
+    }
+    return '<div class="zynix-field"><label class="zynix-field__label" for="' + id + '">' + opts.label + (req ? ' ' + req : '') + '</label>' + control +
+      (opts.hint ? '<p class="zynix-field__hint" id="' + zxAttr(hintId) + '">' + opts.hint + '</p>' : '') +
+      '<p class="zynix-field__error" id="' + zxAttr(errId) + '" role="alert" hidden></p></div>';
+  }
   // ==== ZX:END components ====
 
-  var SVG_GDPR = '<svg viewBox="0 0 40 40" width="32" height="32"><rect width="40" height="40" rx="8" fill="#ea4335" opacity="0.15"/><circle cx="20" cy="20" r="10" fill="none" stroke="#ea4335" stroke-width="2"/><circle cx="20" cy="20" r="4" fill="none" stroke="#ea4335" stroke-width="2"/><path d="M20 6v4M20 30v4M6 20h4M30 20h4" stroke="#ea4335" stroke-width="2" stroke-linecap="round"/></svg>';
-
+  // ── Footer (§3.5): columns from NAV, brand block from SITE_FACTS.company; /sms-program stays in the bottom bar (A2P) ──
   function renderFooter() {
-    return '<footer class="zynix-footer"><div class="zynix-footer-inner">' +
-      '<div class="zynix-footer-brand"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><img src="' + IMG.symbol + '" alt="Zynix AI" style="height:40px;width:40px;"><div style="font-size:26px;font-weight:700;color:#fff;letter-spacing:-0.5px;line-height:1">zynix<span style="color:var(--z-accent)">.ai</span></div></div><p>The operating system that executes care, not just analyzes it. Purpose-built AI for value-based healthcare.</p>' +
-      '<div class="zynix-footer-social">' +
-      '<a href="https://www.linkedin.com/company/zynix/" target="_blank" rel="noopener" aria-label="LinkedIn">' + SVG_LINKEDIN + '</a>' +
-      '<a href="https://x.com/zynixai_" target="_blank" rel="noopener" aria-label="X">' + SVG_X + '</a>' +
-      '<a href="https://www.instagram.com/zynixai/" target="_blank" rel="noopener" aria-label="Instagram">' + SVG_INSTAGRAM + '</a>' +
-      '</div></div>' +
-      '<div class="zynix-footer-col"><h4>SOLUTIONS</h4><a href="/platform">Platform</a><a href="/zynix-data-analytics">Data Analytics</a><a href="/zynix-ai-agents">AI Agents</a><a href="/care-plans">Care Plans</a><a href="/zynscribe">ZynScribe</a><a href="/integrations">Integrations</a></div>' +
-      '<div class="zynix-footer-col"><h4>WHO WE SERVE</h4><a href="/audience-segments/health-systems">Health Systems</a><a href="/audience-segments/acos-msos">ACOs &amp; MSOs</a><a href="/audience-segments/health-plans">Health Plans</a><a href="/audience-segments/independent-group-practices">Group Practices</a><a href="/audience-segments/ascs">ASCs</a><a href="/audience-segments/fqhcs">FQHCs</a></div>' +
-      '<div class="zynix-footer-col"><h4>COMPANY</h4><a href="/about">About</a><a href="/company-zynixllm">ZynixLLM</a><a href="/press">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a><a href="/contact">Contact Us</a></div>' +
-      '<div class="zynix-footer-col"><h4>RESOURCES</h4><a href="/resources-case-studies">Case Studies</a><a href="/use-cases">Use Cases</a><a href="/resources-blog">Blog</a><a href="/press">Press Releases</a><a href="/resources-faq">FAQ</a><a href="/resources-webinars">Webinars</a><a href="/resources-whitepapers">Whitepapers</a><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a></div>' +
+    var co = SITE_FACTS.company, year = new Date().getFullYear();
+    var svgs = { linkedin: SVG_LINKEDIN, x: SVG_X, instagram: SVG_INSTAGRAM };
+    var cols = NAV.filter(function (s) { return s.footer !== false && s.columns; }).map(function (s) {
+      var hid = 'zx-f-' + s.id, links = [];
+      s.columns.forEach(function (col) {
+        (col.items || []).forEach(function (it) { if (it.footer !== false) links.push({ label: it.footerLabel || it.label, href: it.href }); });
+        (col.more || []).forEach(function (it) { if (it.footer !== false) links.push({ label: it.footerLabel || it.label, href: it.href }); });
+      });
+      return '<div class="zynix-footer-col"><p class="zynix-footer__heading" id="' + hid + '">' + s.label + '</p>' +
+        '<ul role="list" aria-labelledby="' + hid + '">' + links.map(function (l) {
+          return '<li><a href="' + zxAttr(l.href) + '" data-z-anchor-fixed="1">' + l.label + '</a></li>'; }).join('') + '</ul></div>';
+    }).join('');
+    var social = co.social.map(function (s) {
+      return '<li><a href="' + zxAttr(s.href) + '" target="_blank" rel="noopener" aria-describedby="zx-newtab-desc" aria-label="' + zxAttr(s.label) + '" data-z-anchor-fixed="1">' +
+        zxIconHtml(svgs[s.id] || '') + '</a></li>';
+    }).join('');
+    var tel = co.phoneHref, here = zxPath();
+    return '<footer class="zynix-footer" role="contentinfo">' +
+      '<div class="zynix-container zynix-footer__top">' +
+        '<div class="zynix-footer__brand zynix-footer-brand">' +
+          '<a class="zynix-footer__logo" href="/" aria-label="Zynix AI home" data-z-anchor-fixed="1"><img src="' + zxAttr(zxImg(SITE_FACTS.brand.logoInverse)) + '" alt="" width="74" height="28" loading="lazy" decoding="async"></a>' +
+          '<p class="zynix-footer__tagline">' + SITE_FACTS.category.long + '.</p>' +
+          '<address class="zynix-footer__address">' + co.legalLine + '<br>' + co.addressLine + '<br>' +
+            '<a href="mailto:' + zxAttr(co.email) + '" data-z-anchor-fixed="1">' + co.email + '</a> · <a href="' + zxAttr(tel) + '" data-z-anchor-fixed="1">' + co.phone + '</a></address>' +
+          '<ul class="zynix-footer__social zynix-footer-social" role="list">' + social + '</ul>' +
+          renderEmailCapture({ variant: 'footer' }) +
+        '</div>' +
+        '<nav class="zynix-footer__nav" aria-label="Footer">' + cols + '</nav>' +
       '</div>' +
-      '<div class="zynix-footer-compliance">' +
-      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_HIPAA + '</div><div><strong>HIPAA</strong><span>Compliant</span></div></div>' +
-      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_SOC2 + '</div><div><strong>SOC 2</strong><span>Type II Certified</span></div></div>' +
-      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_HITRUST + '</div><div><strong>HITRUST</strong><span>In Progress</span></div></div>' +
-      '<div class="zynix-compliance-badge"><div class="zynix-compliance-icon">' + SVG_GDPR + '</div><div><strong>GDPR</strong><span>Compliant</span></div></div>' +
+      '<div class="zynix-container zynix-footer__trust">' + renderTrustRow(['soc2', 'hipaa', 'hitrust'], { inverse: true, href: here === '/security' ? null : '/security' }) + '</div>' +
+      '<div class="zynix-container zynix-footer-bottom">' +
+        '<p>© ' + year + ' ' + co.legalLine + '</p>' +
+        '<ul class="zynix-footer__legal" role="list">' +
+          '<li><a href="/privacy-policy" data-z-anchor-fixed="1">Privacy Policy</a></li>' +
+          '<li><a href="/terms-of-service" data-z-anchor-fixed="1">Terms of Service</a></li>' +
+          '<li><a href="/sms-program" data-z-anchor-fixed="1">SMS Program</a></li>' +
+        '</ul>' +
       '</div>' +
-      '<div class="zynix-footer-bottom"><p>&copy; 2026 Zynix AI. All rights reserved. &middot; <a href="/privacy-policy">Privacy Policy</a> &middot; <a href="/terms-of-service">Terms of Service</a> &middot; <a href="/sms-program">SMS Program</a> &middot; <a href="/security">Security</a></p></div></footer>';
+    '</footer>';
   }
 
-  function renderCTA(title, subtitle, btnText) {
-    return '<section class="zynix-cta-section"><div class="zynix-container">' +
-      '<h2>' + (title || 'See Zynix in Action') + '</h2>' +
-      '<p>' + (subtitle || 'Join the healthcare organizations already transforming care with AI-powered intelligence.') + '</p>' +
-      '<div class="zynix-cta-btns">' +
-      '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener">' + (btnText || 'Request a Demo') + ' &rarr;</a>' +
-      '<a href="/security" class="zynix-btn-secondary">Security & Compliance</a>' +
-      '</div>' +
-      '<div class="zynix-cta-trust">' +
-      '<span>&#128737; HIPAA</span><span>&#128274; SOC 2 Type II</span><span>&#9203; HITRUST in progress</span>' +
-      '<span>&#127760; GDPR</span><span>&#128100; 1M+ Patients</span><span>&#127961; 30 States</span>' +
-      '</div>' +
-      '<p style="font-size:12px;color:rgba(255,255,255,0.8);margin-top:16px">Trusted by 1M+ VBC patients across 30 states</p>' +
+  // ── CTA band (§2.21). Legacy-compatible signature: btnText is IGNORED. One orange action at most; no self-links. ──
+  // Company-preset pages (/about, /careers, /press, /contact) get no demo button and no trust row unless opts say otherwise.
+  function renderCTA(title, subtitle, btnText, opts) {
+    opts = opts || {};
+    var here = zxPath(), company = zxHeroPreset(here) === 'company';
+    var surface = opts.surface === 'inverse' ? 'inverse' : 'subtle';
+    var hideDemo = opts.hideDemo !== undefined ? !!opts.hideDemo : company;
+    var ok = function (a) {
+      if (!a || !a.label || !a.href || a.href === '#') return false;
+      var p = zxHrefPath(a.href);
+      return !(p !== null && p === here);                    // never a link to the current page
+    };
+    var tab = function (a) { return a.newTab != null ? !!a.newTab : /^(https?:|mailto:)/i.test(a.href); };
+    var isDemo = function (a) { return a && a.href === SITE_FACTS.demo.href; };
+    var secVariant = surface === 'inverse' ? 'inverse' : 'secondary';
+    var primary = '', secondary = '';
+    if (opts.primary && ok(opts.primary) && !(hideDemo && isDemo(opts.primary))) {
+      primary = renderButton(opts.primary.label, opts.primary.href, { variant: 'primary', size: 'lg', newTab: tab(opts.primary), cta: isDemo(opts.primary) ? 'demo' : (opts.primary.cta || 'primary') });
+    } else if (!hideDemo) {
+      primary = renderDemoButton({ size: 'lg' });
+    }
+    var sec = opts.secondary === undefined ? { label: 'Contact us', href: '/contact' } : opts.secondary;
+    if (sec && ok(sec) && !(hideDemo && isDemo(sec)) && !(isDemo(sec) && !opts.primary)) {
+      secondary = renderButton(sec.label, sec.href, { variant: secVariant, size: 'lg', newTab: tab(sec), cta: isDemo(sec) ? 'demo' : (sec.cta || null) });
+    }
+    var badges = opts.badges !== undefined ? (opts.badges || []) : (company ? [] : ['soc2', 'hipaa', 'hitrust']);
+    var trust = badges.length ? renderTrustRow(badges, { inverse: surface === 'inverse', href: here === '/security' ? null : '/security' }) : '';
+    var id = opts.id || 'final-cta', tid = id + '-title';
+    var actions = primary + secondary;
+    return '<section class="zynix-cta-section zynix-cta-section--' + surface + (opts.align === 'split' ? ' zynix-cta-section--split' : '') + '" id="' + zxAttr(id) + '" aria-labelledby="' + zxAttr(tid) + '" data-zx-cta-band>' +
+      '<div class="zynix-container zynix-cta-section__inner">' +
+        '<h2 class="zynix-cta-section__title" id="' + zxAttr(tid) + '">' + (title || 'See Zynix on a workflow you run today') + '</h2>' +
+        '<p class="zynix-lead">' + (subtitle || 'Book 30 minutes with our team. We’ll walk through post-discharge follow-up, care gap closure or wellness visit outreach on sample data, and map it to your programs.') + '</p>' +
+        (actions ? '<div class="zynix-cta-section__actions">' + actions + '</div>' : '') +
+        trust +
       '</div></section>';
   }
 
-  // Email capture for non-demo visitors (newsletter / content updates)
-  function renderEmailCapture() {
-    // SMS terms and opt-in pages stay single-purpose for A2P review: no second form on them
-    if (/^\/(sms|sms-program|sms-consent)\/?$/.test(location.pathname.toLowerCase())) return '';
-    return '<section class="zynix-email-capture"><div class="zynix-container" style="max-width:720px;text-align:center;padding:48px 24px">' +
-      '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(32,68,155,0.08);color:#20449B;font-size:12px;font-weight:600;letter-spacing:0.08em;padding:6px 14px;border-radius:20px;margin-bottom:16px">STAY INFORMED</div>' +
-      '<h3 style="font-size:24px;font-weight:700;color:#0f172a;margin:0 0 8px">Get VBC Intelligence, Weekly</h3>' +
-      '<p style="font-size:15px;color:#64748b;margin:0 0 24px;max-width:520px;margin-left:auto;margin-right:auto">AI insights, risk adjustment strategies, and care coordination best practices for value-based care leaders.</p>' +
-      '<form class="zynix-capture-form" style="display:flex;gap:10px;max-width:480px;margin:0 auto" onsubmit="return false">' +
-      '<input type="email" class="zynix-capture-email" placeholder="Enter your work email" required style="flex:1;padding:12px 16px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px;outline:none;transition:border-color 0.2s;background:#fff;color:#0f172a">' +
-      '<button type="submit" class="zynix-capture-btn" style="padding:12px 24px;background:#20449B;color:#fff;font-size:14px;font-weight:600;border:none;border-radius:8px;cursor:pointer;white-space:nowrap;transition:background 0.2s">Subscribe</button>' +
-      '</form>' +
-      '<p style="font-size:11px;color:#94a3b8;margin-top:12px">No spam. Unsubscribe anytime. Read our <a href="/privacy-policy" style="color:#20449B;text-decoration:underline">Privacy Policy</a>.</p>' +
+  // ── Email capture (§2.22): the compact footer signup, or the resource-page block. Never on /contact or the SMS pages
+  // (/sms-consent must keep exactly one visible form). Class names zynix-capture-form / -email / -btn are what the
+  // HubSpot newsletter handler binds to (router, portal 242472215).
+  function renderEmailCapture(opts) {
+    opts = opts || {};
+    if (['/contact', '/sms', '/sms-program', '/sms-consent'].indexOf(zxPath()) > -1) return '';
+    var title = 'Get new research and webinars by email';
+    var note = 'Occasional emails when we publish new research, webinars or product updates. Unsubscribe anytime. <a href="/privacy-policy">Privacy Policy</a>';
+    if (opts.variant === 'footer') {
+      return '<form class="zynix-capture-form zynix-footer__signup" novalidate>' +
+        '<p class="zynix-footer__signup-title" id="zx-footer-signup-title">' + title + '</p>' +
+        '<label class="zx-visually-hidden" for="zx-footer-email">Work email</label>' +
+        '<input class="zynix-input zynix-capture-email" id="zx-footer-email" type="email" autocomplete="email" placeholder="Work email" required aria-describedby="zx-footer-signup-title">' +
+        '<button type="submit" class="zynix-btn zynix-btn--quiet zynix-capture-btn">Subscribe</button>' +
+        '<p class="zynix-footer__signup-note">' + note + '</p>' +
+      '</form>';
+    }
+    return '<section class="zynix-section zynix-section--compact zynix-section--subtle zynix-email-capture" id="newsletter" aria-labelledby="newsletter-title">' +
+      '<div class="zynix-container zynix-container--narrow">' +
+        '<h2 class="zynix-email-capture__title" id="newsletter-title">' + title + '</h2>' +
+        '<form class="zynix-capture-form zynix-email-capture__form" novalidate>' +
+          '<label class="zx-visually-hidden" for="zx-block-email">Work email</label>' +
+          '<input class="zynix-input zynix-capture-email" id="zx-block-email" type="email" autocomplete="email" placeholder="Work email" required aria-describedby="newsletter-title">' +
+          '<button type="submit" class="zynix-btn zynix-btn--quiet zynix-capture-btn">Subscribe</button>' +
+        '</form>' +
+        '<p class="zynix-email-capture__note">' + note + '</p>' +
       '</div></section>';
   }
 
+  // ── Legacy hero adapter (§2.10). Signature unchanged (92 call sites, including the A2P-frozen privacy and terms renderers).
+  // The image argument is ignored (this retired the old glow-card hero visuals) and so is secondaryBtnText (the old
+  // href="#" "Learn More" button). The preset comes from the path: company, legal, resource, case or product.
   function renderInnerHero(tag, title, subtitle, image, imgAlt, secondaryBtnText) {
-    var btnText = secondaryBtnText !== undefined ? secondaryBtnText : 'Learn More';
-    var secondaryBtn = btnText ? '<a href="#" class="zynix-btn-secondary zynix-scroll-next" onclick="event.preventDefault();var hero=this.closest(\'.zynix-inner-hero\');if(hero&&hero.nextElementSibling){hero.nextElementSibling.scrollIntoView({behavior:\'smooth\',block:\'start\'});}">' + btnText + '</a>' : '';
-    return '<section class="zynix-inner-hero"><div class="zynix-container zynix-inner-hero-grid">' +
-      '<div class="zynix-inner-hero-text">' +
-      (tag ? '<span class="zynix-tag">' + tag + '</span>' : '') +
-      '<h1>' + title + '</h1>' +
-      '<p>' + subtitle + '</p>' +
-      '<div class="zynix-hero-btns" style="margin-bottom:20px"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener">Request a Demo &rarr;</a>' + secondaryBtn + '</div>' +
-      '<div class="zynix-hero-trust" style="margin-top:4px">' +
-      '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> HIPAA Compliant</span>' +
-      '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> SOC 2 Type II</span>' +
-      '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0D9B6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> BAA Available</span>' +
-      '</div>' +
-      '</div>' +
-      (image ? '<div class="zynix-inner-hero-img">' + (getPathVis() || HERO_VIS[image] || '<img src="' + image + '" alt="' + (imgAlt || title || 'Zynix AI') + '" loading="lazy">') + '</div>' : '') +
-      '</div></section>';
+    if (tag && typeof tag === 'object') return renderHero(tag);
+    return renderHero({ preset: zxHeroPreset(zxPath()), eyebrow: tag, title: title, lead: subtitle, media: { type: 'none' } });
   }
 
-  // ── Browser Frame Mockup for product screenshots ──
+  // ── Legacy product-screenshot helpers (§2.9 legacy mapping) ──
+  // The legacy url argument is ignored: those app URLs were invented. Sizes come from ASSET_SIZES.
   function renderBrowserFrame(imgSrc, alt, url) {
-    url = url || 'app.zynix.ai/dashboard';
-    return '<div class="zynix-browser-frame">' +
-      '<div class="zynix-browser-bar">' +
-      '<div class="zynix-browser-dots"><span></span><span></span><span></span></div>' +
-      '<div class="zynix-browser-url">' + url + '</div>' +
-      '</div>' +
-      '<img src="' + imgSrc + '" alt="' + (alt || 'Zynix AI product screenshot') + '" loading="lazy" width="1200" height="800">' +
-      '</div>';
+    return renderProductFrame({ src: imgSrc, alt: alt || '', chrome: 'none' });
   }
 
-  // ── Product Showcase — screenshot + description side by side ──
   function renderProductShowcase(imgSrc, alt, url, title, desc, reverse) {
-    var visual = '<div class="zynix-product-showcase-visual">' + renderBrowserFrame(imgSrc, alt, url) + '</div>';
-    var text = '<div class="zynix-product-showcase-text"><h3>' + title + '</h3><p>' + desc + '</p></div>';
-    return '<div class="zynix-product-showcase"' + (reverse ? ' style="direction:rtl"' : '') + '>' +
-      (reverse ? visual + text : text + visual) +
-      '</div>';
+    var text = (title ? '<h3 class="zynix-card__title">' + title + '</h3>' : '') + (desc ? '<p class="zynix-lead">' + desc + '</p>' : '');
+    return renderSplit(text, renderBrowserFrame(imgSrc, alt), { ratio: '5-7', reverse: !!reverse, center: true });
   }
 
-  // ── Screenshot Strip — horizontal row of framed screenshots ──
+  // A count-aware grid of frames, top-aligned (no horizontal strip).
   function renderScreenshotStrip(items) {
-    var html = '<div class="zynix-screenshot-strip">';
-    items.forEach(function(item) {
-      html += renderBrowserFrame(item.img, item.alt, item.url || 'app.zynix.ai/dashboard');
-    });
-    html += '</div>';
-    return html;
+    return renderGrid((items || []).filter(function (it) { return it && it.img; }), function (it) {
+      return renderBrowserFrame(it.img, it.alt);
+    }, { className: 'zynix-cgrid--top' });
   }
 
+  // Count-aware grid of static cards. Legacy metric pills carry no source, so they are marked data-zx-unsourced
+  // (page streams remove them, §6).
   function renderFeatureCards(cards) {
-    var html = '<div class="zynix-feature-grid">';
-    cards.forEach(function(c) {
-      html += '<div class="zynix-feature-card fade-in-up">' +
-        (c.icon ? '<div class="zynix-feature-icon">' + c.icon + '</div>' : '') +
-        '<h3>' + c.title + '</h3>' +
-        '<p>' + c.desc + '</p>' +
-        (c.metric ? '<div class="zynix-feature-metric"><span>' + c.metric + '</span>' + (c.metricLabel ? '<small>' + c.metricLabel + '</small>' : '') + '</div>' : '') +
-        '</div>';
+    return renderGrid(cards || [], function (c) {
+      var metric = c.metric ? '<span class="zynix-chip zynix-chip--brand zynix-card__metric" data-zx-unsourced="1">' + c.metric +
+        (c.metricLabel ? ' <span class="zynix-card__metric-label">' + c.metricLabel + '</span>' : '') + '</span>' : '';
+      return renderCard({ icon: c.icon, title: c.title, body: c.desc, meta: metric });
     });
-    html += '</div>';
-    return html;
   }
 
+  // Legacy metrics bar, restyled as a stat row by CSS. Legacy metrics carry no source: data-zx-unsourced (page streams remove it).
   function renderMetricsBar(metrics) {
-    var html = '<div class="zynix-metrics-bar">';
-    metrics.forEach(function(m) {
-      html += '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">' + m.value + '</span><span class="zynix-metric-label">' + m.label + '</span></div>';
-    });
-    html += '</div>';
-    return html;
+    metrics = (metrics || []).filter(function (m) { return m && m.value; });
+    if (!metrics.length) return '';
+    return '<div class="zynix-metrics-bar" data-zx-unsourced="1" data-count="' + metrics.length + '">' + metrics.map(function (m) {
+      return '<div class="zynix-metric"><span class="zynix-metric-value">' + m.value + '</span><span class="zynix-metric-label">' + (m.label || '') + '</span></div>';
+    }).join('') + '</div>';
   }
 
+  // The problem framing: a left-aligned section head and a count-aware grid of static cards (no default alert icon).
   function renderProblemSection(title, problems) {
-    var html = '<section class="zynix-problem-section"><div class="zynix-container">' +
-      '<span class="zynix-tag">THE CHALLENGE</span>' +
-      '<h2>' + title + '</h2><div class="zynix-problem-grid">';
-    problems.forEach(function(p) {
-      html += '<div class="zynix-problem-card fade-in-up"><div class="zynix-problem-icon">' + (p.icon || IC_ALERT) + '</div><h3>' + p.title + '</h3><p>' + p.desc + '</p></div>';
-    });
-    html += '</div></div></section>';
-    return html;
+    return '<section class="zynix-section zynix-section--subtle zynix-problem-section"><div class="zynix-container">' +
+      renderSectionHead('The challenge', title, '') +
+      renderGrid(problems || [], function (p) { return renderCard({ icon: p.icon || null, title: p.title, body: p.desc }); }) +
+      '</div></section>';
   }
 
   // ── PAGE: Zynix OS ──
@@ -3522,14 +2969,14 @@
   // ── PAGE: FAQ ──
   function renderFAQ() {
     var faqs = [
-      { q: 'What is Zynix AI?', a: 'Zynix is the operating system that executes care, not just analyzes it. It unifies clinical data, deploys autonomous AI agents, and orchestrates care workflows so healthcare organizations can act on insights at scale without adding headcount.' },
+      { q: 'What is Zynix AI?', a: 'Zynix AI is AI infrastructure and workflows for value-based care. The Zynix platform connects claims, EHR and ADT data into one patient record, ranks the patients and care gaps that need attention, and carries the follow-up through care plans, outreach agents and ambient documentation. Clinicians make the clinical decisions.' },
       { q: 'What types of healthcare organizations use Zynix?', a: 'ACOs, MSOs, health systems, FQHCs, health plans, independent practices, and ASCs. Any organization accountable for patient outcomes and operational efficiency.' },
-      { q: 'What products are included in the Zynix platform?', a: 'Zynix OS includes: Data Platform, Analytics, AI Agent Suite (7 specialized agents), ZynScribe (ambient AI scribe), Deployable Care Plans, and ZynixLLM (healthcare foundation model).' },
-      { q: 'How long does implementation take?', a: 'Typical implementation is 3-4 months from contract to full deployment. Many organizations see measurable impact within the first 30 days.' },
-      { q: 'Is Zynix HIPAA compliant?', a: 'Yes. Zynix is HIPAA-aligned, SOC 2 Type II certified, and GDPR compliant. We maintain enterprise-grade security with complete audit trails.' },
+      { q: 'What products are included in the Zynix platform?', a: 'The Zynix platform includes a data foundation, analytics, AI agents in three families (clinical performance, predictive activation and operational efficiency), care plans, ZynScribe for ambient clinical documentation, and ZynixLLM, the platform\u2019s language model layer.' },
+      { q: 'How long does implementation take?', a: 'Timelines depend on your data sources and scope; we set one with you during scoping.' },
+      { q: 'How does Zynix protect patient data?', a: 'Zynix is SOC 2 Type II audited, report available on request through our trust portal. We maintain HIPAA-aligned safeguards, and a Business Associate Agreement (BAA) is available. HITRUST CSF certification is in progress.' },
       { q: 'What EHR systems does Zynix integrate with?', a: '30+ EHR systems across 300+ connected instances, including Epic, Cerner (Oracle Health), athenahealth, eClinicalWorks, NextGen and Allscripts. We support HL7/FHIR feeds, claims (837/835), ADT streams, and custom integrations.' },
-      { q: 'How does pricing work?', a: 'Pricing is based on your organization size and selected products. We offer risk-sharing models aligned with your outcomes. Contact us for a customized quote.' },
-      { q: 'What support is included?', a: '24/7 technical support, dedicated customer success manager, quarterly business reviews, and ongoing training for your team.' }
+      { q: 'How does pricing work?', a: 'Pricing depends on products and population; we\u2019ll scope it with you.' },
+      { q: 'What support is included?', a: 'Support terms are set in your agreement.' }
     ];
     var faqHtml = '<div class="zynix-faq-list">';
     faqs.forEach(function(f, i) {
@@ -7463,61 +6910,61 @@ function renderLLMsTxt() {
   var text = [
     '# Zynix AI',
     '',
-    '> AI healthcare platform that executes care coordination for value-based care organizations. Autonomous AI agents for post-discharge follow-up, HCC gap closure, AWV scheduling, prior authorization, medication adherence, and more.',
+    '> Zynix AI is AI infrastructure and workflows for value-based care. The Zynix platform connects claims, EHR and ADT data into one patient record, ranks the patients and care gaps that need attention, and carries the follow-up through care plans, outreach agents and ambient documentation. Clinicians make the clinical decisions.',
     '',
-    'Zynix AI serves ACOs, health systems, Medicare Advantage plans, FQHCs, ASCs, and independent practices managing 1M+ VBC patients across 30 states.',
+    'Zynix AI builds AI infrastructure and workflows for value-based care. The Zynix platform connects claims, EHR and ADT data, identifies patients and care gaps that need attention, and helps care teams follow through with care plans, outreach agents and ambient documentation, while clinicians make clinical decisions. Zynix serves ACOs, health plans, MSOs, IPAs and health systems, with organizations in 30 states, 1M+ value-based care patients onboarded and 30+ EHR systems across 300+ connected instances. Zynix is SOC 2 Type II audited and an approved participant in the CMS ACCESS Model, a voluntary CMS Innovation Center model in Original Medicare for technology-supported chronic-condition care. Zynix Inc. (d/b/a Zynix AI) is physician-led and based in Trinity, Florida.',
     '',
     '## Platform',
     '',
-    '- [Platform Overview](https://www.zynix.ai/platform): Zynix OS — the operating system for value-based care',
-    '- [AI Agents](https://www.zynix.ai/agents): Autonomous AI agents for clinical, operational, and population health workflows',
-    '- [ZynScribe](https://www.zynix.ai/zynscribe): AI medical scribe with real-time ambient documentation and clinical decision support',
-    '- [Care Plans](https://www.zynix.ai/care-plans): Deployable care plans for chronic disease management and transitions of care',
-    '- [Data Platform](https://www.zynix.ai/products-data-platform): Unified claims and clinical data integration with risk stratification',
-    '- [Analytics](https://www.zynix.ai/products-analytics): Population health performance analytics and gap identification',
-    '- [ZynixLLM](https://www.zynix.ai/company-zynixllm): Healthcare-specific large language model built on clinical and claims data',
-    '- [Integrations](https://www.zynix.ai/integrations): 30+ EHR systems across 300+ connected instances, including Epic, Cerner, athenahealth and eClinicalWorks',
+    '- [Platform overview](https://www.zynix.ai/platform): The Zynix platform: a data foundation, intelligence, agents and care plans for value-based care operations',
+    '- [AI agents](https://www.zynix.ai/agents): Agents for outreach, scheduling, reminders, after-hours intake and fax routing that escalate clinical questions to your care team by rule',
+    '- [ZynScribe](https://www.zynix.ai/zynscribe): Ambient clinical documentation; notes stay drafts until a physician reviews and approves them',
+    '- [Care plans](https://www.zynix.ai/care-plans): Pre-built care plans for TCM, CCM, wellness visits and gap closure that sequence agents and care team tasks',
+    '- [Data foundation](https://www.zynix.ai/products-data-platform): Claims, EHR, ADT, lab and pharmacy data brought into one patient record',
+    '- [Analytics](https://www.zynix.ai/zynix-data-analytics): Risk, quality and HCC gap analytics ranked into worklists your care team can act on',
+    '- [ZynixLLM](https://www.zynix.ai/company-zynixllm): The language model layer of the Zynix platform, and when clinicians step in',
+    '- [Integrations](https://www.zynix.ai/integrations): 30+ EHR systems across 300+ connected instances, including Epic, Oracle Health (Cerner), athenahealth and eClinicalWorks',
     '',
-    '## Who We Serve',
+    '## Solutions',
     '',
-    '- [ACOs & MSOs](https://www.zynix.ai/audience-segments/acos-msos): MSSP and Next Gen ACOs managing shared savings and quality performance',
-    '- [Health Systems](https://www.zynix.ai/audience-segments/health-systems): Large hospital networks and integrated delivery systems',
-    '- [Health Plans](https://www.zynix.ai/audience-segments/health-plans): Medicare Advantage plans managing Stars ratings and member outcomes',
-    '- [FQHCs](https://www.zynix.ai/audience-segments/fqhcs): Federally Qualified Health Centers with multilingual patient populations',
-    '- [ASCs](https://www.zynix.ai/audience-segments/ascs): Ambulatory Surgery Centers managing prior auth and referral workflows',
-    '- [Independent Practices](https://www.zynix.ai/audience-segments/independent-group-practices): Group and independent physician practices',
+    '- [ACOs](https://www.zynix.ai/audience-segments/acos-msos): TCM, annual wellness visits, HCC and quality gaps across the attributed panel',
+    '- [MSOs, IPAs & physician groups](https://www.zynix.ai/audience-segments/independent-group-practices): Value-based programs across independent practices, whatever EHR each one runs',
+    '- [Health plans](https://www.zynix.ai/audience-segments/health-plans): Stars, HEDIS gaps and member outreach for Medicare Advantage plans',
+    '- [Health systems](https://www.zynix.ai/audience-segments/health-systems): Post-discharge follow-up and documentation across hospitals and clinics',
+    '- [FQHCs & community health](https://www.zynix.ai/audience-segments/fqhcs): Multilingual outreach and after-hours access for community health centers',
+    '- [ASCs](https://www.zynix.ai/audience-segments/ascs): Referral intake, pre-procedure scheduling and post-op follow-up for ambulatory surgery centers',
     '',
-    '## Use Cases',
+    '## Use cases',
     '',
-    '- [All Use Cases](https://www.zynix.ai/use-cases): 30 healthcare AI use cases across care coordination, quality, and operations',
-    '- [Post-Discharge Follow-Up](https://www.zynix.ai/use-cases/post-discharge-follow-up): Reduce 30-day readmissions with automated TCM outreach',
-    '- [HCC Gap Closure](https://www.zynix.ai/use-cases/hcc-gap-closure-health-system-aco): Identify and close HCC coding gaps before year-end',
-    '- [AWV Outreach](https://www.zynix.ai/use-cases/preventive-screening-gap-fqhc): Annual Wellness Visit scheduling and completion automation',
-    '- [Prior Authorization](https://www.zynix.ai/use-cases/prior-auth-high-volume-specialty): Automate high-volume prior auth for specialty and surgical procedures',
-    '- [Medication Adherence](https://www.zynix.ai/use-cases/medication-adherence-chronic-populations): Improve PDC scores for chronic disease populations',
+    '- [All use cases](https://www.zynix.ai/use-cases): Value-based care workflows grouped by program: transitions of care, risk adjustment and quality, chronic care, after-hours access, care navigation and front-office work',
+    '- [Post-discharge follow-up](https://www.zynix.ai/use-cases/post-discharge-follow-up): Follow-up calls after discharge that review medications, schedule the follow-up visit and route clinical questions to the care team',
+    '- [HCC gap closure](https://www.zynix.ai/use-cases/hcc-gap-closure-health-system-aco): Outreach to patients with open HCC gaps and pre-visit briefs for scheduled encounters',
+    '- [Preventive screening](https://www.zynix.ai/use-cases/preventive-screening-gap-fqhc): Preventive screening outreach and scheduling for FQHC patients',
+    '- [After-hours access](https://www.zynix.ai/use-cases/after-hours-ed-diversion): After-hours calls answered, routine visits booked and symptom questions routed to the on-call clinician by rule',
+    '- [Medication adherence](https://www.zynix.ai/use-cases/medication-adherence-chronic-populations): Adherence outreach that finds cost, side effect and access barriers and routes them to the care team',
     '',
-    '## Case Studies',
+    '## Customer stories',
     '',
-    '- [Palm Beach ACO](https://www.zynix.ai/case-studies/pbaco): 85% TCM contact rate, 40% gap closure improvement, 3x AWV lift',
-    '- [AMISTAD CHC](https://www.zynix.ai/case-studies/amistad): Multilingual care coordination across 15+ languages',
-    '- [Apollo Clinic](https://www.zynix.ai/case-studies/apollo-clinic): 40% no-show reduction with AI scheduling',
-    '- [NHS Health System](https://www.zynix.ai/case-studies/nhs): Full platform deployment across enterprise health system',
+    '- [Palm Beach ACO](https://www.zynix.ai/case-studies/pbaco): Post-discharge follow-up and AWV engagement across PBACO Holding\u2019s affiliated provider network',
+    '- [AMISTAD Community Health Center](https://www.zynix.ai/case-studies/amistad): Multilingual outreach and after-hours access for a community health center',
+    '- [Apollo Clinic Network](https://www.zynix.ai/case-studies/apollo-clinic): Scheduling, reminders and outreach between visits',
+    '- [NHS Health System](https://www.zynix.ai/case-studies/nhs): The Zynix platform across a health system',
     '',
     '## Resources',
     '',
-    '- [Blog](https://www.zynix.ai/resources-blog): Healthcare AI insights, implementation guides, and industry analysis',
-    '- [FAQ](https://www.zynix.ai/resources-faq): Implementation, pricing, compliance, and technical FAQs',
-    '- [Whitepapers](https://www.zynix.ai/resources-whitepapers): Clinical research and value-based care strategy papers',
-    '- [Glossary](https://www.zynix.ai/resources-glossary): Healthcare AI terminology reference',
+    '- [Insights](https://www.zynix.ai/resources-blog): Articles on transitions of care, risk adjustment, quality programs, CMS models and how care teams put AI to work safely',
+    '- [FAQ](https://www.zynix.ai/resources-faq): Answers on the platform, agents, data, security, integrations and working with Zynix',
+    '- [Research](https://www.zynix.ai/resources-whitepapers): Reports on annual wellness visits, post-discharge follow-up and care management operations',
+    '- [Glossary](https://www.zynix.ai/resources-glossary): Plain definitions of value-based care and care management terms',
     '',
     '## Company',
     '',
-    '- [About](https://www.zynix.ai/about): Company overview, mission, and leadership team',
-    '- [Security & Compliance](https://www.zynix.ai/security): HIPAA and SOC 2 Type II compliance documentation, HITRUST in progress',
-    '- [Careers](https://www.zynix.ai/careers): Open positions at Zynix AI',
-    '- [Contact](https://www.zynix.ai/contact): Sales inquiries and product demonstrations',
-    '- [Privacy Policy](https://www.zynix.ai/privacy-policy): Data handling and patient privacy practices',
-    '- [Terms of Service](https://www.zynix.ai/terms-of-service): Platform usage terms and conditions'
+    '- [About](https://www.zynix.ai/about): Physician-led, built by value-based care operators; our story and leadership',
+    '- [Security & compliance](https://www.zynix.ai/security): SOC 2 Type II audited, report available on request; HIPAA-aligned safeguards, BAA available; HITRUST CSF certification in progress',
+    '- [Careers](https://www.zynix.ai/careers): Open roles at Zynix AI',
+    '- [Contact](https://www.zynix.ai/contact): Request a demo or send a message',
+    '- [Privacy Policy](https://www.zynix.ai/privacy-policy): How we collect, use and protect information',
+    '- [Terms of Service](https://www.zynix.ai/terms-of-service): Terms for using our website and services'
   ].join('\n');
 
   document.title = 'llms.txt | Zynix AI';
@@ -11418,82 +10865,70 @@ function renderDataAnalyticsV7() {
     '/use-cases/post-discharge-followup-fqhc': USE_CASE_ROUTES['/use-cases/post-discharge-followup-fqhc']
   };
 
+  // Reveal (§1.6, §7.1): nothing is hidden unless html.zx-motion is present, and it is added only when the visitor has not
+  // asked for reduced motion and IntersectionObserver exists. Elements already on screen are revealed before the class is
+  // added, so the first screen never blinks. .fade-in-up is for section heads and media only.
   function initAnimations() {
-    // IntersectionObserver for fade-in-up animations
+    var root = document.documentElement;
     var fadeEls = document.querySelectorAll('.fade-in-up');
-    if (fadeEls.length && 'IntersectionObserver' in window) {
-      // Immediately show elements already in viewport (above-the-fold)
-      var viewH = window.innerHeight || document.documentElement.clientHeight;
-      fadeEls.forEach(function(el) {
-        var rect = el.getBoundingClientRect();
-        if (rect.top < viewH) {
-          el.classList.add('visible');
+    var reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (reduce || !('IntersectionObserver' in window)) {
+      root.classList.remove('zx-motion');
+      fadeEls.forEach(function(el) { el.classList.add('visible'); });
+      return;
+    }
+    var viewH = window.innerHeight || root.clientHeight;
+    fadeEls.forEach(function(el) {
+      if (el.getBoundingClientRect().top < viewH) el.classList.add('visible');
+    });
+    root.classList.add('zx-motion');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
-      // Observe remaining hidden elements with staggered reveal
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
-      fadeEls.forEach(function(el) {
-        if (!el.classList.contains('visible')) observer.observe(el);
-      });
-    } else {
-      // Fallback: show all
-      fadeEls.forEach(function(el) { el.classList.add('visible'); });
-    }
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+    fadeEls.forEach(function(el) {
+      if (!el.classList.contains('visible')) observer.observe(el);
+    });
   }
 
-  // ── Scroll-triggered counter animation ──
+  // ── Stat tick (§2.8, §1.6): one tick per element on first intersection, only under html.zx-motion, only when the
+  // numeric part is >= 10, never longer than 1,200ms, and it always ends on the exact final text (data-zx-final, or the
+  // element's own text for legacy markup). Anything else is left alone: no opacity tricks, no re-runs.
   function animateCounters() {
-    var counters = document.querySelectorAll('.zynix-stat-value, .zynix-metric-value');
+    var counters = document.querySelectorAll('.zynix-stat__value[data-zx-final], .zynix-stat-value, .zynix-metric-value');
     if (!counters.length || !('IntersectionObserver' in window)) return;
+    if (!document.documentElement.classList.contains('zx-motion')) return;
     var counterObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (!entry.isIntersecting) return;
         var el = entry.target;
+        counterObserver.unobserve(el);
         if (el.dataset.animated) return;
         el.dataset.animated = '1';
-        var text = el.textContent.trim();
-        // Match: optional prefix ($), digits with optional comma/decimal, optional suffix (M+, %, B, +, etc.)
-        var match = text.match(/^([^\d]*)([\d,.]+)(.*)$/);
-        if (!match) {
-          // No numeric content (e.g., "$285\u2013570B") — just fade in without counting
-          el.style.opacity = '0';
-          el.style.transition = 'opacity 0.6s ease';
-          setTimeout(function() { el.style.opacity = '1'; }, 50);
-          return;
-        }
-        var prefix = match[1] || '';
-        var target = parseFloat(match[2].replace(/,/g, ''));
-        var suffix = match[3] || '';
-        var hasComma = match[2].indexOf(',') > -1;
-        var hasDecimal = match[2].indexOf('.') > -1;
-        var decimals = hasDecimal ? (match[2].split('.')[1] || '').length : 0;
-        if (isNaN(target) || target === 0) {
-          el.style.opacity = '0';
-          el.style.transition = 'opacity 0.6s ease';
-          setTimeout(function() { el.style.opacity = '1'; }, 50);
-          return;
-        }
-        var duration = 1200;
-        var start = performance.now();
+        var finalText = el.getAttribute('data-zx-final') || el.textContent.trim();
+        var match = finalText.match(/^([^\d]*)(\d[\d,]*(?:\.\d+)?)(.*)$/);
+        if (!match) return;
+        var prefix = match[1] || '', numStr = match[2], suffix = match[3] || '';
+        var target = parseFloat(numStr.replace(/,/g, ''));
+        if (isNaN(target) || target < 10) return;
+        var hasComma = numStr.indexOf(',') > -1;
+        var decimals = numStr.indexOf('.') > -1 ? numStr.split('.')[1].length : 0;
+        var duration = 1200, start = performance.now();
         function step(now) {
-          var elapsed = now - start;
-          var progress = Math.min(elapsed / duration, 1);
-          var eased = 1 - Math.pow(1 - progress, 3);
-          var current = target * eased;
-          var formatted = hasDecimal ? current.toFixed(decimals) : Math.floor(current).toString();
-          if (hasComma) formatted = Number(formatted).toLocaleString();
+          var progress = Math.min((now - start) / duration, 1);
+          if (progress >= 1 || !document.documentElement.classList.contains('zx-motion')) { el.textContent = finalText; return; }
+          var current = target * (1 - Math.pow(1 - progress, 3));
+          var formatted = decimals ? current.toFixed(decimals) : Math.floor(current).toString();
+          if (hasComma) formatted = Number(formatted).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
           el.textContent = prefix + formatted + suffix;
-          if (progress < 1) requestAnimationFrame(step);
+          requestAnimationFrame(step);
         }
         requestAnimationFrame(step);
-        counterObserver.unobserve(el);
       });
     }, { threshold: 0.3 });
     counters.forEach(function(el) { counterObserver.observe(el); });
@@ -11621,6 +11056,8 @@ function renderDataAnalyticsV7() {
 
   function initAnalytics() {
     // GA4 - Live measurement ID (also configured natively in Webflow)
+    // DECISIONS 25: this second gtag loader stays until event delivery through Webflow's native gtag alone is verified on
+    // production (the preview strips analytics, so it cannot be verified there). Reported for Gautamdev.
     var gaId = 'G-LJSSJVVXNB';
     if (!gaId) return;
     var s = document.createElement('script');
@@ -11639,7 +11076,7 @@ function renderDataAnalyticsV7() {
       if (link.href && link.href.indexOf('calendly.com') > -1) {
         gtag('event', 'cta_click', { event_category: 'conversion', event_label: 'demo_request', page: window.location.pathname });
       }
-      if (link.classList.contains('zynix-btn-primary') || link.classList.contains('zynix-btn-secondary')) {
+      if (link.classList.contains('zynix-btn-primary') || link.classList.contains('zynix-btn-secondary') || link.classList.contains('zynix-btn')) {
         gtag('event', 'button_click', { event_category: 'engagement', event_label: link.textContent.trim(), page: window.location.pathname });
       }
     });
@@ -13604,10 +13041,9 @@ function renderDataAnalyticsV7() {
       // Build page content, inserting cross-links BEFORE CTA/Footer
       var pageContent = routes[path]();
       var crossLinks = renderCrossLinks(path);
-      // Insert email capture + cross-links before the CTA section
-      var emailCapture = renderEmailCapture();
-      var extras = (crossLinks || '') + emailCapture;
-      var ctaPos = pageContent.indexOf('<section class="zynix-cta-section"');
+      // Insert the related block before the CTA band (any variant). The newsletter signup lives in the footer (§2.22).
+      var extras = crossLinks || '';
+      var ctaPos = pageContent.indexOf('<section class="zynix-cta-section');
       if (ctaPos > -1) {
         pageContent = pageContent.substring(0, ctaPos) + extras + pageContent.substring(ctaPos);
       } else {
@@ -13847,15 +13283,8 @@ function renderDataAnalyticsV7() {
         // Cycle tabs every 3 seconds
         setInterval(cycleTab, 3000);
       })();
-      // FAQ accordion toggle (keyboard accessible — uses <button> elements)
-      document.querySelectorAll('.zynix-faq-q').forEach(function(q) {
-        q.addEventListener('click', function() {
-          var item = q.parentElement;
-          item.classList.toggle('open');
-          var expanded = item.classList.contains('open');
-          q.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-        });
-      });
+      // FAQ and other disclosures (native <button>s; hidden-attribute panels; legacy .open markup still works)
+      initDisclosures(document);
       // Handle hash scrolling after page render
       var hash = window.location.hash;
       if (hash) {
