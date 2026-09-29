@@ -455,6 +455,9 @@
     '/use-cases/referral-intake-asc': 'Referral intake',
     '/use-cases/surgical-scheduling-pre-procedure': 'Pre-procedure scheduling',
     '/use-cases/post-procedure-followup-complication': 'Post-procedure follow-up',
+    '/use-cases/appointment-scheduling-no-show': 'Scheduling and no-show follow-up',
+    '/use-cases/physician-documentation-ambient-ai': 'Ambient visit notes',
+    // Blog articles: labels come from ZX_BLOG (after CROSS_DESCS)
     // Customers (names from CUSTOMERS)
     '/resources-case-studies': 'Customer stories',
     '/case-studies/pbaco': 'Palm Beach ACO',
@@ -526,33 +529,9 @@
     '/audience-segments/health-systems': { products: ['/zynscribe','/agents','/integrations'], useCases: ['/use-cases/post-discharge-tcm-readmission','/use-cases/after-hours-ed-diversion'], related: ['/case-studies/nhs'] },
     '/audience-segments/fqhcs': { products: ['/agents#operational-efficiency','/zynix-data-analytics'], useCases: ['/use-cases/after-hours-ed-diversion','/use-cases/preventive-screening-gap-fqhc'], related: ['/case-studies/amistad'] },
     '/audience-segments/ascs': { products: ['/agents#operational-efficiency'], useCases: ['/use-cases/referral-intake-asc','/use-cases/surgical-scheduling-pre-procedure','/use-cases/post-procedure-followup-complication'], related: ['/audience-segments/health-systems'] },
-    // Use cases
-    '/use-cases/post-discharge-follow-up': { products: ['/agents#clinical-performance','/care-plans','/products-data-platform'], solutions: ['/audience-segments/health-systems','/audience-segments/acos-msos'], related: ['/use-cases/post-discharge-tcm-readmission'] },
-    '/use-cases/hcc-gap-closure-health-system-aco': { products: ['/zynix-data-analytics','/care-plans'], solutions: ['/audience-segments/acos-msos','/audience-segments/health-plans'], related: ['/use-cases/hcc-gap-raf-optimization','/use-cases/preventive-screening-gap-fqhc'] },
-    '/use-cases/after-hours-triage-multi-site': { products: ['/agents#operational-efficiency'], solutions: ['/audience-segments/independent-group-practices','/audience-segments/fqhcs'], related: ['/use-cases/after-hours-ed-diversion','/use-cases/post-discharge-tcm-readmission'] },
-    '/use-cases/prior-auth-high-volume-specialty': { products: ['/agents#operational-efficiency'], solutions: ['/audience-segments/ascs','/audience-segments/health-systems'], related: ['/use-cases/hcc-gap-closure-health-system-aco'] },
-    '/use-cases/preventive-screening-gap-fqhc': { products: ['/zynix-data-analytics','/agents#clinical-performance'], solutions: ['/audience-segments/fqhcs','/audience-segments/acos-msos','/audience-segments/health-plans'], related: ['/use-cases/hcc-gap-closure-health-system-aco'] },
-    '/use-cases/post-discharge-tcm-readmission': { products: ['/agents#clinical-performance','/agents#operational-efficiency','/care-plans'], solutions: ['/audience-segments/acos-msos','/audience-segments/health-systems'], related: ['/use-cases/post-discharge-follow-up'] },
-    // Blog cross-links (topic clusters)
-    '/blog/what-is-value-based-care-ai': { related: ['/blog/vbc-analytics-ai-driven','/blog/tools-driving-value-based-healthcare','/platform','/use-cases/hcc-gap-closure-health-system-aco'] },
-    '/blog/how-ai-closes-care-gaps': { related: ['/blog/hcc-risk-adjustment-year-round','/blog/aco-year-end-gap-closure','/agents','/use-cases/hcc-gap-closure-health-system-aco'] },
-    '/blog/ai-agents-vs-chatbots-healthcare': { related: ['/blog/autonomous-ai-agents-healthcare-automation','/blog/essential-ai-tools-medical-professionals','/agents'] },
-    '/blog/prior-auth-delays-cost-fix': { related: ['/blog/prior-auth-bottlenecks-ai-automation','/blog/eligibility-verification-automation','/use-cases/prior-auth-high-volume-specialty'] },
-    '/blog/hcc-risk-adjustment-year-round': { related: ['/blog/hcc-risk-adjustment-cms-changes','/blog/how-ai-closes-care-gaps','/use-cases/hcc-gap-closure-health-system-aco'] },
-    '/blog/ai-medical-scribes-rollout': { related: ['/blog/ai-medical-scribes-physician-burnout','/blog/documentation-crisis-physician-burnout','/zynscribe'] },
-    '/blog/rising-risk-patients-ai': { related: ['/blog/predictive-analytics-population-health','/blog/strategies-coordinating-patient-care','/care-plans'] },
-    '/blog/reducing-no-shows-ai-scheduling': { related: ['/blog/innovative-patient-recovery-satisfaction','/use-cases/after-hours-triage-multi-site','/agents'] },
-    '/blog/ehr-not-broken-never-built-to-think': { related: ['/blog/ai-breakthroughs-medicine','/blog/ai-transforming-medical-field','/platform'] },
-    '/blog/generative-ai-applications-healthcare': { related: ['/blog/generative-ai-in-healthcare','/blog/generative-ai-trust-safety-healthcare','/platform'] },
-    '/blog/prior-auth-bottlenecks-ai-automation': { related: ['/blog/prior-auth-delays-cost-fix','/blog/eligibility-verification-automation','/use-cases/prior-auth-high-volume-specialty'] },
-    '/blog/hcc-risk-adjustment-cms-changes': { related: ['/blog/hcc-risk-adjustment-year-round','/blog/aco-year-end-gap-closure','/use-cases/hcc-gap-closure-health-system-aco'] },
-    '/blog/aco-year-end-gap-closure': { related: ['/blog/hcc-risk-adjustment-year-round','/blog/how-ai-closes-care-gaps','/audience-segments/acos-msos'] },
-    '/blog/generative-ai-in-healthcare': { related: ['/blog/generative-ai-applications-healthcare','/blog/generative-ai-trust-safety-healthcare','/platform'] },
-    '/blog/autonomous-ai-agents-healthcare-automation': { related: ['/blog/ai-agents-vs-chatbots-healthcare','/blog/essential-ai-tools-medical-professionals','/agents'] },
-    '/blog/ai-medical-scribes-physician-burnout': { related: ['/blog/ai-medical-scribes-rollout','/blog/documentation-crisis-physician-burnout','/zynscribe'] },
-    '/blog/documentation-crisis-physician-burnout': { related: ['/blog/ai-medical-scribes-physician-burnout','/blog/ai-medical-scribes-rollout','/zynscribe'] },
-    '/blog/why-tcm-fails-real-workflows': { related: ['/blog/aco-30-day-post-discharge-program','/use-cases/post-discharge-follow-up','/use-cases/post-discharge-tcm-readmission'] },
-    '/blog/aco-30-day-post-discharge-program': { related: ['/blog/why-tcm-fails-real-workflows','/blog/innovative-patient-recovery-satisfaction','/use-cases/post-discharge-follow-up'] },
+    // Use cases: none. renderUseCaseV7 (P3) renders each use case's one related block itself; its "Where it fits" section
+    // already lists the products, so a router block here would repeat them.
+    // Blog articles: keys are derived from ZX_BLOG after CROSS_DESCS (flat /blog-<slug> plus the two alias forms).
     // Comparison pages (crawler-embed pages: the labels shown here are visible copy)
     '/compare-zynix-vs-point-solutions': { products: ['/platform','/agents','/care-plans'], solutions: ['/audience-segments/acos-msos','/audience-segments/health-systems'], related: ['/compare-zynix-vs-innovaccer'] },
     '/compare-zynix-vs-innovaccer': { products: ['/platform','/zynix-data-analytics','/agents'], solutions: ['/audience-segments/acos-msos','/audience-segments/health-plans'], related: ['/compare-zynix-vs-point-solutions'] },
@@ -1154,6 +1133,8 @@
     '/use-cases/referral-intake-asc': CROSS_ICON_SVG.doc,
     '/use-cases/surgical-scheduling-pre-procedure': CROSS_ICON_SVG.calendar,
     '/use-cases/post-procedure-followup-complication': CROSS_ICON_SVG.phone,
+    '/use-cases/appointment-scheduling-no-show': CROSS_ICON_SVG.calendar,
+    '/use-cases/physician-documentation-ambient-ai': CROSS_ICON_SVG.pen,
     '/resources-case-studies': CROSS_ICON_SVG.book,
     '/case-studies/pbaco': CROSS_ICON_SVG.book,
     '/case-studies/amistad': CROSS_ICON_SVG.book,
@@ -1201,6 +1182,8 @@
     '/use-cases/referral-intake-asc': 'Referral intake and documentation',
     '/use-cases/surgical-scheduling-pre-procedure': 'Scheduling and pre-procedure preparation',
     '/use-cases/post-procedure-followup-complication': 'Follow-up calls after a procedure',
+    '/use-cases/appointment-scheduling-no-show': 'Two-way confirmations and early reschedules',
+    '/use-cases/physician-documentation-ambient-ai': 'Notes the physician reviews and approves',
     '/resources-case-studies': 'How value-based care teams use Zynix',
     '/case-studies/pbaco': 'Customer story · ACO',
     '/case-studies/amistad': 'Customer story · FQHC',
@@ -1213,6 +1196,66 @@
     '/compare-zynix-vs-innovaccer': 'Side-by-side comparison',
     '/compare-zynix-vs-commure': 'Side-by-side comparison'
   };
+
+  // Blog related blocks (owner S3, §2.16, §3.12). The bundle renders each article at three paths: the flat
+  // /blog-<slug> (a Webflow page: HTTP 200, self-canonical, in the sitemap) and /blog/<slug> and /resources/blog/<slug>
+  // (both 404 on the server, and the head link-rewrite script turns links to them into /blog-<slug>). Every form gets
+  // the same one block: two products and two use cases for the article's topic, and two articles on the same topic.
+  // Article links point at the flat URL, or at the native post where the flat URL redirects to it (ZX_BLOG_NATIVE,
+  // mirroring REDIRECTS and the server 301). Labels are the articles' SEO titles, shortened.
+  var ZX_BLOG_TOPICS = {
+    vbc: { desc: 'Article · value-based care', products: ['/zynix-data-analytics', '/platform'], useCases: ['/use-cases/rising-risk-patient-outreach', '/use-cases/hcc-gap-raf-optimization'] },
+    gaps: { desc: 'Article · care gaps and risk adjustment', products: ['/zynix-data-analytics', '/care-plans'], useCases: ['/use-cases/hcc-gap-raf-optimization', '/use-cases/hedis-stars-quality-improvement'] },
+    agents: { desc: 'Article · AI agents', products: ['/agents', '/care-plans'], useCases: ['/use-cases/post-discharge-tcm-readmission', '/use-cases/after-hours-ed-diversion'] },
+    front: { desc: 'Article · front-office work', products: ['/agents#operational-efficiency', '/integrations'], useCases: ['/use-cases/prior-auth-high-volume-specialty', '/use-cases/appointment-scheduling-no-show'] },
+    docs: { desc: 'Article · clinical documentation', products: ['/zynscribe', '/integrations'], useCases: ['/use-cases/physician-documentation-ambient-ai', '/use-cases/hcc-gap-raf-optimization'] },
+    toc: { desc: 'Article · transitions of care', products: ['/care-plans', '/agents#clinical-performance'], useCases: ['/use-cases/post-discharge-tcm-readmission', '/use-cases/post-discharge-follow-up'] },
+    ai: { desc: 'Article · AI in healthcare', products: ['/platform', '/company-zynixllm'], useCases: ['/use-cases/post-discharge-tcm-readmission', '/use-cases/hcc-gap-raf-optimization'] }
+  };
+  var ZX_BLOG_AGENTS_OPS = 'autonomous-ai-agents-healthcare-automation';   // URL slug only; the article is "AI agents in healthcare operations"
+  var ZX_BLOG_NATIVE = { 'why-tcm-fails-real-workflows': 1 };
+  var ZX_BLOG = {   // slug: [topic, link label, two related article slugs]
+    'what-is-value-based-care-ai': ['vbc', 'What is value-based care AI?', ['vbc-analytics-ai-driven', 'tools-driving-value-based-healthcare']],
+    'vbc-analytics-ai-driven': ['vbc', 'Analytics for value-based care', ['predictive-analytics-population-health', 'what-is-value-based-care-ai']],
+    'tools-driving-value-based-healthcare': ['vbc', 'Tools driving value-based care', ['what-is-value-based-care-ai', 'vbc-analytics-ai-driven']],
+    'predictive-analytics-population-health': ['vbc', 'Predictive analytics for population health', ['rising-risk-patients-ai', 'vbc-analytics-ai-driven']],
+    'rising-risk-patients-ai': ['vbc', 'Reaching rising-risk patients earlier', ['predictive-analytics-population-health', 'strategies-coordinating-patient-care']],
+    'how-ai-closes-care-gaps': ['gaps', 'How AI helps close care gaps', ['hcc-risk-adjustment-year-round', 'aco-year-end-gap-closure']],
+    'hcc-risk-adjustment-year-round': ['gaps', 'Year-round HCC risk adjustment', ['hcc-risk-adjustment-cms-changes', 'how-ai-closes-care-gaps']],
+    'hcc-risk-adjustment-cms-changes': ['gaps', 'HCC risk adjustment: CMS V28 changes', ['hcc-risk-adjustment-year-round', 'aco-year-end-gap-closure']],
+    'aco-year-end-gap-closure': ['gaps', 'ACO year-end gap closure', ['hcc-risk-adjustment-year-round', 'how-ai-closes-care-gaps']],
+    'ai-agents-vs-chatbots-healthcare': ['agents', 'AI agents vs chatbots in healthcare', [ZX_BLOG_AGENTS_OPS, 'essential-ai-tools-medical-professionals']],
+    'essential-ai-tools-medical-professionals': ['agents', 'Essential AI tools for clinicians', ['ai-agents-vs-chatbots-healthcare', ZX_BLOG_AGENTS_OPS]],
+    'prior-auth-delays-cost-fix': ['front', 'Prior authorization delays: cost and fixes', ['prior-auth-bottlenecks-ai-automation', 'eligibility-verification-automation']],
+    'prior-auth-bottlenecks-ai-automation': ['front', 'Prior authorization bottlenecks and fixes', ['prior-auth-delays-cost-fix', 'eligibility-verification-automation']],
+    'eligibility-verification-automation': ['front', 'Eligibility verification automation', ['prior-auth-delays-cost-fix', 'reducing-no-shows-ai-scheduling']],
+    'reducing-no-shows-ai-scheduling': ['front', 'Reducing no-shows with smarter scheduling', ['eligibility-verification-automation', 'prior-auth-bottlenecks-ai-automation']],
+    'ai-medical-scribes-rollout': ['docs', 'AI medical scribes rollout guide', ['ai-medical-scribes-physician-burnout', 'documentation-crisis-physician-burnout']],
+    'ai-medical-scribes-physician-burnout': ['docs', 'AI scribes and physician burnout', ['ai-medical-scribes-rollout', 'documentation-crisis-physician-burnout']],
+    'documentation-crisis-physician-burnout': ['docs', 'Documentation burden and physician burnout', ['ai-medical-scribes-physician-burnout', 'ai-medical-scribes-rollout']],
+    'why-tcm-fails-real-workflows': ['toc', 'Why TCM programs fail in real workflows', ['aco-30-day-post-discharge-program', 'strategies-coordinating-patient-care']],
+    'aco-30-day-post-discharge-program': ['toc', 'Building an ACO 30-day post-discharge program', ['why-tcm-fails-real-workflows', 'innovative-patient-recovery-satisfaction']],
+    'innovative-patient-recovery-satisfaction': ['toc', 'Supporting patient recovery after discharge', ['aco-30-day-post-discharge-program', 'strategies-coordinating-patient-care']],
+    'strategies-coordinating-patient-care': ['toc', 'Better patient care coordination', ['innovative-patient-recovery-satisfaction', 'why-tcm-fails-real-workflows']],
+    'ehr-not-broken-never-built-to-think': ['ai', 'Your EHR was never built to think', ['ai-breakthroughs-medicine', 'ai-transforming-medical-field']],
+    'generative-ai-applications-healthcare': ['ai', 'Generative AI applications in healthcare', ['generative-ai-in-healthcare', 'generative-ai-trust-safety-healthcare']],
+    'generative-ai-in-healthcare': ['ai', 'Generative AI in healthcare: a guide', ['generative-ai-applications-healthcare', 'generative-ai-trust-safety-healthcare']],
+    'generative-ai-trust-safety-healthcare': ['ai', 'Generative AI trust and safety', ['generative-ai-in-healthcare', 'generative-ai-applications-healthcare']],
+    'ai-breakthroughs-medicine': ['ai', 'AI breakthroughs in medicine', ['ai-transforming-medical-field', 'revolutionizing-healthcare-role-of-ai']],
+    'revolutionizing-healthcare-role-of-ai': ['ai', 'The role of AI in healthcare', ['ai-transforming-medical-field', 'ai-changing-healthcare-decision-making']],
+    'ai-transforming-medical-field': ['ai', 'How AI is changing the medical field', ['ai-breakthroughs-medicine', 'revolutionizing-healthcare-role-of-ai']],
+    'ai-changing-healthcare-decision-making': ['ai', 'AI in healthcare decision-making', ['ehr-not-broken-never-built-to-think', 'generative-ai-trust-safety-healthcare']]
+  };
+  ZX_BLOG[ZX_BLOG_AGENTS_OPS] = ['agents', 'AI agents in healthcare operations', ['ai-agents-vs-chatbots-healthcare', 'essential-ai-tools-medical-professionals']];
+  (function () {
+    function href(slug) { return (ZX_BLOG_NATIVE[slug] ? '/blog-posts/' : '/blog-') + slug; }
+    Object.keys(ZX_BLOG).forEach(function (slug) {
+      var b = ZX_BLOG[slug], t = ZX_BLOG_TOPICS[b[0]], h = href(slug);
+      LINK_NAMES[h] = b[1]; CROSS_DESCS[h] = t.desc; CROSS_ICONS[h] = CROSS_ICON_SVG.book;
+      var entry = { products: t.products, useCases: t.useCases, related: b[2].map(href) };
+      ['/blog-', '/blog/', '/resources/blog/'].forEach(function (pre) { CROSS_LINKS[pre + slug] = entry; });
+    });
+  })();
 
   // Related-link items for slugs (§2.16) from LINK_NAMES / CROSS_DESCS / CROSS_ICONS; unknown slugs and the current page are skipped.
   function zxRelatedItems(slugs) {
