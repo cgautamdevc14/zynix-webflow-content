@@ -1775,23 +1775,65 @@
     }).join('') + '</div>';
   }
 
-  // Binds button.zynix-faq-q and [data-zx-disclosure] buttons in root once. With aria-controls it toggles the panel's `hidden`
-  // (grid-rows reveal); legacy markup toggles .open on the closest .zynix-faq-item.
+  // Binds every .zynix-faq-q and [data-zx-disclosure] button in root once. Markup that ships aria-controls (renderFaqList,
+  // data-zx-disclosure) toggles the panel's `hidden` (grid-rows reveal). Legacy markup toggles .open on the closest
+  // .zynix-faq-item, which the CSS uses to show the sibling .zynix-faq-a; its question gets aria-controls pointing at that answer.
+  // Legacy non-button questions (<h3 class="zynix-faq-q"> in the flat /blog-* renderers, until the Phase 4 codemod) keep their
+  // heading: the question text is wrapped in a span with role="button", tabindex="0" and aria-expanded (Enter/Space toggle),
+  // and a click anywhere on the heading toggles too. The text is unchanged, so FAQPage JSON-LD (built from textContent) is too.
+  var zxDisclosureSeq = 0;
   function initDisclosures(root) {
     root = root || document;
     if (!root.querySelectorAll) return;
     var reduce = function () { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
-    var btns = root.querySelectorAll('button.zynix-faq-q, [data-zx-disclosure] button[aria-controls]');
-    Array.prototype.forEach.call(btns, function (btn) {
-      if (btn.__zxDisclosure) return;
-      btn.__zxDisclosure = true;
-      btn.addEventListener('click', function () {
-        var item = btn.closest('.zynix-faq-item');
-        var id = btn.getAttribute('aria-controls');
+    var answerOf = function (q, item) {
+      var a = q.nextElementSibling;
+      if (a && a.classList.contains('zynix-faq-a')) return a;
+      return item ? item.querySelector('.zynix-faq-a') : null;
+    };
+    var els = root.querySelectorAll('.zynix-faq-q, [data-zx-disclosure] button[aria-controls]');
+    Array.prototype.forEach.call(els, function (q) {
+      if (q.__zxDisclosure) return;
+      q.__zxDisclosure = true;
+      var managed = !!q.getAttribute('aria-controls');   // captured before a legacy question gets aria-controls below
+      var item = q.closest('.zynix-faq-item') || (managed ? null : q.parentElement);
+      var btn = q;                                         // the element that carries the button role and aria-expanded
+      var chevron = null;                                  // legacy heading only: its state is drawn on the path (no CSS needed)
+      if (!managed) {
+        if (q.tagName !== 'BUTTON') {
+          btn = document.createElement('span');
+          btn.className = 'zynix-faq-q__label';
+          btn.setAttribute('role', 'button');
+          btn.tabIndex = 0;
+          while (q.firstChild) btn.appendChild(q.firstChild);
+          q.appendChild(btn);
+          if (!q.querySelector('.zynix-faq-q__icon')) {    // the heading is a flex row (.zynix-faq-q); the chevron sits at its end
+            q.insertAdjacentHTML('beforeend', ZX_FAQ_CHEVRON);
+            chevron = q.lastElementChild && q.lastElementChild.querySelector('path');
+          }
+          btn.addEventListener('keydown', function (e) {
+            var k = e.key;
+            if (k !== 'Enter' && k !== ' ' && k !== 'Spacebar') return;
+            e.preventDefault();
+            toggle();
+          });
+        }
+        btn.setAttribute('aria-expanded', item && item.classList.contains('open') ? 'true' : 'false');
+        if (chevron && btn.getAttribute('aria-expanded') === 'true') chevron.setAttribute('transform', 'rotate(180 10 10)');
+        var ans = answerOf(q, item);
+        if (ans) {
+          if (!ans.id) { var aid; do { aid = 'zx-faq-a-' + (++zxDisclosureSeq); } while (document.getElementById(aid)); ans.id = aid; }
+          btn.setAttribute('aria-controls', ans.id);
+        }
+      }
+      q.addEventListener('click', function () { toggle(); });
+      function toggle() {
+        var id = managed ? btn.getAttribute('aria-controls') : null;
         var panel = id ? document.getElementById(id) : null;
         var open = btn.getAttribute('aria-expanded') !== 'true';
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         if (item) item.classList.toggle('open', open);
+        if (chevron) { if (open) chevron.setAttribute('transform', 'rotate(180 10 10)'); else chevron.removeAttribute('transform'); }
         if (!panel) return;  // legacy markup: the .open class drives the answer
         if (panel.__zxTimer) { clearTimeout(panel.__zxTimer); panel.__zxTimer = null; }
         if (open) {
@@ -1808,7 +1850,7 @@
           panel.addEventListener('transitionend', done);
           panel.__zxTimer = setTimeout(done, 320);  // no transition (no CSS yet, or zero duration): close anyway
         }
-      });
+      }
     });
   }
 
