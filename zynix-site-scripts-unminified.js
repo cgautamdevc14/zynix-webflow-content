@@ -1860,6 +1860,86 @@
     });
   }
 
+  // ── Filter chip group (single select): the one filter contract for /use-cases, the customer hub and the blog hub ──
+  // <div class="zynix-filter [zynix-filter--stack]" role="group" aria-labelledby="{id}-label" data-zx-filter="{id}" data-zx-filter-scope="{selector}">
+  //   <p class="zynix-filter__label" id="{id}-label">Show workflows for</p>
+  //   <div class="zynix-filter__chips">
+  //     <button type="button" class="zynix-filter__chip" aria-pressed="true" data-zx-filter-value="all">All organizations<span class="zynix-filter__count">30</span></button> …
+  //   </div>
+  //   <p class="zx-visually-hidden" aria-live="polite" data-zx-filter-status></p>
+  // </div>
+  // Items inside the scope (default: the page) carry data-zx-filter-tags="aco fqhc" (space-separated values). An element marked
+  // data-zx-filter-group is hidden when none of its items is visible. The value 'all' shows everything. Selected state is
+  // aria-pressed="true" (S1: blue-50 fill, blue-600 border, blue-700 text; pill geometry shared by every family).
+  // opts: { id, label, labelHidden:false, options:[{ value, label, count }], selected:'all', scope:'#css-selector',
+  //         noun:['use case', 'use cases'], stack:false (vertical list at >=1024 for a sidebar), className }
+  function renderFilter(opts) {
+    opts = opts || {};
+    var id = opts.id || 'filter', sel = opts.selected || 'all';
+    var options = (opts.options || []).filter(function (o) { return o && o.value && o.label; });
+    if (!options.length) return '';
+    var noun = opts.noun || ['item', 'items'];
+    return '<div class="zynix-filter' + (opts.stack ? ' zynix-filter--stack' : '') + zxCls(opts.className) + '" role="group" aria-labelledby="' + zxAttr(id + '-label') + '"' +
+      ' data-zx-filter="' + zxAttr(id) + '"' + (opts.scope ? ' data-zx-filter-scope="' + zxAttr(opts.scope) + '"' : '') +
+      ' data-zx-filter-noun="' + zxAttr(noun[0]) + '|' + zxAttr(noun[1] || noun[0]) + '">' +
+      '<p class="zynix-filter__label' + (opts.labelHidden ? ' zx-visually-hidden' : '') + '" id="' + zxAttr(id + '-label') + '">' + (opts.label || 'Filter') + '</p>' +
+      '<div class="zynix-filter__chips">' + options.map(function (o) {
+        var on = String(o.value) === String(sel);
+        return '<button type="button" class="zynix-filter__chip" aria-pressed="' + (on ? 'true' : 'false') + '" data-zx-filter-value="' + zxAttr(o.value) + '">' + o.label +
+          (o.count != null ? '<span class="zynix-filter__count">' + zxAttr(o.count) + '</span>' : '') + '</button>';
+      }).join('') + '</div>' +
+      '<p class="zx-visually-hidden" aria-live="polite" data-zx-filter-status></p></div>';
+  }
+  // Applies a group's value to its scope; returns the number of visible items. Fires 'zx:filter' (bubbles) on the group with
+  // detail { id, value, shown } so a page can add its own behaviour (for example a "show all" pager) without a second listener.
+  function zxApplyFilter(group, value, announce) {
+    var sel = group.getAttribute('data-zx-filter-scope');
+    var scope = (sel && document.querySelector(sel)) || document;
+    var shown = 0;
+    Array.prototype.forEach.call(scope.querySelectorAll('[data-zx-filter-tags]'), function (el) {
+      var on = value === 'all' || (' ' + el.getAttribute('data-zx-filter-tags') + ' ').indexOf(' ' + value + ' ') > -1;
+      el.hidden = !on; if (on) shown++;
+    });
+    Array.prototype.forEach.call(scope.querySelectorAll('[data-zx-filter-group]'), function (g) {
+      var any = Array.prototype.some.call(g.querySelectorAll('[data-zx-filter-tags]'), function (el) { return !el.hidden; });
+      g.hidden = !any;
+    });
+    var st = group.querySelector('[data-zx-filter-status]');
+    if (st && announce) {
+      var n = (group.getAttribute('data-zx-filter-noun') || 'item|items').split('|');
+      var lbl = '';
+      Array.prototype.forEach.call(group.querySelectorAll('.zynix-filter__chip'), function (c) {
+        if (c.getAttribute('data-zx-filter-value') !== value) return;
+        var t = c.cloneNode(true), cnt = t.querySelector('.zynix-filter__count'); if (cnt) cnt.parentNode.removeChild(cnt);
+        lbl = t.textContent.replace(/\s+/g, ' ').trim();
+      });
+      st.textContent = value === 'all' ? 'Showing all ' + shown + ' ' + (shown === 1 ? n[0] : n[1]) :
+        'Showing ' + shown + ' ' + (shown === 1 ? n[0] : n[1]) + (lbl ? ': ' + lbl : '');
+    }
+    try { group.dispatchEvent(new CustomEvent('zx:filter', { bubbles: true, detail: { id: group.getAttribute('data-zx-filter'), value: value, shown: shown } })); } catch (e) {}
+    return shown;
+  }
+  var zxFiltersBound = false;
+  function initFilters(root) {
+    root = root || document;
+    if (typeof document === 'undefined' || !root.querySelectorAll) return;
+    if (!zxFiltersBound) {   // one delegated listener for every group, present or rendered later
+      zxFiltersBound = true;
+      document.addEventListener('click', function (e) {
+        var chip = e.target && e.target.closest ? e.target.closest('.zynix-filter__chip') : null;
+        var group = chip && chip.closest('[data-zx-filter]');
+        if (!group) return;
+        Array.prototype.forEach.call(group.querySelectorAll('.zynix-filter__chip'), function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+        zxApplyFilter(group, chip.getAttribute('data-zx-filter-value'), true);
+      });
+    }
+    Array.prototype.forEach.call(root.querySelectorAll('[data-zx-filter]'), function (group) {   // a preselected value applies on load, silently
+      var on = group.querySelector('.zynix-filter__chip[aria-pressed="true"]');
+      var v = on ? on.getAttribute('data-zx-filter-value') : 'all';
+      if (v !== 'all') zxApplyFilter(group, v, false);
+    });
+  }
+
   // ── Prose (§2.14) ──
   function renderProse(html, opts) {
     opts = opts || {};
@@ -13942,6 +14022,7 @@ function renderDataAnalyticsV7() {
       })();
       // FAQ and other disclosures (native <button>s; hidden-attribute panels; legacy .open markup still works)
       initDisclosures(document);
+      initFilters(document);   // shared filter chip groups (renderFilter); a no-op on pages without one
       // Handle hash scrolling after page render
       var hash = window.location.hash;
       if (hash) {
