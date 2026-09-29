@@ -2519,312 +2519,15 @@
     renderFooter();
   }
 
-  // ── Shared: Solution Page Template ──
-  function renderSolutionPage(tag, title, subtitle, image, challenges, solutions, metrics, cta, customers, opts) {
-    opts = opts || {};
-    var html = renderInnerHero(tag, title, subtitle, image, tag + ' solution', 'Explore Capabilities');
-
-    // AEO summary block
-    if (opts.summary) {
-      html += '<div class="zynix-container"><div class="zynix-summary-block">' + opts.summary + '</div></div>';
-    }
-
-    html += renderProblemSection('Your Challenges', challenges);
-
-    html += '<section class="zynix-capabilities-section" id="capabilities"><div class="zynix-container">' +
-      '<span class="zynix-tag">HOW ZYNIX HELPS</span>' +
-      '<h2>Purpose-Built for ' + tag + '</h2>' +
-      renderFeatureCards(solutions) +
-      '</div></section>';
-
-    if (metrics && metrics.length) {
-      html += renderMetricsBar(metrics);
-    }
-
-    // Product screenshots section — shows real platform UI
-    if (opts.screenshots && opts.screenshots.length) {
-      html += '<section class="zynix-section" style="padding:60px 0;background:#f8fafc"><div class="zynix-container">' +
-        '<span class="zynix-tag">THE PLATFORM</span>' +
-        '<h2 style="margin-bottom:40px">See the Zynix Dashboard in Action</h2>' +
-        '<div class="zynix-screenshot-strip">';
-      opts.screenshots.forEach(function(s) {
-        html += renderBrowserFrame(s.img, s.alt, s.url || 'app.zynix.ai/dashboard');
-      });
-      html += '</div></div></section>';
-    }
-
-    if (customers && customers.length) {
-      html += '<section class="zynix-customers-section"><div class="zynix-container">' +
-        '<span class="zynix-tag">TRUSTED BY</span>' +
-        '<h2>Organizations That Trust Zynix</h2>' +
-        '<div class="zynix-customer-list">';
-      customers.forEach(function(c) {
-        html += '<div class="zynix-customer-chip">' + c + '</div>';
-      });
-      html += '</div></div></section>';
-    }
-
-    // FAQ section
-    if (opts.faqs && opts.faqs.length) {
-      html += '<section class="zynix-page-faq"><div class="zynix-container">' +
-        '<span class="zynix-tag">FAQ</span>' +
-        '<h2>Frequently Asked Questions</h2>' +
-        '<div class="zynix-faq-list">';
-      opts.faqs.forEach(function(faq) {
-        html += '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">' + faq.q + '<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>' + faq.a + '</p></div></div>';
-      });
-      html += '</div></div></section>';
-    }
-
-    html += renderCTA(cta.title, cta.sub, cta.btn) + renderFooter();
-    return html;
-  }
-
-  // ── PAGE: ACOs & MSOs ──
-  function renderACOs() {
-    return renderSolutionPage('ACOs & MSOs',
-      'Achieve Shared Savings Through Operational Excellence',
-      'Maximize AWV completion rates, hit shared savings targets, and transform care coordination with AI-powered operational intelligence.',
-      IMG.care,
-      [
-        { icon: IC_CHART, title: 'AWV Completion Gaps', desc: 'Low completion rates leave money on the table and miss early intervention opportunities across your attributed population.' },
-        { icon: IC_DOLLAR, title: 'Shared Savings Targets', desc: 'Hitting thresholds requires coordinated care management. Siloed operations make it nearly impossible to reach benchmarks.' },
-        { icon: IC_PHONE, title: 'TCM Contact Underperformance', desc: 'Contact rates stuck at 30-40%, far below the 85%+ needed for optimal outcomes and revenue capture.' }
-      ],
-      [
-        { icon: IC_FILE, title: 'Deployable Care Plans', desc: 'Standardized, evidence-based care plans deployed across your entire ACO network, from discharge to follow-up.' },
-        { icon: IC_CHART, title: 'Analytics Platform', desc: 'Real-time visibility into performance metrics, shared savings progress, and population health across all providers.' },
-        { icon: IC_BOT, title: 'AI Agent Suite', desc: 'Autonomous agents orchestrate care coordination, appointment scheduling, and patient engagement at scale.' },
-        { icon: IC_ZAP, title: 'Unified Data Platform', desc: 'Unified data integration across providers, payers, and EHRs, providing a single source of truth for your ACO.' },
-        { icon: IC_HOSPITAL, title: 'CMS ACCESS Model', desc: 'ACCESS (Advancing Chronic Care with Effective, Scalable Solutions) is a voluntary CMS Innovation Center model in Original Medicare that ties payment for technology-supported chronic-condition care to measured patient outcomes. Zynix AI is an approved ACCESS participant, so ACOs and practices can take part through Zynix: clinicians refer eligible patients, stay involved in their care and can bill the ACCESS co-management fee, without enrolling in ACCESS themselves.' }
-      ],
-      [
-        { value: '85%', label: 'TCM Contact Rate' },
-        { value: '3x', label: 'AWV Completion Lift' },
-        { value: '60%', label: 'Coordinator Time Saved' },
-        { value: '8-12 wk', label: 'Time to Positive ROI' }
-      ],
-      { title: 'See How ACOs Grow Shared Savings with Zynix', sub: 'Schedule a demo to see how Zynix transforms ACO operations.', btn: 'Schedule a Demo' },
-      ['Palm Beach ACO', 'West Florida ACO', 'Space Coast ACO', 'Central Florida ACO', 'Assurity ACO REACH', 'Advanced ACO & Affiliates', 'Sun Flower ACO'],
-      {
-        summary: '<strong>Zynix for ACOs</strong> is an AI-powered operating system that helps Accountable Care Organizations maximize shared savings, achieve 85%+ TCM contact rates, close HCC and quality gaps, and automate care coordination across their attributed populations. Trusted by 7+ ACOs nationwide including Palm Beach ACO, West Florida ACO, and Space Coast ACO.',
-        screenshots: [
-          { img: IMG.portalACO, alt: 'Zynix ACO performance dashboard with shared savings and quality metrics', url: 'app.zynix.ai/aco/dashboard' },
-          { img: IMG.portalACOQuality, alt: 'Zynix ACO quality measures and HEDIS gap closure tracking', url: 'app.zynix.ai/aco/quality' },
-          { img: IMG.portalACORisk, alt: 'Zynix risk stratification engine for ACO population health', url: 'app.zynix.ai/aco/risk' }
-        ],
-        faqs: [
-          { q: 'How can ACOs use AI to close care gaps?', a: 'Zynix uses AI to identify open HCC and quality gaps across your attributed population, prioritize them by RAF impact, and automatically deploy outreach campaigns to schedule patients for gap-closing visits. The system achieves 40% improvement in gap closure rates compared to manual worklist management.' },
-          { q: 'What ROI can ACOs expect from Zynix?', a: 'Most ACOs see positive ROI within 8-12 weeks. Key financial impacts include increased TCM revenue from 85%+ contact rates (vs 30-40% industry average), improved RAF scores from HCC gap closure, and reduced administrative costs through AI agent automation. Typical annual savings range from $500K to $5M+ depending on attributed lives.' },
-          { q: 'How does Zynix integrate with existing ACO infrastructure?', a: 'Zynix integrates with 30+ EHR systems across 300+ connected instances (including Epic, Cerner, athenahealth and eClinicalWorks), claims feeds, ADT notifications and HIE connections. The Data Platform normalizes data from multiple provider organizations within your ACO network into a single unified view. Implementation typically takes 4-6 weeks.' },
-          { q: 'Can Zynix help with MSSP quality benchmarks?', a: 'Yes. Zynix tracks all CMS MSSP quality measures in real-time, identifies patients who need interventions, and deploys AI agents to schedule preventive visits, close quality gaps, and ensure documentation completeness, all of which directly improve your quality gate performance.' }
-        ]
-      }
-    );
-  }
-
-  // ── PAGE: Health Systems ──
-  function renderHealthSystems() {
-    return renderSolutionPage('Health Systems',
-      'Unified Intelligence for Complex Health Systems',
-      'Reduce readmissions, improve care coordination, and transform patient engagement across your entire system with AI-powered workflows.',
-      IMG.enterprise,
-      [
-        { icon: IC_HOSPITAL, title: 'Escalating Readmissions', desc: 'Unplanned 30-day readmissions cost billions annually. Current discharge processes miss critical follow-up windows.' },
-        { icon: IC_ZAP, title: 'Fragmented Engagement', desc: 'Inconsistent messaging across departments leads to poor compliance, missed appointments, and declining satisfaction.' },
-        { icon: IC_FILE, title: 'Documentation Burden', desc: 'Clinical staff spend 40% of their time on administrative tasks instead of delivering patient care.' }
-      ],
-      [
-        { icon: IC_PHONE, title: 'ZynOutreach', desc: 'Intelligently coordinate post-discharge follow-ups, medication reconciliation, and care transitions across facilities.' },
-        { icon: IC_MIC, title: 'ZynScribe', desc: 'Reduce documentation burden by 40% with AI-powered clinical note generation across every department.' },
-        { icon: IC_PILL, title: 'Medication Reconciliation', desc: 'Automated medication reviews ensure safe, complete medication lists at every transition point.' },
-        { icon: IC_CHART, title: 'System-Wide Analytics', desc: 'Enterprise dashboards with real-time visibility across departments, facilities, and care teams.' }
-      ],
-      [
-        { value: '85%', label: 'TCM Contact Rate' },
-        { value: '40%', label: 'Burnout Reduction' },
-        { value: '60%', label: 'Coordinator Time Saved' },
-        { value: '25%', label: 'Readmission Reduction' }
-      ],
-      { title: 'See How Health Systems Reduce Readmissions with Zynix', sub: 'See how Zynix delivers unified intelligence across your entire organization.', btn: 'Schedule a Demo' },
-      ['Health Vision Institute', 'CLSCFL'],
-      {
-        summary: '<strong>Zynix for Health Systems</strong> provides unified AI-powered patient engagement, post-discharge coordination, and clinical documentation across multi-facility health networks. The platform reduces 30-day readmissions by 25%, cuts documentation burden by 40%, and automates care transitions at enterprise scale.',
-        screenshots: [
-          { img: IMG.portalProvider, alt: 'Zynix provider clinical dashboard with quality metrics and care gaps', url: 'app.zynix.ai/provider/dashboard' },
-          { img: IMG.portalPredictive, alt: 'Zynix predictive analytics for readmission risk scoring', url: 'app.zynix.ai/analytics/risk' },
-          { img: IMG.portalQuality, alt: 'Zynix quality measures tracking for health system compliance', url: 'app.zynix.ai/quality/measures' }
-        ],
-        faqs: [
-          { q: 'How does AI reduce hospital readmissions?', a: 'Zynix uses predictive analytics to identify high-risk patients at discharge, then automatically deploys the Post-Discharge Follow-Up Agent to contact patients within 48 hours. The agent confirms safe arrival, reviews medications, and schedules follow-up visits, achieving 85%+ contact rates and 25% reduction in avoidable readmissions.' },
-          { q: 'Can Zynix scale across multiple facilities?', a: 'Yes. Zynix is built for enterprise-scale deployment. The platform normalizes data across multiple EHR instances, departments, and facilities into one unified layer. AI agents can be configured per facility or department while maintaining system-wide analytics and reporting.' },
-          { q: 'How does Zynix help with CMS readmission penalties?', a: 'By automating post-discharge follow-up, medication reconciliation, and care transition workflows, Zynix directly addresses the Hospital Readmissions Reduction Program (HRRP) penalties. Our platform tracks readmission metrics in real-time and proactively intervenes with at-risk patients.' }
-        ]
-      }
-    );
-  }
-
-  // ── PAGE: FQHCs ──
-  function renderFQHCs() {
-    return renderSolutionPage('FQHCs',
-      'Scaling Care for Underserved Communities with AI',
-      'Maximize quality payments, serve multilingual populations, and extend care management capabilities with limited staff resources.',
-      IMG.patients,
-      [
-        { icon: IC_USERS, title: 'Limited Staff Resources', desc: 'Lean teams managing large populations. Every staff member is essential and burnout threatens care continuity.' },
-        { icon: IC_GLOBE, title: 'Multilingual Populations', desc: 'Vulnerable communities require culturally competent, multilingual support that traditional systems can\u2019t provide.' },
-        { icon: IC_DOLLAR, title: 'Quality Payment Optimization', desc: 'Maximizing quality metrics and capturing every eligible payment is critical to sustainability.' }
-      ],
-      [
-        { icon: IC_GLOBE, title: 'Multilingual AI Support', desc: 'AI-powered after-hours support in 15+ languages serving diverse patient populations with cultural competence.' },
-        { icon: IC_BELL, title: 'Smart Reminders', desc: 'Automated appointment reminders and preventive care nudges reduce no-shows and improve compliance.' },
-        { icon: IC_CALENDAR, title: 'Intelligent Scheduling', desc: 'Capture every available appointment slot and manage patient flow efficiently with AI-powered scheduling.' },
-        { icon: IC_CHART, title: 'Quality Gap Analytics', desc: 'Identify quality gaps and preventive care opportunities across your entire patient population.' }
-      ],
-      [
-        { value: '3x', label: 'AWV Scheduling Lift' },
-        { value: '40%', label: 'Faster Gap Closure' },
-        { value: '15+', label: 'Languages Supported' },
-        { value: '24/7', label: 'Patient Access' }
-      ],
-      { title: 'See How FQHCs Scale Care with Zynix', sub: 'See how Zynix helps community health centers do more with less.', btn: 'Schedule a Demo' },
-      ['AMISTAD CHC'],
-      {
-        summary: '<strong>Zynix for FQHCs</strong> provides multilingual AI-powered outreach in 15+ languages, quality payment optimization, and automated care management for community health centers serving underserved populations. The platform helps FQHCs maximize UDS quality metrics while extending limited staff resources.',
-        screenshots: [
-          { img: IMG.portalQuality, alt: 'Zynix quality measures dashboard for FQHC UDS reporting', url: 'app.zynix.ai/fqhc/quality' },
-          { img: IMG.portalProvider, alt: 'Zynix provider dashboard for community health center care coordination', url: 'app.zynix.ai/fqhc/provider' }
-        ],
-        faqs: [
-          { q: 'How do FQHCs use AI for multilingual patient outreach?', a: 'Zynix AI agents communicate with patients in 15+ languages via phone calls, text messages, and voice. The agents handle appointment reminders, preventive care nudges, and after-hours triage in the patient\u2019s preferred language, improving engagement with diverse, underserved populations without adding staff.' },
-          { q: 'Can Zynix help FQHCs improve UDS reporting?', a: 'Yes. Zynix tracks UDS clinical quality measures in real-time, identifies patients who need preventive screenings or follow-up care, and deploys automated outreach to schedule visits. This directly improves quality measure performance for HRSA reporting.' },
-          { q: 'How does Zynix work with limited FQHC budgets?', a: 'Zynix is designed for cost-effectiveness. The platform automates tasks that would otherwise require additional FTEs, including after-hours coverage, appointment reminders, care gap outreach. Most FQHCs see positive ROI within 8-12 weeks through increased quality payments and reduced staffing costs.' }
-        ]
-      }
-    );
-  }
-
-  // ── PAGE: Health Plans ──
-  function renderHealthPlans() {
-    return renderSolutionPage('Health Plans',
-      'Drive Stars Ratings, Member Engagement, and Quality at Scale',
-      'Improve quality metrics, close HCC gaps, reduce avoidable ER utilization, and grow member satisfaction with AI-powered care management.',
-      IMG.analytics,
-      [
-        { icon: IC_STAR, title: 'Stars Rating Pressure', desc: 'Every star point impacts revenue and member choice. Manual processes can\u2019t scale to meet quality targets.' },
-        { icon: IC_USERS, title: 'Member Engagement at Scale', desc: 'Reaching millions of members with personalized outreach at reasonable cost requires automation.' },
-        { icon: IC_CHART, title: 'HCC Gap Closure', desc: 'Identifying and validating high-cost chronic conditions across your entire population is resource-intensive.' }
-      ],
-      [
-        { icon: IC_CHART, title: 'Analytics Suite', desc: 'Identify quality gaps, HCC opportunities, and high-risk members with AI-powered population analytics.' },
-        { icon: IC_FILE, title: 'Deployable Care Plans', desc: 'Standardized, evidence-based care plans deployed across your entire member population at scale.' },
-        { icon: IC_BOT, title: 'AI Agent Suite', desc: 'Autonomous agents handle member outreach, appointment scheduling, and follow-up, reaching 85%+ of members.' },
-        { icon: IC_SEARCH, title: 'Risk Stratification', desc: 'Predictive models identify members most likely to benefit from intervention before they become high-cost.' },
-        { icon: IC_HOSPITAL, title: 'CMS ACCESS Model', desc: 'ACCESS (Advancing Chronic Care with Effective, Scalable Solutions) is a voluntary CMS Innovation Center model in Original Medicare that ties payment for technology-supported chronic-condition care to measured patient outcomes. Zynix AI is an approved ACCESS participant, so ACOs and practices can take part through Zynix: clinicians refer eligible patients, stay involved in their care and can bill the ACCESS co-management fee, without enrolling in ACCESS themselves.' }
-      ],
-      [
-        { value: '85%', label: 'Contact Rates' },
-        { value: '9/10', label: 'Member Satisfaction' },
-        { value: '40%', label: 'Faster Gap Closure' },
-        { value: '30%', label: 'HCC Capture Improvement' }
-      ],
-      { title: 'See How Health Plans Improve Stars with Zynix', sub: 'See how Zynix helps health plans achieve quality targets at scale.', btn: 'Schedule a Demo' },
-      ['eTernal Health'],
-      {
-        summary: '<strong>Zynix for Health Plans</strong> helps payers improve CMS Stars ratings, close HCC and quality gaps at population scale, and drive member engagement through AI-powered outreach. The platform identifies high-impact intervention opportunities and deploys autonomous agents to reach 85%+ of targeted members.',
-        screenshots: [
-          { img: IMG.portalACO, alt: 'Zynix population health dashboard with care gap tracking', url: 'app.zynix.ai/health-plan/population' },
-          { img: IMG.portalACORisk, alt: 'Zynix HCC risk stratification for health plan members', url: 'app.zynix.ai/health-plan/risk' },
-          { img: IMG.portalChatbot, alt: 'Zynix AI data query chatbot for member analytics', url: 'app.zynix.ai/health-plan/query' }
-        ],
-        faqs: [
-          { q: 'How can health plans use AI to improve Stars ratings?', a: 'Zynix identifies members with open quality gaps that impact Stars measures, prioritizes them by potential impact, and deploys AI agents to schedule preventive visits, close care gaps, and ensure proper documentation. The system tracks HEDIS measures in real-time and proactively intervenes before measurement periods close.' },
-          { q: 'How does Zynix help with HCC risk adjustment?', a: 'Zynix Analytics identifies suspected HCC gaps by analyzing claims history, clinical data, and predictive models. The platform prioritizes members by RAF impact and deploys automated outreach to schedule visits with providers who can validate and document chronic conditions, improving risk adjustment accuracy.' },
-          { q: 'Can Zynix handle member engagement at scale?', a: 'Yes. Zynix AI agents can autonomously reach millions of members via phone calls, text messages, and digital channels. The agents handle appointment scheduling, medication adherence reminders, preventive care nudges, and post-discharge follow-ups, all personalized to the individual member.' }
-        ]
-      }
-    );
-  }
-
-  // ── PAGE: Independent Practices ──
-  function renderPractices() {
-    return renderSolutionPage('Independent Practices',
-      'Enterprise-Grade AI, Built for Independent Practices',
-      'Reduce no-shows, eliminate after-hours burden, and capture missed revenue with AI-powered workflows designed for small to mid-size practices.',
-      IMG.doctor,
-      [
-        { icon: IC_ALERT, title: 'No-Show Crisis', desc: 'High no-show rates directly impact revenue. Manual reminders are labor-intensive and inconsistent.' },
-        { icon: IC_MOON, title: 'After-Hours Burden', desc: 'Night and weekend calls drain staff morale. Patients can\u2019t reach you when they need you most.' },
-        { icon: IC_DOLLAR, title: 'Missed Revenue', desc: 'Uncaptured TCM visits and quality payments represent significant lost revenue for your practice.' }
-      ],
-      [
-        { icon: IC_BELL, title: 'ZynReminder', desc: 'Automated appointment reminders via call, text, and email reduce no-shows by up to 40%.' },
-        { icon: IC_MOON, title: 'ZynAfterHours', desc: 'AI-powered after-hours support handles routine calls and urgent triage -24/7, 365 days a year.' },
-        { icon: IC_CALENDAR, title: 'ZynSchedule', desc: 'Intelligent scheduling captures every available appointment slot around the clock.' },
-        { icon: IC_MIC, title: 'ZynScribe', desc: 'AI-powered note generation saves physicians 1-2 hours daily on documentation.' }
-      ],
-      [
-        { value: '40%', label: 'No-Show Reduction' },
-        { value: '$200K+', label: 'Revenue Capture (TCM)' },
-        { value: '2 hrs', label: 'Saved Per Physician/Day' },
-        { value: '24/7', label: 'Patient Access' }
-      ],
-      { title: 'See How Practices Reduce No-Shows with Zynix', sub: 'See how Zynix brings enterprise AI to independent practices.', btn: 'Schedule a Demo' },
-      ['Cardio & Vascular Consultants', 'Professional Radiology Group', 'Pain Rehab Surgery Center'],
-      {
-        summary: '<strong>Zynix for Independent Practices</strong> brings enterprise-grade AI to small and mid-size medical practices. The platform reduces no-shows by 40%, provides 24/7 AI-powered after-hours coverage, automates appointment scheduling, and saves physicians 1-2 hours daily on documentation, all without adding staff.',
-        screenshots: [
-          { img: IMG.portalProvider, alt: 'Zynix clinical dashboard for independent medical practices', url: 'app.zynix.ai/practice/dashboard' },
-          { img: IMG.portalPredictive, alt: 'Zynix predictive analytics for patient risk management', url: 'app.zynix.ai/practice/analytics' }
-        ],
-        faqs: [
-          { q: 'How does AI reduce no-shows for medical practices?', a: 'Zynix ZynReminder sends personalized appointment reminders via phone call, text message, and email at optimal intervals before the visit. Patients can confirm, reschedule, or cancel directly through the AI agent. Practices using Zynix see 40% reduction in no-shows, directly recovering lost revenue.' },
-          { q: 'What does AI after-hours coverage look like for a small practice?', a: 'ZynAfterHours answers patient calls 24/7 in 15+ languages. The AI agent triages symptoms using clinical protocols, directs emergencies to 911, schedules urgent next-day appointments, and handles routine questions, all without waking your on-call physician. You get a detailed report every morning.' },
-          { q: 'How quickly can an independent practice deploy Zynix?', a: 'Most practices go live within 2-4 weeks. The implementation starts with connecting to your EHR and phone system, then activating the agents you need most. Many practices start with ZynReminder and ZynAfterHours, then add scheduling and documentation capabilities over time.' }
-        ]
-      }
-    );
-  }
-
-  // ── PAGE: ASCs ──
-  function renderASCs() {
-    return renderSolutionPage('ASCs',
-      'Streamline Surgical Operations from Auth to Recovery',
-      'Eliminate prior authorization delays, reduce surgical cancellations, and automate post-procedure workflows with AI-powered orchestration.',
-      IMG.enterprise,
-      [
-        { icon: IC_CLIPBOARD, title: 'Prior Auth Delays', desc: 'Lengthy approval processes delay surgeries and block OR capacity, costing revenue every day.' },
-        { icon: IC_ALERT, title: 'Surgical Cancellations', desc: 'Inadequate patient prep and missing clearances lead to last-minute cancellations and wasted OR time.' },
-        { icon: IC_PHONE, title: 'Post-Op Follow-Up Gaps', desc: 'Poor post-procedure communication leads to complications, readmissions, and patient dissatisfaction.' }
-      ],
-      [
-        { icon: IC_CLIPBOARD, title: 'ZynAuth', desc: 'Accelerate prior authorization with AI-powered documentation collection, submission, and tracking.' },
-        { icon: IC_BELL, title: 'Pre-Op Reminders', desc: 'Automated pre-op reminders ensure patients arrive prepared with all required clearances and documentation.' },
-        { icon: IC_CALENDAR, title: 'Smart Scheduling', desc: 'Intelligent surgical scheduling optimizes OR utilization and reduces gaps between procedures.' },
-        { icon: IC_PHONE, title: 'Post-Discharge Follow-Up', desc: 'Automated workflows ensure proper recovery tracking and early complication detection.' }
-      ],
-      [
-        { value: '50%', label: 'Faster Auth Turnaround' },
-        { value: '35%', label: 'Cancellation Reduction' },
-        { value: '24/7', label: 'Patient Communication' },
-        { value: '95%+', label: 'Patient Satisfaction' }
-      ],
-      { title: 'See How ASCs Streamline Operations with Zynix', sub: 'See how Zynix streamlines surgical operations from authorization to recovery.', btn: 'Schedule a Demo' },
-      ['Pain Rehab Surgery Center'],
-      {
-        summary: '<strong>Zynix for ASCs</strong> automates prior authorization workflows, reduces surgical cancellations, and coordinates pre-op and post-op patient communication for ambulatory surgery centers. The platform achieves 60% faster auth turnaround and 35% reduction in day-of-surgery cancellations.',
-        screenshots: [
-          { img: IMG.portalChatbot, alt: 'Zynix AI chatbot interface for ASC patient data queries', url: 'app.zynix.ai/asc/chatbot' },
-          { img: IMG.portalACO, alt: 'Zynix performance dashboard for ambulatory surgery center operations', url: 'app.zynix.ai/asc/performance' }
-        ],
-        faqs: [
-          { q: 'How does AI speed up prior authorization for ASCs?', a: 'ZynAuth automates the entire prior auth workflow: gathering clinical documentation, submitting authorization requests to payers, tracking approval status, and following up on pending authorizations. The AI agent works 24/7 and reduces auth turnaround time by 60%, ensuring surgeries aren\u2019t delayed by administrative bottlenecks.' },
-          { q: 'Can Zynix reduce surgical cancellations?', a: 'Yes. Zynix sends automated pre-op reminders that verify patient readiness by confirming fasting instructions, medication holds, transportation arrangements, and required lab work. By ensuring patients arrive fully prepared, ASCs using Zynix see 35% reduction in day-of-surgery cancellations.' },
-          { q: 'How does Zynix handle post-operative follow-up?', a: 'After surgery, the Post-Discharge Follow-Up Agent automatically contacts patients to check on recovery, review medication instructions, identify potential complications, and schedule follow-up visits. This proactive approach catches issues early and improves patient satisfaction scores.' }
-        ]
-      }
-    );
-  }
+  // ── Legacy /solutions-* routes (owner P3). The server 301s these URLs to /audience-segments/*; when the bundle renders
+  // them (routes table, never edited: DESIGN_SPEC §6), each delegates to its audience page. The old solution template,
+  // its unsourced metrics, invented customer names and placeholder product URLs are gone. ──
+  function renderACOs() { return renderWhoWeServeACOs(); }
+  function renderHealthSystems() { return renderWhoWeServeHealthSystems(); }
+  function renderFQHCs() { return renderWhoWeServeFQHCs(); }
+  function renderHealthPlans() { return renderWhoWeServeHealthPlans(); }
+  function renderPractices() { return renderWhoWeServeIndependentPractices(); }
+  function renderASCs() { return renderWhoWeServeASCs(); }
 
   // ── PAGE: About ──
   function renderAbout() {
@@ -5471,649 +5174,1277 @@
   // ── V7 REBUILD: Use Case Pages ──────────────────────────────────────────
 
 /* ============================================================
-   Zynix AI v7 — Use Case Pages
-   Template renderer, data objects (UC01–UC30), routes, SEO
+   Solutions, audience and use-case pages (owner P3; DESIGN_SPEC §6 "Audience" and "Use case" templates).
+   Renderers, the USE_CASES data (30 pages), routes and SEO. Page CSS: the page:solutions block, prefix zx-sol-.
+   Facts come from SITE_FACTS, CUSTOMERS and NAMES only; product and agent names from NAMES (no status labels,
+   no held agents, no counts). Illustrative panels are renderUiPanel() output, at most two per page (§2.9).
    ============================================================ */
 
-// ── Template B Renderer ─────────────────────────────────────
+// Organization types: filter keys on /use-cases, variant labels, audience pages (labels = NAV "By organization").
+var ZX_SOL_AUD = {
+  aco:    { label: 'ACOs', href: '/audience-segments/acos-msos' },
+  mso:    { label: 'MSOs, IPAs &amp; physician groups', href: '/audience-segments/independent-group-practices' },
+  plan:   { label: 'Health plans', href: '/audience-segments/health-plans' },
+  system: { label: 'Health systems', href: '/audience-segments/health-systems' },
+  fqhc:   { label: 'FQHCs &amp; community health', href: '/audience-segments/fqhcs' },
+  asc:    { label: 'Surgery centers', href: '/audience-segments/ascs' }
+};
+var ZX_SOL_AUD_ORDER = ['aco', 'mso', 'plan', 'system', 'fqhc', 'asc'];
+
+// Workflow groups on /use-cases; the ids are the §6.1 anchors (/solutions and the ASC page link them).
+var ZX_SOL_GROUPS = [
+  { id: 'transitions-of-care', name: 'Transitions of care', icon: 'activity',
+    lead: 'ADT-triggered outreach inside the TCM window, through the follow-up visit.',
+    runs: 'Transitions of care agent · ZynSchedule · Post-discharge TCM care plan' },
+  { id: 'risk-adjustment-quality', name: 'Risk adjustment &amp; quality gaps', icon: 'target',
+    lead: 'HCC and HEDIS gaps worked from the list to a documented visit.',
+    runs: 'Care gap and HCC detection · Preventive and quality activation agent · HCC gap closure sprint' },
+  { id: 'chronic-care', name: 'Chronic care &amp; adherence', icon: 'heart',
+    lead: 'Monthly CCM contact, adherence check-ins and outreach when risk starts to rise.',
+    runs: 'Chronic care management agent · Rising-risk outreach agent · Medication safety and adherence plan' },
+  { id: 'after-hours', name: 'After-hours access', icon: 'clock',
+    lead: 'After-hours calls answered, with symptom questions routed to your on-call clinician.',
+    runs: 'ZynAfterHours · ZynSchedule' },
+  { id: 'care-navigation', name: 'Care navigation &amp; SDoH', icon: 'mappin',
+    lead: 'Screening, resource referrals and follow-up for patients facing barriers.',
+    runs: 'Referral management agent · Chronic care management agent · Care coordinators' },
+  { id: 'front-office', name: 'Front-office work &amp; documentation', icon: 'file',
+    lead: 'Referrals, fax intake, scheduling, authorization paperwork and visit notes.',
+    runs: 'ZynFax · ZynSchedule · Referral management agent · ZynScribe' }
+];
+var ZX_SOL_ICON = { dataFoundation: 'database', analytics: 'chart', agents: 'bot', carePlans: 'clipboard', scribe: 'mic', integrations: 'link', llm: 'brain' };
+var ZX_SOL_OWNER_ICON = { agent: 'bot', staff: 'user', system: 'layers' };
+
+function zxSolGroup(id) { for (var i = 0; i < ZX_SOL_GROUPS.length; i++) if (ZX_SOL_GROUPS[i].id === id) return ZX_SOL_GROUPS[i]; return null; }
+function zxSolAll() { return Object.keys(USE_CASES).map(function (k) { return USE_CASES[k]; }); }
+function zxSolBySlug(slug) { var all = zxSolAll(); for (var i = 0; i < all.length; i++) if (all[i].slug === slug) return all[i]; return null; }
+function zxSolAudLabels(uc) {
+  return [uc.audience].concat(uc.also || []).filter(function (k, i, a) { return ZX_SOL_AUD[k] && a.indexOf(k) === i; })
+    .map(function (k) { return ZX_SOL_AUD[k].label; }).join(' · ');
+}
+
+// Keeps hyphenated words (follow-up, post-discharge) on one line in headings; display only, never in data or labels.
+function zxSolNw(s) { return String(s || '').replace(/([A-Za-z0-9]+(?:-[A-Za-z0-9]+)+)/g, '<span class="zx-sol-nw">$1</span>'); }
+
+// A product link from NAMES.products (agents link to their family anchor on /agents, from NAMES.agentFamilies).
+function zxSolProduct(r) {
+  var p = r && NAMES.products[r.p];
+  if (!p) return null;
+  var fam = null;
+  if (r.family) NAMES.agentFamilies.forEach(function (f) { if (f.id === r.family) fam = f; });
+  return { href: fam ? fam.href : p.href, label: p.name + (fam ? ' · ' + fam.name : ''), desc: r.note || '', icon: ZX_SOL_ICON[r.p] || 'layers' };
+}
+
+// Link rows in the related-link look (§2.16 styling), for "what it runs on" and variant lists inside a section.
+function zxSolLinks(items, cls) {
+  items = (items || []).filter(function (it) { return it && it.href && it.label; });
+  if (!items.length) return '';
+  return '<ul class="zynix-related__list zx-sol-links' + (cls ? ' ' + cls : '') + '" role="list">' + items.map(function (it) {
+    return '<li><a class="zynix-related__link" href="' + zxAttr(it.href) + '">' +
+      (it.icon ? '<span class="zynix-related__icon" aria-hidden="true">' + zxIcon(it.icon) + '</span>' : '') +
+      '<span class="zynix-related__text">' + zxEl('span', 'zx-sol-links__kicker', it.kicker) + '<span class="zynix-related__name">' + it.label + '</span>' +
+      zxEl('span', 'zynix-related__desc', it.desc) + '</span><span class="zynix-related__arrow" aria-hidden="true">→</span></a></li>';
+  }).join('') + '</ul>';
+}
+
+// Who owns a step: an agent, a staff role or the platform (role labels only, §2.9 kit rules).
+function zxSolOwner(s) {
+  var t = ZX_SOL_OWNER_ICON[s.owner] ? s.owner : 'system';
+  return '<p class="zx-sol-owner zx-sol-owner--' + t + '"><span class="zx-visually-hidden">Owner: </span>' + zxIcon(ZX_SOL_OWNER_ICON[t]) + '<span>' + s.who + '</span></p>';
+}
+
+// The product frame around an illustrative panel (the panel carries its own sample chip and data-zx-sample).
+function zxSolFrame(model, caption) {
+  return renderProductFrame({ html: renderUiPanel(model), sample: false, className: 'zx-sol-frame', caption: caption });
+}
+
+// Compact data flow (NAMES.flow, step summaries as on the homepage diagram) with a link to the full diagram.
+var ZX_SOL_FLOW_SUMMARY = { ingest: 'Bring every source in.', normalize: 'Clean, code and match.', reason: 'Read the record in context.',
+  surface: 'Rank the work.', execute: 'Carry it through.' };
+function zxSolFlow() {
+  var layerName = function (id) { for (var i = 0; i < NAMES.layers.length; i++) if (NAMES.layers[i].id === id) return NAMES.layers[i].name; return ''; };
+  return '<ol class="zx-sol-flow" aria-label="Data flow steps">' + NAMES.flow.map(function (s, i) {
+    return '<li class="zx-sol-flow__step"><span class="zx-sol-flow__n" aria-hidden="true">' + (i + 1) + '</span><div class="zx-sol-flow__text">' +
+      '<p class="zx-sol-flow__name">' + s.name + '</p><p class="zx-sol-flow__sum">' + (ZX_SOL_FLOW_SUMMARY[s.id] || '') + '</p>' +
+      '<p class="zx-sol-flow__layer">' + s.layers.map(layerName).join(' · ') + '</p></div></li>';
+  }).join('') + '</ol>';
+}
+
+// ── Use-case page (§6 "Use case"): hook + example episode → the problem → how it runs → where it fits → related → CTA ──
 function renderUseCaseV7(data) {
-  var html = '';
+  var path = '/use-cases/' + data.slug, g = zxSolGroup(data.group), aud = ZX_SOL_AUD[data.audience];
+  var ep = data.episode || {};
+  var html = renderHero({ preset: 'product', eyebrow: g ? g.name : 'Use case', title: zxSolNw(data.title), lead: data.lead,
+    secondary: { label: 'See how it runs', href: '#workflow' },
+    media: { type: 'product', frame: { html: renderUiPanel({ brand: ep.brand || 'Care operations', chip: ep.steps ? 'Example episode · sample data' : 'Sample data',
+      title: ep.title, meta: ep.meta, tiles: ep.tiles, rows: ep.rows, pipeline: ep.pipeline, steps: ep.steps, note: ep.note, footer: ep.footer,
+      label: (ep.steps ? 'Example ' + ep.title.charAt(0).toLowerCase() + ep.title.slice(1) : 'Sample ' + ep.title.charAt(0).toLowerCase() + ep.title.slice(1)) + ', illustrative data' }),
+      sample: false, className: 'zx-sol-frame' } } });
 
-  var segLabel = (data.segments && data.segments.primary) ? data.segments.primary.toUpperCase() : 'USE CASE';
-  // Short title as the H1; the narrative hook becomes the hero lead line, and the
-  // longer intro opens the problem section so no copy is dropped.
-  html += renderInnerHero(segLabel, data.title, data.h1, IMG.care, data.title, 'Explore Capabilities');
+  // The problem, and where today's tools stop
+  var gaps = (data.gaps || []).map(function (x) {
+    return '<li class="zx-sol-gaps__item"><p class="zx-sol-gaps__tool">' + x.tool + '</p><p class="zx-sol-gaps__text">' + x.text + '</p></li>';
+  }).join('');
+  html += renderSection({ id: 'problem', className: 'zx-sol-problem' }, renderSplit(
+    renderSectionHead('The problem', data.problem.title, '', { id: 'problem-title' }) +
+      '<div class="zx-sol-prose">' + data.problem.body.map(function (p) { return '<p>' + p + '</p>'; }).join('') + '</div>',
+    gaps ? '<aside class="zx-sol-gaps" aria-labelledby="gaps-title"><p class="zx-sol-gaps__label" id="gaps-title">Where today’s tools stop</p><ul class="zx-sol-gaps__list" role="list">' + gaps + '</ul></aside>' : '',
+    { ratio: '7-5' }));
 
-  html += '<section style="padding:80px 0"><div class="zynix-container" style="max-width:800px">' +
-    (data.subhead ? '<p style="font-size:18px;line-height:1.7;color:var(--z-text);margin:0 0 40px">' + data.subhead + '</p>' : '') +
-    '<span class="zynix-tag">THE PROBLEM</span>' +
-    '<h2>' + data.problemHeading + '</h2>' +
-    '<div style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin-top:24px">' + data.problem + '</div>' +
-    '</div></section>';
+  // How it runs: the steps, each with its owner, and the confirmed governance statement
+  var steps = '<ol class="zx-sol-steps">' + data.steps.map(function (s, i) {
+    return '<li class="zx-sol-step"><span class="zx-sol-step__n" aria-hidden="true">' + (i < 9 ? '0' : '') + (i + 1) + '</span>' +
+      '<div class="zx-sol-step__main"><h3 class="zx-sol-step__title">' + zxSolNw(s.title) + '</h3><p class="zx-sol-step__body">' + s.body + '</p></div>' + zxSolOwner(s) + '</li>';
+  }).join('') + '</ol>';
+  var gov = zxGovernance(data.gov || ['escalation']).map(function (e) {
+    return '<p class="zx-sol-gov"><strong>' + e.title + '.</strong> ' + e.text + '</p>';
+  }).join('');
+  html += renderSection({ id: 'workflow', surface: 'subtle', className: 'zx-sol-how' },
+    renderSectionHead('How it runs', data.how.title, data.how.lead, { id: 'workflow-title', align: 'split' }) + steps + gov);
 
-  html += '<section style="padding:80px 0;background:var(--z-bg-alt)"><div class="zynix-container">' +
-    '<span class="zynix-tag">WHY CURRENT TOOLS FALL SHORT</span>' +
-    '<h2>Where Existing Approaches Break Down</h2>' +
-    '<div class="zynix-compare-grid" style="margin-top:40px">';
-  for (var s = 0; s < data.shortfalls.length; s++) {
-    html += '<div class="zynix-compare-card zynix-compare-bad fade-in-up">' +
-      '<h3>' + IC_ALERT + ' ' + data.shortfalls[s].tool + '</h3>' +
-      '<p style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin:0">' + data.shortfalls[s].description + '</p>' +
-      '</div>';
+  // Where it fits: products used (NAMES.products links) and the same workflow for other organization types
+  var prods = (data.runsOn || []).map(zxSolProduct).filter(Boolean);
+  var variants = zxSolAll().filter(function (u) { return u.group === data.group && u.slug !== data.slug; })
+    .sort(function (a, b) { return ZX_SOL_AUD_ORDER.indexOf(a.audience) - ZX_SOL_AUD_ORDER.indexOf(b.audience); })
+    .map(function (u) { return { href: '/use-cases/' + u.slug, label: u.title, kicker: ZX_SOL_AUD[u.audience] ? ZX_SOL_AUD[u.audience].label : '' }; });
+  html += renderSection({ id: 'fit', className: 'zx-sol-fit' },
+    renderSectionHead('Where it fits', 'Runs on the Zynix platform', 'The same data foundation, agents and care plans run every workflow on this site, whatever type of organization runs it.', { id: 'fit-title' }) +
+    '<div class="zx-sol-fit__grid"><div class="zx-sol-fit__col"><h3 class="zx-sol-fit__title">Products used</h3>' + zxSolLinks(prods) + '</div>' +
+    (variants.length ? '<div class="zx-sol-fit__col"><h3 class="zx-sol-fit__title">The same workflow for other organizations</h3>' + zxSolLinks(variants, 'zx-sol-links--plain') + '</div>' : '') +
+    '</div>');
+
+  // One related block per page (§2.16). Six use cases still have a CROSS_LINKS entry, which the router inserts instead.
+  if (!(typeof CROSS_LINKS !== 'undefined' && CROSS_LINKS[path])) {
+    var rel = (data.readNext || []).map(zxSolBySlug).filter(Boolean).slice(0, 3).map(function (u) {
+      var ug = zxSolGroup(u.group);
+      return { href: '/use-cases/' + u.slug, label: u.title, desc: ug ? ug.name : '', icon: ug ? ug.icon : 'layers' };
+    });
+    var more = [];
+    if (aud) more.push({ href: aud.href, label: 'Zynix for ' + aud.label, desc: 'Workflows, customers and how it connects', icon: 'users' });
+    var story = data.story ? zxCustomer(data.story) : null;
+    if (story && story.caseStudy) more.push({ href: story.caseStudy, label: story.name, desc: 'Customer story' + (story.segmentLabel ? ' · ' + story.segmentLabel : ''), icon: 'book' });
+    more.push({ href: '/use-cases', label: 'All use cases', desc: 'Every workflow, by program and organization', icon: 'layers' });
+    html += renderRelatedLinks({ title: 'Related', groups: [{ label: 'Use cases', items: rel }, { label: 'Explore more', items: more.slice(0, 3) }] });
   }
-  html += '</div></div></section>';
 
-  html += '<section style="padding:80px 0"><div class="zynix-container" style="max-width:800px">' +
-    '<span class="zynix-tag">HOW ZYNIX AI FITS</span>' +
-    '<h2>' + data.solutionHeading + '</h2>' +
-    '<div style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);margin-top:24px">' + data.solution + '</div>' +
-    '</div></section>';
-
-  html += '<section style="padding:80px 0;background:var(--z-bg-alt)"><div class="zynix-container">' +
-    '<span class="zynix-tag">CAPABILITIES USED</span>' +
-    '<h2>Platform Capabilities</h2>' +
-    '<div class="zynix-feature-grid" style="margin-top:40px">';
-  var prodIcons = [IC_BOT, IC_SEARCH, IC_CALENDAR, IC_CLIPBOARD, IC_GEAR, IC_FILE];
-  for (var p = 0; p < data.products.length; p++) {
-    html += '<div class="zynix-feature-card fade-in-up">' +
-      '<div class="zynix-feature-icon">' + (prodIcons[p] || IC_GEAR) + '</div>' +
-      '<h3>' + data.products[p].name + '</h3>' +
-      '<p>' + data.products[p].descriptor + '</p>' +
-      (data.products[p].status !== 'Available' ? '<div class="zynix-feature-metric"><span style="color:var(--z-accent)">' + data.products[p].status + '</span></div>' : '') +
-      '<a href="' + data.products[p].url + '" class="zynix-card-link">Explore ' + data.products[p].name + ' &rarr;</a>' +
-      '</div>';
-  }
-  html += '</div></div></section>';
-
-  html += renderCTA(data.cta.headline, 'See how Zynix AI can transform this workflow for your organization.', data.cta.label);
-
-  html += '<section style="padding:80px 0"><div class="zynix-container">' +
-    '<span class="zynix-tag">EXPLORE MORE</span>' +
-    '<h2>Related Use Cases</h2>' +
-    '<div class="zynix-agents-grid" style="margin-top:40px">';
-  var ucIcons = [IC_FILE, IC_BOT, IC_SEARCH];
-  for (var r = 0; r < data.readNext.length; r++) {
-    html += '<a href="/use-cases/' + data.readNext[r].slug + '" class="zynix-agent-card fade-in-up" style="text-decoration:none;color:inherit;display:block">' +
-      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + (ucIcons[r] || IC_FILE) + '</span><h3>' + data.readNext[r].title + '</h3></div>' +
-      '<p style="color:var(--z-accent);font-weight:500;font-size:14px;margin-top:12px">View use case &rarr;</p>' +
-      '</a>';
-  }
-  html += '</div></div></section>';
-
+  html += renderCTA('See ' + data.cta + ' run end to end',
+    'A 30-minute demo on sample data: what triggers it, what the agents do and where your team steps in.', null,
+    { secondary: { label: 'All use cases', href: '/use-cases' } });
   html += renderFooter();
   return html;
 }
 
+// ── Audience page (§6 "Audience", ~3,500px): hero + panel → proof → what we run → a plan at work → how it connects →
+// segment callout → (extra) → related (router, CROSS_LINKS) → CTA ──
+function renderAudiencePageV7(d) {
+  var html = renderHero({ preset: 'product', eyebrow: d.eyebrow, title: zxSolNw(d.title), lead: d.lead, secondary: d.secondary,
+    media: { type: 'product', frame: { html: renderUiPanel(d.panel), sample: false, className: 'zx-sol-frame', caption: d.panelCaption } } });
 
-function renderAudiencePageV7(data) {
-  var html = '';
-
-  html += renderInnerHero(data.eyebrow, data.headline, data.subhead, IMG.patients, data.audienceName, 'Explore Capabilities');
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">THE CHALLENGE</span>' +
-    '<h2>Key Challenges</h2>' +
-    '<p class="zynix-section-sub">' + data.challengeIntro + '</p>' +
-    '<div class="zynix-problem-grid">';
-  for (var i = 0; i < data.challenges.length; i++) {
-    html += '<div class="zynix-problem-card fade-in-up"><div class="zynix-problem-icon">' + IC_ALERT + '</div><h3>' + data.challenges[i].title + '</h3><p>' + data.challenges[i].body + '</p></div>';
+  // Proof: customers of this segment (registry only) and one release quote or customer story
+  // (segment logos, or named customers, or the registry logo row), beside a release quote or a customer story card
+  var p = d.proof;
+  if (p) {
+    var who;
+    if (p.logos && p.logos.length) who = renderLogoRow(p.logos, { id: 'proof-logos', label: p.label, link: p.link || null });
+    else if (p.names || p.note) who = '<div class="zx-sol-names"><p class="zynix-logo-row__label">' + p.label + '</p>' +
+      (p.names ? '<ul class="zx-sol-names__list" role="list">' + p.names.map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ul>' : '') +
+      zxEl('p', 'zx-sol-names__note', p.note) + (p.link ? renderLinkArrow(p.link.label, p.link.href) : '') + '</div>';
+    else who = renderLogoRow(null, { id: 'proof-logos' });
+    var side = p.quote ? renderQuote({ customer: p.quote, logo: p.logos ? null : undefined }) : (p.card ? renderCard(p.card) : '');
+    html += '<section class="zynix-section zynix-section--compact zynix-section--rule zx-sol-proof" id="proof" aria-labelledby="proof-title"><div class="zynix-container">' +
+      '<h2 class="zx-visually-hidden" id="proof-title">Customers</h2>' + (side ? renderSplit(who, side, { ratio: '5-7', center: true }) : who) + '</div></section>';
   }
-  html += '</div></div></section>';
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">HOW ZYNIX AI FITS</span>' +
-    '<h2>Platform Capabilities</h2>' +
-    '<p class="zynix-section-sub">' + data.fitIntro + '</p>' +
-    '<div class="zynix-feature-grid">';
-  for (var j = 0; j < data.capabilities.length; j++) {
-    html += '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_ZAP + '</div><h3>' + data.capabilities[j].title + '</h3><p>' + data.capabilities[j].body + '</p></div>';
+  // Section surfaces alternate white / subtle from here on, so two sections never run together
+  var alt = 0, surf = function () { return (alt++ % 2) ? 'subtle' : 'default'; };
+
+  // The problem (MSO/IPA page, COPY_DECK §5.3)
+  if (d.problem) {
+    html += renderSection({ id: 'problem', className: 'zx-sol-problem', surface: surf() }, renderSplit(
+      renderSectionHead('The problem', d.problem.title, '', { id: 'problem-title' }),
+      '<div class="zx-sol-prose">' + d.problem.body.map(function (x) { return '<p>' + x + '</p>'; }).join('') + '</div>', { ratio: '5-7' }));
   }
-  html += '</div></div></section>';
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">USE CASES</span>' +
-    '<h2>Primary Use Cases</h2>' +
-    '<div class="zynix-agents-grid">';
-  for (var k = 0; k < data.primaryUseCases.length; k++) {
-    var uc = data.primaryUseCases[k];
-    html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + String(k + 1).padStart(2, '0') + '</span><h3>' + uc.title + '</h3></div>' +
-      '<p>' + uc.teaser + '</p>' +
-      '<p><a href="' + uc.url + '">View use case &rarr;</a></p>' +
-      '</div>';
+  // What we run: three workflows, each linked to its use cases
+  var w = d.workflows;
+  html += renderSection({ id: 'workflows', className: 'zx-sol-wf', surface: surf() },
+    renderSectionHead(w.eyebrow || 'What we run', w.title, w.lead, { id: 'workflows-title', align: 'split' }) +
+    '<ol class="zx-sol-wf__list">' + w.items.map(function (it, i) {
+      return '<li class="zx-sol-wf__item"><p class="zx-sol-wf__n"><span aria-hidden="true">0' + (i + 1) + '</span> ' + it.eyebrow + '</p>' +
+        '<h3 class="zx-sol-wf__title">' + zxSolNw(it.title) + '</h3><p class="zx-sol-wf__problem">' + it.problem + '</p>' +
+        '<p class="zx-sol-wf__does"><span class="zx-sol-wf__label">What Zynix does</span>' + it.does + '</p>' +
+        '<div class="zx-sol-wf__links">' + (it.links || []).map(function (l) { return renderLinkArrow(l.label, l.href); }).join('') + '</div></li>';
+    }).join('') + '</ol>');
+
+  // One plan at work: the second (and last) illustrative panel, with numbered notes on who does what
+  if (d.plan) {
+    html += renderSection({ id: 'in-practice', surface: surf(), className: 'zx-sol-plan' }, renderSplit(
+      renderSectionHead(d.plan.eyebrow, d.plan.title, d.plan.lead, { id: 'in-practice-title' }) + renderCallouts(d.plan.callouts),
+      zxSolFrame(d.plan.panel, d.plan.caption), { ratio: '5-7', center: true }));
   }
-  html += '</div></div></section>';
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">FEATURED PLATFORM CAPABILITIES</span>' +
-    '<h2>Products That Power This</h2>' +
-    '<div class="zynix-feature-grid">';
-  for (var n = 0; n < data.featuredProducts.length; n++) {
-    var fp = data.featuredProducts[n];
-    html += '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_SEARCH + '</div><h3><a href="' + fp.url + '">' + fp.name + '</a></h3><p>' + fp.description + '</p></div>';
+  // How it connects: the EHR line, the compact data flow and the compliance badges
+  var c = d.connect;
+  html += renderSection({ id: 'connect', className: 'zx-sol-connect', surface: surf() },
+    renderSectionHead(c.eyebrow || 'How it connects', c.title, c.body, { id: 'connect-title', action: c.link, align: 'split' }) + zxSolFlow() +
+    '<div class="zx-sol-connect__foot">' + (c.bullets ? '<div class="zx-sol-bullets"><h3 class="zx-sol-bullets__title">' + c.bullets.title + '</h3><ul class="zx-sol-bullets__list" role="list">' +
+      c.bullets.items.map(function (b) { return '<li>' + b + '</li>'; }).join('') + '</ul></div>' : '') +
+    renderTrustRow(['soc2', 'hipaa', 'hitrust'], { href: '/security', className: 'zx-sol-trust' }) + '</div>');
+
+  // Segment callout: the CMS ACCESS Model (ACO, MSO/IPA, FQHC only), Stars and risk adjustment (plans), governance
+  if (d.callout) {
+    var k = d.callout;
+    html += '<section class="zynix-section zynix-section--brand zynix-section--compact zx-sol-callout" id="' + zxAttr(k.id) + '" aria-labelledby="' + zxAttr(k.id) + '-title"><div class="zynix-container">' +
+      renderSplit(renderSectionHead(k.eyebrow, k.title, '', { id: k.id + '-title' }),
+        '<div class="zx-sol-prose">' + k.body.map(function (x) { return '<p>' + x + '</p>'; }).join('') + '</div>' + (k.link ? renderLinkArrow(k.link.label, k.link.href) : ''),
+        { ratio: '5-7' }) + '</div></section>';
   }
-  html += '</div></div></section>';
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">INDUSTRY CONTEXT</span>' +
-    '<h2>What the Data Shows</h2>' +
-    '<div class="zynix-data-layers">';
-  for (var ci = 0; ci < data.citations.length; ci++) {
-    var c = data.citations[ci];
-    html += '<div class="zynix-data-layer fade-in-up"><h3>' + c.stat + '</h3><p>' + c.context + '</p>' +
-      (c.sourceUrl ? '<p><small><a href="' + c.sourceUrl + '" target="_blank" rel="noopener">' + c.sourceName + ' &#8599;</a></small></p>' : '<p><small><em>' + c.sourceName + '</em></small></p>') +
-      '</div>';
+  // Extra links section (MSO/IPA front-office work)
+  if (d.more) {
+    var m = d.more;
+    html += renderSection({ id: m.id, className: 'zx-sol-more', compact: true, rule: true },
+      renderSectionHead('', m.title, m.body, { id: m.id + '-title', align: 'split' }) + zxSolLinks(m.links, 'zx-sol-links--3'));
   }
-  html += '</div></div></section>';
 
-  html += renderCTA(data.ctaHeadline, data.ctaSubline, data.ctaButton);
+  html += renderCTA(d.cta.title, d.cta.sub, null, { secondary: d.cta.secondary });
   html += renderFooter();
   return html;
 }
-
-
-
-
-
 
 // ── Use Case Data Objects ───────────────────────────────────
+// One record per /use-cases/<slug> page (slugs are SEO assets and never change). Fields: group (ZX_SOL_GROUPS id),
+// audience + also (ZX_SOL_AUD keys: filter and variant labels), title (H1, breadcrumb, lists), teaser (/use-cases),
+// lead (hero), problem, gaps, how + steps (owner: agent | staff | system), episode (the hero's illustrative panel),
+// runsOn (NAMES.products keys; agents link to their family), readNext, story (a CUSTOMERS id with a case study),
+// cta (the workflow's name in the CTA band), gov (confirmed governance keys), seo (merged into PAGE_SEO below).
+// Claims: registry facts and CMS rules only; no percentages, counts of agents or outcome promises; after-hours work is
+// operational intake; the TCM interactive contact stays with licensed clinical staff (DECISIONS 4, 15-19, 17b).
 
 var USE_CASES = {};
 
-/* ── UC01 ── */
+var ZX_SOL_DONE = { tone: 'success', label: 'Completed' };
+var ZX_SOL_REACHED = { tone: 'success', label: 'Reached' };
+var ZX_SOL_BOOKED = { tone: 'success', label: 'Booked' };
+var ZX_SOL_ESC = { tone: 'warning', label: 'Escalated' };
+var ZX_SOL_PROG = { tone: 'brand', label: 'In progress' };
+var ZX_SOL_QUEUED = { tone: 'neutral', label: 'Queued' };
+var ZX_SOL_REVIEW = { tone: 'neutral', label: 'Review' };
+
+/* ── Transitions of care ── */
 USE_CASES.UC01 = {
-  id: 'UC01',
-  slug: 'post-discharge-follow-up',
-  title: 'Post-Discharge Follow-Up at Scale',
-  h1: 'Your care teams know which patients to worry about. The 24-hour window closes before most of them get a call.',
-  subhead: 'Health systems discharging thousands of patients a month have a follow-up problem that is not solvable by working harder. The window that protects patients from readmission is 24 to 48 hours. The volume of discharges is not. Zynix AI closes the gap between who needs contact and who gets it.',
-  problemHeading: 'The follow-up gap is a volume problem, not a staffing philosophy',
-  problem: '<p>A health system with 10 hospitals and 800 beds per site is discharging patients around the clock. Inpatient, observation, ED discharge, all of them enter the same 24-to-48-hour window defined by CMS as the qualifying period for Transitional Care Management billing. The clinical logic is sound. A patient leaving the hospital is at their most vulnerable: medications confused, discharge instructions half-remembered, follow-up appointment not yet confirmed. Contact within that window is not a formality. It is the intervention.</p>' +
-    '<p>The problem is not that care teams are indifferent. It is that the coordination infrastructure scales linearly with staff, and discharge volume does not. A hospital discharging 60 patients on a Tuesday cannot guarantee that a care coordinator reaches each one before Wednesday morning. Manual prioritization is the only tool available, and it works exactly as expected. The highest-acuity patients get called first. The patient who appeared stable at discharge, whose medication confusion was not flagged in the chart, whose follow-up appointment was scheduled but not confirmed. That patient does not get called. And two weeks later they are back in the ED.</p>' +
-    '<p>For health systems participating in value-based care arrangements, the financial exposure is direct. Preventable readmissions within 30 days affect quality scores, shared savings, and payer relationships. For health systems billing for TCM services, missed outreach means missed billing, a revenue loss that accumulates across every discharge that aged past the qualifying window.</p>',
-  shortfalls: [
-    { tool: 'Automated Reminder Systems', description: 'These tools send notifications like discharge summaries, appointment reminders, medication alerts. They do not confirm safe arrival, identify medication confusion, or trigger clinical escalation when a patient reports a concerning symptom. Notification is not follow-up. The gap they leave is precisely the one that leads to preventable readmissions.' },
-    { tool: 'Manual Follow-Up Programs', description: 'Call programs staffed by coordinators work when caseloads are manageable. At health system discharge volume, the caseload is never manageable. Coordinators prioritize the most visible cases, the ones flagged by the clinical team. The patient who slipped out on a Thursday afternoon without any flags does not make the list until the readmission triggers a chart review.' }
-  ],
-  solutionHeading: 'Every discharge contacted. Every TCM window documented.',
-  solution: '<p>The Transitions of Care Agent contacts every discharged patient within 24 to 48 hours, not the flagged ones, not the highest-risk tier, every discharge. The interaction confirms safe arrival at home, identifies medication confusion or gaps, assesses for new or worsening symptoms, and schedules the required follow-up visit within the CMS billing window. Every qualifying interaction is documented for TCM billing in the same workflow.</p>' +
-    '<p>ZynSchedule manages the follow-up appointment booking in the same interaction. Medication Reconciliation identifies discrepancies between what the patient was taking before admission, what was prescribed at discharge, and what they are actually taking now, routing clinical concerns to the appropriate pharmacist or care team member. The coordinator receives escalations and exceptions, not a list of calls to start from scratch.</p>' +
-    '<p>For health system ACOs and value-based care contracts, this changes the math on post-discharge performance. More patients reached within the qualifying window means more TCM billing captured, fewer preventable readmissions within 30 days, and better performance on the quality measures that determine shared savings distributions.</p>',
-  products: [
-    { name: 'Transitions of Care Agent', descriptor: 'Post-discharge outreach, TCM billing documentation, and clinical escalation routing', url: '/agents/transitions-of-care', status: 'Active' },
-    { name: 'ZynSchedule', descriptor: 'Appointment scheduling and follow-up access management', url: '/agents/operational-efficiency/zynschedule', status: 'Active' },
-    { name: 'Medication Reconciliation', descriptor: 'Post-discharge medication discrepancy identification and clinical routing', url: '/agents/transitions-of-care', status: 'Active' }
-  ],
-  cta: { headline: 'Every discharged patient. Every 48-hour window. No exceptions.', label: 'See how it works' },
-  readNext: [
-    { id: 'UC02', title: 'After-Hours Patient Triage Across Multiple Sites', slug: 'after-hours-triage-multi-site' },
-    { id: 'UC03', title: 'HCC Gap Closure at Health System ACO Scale', slug: 'hcc-gap-closure-health-system-aco' },
-    { id: 'UC06', title: 'Post-Discharge TCM and Readmission Prevention', slug: 'post-discharge-tcm-readmission' }
-  ],
-  segments: { primary: 'Health Systems', alsoTagged: ['ACOs & MSOs'] },
-  seo: {
-    title: 'Post-Discharge Follow-Up at Scale | Zynix AI',
-    desc: 'Reach every discharged patient in the 24\u201348 hour TCM window. Zynix AI automates post-discharge follow-up at health system volume with documented TCM.',
-    schema: 'HowTo'
-  }
+  id: 'UC01', slug: 'post-discharge-follow-up', group: 'transitions-of-care', audience: 'system', also: ['aco'],
+  title: 'Post-discharge follow-up across your hospitals',
+  teaser: 'ADT-triggered calls after every discharge across your hospitals, with nurses taking the clinical questions and the TCM contact.',
+  lead: 'Discharges arrive around the clock from every hospital. Zynix starts outreach from the ADT message, books the follow-up visit and routes clinical questions to your nurses by rule.',
+  problem: { title: 'The follow-up gap is a volume problem',
+    body: ['Every discharge opens the same short window. For transitional care management, CMS expects an interactive contact within 2 business days and a face-to-face visit within 7 or 14 days. Patients go home with new medications, half-remembered instructions and a follow-up visit that may not be booked.',
+      'Coordinators call the patients who were flagged at discharge first. The patient who looked stable, whose medication change wasn’t flagged and whose visit was never confirmed, is the one who waits, and too often the one who comes back through the ED.'] },
+  gaps: [{ tool: 'Reminder and notification tools', text: 'They send instructions and appointment reminders. They don’t confirm the patient is home, collect the medication list or put a worrying answer in front of a nurse.' },
+    { tool: 'Coordinator call lists', text: 'They work when caseloads are small. At health system volume, the list is sorted by acuity and the rest of the discharges age out of the window.' }],
+  how: { title: 'Every discharge gets an attempt inside the window', lead: 'Agents do the outreach and the scheduling. Nurses take the clinical questions and the TCM contact.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'The discharge opens a care plan', body: 'An ADT message from any connected hospital is matched to the patient’s record and opens a post-discharge care plan the same day.' },
+    { owner: 'agent', who: 'Transitions of care agent', title: 'The agent calls or texts', body: 'It confirms the patient is home, reviews the discharge instructions and collects the medication list. Patients it can’t reach go to a care coordinator.' },
+    { owner: 'staff', who: 'Care manager, RN', title: 'A nurse takes the clinical work', body: 'Red-flag answers and medication discrepancies are escalated by rule. The interactive TCM contact stays with your licensed clinical staff.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'The follow-up visit is booked', body: 'ZynSchedule books the visit inside the 7- or 14-day window, and reminders go out before it.' },
+    { owner: 'system', who: 'Zynix platform', title: 'The plan closes when the visit is documented', body: 'Coordinators see who was reached, who was escalated and which visits are still open.' }],
+  episode: { title: 'Post-discharge episode', meta: 'Pt 1042 · discharged from Hospital B',
+    steps: [{ time: 'Hour 0', title: 'ADT discharge matched, plan opened', owner: 'Zynix platform', status: ZX_SOL_DONE },
+      { time: 'Day 1', title: 'Call reached patient at home', owner: 'Transitions of care agent', status: ZX_SOL_REACHED },
+      { time: 'Day 1', title: 'Medication question escalated', owner: 'Care manager, RN', status: ZX_SOL_ESC },
+      { time: 'Day 2', title: 'TCM contact made by the nurse', owner: 'Care manager, RN', status: ZX_SOL_DONE },
+      { time: 'Day 2', title: 'Follow-up visit booked for day 6', owner: 'ZynSchedule', status: ZX_SOL_BOOKED }],
+    footer: 'The plan stays open until the follow-up visit is documented.' },
+  runsOn: [{ p: 'agents', family: 'clinical-performance', note: 'The transitions of care agent runs the calls and texts.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books the follow-up visit.' },
+    { p: 'carePlans', note: 'The post-discharge TCM plan sets the steps, owners and escalation rules.' },
+    { p: 'dataFoundation', note: 'ADT feeds from each hospital open the episode.' }],
+  readNext: ['after-hours-triage-multi-site', 'physician-documentation-ambient-ai', 'hcc-gap-closure-health-system-aco'],
+  story: 'nhs', cta: 'post-discharge follow-up',
+  seo: { title: 'Post-discharge follow-up for health systems | Zynix AI',
+    desc: 'ADT-triggered outreach after every discharge, follow-up visits booked inside the TCM window and clinical questions routed to your nurses by rule.', schema: 'HowTo' }
 };
 
-/* ── UC02 ── */
-USE_CASES.UC02 = {
-  id: 'UC02',
-  slug: 'after-hours-triage-multi-site',
-  title: 'After-Hours Patient Triage Across Multiple Sites',
-  h1: 'Patients calling your sites after hours are getting voicemail. Some of them go to the ED. Some of them are not serious. You will not know which until Monday.',
-  subhead: 'Multi-site health systems cannot staff clinical after-hours coverage at every location without significant cost and burnout. The calls keep coming. Zynix AI handles every one of them, triaging by symptom, routing what is urgent, and scheduling what can wait until morning.',
-  problemHeading: 'After-hours access is not consistent across your sites, and patients feel it',
-  problem: '<p>A health system operating 12 ambulatory sites does not have 12 after-hours clinical coverage arrangements. It might have a centralized nurse triage line, an answering service contract, and a rotation of on-call physicians who receive calls ranging from clinical emergencies to prescription refill requests at 2 a.m. The coverage model was not designed for the call volume. It was designed for what was affordable when the system had fewer sites.</p>' +
-    '<p>The result is structural inconsistency. A patient calling Site A reaches a clinically trained triage nurse. A patient calling Site B reaches voicemail with instructions to call 911 for emergencies. A patient calling Site C reaches an answering service that takes a message and promises a callback by the next business day. None of these outcomes are what a patient needs when they are concerned enough to call their doctor after hours. Some of them go to the ED not because their condition warrants it, but because there was no accessible alternative.</p>' +
-    '<p>For health systems in value-based care arrangements, avoidable ED visits have a direct cost. HCAHPS scores reflect patient experience with after-hours access. On-call physicians fielding non-urgent calls are not available for the urgent ones. The after-hours access problem compounds across every metric that connects patient experience to financial performance.</p>',
-  shortfalls: [
-    { tool: 'Answering Service Vendors', description: 'Traditional answering services take messages, relay callback requests, and follow escalation scripts for true emergencies. They cannot triage clinically, differentiate between a symptom that warrants an urgent callback and one that warrants a morning appointment, or schedule the follow-up access the patient actually needs. The message is taken. The patient is still waiting.' },
-    { tool: 'EHR Patient Portals', description: 'Portal messaging systems require a patient to navigate a digital tool at a moment when they want to speak with someone. Adoption rates for portal after-hours contact are low among the populations who call most frequently, including older patients, those with limited digital literacy, patients for whom English is not a first language. The access gap the portal was meant to close remains open for the patients who need after-hours access most.' }
-  ],
-  solutionHeading: 'Consistent clinical coverage across every site without extending on-call burdens',
-  solution: '<p>ZynAfterHours handles after-hours calls across all sites simultaneously, applying consistent clinical triage logic, assessing symptoms, routing urgent cases to on-call clinicians, answering routine questions, and scheduling next-day appointments for everything that can wait. It operates in 15-plus languages, which means the same quality of access extends to every patient in the attributed population regardless of primary language.</p>' +
-    '<p>On-call physicians receive only the cases that genuinely require physician involvement. Routine symptom questions, medication questions, and appointment requests are handled and resolved without a physician callback. ZynSchedule books the next available appointment at the patient\u2019s preferred site in the same interaction so the patient ends the call with a confirmed appointment rather than a message in a queue.</p>' +
-    '<p>For health systems tracking ED utilization and HCAHPS scores, the change in after-hours access patterns is measurable across quarters. The patients who previously defaulted to the ED because they could not reach a clinical voice after hours are reaching one. The on-call burden that contributed to staff burnout is reduced to the clinical escalations that actually required it.</p>',
-  products: [
-    { name: 'ZynAfterHours & Triage', descriptor: '24/7 after-hours clinical triage in 15+ languages: symptom assessment, escalation routing, appointment scheduling', url: '/agents/operational-efficiency/zynafterhours-triage', status: 'Active' },
-    { name: 'ZynSchedule', descriptor: 'Appointment scheduling and follow-up access management', url: '/agents/operational-efficiency/zynschedule', status: 'Active' }
-  ],
-  cta: { headline: 'Every after-hours call handled. Every site covered. Every patient reaches a clinical voice.', label: 'Book a demo' },
-  readNext: [
-    { id: 'UC01', title: 'Post-Discharge Follow-Up at Scale', slug: 'post-discharge-follow-up' },
-    { id: 'UC03', title: 'HCC Gap Closure at Health System ACO Scale', slug: 'hcc-gap-closure-health-system-aco' },
-    { id: 'UC09', title: 'After-Hours Access and ED Diversion for ACO Populations', slug: 'after-hours-ed-diversion' }
-  ],
-  segments: { primary: 'Health Systems', alsoTagged: ['ACOs & MSOs'] },
-  seo: {
-    title: 'After-Hours Patient Triage Multi-Site Health | Zynix AI',
-    desc: 'Clinical triage across every ambulatory site after hours without extending on-call burden. Zynix AI handles calls in 15+ languages and schedules.',
-    schema: 'HowTo'
-  }
-};
-
-/* ── UC03 ── */
-USE_CASES.UC03 = {
-  id: 'UC03',
-  slug: 'hcc-gap-closure-health-system-aco',
-  title: 'HCC Gap Closure at Health System ACO Scale',
-  h1: 'The HCC documentation gaps are identified. The worklist exists. The performance year is closing. And the patients without upcoming appointments are not being reached.',
-  subhead: 'At 50,000 attributed lives, an HCC gap list is not a to-do list. It is an infrastructure problem. Zynix AI connects gap identification to outreach, scheduling, and pre-visit documentation so the work that closes the gap actually gets done before the year ends.',
-  problemHeading: 'The gap is not in the analytics. It is between the analytics and the action.',
-  problem: '<p>Health system ACOs managing 50,000 or more attributed lives have, in most cases, invested meaningfully in analytics infrastructure. Population health dashboards identify every patient with a chronic condition documented in a prior year that has not been coded in the current data submission. The RAF impact per patient is calculated. Prioritization by dollar value and coding deadline is built into the tool. The gap list exists, is accurate, and is refreshed regularly.</p>' +
-    '<p>The gap list does not move by itself. For patients who have upcoming appointments, the workflow is manageable since pre-visit documentation briefs need to reach the care team before the visit. For patients who do not have upcoming appointments, the problem is more fundamental: the patient needs to be brought in before the year-end coding window closes, and that requires a two-way contact that identifies the barrier, schedules the visit, and confirms it.</p>' +
-    '<p>Across a 50,000-life population, the number of patients who qualify for HCC recapture without a scheduled visit in the next 60 days can run to several thousand. At that volume, manual outreach from coordinators already managing active caseloads is not a realistic path to year-end closure. The RAF leakage accumulates in proportion to the gap between the worklist and available outreach capacity.</p>',
-  shortfalls: [
-    { tool: 'Analytics and Population Health Platforms', description: 'These tools identify gaps, calculate impact, produce prioritized worklists. What they do not do is trigger outreach to bring unscheduled patients in or generate and distribute pre-visit documentation briefs to care teams before the appointment. The worklist is the output. Acting on it is a separate workflow that requires separate infrastructure.' },
-    { tool: 'Coordinator-Managed Outreach', description: 'Care coordinators managing active chronic care caseloads, post-discharge follow-up, and quality gap programs cannot absorb the additional volume of HCC outreach for thousands of unscheduled patients in the final quarter. Prioritization means the patients at the bottom of the list, often those with the most complex documentation gaps, age past the closure window.' }
-  ],
-  solutionHeading: 'Gap identification connected to outreach, scheduling, and documentation in one workflow',
-  solution: '<p>ZynGap identifies and prioritizes HCC documentation gaps across the attributed population, ranking by RAF dollar impact, coding deadline proximity, and patient-level EHR and claims history. For patients with upcoming appointments, pre-visit documentation briefs are generated and routed to the care team before the visit. For patients without upcoming appointments, the Preventive and Quality Activation Agents run outreach to bring them in.</p>' +
-    '<p>The outreach is two-way. The agent identifies the reason the patient has not been seen, addresses scheduling barriers, and books the appointment through ZynSchedule. ZynReminder follows up with patients who agreed to schedule but have not yet confirmed. Every step is tracked: how many gaps were identified, how many patients received outreach, how many visits were scheduled, and how many conditions were documented at the encounter.</p>' +
-    '<p>For health system ACOs where RAF score accuracy drives shared savings distributions, closing the documentation gap before year-end is the most direct lever on financial performance. The platform tracks completion, not just identification, so year-end reconciliation reflects work that actually happened.</p>',
-  products: [
-    { name: 'ZynGap', descriptor: 'HCC and quality gap identification prioritized by RAF impact and closure window', url: '/solutions/zynix-data-analytics', status: 'Planned' },
-    { name: 'Preventive & Quality Activation Agents', descriptor: 'Outreach agents for gap closure, preventive care, and quality measure completion', url: '/agents/preventive-quality-activation', status: 'Active' },
-    { name: 'ZynReminder', descriptor: 'Two-way outreach for care gap follow-through and patient engagement', url: '/agents/preventive-quality-activation/zynreminder', status: 'Active' },
-    { name: 'ZynSchedule', descriptor: 'Appointment scheduling and follow-up access management', url: '/agents/operational-efficiency/zynschedule', status: 'Active' }
-  ],
-  cta: { headline: 'The gap list exists. Let\u2019s connect it to the outreach that closes it.', label: 'Talk to our team' },
-  readNext: [
-    { id: 'UC01', title: 'Post-Discharge Follow-Up at Scale', slug: 'post-discharge-follow-up' },
-    { id: 'UC04', title: 'Prior Authorization Across High-Volume Specialty Services', slug: 'prior-auth-high-volume-specialty' },
-    { id: 'UC07', title: 'HCC Gap Closure and RAF Score Optimization', slug: 'hcc-gap-raf-optimization' }
-  ],
-  segments: { primary: 'Health Systems', alsoTagged: ['ACOs & MSOs'] },
-  seo: {
-    title: 'HCC Gap Closure Health System ACO Scale | Zynix AI',
-    desc: 'Close HCC documentation gaps at health system ACO scale. Zynix AI connects gap identification to patient outreach, scheduling, and pre-visit documentation.',
-    schema: 'HowTo'
-  }
-};
-
-/* ── UC04 ── */
-USE_CASES.UC04 = {
-  id: 'UC04',
-  slug: 'prior-auth-high-volume-specialty',
-  title: 'Prior Authorization Across High-Volume Specialty Services',
-  h1: 'Your cardiology and orthopedics teams are waiting on prior authorizations submitted three weeks ago. Staff are making status calls. Patients are calling to ask why their appointment has not been confirmed.',
-  subhead: 'High-volume specialty services generate hundreds of concurrent prior authorization requests every month. Each requires documentation, submission, status tracking, and denial response. Zynix AI handles the entire workflow so staff attention shifts to clinical exceptions, not administrative queues.',
-  problemHeading: 'Prior authorization volume scales with your specialty services. Staff capacity does not.',
-  problem: '<p>Health systems with active cardiology, orthopedics, oncology, and imaging service lines are managing prior authorization workflows that are, in most cases, held together by dedicated administrative staff, payer portal logins maintained on shared spreadsheets, and a follow-up process that depends heavily on who is available to make calls on a given day. At 300 concurrent authorizations across four service lines, that system is already at its limits. At 600, it breaks.</p>' +
-    '<p>The cost of a broken prior auth workflow is distributed across everyone who depends on it. Surgeons see OR slots go idle when a case cannot be confirmed because the authorization is still pending. Patients who were scheduled three weeks ago are calling the front desk to ask why they have not heard back. Referring physicians who sent patients expecting a confirmed timeline receive no update until the authorization clears or the denial arrives.</p>' +
-    '<p>Denial management compounds the problem. An authorization that was denied is not the end of the workflow. It is the beginning of an appeals process with its own documentation requirements, deadlines, and tracking obligations. For health systems where high-value specialty procedures represent significant revenue, a denial that is not appealed within the payer\u2019s response window is a lost authorization.</p>',
-  shortfalls: [
-    { tool: 'RCM Platforms and Authorization Tracking Tools', description: 'Revenue cycle management platforms log the status of outstanding authorizations and flag overdue items. They do not assemble the clinical documentation package, submit it to the payer, or proactively follow up before the payer deadline passes. Staff are still expected to own every step of the submission and tracking workflow. The platform simply shows them what has not been done yet.' },
-    { tool: 'Staff-Managed Prior Auth Queues', description: 'Dedicated prior authorization staff are typically among the most stretched in a health system\u2019s administrative workforce. Their capacity is fixed. Authorization volume is not. When submission backlogs build, they address the highest-priority cases and the long tail of standard authorizations ages in the queue. Status calls become the primary workday activity, consuming the time needed for documentation work that would prevent them.' }
-  ],
-  solutionHeading: 'Documentation assembled, submitted, and managed across every service line simultaneously',
-  solution: '<p>ZynAuth assembles the required clinical documentation for each prior authorization request from the patient record and procedure orders, formats it for the payer, and submits through the appropriate channel. For fax-based payer communications, ZynFax handles the submission and receipt workflow. Every authorization is tracked against the payer\u2019s response timeline, and ZynAuth initiates follow-up before the deadline rather than after it passes.</p>' +
-    '<p>When a denial arrives, ZynAuth identifies the basis for the denial, assembles the required appeal documentation, and routes the response to the payer within the appeal window. Staff attention is directed to cases that require clinical judgment or peer-to-peer review, not the administrative management of cases that can be handled procedurally.</p>' +
-    '<p>For health system specialty service lines where OR scheduling depends on timely authorization clearance, the change is measurable in schedule reliability and staff utilization. Cases that were previously delayed or cancelled due to pending authorizations clear on schedule. Staff who were spending significant time on status calls redirect that capacity to work that actually requires their involvement.</p>',
-  products: [
-    { name: 'ZynAuth', descriptor: 'Prior authorization documentation assembly, submission, tracking, denial management, and appeals', url: '/agents/operational-efficiency', status: 'Active' },
-    { name: 'ZynFax', descriptor: 'Reads, classifies, routes, and assigns ownership to incoming and outgoing fax documents', url: '/agents/operational-efficiency', status: 'Active' },
-    { name: 'ZynSchedule', descriptor: 'Appointment and procedure scheduling confirmation upon authorization clearance', url: '/agents/operational-efficiency/zynschedule', status: 'Active' }
-  ],
-  cta: { headline: 'Authorization backlogs are a workflow problem. Let\u2019s solve the workflow.', label: 'See how it works' },
-  readNext: [
-    { id: 'UC03', title: 'HCC Gap Closure at Health System ACO Scale', slug: 'hcc-gap-closure-health-system-aco' },
-    { id: 'UC05', title: 'Reducing Physician Documentation Burden with Ambient AI', slug: 'physician-documentation-ambient-ai' },
-    { id: 'UC21', title: 'Prior Authorization for Surgical Procedures', slug: 'prior-auth-surgical-procedures' }
-  ],
-  segments: { primary: 'Health Systems', alsoTagged: ['ASCs'] },
-  seo: {
-    title: 'Prior Authorization Automation Health System | Zynix AI',
-    desc: 'Manage prior authorizations across cardiology, orthopedics, oncology, and imaging at scale. Zynix AI handles documentation, submission, tracking, and.',
-    schema: 'HowTo'
-  }
-};
-
-/* ── UC05 ── */
-USE_CASES.UC05 = {
-  id: 'UC05',
-  slug: 'physician-documentation-ambient-ai',
-  title: 'Reducing Physician Documentation Burden with Ambient AI',
-  h1: 'Physicians are spending more time documenting what happened in the visit than they spent in the visit itself. The clinical note is written at 9 p.m., not in the exam room.',
-  subhead: 'Documentation burden is one of the most cited drivers of physician burnout and clinical throughput reduction at health system scale. ZynScribe turns the patient-clinician conversation directly into a structured, review-ready clinical note uploaded to the EHR without dictation, formatting, or after-hours catch-up.',
-  problemHeading: 'Documentation is the job that follows physicians home',
-  problem: '<p>A primary care physician seeing 20 patients in a clinic day is not done when the last patient leaves. The note for the first patient is already behind. EHR documentation requirements for structured clinical notes, coding-supporting language, and quality measure documentation have added layers to every encounter that were not there 10 years ago. The physician who finishes clinic at 5 p.m. typically finishes the documentation for that clinic at 8 or 9 p.m., sometimes later.</p>' +
-    '<p>The clinical consequences are real. Documentation completed hours after the encounter depends on memory rather than the real-time clinical exchange. Detail that matters, like the patient\u2019s specific description of a symptom, a subtle change in their presentation, a concern raised in the final minutes of the visit, can be compressed into summary language by the time the note is written. The note that supports clinical decision-making for the next provider is less accurate than it could be because it was written hours after the encounter it describes.</p>' +
-    '<p>For health systems managing hundreds of physicians across multiple specialties and sites, documentation burden is a throughput problem as much as a clinician wellbeing problem. Physicians who spend two hours documenting for every hour of direct clinical time cannot see more patients without extending their working day further. The clinical capacity the system needs is already present, being consumed by administrative work that technology should have absorbed.</p>',
-  shortfalls: [
-    { tool: 'Voice Dictation Tools', description: 'Dictation tools convert speech to text, which still requires the physician to review, correct, and format the output into a structured clinical note. The documentation step is shortened but not eliminated. For physicians whose burnout is driven by total documentation time rather than the mechanics of typing versus speaking, dictation moves the bottleneck without removing it.' },
-    { tool: 'EHR-Native Documentation Features', description: 'EHR-native note templates and smart text tools accelerate documentation within the EHR\u2019s existing structure. They require the physician to fill in a template rather than complete a blank note. They do not produce structured notes from a natural clinical conversation. They require the physician to translate the conversation into template fields, which is still documentation work.' }
-  ],
-  solutionHeading: 'The conversation becomes the note. The physician stays in the room.',
-  solution: '<p>ZynScribe listens to the patient-clinician conversation during the visit and produces a structured, review-ready clinical note, uploaded directly to the EHR. No dictation after the patient leaves. No template to fill in while the patient is sitting across the desk. No late-evening note completion from home. The physician reviews the structured note before it is finalized, making corrections where needed, but the drafting work is done.</p>' +
-    '<p>For health systems integrating ZynScribe across a physician group, the impact on clinical throughput is measurable in documentation time reduced per encounter. For individual physicians, the change is experienced as the ability to be fully present in the clinical encounter rather than managing note-taking and patient interaction simultaneously. The clinical note quality improves because it is derived from the actual conversation, not a reconstruction of it from memory.</p>' +
-    '<p>ZynScribe is Zynix AI\u2019s longest-standing product, formerly Medvise, acquired and extended into the Zynix platform. It is a standalone product with its own implementation pathway and EHR integration architecture, deployable independently of the broader Zynix AI agent suite.</p>',
-  products: [
-    { name: 'ZynScribe', descriptor: 'Ambient AI clinical documentation: structured notes from patient-clinician conversation, uploaded directly to EHR', url: '/zynscribe', status: 'Active' }
-  ],
-  cta: { headline: 'Clinical notes written from the conversation. Not from memory, at 9 p.m.', label: 'See how it works' },
-  readNext: [
-    { id: 'UC01', title: 'Post-Discharge Follow-Up at Scale', slug: 'post-discharge-follow-up' },
-    { id: 'UC04', title: 'Prior Authorization Across High-Volume Specialty Services', slug: 'prior-auth-high-volume-specialty' },
-    { id: 'UC19', title: 'CCM Billing Execution and Chronic Care Management', slug: 'ccm-billing-chronic-care' }
-  ],
-  segments: { primary: 'Health Systems', alsoTagged: [] },
-  seo: {
-    title: 'Ambient AI Scribe Physician Documentation Health | Zynix AI',
-    desc: 'ZynScribe converts the patient-clinician conversation into a structured clinical note uploaded to the EHR, eliminating after-hours documentation at.',
-    schema: 'FAQPage'
-  }
-};
-
-/* ── UC06 ── */
 USE_CASES.UC06 = {
-  id: 'UC06',
-  slug: 'post-discharge-tcm-readmission',
-  title: 'Post-Discharge TCM and Readmission Prevention',
-  h1: 'Every preventable readmission in your attributed population is a shared savings loss that was visible in the data the day the patient was discharged. The 48-hour window closed before outreach happened.',
-  subhead: 'MSSP ACOs and risk-bearing MSOs carry direct financial exposure to preventable readmissions. The intervention window is 24 to 48 hours post-discharge. Most attributed patients are not reached in that window, not because the care team is not trying, but because manual outreach cannot scale to the volume of discharges across an attributed population.',
-  problemHeading: 'The 30-day readmission window is where shared savings are won or lost',
-  problem: '<p>An MSSP ACO managing 15,000 attributed lives across a primary care network will see a meaningful fraction of that population discharged from one of dozens of hospitals in any given month. Some of those hospitals have strong care transition programs. Most have processes that work for their highest-risk patients and leave the rest to the outpatient team to follow up with. The outpatient team is the ACO\u2019s care coordinators, already managing active chronic care caseloads, quality gap programs, and a rising-risk outreach list.</p>' +
-    '<p>The 24-to-48-hour post-discharge window is where the most valuable intervention can happen. Medication confusion shows up in those first two days. Discharge instruction confusion surfaces when the patient is not sure what a warning sign actually looks like. The follow-up appointment is not yet scheduled, or was scheduled at the hospital and has not been confirmed with the outpatient team. These are the moments where a contact prevents a readmission.</p>' +
-    '<p>For an ACO with financial exposure to every 30-day readmission in the attributed population, the cost of missing the outreach window is direct. A readmission that was preventable with a 20-minute call in the 48-hour window generates a claims event that affects the TCOC calculation, the performance year benchmark, and the shared savings distribution.</p>',
-  shortfalls: [
-    { tool: 'Care Management Software and Task Lists', description: 'Care management platforms create post-discharge task lists and alert coordinators when attributed patients are discharged. They do not execute the outreach. The task that says \u201ccontact patient within 48 hours\u201d still requires a coordinator to make the call. When coordinators are at caseload capacity, which is almost always, that task competes with every other task on the list. The highest-acuity cases get addressed. The ones that looked stable at discharge age past the TCM billing window.' },
-    { tool: 'Coordinator-Managed Follow-Up Programs', description: 'High-touch follow-up programs work for the patients actively enrolled in care management. They do not scale to every discharge across a 15,000-life attributed population. Staffing ratios that made sense for a 5,000-life panel create coverage gaps at 15,000. Practices that have grown their attributed populations through value-based care agreements often find that their care coordination infrastructure has not scaled proportionally with the financial exposure.' }
-  ],
-  solutionHeading: 'Every attributed discharge reached. Every TCM interaction documented. Every billing window captured.',
-  solution: '<p>The Transitions of Care Agent contacts every attributed patient within 24 to 48 hours of hospital discharge. The interaction qualifies for TCM billing, confirms safe arrival, identifies medication confusion or discrepancies, catches new or worsening symptoms, and schedules the required follow-up visit within the CMS billing window. Every qualifying interaction is documented. The ACO\u2019s billing team receives TCM-ready documentation without requiring a coordinator to initiate or document the contact.</p>' +
-    '<p>ZynPredict feeds the discharge workflow with risk scores so the coordinator team sees which patients triggered elevated risk signals and need a follow-up call with a human. ZynSchedule confirms the follow-up appointment. Medication Reconciliation identifies discrepancies between pre-admission, discharge, and current medications, routing clinical concerns to the pharmacist or care team.</p>' +
-    '<p>For MSSP ACOs, the financial case is direct: more qualifying TCM interactions billed, fewer preventable readmissions within 30 days, and better performance on the TCOC metrics that determine shared savings distributions. The platform does not replace the care coordinator team. It handles the volume so the team is deployed at the escalations that actually need them.</p>',
-  products: [
-    { name: 'Transitions of Care Agent', descriptor: 'Post-discharge outreach, TCM billing documentation, and clinical escalation routing', url: '/agents/transitions-of-care', status: 'Active' },
-    { name: 'Medication Reconciliation', descriptor: 'Post-discharge medication discrepancy identification and clinical routing', url: '/agents/transitions-of-care', status: 'Active' },
-    { name: 'ZynSchedule', descriptor: 'Follow-up appointment scheduling within the TCM billing window', url: '/agents/operational-efficiency/zynschedule', status: 'Active' },
-    { name: 'ZynPredict', descriptor: 'Readmission and ED utilization risk scoring for discharged patients', url: '/solutions/zynix-data-analytics', status: 'Planned' }
-  ],
-  cta: { headline: 'Every discharge in the attributed population. Every TCM window. Documented and billed.', label: 'Book a demo' },
-  readNext: [
-    { id: 'UC07', title: 'HCC Gap Closure and RAF Score Optimization', slug: 'hcc-gap-raf-optimization' },
-    { id: 'UC08', title: 'Rising-Risk Patient Outreach Before a Clinical Event', slug: 'rising-risk-patient-outreach' },
-    { id: 'UC14', title: 'Post-Discharge Care Management for MA Members', slug: 'post-discharge-ma-members' }
-  ],
-  segments: { primary: 'ACOs & MSOs', alsoTagged: ['Health Systems', 'Health Plans'] },
-  seo: {
-    title: 'Post-Discharge TCM MSSP ACO Readmission | Zynix AI',
-    desc: 'Reach every attributed patient in the 48-hour TCM window. Zynix AI documents qualifying interactions, prevents readmissions, and captures TCM billing at.',
-    schema: 'HowTo'
-  }
+  id: 'UC06', slug: 'post-discharge-tcm-readmission', group: 'transitions-of-care', audience: 'aco', also: ['mso', 'system'],
+  title: 'Post-discharge TCM across your attributed panel',
+  teaser: 'Discharges from any hospital in your market start outreach, a nurse-led TCM contact and a booked follow-up visit.',
+  lead: 'Your patients leave hospitals you don’t run. Zynix picks up the ADT message, starts outreach, books the follow-up visit and hands the TCM contact to your nurses.',
+  problem: { title: 'Readmissions start in the first days at home',
+    body: ['An ACO’s patients are discharged from many hospitals, each with its own transition process. The ACO often learns about the stay from an ADT feed or, weeks later, from claims. The first days at home are when medication questions, missed warning signs and unbooked visits show up.',
+      'Care coordinators already carry chronic care, quality gaps and wellness visits. Post-discharge calls compete with all of it, so the patients who looked stable at discharge are the ones who wait.'] },
+  gaps: [{ tool: 'Care management task lists', text: 'They create a “call within 2 days” task. Someone still has to make the call, and at full caseload the task ages.' },
+    { tool: 'Hospital transition programs', text: 'Strong for the hospital’s highest-risk patients. They end at discharge, and they don’t book the visit with your primary care practice.' }],
+  how: { title: 'From ADT message to a booked follow-up visit', lead: 'The care plan sets the steps and owners once. Agents run the outreach; your nurses take the clinical work.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'The ADT message opens a care plan', body: 'Discharges from any connected hospital are matched to the attributed patient and ranked by readmission risk.' },
+    { owner: 'agent', who: 'Transitions of care agent', title: 'Outreach starts the same day', body: 'The agent calls or texts, confirms the patient is home, reviews the discharge instructions and collects the medication list.' },
+    { owner: 'staff', who: 'Care manager, RN', title: 'Your nurse makes the TCM contact', body: 'Red-flag answers and medication discrepancies are escalated by rule. The interactive TCM contact and attestation stay with your clinical staff.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'The follow-up visit is booked', body: 'ZynSchedule books the 7- or 14-day visit with the patient’s own primary care practice.' },
+    { owner: 'system', who: 'Zynix platform', title: 'The episode closes when the visit is documented', body: 'Coordinators see who was reached, who was escalated and which visits are still open, by practice.' }],
+  episode: { title: 'Post-discharge episode', meta: 'Pt 2218 · attributed · high risk',
+    steps: [{ time: 'Hour 0', title: 'ADT discharge matched to patient', owner: 'Zynix platform', status: ZX_SOL_DONE },
+      { time: 'Hour 1', title: 'Ranked high risk on today’s list', owner: 'Zynix platform', status: ZX_SOL_DONE },
+      { time: 'Day 1', title: 'Call reached patient at home', owner: 'Transitions of care agent', status: ZX_SOL_REACHED },
+      { time: 'Day 1', title: 'Medication question sent to RN', owner: 'Care manager, RN', status: ZX_SOL_ESC },
+      { time: 'Day 2', title: 'Follow-up visit booked for day 6', owner: 'ZynSchedule', status: ZX_SOL_BOOKED }],
+    footer: 'The TCM contact stays with licensed clinical staff.' },
+  runsOn: [{ p: 'agents', family: 'clinical-performance', note: 'The transitions of care agent runs the outreach.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books the follow-up visit.' },
+    { p: 'carePlans', note: 'The post-discharge TCM plan sets owners and escalation rules.' },
+    { p: 'analytics', note: 'Admission and readmission risk ranks the day’s list.' }],
+  readNext: ['hcc-gap-raf-optimization', 'after-hours-ed-diversion', 'rising-risk-patient-outreach'],
+  story: 'pbaco', cta: 'post-discharge TCM',
+  seo: { title: 'Post-discharge TCM for ACOs | Zynix AI',
+    desc: 'ADT-triggered outreach for attributed patients, nurse-led TCM contacts inside the 2-business-day window and follow-up visits booked with primary care.', schema: 'HowTo' }
 };
 
-/* ── UC07 ── */
+USE_CASES.UC14 = {
+  id: 'UC14', slug: 'post-discharge-ma-members', group: 'transitions-of-care', audience: 'plan', also: ['aco'],
+  title: 'Post-discharge follow-up for Medicare Advantage members',
+  teaser: 'ADT feeds, not claims, start member outreach after a hospital stay, with care managers taking every clinical question.',
+  lead: 'Claims tell you about a hospital stay weeks later. With ADT feeds, member outreach starts while it still matters, and your care managers take every clinical question.',
+  problem: { title: 'Claims arrive after the window has closed',
+    body: ['Most plans learn about an admission from claims, weeks after discharge. By then the first days at home, when medication confusion and missed follow-up visits happen, are over.',
+      'Even with ADT notifications, someone has to turn each alert into a call, a medication check and a booked visit. At regional plan volume, alerts pile up faster than care managers can work them.'] },
+  gaps: [{ tool: 'Claims-based identification', text: 'Accurate, but late. The discharge reaches the care management system after the most useful follow-up days have passed.' },
+    { tool: 'ADT alerts without a workflow', text: 'The signal arrives on time, then waits in a queue for a person to pick it up.' }],
+  how: { title: 'Member outreach that starts from the discharge', lead: 'Your care managers set the scripts and take the escalations. Agents handle the calls and the booking.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'ADT feeds flag the discharge', body: 'Discharges from connected hospitals are matched to the member the same day, instead of waiting for claims.' },
+    { owner: 'agent', who: 'Transitions of care agent', title: 'The member hears from the plan', body: 'The agent calls or texts with scripts your care managers approve, confirms the member is home and reviews the discharge instructions and medications.' },
+    { owner: 'staff', who: 'Care manager, RN', title: 'Clinical questions go to a care manager', body: 'Red-flag answers and medication discrepancies are escalated by rule, with the conversation attached. Medication changes stay with the member’s prescriber.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'The follow-up visit is booked', body: 'ZynSchedule books the visit with the member’s primary care provider, and reminders go out before it.' }],
+  episode: { title: 'Member follow-up after discharge', meta: 'Member 5531 · Medicare Advantage',
+    steps: [{ time: 'Hour 0', title: 'ADT discharge matched to member', owner: 'Zynix platform', status: ZX_SOL_DONE },
+      { time: 'Day 1', title: 'Call reached member at home', owner: 'Transitions of care agent', status: ZX_SOL_REACHED },
+      { time: 'Day 1', title: 'New medication question to care manager', owner: 'Care manager, RN', status: ZX_SOL_ESC },
+      { time: 'Day 2', title: 'Primary care visit booked for day 5', owner: 'ZynSchedule', status: ZX_SOL_BOOKED }],
+    footer: 'Scripts and escalation rules are set by your care management team.' },
+  runsOn: [{ p: 'dataFoundation', note: 'ADT feeds identify discharges without the claims lag.' },
+    { p: 'agents', family: 'clinical-performance', note: 'The transitions of care agent runs member outreach.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books the follow-up visit.' },
+    { p: 'carePlans', note: 'The post-discharge plan sets owners and escalation rules.' }],
+  readNext: ['hedis-stars-quality-improvement', 'medication-adherence-chronic-populations', 'high-utilizer-member-management'],
+  story: 'eternalhealth', cta: 'member post-discharge follow-up',
+  seo: { title: 'Post-discharge follow-up for MA members | Zynix AI',
+    desc: 'ADT-triggered outreach for Medicare Advantage members after a hospital stay, with care managers setting the scripts and taking every clinical question.', schema: 'HowTo' }
+};
+
+USE_CASES.UC30 = {
+  id: 'UC30', slug: 'post-discharge-followup-fqhc', group: 'transitions-of-care', audience: 'fqhc', also: ['aco'],
+  title: 'Post-discharge follow-up for community health patients',
+  teaser: 'Outreach after a hospital stay in the patient’s preferred language, with transportation and other barriers routed to your care team.',
+  lead: 'Your health center is often the last to hear about a hospital stay. Zynix picks up the discharge, reaches the patient in their preferred language and books the follow-up visit.',
+  problem: { title: 'Discharge instructions don’t always come home in the right language',
+    body: ['Health center patients are discharged from hospitals across the region, often with instructions in a language they don’t read and a follow-up visit they can’t get to. Without an ADT feed, the center hears about the stay when the patient calls, or when claims arrive.',
+      'Standard follow-up assumes the patient reads English, answers the phone during business hours and can arrange a ride. For many health center patients, one of those is missing.'] },
+  gaps: [{ tool: 'ADT notifications alone', text: 'They tell you a patient was discharged. They don’t make the call, find the barrier or book the visit.' },
+    { tool: 'Standard follow-up scripts', text: 'Written for patients who read English and drive, so they miss the patients who most need follow-up.' }],
+  how: { title: 'Follow-up that starts by asking what the patient needs', lead: 'Agents reach the patient and book the visit. Your care team handles the clinical questions and the barriers.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'The discharge reaches your health center', body: 'ADT messages from connected hospitals are matched to your patient the same day.' },
+    { owner: 'agent', who: 'Transitions of care agent', title: 'Outreach in the patient’s preferred language', body: 'The agent confirms the patient is home, goes through the discharge instructions and asks about medications and getting to the follow-up visit.' },
+    { owner: 'staff', who: 'Care manager, RN', title: 'Clinical questions go to your nurses', body: 'Symptoms and medication questions are escalated by rule, with the conversation attached. The TCM contact stays with your clinical staff.' },
+    { owner: 'staff', who: 'Care coordinator', title: 'Barriers go to a coordinator', body: 'A patient who reports no ride, no refill or no reliable phone is routed to a coordinator or community health worker.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'The follow-up visit is booked', body: 'ZynSchedule books the visit at the health center, and reminders go out before it.' }],
+  episode: { title: 'Post-discharge episode', meta: 'Pt 3307 · prefers Spanish',
+    steps: [{ time: 'Hour 0', title: 'ADT discharge matched to patient', owner: 'Zynix platform', status: ZX_SOL_DONE },
+      { time: 'Day 1', title: 'Call in Spanish · patient is home', owner: 'Transitions of care agent', status: ZX_SOL_REACHED },
+      { time: 'Day 1', title: 'No ride to the follow-up visit', owner: 'Care coordinator', status: ZX_SOL_PROG },
+      { time: 'Day 2', title: 'TCM contact made by the nurse', owner: 'Care manager, RN', status: ZX_SOL_DONE },
+      { time: 'Day 2', title: 'Visit booked at the health center', owner: 'ZynSchedule', status: ZX_SOL_BOOKED }],
+    footer: 'Barriers are routed to your care team; the TCM contact stays with licensed staff.' },
+  runsOn: [{ p: 'agents', family: 'clinical-performance', note: 'The transitions of care agent runs the outreach.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books the visit at your center.' },
+    { p: 'carePlans', note: 'The post-discharge plan sets owners, escalation rules and barrier routing.' },
+    { p: 'dataFoundation', note: 'ADT feeds tell you about the stay the same day.' }],
+  readNext: ['after-hours-triage-multilingual-fqhc', 'sdoh-screening-care-navigation', 'preventive-screening-gap-fqhc'],
+  story: 'amistad', cta: 'post-discharge follow-up',
+  seo: { title: 'Post-discharge follow-up for FQHCs | Zynix AI',
+    desc: 'Outreach after a hospital stay in the patient’s preferred language, with barriers routed to your care team and the follow-up visit booked at your center.', schema: 'HowTo' }
+};
+
+USE_CASES.UC24 = {
+  id: 'UC24', slug: 'post-procedure-followup-complication', group: 'transitions-of-care', audience: 'asc', also: ['system'],
+  title: 'Follow-up calls after an outpatient procedure',
+  teaser: 'Structured calls in the days after surgery, with wound, pain and medication concerns routed to your clinical team.',
+  lead: 'Most questions after outpatient surgery come up in the first days at home. Zynix calls patients on the schedule your surgeons set and sends clinical concerns to your team.',
+  problem: { title: 'Patients go home with questions and nobody calling them',
+    body: ['A patient discharged after a procedure goes home with instructions, a follow-up visit weeks away and a number to call. Nausea, a wound that looks different than expected or pain that feels wrong often go unreported until they become urgent.',
+      'Callback programs work when staff have time. On a busy surgical day, the routine-looking cases are the ones that don’t get a call.'] },
+  gaps: [{ tool: 'Post-op surveys', text: 'They collect answers through a link. They don’t talk with the patient or put a concerning answer in front of a nurse.' },
+    { tool: 'Staff callback lists', text: 'Valuable when they happen, and the first thing to slip when the schedule is full.' }],
+  how: { title: 'A call on the schedule your surgeons set', lead: 'Agents make the calls and book visits. Your clinical team handles every concern.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Discharge schedules the calls', body: 'When a case is discharged, follow-up calls are scheduled at the intervals your surgeons set.' },
+    { owner: 'agent', who: 'Transitions of care agent', title: 'The agent checks in', body: 'It asks the questions your clinical team approves about pain, the wound site, nausea and medications, and answers logistics questions.' },
+    { owner: 'staff', who: 'Clinical team, RN', title: 'Concerns go to your clinical team', body: 'Answers that match your escalation rules go to a nurse or the surgeon with the call summary. Callers describing an emergency are told to call 911.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'Visits are booked when needed', body: 'If the clinical team wants to see the patient sooner, ZynSchedule books the visit.' }],
+  episode: { title: 'Post-procedure follow-up', meta: 'Pt 4410 · outpatient procedure yesterday',
+    steps: [{ time: 'Day 1', title: '24-hour check-in call', owner: 'Transitions of care agent', status: ZX_SOL_REACHED },
+      { time: 'Day 1', title: 'Wound question sent to a nurse', owner: 'Clinical team, RN', status: ZX_SOL_ESC },
+      { time: 'Day 1', title: 'Nurse callback completed', owner: 'Clinical team, RN', status: ZX_SOL_DONE },
+      { time: 'Day 3', title: '72-hour check-in call', owner: 'Transitions of care agent', status: ZX_SOL_REACHED }],
+    footer: 'Your surgeons set the questions, intervals and escalation rules.' },
+  runsOn: [{ p: 'agents', family: 'clinical-performance', note: 'The transitions of care agent makes the follow-up calls.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books any visit the team asks for.' },
+    { p: 'carePlans', note: 'The plan holds your intervals, questions and escalation rules.' }],
+  readNext: ['surgical-scheduling-pre-procedure', 'referral-intake-asc', 'fax-inbound-document-routing'],
+  cta: 'post-procedure follow-up',
+  seo: { title: 'Post-procedure follow-up calls for ASCs | Zynix AI',
+    desc: 'Follow-up calls after outpatient surgery on the schedule your surgeons set, with wound, pain and medication concerns routed to your clinical team.', schema: 'HowTo' }
+};
+
+/* ── Risk adjustment and quality gaps ── */
+USE_CASES.UC03 = {
+  id: 'UC03', slug: 'hcc-gap-closure-health-system-aco', group: 'risk-adjustment-quality', audience: 'system', also: ['aco'],
+  title: 'HCC gap closure across a health system ACO',
+  teaser: 'Pre-visit gap summaries for scheduled patients, and outreach to bring in the ones with no visit on the books.',
+  lead: 'Your analytics already list the open HCC gaps. Zynix sends pre-visit summaries to scheduled clinics and runs outreach to bring in the patients with no visit booked.',
+  problem: { title: 'The gap list exists. The visits don’t.',
+    body: ['Risk adjustment counts conditions that are assessed and documented at a face-to-face visit during the year. Population health tools already show which chronic conditions haven’t been documented yet, ranked by impact and deadline.',
+      'Two jobs follow. Patients with a visit coming up need the gap in front of their clinician before the visit. Patients with no visit need to be reached, scheduled and seen before year-end. Across a large attributed population, the second list is the one that stalls.'] },
+  gaps: [{ tool: 'Population health analytics', text: 'They find and rank the gaps. They don’t bring an unscheduled patient in or put a summary in front of the clinician.' },
+    { tool: 'Coordinator outreach', text: 'Year-end gap work lands on the same coordinators who run transitions and chronic care, and the hardest cases age out.' }],
+  how: { title: 'From the gap list to a documented visit', lead: 'The platform ranks the work and prepares the visit. Agents fill the schedule. Clinicians decide what to document.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Gaps ranked by impact and deadline', body: 'Care gap and HCC detection checks recorded diagnoses against current-year claims and ranks open gaps across the ACO population.' },
+    { owner: 'system', who: 'Zynix platform', title: 'Scheduled patients get a pre-visit summary', body: 'Clinics see the open gaps for each scheduled patient before the visit, as prompts for the clinician to assess.' },
+    { owner: 'agent', who: 'Preventive and quality activation agent', title: 'Unscheduled patients are invited', body: 'The agent calls or texts patients with no visit booked, asks what is in the way and follows up until a visit is confirmed.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'The visit is booked', body: 'ZynSchedule matches the visit type to clinic availability and books it.' },
+    { owner: 'staff', who: 'Treating clinician', title: 'The clinician assesses and documents', body: 'Conditions are assessed and documented by the treating clinician. The gap closes only when the visit is documented.' }],
+  episode: { title: 'HCC gap closure sprint', meta: 'Pt 6120 · two open conditions',
+    steps: [{ time: 'Mon', title: 'Open gaps ranked, no visit this year', owner: 'Zynix platform', status: ZX_SOL_DONE },
+      { time: 'Mon', title: 'Outreach call · visit offered', owner: 'Outreach agent', status: ZX_SOL_REACHED },
+      { time: 'Tue', title: 'Visit booked for week 3', owner: 'ZynSchedule', status: ZX_SOL_BOOKED },
+      { time: 'Wk 3', title: 'Pre-visit gap summary sent to clinic', owner: 'Zynix platform', status: ZX_SOL_DONE },
+      { time: 'Wk 3', title: 'Visit documented by the clinician', owner: 'Treating clinician', status: ZX_SOL_DONE }],
+    footer: 'Clinicians decide what to document; the agent only fills the schedule.' },
+  runsOn: [{ p: 'analytics', note: 'Care gap and HCC detection ranks the open gaps.' },
+    { p: 'agents', family: 'clinical-performance', note: 'The preventive and quality activation agent invites and reminds.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books the visit.' },
+    { p: 'carePlans', note: 'The HCC gap closure sprint sets the steps and the deadline.' }],
+  readNext: ['post-discharge-follow-up', 'physician-documentation-ambient-ai', 'chronic-care-coordination-scale'],
+  story: 'nhs', cta: 'HCC gap closure',
+  seo: { title: 'HCC gap closure for health systems | Zynix AI',
+    desc: 'Pre-visit gap summaries for scheduled patients and outreach to bring in the ones with no visit booked, so HCC gaps close at documented visits.', schema: 'HowTo' }
+};
+
 USE_CASES.UC07 = {
-  id: 'UC07',
-  slug: 'hcc-gap-raf-optimization',
-  title: 'HCC Gap Closure and RAF Score Optimization',
-  h1: 'The RAF leakage in your performance year is not a coding problem. It is a workflow problem. Chronic conditions are documented in the EHR. They are not making it into current-year coding.',
-  subhead: 'In an MSSP ACO, RAF score accuracy is a direct financial lever. Every chronic condition documented in a prior year but not coded in the current submission period is shared savings that does not get captured. Zynix AI connects the gap to the workflow that closes it before the year-end deadline.',
-  problemHeading: 'RAF score leakage accumulates in the space between knowing and acting',
-  problem: '<p>An MSSP ACO\u2019s shared savings calculation depends on the accuracy of its risk score relative to its benchmark. Patients with complex chronic disease profiles with multiple comorbidities, documented histories of heart failure, diabetes with complications, COPD, chronic kidney disease, carry significant RAF weight. When those conditions are coded in the current data submission, the risk score reflects the true population complexity. When they are not, the benchmark is set against a population profile that does not accurately represent the patients being managed.</p>' +
-    '<p>The documentation is there. In most cases, the conditions have been active and treated throughout the year. The problem is that current-year coding requires a face-to-face encounter in which the condition is reviewed, documented as active, and appropriately coded in the visit note. Patients who are not seen in a given year, or whose visit notes do not include explicit documentation of the chronic condition, do not contribute to current-year RAF. Across hundreds of patients with complex co-morbidity profiles, the aggregate RAF impact is not marginal.</p>' +
-    '<p>Closing the gap before year-end requires two parallel workflows: for patients with upcoming appointments, pre-visit documentation briefs need to reach the care team in time for the condition to be reviewed and coded. For patients without upcoming appointments, outreach is needed to schedule a visit before the year-end coding window closes. Both workflows require infrastructure that runs at population scale.</p>',
-  shortfalls: [
-    { tool: 'Quality Reporting and Analytics Tools', description: 'Reporting platforms calculate aggregate gap rates and produce patient-level gap lists sorted by RAF dollar impact. They do not connect the gap list to a pre-visit documentation workflow or trigger outreach to bring unscheduled patients in before the coding window closes. The gap is identified. Acting on it requires a separate workflow that reporting tools are not designed to support.' },
-    { tool: 'EHR Coding Support and Alerts', description: 'EHR-native coding support tools surface suspect diagnoses and suggest codes at the point of documentation. They work for patients who are in the exam room. They do not reach the patients who have not been seen this year, do not generate pre-visit briefs for care teams with high patient volume, and do not trigger outreach to bring in the patients whose RAF weight most needs current-year documentation.' }
-  ],
-  solutionHeading: 'Every HCC gap prioritized, tracked, and closed before the year-end coding deadline',
-  solution: '<p>ZynGap surfaces HCC and quality gaps for every patient in the attributed population, ranked by RAF dollar impact and closure timing. For patients with upcoming appointments, pre-visit documentation briefs are generated and delivered to the care team before the visit so the chronic condition review and documentation happens at the encounter rather than being missed.</p>' +
-    '<p>For patients without upcoming appointments, the Preventive and Quality Activation Agents run outreach, identifying barriers to scheduling, booking the visit through ZynSchedule, and following up with patients who agreed to schedule but have not confirmed. ZynReminder handles the follow-up cadence so coordinators do not need to manage individual patient tracking across hundreds of open items.</p>' +
-    '<p>The platform tracks completion at every step. For an ACO executive team tracking shared savings performance against the year-end target, this visibility allows mid-year course correction rather than a post-performance-year reconciliation of what was missed.</p>',
-  products: [
-    { name: 'ZynGap', descriptor: 'HCC and quality gap identification prioritized by RAF impact and closure timing', url: '/solutions/zynix-data-analytics', status: 'Planned' },
-    { name: 'Preventive & Quality Activation Agents', descriptor: 'Outreach agents for gap closure, preventive care, and quality measure completion', url: '/agents/preventive-quality-activation', status: 'Active' },
-    { name: 'ZynReminder', descriptor: 'Two-way outreach for care gap follow-through and patient engagement', url: '/agents/preventive-quality-activation/zynreminder', status: 'Active' },
-    { name: 'ZynSchedule', descriptor: 'Appointment scheduling and follow-up access management', url: '/agents/operational-efficiency/zynschedule', status: 'Active' }
-  ],
-  cta: { headline: 'The RAF opportunity is in the data today. Let\u2019s close it before the year ends.', label: 'Book a demo' },
-  readNext: [
-    { id: 'UC06', title: 'Post-Discharge TCM and Readmission Prevention', slug: 'post-discharge-tcm-readmission' },
-    { id: 'UC10', title: 'Chronic Care Coordination at Scale', slug: 'chronic-care-coordination-scale' },
-    { id: 'UC03', title: 'HCC Gap Closure at Health System ACO Scale', slug: 'hcc-gap-closure-health-system-aco' }
-  ],
-  segments: { primary: 'ACOs & MSOs', alsoTagged: ['Health Systems'] },
-  seo: {
-    title: 'HCC Gap Closure RAF Score Optimization MSSP ACO | Zynix AI',
-    desc: 'Close HCC documentation gaps and optimize RAF scores before year-end. Zynix AI connects gap identification to outreach, pre-visit documentation, and.',
-    schema: 'HowTo'
-  }
+  id: 'UC07', slug: 'hcc-gap-raf-optimization', group: 'risk-adjustment-quality', audience: 'aco', also: ['mso', 'system'],
+  title: 'HCC recapture before the performance year closes',
+  teaser: 'Open HCC gaps ranked by impact and deadline, pre-visit summaries for clinicians and outreach for patients with no visit booked.',
+  lead: 'Conditions your patients were treated for last year don’t count this year until a clinician documents them at a visit. Zynix gets those visits booked and prepared.',
+  problem: { title: 'Risk scores lag when visits don’t happen',
+    body: ['An ACO’s benchmark depends on how accurately its population’s risk is documented. A condition counts for the year only when a clinician assesses and documents it at a face-to-face visit. Patients who aren’t seen, or whose visit note doesn’t address the condition, drop out of the current-year picture.',
+      'The fix is two workflows running all year: prepare clinicians for patients who are scheduled, and bring in the patients who aren’t. Both have to cover the whole attributed population, not only the top of a list.'] },
+  gaps: [{ tool: 'Quality and gap reports', text: 'They rank patients by impact, and they stop at the report.' },
+    { tool: 'EHR coding prompts', text: 'Useful when the patient is in the exam room. They can’t reach a patient who hasn’t booked a visit this year.' }],
+  how: { title: 'Both halves of HCC work, running all year', lead: 'Clinicians decide what to document. Zynix makes sure the visit happens and the open gap is in front of them.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Open gaps, ranked', body: 'Recorded diagnoses are checked against current-year claims, and gaps are ranked by impact and time left in the year.' },
+    { owner: 'system', who: 'Zynix platform', title: 'A summary before each scheduled visit', body: 'Point-of-care gap prompts show the clinician which conditions are still open for this patient.' },
+    { owner: 'agent', who: 'Preventive and quality activation agent', title: 'Patients with no visit are invited', body: 'The agent reaches out by voice or SMS, asks what is in the way and offers times, then follows up until the visit is confirmed.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'The visit is booked', body: 'ZynSchedule books the visit at the patient’s own practice and fills cancellations.' },
+    { owner: 'staff', who: 'Treating clinician', title: 'The clinician documents', body: 'The treating clinician assesses each condition. The gap closes when the visit is documented, and leaders see progress by practice.' }],
+  episode: { title: 'HCC gap closure sprint', meta: 'Attributed panel · this quarter',
+    tiles: [{ label: 'Open gaps', value: '612' }, { label: 'Visits booked', value: '174' }, { label: 'Documented', value: '98' }],
+    pipeline: [{ label: 'Open', value: 612 }, { label: 'Invited', value: 355 }, { label: 'Booked', value: 174 }, { label: 'Documented', value: 98 }],
+    footer: 'A gap counts as closed only when the visit is documented.' },
+  runsOn: [{ p: 'analytics', note: 'Care gap and HCC detection finds and ranks the gaps.' },
+    { p: 'agents', family: 'clinical-performance', note: 'The preventive and quality activation agent brings patients in.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books the visit.' },
+    { p: 'carePlans', note: 'The HCC gap closure sprint runs to your year-end date.' }],
+  readNext: ['post-discharge-tcm-readmission', 'chronic-care-coordination-scale', 'rising-risk-patient-outreach'],
+  cta: 'HCC gap closure',
+  seo: { title: 'HCC gap closure for ACOs | Zynix AI',
+    desc: 'Rank open HCC gaps, prepare clinicians before scheduled visits and invite patients with no visit booked, so conditions are documented before year-end.', schema: 'HowTo' }
 };
 
-/* ── UC08 ── */
-USE_CASES.UC08 = {
-  id: 'UC08',
-  slug: 'rising-risk-patient-outreach',
-  title: 'Rising-Risk Patient Outreach Before a Clinical Event',
-  h1: 'The patients most likely to be readmitted next month are already in your data. The question is whether anything happens before the hospitalization.',
-  subhead: 'Risk stratification tools surface the signal. The problem is that care teams cannot act on every elevated flag when coordinators are managing active caseloads. Rising-risk patients sit on a list. Zynix AI moves them into an outreach workflow so the 90-day risk window becomes a 90-day action window.',
-  problemHeading: 'The care management gap nobody talks about is the one between the risk flag and the phone call',
-  problem: '<p>Every MSSP ACO and risk-bearing MSO has a risk stratification tool. The analytics work. ZynPredict, Epic\u2019s risk model, Arcadia, , and other platforms, these tools surface patients whose trajectory is pointing toward a costly clinical event. The score is accurate. The flag is real. A patient with a recent ED visit, a gap in their blood pressure medication, worsening kidney function labs, and no scheduled follow-up in the next 60 days is, with some predictable probability, heading toward an acute event.</p>' +
-    '<p>The problem is what happens next. A care coordinator\u2019s active caseload on any given day is not three patients. It is 80. The rising-risk worklist is a second job sitting on top of the first one. Outreach to a patient who has not been admitted and does not have an immediate need. That call gets made last, if it gets made at all. And then the readmission happens, and everybody knew it was coming, and the post-event chart review confirms all the signals that were there six weeks ago.</p>' +
-    '<p>This is not a staffing problem. You cannot hire your way out of a workflow that scales with your attributed population. A 10,000-life ACO with 400 rising-risk patients flagged in any given month needs infrastructure that can carry the outreach volume at the same time coordinators are managing active transitions, chronic care programs, and quality gap closure.</p>',
-  shortfalls: [
-    { tool: 'Risk Stratification Engines', description: 'Risk scores and flags are the output of a prediction model, not an outreach infrastructure. These tools identify who is likely to deteriorate. They do not initiate contact, carry a conversation, document the interaction, or route a clinical concern to the care team. The move from prediction to action is a manual step that requires a coordinator to open the list, prioritize it, and find time that does not exist at scale.' },
-    { tool: 'Care Management Platforms', description: 'Care management platforms create task lists and track open items. They do not execute outreach. A task that says \u201ccall rising-risk patient\u201d is still a task someone has to pick up. When caseloads are at capacity, rising-risk outreach ages in the queue. The coordinator team is not failing. The workflow architecture is.' }
-  ],
-  solutionHeading: 'Risk intelligence connected to action before the clinical event',
-  solution: '<p>ZynPredict identifies patients whose clinical signals like recent ED use, medication gaps, worsening chronic condition indicators, utilization pattern changes, place them in an elevated risk tier. The Predictive Activation Agents carry that signal into an outreach workflow without waiting for a coordinator to initiate it.</p>' +
-    '<p>Every flagged patient receives proactive contact. The interaction is two-way, capturing current medication status, identifies new or worsening symptoms, confirms that the patient has a follow-up scheduled, and flags clinical concerns for coordinator review. When a patient reports a concerning symptom or medication gap, the agent routes the escalation to the care team with the full contact summary attached. ZynSchedule manages the follow-up booking.</p>' +
-    '<p>For ACOs and MSOs operating under shared savings targets, the financial logic is direct. The cost of proactive outreach for 400 rising-risk patients is a fraction of the cost of the readmissions that outreach prevents. Reaching those patients consistently and documentably, at the moment the risk signal flags , is the workflow Zynix AI is built to run.</p>',
-  products: [
-    { name: 'ZynPredict', descriptor: 'Predictive analytics for rising risk, readmissions, and ED utilization', url: '/solutions/zynix-data-analytics', status: 'Planned' },
-    { name: 'Predictive Activation Agents', descriptor: 'Proactive outreach agents acting on risk intelligence before clinical events', url: '/agents/predictive-activation', status: 'Active' },
-    { name: 'ZynSchedule', descriptor: 'Appointment scheduling and follow-up access management', url: '/agents/operational-efficiency/zynschedule', status: 'Active' }
-  ],
-  cta: { headline: 'Your risk stratification is already working. Let\u2019s connect it to outreach that runs at scale.', label: 'Talk to our team' },
-  readNext: [
-    { id: 'UC06', title: 'Post-Discharge TCM and Readmission Prevention', slug: 'post-discharge-tcm-readmission' },
-    { id: 'UC10', title: 'Chronic Care Coordination at Scale', slug: 'chronic-care-coordination-scale' },
-    { id: 'UC13', title: 'High-Cost and High-Utilizer Member Management', slug: 'high-utilizer-member-management' }
-  ],
-  segments: { primary: 'ACOs & MSOs', alsoTagged: ['Health Systems', 'Health Plans'] },
-  seo: { title: 'Rising-Risk Patient Outreach ACO Predictive Care | Zynix AI', desc: 'Reach rising-risk patients before the clinical event. Zynix AI connects risk stratification to proactive outreach, documented, two-way, and.', schema: 'HowTo' }
+USE_CASES.UC12 = {
+  id: 'UC12', slug: 'hcc-risk-adjustment-ma', group: 'risk-adjustment-quality', audience: 'plan', also: ['aco'],
+  title: 'Risk adjustment visits for Medicare Advantage members',
+  teaser: 'Members with conditions not yet documented this year are invited to a visit, and providers see the open gaps before the member arrives.',
+  lead: 'Your members’ chronic conditions count toward risk adjustment only when a provider documents them at a visit. Zynix gets those visits booked and the gaps in front of the provider.',
+  problem: { title: 'The condition is known. This year’s visit isn’t booked.',
+    body: ['Medicare Advantage risk adjustment counts diagnoses documented at acceptable face-to-face encounters during the year. A member treated for heart failure and diabetes for years adds nothing to this year’s score if no visit this year addresses those conditions.',
+      'Analytics find those members. Provider education improves documentation for members who are seen. Neither one books a visit for the member who hasn’t been in.'] },
+  gaps: [{ tool: 'Risk adjustment analytics', text: 'They find suspected gaps and rank them. They don’t contact members or schedule anything.' },
+    { tool: 'Provider coding education', text: 'It helps at the visits that happen. It can’t create the visit.' }],
+  how: { title: 'From a suspected gap to a documented encounter', lead: 'Your care managers approve the outreach. Providers decide what to document.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Suspected gaps, ranked', body: 'Diagnoses in claims and clinical records are compared with this year’s encounters, and members are ranked by impact and time left.' },
+    { owner: 'system', who: 'Zynix platform', title: 'Providers see the gap before the visit', body: 'For members with a visit booked, the provider’s office gets the open conditions to assess.' },
+    { owner: 'agent', who: 'Preventive and quality activation agent', title: 'Members without a visit are invited', body: 'The agent contacts members with scripts your care managers approve, explains why the visit matters and offers times.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'The visit is booked with the member’s provider', body: 'ZynSchedule books the visit, and the agent follows up until it is confirmed.' },
+    { owner: 'staff', who: 'Treating provider', title: 'The provider assesses and documents', body: 'Only the provider decides what is documented. The gap closes when the encounter does.' }],
+  episode: { title: 'Risk adjustment outreach', meta: 'This month · 3 provider groups',
+    rows: [{ title: 'Member 4471 · CHF, CKD not yet documented', sub: 'No visit this year', owner: { type: 'agent', label: 'Outreach agent' }, status: ZX_SOL_PROG },
+      { title: 'Member 2093 · diabetes with complications', sub: 'Visit booked Thursday', owner: { type: 'system', label: 'Pre-visit summary' }, status: ZX_SOL_BOOKED },
+      { title: 'Member 7710 · COPD', sub: 'Asked for a call back', owner: { type: 'staff', label: 'Care manager, RN' }, status: ZX_SOL_REVIEW }],
+    footer: 'Providers decide what is documented at the visit.' },
+  runsOn: [{ p: 'analytics', note: 'Care gap and HCC detection ranks members by open conditions.' },
+    { p: 'agents', family: 'clinical-performance', note: 'The preventive and quality activation agent invites members.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books the visit with the member’s provider.' },
+    { p: 'carePlans', note: 'The HCC gap closure sprint sets the cadence.' }],
+  readNext: ['post-discharge-ma-members', 'medication-adherence-chronic-populations', 'high-utilizer-member-management'],
+  story: 'eternalhealth', cta: 'risk adjustment outreach',
+  seo: { title: 'Risk adjustment outreach for MA plans | Zynix AI',
+    desc: 'Invite Medicare Advantage members with undocumented chronic conditions to a visit, and give providers the open gaps before the member arrives.', schema: 'HowTo' }
 };
 
-/* ── UC09 ── */
-USE_CASES.UC09 = {
-  id: 'UC09', slug: 'after-hours-ed-diversion', title: 'After-Hours Access and ED Diversion for ACO Populations',
-  h1: 'Patients who cannot reach their care team after hours go to the ED. Many of them do not need the ED. Each one of those visits is a direct shared savings impact.',
-  subhead: 'Unnecessary ED visits are among the most direct cost drivers in any risk-bearing care arrangement. The majority originate after hours, when patients cannot reach their care team and have no alternative. Zynix AI provides clinical triage access around the clock so the attributed population has somewhere to call that is not the emergency department.',
-  problemHeading: 'The after-hours access gap is a shared savings problem, not just a patient experience problem',
-  problem: '<p>An MSSP ACO managing 15,000 attributed lives has, in most configurations, a business-hours care team and a fragmented after-hours arrangement. A nurse triage line that operates until 8 p.m. An answering service that takes messages and relays callback requests. An on-call physician rotation that was designed for clinical emergencies and now handles everything from chest pain to medication refill questions because there is no other option after 9 p.m.</p>' +
-    '<p>Patients who cannot reach clinical guidance after hours make rational decisions. They go to urgent care if one is available and open. They go to the ED if it is not, or if their concern is significant enough that waiting until morning does not feel like an option. A patient with type 2 diabetes who woke up at midnight with a headache and blurred vision, uncertain whether this is concerning, unsure whether it can wait, makes that decision without any guidance from their care team. Some of those decisions result in non-urgent ED visits. The urgency determination is the service that was unavailable.</p>' +
-    '<p>For an ACO carrying financial responsibility for TCOC, every non-urgent ED visit in the attributed population is a direct cost. CMS tracks ED utilization rates as a quality metric. Payer contracts for risk-bearing MSOs often include ED utilization performance targets. The correlation between after-hours access gap and avoidable ED utilization is well-documented.</p>',
-  shortfalls: [
-    { tool: 'Nurse Triage Lines', description: 'Nurse-staffed triage lines are clinically capable when they are available. They are expensive to staff after hours for extended coverage windows, and their availability is often limited to specific hours, not 24/7. They are typically staffed for English-speaking populations, which leaves language access gaps for the multilingual attributed populations many ACOs manage. When call volume spikes, wait times eliminate the access benefit.' },
-    { tool: 'Patient Portal Messaging', description: 'Portal messaging is asynchronous by design. A patient with a health concern at 10 p.m. does not experience submitting a message and waiting for a next-day response as access. They experience it as an instruction to manage their concern alone until morning. For populations with lower digital literacy or limited portal adoption, common among the highest-need attributed populations. The portal is not an accessible channel at all.' }
-  ],
-  solutionHeading: 'Clinical access for the full attributed population, every hour the care team is not available',
-  solution: '<p>ZynAfterHours handles every after-hours call from the attributed population, assessing symptoms using consistent clinical triage logic, resolving routine questions, scheduling next-day appointments for concerns that can wait, and routing genuinely urgent cases to the on-call clinician. It operates in 15-plus languages, which means the same quality of access extends to every patient regardless of primary language. The on-call physician receives only the cases that require physician judgment.</p>' +
-    '<p>For patients identified as high-risk or recently discharged, ZynAfterHours flags the interaction for care team review the next morning so the clinical team has context on any after-hours contact before the patient\u2019s next scheduled encounter. ZynSchedule confirms next-day appointments in the same call. The patient ends the interaction with a plan rather than a message in a queue.</p>' +
-    '<p>For ACO and MSO leadership teams tracking ED utilization against performance year targets, the change in after-hours contact patterns is visible in claims within quarters. Patients who previously defaulted to the ED because no clinical alternative was available are reaching one. The on-call burden on the physician team is reduced to the clinical escalations that genuinely warranted it.</p>',
-  products: [
-    { name: 'ZynAfterHours & Triage', descriptor: '24/7 clinical triage in 15+ languages: symptom assessment, escalation routing, next-day scheduling', url: '/agents/operational-efficiency/zynafterhours-triage', status: 'Active' },
-    { name: 'ZynSchedule', descriptor: 'Next-day appointment scheduling completed in the after-hours interaction', url: '/agents/operational-efficiency/zynschedule', status: 'Active' }
-  ],
-  cta: { headline: 'After-hours access for every patient in the attributed population, 24 hours a day.', label: 'See how it works' },
-  readNext: [
-    { id: 'UC06', title: 'Post-Discharge TCM and Readmission Prevention', slug: 'post-discharge-tcm-readmission' },
-    { id: 'UC08', title: 'Rising-Risk Patient Outreach Before a Clinical Event', slug: 'rising-risk-patient-outreach' },
-    { id: 'UC02', title: 'After-Hours Patient Triage Across Multiple Sites', slug: 'after-hours-triage-multi-site' }
-  ],
-  segments: { primary: 'ACOs & MSOs', alsoTagged: ['Health Systems', 'Health Plans'] },
-  seo: { title: 'After-Hours ED Diversion ACO Population Health | Zynix AI', desc: 'Reduce avoidable ED visits for your attributed population. Zynix AI provides 24/7 clinical triage in 15+ languages, scheduling next-day access.', schema: 'HowTo' }
-};
-
-/* ── UC10 ── */
-USE_CASES.UC10 = {
-  id: 'UC10', slug: 'chronic-care-coordination-scale', title: 'Chronic Care Coordination at Scale',
-  h1: 'An MSSP ACO with 10,000 attributed lives may have 3,000 patients in active chronic care programs. Each requires monthly documented contact. None of that volume fits inside a human-only workflow.',
-  subhead: 'Chronic care management at the population level requires outreach that runs every month, two-way, across thousands of patients with different condition profiles and different barriers. Zynix AI runs the outreach, captures the documentation, and routes the exceptions so the care coordination team manages the complex cases rather than the contact volume.',
-  problemHeading: 'The caseload math does not work at ACO scale without a different infrastructure',
-  problem: '<p>An MSSP ACO managing 10,000 attributed lives with a typical chronic disease prevalence profile may have 2,500 to 3,500 patients enrolled in active CCM programs. Each of those patients requires, under CMS billing requirements, at least 20 minutes of non-face-to-face care management monthly, documented with a time-stamped record of the interaction.</p>' +
-    '<p>A care coordination team of 10 full-time coordinators managing 3,000 active CCM patients faces a structural caseload problem. Ten coordinators working 40-hour weeks, accounting for documentation, care plan management, and administrative time, have roughly 1,600 to 1,800 available hours per month for patient contact. At 3,000 patients, that is approximately 30 minutes per patient per month, before the time required for any patient who presents a barrier, requires a medication review, or generates a clinical escalation.</p>' +
-    '<p>The consequences of the caseload gap are not abstract. Patients who do not receive monthly CCM contact do not get their documentation, which affects billing. Patients whose medication barriers are not captured in a routine check-in present with preventable clinical events. The CCM program that is supposed to manage these patients at scale is limited by the same infrastructure that served a smaller panel.</p>',
-  shortfalls: [
-    { tool: 'Care Management Platforms and Worklists', description: 'Care management software creates visibility into the caseload: who needs contact this month, whose care plan is overdue, which patients have not had a documented touchpoint. It does not execute the outreach. Every item on the worklist still requires a coordinator to make the call, capture the documentation, identify the barrier, and decide on the next step. The platform shows the work. The coordinator does it.' },
-    { tool: 'EHR-Native CCM Modules', description: 'EHR-native CCM tools track time, manage care plan templates, and generate billing documentation when encounters are logged. They do not initiate patient contact, run two-way outreach interactions, or capture barriers in a structured format for care team review. They are documentation systems for work that has already been done, not execution systems for work that needs to happen.' }
-  ],
-  solutionHeading: 'Two-way chronic care outreach at population scale, with barriers captured and escalations routed',
-  solution: '<p>The Chronic and Longitudinal Care Management Agent runs monthly two-way outreach for the full chronic care population, capturing current medication status, identifying barriers, checking for new or worsening symptoms, reinforcing care plan adherence, and routing clinical concerns to the coordinator or care team for follow-up. Every interaction is time-stamped and documented for CCM billing eligibility. The coordinator team receives a daily queue of escalations and exceptions, not a list of 3,000 patients to work through from scratch.</p>' +
-    '<p>ZynReminder handles the patients who need a follow-up outreach after the initial monthly contact, those who reported a barrier that needed resolution, who agreed to schedule an appointment but have not confirmed, or whose medication concern required a pharmacist callback.</p>' +
-    '<p>For ACOs where CCM billing represents a meaningful revenue stream alongside the shared savings calculation, the change in monthly contact completion rates directly affects revenue capture. For the care coordination team, the change is operational: coordinators spend their time managing the patients whose situations require clinical judgment, not managing the contact volume for the entire caseload.</p>',
-  products: [
-    { name: 'Chronic & Longitudinal Care Management Agent', descriptor: 'Two-way monthly CCM outreach, barrier capture, escalation routing, and billing documentation', url: '/agents/chronic-care-management', status: 'Active' },
-    { name: 'ZynReminder', descriptor: 'Follow-up outreach for barrier resolution, scheduling confirmation, and care plan adherence', url: '/agents/preventive-quality-activation/zynreminder', status: 'Active' },
-    { name: 'ZynSchedule', descriptor: 'Appointment scheduling for chronic care follow-up visits', url: '/agents/operational-efficiency/zynschedule', status: 'Active' }
-  ],
-  cta: { headline: 'Monthly CCM contact for every patient in the program, documented, two-way, and escalated when needed.', label: 'Book a demo' },
-  readNext: [
-    { id: 'UC07', title: 'HCC Gap Closure and RAF Score Optimization', slug: 'hcc-gap-raf-optimization' },
-    { id: 'UC09', title: 'After-Hours Access and ED Diversion for ACO Populations', slug: 'after-hours-ed-diversion' },
-    { id: 'UC15', title: 'Medication Adherence for Chronic Disease Populations', slug: 'medication-adherence-chronic-populations' }
-  ],
-  segments: { primary: 'ACOs & MSOs', alsoTagged: ['Health Systems', 'Health Plans'] },
-  seo: { title: 'Chronic Care Coordination at Scale ACO CCM | Zynix AI', desc: 'Run monthly CCM outreach for thousands of chronic disease patients. Zynix AI captures documentation, identifies barriers, and routes escalations at.', schema: 'HowTo' }
-};
-
-/* ── UC11 ── */
 USE_CASES.UC11 = {
-  id: 'UC11', slug: 'hedis-stars-quality-improvement', title: 'HEDIS and Stars Quality Measure Improvement',
-  h1: 'The members holding down your Stars score this year are identified. The measurement window is open. They have not completed the measure. A reminder was sent. Nothing happened.',
-  subhead: 'Medicare Advantage Stars ratings are directly tied to HEDIS measure performance, and HEDIS performance is directly tied to whether members with open measures complete them before the measurement window closes. Zynix AI runs the outreach that turns open measures into completed ones.',
-  problemHeading: 'The gap between knowing a measure is open and closing it before the window ends is the Stars problem',
-  problem: '<p>Medicare Advantage health plans with direct Stars financial exposure know, months before the measurement window closes, which members are holding down specific measure scores. A member who has not had a glycosylated hemoglobin test in the measurement year is an open HEDIS CDC measure. A member who has not filled their statin for three consecutive months is an open Medication Adherence measure. The member is identified. The financial impact of non-completion is calculated. The window is still open.</p>' +
-    '<p>The challenge is that knowing a measure is open is different from having the infrastructure to close it. Sending a letter that tells a member a test is due results in low response rates, not because members do not care about their health, but because a letter does not schedule the appointment, does not identify the reason the test has not been completed, and does not navigate the specific barrier that kept the member from completing it in the first place.</p>' +
-    '<p>For health plans where Stars ratings drive plan revenue, per-member-per-month payments, and CMS bonus pools, HEDIS measure performance is a financial performance lever that affects the plan\u2019s margin materially. A plan that moves from three to four stars generates meaningfully higher revenue per member. The plan that knows which members and which measures represent the gap between those ratings and still cannot close them before the measurement window ends, is leaving a known financial opportunity uncaptured.</p>',
-  shortfalls: [
-    { tool: 'Member Outreach Programs and Mailings', description: 'Letters, postcards, and portal notifications inform members that a measure is due. They do not identify why the member has not completed the measure, navigate the specific barrier to completion, or schedule the lab or visit in the same interaction. Response rates to passive outreach are low across all member populations and lower for the members most at risk for measure non-completion. The measure stays open.' },
-    { tool: 'Call Center Outreach Programs', description: 'Call center programs can have two-way conversations with members, but they are expensive to staff for a full open-measure population, particularly in the final quarter of a Stars measurement year when all open measures need to be addressed simultaneously. Coverage gaps are common. The members who most need the outreach are often the hardest to reach and the most likely to require multiple attempts across the window.' }
-  ],
-  solutionHeading: 'HEDIS-specific outreach that navigates the barrier and books the service before the window closes',
-  solution: '<p>ZynReminder runs HEDIS-specific member outreach, explaining the measure in plain language, identifying the specific reason the member has not completed it, and navigating the resolution in the same interaction. If the barrier is scheduling, ZynSchedule books the lab or visit at the member\u2019s preferred location and time before the call ends. If the barrier is cost or access, the interaction routes to a care coordinator or patient assistance resource.</p>' +
-    '<p>The outreach scales across the full open-measure population simultaneously, not sequentially. A Stars quality team monitoring 12 HEDIS measures with thousands of open items per measure does not have to choose which measures to prioritize for outreach resources. ZynReminder runs the full population for every measure in the window, and the quality team receives completion tracking by measure, member tier, and closure timeline.</p>' +
-    '<p>For health plan quality and Stars teams, the most useful metric is measure closure rate by week of the measurement window: how many open measures are being closed per week relative to the window deadline. Zynix AI provides that visibility in real time, which allows the team to identify measures where barrier rates are higher than expected and adjust the approach before the window closes.</p>',
-  products: [
-    { name: 'ZynReminder', descriptor: 'Two-way HEDIS-specific member outreach with barrier identification and scheduling integration', url: '/agents/preventive-quality-activation/zynreminder', status: 'Active' },
-    { name: 'ZynSchedule', descriptor: 'Appointment and lab scheduling completed in the member outreach interaction', url: '/agents/operational-efficiency/zynschedule', status: 'Active' },
-    { name: 'ZynGap', descriptor: 'Quality gap identification and prioritization by measure impact and closure timing', url: '/solutions/zynix-data-analytics', status: 'Planned' }
-  ],
-  cta: { headline: 'The measurement window is open. Let\u2019s close the measures before it ends.', label: 'Book a demo' },
-  readNext: [
-    { id: 'UC12', title: 'HCC Risk Adjustment Accuracy', slug: 'hcc-risk-adjustment-ma' },
-    { id: 'UC14', title: 'Post-Discharge Care Management for MA Members', slug: 'post-discharge-ma-members' },
-    { id: 'UC07', title: 'HCC Gap Closure and RAF Score Optimization', slug: 'hcc-gap-raf-optimization' }
-  ],
-  segments: { primary: 'Health Plans', alsoTagged: [] },
-  seo: { title: 'HEDIS Quality Measure Improvement MA Stars | Zynix AI', desc: 'Close HEDIS measures before the Stars window ends. Zynix AI runs barrier-aware two-way member outreach, identifying why measures are open and.', schema: 'HowTo' }
+  id: 'UC11', slug: 'hedis-stars-quality-improvement', group: 'risk-adjustment-quality', audience: 'plan', also: [],
+  title: 'HEDIS gaps closed before the measurement year ends',
+  teaser: 'Two-way member outreach that finds out why a measure is still open and books the screening, lab or visit.',
+  lead: 'You know which members hold open HEDIS measures. Zynix asks each one what is in the way, books the service and passes anything clinical to your care managers.',
+  problem: { title: 'A reminder tells a member what is due. It doesn’t get it done.',
+    body: ['Months before the measurement year closes, a plan knows which members still need an A1c test, a colorectal screening or a blood pressure check. Letters and texts tell them. Many don’t act, because the barrier is a ride, a schedule, a cost question or a language, and a reminder doesn’t ask.',
+      'Call center campaigns can ask, but they are expensive to run across every open measure at once, and the members who need several attempts are the hardest to reach.'] },
+  gaps: [{ tool: 'Mailers and reminder texts', text: 'They inform. They don’t find the barrier or book the service.' },
+    { tool: 'Call center campaigns', text: 'Two-way, but costly at full scale in the last months of the year, when every measure needs attention at once.' }],
+  how: { title: 'Outreach that finds the barrier and books the service', lead: 'Your quality team chooses the measures and approves the scripts. Care managers take anything clinical.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Open measures, ranked', body: 'Members with open measures are ranked by measure and by the time left in the measurement year.' },
+    { owner: 'agent', who: 'Preventive and quality activation agent', title: 'A two-way conversation', body: 'The agent explains the measure in plain language, asks what is in the way and offers options.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'The service is booked', body: 'Labs, screenings and visits are booked at a place and time that work for the member, with reminders before them.' },
+    { owner: 'staff', who: 'Care manager, RN', title: 'Barriers and questions go to people', body: 'Cost, transportation and clinical questions are routed to a care manager or member services by rule.' },
+    { owner: 'system', who: 'Zynix platform', title: 'Closure tracked by measure', body: 'The quality team sees open, booked and completed items by measure and week.' }],
+  episode: { title: 'Measure outreach · A1c testing', meta: 'Measurement year · sample plan',
+    tiles: [{ label: 'Open', value: '1,280' }, { label: 'Booked', value: '402' }, { label: 'Completed', value: '233' }],
+    pipeline: [{ label: 'Open', value: 1280 }, { label: 'Reached', value: 744 }, { label: 'Booked', value: 402 }, { label: 'Completed', value: 233 }],
+    footer: 'A measure counts as closed when the result is back, not when the visit is booked.' },
+  runsOn: [{ p: 'analytics', note: 'Population and quality dashboards track open measures.' },
+    { p: 'agents', family: 'clinical-performance', note: 'The preventive and quality activation agent runs member outreach.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books the lab, screening or visit.' },
+    { p: 'carePlans', note: 'The preventive screening program sets cadence and routing rules.' }],
+  readNext: ['medication-adherence-chronic-populations', 'post-discharge-ma-members', 'high-utilizer-member-management'],
+  story: 'eternalhealth', cta: 'HEDIS gap outreach',
+  seo: { title: 'HEDIS gap outreach for health plans | Zynix AI',
+    desc: 'Two-way member outreach for open HEDIS measures: find the barrier, book the screening, lab or visit, and route clinical questions to care managers.', schema: 'HowTo' }
 };
 
-/* ── UC12 ── */
-USE_CASES.UC12 = { id: 'UC12', slug: 'hcc-risk-adjustment-ma', title: 'HCC Risk Adjustment Accuracy', h1: 'Your MA members have chronic conditions documented in their chart from prior years. Those conditions are not in the current CMS data submission. The revenue gap accumulates with every submission cycle.', subhead: 'Medicare Advantage plan revenue is tied directly to the accuracy of HCC coding in the CMS risk adjustment model. Members with chronic conditions documented historically but not coded in the current period represent a direct and quantifiable revenue gap. Zynix AI connects the gap identification to the visit that closes it.', problemHeading: 'The revenue gap is in the documentation, not in the diagnosis', problem: '<p>Medicare Advantage plans operating under the CMS risk adjustment model receive higher per-member-per-month payments for members with greater chronic disease burden, as documented through HCC codes in the current data submission period. The accuracy of the HCC coding directly determines whether the revenue the plan receives reflects the true complexity of the population it is managing.</p><p>The documentation gap is structural. A member with heart failure, type 2 diabetes, and chronic kidney disease may have all three conditions managed actively and documented in their claims and clinical records from prior years. If none of those conditions appear in a face-to-face encounter coded in the current submission period, none of them contribute to the plan\u2019s current-year risk score.</p><p>Plans managing hundreds of thousands of members with complex chronic disease profiles are leaving risk adjustment revenue uncaptured not because their populations are not sick, but because the workflow that connects known chronic conditions to current-year coding encounters is not consistently in place.</p>', shortfalls: [ { tool: 'Risk Adjustment Analytics Tools', description: 'Risk adjustment analytics platforms identify suspect HCC gaps at the member level, calculate the revenue impact of each uncoded condition, and rank members by documentation priority. They do not connect to a member outreach workflow, generate a pre-visit documentation brief for the provider, or trigger scheduling for members who do not have an upcoming appointment.' }, { tool: 'Provider Coding Education and Support Programs', description: 'Provider education programs improve coding accuracy at the point of documentation, but only for members who are seen. For members without an upcoming encounter in the current submission period, provider coding education does not generate a qualifying visit.' } ], solutionHeading: 'From risk adjustment gap to qualifying encounter at member population scale', solution: '<p>ZynGap surfaces member-level HCC gaps for the MA population, prioritized by risk adjustment revenue impact and submission deadline. For members with upcoming appointments, pre-visit documentation briefs are generated and delivered to the provider before the encounter.</p><p>For members without upcoming appointments, the Preventive and Quality Activation Agents run outreach to schedule a visit within the submission window. The interaction identifies scheduling barriers, books the appointment through ZynSchedule, and follows up with members who agreed to schedule but have not confirmed.</p><p>For MA plan finance and risk adjustment teams, the change is measurable in current-year risk scores relative to prior-year benchmarks, and in the completeness of the HCC documentation submitted in each payment year.</p>', products: [ { name: 'ZynGap', descriptor: 'HCC gap identification for MA populations, prioritized by risk adjustment revenue impact', url: '/solutions/zynix-data-analytics', status: 'Planned' }, { name: 'Preventive & Quality Activation Agents', descriptor: 'Member outreach for risk adjustment encounters and preventive care scheduling', url: '/agents/preventive-quality-activation', status: 'Active' }, { name: 'ZynSchedule', descriptor: 'Appointment scheduling within the risk adjustment submission window', url: '/agents/operational-efficiency/zynschedule', status: 'Active' } ], cta: { headline: 'The risk adjustment gap is in the data. Let\u2019s close it before the submission deadline.', label: 'Talk to our team' }, readNext: [ { id: 'UC11', title: 'HEDIS and Stars Quality Measure Improvement', slug: 'hedis-stars-quality-improvement' }, { id: 'UC13', title: 'High-Cost and High-Utilizer Member Management', slug: 'high-utilizer-member-management' }, { id: 'UC07', title: 'HCC Gap Closure and RAF Score Optimization', slug: 'hcc-gap-raf-optimization' } ], segments: { primary: 'Health Plans', alsoTagged: ['ACOs & MSOs'] }, seo: { title: 'HCC Risk Adjustment Accuracy MA MA Plan | Zynix AI', desc: 'Close HCC documentation gaps before the MA submission deadline. Zynix AI connects risk adjustment analytics to member outreach, provider preparation, and.', schema: 'HowTo' } };
+USE_CASES.UC28 = {
+  id: 'UC28', slug: 'preventive-screening-gap-fqhc', group: 'risk-adjustment-quality', audience: 'fqhc', also: ['aco', 'plan'],
+  title: 'Preventive screening outreach for high-barrier patients',
+  teaser: 'Outreach that asks why a screening is still open, books it and routes transportation or cost barriers to your team.',
+  lead: 'The order has been open for months. Zynix asks the patient what is in the way, books the screening and passes transportation or cost barriers to your team.',
+  problem: { title: 'The order exists. Nobody has asked why it’s still open.',
+    body: ['Health centers order screenings at reasonable rates. Completion is the problem: no ride to the imaging center, no time off during lab hours, a cost question, or instructions in a language the patient doesn’t read.',
+      'More reminders reach the patients who were going to go anyway. The patients with the biggest barriers need a conversation, and coordinators can only have so many of them.'] },
+  gaps: [{ tool: 'Generic reminders', text: 'They reach responsive patients. They don’t find or remove a barrier.' },
+    { tool: 'Coordinator outreach', text: 'Effective one patient at a time, with hundreds of open orders at once.' }],
+  how: { title: 'One barrier at a time, across every open order', lead: 'Agents have the conversation and book the visit. Your team handles the barriers that need a person.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Open screenings, ranked', body: 'Open orders and due screenings are ranked by age and priority across your patients.' },
+    { owner: 'agent', who: 'Preventive and quality activation agent', title: 'A conversation, not a reminder', body: 'The agent asks why the screening hasn’t happened, in the patient’s preferred language, and offers options.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'Booked when the barrier is timing', body: 'ZynSchedule books a time the patient can make, and reminders go out before it.' },
+    { owner: 'staff', who: 'Care coordinator', title: 'Routed when it needs a person', body: 'Transportation, cost and other barriers go to a coordinator or community health worker to arrange support.' }],
+  episode: { title: 'Screening outreach', meta: 'This week · open orders',
+    rows: [{ title: 'Pt 5102 · mammogram ordered in spring', sub: 'Works during imaging hours', owner: { type: 'agent', label: 'ZynSchedule' }, status: ZX_SOL_BOOKED },
+      { title: 'Pt 3318 · colorectal screening', sub: 'Needs a ride', owner: { type: 'staff', label: 'Care coordinator' }, status: ZX_SOL_ESC },
+      { title: 'Pt 2275 · A1c test', sub: 'Prefers Spanish', owner: { type: 'agent', label: 'Outreach agent' }, status: ZX_SOL_PROG }],
+    footer: 'Barriers that need a person go to your care team.' },
+  runsOn: [{ p: 'analytics', note: 'Population and quality dashboards list open screenings.' },
+    { p: 'agents', family: 'clinical-performance', note: 'The preventive and quality activation agent has the conversation.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books the screening.' },
+    { p: 'carePlans', note: 'The preventive screening program sets cadence and routing.' }],
+  readNext: ['sdoh-screening-care-navigation', 'medication-adherence-complex-chronic', 'after-hours-triage-multilingual-fqhc'],
+  story: 'amistad', cta: 'screening outreach',
+  seo: { title: 'Preventive screening outreach for FQHCs | Zynix AI',
+    desc: 'Outreach for open screening orders that asks what is in the way, books the visit and routes transportation or cost barriers to your care team.', schema: 'HowTo' }
+};
 
-/* ── UC13 ── */
-USE_CASES.UC13 = { id: 'UC13', slug: 'high-utilizer-member-management', title: 'High-Cost and High-Utilizer Member Management', h1: 'A small fraction of your membership drives a disproportionate share of medical spend. They are identified. They are enrolled in case management. They are still hard to reach consistently. The next admission is coming.', subhead: 'High-cost, high-utilizer members are known. Actuarial models identify them. Case management programs enroll them. The challenge is maintaining consistent outreach and care plan follow-through for the members who are hardest to reach and most likely to generate the next admission without it.', problemHeading: 'Case management programs identify the right members. Consistent outreach does not always follow.', problem: '<p>In most health plan books of business, 5 percent of members account for 50 percent or more of total medical expenditure. These members are not unknown to the plan. Actuarial risk models identify them. Complex case management programs enroll the highest-acuity tier.</p><p>High-utilizer members present specific engagement challenges. Many have fragmented care relationships, including multiple specialists, frequent care transitions, gaps between inpatient and outpatient follow-up. Many have significant social needs that affect their willingness and ability to engage with the health plan.</p><p>Case management staff managing complex member caseloads are typically among the most clinically skilled in the plan\u2019s care management workforce. Their time is most valuable in the interactions that require clinical judgment. It is least valuable in the routine monthly check-in contact that is required to maintain program enrollment and catch emerging issues before they become acute events. That is where consistent outreach breaks down.</p>', shortfalls: [ { tool: 'Actuarial Risk Models and Identification Tools', description: 'Risk stratification models identify high-utilizer members accurately. They do not initiate contact, maintain an outreach cadence, capture barriers in a structured format, or route clinical concerns to the care team.' }, { tool: 'Complex Case Management Programs', description: 'High-touch case management works for the members who are actively enrolled and engaged. For members who are hard to reach, those who do not answer calls reliably, who have had negative experiences with plan outreach, or whose living situations create access barriers, maintaining the consistent monthly contact that program enrollment requires strains the case management team.' } ], solutionHeading: 'Rising-utilizer signals caught early. Consistent outreach maintained between case management touchpoints.', solution: '<p>ZynPredict identifies members whose utilization and clinical signals indicate a rising trajectory, not just the members already in high-tier case management, but the members approaching that threshold. The Predictive Activation Agents initiate outreach for rising-utilizer members before the next admission.</p><p>For members already enrolled in complex case management programs, the Chronic and Longitudinal Care Management Agent maintains the routine monthly outreach cadence, confirming medication adherence, checking for new symptoms, reinforcing care plan components, and identifying barriers that need case manager attention.</p><p>For health plan care management and medical management teams, the change is in how caseload hours are distributed. Case managers spend their time on the high-judgment interventions. The routine contact volume that keeps members engaged between those interventions runs through the Zynix AI workflow.</p>', products: [ { name: 'ZynPredict', descriptor: 'Predictive analytics for rising utilization and high-cost member identification', url: '/solutions/zynix-data-analytics', status: 'Planned' }, { name: 'Chronic & Longitudinal Care Management Agent', descriptor: 'Two-way monthly outreach, barrier capture, and care plan reinforcement for complex chronic members', url: '/agents/chronic-care-management', status: 'Active' }, { name: 'Predictive Activation Agents', descriptor: 'Proactive outreach acting on rising utilization signals before the next clinical event', url: '/agents/predictive-activation', status: 'Active' } ], cta: { headline: 'The members driving your highest costs are identifiable. Let\u2019s reach them consistently.', label: 'Talk to our team' }, readNext: [ { id: 'UC12', title: 'HCC Risk Adjustment Accuracy', slug: 'hcc-risk-adjustment-ma' }, { id: 'UC15', title: 'Medication Adherence for Chronic Disease Populations', slug: 'medication-adherence-chronic-populations' }, { id: 'UC08', title: 'Rising-Risk Patient Outreach Before a Clinical Event', slug: 'rising-risk-patient-outreach' } ], segments: { primary: 'Health Plans', alsoTagged: ['ACOs & MSOs', 'Health Systems'] }, seo: { title: 'High-Cost High-Utilizer Member Management Health | Zynix AI', desc: 'Reach high-utilizer members before the next admission. Zynix AI combines predictive risk identification with consistent outreach and care plan.', schema: 'HowTo' } };
+/* ── Chronic care and adherence ── */
+USE_CASES.UC10 = {
+  id: 'UC10', slug: 'chronic-care-coordination-scale', group: 'chronic-care', audience: 'aco', also: ['mso', 'system', 'plan'],
+  title: 'Chronic care management across your panel',
+  teaser: 'Monthly check-ins for patients in chronic care programs, with changes in symptoms or adherence routed to care managers.',
+  lead: 'Patients in your chronic care programs need a touchpoint every month. Agents run the routine check-ins, and care managers spend their time on the patients who need them.',
+  problem: { title: 'The caseload math stops working at ACO scale',
+    body: ['Chronic care management asks for a documented touchpoint every calendar month for each enrolled patient. Across an attributed population, that is thousands of calls on top of transitions, quality gaps and wellness visits.',
+      'When the month runs out, the routine check-ins are what slip, and those are the calls that catch a missed medication or a new symptom before it becomes an admission.'] },
+  gaps: [{ tool: 'Care management worklists', text: 'They show who is due this month. A person still has to make every call.' },
+    { tool: 'EHR CCM modules', text: 'They track time and templates for work already done. They don’t start the conversation.' }],
+  how: { title: 'Routine contact every month, exceptions to your team', lead: 'The care plan sets the cadence and the questions. Care managers get a queue of exceptions, not the whole list.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Due patients, by risk tier', body: 'Enrolled patients due for a touchpoint are ranked by risk tier and date of last contact.' },
+    { owner: 'agent', who: 'Chronic care management agent', title: 'The monthly check-in', body: 'The agent asks about symptoms, medications and upcoming visits, reinforces the care plan and records the contact.' },
+    { owner: 'staff', who: 'Care manager, RN', title: 'Changes go to a care manager', body: 'New symptoms, missed doses and barriers are escalated by rule, with the conversation attached.' },
+    { owner: 'staff', who: 'Billing provider', title: 'Time and documentation are reviewed', body: 'The billing provider reviews the record and decides what counts toward CCM time.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'Visits booked when needed', body: 'If the care manager wants the patient seen, ZynSchedule books the visit.' }],
+  episode: { title: 'Chronic care queue', meta: 'This month · risk tier 2',
+    tiles: [{ label: 'Due this month', value: '2,140' }, { label: 'Checked in', value: '1,386' }, { label: 'Escalated', value: '94' }],
+    rows: [{ title: 'Pt 1177 · CHF, COPD', sub: 'Check-in done · no changes', owner: { type: 'agent', label: 'Chronic care agent' }, status: ZX_SOL_DONE },
+      { title: 'Pt 6031 · diabetes', sub: 'Missed doses this week', owner: { type: 'staff', label: 'Care manager, RN' }, status: ZX_SOL_ESC },
+      { title: 'Pt 4852 · hypertension', sub: 'Second attempt tomorrow', owner: { type: 'agent', label: 'Chronic care agent' }, status: ZX_SOL_QUEUED }],
+    footer: 'Care managers see the exceptions; the billing provider reviews CCM time.' },
+  runsOn: [{ p: 'agents', family: 'clinical-performance', note: 'The chronic care management agent runs the check-ins.' },
+    { p: 'carePlans', note: 'Care plans set the cadence, questions and escalation rules.' },
+    { p: 'analytics', note: 'Risk tiers order the monthly list.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books visits the care team asks for.' }],
+  readNext: ['post-discharge-tcm-readmission', 'hcc-gap-raf-optimization', 'after-hours-ed-diversion'],
+  cta: 'chronic care check-ins',
+  seo: { title: 'Chronic care management for ACOs | Zynix AI',
+    desc: 'Monthly chronic care check-ins across your attributed panel, with symptom and adherence changes routed to care managers and CCM time reviewed by providers.', schema: 'HowTo' }
+};
 
-/* ── UC14 ── */
-USE_CASES.UC14 = { id: 'UC14', slug: 'post-discharge-ma-members', title: 'Post-Discharge Care Management for MA Members', h1: 'By the time your claims system identifies that an MA member was discharged from the hospital, the TCM outreach window has already closed. The readmission risk has not.', subhead: 'Medicare Advantage plans have financial and quality exposure to post-discharge outcomes, but most plans receive discharge information on a claims lag that makes the TCM window unreachable. Zynix AI connects to real-time ADT feeds so the 48-hour contact window opens the day the member leaves the hospital, not three weeks later.', problemHeading: 'The discharge happened. The claims will tell you about it in four weeks.', problem: '<p>Medicare Advantage plans carrying quality and financial responsibility for their attributed members\u2019 post-discharge outcomes face a structural information lag. Most plans identify that a member was hospitalized through claims data, which arrives weeks after the event. By the time a care coordinator reviews the discharge report and initiates outreach, the 24-to-48-hour TCM contact window has long since closed.</p><p>The 30-day post-discharge period is when preventable readmissions occur. The first 48 hours are when the most actionable interventions can happen, including identifying medication confusion before it leads to an adverse event, confirming that the follow-up appointment has been scheduled and is accessible, addressing the transportation or social barriers that might prevent the member from keeping it.</p><p>For MA plans where 30-day readmission rates affect Stars quality scores and where each readmission adds directly to MLR, the claims identification lag is not a data problem that can be solved by better reporting. It requires a fundamentally different signal source: real-time ADT feeds.</p>', shortfalls: [ { tool: 'Claims-Based Discharge Identification', description: 'Claims data provides accurate discharge identification with a two-to-four-week processing lag. By the time the discharge appears in a plan\u2019s care management system, the TCM billing window has closed and the highest-risk post-discharge period has passed.' }, { tool: 'Manual Outreach Programs for Identified Discharges', description: 'Even for plans with ADT notification systems in place, converting a discharge notification into an outreach call requires staff to review the notification, prioritize against the existing caseload, and make the call within the intervention window. At the volume of a regional MA plan\u2019s monthly discharges, manual prioritization consistently misses a significant fraction of the eligible population.' } ], solutionHeading: 'Real-time discharge detection. Forty-eight-hour contact. Every MA member.', solution: '<p>The Transitions of Care Agent connects to real-time ADT feeds from the hospital network, identifies MA member discharges within hours of occurrence, and initiates the 24-to-48-hour contact window automatically. The interaction confirms safe arrival, catches medication confusion, assesses for new or worsening symptoms, and schedules the required follow-up visit.</p><p>Medication Reconciliation identifies discrepancies between the member\u2019s pre-admission medications, discharge prescriptions, and current reported medications, routing concerns to the plan\u2019s clinical team or the member\u2019s primary care provider as appropriate. ZynSchedule confirms the follow-up appointment before the interaction ends.</p><p>For MA plan quality teams tracking 30-day readmission rates against Stars performance targets, the operational change is in how many members receive timely post-discharge contact, not which members were identified.</p>', products: [ { name: 'Transitions of Care Agent', descriptor: 'Real-time ADT-connected post-discharge outreach and quality documentation for MA members', url: '/agents/transitions-of-care', status: 'Active' }, { name: 'ZynSchedule', descriptor: 'Follow-up appointment scheduling within the post-discharge contact interaction', url: '/agents/operational-efficiency/zynschedule', status: 'Active' }, { name: 'Medication Reconciliation', descriptor: 'Post-discharge medication discrepancy identification and clinical routing', url: '/agents/transitions-of-care', status: 'Active' } ], cta: { headline: 'The member was discharged this morning. The 48-hour window is open now.', label: 'Book a demo' }, readNext: [ { id: 'UC11', title: 'HEDIS and Stars Quality Measure Improvement', slug: 'hedis-stars-quality-improvement' }, { id: 'UC12', title: 'HCC Risk Adjustment Accuracy', slug: 'hcc-risk-adjustment-ma' }, { id: 'UC06', title: 'Post-Discharge TCM and Readmission Prevention', slug: 'post-discharge-tcm-readmission' } ], segments: { primary: 'Health Plans', alsoTagged: ['ACOs & MSOs'] }, seo: { title: 'Post-Discharge Care Management MA Members | Zynix AI', desc: 'Reach MA members within 48 hours of discharge using real-time ADT feeds. Zynix AI eliminates the claims-lag gap and delivers post-discharge outreach.', schema: 'HowTo' } };
+USE_CASES.UC19 = {
+  id: 'UC19', slug: 'ccm-billing-chronic-care', group: 'chronic-care', audience: 'mso', also: ['aco', 'fqhc'],
+  title: 'Monthly CCM check-ins for independent practices',
+  teaser: 'The monthly chronic care touchpoint, run for every enrolled patient, with clinical questions routed to the practice.',
+  lead: 'Many of your Medicare patients qualify for chronic care management, and the monthly touchpoint is what slips. Zynix runs the routine check-ins and routes anything clinical to the practice.',
+  problem: { title: 'The program is there. The monthly touchpoint isn’t.',
+    body: ['Chronic care management pays for ongoing care between visits for patients with two or more chronic conditions, with clinical staff time documented each calendar month. Most practices know which of their patients qualify.',
+      'The medical assistants and nurses who would make the calls are also rooming patients, returning messages and handling refills. The monthly contact gets done for the patients they have time for.'] },
+  gaps: [{ tool: 'EHR CCM modules', text: 'They track eligibility and time. They don’t make the call.' },
+    { tool: 'Staff call lists', text: 'They work until clinic gets busy, which is most days.' }],
+  how: { title: 'The monthly touchpoint, for every enrolled patient', lead: 'Agents handle the routine contact. Your clinical staff handle the clinical work and what counts toward CCM time.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Enrolled patients due this month', body: 'Patients due for this month’s touchpoint are listed by practice.' },
+    { owner: 'agent', who: 'Chronic care management agent', title: 'The check-in', body: 'Symptoms, medications and upcoming visits, with the care plan reinforced and the contact recorded.' },
+    { owner: 'staff', who: 'Practice nurse', title: 'Clinical questions go to the practice', body: 'Changes in symptoms or adherence go to the practice nurse by rule.' },
+    { owner: 'staff', who: 'Billing provider', title: 'The provider reviews', body: 'The billing provider reviews the record and decides what counts toward CCM time.' }],
+  episode: { title: 'Monthly check-in', meta: 'Pt 2064 · enrolled in CCM',
+    steps: [{ time: 'Day 1', title: 'Check-in call · symptoms stable', owner: 'Chronic care management agent', status: ZX_SOL_DONE },
+      { time: 'Day 1', title: 'Refill running low, flagged', owner: 'Practice nurse', status: ZX_SOL_ESC },
+      { time: 'Day 2', title: 'Nurse called patient, refill sent', owner: 'Practice nurse', status: ZX_SOL_DONE },
+      { time: 'Day 5', title: 'Contact record ready for review', owner: 'Billing provider', status: ZX_SOL_REVIEW }],
+    footer: 'The billing provider decides what counts toward CCM time.' },
+  runsOn: [{ p: 'agents', family: 'clinical-performance', note: 'The chronic care management agent runs the monthly check-in.' },
+    { p: 'carePlans', note: 'The care plan sets the questions and escalation rules.' },
+    { p: 'dataFoundation', note: 'One record, whatever EHR each practice runs.' }],
+  readNext: ['after-hours-call-handling-group-practices', 'appointment-scheduling-no-show', 'referral-coordination-leakage'],
+  cta: 'monthly CCM check-ins',
+  seo: { title: 'CCM check-ins for independent practices | Zynix AI',
+    desc: 'Monthly chronic care check-ins for enrolled patients, with clinical questions routed to the practice and CCM time reviewed by the billing provider.', schema: 'HowTo' }
+};
 
-/* ── UC15 ── */
-USE_CASES.UC15 = { id: 'UC15', slug: 'medication-adherence-chronic-populations', title: 'Medication Adherence for Chronic Disease Populations', h1: 'Non-adherent members are known. Their PDC scores are calculated. A refill reminder was sent. The prescription still has not been filled. The reason for non-adherence was never captured.', subhead: 'PDC-based medication adherence measures are among the highest-weighted Stars metrics for Medicare Advantage plans. Non-adherent members are identifiable in the pharmacy claims. The gap between knowing who has not filled their medication and knowing why, and routing the resolution, is where standard outreach programs fall short.', problemHeading: 'The non-adherent member is not unidentified. They are unreached in a way that matters.', problem: '<p>A Medicare Advantage plan managing its Stars medication adherence measures can identify, from pharmacy claims, every member who has not filled their diabetes, blood pressure, or cholesterol medication in the past 30 to 90 days. The PDC calculation is automated. The member list is current.</p><p>The question is what happens next. A refill reminder tells the member that their prescription is due. It does not ask whether the member stopped taking the medication because it caused side effects they did not report. It does not identify whether the member cannot afford the copay for a brand-name medication that has a generic alternative they were not offered.</p><p>Each of those barriers requires a different response. Side effects route to the pharmacist or prescribing provider. Cost barriers route to a patient assistance program or a formulary review. A refill reminder system cannot distinguish between these situations because it does not have a two-way conversation with the member.</p>', shortfalls: [ { tool: 'Automated Refill Reminder Systems', description: 'Refill reminders notify members that a prescription is due. They do not capture why the member has not filled it, differentiate between barrier types, or route the resolution. The measure stays open because the barrier was never identified.' }, { tool: 'Pharmacist Outreach and Intervention Programs', description: 'Clinical pharmacist programs provide high-quality, barrier-specific medication adherence intervention. They are expensive to staff at a scale that covers the full non-adherent population for a large MA plan, and they are typically limited to the highest-risk tier.' } ], solutionHeading: 'Two-way adherence outreach that captures the barrier and routes the resolution', solution: '<p>The Medication Adherence workflow within the Chronic and Longitudinal Care Management Agent contacts non-adherent members with a two-way interaction that identifies the specific barrier to medication access. Cost barriers route to patient assistance program information. Side effect concerns route to the pharmacist or prescribing provider. Clinical misunderstandings are routed to the care team for clarification.</p><p>ZynReminder manages the follow-up cadence for members who need a second contact or whose barrier resolution requires a callback confirmation. Every interaction is documented with the barrier type, routing action, and outcome.</p><p>For MA plans where medication adherence measures are among the highest-weighted components of the Stars composite, the change in PDC scores is visible at the measure level within a Stars measurement cycle.</p>', products: [ { name: 'Chronic & Longitudinal Care Management Agent', descriptor: 'Two-way medication adherence outreach with barrier identification and clinical routing', url: '/agents/chronic-care-management', status: 'Active' }, { name: 'ZynReminder', descriptor: 'Follow-up outreach for barrier resolution and medication adherence confirmation', url: '/agents/preventive-quality-activation/zynreminder', status: 'Active' } ], cta: { headline: 'Non-adherence has a reason. Let\u2019s identify it and route the resolution.', label: 'See how it works' }, readNext: [ { id: 'UC13', title: 'High-Cost and High-Utilizer Member Management', slug: 'high-utilizer-member-management' }, { id: 'UC14', title: 'Post-Discharge Care Management for MA Members', slug: 'post-discharge-ma-members' }, { id: 'UC29', title: 'Medication Adherence for Complex Chronic Patients', slug: 'medication-adherence-complex-chronic' } ], segments: { primary: 'Health Plans', alsoTagged: ['ACOs & MSOs', 'FQHCs'] }, seo: { title: 'Medication Adherence Medicare Advantage PDC Stars | Zynix AI', desc: 'Two-way adherence outreach that identifies why MA members stopped their medication and routes the resolution to the pharmacist, provider, or.', schema: 'HowTo' } };
+USE_CASES.UC15 = {
+  id: 'UC15', slug: 'medication-adherence-chronic-populations', group: 'chronic-care', audience: 'plan', also: ['aco', 'fqhc'],
+  title: 'Medication adherence outreach for Stars measures',
+  teaser: 'Conversations with members who stopped filling a medication, with side effects routed to a pharmacist and cost questions to member services.',
+  lead: 'Pharmacy claims show who stopped filling a diabetes, blood pressure or statin medication. Zynix asks why, and routes the answer to the person who can fix it.',
+  problem: { title: 'A refill reminder doesn’t ask why',
+    body: ['Part D adherence measures look at how many days a member had their medication on hand. The members holding them down are easy to find in pharmacy claims. The reasons are not: side effects nobody reported, a copay the member can’t manage, a pharmacy that’s hard to reach, or confusion after a dose change.',
+      'Each reason needs a different response. Side effects go to a pharmacist or the prescriber. Cost goes to member services or a lower-cost alternative. A reminder can’t tell them apart.'] },
+  gaps: [{ tool: 'Automated refill reminders', text: 'They say the refill is due. They don’t learn why it wasn’t filled.' },
+    { tool: 'Pharmacist programs', text: 'The right answer for complex cases, and too costly to reach every member who has stopped.' }],
+  how: { title: 'Find the reason, route the fix', lead: 'Agents have the conversation. Pharmacists, prescribers and member services resolve what they hear.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Members with gaps in fills', body: 'Pharmacy claims flag members whose days covered are falling behind, by measure.' },
+    { owner: 'agent', who: 'Chronic care management agent', title: 'A two-way check-in', body: 'The agent asks whether the member is still taking the medication and, if not, why, using scripts your team approves.' },
+    { owner: 'staff', who: 'Pharmacist or prescriber', title: 'Side effects go to a clinician', body: 'Side effects and dosing confusion are routed to a pharmacist or the prescriber by rule.' },
+    { owner: 'staff', who: 'Member services', title: 'Cost and access go to member services', body: 'Copay, formulary and pharmacy access questions go to the team that can resolve them.' },
+    { owner: 'agent', who: 'Preventive and quality activation agent', title: 'Follow-up until it’s resolved', body: 'Two-way reminders confirm the refill or the next step.' }],
+  episode: { title: 'Adherence outreach', meta: 'Statins · this month',
+    rows: [{ title: 'Member 3120 · stopped after dizziness', sub: 'Routed to a pharmacist', owner: { type: 'staff', label: 'Pharmacist' }, status: ZX_SOL_ESC },
+      { title: 'Member 8841 · copay question', sub: 'Member services callback', owner: { type: 'staff', label: 'Member services' }, status: ZX_SOL_PROG },
+      { title: 'Member 5092 · forgot the refill', sub: 'Refill confirmed', owner: { type: 'agent', label: 'Outreach agent' }, status: ZX_SOL_DONE }],
+    footer: 'Every answer is routed by type: clinical, cost or access.' },
+  runsOn: [{ p: 'agents', family: 'clinical-performance', note: 'The chronic care management agent runs the check-ins.' },
+    { p: 'analytics', note: 'Population and quality dashboards track days covered by measure.' },
+    { p: 'carePlans', note: 'The medication safety and adherence plan sets routing rules.' }],
+  readNext: ['hedis-stars-quality-improvement', 'post-discharge-ma-members', 'high-utilizer-member-management'],
+  story: 'eternalhealth', cta: 'adherence outreach',
+  seo: { title: 'Medication adherence outreach for MA plans | Zynix AI',
+    desc: 'Find out why members stopped filling diabetes, blood pressure or statin medications, and route side effects, cost and access questions to the right team.', schema: 'HowTo' }
+};
 
-/* ── UC16 ── */
-USE_CASES.UC16 = { id: 'UC16', slug: 'after-hours-call-handling-group-practices', title: 'After-Hours Call Handling and Patient Triage', h1: 'After your office closes, patients with health concerns have three choices: leave a voicemail, go to urgent care, or go to the ED. None of those outcomes serves your practice or your patients.', subhead: 'Independent group practices cannot afford to staff clinical after-hours coverage consistently. The calls keep coming anyway. ZynAfterHours handles every after-hours call, triaging by symptom, routing urgent cases, and scheduling next-day appointments for everything else.', problemHeading: 'After-hours call volume is a staffing problem most practices have solved with a workaround that does not work', problem: '<p>An independent group practice with four to twelve physicians typically manages after-hours calls through some combination of a physician rotation, an answering service contract, and a patient portal. The physician rotation routes every after-hours call to a physician, regardless of whether the call requires physician involvement.</p><p>The practical outcome is that patients who call after hours either reach a physician who handles a mix of genuine clinical concerns and routine questions, reach an answering service that documents the call without resolving it, or go to urgent care or the ED because none of the available options felt accessible or timely.</p><p>For independent group practices participating in value-based care arrangements, the after-hours access gap has a direct effect on care continuity and patient retention. Patients who consistently cannot reach their practice after hours develop alternative care relationships.</p>', shortfalls: [ { tool: 'Traditional Answering Services', description: 'Answering services receive after-hours calls and relay messages for callback. They cannot triage clinical urgency, differentiate between a symptom that warrants an urgent physician callback and one that warrants a next-morning appointment, or schedule follow-up access in the interaction.' }, { tool: 'On-Call Physician Rotations', description: 'Physician rotations provide clinical quality, but the rotation does not discriminate between call types. A physician who agreed to handle after-hours clinical emergencies is receiving prescription refill requests and medication question calls at 9 p.m. Burnout in on-call roles accumulates.' } ], solutionHeading: 'Clinical triage after hours, with urgent cases reaching the physician and everything else handled', solution: '<p>ZynAfterHours handles every after-hours call for the practice, assessing symptoms against consistent clinical triage logic, answering routine questions, and scheduling next-day appointments for everything that can wait. Urgent clinical situations route to the on-call physician with a summary of the patient\u2019s concern and the triage assessment.</p><p>The interaction is available in 15-plus languages. ZynSchedule books next-morning appointments in the same call so the patient ends the interaction with a confirmed access plan.</p><p>For practices tracking patient satisfaction and retention, the change in after-hours experience is directly relevant. For practices in value-based care arrangements, the reduction in non-urgent ED visits from patients who previously had no after-hours alternative is visible in the ED utilization data within months.</p>', products: [ { name: 'ZynAfterHours & Triage', descriptor: '24/7 after-hours clinical triage in 15+ languages: symptom assessment, escalation routing, next-day scheduling', url: '/agents/operational-efficiency/zynafterhours-triage', status: 'Active' }, { name: 'ZynSchedule', descriptor: 'Next-day appointment scheduling completed in the after-hours interaction', url: '/agents/operational-efficiency/zynschedule', status: 'Active' } ], cta: { headline: 'After-hours calls handled. Urgent cases routed. Appointments scheduled. Every night.', label: 'Book a demo' }, readNext: [ { id: 'UC17', title: 'Appointment Scheduling and No-Show Reduction', slug: 'appointment-scheduling-no-show' }, { id: 'UC19', title: 'CCM Billing Execution and Chronic Care Management', slug: 'ccm-billing-chronic-care' }, { id: 'UC09', title: 'After-Hours Access and ED Diversion for ACO Populations', slug: 'after-hours-ed-diversion' } ], segments: { primary: 'Independent Group Practices', alsoTagged: ['ACOs & MSOs'] }, seo: { title: 'After-Hours Call Handling Practice Triage | Zynix AI', desc: 'Clinical triage for every after-hours call at your group practice, with urgent cases routed to the on-call physician, everything else handled and.', schema: 'HowTo' } };
+USE_CASES.UC29 = {
+  id: 'UC29', slug: 'medication-adherence-complex-chronic', group: 'chronic-care', audience: 'fqhc', also: ['plan', 'aco'],
+  title: 'Adherence check-ins for patients on complex regimens',
+  teaser: 'Two-way check-ins for patients managing several chronic conditions, with side effects and cost barriers routed to the right person.',
+  lead: 'A patient stopped a blood pressure medication because it made them dizzy and never told anyone. Zynix asks, in the patient’s language, and routes the answer to your team.',
+  problem: { title: 'Non-adherence in complex patients is rarely just forgetting',
+    body: ['Health center patients often manage diabetes, hypertension and heart failure together, with several prescribers and dosing schedules. A dry cough, a copay that doesn’t fit the month or a confusing change after a hospital stay can each stop a medication.',
+      'Refill reminders help patients who have no barrier. The rest need a conversation, and pharmacist time is reserved for the highest-risk few.'] },
+  gaps: [{ tool: 'Refill reminders', text: 'Effective for patients with no barrier, and silent on why the others stopped.' },
+    { tool: 'Pharmacist outreach', text: 'The best intervention, reserved for the highest-risk tier because it takes the most time.' }],
+  how: { title: 'Ask why, then route the answer', lead: 'Agents ask and record. Pharmacists, prescribers and coordinators resolve.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Who stopped, and what', body: 'Fill gaps and medication lists are matched to patients on complex regimens.' },
+    { owner: 'agent', who: 'Chronic care management agent', title: 'The check-in', body: 'The agent asks about each medication in the patient’s preferred language and records any reason for stopping.' },
+    { owner: 'staff', who: 'Pharmacist or prescriber', title: 'Clinical reasons go to a clinician', body: 'Side effects and confusion about doses go to a pharmacist or the prescriber by rule.' },
+    { owner: 'staff', who: 'Care coordinator', title: 'Cost and access go to a coordinator', body: 'Cost barriers go to your patient assistance or sliding-fee process.' }],
+  episode: { title: 'Adherence check-in', meta: 'Pt 7304 · three chronic conditions',
+    steps: [{ time: 'Day 1', title: 'Check-in call · stopped lisinopril', owner: 'Chronic care management agent', status: ZX_SOL_REACHED },
+      { time: 'Day 1', title: 'Reason: dry cough, routed', owner: 'Pharmacist', status: ZX_SOL_ESC },
+      { time: 'Day 3', title: 'Prescriber changed the medication', owner: 'Prescriber', status: ZX_SOL_DONE },
+      { time: 'Day 10', title: 'Follow-up check-in scheduled', owner: 'Chronic care management agent', status: ZX_SOL_QUEUED }],
+    footer: 'Medication changes are made by the prescriber, never by the agent.' },
+  runsOn: [{ p: 'agents', family: 'clinical-performance', note: 'The chronic care management agent runs the check-ins.' },
+    { p: 'carePlans', note: 'The medication safety and adherence plan sets routing rules.' },
+    { p: 'dataFoundation', note: 'Pharmacy fills and medication lists in one record.' }],
+  readNext: ['preventive-screening-gap-fqhc', 'sdoh-screening-care-navigation', 'post-discharge-followup-fqhc'],
+  story: 'amistad', cta: 'adherence check-ins',
+  seo: { title: 'Adherence check-ins for FQHC patients | Zynix AI',
+    desc: 'Two-way medication check-ins for patients on complex regimens, in their preferred language, with side effects and cost barriers routed to your team.', schema: 'HowTo' }
+};
 
-/* ── UC17 ── */
-USE_CASES.UC17 = { id: 'UC17', slug: 'appointment-scheduling-no-show', title: 'Appointment Scheduling and No-Show Reduction', h1: 'A no-show rate of 20 percent means one in five appointment slots generates no revenue and cannot be backfilled. Your front desk staff spent time confirming appointments that did not happen.', subhead: 'High no-show rates represent a direct and compounding revenue loss for independent group practices. The problem is not that patients forget their appointments. It is that the barrier to attending was never identified or addressed. ZynSchedule runs the confirmation and rescheduling workflow that standard reminder systems are not designed to handle.', problemHeading: 'The no-show is not the problem. The barrier that caused it is the problem.', problem: '<p>An independent group practice with a 25 percent no-show rate is not experiencing a reminder system failure. It is experiencing a barrier identification failure. The patient who did not come to their appointment received the reminder. What they did not receive was a two-way conversation that identified why they were not going to make it (transportation, work schedule, childcare) and connected them to a rescheduling option before the slot was lost.</p><p>Front desk staff at independent group practices spend a meaningful portion of their time managing the scheduling consequences of no-shows by calling patients after missed appointments, managing the waitlist, and rescheduling.</p><p>For specialty practices where procedure or high-value visit slots are involved, the no-show cost compounds. A cardiology stress test slot or an orthopedic consult missed represents a significantly higher revenue loss.</p>', shortfalls: [ { tool: 'Automated Appointment Reminder Systems', description: 'Reminder systems confirm the appointment is scheduled. They do not identify the barrier to attending, offer to rebook at a more accessible time, manage the waitlist to fill a cancelled slot, or follow up when a confirmation is not received.' }, { tool: 'Front Desk Staff Confirmation Calls', description: 'Staff-managed confirmation calls provide the two-way interaction that reminder systems lack, but at a labor cost that scales with patient volume. Practices that grow their panel sizes without growing scheduling support staff see no-show rates remain constant or increase.' } ], solutionHeading: 'Barrier-aware scheduling that reduces no-shows and manages the waitlist automatically', solution: '<p>ZynSchedule handles the full appointment scheduling workflow: confirmation outreach, barrier identification, rescheduling, and waitlist management. When a patient indicates they cannot make an appointment, the interaction identifies the barrier and offers rescheduling options. The waitlist is managed dynamically so that cancellations trigger outreach to waiting patients before the slot is lost.</p><p>For new patient scheduling, ZynSchedule handles inbound requests and books appointments based on provider availability, appointment type requirements, and patient preference.</p><p>For practices with specialty or high-value procedure slots, ZynReminder runs pre-appointment preparation outreach, confirming preparation requirements and ensuring the patient arrives ready for the appointment.</p>', products: [ { name: 'ZynSchedule', descriptor: 'Full appointment scheduling workflow: confirmation, waitlist management, barrier-aware rescheduling', url: '/agents/operational-efficiency/zynschedule', status: 'Active' }, { name: 'ZynReminder', descriptor: 'Pre-appointment preparation outreach and barrier-aware confirmation', url: '/agents/preventive-quality-activation/zynreminder', status: 'Active' } ], cta: { headline: 'No-show rates go down when barriers get identified. Let\u2019s build that workflow.', label: 'See how it works' }, readNext: [ { id: 'UC16', title: 'After-Hours Call Handling and Patient Triage', slug: 'after-hours-call-handling-group-practices' }, { id: 'UC19', title: 'CCM Billing Execution and Chronic Care Management', slug: 'ccm-billing-chronic-care' }, { id: 'UC26', title: 'After-Hours Triage for Multilingual and Underserved Populations', slug: 'after-hours-triage-multilingual-fqhc' } ], segments: { primary: 'Independent Group Practices', alsoTagged: ['FQHCs'] }, seo: { title: 'Appointment Scheduling No-Show Reduction Practice | Zynix AI', desc: 'Reduce no-show rates with barrier-aware confirmation and dynamic rescheduling. Zynix AI handles the full scheduling workflow so your front desk focuses on.', schema: 'HowTo' } };
+USE_CASES.UC08 = {
+  id: 'UC08', slug: 'rising-risk-patient-outreach', group: 'chronic-care', audience: 'aco', also: ['mso', 'plan', 'system'],
+  title: 'Outreach to rising-risk patients before an admission',
+  teaser: 'When claims, labs or utilization show risk climbing, the rising-risk outreach agent checks in and books a visit.',
+  lead: 'Your risk model already flags patients heading toward an admission. Zynix turns each flag into a check-in and a booked visit, and routes new symptoms to your care team.',
+  problem: { title: 'The flag is accurate. The call doesn’t happen.',
+    body: ['Risk stratification shows which patients are trending toward an acute event: a recent ED visit, a gap in medication fills, a worsening lab, no visit on the books. The score is real. The problem is what happens next.',
+      'A coordinator’s day is already full of active cases. Outreach to a patient who hasn’t been admitted yet is the call that gets made last, and after the admission the chart review shows every signal was there.'] },
+  gaps: [{ tool: 'Risk scores', text: 'They predict. They don’t contact anyone.' },
+    { tool: 'Care management tasks', text: '“Call rising-risk patient” is still a task someone has to pick up.' }],
+  how: { title: 'From risk flag to a check-in and a visit', lead: 'The model flags. The agent reaches out. Your care team handles anything clinical.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Risk climbs', body: 'Admission and readmission risk flags patients whose claims, labs or utilization show risk rising.' },
+    { owner: 'agent', who: 'Rising-risk outreach agent', title: 'A proactive check-in', body: 'The agent checks in, reviews medications and open gaps and asks about new symptoms.' },
+    { owner: 'staff', who: 'Care manager, RN', title: 'Symptoms and barriers go to the care team', body: 'Patients who report new symptoms or barriers are routed to the care team with the conversation attached.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'A visit before the event', body: 'ZynSchedule books a visit with the patient’s primary care practice.' }],
+  episode: { title: 'Rising-risk outreach', meta: 'Flagged this week',
+    rows: [{ title: 'Pt 3391 · ED visit last week, no follow-up', sub: 'Visit booked for Tuesday', owner: { type: 'agent', label: 'ZynSchedule' }, status: ZX_SOL_BOOKED },
+      { title: 'Pt 8820 · missed statin fills', sub: 'New shortness of breath', owner: { type: 'staff', label: 'Care manager, RN' }, status: ZX_SOL_ESC },
+      { title: 'Pt 1456 · rising A1c', sub: 'Second call tomorrow', owner: { type: 'agent', label: 'Outreach agent' }, status: ZX_SOL_QUEUED }],
+    footer: 'Clinical questions go to your care team by rule.' },
+  runsOn: [{ p: 'analytics', note: 'Admission and readmission risk flags the patients.' },
+    { p: 'agents', family: 'predictive-activation', note: 'The rising-risk outreach agent checks in.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books the visit.' },
+    { p: 'carePlans', note: 'The care plan sets who is called, when and what escalates.' }],
+  readNext: ['post-discharge-tcm-readmission', 'after-hours-ed-diversion', 'hcc-gap-raf-optimization'],
+  cta: 'rising-risk outreach',
+  seo: { title: 'Rising-risk patient outreach for ACOs | Zynix AI',
+    desc: 'Turn risk flags into check-ins and booked visits before an admission, with new symptoms and barriers routed to your care team by rule.', schema: 'HowTo' }
+};
 
-/* ── UC18 ── */
-USE_CASES.UC18 = { id: 'UC18', slug: 'prior-auth-workflow-management', title: 'Prior Authorization Workflow Management', h1: 'Prior authorization requests submitted two weeks ago have not been resolved. The patient\u2019s appointment is scheduled. The authorization is still pending. Staff are making status calls instead of doing the documentation work that would move the queue.', subhead: 'Independent group practices submit hundreds of prior authorization requests monthly. Each requires documentation assembly, payer submission, status follow-up, and denial management. ZynAuth handles the administrative workflow so staff focus on the clinical work that requires their judgment.', problemHeading: 'Prior authorization is not a complex problem. It is a volume problem that became a staff capacity problem.', problem: '<p>An independent group practice with eight providers across primary care, behavioral health, and specialty services submits prior authorization requests for imaging, specialty referrals, procedures, and medications every day. At any given moment, there are 60 to 100 open authorization requests in various stages of the submission and approval process.</p><p>The staff managing this queue are typically the same staff managing front desk operations, insurance verification, claim submission, and scheduling support. Prior authorization is one of many administrative responsibilities, and it competes for attention with everything else.</p><p>The patient experience consequence is real. A patient who was scheduled for an MRI three weeks ago and whose authorization is still pending is not getting the care their physician ordered.</p>', shortfalls: [ { tool: 'Practice Management System Authorization Tracking', description: 'Practice management systems log submitted authorization requests and provide a status field for tracking. They do not automatically follow up with payers before the response deadline, flag denials for escalation, or route documentation requests. They provide visibility into the queue, not movement through it.' }, { tool: 'Staff-Managed Authorization Queues', description: 'Dedicated prior authorization staff manage the queue manually. At smaller practice sizes where authorization management is shared among administrative staff with multiple responsibilities, the queue ages faster than it clears. Denials get missed. Follow-up windows close. Patients wait.' } ], solutionHeading: 'Authorization assembled, submitted, and managed, with staff attention reserved for the exceptions', solution: '<p>ZynAuth assembles the clinical documentation required for each prior authorization request from the patient record and provider order, formats it for the payer, and submits through the appropriate channel. For fax-based payer submissions, ZynFax handles the transmission. Every request is tracked against the payer\u2019s response timeline, and ZynAuth initiates status follow-up before the payer deadline passes.</p><p>When a denial arrives, ZynAuth identifies the basis for the denial and routes the appeal documentation workflow by assembling the required records, drafting the appeal, and routing to the physician or staff member for review and signature where clinical input is required.</p><p>For independent group practices where prior authorization management is consuming administrative staff time that should be available for patient-facing work, the change is in how staff time is distributed. Authorization submissions, tracking, and routine denial responses run through Zynix AI. Staff handle the escalations.</p>', products: [ { name: 'ZynAuth', descriptor: 'Prior authorization documentation assembly, submission, tracking, denial management, and appeals', url: '/agents/operational-efficiency', status: 'Active' }, { name: 'ZynFax', descriptor: 'Fax-based payer submission and receipt handling for authorization workflows', url: '/agents/operational-efficiency', status: 'Active' }, { name: 'ZynSchedule', descriptor: 'Scheduling confirmation upon authorization clearance', url: '/agents/operational-efficiency/zynschedule', status: 'Active' } ], cta: { headline: 'Prior auth submitted, tracked, and resolved without consuming your staff\u2019s day.', label: 'Talk to our team' }, readNext: [ { id: 'UC16', title: 'After-Hours Call Handling and Patient Triage', slug: 'after-hours-call-handling-group-practices' }, { id: 'UC20', title: 'Referral Coordination and Leakage Prevention', slug: 'referral-coordination-leakage' }, { id: 'UC21', title: 'Prior Authorization for Surgical Procedures', slug: 'prior-auth-surgical-procedures' } ], segments: { primary: 'Independent Group Practices', alsoTagged: ['ASCs', 'ACOs & MSOs'] }, seo: { title: 'Prior Authorization Automation | Zynix AI', desc: 'ZynAuth handles prior authorization from documentation assembly through denial management so staff at independent group practices focus on.', schema: 'HowTo' } };
+/* ── After-hours access (operational intake: never triage; symptom questions go to the on-call clinician) ── */
+USE_CASES.UC02 = {
+  id: 'UC02', slug: 'after-hours-triage-multi-site', group: 'after-hours', audience: 'system', also: ['aco'],
+  title: 'After-hours calls answered at every site',
+  teaser: 'One consistent after-hours line across your sites: the reason captured, routine visits booked, symptom questions to the on-call clinician.',
+  lead: 'Each of your sites handles after-hours calls differently. ZynAfterHours answers every call the same way, books routine visits and routes symptom questions to your on-call clinician.',
+  problem: { title: 'After-hours access depends on which site a patient calls',
+    body: ['A multi-site system rarely has one after-hours model. One site has a nurse line, another an answering service, another a voicemail that says to call 911. On-call physicians field everything from chest pain to refill requests.',
+      'Patients who can’t reach anyone make their own decision, and some of them go to the ED with a question that could have waited for a morning visit.'] },
+  gaps: [{ tool: 'Answering services', text: 'They take a message and promise a callback. They don’t book the visit or get the question to the right clinician.' },
+    { tool: 'Patient portals', text: 'Asynchronous by design, and least used by the patients who call most.' }],
+  how: { title: 'One after-hours process for every site', lead: 'ZynAfterHours handles intake and booking. Your on-call clinicians handle every symptom question.' },
+  steps: [
+    { owner: 'agent', who: 'ZynAfterHours', title: 'The call is answered', body: 'Every after-hours call is answered, the caller’s identity is verified and the reason for the call is captured. Callers describing an emergency are told to call 911.' },
+    { owner: 'staff', who: 'On-call clinician', title: 'Symptom questions go to the on-call clinician', body: 'Symptom and medication questions are routed by your rules, with the call summary attached.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'Routine needs get a visit', body: 'Appointment requests are booked at the patient’s preferred site for the next available time.' },
+    { owner: 'system', who: 'Zynix platform', title: 'The care team sees it in the morning', body: 'Calls that need follow-up are flagged for the patient’s care team when the site opens.' }],
+  episode: { title: 'After-hours calls', meta: 'Last night · all sites',
+    tiles: [{ label: 'Calls answered', value: '57' }, { label: 'Visits booked', value: '19' }, { label: 'Sent to on-call', value: '8' }],
+    rows: [{ title: 'Caller 1 · Site A · wants an earlier visit', sub: 'Booked 8:40 am', owner: { type: 'agent', label: 'ZynSchedule' }, status: ZX_SOL_BOOKED },
+      { title: 'Caller 2 · Site F · child with a fever', sub: 'Routed to on-call', owner: { type: 'staff', label: 'On-call clinician' }, status: ZX_SOL_ESC },
+      { title: 'Caller 3 · Site C · refill question', sub: 'Routed to on-call', owner: { type: 'staff', label: 'On-call clinician' }, status: ZX_SOL_ESC }],
+    footer: 'Symptom questions always go to your on-call clinician.' },
+  runsOn: [{ p: 'agents', family: 'operational-efficiency', note: 'ZynAfterHours answers; ZynSchedule books.' },
+    { p: 'dataFoundation', note: 'One patient record across your sites.' },
+    { p: 'integrations', note: 'Works with the EHR each site runs.' }],
+  readNext: ['post-discharge-follow-up', 'hcc-gap-closure-health-system-aco', 'physician-documentation-ambient-ai'],
+  story: 'nhs', cta: 'after-hours call handling',
+  seo: { title: 'After-hours call handling across sites | Zynix AI',
+    desc: 'One after-hours process for every site: calls answered, routine visits booked and symptom questions routed to your on-call clinician by rule.', schema: 'HowTo' }
+};
 
-/* ── UC19 ── */
-USE_CASES.UC19 = { id: 'UC19', slug: 'ccm-billing-chronic-care', title: 'CCM Billing Execution and Chronic Care Management', h1: 'Your practice has hundreds of patients eligible for CCM billing. Most of the monthly touchpoints are not documented. The CMS revenue is not being captured. The patients are not being managed.', subhead: 'Independent group practices with large chronic disease panels are leaving significant CCM billing revenue uncaptured, not because they are unaware of the program, but because the monthly documented touchpoint requirement is administratively intensive at volume. Zynix AI executes the outreach, captures the documentation, and routes the clinical questions.', problemHeading: 'CCM billing revenue exists in the patient panel. Capturing it requires a workflow most practices do not have.', problem: '<p>CMS Chronic Care Management codes provide reimbursement for monthly non-face-to-face care management provided to Medicare beneficiaries with two or more chronic conditions. For an independent group practice with 500 Medicare patients, a significant fraction of that panel qualifies for CCM billing at a reimbursement rate that, aggregated across a year, represents material practice revenue. Most practices know this. Most practices are capturing a fraction of it.</p><p>The documentation requirement is the operational bottleneck. CCM billing requires at least 20 minutes of documented care management time per patient per month, including a time-stamped record of non-face-to-face contact.</p><p>The irony is that the patients who most benefit from CCM outreach are the same patients who, without it, are most likely to generate the unplanned visits and ED encounters that drive practice costs and value-based care penalties.</p>', shortfalls: [ { tool: 'EHR-Native CCM Modules', description: 'EHR CCM modules track patient eligibility, generate care plan templates, and provide time-tracking tools. They do not initiate outreach, execute the monthly contact, capture patient-reported barriers, or route clinical questions to the care team. They are documentation systems for care management work that has been done.' }, { tool: 'Care Coordinator Staff Outreach', description: 'Care coordinators or medical assistants assigned CCM outreach responsibilities can execute the program, for the patients they have time to reach. At 200 to 400 monthly contacts, the outreach volume competes with every other clinical support responsibility during the day.' } ], solutionHeading: 'Monthly CCM outreach executed, documented, and billed for every eligible patient', solution: '<p>The Chronic and Longitudinal Care Management Agent runs monthly outreach for every CCM-eligible patient in the practice panel with a two-way interaction that confirms current medication status, identifies barriers, captures clinical concerns, and documents the time-stamped interaction record required for CMS billing.</p><p>ZynReminder manages the patients who need a second contact within the month. ZynSchedule books follow-up appointments for patients whose monthly interaction identified a clinical need for a face-to-face visit.</p><p>For practices tracking CCM billing revenue as a distinct contribution to practice financials, the change is in completion rates: how many of the eligible monthly contacts are documented and billed versus how many aged uncaptured.</p>', products: [ { name: 'Chronic & Longitudinal Care Management Agent', descriptor: 'Monthly two-way CCM outreach, documentation, escalation routing, and billing record generation', url: '/agents/chronic-care-management', status: 'Active' }, { name: 'ZynReminder', descriptor: 'Follow-up outreach for non-responsive patients and barrier resolution within the CCM contact cycle', url: '/agents/preventive-quality-activation/zynreminder', status: 'Active' }, { name: 'ZynSchedule', descriptor: 'Follow-up appointment scheduling when monthly interaction identifies a face-to-face need', url: '/agents/operational-efficiency/zynschedule', status: 'Active' } ], cta: { headline: 'CCM billing revenue is in your panel. Let\u2019s build the workflow that captures it.', label: 'Book a demo' }, readNext: [ { id: 'UC16', title: 'After-Hours Call Handling and Patient Triage', slug: 'after-hours-call-handling-group-practices' }, { id: 'UC17', title: 'Appointment Scheduling and No-Show Reduction', slug: 'appointment-scheduling-no-show' }, { id: 'UC10', title: 'Chronic Care Coordination at Scale', slug: 'chronic-care-coordination-scale' } ], segments: { primary: 'Independent Group Practices', alsoTagged: ['ACOs & MSOs', 'FQHCs'] }, seo: { title: 'CCM Billing Execution CCM Practice | Zynix AI', desc: 'Capture CCM billing revenue for every eligible patient in your panel. Zynix AI runs monthly documented outreach, identifies barriers, and produces.', schema: 'HowTo' } };
+USE_CASES.UC09 = {
+  id: 'UC09', slug: 'after-hours-ed-diversion', group: 'after-hours', audience: 'aco', also: ['mso', 'system', 'plan'],
+  title: 'After-hours access for your attributed patients',
+  teaser: 'An after-hours answer for attributed patients, so routine needs get a morning visit instead of an ED trip.',
+  lead: 'When your patients can’t reach anyone after hours, some go to the ED. ZynAfterHours answers, books routine visits and routes symptom questions to your on-call clinician.',
+  problem: { title: 'The after-hours gap shows up in ED claims',
+    body: ['Most ACO practices close in the evening. After that there is a nurse line with limited hours, an answering service or an on-call physician handling every kind of call.',
+      'A patient with a question at midnight decides alone whether it can wait. Some of those decisions become ED visits that a morning appointment would have handled, and each one counts against total cost of care.'] },
+  gaps: [{ tool: 'Nurse lines', text: 'Clinically strong when staffed, and costly to staff for every after-hours hour.' },
+    { tool: 'Portal messages', text: 'A reply tomorrow is not access tonight.' }],
+  how: { title: 'An answer every hour the practice is closed', lead: 'ZynAfterHours does intake and booking. Symptom questions always go to your on-call clinician.' },
+  steps: [
+    { owner: 'agent', who: 'ZynAfterHours', title: 'Every call answered', body: 'The caller is verified and the reason for the call captured. Callers describing an emergency are told to call 911.' },
+    { owner: 'staff', who: 'On-call clinician', title: 'Symptom questions go to the on-call clinician', body: 'They are routed by the rules your clinicians approve, with the call summary attached.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'Routine needs are booked', body: 'Appointment requests get the next available visit at the patient’s own practice.' },
+    { owner: 'system', who: 'Zynix platform', title: 'Flagged for the morning', body: 'Calls from recently discharged or high-risk patients are flagged for the care team the next morning.' }],
+  episode: { title: 'After-hours call', meta: 'Pt 6618 · attributed · 11:40 pm',
+    steps: [{ time: '11:40 pm', title: 'Call answered, identity verified', owner: 'ZynAfterHours', status: ZX_SOL_DONE },
+      { time: '11:42 pm', title: 'Reason captured: new ankle swelling', owner: 'ZynAfterHours', status: ZX_SOL_DONE },
+      { time: '11:43 pm', title: 'Routed to the on-call clinician', owner: 'On-call clinician', status: ZX_SOL_ESC },
+      { time: '11:58 pm', title: 'Clinician called the patient back', owner: 'On-call clinician', status: ZX_SOL_DONE },
+      { time: '8:05 am', title: 'Morning visit booked', owner: 'ZynSchedule', status: ZX_SOL_BOOKED }],
+    footer: 'Symptom questions always go to a clinician.' },
+  runsOn: [{ p: 'agents', family: 'operational-efficiency', note: 'ZynAfterHours answers; ZynSchedule books.' },
+    { p: 'analytics', note: 'Risk flags show the care team whose call to review first.' },
+    { p: 'dataFoundation', note: 'Recent discharges and risk tiers travel with the call.' }],
+  readNext: ['post-discharge-tcm-readmission', 'rising-risk-patient-outreach', 'chronic-care-coordination-scale'],
+  cta: 'after-hours access',
+  seo: { title: 'After-hours access for ACO patients | Zynix AI',
+    desc: 'After-hours calls answered for attributed patients: routine visits booked, symptom questions routed to your on-call clinician, emergencies sent to 911.', schema: 'HowTo' }
+};
 
-/* ── UC20 ── */
-USE_CASES.UC20 = { id: 'UC20', slug: 'referral-coordination-leakage', title: 'Referral Coordination and Leakage Prevention', h1: 'Referrals generated in your practice complete at far lower rates than you expect. The patient received the referral and did not follow through. The specialist never confirmed receipt. Neither of you will know until the patient mentions it at the next visit.', subhead: 'Referrals generated by a group practice complete at far lower rates than the ordering clinician expects. The clinical handoff sits in a fax queue or a patient\u2019s good intentions, and the downstream impact on outcomes and network retention compounds. Zynix AI tracks every referral until it is closed.', problemHeading: 'The referral was generated. What happens next is not being tracked.', problem: '<p>A group practice ordering a referral to cardiology, orthopedics, or a specialist for a patient with a new or worsening condition has, in most cases, completed what the practice management system considers a completed workflow. The referral document was generated. The fax was sent to the specialist. The patient was told to call and schedule. The task is closed.</p><p>The reality is that a significant fraction of those referrals never result in a specialist appointment. Patients receive the referral and do not follow through. Specialist offices receive the fax and do not confirm receipt.</p><p>The clinical consequences are real. For group practices in value-based care arrangements, referral completion rates affect continuity of care metrics, network retention, and the downstream outcomes that determine shared savings performance.</p>', shortfalls: [ { tool: 'Practice Management System Referral Tracking', description: 'Practice management systems generate referral documentation and provide a status field for tracking. They do not confirm that the specialist received the referral, that the patient has scheduled the appointment, or that the specialist has the clinical context they need for the visit.' }, { tool: 'Staff Follow-Up Programs', description: 'Administrative staff calling patients to confirm referral scheduling is a workflow that works for the referrals prioritized for follow-up. At the volume of referrals generated by a multi-physician group practice, systematic follow-up for every referral until completion is not achievable alongside other administrative responsibilities.' } ], solutionHeading: 'Every referral tracked from generation to specialist appointment without adding to staff workload', solution: '<p>ZynFax receives incoming communications from the specialist office like confirmations, scheduling requests, clinical questions, and results, and routes them to the appropriate staff member with the context needed to act. The referring practice knows what the specialist received and when.</p><p>ZynReminder follows up with the patient after the referral is generated, confirming they have contacted the specialist, identifying barriers to scheduling, and providing the specialist\u2019s contact information and a direct scheduling link if the patient has not yet called.</p><p>For ACO-affiliated group practices, referral completion rates and network retention are performance metrics that affect shared savings calculations.</p>', products: [ { name: 'ZynFax', descriptor: 'Reads, classifies, routes, and assigns ownership to incoming specialist communications and referral documents', url: '/agents/operational-efficiency', status: 'Active' }, { name: 'ZynReminder', descriptor: 'Patient follow-up outreach to confirm referral scheduling and identify barriers', url: '/agents/preventive-quality-activation/zynreminder', status: 'Active' }, { name: 'ZynSchedule', descriptor: 'Specialist appointment booking at the point of referral when integrated', url: '/agents/operational-efficiency/zynschedule', status: 'Active' } ], cta: { headline: 'Referrals generated. Tracked. Closed. Every one.', label: 'See how it works' }, readNext: [ { id: 'UC18', title: 'Prior Authorization Workflow Management', slug: 'prior-auth-workflow-management' }, { id: 'UC17', title: 'Appointment Scheduling and No-Show Reduction', slug: 'appointment-scheduling-no-show' }, { id: 'UC22', title: 'Referral Intake and Documentation Management', slug: 'referral-intake-asc' } ], segments: { primary: 'Independent Group Practices', alsoTagged: ['ACOs & MSOs', 'Health Systems'] }, seo: { title: 'Referral Coordination Prevention Practice | Zynix AI', desc: 'Track every referral until the specialist appointment is confirmed. Zynix AI follows up with patients, routes specialist communications, and closes.', schema: 'HowTo' } };
+USE_CASES.UC16 = {
+  id: 'UC16', slug: 'after-hours-call-handling-group-practices', group: 'after-hours', audience: 'mso', also: ['aco'],
+  title: 'After-hours calls for independent practices',
+  teaser: 'Calls answered after the office closes, next-morning visits booked and symptom questions sent to the physician on call.',
+  lead: 'After your office closes, patients choose between voicemail, urgent care and the ED. ZynAfterHours answers, books the morning visit and sends symptom questions to your on-call physician.',
+  problem: { title: 'On call for everything, all night',
+    body: ['Most independent practices cover nights with a physician rotation, an answering service and a portal. The rotation routes every call to a physician, whether it’s chest pain or a refill.',
+      'Patients who can’t get a timely answer go to urgent care or the ED, and some of them start getting their care somewhere else.'] },
+  gaps: [{ tool: 'Answering services', text: 'They take the message. They don’t book the visit.' },
+    { tool: 'Physician on-call rotations', text: 'Clinically sound, and exhausting when every call reaches the physician.' }],
+  how: { title: 'The on-call physician gets the calls that need a physician', lead: 'ZynAfterHours handles intake and booking; the physician on call handles every symptom question.' },
+  steps: [
+    { owner: 'agent', who: 'ZynAfterHours', title: 'Answered and verified', body: 'The call is answered, the patient verified and the reason captured. Callers describing an emergency are told to call 911.' },
+    { owner: 'staff', who: 'On-call physician', title: 'Symptom questions go to the physician', body: 'They are routed by your rules, with a summary of the call.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'Routine needs are booked for the morning', body: 'Appointment requests get a confirmed next-morning slot.' },
+    { owner: 'system', who: 'Zynix platform', title: 'The practice sees it at opening', body: 'Calls that need follow-up are waiting for the practice team when the office opens.' }],
+  episode: { title: 'Overnight calls', meta: 'Last night · all practices',
+    rows: [{ title: 'Caller 1 · appointment request', sub: 'Booked 9:20 am', owner: { type: 'agent', label: 'ZynSchedule' }, status: ZX_SOL_BOOKED },
+      { title: 'Caller 2 · chest tightness', sub: 'Told to call 911', owner: { type: 'agent', label: 'ZynAfterHours' }, status: ZX_SOL_ESC },
+      { title: 'Caller 3 · medication question', sub: 'Routed to the on-call physician', owner: { type: 'staff', label: 'On-call physician' }, status: ZX_SOL_ESC }],
+    footer: 'Symptom questions go to your on-call physician by rule.' },
+  runsOn: [{ p: 'agents', family: 'operational-efficiency', note: 'ZynAfterHours answers; ZynSchedule books.' },
+    { p: 'integrations', note: 'Works with the EHR each practice runs.' }],
+  readNext: ['appointment-scheduling-no-show', 'ccm-billing-chronic-care', 'referral-coordination-leakage'],
+  cta: 'after-hours call handling',
+  seo: { title: 'After-hours calls for group practices | Zynix AI',
+    desc: 'After-hours calls answered for independent practices, with next-morning visits booked and symptom questions routed to the physician on call by rule.', schema: 'HowTo' }
+};
 
-/* ── UC21 ── */
-USE_CASES.UC21 = { id: 'UC21', slug: 'prior-auth-surgical-procedures', title: 'Prior Authorization for Surgical Procedures', h1: 'The OR slot is blocked. The authorization was submitted 10 days ago. The payer has not responded. Staff are on hold. The surgeon is asking why the case is not confirmed.', subhead: 'Ambulatory surgery centers face authorization requirements for the majority of their procedure volume. Delays stall OR scheduling, frustrate surgeons, and generate expensive idle time when approvals arrive after the case date. Zynix AI manages the entire workflow so the OR schedule stays intact.', problemHeading: 'Authorization delays in a surgical environment are not an administrative inconvenience. They are an OR efficiency problem', problem: '<p>Ambulatory surgery centers managing orthopedic, ophthalmologic, GI, and general surgery case volumes are processing prior authorization requests for the majority of their procedures. An ASC doing 80 cases per month might have 60 or more active authorization requests in process at any given time.</p><p>The authorization management workflow in most ASCs is held together by one or two administrative staff who manage payer portals, respond to information requests, track status, and handle denials alongside their other responsibilities.</p><p>For ASCs with surgical volume that includes high-reimbursement procedure categories like total joint replacement, spine surgery, complex GI. A missed authorization window or an uncontested denial is a direct revenue loss.</p>', shortfalls: [ { tool: 'Authorization Status Tracking Across Payer Portals', description: 'Tracking authorization status across multiple payer portals requires staff to log in to each portal individually, check the status of outstanding requests, and manually update the internal tracking system. The staff time consumed tracking status is time not spent on the documentation work that moves authorizations forward.' }, { tool: 'Manual Denial Management', description: 'When a denial arrives, the response window is short and the documentation requirements are specific. ASC administrative staff managing active case volumes often discover denials late, after the response window has narrowed, because denial notifications are mixed in with normal case correspondence.' } ], solutionHeading: 'Documentation assembled, submitted, and tracked, with denials flagged before the window closes', solution: '<p>ZynAuth assembles the required clinical documentation from the surgical order and patient record, formats it for the payer\u2019s requirements, and submits. For ASCs with fax-based payer communications, ZynFax handles the transmission and incoming acknowledgment. Every authorization is tracked against the payer\u2019s stated response timeline, and ZynAuth initiates follow-up before the deadline passes.</p><p>Denial notifications are flagged immediately. ZynAuth identifies the denial basis, assembles the appeal documentation, and routes to the clinical or administrative staff member who needs to review and sign off before submission. Peer-to-peer review requests are escalated directly to the surgeon with the authorization context attached.</p><p>For ASC operations teams managing OR scheduling efficiency, the change is in how many cases are confirmed on schedule versus delayed or cancelled due to authorization status.</p>', products: [ { name: 'ZynAuth', descriptor: 'Surgical prior authorization documentation assembly, submission, tracking, denial management, and appeals', url: '/agents/operational-efficiency', status: 'Active' }, { name: 'ZynFax', descriptor: 'Fax-based payer submission and receipt handling for authorization workflows', url: '/agents/operational-efficiency', status: 'Active' } ], cta: { headline: 'OR schedules stay intact when authorizations are managed before they stall.', label: 'Book a demo' }, readNext: [ { id: 'UC22', title: 'Referral Intake and Documentation Management', slug: 'referral-intake-asc' }, { id: 'UC23', title: 'Patient Scheduling and Pre-Procedure Preparation', slug: 'surgical-scheduling-pre-procedure' }, { id: 'UC04', title: 'Prior Authorization Across High-Volume Specialty Services', slug: 'prior-auth-high-volume-specialty' } ], segments: { primary: 'ASCs', alsoTagged: ['Health Systems'] }, seo: { title: 'Prior Authorization Surgical Procedures ASC | Zynix AI', desc: 'Manage surgical prior authorizations from documentation assembly through denial appeals. Zynix AI keeps OR schedules intact and flags denials before the.', schema: 'HowTo' } };
+USE_CASES.UC26 = {
+  id: 'UC26', slug: 'after-hours-triage-multilingual-fqhc', group: 'after-hours', audience: 'fqhc', also: ['mso'],
+  title: 'After-hours access in your patients’ languages',
+  teaser: 'After-hours calls answered in the caller’s preferred language, with symptom questions routed to your on-call clinician.',
+  lead: 'A parent calls at 9 pm in Spanish about a child’s fever. ZynAfterHours answers in the caller’s language, books routine visits and routes symptom questions to your on-call clinician.',
+  problem: { title: 'After hours, language becomes an access barrier',
+    body: ['Health centers serve communities that speak many languages, and after-hours calls often reach an English-only answering service or an on-call clinician who doesn’t share the caller’s language.',
+      'The patients health centers exist to serve have the fewest alternatives at night. When the call doesn’t work, the ED becomes the default.'] },
+  gaps: [{ tool: 'English-only answering services', text: 'They document the call, and for many callers they can’t take it at all.' },
+    { tool: 'On-call rotations', text: 'Valuable for clinical calls, and stretched thin by routine ones.' }],
+  how: { title: 'The same after-hours answer, in the caller’s language', lead: 'ZynAfterHours does intake and booking in the caller’s preferred language. Clinical questions go to your on-call clinician.' },
+  steps: [
+    { owner: 'agent', who: 'ZynAfterHours', title: 'Answered in the caller’s language', body: 'The caller is verified and the reason captured in their preferred language. Callers describing an emergency are told to call 911.' },
+    { owner: 'staff', who: 'On-call clinician', title: 'Symptom questions go to the clinician', body: 'They are routed by your rules, with a summary of the call and the caller’s preferred language.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'Routine needs are booked', body: 'Next-day visits are booked at the patient’s health center.' },
+    { owner: 'system', who: 'Zynix platform', title: 'Your team sees it in the morning', body: 'Calls that need follow-up are flagged for the care team.' }],
+  episode: { title: 'After-hours call', meta: 'Caller prefers Spanish · 9:04 pm',
+    steps: [{ time: '9:04 pm', title: 'Call answered in Spanish', owner: 'ZynAfterHours', status: ZX_SOL_DONE },
+      { time: '9:06 pm', title: 'Reason captured: child with a fever', owner: 'ZynAfterHours', status: ZX_SOL_DONE },
+      { time: '9:07 pm', title: 'Routed to the on-call clinician', owner: 'On-call clinician', status: ZX_SOL_ESC },
+      { time: '9:20 pm', title: 'Clinician called the family back', owner: 'On-call clinician', status: ZX_SOL_DONE },
+      { time: '8:10 am', title: 'Next-day visit booked', owner: 'ZynSchedule', status: ZX_SOL_BOOKED }],
+    footer: 'Symptom questions always go to a clinician.' },
+  runsOn: [{ p: 'agents', family: 'operational-efficiency', note: 'ZynAfterHours answers; ZynSchedule books.' },
+    { p: 'dataFoundation', note: 'The patient’s preferred language travels with the record.' }],
+  readNext: ['post-discharge-followup-fqhc', 'preventive-screening-gap-fqhc', 'sdoh-screening-care-navigation'],
+  story: 'amistad', cta: 'after-hours access',
+  seo: { title: 'After-hours access for FQHCs | Zynix AI',
+    desc: 'After-hours calls answered in the caller’s preferred language, with next-day visits booked and symptom questions routed to your on-call clinician.', schema: 'HowTo' }
+};
 
-/* ── UC22 ── */
-USE_CASES.UC22 = { id: 'UC22', slug: 'referral-intake-asc', title: 'Referral Intake and Documentation Management', h1: 'Your ASC receives referral faxes from a dozen different referring practices. Each one arrives as an unclassified document in a queue. Someone has to open every page to figure out what it is, where it belongs, and what is missing.', subhead: 'ASCs receive the majority of their case volume through specialist referrals, arriving as faxes with clinical documentation, imaging, and insurance information. Processing incoming referrals manually is time-intensive and error-prone. ZynFax reads, classifies, and routes every incoming document so the surgical intake team starts with organized, action-ready information.', problemHeading: 'The fax queue is not a workflow problem. It is a volume problem that looks like a workflow problem.', problem: '<p>An ambulatory surgery center managing 80 cases per month across orthopedics, ophthalmology, and GI receives a corresponding volume of incoming fax documents: referral packets, preoperative clearance notes, imaging reports, lab results, insurance correspondence, and prior authorization confirmations.</p><p>The intake team opens every incoming fax, identifies the document type, determines which patient it belongs to, routes it to the appropriate staff member, and flags any missing items.</p><p>The consequences of an unmanaged fax queue in an ASC setting are measured in case delays and cancellations, both of which have costs that significantly exceed the administrative time that better intake management would have saved.</p>', shortfalls: [ { tool: 'Electronic Fax Systems and Digital Fax Platforms', description: 'Digital fax platforms deliver incoming faxes as PDFs and provide a shared inbox for the team. They do not read the content of the fax, identify the document type, match it to the correct patient, determine which staff member should receive it, or flag missing items. The queue is digital rather than paper. The work is the same.' }, { tool: 'Manual Intake Workflows and Staff Assignment', description: 'Assigning specific staff members to fax intake processing creates accountability but does not change the fundamental time requirement of reading and classifying each document. In ASC environments where intake staff also manage scheduling, insurance verification, and pre-op coordination, fax processing competes with higher-priority activities.' } ], solutionHeading: 'Fax queue classified, routed, and action-ready before the intake team starts their day', solution: '<p>ZynFax reads every incoming fax at the document level, identifying document type (referral packet, lab result, imaging report, insurance correspondence, authorization confirmation), matching to the appropriate patient and case, and routing to the staff queue responsible for that document type. Missing items are flagged immediately.</p><p>For ASC intake coordinators who previously spent the first hour of every morning processing the fax queue, the change is in what that hour is used for. The queue is organized by document type and priority.</p><p>For referring practices, the intake experience changes as well. ZynFax routes the acknowledgment of received referral documents back to the practice\u2019s fax number, closing the communication loop.</p>', products: [ { name: 'ZynFax', descriptor: 'Reads, classifies, routes, and assigns ownership to incoming referral faxes and clinical documents', url: '/agents/operational-efficiency', status: 'Active' } ], cta: { headline: 'The fax queue is already organized before the intake team arrives.', label: 'Talk to our team' }, readNext: [ { id: 'UC21', title: 'Prior Authorization for Surgical Procedures', slug: 'prior-auth-surgical-procedures' }, { id: 'UC23', title: 'Patient Scheduling and Pre-Procedure Preparation', slug: 'surgical-scheduling-pre-procedure' }, { id: 'UC20', title: 'Referral Coordination and Leakage Prevention', slug: 'referral-coordination-leakage' } ], segments: { primary: 'ASCs', alsoTagged: ['Independent Group Practices'] }, seo: { title: 'Referral Intake Management ASC | Zynix AI', desc: 'ZynFax reads, classifies, and routes every incoming referral fax at your ASC so the surgical intake team starts with organized, action-ready.', schema: 'HowTo' } };
+/* ── Care navigation and SDoH ── */
+USE_CASES.UC27 = {
+  id: 'UC27', slug: 'sdoh-screening-care-navigation', group: 'care-navigation', audience: 'fqhc', also: ['aco', 'system'],
+  title: 'Social needs screening that leads to follow-up',
+  teaser: 'Barriers patients mention during outreach are captured and routed to a coordinator, not left in a screening form.',
+  lead: 'Your health center screens for social needs at the visit and misses the patients who don’t make it in. Zynix captures barriers during outreach and routes them to your care team.',
+  problem: { title: 'Screening at the visit misses the patients who don’t come in',
+    body: ['Health centers collect social needs data during clinic visits. The patients most affected by transportation, food or housing barriers are often the ones who miss those visits.',
+      'Outreach calls, reminders and post-discharge check-ins reach patients between visits. When a patient mentions a barrier on one of those calls, it should reach someone who can help.'] },
+  gaps: [{ tool: 'In-clinic screening forms', text: 'Structured and useful, and only for patients who are in the room.' },
+    { tool: 'Separate navigation programs', text: 'Helpful, with a gap between the answer and the callback.' }],
+  how: { title: 'Barriers captured where patients already talk to you', lead: 'Agents capture what patients report. Coordinators and community health workers arrange the help.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Screening results in one record', body: 'Social needs screenings from your EHR sit in each patient’s record, next to the clinical data.' },
+    { owner: 'agent', who: 'Chronic care management agent', title: 'Barriers come up in outreach', body: 'During check-ins and reminders, patients can report transportation, food, housing or cost problems.' },
+    { owner: 'staff', who: 'Care coordinator', title: 'A coordinator follows up', body: 'Reported barriers are routed to a coordinator or community health worker by rule.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'The visit still happens', body: 'Once the barrier is handled, ZynSchedule books or moves the visit.' }],
+  episode: { title: 'Barriers reported this week', meta: 'From outreach and check-ins',
+    rows: [{ title: 'Pt 2208 · no ride to Tuesday’s visit', sub: 'Coordinator arranging transport', owner: { type: 'staff', label: 'Care coordinator' }, status: ZX_SOL_PROG },
+      { title: 'Pt 6734 · food insecurity mentioned', sub: 'Community health worker call', owner: { type: 'staff', label: 'Community health worker' }, status: ZX_SOL_QUEUED },
+      { title: 'Pt 1893 · can’t afford a refill', sub: 'Sliding-fee review', owner: { type: 'staff', label: 'Care coordinator' }, status: ZX_SOL_REVIEW }],
+    footer: 'Coordinators decide the next step for every reported barrier.' },
+  runsOn: [{ p: 'dataFoundation', note: 'SDoH screening results sit in the same record.' },
+    { p: 'agents', family: 'clinical-performance', note: 'Check-ins give patients a chance to report barriers.' },
+    { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books or moves the visit.' },
+    { p: 'carePlans', note: 'The care plan sets where each type of barrier is routed.' }],
+  readNext: ['preventive-screening-gap-fqhc', 'post-discharge-followup-fqhc', 'medication-adherence-complex-chronic'],
+  story: 'amistad', cta: 'social needs follow-up',
+  seo: { title: 'SDoH screening and care navigation | Zynix AI',
+    desc: 'Capture transportation, food, housing and cost barriers during patient outreach and route them to coordinators, so a screening answer leads to follow-up.', schema: 'HowTo' }
+};
 
-/* ── UC23 ── */
-USE_CASES.UC23 = { id: 'UC23', slug: 'surgical-scheduling-pre-procedure', title: 'Patient Scheduling and Pre-Procedure Preparation', h1: 'The surgical case is scheduled. The pre-op labs were ordered six weeks ago. The patient has not completed them. You will find out at check-in, two hours before the OR time.', subhead: 'Surgical cases require more than a confirmed date. Patients need specific preparation: dietary restrictions, medication holds, transportation, consent, lab completion. When pre-procedure preparation is incomplete at check-in, cases are delayed or cancelled at significant cost to OR efficiency and patient experience. Zynix AI runs the preparation workflow that scheduling systems are not designed to manage.', problemHeading: 'Case cancellations do not happen in the OR. They happen when preparation was not confirmed.', problem: '<p>An ambulatory surgery center that cancels a case on the day of surgery has already absorbed most of the cost of that case. Staff are present. The OR is prepared. The surgeon has arrived. A case cancellation at that stage is an operational and financial loss that the scheduling confirmation call two days prior could have prevented.</p><p>Pre-procedure preparation for surgical patients is genuinely complex. The requirements vary by procedure type, surgeon preference, patient comorbidity profile, and anesthesia plan.</p><p>ASC scheduling staff who are responsible for pre-op coordination alongside scheduling, insurance verification, and authorization management cannot consistently execute the full preparation workflow for every patient on every case.</p>', shortfalls: [ { tool: 'Scheduling Systems and Appointment Confirmation', description: 'Scheduling systems confirm the appointment date and send a standard reminder. They do not verify that the pre-op lab was completed, that the patient understood the dietary restriction, that medication holds were implemented correctly, or that transportation is confirmed.' }, { tool: 'Pre-Op Preparation Phone Call Programs', description: 'Staff-managed pre-op calls provide the personalized preparation verification that automated reminders cannot. They are time-intensive at case volume and depend on patients being available by phone during business hours. Patients who cannot be reached receive a voicemail with preparation instructions.' } ], solutionHeading: 'Preparation verified, not just confirmed, before the case reaches the OR', solution: '<p>ZynSchedule manages the confirmation workflow by booking appointments, managing the schedule, and triggering the pre-procedure preparation sequence for each scheduled case. ZynReminder runs the preparation outreach in the days leading up to the procedure, customized to the procedure type and patient profile: verifying lab completion, reviewing dietary and medication preparation instructions, confirming transportation, and flagging any item that is incomplete or unclear.</p><p>When a pre-op item is incomplete, the flag routes to the clinical or scheduling staff member who can resolve it before the case date.</p><p>For ASC operations teams tracking case cancellation rates and OR utilization, the change is in how many cases proceed on schedule versus how many are cancelled or delayed due to incomplete preparation.</p>', products: [ { name: 'ZynSchedule', descriptor: 'Surgical appointment scheduling and pre-procedure preparation sequence trigger', url: '/agents/operational-efficiency/zynschedule', status: 'Active' }, { name: 'ZynReminder', descriptor: 'Pre-procedure preparation outreach: verification of labs, dietary restrictions, medication holds, and transportation', url: '/agents/preventive-quality-activation/zynreminder', status: 'Active' } ], cta: { headline: 'Pre-op preparation confirmed before the case date. Every item. Every patient.', label: 'See how it works' }, readNext: [ { id: 'UC21', title: 'Prior Authorization for Surgical Procedures', slug: 'prior-auth-surgical-procedures' }, { id: 'UC22', title: 'Referral Intake and Documentation Management', slug: 'referral-intake-asc' }, { id: 'UC24', title: 'Post-Procedure Follow-Up and Complication Monitoring', slug: 'post-procedure-followup-complication' } ], segments: { primary: 'ASCs', alsoTagged: [] }, seo: { title: 'Surgical Patient Scheduling Pre-Op ASC | Zynix AI', desc: 'Verify every pre-procedure preparation item before the case date. Zynix AI confirms labs, dietary instructions, medication holds, and transportation.', schema: 'HowTo' } };
+USE_CASES.UC20 = {
+  id: 'UC20', slug: 'referral-coordination-leakage', group: 'care-navigation', audience: 'mso', also: ['aco', 'system'],
+  title: 'Referrals tracked to a completed specialist visit',
+  teaser: 'The referral management agent follows each referral until the specialist visit happens and the result comes back.',
+  lead: 'The referral was sent and the task closed. Zynix follows it until the patient sees the specialist and the result comes back to the referring provider.',
+  problem: { title: 'Sending a referral isn’t completing it',
+    body: ['A practice sends the referral, tells the patient to call and closes the task. Some patients never call. Some specialist offices never confirm. Nobody knows until the next visit.',
+      'For practices in value-based arrangements, every referral that stalls is a gap in care, and every one that goes out of network is a cost the practice carries.'] },
+  gaps: [{ tool: 'Referral status fields', text: 'They record that a referral was sent. They don’t follow it.' },
+    { tool: 'Staff follow-up', text: 'It works for the referrals someone has time to chase.' }],
+  how: { title: 'Each referral followed until it’s closed', lead: 'Agents track and follow up. Your referral coordinator handles the ones that stall.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'A referral order starts tracking', body: 'New referrals are listed with the specialist, the due date and the current status.' },
+    { owner: 'agent', who: 'Referral management agent', title: 'The visit gets booked', body: 'The agent tracks the referral to a booked specialist visit and confirms the scheduling with the patient.' },
+    { owner: 'agent', who: 'ZynFax', title: 'Specialist paperwork is routed', body: 'Faxed confirmations, questions and results are read, matched to the patient and routed to the right queue.' },
+    { owner: 'staff', who: 'Referral coordinator', title: 'Stalled referrals go to a person', body: 'Referrals that stall or come back incomplete go to your referral coordinator.' },
+    { owner: 'agent', who: 'Referral management agent', title: 'Results return to the referring provider', body: 'The loop closes when the specialist’s note reaches the referring provider.' }],
+  episode: { title: 'Open referrals', meta: 'This month · all practices',
+    rows: [{ title: 'Pt 5510 · cardiology', sub: 'Visit booked for the 14th', owner: { type: 'agent', label: 'Referral management agent' }, status: ZX_SOL_BOOKED },
+      { title: 'Pt 2901 · orthopedics', sub: 'Specialist asked for imaging', owner: { type: 'agent', label: 'ZynFax' }, status: ZX_SOL_PROG },
+      { title: 'Pt 7788 · endocrinology', sub: 'No response after two attempts', owner: { type: 'staff', label: 'Referral coordinator' }, status: ZX_SOL_ESC }],
+    footer: 'A referral closes when the result is back with the referring provider.' },
+  runsOn: [{ p: 'agents', family: 'operational-efficiency', note: 'The referral management agent and ZynFax.' },
+    { p: 'dataFoundation', note: 'Referrals, results and the patient record in one place.' },
+    { p: 'integrations', note: 'Works with the EHR each practice runs.' }],
+  readNext: ['ccm-billing-chronic-care', 'after-hours-call-handling-group-practices', 'fax-inbound-document-routing'],
+  cta: 'referral tracking',
+  seo: { title: 'Referral tracking and leakage prevention | Zynix AI',
+    desc: 'Follow each referral until the specialist visit happens and the result returns to the referring provider, with stalled referrals routed to your team.', schema: 'HowTo' }
+};
 
-/* ── UC24 ── */
-USE_CASES.UC24 = { id: 'UC24', slug: 'post-procedure-followup-complication', title: 'Post-Procedure Follow-Up and Complication Monitoring', h1: 'Most post-procedure complications surface in the first 24 to 72 hours after an outpatient surgical case. Most ASCs have no structured outreach workflow for that window. The patient manages alone until something becomes concerning enough to call.', subhead: 'Post-procedure complications like wound concerns, pain management questions, and unexpected symptoms, typically emerge in the first 24 to 72 hours after outpatient surgery. Most ASCs have no structured outreach workflow for this window. Zynix AI contacts every patient in the monitoring period and routes what needs clinical attention.', problemHeading: 'The 72-hour post-procedure window is the most important patient contact most ASCs are not making', problem: '<p>A patient who underwent a laparoscopic cholecystectomy yesterday morning left the ASC with discharge instructions, a follow-up appointment in two weeks, and a phone number to call if they had concerns. They are at home managing mild nausea, a wound site that looks different from what the discharge photo showed, and uncertainty about whether their pain level is normal or not.</p><p>Most ASCs have no proactive outreach infrastructure for the 24-to-72-hour post-procedure window. The clinical team assumes patients will call if something is wrong. Patients assume their symptoms are normal unless they are obviously severe.</p><p>For ASCs, the clinical and operational consequences of a missed post-procedure complication are significant. For ASCs building quality reputations with referring surgeons and health systems, post-procedure outcomes in the monitoring period are a direct reflection of the care coordination infrastructure.</p>', shortfalls: [ { tool: 'Automated Post-Procedure Survey Systems', description: 'Automated post-discharge surveys collect patient-reported symptom data, usually through a portal link. They do not triage urgency, interpret clinical significance, or route concerning responses to the clinical team in real time.' }, { tool: 'Staff Callback Programs', description: 'Staff-managed post-procedure callback programs provide real clinical value when they are consistently executed. They are difficult to staff consistently at surgical case volume. Callbacks that happen for the highest-acuity cases do not happen for the cases that appeared routine at discharge.' } ], solutionHeading: 'Proactive post-procedure contact for every patient, with clinical concerns routed before they escalate', solution: '<p>The Transitions of Care Agent contacts every post-procedure patient within 24 to 72 hours, assessing current symptom status, capturing questions about recovery, routing clinical concerns to the surgeon or clinical team with full context, and scheduling follow-up appointments where warranted.</p><p>ZynReminder handles the patients who need a follow-up contact. ZynSchedule manages the follow-up appointment booking when the clinical concern warrants a visit.</p><p>For ASC operations teams tracking complication-related ED visits and unplanned returns to the OR, the change in post-procedure contact rates is directly relevant to quality performance data.</p>', products: [ { name: 'Transitions of Care Agent', descriptor: 'Post-procedure patient outreach, symptom assessment, clinical escalation routing, and follow-up scheduling', url: '/agents/transitions-of-care', status: 'Active' }, { name: 'ZynReminder', descriptor: 'Follow-up outreach for patients requiring monitoring or who were not reached in the primary contact window', url: '/agents/preventive-quality-activation/zynreminder', status: 'Active' }, { name: 'ZynSchedule', descriptor: 'Follow-up appointment scheduling when post-procedure concern warrants a clinical visit', url: '/agents/operational-efficiency/zynschedule', status: 'Active' } ], cta: { headline: 'Post-procedure complications are caught when patients are contacted. Let\u2019s build that workflow.', label: 'Book a demo' }, readNext: [ { id: 'UC23', title: 'Patient Scheduling and Pre-Procedure Preparation', slug: 'surgical-scheduling-pre-procedure' }, { id: 'UC21', title: 'Prior Authorization for Surgical Procedures', slug: 'prior-auth-surgical-procedures' }, { id: 'UC01', title: 'Post-Discharge Follow-Up at Scale', slug: 'post-discharge-follow-up' } ], segments: { primary: 'ASCs', alsoTagged: ['Health Systems'] }, seo: { title: 'Post-Procedure Follow-Up Monitoring ASC | Zynix AI', desc: 'Reach every outpatient surgical patient in the 24\u201372 hour monitoring window. Zynix AI assesses symptoms, routes clinical concerns, and schedules.', schema: 'HowTo' } };
+USE_CASES.UC13 = {
+  id: 'UC13', slug: 'high-utilizer-member-management', group: 'care-navigation', audience: 'plan', also: ['aco', 'system'],
+  title: 'Steady outreach for high-utilizer members',
+  teaser: 'Routine contact between case management calls for members with frequent admissions and ED visits, with changes routed to case managers.',
+  lead: 'Your highest-cost members are known and enrolled, and still hard to reach between case manager calls. Agents keep the routine contact going; case managers handle the judgment calls.',
+  problem: { title: 'Known, enrolled, and still hard to reach',
+    body: ['Members with frequent admissions and ED visits are easy to identify. They often have several specialists, recent transitions and social needs that make them hard to reach consistently.',
+      'Case managers are among the most skilled people on a plan’s team. Their time goes furthest on clinical judgment, not on the routine check-ins that keep a member engaged between those conversations.'] },
+  gaps: [{ tool: 'Risk identification models', text: 'They find the members. They don’t keep in touch with them.' },
+    { tool: 'Complex case management', text: 'High-touch and effective, and hard to sustain month after month for members who don’t answer.' }],
+  how: { title: 'Routine contact between case management touchpoints', lead: 'Agents keep members engaged and flag changes. Case managers make the decisions.' },
+  steps: [
+    { owner: 'system', who: 'Zynix platform', title: 'Rising utilization is flagged', body: 'Admission and readmission risk flags members whose utilization is climbing, not only those already enrolled.' },
+    { owner: 'agent', who: 'Rising-risk outreach agent', title: 'Outreach before the next event', body: 'Newly flagged members get a check-in on medications, open gaps and upcoming visits.' },
+    { owner: 'agent', who: 'Chronic care management agent', title: 'Monthly check-ins for enrolled members', body: 'Routine contact continues between case manager calls, with the care plan reinforced.' },
+    { owner: 'staff', who: 'Case manager, RN', title: 'Changes go to the case manager', body: 'New symptoms, missed visits and barriers are escalated with the conversation attached.' }],
+  episode: { title: 'High-utilizer outreach', meta: 'Care management · this week',
+    rows: [{ title: 'Member 9012 · repeat ED visits', sub: 'Check-in done, visit booked', owner: { type: 'agent', label: 'Outreach agent' }, status: ZX_SOL_BOOKED },
+      { title: 'Member 4403 · recent admission', sub: 'Asked about home health', owner: { type: 'staff', label: 'Case manager, RN' }, status: ZX_SOL_ESC },
+      { title: 'Member 6120 · missed two calls', sub: 'Text follow-up sent', owner: { type: 'agent', label: 'Outreach agent' }, status: ZX_SOL_QUEUED }],
+    footer: 'Case managers decide the plan; agents keep the contact going.' },
+  runsOn: [{ p: 'analytics', note: 'Admission and readmission risk flags rising utilization.' },
+    { p: 'agents', family: 'predictive-activation', note: 'The rising-risk outreach agent reaches newly flagged members.' },
+    { p: 'agents', family: 'clinical-performance', note: 'The chronic care management agent keeps the monthly contact.' },
+    { p: 'carePlans', note: 'The high-utilizer ED diversion plan sets the steps.' }],
+  readNext: ['medication-adherence-chronic-populations', 'post-discharge-ma-members', 'hcc-risk-adjustment-ma'],
+  story: 'eternalhealth', cta: 'high-utilizer outreach',
+  seo: { title: 'High-utilizer member outreach | Zynix AI',
+    desc: 'Keep routine contact going with high-utilizer members between case management calls, and flag rising utilization before the next admission.', schema: 'HowTo' }
+};
 
-/* ── UC25 ── */
-USE_CASES.UC25 = { id: 'UC25', slug: 'fax-inbound-document-routing', title: 'Fax and Inbound Document Routing', h1: 'Your ASC receives hundreds of incoming faxes each week. Every one of them arrives as an unclassified PDF. Staff open each one to figure out what it is. Half of them are waiting to be acted on by someone who has not seen them yet.', subhead: 'High-volume surgical environments receive hundreds of faxes daily: referral documents, lab results, insurance correspondence, prior auth confirmations, imaging reports. Processing this volume manually requires dedicated staff time. Documents get lost in queues. Zynix AI turns the fax queue into an organized, prioritized action list.', problemHeading: 'A fax queue that nobody has time to process is a patient care delay waiting to happen', problem: '<p>An ASC receiving 150 faxes per week across referral intake, payer correspondence, and clinical documentation has a document management problem that scales with case volume. Each fax arrives as a PDF image with no metadata beyond the sending fax number.</p><p>The time cost of processing incoming faxes at this volume is not marginal. In ASC environments where administrative staff are also managing scheduling, insurance verification, and patient communications, fax processing competes directly with patient-facing work.</p><p>The clinical risk is specific. A lab result that does not reach the surgeon before the pre-operative assessment window closes delays the case. An authorization denial that is not routed to the billing coordinator within the appeal window loses the authorization.</p>', shortfalls: [ { tool: 'Digital Fax Systems', description: 'Electronic fax platforms convert incoming faxes from physical transmission to digital PDFs and deliver them to a shared inbox. They do not read the content of each document, identify what type of document it is, determine which staff member or department should receive it, or flag items that require immediate action.' }, { tool: 'Manual Document Distribution Workflows', description: 'Assigning a dedicated staff member to process incoming faxes creates consistency when that person is available and at capacity. It creates a bottleneck the moment they are not. The labor cost of manual fax processing scales directly with document volume, with no technology leverage applied to the most time-consuming step.' } ], solutionHeading: 'Every incoming document read, classified, and routed without a staff member opening a single fax', solution: '<p>ZynFax processes every incoming fax at the document level, reading the content, identifying the document type across dozens of categories, matching to the correct patient and case record, and routing to the appropriate staff queue. Items that require immediate action are flagged for priority review.</p><p>For staff who previously spent the first portion of each morning processing the fax queue, the change is in what that time is used for. Documents arrive pre-classified. The referral intake coordinator sees referral packets. The billing coordinator sees authorization correspondence. The surgeon sees lab results and imaging reports.</p><p>For ASC leadership teams tracking administrative staff utilization and case workflow efficiency, the reduction in fax processing time is directly available for reallocation to higher-value work.</p>', products: [ { name: 'ZynFax', descriptor: 'Reads, classifies, routes, and assigns ownership to every incoming fax by document type, clinical content, and ownership', url: '/agents/operational-efficiency', status: 'Active' } ], cta: { headline: 'The fax queue is organized before anyone opens it. Let\u2019s show you how.', label: 'See how it works' }, readNext: [ { id: 'UC22', title: 'Referral Intake and Documentation Management', slug: 'referral-intake-asc' }, { id: 'UC21', title: 'Prior Authorization for Surgical Procedures', slug: 'prior-auth-surgical-procedures' }, { id: 'UC20', title: 'Referral Coordination and Leakage Prevention', slug: 'referral-coordination-leakage' } ], segments: { primary: 'ASCs', alsoTagged: ['Health Systems', 'Independent Group Practices'] }, seo: { title: 'Fax Inbound Document Routing Healthcare | Zynix AI', desc: 'ZynFax reads, classifies, and routes every incoming healthcare fax by document type and ownership, turning an unclassified queue into a prioritized.', schema: 'HowTo' } };
+/* ── Front-office work and documentation ── */
+USE_CASES.UC17 = {
+  id: 'UC17', slug: 'appointment-scheduling-no-show', group: 'front-office', audience: 'mso', also: ['fqhc'],
+  title: 'Appointment scheduling and no-show follow-up',
+  teaser: 'Two-way confirmations that ask what is in the way, reschedule early and offer freed slots to patients on the waitlist.',
+  lead: 'Reminders tell patients about the visit, not what is stopping them from coming. Zynix confirms, reschedules early and offers freed slots to patients on your waitlist.',
+  problem: { title: 'The no-show isn’t the problem. The unasked question is.',
+    body: ['Patients who miss visits usually got the reminder. What they didn’t get was a chance to say they have no ride, can’t leave work or need a different time, early enough to fill the slot with someone else.',
+      'Front-desk teams call after the miss, work the waitlist and rebook, on top of the phones. As panels grow, that work doesn’t shrink.'] },
+  gaps: [{ tool: 'Automated reminders', text: 'One-way. They confirm the time, not the barrier.' },
+    { tool: 'Front-desk confirmation calls', text: 'Two-way, and limited by how many calls the desk can make.' }],
+  how: { title: 'Confirm, reschedule, refill the slot', lead: 'Agents handle the scheduling conversations. Your front-desk staff handle the exceptions.' },
+  steps: [
+    { owner: 'agent', who: 'ZynSchedule', title: 'Requests are booked', body: 'Scheduling requests by phone, text or web are matched to visit type and provider availability.' },
+    { owner: 'agent', who: 'Preventive and quality activation agent', title: 'Two-way confirmations', body: 'Patients confirm, cancel or ask to move the visit, and can say what is in the way.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'Freed slots are offered', body: 'Cancellations are offered to patients on the waitlist.' },
+    { owner: 'staff', who: 'Front-desk staff', title: 'Exceptions go to the desk', body: 'Requests outside your scheduling rules go to front-desk staff.' }],
+  episode: { title: 'Tomorrow’s schedule', meta: 'One practice · sample day',
+    tiles: [{ label: 'Visits', value: '64' }, { label: 'Confirmed', value: '51' }, { label: 'Rebooked', value: '6' }],
+    rows: [{ title: 'Pt 3309 · 9:20 am follow-up', sub: 'Moved to 4:40 pm at patient’s request', owner: { type: 'agent', label: 'ZynSchedule' }, status: ZX_SOL_BOOKED },
+      { title: '9:20 am slot · freed', sub: 'Offered to the waitlist', owner: { type: 'agent', label: 'ZynSchedule' }, status: ZX_SOL_PROG },
+      { title: 'Pt 7215 · 2:00 pm new patient', sub: 'Insurance question', owner: { type: 'staff', label: 'Front-desk staff' }, status: ZX_SOL_REVIEW }],
+    footer: 'Anything outside your scheduling rules goes to the front desk.' },
+  runsOn: [{ p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books, reschedules and fills cancellations.' },
+    { p: 'agents', family: 'clinical-performance', note: 'Two-way reminders from the preventive and quality activation agent.' },
+    { p: 'integrations', note: 'Works with the scheduling in the EHR you run.' }],
+  readNext: ['after-hours-call-handling-group-practices', 'ccm-billing-chronic-care', 'referral-coordination-leakage'],
+  cta: 'scheduling and confirmations',
+  seo: { title: 'Appointment scheduling and no-show follow-up | Zynix AI',
+    desc: 'Two-way confirmations that ask what is in the way, reschedule early and offer freed slots to your waitlist, with exceptions routed to front-desk staff.', schema: 'HowTo' }
+};
 
-/* ── UC26 ── */
-USE_CASES.UC26 = { id: 'UC26', slug: 'after-hours-triage-multilingual-fqhc', title: 'After-Hours Triage for Multilingual and Underserved Populations', h1: 'A patient calls your FQHC at 9 p.m. in Spanish. Your answering service speaks English. The patient is concerned about their child\u2019s fever. They end up in the ED, not because they needed emergency care, but because there was no alternative.', subhead: 'FQHCs serve patient populations with significant language diversity and elevated after-hours healthcare need. When a patient cannot reach their FQHC after hours in their primary language, the barrier compounds. Medical urgency in a second language leads to delayed care or a preventable ED visit. Zynix AI provides consistent multilingual clinical triage access around the clock.', problemHeading: 'The language barrier after hours is a care access barrier and a patient safety gap', problem: '<p>An FQHC serving a predominantly Spanish-speaking, Haitian Creole-speaking, or Vietnamese-speaking community does not have the after-hours coverage infrastructure that matches its patient population\u2019s access needs. After-hours calls go to an English-only answering service, or to a rotation of on-call clinicians who may not speak the patient\u2019s primary language.</p><p>The after-hours access problem at FQHCs is not simply a staffing cost problem. It is a structural equity problem. The populations FQHCs exist to serve have disproportionately high after-hours healthcare need: higher rates of chronic disease, more complex social circumstances, less access to alternative care settings.</p><p>For FQHCs tracking ED utilization as a HRSA UDS metric and managing the cost burden of preventable ED visits on an already resource-constrained budget, the after-hours access gap has both clinical and financial consequences.</p>', shortfalls: [ { tool: 'English-Only Answering Services', description: 'Traditional answering services receive after-hours calls, take messages, and relay callback requests. Most operate in English with limited or no capacity for other languages. For FQHCs whose patient populations include significant proportions of non-English speakers, an English-only answering service does not provide clinical triage access. It provides documentation of an access failure.' }, { tool: 'On-Call Clinician Rotations', description: 'On-call clinicians provide genuine clinical value, when they speak the patient\u2019s language, when the call is a clinical concern that requires physician involvement, and when the volume is manageable. FQHCs running on-call rotations find that call volume includes a significant proportion of non-clinical questions and routine concerns that do not require physician involvement.' } ], solutionHeading: 'Clinical triage in every patient\u2019s language, every hour the FQHC is not available', solution: '<p>ZynAfterHours handles after-hours calls in 15-plus languages, applying consistent clinical triage logic to assess urgency, provide guidance, route clinical concerns to the on-call clinician, and schedule next-day appointments for everything that can wait. A Spanish-speaking patient calling at 9 p.m. with a concern about their child\u2019s symptoms reaches a clinical triage interaction in Spanish.</p><p>For patients with urgent clinical concerns, ZynAfterHours routes to the on-call clinician with a summary of the patient\u2019s concern and the triage assessment. ZynSchedule books next-day appointments in the same interaction.</p><p>For FQHCs reporting HRSA UDS metrics on after-hours access and ED utilization, the change in after-hours contact resolution rates and preventable ED visits is directly relevant to quality reporting.</p>', products: [ { name: 'ZynAfterHours & Triage', descriptor: '24/7 after-hours clinical triage in 15+ languages: symptom assessment, escalation routing, next-day scheduling', url: '/agents/operational-efficiency/zynafterhours-triage', status: 'Active' }, { name: 'ZynSchedule', descriptor: 'Next-day appointment scheduling completed in the after-hours interaction', url: '/agents/operational-efficiency/zynschedule', status: 'Active' } ], cta: { headline: 'Every patient. Every language. Every hour the FQHC is not available.', label: 'Book a demo' }, readNext: [ { id: 'UC27', title: 'SDoH Screening, Identification, and Care Navigation', slug: 'sdoh-screening-care-navigation' }, { id: 'UC30', title: 'Post-Discharge Follow-Up for High-Risk FQHC Patients', slug: 'post-discharge-followup-fqhc' }, { id: 'UC16', title: 'After-Hours Call Handling and Patient Triage', slug: 'after-hours-call-handling-group-practices' } ], segments: { primary: 'FQHCs', alsoTagged: ['Independent Group Practices'] }, seo: { title: 'After-Hours Triage Multilingual FQHC Patients | Zynix AI', desc: 'ZynAfterHours provides 24/7 clinical triage in 15+ languages for FQHC patient populations, routing urgent concerns and scheduling next-day access so.', schema: 'HowTo' } };
+// Prior authorization: the Prior authorization agent is held (NAMES.agentFamilies[*].held) until Gautamdev confirms it.
+// These three pages describe only what ships: ZynFax reads and routes payer responses, ZynSchedule books approved cases,
+// and your authorization staff prepare, submit and appeal every request.
+USE_CASES.UC04 = {
+  id: 'UC04', slug: 'prior-auth-high-volume-specialty', group: 'front-office', audience: 'system', also: ['asc'],
+  title: 'Prior authorization paperwork for specialty service lines',
+  teaser: 'Payer faxes for specialty authorizations read, matched and routed, and approved cases booked, while your staff own each request.',
+  lead: 'Your cardiology and orthopedics teams wait on authorizations while staff dig through payer faxes. ZynFax sorts the responses and ZynSchedule books approved cases; your staff own every request.',
+  problem: { title: 'Authorization volume grows with every service line',
+    body: ['Specialty service lines generate a steady stream of authorization requests, and the answers come back by fax, portal and phone. Approvals, denials and requests for more information arrive mixed in with everything else.',
+      'When a response sits unread, the case waits, the patient calls to ask why and the ordering physician hears nothing. A denial found late leaves less time to respond.'] },
+  gaps: [{ tool: 'Authorization status tools', text: 'They show what is outstanding. They don’t read the documents that change the status.' },
+    { tool: 'Shared fax inboxes', text: 'Digital, but still one unlabeled PDF after another.' }],
+  how: { title: 'Your staff own the authorization. Zynix handles the paperwork around it.', lead: 'Payer responses reach the right person sooner, and approved cases get scheduled.' },
+  steps: [
+    { owner: 'staff', who: 'Authorization staff', title: 'Your team prepares and submits', body: 'Requests are prepared, submitted and appealed by your authorization staff.' },
+    { owner: 'agent', who: 'ZynFax', title: 'Payer responses are sorted', body: 'Faxed approvals, denials and requests for more information are read, matched to the patient and case, and routed to the right queue, with missing pages flagged.' },
+    { owner: 'staff', who: 'Authorization staff', title: 'Each response lands with the right person', body: 'Denials, peer-to-peer requests and information requests reach the person who handles them, with the document attached.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'Approved cases are scheduled', body: 'When an approval arrives, ZynSchedule books or confirms the visit or procedure.' }],
+  episode: { title: 'Authorization inbox', meta: 'Today · cardiology and orthopedics',
+    rows: [{ title: 'Pt 4180 · cardiac MRI · approval', sub: 'Ready to book', owner: { type: 'agent', label: 'ZynSchedule' }, status: ZX_SOL_BOOKED },
+      { title: 'Pt 2257 · knee arthroscopy · more information', sub: 'Routed to authorization staff', owner: { type: 'staff', label: 'Authorization staff' }, status: ZX_SOL_PROG },
+      { title: 'Pt 9036 · CT · denial', sub: 'Sent to physician for peer-to-peer', owner: { type: 'staff', label: 'Physician lead' }, status: ZX_SOL_ESC }],
+    footer: 'Your staff prepare, submit and appeal every request.' },
+  runsOn: [{ p: 'agents', family: 'operational-efficiency', note: 'ZynFax sorts payer responses; ZynSchedule books approved cases.' },
+    { p: 'integrations', note: 'Works with the EHR your service lines run.' }],
+  readNext: ['post-discharge-follow-up', 'physician-documentation-ambient-ai', 'after-hours-triage-multi-site'],
+  cta: 'authorization paperwork routing',
+  seo: { title: 'Prior authorization paperwork for specialty care | Zynix AI',
+    desc: 'Payer responses for specialty authorizations read, matched and routed to the right person, with approved cases scheduled while your staff own each request.', schema: 'HowTo' }
+};
 
-/* ── UC27 ── */
-USE_CASES.UC27 = { id: 'UC27', slug: 'sdoh-screening-care-navigation', title: 'SDoH Screening, Identification, and Care Navigation', h1: 'Your FQHC is required to screen for social determinants of health. The screening form exists. It is not integrated into the outreach workflow. Transportation barriers, food insecurity, and housing instability are being identified in clinic, but not in the patient interactions where you could route them to a resource before the next visit.', subhead: 'FQHCs are required to screen for and address social determinants of health, but integrating SDoH identification into a high-volume outreach workflow is operationally demanding. Zynix AI identifies social barriers during existing patient interactions and routes them to the right resource without requiring a separate screening visit.', problemHeading: 'SDoH screening that happens at the visit misses the patients who are not coming in', problem: '<p>FQHCs operating under HRSA UDS reporting requirements collect SDoH data as part of the clinical encounter. The problem is that screening happens at the point of care, which means it only captures patients who make it to the clinic.</p><p>For FQHC patient populations where social barriers are among the primary reasons patients do not make it to the clinic, a screening process that only operates at the visit misses the patients with the highest social need.</p><p>Integrating SDoH identification into outreach interactions like the chronic care management check-in, the appointment reminder call, the post-discharge follow-up, allows the FQHC to capture social barriers at the moments when patients are engaged, not just when they are present.</p>', shortfalls: [ { tool: 'Paper-Based and In-Clinic SDoH Screening Tools', description: 'Standardized SDoH screening instruments capture structured SDoH data effectively in the clinical encounter. They are administered at the point of care and require the patient to be present. They do not integrate with outreach workflows or connect to community resource routing in real time.' }, { tool: 'Separate Care Navigation Programs', description: 'Care navigation programs that follow up on identified SDoH needs add a valuable layer of support, but they add a step. A patient who discloses a food insecurity concern at a clinical screening and then receives a callback from a care navigator two weeks later has experienced a fragmented process.' } ], solutionHeading: 'Social barriers identified and routed in the same interaction without a separate screening visit', solution: '<p>The SDoH Determination Agent identifies social barriers during existing outreach interactions like chronic care management check-ins, appointment confirmation calls, post-discharge follow-up, capturing transportation barriers, food insecurity, housing instability, and language access needs in a structured format.</p><p>When a social barrier is identified, the agent routes to the appropriate community resource or care navigator in the same interaction. A patient who discloses a transportation barrier during their monthly chronic care check-in receives the routing to the transportation assistance program before the call ends.</p><p>For FQHCs reporting HRSA UDS SDoH screening rates and tracking the connection between social needs and clinical outcomes, the change is in how many patient interactions include structured SDoH data, not just the patients who arrived for a visit.</p>', products: [ { name: 'SDoH Determination Agent', descriptor: 'Identifies social barriers during outreach interactions and routes to community resources or care navigators', url: '/agents/clinical-performance', status: 'Planned' }, { name: 'Chronic & Longitudinal Care Management Agent', descriptor: 'Monthly two-way outreach workflow within which SDoH screening is embedded', url: '/agents/chronic-care-management', status: 'Active' } ], cta: { headline: 'Social barriers get addressed when they are identified in the workflow. Let\u2019s build that integration.', label: 'Talk to our team' }, readNext: [ { id: 'UC26', title: 'After-Hours Triage for Multilingual and Underserved Populations', slug: 'after-hours-triage-multilingual-fqhc' }, { id: 'UC28', title: 'Preventive Screening Gap Closure for High-Barrier Populations', slug: 'preventive-screening-gap-fqhc' }, { id: 'UC30', title: 'Post-Discharge Follow-Up for High-Risk FQHC Patients', slug: 'post-discharge-followup-fqhc' } ], segments: { primary: 'FQHCs', alsoTagged: ['ACOs & MSOs', 'Health Systems'] }, seo: { title: 'SDoH Screening Care Navigation FQHC SDoH | Zynix AI', desc: 'Identify and route social determinants of health during outreach interactions, not just in-clinic screenings.', schema: 'HowTo' } };
+USE_CASES.UC18 = {
+  id: 'UC18', slug: 'prior-auth-workflow-management', group: 'front-office', audience: 'mso', also: ['asc', 'aco'],
+  title: 'Prior authorization paperwork for independent practices',
+  teaser: 'Payer responses routed to the right person and approved visits booked, while practice staff keep ownership of each request.',
+  lead: 'Authorizations submitted two weeks ago are still pending, and staff are on hold with payers. ZynFax sorts the responses as they arrive and ZynSchedule books approved visits.',
+  problem: { title: 'Authorizations compete with everything else at the front desk',
+    body: ['In most independent practices, the people handling authorizations also run the front desk, verify insurance and support scheduling. Imaging, procedures, specialty referrals and medications each bring their own paperwork.',
+      'Responses arrive by fax between patient calls. A request for more information that waits a day adds a day to the patient’s wait.'] },
+  gaps: [{ tool: 'Practice management status fields', text: 'They show a request is pending. They don’t read the reply.' },
+    { tool: 'Staff-managed queues', text: 'They age faster than they clear when the office is busy.' }],
+  how: { title: 'Your staff own the authorization. Zynix handles the paperwork around it.', lead: 'Payer responses reach the right person sooner, and approved visits get booked.' },
+  steps: [
+    { owner: 'staff', who: 'Practice staff', title: 'Your team prepares and submits', body: 'Requests are prepared, submitted and appealed by practice staff, as they are today.' },
+    { owner: 'agent', who: 'ZynFax', title: 'Payer responses are sorted', body: 'Faxed approvals, denials and requests for more information are read, matched to the patient and routed, with missing pages flagged.' },
+    { owner: 'staff', who: 'Practice nurse', title: 'Clinical requests reach a clinician', body: 'Requests for clinical information go to the practice nurse or physician with the document attached.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'Approved visits are booked', body: 'When an approval arrives, ZynSchedule books the visit or procedure.' }],
+  episode: { title: 'Authorization inbox', meta: 'Today · two practices',
+    rows: [{ title: 'Pt 6603 · lumbar MRI · approval', sub: 'Visit booked', owner: { type: 'agent', label: 'ZynSchedule' }, status: ZX_SOL_BOOKED },
+      { title: 'Pt 1149 · specialty drug · form requested', sub: 'Routed to the practice nurse', owner: { type: 'staff', label: 'Practice nurse' }, status: ZX_SOL_PROG },
+      { title: 'Pt 8420 · referral · missing page', sub: 'Flagged for follow-up', owner: { type: 'agent', label: 'ZynFax' }, status: ZX_SOL_REVIEW }],
+    footer: 'Practice staff prepare, submit and appeal every request.' },
+  runsOn: [{ p: 'agents', family: 'operational-efficiency', note: 'ZynFax sorts payer responses; ZynSchedule books approved visits.' },
+    { p: 'integrations', note: 'Works with the EHR each practice runs.' }],
+  readNext: ['referral-coordination-leakage', 'after-hours-call-handling-group-practices', 'ccm-billing-chronic-care'],
+  cta: 'authorization paperwork routing',
+  seo: { title: 'Prior authorization paperwork for practices | Zynix AI',
+    desc: 'Payer responses read, matched and routed to the right person, and approved visits booked, while practice staff keep ownership of every request.', schema: 'HowTo' }
+};
 
-/* ── UC28 ── */
-USE_CASES.UC28 = { id: 'UC28', slug: 'preventive-screening-gap-fqhc', title: 'Preventive Screening Gap Closure for High-Barrier Populations', h1: 'A patient in your FQHC panel has had an open mammogram order for six months. They have not scheduled the appointment. A reminder was sent. Nothing happened. The reason the order is still open has never been asked.', subhead: 'Preventive screening completion rates in FQHC populations are structurally lower than in the general population, not because patients decline, but because the path from order to completion is longer and more barrier-prone. Zynix AI identifies open screening gaps and routes the specific barrier to resolution rather than sending a reminder that assumes the barrier does not exist.', problemHeading: 'The screening order exists. The barrier to completing it does not appear in the data.', problem: '<p>An FQHC with a large panel of patients eligible for preventive cancer screenings, diabetes testing, and cardiovascular risk assessments has, in most cases, the clinical infrastructure to order those screenings. The ordering rates are reasonable. The completion rates are not.</p><p>The reason for non-completion is almost never clinical indifference. It is almost always a barrier that was not identified, not addressed, and not resolved. Transportation to the imaging center is not available. The patient works during all the appointment slots at the lab. The cost is not manageable. The instructions were in a language the patient does not read.</p><p>For FQHCs tracking preventive screening rates as HRSA UDS quality metrics, low completion rates are not a patient engagement problem to be solved by sending more reminders. They are a barrier navigation problem.</p>', shortfalls: [ { tool: 'Generic Reminder Systems', description: 'Automated reminder systems send notifications that a preventive screening is due. They reach patients who are responsive to notifications. For patients who are not responsive, and who are disproportionately the patients with the highest social barriers. Reminders generate low response rates and do not address the underlying barrier. The gap stays open.' }, { tool: 'Care Coordinator Outreach Programs', description: 'Care coordinators who address screening barriers individually can do so effectively, for the patients they have time to reach. At FQHC case volumes where hundreds of patients may have open preventive screening gaps simultaneously, individual coordinator outreach for every gap is not feasible.' } ], solutionHeading: 'Open screening gaps addressed one barrier at a time, at the scale of the full gap population', solution: '<p>ZynReminder identifies patients with open preventive screening gaps and runs two-way outreach to understand the specific barrier to completion. The interaction is not a reminder. It is a conversation that asks why the screening has not happened and then addresses the answer.</p><p>When the barrier is scheduling, ZynSchedule books the appointment. When the barrier is transportation, the interaction routes to the transportation assistance program. When the barrier is cost, it connects to the financial assistance workflow. When the barrier is language, the interaction is conducted in the patient\u2019s primary language.</p><p>For FQHCs where preventive screening completion rates are a direct input to HRSA UDS reporting, the change is in completion rates across the full open-gap population.</p>', products: [ { name: 'ZynReminder', descriptor: 'Two-way preventive screening gap outreach with barrier identification, scheduling integration, and community resource routing', url: '/agents/preventive-quality-activation/zynreminder', status: 'Active' }, { name: 'ZynGap', descriptor: 'Preventive and quality gap identification prioritized by closure window and patient-level barrier profile', url: '/solutions/zynix-data-analytics', status: 'Planned' }, { name: 'ZynSchedule', descriptor: 'Appointment scheduling for preventive screening completion in the outreach interaction', url: '/agents/operational-efficiency/zynschedule', status: 'Active' } ], cta: { headline: 'Open screening gaps have a reason. Let\u2019s identify it and remove it.', label: 'Book a demo' }, readNext: [ { id: 'UC27', title: 'SDoH Screening, Identification, and Care Navigation', slug: 'sdoh-screening-care-navigation' }, { id: 'UC29', title: 'Medication Adherence for Complex Chronic Patients', slug: 'medication-adherence-complex-chronic' }, { id: 'UC11', title: 'HEDIS and Stars Quality Measure Improvement', slug: 'hedis-stars-quality-improvement' } ], segments: { primary: 'FQHCs', alsoTagged: ['ACOs & MSOs', 'Health Plans'] }, seo: { title: 'Preventive Screening Gap Closure Populations FQHC | Zynix AI', desc: 'Close preventive screening gaps in high-barrier FQHC populations. Zynix AI identifies why gaps are open (transportation, cost, language, access.', schema: 'HowTo' } };
+USE_CASES.UC21 = {
+  id: 'UC21', slug: 'prior-auth-surgical-procedures', group: 'front-office', audience: 'asc', also: ['system'],
+  title: 'Authorization paperwork for surgical cases',
+  teaser: 'Payer responses for surgical cases routed to the right person, so approved cases are confirmed before the OR date.',
+  lead: 'The OR slot is blocked and the authorization is pending. ZynFax routes payer responses as they arrive and ZynSchedule confirms approved cases; your staff own every request.',
+  problem: { title: 'A late authorization is an empty OR slot',
+    body: ['Most surgical cases need authorization, and one or two administrative staff often manage payer portals, information requests and denials alongside scheduling.',
+      'Denial notices and information requests arrive mixed in with routine case correspondence. When they are found late, the response window is shorter and the case date is at risk.'] },
+  gaps: [{ tool: 'Payer portals', text: 'One login per payer, checked one case at a time.' },
+    { tool: 'Manual denial handling', text: 'Denials found late leave little time to respond.' }],
+  how: { title: 'Your staff own the authorization. Zynix handles the paperwork around it.', lead: 'Payer responses reach the right person sooner, and approved cases are confirmed with the patient.' },
+  steps: [
+    { owner: 'staff', who: 'Authorization staff', title: 'Your team prepares and submits', body: 'Requests are prepared, submitted and appealed by your authorization staff.' },
+    { owner: 'agent', who: 'ZynFax', title: 'Payer responses are sorted', body: 'Approvals, denials and information requests are read, matched to the case and routed, with missing pages flagged.' },
+    { owner: 'staff', who: 'Surgeon', title: 'Peer-to-peer requests reach the surgeon', body: 'Requests that need the surgeon go straight to them with the case attached.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'Approved cases are confirmed', body: 'When an approval arrives, ZynSchedule confirms the case date with the patient.' }],
+  episode: { title: 'Surgical authorizations', meta: 'Cases in the next 14 days',
+    rows: [{ title: 'Case 118 · total knee · approved', sub: 'Patient confirmed for the 21st', owner: { type: 'agent', label: 'ZynSchedule' }, status: ZX_SOL_BOOKED },
+      { title: 'Case 124 · spine · information requested', sub: 'Routed to authorization staff', owner: { type: 'staff', label: 'Authorization staff' }, status: ZX_SOL_PROG },
+      { title: 'Case 131 · cataract · denial', sub: 'Sent to the surgeon for peer-to-peer', owner: { type: 'staff', label: 'Surgeon' }, status: ZX_SOL_ESC }],
+    footer: 'Your staff prepare, submit and appeal every request.' },
+  runsOn: [{ p: 'agents', family: 'operational-efficiency', note: 'ZynFax sorts payer responses; ZynSchedule confirms approved cases.' },
+    { p: 'integrations', note: 'Works with the systems your center runs.' }],
+  readNext: ['surgical-scheduling-pre-procedure', 'referral-intake-asc', 'post-procedure-followup-complication'],
+  cta: 'surgical authorization paperwork',
+  seo: { title: 'Authorization paperwork for surgery centers | Zynix AI',
+    desc: 'Payer responses for surgical cases read, matched and routed to the right person, with approved cases confirmed while your staff own every request.', schema: 'HowTo' }
+};
 
-/* ── UC29 ── */
-USE_CASES.UC29 = { id: 'UC29', slug: 'medication-adherence-complex-chronic', title: 'Medication Adherence for Complex Chronic Patients', h1: 'A patient managing hypertension, diabetes, and heart failure stopped taking their blood pressure medication three months ago because it made them dizzy. They never told anyone. A refill reminder did not ask.', subhead: 'FQHC patients managing multiple chronic conditions face medication adherence challenges that go beyond access. Cost barriers, side effect confusion, polypharmacy complexity, and language gaps compound each other. Zynix AI identifies the specific barrier in a two-way interaction and routes the resolution so the patient gets the right support, not another refill reminder.', problemHeading: 'The adherence problem in complex chronic FQHC patients is not a reminder problem. It is a barrier problem.', problem: '<p>FQHC patients managing diabetes, hypertension, heart failure, COPD, and chronic kidney disease, often in combination, face a medication adherence environment that is structurally more difficult than the general population. Polypharmacy complexity means multiple medications with different dosing schedules, different side effect profiles, and different prescribers who may not be coordinating with each other.</p><p>A patient who stopped taking their lisinopril because it caused a persistent dry cough and did not know that the cough was a known side effect with alternative medications available represents a preventable adherence gap. A patient who is taking their metformin intermittently because they cannot afford to fill it every month represents a different kind of adherence gap requiring a different response.</p><p>Each of these situations requires a two-way conversation to identify. A refill reminder system that sends a notification when the prescription fill window opens does not have that conversation.</p>', shortfalls: [ { tool: 'Refill Reminder Systems', description: 'Refill reminders notify patients that a prescription is due for refill. They are effective for patients who have no barrier. They are ineffective for patients who stopped taking the medication because of side effects, cost, confusion, or a misunderstood clinical instruction, because those patients need a conversation, not a notification.' }, { tool: 'Pharmacist Intervention Programs', description: 'Clinical pharmacist outreach provides the highest-quality medication adherence intervention that is barrier-specific, clinically informed, and personalized. Pharmacist programs are resource-intensive and are typically reserved for the highest-risk tier. For FQHC populations where the majority of chronic disease patients have multiple adherence challenges, pharmacist-level attention for every non-adherent patient is not achievable at the volume needed.' } ], solutionHeading: 'Two-way adherence outreach that identifies the barrier and routes the resolution for every complex chronic patient', solution: '<p>The Medication Adherence workflow within the Chronic and Longitudinal Care Management Agent conducts two-way outreach with FQHC patients managing complex chronic conditions, capturing current medication status, identifying the specific barrier to adherence, and routing the resolution to the appropriate resource. Side effect concerns route to the pharmacist or prescribing provider. Cost barriers route to the patient assistance program. Language or comprehension barriers are addressed in the patient\u2019s primary language.</p><p>ZynReminder manages the follow-up contact for patients whose barrier required a resolution that takes time, such as a pharmacist callback, a cost assistance application, a prescription change.</p><p>For FQHCs where medication adherence is tracked as a quality metric, the change is in how many adherence barriers are identified and resolved versus how many result in an acute clinical event that was preventable.</p>', products: [ { name: 'Chronic & Longitudinal Care Management Agent', descriptor: 'Two-way medication adherence outreach with barrier identification and clinical routing for complex chronic patients', url: '/agents/chronic-care-management', status: 'Active' }, { name: 'ZynReminder', descriptor: 'Follow-up outreach for barrier resolution and medication adherence confirmation', url: '/agents/preventive-quality-activation/zynreminder', status: 'Active' } ], cta: { headline: 'Medication non-adherence has a specific reason. Let\u2019s identify it and route the resolution.', label: 'See how it works' }, readNext: [ { id: 'UC27', title: 'SDoH Screening, Identification, and Care Navigation', slug: 'sdoh-screening-care-navigation' }, { id: 'UC28', title: 'Preventive Screening Gap Closure for High-Barrier Populations', slug: 'preventive-screening-gap-fqhc' }, { id: 'UC15', title: 'Medication Adherence for Chronic Disease Populations', slug: 'medication-adherence-chronic-populations' } ], segments: { primary: 'FQHCs', alsoTagged: ['Health Plans', 'ACOs & MSOs'] }, seo: { title: 'Medication Adherence Complex Chronic Patients | Zynix AI', desc: 'Two-way medication adherence outreach for complex chronic FQHC patients, identifying the specific barrier (cost, side effects, polypharmacy,.', schema: 'HowTo' } };
+USE_CASES.UC22 = {
+  id: 'UC22', slug: 'referral-intake-asc', group: 'front-office', audience: 'asc', also: ['mso'],
+  title: 'Referral intake for surgery centers',
+  teaser: 'Referral packets read, matched to the patient, checked for missing items and routed before your intake team starts the day.',
+  lead: 'Referral faxes arrive from a dozen practices as unlabeled documents. ZynFax reads each one, matches it to the patient, flags what is missing and routes it to intake.',
+  problem: { title: 'Every page opened, one fax at a time',
+    body: ['A surgery center receives referral packets, clearance notes, imaging, lab results and insurance correspondence, mostly by fax. Someone has to open each one, work out what it is and whose it is, and notice what is missing.',
+      'Incomplete packets delay scheduling, and referring surgeons notice which centers make referrals easy.'] },
+  gaps: [{ tool: 'Digital fax inboxes', text: 'The paper is gone. The reading, sorting and matching are not.' },
+    { tool: 'Dedicated intake staff', text: 'Accountable, and still limited by how fast a person can read.' }],
+  how: { title: 'The fax queue sorted before your team arrives', lead: 'ZynFax does the reading and routing. Your intake team handles what needs a decision.' },
+  steps: [
+    { owner: 'agent', who: 'ZynFax', title: 'Read and classified', body: 'Each incoming document is read and classified: referral packet, clearance, imaging, labs or insurance.' },
+    { owner: 'agent', who: 'ZynFax', title: 'Matched to the patient and case', body: 'Documents are matched to the patient record and the scheduled or pending case.' },
+    { owner: 'agent', who: 'ZynFax', title: 'Missing items flagged', body: 'Missing pages or fields are flagged before the packet reaches scheduling.' },
+    { owner: 'staff', who: 'Intake coordinator', title: 'Routed to the right queue', body: 'Intake, scheduling and billing each see their own documents; anything ZynFax can’t match goes to a person.' }],
+  episode: { title: 'Intake queue', meta: 'This morning',
+    rows: [{ title: 'Referral packet · Pt 3120 · orthopedics', sub: 'Complete, sent to scheduling', owner: { type: 'agent', label: 'ZynFax' }, status: ZX_SOL_DONE },
+      { title: 'Clearance note · Pt 8806', sub: 'Matched to the case on the 19th', owner: { type: 'agent', label: 'ZynFax' }, status: ZX_SOL_DONE },
+      { title: 'Referral packet · Pt 4471 · GI', sub: 'Missing insurance card', owner: { type: 'staff', label: 'Intake coordinator' }, status: ZX_SOL_ESC }],
+    footer: 'Documents ZynFax can’t match go to your intake team.' },
+  runsOn: [{ p: 'agents', family: 'operational-efficiency', note: 'ZynFax reads, matches and routes.' },
+    { p: 'dataFoundation', note: 'Documents are matched to one patient record.' },
+    { p: 'integrations', note: 'Works with the systems your center runs.' }],
+  readNext: ['referral-coordination-leakage', 'post-procedure-followup-complication', 'surgical-scheduling-pre-procedure'],
+  cta: 'referral intake',
+  seo: { title: 'Referral intake for surgery centers | Zynix AI',
+    desc: 'Referral packets and faxes read, matched to the patient and case, checked for missing items and routed to your intake team before scheduling.', schema: 'HowTo' }
+};
 
-/* ── UC30 ── */
-USE_CASES.UC30 = { id: 'UC30', slug: 'post-discharge-followup-fqhc', title: 'Post-Discharge Follow-Up for High-Risk FQHC Patients', h1: 'An FQHC patient was discharged from the hospital two days ago. The discharge instructions were in English. The patient\u2019s primary language is Haitian Creole. Transportation to the follow-up appointment is not available. The FQHC did not know they were admitted until they called to reschedule a different appointment.', subhead: 'FQHC patients discharged from a hospital face the same post-discharge risks as any population, including medication confusion, missed follow-up, and unresolved barriers, with added complexity. Transportation, language barriers, and delayed notification to the FQHC compound the risk. Zynix AI contacts every high-risk discharged patient within 48 hours and addresses the social barriers that prevent follow-through in the same interaction.', problemHeading: 'FQHC patients face the same post-discharge risks as any population, with compounding barriers that the standard follow-up workflow was not designed for', problem: '<p>A post-discharge follow-up program that relies on the patient reading and understanding English-language discharge instructions, arranging their own transportation to a follow-up appointment, and knowing to call their FQHC primary care team within a week will fail for a significant portion of FQHC patient populations.</p><p>Transportation barriers are among the most common reasons FQHC patients miss post-discharge follow-up appointments. A patient who was hospitalized at a facility across town, discharged with instructions to see their primary care provider within seven days, and who relies on public transit has a scheduling problem that no appointment reminder can solve.</p><p>The FQHC is often the last to know the patient was discharged. Without real-time ADT connectivity, the FQHC learns about the hospitalization when the patient calls, when claims data arrives weeks later, or when the patient presents to the clinic with unresolved post-discharge issues.</p>', shortfalls: [ { tool: 'ADT Notification Systems', description: 'ADT notification systems alert the FQHC when an attributed patient is admitted or discharged from a connected hospital. They provide the signal. They do not initiate outreach, conduct the follow-up interaction, identify the social barriers that prevent follow-through, or connect the patient back to their care team.' }, { tool: 'Standard Post-Discharge Follow-Up Programs', description: 'Post-discharge follow-up programs designed for general clinical populations assume the patient can navigate phone contact in English, arrange transportation independently, and understand standard discharge instructions. For FQHC patient populations where language barriers, transportation limitations, and health literacy challenges are common, a standard follow-up program produces lower-than-expected contact rates.' } ], solutionHeading: 'Post-discharge contact in the right language, with social barriers addressed in the same interaction', solution: '<p>The Transitions of Care Agent contacts FQHC patients within 24 to 48 hours of discharge, in the patient\u2019s primary language, using consistent clinical triage logic to assess medication status, identify discharge instruction confusion, and route clinical concerns to the FQHC care team. The interaction does not assume the patient read the discharge paperwork. It asks.</p><p>The SDoH Determination Agent is embedded in the same interaction, identifying transportation barriers, financial constraints, language comprehension gaps, and other social circumstances that affect the patient\u2019s ability to complete follow-up. ZynSchedule confirms the follow-up appointment with the patient\u2019s FQHC primary care team.</p><p>For FQHCs tracking 30-day readmission rates and post-discharge follow-up completion as a quality metric, the change is in how many discharged patients are reached within the intervention window and how many have their barriers addressed before those barriers result in a preventable readmission.</p>', products: [ { name: 'Transitions of Care Agent', descriptor: 'Post-discharge outreach in patient\u2019s primary language, clinical assessment, escalation routing, and follow-up scheduling', url: '/agents/transitions-of-care', status: 'Active' }, { name: 'SDoH Determination Agent', descriptor: 'Identifies social barriers during post-discharge interaction and routes to community resources or care navigators', url: '/agents/clinical-performance', status: 'Planned' }, { name: 'ZynSchedule', descriptor: 'Follow-up appointment scheduling with FQHC primary care team in the post-discharge interaction', url: '/agents/operational-efficiency/zynschedule', status: 'Active' }, { name: 'Medication Reconciliation', descriptor: 'Post-discharge medication discrepancy identification and clinical routing', url: '/agents/transitions-of-care', status: 'Active' } ], cta: { headline: 'Every high-risk FQHC patient reached within 48 hours of discharge, in their language, with barriers addressed.', label: 'Talk to our team' }, readNext: [ { id: 'UC27', title: 'SDoH Screening, Identification, and Care Navigation', slug: 'sdoh-screening-care-navigation' }, { id: 'UC26', title: 'After-Hours Triage for Multilingual and Underserved Populations', slug: 'after-hours-triage-multilingual-fqhc' }, { id: 'UC06', title: 'Post-Discharge TCM and Readmission Prevention', slug: 'post-discharge-tcm-readmission' } ], segments: { primary: 'FQHCs', alsoTagged: ['ACOs & MSOs'] }, seo: { title: 'Post-Discharge Follow-Up High-Risk FQHC Patients | Zynix AI', desc: 'Reach high-risk FQHC patients within 48 hours of discharge, in their primary language, with social barriers addressed in the same interaction.', schema: 'HowTo' } };
+USE_CASES.UC23 = {
+  id: 'UC23', slug: 'surgical-scheduling-pre-procedure', group: 'front-office', audience: 'asc', also: [],
+  title: 'Scheduling and pre-procedure preparation',
+  teaser: 'Preparation outreach before each case: labs, medication holds, fasting and transportation confirmed, with gaps routed to staff.',
+  lead: 'The case is booked, the pre-op labs are outstanding, and you find out at check-in. Zynix confirms each preparation step before the case date and flags gaps to your staff.',
+  problem: { title: 'Cancellations happen when preparation isn’t confirmed',
+    body: ['A day-of-surgery cancellation costs a staffed room, a prepared OR and a surgeon’s time. Most start days earlier with a lab not done, a medication not held or a ride not arranged.',
+      'Preparation depends on the procedure, the surgeon and the patient. Staff who also schedule, verify insurance and chase authorizations can’t call every patient about every step.'] },
+  gaps: [{ tool: 'Scheduling systems', text: 'They confirm the date. They don’t confirm the preparation.' },
+    { tool: 'Pre-op phone calls', text: 'Personal and effective, when staff and patient are both free during business hours.' }],
+  how: { title: 'Every preparation step confirmed before the case date', lead: 'Agents confirm each step. Your clinical and scheduling staff resolve what is incomplete.' },
+  steps: [
+    { owner: 'agent', who: 'ZynSchedule', title: 'The case is booked', body: 'Cases are booked against provider availability and your scheduling rules.' },
+    { owner: 'agent', who: 'Outreach agent', title: 'Preparation reminders', body: 'In the days before the case, two-way reminders confirm labs, medication holds, fasting and transportation, following your instructions.' },
+    { owner: 'staff', who: 'Pre-op nurse', title: 'Gaps go to staff', body: 'An incomplete item goes to the clinical or scheduling staff member who can resolve it before the case date.' },
+    { owner: 'agent', who: 'ZynSchedule', title: 'Moved early when needed', body: 'If a case has to move, it moves days ahead, and the slot can be offered to another patient.' }],
+  episode: { title: 'Pre-procedure preparation', meta: 'Case 207 · Thursday 7:30 am',
+    steps: [{ time: 'Day −7', title: 'Pre-op labs reminder · done', owner: 'Outreach agent', status: ZX_SOL_DONE },
+      { time: 'Day −3', title: 'Medication hold confirmed', owner: 'Outreach agent', status: ZX_SOL_DONE },
+      { time: 'Day −2', title: 'No ride yet, flagged', owner: 'Pre-op nurse', status: ZX_SOL_ESC },
+      { time: 'Day −1', title: 'Ride arranged, case confirmed', owner: 'Pre-op nurse', status: ZX_SOL_DONE }],
+    footer: 'Preparation instructions come from your surgeons and anesthesia team.' },
+  runsOn: [{ p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books and moves cases.' },
+    { p: 'agents', family: 'clinical-performance', note: 'Two-way reminders for each preparation step.' },
+    { p: 'carePlans', note: 'Preparation steps per procedure type, set by your team.' }],
+  readNext: ['post-procedure-followup-complication', 'prior-auth-surgical-procedures', 'referral-intake-asc'],
+  cta: 'pre-procedure preparation',
+  seo: { title: 'Pre-procedure preparation for surgery centers | Zynix AI',
+    desc: 'Two-way outreach before each case confirms labs, medication holds, fasting and transportation, with incomplete items routed to your staff early.', schema: 'HowTo' }
+};
 
+USE_CASES.UC25 = {
+  id: 'UC25', slug: 'fax-inbound-document-routing', group: 'front-office', audience: 'asc', also: ['system', 'mso'],
+  title: 'Inbound fax sorted, matched and routed',
+  teaser: 'Every inbound fax read, classified, matched to the patient and routed to the right queue, with urgent items flagged.',
+  lead: 'Faxes arrive all day as unlabeled PDFs, and someone opens each one. ZynFax reads, classifies and routes them, and flags what needs attention first.',
+  problem: { title: 'An unread fax is a delay waiting to happen',
+    body: ['Referral documents, lab results, clearances, payer correspondence and imaging reports all arrive as images with nothing but a sending number.',
+      'A lab result that misses the pre-op assessment delays a case. A denial that sits in the wrong inbox loses time to respond. Sorting by hand grows with volume.'] },
+  gaps: [{ tool: 'Digital fax platforms', text: 'They deliver PDFs to a shared inbox. They don’t read them.' },
+    { tool: 'Manual distribution', text: 'It works while one person keeps up, and stops when they are out.' }],
+  how: { title: 'Read, classified and routed before anyone opens it', lead: 'ZynFax handles the sorting. Staff see documents already in their queue.' },
+  steps: [
+    { owner: 'agent', who: 'ZynFax', title: 'Read and classified', body: 'Each document is read and classified by type.' },
+    { owner: 'agent', who: 'ZynFax', title: 'Matched', body: 'It is matched to the right patient and case.' },
+    { owner: 'agent', who: 'ZynFax', title: 'Routed and flagged', body: 'It lands in the right staff queue, with missing pages or fields and time-sensitive items flagged.' },
+    { owner: 'staff', who: 'Front-office staff', title: 'Unclear documents go to a person', body: 'Anything ZynFax can’t match or classify goes to staff for review.' }],
+  episode: { title: 'Fax queue', meta: 'Today',
+    tiles: [{ label: 'Received', value: '142' }, { label: 'Routed', value: '131' }, { label: 'For review', value: '11' }],
+    rows: [{ title: 'Lab result · Pt 5092', sub: 'To the surgeon’s queue', owner: { type: 'agent', label: 'ZynFax' }, status: ZX_SOL_DONE },
+      { title: 'Denial letter · Pt 3378', sub: 'To billing, flagged urgent', owner: { type: 'agent', label: 'ZynFax' }, status: ZX_SOL_ESC },
+      { title: 'Unmatched document', sub: 'Staff review', owner: { type: 'staff', label: 'Front-office staff' }, status: ZX_SOL_REVIEW }],
+    footer: 'Documents it can’t match go to your staff.' },
+  runsOn: [{ p: 'agents', family: 'operational-efficiency', note: 'ZynFax reads, classifies and routes.' },
+    { p: 'dataFoundation', note: 'Documents are matched to one patient record.' },
+    { p: 'integrations', note: 'Works with the systems you already run.' }],
+  readNext: ['referral-coordination-leakage', 'post-procedure-followup-complication', 'post-discharge-follow-up'],
+  cta: 'fax routing',
+  seo: { title: 'Inbound fax routing | Zynix AI',
+    desc: 'Every inbound fax read, classified, matched to the patient and routed to the right staff queue, with missing pages and urgent items flagged for review.', schema: 'HowTo' }
+};
 
-// ── Use Cases Listing Page ──────────────────────────────────
+USE_CASES.UC05 = {
+  id: 'UC05', slug: 'physician-documentation-ambient-ai', group: 'front-office', audience: 'system', also: ['mso'],
+  title: 'Visit notes drafted during the visit',
+  teaser: 'ZynScribe drafts a structured note from the visit conversation; nothing is filed until the physician approves it.',
+  lead: 'Physicians finish clinic and then finish notes at night. ZynScribe drafts a structured note from the visit conversation, and nothing is filed until the physician reviews and approves it.',
+  problem: { title: 'Documentation follows physicians home',
+    body: ['A full clinic day leaves a stack of notes to write after the last patient. Structured documentation, coding-supporting language and quality measure details have added work to every visit.',
+      'Notes written hours later rely on memory. Details that matter to the next clinician, like how the patient described a symptom, get compressed into a summary.'] },
+  gaps: [{ tool: 'Dictation', text: 'Faster typing. The physician still structures, edits and formats the note.' },
+    { tool: 'EHR templates', text: 'Faster fields. The physician still translates the conversation into them.' }],
+  how: { title: 'The conversation becomes a draft. The physician decides what is filed.', lead: 'ZynScribe drafts. The physician reviews, edits and approves every note.' },
+  steps: [
+    { owner: 'system', who: 'ZynScribe', title: 'The visit happens as usual', body: 'ZynScribe listens to the visit conversation in the physician’s workflow.' },
+    { owner: 'system', who: 'ZynScribe', title: 'A structured draft', body: 'It drafts a structured SOAP note from the conversation.' },
+    { owner: 'staff', who: 'Physician', title: 'The physician reviews and approves', body: 'The physician edits and approves the draft. Nothing is filed or used for billing until then.' }],
+  gov: ['review'],
+  episode: { brand: 'ZynScribe', title: 'Visit note · draft', meta: 'Pt 4108 · follow-up visit',
+    note: { sections: [{ label: 'Subjective', text: 'Two weeks of ankle swelling, worse in the evening. Taking furosemide as prescribed.' },
+      { label: 'Assessment', text: 'Heart failure follow-up. Weight up since the last visit.' },
+      { label: 'Plan', text: 'Awaiting physician review.' }] },
+    footer: 'Draft. Nothing is filed until the physician approves it.' },
+  runsOn: [{ p: 'scribe', note: 'Drafts the note from the visit conversation.' },
+    { p: 'llm', note: 'The language model layer, with physician review on every note.' }],
+  readNext: ['post-discharge-follow-up', 'hcc-gap-closure-health-system-aco', 'after-hours-triage-multi-site'],
+  story: 'nhs', cta: 'ambient documentation',
+  seo: { title: 'Ambient clinical documentation with ZynScribe | Zynix AI',
+    desc: 'ZynScribe drafts structured visit notes from the conversation for physician review. Nothing is filed or used for billing until the physician approves it.', schema: 'HowTo' }
+};
 
+// ── /use-cases listing (§6 "Use case" listing): resource hero → organization filter → six workflow groups → related → CTA ──
 function renderUseCasesListing() {
-  var keys = Object.keys(USE_CASES);
-  // Group by primary segment
-  var bySegment = {};
-  for (var i = 0; i < keys.length; i++) {
-    var uc = USE_CASES[keys[i]];
-    var seg = uc.segments && uc.segments.primary ? uc.segments.primary : 'Other';
-    if (!bySegment[seg]) bySegment[seg] = [];
-    bySegment[seg].push(uc);
-  }
-  var segOrder = ['Health Systems', 'ACOs & MSOs', 'Health Plans', 'Independent Group Practices', 'ASCs', 'FQHCs'];
-  // Never drop a segment silently: a label that is not listed above is appended (UC16-UC20 were hidden by an '&' mismatch)
-  Object.keys(bySegment).forEach(function (k) { if (segOrder.indexOf(k) === -1) segOrder.push(k); });
-  var html = renderInnerHero('USE CASES', 'Real-World AI Use Cases for Value-Based Care',
-    'See how Zynix AI solves specific operational challenges across healthcare organizations — from post-discharge follow-up to prior authorization automation.',
-    IMG.enterprise, 'Zynix AI use cases for healthcare', 'Browse Use Cases') +
-    '<section class="zynix-section" style="padding:64px 0"><div class="zynix-container">';
-  for (var s = 0; s < segOrder.length; s++) {
-    var seg = segOrder[s];
-    var ucs = bySegment[seg];
-    if (!ucs || !ucs.length) continue;
-    html += '<h2 style="font-size:22px;font-weight:700;color:#0f172a;margin:40px 0 20px;padding-bottom:12px;border-bottom:2px solid #e2e8f0">' + seg + '</h2>' +
-      '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;margin-bottom:32px">';
-    for (var u = 0; u < ucs.length; u++) {
-      html += '<a href="/use-cases/' + ucs[u].slug + '" style="display:block;padding:24px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;text-decoration:none;transition:border-color 0.2s,box-shadow 0.2s"' +
-        ' onmouseover="this.style.borderColor=\'#20449B\';this.style.boxShadow=\'0 4px 12px rgba(32,68,155,0.08)\'"' +
-        ' onmouseout="this.style.borderColor=\'#e2e8f0\';this.style.boxShadow=\'none\'">' +
-        '<div style="font-size:11px;font-weight:600;color:#20449B;letter-spacing:0.06em;margin-bottom:8px">' + ucs[u].id + '</div>' +
-        '<h3 style="font-size:16px;font-weight:600;color:#0f172a;margin:0 0 8px;line-height:1.4">' + ucs[u].title + '</h3>' +
-        '<p style="font-size:13px;color:#64748b;margin:0;line-height:1.5">' + (ucs[u].seo.desc.length > 120 ? ucs[u].seo.desc.substring(0, 117) + '...' : ucs[u].seo.desc) + '</p>' +
-        '</a>';
-    }
-    html += '</div>';
-  }
-  html += '</div></section>' +
-    renderCTA('Find Your Use Case', 'Schedule a 30-minute call to see how Zynix AI addresses your specific operational challenges.', 'Request a Demo') +
-    renderFooter();
+  var all = zxSolAll();
+  var html = renderHero({ preset: 'resource', eyebrow: 'Use cases', title: 'Value-based care workflows, step by step',
+    lead: 'Grouped by program: transitions of care, risk adjustment and quality, chronic care, after-hours access, care navigation and front-office work. Filter by organization type.',
+    primary: { label: SITE_FACTS.demo.label, href: SITE_FACTS.demo.href }, secondary: { label: 'Filter by organization', href: '#filter' } });
+
+  var chips = [{ k: 'all', label: 'All organizations' }].concat(ZX_SOL_AUD_ORDER.map(function (k) { return { k: k, label: ZX_SOL_AUD[k].label }; }));
+  html += '<section class="zynix-section zynix-section--compact zynix-section--subtle zx-sol-filter" id="filter" aria-labelledby="filter-label"><div class="zynix-container">' +
+    '<div class="zx-sol-filter__row"><p class="zx-sol-filter__label" id="filter-label">Show workflows for</p>' +
+    '<div class="zx-sol-filter__chips" role="group" aria-labelledby="filter-label">' + chips.map(function (c) {
+      return '<button type="button" class="zx-sol-chip" data-zx-uc-filter="' + c.k + '" aria-pressed="' + (c.k === 'all' ? 'true' : 'false') + '">' + c.label + '</button>';
+    }).join('') + '</div></div>' +
+    '<nav class="zx-sol-jump" aria-label="Programs"><ul class="zx-sol-jump__list" role="list">' + ZX_SOL_GROUPS.map(function (g) {
+      return '<li><a href="#' + g.id + '">' + g.name + '</a></li>';
+    }).join('') + '</ul></nav>' +
+    '<p class="zx-visually-hidden" id="filter-status" aria-live="polite"></p></div></section>';
+
+  ZX_SOL_GROUPS.forEach(function (g) {
+    var ucs = all.filter(function (u) { return u.group === g.id; })
+      .sort(function (a, b) { return ZX_SOL_AUD_ORDER.indexOf(a.audience) - ZX_SOL_AUD_ORDER.indexOf(b.audience); });
+    if (!ucs.length) return;
+    html += '<section class="zynix-section zynix-section--compact zx-sol-group" id="' + g.id + '" aria-labelledby="' + g.id + '-title" data-zx-uc-group><div class="zynix-container">' +
+      renderSectionHead(ucs.length + (ucs.length === 1 ? ' use case' : ' use cases'), g.name, g.lead + '<span class="zx-sol-group__runs"><span class="zx-sol-group__runs-label">Runs on</span> ' + g.runs + '</span>', { id: g.id + '-title', align: 'split' }) +
+      '<ul class="zx-sol-uclist" role="list">' + ucs.map(function (u) {
+        return '<li class="zx-sol-uc" data-zx-aud="' + [u.audience].concat(u.also || []).join(' ') + '">' +
+          '<p class="zx-sol-uc__for"><span class="zx-visually-hidden">For </span>' + zxSolAudLabels(u) + '</p>' +
+          '<h3 class="zx-sol-uc__title"><a href="/use-cases/' + u.slug + '">' + zxSolNw(u.title) + '</a></h3>' +
+          '<p class="zx-sol-uc__teaser">' + u.teaser + '</p><span class="zx-sol-uc__arrow" aria-hidden="true">→</span></li>';
+      }).join('') + '</ul></div></section>';
+  });
+
+  html += renderRelatedLinks({ title: 'Related', groups: [
+    { label: 'By organization', items: [
+      { href: '/solutions', label: 'Solutions overview', desc: 'Start with your organization type', icon: 'users' },
+      { href: '/resources-case-studies', label: 'Customer stories', desc: 'How value-based care teams use Zynix', icon: 'book' }] },
+    { label: 'Platform', items: [
+      { href: NAMES.products.agents.href, label: 'All AI agents', desc: 'How agents work with your care team', icon: 'bot' },
+      { href: NAMES.products.carePlans.href, label: NAMES.products.carePlans.name, desc: 'TCM, AWV and CCM workflows', icon: 'clipboard' },
+      { href: '/platform', label: 'Platform overview', desc: 'One platform for value-based care operations', icon: 'layers' }] }] });
+  html += renderCTA(null, null, null);
+  html += renderFooter();
   return html;
 }
+
+// /use-cases filter: one delegated listener (registered once at load; no router change). Buttons carry aria-pressed;
+// rows and groups use the hidden attribute; the status line is announced politely.
+(function zxSolFilterInit() {
+  if (typeof document === 'undefined' || !document.addEventListener) return;
+  document.addEventListener('click', function (e) {
+    var b = e.target && e.target.closest ? e.target.closest('[data-zx-uc-filter]') : null;
+    if (!b) return;
+    var key = b.getAttribute('data-zx-uc-filter'), shown = 0;
+    [].forEach.call(document.querySelectorAll('[data-zx-uc-filter]'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    [].forEach.call(document.querySelectorAll('[data-zx-uc-group]'), function (sec) {
+      var n = 0;
+      [].forEach.call(sec.querySelectorAll('[data-zx-aud]'), function (li) {
+        var on = key === 'all' || (' ' + li.getAttribute('data-zx-aud') + ' ').indexOf(' ' + key + ' ') > -1;
+        li.hidden = !on; if (on) n++;
+      });
+      sec.hidden = !n; shown += n;
+      var j = document.querySelector('.zx-sol-jump a[href="#' + sec.id + '"]');
+      if (j && j.parentNode) j.parentNode.hidden = !n;
+    });
+    var st = document.getElementById('filter-status');
+    if (st) st.textContent = shown + (shown === 1 ? ' workflow' : ' workflows') + (key === 'all' ? '' : ' for ' + b.textContent);
+  });
+})();
+
 
 // ── Route Entries ───────────────────────────────────────────
 
@@ -6167,353 +6498,327 @@ var USE_CASE_SEO = {};
  */
 
 // ============================================================================
-// AUDIENCE PAGES — Template A (Whom We Serve)
+// AUDIENCE PAGES (owner P3; DESIGN_SPEC §6 "Audience"; words from COPY_DECK §4, §2.6 and §5.3). Data only; the
+// template is renderAudiencePageV7. "What the Data Shows" is gone: no third-party statistics on these pages.
+// The CMS ACCESS Model appears only through zxAccessLine(), and only on the ACO, MSO/IPA and FQHC pages.
 // ============================================================================
 
-// ---------------------------------------------------------------------------
-// Shared audience-page renderer (Template A pattern)
-
+// Shared pieces: the ACCESS callout (never on the health-plan page) and the "how it connects" copy.
+function zxSolAccessCallout() {
+  return { id: 'access', eyebrow: 'CMS ACCESS Model', title: 'Take part in the CMS ACCESS Model through Zynix',
+    body: [zxAccessLine(), 'Clinicians refer eligible patients, stay involved in their care and can bill the ACCESS co-management fee, without enrolling in ACCESS themselves.'],
+    link: { label: 'Ask about ACCESS', href: '/contact' } };
+}
+var ZX_SOL_FLOW_LINK = { label: 'See the data flow', href: '/platform#data-flow' };
+var ZX_SOL_TCM_EPISODE = { brand: 'Care operations', chip: 'Example episode · sample data', title: 'Post-discharge episode', meta: 'Pt 2218 · attributed',
+  label: 'Example post-discharge episode, illustrative data',
+  steps: [{ time: 'Hour 0', title: 'ADT discharge matched, plan opened', owner: 'Zynix platform', status: { tone: 'success', label: 'Completed' } },
+    { time: 'Day 1', title: 'Call reached patient at home', owner: 'Transitions of care agent', status: { tone: 'success', label: 'Reached' } },
+    { time: 'Day 1', title: 'Medication question escalated by rule', owner: 'Care manager, RN', status: { tone: 'warning', label: 'Escalated' } },
+    { time: 'Day 2', title: 'TCM contact made by the nurse', owner: 'Care manager, RN', status: { tone: 'success', label: 'Completed' } },
+    { time: 'Day 2', title: 'Follow-up visit booked for day 6', owner: 'ZynSchedule', status: { tone: 'success', label: 'Booked' } }],
+  footer: 'Every step has an owner: an agent or a named role.' };
 
 // ============================================================================
 // 1. HEALTH SYSTEMS
 // ============================================================================
 function renderWhoWeServeHealthSystems() {
   return renderAudiencePageV7({
-    audienceName: 'Health Systems',
-    breadcrumb: 'Who We Serve &gt; Health Systems',
-    eyebrow: 'WHO WE SERVE',
-    headline: 'Reach every patient. Close every gap. Run every care program at health system scale.',
-    subhead: 'You have the staff, the data, and the clinical programs. The gap is execution at the scale of a health system attribution. Post-discharge follow-up that misses the highest-risk patients, after-hours calls that default to the ED, HCC documentation that closes short of year-end targets, and prior auth backlogs that delay care for patients already scheduled.',
-    challengeIntro: 'Health systems managing large attributed populations face the same structural problem across every care management program: the analytics layer identifies who needs attention. The execution infrastructure cannot keep up with the volume of acting on it.',
-    challenges: [
-      { title: 'Post-Discharge Follow-Up Rates', body: 'CMS requires contact within 24\u201348 hours and a follow-up visit within 7\u201314 days for TCM billing. At health system scale, manual outreach consistently misses a significant share of eligible patients, often the highest-risk ones, the most likely to return to the ED.' },
-      { title: 'After-Hours Access Across Multiple Sites', body: 'Patients calling after hours frequently reach voicemail or answering services that cannot triage clinically. Non-urgent ED visits increase. On-call physicians field routine calls. HCAHPS scores reflect the access gap, and shared savings take the hit.' },
-      { title: 'HCC Documentation and Gap Closure', body: 'Analytics identify every underdocumented condition and quality measure gap. Closing them before year-end requires outreach, scheduling, visit completion, and documentation alignment that coordinator capacity cannot sustain at health system ACO scale.' },
-      { title: 'Prior Authorization Volume in Specialty Services', body: 'High-volume specialty services like orthopedics, cardiology, oncology, imaging, process thousands of prior authorizations monthly. Manual submission, tracking, and denial management consumes significant administrative FTE and delays care for patients already in the system.' }
-    ],
-    fitIntro: 'Zynix AI is an execution layer that sits between your care management programs and your patient population. It carries the contact volume, documentation, and coordination work that your team identifies but cannot sustain at health system scale.',
-    capabilities: [
-      { title: 'Closed-Loop Patient Outreach at Attributed Population Scale', body: 'Every discharged patient contacted. Every chronic care touchpoint documented. Every quality gap outreach triggered and tracked through to completion. Coordinators receive escalations and exceptions, not a list of calls to make from scratch.' },
-      { title: 'After-Hours Clinical Intelligence Across All Sites', body: 'Evidence-based triage handles routine after-hours calls in 15+ languages, schedules next-day access, and surfaces only genuine clinical escalations. Consistent coverage across every site without additional on-call burden.' },
-      { title: 'HCC and Quality Gap Closure Orchestrated to Year-End Deadline', body: 'Gaps prioritized by RAF impact and closure window. Outreach, scheduling, and documentation alignment run in sequence. The platform tracks completion, not just identification, so year-end performance reflects work that actually got done.' },
-      { title: 'Administrative Workflows That Stop Blocking Clinical Capacity', body: 'Documentation assembly, prior auth submission, denial routing, fax classification, and referral coordination run without coordinator involvement at every step. Clinical staff spend their time on patients who need a human.' }
-    ],
-    primaryUseCases: [
-      { title: 'Post-Discharge Follow-Up at Scale', teaser: 'Reaching every discharged patient within 24\u201348 hours, consistently, at health system volume, with TCM billing documentation captured in parallel.', url: '/use-cases/post-discharge-follow-up' },
-      { title: 'After-Hours Patient Triage Across Multiple Sites', teaser: 'Clinical triage at every site after hours without routing routine calls to on-call physicians or losing patients to non-urgent ED visits.', url: '/use-cases/after-hours-triage-multi-site' },
-      { title: 'HCC Gap Closure at Health System ACO Scale', teaser: 'Closing HCC documentation and quality measure gaps before year-end through coordinated outreach and scheduling, not raw gap lists.', url: '/use-cases/hcc-gap-closure-health-system-aco' },
-      { title: 'Prior Authorization Across High-Volume Specialty Services', teaser: 'Automated documentation assembly, payer submission, tracking, and denial management for thousands of monthly prior auths.', url: '/use-cases/prior-auth-high-volume-specialty' },
-      { title: 'Reducing Physician Documentation Burden with Ambient AI', teaser: 'Structured clinical notes from every patient visit, uploaded directly to the EHR without adding documentation time after the encounter.', url: '/use-cases/physician-documentation-ambient-ai' }
-    ],
-    additionalUseCases: [
-      { id: 'UC06', title: 'Post-Discharge TCM and Readmission Prevention', primarySegment: 'ACOs & MSOs', url: '/use-cases/post-discharge-tcm-readmission' },
-      { id: 'UC07', title: 'HCC Gap Closure and RAF Score Optimization', primarySegment: 'ACOs & MSOs', url: '/use-cases/hcc-gap-raf-optimization' },
-      { id: 'UC08', title: 'Rising-Risk Patient Outreach Before a Clinical Event', primarySegment: 'ACOs & MSOs', url: '/use-cases/rising-risk-patient-outreach' },
-      { id: 'UC09', title: 'After-Hours Access and ED Diversion for ACO Populations', primarySegment: 'ACOs & MSOs', url: '/use-cases/after-hours-ed-diversion' },
-      { id: 'UC10', title: 'Chronic Care Coordination at Scale', primarySegment: 'ACOs & MSOs', url: '/use-cases/chronic-care-coordination-scale' },
-      { id: 'UC13', title: 'High-Cost and High-Utilizer Member Management', primarySegment: 'Health Plans', url: '/use-cases/high-utilizer-member-management' },
-      { id: 'UC20', title: 'Referral Coordination and Leakage Prevention', primarySegment: 'Independent Group Practices', url: '/use-cases/referral-coordination-leakage' },
-      { id: 'UC27', title: 'SDoH Screening, Identification, and Care Navigation', primarySegment: 'FQHCs', url: '/use-cases/sdoh-screening-care-navigation' }
-    ],
-    featuredProducts: [
-      { name: 'Transitions of Care Agent', url: '/agents/transitions-of-care', description: 'Manages every post-discharge step from ADT trigger to 30-day close. Medication reconciliation, symptom assessment, TCM visit scheduling, and billing documentation in one closed-loop workflow.' },
-      { name: 'ZynAfterHours', url: '/agents/operational-efficiency/zynafterhours-triage', description: '24/7 clinical triage across all health system sites. Evidence-based triage logic, 15+ languages, EHR-integrated. Escalates only when escalation is clinically warranted.' },
-      { name: 'Deployable Care Plans', url: '/care-plans', description: 'Post-Discharge TCM, HCC + Quality Gap Closure Sprint, Prior Auth Acceleration. Orchestrated multi-agent programs that run from trigger to outcome.' },
-      { name: 'ZynScribe', url: '/zynscribe', description: 'Ambient AI scribing that captures the patient-clinician conversation and produces structured clinical notes uploaded directly to the EHR.' }
-    ],
-    citations: [
-      { stat: 'Fewer than 30% of eligible patients are reached within the 24\u201348 hour post-discharge window when outreach relies on manual coordinator workflows.', context: 'The gap widens at health system volume with higher throughput, stretched teams, and inconsistent ADT notification across sites compound the shortfall.', sourceName: 'CMS Transitional Care Management Services', sourceUrl: 'https://www.cms.gov/medicare/physician-fee-schedule/transitional-care-management-services' },
-      { stat: 'Health system ACOs capturing full TCM reimbursement maintain measurably higher post-discharge visit completion rates than those relying on manual outreach.', context: 'TCM billing eligibility and post-discharge contact quality are closely correlated. Systems that reach more patients also bill more completely.', sourceName: 'CMS Shared Savings Program', sourceUrl: 'https://www.cms.gov/medicare/shared-savings-program/about' },
-      { stat: 'Physicians in large health systems report spending significant administrative time weekly on prior authorization submission, status tracking, and denial management.', context: 'High-volume specialty services bear a disproportionate share. Orthopedics, cardiology, and oncology consistently top prior auth volume rankings.', sourceName: 'AMA Prior Authorization and Administrative Burden', sourceUrl: 'https://www.ama-assn.org/practice-management/prior-authorization/prior-authorization-and-administrative-burden' },
-      { stat: 'Top-quartile health system ACOs outperform bottom-quartile peers on post-discharge contact rates and HCC closure rates by a measurable and consistent margin.', context: 'The spread is not explained by panel size or patient complexity alone. Operational execution quality is the differentiating variable.', sourceName: 'NAACOS ACO Benchmarking Data', sourceUrl: null }
-    ],
-    ctaHeadline: 'Book a Demo',
-    ctaSubline: 'Talk to our team about your health system\'s care coordination and operational priorities.',
-    ctaButton: 'Book a Demo'
+    eyebrow: 'Health systems',
+    title: 'Post-discharge follow-up across your hospitals and clinics',
+    lead: 'ADT-triggered outreach, follow-up scheduling and ambient documentation that work with your EHR, so care teams spend their time on the patients who need them.',
+    secondary: { label: 'See integrations', href: '/integrations' },
+    panel: { brand: 'Care operations', title: 'Post-discharge queue', meta: 'Today · all hospitals', label: 'Sample post-discharge queue, illustrative data',
+      tiles: [{ label: 'Discharges', value: '128' }, { label: 'Reached', value: '74' }, { label: 'Escalated', value: '12' }],
+      rows: [{ title: 'Pt 1042 · Hospital B · heart failure', sub: 'Home, visit booked for day 6', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Booked' } },
+        { title: 'Pt 5518 · Hospital A · COPD', sub: 'New inhaler question', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'warning', label: 'Escalated' } },
+        { title: 'Pt 7730 · Hospital D · pneumonia', sub: 'Second call at 4 pm', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'neutral', label: 'Queued' } }],
+      footer: 'The TCM contact stays with your clinical staff.' },
+    proof: { card: { href: '/case-studies/nhs', eyebrow: 'Customer story · Health system', title: 'NHS Health System',
+      body: 'The Zynix platform with after-hours access, transitions-of-care outreach and ZynScribe.', cta: 'Read the story', icon: 'hospital' } },
+    workflows: { title: 'What we run for health systems',
+      lead: 'Your teams know which patients need follow-up. Zynix carries the volume across every hospital and clinic, and keeps clinical decisions with your clinicians.',
+      items: [
+        { eyebrow: 'Transitions of care', title: 'Post-discharge follow-up at system volume', problem: 'Discharges arrive around the clock, and coordinators call the flagged patients first.',
+          does: 'ADT messages start outreach, nurses take the clinical questions and the TCM contact, and ZynSchedule books the follow-up visit.',
+          links: [{ label: 'Post-discharge follow-up', href: '/use-cases/post-discharge-follow-up' }] },
+        { eyebrow: 'After-hours access', title: 'One after-hours process for every site', problem: 'Each site handles nights differently, and some patients end up in the ED with a question that could have waited.',
+          does: 'ZynAfterHours answers, books routine visits and routes symptom questions to your on-call clinician by rule.',
+          links: [{ label: 'After-hours calls across sites', href: '/use-cases/after-hours-triage-multi-site' }] },
+        { eyebrow: 'Documentation', title: 'Visit notes drafted during the visit', problem: 'Physicians finish clinic and then finish notes at night.',
+          does: 'ZynScribe drafts a structured note from the visit conversation. Nothing is filed until the physician approves it.',
+          links: [{ label: 'Ambient documentation', href: '/use-cases/physician-documentation-ambient-ai' }, { label: 'ZynScribe', href: '/zynscribe' }] }] },
+    plan: { eyebrow: 'In practice', title: 'Physicians stay in charge of the note',
+      lead: 'ZynScribe drafts in the physician’s workflow. The physician reviews, edits and approves.',
+      callouts: [{ title: 'Drafted from the conversation', body: 'A structured SOAP note draft, ready when the visit ends.' },
+        { title: 'Reviewed before anything is filed', body: 'Nothing is filed or used for billing until the physician approves it.' }],
+      panel: { brand: 'ZynScribe', title: 'Visit note · draft', meta: 'Pt 4108 · follow-up visit', label: 'Sample visit note draft, illustrative data',
+        note: { sections: [{ label: 'Subjective', text: 'Two weeks of ankle swelling, worse in the evening. Taking furosemide as prescribed.' },
+          { label: 'Assessment', text: 'Heart failure follow-up. Weight up since the last visit.' },
+          { label: 'Plan', text: 'Awaiting physician review.' }] },
+        footer: 'Draft. Nothing is filed until the physician approves it.' } },
+    connect: { title: 'Works with the EHR your hospitals run',
+      body: 'Zynix connects to ' + SITE_FACTS.ehr.line + ', including Epic and Oracle Health (Cerner), plus ADT feeds, labs and claims, in one patient record.',
+      link: ZX_SOL_FLOW_LINK },
+    callout: { id: 'governance', eyebrow: 'Governance', title: 'Built to be governed',
+      body: zxGovernance(['escalation', 'review']).map(function (e) { return '<strong>' + e.title + '.</strong> ' + e.text; }),
+      link: { label: 'Security and trust', href: '/security' } },
+    cta: { title: 'See what Zynix runs for health systems',
+      sub: 'We’ll walk through post-discharge follow-up, after-hours access and ambient documentation on sample data, then map them to your contracts and programs.',
+      secondary: { label: 'Read the NHS Health System story', href: '/case-studies/nhs' } }
   });
 }
 
 
 // ============================================================================
-// 2. ACOs & MSOs
+// 2. ACOs
 // ============================================================================
 function renderWhoWeServeACOs() {
   return renderAudiencePageV7({
-    audienceName: 'ACOs & MSOs',
-    breadcrumb: 'Who We Serve &gt; ACOs &amp; MSOs',
-    eyebrow: 'WHO WE SERVE',
-    headline: 'Better post-discharge rates. Higher HCC closure. More shared savings, without adding headcount.',
-    subhead: 'Your analytics tell you who needs attention. Your care management program tracks the work. The gap is getting it done at the scale of your attributed panel, across a full performance year, without adding coordinator headcount you don\'t have budget for.',
-    challengeIntro: 'MSSP ACOs and risk-bearing MSOs operate with a clear financial equation: shared savings depend on keeping total cost of care below benchmark, which depends on care management execution quality. The data to identify the work is usually adequate. The execution infrastructure to complete it at panel scale is not.',
-    challenges: [
-      { title: 'Post-Discharge Contact Rates', body: 'Industry data consistently shows that manual outreach reaches fewer than 30% of eligible patients within the 24\u201348 hour window. The missed patients are the ones most likely to return to the ED and most likely to drive readmission costs against your TCOC benchmark.' },
-      { title: 'HCC Gap Closure Before Year-End', body: 'ZynGap identifies the gaps. Closing them before the performance year ends requires outreach, scheduling, visit completion, and documentation alignment that coordinator capacity cannot sustain at full-panel scale. Most ACOs leave RAF score on the table at year-end.' },
-      { title: 'Coordinator Capacity Against Panel Size', body: 'Care coordinators carry the full execution load of value-based care programs. The patient-to-coordinator ratio means some work doesn\'t get done, not because the team isn\'t working, but because the volume requires an execution layer, not more headcount.' },
-      { title: 'Chronic Disease Management at Scale', body: 'CCM billing represents significant unrealized revenue for ACOs with chronic disease panels. Capturing it requires consistent monthly patient contact and billing-ready documentation that most coordinator teams cannot sustain at scale.' }
-    ],
-    fitIntro: 'Zynix AI carries the execution volume that care management programs generate but coordinator teams cannot sustain. It operates at the intersection of your intelligence layer and your patient population, completing the work the analytics identify.',
-    capabilities: [
-      { title: 'Execution at Full Panel Scale Without Adding Headcount', body: 'Every patient on the follow-up list gets contacted. Every CCM-eligible patient gets a monthly touchpoint. Every HCC gap gets an outreach trigger. The care team handles clinical escalations. Zynix AI handles the volume.' },
-      { title: 'Performance-Year Programs That Run to Completion', body: 'The HCC + Quality Gap Closure Sprint coordinates outreach, scheduling, and documentation on a performance-year timeline, prioritizing by RAF impact and closure window. Programs don\'t stall in Q4 when coordinator bandwidth is already stretched.' },
-      { title: 'Total Cost of Care Protection Through Proactive Outreach', body: 'Predictive signals on rising-risk and readmission-risk patients trigger outreach before the clinical event. Barrier capture routes resolution through the same interaction. The cost that doesn\'t happen is the shared savings that does.' },
-      { title: 'After-Hours Access That Keeps Attributed Patients Out of the ED', body: 'Every non-emergent ED visit by an attributed patient is a direct hit to TCOC. Consistent after-hours access with clinical triage, self-care guidance, and next-day scheduling, keeps routine care needs from defaulting to the ED.' },
-      { title: 'CMS ACCESS Model', body: 'ACCESS (Advancing Chronic Care with Effective, Scalable Solutions) is a voluntary CMS Innovation Center model in Original Medicare that ties payment for technology-supported chronic-condition care to measured patient outcomes. Zynix AI is an approved ACCESS participant, so ACOs and practices can take part through Zynix: clinicians refer eligible patients, stay involved in their care and can bill the ACCESS co-management fee, without enrolling in ACCESS themselves.' }
-    ],
-    primaryUseCases: [
-      { title: 'Post-Discharge TCM and Readmission Prevention', teaser: 'The 48-hour post-discharge window is where ACO performance is won or lost, with full workflow from ADT trigger through 30-day close, including TCM billing capture.', url: '/use-cases/post-discharge-tcm-readmission' },
-      { title: 'HCC Gap Closure and RAF Score Optimization', teaser: 'RAF scores are documentation scores. End-to-end gap closure, prioritized by RAF impact, executed before year-end performance close.', url: '/use-cases/hcc-gap-raf-optimization' },
-      { title: 'Rising-Risk Patient Outreach Before a Clinical Event', teaser: 'Prediction without action is just an earlier warning about a cost you didn\'t prevent. How ZynPredict signals translate into structured proactive outreach.', url: '/use-cases/rising-risk-patient-outreach' },
-      { title: 'After-Hours Access and ED Diversion for ACO Populations', teaser: 'The ACO\'s after-hours answer rate is a shared savings metric hiding in the phone system. The connection between access and TCOC, operationalized.', url: '/use-cases/after-hours-ed-diversion' },
-      { title: 'Chronic Care Coordination at Scale', teaser: 'CCM billing revenue is sitting in your patient panel. The consistent monthly contact and documentation workflow that most ACO coordinator teams cannot sustain manually.', url: '/use-cases/chronic-care-coordination-scale' }
-    ],
-    additionalUseCases: [
-      { id: 'UC01', title: 'Post-Discharge Follow-Up at Scale', primarySegment: 'Health Systems', url: '/use-cases/post-discharge-follow-up' },
-      { id: 'UC02', title: 'After-Hours Patient Triage Across Multiple Sites', primarySegment: 'Health Systems', url: '/use-cases/after-hours-triage-multi-site' },
-      { id: 'UC03', title: 'HCC Gap Closure at Health System ACO Scale', primarySegment: 'Health Systems', url: '/use-cases/hcc-gap-closure-health-system-aco' },
-      { id: 'UC12', title: 'HCC Risk Adjustment Accuracy', primarySegment: 'Health Plans', url: '/use-cases/hcc-risk-adjustment-ma' },
-      { id: 'UC14', title: 'Post-Discharge Care Management for MA Members', primarySegment: 'Health Plans', url: '/use-cases/post-discharge-ma-members' },
-      { id: 'UC15', title: 'Medication Adherence for Chronic Disease Populations', primarySegment: 'Health Plans', url: '/use-cases/medication-adherence-chronic-populations' },
-      { id: 'UC16', title: 'After-Hours Call Handling and Patient Triage', primarySegment: 'Independent Group Practices', url: '/use-cases/after-hours-call-handling-group-practices' },
-      { id: 'UC18', title: 'Prior Authorization Workflow Management', primarySegment: 'Independent Group Practices', url: '/use-cases/prior-auth-workflow-management' },
-      { id: 'UC19', title: 'CCM Billing Execution and Chronic Care Management', primarySegment: 'Independent Group Practices', url: '/use-cases/ccm-billing-chronic-care' },
-      { id: 'UC20', title: 'Referral Coordination and Leakage Prevention', primarySegment: 'Independent Group Practices', url: '/use-cases/referral-coordination-leakage' },
-      { id: 'UC30', title: 'Post-Discharge Follow-Up for High-Risk FQHC Patients', primarySegment: 'FQHCs', url: '/use-cases/post-discharge-followup-fqhc' }
-    ],
-    featuredProducts: [
-      { name: 'Deployable Care Plans', url: '/care-plans', description: 'Post-Discharge TCM Care Plan, HCC + Quality Gap Closure Sprint, High-Utilizer ED Diversion Plan, Medication Safety & Adherence Plan. Multi-agent programs built around ACO performance-year priorities.' },
-      { name: 'Clinical Performance Agents', url: '/agents/clinical-performance', description: 'Transitions of Care Agent, Chronic & Longitudinal Care Management Agent, Preventive & Quality Activation Agents, SDoH Determination Agent. The execution layer your care management program identifies the work for.' },
-      { name: 'ZynGap', url: '/solutions/zynix-data-analytics', description: 'HCC and quality gap identification prioritized by RAF impact and closure timing. Actionable worklists for coordinators, not raw gap data that has to be triaged before it can be acted on.' },
-      { name: 'ZynAfterHours', url: '/agents/operational-efficiency/zynafterhours-triage', description: '24/7 after-hours triage for your attributed population. Clinical triage logic, 15+ languages, ED diversion built in. Every non-emergent call that stays out of the ED is a TCOC win.' }
-    ],
-    citations: [
-      { stat: 'ACOs achieving benchmark shared savings consistently show higher care management completion rates, post-discharge contact rates, and HCC closure rates than those that miss targets.', context: 'The performance gap between top and bottom ACO quartiles is not explained by panel complexity alone. Execution quality is the differentiating factor.', sourceName: 'CMS Shared Savings Program', sourceUrl: 'https://www.cms.gov/medicare/shared-savings-program/about' },
-      { stat: 'Manual post-discharge outreach reaches fewer than 30% of eligible patients within the 24-to-48 hour contact window, the window where readmission risk is highest.', context: 'For MSSP ACOs, every missed post-discharge contact in this window represents both a care quality gap and a TCOC exposure.', sourceName: 'CMS Transitional Care Management Services', sourceUrl: 'https://www.cms.gov/medicare/physician-fee-schedule/transitional-care-management-services' },
-      { stat: 'ACOs relying on manual outreach capture a significantly lower share of eligible TCM reimbursement than those using systematic outreach workflows.', context: 'Reaching more patients produces more complete billing documentation. Contact rate and TCM billing capture move together.', sourceName: 'CMS Transitional Care Management Services', sourceUrl: 'https://www.cms.gov/medicare/physician-fee-schedule/transitional-care-management-services' },
-      { stat: 'Coordinator-to-patient ratios in most MSSP ACOs make full-panel chronic care management execution impossible without a systematic outreach infrastructure.', context: 'The CCM billing gap in most ACO panels is a contact rate problem, not a patient eligibility problem.', sourceName: 'AAFP Chronic Care Management Billing Guidance', sourceUrl: 'https://www.aafp.org/family-physician/practice-and-career/getting-paid/coding/chronic-care-management.html' }
-    ],
-    ctaHeadline: 'Book a Demo',
-    ctaSubline: 'Talk to our team about your performance-year priorities.',
-    ctaButton: 'Book a Demo'
+    eyebrow: 'ACOs',
+    title: 'Follow-up at the scale of your attributed panel',
+    lead: 'Zynix connects your claims, EHR and ADT data, ranks TCM, wellness-visit and HCC work, and runs outreach with agents, so coordinators can focus on complex patients.',
+    secondary: { label: 'Read the Palm Beach ACO story', href: '/case-studies/pbaco' },
+    panel: { brand: 'Care operations', title: 'This week’s work', meta: 'Attributed panel · all practices', label: 'Sample ACO worklist, illustrative data',
+      tiles: [{ label: 'Discharges', value: '46' }, { label: 'AWVs due', value: '312' }, { label: 'Open HCC gaps', value: '588' }],
+      rows: [{ title: 'Pt 1042 · discharged yesterday', sub: 'TCM window · high risk', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Reached' } },
+        { title: 'Pt 2210 · wellness visit due', sub: 'No visit this year', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Booked' } },
+        { title: 'Pt 3317 · HCC gap · CKD stage 3', sub: 'Visit Thursday', owner: { type: 'system', label: 'Pre-visit summary' }, status: { tone: 'neutral', label: 'Queued' } },
+        { title: 'Pt 4428 · medication question', sub: 'After the discharge call', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'warning', label: 'Escalated' } }],
+      footer: 'Agents do the outreach and scheduling. Licensed staff own clinical judgment and the TCM contact.' },
+    proof: { logos: ['pbaco', 'westfloridaaco', 'spacecoastaco', 'centralfloridaaco', 'goldencareaco', 'sunfloweraco'], label: 'ACOs working with Zynix',
+      link: { label: 'ACO customer stories', href: '/case-studies-acos' }, quote: 'pbaco' },
+    workflows: { title: 'What we run for ACOs',
+      lead: 'The data to find the work is usually there. Zynix runs the work itself, across the whole attributed panel and the whole performance year.',
+      items: [
+        { eyebrow: 'Transitions of care', title: 'Post-discharge follow-up inside the TCM window', problem: 'Discharges arrive from hospitals you don’t run, and coordinators call the flagged patients first.',
+          does: 'ADT messages open a care plan the same day. The transitions of care agent calls, your nurses make the TCM contact and ZynSchedule books the follow-up visit.',
+          links: [{ label: 'Post-discharge TCM', href: '/use-cases/post-discharge-tcm-readmission' }] },
+        { eyebrow: 'Annual wellness visits', title: 'Wellness visits booked across every practice', problem: 'Patients due for a wellness visit sit on a list no practice has time to work.',
+          does: 'The preventive and quality activation agent invites patients by voice and SMS, books the visit at their own practice and follows up until it is completed.',
+          links: [{ label: 'Preventive and quality agents', href: '/agents#clinical-performance' }] },
+        { eyebrow: 'Risk adjustment', title: 'HCC gaps closed at documented visits', problem: 'Conditions treated last year don’t count this year until a clinician documents them.',
+          does: 'Open gaps are ranked by impact and deadline, clinicians see them before scheduled visits and agents bring in patients with no visit booked.',
+          links: [{ label: 'HCC gap closure', href: '/use-cases/hcc-gap-raf-optimization' }] }] },
+    plan: { eyebrow: 'In practice', title: 'One discharge, start to finish',
+      lead: 'A post-discharge care plan gives every step an owner, and stays open until the follow-up visit is documented.',
+      callouts: [{ title: 'Agents do the outreach', body: 'The transitions of care agent calls and texts, and ZynSchedule books the visit.' },
+        { title: 'Nurses take the clinical work', body: 'Medication questions and red flags are escalated by rule; the TCM contact stays with licensed staff.' },
+        { title: 'Nothing closes early', body: 'The plan closes only when the follow-up visit is documented.' }],
+      panel: ZX_SOL_TCM_EPISODE },
+    connect: { title: 'One record from every practice and hospital',
+      body: 'Zynix connects to ' + SITE_FACTS.ehr.line + ', plus Medicare claims (CCLF and BCDA), ADT feeds, labs and pharmacy data, in one patient record.',
+      link: ZX_SOL_FLOW_LINK },
+    callout: zxSolAccessCallout(),
+    cta: { title: 'See what Zynix runs for ACOs',
+      sub: 'We’ll walk through post-discharge follow-up, wellness visits and HCC gap closure on sample data, then map them to your contracts and programs.',
+      secondary: { label: 'Read the Palm Beach ACO story', href: '/case-studies/pbaco' } }
   });
 }
 
 
 // ============================================================================
-// 3. HEALTH PLANS
+// 3. HEALTH PLANS (no CMS ACCESS Model here: it is an Original Medicare model)
 // ============================================================================
 function renderWhoWeServeHealthPlans() {
   return renderAudiencePageV7({
-    audienceName: 'Health Plans',
-    breadcrumb: 'Who We Serve &gt; Health Plans',
-    eyebrow: 'WHO WE SERVE',
-    headline: 'Move your Star Rating. Close your HCC gaps. Reach every member who needs outreach this performance year.',
-    subhead: 'Your population health analytics are sophisticated. The gap between identifying a member who needs outreach and completing that outreach at full-member-population scale, across the measures that move your Star Rating, is where revenue is won or lost.',
-    challengeIntro: 'Medicare Advantage plans compete on Star Ratings and risk adjustment accuracy. Both depend on member engagement, clinical documentation, and care coordination that most plans cannot execute at full-member-population scale. The analytics to identify the gap are sophisticated. The workflow execution layer to close it is the missing piece.',
-    challenges: [
-      { title: 'Quality Measure Completion at Scale', body: 'HEDIS measures that move Stars like medication adherence, diabetes care, blood pressure control, colorectal screening, require member contact, appointment scheduling, and clinical follow-through that plan-level care management cannot execute at full-population scale.' },
-      { title: 'HCC Documentation Accuracy', body: 'Members with chronic conditions present but underdocumented suppress risk adjustment revenue. Closing documentation gaps requires outreach, visit completion, and documentation alignment that internal teams can\'t sustain across the full member population.' },
-      { title: 'High-Cost Member Engagement Before the Clinical Event', body: 'The members who drive the highest total cost of care are often the hardest to engage proactively. Reaching them before a hospitalization or ED visit requires outreach capacity that case manager caseloads cannot sustain across the full high-risk cohort.' },
-      { title: 'Medication Adherence and PDC Scores', body: 'PDC scores for diabetes, hypertension, and cholesterol medications directly affect Star Ratings. Moving PDC scores requires consistent member contact and barrier resolution (cost, pharmacy access, side effects), not just fill reminders that generate no-responses.' }
-    ],
-    fitIntro: 'Zynix AI is the member outreach and care coordination execution layer between your population health intelligence and your member population. It handles the contact volume, barrier resolution, and documentation workflows that your Stars and risk adjustment programs require but cannot execute manually at scale.',
-    capabilities: [
-      { title: 'Member Outreach That Reaches the Full Population, Not a Sample', body: 'Quality gap reminders, HCC documentation outreach, medication adherence check-ins, and preventive care follow-through executed for every eligible member, not just those a case manager had time to call. Contact rates move when the outreach reaches the full cohort.' },
-      { title: 'Barrier Resolution Built Into the Outreach Interaction', body: 'Two-way conversations identify cost, access, transportation, and language barriers in the same interaction where the clinical need is surfaced and route each barrier to resolution without requiring a second follow-up. PDC scores and quality measure completion both depend on this step.' },
-      { title: 'Risk Adjustment Documentation Closed Before the Deadline', body: 'HCC gaps prioritized by revenue impact. Outreach, scheduling, visit completion, and documentation coordinated in sequence. The risk adjustment deadline is a fixed constraint. The execution layer runs to meet it.' },
-      { title: 'High-Risk Member Engagement Before the Claim Arrives', body: 'ZynPredict surfaces members on a deterioration trajectory before a hospitalization or ED visit. Proactive outreach engages them at the right window, identifying the barriers driving the risk and connecting to chronic care management for stabilization.' },
-      { title: 'CMS ACCESS Model', body: 'ACCESS (Advancing Chronic Care with Effective, Scalable Solutions) is a voluntary CMS Innovation Center model in Original Medicare that ties payment for technology-supported chronic-condition care to measured patient outcomes. Zynix AI is an approved ACCESS participant, so ACOs and practices can take part through Zynix: clinicians refer eligible patients, stay involved in their care and can bill the ACCESS co-management fee, without enrolling in ACCESS themselves.' }
-    ],
-    primaryUseCases: [
-      { title: 'HEDIS and Stars Quality Measure Improvement', teaser: 'Star Ratings are earned member by member. How quality measure completion moves at full-member-population scale, not just for the members a case manager reached.', url: '/use-cases/hedis-stars-quality-improvement' },
-      { title: 'HCC Risk Adjustment Accuracy', teaser: 'Underdocumented conditions suppress risk adjustment revenue. Closing documentation gaps at member-population scale requires more than a case manager workflow can deliver.', url: '/use-cases/hcc-risk-adjustment-ma' },
-      { title: 'High-Cost and High-Utilizer Member Management', teaser: 'The members who drive the most cost are the hardest to reach proactively. Structured, risk-tiered outreach before the clinical event, before the claim arrives.', url: '/use-cases/high-utilizer-member-management' },
-      { title: 'Post-Discharge Care Management for MA Members', teaser: 'High-risk MA members discharged from hospital face compounded readmission risk. The 48-hour window is where the outcome is determined.', url: '/use-cases/post-discharge-ma-members' },
-      { title: 'Medication Adherence for Chronic Disease Populations', teaser: 'Moving PDC scores requires barrier resolution, not fill reminders. The two-way outreach workflow that identifies and routes the real obstacles to medication adherence.', url: '/use-cases/medication-adherence-chronic-populations' }
-    ],
-    additionalUseCases: [
-      { id: 'UC08', title: 'Rising-Risk Patient Outreach Before a Clinical Event', primarySegment: 'ACOs & MSOs', url: '/use-cases/rising-risk-patient-outreach' },
-      { id: 'UC09', title: 'After-Hours Access and ED Diversion for ACO Populations', primarySegment: 'ACOs & MSOs', url: '/use-cases/after-hours-ed-diversion' },
-      { id: 'UC10', title: 'Chronic Care Coordination at Scale', primarySegment: 'ACOs & MSOs', url: '/use-cases/chronic-care-coordination-scale' },
-      { id: 'UC28', title: 'Preventive Screening Gap Closure for High-Barrier Populations', primarySegment: 'FQHCs', url: '/use-cases/preventive-screening-gap-fqhc' },
-      { id: 'UC29', title: 'Medication Adherence for Complex Chronic Patients', primarySegment: 'FQHCs', url: '/use-cases/medication-adherence-complex-chronic' },
-      { id: 'UC06', title: 'Post-Discharge TCM and Readmission Prevention', primarySegment: 'ACOs & MSOs', url: '/use-cases/post-discharge-tcm-readmission' }
-    ],
-    featuredProducts: [
-      { name: 'ZynGap', url: '/solutions/zynix-data-analytics', description: 'HCC and quality gap identification across your member population, prioritized by risk adjustment impact and Stars measure completion timing. Actionable worklists, not raw gap exports.' },
-      { name: 'Predictive Activation Agents', url: '/agents/predictive-activation', description: 'Rising risk member outreach, readmission risk monitoring, high-utilizer ED diversion. Acts on ZynPredict signals before the clinical event, not after the claim arrives.' },
-      { name: 'Clinical Performance Agents', url: '/agents/clinical-performance', description: 'Medication adherence outreach, Transitions of Care Agent, Preventive & Quality Activation. The member engagement execution layer for Medicare Advantage population scale.' },
-      { name: 'HCC + Quality Gap Closure Sprint', url: '/care-plans', description: 'Orchestrated program that coordinates outreach, visit completion, and documentation for the highest-impact HCC and quality gaps before the risk adjustment deadline.' }
-    ],
-    citations: [
-      { stat: 'Medication adherence, care coordination, and chronic disease management measures carry the highest weight in overall Star Rating calculation for Medicare Advantage plans.', context: 'Plans that move these measures by even a fraction of a star generate significant revenue implications. The bonus structure amplifies the value of incremental improvement.', sourceName: 'CMS Medicare Advantage Star Ratings', sourceUrl: 'https://www.cms.gov/medicare/health-plans/medicareadvtgspecratestats/star-ratings' },
-      { stat: 'HCC documentation gaps are most common in members with multiple chronic conditions who have limited care team contact, the cohort where risk adjustment revenue opportunity is highest.', context: 'Closing documentation gaps requires proactive outreach and visit completion. Administrative coding review alone cannot close gaps that require a clinical encounter.', sourceName: 'CMS Risk Adjustors, Medicare Advantage', sourceUrl: 'https://www.cms.gov/medicare/health-plans/medicareadvtgspecratestats/risk-adjustors' },
-      { stat: 'Plans with higher member outreach completion rates consistently show stronger Stars performance on quality and outcome measures than plans with lower contact rates.', context: 'Contact rate is the leading indicator. The relationship is about whether the member was reached at all, not the sophistication of the outreach program.', sourceName: 'NAACOS Research on Care Management Outcomes', sourceUrl: null },
-      { stat: 'After-hours access and post-discharge follow-up rates are significant predictors of avoidable hospitalization and ED utilization in Medicare Advantage populations.', context: 'For MA plans, avoidable hospitalizations affect both Stars measures and total cost of care: the financial and quality incentives align on the same workflow gap.', sourceName: 'Published Medicare Advantage outcomes research', sourceUrl: null }
-    ],
-    ctaHeadline: 'Book a Demo',
-    ctaSubline: 'Talk to our team about your Stars and risk adjustment priorities.',
-    ctaButton: 'Book a Demo'
+    eyebrow: 'Health plans',
+    title: 'Reach the members your quality programs depend on',
+    lead: 'Zynix ranks members by open HEDIS gaps, adherence risk and recent discharges, then runs outreach with your care managers setting the scripts and taking the escalations.',
+    secondary: { label: 'Read the eternalHealth announcement', href: '/press#eternalhealth-zynix-ai-nirvanahealth-partnership' },
+    panel: { brand: 'Care operations', title: 'Member outreach queue', meta: 'Medicare Advantage · this week', label: 'Sample member outreach queue, illustrative data',
+      tiles: [{ label: 'Open HEDIS gaps', value: '3,410' }, { label: 'Adherence flags', value: '826' }, { label: 'Discharges', value: '61' }],
+      rows: [{ title: 'Member 4471 · A1c test open', sub: 'Lab booked for Saturday', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Booked' } },
+        { title: 'Member 3120 · statin fills behind', sub: 'Side effect reported', owner: { type: 'staff', label: 'Pharmacist' }, status: { tone: 'warning', label: 'Escalated' } },
+        { title: 'Member 5531 · discharged Tuesday', sub: 'Primary care visit on day 5', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Booked' } }],
+      footer: 'Your care managers approve the scripts and take every escalation.' },
+    proof: { quote: 'eternalhealth', label: 'Health plans working with Zynix',
+      note: 'eternalHealth, a Medicare Advantage plan serving members in Massachusetts and Arizona, has used Zynix outreach and care management workflows since January 1, 2026.',
+      link: { label: 'Read the eternalHealth story', href: '/case-studies-eternal-health' } },
+    workflows: { title: 'What we run for health plans',
+      lead: 'Stars and risk adjustment both depend on reaching members before a window closes. Zynix runs that outreach at plan scale, with your care managers in charge.',
+      items: [
+        { eyebrow: 'HEDIS and Stars', title: 'Open measures closed before the year ends', problem: 'Letters and texts tell members what is due. Many don’t act because of a ride, a schedule or a cost question.',
+          does: 'Agents ask what is in the way, book the lab, screening or visit, and route cost and clinical questions to your team.',
+          links: [{ label: 'HEDIS gap outreach', href: '/use-cases/hedis-stars-quality-improvement' }] },
+        { eyebrow: 'Medication adherence', title: 'Adherence check-ins that find the reason', problem: 'Pharmacy claims show who stopped filling a medication, not why.',
+          does: 'Agents ask, then route side effects to a pharmacist or prescriber and cost questions to member services.',
+          links: [{ label: 'Adherence outreach', href: '/use-cases/medication-adherence-chronic-populations' }] },
+        { eyebrow: 'Post-discharge', title: 'Member follow-up after a hospital stay', problem: 'Claims report the stay weeks after the most useful follow-up days.',
+          does: 'ADT feeds start outreach, care managers take the clinical questions and the member’s follow-up visit is booked.',
+          links: [{ label: 'Member post-discharge follow-up', href: '/use-cases/post-discharge-ma-members' }] }] },
+    plan: { eyebrow: 'In practice', title: 'Every open measure worked, week by week',
+      lead: 'Your quality team picks the measures and approves the scripts. Zynix works the list and shows where each measure stands.',
+      callouts: [{ title: 'Scripts you approve', body: 'Member outreach follows the scripts, hours and escalation paths your care management team sets.' },
+        { title: 'A person for anything clinical', body: 'Clinical, cost and access questions go to care managers or member services by rule.' },
+        { title: 'Closure you can see', body: 'Open, booked and completed items by measure and by week.' }],
+      panel: { brand: 'Care operations', chip: 'Sample data', title: 'Measure outreach · colorectal screening', meta: 'Measurement year · sample plan', label: 'Sample measure outreach pipeline, illustrative data',
+        tiles: [{ label: 'Open', value: '2,140' }, { label: 'Booked', value: '688' }, { label: 'Completed', value: '419' }],
+        pipeline: [{ label: 'Open', value: 2140 }, { label: 'Reached', value: 1302 }, { label: 'Booked', value: 688 }, { label: 'Completed', value: 419 }],
+        footer: 'A measure counts as closed only when the result is back.' } },
+    connect: { title: 'Plan data and provider data, in one record',
+      body: 'Zynix brings together claims, pharmacy fills, ADT feeds and clinical data from your provider network, and connects to ' + SITE_FACTS.ehr.line + '.',
+      link: ZX_SOL_FLOW_LINK },
+    callout: { id: 'stars-risk', eyebrow: 'Stars and risk adjustment', title: 'Built around the CMS calendar',
+      body: ['HEDIS measures close with the measurement year, Part D adherence measures count the days a member had medication on hand, and risk adjustment counts conditions documented at face-to-face visits. Zynix ranks open work against those deadlines, so outreach starts where time is shortest.',
+        'Outreach runs under your plan’s rules: your care managers set the scripts, hours and escalation paths, and member communications go through your own review.'],
+      link: { label: 'Risk adjustment outreach', href: '/use-cases/hcc-risk-adjustment-ma' } },
+    cta: { title: 'See what Zynix runs for health plans',
+      sub: 'We’ll walk through HEDIS gap outreach, adherence check-ins and post-discharge follow-up on sample data, then map them to your contracts and programs.',
+      secondary: { label: 'Read the eternalHealth announcement', href: '/press#eternalhealth-zynix-ai-nirvanahealth-partnership' } }
   });
 }
 
 
 // ============================================================================
-// 4. INDEPENDENT GROUP PRACTICES
+// 4. MSOs, IPAs & PHYSICIAN GROUPS (slug independent-group-practices kept; COPY_DECK §5.3)
 // ============================================================================
 function renderWhoWeServeIndependentPractices() {
   return renderAudiencePageV7({
-    audienceName: 'Independent Group Practices',
-    breadcrumb: 'Who We Serve &gt; Independent Group Practices',
-    eyebrow: 'WHO WE SERVE',
-    headline: 'Handle more after-hours calls. Capture more CCM billing. Spend less coordinator time on prior auth.',
-    subhead: 'Your front desk manages inbound calls, scheduling, prior auth, and refill requests at the same time. Your care quality programs need coordinator time you don\'t have to spare. After-hours calls go to voicemail. These are solvable workflow problems, and they don\'t require health system infrastructure to solve.',
-    challengeIntro: 'Independent physician groups carry the full operational weight of value-based care without health system infrastructure. Coordinators wear multiple hats. Care quality programs that require consistent monthly patient contact produce inconsistent results because the capacity isn\'t there.',
-    challenges: [
-      { title: 'After-Hours Access', body: 'Patients calling after 5 PM reach voicemail or a basic answering service. Patients with urgent questions go to the ED. For a practice participating in value-based care contracts, after-hours ED visits affect both cost performance and patient satisfaction scores.' },
-      { title: 'Prior Authorization Time Cost', body: 'Practices submitting 20\u201350 prior auths per week without dedicated PA staff spend significant coordinator hours on documentation assembly, payer portal tracking, and denial management. That time comes directly from patient-facing work.' },
-      { title: 'Scheduling Abandonment and No-Show Rate', body: 'Hold times at the front desk mean missed bookings. No-show rates create empty appointment slots that rarely fill proactively. Both have quantifiable revenue impact, and both have workflow solutions that do not require additional staff.' },
-      { title: 'CCM Billing Execution', body: 'Chronic Care Management billing represents significant unrealized revenue for practices with Medicare-eligible chronic disease populations. Capturing it requires consistent monthly patient contact and billing-ready documentation that most independent practice teams cannot sustain at scale.' }
-    ],
-    fitIntro: 'Zynix AI brings the operational execution infrastructure of a health system to independent practice economics. The same tools, like after-hours triage, scheduling, chronic care management, referral coordination, sized and priced for a 5\u201350 physician group.',
-    capabilities: [
-      { title: 'After-Hours and Scheduling Coverage Without Additional Staff', body: 'Routine after-hours calls handled clinically. Inbound scheduling processed without a hold queue. Waitlists managed proactively when cancellations occur. The front desk team handles patient relationships. The workflow volume routes through Zynix AI.' },
-      { title: 'Care Quality Programs That Run Consistently', body: 'CCM monthly contact, AWV outreach, quality gap reminders, and care plan reinforcement executed for every eligible patient, not just those the coordinator had capacity to reach. Billing-ready documentation captured in the same workflow.' },
-      { title: 'Administrative Workflows Reclaimed From Coordinator Time', body: 'Prior auth documentation assembly, payer portal submission, status tracking, denial management, and fax routing handled without coordinator involvement at every step. The hours reclaimed go back to patient-facing work.' },
-      { title: 'Referrals That Complete Instead of Going Dark', body: 'From referral order to confirmed specialist appointment, with documentation completeness checked, specialist follow-up tracked, inbound results routed. Sending the referral is not the same as completing it.' }
-    ],
-    primaryUseCases: [
-      { title: 'After-Hours Call Handling and Patient Triage', teaser: 'Clinical triage after 5 PM, without voicemail, without the ED as default, without waking the physician on-call for routine questions.', url: '/use-cases/after-hours-call-handling-group-practices' },
-      { title: 'Appointment Scheduling and No-Show Reduction', teaser: 'Every empty slot and every abandoned scheduling call is recoverable revenue. Inbound scheduling, waitlist management, and reminder sequences that reduce no-shows.', url: '/use-cases/appointment-scheduling-no-show' },
-      { title: 'Prior Authorization Workflow Management', teaser: 'Prior auth is consuming coordinator hours. Documentation assembly, payer submission, status tracking, and denial management, running automatically.', url: '/use-cases/prior-auth-workflow-management' },
-      { title: 'CCM Billing Execution and Chronic Care Management', teaser: 'CCM billing revenue is sitting in your patient list. Consistent monthly contact and billing-ready documentation, the workflow most independent practices can\'t sustain manually.', url: '/use-cases/ccm-billing-chronic-care' },
-      { title: 'Referral Coordination and Leakage Prevention', teaser: 'Sending the referral is not the same as completing the referral. From referral order to confirmed specialist appointment, documented and tracked.', url: '/use-cases/referral-coordination-leakage' }
-    ],
-    additionalUseCases: [],
-    featuredProducts: [
-      { name: 'ZynAfterHours', url: '/agents/operational-efficiency/zynafterhours-triage', description: '24/7 after-hours triage built for independent practice economics. Evidence-based clinical triage logic, 15+ languages, next-day appointment scheduling. Physician on-call receives only the calls that genuinely need them.' },
-      { name: 'ZynSchedule', url: '/agents/operational-efficiency/zynschedule', description: 'Inbound scheduling without the hold queue. Waitlist management when cancellations occur. Confirmation and reminder sequences that reduce no-shows. Built for the volume of a 5\u201350 physician practice.' },
-      { name: 'Chronic & Longitudinal Care Management Agent', url: '/agents/chronic-care-management', description: 'Monthly outreach, medication adherence check-ins, care plan reinforcement, and CCM/PCM billing documentation for every eligible chronic disease patient. CCM becomes a sustainable, billable program.' },
-      { name: 'ZynScribe', url: '/zynscribe', description: 'Ambient AI scribing that captures every patient-clinician conversation and produces structured clinical notes uploaded directly to the EHR. Reduces after-hours documentation time. Works with your existing EHR.' }
-    ],
-    citations: [
-      { stat: 'Independent practices without dedicated prior auth staff spend a disproportionate share of coordinator time on authorization submission, status tracking, and denial management.', context: 'For a 10-physician group submitting 30\u201350 prior auths per week, the cumulative coordinator time cost competes directly with patient-facing care coordination capacity.', sourceName: 'AMA Prior Authorization and Administrative Burden', sourceUrl: 'https://www.ama-assn.org/practice-management/prior-authorization/prior-authorization-and-administrative-burden' },
-      { stat: 'Most independent practices with Medicare-eligible chronic disease populations are billing a fraction of eligible CCM codes, not due to lack of qualifying patients, but due to the contact and documentation workflow.', context: 'The CCM billing gap is a workflow gap, not a patient gap. Consistent monthly contact is what most practices cannot sustain at eligible-patient scale.', sourceName: 'AAFP Chronic Care Management Billing Guidance', sourceUrl: 'https://www.aafp.org/family-physician/practice-and-career/getting-paid/coding/chronic-care-management.html' },
-      { stat: 'No-show rates and scheduling abandonment at independent practices have measurable and quantifiable revenue impact per physician per year.', context: 'The combination of front desk hold abandonment and unfilled no-show slots compounds. Each individually recoverable with the right scheduling workflow.', sourceName: 'MGMA Benchmarking Data', sourceUrl: 'https://www.mgma.com/data/benchmarking-data' },
-      { stat: 'The majority of after-hours calls that reach voicemail or default to the ED at independent practices are clinically routine, resolvable without escalation to a physician.', context: 'Self-care guidance, next-day appointment scheduling, and medication questions represent the bulk of after-hours call volume. Most can be resolved without on-call physician involvement.', sourceName: 'AAFP and MGMA after-hours access research', sourceUrl: null }
-    ],
-    ctaHeadline: 'Book a Demo',
-    ctaSubline: 'Talk to our team about your practice\'s most pressing operational priorities.',
-    ctaButton: 'Book a Demo'
+    eyebrow: 'MSOs, IPAs &amp; physician groups',
+    title: 'Run value-based programs across independent practices',
+    lead: 'One data layer and one set of workflows for every practice in your network: wellness visits, transitions of care, chronic care and quality gaps, whatever EHR each practice runs.',
+    secondary: { label: 'See the workflows', href: '#workflows' },
+    panel: { brand: 'Care operations', title: 'Network worklist', meta: 'All practices · this week', label: 'Sample network worklist, illustrative data',
+      tiles: [{ label: 'Practices', value: '14' }, { label: 'Discharges', value: '23' }, { label: 'AWVs due', value: '205' }],
+      rows: [{ title: 'Pt 5120 · discharged Monday', sub: 'Practice A · eClinicalWorks', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Reached' } },
+        { title: 'Pt 6634 · wellness visit due', sub: 'Practice D · athenahealth', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Booked' } },
+        { title: 'Pt 2871 · CCM check-in', sub: 'Practice B · NextGen', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'warning', label: 'Escalated' } }],
+      footer: 'Agents do the outreach; clinical questions go to the practice by rule.' },
+    proof: { label: 'Physician organizations working with Zynix', names: ['IncentiveCare IPA', 'Apollo Clinic Network', 'NEXT Healthcare Solutions'],
+      card: { href: '/case-studies/apollo-clinic', eyebrow: 'Customer story · Physician group', title: 'Apollo Clinic Network',
+        body: 'Scheduling and reminders across a multi-site practice.', cta: 'Read the Apollo Clinic Network story', icon: 'stethoscope' } },
+    problem: { title: 'Your network carries the risk. Each practice runs its own way.',
+      body: ['An MSO or IPA holds value-based contracts on behalf of many independent practices, each with its own EHR, front desk and habits. The data to see who needs a wellness visit, a post-discharge call or a chronic care check-in usually exists. Getting that work done the same way in every practice, all year, is the hard part.',
+        'Hiring coordinators for every practice doesn’t scale, and asking practices to run more programs on top of patient care rarely sticks.'] },
+    workflows: { title: 'What we run for physician organizations', lead: 'Three programs, run the same way in every practice in the network.',
+      items: [
+        { eyebrow: 'Wellness visits', title: 'Annual wellness visits and preventive care', problem: 'Patients due for a wellness visit or screening sit in a report that no practice has time to work.',
+          does: 'Agents invite patients by voice and SMS, book the visit at their own practice, send reminders and track it to a documented visit.',
+          links: [{ label: 'Preventive and quality agents', href: '/agents#clinical-performance' }] },
+        { eyebrow: 'Transitions of care', title: 'Transitions of care across hospitals you don’t own', problem: 'Your patients are discharged from hospitals across the region, and the practice often hears about it last.',
+          does: 'ADT feeds trigger outreach the same day. A care manager makes the TCM contact, and the scheduling agent books the follow-up at the patient’s own practice.',
+          links: [{ label: 'Transitional care use case', href: '/use-cases/post-discharge-tcm-readmission' }] },
+        { eyebrow: 'Chronic care and HCC', title: 'Chronic care management and HCC documentation', problem: 'CCM needs a monthly touchpoint, and HCC capture needs a visit with the right documentation, for every eligible patient.',
+          does: 'Agents run monthly check-ins and pre-visit outreach, physicians see open gaps before the visit, and ZynScribe drafts the note for approval.',
+          links: [{ label: 'CCM use case', href: '/use-cases/ccm-billing-chronic-care' }, { label: 'HCC use case', href: '/use-cases/hcc-gap-raf-optimization' }] }] },
+    plan: { eyebrow: 'In practice', title: 'Wellness visits, from the list to a documented visit',
+      lead: 'The same program runs in every practice, from the first invitation to the documented visit.',
+      callouts: [{ title: 'Invited at their own practice', body: 'Patients are invited by voice and SMS and booked with their own practice.' },
+        { title: 'Reminders until the visit', body: 'Two-way reminders confirm or reschedule, and questions go to practice staff.' },
+        { title: 'Counted when documented', body: 'A visit counts only when it is completed and documented.' }],
+      panel: { brand: 'Care operations', chip: 'Sample data', title: 'Annual wellness visits', meta: 'Network · this quarter', label: 'Sample wellness-visit pipeline, illustrative data',
+        tiles: [{ label: 'Due', value: '1,840' }, { label: 'Booked', value: '702' }, { label: 'Completed', value: '431' }],
+        pipeline: [{ label: 'Due', value: 1840 }, { label: 'Invited', value: 1216 }, { label: 'Booked', value: 702 }, { label: 'Completed', value: 431 }],
+        footer: 'A visit counts only when it is completed and documented.' } },
+    connect: { title: 'One record across every practice’s EHR',
+      body: 'Zynix connects to ' + SITE_FACTS.ehr.line + '. A network with eClinicalWorks in one practice and athenahealth in the next still works from one patient record and one worklist.',
+      link: ZX_SOL_FLOW_LINK,
+      bullets: { title: 'Run it from the network office. Work it in the practice.',
+        items: ['One worklist for the network, filtered by practice', 'Care plans set up once and used in every practice', 'Role-based access for network and practice staff'] } },
+    callout: zxSolAccessCallout(),
+    more: { id: 'front-office', title: 'Front-office work, handled too',
+      body: 'The same agents cover after-hours calls, scheduling, referrals and fax intake, so practice staff get time back for patients.',
+      links: [{ href: '/use-cases/after-hours-call-handling-group-practices', label: 'After-hours calls', desc: 'Answered, booked and routed to the on-call physician', icon: 'clock' },
+        { href: '/use-cases/appointment-scheduling-no-show', label: 'Scheduling and no-shows', desc: 'Two-way confirmations and waitlist fills', icon: 'calendar' },
+        { href: '/use-cases/referral-coordination-leakage', label: 'Referral coordination', desc: 'Referrals followed to a completed visit', icon: 'link' }] },
+    cta: { title: 'See what Zynix runs for physician organizations',
+      sub: 'We’ll walk through wellness visits, transitions of care and chronic care across a multi-practice network on sample data, then map them to your contracts and programs.',
+      secondary: { label: 'Contact us', href: '/contact' } }
   });
 }
 
 
 // ============================================================================
-// 5. ASCs
+// 5. AMBULATORY SURGERY CENTERS (live and linked from /solutions and /use-cases; not in menus or the footer)
 // ============================================================================
 function renderWhoWeServeASCs() {
   return renderAudiencePageV7({
-    audienceName: 'Ambulatory Surgery Centers',
-    breadcrumb: 'Who We Serve &gt; Ambulatory Surgery Centers',
-    eyebrow: 'WHO WE SERVE',
-    headline: 'Fewer prior auth delays. Faster referral-to-schedule. More OR days that run on plan.',
-    subhead: 'Your margin runs on procedure throughput. The administrative workflows surrounding that throughput, including prior authorizations, referral intake, patient scheduling, pre-procedure preparation, and post-procedure follow-up, are where delays originate, where referrals stall, and where recoverable revenue goes unrecovered.',
-    challengeIntro: 'ASCs run on procedure throughput and margin. Every stalled prior auth is a delayed surgery. Every incomplete referral packet delays scheduling and frustrates the referring surgeon. Every day-of cancellation is a gap the OR schedule absorbs. The administrative workflows before and after the procedure are where operational efficiency is won or lost.',
-    challenges: [
-      { title: 'Prior Authorization Delays', body: 'Surgical prior auths are among the most documentation-intensive in ambulatory care. An ASC submitting 30\u201380 prior auths per week without an automated workflow is running a bottleneck that directly delays OR scheduling, and creating revenue cycle risk when authorization windows are missed.' },
-      { title: 'Referral Intake Friction', body: 'Referrals arrive with varying documentation completeness. Managing incomplete intake manually by reading faxes, identifying missing items, contacting referring offices, delays scheduling and creates a poor handoff experience for referring surgeons who can and do route volume elsewhere.' },
-      { title: 'Scheduling Gaps and Day-Of Cancellations', body: 'When scheduling staff manage procedure-specific time blocks, surgeon templates, equipment requirements, and payer constraints manually while handling inbound calls and cancellations, the OR schedule runs suboptimally. Preventable gaps and day-of cancellations have direct revenue impact.' },
-      { title: 'Post-Procedure Patient Access', body: 'Patients experiencing medication confusion or post-procedure concerns after discharge often don\'t know who to call and default to the ED. A structured post-procedure outreach program reaches them first and keeps recoverable issues out of the emergency department.' }
-    ],
-    fitIntro: 'Zynix AI handles the administrative execution layer that surrounds your OR, from the moment a referral arrives to the 72-hour post-procedure follow-up. The workflows that determine whether procedures happen on schedule, and whether patients recover without avoidable complications.',
-    capabilities: [
-      { title: 'Prior Auth and Referral Intake That Don\'t Create Queues', body: 'Documentation assembled, payers submitted, status tracked, denials routed, referral packets classified and checked for completeness without a coordinator managing each step manually. The revenue cycle team and scheduling staff handle exceptions. Procedures stay on schedule.' },
-      { title: 'OR Scheduling Optimized From the Cancellation Inward', body: 'Procedure-specific scheduling rules, surgeon template matching, and payer constraints enforced automatically. Waitlists filled when cancellations occur. Pre-procedure preparation sequences and day-of confirmations reduce preventable day-of cancellations.' },
-      { title: 'Referring Surgeon Relationships Protected by Smooth Intake', body: 'Incomplete referral packets flagged and resolved before they delay scheduling. Referring surgeons receive a consistent, professional handoff and continue routing volume to an ASC that makes their referrals easy to complete.' },
-      { title: 'Post-Procedure Recovery Supported Through the Discharge Window', body: 'Structured 24-hour and 72-hour outreach contacts every discharged patient. Medication and wound care instructions confirmed via two-way interaction. After-hours patient questions answered without the ED as the only option.' }
-    ],
-    primaryUseCases: [
-      { title: 'Prior Authorization for Surgical Procedures', teaser: 'A stalled prior auth is a delayed surgery. Criteria-aware documentation assembly, payer submission, denial management, and appeal routing for surgical authorization workflows.', url: '/use-cases/prior-auth-surgical-procedures' },
-      { title: 'Referral Intake and Documentation Management', teaser: 'Referring surgeons judge your ASC by how smoothly referrals move. From received fax to classified, checked, and scheduled. Incomplete packets resolved before they cause delays.', url: '/use-cases/referral-intake-asc' },
-      { title: 'Patient Scheduling and Pre-Procedure Preparation', teaser: 'An optimized OR schedule starts with an optimized scheduling workflow. Procedure-specific rules, cancellation management, waitlist filling, and the prep sequences that reduce day-of cancellations.', url: '/use-cases/surgical-scheduling-pre-procedure' },
-      { title: 'Post-Procedure Follow-Up and Complication Monitoring', teaser: 'Post-procedure safety doesn\'t end at discharge. The 24-hour and 72-hour follow-up workflow: what it checks, what it routes, and how it connects to after-hours coverage.', url: '/use-cases/post-procedure-followup-complication' },
-      { title: 'Fax and Inbound Document Routing', teaser: 'Your fax inbox is a clinical workflow. Referral packets, auth responses, clearances, and lab results, read, classified, and routed, not stacked in a manual queue.', url: '/use-cases/fax-inbound-document-routing' }
-    ],
-    additionalUseCases: [
-      { id: 'UC04', title: 'Prior Authorization Across High-Volume Specialty Services', primarySegment: 'Health Systems', url: '/use-cases/prior-auth-high-volume-specialty' }
-    ],
-    featuredProducts: [
-      { name: 'ZynSchedule', url: '/agents/operational-efficiency/zynschedule', description: 'Procedure-specific scheduling with surgeon template matching, payer constraints, and waitlist management for surgical cancellations. Pre-procedure preparation and day-of confirmation sequences reduce preventable day-of cancellations.' },
-      { name: 'Prior Auth Acceleration Care Plan', url: '/care-plans', description: 'Orchestrated workflow from authorization order to approved and scheduled. Handles documentation assembly, payer submission, denial management, and scheduling trigger when authorization is confirmed.' },
-      { name: 'Transitions of Care Agent', url: '/agents/transitions-of-care', description: 'Post-procedure follow-up adapted to the ASC discharge context: 24-hour and 72-hour structured outreach, medication and wound care confirmation, complication routing, and integration with after-hours coverage.' },
-      { name: 'ZynAfterHours', url: '/agents/operational-efficiency/zynafterhours-triage', description: '24/7 after-hours coverage for post-procedure patient concerns. Clinical triage logic, 15+ languages. Patients who would otherwise go to the ED get a clinical answer and a clear next step instead.' }
-    ],
-    citations: [
-      { stat: 'Surgical prior authorizations are among the most documentation-intensive authorization categories in ambulatory care, and denial rates for surgical procedures are higher than most other service categories.', context: 'For an ASC submitting 30\u201380 prior auths per week without automation, the administrative burden and procedure delay risk compounds as payer portal requirements multiply.', sourceName: 'AMA Prior Authorization and Administrative Burden', sourceUrl: 'https://www.ama-assn.org/practice-management/prior-authorization/prior-authorization-and-administrative-burden' },
-      { stat: 'No-show rates and day-of cancellations in ambulatory surgery settings have direct and measurable revenue impact per OR day, with proactive scheduling workflows reducing cancellation rates.', context: 'Automated waitlist management, preparation reminders, and day-of confirmation sequences address the preventable share of day-of cancellations before they happen.', sourceName: 'MGMA Benchmarking Data', sourceUrl: 'https://www.mgma.com/data/benchmarking-data' },
-      { stat: 'Manual fax management in high-volume ambulatory surgery centers consumes significant staff time daily, with the highest risk concentrated in time-sensitive categories like prior auth approvals and medical clearances.', context: 'The risk is not just the staff time. It is the clinical and scheduling implication when a time-sensitive document sits unprocessed. Auth approvals missed, clearances delayed, procedures rescheduled.', sourceName: 'ASCA ASC Operational Benchmarking', sourceUrl: null },
-      { stat: 'Structured post-surgical follow-up outreach within 24\u201372 hours of ASC discharge reduces avoidable ED visits for post-procedure complications and medication confusion.', context: 'For ASC patients, the post-discharge window is the highest-risk clinical period and the period where patient communication is typically least structured.', sourceName: 'Published post-surgical care and ambulatory outcomes research', sourceUrl: null }
-    ],
-    ctaHeadline: 'Book a Demo',
-    ctaSubline: 'Talk to our team about your ASC\'s operational and throughput priorities.',
-    ctaButton: 'Book a Demo'
+    eyebrow: 'Ambulatory surgery centers',
+    title: 'Fewer surprises before and after surgery',
+    lead: 'Referral intake, pre-procedure scheduling and post-op follow-up calls, handled by agents, with your staff taking every exception.',
+    secondary: { label: 'Front-office use cases', href: '/use-cases#front-office' },
+    panel: { brand: 'Care operations', title: 'Case readiness', meta: 'Cases in the next 7 days', label: 'Sample case readiness queue, illustrative data',
+      tiles: [{ label: 'Cases', value: '38' }, { label: 'Ready', value: '29' }, { label: 'Open items', value: '9' }],
+      rows: [{ title: 'Case 207 · Thursday 7:30 am', sub: 'Labs done, medication hold confirmed', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Completed' } },
+        { title: 'Case 212 · Thursday 10:00 am', sub: 'Clearance note missing', owner: { type: 'staff', label: 'Intake coordinator' }, status: { tone: 'warning', label: 'Escalated' } },
+        { title: 'Case 219 · Friday 8:15 am', sub: 'Referral packet complete', owner: { type: 'agent', label: 'ZynFax' }, status: { tone: 'success', label: 'Completed' } }],
+      footer: 'Your staff take every exception.' },
+    workflows: { title: 'What we run for surgery centers',
+      lead: 'The work before and after the procedure decides whether the day runs on plan. Agents handle the routine steps; your staff handle the exceptions.',
+      items: [
+        { eyebrow: 'Referral intake', title: 'Referral packets sorted and checked', problem: 'Faxes arrive from a dozen practices as unlabeled documents.',
+          does: 'ZynFax reads, matches and routes each document and flags missing items before scheduling.',
+          links: [{ label: 'Referral intake', href: '/use-cases/referral-intake-asc' }] },
+        { eyebrow: 'Preparation', title: 'Pre-procedure preparation confirmed', problem: 'Cancellations start days earlier, with a lab not done or a ride not arranged.',
+          does: 'Two-way reminders confirm each preparation step, and gaps go to staff while there is still time to fix them.',
+          links: [{ label: 'Pre-procedure preparation', href: '/use-cases/surgical-scheduling-pre-procedure' }] },
+        { eyebrow: 'Recovery', title: 'Follow-up calls after the procedure', problem: 'Questions in the first days at home often go unasked until they become urgent.',
+          does: 'Calls on the schedule your surgeons set, with wound, pain and medication concerns routed to your clinical team.',
+          links: [{ label: 'Post-procedure follow-up', href: '/use-cases/post-procedure-followup-complication' }] }] },
+    connect: { title: 'Works with the systems you run',
+      body: 'Zynix connects to ' + SITE_FACTS.ehr.line + ', and reads the faxes that still carry most referral paperwork.',
+      link: ZX_SOL_FLOW_LINK },
+    callout: { id: 'governance', eyebrow: 'Governance', title: 'Your staff take every exception',
+      body: zxGovernance(['escalation']).map(function (e) { return '<strong>' + e.title + '.</strong> ' + e.text; }),
+      link: { label: 'Security and trust', href: '/security' } },
+    cta: { title: 'See what Zynix runs for surgery centers',
+      sub: 'We’ll walk through referral intake, pre-procedure scheduling and post-op follow-up calls on sample data, then map them to your contracts and programs.',
+      secondary: { label: 'Front-office use cases', href: '/use-cases#front-office' } }
   });
 }
 
 
 // ============================================================================
-// 6. FQHCs
+// 6. FQHCs & COMMUNITY HEALTH
 // ============================================================================
 function renderWhoWeServeFQHCs() {
   return renderAudiencePageV7({
-    audienceName: 'Federally Qualified Health Centers',
-    breadcrumb: 'Who We Serve &gt; FQHCs',
-    eyebrow: 'WHO WE SERVE',
-    headline: 'Reach more patients in their language. Close more care gaps. Reduce avoidable ED visits for your highest-barrier population.',
-    subhead: 'FQHCs serve the most complex patient populations in US healthcare, with some of the leanest care management staffing ratios in the ambulatory sector. The clinical mission is clear. The execution gap is structural: too many patients, too few coordinators, too many barriers between a clinical need and a completed clinical action.',
-    challengeIntro: 'FQHCs serve patients with high chronic disease burden, significant social determinants of health, linguistic diversity, and limited access to alternative care settings. The execution gap is structural. The ratio of care management staff to patients makes full-panel execution impossible without an execution layer that handles contact volume, barrier identification, and multilingual outreach.',
-    challenges: [
-      { title: 'SDoH Barriers That Block Clinical Follow-Through', body: 'Transportation, food insecurity, housing instability, language barriers, and medication cost affect care plan adherence in ways clinical interventions alone cannot address. Identifying the barriers is one problem. Routing them to resolution is another. Most outreach tools do the first and skip the second.' },
-      { title: 'Multilingual Patient Population', body: 'A significant share of FQHC patient panels speak a primary language other than English. Standard outreach tools reach the English-speaking cohort. They miss the rest, consistently, at exactly the moment when patient contact matters most. Language is not an edge case. It is a panel-level access problem.' },
-      { title: 'Chronic Disease Volume With Limited Coordinator Capacity', body: 'FQHC patient panels carry high chronic disease burden. The ratio of care management staff to patients makes consistent monthly contact for every chronic care patient impossible without an execution layer. Most FQHCs are reaching a fraction of their CCM-eligible and care plan-enrolled panel.' },
-      { title: 'After-Hours Access and ED Utilization', body: 'FQHC patients have fewer alternatives to the ED when they can\'t reach their care team after hours. When the call goes to voicemail or reaches an English-only line, patients in this population go to the ED at higher rates than the general ambulatory population.' }
-    ],
-    fitIntro: 'Zynix AI is built for the execution complexity of FQHC populations: multilingual, high-barrier, high chronic disease volume. It doesn\'t simplify the problem. It handles the work at the depth and scale the population requires.',
-    capabilities: [
-      { title: 'Outreach That Reaches the Full Panel, in the Patient\'s Language', body: 'Care management outreach, after-hours triage, and patient engagement in 15+ languages. The patient who calls in Spanish, Vietnamese, Haitian Creole, or Somali receives the same quality of clinical triage and care coordination as the patient who calls in English. Language is not a reason a patient goes unserved.' },
-      { title: 'SDoH Barriers Identified, Routed, and Documented', body: 'Transportation, food, housing, cost, and language barriers captured during outreach interactions in the same conversation as the clinical need. Each barrier type routes to the appropriate community resource or scheduling alternative. Resolution documented for HRSA reporting and quality measure tracking.' },
-      { title: 'Chronic Care Programs That Reach the Full Enrolled Panel', body: 'Monthly check-ins, medication adherence monitoring, care plan reinforcement, and CCM billing documentation for every eligible patient, not just those the coordinator had time to reach. Patients with the highest barrier burden get more consistent contact, not less.' },
-      { title: 'Post-Discharge Follow-Up That Accounts for Every FQHC-Specific Risk', body: 'ADT-triggered multilingual outreach reaches every discharged FQHC patient within 48 hours. Medication reconciliation accounts for polypharmacy complexity. Follow-up scheduling accommodates transportation barriers. Clinical escalation routes based on risk tier.' }
-    ],
-    primaryUseCases: [
-      { title: 'After-Hours Triage for Multilingual and Underserved Populations', teaser: '24/7 clinical triage in 15+ languages, at FQHC economics, with ED diversion built into the workflow. After-hours access is an equity issue.', url: '/use-cases/after-hours-triage-multilingual-fqhc' },
-      { title: 'SDoH Screening, Identification, and Care Navigation', teaser: 'Screening without routing is documentation. Routing without resolution is delay. Full workflow from positive SDoH screen to routed, documented, and resolved barrier.', url: '/use-cases/sdoh-screening-care-navigation' },
-      { title: 'Preventive Screening Gap Closure for High-Barrier Populations', teaser: 'Two-way outreach that acknowledges barriers, offers a path through them, and books the appointment in the same interaction, not a generic reminder.', url: '/use-cases/preventive-screening-gap-fqhc' },
-      { title: 'Medication Adherence for Complex Chronic Patients', teaser: 'In FQHC populations, medication non-adherence is a social problem as much as a clinical one. Barrier identification (cost, pharmacy access, side effects) and routing to resolution.', url: '/use-cases/medication-adherence-complex-chronic' },
-      { title: 'Post-Discharge Follow-Up for High-Risk FQHC Patients', teaser: 'For FQHC patients, the post-discharge window is where outcomes are determined. Multilingual outreach, medication reconciliation, and transportation-accommodated follow-up scheduling.', url: '/use-cases/post-discharge-followup-fqhc' }
-    ],
-    additionalUseCases: [
-      { id: 'UC17', title: 'Appointment Scheduling and No-Show Reduction', primarySegment: 'Independent Group Practices', url: '/use-cases/appointment-scheduling-no-show' },
-      { id: 'UC19', title: 'CCM Billing Execution and Chronic Care Management', primarySegment: 'Independent Group Practices', url: '/use-cases/ccm-billing-chronic-care' },
-      { id: 'UC15', title: 'Medication Adherence for Chronic Disease Populations', primarySegment: 'Health Plans', url: '/use-cases/medication-adherence-chronic-populations' }
-    ],
-    featuredProducts: [
-      { name: 'ZynAfterHours', url: '/agents/operational-efficiency/zynafterhours-triage', description: '24/7 clinical triage with native support for 15+ languages. Evidence-based triage logic, ED diversion built in, next-day appointment scheduling. Built to operate at FQHC population economics.' },
-      { name: 'SDoH Determination Agent', url: '/agents/sdoh-determination', description: 'Captures transportation, housing, food insecurity, language, and cost barriers during outreach interactions and routes each barrier type to the appropriate community resource or scheduling alternative. Resolution documented for HRSA reporting.' },
-      { name: 'Preventive & Quality Activation Agents', url: '/agents/preventive-quality-activation', description: 'Two-way outreach for preventive screening, AWV, and quality gaps, with plain-language education, barrier capture, and same-session scheduling for patients who face access barriers that generic reminders don\'t address.' },
-      { name: 'Transitions of Care Agent', url: '/agents/transitions-of-care', description: 'Post-discharge follow-up with multilingual outreach, medication reconciliation for polypharmacy FQHC patients, transportation-accommodated follow-up scheduling, and clinical escalation based on risk tier.' }
-    ],
-    citations: [
-      { stat: 'FQHCs with higher patient outreach completion rates consistently outperform on HRSA UDS preventive care quality measures, with the performance gap most visible on measures that require patient-initiated follow-through.', context: 'For high-barrier populations, the outreach must navigate the barrier in the same interaction, not schedule a second touch. Contact rate and barrier resolution are the leading indicators.', sourceName: 'HRSA GeoCare Navigator (formerly the UDS Mapper)', sourceUrl: 'https://geocarenavigator.hrsa.gov/' },
-      { stat: 'Multilingual patient communication in the patient\'s primary language, without a third-party interpreter, improves engagement, care plan adherence, and follow-up completion rates in underserved populations.', context: 'For patients whose primary language is not English, language-matched outreach is the threshold between contacted and unreached. This is not a marginal issue for FQHCs with diverse panels.', sourceName: 'Published health equity and community health outcomes research', sourceUrl: null },
-      { stat: 'FQHCs that close the loop between SDoH screening and barrier resolution show measurably better chronic care quality measure performance than those that screen and document without routing.', context: 'PCMH quality measures and HRSA UDS metrics both reward SDoH identification and action. The action step is what separates documentation from impact.', sourceName: 'PCMH quality measure data and HRSA program guidelines', sourceUrl: null },
-      { stat: 'FQHC patients face a higher 30-day readmission risk than the general ambulatory population, driven by post-discharge follow-up gaps, language barriers in the discharge process, and medication reconciliation failures in the 24\u201348 hour window.', context: 'For FQHCs under value-based contracts, readmission risk in the discharged patient cohort is both a care quality issue and a cost exposure. The 48-hour contact window is the highest-leverage intervention point.', sourceName: 'Post-discharge outcomes research in FQHC and community health center populations', sourceUrl: null }
-    ],
-    ctaHeadline: 'Book a Demo',
-    ctaSubline: 'Talk to our team about your FQHC\'s care coordination and population health priorities.',
-    ctaButton: 'Book a Demo'
+    eyebrow: 'FQHCs &amp; community health',
+    title: 'Reach patients in the language they speak',
+    lead: 'Multilingual outreach, after-hours access and preventive screening follow-up for high-barrier populations, with care team escalation built in.',
+    secondary: { label: 'Read the AMISTAD story', href: '/case-studies/amistad' },
+    panel: { brand: 'Care operations', title: 'Outreach queue', meta: 'This week · all sites', label: 'Sample community health outreach queue, illustrative data',
+      tiles: [{ label: 'Screenings due', value: '940' }, { label: 'Reached', value: '512' }, { label: 'Barriers routed', value: '63' }],
+      rows: [{ title: 'Pt 2275 · A1c test due', sub: 'Prefers Spanish · booked Friday', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Booked' } },
+        { title: 'Pt 3318 · colorectal screening', sub: 'Needs a ride', owner: { type: 'staff', label: 'Care coordinator' }, status: { tone: 'warning', label: 'Escalated' } },
+        { title: 'Pt 6102 · discharged Sunday', sub: 'Visit booked at the center', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Booked' } }],
+      footer: 'Barriers and clinical questions go to your care team by rule.' },
+    proof: { card: { href: '/case-studies/amistad', eyebrow: 'Customer story · FQHC', title: 'AMISTAD Community Health Center',
+      body: 'After-hours access and preventive outreach for a multilingual patient population.', cta: 'Read the AMISTAD story', icon: 'mappin' } },
+    workflows: { title: 'What we run for community health centers',
+      lead: 'Your patients face more barriers between an order and a completed visit. Zynix has the conversation that finds the barrier, and your team removes it.',
+      items: [
+        { eyebrow: 'Preventive screening', title: 'Screening follow-up in the patient’s language', problem: 'Orders stay open for months, and reminders don’t ask why.',
+          does: 'Agents ask what is in the way in the patient’s preferred language, book the screening and route transportation or cost barriers to coordinators.',
+          links: [{ label: 'Screening outreach', href: '/use-cases/preventive-screening-gap-fqhc' }] },
+        { eyebrow: 'After-hours access', title: 'After-hours calls in the caller’s language', problem: 'At night, calls reach an English-only service or go unanswered.',
+          does: 'ZynAfterHours answers in the caller’s preferred language, books routine visits and routes symptom questions to your on-call clinician.',
+          links: [{ label: 'After-hours access', href: '/use-cases/after-hours-triage-multilingual-fqhc' }] },
+        { eyebrow: 'Transitions of care', title: 'Follow-up after a hospital stay', problem: 'The center often hears about a stay last, and the instructions came home in the wrong language.',
+          does: 'ADT messages start outreach, nurses take the clinical questions and ZynSchedule books the visit at the center.',
+          links: [{ label: 'Post-discharge follow-up', href: '/use-cases/post-discharge-followup-fqhc' }] }] },
+    plan: { eyebrow: 'In practice', title: 'One open order, one barrier at a time',
+      lead: 'Agents have the conversation and book the visit. Coordinators and community health workers handle what needs a person.',
+      callouts: [{ title: 'In the patient’s language', body: 'Outreach in the patient’s preferred language, with the reason for the delay recorded.' },
+        { title: 'Barriers go to people', body: 'Transportation, cost and other barriers are routed to your care team by rule.' },
+        { title: 'Booked when it works', body: 'ZynSchedule books a time the patient can make.' }],
+      panel: { brand: 'Care operations', chip: 'Example episode · sample data', title: 'Screening outreach', meta: 'Pt 5102 · mammogram ordered in spring', label: 'Example screening outreach episode, illustrative data',
+        steps: [{ time: 'Mon', title: 'Call in Spanish · works during clinic hours', owner: 'Outreach agent', status: { tone: 'success', label: 'Reached' } },
+          { time: 'Mon', title: 'Saturday imaging slot offered and booked', owner: 'ZynSchedule', status: { tone: 'success', label: 'Booked' } },
+          { time: 'Thu', title: 'Ride needed, sent to a coordinator', owner: 'Care coordinator', status: { tone: 'warning', label: 'Escalated' } },
+          { time: 'Fri', title: 'Ride arranged', owner: 'Care coordinator', status: { tone: 'success', label: 'Completed' } }],
+        footer: 'Your coordinators decide how each barrier is handled.' } },
+    connect: { title: 'One record for every patient',
+      body: 'Zynix brings EHR, claims, ADT, lab and pharmacy data, including social needs screening, into one patient record, and connects to ' + SITE_FACTS.ehr.line + '.',
+      link: ZX_SOL_FLOW_LINK },
+    callout: zxSolAccessCallout(),
+    cta: { title: 'See what Zynix runs for community health centers',
+      sub: 'We’ll walk through multilingual outreach, after-hours access and preventive screening follow-up on sample data, then map them to your contracts and programs.',
+      secondary: { label: 'Read the AMISTAD story', href: '/case-studies/amistad' } }
   });
 }
+
 
 
 // ============================================================================
@@ -8366,58 +8671,47 @@ function renderCarePlansV7() {
 }
 
 
+// ── /solutions hub (owner P3; COPY_DECK §4 and §5.4): audience-first. Hero → customer logos → by organization (5) →
+// by workflow (6, anchors on /use-cases) → related (router, CROSS_LINKS) → CTA. No product index, no stat band. ──
 function renderSolutionsOverview() {
-    return renderInnerHero('SOLUTIONS', 'Purpose-Built AI for Every Layer of Care',
-      'From data intelligence to autonomous AI agents, deployable care plans to clinical documentation \u2014 Zynix delivers the complete toolkit for value-based care.',
-      IMG.enterprise, 'Zynix Solutions Overview', 'Explore Solutions') +
-
-    '<section class="zynix-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">PRODUCT SUITE</span>' +
-    '<h2 style="text-align:center;margin-bottom:48px">Four Solutions. One Outcome: Better Care at Scale.</h2>' +
-    '<div class="zynix-feature-grid">' +
-      '<div class="zynix-feature-card fade-in-up">' +
-        '<div class="zynix-feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>' +
-        '<h3>Zynix Data Analytics</h3>' +
-        '<p>Population health intelligence that identifies HCC gaps, stratifies risk, tracks quality measures, and surfaces actionable insights across your entire patient population.</p>' +
-        '<div class="zynix-feature-metric"><span>40%</span><small>Faster gap closure</small></div>' +
-        '<a href="/zynix-data-analytics" style="color:var(--z-accent);font-weight:600;margin-top:12px;display:inline-block">Learn More \u2192</a>' +
-      '</div>' +
-      '<div class="zynix-feature-card fade-in-up">' +
-        '<div class="zynix-feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>' +
-        '<h3>Zynix AI Agents</h3>' +
-        '<p>12 purpose-built autonomous agents that execute care workflows: outreach calls, scheduling, triage, chronic care management, transitions of care, and more.</p>' +
-        '<div class="zynix-feature-metric"><span>12</span><small>Specialized agents</small></div>' +
-        '<a href="/zynix-ai-agents" style="color:var(--z-accent);font-weight:600;margin-top:12px;display:inline-block">Learn More \u2192</a>' +
-      '</div>' +
-      '<div class="zynix-feature-card fade-in-up">' +
-        '<div class="zynix-feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>' +
-        '<h3>Deployable Care Plans</h3>' +
-        '<p>Configurable care workflows for TCM, AWV, chronic care, and preventive screenings. Orchestrate multi-step protocols that agents execute autonomously.</p>' +
-        '<div class="zynix-feature-metric"><span>85%+</span><small>TCM contact rate</small></div>' +
-        '<a href="/care-plans" style="color:var(--z-accent);font-weight:600;margin-top:12px;display:inline-block">Learn More \u2192</a>' +
-      '</div>' +
-      '<div class="zynix-feature-card fade-in-up">' +
-        '<div class="zynix-feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg></div>' +
-        '<h3>ZynScribe</h3>' +
-        '<p>Ambient AI clinical documentation that listens, understands, and generates accurate notes in real time. Reduce documentation burden and give clinicians time back.</p>' +
-        '<div class="zynix-feature-metric"><span>70%</span><small>Less documentation time</small></div>' +
-        '<a href="/zynscribe" style="color:var(--z-accent);font-weight:600;margin-top:12px;display:inline-block">Learn More \u2192</a>' +
-      '</div>' +
-    '</div></div></section>' +
-
-    '<section class="zynix-section-dark"><div class="zynix-container" style="text-align:center">' +
-    '<h2 style="color:#fff">Built for Outcomes. Measured in Impact.</h2>' +
-    renderMetricsBar([
-      { value: '1M+', label: 'Patients Served' },
-      { value: '85%+', label: 'TCM Contact Rate' },
-      { value: '40%', label: 'Gap Closure Improvement' },
-      { value: '30', label: 'States Deployed' }
-    ]) +
-    '</div></section>' +
-
-    renderCTA('See Zynix Solutions in Action', 'Discover how our integrated platform can transform your care delivery and drive measurable outcomes.', 'Request a Demo') +
-    renderFooter();
-  }
+  var orgs = [
+    { aud: 'aco', icon: 'users', line: 'TCM, wellness visits, HCC and quality gaps across your attributed panel.', proof: 'Palm Beach ACO · West Florida ACO · Space Coast ACO', cta: 'For ACOs' },
+    { aud: 'mso', icon: 'stethoscope', line: 'One data layer and one set of workflows across independent practices.', proof: 'IncentiveCare IPA · Apollo Clinic Network', cta: 'For MSOs and IPAs' },
+    { aud: 'plan', icon: 'target', line: 'Member outreach for HEDIS gaps, adherence and post-discharge follow-up.', proof: 'eternalHealth', cta: 'For health plans' },
+    { aud: 'system', icon: 'hospital', line: 'Post-discharge follow-up and ambient documentation across your sites.', proof: 'NHS Health System', cta: 'For health systems' },
+    { aud: 'fqhc', icon: 'mappin', line: 'Multilingual outreach and after-hours access for high-barrier populations.', proof: 'AMISTAD Community Health Center', cta: 'For FQHCs' }
+  ];
+  var flows = [
+    { id: 'transitions-of-care', label: 'Transitions of care', line: 'ADT-triggered outreach inside the TCM window, through the follow-up visit.', icon: 'activity' },
+    { id: 'risk-adjustment-quality', label: 'Risk adjustment &amp; quality gaps', line: 'HCC and HEDIS gaps worked from the list to a documented visit.', icon: 'target' },
+    { id: 'chronic-care', label: 'Chronic care &amp; adherence', line: 'Monthly CCM contact and adherence check-ins.', icon: 'heart' },
+    { id: 'after-hours', label: 'After-hours access', line: 'After-hours calls answered, with symptom questions routed to your on-call clinician.', icon: 'clock' },
+    { id: 'care-navigation', label: 'Care navigation &amp; SDoH', line: 'Screening, resource referrals and follow-up for patients facing barriers.', icon: 'mappin' },
+    { id: 'front-office', label: 'Front-office automation', line: 'Referrals, fax intake, scheduling and authorization paperwork.', icon: 'file' }
+  ];
+  var html = renderHero({ preset: 'product', compact: true, eyebrow: 'Solutions', title: 'Find the workflows for your organization',
+    lead: 'ACOs, MSOs and IPAs, health plans, health systems and FQHCs run different programs. Start with your organization type, or browse by workflow.',
+    secondary: { label: 'Browse all use cases', href: '/use-cases' } });
+  html += '<section class="zynix-section zynix-section--compact zynix-section--rule zx-sol-logos" aria-label="Customers"><div class="zynix-container">' +
+    renderLogoRow(null, { id: 'solutions-logos' }) + '</div></section>';
+  html += renderSection({ id: 'organizations', surface: 'subtle', className: 'zx-sol-orgs' },
+    renderSectionHead('Who we serve', 'By organization', 'Each page shows the three workflows we run most for that type of organization, the customers who run them, and how the data connects.', { id: 'organizations-title', align: 'split' }) +
+    renderGrid(orgs, function (o) {
+      var a = ZX_SOL_AUD[o.aud];
+      return renderCard({ href: a.href, icon: o.icon, title: a.label, body: o.line,
+        meta: '<span class="zx-sol-orgs__proof"><span class="zx-visually-hidden">Customers: </span>' + o.proof + '</span>', cta: o.cta });
+    }));
+  html += renderSection({ id: 'workflows', className: 'zx-sol-flows' },
+    renderSectionHead('By program', 'By workflow', zxSolAll().length + ' use cases, grouped into ' + ZX_SOL_GROUPS.length + ' programs. Each one shows the steps, who owns them and what it runs on.', { id: 'workflows-title', align: 'split' }) +
+    zxSolLinks(flows.map(function (f) { return { href: '/use-cases#' + f.id, label: f.label, desc: f.line, icon: f.icon }; }), 'zx-sol-links--3') +
+    '<div class="zx-sol-also">' +
+      '<p class="zx-sol-also__item"><span class="zx-sol-also__label">Also served</span>' + renderLinkArrow('Ambulatory surgery centers', '/audience-segments/ascs') + '<span class="zx-sol-also__desc">Referral intake, pre-procedure scheduling and post-op follow-up.</span></p>' +
+      '<p class="zx-sol-also__item"><span class="zx-sol-also__label">How it fits together</span>' + renderLinkArrow('See the data flow', '/platform#data-flow') + '<span class="zx-sol-also__desc">Every workflow runs on the same data flow, from source data to a documented outcome.</span></p>' +
+    '</div>');
+  html += renderCTA(null, null, null);
+  html += renderFooter();
+  return html;
+}
 
 function renderDataAnalyticsV7() {
   var html = '';
