@@ -56,7 +56,9 @@
         { id: 'instagram', label: 'Zynix AI on Instagram', href: 'https://www.instagram.com/zynixai/' }
       ]
     },
-    brand: { logo: 'brand/zynix-logo-color.png', logoInverse: 'brand/zynix-logo-inverse.png', logoRatio: 2.625, symbol: 'logo-symbol.png' },
+    // symbol: the colour Z (blue and orange) from the colour lockup, trimmed to its alpha box and centred on a 64x64 transparent
+    // square, so it fills the 20x20 slot in the zynix-ui bar on white. (logo-symbol.png is light artwork for dark surfaces.)
+    brand: { logo: 'brand/zynix-logo-color.png', logoInverse: 'brand/zynix-logo-inverse.png', logoRatio: 2.625, symbol: 'brand/zynix-symbol-color.png' },
     demo: { label: 'Request a demo', href: CALENDLY, length: '30 minutes' },
     stats: {
       patients:     { value: '1M+',  label: 'value-based care patients onboarded',       sentence: '1M+ value-based care patients onboarded', source: 'Zynix, September 2026' },
@@ -159,14 +161,18 @@
       logo: { file: 'logos/central-florida-aco.svg', source: 'central-florida-aco-logo.svg', h: 24, w: 104 }, caseStudy: '/case-studies-central-florida-aco', metrics: [] },
     nexthealthcare: { name: 'NEXT Healthcare Solutions', segment: null, segmentLabel: null, logoRow: 7,   // [VERIFY] segment
       logo: { file: 'logos/next-healthcare.svg', source: 'next-healthcare.svg', h: 28, w: 79 }, caseStudy: null, metrics: [] },
-    goldencareaco: { name: 'GoldenCare ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: 8,
-      logo: { file: 'logos/goldencare-aco.webp', source: 'goldencare-aco.png', h: 32, w: 80 }, caseStudy: null, metrics: [] },
+    // GoldenCare, Sunflower and Professional Radiology are thin, light marks that vanish under the rows' grayscale filter, so their
+    // `file` is a monochrome ink rendition (light colours darkened, white removed, 2026-09-29); the colour trims stay in
+    // images/logos/<name>.webp for any colour context. GoldenCare's script still reads lighter than the other marks, so it is
+    // out of the default row and CLSC (now on a transparent background) takes slot 8.
+    goldencareaco: { name: 'GoldenCare ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: null,
+      logo: { file: 'logos/goldencare-aco-ink.webp', source: 'goldencare-aco.png', h: 36, w: 90 }, caseStudy: null, metrics: [] },
     sunfloweraco: { name: 'Sunflower ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: null,
-      logo: { file: 'logos/sunflower-aco.webp', source: 'sunflower-aco.png', h: 36, w: 63 }, caseStudy: null, metrics: [] },
+      logo: { file: 'logos/sunflower-aco-ink.webp', source: 'sunflower-aco.png', h: 40, w: 70 }, caseStudy: null, metrics: [] },
     professionalradiology: { name: 'Professional Radiology', segment: null, segmentLabel: null, logoRow: null,
-      logo: { file: 'logos/professional-radiology.webp', source: 'professional-radiology.png', h: 36, w: 60 }, caseStudy: null, metrics: [] },
-    clsc: { name: 'CLSC', segment: null, segmentLabel: null, logoRow: null,   // [VERIFY] full name
-      logo: { file: 'logos/clsc.webp', source: 'clscfl.png', h: 24, w: 86 }, caseStudy: null, metrics: [] },
+      logo: { file: 'logos/professional-radiology-ink.webp', source: 'professional-radiology.png', h: 40, w: 67 }, caseStudy: null, metrics: [] },
+    clsc: { name: 'CLSC', segment: null, segmentLabel: null, logoRow: 8,   // [VERIFY] full name
+      logo: { file: 'logos/clsc-alpha.webp', source: 'clscfl.png', h: 24, w: 85 }, caseStudy: null, metrics: [] },
     apolloclinic: { name: 'Apollo Clinic Network', segment: 'practice', segmentLabel: 'Physician group', logoRow: null, logo: null, caseStudy: '/case-studies/apollo-clinic', metrics: [   // [VERIFY] segment
       { value: 'Under 14%', label: 'No-show rate', baseline: '22%', period: 'first quarter of deployment', n: null, source: 'Reported by Apollo Clinic Network', approved: null }   // P4, DECISIONS 16 [VERIFY]
     ] },
