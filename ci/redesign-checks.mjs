@@ -12,6 +12,8 @@
 //      from styling attributes, and still sends sms_consent 'No'.
 //   5. Banned-string ratchet (ci/banned-strings.mjs): no scope's count rises above ci/baseline.json, and no scope on the
 //      must-be-zero list of the current phase (ci/baseline.json `phase`, or `--phase N` / env ZX_PHASE) has a hit.
+//      Exempt hits (facts data, dead functions, URL slugs, dated) are not counted; a separate check fails when an exemption
+//      is no longer valid (a DEAD_FUNCTIONS entry became reachable). List them: node ci/banned-strings.mjs --exempt
 // ci/baseline.json documents its own fields. Try a phase without changing it: node ci/static-checks.mjs --phase 1
 import { judge } from './banned-strings.mjs';
 
@@ -96,9 +98,12 @@ export function runRedesignChecks({ js, css, baseline, phase, check }) {
   const noConsent = /name:\\?'sms_consent\\?',\s*value:\\?'No\\?'/.test(form) || /name:\s*\\?["']sms_consent\\?["']\s*,\s*value:\s*\\?["']No\\?["']/.test(form);
   check(`/contact demo form keeps the SMS disclosure sentence and links verbatim and sends sms_consent 'No'`, at > -1 && sentence && noConsent, at < 0 ? 'no id="zynix-demo-form" in the bundle' : `sentence ${sentence ? 'ok' : 'CHANGED'}, sms_consent No ${noConsent ? 'ok' : 'MISSING'}`);
 
-  // 5. banned-string ratchet
+  // 5. banned-string ratchet (exemptions: ci/banned-strings.mjs header; each one is verified here)
   const r = judge(js, baseline, phase);
   const tot = r.counts['(bundle)'] || 0;
+  const kinds = Object.entries(r.exemptByKind || {}).map(([k, n]) => `${k} ${n}`).join(', ') || 'none';
+  check(`banned strings: exemptions are valid (every DEAD_FUNCTIONS entry unreachable from the router and live code; dated exemptions pinned)`, !(r.exemptProblems || []).length,
+    ((r.exemptProblems || []).join(' | ') || `${r.exempted} exempt hit(s): ${kinds}`) + ((r.exemptNotes || []).length ? '; notes: ' + r.exemptNotes.join(' | ') : ''));
   check(`banned strings: no scope above its ci/baseline.json count (phase ${r.phase}; ${r.hits.length} hits in the bundle, ${r.exempted} exempt)`, r.rises.length === 0,
     r.rises.length ? 'rose: ' + r.rises.map(x => `${x.scope} ${x.baseline}->${x.count}`).slice(0, 8).join(', ') + ' (node ci/banned-strings.mjs --hits <scope>)' : (r.lower.length ? `${r.lower.length} scope(s) below baseline; ratchet down with node ci/banned-strings.mjs --write-baseline` : `whole bundle ${tot}`));
   check(`banned strings: must-be-zero scopes are clean (phase ${r.phase}: ${r.mustZero.length ? r.mustZero.join(', ') : 'none yet'})`, r.zeroFails.length === 0,

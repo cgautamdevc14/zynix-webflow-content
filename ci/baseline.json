@@ -1,19 +1,22 @@
 {
   "_doc": [
     "Ratchet baselines for ci/static-checks.mjs (DESIGN_SPEC §8.2 Q items 3-5), measured at c95cc03. Owner: Q.",
-    "phase: 0 until the Phase 1 merge; the orchestrator sets it to 1, 2, 3 after each phase merges. A scope listed in",
+    "phase: 3 since 2026-09-29 (Phase 3 integration, Q fix round 1); the orchestrator sets it to 1, 2, 3 after each phase merges. A scope listed in",
     "  mustBeZeroByPhase[p] for every p <= phase must have zero banned-string hits ('*' = every scope).",
     "  Preview a later phase without editing this file: node ci/static-checks.mjs --phase 1",
     "bannedStrings: hits per scope at c95cc03 (absent = 0). A PR fails if any scope rises. Owning streams lower their",
     "  own scopes with: node ci/banned-strings.mjs --write-baseline (never raises). Inspect: node ci/banned-strings.mjs --hits <scope>",
-    "styleAttributes: max count of style=\" in the bundle (2,196 at c95cc03); lower it after each phase.",
+    "styleAttributes: max count of style=\" in the bundle (2,196 at c95cc03; 1,229 after Phase 3, 2026-09-29); lower it after each phase.",
     "undefinedVars: var(--z*) names used without a fallback and defined nowhere at c95cc03; S1's token block defines them,",
     "  then remove them here. Any other undefined name fails.",
     "smokeOverflow390: ci/smoke.mjs rect-overflow ratchet, outermost offending elements per page at 390px on production",
-    "  with c95cc03's files. Fails when a page gets worse; from phase 3 every count must be 0 (launch precondition 6)."
+    "  with c95cc03's files. Fails when a page gets worse; from phase 3 every count must be 0 (launch precondition 6).",
+    "Exempt hits (not counted; ci/banned-strings.mjs header): facts data, DEAD_FUNCTIONS (verified unreachable on every run),",
+    "  URL/path tokens, and DATED_EXEMPTIONS (renderPrivacyV7 'SOC 2 Type II certification', A2P-frozen, since 2026-09-29).",
+    "  List them: node ci/banned-strings.mjs --exempt; reachability report: node ci/banned-strings.mjs --dead"
   ],
   "commit": "c95cc03",
-  "phase": 0,
+  "phase": 3,
   "mustBeZeroByPhase": {
     "1": [
       "injectMegaMenu",
@@ -38,11 +41,8 @@
       "*"
     ]
   },
-  "styleAttributes": 2196,
-  "undefinedVars": [
-    "--z-primary",
-    "--z-text-light"
-  ],
+  "styleAttributes": 1229,
+  "undefinedVars": [],
   "smokeOverflow390": {
     "/": 3,
     "/platform": 7,
@@ -51,54 +51,7 @@
     "/compare-zynix-vs-navina": 1
   },
   "bannedStrings": {
-    "(bundle)": 404,
-    "initZynixAgent": 18,
-    "injectMegaMenu": 6,
-    "renderACOs": 0,
-    "renderAbout": 0,
-    "renderAlternativesHub": 0,
-    "renderBlog": 0,
-    "renderBlog1MPatients": 0,
-    "renderBlogLeadModel": 0,
-    "renderCarePlans": 5,
-    "renderCarePlansV7": 0,
-    "renderCareers": 0,
-    "renderCompareAbridge": 0,
-    "renderCompareCommure": 0,
-    "renderCompareHealthCatalyst": 0,
-    "renderCompareInnovaccer": 0,
-    "renderCompareNavina": 0,
-    "renderCompareNotableHealth": 0,
-    "renderCompareOliveAI": 0,
-    "renderComparePointSolutions": 0,
-    "renderDataAnalyticsV7": 0,
-    "renderDataPlatform": 0,
-    "renderGlossary": 0,
-    "renderHealthPlans": 0,
-    "renderHealthSystems": 0,
-    "renderHomepage": 44,
-    "renderMedRec": 1,
-    "renderPlatformHub": 0,
-    "renderPostDischarge": 3,
-    "renderPractices": 0,
-    "renderPrivacy": 2,
-    "renderPrivacyV7": 1,
-    "renderSecurityV7": 0,
-    "renderSolutionsOverview": 0,
-    "renderStep": 1,
-    "renderTrustCenter": 4,
-    "renderUseCaseAfterHours": 2,
-    "renderUseCaseGapClosure": 2,
-    "renderUseCaseReadmission": 1,
-    "renderUseCaseTCM": 2,
-    "renderWhitepapers": 0,
-    "renderWhoWeServeACOs": 0,
-    "renderWhoWeServeIndependentPractices": 0,
-    "renderZynAfterHours": 6,
-    "renderZynReminder": 1,
-    "renderZynScribeV7": 0,
-    "renderZynixLLM": 5,
-    "renderZynixLLMV7": 0,
-    "renderZynixOS": 19
+    "(bundle)": 47,
+    "renderHomepage": 44
   }
 }
