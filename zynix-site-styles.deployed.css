@@ -3495,10 +3495,11 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 /* Homepage (DESIGN_SPEC §5; owner H). Prefixes: zx-home-, zx-hw, zx-hiw, zx-flow, zx-ep. Shared components are restyled
    only as descendants of these classes. Tokens only (the rgba() values on the dark band are the ones §5.5 specifies). */
 
-/* Homepage rhythm: DECISIONS 11 caps the page at 8,500px (1440) and 11,000px (390), so homepage sections use a slightly
-   tighter section padding than the site default (80 instead of 112 at 1440; 48 instead of 64 at 390). */
+/* Homepage rhythm: DECISIONS 11 caps the page at 8,500px (1440) and 11,000px (390), so homepage sections use a tighter
+   section padding than the site default (72 instead of 112 at 1440; 40 instead of 64 at 390); the compact bands (#proof,
+   #audiences) use 48 / 32, so the page alternates quick and slow sections. */
 .zx-home-proof, .zx-home-hiw, .zx-home-flow, .zx-home-agents, .zx-home-caps, .zx-home-interop, .zx-home-customers, .zx-home-security, .zx-home-audiences, .zx-home-faq, .zx-home-end {
-  --zx-section-y:clamp(48px, 24px + 4vw, 80px); --zx-section-y-sm:clamp(40px, 26px + 1.6vw, 48px); --zx-head-gap:clamp(28px, 18px + 1.25vw, 36px); }
+  --zx-section-y:clamp(40px, 22px + 3.5vw, 72px); --zx-section-y-sm:clamp(32px, 20px + 2vw, 48px); --zx-head-gap:clamp(24px, 16px + 1.4vw, 36px); }
 
 /* ── §5.1 Hero ── */
 .zx-home-hero { padding:48px 0 32px; background:var(--zx-surface); }
@@ -3507,13 +3508,27 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-home-hero__title { margin:0; font-size:var(--zx-fs-display); line-height:var(--zx-lh-display); letter-spacing:var(--zx-tr-display); font-weight:var(--zx-fw-semibold); text-wrap:balance; color:var(--zx-text); }
 .zx-home-hero__lead { margin:20px 0 0; font-size:var(--zx-fs-lead); line-height:var(--zx-lh-lead); color:var(--zx-text-secondary); max-width:36em; }
 .zx-home-hero__actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
-.zx-home-hero__proof { display:flex; flex-wrap:wrap; gap:8px 0; list-style:none; margin:24px 0 0 -13px; padding:0; font-size:var(--zx-fs-sm); line-height:1.4; color:var(--zx-text-secondary);
-  clip-path:inset(0 0 0 13px); }   /* every item carries its left rule; the one that starts a line is clipped away */
-.zx-home-hero__proof li { padding:0 12px; border-left:1px solid var(--zx-border); }
+.zx-home-hero__text, .zx-home-hero__media { min-width:0; }   /* the widget's tab bar scrolls inside a 280px column instead of widening it (320px) */
+/* Proof list: three stacked rows with a 14px icon each, at every width (an inline row wrapped 2+1 at 1440, 1024 and 768) */
+.zx-home-hero__proof { display:grid; gap:8px; list-style:none; margin:24px 0 0; padding:0; font-size:var(--zx-fs-sm); line-height:1.4; color:var(--zx-text-secondary); }
+.zx-home-hero__proof li { display:flex; align-items:center; gap:10px; }
+.zx-home-hero__proof-icon { display:inline-grid; place-items:center; flex:none; width:16px; height:16px; color:var(--zx-blue-600); }
+.zx-home-hero__proof-icon svg { width:15px; height:15px; stroke-width:2; }
 .zx-home-hero__eyebrow-short { display:none; }
 .zx-home-hero .zynix-logo-row { margin-top:44px; padding-top:24px; border-top:1px solid var(--zx-border); }
-.zx-home-hero .zynix-logo-row__img { opacity:.72; }
-.zx-home-hero .zynix-logo-row__img[src*="goldencare"] { filter:grayscale(1) brightness(.62) contrast(1.5); opacity:.8; }   /* yellow artwork: plain grayscale is near-white */
+.zx-home-hero .zynix-logo-row__img { opacity:.78; }
+/* Optical balance (review round 1; the assets themselves are S2's): the PBACO seal gets the full cell height, the thin
+   Florida wordmarks step up to 24px, the heavy NEXT wordmark steps down, and the yellow GoldenCare script is darkened to a
+   solid grey (plain grayscale leaves it near-white). */
+.zx-home-hero .zynix-logo-row__img[src*="palm-beach-aco"] { height:48px; opacity:.88; }
+.zx-home-hero .zynix-logo-row__img:is([src*="west-florida-aco"], [src*="space-coast-aco"]) { height:24px; }
+.zx-home-hero .zynix-logo-row__img[src*="next-healthcare"] { height:24px; opacity:.6; }
+.zx-home-hero .zynix-logo-row__img[src*="goldencare"] { filter:grayscale(1) brightness(.4) contrast(2.2); opacity:.9; }
+/* ≥1024: the first and last logos sit flush with the label and the "Customer stories" link */
+@media (min-width:1024px) {
+  .zx-home-hero .zynix-logo-row__list { display:flex; justify-content:space-between; align-items:center; gap:16px; }
+  .zx-home-hero .zynix-logo-row__item { flex:0 1 auto; }
+}
 @media (min-width:1280px) { .zx-home-hero__grid { grid-template-columns:minmax(0,592px) minmax(0,560px); justify-content:space-between; } }
 @media (min-width:1024px) and (max-width:1279.98px) {
   .zx-home-hero__grid { grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); column-gap:40px; }
@@ -3529,11 +3544,10 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 }
 @media (max-width:479.98px) {
   .zx-home-hero__actions .zynix-btn { width:100%; }
-  .zx-home-hero__proof { display:block; margin-left:0; clip-path:none; }
-  .zx-home-hero__proof li { padding:0; border:0; }
-  .zx-home-hero__proof li + li { margin-top:6px; }
+  .zx-home-hero__proof { gap:6px; margin-top:20px; }
   .zx-home-hero__lead { margin-top:16px; }
-  .zx-home-hero .zynix-logo-row { margin-top:36px; padding-top:20px; }
+  .zx-home-hero .zynix-logo-row { margin-top:32px; padding-top:18px; }
+  .zx-home-hero .zynix-logo-row__img { transform:none; opacity:.86; }   /* no 0.85 scale: the wordmarks' lettering stays legible */
 }
 
 /* ── §5.2 ★ Hero widget (on top of the zynix-ui kit) ── */
@@ -3567,31 +3581,55 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-hw__panel { grid-area:1 / 1; display:flex; flex-direction:column; min-width:0; opacity:1; transition:opacity var(--zx-dur-2) var(--zx-ease-out); }
 .zx-hw__panel[hidden] { display:flex; visibility:hidden; opacity:0; transition:none; }
 .zx-hw__panel:focus-visible { outline-offset:-3px; }
-.zx-hw__panel > .zynix-ui__rows, .zx-hw__panel > .zynix-ui__pipeline { margin-bottom:16px; }
-.zx-hw__panel > .zynix-ui__pipeline { padding-top:8px; gap:14px; }
+/* Spare height (the panels share the tallest one's height) is spread inside the rows and the pipeline, never left as a band
+   above the footer. The AWV tab has no tiles (they repeated the pipeline values), so its four stages take the height. */
+.zx-hw__panel > .zynix-ui__rows { display:flex; flex-direction:column; flex:1 0 auto; margin-bottom:16px; }
+.zx-hw__panel > .zynix-ui__rows > .zynix-ui__row { flex:1 0 auto; }
+.zx-hw__panel > .zynix-ui__pipeline { flex:1 0 auto; align-content:space-evenly; gap:14px; margin-bottom:8px; padding:8px 0 0; border-top:1px solid var(--zx-border); }
+.zx-hw__panel > .zynix-ui__pipeline .zynix-ui__stage-bar { height:10px; border-radius:5px; }
 .zx-hw__panel > .zynix-ui__footer { margin-top:auto; }
 @media (min-width:1024px) and (max-width:1279.98px) {
-  .zx-hw .zynix-ui__bar > .zynix-chip--sample { margin-left:0; }
+  /* ~420px column: brand and the required sample chip stay on one 44px line; the "Demo" badge steps aside at this width */
+  .zx-hw .zynix-ui__bar { flex-wrap:nowrap; gap:8px; }
+  .zx-hw .zynix-ui__bar > .zynix-ui__badge { display:none; }
   .zx-hw .zynix-ui__row { grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"main status" "owner status"; }
   .zx-hw .zynix-ui__owner { justify-self:start; }
 }
 @media (max-width:479.98px) {
+  .zx-hw .zynix-ui__tiles { display:none; }   /* phones: the three rows (role labels, status) carry the widget; tiles hidden */
+  /* two-line rows: title and status, then the count and the owner on one line (the kit stacks owner as a third line) */
+  .zx-hw .zynix-ui__row { grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"title status" "sub owner"; row-gap:3px; column-gap:10px; }
+  .zx-hw .zynix-ui__row-main { display:contents; }
+  .zx-hw .zynix-ui__row-title { grid-area:title; align-self:center; }
+  .zx-hw .zynix-ui__row-sub { grid-area:sub; margin:0; }
+  .zx-hw .zynix-ui__owner { grid-area:owner; justify-self:end; }
+  .zx-hw .zynix-ui__status { grid-area:status; }
   .zx-hw__tabbar { padding:0 6px; }
   .zx-hw__tab { padding:0 8px; }
   .zx-hw__tab::before, .zx-hw__tab::after { left:8px; right:8px; }
 }
 
 /* ── §5.3 Proof band ── */
-.zx-home-proof__title { margin:0 0 12px; font-size:var(--zx-fs-h3); line-height:var(--zx-lh-snug); letter-spacing:var(--zx-tr-h3); color:var(--zx-text); }
+.zx-home-proof__title { margin:0 0 12px; font-size:var(--zx-fs-h2); line-height:var(--zx-lh-heading); letter-spacing:var(--zx-tr-h2); color:var(--zx-text); }   /* an H2 on the H2 tier (was the H3 size) */
 .zx-home-proof__def { margin:0; font-size:var(--zx-fs-body); line-height:var(--zx-lh-body); color:var(--zx-text-secondary); max-width:var(--zx-measure); }
 .zx-home-proof__access { margin:20px 0 0; padding-top:16px; border-top:1px solid var(--zx-border); font-size:var(--zx-fs-sm); line-height:1.55; color:var(--zx-text-secondary); }
 .zx-home-proof__access-line { font-weight:var(--zx-fw-semibold); color:var(--zx-text); }
 .zx-home-proof .zynix-stat-row__list { border-top:0; }
 .zx-home-proof .zynix-stat { padding-top:0; }
 .zx-home-proof .zynix-stat__label { max-width:none; }
+@media (max-width:479.98px) {
+  .zx-home-proof__def { font-size:15px; line-height:1.55; }
+  .zx-home-proof .zynix-stat { padding-top:0; padding-bottom:12px; }
+  .zx-home-proof .zynix-stat__value { font-size:1.75rem; }   /* 28px numerals keep both stats on one row with 2-line labels */
+  .zx-home-proof .zynix-stat-row__source { margin-top:8px; }
+  .zx-home-proof__access { margin-top:16px; padding-top:14px; }
+}
 
 /* Sections reached through the homepage's own same-page links take focus (tabindex -1) without a ring around the section */
 .zx-home-hiw[tabindex="-1"]:focus-visible, .zx-home-flow[tabindex="-1"]:focus-visible { outline:none; }
+
+/* Stacked splits on phones: 28px between the two halves (the shared default is 40) */
+@media (max-width:767.98px) { :is(.zx-home-proof, .zx-home-agents, .zx-home-interop, .zx-home-customers, .zx-home-security, .zx-home-faq) .zynix-split { gap:28px; } }
 
 /* ── Shared small label (eyebrow-sized, muted) ── */
 .zx-home-label { margin:0 0 12px; font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.2 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase; color:var(--zx-text-muted); }
@@ -3623,13 +3661,13 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-hiw__footer button.zynix-link-arrow { margin:0; padding:0; border:0; background:none; cursor:pointer; }
 .zx-hiw__next { color:var(--zx-text); }
 @media (max-width:479.98px) {
-  .zx-hiw__tab { grid-template-columns:32px minmax(0,1fr) auto; grid-template-areas:"num name chev"; padding:12px 16px 12px 14px; }
+  .zx-hiw__tab { grid-template-columns:32px minmax(0,1fr) auto; grid-template-areas:"num name chev"; min-height:52px; padding:10px 16px 10px 14px; }
   .zx-hiw__short { display:none; }
   .zx-hiw__panel { padding:4px 16px 24px 46px; }
-  .zx-hiw__footer { gap:8px 20px; margin-top:20px; padding-top:16px; }
+  .zx-hiw__footer { flex-direction:column; align-items:flex-start; gap:4px; margin-top:18px; padding-top:14px; }   /* links stack on phones (§5.4) */
   .zx-hiw__tagline { font-size:var(--zx-fs-body); }
   .zx-hiw__body { font-size:15px; line-height:1.55; }
-  .zx-hiw__chips-label { margin-top:18px; margin-bottom:6px; }
+  .zx-hiw__chips-label { margin-top:16px; margin-bottom:6px; }
   /* the layer's chips read as one text line on phones (same treatment as the data-flow tags, §5.0 fallback 3) */
   .zx-hiw__chips { display:block; font-size:14px; line-height:1.8; color:var(--zx-text); }
   .zx-hiw__chips li { display:inline; }
@@ -3638,7 +3676,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-hiw__chips a.zynix-chip { color:var(--zx-link); text-decoration:underline; text-underline-offset:3px; }
 }
 @media (min-width:1024px) {
-  .zx-hiw { grid-template-columns:minmax(0,5fr) minmax(0,7fr); grid-template-rows:repeat(4, auto) 1fr; column-gap:48px; border-top:0; }
+  /* The four selector rows share the panel's height (1fr each), so both columns end on the same line */
+  .zx-hiw { grid-template-columns:minmax(0,5fr) minmax(0,7fr); grid-template-rows:repeat(4, minmax(88px, 1fr)); column-gap:48px; border-top:0; }
+  .zx-hiw__heading { display:grid; }
   .zx-hiw__heading[data-n="1"] { grid-column:1; grid-row:1; }
   .zx-hiw__heading[data-n="2"] { grid-column:1; grid-row:2; }
   .zx-hiw__heading[data-n="3"] { grid-column:1; grid-row:3; }
@@ -3647,7 +3687,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-hiw__tab { grid-template-columns:40px minmax(0,1fr); grid-template-areas:"num name" "num short"; min-height:88px; padding:16px 20px 16px 18px; }
   .zx-hiw__chev { display:none; }
   /* One shown panel; the others share its cell invisibly, so the explorer keeps the height of the tallest layer. */
-  .zx-hiw__panel { grid-column:2; grid-row:1 / span 5; align-self:stretch; padding:28px 32px; border:1px solid var(--zx-border); border-radius:var(--zx-radius-xl); background:var(--zx-surface); box-shadow:var(--zx-shadow-sm); }
+  .zx-hiw__panel { grid-column:2; grid-row:1 / span 4; align-self:stretch; padding:28px 32px; border:1px solid var(--zx-border); border-radius:var(--zx-radius-xl); background:var(--zx-surface); box-shadow:var(--zx-shadow-sm); }
   .zx-hiw__panel[hidden] { display:block; visibility:hidden; }
   .zx-hiw__panel .zynix-eyebrow { display:flex; }
   .zx-hiw__tagline { font-size:var(--zx-fs-h3); line-height:var(--zx-lh-snug); letter-spacing:var(--zx-tr-h3); }
@@ -3699,8 +3739,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 @media (min-width:1024px) {
   .zx-flow:not(.zx-flow--expanded) .zx-flow__nodes { position:relative; display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:24px; }
   .zx-flow:not(.zx-flow--expanded) .zx-flow__nodes::before { content:""; position:absolute; left:0; right:0; top:50%; height:2px; margin-top:-1px; background:rgba(255,255,255,.24); }
-  .zx-flow__node { position:relative; z-index:1; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:6px; box-sizing:border-box; min-width:0; min-height:96px; margin:0;
-    padding:14px 16px; border:1px solid var(--zx-border-inverse); border-radius:var(--zx-radius-lg); background:var(--zx-surface-inverse-raised); color:var(--zx-text-inverse);
+  /* Top-aligned content: every node's number and name sit on the same lines; the layer line always reserves two lines */
+  .zx-flow__node { position:relative; z-index:1; display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; gap:6px; box-sizing:border-box; min-width:0; min-height:96px; margin:0;
+    padding:12px 12px 12px 14px; border:1px solid var(--zx-border-inverse); border-radius:var(--zx-radius-lg); background:var(--zx-surface-inverse-raised); color:var(--zx-text-inverse);
     text-align:left; cursor:pointer; transition:border-color var(--zx-dur-1) var(--zx-ease-out), background-color var(--zx-dur-1) var(--zx-ease-out); }
   .zx-flow__node:not(:last-child)::after { content:""; position:absolute; top:50%; right:-17px; width:0; height:0; margin-top:-5px;
     border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:7px solid rgba(255,255,255,.44); }
@@ -3708,7 +3749,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-flow__node[aria-selected="true"] { border-color:var(--zx-blue-200); background:var(--zx-blue-800); }
   .zx-flow__node[aria-selected="true"] .zx-flow__num { background:var(--zx-blue-200); color:var(--zx-ink-950); }
   .zx-flow__node-name { font:var(--zx-fw-semibold) var(--zx-fs-body)/1.25 var(--zx-font-sans); color:var(--zx-text-inverse); }
-  .zx-flow__node-layer { font:var(--zx-fw-medium) 12px/1.3 var(--zx-font-sans); color:var(--zx-eyebrow-inverse); }
+  .zx-flow__node-layer { min-height:2.6em; font:var(--zx-fw-medium) 12px/1.3 var(--zx-font-sans); color:var(--zx-eyebrow-inverse); }
   .zx-flow:not(.zx-flow--expanded) .zx-flow__steps { margin-top:20px; }
   .zx-flow:not(.zx-flow--expanded) .zx-flow__step { grid-area:1 / 1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.8fr); grid-template-areas:"summary tags" "detail tags"; align-content:start; gap:6px 32px;
     padding:24px 28px; border:1px solid var(--zx-border-inverse); border-radius:var(--zx-radius-lg); background:var(--zx-surface-inverse-raised); }
@@ -3726,8 +3767,14 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 }
 /* ≥1280: sources · pipeline · outputs as three columns; the connector runs from the sources into the outputs */
 @media (min-width:1280px) {
-  .zx-flow { grid-template-columns:248px minmax(0,1fr) 200px; column-gap:32px; align-items:start; }
+  /* The pipeline takes the width the side columns give up (so "Data foundation" fits one node line); the sources list is
+     tighter, so the three columns end within a few lines of each other (the EHR fact no longer sits under it) */
+  .zx-flow { grid-template-columns:224px minmax(0,1fr) 200px; column-gap:32px; align-items:start; }
   .zx-flow__main { padding-top:26px; }
+  .zx-flow:not(.zx-flow--expanded) .zx-flow__nodes { gap:20px; }
+  .zx-flow:not(.zx-flow--expanded) .zx-flow__node:not(:last-child)::after { right:-15px; }
+  .zx-flow__col .zx-flow__item { padding:5px 0; }
+  .zx-flow__col .zx-flow__item-detail { line-height:1.35; }
   .zx-flow:not(.zx-flow--expanded) .zx-flow__nodes::before { left:-20px; right:-32px; }
   .zx-flow:not(.zx-flow--expanded) .zx-flow__nodes::after { content:""; position:absolute; top:50%; right:-34px; width:0; height:0; margin-top:-5px;
     border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:7px solid rgba(255,255,255,.44); }
@@ -3743,9 +3790,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-flow__step-head .zx-flow__num { width:28px; height:28px; margin-right:4px; background:var(--zx-blue-200); color:var(--zx-ink-950); font-size:13px; }
 }
 @media (max-width:479.98px) {
-  .zx-flow__step-head .zx-flow__layer-links { flex-basis:100%; padding-left:44px; margin-top:-2px; }
   .zx-flow { gap:28px; }
-  .zx-flow__step { padding-bottom:24px; }
+  .zx-flow__step { padding-bottom:20px; }
+  .zx-flow__step-head { margin-bottom:4px; }
   .zx-flow__detail { font-size:14px; }
   /* §5.0 fallback 3: tags, sources and outputs read as one 12px text line each (nothing is hidden) */
   .zx-flow__tags, .zx-flow__col .zx-flow__list { display:block; margin-top:8px; font:var(--zx-fw-medium) 12px/1.6 var(--zx-font-sans); color:var(--zx-text-inverse-secondary); }
@@ -3769,10 +3816,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-home-cms__link:hover { color:var(--zx-link-hover); }
 @media (min-width:1024px) { .zx-home-agents .zynix-split { align-items:center; } }
 
-.zx-ep { position:relative; margin:0; padding:24px 28px 20px; border:1px solid var(--zx-border); border-radius:var(--zx-radius-xl); background:var(--zx-surface); box-shadow:var(--zx-shadow-md); }
-.zx-ep__head { position:absolute; top:-13px; left:24px; display:flex; margin:0; }
-.zx-ep__head .zynix-chip--sample { background:var(--zx-surface); }
-.zx-ep__steps { margin-top:4px; }
+.zx-ep { position:relative; margin:0; padding:16px 28px 20px; border:1px solid var(--zx-border); border-radius:var(--zx-radius-xl); background:var(--zx-surface); box-shadow:var(--zx-shadow-md); }
+/* The sample chip sits inside the frame, top right, like the hero widget's and the care-plan panel's */
+.zx-ep__head { display:flex; justify-content:flex-end; margin:0 -12px 2px 0; }
 .zx-ep__steps { position:relative; list-style:none; margin:0; padding:0; }
 .zx-ep__step { position:relative; display:grid; grid-template-columns:136px minmax(0,1fr); column-gap:32px; padding:11px 0; }
 .zx-ep__step::before { content:""; position:absolute; left:151px; top:0; bottom:0; width:1px; background:var(--zx-border); }
@@ -3784,14 +3830,13 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-ep__time { padding-top:3px; font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.3 var(--zx-font-sans); letter-spacing:.08em; text-transform:uppercase; color:var(--zx-text-muted); font-variant-numeric:tabular-nums; }
 .zx-ep__main { min-width:0; }
 .zx-ep__text { margin:0; font-size:15px; line-height:1.5; color:var(--zx-text); }
-.zx-ep__meta { display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; margin:6px 0 0; }
 .zx-ep .zynix-ui__owner { min-height:24px; max-width:100%; box-sizing:border-box; padding:0 8px 0 6px; border:1px solid var(--zx-border); border-radius:var(--zx-radius-xs); background:var(--zx-surface); color:var(--zx-gray-700); }
 .zx-ep .zynix-ui__owner--agent { border-color:transparent; background:var(--zx-blue-50); color:var(--zx-blue-700); }
 .zx-ep .zynix-ui__owner--staff { border-color:transparent; background:var(--zx-gray-100); color:var(--zx-gray-700); }
 .zx-ep__note { display:flex; gap:8px; margin:12px 0 0; padding:14px 0 0; border-top:1px solid var(--zx-border); font-size:var(--zx-fs-sm); line-height:1.5; color:var(--zx-text-muted); text-align:left; }
 @media (max-width:767.98px) {
-  .zx-ep { padding:18px 16px 14px; }
-  .zx-ep__head { left:14px; }
+  .zx-ep { padding:14px 16px 14px; }
+  .zx-ep__head { margin-right:-4px; }
   .zx-ep__text { font-size:14px; }
   .zx-ep__step { grid-template-columns:minmax(0,1fr); row-gap:6px; padding:10px 0 12px 24px; }
   .zx-ep__when { flex-direction:row; flex-wrap:wrap; align-items:center; gap:4px 10px; }
@@ -3801,50 +3846,97 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-ep__step:last-child::before { height:17px; }
   .zx-ep__time { padding-top:0; }
 }
+@media (max-width:479.98px) {
+  /* Phones: the episode is a plain timeline (no frame), the "without" rows are tighter and the note is left to the plan */
+  .zx-home-agents .zx-home-label { margin-top:24px; }
+  .zx-home-without li { padding:6px 0 6px 22px; font-size:14px; }
+  .zx-home-without li::before { top:6px; }
+  .zx-home-cms { margin-top:16px; }
+  .zx-ep { padding:0; border:0; border-radius:0; background:none; box-shadow:none; }
+  .zx-ep__head { justify-content:flex-start; margin:0 0 6px; }
+  .zx-ep__step { padding:8px 0 10px 24px; }
+  .zx-ep__note { display:none; }
+}
 
 /* ── §5.7 Capabilities ── */
-.zx-home-caps__rows { display:grid; gap:48px; }
+.zx-home-caps__rows { display:grid; gap:64px; }
 .zx-home-nowrap { white-space:nowrap; }
-@media (max-width:1279.98px) { .zx-home-caps .zynix-section-head--split { grid-template-columns:1fr; row-gap:var(--zx-space-4); } }
 .zx-home-cap__title { margin:0; font-size:var(--zx-fs-h3); line-height:var(--zx-lh-snug); letter-spacing:var(--zx-tr-h3); color:var(--zx-text); max-width:30ch; }
 .zx-home-cap__body { margin:14px 0 0; font-size:var(--zx-fs-body); line-height:var(--zx-lh-body); color:var(--zx-text-secondary); max-width:58ch; }
 .zx-home-cap__links { display:flex; flex-wrap:wrap; gap:8px 24px; margin-top:20px; }
-
-.zx-home-cap--text > .zynix-split__b { box-sizing:border-box; padding:22px 24px; border:1px solid var(--zx-border); border-radius:var(--zx-radius-lg); background:var(--zx-surface); }
-.zx-home-cap--text .zynix-callouts { margin:0; gap:16px; }
-.zx-home-cap--panel .zynix-callouts, .zx-home-cap--capture .zynix-callouts { margin-top:22px; gap:12px; }
 .zx-home-cap .zynix-product-frame__caption { font-size:13px; }
-.zx-home-cap .zynix-callouts__body { font-size:14px; line-height:1.45; }
 .zx-home-cap .zynix-ui__step { min-height:46px; padding:6px 0; }
 .zx-home-cap .zynix-ui__brand img { display:none; }   /* the shared symbol is light artwork for dark surfaces (request to S2) */
-@media (min-width:1024px) { .zx-home-cap--text { align-items:center; } }
+
+/* Points: parallel properties with a short blue rule, no numbers (numbers belong to callouts that annotate a capture) */
+.zx-home-points { display:grid; gap:0; list-style:none; margin:24px 0 0; padding:0; }
+.zx-home-points__item { position:relative; padding:14px 0 12px; border-top:1px solid var(--zx-border); }
+.zx-home-points__item::before { content:""; position:absolute; top:-1px; left:0; width:24px; height:2px; background:var(--zx-blue-600); }
+.zx-home-points__title { margin:0; font:var(--zx-fw-semibold) var(--zx-fs-body)/1.4 var(--zx-font-sans); color:var(--zx-text); }
+.zx-home-points__body { margin:4px 0 0; font-size:var(--zx-fs-sm); line-height:1.5; color:var(--zx-text-secondary); }
+
+/* Text mode (no admissible capture yet, §5.7 fallback): no card and no fake visual. The text sits on the left and the
+   points run as an unboxed hairline list on the right 5 columns, the same list (and the same column) the act row uses
+   under its text. The row switches to the 5/7 split with a capture through row.media. */
+.zx-home-cap--text { display:grid; gap:24px; }
+.zx-home-cap--text .zx-home-points { margin:0; }
+@media (min-width:768px) {
+  .zx-home-cap--text { grid-template-columns:repeat(12, minmax(0,1fr)); column-gap:32px; align-items:start; }
+  .zx-home-cap--text .zx-home-cap__text { grid-column:1 / span 7; }
+  .zx-home-cap--text .zx-home-points { grid-column:8 / span 5; }
+}
+@media (min-width:1024px) {
+  .zx-home-cap--text { column-gap:var(--zx-space-12); }
+  .zx-home-cap--text .zx-home-cap__text { grid-column:1 / span 6; }
+  .zx-home-cap--text .zx-home-points { grid-column:8 / span 5; }
+}
+.zx-home-cap .zx-home-points__item:last-child { padding-bottom:0; }
 @media (max-width:1023.98px) {
-  .zx-home-cap--panel .zynix-callouts, .zx-home-cap--capture .zynix-callouts { display:none; }
+  .zx-home-cap--panel .zx-home-points, .zx-home-cap--capture .zx-home-points { display:none; }   /* the panel carries the row below 1024 */
 }
 @media (max-width:767.98px) {
   .zx-home-caps__rows { gap:48px; }
-  .zx-home-cap--text > .zynix-split__b { padding:20px; }
-  .zx-home-cap .zynix-split { gap:24px; }
-  .zx-home-cap .zynix-ui__step:nth-child(n+4) { display:none; }   /* §5.0 fallback 1: compact panel, 3 rows */
-  .zx-home-cap .zynix-callouts__body { font-size:13px; }
-  .zx-home-cap--text .zynix-callouts { gap:12px; }
+  .zx-home-cap.zynix-split { gap:24px; }
+  /* §5.0 fallback 1 (compact panel): four steps, from the agent's call to the documented visit, so the plan visibly
+     closes; "Discharge detected" is implied by the meta line "started Day 0" */
+  .zx-home-cap .zynix-ui__step:first-child { display:none; }
 }
-@media (max-width:479.98px) { .zx-home-cap .zynix-product-frame__caption { display:none; } }   /* §5.0 fallback 2 (the chip stays) */
+@media (max-width:479.98px) {
+  .zx-home-caps__rows { gap:40px; }
+  .zx-home-cap .zynix-product-frame__caption { display:none; }   /* §5.0 fallback 2 (the chip stays) */
+  /* the frame's "Sample data" chip is the notice; the panel's own bar and meta line give way to it */
+  .zx-home-cap .zynix-ui__bar, .zx-home-cap .zynix-ui__meta { display:none; }
+  .zx-home-cap .zynix-ui__head { min-height:26px; padding-right:96px; align-items:center; }
+  .zx-home-cap__body { font-size:15px; line-height:1.55; }
+  .zx-home-cap__links { gap:4px 20px; margin-top:14px; }
+  .zx-home-cap--text { gap:18px; }
+  /* phones: the points read as a short hairline list of their titles */
+  .zx-home-points__item { padding:9px 0 8px; }
+  .zx-home-points__body { display:none; }
+  .zx-home-points__title { font-size:15px; }
+}
 
 /* ── §5.8 Interoperability ── */
 .zx-home-interop .zynix-section-head { margin-bottom:0; }
-.zx-home-interop .zynix-lead { font-size:var(--zx-fs-body); line-height:var(--zx-lh-body); }
 .zx-home-ehr { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); list-style:none; margin:0 0 32px; padding:0; border-top:1px solid var(--zx-border); border-left:1px solid var(--zx-border); }
 .zx-home-ehr li { display:flex; align-items:center; box-sizing:border-box; min-height:56px; padding:8px 16px; border-right:1px solid var(--zx-border); border-bottom:1px solid var(--zx-border);
   font:var(--zx-fw-semibold) 15px/1.3 var(--zx-font-sans); color:var(--zx-text); }
 .zx-home-standards { display:flex; flex-wrap:wrap; gap:8px; list-style:none; margin:0; padding:0; }
 .zx-home-standards .zynix-chip { min-height:28px; padding:0 10px; font-size:13px; background:var(--zx-surface-subtle); border:1px solid var(--zx-border); }
 @media (min-width:768px) { .zx-home-ehr { grid-template-columns:repeat(4, minmax(0,1fr)); } }
-@media (max-width:479.98px) { .zx-home-ehr li { min-height:44px; padding:6px 12px; font-size:14px; } .zx-home-ehr { margin-bottom:24px; } }
+@media (max-width:479.98px) {   /* phones: the named EHRs and the standards read as one text line each, not a bordered grid */
+  .zx-home-ehr { display:block; margin:0 0 20px; border:0; font:var(--zx-fw-semibold) 15px/1.6 var(--zx-font-sans); color:var(--zx-text); }
+  .zx-home-ehr li { display:inline; min-height:0; padding:0; border:0; font:inherit; }
+  .zx-home-ehr li + li::before { content:", "; font-weight:var(--zx-fw-regular); color:var(--zx-text-muted); }
+  .zx-home-standards { display:block; font-size:14px; line-height:1.7; color:var(--zx-text-secondary); }
+  .zx-home-standards li { display:inline; }
+  .zx-home-standards li + li::before { content:" · "; color:var(--zx-text-muted); }
+  .zx-home-standards .zynix-chip { display:inline; min-height:0; padding:0; border:0; background:none; font:inherit; color:inherit; white-space:normal; }
+  .zx-home-interop .zx-home-label { margin-bottom:8px; }
+}
 @media (min-width:1024px) { .zx-home-interop .zynix-split { align-items:center; } }
 
 /* ── §5.9 Customers ── */
-.zx-home-customers .zynix-section-head__aside .zynix-lead { font-size:var(--zx-fs-body); line-height:var(--zx-lh-body); }
 .zx-home-customers .zynix-quote { padding-left:28px; }
 .zx-home-customers .zynix-quote--large .zynix-quote__text p { font-size:clamp(1.125rem, .95rem + .7vw, 1.5rem); line-height:1.45; }
 .zx-home-customers .zynix-quote__cite { margin-top:20px; }
@@ -3869,8 +3961,24 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-home-customers .zynix-card__eyebrow { justify-self:start; margin-top:14px; }
   .zx-home-customers .zynix-card__title { margin-top:4px; }
 }
-@media (max-width:767.98px) { .zx-home-customers .zynix-section-head__aside .zynix-lead { font-size:15px; } }
-@media (min-width:1024px) { .zx-home-customers .zynix-split { align-items:center; } }
+@media (min-width:1024px) { .zx-home-customers .zynix-split { align-items:start; } }   /* the quote and the first card share a top edge */
+@media (max-width:479.98px) {
+  .zx-home-customers .zynix-quote { padding-left:18px; }
+  .zx-home-customers .zynix-quote--large .zynix-quote__text p { font-size:17px; line-height:1.5; letter-spacing:0; }
+  .zx-home-customers .zynix-quote__cite { margin-top:16px; }
+  .zx-home-customers .zynix-quote__logo { height:28px; }
+  /* the two cards become hairline rows: eyebrow, name, one line, link (no logo: the eyebrow and the name identify them) */
+  .zx-home-customers__cards { gap:0; border-top:1px solid var(--zx-border); }
+  .zx-home-customers .zynix-card { padding:14px 0 16px; border:0; border-bottom:1px solid var(--zx-border); border-radius:0; background:none; }
+  .zx-home-customers .zynix-card:hover { box-shadow:none; }
+  .zx-home-customers .zynix-card__media { display:none; }
+  .zx-home-customers .zynix-card__eyebrow { margin-top:0; }
+  .zx-home-customers .zynix-card__body { font-size:14px; line-height:1.5; }
+  .zx-home-customers .zynix-card__title { color:var(--zx-link); }   /* the whole row is the link; its name reads as one */
+  .zx-home-customers .zynix-card__cta { display:none; }
+  .zx-home-quote__links { gap:4px 16px; }
+  .zx-home-customers__links { gap:4px 24px; margin-top:16px; }
+}
 
 /* ── §5.10 Security and governance ── */
 .zx-home-security .zynix-section-head { margin-bottom:0; }
@@ -3893,12 +4001,13 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-home-sec__badges.zynix-trust-row { display:flex; margin-bottom:8px; }
   .zx-home-sec { display:none; }
   .zx-home-gov { margin-top:24px; }
+  .zx-home-gov__item { padding:12px 14px; }
+  .zx-home-sec__actions { margin-top:24px; }
 }
 
 /* ── §5.11 Who we serve ── */
 .zx-home-audiences .zynix-section-head--split { align-items:end; }
 @media (min-width:768px) { .zx-home-audiences .zynix-section-head--split { grid-template-columns:minmax(0,1fr) auto; } }
-.zx-home-audiences .zynix-section-head__title { font-size:clamp(1.5rem, 1.15rem + 1.2vw, 2.25rem); }
 .zx-home-audiences .zynix-card { padding:18px 20px; }
 .zx-home-audiences .zynix-cgrid { gap:16px; }
 .zx-home-audiences .zynix-section-head__aside { justify-self:end; }
@@ -3906,7 +4015,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 @media (max-width:1023.98px) { .zx-home-audiences .zynix-section-head__aside { justify-self:start; } }
 @media (max-width:767.98px) {   /* a hairline list on phones, not five tall cards */
   .zx-home-audiences .zynix-cgrid { gap:0; border-top:1px solid var(--zx-border); }
-  .zx-home-audiences .zynix-card { padding:14px 0; border:0; border-bottom:1px solid var(--zx-border); border-radius:0; background:none; }
+  .zx-home-audiences .zynix-card { padding:12px 0; border:0; border-bottom:1px solid var(--zx-border); border-radius:0; background:none; }
   .zx-home-audiences .zynix-card:hover { box-shadow:none; }
   .zx-home-audiences .zynix-card__icon { width:32px; height:32px; }
   .zx-home-audiences .zynix-card__title { font-size:var(--zx-fs-body); }
