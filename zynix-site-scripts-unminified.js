@@ -2324,22 +2324,6 @@
   }
   // ==== ZX:END platform ====
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // ── PAGE: Analytics ──
   function renderAnalytics() {
     // /products-analytics is a duplicate of /zynix-data-analytics; it renders the same page until its 301 exists (§6).
