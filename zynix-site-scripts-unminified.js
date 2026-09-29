@@ -1288,7 +1288,7 @@
     if (/^\s*<svg[\s>]/.test(icon)) return icon.indexOf('aria-hidden') > -1 ? icon : icon.replace(/<svg(?=[\s>])/, '<svg aria-hidden="true" focusable="false"');
     return zxIcon(icon);
   }
-  // ASSET_SIZES key of an image path or URL: 'screenshots/x.png' for GH + 'screenshots/x.png' or 'screenshots/x.png'.
+  // ASSET_SIZES key of an image path or URL: the path relative to images/, whether given with or without the GH prefix.
   function zxAssetKey(src) { src = String(src || ''); return src.indexOf(GH) === 0 ? src.slice(GH.length) : src.replace(/^\/+/, ''); }
   function zxAssetUrl(src) { src = String(src || ''); return /^(https?:|data:|\/)/i.test(src) ? src : zxImg(src); }
   // The path part of a same-site href ('' for the homepage), or null for another site, a fragment or a mailto/tel link.
