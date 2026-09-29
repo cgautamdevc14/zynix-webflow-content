@@ -1,5 +1,5 @@
 // Static guards for the two files that production loads. Fails the build on anything that would break or embarrass the site.
-import fs from 'node:fs'; import crypto from 'node:crypto'; import { extractFunction } from './extract-function.mjs';
+import fs from 'node:fs'; import crypto from 'node:crypto'; import { extractFunction } from './extract-function.mjs'; import { runRedesignChecks } from './redesign-checks.mjs';
 const JS = 'zynix-site-scripts-unminified.js', CSS = 'zynix-site-styles.deployed.css';
 const js = fs.readFileSync(JS, 'utf8'), css = fs.readFileSync(CSS, 'utf8');
 let failed = 0; const check = (name, ok, detail = '') => { console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? '  — ' + detail : ''}`); if (!ok) failed++; };
@@ -32,4 +32,9 @@ if (FREEZE.active) {
   }
   check(`A2P freeze since ${FREEZE.since}: SMS/legal renderers unchanged since ${FREEZE.reference_commit}`, changed.length === 0, changed.length ? `changed: ${changed.join(', ')}. ${FREEZE.reason} ${FREEZE.to_unfreeze}` : 'frozen');
 } else console.log('INFO  A2P freeze inactive (ci/a2p-freeze.json)');
+// Redesign guards (DESIGN_SPEC §8.2 Q; ci/redesign-checks.mjs): CSS lint of ZX blocks, token definitions, inline-style and
+// banned-string ratchets against ci/baseline.json, and the /contact SMS disclosure. `--phase N` (or env ZX_PHASE) previews
+// the must-be-zero list of a later phase without editing ci/baseline.json.
+const BASELINE = JSON.parse(fs.readFileSync('ci/baseline.json', 'utf8')); const phaseAt = process.argv.indexOf('--phase');
+runRedesignChecks({ js, css, baseline: BASELINE, phase: phaseAt > -1 ? process.argv[phaseAt + 1] : process.env.ZX_PHASE, check });
 console.log(`\n${failed ? failed + ' static check(s) FAILED' : 'all static checks passed'}`); process.exit(failed ? 1 : 0);

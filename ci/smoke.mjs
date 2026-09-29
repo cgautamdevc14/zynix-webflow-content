@@ -66,7 +66,7 @@ for (const [p, min] of ROUTES) { const pg = await open(p); const r = await pg.ev
 // 2. forms exist and are wired, but are never submitted here
 { const pg = await open('/contact'); const r = await pg.ev(`(()=>{const f=document.querySelector('#zynix-demo-form');return f?{fields:f.querySelectorAll('input,select,textarea').length,submit:!!f.querySelector('[type=submit]')}:null})()`); check('/contact demo form present', r && r.fields >= 6 && r.submit, JSON.stringify(r)); check('no request went to HubSpot during the smoke test', pg.st.hubspot === 0); await pg.close(); }
 { const pg = await open('/sms-consent'); const r = await pg.ev(`(()=>{const f=document.querySelector('#zynix-sms-form');const c=f&&f.querySelector('[name=sms_consent]');return f?{checkbox:!!c,checkedByDefault:!!(c&&c.checked)}:null})()`); check('/sms-consent form present; consent box unchecked by default', r && r.checkbox && !r.checkedByDefault, JSON.stringify(r)); await pg.close(); }
-{ const pg = await open('/use-cases'); const n = await pg.ev(`[...new Set([...document.querySelectorAll('a[href^="/use-cases/"]')].map(a=>a.innerText.trim().slice(0,4)).filter(x=>/^UC\\d\\d$/.test(x)))].length`); check('/use-cases lists all 30 use cases', n === 30, String(n)); await pg.close(); }
+{ const pg = await open('/use-cases'); const n = await pg.ev(`[...new Set([...document.querySelectorAll('.zynix-injected a[href^="/use-cases/"]')].map(a=>a.getAttribute('href').split(/[?#]/)[0].replace(/\\/$/,'')).filter(h=>/^\\/use-cases\\/[a-z0-9-]+$/.test(h)))].length`); check('/use-cases links 30 distinct /use-cases/<slug> pages', n === 30, String(n)); await pg.close(); }
 
 // 2b. every case-study link the bundle renders must exist on the server (a 404 document is not a page, even if JS paints over it)
 { const pg = await open('/resources-case-studies'); const hrefs = await pg.ev(`[...new Set([...document.querySelectorAll('a[href^="/case-stud"]')].map(a=>a.getAttribute('href').split('#')[0]))]`); await pg.close();
@@ -101,8 +101,26 @@ const A2P = `(()=>{const vis=e=>!!(e.offsetWidth||e.offsetHeight);const main=doc
 { const pg = await open('/terms-of-service'); const r = await pg.ev(A2P); await pg.close();
   check('A2P /terms-of-service: carrier sentence, no quoted reply texts', r && r.carrier && !r.quotedReplies, r && JSON.stringify({ carrier: r.carrier, quotedReplies: r.quotedReplies })); }
 
-// 3. mobile: no horizontal overflow, menu opens
-{ const pg = await open('/', { mobile: true }); const r = await pg.ev(`(()=>{const b=document.querySelector('.zynix-nav-hamburger');if(b)b.click();const m=document.querySelector('.zynix-mobile-menu');return {overflow:document.documentElement.scrollWidth-window.innerWidth,menu:!!(m&&m.classList.contains('open'))}})()`); check('mobile home: no horizontal overflow, menu opens', r && r.overflow <= 2 && r.menu, JSON.stringify(r)); check('mobile home: no exceptions', pg.st.errors.length === 0, pg.st.errors.join(' | ')); await pg.close(); }
+// 3. mobile: no horizontal overflow, menu opens.
+// Rect-based overflow at 390 (DESIGN_SPEC §1.3, §7.3, §8.2 Q; the rule of redesign-2026-09/tools/rd_checks.mjs): a visible element in
+// the bundle regions whose right edge passes the 390px viewport is an offender WHATEVER scrollWidth says (an overflow-x:clip
+// ancestor, or a mobile layout viewport widened by the overflow, hides it from scrollWidth - innerWidth). Interim ratchet: the
+// outermost offenders inside .zynix-injected may not exceed ci/baseline.json smokeOverflow390[path] (c95cc03 counts); from
+// baseline phase 3 on (launch precondition 6) any offender anywhere in the bundle regions fails.
+const OVF = (() => { try { const b = JSON.parse(fs.readFileSync('ci/baseline.json', 'utf8')); return { counts: b.smokeOverflow390 || {}, launch: (+b.phase || 0) >= 3 }; } catch { return { counts: {}, launch: false }; } })();
+const RECT390 = `(async()=>{const W=390;const H=document.documentElement.scrollHeight;for(let y=0;y<H;y+=Math.round(innerHeight*0.8)){scrollTo(0,y);await new Promise(r=>setTimeout(r,60))}scrollTo(0,0);await new Promise(r=>setTimeout(r,400));
+ const REG='.zynix-injected, .zynix-mega-nav, .zynix-mobile-menu, .zynix-announcement-bar, #zynix-chat-widget';
+ const vis=e=>{const r=e.getBoundingClientRect();if(r.width<=1||r.height<=1)return false;return e.checkVisibility?e.checkVisibility({opacityProperty:true,visibilityProperty:true}):getComputedStyle(e).visibility!=='hidden'};
+ const seen=new Set(),all=[];document.querySelectorAll(REG).forEach(x=>{if(!seen.has(x)){seen.add(x);all.push(x)}x.querySelectorAll('*').forEach(e=>{if(!seen.has(e)){seen.add(e);all.push(e)}})});
+ const off=all.filter(e=>{const r=e.getBoundingClientRect();if(r.right<=W+1)return false;if(e.closest('[data-zx-allow-overflow], .zx-visually-hidden'))return false;if(!vis(e))return false;return getComputedStyle(e).position!=='fixed'});
+ const s=new Set(off);const outer=off.filter(e=>!s.has(e.parentElement));const content=outer.filter(e=>e.closest('.zynix-injected')).sort((a,b)=>b.getBoundingClientRect().right-a.getBoundingClientRect().right);
+ const d=e=>e.tagName.toLowerCase()+(typeof e.className==='string'&&e.className.trim()?'.'+e.className.trim().split(/\\s+/).slice(0,2).join('.'):'')+' right='+Math.round(e.getBoundingClientRect().right);
+ return {outerAll:outer.length,outerContent:content.length,scrollWidth:document.documentElement.scrollWidth,sample:content.concat(outer.filter(e=>!content.includes(e))).slice(0,4).map(d)}})()`;
+const rect390 = (p, r) => { if (!r) return [false, 'rect probe failed']; const allowed = OVF.launch ? 0 : (OVF.counts[p] || 0), n = OVF.launch ? r.outerAll : r.outerContent;
+  return [n <= allowed, `${n} outermost offender(s) ${OVF.launch ? 'in the bundle regions' : 'in .zynix-injected'}, allowed ${allowed} (${OVF.launch ? 'launch' : 'c95cc03 ratchet'}); scrollWidth ${r.scrollWidth}${r.sample.length ? '; ' + r.sample.join(' | ') : ''}`]; };
+{ const pg = await open('/', { mobile: true }); const rect = await pg.ev(RECT390); const r = await pg.ev(`(()=>{const b=document.querySelector('.zynix-nav-hamburger');if(b)b.click();const m=document.querySelector('.zynix-mobile-menu');return {overflow:document.documentElement.scrollWidth-window.innerWidth,menu:!!(m&&m.classList.contains('open'))}})()`);
+  const [rok, rdet] = rect390('/', rect); check('mobile home: no horizontal overflow (scrollWidth and rect ratchet), menu opens', r && r.overflow <= 2 && r.menu && rok, JSON.stringify(r) + '; rect: ' + rdet); check('mobile home: no exceptions', pg.st.errors.length === 0, pg.st.errors.join(' | ')); await pg.close(); }
+for (const p of ['/platform', '/agents', '/case-studies/pbaco', '/compare-zynix-vs-navina']) { const pg = await open(p, { mobile: true }); const rect = await pg.ev(RECT390); await pg.close(); const [ok, det] = rect390(p, rect); check(`${p} @390: no rect overflow beyond the c95cc03 ratchet`, ok, det); }
 
 // 4. the page as it will be once Webflow loads @main: background cache revalidation fires and nothing throws
 { const pg = await open('/', { asMain: true, firstVisit: true, wait: 16000 }); const r = await pg.ev(`({main:[...document.scripts].some(s=>/@main\\/zynix-site-scripts-unminified\\.js/.test(s.src)),words:document.body.innerText.split(/\\s+/).length,stamp:(()=>{try{return !!localStorage.getItem('zx_asset_check')}catch(e){return null}})()})`);
