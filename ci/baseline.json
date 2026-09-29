@@ -47,7 +47,7 @@
     "/": 3,
     "/platform": 7,
     "/agents": 10,
-    "/case-studies/pbaco": 2,
+    "/case-studies/pbaco": 0,
     "/compare-zynix-vs-navina": 1
   },
   "bannedStrings": {
@@ -92,14 +92,6 @@
     "renderCarePlans": 5,
     "renderCarePlansV7": 2,
     "renderCareers": 2,
-    "renderCaseStudies": 2,
-    "renderCaseStudiesBySegment": 2,
-    "renderCaseStudyApollo": 2,
-    "renderCaseStudyCentralFlorida": 3,
-    "renderCaseStudyNHS": 1,
-    "renderCaseStudyPalmBeach": 2,
-    "renderCaseStudySpaceCoast": 3,
-    "renderCaseStudyWestFlorida": 2,
     "renderClinicalPerformanceHub": 3,
     "renderCompareAbridge": 4,
     "renderCompareCommure": 5,
