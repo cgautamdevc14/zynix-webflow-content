@@ -4493,735 +4493,649 @@
     return html;
   }
 
-  // ── PAGE: Homepage ──
-  function renderHomepage() {
-    // (Announcement bar is injected site-wide by zynix-inner-pages.js — no duplicate here)
-    // -- HERO --
-    var html = '<section class="zynix-homepage-hero"><div class="zynix-container zynix-inner-hero-grid">' +
-      '<div class="zynix-inner-hero-text">' +
-      '<span class="zynix-tag">AI-POWERED VALUE-BASED CARE PLATFORM</span>' +
-      '<h1>AI That <span style="color:var(--z-accent)">Executes</span> Care.<br>Not Just Analyzes It.</h1>' +
-      '<p>Zynix deploys AI agents that call patients, close care gaps, schedule visits, and document outcomes. All without adding headcount.</p>' +
-      '<div class="zynix-hero-btns" style="margin-bottom:20px"><a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener">Request a Demo &rarr;</a><a href="#how-it-works" class="zynix-btn-secondary">See How It Works</a></div>' +
-      '<div class="zynix-hero-trust" style="margin-top:4px">' +
-      '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> HIPAA Compliant</span>' +
-      '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20449B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> SOC 2 Type II</span>' +
-      '<span class="zynix-hero-badge" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--z-text-secondary,#4B5563);padding:8px 14px;background:var(--z-bg-card,#fff);border:1px solid var(--z-border,#E5E7EB);border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,0.04)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0D9B6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> BAA Available</span>' +
-      '</div>' +
-      '</div>' +
-      // Scoped light-mode override so the dashboard card stays white even when the rest of the page is dark-mode.
-      // The dark-mode site-wide override (see 8047f73) uses !important on CSS custom properties, so we need !important too.
-      '<style>' +
-      '.zynix-hero-card,.zynix-hero-card *{background-image:none!important;text-shadow:none!important}' +
-      '.zynix-hero-card{background:#fff!important;color:#1a1a2e!important;border:1px solid rgba(0,0,0,0.08)!important;box-shadow:0 24px 70px rgba(0,0,0,0.35),0 2px 6px rgba(0,0,0,0.2)!important}' +
-      '.zynix-hero-card .zhc-chrome{background:#fafbfc!important;border-bottom:1px solid rgba(0,0,0,0.06)!important}' +
-      '.zynix-hero-card .zhc-chrome-title{color:rgba(0,0,0,0.6)!important}' +
-      '.zynix-hero-card .zhc-brand{color:#1a1a2e!important}' +
-      '.zynix-hero-card .zhc-tabs{border-bottom:1px solid rgba(0,0,0,0.06)!important}' +
-      '.zynix-hero-card .zhc-tab{color:rgba(0,0,0,0.55)!important}' +
-      '.zynix-hero-card .zhc-tab.zhc-tab-active{color:#1a1a2e!important;border-bottom:2px solid #F16529!important}' +
-      '.zynix-hero-card .zhc-title{color:#1a1a2e!important}' +
-      '.zynix-hero-card .zhc-sub{color:rgba(0,0,0,0.65)!important}' +
-      '.zynix-hero-card .zhc-stat-tile{background:#f8f9fb!important;border:1px solid rgba(0,0,0,0.05)!important}' +
-      '.zynix-hero-card .zhc-stat-label{color:rgba(0,0,0,0.6)!important}' +
-      '.zynix-hero-card .zhc-row{border-bottom:1px solid rgba(0,0,0,0.06)!important}' +
-      '.zynix-hero-card .zhc-row:last-child{border-bottom:0!important}' +
-      '.zynix-hero-card .zhc-name{color:#1a1a2e!important}' +
-      '.zynix-hero-card .zhc-role{color:rgba(0,0,0,0.6)!important}' +
-      '.zynix-hero-card .zhc-count{color:#1a1a2e!important}' +
-      '.zynix-hero-card .zhc-footer{background:linear-gradient(90deg,rgba(34,197,94,0.08),rgba(34,197,94,0.02))!important;border-top:1px solid rgba(34,197,94,0.15)!important;color:rgba(0,0,0,0.72)!important}' +
-      '.zynix-hero-card .zhc-footer strong{color:#16a34a!important}' +
-      /* Mobile (≤768px): show animated gif, hide HTML card. Desktop keeps the richer HTML card. */
-      '@media (max-width:768px){' +
-      '.zynix-homepage-hero .zynix-inner-hero-img{max-width:100%!important;margin:0 auto}' +
-      '.zynix-homepage-hero .zynix-hero-card{display:none!important}' +
-      '.zynix-homepage-hero .zynix-hero-gif-mobile{display:block!important}' +
-      /* (fallback tightening — kept in case the gif fails to load and the card is re-enabled) */
-      '.zynix-hero-card{border-radius:16px!important;box-shadow:0 12px 40px rgba(0,0,0,0.25),0 1px 3px rgba(0,0,0,0.15)!important}' +
-      '.zynix-hero-card .zhc-tabs{overflow-x:auto!important;flex-wrap:nowrap!important;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:12px 16px 0!important;scrollbar-width:none}' +
-      '.zynix-hero-card .zhc-tabs::-webkit-scrollbar{display:none}' +
-      '.zynix-hero-card .zhc-tab{flex:0 0 auto;scroll-snap-align:start;padding:8px 12px 10px!important;font-size:12px!important;white-space:nowrap}' +
-      '.zynix-hero-card>div[style*="padding:20px 24px 0"]{padding:14px 16px 0!important}' +
-      '.zynix-hero-card>div[style*="grid-template-columns:repeat(3,1fr)"]{padding:14px 16px!important;gap:8px!important}' +
-      '.zynix-hero-card .zhc-stat-tile{padding:10px 6px!important;border-radius:10px!important}' +
-      '.zynix-hero-card .zhc-stat-tile>div:first-child{font-size:20px!important}' +
-      '.zynix-hero-card .zhc-stat-label{font-size:9px!important}' +
-      '.zynix-hero-card>div[style*="padding:0 24px 16px"]{padding:0 16px 12px!important}' +
-      '.zynix-hero-card .zhc-row{padding:8px 0!important;gap:10px!important}' +
-      '.zynix-hero-card .zhc-row:nth-child(n+3){display:none!important}' +
-      '.zynix-hero-card .zhc-count{font-size:17px!important}' +
-      '.zynix-hero-card .zhc-footer{padding:10px 16px!important;font-size:11px!important}' +
-      '.zynix-hero-card .zhc-title{font-size:15px!important}' +
-      '.zynix-hero-card .zhc-sub{font-size:11px!important}' +
-      '}' +
-      '</style>' +
-      '<div class="zynix-inner-hero-img" style="max-width:580px">' +
-      // Mobile-only animated hero gif (replaces HTML card on ≤768px). Desktop keeps the richer HTML card below.
-      '<img class="zynix-hero-gif-mobile" src="' + IMG.gifHero + '" alt="Zynix AI agents executing care in real time" loading="eager" fetchpriority="high" style="display:none;width:100%;max-width:100%;height:auto;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.25),0 1px 3px rgba(0,0,0,0.15)">' +
-      // NOTE: no inline background on .zynix-hero-card — the site-wide dark-mode stylesheet uses [style*="background:#fff"] to flip light cards dark, so we move the white background into the scoped <style> rule above.
-      '<div class="zynix-hero-card" style="border-radius:20px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">' +
-      '<div class="zhc-chrome" style="display:flex;align-items:center;padding:14px 20px">' +
-        '<div style="display:flex;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:#ef4444;display:block"></span><span style="width:12px;height:12px;border-radius:50%;background:#f59e0b;display:block"></span><span style="width:12px;height:12px;border-radius:50%;background:#22c55e;display:block"></span></div>' +
-        '<div class="zhc-chrome-title" style="flex:1;text-align:center;font-size:13px;font-weight:500">zynix.ai</div>' +
-      '</div>' +
-      '<div style="display:flex;align-items:center;gap:8px;padding:20px 24px 0"><svg viewBox="0 0 32 32" width="24" height="24" fill="none"><path d="M16 2L4 8v8c0 8.4 5.1 16.2 12 19 6.9-2.8 12-10.6 12-19V8L16 2z" fill="#20449B" opacity="0.15"/><path d="M12 16l3 3 7-7" stroke="#F16529" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="zhc-brand" style="font-size:15px;font-weight:600">zynix<span style="color:#F16529">.ai</span></span></div>' +
-      '<div class="zhc-tabs" style="display:flex;gap:0;padding:16px 24px 0">' +
-        '<div class="zhc-tab" style="padding:10px 18px 12px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:block"></span> Care Gap Agent</div>' +
-        '<div class="zhc-tab" style="padding:10px 18px 12px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#3b82f6;display:block"></span> Outreach Agent</div>' +
-        '<div class="zhc-tab" style="padding:10px 18px 12px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#C44B16;display:block"></span> AWV Scheduler</div>' +
-        '<div class="zhc-tab zhc-tab-active" style="padding:10px 18px 12px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:block"></span> Care Team</div>' +
-      '</div>' +
-      '<div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0">' +
-        '<div><div class="zhc-title" style="font-size:18px;font-weight:600;display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C44B16" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg> Care Team + AI Agents</div><div class="zhc-sub" style="font-size:12px;margin-top:2px">Humans and agents working together to close gaps</div></div>' +
-        '<div style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#15803d;background:rgba(21,128,61,0.12);padding:4px 12px;border-radius:20px"><span style="width:6px;height:6px;border-radius:50%;background:#15803d;display:block;animation:zynixPulse 2s infinite"></span> LIVE</div>' +
-      '</div>' +
-      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:20px 24px">' +
-        '<div class="zhc-stat-tile" style="border-radius:12px;padding:16px;text-align:center"><div style="font-size:28px;font-weight:700;color:#20449B;letter-spacing:-1px">5,120</div><div class="zhc-stat-label" style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Patients Managed</div></div>' +
-        '<div class="zhc-stat-tile" style="border-radius:12px;padding:16px;text-align:center"><div style="font-size:28px;font-weight:700;color:#16a34a;letter-spacing:-1px">40%</div><div class="zhc-stat-label" style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Gap Closure Rate</div></div>' +
-        '<div class="zhc-stat-tile" style="border-radius:12px;padding:16px;text-align:center"><div style="font-size:28px;font-weight:700;color:#C44B16;letter-spacing:-1px">2.5x</div><div class="zhc-stat-label" style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-top:4px">ROI Year One</div></div>' +
-      '</div>' +
-      '<div style="padding:0 24px 16px">' +
-        '<div class="zhc-row" style="display:flex;align-items:center;gap:12px;padding:10px 0"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#2563eb);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">SP</div><div style="flex:1"><div class="zhc-name" style="font-size:13px;font-weight:600">Dr. Sarah Patel</div><div class="zhc-role" style="font-size:11px">Lead Physician</div></div><div class="zhc-count" style="font-size:20px;font-weight:700">34</div></div>' +
-        '<div class="zhc-row" style="display:flex;align-items:center;gap:12px;padding:10px 0"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#16a34a);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">MJ</div><div style="flex:1"><div class="zhc-name" style="font-size:13px;font-weight:600">Maria Johnson, RN</div><div class="zhc-role" style="font-size:11px">Care Manager</div></div><div class="zhc-count" style="font-size:20px;font-weight:700">52</div></div>' +
-        '<div class="zhc-row" style="display:flex;align-items:center;gap:12px;padding:10px 0"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#C44B16,#ea580c);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff">AI</div><div style="flex:1"><div class="zhc-name" style="font-size:13px;font-weight:600">Care Gap Agent</div><div class="zhc-role" style="font-size:11px">AI, Autonomous</div></div><div class="zhc-count" style="font-size:20px;font-weight:700">247</div></div>' +
-        '<div class="zhc-row" style="display:flex;align-items:center;gap:12px;padding:10px 0"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#C44B16,#ea580c);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff">AI</div><div style="flex:1"><div class="zhc-name" style="font-size:13px;font-weight:600">Outreach Agent</div><div class="zhc-role" style="font-size:11px">AI, Autonomous</div></div><div class="zhc-count" style="font-size:20px;font-weight:700">183</div></div>' +
-      '</div>' +
-      '<div class="zhc-footer" style="display:flex;align-items:center;gap:8px;padding:14px 24px;font-size:12px;font-weight:500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>AI agents handle <strong>73%</strong> of routine tasks. Care team focuses on complex cases</span></div>' +
-      '</div></div>' +
-      '</div></section>';
+  // ==== ZX:BEGIN home (owner H) ====
+  // Homepage (DESIGN_SPEC §5; words: COPY_DECK §3). The four protected assets (DECISIONS 11) are rebuilt here, never
+  // removed: the hero widget (HERO_WIDGET, renderHeroWidget, initHeroWidget), the How-It-Works explorer (HOME_LAYERS,
+  // initHowItWorks), the data flow, the page's one dark band (HOME_FLOW, renderDataFlow, initDataFlow; P1 reuses it on
+  // /platform) and the real logo row (renderLogoRow over CUSTOMERS). Facts come only from SITE_FACTS, CUSTOMERS and NAMES.
+  // Illustrative UI says so, uses role labels (never names) and shows operational counts only (DECISIONS 19).
 
+  // §5.2 The only hero-widget data. Counts are internally coherent (6 escalations in Outreach = 6 in Care team;
+  // AWV 540 >= 318 >= 212 >= 131). Tab labels stay at most 9 characters so all four fit at 390.
+  // Review round 1 (critics, 2026-09-29): the AWV tab drops its tiles (they repeated the pipeline values); the booked visit
+  // matches the episode and the care plan (booked by the scheduling agent); the Care team tab lists the agent second so it
+  // stays inside the three rows shown on phones; the adherence row names the Part D measure (health-plan / Stars buyers).
+  var HERO_WIDGET = {
+    brand: 'Care operations',
+    badge: 'Demo',                                             // a demo workspace, never labelled as a production feed
+    chip: 'Sample workspace · illustrative data',              // DECISIONS 11; always visible at every width
+    label: 'Sample workspace, illustrative data',              // accessible name of the widget
+    autoplayMs: 6000,
+    tabs: [
+      { id: 'gaps', label: 'Care gaps', layer: 'intelligence',
+        heading: 'Open care gaps', meta: 'This week · all practices',
+        tiles: [ { value: '312', label: 'Open gaps' }, { value: '128', label: 'Queued for outreach' }, { value: '46', label: 'Closed this week' } ],
+        rows: [
+          { title: 'Annual wellness visit due', sub: '64 patients', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'brand', label: 'In progress' } },
+          { title: 'HbA1c test overdue', sub: '38 patients', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'neutral', label: 'Queued' } },
+          { title: 'HCC recapture review', sub: '21 charts', owner: { type: 'staff', label: 'Physician lead' }, status: { tone: 'neutral', label: 'In review' } },
+          { title: 'Part D statin adherence', sub: '12 patients', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'warning', label: 'Escalated' } }
+        ],
+        footer: 'Gaps are ranked by due date and reachability. Your care team sets the rules.' },
+      { id: 'outreach', label: 'Outreach', layer: 'agents',
+        heading: 'Outreach queue', meta: 'Today',
+        tiles: [ { value: '84', label: 'Calls queued' }, { value: '51', label: 'Patients reached' }, { value: '6', label: 'Escalated to RN' } ],
+        rows: [
+          { title: 'Post-discharge check-in', sub: 'Day 1 after discharge', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Reached' } },
+          { title: 'Medication question', sub: 'Raised during the call', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'warning', label: 'Escalated' } },
+          { title: 'Follow-up visit booked', sub: 'Patient picked from 3 time slots', owner: { type: 'agent', label: 'Scheduling agent' }, status: { tone: 'success', label: 'Booked' } },
+          { title: 'No answer', sub: 'Second attempt at 4 pm', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'neutral', label: 'Retry scheduled' } }
+        ],
+        footer: 'Clinical questions go to the care team by rule.' },
+      { id: 'awv', label: 'AWVs', layer: 'care-plans',
+        heading: 'Annual wellness visit program', meta: 'This quarter',
+        pipeline: [ { label: 'Identified', value: 540 }, { label: 'Contacted', value: 318 }, { label: 'Scheduled', value: 212 }, { label: 'Completed', value: 131 } ],
+        footer: 'A visit counts only when it is completed and documented.' },
+      { id: 'team', label: 'Care team', layer: 'people',
+        heading: 'Care team', meta: 'Today',
+        tiles: [ { value: '6', label: 'Escalations' }, { value: '4', label: 'Resolved' }, { value: '17', label: 'Open tasks' } ],
+        rows: [
+          { title: 'Care manager, RN', sub: 'Interactive TCM contacts · 3 open', owner: { type: 'staff', label: 'Clinical staff' }, status: { tone: 'brand', label: 'In progress' } },
+          { title: 'Outreach agent', sub: '84 calls queued · 6 handed to the RN', owner: { type: 'agent', label: 'AI agent' }, status: { tone: 'success', label: 'Running' } },
+          { title: 'Physician lead', sub: 'HCC reviews · 2 awaiting sign-off', owner: { type: 'staff', label: 'Clinical staff' }, status: { tone: 'neutral', label: 'In review' } },
+          { title: 'Care coordinator', sub: 'Scheduling tasks · 9 open', owner: { type: 'staff', label: 'Staff' }, status: { tone: 'brand', label: 'In progress' } }
+        ],
+        footer: 'Agents do the outreach and scheduling. Licensed staff own clinical judgment and the billable TCM contact.' }
+    ]
+  };
 
-    // -- AEO SUMMARY (hidden visually, readable by crawlers/screen readers for SEO/AEO) --
-    html += '<div class="zynix-sr-only" aria-hidden="false" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">' +
-      '<h2>What is Zynix AI?</h2>' +
-      '<p>Zynix AI is the operating system that executes care, not just analyzes it. Purpose-built for value-based care, it deploys autonomous AI agents that call patients, close care gaps, schedule visits, document outcomes, and capture revenue, all without adding headcount. The platform serves ACOs, health systems, health plans, FQHCs, independent practices, and ambulatory surgery centers.</p>' +
-      '<p>Who is it for? ACOs in MSSP and ACO REACH, health systems, Medicare Advantage plans, FQHCs, independent practices, and ambulatory surgery centers.</p>' +
-      '<p>What problem does it solve? Healthcare has a doing problem, not a knowing problem. Organizations have invested millions in analytics but lack the execution infrastructure to act on insights at scale.</p>' +
-      '<p>How does it work? Four integrated layers: AI Data Foundation, Intelligence Engine, AI Agent Suite with 12 specialized agents, and Deployable Care Plans that orchestrate end-to-end workflows.</p>' +
-      '<p>How is it different? Unlike analytics dashboards that show you what to do, Zynix actually does it. The platform achieves 85%+ TCM contact rates with 1M+ patients across 30 states.</p>' +
+  // §5.4 How-It-Works explorer: the four product layers, numbered 01–04 (the data flow tags steps with the same layers).
+  // No intelligence product names while NAMES.intelligence[*].showName is false; no agent count.
+  var HOME_LAYERS = [
+    { n: 1, id: 'data-foundation', name: 'Data foundation', short: 'Every source, one patient record',
+      tagline: 'Claims, EHR, ADT, lab and pharmacy data, matched to one patient record.',
+      body: 'Zynix brings in Medicare claims, HL7 ADT feeds, labs, pharmacy fills and SDoH screens, standardizes ICD-10, CPT, SNOMED and LOINC codes, and resolves patient identity across sources.',
+      chipsLabel: 'Sources it connects', chips: ['Claims (CCLF, BCDA)', 'EHR (Epic, Oracle Health, athenahealth and more)', 'ADT feeds', 'Labs and pharmacy', 'SDoH screening'],
+      links: [ { label: 'Data foundation', href: '/products-data-platform' }, { label: 'Integrations', href: '/integrations' } ] },
+    { n: 2, id: 'intelligence', name: 'Intelligence', short: 'What needs attention, and why',
+      tagline: 'Ranks the patients, gaps and risks that need action, and shows why.',
+      body: 'It checks clinical diagnoses against current-year claims to find HCC and quality gaps, flags admission and readmission risk, and gives program leaders population and quality views.',
+      chipsLabel: 'What it surfaces', chips: NAMES.intelligence.map(function (p) { return p.showName ? p.name + ': ' + p.capability : p.capability; }),
+      links: [ { label: 'Analytics', href: '/zynix-data-analytics' } ] },
+    { n: 3, id: 'agents', name: 'Agents', short: 'Outreach, scheduling and follow-up',
+      tagline: 'Handle outreach, scheduling, intake and <span class="zx-home-nowrap">follow-up</span>, and hand clinical questions to your team.',
+      body: 'Agents run the operational steps of each program. Clinical questions and clinical decisions stay with your care team, and agents escalate to it by rule.',
+      // concrete jobs (the FAQ's list), each linked to the agent family on /agents that does it (NAMES.agentFamilies)
+      chipsLabel: 'What agents handle', chips: [ ['Post-discharge calls', 0], ['AWV scheduling', 0], ['Reminders', 0], ['After-hours intake', 2], ['Fax routing', 2] ]
+        .map(function (c) { var f = NAMES.agentFamilies[c[1]]; return f ? { label: c[0], href: f.href } : c[0]; }),
+      links: [ { label: 'AI agents', href: '/agents' } ] },
+    { n: 4, id: 'care-plans', name: 'Care plans', short: 'Each episode, seen through',
+      tagline: 'Sequence agents and people around one goal, and keep the episode open until it’s documented.',
+      body: 'Templates cover post-discharge TCM, HCC gap closure, medication adherence and preventive screening. Every step has an owner, an agent or a named role, and a plan closes only when each step is complete.',
+      chipsLabel: 'Example care plans', chips: NAMES.carePlans.slice(0, 4),
+      links: [ { label: 'Care plans', href: '/care-plans' } ] }
+  ];
+
+  // §5.5 Data flow "From source data to a documented outcome": Ingest → Normalize → Reason → Surface → Execute.
+  // summary <= 6 words, detail <= 20 words, tags <= 6, so every step stays complete at 390. No EHR write-back claim.
+  var HOME_FLOW = {
+    eyebrow: 'Data flow', title: 'From source data to a documented outcome',
+    lead: 'Every signal takes the same path: in from your systems, cleaned and matched, read in context, ranked into work and carried through to a documented result.',
+    sourcesLabel: 'Your data sources', outputsLabel: 'Where the work lands',
+    sources: [
+      { icon: 'file',     label: 'EHR systems', detail: 'Epic, Oracle Health (Cerner), athenahealth, eClinicalWorks, NextGen and more' },
+      { icon: 'database', label: 'Claims', detail: 'Medicare CCLF and BCDA; payer X12 837 and 835' },
+      { icon: 'bell',     label: 'ADT events', detail: 'HL7 v2 admit, discharge and transfer messages' },
+      { icon: 'activity', label: 'Labs and imaging', detail: '' },
+      { icon: 'pill',     label: 'Pharmacy fills', detail: 'NCPDP' },
+      { icon: 'users',    label: 'SDoH screening', detail: '' }
+    ],
+    steps: [   // id and name from NAMES.flow; layer tags link to NAMES.layers[].href
+      { id: 'ingest',    summary: 'Bring every source in.',
+        detail: 'Claims, EHR, ADT, lab, pharmacy and SDoH data arrive over standard interfaces into one secure record.',
+        tags: ['EHR', 'CCLF', 'BCDA', 'HL7 v2 ADT', 'X12', 'NCPDP'] },
+      { id: 'normalize', summary: 'Clean, code and match.',
+        detail: 'Codes are standardized to ICD-10, CPT, SNOMED and LOINC, and patient identity is resolved across systems.',
+        tags: ['ICD-10', 'CPT', 'SNOMED', 'LOINC', 'Identity resolution'] },
+      { id: 'reason',    summary: 'Read the record in context.',
+        detail: 'ZynixLLM and clinical risk models read diagnoses, notes and utilization to find gaps and risk.',
+        tags: ['ZynixLLM', 'Risk models'] },
+      { id: 'surface',   summary: 'Rank the work.',
+        detail: 'Patients and gaps are ranked into worklists by risk and deadline, then routed to the right program.',
+        tags: NAMES.intelligence.map(function (p) { return p.showName ? p.name : p.capability; }) },
+      { id: 'execute',   summary: 'Carry it through.',
+        detail: 'Care plans give each step to an agent or a person. Clinicians make clinical decisions; episodes close only when complete.',
+        tags: NAMES.agentFamilies.map(function (f) { return f.name; }).concat(['Care plans']) }
+    ],
+    outputs: [ { icon: 'clipboard', label: 'Care-team worklists' }, { icon: 'stethoscope', label: 'Point-of-care prompts' },
+               { icon: 'chart', label: 'Population and quality reporting' }, { icon: 'bot', label: 'Agent outreach tasks' },
+               { icon: 'file', label: 'Documentation for physician review' } ]   // no EHR write-back claim until confirmed per EHR [VERIFY]
+  };
+
+  // §5.6 The 48 hours after discharge. The billable TCM contact is always made by licensed clinical staff (DECISIONS 17b).
+  var HOME_EPISODE = {
+    caption: 'Example episode · sample data',
+    without: [ 'The discharge shows up in a report days later.', 'Nobody owns the patient yet.',
+               'A voicemail, then nothing.', 'The TCM contact window closes unnoticed.' ],
+    steps: [
+      { time: 'Hour 0', owner: 'system', ownerLabel: 'Zynix platform',   text: 'The ADT discharge message arrives, the patient is matched to their record and a post-discharge care plan opens.' },
+      { time: 'Hour 1', owner: 'system', ownerLabel: 'Zynix platform',   text: 'The patient joins today’s TCM worklist, ranked by risk.' },
+      { time: 'Day 1',  owner: 'agent',  ownerLabel: 'Outreach agent',   text: 'The outreach agent calls, confirms the patient is home and reviews the discharge instructions.' },
+      { time: 'Day 1',  owner: 'staff',  ownerLabel: 'Care manager, RN', text: 'A medication question is escalated by rule, and the care manager, RN makes the interactive TCM contact.', escalation: true },
+      { time: 'Day 2',  owner: 'agent',  ownerLabel: 'Scheduling agent', text: 'The follow-up visit is booked inside the 7- or 14-day window and reminders are set.' }
+    ],
+    note: 'Your care plan sets the steps, owners and escalation rules. The plan stays open until the visit is documented.',
+    // CMS-1 (COPY_DECK §0.3), checked 2026-09-29: the MLN booklet answers 200 and states the 2-business-day interactive contact.
+    rule: { text: 'For TCM, CMS requires an interactive contact with the patient or caregiver within 2 business days of discharge.',
+            label: 'CMS: Transitional Care Management Services (PDF)',
+            href: 'https://www.cms.gov/files/document/mln908628-transitional-care-management-services.pdf' }
+  };
+
+  // §5.7 Capabilities. media: 'capture' (a real, admissible screenshot in capture.src, §2.9 checklist) | 'panel' (the
+  // illustrative panel) | 'text' (text and callouts only). Switching a row is a data change. Until two captures pass the
+  // checklist the §5.7 fallback ships: connect and document = 'text', act = 'panel' (at most two mock panels on the page:
+  // the hero widget and the care-plan panel). [VERIFY] launch dependency, listed for Gautamdev.
+  var HOME_CAPABILITIES = [
+    { id: 'connect', media: 'text', capture: null, eyebrow: 'Data foundation · Intelligence', title: 'See who needs attention this week, and why',
+      body: 'The Zynix platform matches claims, EHR and ADT data to one patient record, then ranks discharges, care gaps and risk into worklists, so teams start where the window is closing.',
+      links: [ { label: 'Explore analytics', href: '/zynix-data-analytics' }, { label: 'See the data foundation', href: '/products-data-platform' } ],
+      caption: 'A post-discharge worklist, ranked by priority, with an owner on every row.',
+      panel: { label: 'Sample worklist, illustrative data', brand: 'Care management', title: 'Post-discharge worklist', meta: 'Today · 4 practices',
+        tiles: [ { value: '18', label: 'Discharges' }, { value: '12', label: 'High priority' }, { value: '9', label: 'Reached' } ],
+        rows: [
+          { title: 'Pt 1042 · 72 · CHF',      sub: 'Discharged yesterday · high priority', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Reached' } },
+          { title: 'Pt 2317 · 68 · COPD',     sub: 'Discharged yesterday',                 owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'brand', label: 'Calling' } },
+          { title: 'Pt 0896 · 81 · CKD',      sub: 'Discharged 2 days ago',                owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'warning', label: 'Escalated' } },
+          { title: 'Pt 3350 · 59 · Diabetes', sub: 'AWV due · HbA1c gap open',             owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'neutral', label: 'Queued' } } ] },
+      callouts: [ { title: 'Ranked by risk and deadline', body: 'Discharges and gaps are sorted so the team starts where the window is closing.' },
+                  { title: 'An owner on every row', body: 'Each patient shows whether an agent or a named role has the next step.' },
+                  { title: 'Escalations reach the RN', body: 'When a call raises a clinical question, the row moves to the care manager, RN.' } ] },
+    { id: 'act', media: 'panel', capture: null, eyebrow: 'Agents · Care plans', title: 'A plan with an owner for every step',
+      body: 'Care plans sequence agents and people around one goal, such as a discharge or a wellness visit. Agents make the calls, send the texts and book visits; your care team takes escalations and clinical decisions.',
+      links: [ { label: 'See how agents work', href: '/agents' }, { label: 'Browse care plans', href: '/care-plans' } ],
+      caption: 'A post-discharge care plan: each step belongs to an agent or a person.',
+      panel: { label: 'Sample care plan, illustrative data', brand: 'Care plans', title: 'Post-discharge TCM', meta: 'Pt 1042 · started Day 0',
+        steps: [
+          { time: 'Day 0', title: 'Discharge detected',        owner: { type: 'system', label: 'Zynix platform' },   status: { tone: 'success', label: 'Done' } },
+          { time: 'Day 1', title: 'Check-in call',             owner: { type: 'agent',  label: 'Outreach agent' },   status: { tone: 'success', label: 'Reached' } },
+          { time: 'Day 1', title: 'Interactive TCM contact',   owner: { type: 'staff',  label: 'Care manager, RN' }, status: { tone: 'success', label: 'Completed' } },
+          { time: 'Day 2', title: 'Follow-up visit booked',    owner: { type: 'agent',  label: 'Scheduling agent' }, status: { tone: 'success', label: 'Booked' } },   // matches HOME_EPISODE
+          { time: 'Day 7', title: 'Visit and documentation',   owner: { type: 'staff',  label: 'Physician' },        status: { tone: 'neutral', label: 'Scheduled' } } ] },
+      callouts: [ { title: 'One plan, several agents', body: 'A post-discharge plan sequences the check-in call, the visit booking and the reminders.' },
+                  { title: 'People where judgment is needed', body: 'The interactive TCM contact and every clinical question stay with licensed staff.' },
+                  { title: 'Closes only when complete', body: 'The plan stays open until the follow-up visit is documented.' } ] },
+    { id: 'document', media: 'text', capture: null, eyebrow: 'ZynScribe', title: 'Notes drafted during the visit, approved by the physician',
+      body: 'ZynScribe listens to the visit and drafts a structured SOAP note in the physician’s workflow. The physician reviews, edits and approves it before anything is filed or used for billing.',
+      links: [ { label: 'Explore ZynScribe', href: '/zynscribe' } ],
+      caption: 'A visit note drafted by ZynScribe, waiting for physician review.',
+      panel: { label: 'Sample visit note, illustrative data', brand: 'ZynScribe', title: 'Visit note draft', meta: 'Follow-up visit · sample',
+        note: { sections: [ { label: 'Subjective', text: 'Breathing better since discharge; no new symptoms.' },
+                            { label: 'Assessment', text: 'Heart failure, stable on current regimen.' },
+                            { label: 'Plan', text: 'Continue medications; daily weights; follow up in 2 weeks.' } ] },
+        footer: 'Draft · waiting for physician review and sign-off.' },
+      callouts: [ { title: 'Drafted during the visit', body: 'ZynScribe turns the visit conversation into a structured SOAP note draft.' },
+                  { title: 'Physician reviews every note', body: 'Nothing is filed or used for billing until the physician approves it.' } ] }
+  ];
+
+  // §5.12 Five questions; no numbers in the answers; none repeats the proof band's "What is Zynix AI?".
+  var HOME_FAQ = [
+    { q: 'Which organizations use Zynix?',
+      a: 'ACOs, health plans, MSOs, IPAs and physician groups, health systems and FQHCs use Zynix to run programs such as transitional care, annual wellness visits, chronic care management and quality gap closure. Palm Beach ACO and eternalHealth have announced their partnerships with Zynix in published releases, and our customer stories cover others.' },
+    { q: 'How is Zynix different from a population health analytics platform?',
+      a: 'Analytics tells you who needs attention. Zynix also covers the work that follows: care plans that give each step an owner, agents that handle outreach and scheduling, and documentation that closes the loop. If you already use an analytics platform, ask us how Zynix works alongside it.' },
+    { q: 'How do AI agents work with our care team?',
+      a: 'Agents handle operational work: outreach calls and texts, scheduling, reminders, after-hours intake and fax routing. They follow the escalation rules your team sets and hand clinical questions to a nurse or physician with the conversation attached. Agents don’t diagnose, prescribe or make treatment decisions. Unlike a chatbot, which answers questions, an agent completes a task inside your workflow.' },
+    { q: 'Which EHRs and data sources does Zynix connect to?',
+      a: 'Zynix connects to Epic, Oracle Health (Cerner), athenahealth, eClinicalWorks, NextGen, Allscripts, Greenway, DrChrono and other EHRs, along with Medicare and payer claims, ADT feeds, labs and pharmacy data. Connections use FHIR, HL7, C-CDA and X12 standards. The integrations page has the detail.' },
+    { q: 'How does Zynix protect patient data?',
+      a: 'Zynix is SOC 2 Type II audited, and the report is available on request through our trust portal. We maintain HIPAA-aligned safeguards, and a Business Associate Agreement is available. HITRUST CSF certification is in progress.' }
+  ];
+
+  // Homepage title and description (§5.0 SEO; COPY_DECK §6): set here, never by editing the PAGE_SEO table.
+  zxSeo('', { title: 'Value-based care AI for ACOs and health plans | Zynix AI',
+    desc: 'Connect claims, EHR and ADT data, flag discharges, care gaps and AWVs due, and give care teams AI outreach agents. For ACOs, health plans, MSOs and IPAs.' });
+
+  // ── Home helpers ──
+  function zxHomeOwner(o) {
+    var type = o && (o.type === 'agent' || o.type === 'staff' || o.type === 'system') ? o.type : 'system';
+    return '<span class="zynix-ui__owner zynix-ui__owner--' + type + '">' + zxIcon({ agent: 'bot', staff: 'user', system: 'layers' }[type]) + ' ' + o.label + '</span>';
+  }
+  function zxHomeStatus(st) {
+    if (!st) return '';
+    var tone = ['brand', 'success', 'warning', 'danger'].indexOf(st.tone) > -1 ? ' zynix-chip--' + st.tone : '';
+    return '<span class="zynix-chip' + tone + ' zynix-ui__status">' + st.label + '</span>';
+  }
+  function zxHomeMq(q) { try { return window.matchMedia ? window.matchMedia(q) : null; } catch (e) { return null; } }
+  function zxHomeOnChange(mq, fn) { if (!mq) return; if (mq.addEventListener) mq.addEventListener('change', fn); else if (mq.addListener) mq.addListener(fn); }
+  function zxHomeLabel(text, id) { return '<p class="zx-home-label"' + zxA('id', id) + '>' + text + '</p>'; }
+
+  // ── §5.2 Hero widget: one responsive HTML widget with real tabs (tablist, roving tabindex, one panel per tab) ──
+  var ZX_HW_PAUSE = '<svg class="zx-hw__icon zx-hw__icon--pause" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16"><rect x="4" y="3" width="2.75" height="10" rx="1" fill="currentColor"/><rect x="9.25" y="3" width="2.75" height="10" rx="1" fill="currentColor"/></svg>' +
+    '<svg class="zx-hw__icon zx-hw__icon--play" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16"><path d="M5 3.3v9.4a.6.6 0 0 0 .9.5l7.3-4.7a.6.6 0 0 0 0-1L5.9 2.8a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>';
+  // The coloured Zynix symbol (live on @main as the touch icon). SITE_FACTS.brand.symbol (logo-symbol.png) is the light
+  // artwork for dark surfaces and is invisible on the widget's light bar; the mark is cropped to the glyph in CSS.
+  var ZX_HW_MARK = 'apple-touch-icon.png';
+  function renderHeroWidget(model) {
+    model = model || HERO_WIDGET;
+    var tabs = model.tabs || [];
+    var tablist = tabs.map(function (t, i) {
+      return '<button type="button" class="zx-hw__tab" role="tab" id="zx-hw-tab-' + t.id + '" aria-controls="zx-hw-panel-' + t.id + '" aria-selected="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? '-1' : '0') + '">' + t.label + '</button>';
+    }).join('');
+    var panels = tabs.map(function (t, i) {
+      var tiles = (t.tiles || []).length ? '<dl class="zynix-ui__tiles">' + t.tiles.map(function (x) {
+        return '<div class="zynix-ui__tile"><dt class="zynix-ui__tile-label">' + x.label + '</dt><dd class="zynix-ui__tile-value">' + x.value + '</dd></div>'; }).join('') + '</dl>' : '';
+      var rows = (t.rows || []).length ? '<ul class="zynix-ui__rows" role="list">' + t.rows.map(function (r) {
+        return '<li class="zynix-ui__row"><div class="zynix-ui__row-main"><p class="zynix-ui__row-title">' + r.title + '</p>' + zxEl('p', 'zynix-ui__row-sub', r.sub) + '</div>' +
+          (r.owner ? zxHomeOwner(r.owner) : '') + zxHomeStatus(r.status) + '</li>'; }).join('') + '</ul>' : '';
+      var max = 0; (t.pipeline || []).forEach(function (p) { if (+p.value > max) max = +p.value; });
+      var pipeline = (t.pipeline || []).length ? '<ol class="zynix-ui__pipeline">' + t.pipeline.map(function (p) {
+        return '<li class="zynix-ui__stage" style="--zx-bar:' + (max ? Math.round(+p.value / max * 100) / 100 : 0) + '"><span class="zynix-ui__stage-label">' + p.label +
+          '</span><span class="zynix-ui__stage-bar" aria-hidden="true"></span><span class="zynix-ui__stage-value">' + p.value + '</span></li>'; }).join('') + '</ol>' : '';
+      return '<div class="zx-hw__panel zynix-ui__body" role="tabpanel" id="zx-hw-panel-' + t.id + '" aria-labelledby="zx-hw-tab-' + t.id + '" tabindex="0"' + (i ? ' hidden' : '') + '>' +
+        '<div class="zynix-ui__head"><p class="zynix-ui__title">' + t.heading + '</p>' + zxEl('p', 'zynix-ui__meta', t.meta) + '</div>' +
+        tiles + rows + pipeline + zxEl('p', 'zynix-ui__footer', t.footer) + '</div>';
+    }).join('');
+    return '<div class="zx-hw zynix-ui" data-zx-hw data-zx-sample role="group" aria-label="' + zxAttr(model.label) + '">' +
+      '<div class="zynix-ui__bar"><span class="zynix-ui__brand"><span class="zx-hw__mark" aria-hidden="true"><img src="' + zxAttr(zxImg(ZX_HW_MARK)) + '" alt="" width="32" height="32"></span>' + model.brand + '</span>' +
+        '<span class="zynix-ui__badge">' + model.badge + '</span><span class="zynix-chip zynix-chip--sample">' + model.chip + '</span></div>' +
+      '<div class="zx-hw__tabbar"><div class="zx-hw__tabs" role="tablist" aria-label="Sample workspace views" data-zx-allow-overflow>' + tablist + '</div>' +
+        '<button type="button" class="zx-hw__pause" aria-pressed="false" aria-label="Pause the sample rotation" hidden>' + ZX_HW_PAUSE + '</button></div>' +
+      '<div class="zx-hw__panels">' + panels + '</div></div>';
+  }
+
+  // ── §5.5 Data flow (P1 reuses it on /platform with opts.expanded; H owns it) ──
+  // opts: { id, expanded, eyebrow, title, lead, className, fact } — fact:false drops the EHR line under the sources column
+  // (the homepage states it in the hero proof list and #interoperability, so it is not repeated a screen later).
+  function renderDataFlow(model, opts) {
+    model = model || HOME_FLOW; opts = opts || {};
+    var id = opts.id || 'data-flow', tid = id + '-title', expanded = !!opts.expanded;
+    var layerOf = {}; NAMES.layers.forEach(function (l) { layerOf[l.id] = l; });
+    var flowOf = {}; NAMES.flow.forEach(function (f) { flowOf[f.id] = f; });
+    var item = function (it) {
+      return '<li class="zx-flow__item"><span class="zx-flow__icon" aria-hidden="true">' + zxIcon(it.icon) + '</span><span class="zx-flow__item-text">' +
+        '<span class="zx-flow__item-label">' + it.label + '</span>' + zxEl('span', 'zx-flow__item-detail', it.detail) + '</span></li>';
+    };
+    var steps = (model.steps || []).map(function (s, i) {
+      var f = flowOf[s.id] || { name: s.id, layers: [] };
+      var layers = (f.layers || []).map(function (k) { return layerOf[k]; }).filter(Boolean);
+      return { id: s.id, n: i + 1, name: f.name, layers: layers, summary: s.summary, detail: s.detail, tags: s.tags || [] };
+    });
+    var nodes = steps.map(function (s, i) {
+      return '<button type="button" class="zx-flow__node" role="tab" id="zx-flow-tab-' + s.id + '" aria-controls="zx-flow-step-' + s.id + '" aria-selected="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? '-1' : '0') + '">' +
+        '<span class="zx-flow__num" aria-hidden="true">' + s.n + '</span><span class="zx-flow__node-name">' + s.name + '</span>' +
+        '<span class="zx-flow__node-layer">' + s.layers.map(function (l) { return l.name; }).join(' · ') + '</span></button>';
+    }).join('');
+    var panels = steps.map(function (s, i) {
+      return '<div class="zx-flow__step" id="zx-flow-step-' + s.id + '"' + (expanded ? '' : ' role="tabpanel" aria-labelledby="zx-flow-tab-' + s.id + '" tabindex="0"' + (i ? ' hidden' : '')) + '>' +
+        '<div class="zx-flow__step-head"><span class="zx-flow__num" aria-hidden="true">' + s.n + '</span><h3 class="zx-flow__step-title">' + s.name + '</h3>' +
+          '<span class="zx-flow__layer-links">' + s.layers.map(function (l) { return '<a class="zx-flow__layer-link" href="' + zxAttr(l.href) + '">' + l.name + '</a>'; }).join('<span aria-hidden="true"> · </span>') + '</span></div>' +
+        '<p class="zx-flow__summary">' + s.summary + '</p><p class="zx-flow__detail">' + s.detail + '</p>' +
+        (s.tags.length ? '<ul class="zx-flow__tags" role="list">' + s.tags.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' : '') +
       '</div>';
+    }).join('');
+    var flow = '<div class="zx-flow' + (expanded ? ' zx-flow--expanded' : '') + '" data-zx-flow' + (expanded ? ' data-zx-flow-expanded' : '') + '>' +
+      '<div class="zx-flow__col zx-flow__sources"><p class="zx-flow__col-label" id="' + id + '-sources">' + model.sourcesLabel + '</p>' +
+        '<ul class="zx-flow__list" role="list" aria-labelledby="' + id + '-sources">' + (model.sources || []).map(item).join('') + '</ul>' +
+        (opts.fact === false ? '' : '<p class="zx-flow__fact">' + SITE_FACTS.ehr.short + '</p>') + '</div>' +
+      '<div class="zx-flow__main">' +
+        (expanded ? '' : '<div class="zx-flow__nodes" role="tablist" aria-label="Data flow steps">' + nodes + '</div>') +
+        '<div class="zx-flow__steps">' + panels + '</div></div>' +
+      '<div class="zx-flow__col zx-flow__outputs"><p class="zx-flow__col-label" id="' + id + '-outputs">' + model.outputsLabel + '</p>' +
+        '<ul class="zx-flow__list" role="list" aria-labelledby="' + id + '-outputs">' + (model.outputs || []).map(item).join('') + '</ul></div>' +
+    '</div>';
+    var head = renderSectionHead(opts.eyebrow || model.eyebrow, opts.title || model.title, opts.lead === undefined ? model.lead : opts.lead, { id: tid });
+    return renderSection({ id: id, surface: 'inverse', className: 'zx-flow-section' + (opts.className ? ' ' + opts.className : '') }, head + flow);
+  }
 
-    // -- CUSTOMER TRUST STRIP (logo-only, grayscale, uniform height) --
-    var trustLogos = [
-      { name: 'Palm Beach ACO', logo: GH + 'palm-beach-aco.png' },
-      { name: 'West Florida ACO', logo: GH + 'west-florida-aco.svg' },
-      { name: 'Space Coast ACO', logo: GH + 'space-coast-aco.svg' },
-      { name: 'Central Florida ACO', logo: GH + 'central-florida-aco-logo.svg' },
-      { name: 'GoldenCare ACO', logo: GH + 'goldencare-aco.png' },
-      { name: 'NEXT Healthcare', logo: GH + 'next-healthcare.svg' },
-      { name: 'eTernal Health', logo: GH + 'eternal-health.png' },
-      { name: 'AMISTAD CHC', logo: GH + 'amistad-chc.png' },
-      { name: 'Professional Radiology', logo: GH + 'professional-radiology.png' },
-      { name: 'Sunflower ACO', logo: GH + 'sunflower-aco.png' },
-      { name: 'Innovacare Health', logo: GH + 'innovacare-health.svg' },
-      { name: 'CLSCFL', logo: GH + 'clscfl.png' }
-    ];
-    var logoStyle = 'height:52px;width:auto;max-width:180px;filter:grayscale(100%) brightness(0.45) contrast(1.2);transition:filter 0.3s;object-fit:contain';
-    var trustSpans = '';
-    for (var ti = 0; ti < 2; ti++) {
-      for (var tj = 0; tj < trustLogos.length; tj++) {
-        var tl = trustLogos[tj];
-        trustSpans += '<span title="' + tl.name + '" style="display:inline-flex;align-items:center;height:52px;flex-shrink:0"><img src="' + tl.logo + '" alt="' + tl.name + '" style="' + logoStyle + '" loading="lazy"></span>';
+  // ── §5.4 How-It-Works explorer: interleaved headings and panels (disclosures below 1024, selectors at 1024+) ──
+  var ZX_HIW_CHEVRON = '<svg class="zx-hiw__chev" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function zxHomeExplorer(layers) {
+    return '<div class="zx-hiw" data-zx-hiw role="group" aria-label="Platform layers">' + layers.map(function (l, i) {
+      var num = (l.n < 10 ? '0' : '') + l.n, open = i === 0, next = layers[i + 1];
+      var chips = (l.chips || []).map(function (c) {
+        return '<li>' + (typeof c === 'object' ? renderChip(c.label, 'brand', { href: c.href }) : renderChip(c, 'neutral')) + '</li>';
+      }).join('');
+      var go = next ? '<button type="button" class="zynix-link-arrow zx-hiw__next" data-zx-hiw-go="' + next.n + '">Next: ' + next.name + '<span class="zynix-link-arrow__icon" aria-hidden="true">→</span></button>'
+        : '<a class="zynix-link-arrow zx-hiw__next" href="#data-flow">See the data flow<span class="zynix-link-arrow__icon" aria-hidden="true">↓</span></a>';
+      return '<h3 class="zx-hiw__heading" data-n="' + l.n + '"><button type="button" class="zx-hiw__tab" data-n="' + l.n + '" id="zx-hiw-tab-' + l.n + '" aria-expanded="' + (open ? 'true' : 'false') + '" aria-controls="zx-hiw-panel-' + l.n + '">' +
+          '<span class="zx-hiw__num" aria-hidden="true">' + num + '</span><span class="zx-hiw__name">' + l.name + '</span><span class="zx-hiw__short">' + l.short + '</span>' + ZX_HIW_CHEVRON + '</button></h3>' +
+        '<div class="zx-hiw__panel" data-n="' + l.n + '" id="zx-hiw-panel-' + l.n + '" role="region" aria-labelledby="zx-hiw-tab-' + l.n + '"' + (open ? '' : ' hidden') + '>' +
+          '<p class="zynix-eyebrow">Layer ' + l.n + '</p>' +
+          '<p class="zx-hiw__tagline">' + l.tagline + '</p><p class="zx-hiw__body">' + l.body + '</p>' +
+          '<p class="zx-hiw__chips-label" id="zx-hiw-chips-' + l.n + '">' + l.chipsLabel + '</p><ul class="zx-hiw__chips" role="list" aria-labelledby="zx-hiw-chips-' + l.n + '">' + chips + '</ul>' +
+          '<div class="zx-hiw__footer">' + go + (l.links || []).map(function (k) { return renderLinkArrow(k.label, k.href); }).join('') + '</div>' +
+        '</div>';
+    }).join('') + '</div>';
+  }
+
+  // ── §5.6 Example episode (a diagram, not a product mock: no bar, no "Demo" badge) ──
+  function zxHomeEpisode(ep) {
+    return '<figure class="zx-ep" data-zx-sample>' +
+      '<div class="zx-ep__head"><span class="zynix-chip zynix-chip--sample">' + ep.caption + '</span></div>' +
+      '<ol class="zx-ep__steps">' + ep.steps.map(function (s) {
+        return '<li class="zx-ep__step' + (s.escalation ? ' zx-ep__step--escalation' : '') + '"><div class="zx-ep__when"><span class="zx-ep__time">' + s.time + '</span>' +
+          zxHomeOwner({ type: s.owner, label: s.ownerLabel }) + (s.escalation ? '<span class="zynix-chip zynix-chip--warning zx-ep__flag">Escalated by rule</span>' : '') + '</div>' +
+          '<div class="zx-ep__main"><p class="zx-ep__text">' + s.text + '</p></div></li>';
+      }).join('') + '</ol>' +
+      '<figcaption class="zx-ep__note">' + ep.note + '</figcaption></figure>';
+  }
+
+  // ── §5.7 One capability row in its media mode ──
+  // The callouts are parallel properties, not a sequence, so the homepage lists them without numbers (review round 1;
+  // numbered callouts stay for annotating numbered points on a capture). Text mode (no admissible capture yet) is an
+  // editorial row: the text on up to 8 columns, the points as a hairline-topped row beneath it, no card.
+  function zxHomePoints(items) {
+    items = (items || []).filter(function (it) { return it && it.title; });
+    return items.length ? '<ul class="zx-home-points" role="list" data-count="' + items.length + '">' + items.map(function (it) {
+      return '<li class="zx-home-points__item"><p class="zx-home-points__title">' + it.title + '</p>' + zxEl('p', 'zx-home-points__body', it.body) + '</li>';
+    }).join('') + '</ul>' : '';
+  }
+  function zxHomeCapability(row, i) {
+    var mode = row.media === 'capture' && row.capture && row.capture.src ? 'capture' : (row.media === 'panel' && row.panel ? 'panel' : 'text');
+    var text = '<p class="zynix-eyebrow">' + row.eyebrow + '</p><h3 class="zx-home-cap__title">' + row.title + '</h3>' +
+      '<p class="zx-home-cap__body">' + row.body + '</p>' +
+      '<div class="zx-home-cap__links">' + (row.links || []).map(function (l) { return renderLinkArrow(l.label, l.href); }).join('') + '</div>';
+    if (mode === 'text') return '<div class="zx-home-cap zx-home-cap--text"><div class="zx-home-cap__text">' + text + '</div>' + zxHomePoints(row.callouts) + '</div>';
+    var frame = mode === 'capture'
+      ? renderProductFrame({ src: row.capture.src, alt: row.capture.alt, caption: row.capture.caption || row.caption, sample: true, sampleLabel: 'Sample data' })
+      : renderProductFrame({ html: renderUiPanel(Object.assign({}, row.panel, { chip: null })), sample: true, sampleLabel: 'Sample data', caption: row.caption });
+    return renderSplit(text + zxHomePoints(row.callouts), frame, { ratio: '5-7', reverse: i % 2 === 1, center: true, className: 'zx-home-cap zx-home-cap--' + mode });
+  }
+
+  // ── Init (§5.15): each idempotent, early return without its root, listeners registered once ──
+  function initHomepage() {
+    [[initHeroWidget, '[data-zx-hw]'], [initHowItWorks, '[data-zx-hiw]'], [initDataFlow, '[data-zx-flow]'], [zxHomeAnchors, '.zynix-injected']].forEach(function (x) {
+      try { x[0](document.querySelector(x[1])); } catch (e) { try { console.warn('[zx] home init', e); } catch (e2) {} }
+    });
+  }
+
+  // Same-page links on the homepage ("See how it works", "See the data flow") land below the fixed chrome. Webflow's own
+  // anchor scroll ignores the bundle's fixed nav and parks the target under it, so these links scroll themselves.
+  function zxHomeAnchors(root) {
+    if (!root || root.__zxHomeAnchors) return;
+    root.__zxHomeAnchors = true;
+    [].forEach.call(root.querySelectorAll('.zx-home-hero a[href^="#"], .zx-hiw a[href^="#"]'), function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href').slice(1), el = id ? document.getElementById(id) : null;
+        if (!el) return;
+        e.preventDefault(); e.stopPropagation();
+        var chrome = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--zx-chrome-h')) || 0;
+        var still = zxHomeMq('(prefers-reduced-motion: reduce)');
+        window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - chrome), behavior: still && still.matches ? 'auto' : 'smooth' });
+        try { history.pushState(null, '', '#' + id); } catch (err) {}
+        if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+        el.focus({ preventScroll: true });   // keyboard users continue from the section they jumped to
+      });
+    });
+  }
+
+  // Autoplay runs only when all are true: >= 1024px, no reduced motion, >= 50% visible, tab visible, pointer not over it,
+  // focus not inside it, no manual tab choice this page view, not paused. setInterval is cleared whenever one turns false.
+  function initHeroWidget(root) {
+    if (!root || root.dataset.zxInit) return;
+    root.dataset.zxInit = '1';
+    var tabs = [].slice.call(root.querySelectorAll('[role="tab"]'));
+    if (!tabs.length) return;
+    var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+    var pause = root.querySelector('.zx-hw__pause');
+    var ms = +HERO_WIDGET.autoplayMs || 6000;
+    var desk = zxHomeMq('(min-width:1024px)'), still = zxHomeMq('(prefers-reduced-motion: reduce)');
+    var st = { inView: !window.IntersectionObserver, hover: false, focus: false, manual: false, paused: false };
+    var cur = 0, timer = null;
+    tabs.forEach(function (t, k) { if (t.getAttribute('aria-selected') === 'true') cur = k; });
+    function select(i, focus) {
+      cur = (i + tabs.length) % tabs.length;
+      tabs.forEach(function (t, k) {
+        var on = k === cur;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        if (panels[k]) panels[k].hidden = !on;
+      });
+      if (focus) tabs[cur].focus();
+    }
+    function possible() { return !!(desk && desk.matches) && !(still && still.matches) && !st.manual; }
+    function progress() { root.classList.remove('is-playing'); void root.offsetWidth; root.classList.add('is-playing'); }
+    function update() {
+      if (pause) pause.hidden = !possible();
+      var go = possible() && !st.paused && st.inView && !st.hover && !st.focus && document.visibilityState !== 'hidden';
+      if (go && !timer) { progress(); timer = setInterval(function () { select(cur + 1); progress(); }, ms); }
+      else if (!go) { if (timer) { clearInterval(timer); timer = null; } root.classList.remove('is-playing'); }
+    }
+    tabs.forEach(function (t, k) {
+      t.addEventListener('click', function () { st.manual = true; select(k); update(); });
+    });
+    root.querySelector('[role="tablist"]').addEventListener('keydown', function (e) {
+      var k = e.key, to = k === 'ArrowRight' ? cur + 1 : k === 'ArrowLeft' ? cur - 1 : k === 'Home' ? 0 : k === 'End' ? tabs.length - 1 : null;
+      if (to === null) return;
+      e.preventDefault(); st.manual = true; select(to, true); update();
+    });
+    if (pause) pause.addEventListener('click', function () {
+      st.paused = !st.paused;
+      pause.setAttribute('aria-pressed', st.paused ? 'true' : 'false');
+      pause.setAttribute('aria-label', st.paused ? 'Resume the sample rotation' : 'Pause the sample rotation');
+      update();
+    });
+    root.addEventListener('mouseenter', function () { st.hover = true; update(); });
+    root.addEventListener('mouseleave', function () { st.hover = false; update(); });
+    root.addEventListener('focusin', function () { st.focus = true; update(); });
+    root.addEventListener('focusout', function (e) { st.focus = !!(e.relatedTarget && root.contains(e.relatedTarget)); update(); });
+    document.addEventListener('visibilitychange', update);
+    zxHomeOnChange(desk, update); zxHomeOnChange(still, update);
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function (es) { es.forEach(function (en) { st.inView = en.isIntersecting && en.intersectionRatio >= 0.5; }); update(); }, { threshold: [0, 0.5, 1] }).observe(root);
+    }
+    update();
+  }
+
+  function initHowItWorks(root) {
+    if (!root || root.dataset.zxInit) return;
+    root.dataset.zxInit = '1';
+    var btns = [].slice.call(root.querySelectorAll('.zx-hiw__tab'));
+    var panels = btns.map(function (b) { return document.getElementById(b.getAttribute('aria-controls')); });
+    var desk = zxHomeMq('(min-width:1024px)'), cur = 0;
+    function isDesk() { return !!(desk && desk.matches); }
+    function select(i) {   // >= 1024: exactly one layer shown; the shown layer's button carries aria-current
+      cur = i;
+      btns.forEach(function (b, k) {
+        b.removeAttribute('aria-expanded');
+        if (k === i) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+        if (panels[k]) panels[k].hidden = k !== i;
+      });
+    }
+    function toggle(i, open) {   // < 1024: independent disclosures
+      if (!panels[i]) return;
+      if (open == null) open = panels[i].hidden;
+      panels[i].hidden = !open;
+      btns[i].setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    function mode() {
+      if (isDesk()) {
+        var first = -1;
+        panels.forEach(function (p, k) { if (first < 0 && p && !p.hidden) first = k; });
+        select(first < 0 ? cur : first);
+      } else {
+        btns.forEach(function (b, k) { b.removeAttribute('aria-current'); b.setAttribute('aria-expanded', panels[k] && !panels[k].hidden ? 'true' : 'false'); });
       }
     }
-    html += '<section class="zynix-trust-strip"><div class="zynix-container">' +
-      '<p class="zynix-trust-label">TRUSTED BY 1M+ VBC PATIENTS &middot; ACOs &middot; HEALTH PLANS &middot; HEALTH SYSTEMS &middot; FQHCs &middot; PRACTICES</p>' +
-      '<div class="zynix-trust-marquee"><div class="zynix-trust-track">' +
-      trustSpans +
-      '</div></div></div></section>';
+    btns.forEach(function (b, k) {
+      b.addEventListener('click', function () { if (isDesk()) { if (k !== cur) select(k); } else toggle(k); });
+      b.addEventListener('keydown', function (e) {
+        if (!isDesk()) return;
+        var key = e.key, to = key === 'ArrowDown' ? k + 1 : key === 'ArrowUp' ? k - 1 : key === 'Home' ? 0 : key === 'End' ? btns.length - 1 : null;
+        if (to === null) return;
+        e.preventDefault(); btns[(to + btns.length) % btns.length].focus();
+      });
+    });
+    [].forEach.call(root.querySelectorAll('[data-zx-hiw-go]'), function (g) {
+      g.addEventListener('click', function () {
+        var i = +g.getAttribute('data-zx-hiw-go') - 1;
+        if (!btns[i]) return;
+        if (isDesk()) select(i); else toggle(i, true);
+        btns[i].focus();
+      });
+    });
+    mode();
+    zxHomeOnChange(desk, mode);
+  }
 
-    // -- CRISIS STATS --
-    html += '<section class="zynix-crisis-section"><div class="zynix-container">' +
-      '<span class="zynix-tag">THE CRISIS</span>' +
-      '<h2>Healthcare Has a Doing Problem, Not a Knowing Problem</h2>' +
-      '<p class="zynix-section-sub">Every organization has invested millions in analytics. The problem isn\u2019t knowing who needs care. It\u2019s delivering that care at scale.</p>' +
-      '<div class="zynix-metrics-bar">' +
-      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">$600\u2013850B</span><span class="zynix-metric-label">Wasted annually on admin overhead</span></div>' +
-      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">97%</span><span class="zynix-metric-label">Of healthcare data goes unused</span></div>' +
-      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">85%</span><span class="zynix-metric-label">After-hours callers never call back</span></div>' +
-      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">30%</span><span class="zynix-metric-label">ER visits are avoidable</span></div>' +
-      '</div></div></section>';
+  function initDataFlow(root) {
+    if (!root || root.dataset.zxInit) return;
+    root.dataset.zxInit = '1';
+    var nodes = [].slice.call(root.querySelectorAll('.zx-flow__node'));
+    var steps = [].slice.call(root.querySelectorAll('.zx-flow__step'));
+    var wrap = root.querySelector('.zx-flow__steps');
+    var desk = zxHomeMq('(min-width:1024px)'), cur = 0;
+    var expanded = root.hasAttribute('data-zx-flow-expanded') || !nodes.length;
+    function tabs() {   // >= 1024: a tablist of the five steps, only the selected step shown
+      if (wrap) wrap.removeAttribute('role');
+      steps.forEach(function (s, k) {
+        s.setAttribute('role', 'tabpanel'); s.setAttribute('aria-labelledby', nodes[k].id); s.tabIndex = 0; s.hidden = k !== cur;
+      });
+      nodes.forEach(function (n, k) { n.setAttribute('aria-selected', k === cur ? 'true' : 'false'); n.tabIndex = k === cur ? 0 : -1; });
+    }
+    function list() {   // < 1024 (and the expanded variant): every step open, a plain list
+      if (wrap) wrap.setAttribute('role', 'list');
+      steps.forEach(function (s) { s.setAttribute('role', 'listitem'); s.removeAttribute('aria-labelledby'); s.removeAttribute('tabindex'); s.hidden = false; });
+    }
+    function mode() { if (!expanded && desk && desk.matches) tabs(); else list(); }
+    nodes.forEach(function (n, k) {
+      n.addEventListener('click', function () { cur = k; tabs(); });
+      n.addEventListener('keydown', function (e) {
+        var key = e.key, to = key === 'ArrowRight' ? cur + 1 : key === 'ArrowLeft' ? cur - 1 : key === 'Home' ? 0 : key === 'End' ? nodes.length - 1 : null;
+        if (to === null) return;
+        e.preventDefault(); cur = (to + nodes.length) % nodes.length; tabs(); nodes[cur].focus();
+      });
+    });
+    mode();
+    zxHomeOnChange(desk, mode);
+  }
+  // ==== ZX:END home ====
 
-    // -- HOW IT WORKS (V2 Interactive 4-Layer Architecture) --
-    html += '<section class="zynix-architecture-section" id="how-it-works"><div class="zynix-container">' +
-      '<span class="zynix-tag">HOW IT WORKS</span>' +
-      '<style>' +
-      '.za{font-family:var(--z-font);background:transparent;padding:0;position:relative;overflow:hidden}' +
-      '.za-h{text-align:center;margin-bottom:36px;position:relative;z-index:1}' +
-      '.za-ey{display:block;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#F16529;margin-bottom:8px}' +
-      '.za-h2{font-size:24px;font-weight:800;color:#20449B;line-height:1.25;margin-bottom:10px}' +
-      '.za-sub{font-size:13.5px;color:#606061;line-height:1.65;max-width:500px;margin:0 auto}' +
-      '.za-b{display:flex;gap:16px;max-width:880px;margin:0 auto;align-items:flex-start;position:relative;z-index:1}' +
-      '.za-s{width:236px;flex-shrink:0;display:flex;flex-direction:column}' +
-      '.lb{border-radius:10px;padding:11px 14px;cursor:pointer;border:1.5px solid transparent;position:relative;overflow:hidden;user-select:none;transition:background .32s,border-color .32s,box-shadow .32s}' +
-      '.lb[data-n="4"]{background:#FEF0E9;border-color:#F5BEAA}' +
-      '.lb[data-n="3"]{background:#E8EDF8;border-color:#BCC6E6}' +
-      '.lb[data-n="2"]{background:#E0F5FD;border-color:#A8D8EF}' +
-      '.lb[data-n="1"]{background:#EAF0FA;border-color:#BCC6E6}' +
-      '.lb.on[data-n="4"]{background:#C44B16;border-color:#a33d0f;box-shadow:0 6px 22px rgba(196,75,22,.32)}' +
-      '.lb.on[data-n="3"]{background:#3286E0;border-color:#2863BA;box-shadow:0 6px 22px rgba(50,134,224,.28)}' +
-      '.lb.on[data-n="2"]{background:#2863BA;border-color:#20459B;box-shadow:0 6px 22px rgba(40,99,186,.28)}' +
-      '.lb.on[data-n="1"]{background:#20449B;border-color:#192f78;box-shadow:0 6px 22px rgba(32,68,155,.36)}' +
-      '.lb-bg{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-bottom:5px}' +
-      '.lb[data-n="4"]:not(.on) .lb-bg{background:#C44B16;color:#fff}' +
-      '.lb[data-n="3"]:not(.on) .lb-bg{background:#2D74CD;color:#fff}' +
-      '.lb[data-n="2"]:not(.on) .lb-bg{background:#2863BA;color:#fff}' +
-      '.lb[data-n="1"]:not(.on) .lb-bg{background:#20449B;color:#fff}' +
-      '.lb.on .lb-bg{background:rgba(255,255,255,0.9);color:#1a1a2e}' +
-      '.lb-nm{font-size:12.5px;font-weight:700;line-height:1.3}' +
-      '.lb[data-n="4"]:not(.on) .lb-nm{color:#b14619}' +
-      '.lb[data-n="3"]:not(.on) .lb-nm{color:#1e4fa0}' +
-      '.lb[data-n="2"]:not(.on) .lb-nm{color:#1a4080}' +
-      '.lb[data-n="1"]:not(.on) .lb-nm{color:#1a3a8a}' +
-      '.lb.on .lb-nm{color:#fff}' +
-      '.lb-sb{font-size:11px;line-height:1.4;margin-top:3px}' +
-      '.lb:not(.on) .lb-sb{color:#747475}' +
-      '.lb.on .lb-sb{color:rgba(255,255,255,.78)}' +
-      '.lb-pr{position:absolute;bottom:0;left:0;height:3px;background:rgba(255,255,255,.48);width:0%;border-radius:0 0 0 9px;transition:width .08s linear}' +
-      '.za-cn{height:16px;padding-left:18px;display:flex;align-items:center;gap:3px;flex-shrink:0}' +
-      '.za-cn-l{width:1.5px;height:100%;background:#DFDFE1}' +
-      '.za-cn-a{font-size:10px;color:#C8C8CA;line-height:1;margin-top:-1px}' +
-      '.za-dots{display:flex;gap:5px;justify-content:center;margin-top:12px}' +
-      '.za-dot{width:7px;height:7px;border-radius:50%;background:#DFDFE1;cursor:pointer;transition:all .25s;flex-shrink:0}' +
-      '.za-dot.on[data-n="4"]{background:#F16529;width:18px;border-radius:3.5px}' +
-      '.za-dot.on[data-n="3"]{background:#3286E0;width:18px;border-radius:3.5px}' +
-      '.za-dot.on[data-n="2"]{background:#2863BA;width:18px;border-radius:3.5px}' +
-      '.za-dot.on[data-n="1"]{background:#20449B;width:18px;border-radius:3.5px}' +
-      '.za-d{flex:1;min-width:0;background:#fff;border-radius:14px;overflow:hidden;border:1px solid #DFDFE1;min-height:320px;position:relative}' +
-      '.dp{display:none;flex-direction:column;height:100%;min-height:320px}' +
-      '.dp.on{display:flex;animation:dpIn .38s ease}' +
-      '@keyframes dpIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}' +
-      '.dp-st{height:5px;flex-shrink:0}' +
-      '.dp[data-n="4"] .dp-st{background:linear-gradient(90deg,#F16529,#f27a48)}' +
-      '.dp[data-n="3"] .dp-st{background:linear-gradient(90deg,#2D74CD,#3286E0)}' +
-      '.dp[data-n="2"] .dp-st{background:linear-gradient(90deg,#20459B,#2863BA)}' +
-      '.dp[data-n="1"] .dp-st{background:linear-gradient(90deg,#20449B,#2D74CD)}' +
-      '.dp-in{padding:20px 22px;flex:1;display:flex;flex-direction:column}' +
-      '.dp-ln{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px}' +
-      '.dp[data-n="4"] .dp-ln{color:#F16529}' +
-      '.dp[data-n="3"] .dp-ln{color:#3286E0}' +
-      '.dp[data-n="2"] .dp-ln{color:#2863BA}' +
-      '.dp[data-n="1"] .dp-ln{color:#20449B}' +
-      '.dp-ti{font-size:17px;font-weight:800;color:#202021;line-height:1.25;margin-bottom:5px}' +
-      '.dp-tg{font-size:12.5px;color:#606061;font-style:italic;margin-bottom:13px;padding-bottom:13px;border-bottom:1px solid #EDEDEF;line-height:1.5}' +
-      '.dp-de{font-size:12.5px;color:#414142;line-height:1.72;margin-bottom:15px}' +
-      '.dp-cl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9C9C9E;margin-bottom:7px}' +
-      '.dp-cs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}' +
-      '.dp-c{font-size:11px;font-weight:500;padding:3px 9px;border-radius:4px;display:inline-block}' +
-      '.dp[data-n="4"] .dp-c{background:#FEF0E9;color:#b14619}' +
-      '.dp[data-n="3"] .dp-c{background:#E8EDF8;color:#1e4fa0}' +
-      '.dp[data-n="2"] .dp-c{background:#EAF0FA;color:#1a4080}' +
-      '.dp[data-n="1"] .dp-c{background:#EAF0FA;color:#1a3a8a}' +
-      '.dp-ft{margin-top:auto;padding-top:11px;border-top:1px solid #EDEDEF;font-size:11px;color:#747475;display:flex;align-items:flex-start;gap:5px;flex-wrap:wrap;line-height:1.6}' +
-      '.dp-fl{font-weight:600;cursor:pointer}' +
-      '.dp[data-n="4"] .dp-fl{color:#F16529}' +
-      '.dp[data-n="3"] .dp-fl{color:#3286E0}' +
-      '.dp[data-n="2"] .dp-fl{color:#2863BA}' +
-      '.dp[data-n="1"] .dp-fl{color:#20449B}' +
-      /* V2 responsive */
-      '@media(max-width:767px){' +
-        '.za-b{flex-direction:column;gap:20px}' +
-        '.za-s{width:100%;flex-direction:row;flex-wrap:wrap;gap:8px}' +
-        '.lb{flex:1 1 calc(50% - 4px);min-width:140px}' +
-        '.za-cn{display:none}' +
-        '.za-dots{margin-top:8px;width:100%}' +
-        '.za-d{min-height:auto}' +
-        '.dp{min-height:auto}' +
-        '.dp-de{font-size:12px}' +
-      '}' +
-      '</style>' +
-      '<div class="za" id="za-root">' +
-        '<div class="za-h">' +
-          '<h2 class="za-h2">Four Layers. One Operating System.</h2>' +
-          '<p class="za-sub">Four integrated layers, each one built to feed the next, with no manual handoff between insight and action.</p>' +
-        '</div>' +
-        '<div class="za-b">' +
-          '<div class="za-s">' +
-            '<div class="lb" data-n="4" onclick="zPick(4)"><div class="lb-bg">Layer 4</div><div class="lb-nm">Deployable Care Plans</div><div class="lb-sb">Closed-loop care orchestration</div><div class="lb-pr"></div></div>' +
-            '<div class="za-cn"><div class="za-cn-l"></div><span class="za-cn-a">\u2191</span></div>' +
-            '<div class="lb" data-n="3" onclick="zPick(3)"><div class="lb-bg">Layer 3</div><div class="lb-nm">AI Agent Suite</div><div class="lb-sb">Three families of purpose-built agents</div><div class="lb-pr"></div></div>' +
-            '<div class="za-cn"><div class="za-cn-l"></div><span class="za-cn-a">\u2191</span></div>' +
-            '<div class="lb" data-n="2" onclick="zPick(2)"><div class="lb-bg">Layer 2</div><div class="lb-nm">Intelligence and Reasoning</div><div class="lb-sb">Clinical population intelligence engine</div><div class="lb-pr"></div></div>' +
-            '<div class="za-cn"><div class="za-cn-l"></div><span class="za-cn-a">\u2191</span></div>' +
-            '<div class="lb" data-n="1" onclick="zPick(1)"><div class="lb-bg">Layer 1</div><div class="lb-nm">AI Data Foundation</div><div class="lb-sb">Unified healthcare data layer</div><div class="lb-pr"></div></div>' +
-            '<div class="za-dots">' +
-              '<div class="za-dot" data-n="1" onclick="zPick(1)"></div>' +
-              '<div class="za-dot" data-n="2" onclick="zPick(2)"></div>' +
-              '<div class="za-dot" data-n="3" onclick="zPick(3)"></div>' +
-              '<div class="za-dot" data-n="4" onclick="zPick(4)"></div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="za-d">' +
-            '<div class="dp" data-n="1"><div class="dp-st"></div><div class="dp-in">' +
-              '<div class="dp-ln">Layer 1: Foundation</div><div class="dp-ti">AI Data Foundation</div>' +
-              '<div class="dp-tg">Every patient signal, unified into one continuously refreshed record</div>' +
-              '<p class="dp-de">Zynix connects and normalizes data from every source that matters: EHR systems, Medicare and Medicaid claims, real-time ADT feeds, labs, pharmacy fills, and SDoH screens. De-duplication across systems creates a single reconciled patient record. No manual exports. No 30-day claims lag.</p>' +
-              '<div class="dp-cl">Data sources connected</div>' +
-              '<div class="dp-cs"><span class="dp-c">Epic \u00b7 Cerner \u00b7 athenahealth</span><span class="dp-c">CMS Medicare Claims</span><span class="dp-c">Real-time ADT feeds</span><span class="dp-c">Labs &amp; imaging</span><span class="dp-c">Pharmacy data</span><span class="dp-c">SDoH screening</span><span class="dp-c">FHIR \u00b7 HL7 \u00b7 CCLF</span></div>' +
-              '<div class="dp-ft">Powers \u2192 <span class="dp-fl" onclick="zPick(2)">Layer 2: Intelligence and Reasoning \u2191</span></div>' +
-            '</div></div>' +
-            '<div class="dp" data-n="2"><div class="dp-st"></div><div class="dp-in">' +
-              '<div class="dp-ln">Layer 2: Intelligence</div><div class="dp-ti">Intelligence and Reasoning</div>' +
-              '<div class="dp-tg">Surface who needs care, what\u2019s at risk, and when the window closes</div>' +
-              '<p class="dp-de">Four intelligence products sit on top of the unified data foundation. ZynGap cross-references clinical diagnoses against current-year claims to surface HCC and quality gaps. ZynPredict scores readmission and admission risk 30 to 90 days out. ZynGuide surfaces drug interactions and quality gaps at the point of care. ZynAnalytics gives population health leaders real-time cohort visibility.</p>' +
-              '<div class="dp-cl">Intelligence products</div>' +
-              '<div class="dp-cs"><span class="dp-c">ZynGap: HCC &amp; quality gaps</span><span class="dp-c">ZynPredict: Risk prediction</span><span class="dp-c">ZynGuide: Point-of-care support</span><span class="dp-c">ZynAnalytics: Population dashboards</span></div>' +
-              '<div class="dp-ft">Triggers \u2192 <span class="dp-fl" onclick="zPick(3)">Layer 3: AI Agent Suite \u2191</span></div>' +
-            '</div></div>' +
-            '<div class="dp" data-n="3"><div class="dp-st"></div><div class="dp-in">' +
-              '<div class="dp-ln">Layer 3: Execution</div><div class="dp-ti">AI Agent Suite</div>' +
-              '<div class="dp-tg">Carry out the follow-through at the scale of your full attributed panel</div>' +
-              '<p class="dp-de">Three families of purpose-built agents execute the work that intelligence identifies but coordinator teams cannot sustain at panel scale. Clinical Performance Agents handle post-discharge follow-up and chronic care management. Predictive Activation Agents act on rising risk signals. Operational Efficiency Agents cover after-hours, scheduling, fax, and prior auth.</p>' +
-              '<div class="dp-cl">Agent families</div>' +
-              '<div class="dp-cs"><span class="dp-c">Clinical Performance Agents</span><span class="dp-c">Predictive Activation Agents</span><span class="dp-c">Operational Efficiency Agents</span><span class="dp-c">ZynAfterHours \u00b7 ZynSchedule</span><span class="dp-c">ZynReminder \u00b7 ZynFax \u00b7 ZynAuth</span></div>' +
-              '<div class="dp-ft">Coordinated by \u2192 <span class="dp-fl" onclick="zPick(4)">Layer 4: Deployable Care Plans \u2191</span></div>' +
-            '</div></div>' +
-            '<div class="dp" data-n="4"><div class="dp-st"></div><div class="dp-in">' +
-              '<div class="dp-ln">Layer 4: Orchestration</div><div class="dp-ti">Deployable Care Plans</div>' +
-              '<div class="dp-tg">Coordinate multiple agents around one clinical goal and keep the episode open until the work is done</div>' +
-              '<p class="dp-de">Care Plans orchestrate agents around defined clinical and operational goals, sequencing outreach, managing exceptions, and documenting outcomes back into the EHR. A post-discharge TCM plan sequences Transitions of Care, ZynSchedule, ZynReminder, and ZynScribe in the right order, and closes only when each step is verified complete.</p>' +
-              '<div class="dp-cl">Active care plans</div>' +
-              '<div class="dp-cs"><span class="dp-c">Post-discharge TCM</span><span class="dp-c">HCC Gap Closure Sprint</span><span class="dp-c">Medication Safety &amp; Adherence</span><span class="dp-c">High-Utilizer ED Diversion</span><span class="dp-c">Chronic Condition Visit Readiness</span><span class="dp-c">Preventive Screening Program</span></div>' +
-              '<div class="dp-ft">Output \u2192 Episode completion documented in EHR \u00b7 Shared savings protected \u00b7 RAF score closed</div>' +
-            '</div></div>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-      '</div></section>';
+  // ── PAGE: Homepage (owner H; DESIGN_SPEC §5, COPY_DECK §3): 11 sections plus the footer ──
+  function renderHomepage() {
+    var C = SITE_FACTS.compliance;
+    var soc2Short = C.soc2.prose.split(',')[0];   // "SOC 2 Type II audited"
 
-    // -- PLATFORM ARCHITECTURE DIAGRAM (V3 Visual Flow) --
-    html += '<section class="zynix-architecture-diagram-section" style="padding:60px 0 80px;background:linear-gradient(135deg,#060D1C 0%,#0B1830 52%,#0E1E3A 100%);overflow:hidden"><div class="zynix-container">' +
-      '<style>' +
-      ':root{--zpa-blue-core:#60a5fa;--zpa-blue-mid:#3b82f6;--zpa-blue-bright:#60a5fa;--zpa-blue-pale:rgba(59,130,246,0.1);--zpa-orange:#f97316;--zpa-orange-light:rgba(249,115,22,0.12);--zpa-gray-line:rgba(255,255,255,0.08);--zpa-gray-card:rgba(255,255,255,0.04);--zpa-text-body:rgba(255,255,255,0.78);--zpa-text-muted:rgba(255,255,255,0.45)}' +
-      '.zpa-diagram{position:relative;z-index:1;display:grid;grid-template-columns:148px 1fr 148px;align-items:center;max-width:1100px;margin:0 auto;gap:0}' +
-      '.zpa-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 12px;box-shadow:none}' +
-      '.zpa-box-label{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-bottom:10px;display:block;text-align:center}' +
-      '.zpa-src-box .zpa-box-label{color:var(--zpa-blue-mid)}' +
-      '.zpa-usr-box .zpa-box-label{color:var(--zpa-orange)}' +
-      '.zpa-src-item,.zpa-usr-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;background:rgba(59,130,246,0.06);margin-bottom:5px;border:1px solid rgba(59,130,246,0.12)}' +
-      '.zpa-src-item:last-child,.zpa-usr-item:last-child{margin-bottom:0}' +
-      '.zpa-src-ic,.zpa-usr-ic{width:24px;height:24px;border-radius:50%;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}' +
-      '.zpa-src-ic svg{width:12px;height:12px;stroke:var(--zpa-blue-bright);fill:none;stroke-width:1.5}' +
-      '.zpa-usr-ic svg{width:12px;height:12px;fill:var(--zpa-blue-bright)}' +
-      '.zpa-src-name,.zpa-usr-name{font-size:10.5px;font-weight:600;color:rgba(255,255,255,0.7);flex:1}' +
-      '.zpa-usr-item.highlight{background:rgba(249,115,22,0.08);border-color:rgba(249,115,22,0.2)}' +
-      '.zpa-usr-item.highlight .zpa-usr-ic{border-color:rgba(249,115,22,0.3)}' +
-      '.zpa-usr-item.highlight .zpa-usr-ic svg{fill:var(--zpa-orange)}' +
-      '.zpa-usr-item.highlight .zpa-usr-name{color:var(--zpa-orange);font-weight:700}' +
-      '.zpa-flow{position:relative;padding:88px 0 64px}' +
-      '.zpa-flow-line{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:2px;background:linear-gradient(90deg,rgba(59,130,246,0.1) 0%,rgba(59,130,246,0.4) 35%,rgba(96,165,250,0.4) 62%,rgba(249,115,22,0.4) 100%);z-index:0}' +
-      '.zpa-nodes{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}' +
-      '.zpa-node{display:flex;flex-direction:column;align-items:center;position:relative;cursor:pointer;flex:1}' +
-      '.zpa-tip{position:absolute;bottom:calc(100% + 10px);width:116px;background:rgba(15,23,42,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 10px;font-size:10px;line-height:1.55;color:rgba(255,255,255,0.6);text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.4);pointer-events:none;opacity:0;transition:opacity .3s;backdrop-filter:blur(8px)}' +
-      '.zpa-tip::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:rgba(255,255,255,0.1)}' +
-      '.zpa-tip::before{content:"";position:absolute;top:calc(100% - 1px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:rgba(15,23,42,0.95);z-index:1}' +
-      '.zpa-node.on .zpa-tip{opacity:1}' +
-      '.zpa-ring{width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(59,130,246,.06);transition:background .35s,transform .35s;flex-shrink:0}' +
-      '.zpa-node.on .zpa-ring{background:rgba(59,130,246,.15);transform:scale(1.1)}' +
-      '.zpa-node[data-n="5"].on .zpa-ring{background:rgba(249,115,22,.15)}' +
-      '.zpa-circle{width:70px;height:70px;border-radius:50%;background:rgba(59,130,246,0.15);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(59,130,246,.2);border:2px solid rgba(59,130,246,0.3);transition:all .35s;flex-shrink:0}' +
-      '.zpa-node.on .zpa-circle{width:80px;height:80px;box-shadow:0 0 32px rgba(59,130,246,.35);border-color:rgba(59,130,246,0.5)}' +
-      '.zpa-node[data-n="5"] .zpa-circle{background:rgba(249,115,22,0.12);border-color:rgba(249,115,22,0.3);box-shadow:0 0 20px rgba(249,115,22,.15)}' +
-      '.zpa-node[data-n="5"].on .zpa-circle{box-shadow:0 0 32px rgba(249,115,22,.3);border-color:rgba(249,115,22,0.5)}' +
-      '.zpa-lbadge{font-size:20px;font-weight:800;line-height:1}' +
-      '.zpa-lname{font-size:8px;font-weight:700;text-align:center;line-height:1.25;margin-top:2px;padding:0 4px;opacity:0.7}' +
-      '.zpa-nlabel{margin-top:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--zpa-text-muted);text-align:center;transition:color .35s}' +
-      '.zpa-node.on .zpa-nlabel{color:var(--zpa-blue-bright)}' +
-      '.zpa-node[data-n="5"].on .zpa-nlabel{color:var(--zpa-orange)}' +
-      '.zpa-ico{width:32px;height:32px;border-radius:8px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.15);display:flex;align-items:center;justify-content:center;transition:background .35s,border-color .35s}' +
-      '.zpa-ico svg{width:15px;height:15px;fill:var(--zpa-blue-mid);stroke:none}' +
-      '.zpa-node.on .zpa-ico{background:rgba(59,130,246,0.2);border-color:rgba(59,130,246,0.35)}' +
-      '.zpa-node.on .zpa-ico svg{fill:var(--zpa-blue-bright)}' +
-      '.zpa-node[data-n="5"] .zpa-ico{background:rgba(249,115,22,0.08);border-color:rgba(249,115,22,0.15)}' +
-      '.zpa-node[data-n="5"] .zpa-ico svg{fill:var(--zpa-orange)}' +
-      '.zpa-node[data-n="5"].on .zpa-ico{background:rgba(249,115,22,0.2);border-color:rgba(249,115,22,0.35)}' +
-      '.zpa-node[data-n="5"].on .zpa-ico svg{fill:var(--zpa-orange)}' +
-      '.zpa-ico-wrap{display:flex;flex-direction:column;align-items:center;gap:6px}' +
-      '.zpa-ico-wrap.below{flex-direction:column-reverse}' +
-      '.zpa-detail{max-width:1100px;margin:28px auto 0;background:rgba(255,255,255,0.03);border-radius:16px;border:1px solid rgba(255,255,255,0.08);box-shadow:none;overflow:hidden;position:relative;z-index:1}' +
-      '.zpa-prog{height:2px;background:rgba(255,255,255,0.06);position:relative}' +
-      '.zpa-prog-fill{height:2px;width:0%;position:absolute;left:0;top:0;transition:width .08s linear}' +
-      '.zpa-slide{display:none;padding:26px 36px}' +
-      '.zpa-slide.on{display:block;animation:zpaSlideIn .35s ease}' +
-      '@keyframes zpaSlideIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}' +
-      '.zpa-slide-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}' +
-      '.zpa-slide-badge{flex-shrink:0;font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;background:rgba(59,130,246,0.1);color:var(--zpa-blue-bright);margin-top:2px;white-space:nowrap}' +
-      '.zpa-slide[data-n="5"] .zpa-slide-badge{background:rgba(249,115,22,0.1);color:var(--zpa-orange)}' +
-      '.zpa-slide-title{font-size:17px;font-weight:800;color:#fff;line-height:1.25}' +
-      '.zpa-slide[data-n="5"] .zpa-slide-title{color:var(--zpa-orange)}' +
-      '.zpa-slide-body{font-size:13.5px;color:var(--zpa-text-body);line-height:1.78;max-width:800px}' +
-      '.zpa-slide-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}' +
-      '.zpa-slide-tag{font-size:11px;font-weight:500;padding:3px 9px;border-radius:4px;background:rgba(59,130,246,0.08);color:rgba(96,165,250,0.9)}' +
-      '.zpa-slide[data-n="5"] .zpa-slide-tag{background:rgba(249,115,22,0.08);color:rgba(249,115,22,0.85)}' +
-      '.zpa-nav{display:flex;align-items:center;justify-content:space-between;padding:13px 36px 16px;border-top:1px solid rgba(255,255,255,0.06)}' +
-      '.zpa-nav-btn{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:rgba(255,255,255,0.4);transition:background .2s,color .2s;user-select:none}' +
-      '.zpa-nav-btn:hover{background:rgba(59,130,246,0.12);color:var(--zpa-blue-bright)}' +
-      '.zpa-dots-v3{display:flex;gap:7px;align-items:center}' +
-      '.zpa-dot-v3{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.12);cursor:pointer;transition:all .25s}' +
-      '.zpa-dot-v3.on{background:var(--zpa-blue-mid);width:20px;border-radius:4px}' +
-      '.zpa-dot-v3[data-n="5"].on{background:var(--zpa-orange)}' +
-      '@media(max-width:767px){' +
-        '.zpa-diagram{display:flex;flex-direction:column;gap:0}' +
-        '.zpa-src-box,.zpa-usr-box{display:none}' +
-        '.zpa-flow{padding:16px 0 20px}' +
-        '.zpa-flow-line{display:none}' +
-        '.zpa-nodes{display:flex;justify-content:center;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:0 4px}' +
-        '.zpa-node{flex:0 0 auto;width:60px}' +
-        '.zpa-ring{width:52px;height:52px}' +
-        '.zpa-circle{width:42px;height:42px;border-width:2px}' +
-        '.zpa-node.on .zpa-ring{transform:scale(1.15)}' +
-        '.zpa-node.on .zpa-circle{width:46px;height:46px;box-shadow:0 0 20px rgba(59,130,246,.3)}' +
-        '.zpa-lbadge{font-size:13px}' +
-        '.zpa-lname{display:none}' +
-        '.zpa-nlabel{font-size:8px;margin-top:6px;letter-spacing:.04em}' +
-        '.zpa-tip{display:none}' +
-        '.zpa-ico-wrap{display:none}' +
-        '.zpa-detail{margin:12px 0 0;border-radius:12px}' +
-        '.zpa-slide{padding:18px 16px}' +
-        '.zpa-slide-head{flex-direction:column;gap:6px}' +
-        '.zpa-slide-title{font-size:15px}' +
-        '.zpa-slide-body{font-size:13px;line-height:1.7}' +
-        '.zpa-slide-tags{gap:4px}' +
-        '.zpa-slide-tag{font-size:10px;padding:2px 7px}' +
-        '.zpa-nav{padding:10px 16px 12px}' +
-      '}' +
-      '</style>' +
-      '<div style="text-align:center;margin-bottom:40px">' +
-        '<span class="zynix-tag" style="color:var(--zpa-blue-bright);border-color:rgba(59,130,246,0.3)">PLATFORM ARCHITECTURE</span>' +
-        '<h2 style="color:#fff;font-size:clamp(1.75rem,3.5vw,2.5rem);margin-top:12px">From Data Sources to Patient Outcomes</h2>' +
-        '<p style="color:rgba(255,255,255,0.6);max-width:600px;margin:8px auto 0;font-size:15px">Five layers working in sequence — every signal ingested, reasoned over, and acted on.</p>' +
-      '</div>' +
-      '<div class="zpa-diagram">' +
-        '<div class="zpa-box zpa-src-box">' +
-          '<span class="zpa-box-label">Data sources</span>' +
-          '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><rect x="3" y="2" width="14" height="16" rx="2"/><line x1="6" y1="7" x2="14" y2="7"/><line x1="6" y1="10" x2="14" y2="10"/><line x1="6" y1="13" x2="10" y2="13"/></svg></div><span class="zpa-src-name">EHR systems</span></div>' +
-          '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><path d="M10 2L2 7v6l8 5 8-5V7z"/></svg></div><span class="zpa-src-name">Claims &amp; BCDA</span></div>' +
-          '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div><span class="zpa-src-name">ADT events</span></div>' +
-          '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><path d="M7 3v8l-3 5h12l-3-5V3"/><line x1="7" y1="7" x2="13" y2="7"/></svg></div><span class="zpa-src-name">Labs &amp; imaging</span></div>' +
-          '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><rect x="5" y="3" width="10" height="14" rx="2"/><line x1="10" y1="7" x2="10" y2="13"/><line x1="7" y1="10" x2="13" y2="10"/></svg></div><span class="zpa-src-name">Pharmacy data</span></div>' +
-          '<div class="zpa-src-item"><div class="zpa-src-ic"><svg viewBox="0 0 20 20"><circle cx="10" cy="8" r="3"/><path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></div><span class="zpa-src-name">SDoH screening</span></div>' +
-          '<div style="display:flex;align-items:center;margin-top:12px;padding:0 4px"><div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(59,130,246,0.1),rgba(59,130,246,0.4))"></div><div style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid rgba(59,130,246,0.4)"></div></div>' +
-        '</div>' +
-        '<div class="zpa-flow">' +
-          '<div class="zpa-flow-line"></div>' +
-          '<div class="zpa-nodes">' +
-            '<div class="zpa-node" data-n="1" onclick="zpaPick(1)"><div class="zpa-ico-wrap"><div class="zpa-ico"><svg viewBox="0 0 20 20"><ellipse cx="10" cy="6" rx="7" ry="3" fill="currentColor"/><path d="M3 6v4c0 1.65 3.13 3 7 3s7-1.35 7-3V6"/><path d="M3 10v4c0 1.65 3.13 3 7 3s7-1.35 7-3v-4"/></svg></div></div><div class="zpa-ring"><div class="zpa-circle"><span class="zpa-lbadge">L1</span><span class="zpa-lname">Data Foundation</span></div></div><div class="zpa-nlabel">Ingest</div><div class="zpa-tip">Ingest &amp; unify all healthcare data into one secure, compliant record</div></div>' +
-            '<div class="zpa-node" data-n="2" onclick="zpaPick(2)"><div class="zpa-ico-wrap below"><div class="zpa-ico"><svg viewBox="0 0 20 20"><path d="M4 5h12M4 9h8M4 13h10"/><polyline points="14 11 17 14 14 17"/></svg></div></div><div class="zpa-ring"><div class="zpa-circle"><span class="zpa-lbadge">L2</span><span class="zpa-lname">Curated Layer</span></div></div><div class="zpa-nlabel">Normalize</div><div class="zpa-tip">Clean, standardize &amp; validate. FHIR, HL7, CCLF aligned and deduplicated</div></div>' +
-            '<div class="zpa-node" data-n="3" onclick="zpaPick(3)"><div class="zpa-ico-wrap"><div class="zpa-ico"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="3" fill="currentColor"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.93 4.93l1.41 1.41M13.66 13.66l1.41 1.41M4.93 15.07l1.41-1.41M13.66 6.34l1.41-1.41"/></svg></div></div><div class="zpa-ring"><div class="zpa-circle"><span class="zpa-lbadge">L3</span><span class="zpa-lname">ZynixLLM Engine</span></div></div><div class="zpa-nlabel">Reason</div><div class="zpa-tip">Healthcare-native AI with clinical risk models, gap detection, care pathway logic</div></div>' +
-            '<div class="zpa-node" data-n="4" onclick="zpaPick(4)"><div class="zpa-ico-wrap below"><div class="zpa-ico"><svg viewBox="0 0 20 20"><polyline points="4 15 8 9 12 12 16 5"/></svg></div></div><div class="zpa-ring"><div class="zpa-circle"><span class="zpa-lbadge">L4</span><span class="zpa-lname">Intelligence</span></div></div><div class="zpa-nlabel">Surface</div><div class="zpa-tip">ZynGap \u00b7 ZynPredict \u00b7 ZynGuide \u00b7 ZynAnalytics: RAF-prioritized, actionable outputs</div></div>' +
-            '<div class="zpa-node" data-n="5" onclick="zpaPick(5)"><div class="zpa-ico-wrap"><div class="zpa-ico"><svg viewBox="0 0 20 20"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6L2 8h6z" fill="currentColor"/></svg></div></div><div class="zpa-ring"><div class="zpa-circle"><span class="zpa-lbadge">L5</span><span class="zpa-lname">Action Layer</span></div></div><div class="zpa-nlabel">Execute</div><div class="zpa-tip">AI agents + care plans close the loop, from insight to documented outcome</div></div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="zpa-box zpa-usr-box">' +
-          '<span class="zpa-box-label">Output to</span>' +
-          '<div style="display:flex;align-items:center;margin-bottom:10px;padding:0 4px"><div style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid rgba(59,130,246,0.4)"></div><div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(59,130,246,0.4),rgba(59,130,246,0.1))"></div></div>' +
-          '<div class="zpa-usr-item"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.5"/><path d="M3 18c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></div><span class="zpa-usr-name">Clinicians</span></div>' +
-          '<div class="zpa-usr-item"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><circle cx="8" cy="7" r="3"/><path d="M2 18c0-3.3 2.7-6 6-6"/><circle cx="14" cy="9" r="2.5"/><path d="M11 18c0-2.8 2.1-5 5-5"/></svg></div><span class="zpa-usr-name">Care coordinators</span></div>' +
-          '<div class="zpa-usr-item"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><polyline points="3 7 10 3 17 7 10 11 3 7"/><polyline points="3 12 10 16 17 12"/></svg></div><span class="zpa-usr-name">Pop. health directors</span></div>' +
-          '<div class="zpa-usr-item"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><rect x="3" y="5" width="14" height="11" rx="2"/><line x1="7" y1="9" x2="13" y2="9"/><line x1="7" y1="12" x2="11" y2="12"/></svg></div><span class="zpa-usr-name">Executives</span></div>' +
-          '<div class="zpa-usr-item highlight"><div class="zpa-usr-ic"><svg viewBox="0 0 20 20"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6L2 8h6z"/></svg></div><span class="zpa-usr-name">AI agents</span></div>' +
-        '</div>' +
-      '</div>' +
-      '<div class="zpa-detail">' +
-        '<div class="zpa-prog"><div class="zpa-prog-fill" id="zpa-fill"></div></div>' +
-        '<div class="zpa-slide" data-n="1"><div class="zpa-slide-head"><span class="zpa-slide-badge">L1: Foundation</span><div><div class="zpa-slide-title">AI Data Foundation: Unified Healthcare Data Lake</div></div></div><p class="zpa-slide-body">Zynix connects every data source that matters: EHR systems, Medicare and Medicaid claims, real-time ADT feeds, labs, pharmacy fills, and SDoH screens, all into a single unified patient record. De-duplication across systems resolves patient identity conflicts before any intelligence runs on top.</p><div class="zpa-slide-tags"><span class="zpa-slide-tag">Epic \u00b7 Cerner \u00b7 athenahealth</span><span class="zpa-slide-tag">CMS Medicare Claims</span><span class="zpa-slide-tag">Real-time ADT feeds</span><span class="zpa-slide-tag">Labs &amp; imaging</span><span class="zpa-slide-tag">Pharmacy fills</span><span class="zpa-slide-tag">SDoH screening</span><span class="zpa-slide-tag">FHIR \u00b7 HL7 \u00b7 CCLF</span></div></div>' +
-        '<div class="zpa-slide" data-n="2"><div class="zpa-slide-head"><span class="zpa-slide-badge">L2: Curation</span><div><div class="zpa-slide-title">Curated Data Layer: Normalize, Validate, and Deduplicate</div></div></div><p class="zpa-slide-body">Raw healthcare data from every source is structurally inconsistent. This layer standardizes clinical coding across ICD-10, CPT, SNOMED, and LOINC, reconciles conflicting information, and flags irreconcilable discrepancies for review.</p><div class="zpa-slide-tags"><span class="zpa-slide-tag">ICD-10 \u00b7 CPT \u00b7 SNOMED \u00b7 LOINC</span><span class="zpa-slide-tag">Patient identity resolution</span><span class="zpa-slide-tag">Claims reconciliation</span><span class="zpa-slide-tag">Data quality scoring</span><span class="zpa-slide-tag">Deduplication engine</span></div></div>' +
-        '<div class="zpa-slide" data-n="3"><div class="zpa-slide-head"><span class="zpa-slide-badge">L3: Intelligence</span><div><div class="zpa-slide-title">ZynixLLM Intelligence Engine: Healthcare-Native AI Reasoning</div></div></div><p class="zpa-slide-body">ZynixLLM is Zynix AI\u2019s healthcare-native adapted language model, fine-tuned on US healthcare data to understand clinical terminology, risk context, care pathway logic, and documentation requirements.</p><div class="zpa-slide-tags"><span class="zpa-slide-tag">Healthcare-native LLM</span><span class="zpa-slide-tag">Risk stratification models</span><span class="zpa-slide-tag">Clinical gap detection</span><span class="zpa-slide-tag">Predictive deterioration</span><span class="zpa-slide-tag">NLP on clinical notes</span></div></div>' +
-        '<div class="zpa-slide" data-n="4"><div class="zpa-slide-head"><span class="zpa-slide-badge">L4: Analytics</span><div><div class="zpa-slide-title">Intelligence and Analytics: Surface What Matters, When It Matters</div></div></div><p class="zpa-slide-body">Four intelligence products sit on top of the engine, each connected directly to an outreach workflow. ZynGap identifies HCC and quality gaps prioritized by RAF impact. ZynPredict scores readmission risk 30 to 90 days in advance. ZynGuide surfaces point-of-care support. ZynAnalytics provides real-time population visibility.</p><div class="zpa-slide-tags"><span class="zpa-slide-tag">ZynGap: HCC &amp; quality gaps</span><span class="zpa-slide-tag">ZynPredict: Readmission risk</span><span class="zpa-slide-tag">ZynGuide: Point-of-care</span><span class="zpa-slide-tag">ZynAnalytics: Population dashboards</span></div></div>' +
-        '<div class="zpa-slide" data-n="5"><div class="zpa-slide-head"><span class="zpa-slide-badge">L5: Action</span><div><div class="zpa-slide-title">Action and Execution Layer: Agents and Care Plans Close the Loop</div></div></div><p class="zpa-slide-body">Intelligence outputs from L4 directly trigger the AI Agent Suite: Clinical Performance Agents, Predictive Activation Agents, and Operational Efficiency Agents. Deployable Care Plans orchestrate multiple agents around a single clinical goal.</p><div class="zpa-slide-tags"><span class="zpa-slide-tag">Clinical Performance Agents</span><span class="zpa-slide-tag">Predictive Activation Agents</span><span class="zpa-slide-tag">Operational Efficiency Agents</span><span class="zpa-slide-tag">Deployable Care Plans</span><span class="zpa-slide-tag">Post-discharge TCM</span><span class="zpa-slide-tag">EHR documentation loop</span></div></div>' +
-        '<div class="zpa-nav"><div class="zpa-nav-btn" onclick="zpaPrev()">&#8249;</div><div class="zpa-dots-v3"><div class="zpa-dot-v3" data-n="1" onclick="zpaPick(1)"></div><div class="zpa-dot-v3" data-n="2" onclick="zpaPick(2)"></div><div class="zpa-dot-v3" data-n="3" onclick="zpaPick(3)"></div><div class="zpa-dot-v3" data-n="4" onclick="zpaPick(4)"></div><div class="zpa-dot-v3" data-n="5" onclick="zpaPick(5)"></div></div><div class="zpa-nav-btn" onclick="zpaNext()">&#8250;</div></div>' +
-      '</div>' +
-      '</div></section>';
-
-    // -- PROVEN RESULTS (Statement Section) --
-    html += '<section style="padding:80px 0;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;text-align:center"><div class="zynix-container">' +
-      '<span class="zynix-tag" style="color:var(--z-accent);border-color:rgba(249,115,22,0.3)">PROVEN RESULTS</span>' +
-      '<h2 style="color:#fff;font-size:clamp(2rem,4vw,2.75rem)">Built for Outcomes. Measured in Impact.</h2>' +
-      '<p style="color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto 48px;font-size:16px">Real results from healthcare organizations using Zynix in production.</p>' +
-      '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px 48px;max-width:900px;margin:0 auto">' +
-      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:var(--z-accent);line-height:1.2;padding-top:4px">85%+</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">TCM Contact Rate</div></div>' +
-      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:var(--z-accent);line-height:1.2;padding-top:4px">40%</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">Gap Closure Improvement</div></div>' +
-      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:var(--z-accent);line-height:1.2;padding-top:4px">2.5x</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">AWV Scheduling Lift</div></div>' +
-      '<div style="flex:1 1 180px;max-width:200px"><div style="font-size:48px;font-weight:700;color:var(--z-accent);line-height:1.2;padding-top:4px">30</div><div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">States Deployed</div></div>' +
-      '</div></div></section>';
-
-    // -- THE ZYNIX WAY (Point Solutions vs OS) --
-    html += '<section style="padding:80px 0;background:var(--z-bg-alt)"><div class="zynix-container" style="text-align:center">' +
-      '<style>' +
-      '.zd-grid{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;margin-top:48px;max-width:960px;margin-left:auto;margin-right:auto;text-align:left}' +
-      '.zd-vs{background:#f8fafc;display:flex;align-items:center;justify-content:center}' +
-      '.zd-mob-without,.zd-mob-with{display:none}' +
-      '@media(max-width:767px){' +
-        '.zd-grid{display:none !important}' +
-        '.zd-mob-without,.zd-mob-with{display:block;border-radius:16px;padding:24px 20px;margin-top:20px;text-align:left}' +
-        '.zd-mob-without{background:#fef2f2;border:1px solid rgba(220,38,38,0.12)}' +
-        '.zd-mob-with{background:#f0fdf4;border:1px solid rgba(22,163,74,0.12)}' +
-        '.zd-mob-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}' +
-        '.zd-mob-item{font-size:14px;padding:12px 0;border-bottom:1px solid var(--z-border,rgba(0,0,0,0.06));line-height:1.5}' +
-        '.zd-mob-item:last-child{border-bottom:none;padding-bottom:0}' +
-      '}' +
-      '</style>' +
-      '<span class="zynix-tag">THE ZYNIX DIFFERENCE</span>' +
-      '<h2>What Happens After a Patient Is Discharged?</h2>' +
-      '<p class="zynix-section-sub">Same patient. Same 48-hour window. Two very different outcomes.</p>' +
-      // Desktop grid (hidden on mobile)
-      '<div class="zd-grid">' +
-      '<div style="padding:20px 24px;background:#fef2f2;border-radius:12px 0 0 0;border-bottom:1px solid rgba(220,38,38,0.1)"><div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#dc2626">WITHOUT ZYNIX</div></div>' +
-      '<div class="zd-vs"><div style="font-size:11px;font-weight:600;color:#94a3b8">vs</div></div>' +
-      '<div style="padding:20px 24px;background:#f0fdf4;border-radius:0 12px 0 0;border-bottom:1px solid rgba(22,163,74,0.1)"><div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#16a34a">WITH ZYNIX</div></div>' +
-      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text-secondary)">Analytics flags a high-risk patient <span style="color:#dc2626;font-weight:500">(but does nothing)</span></div>' +
-      '<div class="zd-vs"><div style="width:8px;height:8px;border-radius:50%;background:#e2e8f0"></div></div>' +
-      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text)"><strong style="color:var(--z-accent)">Minute 0:</strong> ADT feed hits Zynix Data Platform</div>' +
-      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text-secondary)">Care management adds to a worklist <span style="color:#dc2626;font-weight:500">(already too long)</span></div>' +
-      '<div class="zd-vs"><div style="width:8px;height:8px;border-radius:50%;background:#e2e8f0"></div></div>' +
-      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text)"><strong style="color:var(--z-accent)">Minute 1:</strong> Intelligence Engine flags 82nd percentile risk</div>' +
-      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text-secondary)">Call center tries to reach them <span style="color:#dc2626;font-weight:500">(voicemail 70%)</span></div>' +
-      '<div class="zd-vs"><div style="width:8px;height:8px;border-radius:50%;background:#e2e8f0"></div></div>' +
-      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text)"><strong style="color:var(--z-accent)">Minute 2:</strong> TCM care plan auto-deployed</div>' +
-      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text-secondary)">EHR tracks missed follow-up <span style="color:#dc2626;font-weight:500">(can\u2019t fix it)</span></div>' +
-      '<div class="zd-vs"><div style="width:8px;height:8px;border-radius:50%;background:#e2e8f0"></div></div>' +
-      '<div style="padding:16px 24px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:14px;color:var(--z-text)"><strong style="color:var(--z-accent)">Hour 2:</strong> AI agent calls patient, confirms safe arrival</div>' +
-      '<div style="padding:16px 24px;background:#fff;border-radius:0 0 0 12px;font-size:14px;color:var(--z-text-secondary)">Revenue team misses TCM billing window <span style="color:#dc2626;font-weight:500">\u2718</span></div>' +
-      '<div class="zd-vs"><div style="width:8px;height:8px;border-radius:50%;background:#e2e8f0"></div></div>' +
-      '<div style="padding:16px 24px;background:#fff;border-radius:0 0 12px 0;font-size:14px;color:var(--z-text)"><strong style="color:var(--z-accent)">Day 30:</strong> No readmission. TCM billed. <span style="color:#16a34a;font-weight:600">Savings preserved. \u2714</span></div>' +
-      '</div>' +
-      // Mobile cards (hidden on desktop)
-      '<div class="zd-mob-without">' +
-        '<div class="zd-mob-label" style="color:#dc2626">\u2718 WITHOUT ZYNIX</div>' +
-        '<div class="zd-mob-item" style="color:var(--z-text-secondary)">Analytics flags a high-risk patient <span style="color:#dc2626;font-weight:500">(but does nothing)</span></div>' +
-        '<div class="zd-mob-item" style="color:var(--z-text-secondary)">Care management adds to a worklist <span style="color:#dc2626;font-weight:500">(already too long)</span></div>' +
-        '<div class="zd-mob-item" style="color:var(--z-text-secondary)">Call center tries to reach them <span style="color:#dc2626;font-weight:500">(voicemail 70%)</span></div>' +
-        '<div class="zd-mob-item" style="color:var(--z-text-secondary)">EHR tracks missed follow-up <span style="color:#dc2626;font-weight:500">(can\u2019t fix it)</span></div>' +
-        '<div class="zd-mob-item" style="color:var(--z-text-secondary)">Revenue team misses TCM billing window <span style="color:#dc2626;font-weight:600">\u2718</span></div>' +
-      '</div>' +
-      '<div class="zd-mob-with">' +
-        '<div class="zd-mob-label" style="color:#16a34a">\u2714 WITH ZYNIX</div>' +
-        '<div class="zd-mob-item"><strong style="color:var(--z-accent)">Minute 0:</strong> ADT feed hits Zynix Data Platform</div>' +
-        '<div class="zd-mob-item"><strong style="color:var(--z-accent)">Minute 1:</strong> Intelligence Engine flags 82nd percentile risk</div>' +
-        '<div class="zd-mob-item"><strong style="color:var(--z-accent)">Minute 2:</strong> TCM care plan auto-deployed</div>' +
-        '<div class="zd-mob-item"><strong style="color:var(--z-accent)">Hour 2:</strong> AI agent calls patient, confirms safe arrival</div>' +
-        '<div class="zd-mob-item"><strong style="color:var(--z-accent)">Day 30:</strong> No readmission. TCM billed. <span style="color:#16a34a;font-weight:600">Savings preserved. \u2714</span></div>' +
-      '</div>' +
-      '</div></section>';
-
-    // -- PRODUCT SUITE --
-    html += '<section class="zynix-products-overview"><div class="zynix-container">' +
-      '<span class="zynix-tag">PRODUCT SUITE</span>' +
-      '<h2>Everything You Need. Nothing You Don\u2019t.</h2>' +
-      '<div class="zynix-feature-grid">' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_DATABASE + '</div><h3>Data Platform</h3><p>Unified healthcare data layer that ingests, cleans, and normalizes data from every clinical and administrative source.</p><a href="/platform" class="zynix-card-link">Explore Data Platform &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_CHART + '</div><h3>Analytics</h3><p>Population health analytics, predictive modeling, and real-time decision support. ZynGap, ZynPredict, ZynGuide.</p><a href="/solutions/zynix-data-analytics" class="zynix-card-link">Explore Analytics &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_BOT + '</div><h3>AI Agents</h3><p>Seven specialized agents for outreach, scheduling, triage, documentation, reminders, prior auth, and fax processing.</p><a href="/agents" class="zynix-card-link">Explore AI Agents &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_FILE + '</div><h3>ZynScribe</h3><p>Ambient AI documentation that captures structured clinical notes in real-time during patient encounters.</p><a href="/zynscribe" class="zynix-card-link">Explore ZynScribe &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_CLIPBOARD + '</div><h3>Care Plans</h3><p>Deployable, orchestrated care plans for TCM, CCM, AWV, HEDIS, and HCC closure, executed by AI agents.</p><a href="/care-plans" class="zynix-card-link">Explore Care Plans &rarr;</a></div>' +
-      '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_BRAIN + '</div><h3>ZynixLLM</h3><p>Purpose-built healthcare language model that powers the entire platform. Gets smarter with every patient interaction.</p><a href="/company-zynixllm" class="zynix-card-link">Explore ZynixLLM &rarr;</a></div>' +
-      '</div></div></section>';
-
-    // -- PLATFORM SCREENSHOTS --
-    html += '<section class="zynix-screenshot-section"><div class="zynix-container">' +
-      '<span class="zynix-tag">INSIDE THE PLATFORM</span>' +
-      '<h2>See What You Get on Day One</h2>' +
-      '<p class="zynix-section-sub">Real product screenshots from live deployments across healthcare organizations in 30 states.</p>' +
-      '<div class="zynix-screenshot-strip zynix-screenshot-strip-lg">' +
-      renderBrowserFrame(IMG.portalACO, 'Zynix AI ACO performance dashboard showing quality measures and shared savings', 'app.zynix.ai/aco/dashboard') +
-      renderBrowserFrame(IMG.portalProvider, 'Zynix AI clinical quality metrics view for healthcare providers', 'app.zynix.ai/provider/clinical') +
-      renderBrowserFrame(IMG.portalQuality, 'Zynix AI quality measures tracking for healthcare compliance', 'app.zynix.ai/quality/measures') +
-      '</div></div></section>';
-
-    // -- PROOF POINTS --
-    html += '<section class="zynix-results-section"><div class="zynix-container">' +
-      '<span class="zynix-tag">RESULTS</span>' +
-      '<h2>Measurable Outcomes From Day One</h2>' +
-      '<div class="zynix-metrics-bar">' +
-      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">1M+</span><span class="zynix-metric-label">VBC Patients Onboarded</span></div>' +
-      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">85%+</span><span class="zynix-metric-label">TCM contact rate (vs. 30\u201340% industry avg)</span></div>' +
-      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">40%</span><span class="zynix-metric-label">Improvement in HCC gap closure</span></div>' +
-      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">2\u20133x</span><span class="zynix-metric-label">AWV scheduling lift</span></div>' +
-      '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">60%+</span><span class="zynix-metric-label">Reduction in admin tasks</span></div>' +
-      '</div></div></section>';
-
-    // -- TESTIMONIAL SOCIAL PROOF QUOTE --
-    html += '<section style="padding:64px 0;background:#fff;text-align:center"><div class="zynix-container" style="max-width:720px">' +
-    '<blockquote style="font-size:20px;line-height:1.8;color:var(--z-text);font-style:italic;font-weight:400;margin:0;position:relative;padding:0 40px">' +
-    '<span style="position:absolute;top:-10px;left:0;font-size:64px;color:var(--z-accent);opacity:0.3;font-family:Georgia,serif;line-height:1">\u201C</span>' +
-    'Zynix didn\u2019t just improve our TCM rates. It fundamentally changed how we deliver post-discharge care. Our coordinators now focus on complex cases while AI handles the volume.' +
-    '</blockquote>' +
-    '<div style="margin-top:24px"><strong style="color:var(--z-text)">VP of Care Management</strong><span style="color:var(--z-text-muted);margin-left:8px">Multi-State ACO, 45,000 Attributed Lives</span></div>' +
+    // 1. Hero (§5.1) with the hero widget (protected, §5.2) and the real logo row (protected, §5.14) at the fold
+    var hero = '<section class="zx-home-hero" id="hero" aria-labelledby="hero-title"><div class="zynix-container">' +
+      '<div class="zx-home-hero__grid"><div class="zx-home-hero__text">' +
+        '<p class="zynix-eyebrow"><span class="zx-home-hero__eyebrow-long">' + SITE_FACTS.category.long + '</span><span class="zx-home-hero__eyebrow-short">' + SITE_FACTS.category.short + '</span></p>' +
+        '<h1 class="zx-home-hero__title" id="hero-title">Turn your data into completed follow-up.</h1>' +
+        '<p class="zx-home-hero__lead">For ACOs, health plans, MSOs, IPAs and health systems: Zynix connects claims, EHR and ADT data, flags discharges, care gaps and AWVs due, and gives care teams AI outreach agents.</p>' +
+        '<div class="zx-home-hero__actions">' + renderDemoButton({ size: 'lg' }) + renderButton('See how it works', '#how-it-works', { variant: 'secondary', size: 'lg' }) + '</div>' +
+        '<ul class="zx-home-hero__proof" role="list" aria-label="Zynix at a glance">' + [['database', SITE_FACTS.ehr.short], ['shield', soc2Short], ['lock', C.hipaa.prose]].map(function (x) {
+          return '<li><span class="zx-home-hero__proof-icon" aria-hidden="true">' + zxIcon(x[0]) + '</span>' + x[1] + '</li>'; }).join('') + '</ul>' +
+      '</div><div class="zx-home-hero__media">' + renderHeroWidget(HERO_WIDGET) + '</div></div>' +
+      renderLogoRow(null, { eager: true, id: 'hero-logos', label: 'Used by ACOs, health plans and provider organizations', link: { label: 'Customer stories', href: '/resources-case-studies' } }) +
     '</div></section>';
 
-    // -- TESTIMONIALS --
-    html += '<section class="zynix-testimonials-section"><div class="zynix-container">' +
-      '<span class="zynix-tag">WHAT OUR CLIENTS SAY</span>' +
-      '<h2>Trusted by Healthcare Leaders</h2>' +
-      '<div class="zynix-testimonials-grid">' +
-      '<div class="zynix-testimonial-card fade-in-up">' +
-      '<div class="zynix-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
-      '<p class="zynix-testimonial-quote">&ldquo;Zynix transformed our TCM workflow overnight. We went from a 32% contact rate to over 85% within the first quarter. The AI agents handle the outreach while our nurses focus on clinical care.&rdquo;</p>' +
-      '<div class="zynix-testimonial-author"><strong>David Klebonis</strong><span>COO, Palm Beach ACO</span></div></div>' +
-      '<div class="zynix-testimonial-card fade-in-up">' +
-      '<div class="zynix-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
-      '<p class="zynix-testimonial-quote">&ldquo;We evaluated six VBC platforms. Zynix was the only one that could ingest our data, deploy agents, and show ROI within 30 days. It\u2019s not a dashboard. It\u2019s an operating system.&rdquo;</p>' +
-      '<div class="zynix-testimonial-author"><strong>Ronda Miller</strong><span>Senior Care Manager, West Florida ACO</span></div></div>' +
-      '<div class="zynix-testimonial-card fade-in-up">' +
-      '<div class="zynix-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>' +
-      '<p class="zynix-testimonial-quote">&ldquo;The multilingual AI agents were a game-changer for our FQHC. Our Spanish-speaking patients finally get the follow-up calls they deserve, on time, every time.&rdquo;</p>' +
-      '<div class="zynix-testimonial-author"><strong>Ganesh Karra</strong><span>Systems Engineer, AMISTAD CHC</span></div></div>' +
-      '</div></div></section>';
+    // 2. Proof band (§5.3): the visible definition, two registry stats, the CMS ACCESS Model line with its clause
+    var access = zxAccessLine().replace(SITE_FACTS.access.line, '<span class="zx-home-proof__access-line">' + SITE_FACTS.access.line + '</span>');
+    var proof = renderSection({ id: 'proof', surface: 'subtle', compact: true, className: 'zx-home-proof' }, renderSplit(
+      '<h2 class="zx-home-proof__title" id="proof-title">What is Zynix AI?</h2>' +
+      '<p class="zx-home-proof__def">Zynix AI is AI infrastructure and workflows for value-based care. The Zynix platform connects claims, EHR and ADT data into one patient record, ranks the patients and care gaps that need attention, and carries the follow-up through care plans, outreach agents and ambient documentation. Clinicians make the clinical decisions.</p>',
+      renderStatRow([{ fact: 'patients' }, { fact: 'states' }]) + '<p class="zx-home-proof__access">' + access + '</p>',
+      { ratio: '5-7' }));
 
-    // -- ROI CALCULATOR --
-    html += '<section class="zynix-roi-section" id="roi-calculator"><div class="zynix-container">' +
-      '<span class="zynix-tag">ROI CALCULATOR</span>' +
-      '<h2>Calculate Your Value-Based Care Savings</h2>' +
-      '<p class="zynix-section-sub">See how much Zynix can save your organization annually. Adjust the sliders to match your scale.</p>' +
-      '<div class="zynix-roi-calculator fade-in-up">' +
-      '<div class="zynix-roi-inputs">' +
-        '<div class="zynix-roi-input-group">' +
-          '<label>Total Attributed Lives</label>' +
-          '<input type="range" min="1000" max="500000" value="50000" step="1000" class="zynix-roi-slider" id="roi-lives">' +
-          '<div class="zynix-roi-value" id="roi-lives-val">50,000</div>' +
-        '</div>' +
-        '<div class="zynix-roi-input-group">' +
-          '<label>Monthly Discharges</label>' +
-          '<input type="range" min="50" max="5000" value="500" step="50" class="zynix-roi-slider" id="roi-discharges">' +
-          '<div class="zynix-roi-value" id="roi-discharges-val">500</div>' +
-        '</div>' +
-        '<div class="zynix-roi-input-group">' +
-          '<label>Current TCM Contact Rate</label>' +
-          '<input type="range" min="10" max="80" value="35" step="5" class="zynix-roi-slider" id="roi-tcm">' +
-          '<div class="zynix-roi-value" id="roi-tcm-val">35%</div>' +
-        '</div>' +
-        '<div class="zynix-roi-input-group">' +
-          '<label>Open Care Gaps (HCC/HEDIS)</label>' +
-          '<input type="range" min="500" max="100000" value="10000" step="500" class="zynix-roi-slider" id="roi-gaps">' +
-          '<div class="zynix-roi-value" id="roi-gaps-val">10,000</div>' +
-        '</div>' +
-      '</div>' +
-      '<div class="zynix-roi-results">' +
-        '<h3>Projected Annual Impact</h3>' +
-        '<div class="zynix-roi-result-grid">' +
-          '<div class="zynix-roi-result"><span class="zynix-roi-number" id="roi-savings">$2.4M</span><span class="zynix-roi-label">Estimated Annual Savings</span></div>' +
-          '<div class="zynix-roi-result"><span class="zynix-roi-number" id="roi-tcm-lift">+50%</span><span class="zynix-roi-label">TCM Contact Rate Lift</span></div>' +
-          '<div class="zynix-roi-result"><span class="zynix-roi-number" id="roi-gaps-closed">4,000</span><span class="zynix-roi-label">Additional Gaps Closed</span></div>' +
-          '<div class="zynix-roi-result"><span class="zynix-roi-number" id="roi-readmit">-23%</span><span class="zynix-roi-label">Readmission Reduction</span></div>' +
-        '</div>' +
-        '<a href="' + CALENDLY + '" class="zynix-btn-primary" target="_blank" rel="noopener" style="margin-top:24px">Get Your Custom ROI Report &rarr;</a>' +
-      '</div>' +
-      '</div></div></section>';
+    // 3. Platform chapter, part 1 (§5.4): the How-It-Works explorer (protected)
+    var hiw = renderSection({ id: 'how-it-works', className: 'zx-home-hiw' },
+      renderSectionHead('How it works', 'Knowing who needs care isn’t the hard part. Getting it done is.',
+        'The Zynix platform has four layers, and each one feeds the next. A flagged patient becomes a task with an owner, not a line in a report.', { id: 'how-it-works-title', align: 'split' }) +
+      zxHomeExplorer(HOME_LAYERS));
 
-    // -- SOLUTIONS BY SEGMENT --
-    html += '<section class="zynix-solutions-section"><div class="zynix-container">' +
-      '<span class="zynix-tag">WHO WE SERVE</span>' +
-      '<h2>Purpose-Built for Value-Based Healthcare</h2>' +
-      '<p class="zynix-section-sub">Zynix serves organizations responsible for outcomes, cost, quality, and operations.</p>' +
-      '<div class="zynix-feature-grid">' +
-      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid var(--z-blue)"><h3>ACOs &amp; MSOs</h3><p>TCM execution, AWV completion, shared savings optimization, and quality performance.</p><a href="/audience-segments/acos-msos" class="zynix-card-link">ACO Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid var(--z-accent)"><h3>Health Systems</h3><p>Readmission reduction, unified patient engagement, post-discharge coordination at scale.</p><a href="/audience-segments/health-systems" class="zynix-card-link">Health System Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid var(--z-success)"><h3>Health Plans</h3><p>Stars ratings improvement, HCC gap closure, member engagement, avoidable ER reduction.</p><a href="/audience-segments/health-plans" class="zynix-card-link">Health Plan Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #7C3AED"><h3>FQHCs</h3><p>Multilingual AI for underserved populations, quality payments maximization, care management at scale.</p><a href="/audience-segments/fqhcs" class="zynix-card-link">FQHC Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #0891B2"><h3>Independent Practices</h3><p>No-show reduction, after-hours coverage, appointment scheduling, documentation time savings.</p><a href="/audience-segments/independent-group-practices" class="zynix-card-link">Practice Solutions &rarr;</a></div>' +
-      '<div class="zynix-feature-card zynix-serve-card fade-in-up" style="border-left:4px solid #D97706"><h3>ASCs</h3><p>Prior authorization automation, surgical cancellation reduction, pre-op/post-op coordination.</p><a href="/audience-segments/ascs" class="zynix-card-link">ASC Solutions &rarr;</a></div>' +
-      '</div></div></section>';
+    // 3b. Platform chapter, part 2 (§5.5): the data flow (protected), the page's one dark band
+    var flow = renderDataFlow(HOME_FLOW, { id: 'data-flow', className: 'zx-home-flow', fact: false });
 
-    // -- CUSTOMER TESTIMONIALS / NAMED SOCIAL PROOF (Apr 2026) --
-    // Each quote names a real customer + cites a specific outcome number for GEO citability and E-E-A-T.
-    html += '<section class="zynix-testimonials-section" style="padding:80px 0;background:var(--z-bg-alt)"><div class="zynix-container">' +
-      '<span class="zynix-tag">CUSTOMER OUTCOMES</span>' +
-      '<h2 style="text-align:center;font-size:36px;font-weight:800;margin:0 0 14px">Trusted by the Teams Setting the Standard in Value-Based Care</h2>' +
-      '<p class="zynix-section-sub" style="text-align:center;max-width:680px;margin:0 auto 48px">Real numbers from real customers. Zynix AI serves 1M+ VBC patients across 30 states, and was built by a physician whose ACOs generated $300M+ in shared savings.</p>' +
-      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:40px">' +
-      // Palm Beach ACO — the big one
-      '<div class="zynix-testimonial-card fade-in-up" style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,0.06);position:relative">' +
-      '<div style="font-size:48px;line-height:1;color:#20449B;opacity:0.15;font-family:Georgia,serif;margin-bottom:-20px">&ldquo;</div>' +
-      '<p style="font-size:17px;line-height:1.6;color:#0f172a;margin:0 0 20px;font-weight:500">Our partnership with Zynix AI is about scaling the results we have already proven work \u2014 delivering better care to more patients without adding operational burden to our physicians.</p>' +
-      '<div style="border-top:1px solid #e5e7eb;padding-top:16px">' +
-      '<div style="font-weight:700;color:#0f172a;font-size:15px">David Klebonis</div>' +
-      '<div style="font-size:13px;color:#475569">President &amp; COO, Palm Beach ACO</div>' +
-      '<div style="margin-top:12px;display:flex;align-items:center;gap:8px"><span style="font-size:24px;font-weight:800;color:#20449B">$936M+</span><span style="font-size:13px;color:#475569">in MSSP savings to date</span></div>' +
-      '</div></div>' +
-      // eTernal Health
-      '<div class="zynix-testimonial-card fade-in-up" style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,0.06);position:relative">' +
-      '<div style="font-size:48px;line-height:1;color:#0891B2;opacity:0.15;font-family:Georgia,serif;margin-bottom:-20px">&ldquo;</div>' +
-      '<p style="font-size:17px;line-height:1.6;color:#0f172a;margin:0 0 20px;font-weight:500">Zynix AI agents handle medication adherence outreach at a scale our team could never reach manually. The contact rates and adherence lift have been transformational for our Stars program.</p>' +
-      '<div style="border-top:1px solid #e5e7eb;padding-top:16px">' +
-      '<div style="font-weight:700;color:#0f172a;font-size:15px">eTernal Health</div>' +
-      '<div style="font-size:13px;color:#475569">Medicare Advantage Health Plan</div>' +
-      '<div style="margin-top:12px;display:flex;align-items:center;gap:8px"><span style="font-size:24px;font-weight:800;color:#0891B2">45%</span><span style="font-size:13px;color:#475569">medication adherence improvement</span></div>' +
-      '</div></div>' +
-      // AMISTAD CHC (FQHC)
-      '<div class="zynix-testimonial-card fade-in-up" style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,0.06);position:relative">' +
-      '<div style="font-size:48px;line-height:1;color:#F16529;opacity:0.15;font-family:Georgia,serif;margin-bottom:-20px">&ldquo;</div>' +
-      '<p style="font-size:17px;line-height:1.6;color:#0f172a;margin:0 0 20px;font-weight:500">ZynAfterHours gave our patients 24/7 access in their preferred language. We saw measurable ER diversion and higher same-week appointment capture across our multilingual population.</p>' +
-      '<div style="border-top:1px solid #e5e7eb;padding-top:16px">' +
-      '<div style="font-weight:700;color:#0f172a;font-size:15px">AMISTAD Community Health Center</div>' +
-      '<div style="font-size:13px;color:#475569">Federally Qualified Health Center (FQHC)</div>' +
-      '<div style="margin-top:12px;display:flex;align-items:center;gap:8px"><span style="font-size:24px;font-weight:800;color:#F16529">20-30%</span><span style="font-size:13px;color:#475569">avoidable ER diversion rate</span></div>' +
-      '</div></div>' +
-      '</div>' +
-      // Aggregate metric bar
-      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin-top:48px;padding:32px;background:#fff;border-radius:16px;border:1px solid #e5e7eb">' +
-      '<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#20449B">1M+</div><div style="font-size:13px;color:#475569;margin-top:4px">VBC Patients Served</div></div>' +
-      '<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#20449B">$300M+</div><div style="font-size:13px;color:#475569;margin-top:4px">Shared Savings From Our Founder\u2019s ACOs</div></div>' +
-      '<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#20449B">85%+</div><div style="font-size:13px;color:#475569;margin-top:4px">TCM Contact Rate</div></div>' +
-      '<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#20449B">30</div><div style="font-size:13px;color:#475569;margin-top:4px">U.S. States</div></div>' +
-      '<div style="text-align:center"><div style="font-size:32px;font-weight:800;color:#20449B">97.3%</div><div style="font-size:13px;color:#475569;margin-top:4px">ZynAfterHours Triage Accuracy</div></div>' +
-      '</div>' +
-      '<div style="text-align:center;margin-top:32px"><a href="/resources-case-studies" style="display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:#20449B;text-decoration:none">Read full case studies <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>' +
-      '</div></section>';
+    // 4. Agents at work (§5.6): the 48 hours after discharge
+    var ep = HOME_EPISODE;
+    var agents = renderSection({ id: 'agents-at-work', className: 'zx-home-agents' }, renderSplit(
+      renderSectionHead('Agents at work', 'What happens in the 48 hours after discharge',
+        'Same patient, same discharge. The difference is who does the follow-up, and whether anyone knows it happened.', { id: 'agents-at-work-title' }) +
+      zxHomeLabel('Without a follow-through layer', 'zx-home-without-label') +
+      '<ul class="zx-home-without" role="list" aria-labelledby="zx-home-without-label">' + ep.without.map(function (w) { return '<li>' + w + '</li>'; }).join('') + '</ul>' +
+      '<p class="zx-home-cms">' + ep.rule.text + ' <a class="zx-home-cms__link" href="' + zxAttr(ep.rule.href) + '"' + zxNewTab(ep.rule.href) + '>' + ep.rule.label + '</a></p>',
+      zxHomeEpisode(ep), { ratio: '5-7' }));
 
-    // -- DATA FLYWHEEL --
-    html += '<section class="zynix-flywheel-section"><div class="zynix-container">' +
-      '<span class="zynix-tag">THE DATA FLYWHEEL</span>' +
-      '<h2>Every Interaction Makes Zynix Smarter</h2>' +
-      '<p class="zynix-section-sub">Unlike competitors renting intelligence from third-party LLMs, ZynixLLM is purpose-built for healthcare and improves with every patient interaction.</p>' +
-      '<div class="zynix-flywheel-grid fade-in-up">' +
-      '<div class="zynix-flywheel-step"><span>1</span><h4>More Calls</h4><p>Better conversation models</p></div>' +
-      '<div class="zynix-flywheel-arrow">&rarr;</div>' +
-      '<div class="zynix-flywheel-step"><span>2</span><h4>More Triage</h4><p>Better clinical reasoning</p></div>' +
-      '<div class="zynix-flywheel-arrow">&rarr;</div>' +
-      '<div class="zynix-flywheel-step"><span>3</span><h4>More Documentation</h4><p>Better ambient scribe</p></div>' +
-      '<div class="zynix-flywheel-arrow">&rarr;</div>' +
-      '<div class="zynix-flywheel-step"><span>4</span><h4>More Outcomes</h4><p>Better risk prediction</p></div>' +
-      '<div class="zynix-flywheel-arrow zynix-flywheel-loop">&#x21BA;</div>' +
-      '</div></div></section>';
+    // 5. Capabilities (§5.7)
+    var caps = renderSection({ id: 'capabilities', surface: 'subtle', className: 'zx-home-caps' },
+      renderSectionHead(null, 'Finish the <span class="zx-home-nowrap">follow-up</span> your data creates', 'See the work, assign it and document it, in one platform.',
+        { id: 'capabilities-title', action: { label: 'Watch the recorded webinar', href: '/resources-webinars' } }) +
+      '<div class="zx-home-caps__rows">' + HOME_CAPABILITIES.map(zxHomeCapability).join('') + '</div>');
 
-    // (AEO FAQ merged into main FAQ section below)
+    // 6. Interoperability (§5.8): the EHR line as text, named EHRs as text wordmarks, standards as chips
+    var interop = renderSection({ id: 'interoperability', className: 'zx-home-interop' }, renderSplit(
+      renderSectionHead(null, 'Works with the systems you already run',
+        'Zynix connects to ' + SITE_FACTS.ehr.line + ', plus claims, ADT, lab and pharmacy feeds. For a network of independent practices, that means one record and one worklist, even when every practice runs a different EHR.',
+        { id: 'interoperability-title', action: { label: 'See all integrations', href: '/integrations' } }),
+      zxHomeLabel('EHRs we connect to include', 'zx-home-ehr-label') +
+      '<ul class="zx-home-ehr" role="list" aria-labelledby="zx-home-ehr-label">' + SITE_FACTS.ehr.named.map(function (e) { return '<li>' + e + '</li>'; }).join('') + '</ul>' +
+      zxHomeLabel('Standards we work with', 'zx-home-std-label') +
+      '<ul class="zx-home-standards" role="list" aria-labelledby="zx-home-std-label">' + SITE_FACTS.ehr.standards.map(function (s) { return '<li>' + renderChip(s, 'neutral') + '</li>'; }).join('') + '</ul>',
+      { ratio: '5-7' }));
 
-    // -- HOMEPAGE FAQ --
-    html += '<section class="zynix-faq-section" id="faq"><div class="zynix-container">' +
-      '<span class="zynix-tag">FREQUENTLY ASKED QUESTIONS</span>' +
-      '<h2>Common Questions About AI for Value-Based Care</h2>' +
-      '<div class="zynix-faq-list">' +
+    // 7. Customers (§5.9): one verbatim release quote, two cards (no numbers), links to stories and the ROI calculator
+    var pb = zxCustomer('pbaco');
+    // A verbatim excerpt of the release quote: its sentences about the partnership, from "We believe…" to the end (the
+    // opening sentence describes PBACO's own focus). The full quote stays on the case study and /press (review round 1:
+    // the section ran 20% over its height budget at 390 and 1440).
+    var pbQuote = pb && pb.quote && pb.quote.text ? pb.quote.text.replace(/^[^.]*\.\s+(?=We believe)/, '') : null;
+    var card = function (id, line) {
+      var c = zxCustomer(id); if (!c) return '';
+      var logo = c.logo ? '<img class="zx-home-customers__logo zx-home-customers__logo--h' + c.logo.h + '" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + c.logo.w + '" height="' + c.logo.h + '" loading="lazy" decoding="async">' : '';
+      return renderCard({ href: c.caseStudy, media: logo, eyebrow: c.segmentLabel, title: c.name, body: line, cta: 'Read the case study', className: 'zx-home-customers__card' });
+    };
+    var customers = renderSection({ id: 'customers', surface: 'subtle', className: 'zx-home-customers' },
+      renderSectionHead(null, 'Customers, on the record',
+        'Palm Beach ACO and eternalHealth announced their partnerships with Zynix in published releases. PBACO Holding, one of the nation’s largest risk-bearing ACOs, started with outreach for post-discharge follow-up and annual wellness visits.', { id: 'customers-title' }) +
+      renderSplit(
+        renderQuote({ customer: 'pbaco', variant: 'large', href: null, text: pbQuote }).replace('</figcaption>', '<span class="zx-home-quote__links">' +
+          (pb && pb.release ? renderLinkArrow('Read the announcement', pb.release.href) : '') + (pb && pb.caseStudy ? renderLinkArrow('Read the case study', pb.caseStudy) : '') + '</span></figcaption>'),
+        '<div class="zx-home-customers__cards">' +
+          card('eternalhealth', 'Outreach and care management workflows for members in Massachusetts and Arizona, in use since January 1, 2026.') +
+          card('amistad', 'After-hours access and preventive outreach for a multilingual patient population.') + '</div>' +
+        '<div class="zx-home-customers__links">' + renderLinkArrow('Customer stories', '/resources-case-studies') + renderLinkArrow('Model the impact on your population', '/roi-calculator') + '</div>',
+        { ratio: '7-5' }));
 
-      '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What is value-based care AI?</button>' +
-      '<div class="zynix-faq-a"><p>Value-based care AI refers to artificial intelligence systems specifically designed to help healthcare organizations succeed in value-based payment models. These platforms use AI agents, predictive analytics, and automated workflows to close care gaps, reduce hospital readmissions, improve quality scores, and optimize risk adjustment, ultimately helping ACOs, health systems, and health plans improve patient outcomes while reducing costs. Zynix AI is the leading value-based care AI operating system, serving over 1 million VBC patients across 30 states.</p></div></div>' +
+    // 8. Security and governance (§5.10): registry compliance strings; only confirmed governance statements render
+    var secRows = [
+      { icon: 'shield', title: C.soc2.prose, text: 'The audit report and supporting documentation are shared through our Drata trust portal.' },
+      { icon: 'lock', title: C.hipaa.prose, text: 'A Business Associate Agreement is available for customers handling PHI.' },
+      { icon: 'clock', title: C.hitrust.prose, text: 'Readiness assessment completed.' }
+    ];
+    var gov = zxGovernance(['escalation', 'review', 'auditTrail', 'dataUse']);
+    var security = renderSection({ id: 'security', className: 'zx-home-security' }, renderSplit(
+      renderSectionHead('Security and governance', 'Built to be governed',
+        'Security reviews are part of every evaluation. Here is where we stand, and how agents are kept in check.', { id: 'security-title' }) +
+      '<div class="zx-home-sec__actions">' + renderButton(C.soc2.request.label, C.soc2.request.href, { variant: 'secondary' }) + renderLinkArrow('Security and trust', '/security') + '</div>',
+      renderTrustRow(['soc2', 'hipaa', 'hitrust'], { className: 'zx-home-sec__badges' }) +
+      '<ul class="zx-home-sec" role="list">' + secRows.map(function (r) {
+        return '<li class="zx-home-sec__row"><span class="zx-home-sec__icon" aria-hidden="true">' + zxIcon(r.icon) + '</span><div><h3 class="zx-home-sec__title">' + r.title + '</h3><p class="zx-home-sec__text">' + r.text + '</p></div></li>';
+      }).join('') + '</ul>' +
+      (gov.length ? '<div class="zx-home-gov"><h3 class="zx-home-gov__title">How agents are governed</h3><ul class="zx-home-gov__list" role="list">' + gov.map(function (g) {
+        return '<li class="zx-home-gov__item"><h4 class="zx-home-gov__item-title">' + g.title + '</h4><p class="zx-home-gov__item-text">' + g.text + '</p></li>';
+      }).join('') + '</ul></div>' : ''),
+      { ratio: '5-7' }));
 
-      '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How does AI help ACOs close care gaps?</button>' +
-      '<div class="zynix-faq-a"><p>AI helps ACOs close care gaps by automatically identifying patients with open quality measures (HEDIS, Stars, HCC/RAF gaps), prioritizing them by impact and reachability, and deploying autonomous AI agents to conduct outreach via phone, SMS, and patient portal. The AI handles scheduling, appointment reminders, post-visit documentation, and follow-up, reducing the manual burden on care coordinators by up to 80%. Zynix AI\'s gap closure engine has helped ACOs close 40% more quality gaps compared to manual workflows.</p></div></div>' +
+    // 9. Who we serve (§5.11): the five NAV audiences as linked rows (no ASCs)
+    var sol = NAV.filter(function (s) { return s.id === 'solutions'; })[0];
+    var orgs = sol ? ((sol.columns || []).filter(function (c) { return c.heading === 'By organization'; })[0] || { items: [] }).items : [];
+    var audiences = renderSection({ id: 'audiences', surface: 'subtle', compact: true, className: 'zx-home-audiences' },
+      renderSectionHead('Who we serve', 'Built for organizations accountable for cost and quality', null,
+        { id: 'audiences-title', align: 'split', action: { label: 'Solutions overview', href: '/solutions' } }) +
+      renderGrid(orgs, function (it) { return renderCard({ variant: 'row', title: it.label, body: it.desc, href: it.href, icon: it.icon }); }));
 
-      '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What is the difference between AI agents and chatbots in healthcare?</button>' +
-      '<div class="zynix-faq-a"><p>Healthcare chatbots are rule-based systems that follow scripted decision trees and can only respond to pre-programmed inputs. AI agents, by contrast, are autonomous systems that can reason, plan, and take action across multiple workflows. A chatbot might answer a patient\'s FAQ, but an AI agent can identify a high-risk patient from ADT data, call them post-discharge, schedule a TCM follow-up, update the care plan and trigger billing, escalating to your care team when clinical judgment is needed. Zynix AI deploys seven specialized AI agents that operate across the entire care coordination lifecycle.</p></div></div>' +
+    // 10. FAQ (§5.12): .zynix-faq-item markup feeds the FAQPage JSON-LD
+    var faq = renderSection({ id: 'faq', className: 'zx-home-faq' }, renderSplit(
+      renderSectionHead(null, 'Questions buyers ask first', null, { id: 'faq-title', action: { label: 'More questions', href: '/resources-faq' } }),
+      renderFaqList(HOME_FAQ, { idPrefix: 'faq-home' }), { ratio: '4-8' }));
 
-      '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How does AI reduce hospital readmissions?</button>' +
-      '<div class="zynix-faq-a"><p>AI reduces hospital readmissions through three mechanisms: (1) real-time risk stratification that identifies high-risk patients at the moment of discharge using ADT feeds, clinical data, and social determinants; (2) automated post-discharge outreach via AI agents that call patients within 48 hours to confirm medication adherence, follow-up appointments, and safe transitions; and (3) proactive care plan deployment that triggers TCM workflows, schedules follow-up visits, and monitors patient engagement through day 30. Organizations using Zynix AI have seen readmission rates decrease by 25-35%.</p></div></div>' +
+    // 11. Final CTA (§5.13)
+    var cta = renderCTA('See Zynix on a workflow you run today',
+      'Book 30 minutes with our team. We’ll walk through post-discharge <span class="zx-home-nowrap">follow-up</span>, care gap closure or wellness visit outreach on sample data, and map it to your programs.',
+      null, { surface: 'subtle', id: 'final-cta', secondary: { label: 'Contact us', href: '/contact' }, badges: [] });
 
-      '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What is HCC/RAF gap closure and why does it matter?</button>' +
-      '<div class="zynix-faq-a"><p>HCC (Hierarchical Condition Category) and RAF (Risk Adjustment Factor) gap closure is the process of identifying and documenting chronic conditions that were previously unrecorded or under-coded. Accurate HCC coding ensures health plans and ACOs receive appropriate risk-adjusted payments that reflect the true health burden of their patient populations. AI accelerates this by analyzing claims, clinical notes, and lab results to surface suspect conditions, prioritize annual wellness visits, and ensure proper documentation at the point of care. Zynix AI\'s analytics engine identifies an average of $180 in additional RAF value per patient per year.</p></div></div>' +
-
-      '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Can AI automate prior authorization in healthcare?</button>' +
-      '<div class="zynix-faq-a"><p>Yes. AI can automate up to 70% of prior authorization workflows by extracting clinical data from EHRs, matching it against payer-specific criteria, auto-populating authorization forms, submitting requests electronically, and tracking approvals in real time. This reduces the average prior auth processing time from 5-14 days to under 24 hours. Zynix AI\'s ZynAuth agent handles the entire prior authorization lifecycle, from initial clinical data extraction through submission, follow-up, and appeals, integrating directly with major payer portals and EHR systems.</p></div></div>' +
-
-      '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">How is Zynix AI different from other healthcare AI platforms?</button>' +
-      '<div class="zynix-faq-a"><p>Most healthcare AI vendors sell point solutions: a scheduling tool here, an analytics dashboard there, a documentation assistant elsewhere. Zynix AI is the only integrated operating system purpose-built for value-based care that combines a unified data platform, population health analytics, seven specialized AI agents, ambient clinical documentation, and orchestrated care plans in a single platform. Instead of buying and integrating 6-8 separate tools, organizations deploy Zynix as one operating system where data flows seamlessly from ingestion through action. This integrated approach delivers 3-5x faster time-to-value and eliminates the data silos that plague multi-vendor stacks.</p></div></div>' +
-
-      '</div></div></section>';
-
-    // -- CTA --
-    html += renderCTA('See Zynix in Action', 'Join the healthcare organizations already transforming care operations with AI-powered intelligence.', 'Request a Demo');
-
-    // -- FOOTER --
-    html += renderFooter();
-
-    return html;
+    // The closing band keeps the homepage's section rhythm (page:home CSS sets the padding through .zx-home-end).
+    return hero + proof + hiw + flow + agents + caps + interop + customers + security + audiences + faq + '<div class="zx-home-end">' + cta + '</div>' + renderFooter();
   }
 
   // ── 301 REDIRECT MAP (v7 rebuild) ──
@@ -13703,195 +13617,8 @@ function renderDataAnalyticsV7() {
             .catch(fail);
         });
       });
-      // V2 Interactive Architecture Component (zPick)
-      (function(){
-        var _c=1,_e=0,_DUR=5000,_T=80,_iv=null,_paused=false;
-        function _tick(){
-          _e+=_T;
-          var pct=Math.min((_e/_DUR)*100,100);
-          var pr=document.querySelector('.lb.on .lb-pr');
-          if(pr) pr.style.width=pct+'%';
-          if(_e>=_DUR){ window.zPick(_c>=4?1:_c+1); }
-        }
-        function _start(){ clearInterval(_iv); _iv=setInterval(_tick,_T); }
-        window.zPick=function(n){
-          clearInterval(_iv);
-          document.querySelectorAll('.lb').forEach(function(el){
-            var on=+el.getAttribute('data-n')===n;
-            el.classList.toggle('on',on);
-            var pr=el.querySelector('.lb-pr');
-            if(pr) pr.style.width='0%';
-          });
-          document.querySelectorAll('.dp').forEach(function(el){
-            el.classList.toggle('on',+el.getAttribute('data-n')===n);
-          });
-          document.querySelectorAll('.za-dot').forEach(function(el){
-            el.classList.toggle('on',+el.getAttribute('data-n')===n);
-          });
-          _c=n; _e=0;
-          if(!_paused) _start();
-        };
-        var root=document.getElementById('za-root');
-        if(root){
-          root.addEventListener('mouseenter',function(){ _paused=true; clearInterval(_iv); });
-          root.addEventListener('mouseleave',function(){ _paused=false; _start(); });
-          window.zPick(1);
-        }
-      })();
-      // V3 Architecture Diagram Component (zpaPick)
-      (function(){
-        var _c=1,_e=0,_DUR=5000,_T=80,_iv=null,_paused=false;
-        var C={1:'#20449B',2:'#20449B',3:'#20449B',4:'#20449B',5:'#F16529'};
-        function _render(n){
-          document.querySelectorAll('.zpa-node').forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-n')===n)});
-          document.querySelectorAll('.zpa-slide').forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-n')===n)});
-          document.querySelectorAll('.zpa-dot-v3').forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-n')===n)});
-          var f=document.getElementById('zpa-fill');
-          if(f){f.style.background=C[n];f.style.width='0%';}
-          _c=n;_e=0;
-        }
-        function _tick(){
-          _e+=_T;
-          var f=document.getElementById('zpa-fill');
-          if(f) f.style.width=Math.min((_e/_DUR)*100,100)+'%';
-          if(_e>=_DUR) _render(_c>=5?1:_c+1);
-        }
-        function _start(){clearInterval(_iv);_iv=setInterval(_tick,_T);}
-        window.zpaPick=function(n){clearInterval(_iv);_render(n);if(!_paused)_start();};
-        window.zpaNext=function(){window.zpaPick(_c>=5?1:_c+1);};
-        window.zpaPrev=function(){window.zpaPick(_c<=1?5:_c-1);};
-        var root=document.getElementById('zpa-root');
-        if(root){
-          root.addEventListener('mouseenter',function(){_paused=true;clearInterval(_iv);});
-          root.addEventListener('mouseleave',function(){_paused=false;_start();});
-        }
-        // Wait for the V3 section to be rendered, then initialize
-        var zpaDetail=document.querySelector('.zpa-detail');
-        if(zpaDetail){
-          zpaDetail.closest('section').addEventListener('mouseenter',function(){_paused=true;clearInterval(_iv);});
-          zpaDetail.closest('section').addEventListener('mouseleave',function(){_paused=false;_start();});
-          window.zpaPick(1);
-        }
-      })();
-      // Hero dashboard animations — full GIF-like experience
-      (function(){
-        var heroCard=document.querySelector('.zynix-homepage-hero .zynix-inner-hero-img');
-        if(!heroCard) return;
-        var style=document.createElement('style');
-        style.textContent=
-          '@keyframes zhFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}' +
-          '@keyframes zhPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.8)}}' +
-          '@keyframes zhFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}' +
-          '@keyframes zhGlow{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.2)}50%{box-shadow:0 0 0 8px rgba(34,197,94,0)}}' +
-          '@keyframes zhSlideNum{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}' +
-          '@keyframes zhBarGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}' +
-          '@keyframes zhRowFlash{0%,100%{background:transparent}50%{background:rgba(241,101,41,0.04)}}' +
-          '.zynix-homepage-hero .zynix-inner-hero-img>div{animation:zhFloat 4s ease-in-out infinite}' +
-          '.zh-live-dot{animation:zhPulse 2s ease-in-out infinite !important}' +
-          '.zh-stat-anim{animation:zhSlideNum 0.8s ease-out both}' +
-          '.zh-row-anim{animation:zhFadeIn 0.6s ease-out both}' +
-          '.zh-active-tab{border-bottom:2px solid #F16529 !important;color:#1a1a2e !important}' +
-          '.zh-tab-trans{transition:all 0.3s ease}';
-        document.head.appendChild(style);
-
-        // Mark LIVE dot for pulsing
-        var liveDots = heroCard.querySelectorAll('[style*="animation:zynixPulse"]');
-        liveDots.forEach(function(el){
-          var dot = el.querySelector('span') || el;
-          dot.classList.add('zh-live-dot');
-        });
-
-        // Get all tabs, stats, and rows
-        var tabs = heroCard.querySelectorAll('[style*="padding:10px 18px"]');
-        var stats = heroCard.querySelectorAll('[style*="font-size:28px"]');
-        var rows = heroCard.querySelectorAll('[style*="padding:10px 0"]');
-
-        // Add transition class to tabs
-        tabs.forEach(function(t){ t.classList.add('zh-tab-trans'); });
-
-        // Counter animation for stats
-        function animateCounter(el, target, suffix, duration) {
-          suffix = suffix || '';
-          duration = duration || 1200;
-          var start = performance.now();
-          var isDecimal = String(target).indexOf('.') > -1;
-          function step(now) {
-            var p = Math.min((now - start) / duration, 1);
-            var ease = 1 - Math.pow(1 - p, 3);
-            var val = target * ease;
-            if (isDecimal) {
-              el.textContent = val.toFixed(1) + suffix;
-            } else if (target >= 1000) {
-              el.textContent = Math.floor(val).toLocaleString() + suffix;
-            } else {
-              el.textContent = Math.floor(val) + suffix;
-            }
-            if (p < 1) requestAnimationFrame(step);
-          }
-          requestAnimationFrame(step);
-        }
-
-        // Data sets for tab cycling
-        var tabData = [
-          { stats: [{v:247,s:''},{v:40,s:'%'},{v:2.5,s:'x'}], labels:['Gaps Closed','Closure Rate','ROI Year One'], activeTab:0 },
-          { stats: [{v:183,s:''},{v:85,s:'%'},{v:1.2,s:'M'}], labels:['Calls Made','Contact Rate','Revenue Impact'], activeTab:1 },
-          { stats: [{v:389,s:''},{v:92,s:'%'},{v:847,s:'K'}], labels:['AWVs Scheduled','Confirmation','Revenue Impact'], activeTab:2 },
-          { stats: [{v:5120,s:''},{v:40,s:'%'},{v:2.5,s:'x'}], labels:['Patients Managed','Gap Closure Rate','ROI Year One'], activeTab:3 }
-        ];
-        var currentTab = 3; // Start on Care Team
-
-        function cycleTab() {
-          currentTab = (currentTab + 1) % 4;
-          var d = tabData[currentTab];
-
-          // Update tab styling
-          tabs.forEach(function(t, i) {
-            if (i === d.activeTab) {
-              t.style.color = '#1a1a2e';
-              t.style.borderBottom = '2px solid #F16529';
-            } else {
-              t.style.color = 'rgba(0,0,0,0.4)';
-              t.style.borderBottom = '2px solid transparent';
-            }
-          });
-
-          // Animate stats with count-up
-          stats.forEach(function(el, i) {
-            if (d.stats[i]) {
-              el.classList.remove('zh-stat-anim');
-              void el.offsetWidth; // force reflow
-              el.classList.add('zh-stat-anim');
-              animateCounter(el, d.stats[i].v, d.stats[i].s, 800);
-            }
-          });
-
-          // Update stat labels
-          var labels = heroCard.querySelectorAll('[style*="text-transform:uppercase"][style*="letter-spacing:1px"]');
-          labels.forEach(function(el, i) {
-            if (d.labels[i]) el.textContent = d.labels[i];
-          });
-
-          // Flash rows sequentially
-          rows.forEach(function(r, i) {
-            r.classList.remove('zh-row-anim');
-            void r.offsetWidth;
-            r.style.animationDelay = (i * 0.15) + 's';
-            r.classList.add('zh-row-anim');
-          });
-        }
-
-        // Initial animation
-        stats.forEach(function(el) {
-          el.classList.add('zh-stat-anim');
-        });
-        rows.forEach(function(r, i) {
-          r.style.animationDelay = (i * 0.15) + 's';
-          r.classList.add('zh-row-anim');
-        });
-
-        // Cycle tabs every 3 seconds
-        setInterval(cycleTab, 3000);
-      })();
+      // Homepage behaviour (DESIGN_SPEC §5.15): hero widget, How-It-Works explorer, data flow
+      if (path === '') initHomepage();
       // FAQ and other disclosures (native <button>s; hidden-attribute panels; legacy .open markup still works)
       initDisclosures(document);
       // Handle hash scrolling after page render
@@ -13913,33 +13640,6 @@ function renderDataAnalyticsV7() {
       // Anti-flicker: reveal page now that content is injected
       document.documentElement.classList.remove('js-loading');
       if(window.__antiFlickerTimeout)clearTimeout(window.__antiFlickerTimeout);
-
-      // Defensive: prevent external scripts from overwriting hero content
-      // The zynixherofix MCP Bridge script tries to revert the hero text
-      // This observer watches for unauthorized changes and restores correct content
-      if (path === '' || path === '/') {
-        var heroH1 = document.querySelector('.zynix-homepage-hero h1');
-        if (heroH1) {
-          var correctHTML = heroH1.innerHTML;
-          var heroObserver = new MutationObserver(function(mutations) {
-            mutations.forEach(function(m) {
-              if (m.target.innerHTML !== correctHTML && m.target.closest('.zynix-homepage-hero')) {
-                m.target.innerHTML = correctHTML;
-              }
-            });
-          });
-          heroObserver.observe(heroH1, { childList: true, characterData: true, subtree: true });
-          // Also re-check periodically for the first 10 seconds, then disconnect observer
-          var heroChecks = 0;
-          var heroInterval = setInterval(function() {
-            if (heroH1.innerHTML !== correctHTML) heroH1.innerHTML = correctHTML;
-            if (++heroChecks > 20) {
-              clearInterval(heroInterval);
-              heroObserver.disconnect();
-            }
-          }, 500);
-        }
-      }
     };
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', doInject);
