@@ -402,85 +402,133 @@
 
   // ── Cross-Linking Data Model ──
   var LINK_NAMES = {
-    '/platform': 'Zynix OS',
-    '/products-data-platform': 'Data Platform',
+    // Link labels (owner S3, DESIGN_SPEC §3.12). They follow the NAV labels; they name related-block links and are the
+    // last fallback for breadcrumb page labels (§3.7). Keys are canonical paths (plus the aliases that still render).
+    // Platform
+    '/platform': 'Platform overview',
+    '/products-data-platform': 'Data foundation',
+    '/zynix-data-analytics': 'Analytics',
     '/products-analytics': 'Analytics',
-    '/agents': 'AI Agents',
+    '/solutions/zynix-data-analytics': 'Analytics',
+    '/care-plans': 'Care plans',
     '/zynscribe': 'ZynScribe',
-    '/care-plans': 'Care Plans',
-    '/company-zynixllm': 'ZynixLLM',
-    '/products-ai-agents-zynafterhours': 'ZynAfterHours & Triage',
-    '/products-ai-agents-zynschedule': 'ZynSchedule',
-    '/products-ai-agents-post-discharge': 'Post-Discharge Follow-Up',
-    '/products-ai-agents-med-rec': 'Medication Reconciliation',
-    '/products-ai-agents-zynreminder': 'ZynReminder',
-    '/products-ai-agents-zynfax': 'ZynFax',
-    '/products-ai-agents-zynauth': 'ZynAuth',
-    '/solutions-acos': 'ACOs & MSOs',
-    '/solutions-health-systems': 'Health Systems',
-    '/solutions-health-plans': 'Health Plans',
-    '/solutions-fqhcs': 'FQHCs',
-    '/solutions-independent-practices': 'Independent Practices',
-    '/solutions-ascs': 'ASCs',
-    '/use-cases/post-discharge-follow-up': 'Transitional Care (TCM)',
-    '/use-cases/hcc-gap-closure-health-system-aco': 'Gap Closure (HCC/HEDIS)',
-    '/use-cases/after-hours-triage-multi-site': 'After-Hours & Access',
-    '/use-cases/prior-auth-high-volume-specialty': 'Prior Authorization',
-    '/use-cases/preventive-screening-gap-fqhc': 'Preventive Screening',
-    '/use-cases/post-discharge-tcm-readmission': 'Readmission Prevention',
     '/integrations': 'Integrations',
-    '/case-studies': 'Case Studies',
-    '/case-studies/palm-beach-aco': 'Palm Beach ACO',
+    '/company-zynixllm': 'ZynixLLM',
+    '/security': 'Security & trust',
+    // AI agents (family names from NAMES.agentFamilies; no counts, no planned agents)
+    '/agents': 'AI agents',
+    '/zynix-ai-agents': 'AI agents',
+    '/agents#clinical-performance': 'Clinical performance agents',
+    '/agents#predictive-activation': 'Predictive activation agents',
+    '/agents#operational-efficiency': 'Operational efficiency agents',
+    '/agents/chronic-care-management': 'Chronic care management',
+    '/agents/chronic-care-management/chronic-disease-monitoring': 'Chronic disease monitoring',
+    '/agents/preventive-quality-activation': 'Preventive and quality activation',
+    '/agents/preventive-quality-activation/awv-outreach': 'AWV outreach',
+    '/agents/predictive-activation': 'Predictive activation',
+    // Solutions: audiences
+    '/solutions': 'Solutions overview',
+    '/audience-segments/acos-msos': 'ACOs',
+    '/audience-segments/independent-group-practices': 'MSOs, IPAs & physician groups',
+    '/audience-segments/health-plans': 'Health plans',
+    '/audience-segments/health-systems': 'Health systems',
+    '/audience-segments/fqhcs': 'FQHCs & community health',
+    '/audience-segments/ascs': 'Ambulatory surgery centers',
+    // Solutions: use cases (the six NAV programs first)
+    '/use-cases': 'Use cases',
+    '/use-cases/post-discharge-tcm-readmission': 'Transitional care & readmissions',
+    '/use-cases/hcc-gap-raf-optimization': 'HCC & risk adjustment',
+    '/use-cases/hedis-stars-quality-improvement': 'HEDIS & Stars quality',
+    '/use-cases/chronic-care-coordination-scale': 'Chronic care & adherence',
+    '/use-cases/after-hours-ed-diversion': 'After-hours access',
+    '/use-cases/rising-risk-patient-outreach': 'Rising-risk outreach',
+    '/use-cases/post-discharge-follow-up': 'Post-discharge follow-up',
+    '/use-cases/hcc-gap-closure-health-system-aco': 'HCC and quality gap closure',
+    '/use-cases/after-hours-triage-multi-site': 'After-hours access across sites',
+    '/use-cases/prior-auth-high-volume-specialty': 'Prior authorization workflows',
+    '/use-cases/preventive-screening-gap-fqhc': 'Preventive screening outreach',
+    '/use-cases/referral-intake-asc': 'Referral intake',
+    '/use-cases/surgical-scheduling-pre-procedure': 'Pre-procedure scheduling',
+    '/use-cases/post-procedure-followup-complication': 'Post-procedure follow-up',
+    // Customers (names from CUSTOMERS)
+    '/resources-case-studies': 'Customer stories',
     '/case-studies/pbaco': 'Palm Beach ACO',
+    '/case-studies/amistad': 'AMISTAD Community Health Center',
+    '/case-studies/apollo-clinic': 'Apollo Clinic Network',
+    '/case-studies/nhs': 'NHS Health System',
     '/case-studies-west-florida-aco': 'West Florida ACO',
     '/case-studies-space-coast-aco': 'Space Coast ACO',
     '/case-studies-central-florida-aco': 'Central Florida ACO',
-    '/case-studies-eternal-health': 'eTernal Health',
-    '/case-studies/amistad': 'AMISTAD CHC',
-    '/case-studies/apollo-clinic': 'Apollo Clinic',
-    '/case-studies/nhs': 'NHS Health System',
+    '/case-studies-eternal-health': 'eternalHealth',
     '/case-studies/west-florida-aco': 'West Florida ACO',
     '/case-studies/space-coast-aco': 'Space Coast ACO',
     '/case-studies/central-florida-aco': 'Central Florida ACO',
-    '/case-studies/eternal-health': 'eTernal Health',
-    '/case-studies/health-systems': 'Health Systems',
-    '/case-studies/acos': 'ACOs & MSOs',
-    '/case-studies/health-plans': 'Health Plans',
-    '/case-studies/practices': 'Independent Practices',
-    '/case-studies/fqhcs': 'FQHCs'
+    '/case-studies/eternal-health': 'eternalHealth',
+    '/case-studies-acos': 'ACOs',
+    '/case-studies-health-systems': 'Health systems',
+    '/case-studies-health-plans': 'Health plans',
+    '/case-studies-practices': 'Physician groups',
+    '/case-studies-fqhcs': 'FQHCs',
+    '/case-studies/acos': 'ACOs',
+    '/case-studies/health-systems': 'Health systems',
+    '/case-studies/health-plans': 'Health plans',
+    '/case-studies/practices': 'Physician groups',
+    '/case-studies/fqhcs': 'FQHCs',
+    // Resources
+    '/resources-blog': 'Insights',
+    '/press': 'Newsroom',
+    '/roi-calculator': 'ROI calculator',
+    '/alternatives': 'Compare Zynix',
+    '/resources-webinars': 'Webinars & events',
+    '/resources-whitepapers': 'Research',
+    '/resources-faq': 'FAQ',
+    '/resources-glossary': 'Glossary',
+    '/compare-zynix-vs-navina': 'Zynix vs Navina',
+    '/compare-zynix-vs-innovaccer': 'Zynix vs Innovaccer',
+    '/compare-zynix-vs-abridge': 'Zynix vs Abridge',
+    '/compare-zynix-vs-health-catalyst': 'Zynix vs Health Catalyst',
+    '/compare-zynix-vs-notable-health': 'Zynix vs Notable',
+    '/compare-zynix-vs-olive-ai': 'Zynix vs Olive',
+    '/compare-zynix-vs-commure': 'Zynix vs Commure',
+    '/compare-zynix-vs-point-solutions': 'Zynix vs point solutions',
+    // Company
+    '/about': 'About',
+    '/careers': 'Careers',
+    '/contact': 'Contact'
   };
 
+  // Related-block targets per page (owner S3, §3.12; rendered by S2's renderCrossLinks). Every target is canonical,
+  // keys are the paths that render (post-REDIRECTS), and no page gets more than 6 links (§2.16).
   var CROSS_LINKS = {
-    '/platform': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/post-discharge-tcm-readmission'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/products-data-platform','/products-analytics','/agents','/care-plans'] },
-    '/products-data-platform': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/hcc-gap-closure-health-system-aco'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans','/solutions-fqhcs'], related: ['/products-analytics','/platform'] },
-    '/products-analytics': { useCases: ['/use-cases/hcc-gap-closure-health-system-aco','/use-cases/post-discharge-tcm-readmission','/use-cases/preventive-screening-gap-fqhc'], solutions: ['/solutions-acos','/solutions-health-plans','/solutions-health-systems'], related: ['/products-data-platform','/care-plans'] },
-    '/agents': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/after-hours-triage-multi-site','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/prior-auth-high-volume-specialty'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-independent-practices','/solutions-fqhcs'], related: ['/platform','/care-plans','/zynscribe'] },
-    '/zynscribe': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/hcc-gap-closure-health-system-aco'], solutions: ['/solutions-health-systems','/solutions-independent-practices','/solutions-acos'], related: ['/agents','/care-plans'] },
-    '/care-plans': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/post-discharge-tcm-readmission'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/agents','/products-analytics','/platform'] },
-    '/company-zynixllm': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/after-hours-triage-multi-site'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/platform','/products-data-platform','/agents'] },
-    '/products-ai-agents-zynafterhours': { useCases: ['/use-cases/after-hours-triage-multi-site','/use-cases/post-discharge-tcm-readmission'], solutions: ['/solutions-independent-practices','/solutions-fqhcs','/solutions-health-systems'], related: ['/products-ai-agents-zynschedule','/products-ai-agents-zynreminder'] },
-    '/products-ai-agents-zynschedule': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/after-hours-triage-multi-site','/use-cases/preventive-screening-gap-fqhc'], solutions: ['/solutions-independent-practices','/solutions-acos','/solutions-ascs'], related: ['/products-ai-agents-zynreminder','/products-ai-agents-zynafterhours'] },
-    '/products-ai-agents-post-discharge': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/post-discharge-tcm-readmission'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/products-ai-agents-med-rec','/products-ai-agents-zynschedule','/products-ai-agents-zynreminder'] },
-    '/products-ai-agents-med-rec': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/post-discharge-tcm-readmission'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/products-ai-agents-post-discharge','/products-ai-agents-zynreminder'] },
-    '/products-ai-agents-zynreminder': { useCases: ['/use-cases/preventive-screening-gap-fqhc','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/after-hours-triage-multi-site'], solutions: ['/solutions-independent-practices','/solutions-acos','/solutions-fqhcs'], related: ['/products-ai-agents-zynschedule','/products-ai-agents-zynafterhours'] },
-    '/products-ai-agents-zynfax': { useCases: ['/use-cases/prior-auth-high-volume-specialty'], solutions: ['/solutions-health-systems','/solutions-ascs'], related: ['/products-ai-agents-zynauth'] },
-    '/products-ai-agents-zynauth': { useCases: ['/use-cases/prior-auth-high-volume-specialty'], solutions: ['/solutions-ascs','/solutions-health-systems','/solutions-independent-practices'], related: ['/products-ai-agents-zynfax','/products-ai-agents-zynschedule'] },
-    '/solutions-acos': { products: ['/platform','/products-data-platform','/products-analytics','/agents','/care-plans'], useCases: ['/use-cases/post-discharge-follow-up','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/post-discharge-tcm-readmission','/use-cases/preventive-screening-gap-fqhc'], related: ['/solutions-health-systems','/solutions-health-plans'] },
-    '/solutions-health-systems': { products: ['/platform','/zynscribe','/products-ai-agents-post-discharge','/products-ai-agents-med-rec'], useCases: ['/use-cases/post-discharge-follow-up','/use-cases/post-discharge-tcm-readmission','/use-cases/prior-auth-high-volume-specialty'], related: ['/solutions-acos','/solutions-ascs'] },
-    '/solutions-health-plans': { products: ['/products-analytics','/care-plans','/agents'], useCases: ['/use-cases/hcc-gap-closure-health-system-aco','/use-cases/preventive-screening-gap-fqhc'], related: ['/solutions-acos'] },
-    '/solutions-fqhcs': { products: ['/products-ai-agents-zynafterhours','/products-ai-agents-zynschedule','/products-ai-agents-zynreminder','/products-analytics'], useCases: ['/use-cases/after-hours-triage-multi-site','/use-cases/preventive-screening-gap-fqhc','/use-cases/hcc-gap-closure-health-system-aco'], related: ['/solutions-independent-practices'] },
-    '/solutions-independent-practices': { products: ['/products-ai-agents-zynreminder','/products-ai-agents-zynafterhours','/products-ai-agents-zynschedule','/zynscribe'], useCases: ['/use-cases/after-hours-triage-multi-site','/use-cases/hcc-gap-closure-health-system-aco'], related: ['/solutions-fqhcs'] },
-    '/solutions-ascs': { products: ['/products-ai-agents-zynauth','/products-ai-agents-zynfax','/products-ai-agents-zynschedule'], useCases: ['/use-cases/prior-auth-high-volume-specialty'], related: ['/solutions-health-systems'] },
-    '/use-cases/post-discharge-follow-up': { products: ['/products-ai-agents-post-discharge','/products-ai-agents-zynschedule','/products-ai-agents-med-rec','/zynscribe','/products-data-platform'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/use-cases/post-discharge-tcm-readmission','/use-cases/hcc-gap-closure-health-system-aco'] },
-    '/use-cases/hcc-gap-closure-health-system-aco': { products: ['/products-analytics','/products-ai-agents-zynreminder','/products-ai-agents-zynschedule','/care-plans'], solutions: ['/solutions-acos','/solutions-health-plans'], related: ['/use-cases/preventive-screening-gap-fqhc','/use-cases/post-discharge-follow-up'] },
-    '/use-cases/after-hours-triage-multi-site': { products: ['/products-ai-agents-zynafterhours','/products-ai-agents-zynschedule','/products-ai-agents-zynreminder'], solutions: ['/solutions-independent-practices','/solutions-fqhcs'], related: ['/use-cases/post-discharge-tcm-readmission'] },
-    '/use-cases/prior-auth-high-volume-specialty': { products: ['/products-ai-agents-zynauth','/products-ai-agents-zynfax','/products-ai-agents-zynschedule'], solutions: ['/solutions-ascs','/solutions-health-systems'], related: ['/use-cases/hcc-gap-closure-health-system-aco'] },
-    '/use-cases/preventive-screening-gap-fqhc': { products: ['/products-analytics','/products-ai-agents-zynreminder','/products-ai-agents-zynschedule'], solutions: ['/solutions-fqhcs','/solutions-acos','/solutions-health-plans'], related: ['/use-cases/hcc-gap-closure-health-system-aco'] },
-    '/use-cases/post-discharge-tcm-readmission': { products: ['/products-ai-agents-post-discharge','/products-ai-agents-med-rec','/products-ai-agents-zynafterhours','/products-ai-agents-zynschedule'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/use-cases/post-discharge-follow-up','/use-cases/after-hours-triage-multi-site'] },
-    '/solutions': { solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans','/solutions-fqhcs'], related: ['/platform','/agents','/zynscribe','/care-plans'] },
-    '/zynix-data-analytics': { useCases: ['/use-cases/hcc-gap-closure-health-system-aco','/use-cases/post-discharge-tcm-readmission','/use-cases/preventive-screening-gap-fqhc'], solutions: ['/solutions-acos','/solutions-health-plans','/solutions-health-systems'], related: ['/products-analytics','/platform','/care-plans'] },
-    '/zynix-ai-agents': { useCases: ['/use-cases/post-discharge-follow-up','/use-cases/after-hours-triage-multi-site','/use-cases/hcc-gap-closure-health-system-aco','/use-cases/prior-auth-high-volume-specialty'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-independent-practices','/solutions-fqhcs'], related: ['/platform','/care-plans','/zynscribe'] },
-    // Blog cross-links — group by topic cluster
+    // Platform and products
+    '/platform': { products: ['/products-data-platform','/zynix-data-analytics','/agents','/care-plans'], useCases: ['/use-cases/post-discharge-tcm-readmission','/use-cases/hcc-gap-raf-optimization'] },
+    '/products-data-platform': { products: ['/zynix-data-analytics','/integrations','/platform'], solutions: ['/audience-segments/acos-msos','/audience-segments/health-systems','/audience-segments/health-plans'] },
+    '/zynix-data-analytics': { useCases: ['/use-cases/hcc-gap-raf-optimization','/use-cases/hedis-stars-quality-improvement','/use-cases/rising-risk-patient-outreach'], related: ['/products-data-platform','/care-plans','/platform'] },
+    '/products-analytics': { useCases: ['/use-cases/hcc-gap-raf-optimization','/use-cases/hedis-stars-quality-improvement','/use-cases/rising-risk-patient-outreach'], related: ['/products-data-platform','/care-plans','/platform'] },
+    '/solutions/zynix-data-analytics': { useCases: ['/use-cases/hcc-gap-raf-optimization','/use-cases/hedis-stars-quality-improvement','/use-cases/rising-risk-patient-outreach'], related: ['/products-data-platform','/care-plans','/platform'] },
+    '/care-plans': { useCases: ['/use-cases/post-discharge-tcm-readmission','/use-cases/chronic-care-coordination-scale','/use-cases/hcc-gap-raf-optimization'], related: ['/agents','/zynix-data-analytics','/platform'] },
+    '/zynscribe': { related: ['/care-plans','/agents','/security'], solutions: ['/audience-segments/health-systems','/audience-segments/independent-group-practices'] },
+    '/integrations': { related: ['/products-data-platform','/security','/platform'] },
+    '/company-zynixllm': { related: ['/security','/platform','/agents','/zynscribe'] },
+    '/security': { related: ['/integrations','/company-zynixllm','/platform'] },
+    '/agents': { useCases: ['/use-cases/post-discharge-tcm-readmission','/use-cases/after-hours-ed-diversion','/use-cases/chronic-care-coordination-scale'], related: ['/care-plans','/platform','/zynscribe'] },
+    '/zynix-ai-agents': { useCases: ['/use-cases/post-discharge-tcm-readmission','/use-cases/after-hours-ed-diversion','/use-cases/chronic-care-coordination-scale'], related: ['/agents','/care-plans','/platform'] },
+    // Solutions (keys are the canonical audience pages, so the block renders there)
+    '/solutions': { products: ['/platform','/agents','/care-plans','/zynscribe'], related: ['/use-cases','/resources-case-studies'] },
+    '/audience-segments/acos-msos': { products: ['/care-plans','/agents','/zynix-data-analytics'], useCases: ['/use-cases/post-discharge-tcm-readmission','/use-cases/hcc-gap-raf-optimization'], related: ['/case-studies/pbaco'] },
+    '/audience-segments/independent-group-practices': { products: ['/zynscribe','/agents','/care-plans'], useCases: ['/use-cases/hcc-gap-raf-optimization','/use-cases/chronic-care-coordination-scale'], related: ['/case-studies/apollo-clinic'] },
+    '/audience-segments/health-plans': { products: ['/zynix-data-analytics','/care-plans','/agents'], useCases: ['/use-cases/hedis-stars-quality-improvement','/use-cases/chronic-care-coordination-scale'], related: ['/case-studies-eternal-health'] },
+    '/audience-segments/health-systems': { products: ['/zynscribe','/agents','/integrations'], useCases: ['/use-cases/post-discharge-tcm-readmission','/use-cases/after-hours-ed-diversion'], related: ['/case-studies/nhs'] },
+    '/audience-segments/fqhcs': { products: ['/agents#operational-efficiency','/zynix-data-analytics'], useCases: ['/use-cases/after-hours-ed-diversion','/use-cases/preventive-screening-gap-fqhc'], related: ['/case-studies/amistad'] },
+    '/audience-segments/ascs': { products: ['/agents#operational-efficiency'], useCases: ['/use-cases/referral-intake-asc','/use-cases/surgical-scheduling-pre-procedure','/use-cases/post-procedure-followup-complication'], related: ['/audience-segments/health-systems'] },
+    // Use cases
+    '/use-cases/post-discharge-follow-up': { products: ['/agents#clinical-performance','/care-plans','/products-data-platform'], solutions: ['/audience-segments/health-systems','/audience-segments/acos-msos'], related: ['/use-cases/post-discharge-tcm-readmission'] },
+    '/use-cases/hcc-gap-closure-health-system-aco': { products: ['/zynix-data-analytics','/care-plans'], solutions: ['/audience-segments/acos-msos','/audience-segments/health-plans'], related: ['/use-cases/hcc-gap-raf-optimization','/use-cases/preventive-screening-gap-fqhc'] },
+    '/use-cases/after-hours-triage-multi-site': { products: ['/agents#operational-efficiency'], solutions: ['/audience-segments/independent-group-practices','/audience-segments/fqhcs'], related: ['/use-cases/after-hours-ed-diversion','/use-cases/post-discharge-tcm-readmission'] },
+    '/use-cases/prior-auth-high-volume-specialty': { products: ['/agents#operational-efficiency'], solutions: ['/audience-segments/ascs','/audience-segments/health-systems'], related: ['/use-cases/hcc-gap-closure-health-system-aco'] },
+    '/use-cases/preventive-screening-gap-fqhc': { products: ['/zynix-data-analytics','/agents#clinical-performance'], solutions: ['/audience-segments/fqhcs','/audience-segments/acos-msos','/audience-segments/health-plans'], related: ['/use-cases/hcc-gap-closure-health-system-aco'] },
+    '/use-cases/post-discharge-tcm-readmission': { products: ['/agents#clinical-performance','/agents#operational-efficiency','/care-plans'], solutions: ['/audience-segments/acos-msos','/audience-segments/health-systems'], related: ['/use-cases/post-discharge-follow-up'] },
+    // Blog cross-links (topic clusters)
     '/blog/what-is-value-based-care-ai': { related: ['/blog/vbc-analytics-ai-driven','/blog/tools-driving-value-based-healthcare','/platform','/use-cases/hcc-gap-closure-health-system-aco'] },
     '/blog/how-ai-closes-care-gaps': { related: ['/blog/hcc-risk-adjustment-year-round','/blog/aco-year-end-gap-closure','/agents','/use-cases/hcc-gap-closure-health-system-aco'] },
     '/blog/ai-agents-vs-chatbots-healthcare': { related: ['/blog/autonomous-ai-agents-healthcare-automation','/blog/essential-ai-tools-medical-professionals','/agents'] },
@@ -493,22 +541,22 @@
     '/blog/generative-ai-applications-healthcare': { related: ['/blog/generative-ai-in-healthcare','/blog/generative-ai-trust-safety-healthcare','/platform'] },
     '/blog/prior-auth-bottlenecks-ai-automation': { related: ['/blog/prior-auth-delays-cost-fix','/blog/eligibility-verification-automation','/use-cases/prior-auth-high-volume-specialty'] },
     '/blog/hcc-risk-adjustment-cms-changes': { related: ['/blog/hcc-risk-adjustment-year-round','/blog/aco-year-end-gap-closure','/use-cases/hcc-gap-closure-health-system-aco'] },
-    '/blog/aco-year-end-gap-closure': { related: ['/blog/hcc-risk-adjustment-year-round','/blog/how-ai-closes-care-gaps','/solutions-acos'] },
+    '/blog/aco-year-end-gap-closure': { related: ['/blog/hcc-risk-adjustment-year-round','/blog/how-ai-closes-care-gaps','/audience-segments/acos-msos'] },
     '/blog/generative-ai-in-healthcare': { related: ['/blog/generative-ai-applications-healthcare','/blog/generative-ai-trust-safety-healthcare','/platform'] },
     '/blog/autonomous-ai-agents-healthcare-automation': { related: ['/blog/ai-agents-vs-chatbots-healthcare','/blog/essential-ai-tools-medical-professionals','/agents'] },
     '/blog/ai-medical-scribes-physician-burnout': { related: ['/blog/ai-medical-scribes-rollout','/blog/documentation-crisis-physician-burnout','/zynscribe'] },
     '/blog/documentation-crisis-physician-burnout': { related: ['/blog/ai-medical-scribes-physician-burnout','/blog/ai-medical-scribes-rollout','/zynscribe'] },
     '/blog/why-tcm-fails-real-workflows': { related: ['/blog/aco-30-day-post-discharge-program','/use-cases/post-discharge-follow-up','/use-cases/post-discharge-tcm-readmission'] },
     '/blog/aco-30-day-post-discharge-program': { related: ['/blog/why-tcm-fails-real-workflows','/blog/innovative-patient-recovery-satisfaction','/use-cases/post-discharge-follow-up'] },
-    // Comparison pages — high-intent SEO
-    '/compare-zynix-vs-point-solutions': { products: ['/platform','/agents','/care-plans','/zynscribe'], solutions: ['/solutions-acos','/solutions-health-systems'], related: ['/compare-zynix-vs-innovaccer','/compare-zynix-vs-commure'] },
-    '/compare-zynix-vs-innovaccer': { products: ['/platform','/zynix-data-analytics','/agents'], solutions: ['/solutions-acos','/solutions-health-systems','/solutions-health-plans'], related: ['/compare-zynix-vs-point-solutions','/compare-zynix-vs-commure'] },
-    '/compare-zynix-vs-commure': { products: ['/platform','/agents','/integrations'], solutions: ['/solutions-health-systems','/solutions-acos'], related: ['/compare-zynix-vs-point-solutions','/compare-zynix-vs-innovaccer'] },
-    // Case studies — link to relevant products and solutions
-    '/case-studies/palm-beach-aco': { products: ['/agents','/care-plans','/zynscribe'], solutions: ['/solutions-acos'], related: ['/case-studies-west-florida-aco','/case-studies-space-coast-aco'] },
-    '/case-studies/amistad': { products: ['/agents','/care-plans'], solutions: ['/solutions-fqhcs'], related: ['/case-studies/nhs','/use-cases/after-hours-triage-multi-site'] },
-    '/case-studies/apollo-clinic': { products: ['/agents','/zynscribe'], solutions: ['/solutions-independent-practices'], related: ['/case-studies/pbaco','/use-cases/post-discharge-follow-up'] },
-    '/case-studies/nhs': { products: ['/platform','/agents','/zynscribe','/care-plans'], solutions: ['/solutions-health-systems'], related: ['/case-studies/pbaco','/case-studies/amistad'] }
+    // Comparison pages (crawler-embed pages: the labels shown here are visible copy)
+    '/compare-zynix-vs-point-solutions': { products: ['/platform','/agents','/care-plans'], solutions: ['/audience-segments/acos-msos','/audience-segments/health-systems'], related: ['/compare-zynix-vs-innovaccer'] },
+    '/compare-zynix-vs-innovaccer': { products: ['/platform','/zynix-data-analytics','/agents'], solutions: ['/audience-segments/acos-msos','/audience-segments/health-plans'], related: ['/compare-zynix-vs-point-solutions'] },
+    '/compare-zynix-vs-commure': { products: ['/platform','/agents','/integrations'], solutions: ['/audience-segments/health-systems','/audience-segments/acos-msos'], related: ['/compare-zynix-vs-point-solutions'] },
+    // Customer stories
+    '/case-studies/pbaco': { products: ['/agents','/care-plans'], solutions: ['/audience-segments/acos-msos'], related: ['/case-studies-west-florida-aco','/case-studies-space-coast-aco','/resources-case-studies'] },
+    '/case-studies/amistad': { products: ['/agents#operational-efficiency','/care-plans'], solutions: ['/audience-segments/fqhcs'], related: ['/case-studies/nhs','/resources-case-studies'] },
+    '/case-studies/apollo-clinic': { products: ['/agents','/zynscribe'], solutions: ['/audience-segments/independent-group-practices'], related: ['/case-studies/pbaco','/resources-case-studies'] },
+    '/case-studies/nhs': { products: ['/platform','/agents','/zynscribe'], solutions: ['/audience-segments/health-systems'], related: ['/case-studies/pbaco','/case-studies/amistad'] }
   };
 
   // ── SEO Data ──
@@ -1047,63 +1095,127 @@
   }
 
   // ── Cross-Link Renderers ──
+  // Icons and one-line descriptors for related-block targets (owner S3, §3.12). Keys follow the canonical targets in
+  // CROSS_LINKS; descriptors are the NAV `desc` strings where the target is a NAV item (SITE_FACTS is read at load time,
+  // it is declared above). Icons stay inline SVG strings (the renderer wraps them in an aria-hidden span).
+  var CROSS_ICON_SVG = {
+    monitor: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+    database: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>',
+    chart: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+    pulse: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
+    pen: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>',
+    doc: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+    shield: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    info: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
+    link: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+    home: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    hospital: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="12" y1="6" x2="12" y2="12"/></svg>',
+    card: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>',
+    people: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    stethoscope: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6a6 6 0 0 0 12 0V3"/><path d="M12 15v3a3 3 0 0 0 6 0v-1"/><circle cx="18" cy="15" r="2"/></svg>',
+    layers: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>',
+    phone: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.09 5.18 2 2 0 0 1 5.11 3h3"/><polyline points="16 2 16 8 22 8"/></svg>',
+    search: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+    clock: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+    check: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+    trend: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>',
+    calendar: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+    book: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+    swap: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3"/></svg>'
+  };
   var CROSS_ICONS = {
-    '/platform': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
-    '/products-data-platform': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>',
-    '/products-analytics': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
-    '/agents': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
-    '/zynscribe': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>',
-    '/care-plans': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
-    '/security': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
-    '/company-zynixllm': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
-    '/solutions-acos': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
-    '/solutions-health-systems': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="12" y1="6" x2="12" y2="12"/></svg>',
-    '/solutions-health-plans': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>',
-    '/solutions-fqhcs': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>',
-    '/solutions-independent-practices': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33"/></svg>',
-    '/solutions-ascs': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>',
-    '/use-cases/post-discharge-follow-up': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.09 5.18 2 2 0 0 1 5.11 3h3"/><polyline points="16 2 16 8 22 8"/></svg>',
-    '/use-cases/hcc-gap-closure-health-system-aco': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
-    '/use-cases/after-hours-triage-multi-site': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
-    '/use-cases/prior-auth-high-volume-specialty': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
-    '/use-cases/preventive-screening-gap-fqhc': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
-    '/use-cases/post-discharge-tcm-readmission': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>',
-    '/products-ai-agents-zynafterhours': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
-    '/products-ai-agents-zynschedule': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>',
-    '/products-ai-agents-post-discharge': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
-    '/products-ai-agents-med-rec': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
-    '/products-ai-agents-zynreminder': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>',
-    '/products-ai-agents-zynfax': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>',
-    '/products-ai-agents-zynauth': '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>'
+    '/platform': CROSS_ICON_SVG.monitor,
+    '/products-data-platform': CROSS_ICON_SVG.database,
+    '/zynix-data-analytics': CROSS_ICON_SVG.chart,
+    '/agents': CROSS_ICON_SVG.pulse,
+    '/agents#clinical-performance': CROSS_ICON_SVG.pulse,
+    '/agents#predictive-activation': CROSS_ICON_SVG.trend,
+    '/agents#operational-efficiency': CROSS_ICON_SVG.clock,
+    '/zynscribe': CROSS_ICON_SVG.pen,
+    '/care-plans': CROSS_ICON_SVG.doc,
+    '/security': CROSS_ICON_SVG.shield,
+    '/company-zynixllm': CROSS_ICON_SVG.info,
+    '/integrations': CROSS_ICON_SVG.link,
+    '/solutions': CROSS_ICON_SVG.layers,
+    '/audience-segments/acos-msos': CROSS_ICON_SVG.home,
+    '/audience-segments/independent-group-practices': CROSS_ICON_SVG.stethoscope,
+    '/audience-segments/health-plans': CROSS_ICON_SVG.card,
+    '/audience-segments/health-systems': CROSS_ICON_SVG.hospital,
+    '/audience-segments/fqhcs': CROSS_ICON_SVG.people,
+    '/audience-segments/ascs': CROSS_ICON_SVG.layers,
+    '/use-cases': CROSS_ICON_SVG.layers,
+    '/use-cases/post-discharge-tcm-readmission': CROSS_ICON_SVG.phone,
+    '/use-cases/hcc-gap-raf-optimization': CROSS_ICON_SVG.search,
+    '/use-cases/hedis-stars-quality-improvement': CROSS_ICON_SVG.check,
+    '/use-cases/chronic-care-coordination-scale': CROSS_ICON_SVG.pulse,
+    '/use-cases/after-hours-ed-diversion': CROSS_ICON_SVG.clock,
+    '/use-cases/rising-risk-patient-outreach': CROSS_ICON_SVG.trend,
+    '/use-cases/post-discharge-follow-up': CROSS_ICON_SVG.phone,
+    '/use-cases/hcc-gap-closure-health-system-aco': CROSS_ICON_SVG.search,
+    '/use-cases/after-hours-triage-multi-site': CROSS_ICON_SVG.clock,
+    '/use-cases/prior-auth-high-volume-specialty': CROSS_ICON_SVG.check,
+    '/use-cases/preventive-screening-gap-fqhc': CROSS_ICON_SVG.shield,
+    '/use-cases/referral-intake-asc': CROSS_ICON_SVG.doc,
+    '/use-cases/surgical-scheduling-pre-procedure': CROSS_ICON_SVG.calendar,
+    '/use-cases/post-procedure-followup-complication': CROSS_ICON_SVG.phone,
+    '/resources-case-studies': CROSS_ICON_SVG.book,
+    '/case-studies/pbaco': CROSS_ICON_SVG.book,
+    '/case-studies/amistad': CROSS_ICON_SVG.book,
+    '/case-studies/apollo-clinic': CROSS_ICON_SVG.book,
+    '/case-studies/nhs': CROSS_ICON_SVG.book,
+    '/case-studies-west-florida-aco': CROSS_ICON_SVG.book,
+    '/case-studies-space-coast-aco': CROSS_ICON_SVG.book,
+    '/case-studies-eternal-health': CROSS_ICON_SVG.book,
+    '/compare-zynix-vs-point-solutions': CROSS_ICON_SVG.swap,
+    '/compare-zynix-vs-innovaccer': CROSS_ICON_SVG.swap,
+    '/compare-zynix-vs-commure': CROSS_ICON_SVG.swap
   };
   var CROSS_DESCS = {
-    '/platform': 'The AI operating system for VBC',
-    '/products-data-platform': 'Unified clinical and claims data',
-    '/products-analytics': 'Population health intelligence',
-    '/agents': '12 purpose-built AI agents',
-    '/zynscribe': 'Ambient AI documentation',
-    '/care-plans': 'Configurable care workflows',
-    '/security': 'HIPAA, SOC 2 Type II',
-    '/company-zynixllm': 'Healthcare language model',
-    '/solutions-acos': 'Shared savings optimization',
-    '/solutions-health-systems': 'Enterprise AI at scale',
-    '/solutions-health-plans': 'Stars and HEDIS improvement',
-    '/solutions-fqhcs': 'Community health AI',
-    '/solutions-independent-practices': 'Reduce burnout and no-shows',
-    '/solutions-ascs': 'Surgical workflow AI',
-    '/use-cases/post-discharge-follow-up': 'Post-discharge follow-up',
-    '/use-cases/hcc-gap-closure-health-system-aco': 'HCC and quality gaps',
-    '/use-cases/after-hours-triage-multi-site': '24/7 AI call handling',
-    '/use-cases/prior-auth-high-volume-specialty': 'Accelerate approvals',
-    '/use-cases/preventive-screening-gap-fqhc': 'Screening outreach',
-    '/use-cases/post-discharge-tcm-readmission': 'Reduce readmissions',
-    '/products-ai-agents-zynafterhours': '24/7 AI call handling',
-    '/products-ai-agents-zynschedule': 'Smart appointment scheduling',
-    '/products-ai-agents-post-discharge': 'Post-discharge automation',
-    '/products-ai-agents-med-rec': 'Medication reconciliation',
-    '/products-ai-agents-zynreminder': 'Automated patient reminders',
-    '/products-ai-agents-zynfax': 'Digital fax processing',
-    '/products-ai-agents-zynauth': 'Prior auth automation'
+    '/platform': 'One platform for value-based care operations',
+    '/products-data-platform': 'Claims, EHR, ADT and labs, unified',
+    '/zynix-data-analytics': 'Risk, quality and HCC gaps',
+    '/agents': 'How agents work with your care team',
+    '/agents#clinical-performance': 'Chronic care, transitions, prevention',
+    '/agents#predictive-activation': 'Reach patients before the event',
+    '/agents#operational-efficiency': 'After-hours, scheduling, intake',
+    '/zynscribe': 'Ambient clinical documentation',
+    '/care-plans': 'TCM, AWV and CCM workflows',
+    '/security': 'SOC 2 Type II · BAA available',
+    '/company-zynixllm': 'How our models are built and governed',
+    '/integrations': SITE_FACTS.ehr.short,
+    '/solutions': 'Built for each type of organization',
+    '/audience-segments/acos-msos': 'TCM, AWVs, HCC and quality gaps',
+    '/audience-segments/independent-group-practices': 'Programs across independent practices',
+    '/audience-segments/health-plans': 'Stars, HEDIS gaps and member outreach',
+    '/audience-segments/health-systems': 'Post-discharge follow-up and documentation',
+    '/audience-segments/fqhcs': 'Multilingual outreach and after-hours access',
+    '/audience-segments/ascs': 'Referral intake, scheduling and post-op follow-up',
+    '/use-cases': 'Workflows by program and organization',
+    '/use-cases/post-discharge-tcm-readmission': 'Post-discharge outreach and TCM follow-up',
+    '/use-cases/hcc-gap-raf-optimization': 'HCC gap closure and documentation',
+    '/use-cases/hedis-stars-quality-improvement': 'HEDIS gap outreach for Stars measures',
+    '/use-cases/chronic-care-coordination-scale': 'Chronic care check-ins and adherence',
+    '/use-cases/after-hours-ed-diversion': 'After-hours intake and on-call routing',
+    '/use-cases/rising-risk-patient-outreach': 'Outreach before a clinical event',
+    '/use-cases/post-discharge-follow-up': 'Post-discharge calls at health system volume',
+    '/use-cases/hcc-gap-closure-health-system-aco': 'HCC and quality gaps across a network',
+    '/use-cases/after-hours-triage-multi-site': 'After-hours intake across locations',
+    '/use-cases/prior-auth-high-volume-specialty': 'Prior authorization for specialty services',
+    '/use-cases/preventive-screening-gap-fqhc': 'Screening outreach for high-barrier patients',
+    '/use-cases/referral-intake-asc': 'Referral intake and documentation',
+    '/use-cases/surgical-scheduling-pre-procedure': 'Scheduling and pre-procedure preparation',
+    '/use-cases/post-procedure-followup-complication': 'Follow-up calls after a procedure',
+    '/resources-case-studies': 'How value-based care teams use Zynix',
+    '/case-studies/pbaco': 'Customer story · ACO',
+    '/case-studies/amistad': 'Customer story · FQHC',
+    '/case-studies/apollo-clinic': 'Customer story · physician group',
+    '/case-studies/nhs': 'Customer story · health system',
+    '/case-studies-west-florida-aco': 'Customer story · ACO',
+    '/case-studies-space-coast-aco': 'Customer story · ACO',
+    '/case-studies-eternal-health': 'Customer story · Medicare Advantage plan',
+    '/compare-zynix-vs-point-solutions': 'Side-by-side comparison',
+    '/compare-zynix-vs-innovaccer': 'Side-by-side comparison',
+    '/compare-zynix-vs-commure': 'Side-by-side comparison'
   };
 
   // Legacy signature (§2.16): one group of links; labels, descriptors and icons from LINK_NAMES / CROSS_DESCS / CROSS_ICONS.
@@ -1131,30 +1243,29 @@
     return renderRelatedLinks({ title: 'Related', groups: groups });
   }
 
+  // Breadcrumb (owner S3; DESIGN_SPEC §2.17, §3.7): always Home / {NAV section} / {page}. The section comes from the
+  // NAV section that holds the page (zxNavCurrent); the page label from its NAV item, else CUSTOMERS (case studies),
+  // else USE_CASES (use cases), else LINK_NAMES. Not rendered on the homepage, the section landing pages, the SMS and
+  // legal pages or the 404. No JSON-LD (schema unchanged).
   function renderBreadcrumb(pagePath) {
-    var segments = pagePath.replace(/^\//, '').split('/').filter(function(s) { return s; });
-    var topSegment = segments[0];
-    // V7 slash-based labels
-    var v7Labels = {'who-we-serve':'Who We Serve','agents':'AI Agents','platform':'Platform','company':'Company','resources':'Resources','solutions':'Solutions','case-studies':'Case Studies','blog':'Blog'};
-    // Legacy dash-based labels
-    var legacyLabels = { products: 'Products', solutions: 'Solutions', company: 'Company', resources: 'Resources', contact: 'Contact' };
-    var sectionLabel = '';
-    var sectionHref = '';
-    if (v7Labels[topSegment] && segments.length > 1) {
-      sectionLabel = v7Labels[topSegment];
-      sectionHref = '/' + topSegment;
-    } else {
-      var legacyParts = pagePath.replace(/^\//, '').split('-');
-      sectionLabel = legacyLabels[legacyParts[0]] || '';
-    }
-    var pageName = (LINK_NAMES[pagePath] || '').replace(/ \| .*/, '');
-    if (!pageName) return '';
-    return '<div class="zynix-breadcrumb"><div class="zynix-container">' +
-      '<a href="/">Home</a>' +
-      (sectionHref ? '<span class="zynix-bc-sep">/</span><a href="' + sectionHref + '">' + sectionLabel + '</a>' : '') +
-      '<span class="zynix-bc-sep">/</span>' +
-      '<span class="zynix-bc-current">' + pageName + '</span>' +
-      '</div></div>';
+    var p = String(pagePath == null ? zxPath() : pagePath).replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
+    if (!p || ['/sms', '/sms-program', '/sms-consent', '/privacy-policy', '/terms-of-service'].indexOf(p) > -1) return '';
+    var cur = zxNavCurrent(p);
+    if (!cur.section || cur.landing) return '';
+    var q = cur.navPath, label = cur.item ? cur.item.label : '';
+    if (!label) Object.keys(CUSTOMERS).some(function (k) {
+      var c = CUSTOMERS[k]; if (c && c.caseStudy && (c.caseStudy === q || c.caseStudy === p)) { label = c.name; return true; } return false;
+    });
+    var uc = !label && typeof USE_CASES !== 'undefined' ? /^\/use-cases\/([a-z0-9-]+)$/.exec(q) : null;
+    if (uc) Object.keys(USE_CASES).some(function (k) {
+      if (USE_CASES[k] && USE_CASES[k].slug === uc[1] && USE_CASES[k].title) { label = USE_CASES[k].title; return true; } return false;
+    });
+    if (!label) label = LINK_NAMES[q] || LINK_NAMES[p] || '';
+    if (!label) return '';
+    var crumb = function (href, text) { return '<li><a href="' + zxAttr(href) + '" data-z-anchor-fixed="1" aria-label="' + zxAttr(text) + '">' + text + '</a></li>'; };
+    return '<nav class="zynix-breadcrumb" aria-label="Breadcrumb"><div class="zynix-container"><ol class="zynix-breadcrumb__list">' +
+      crumb('/', 'Home') + crumb(cur.section.href, cur.section.label) +
+      '<li><span aria-current="page">' + label + '</span></li></ol></div></nav>';
   }
 
   // ── Helpers ──
@@ -1166,12 +1277,17 @@
   }
 
   function hideWebflowContent() {
-    // Hide ALL body children that aren't zynix-injected, zynix-mega-nav, zynix-mobile-menu, or scripts
+    // Hide every body child except the bundle's own chrome and page (§3.11). The cookie banner is deliberately not in
+    // the list, so it stays hidden until the consent decision (§3.9); the chat is appended after this pass.
+    var KEEP = ['zynix-injected', 'zynix-mega-nav', 'zynix-mobile-menu', 'zynix-announcement-bar', 'zynix-skip-nav', 'zx-scroll-sentinel'];
     var bodyChildren = document.body.children;
     for (var i = 0; i < bodyChildren.length; i++) {
       var child = bodyChildren[i];
       if (child.tagName === 'SCRIPT' || child.tagName === 'STYLE' || child.tagName === 'LINK') continue;
-      if (child.classList.contains('zynix-injected') || child.classList.contains('zynix-mega-nav') || child.classList.contains('zynix-mobile-menu') || child.classList.contains('zynix-announcement-bar')) continue;
+      if (child.id === 'zx-newtab-desc' || child.id === 'zynix-chat-widget') continue;
+      var keep = false;
+      for (var k = 0; k < KEEP.length; k++) if (child.classList.contains(KEEP[k])) { keep = true; break; }
+      if (keep) continue;
       child.style.display = 'none';
     }
     // Also hide main/header/footer from Webflow template
@@ -1194,14 +1310,24 @@
     wrapper.id = 'main-content';
     wrapper.setAttribute('role', 'main');
     wrapper.innerHTML = html;
-    var zynixNav = document.querySelector('.zynix-mega-nav');
-    if (zynixNav) {
-      zynixNav.parentNode.insertBefore(wrapper, zynixNav.nextSibling);
+    // DOM order (§3.3): nav, mobile menu, then the page, so the menu dialog sits next to its trigger (A11Y-1).
+    // A zero-height sentinel right before the page lets zxSetChromeHeight toggle .is-scrolled on the nav without a
+    // scroll listener (§7.4); it is aria-hidden and outside .zynix-injected (it must not shift :nth-child styles).
+    var after = document.querySelector('.zynix-mobile-menu') || document.querySelector('.zynix-mega-nav');
+    var sentinel = document.querySelector('.zx-scroll-sentinel') || el('div', 'zx-scroll-sentinel');
+    sentinel.setAttribute('aria-hidden', 'true');
+    if (after) {
+      after.parentNode.insertBefore(sentinel, after.nextSibling);
+      sentinel.parentNode.insertBefore(wrapper, sentinel.nextSibling);
     } else {
       document.body.insertBefore(wrapper, document.body.firstChild);
+      document.body.insertBefore(sentinel, wrapper);
     }
     // Hide old Webflow content
     hideWebflowContent();
+    // Stamp every link that has text against the Webflow anchor-text head scripts (§3.10 item 3), then measure the chrome.
+    zxGuardAnchors(document);
+    zxSetChromeHeight();
     return wrapper;
   }
 
@@ -3262,318 +3388,484 @@
 
   // ── MEGA MENU ──
   function injectMegaMenu() {
-    var path = window.location.pathname.replace(/\/$/, '').toLowerCase();
-    function al(href, text, icon, desc) {
-      var cls = path === href ? ' class="active"' : '';
-      var iconHtml = icon ? '<span class="zynix-nav-icon">' + icon + '</span>' : '';
-      var descHtml = desc ? '<small>' + desc + '</small>' : '';
-      return '<a href="' + href + '"' + cls + '>' + iconHtml + '<div><strong>' + text + '</strong>' + descHtml + '</div></a>';
+    // Announcement bar: the NAACOS promo belongs to the event-promos workstream. This one object is the whole swap
+    // after Oct 16 (DESIGN_SPEC §3.4); past `expires` the bar is not rendered at all.
+    var ZX_ANNOUNCE = {
+      long: 'Meet the Zynix AI team at NAACOS Fall 2026 · October 14–16 · Washington, DC',
+      short: 'NAACOS Fall · Oct 14–16',
+      linkLabel: 'Book a meeting',
+      href: CALENDLY,
+      expires: Date.UTC(2026, 9, 17, 4, 0, 0),   // NAACOS Fall 2026 ends Oct 16 (midnight ET = 04:00 UTC Oct 17)
+      storageKey: 'zx_announce_naacos2026'
+    };
+    // Chrome (owner S3; §3.2–3.4, §3.9–3.11). Menus, mobile menu, footer and chat all read the one NAV literal (facts
+    // block). Closed panels use the `hidden` attribute, never visibility:hidden, so the Webflow anchor head scripts
+    // read their text (§3.10); every chrome link carries data-z-anchor-fixed and an aria-label equal to its label.
+    if (document.querySelector('nav.zynix-mega-nav')) return;
+    var path = zxPath();
+    var cur = zxNavCurrent(path);
+    var isSms = ['/sms', '/sms-program', '/sms-consent'].indexOf(path) > -1;
+    var plain = function (s) { return String(s == null ? '' : s).replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim(); };
+    var here = function (href) { return !!path && href === path; };
+    var link = function (cls, href, inner, label, extra) {
+      return '<a class="' + cls + (here(href) ? ' is-current' : '') + '" href="' + zxAttr(href) + '" data-z-anchor-fixed="1"' +
+        (label ? ' aria-label="' + zxAttr(plain(label)) + '"' : '') + (extra || '') + (here(href) ? ' aria-current="page"' : '') + '>' + inner + '</a>';
+    };
+    var arrow = function (label, href) { return renderLinkArrow(label, href, { anchorFixed: true, ariaLabel: plain(label) }); };
+    var chevron = function (cls) {
+      return '<svg class="' + cls + '" aria-hidden="true" focusable="false" width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    };
+    var inMenu = function (it) { return it && it.menu !== false; };
+    var isCurSection = function (sec) { return !!(cur.section && cur.section.id === sec.id); };
+
+    // ── Desktop bar and disclosure panels (§3.2) ──
+    function megaItem(sec, ci, ii, it) {
+      var did = 'zx-nav-d-' + sec.id + '-' + ci + '-' + ii;
+      var icon = it.icon ? '<span class="zynix-mega-link__icon" aria-hidden="true">' + zxIcon(it.icon) + '</span>' : '';
+      var desc = it.desc ? '<span class="zynix-mega-link__desc" id="' + did + '">' + it.desc + '</span>' : '';
+      return '<li>' + link('zynix-mega-link', it.href, icon + '<span class="zynix-mega-link__text"><span class="zynix-mega-link__label">' + it.label + '</span>' + desc + '</span>',
+        it.label, it.desc ? ' aria-describedby="' + did + '"' : '') + '</li>';
     }
-    function als(href, text) {
-      var cls = path === href ? ' class="active"' : '';
-      return '<a href="' + href + '"' + cls + '>' + text + '</a>';
+    function megaCol(sec, col, ci) {
+      var items = (col.items || []).filter(inMenu), more = col.more || [];
+      if (!items.length && !more.length) return '';
+      var hid = 'zx-nav-h-' + sec.id + '-' + ci;
+      return '<div class="zynix-mega-col">' +
+        (col.heading ? '<p class="zynix-mega-col__heading" id="' + hid + '">' + col.heading + '</p>' : '') +
+        '<ul class="zynix-mega-col__list" role="list"' + (col.heading ? ' aria-labelledby="' + hid + '"' : '') + '>' +
+          items.map(function (it, ii) { return megaItem(sec, ci, ii, it); }).join('') + '</ul>' +
+        (more.length ? '<p class="zynix-mega-col__more">' + more.map(function (m) { return arrow(m.label, m.href); }).join(' ') + '</p>' : '') +
+        '</div>';
     }
+    // Feature cards are light and text-only (a real customer logo excepted): flow, note, customer, promo (§3.2).
+    function megaFeature(sec) {
+      var f = sec.feature || (sec.promo ? NAV_PROMO : null);
+      var kind = sec.feature ? sec.feature.kind : 'promo';
+      if (!f || !f.title) return '';
+      var logo = '';
+      if (kind === 'customer') {
+        var c = zxCustomer(f.customer);
+        if (c && c.logo) logo = '<img class="zynix-mega-feature__logo" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="' + zxAttr(c.name) + '" width="' +
+          Math.round(c.logo.w / c.logo.h * 32) + '" height="32" loading="lazy" decoding="async">';
+      }
+      var steps = kind === 'flow' && f.steps ? '<ol class="zynix-mega-feature__steps" role="list">' + f.steps.map(function (s, i) {
+        return '<li>' + s + (i < f.steps.length - 1 ? '<span class="zynix-mega-feature__sep" aria-hidden="true">→</span>' : '') + '</li>';
+      }).join('') + '</ol>' : '';
+      return '<aside class="zynix-mega-feature zynix-mega-feature--' + kind + '" aria-label="' + zxAttr(plain(f.eyebrow || sec.label)) + '">' + logo +
+        (f.eyebrow ? '<p class="zynix-eyebrow zynix-mega-feature__eyebrow">' + f.eyebrow + '</p>' : '') +
+        '<p class="zynix-mega-feature__title">' + f.title + '</p>' +
+        (f.body ? '<p class="zynix-mega-feature__body">' + f.body + '</p>' : '') + steps +
+        (f.cta && f.href ? arrow(f.cta, f.href) : '') + '</aside>';
+    }
+    function navItem(sec) {
+      if (!sec.panel) {
+        return '<li class="zynix-nav-item" data-zx-nav="' + zxAttr(sec.id) + '">' +
+          link('zynix-nav-link' + (isCurSection(sec) && !here(sec.href) ? ' is-current' : ''), sec.href, sec.label, sec.label) + '</li>';
+      }
+      var cols = (sec.columns || []).map(function (col, ci) { return megaCol(sec, col, ci); }).filter(Boolean);
+      var feature = megaFeature(sec);
+      return '<li class="zynix-nav-dropdown zynix-nav-dropdown--' + zxAttr(sec.panel) + '" data-zx-nav="' + zxAttr(sec.id) + '">' +
+        '<button type="button" class="zynix-nav-trigger' + (isCurSection(sec) ? ' is-current' : '') + '" id="zx-nav-t-' + sec.id + '" aria-expanded="false" aria-controls="zx-nav-p-' + sec.id + '">' +
+          sec.label + chevron('zynix-nav-trigger__chevron') + '</button>' +
+        '<div class="zynix-mega-panel" id="zx-nav-p-' + sec.id + '" hidden>' +
+          // --cols carries data for the grid (§2.0 exception); a panel without a feature card says so for its grid
+          '<div class="zynix-mega-panel-inner' + (feature ? '' : ' zynix-mega-panel-inner--plain') + '" style="--cols:' + cols.length + '">' + cols.join('') + feature + '</div>' +
+        '</div></li>';
+    }
+
     var nav = document.createElement('nav');
     nav.className = 'zynix-mega-nav';
-    nav.innerHTML =
-      '<a href="/" class="zynix-nav-logo"><img src="' + IMG.logo + '" alt="Zynix AI"><span class="zynix-nav-logo-text">zynix<span class="zynix-logo-dot">.ai</span></span></a>' +
-      '<div class="zynix-nav-items">' +
-        // 1. Platform — Navina-style: items left + ACCESS webinar recording right
-        '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Platform <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-        '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
-          '<div class="zynix-mega-col">' +
-            al('/platform','Zynix OS','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>','Unified healthcare operating system') +
-            al('/company-zynixllm','ZynixLLM','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>','Healthcare language model') +
-            al('/security','Security','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>','HIPAA, SOC 2 Type II') +
-            al('/integrations','Integrations','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>','EHR &amp; data connectors') +
-          '</div>' +
-          '<div class="zynix-nav-promo-card">' +
-            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><img src="' + IMG.logo + '" alt="Zynix AI" style="width:24px;height:24px;border-radius:4px"><span style="font-size:11px;font-weight:700;color:#F16529;text-transform:uppercase;letter-spacing:1px">Recorded Webinar</span></div>' +
-            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">The Future Operating Model for Value-Based Care: Why the Next-Generation ACO Needs an AI Operating Layer</p>' +
-            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">VBC Exhibit Hall &middot; Recorded Sep 10, 2026</p>' +
-            '<a href="https://library.vbcexhibithall.com/recorded-webinar-the-future-operating-model-for-value-based-care-why-the-next-generation-aco-needs-an-ai-operating-layer/" target="_blank" rel="noopener" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Watch on-demand</a>' +
-          '</div>' +
-        '</div></div></div>' +
-        // 2. Solutions — Navina-style: Products + Use Cases left, conference promo right
-        '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Solutions <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-        '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
-          '<div class="zynix-mega-col"><h5>Products</h5>' +
-            al('/zynix-data-analytics','Zynix Data Analytics','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>','Population health intelligence') +
-            al('/zynix-ai-agents','Zynix AI Agents','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>','12 purpose-built AI agents') +
-            al('/care-plans','Deployable Care Plans','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>','Configurable care workflows') +
-            al('/zynscribe','ZynScribe','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>','Ambient AI clinical documentation') +
-            '<div class="zynix-dropdown-featured"><a href="/solutions">View All Solutions &rarr;</a></div>' +
-          '</div>' +
-          '<div class="zynix-mega-col"><h5>Use Cases</h5>' +
-            al('/use-cases/post-discharge-follow-up','Transitional Care (TCM)','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>','Post-discharge outreach') +
-            al('/use-cases/hcc-gap-closure-health-system-aco','Gap Closure','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>','HCC &amp; HEDIS gaps') +
-            al('/use-cases/post-discharge-tcm-readmission','Readmission Prevention','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>','Reduce 30-day readmits') +
-            al('/use-cases/after-hours-triage-multi-site','After-Hours &amp; Access','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>','24/7 patient triage') +
-            al('/use-cases/prior-auth-high-volume-specialty','Prior Authorization','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>','Automate auth workflows') +
-            al('/use-cases/preventive-screening-gap-fqhc','Preventive Screening','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>','Proactive care outreach') +
-            '<div class="zynix-dropdown-featured"><a href="/use-cases">View All 30 Use Cases &rarr;</a></div>' +
-          '</div>' +
-          '<div class="zynix-nav-promo-card">' +
-            '<p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#F16529;font-weight:700">Meet Us In Person</p>' +
-            '<div style="margin:12px 0;padding:12px;background:rgba(255,255,255,0.06);border-radius:8px">' +
-              '<p style="margin:0 0 2px;font-size:14px;font-weight:600;color:#fff">NAACOS Fall 2026</p>' +
-              '<p style="margin:0;font-size:12px;color:#94a3b8">Oct 14 &ndash; 16 &middot; Marriott Marquis, Washington, DC</p>' +
-            '</div>' +
-            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">Meet the team and see our AI agents live. Book time in advance.</p>' +
-            '<a href="' + CALENDLY + '" target="_blank" rel="noopener" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Book a Meeting &rarr;</a>' +
-          '</div>' +
-        '</div></div></div>' +
-        // 3. Who We Serve — Navina-style: orgs left, case study spotlight right
-        '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Who We Serve <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-        '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
-          '<div class="zynix-mega-col"><h5>By Organization</h5>' +
-            al('/who-we-serve/health-systems','Health Systems','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="12" y1="6" x2="12" y2="12"/></svg>','Enterprise AI at scale') +
-            al('/who-we-serve/acos-msos','ACOs &amp; MSOs','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>','Shared savings optimization') +
-            al('/who-we-serve/health-plans','Health Plans','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>','Stars and HEDIS improvement') +
-            al('/who-we-serve/independent-group-practices','Group Practices','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33"/></svg>','Reduce burnout and no-shows') +
-            al('/who-we-serve/ascs','ASCs','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>','Surgical workflow AI') +
-            al('/who-we-serve/fqhcs','FQHCs','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>','Community health AI') +
-          '</div>' +
-          '<div class="zynix-nav-promo-card">' +
-            '<p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#F16529;font-weight:700">Case Study Spotlight</p>' +
-            '<p style="margin:8px 0;font-size:14px;font-weight:500;color:#fff;line-height:1.5">See real outcomes from organizations using Zynix AI</p>' +
-            '<a href="/resources-case-studies" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">View Case Studies &rarr;</a>' +
-          '</div>' +
-        '</div></div></div>' +
-        // 4. Resources — Navina-style: links left, LEAD model article promo right
-        '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Resources <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-        '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
-          '<div class="zynix-mega-col">' +
-            al('/resources-case-studies','Case Studies','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>','Real customer outcomes') +
-            al('/resources-blog','Blog','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>','Insights &amp; analysis') +
-            al('/alternatives','Zynix Alternatives','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3"/></svg>','Compared vs Innovaccer, Abridge &amp; more') +
-            al('/press','Press Releases','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>','Newsroom &amp; announcements') +
-            al('/resources-webinars','Webinars &amp; Events','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>','On-demand &amp; live sessions') +
-            al('/resources-faq','FAQ','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>','Common questions') +
-            al('/resources-glossary','Glossary','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>','Healthcare AI terms') +
-            al('/resources-whitepapers','Whitepapers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>','Research &amp; reports') +
-            al('/roi-calculator','ROI Calculator','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>','Calculate your projected savings') +
-          '</div>' +
-          '<div class="zynix-nav-promo-card">' +
-            '<span style="display:inline-block;padding:3px 10px;background:rgba(241,101,41,0.15);color:#F16529;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">New Article</span>' +
-            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">ACO LEAD Model: Why 2027 Rewards ACOs That Execute Between Visits</p>' +
-            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">Most ACOs can already see who needs attention. The question is whether they can follow through at scale.</p>' +
-            '<a href="/resources-blog-aco-lead-model-execution-infrastructure-2027" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Read Article &rarr;</a>' +
-          '</div>' +
-        '</div></div></div>' +
-        // 5. Company — Navina-style: links left, webinar promo right
-        '<div class="zynix-nav-dropdown"><button class="zynix-nav-trigger">Company <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-        '<div class="zynix-mega-panel"><div class="zynix-mega-panel-inner">' +
-          '<div class="zynix-mega-col">' +
-            al('/about','About Us','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>','Our mission and story') +
-            al('/careers','Careers','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>','Shape the future of healthcare') +
-            al('/press','Newsroom','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>','Press &amp; announcements') +
-            al('/contact','Contact Us','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>','Get in touch with our team') +
-          '</div>' +
-          '<div class="zynix-nav-promo-card">' +
-            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><img src="' + IMG.logo + '" alt="Zynix AI" style="width:24px;height:24px;border-radius:4px"><span style="font-size:11px;font-weight:700;color:#F16529;text-transform:uppercase;letter-spacing:1px">Webinar</span></div>' +
-            '<p style="margin:0 0 8px;font-size:14px;font-weight:600;color:#fff;line-height:1.4">The Future Operating Model for Value-Based Care: Why the Next-Generation ACO Needs an AI Operating Layer</p>' +
-            '<p style="margin:0 0 14px;font-size:12px;color:#94a3b8;line-height:1.4">VBC Exhibit Hall &middot; Recorded Sep 10, 2026</p>' +
-            '<a href="https://library.vbcexhibithall.com/recorded-webinar-the-future-operating-model-for-value-based-care-why-the-next-generation-aco-needs-an-ai-operating-layer/" target="_blank" rel="noopener" style="display:inline-block;padding:8px 20px;background:#F16529;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">Watch on-demand</a>' +
-          '</div>' +
-        '</div></div></div>' +
-      '</div>' +
+    nav.setAttribute('aria-label', 'Main');
+    nav.innerHTML = '<div class="zynix-container zynix-mega-nav__inner">' +
+      '<a class="zynix-nav-logo" href="/" aria-label="Zynix AI home" data-z-anchor-fixed="1"' + (path ? '' : ' aria-current="page"') + '>' +
+        '<img class="zynix-nav-logo__img" src="' + zxAttr(zxImg(SITE_FACTS.brand.logo)) + '" alt="" width="84" height="32" decoding="async"></a>' +
+      '<ul class="zynix-nav-items" role="list">' + NAV.map(navItem).join('') + '</ul>' +
       '<div class="zynix-nav-actions">' +
-        '<a href="/contact" class="zynix-nav-contact">Contact Us</a>' +
-        '<a href="' + CALENDLY + '" class="zynix-nav-cta" target="_blank" rel="noopener">Request a Demo</a>' +
-      '</div>' +
-      '<button class="zynix-nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>';
+        link('zynix-nav-contact', NAV_ACTIONS.contact.href, NAV_ACTIONS.contact.label, NAV_ACTIONS.contact.label) +
+        renderButton(NAV_ACTIONS.demo.label, NAV_ACTIONS.demo.href, { variant: 'primary', cta: 'demo', className: 'zynix-nav-cta', ariaLabel: plain(NAV_ACTIONS.demo.label), anchorFixed: true }) +
+        '<button type="button" class="zynix-nav-hamburger" aria-expanded="false" aria-controls="zx-mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>' +
+      '</div></div>';
 
-    // Mobile menu
+    // ── Mobile menu (<1024px, §3.3): the same six sections as accordions, no descriptors ──
+    function mobileSection(sec) {
+      if (!sec.panel) {
+        return '<li class="zynix-mobile-section">' + link('zynix-mobile-link zynix-mobile-link--top', sec.href, sec.label, sec.label) + '</li>';
+      }
+      var mid = 'zx-m-' + sec.id;
+      var body = (sec.columns || []).map(function (col) {
+        var rows = (col.items || []).filter(inMenu).map(function (it) { return '<li>' + link('zynix-mobile-link', it.href, it.label, it.label) + '</li>'; });
+        (col.more || []).forEach(function (m) { rows.push('<li>' + link('zynix-mobile-link', m.href, m.label, m.label) + '</li>'); });
+        if (!rows.length) return '';
+        return (col.heading ? '<p class="zynix-mobile-section__group">' + col.heading + '</p>' : '') + '<ul role="list">' + rows.join('') + '</ul>';
+      }).join('');
+      var f = sec.feature, c = f && f.kind === 'customer' ? zxCustomer(f.customer) : null;
+      if (c && f.href) {
+        var story = 'Customer story: ' + c.name;
+        body += '<ul role="list"><li>' + link('zynix-mobile-link zynix-mobile-link--story', f.href, story + '<span class="zynix-mobile-link__arrow" aria-hidden="true">&#160;→</span>', story) + '</li></ul>';
+      }
+      return '<li class="zynix-mobile-section">' +
+        '<h2 class="zynix-mobile-section__heading"><button type="button" class="zynix-mobile-section-trigger' + (isCurSection(sec) ? ' is-current' : '') + '" aria-expanded="false" aria-controls="' + mid + '">' +
+          sec.label + chevron('zynix-mobile-section-trigger__chevron') + '</button></h2>' +
+        '<div class="zynix-mobile-section-links" id="' + mid + '" hidden>' + body + '</div></li>';
+    }
+    var co = SITE_FACTS.company;
     var mobile = document.createElement('div');
     mobile.className = 'zynix-mobile-menu';
-    mobile.innerHTML =
-      '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Platform &#9662;</button><div class="zynix-mobile-section-links">' +
-      '<a href="/platform"><strong>Zynix OS</strong></a><a href="/company-zynixllm">ZynixLLM</a><a href="/security">Security</a><a href="/integrations">Integrations</a></div></div>' +
-      '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Solutions &#9662;</button><div class="zynix-mobile-section-links">' +
-      '<p style="margin:0 0 4px;padding:0 20px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;font-weight:600">Products</p>' +
-      '<a href="/zynix-data-analytics">Zynix Data Analytics</a><a href="/zynix-ai-agents">Zynix AI Agents</a><a href="/care-plans">Deployable Care Plans</a><a href="/zynscribe">ZynScribe</a>' +
-      '<p style="margin:12px 0 4px;padding:0 20px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;font-weight:600;border-top:1px solid rgba(148,163,184,0.15);padding-top:12px">Use Cases</p>' +
-      '<a href="/use-cases/post-discharge-follow-up">Transitional Care (TCM)</a><a href="/use-cases/hcc-gap-closure-health-system-aco">Gap Closure</a><a href="/use-cases/post-discharge-tcm-readmission">Readmission Prevention</a><a href="/use-cases/after-hours-triage-multi-site">After-Hours &amp; Access</a><a href="/use-cases/prior-auth-high-volume-specialty">Prior Authorization</a><a href="/use-cases/preventive-screening-gap-fqhc">Preventive Screening</a>' +
-      '<a href="/solutions" style="color:#F16529;font-weight:600;margin-top:8px;display:block">View All Solutions &rarr;</a>' +
-      '</div></div>' +
-      '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Who We Serve &#9662;</button><div class="zynix-mobile-section-links">' +
-      '<a href="/audience-segments/health-systems">Health Systems</a><a href="/audience-segments/acos-msos">ACOs &amp; MSOs</a><a href="/audience-segments/health-plans">Health Plans</a><a href="/audience-segments/independent-group-practices">Group Practices</a><a href="/audience-segments/ascs">ASCs</a><a href="/audience-segments/fqhcs">FQHCs</a></div></div>' +
-      '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Resources &#9662;</button><div class="zynix-mobile-section-links">' +
-      '<a href="/resources-case-studies">Case Studies</a><a href="/use-cases">Use Cases</a><a href="/resources-blog">Blog</a><a href="/press">Press Releases</a><a href="/resources-webinars">Webinars &amp; Events</a><a href="/resources-faq">FAQ</a><a href="/resources-glossary">Glossary</a><a href="/resources-whitepapers">Whitepapers</a></div></div>' +
-      '<div class="zynix-mobile-section"><button class="zynix-mobile-section-trigger">Company &#9662;</button><div class="zynix-mobile-section-links">' +
-      '<a href="/about">About</a><a href="/company-zynixllm">ZynixLLM</a><a href="/press">Newsroom</a><a href="/careers">Careers</a><a href="/security">Security</a></div></div>' +
-      '<a href="/contact" class="zynix-mobile-link" style="display:block;padding:14px 20px;font-weight:600;color:var(--z-text)">Contact Us</a>' +
-      '<a href="' + CALENDLY + '" class="zynix-mobile-cta" target="_blank" rel="noopener">Request a Demo</a>';
+    mobile.id = 'zx-mobile-menu';
+    mobile.setAttribute('role', 'dialog');   // no aria-modal: its close control (the hamburger) lives in the nav (§3.3)
+    mobile.setAttribute('aria-label', 'Site menu');
+    mobile.hidden = true;
+    mobile.innerHTML = '<div class="zynix-mobile-menu__inner">' +
+      '<ul class="zynix-mobile-menu__sections" role="list">' + NAV.map(mobileSection).join('') + '</ul>' +
+      '<div class="zynix-mobile-menu__footer">' +
+        renderButton(NAV_ACTIONS.demo.label, NAV_ACTIONS.demo.href, { variant: 'primary', size: 'lg', cta: 'demo', className: 'zynix-mobile-cta', ariaLabel: plain(NAV_ACTIONS.demo.label), anchorFixed: true }) +
+        link('zynix-mobile-link', NAV_ACTIONS.contact.href, NAV_ACTIONS.contact.label, NAV_ACTIONS.contact.label) +
+        '<p class="zynix-mobile-menu__contact"><a href="mailto:' + zxAttr(co.email) + '" data-z-anchor-fixed="1">' + co.email + '</a> · ' +
+          '<a href="' + zxAttr(co.phoneHref) + '" data-z-anchor-fixed="1">' + co.phone + '</a></p>' +
+      '</div></div>';
 
-    // Announcement banner
-    var announceBanner = document.createElement('div');
-    announceBanner.className = 'zynix-announcement-bar';
-    announceBanner.innerHTML = '📍 Meet Zynix AI at NAACOS Fall 2026 &middot; Oct 14&ndash;16 &middot; Washington, DC <a href="' + CALENDLY + '" target="_blank" rel="noopener">Book a meeting</a><button class="zynix-announce-close" aria-label="Close">&times;</button>';
+    // ── Announcement bar (§3.4): one line, no emoji, remembered dismissal, not on the SMS pages ──
+    var dismissed = false;
+    try { dismissed = window.localStorage.getItem(ZX_ANNOUNCE.storageKey) === '1'; } catch (e) {}
+    var bar = null;
+    if (!isSms && !dismissed && Date.now() < ZX_ANNOUNCE.expires) {
+      bar = document.createElement('div');
+      bar.className = 'zynix-announcement-bar';
+      bar.setAttribute('role', 'region');
+      bar.setAttribute('aria-label', 'Announcement');
+      bar.innerHTML = '<div class="zynix-container zynix-announcement-bar__inner">' +
+        '<p class="zynix-announcement-bar__text"><span class="zynix-announcement-bar__long">' + ZX_ANNOUNCE.long + '</span>' +
+          '<span class="zynix-announcement-bar__short">' + ZX_ANNOUNCE.short + '</span></p>' +
+        '<a class="zynix-announcement-bar__link" href="' + zxAttr(ZX_ANNOUNCE.href) + '" target="_blank" rel="noopener" aria-describedby="zx-newtab-desc" data-z-anchor-fixed="1" aria-label="' + zxAttr(ZX_ANNOUNCE.linkLabel) + '">' + ZX_ANNOUNCE.linkLabel + '</a>' +
+        '<button type="button" class="zynix-announce-close" aria-label="Dismiss announcement"><svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></button>' +
+        '</div>';
+    }
 
-    // Skip navigation link (WCAG 2.1 AA)
-    var skipNav = document.createElement('a');
-    skipNav.href = '#main-content';
-    skipNav.className = 'zynix-skip-nav';
-    skipNav.textContent = 'Skip to main content';
-
-    // ARIA landmarks
-    nav.setAttribute('role', 'navigation');
-    nav.setAttribute('aria-label', 'Main navigation');
+    // ── Skip link (first focusable element) and the one shared new-tab description (§2.3, §3.11) ──
+    var skip = document.createElement('a');
+    skip.className = 'zynix-skip-nav';
+    skip.href = '#main-content';
+    skip.setAttribute('data-z-anchor-fixed', '1');
+    skip.textContent = 'Skip to main content';
+    skip.addEventListener('click', function (e) {
+      // Move focus (not only the scroll position) into the page; the tabindex is removed again on blur. The click
+      // stops here: Webflow's own in-page-anchor handler would otherwise smooth-scroll and re-focus #main-content
+      // ~0.5s later, stealing focus from wherever the visitor has tabbed to by then.
+      var main = document.getElementById('main-content');
+      if (!main) return;
+      e.preventDefault();
+      e.stopPropagation();
+      main.setAttribute('tabindex', '-1');
+      main.addEventListener('blur', function onBlur() { main.removeAttribute('tabindex'); main.removeEventListener('blur', onBlur); });
+      main.focus();
+    });
+    var newTab = document.createElement('span');
+    newTab.id = 'zx-newtab-desc';
+    newTab.className = 'zx-visually-hidden';
+    newTab.textContent = 'Opens in a new tab';
 
     document.body.prepend(mobile);
     document.body.prepend(nav);
-    document.body.prepend(announceBanner);
-    document.body.prepend(skipNav);
-
-    // Push nav down to sit below the fixed announcement bar — use actual height
-    function adjustNavForBanner() {
-      var bh = announceBanner.offsetHeight;
-      nav.style.top = bh + 'px';
-      document.body.style.paddingTop = (bh + 64) + 'px';
-    }
-    adjustNavForBanner();
-    window.addEventListener('resize', adjustNavForBanner);
-    document.body.classList.add('has-announcement-bar');
-
-    // Announcement close handler
-    announceBanner.querySelector('.zynix-announce-close').addEventListener('click', function() {
-      announceBanner.style.display = 'none';
-      nav.style.top = '0';
-      document.body.style.paddingTop = '64px';
-      document.body.classList.remove('has-announcement-bar');
-    });
-
-    // Event promos expire on their own: NAACOS Fall 2026 ends Oct 16 (midnight ET = 04:00 UTC Oct 17)
-    if (Date.now() >= Date.UTC(2026, 9, 17, 4, 0, 0)) {
-      announceBanner.querySelector('.zynix-announce-close').click();
-      Array.prototype.forEach.call(nav.querySelectorAll('.zynix-nav-promo-card'), function(card) {
-        if (/NAACOS Fall 2026/.test(card.textContent)) card.style.display = 'none';
-      });
-    }
+    if (bar) document.body.prepend(bar);
+    document.body.prepend(newTab);
+    document.body.prepend(skip);
 
     // Hide ALL Webflow native navbars — inject style with !important to override any CSS
     var hideNavStyle = document.createElement('style');
-    hideNavStyle.textContent = 'section.navbar, .w-nav, [data-collapse="medium"] { display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; }' +
-      '.zynix-nav-promo-card { min-width: 260px; max-width: 280px; background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; justify-content: center; }' +
-      '.zynix-nav-promo-card a:hover { opacity: 0.92; transform: translateY(-1px); }' +
-      '.zynix-dropdown-featured { margin-top: 8px; padding: 8px 12px; border-top: 1px solid var(--z-border, #e5e7eb); }' +
-      '.zynix-dropdown-featured a { color: #F16529 !important; font-size: 13px; font-weight: 600; text-decoration: none; }' +
-      '.zynix-dropdown-featured a:hover { text-decoration: underline; }' +
-      '.zynix-trust-marquee img, .zynix-trust-track img, [class*="trust-marquee"] img, [class*="trust-track"] img { filter: grayscale(100%) brightness(0.45) contrast(1.2) !important; opacity: 1 !important; }' +
-      '.zynix-trust-marquee img:hover, .zynix-trust-track img:hover, [class*="trust-marquee"] img:hover, [class*="trust-track"] img:hover { filter: grayscale(0%) brightness(1) contrast(1) !important; }' +
-      /* Skip nav (WCAG) */
-      '.zynix-skip-nav { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 999999; padding: 16px 24px; background: #20449B; color: #fff; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 0 0 8px 0; }' +
-      '.zynix-skip-nav:focus { position: fixed; left: 0; top: 0; width: auto; height: auto; }' +
-      /* Cookie consent banner */
-      '.zynix-cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #0f172a; padding: 16px 24px; z-index: 99998; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid rgba(255,255,255,0.1); }' +
-      '.zynix-cookie-banner p { color: rgba(255,255,255,0.8); font-size: 14px; margin: 0; flex: 1 1 300px; }' +
-      '.zynix-cookie-banner a { color: #F16529; text-decoration: underline; }' +
-      '.zynix-cookie-btn-reject { padding: 8px 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; background: transparent; color: #fff; cursor: pointer; font-size: 13px; }' +
-      '.zynix-cookie-btn-accept { padding: 8px 20px; border: none; border-radius: 6px; background: #F16529; color: #fff; cursor: pointer; font-size: 13px; font-weight: 600; }' +
-      /* ROI slider styling — custom track + thumb */
-      '.zynix-roi-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #20449B var(--slider-pct, 50%), #e2e8f0 var(--slider-pct, 50%)); outline: none; cursor: pointer; transition: background 0.15s; }' +
-      '.zynix-roi-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #20449B; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(32,68,155,0.35); cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }' +
-      '.zynix-roi-slider::-webkit-slider-thumb:hover { transform: scale(1.15); box-shadow: 0 3px 12px rgba(32,68,155,0.5); }' +
-      '.zynix-roi-slider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: #20449B; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(32,68,155,0.35); cursor: pointer; }' +
-      '.zynix-roi-slider::-moz-range-track { height: 8px; border-radius: 4px; background: #e2e8f0; }' +
-      '.zynix-roi-slider::-moz-range-progress { height: 8px; border-radius: 4px; background: #20449B; }' +
-      /* Email capture section */
-      '.zynix-email-capture { background: linear-gradient(180deg, #f8fafc 0%, #fff 100%); border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }' +
-      '.zynix-capture-email:focus { border-color: #20449B !important; box-shadow: 0 0 0 3px rgba(32,68,155,0.12) !important; }' +
-      '.zynix-capture-btn:hover { background: #1a3880 !important; }' +
-      '@media (max-width: 600px) { .zynix-capture-form { flex-direction: column !important; } .zynix-capture-btn { width: 100%; } }' +
-      /* Browser mockup frame for product screenshots */
-      '.zynix-browser-frame { background: #1a1f2e; border-radius: 12px; overflow: hidden; box-shadow: 0 25px 60px -12px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06); }' +
-      '.zynix-browser-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #151922; border-bottom: 1px solid rgba(255,255,255,0.06); }' +
-      '.zynix-browser-dots { display: flex; gap: 6px; }' +
-      '.zynix-browser-dots span { width: 10px; height: 10px; border-radius: 50%; }' +
-      '.zynix-browser-dots span:nth-child(1) { background: #ff5f57; }' +
-      '.zynix-browser-dots span:nth-child(2) { background: #febc2e; }' +
-      '.zynix-browser-dots span:nth-child(3) { background: #28c840; }' +
-      '.zynix-browser-url { flex: 1; margin-left: 8px; padding: 5px 12px; background: rgba(255,255,255,0.06); border-radius: 6px; font-size: 11px; color: rgba(255,255,255,0.45); font-family: ui-monospace, SFMono-Regular, monospace; letter-spacing: 0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }' +
-      '.zynix-browser-frame img { display: block; width: 100%; height: auto; }' +
-      /* Product showcase — side-by-side layout */
-      '.zynix-product-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin: 48px 0; }' +
-      '.zynix-product-showcase-text { }' +
-      '.zynix-product-showcase-text h3 { font-size: 28px; font-weight: 700; margin: 0 0 16px; color: var(--z-text-primary, #0f172a); }' +
-      '.zynix-product-showcase-text p { font-size: 16px; line-height: 1.7; color: var(--z-text-secondary, #475569); margin: 0 0 20px; }' +
-      '.zynix-product-showcase-visual { }' +
-      '@media (max-width: 768px) { .zynix-product-showcase { grid-template-columns: 1fr; gap: 32px; } }' +
-      /* Screenshot strip — horizontal scroll on mobile */
-      '.zynix-screenshot-strip { display: flex; gap: 24px; overflow-x: auto; padding: 8px 0 24px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }' +
-      '.zynix-screenshot-strip::-webkit-scrollbar { height: 4px; }' +
-      '.zynix-screenshot-strip::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }' +
-      '.zynix-screenshot-strip .zynix-browser-frame { flex: 0 0 340px; scroll-snap-align: start; }' +
-      '@media (min-width: 769px) { .zynix-screenshot-strip .zynix-browser-frame { flex: 1 1 0; } }' +
-      /* Larger 3-up variant for homepage Day One section */
-      '.zynix-screenshot-strip-lg { gap: 32px; justify-content: center; }' +
-      '.zynix-screenshot-strip-lg .zynix-browser-frame { flex: 0 0 min(460px, 85vw); }' +
-      '@media (min-width: 900px) { .zynix-screenshot-strip-lg .zynix-browser-frame { flex: 1 1 0; max-width: 520px; } }';
+    hideNavStyle.textContent = 'section.navbar, .w-nav, [data-collapse="medium"] { display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; }';
     document.head.appendChild(hideNavStyle);
     document.querySelectorAll('.w-nav, .navbar, [data-collapse="medium"], section.navbar').forEach(function(el) {
       el.style.cssText = 'display:none!important;visibility:hidden!important;height:0!important;overflow:hidden!important;';
     });
 
-    // Hamburger toggle
-    var burger = nav.querySelector('.zynix-nav-hamburger');
-    burger.setAttribute('aria-expanded', 'false');
-    burger.addEventListener('click', function() {
-      burger.classList.toggle('open');
-      var isOpen = burger.classList.contains('open');
-      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      // Always set mobile menu top to exactly below the nav bar
-      var navBottom = nav.getBoundingClientRect().bottom;
-      mobile.style.top = navBottom + 'px';
-      mobile.style.height = 'calc(100vh - ' + navBottom + 'px)';
-      mobile.classList.toggle('open');
-    });
+    initMegaMenu(nav);
+    initMobileMenu(nav, mobile);
 
-    // Escape closes the mobile menu and returns focus to the hamburger (WCAG 2.1.1 / 2.4.3)
-    document.addEventListener('keydown', function(e) {
-      if ((e.key === 'Escape' || e.key === 'Esc') && mobile.classList.contains('open')) {
-        burger.click();
-        burger.focus();
-      }
-    });
-
-    // Cookie consent banner (GDPR compliance)
-    if (!localStorage.getItem('zynix_cookie_consent')) {
-      var cookieBanner = document.createElement('div');
-      cookieBanner.className = 'zynix-cookie-banner';
-      cookieBanner.innerHTML = '<p>We use cookies for analytics and site functionality. See our <a href="/privacy-policy">Privacy Policy</a>.</p>' +
-        '<div style="display:flex;gap:8px"><button class="zynix-cookie-btn-reject">Reject</button><button class="zynix-cookie-btn-accept">Accept</button></div>';
-      document.body.appendChild(cookieBanner);
-      cookieBanner.querySelector('.zynix-cookie-btn-accept').addEventListener('click', function() {
-        localStorage.setItem('zynix_cookie_consent', 'accepted');
-        cookieBanner.remove();
-      });
-      cookieBanner.querySelector('.zynix-cookie-btn-reject').addEventListener('click', function() {
-        localStorage.setItem('zynix_cookie_consent', 'rejected');
-        cookieBanner.remove();
+    if (bar) {
+      bar.querySelector('.zynix-announce-close').addEventListener('click', function () {
+        try { window.localStorage.setItem(ZX_ANNOUNCE.storageKey, '1'); } catch (e) {}
+        if (bar.parentNode) bar.parentNode.removeChild(bar);
+        zxSetChromeHeight();
+        var logo = nav.querySelector('.zynix-nav-logo');
+        if (logo) logo.focus();
       });
     }
+    // Fixed chrome height: on render, on resize (one measurement per frame) and on dismissal (§3.4)
+    zxSetChromeHeight();
+    var chromeFrame = 0;
+    window.addEventListener('resize', function () {
+      if (chromeFrame) return;
+      chromeFrame = requestAnimationFrame(function () { chromeFrame = 0; zxSetChromeHeight(); });
+    }, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { zxSetChromeHeight(); }).catch(function () {});
 
-    // Mobile accordion
-    mobile.querySelectorAll('.zynix-mobile-section-trigger').forEach(function(btn) {
-      btn.setAttribute('aria-expanded', 'false');
-      btn.addEventListener('click', function() {
-        var links = btn.nextElementSibling;
-        links.classList.toggle('open');
-        btn.setAttribute('aria-expanded', links.classList.contains('open') ? 'true' : 'false');
-        var svgChevron = '<svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" style="margin-left:6px;transition:transform 0.25s;' + (links.classList.contains('open') ? 'transform:rotate(180deg)' : '') + '"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        btn.innerHTML = btn.textContent.trim() + ' ' + svgChevron;
+    // Cookie consent banner: behaviour unchanged (§3.9). It stays out of hideWebflowContent's list, so it is hidden
+    // until counsel decides how consent gates analytics (NAV-J).
+    try {
+      if (!localStorage.getItem('zynix_cookie_consent')) {
+        var cookieBanner = document.createElement('div');
+        cookieBanner.className = 'zynix-cookie-banner';
+        cookieBanner.innerHTML = '<p>We use cookies for analytics and site functionality. See our <a href="/privacy-policy">Privacy Policy</a>.</p>' +
+          '<div style="display:flex;gap:8px"><button class="zynix-cookie-btn-reject">Reject</button><button class="zynix-cookie-btn-accept">Accept</button></div>';
+        document.body.appendChild(cookieBanner);
+        cookieBanner.querySelector('.zynix-cookie-btn-accept').addEventListener('click', function() {
+          localStorage.setItem('zynix_cookie_consent', 'accepted');
+          cookieBanner.remove();
+        });
+        cookieBanner.querySelector('.zynix-cookie-btn-reject').addEventListener('click', function() {
+          localStorage.setItem('zynix_cookie_consent', 'rejected');
+          cookieBanner.remove();
+        });
+      }
+    } catch (e) {}
+  }
+
+  // ── Chrome helpers (owner S3) ──
+
+  // Desktop disclosure menus (§3.2 behaviour table). No role="menu": links stay links and Tab moves through them.
+  // Hover opens only on a fine pointer, as an enhancement; nothing opens on hover without this state.
+  function initMegaMenu(nav) {
+    if (!nav || nav.getAttribute('data-zx-menu-ready')) return;
+    nav.setAttribute('data-zx-menu-ready', '1');
+    var mm = function (q) { return window.matchMedia ? window.matchMedia(q) : { matches: false }; };
+    var fine = mm('(hover: hover) and (pointer: fine)'), reduce = mm('(prefers-reduced-motion: reduce)'), wide = mm('(min-width: 1024px)');
+    var menus = [].map.call(nav.querySelectorAll('.zynix-nav-dropdown'), function (li) {
+      return { li: li, btn: li.querySelector('.zynix-nav-trigger'), panel: li.querySelector('.zynix-mega-panel'), by: null, at: 0, enterT: 0, leaveT: 0, hideT: 0 };
+    }).filter(function (m) { return m.btn && m.panel; });
+    var isOpen = function (m) { return m.btn.getAttribute('aria-expanded') === 'true'; };
+    function open(m, by) {
+      clearTimeout(m.enterT); clearTimeout(m.leaveT); clearTimeout(m.hideT);
+      menus.forEach(function (o) { if (o !== m && isOpen(o)) close(o); });
+      m.by = by; m.at = Date.now();
+      if (isOpen(m)) return;
+      m.btn.setAttribute('aria-expanded', 'true');
+      m.panel.inert = false;
+      m.panel.hidden = false;
+      requestAnimationFrame(function () { if (isOpen(m)) m.panel.classList.add('is-open'); });   // CSS fades it in (200ms)
+    }
+    function close(m, returnFocus) {
+      clearTimeout(m.enterT); clearTimeout(m.leaveT); clearTimeout(m.hideT);
+      m.by = null;
+      if (isOpen(m)) {
+        m.btn.setAttribute('aria-expanded', 'false');
+        m.panel.classList.remove('is-open');
+        m.panel.inert = true;   // not focusable while it fades out
+        if (reduce.matches) m.panel.hidden = true;
+        else m.hideT = setTimeout(function () { if (!isOpen(m)) m.panel.hidden = true; }, 200);
+      }
+      if (returnFocus) m.btn.focus();
+    }
+    var closeAll = function () { menus.forEach(function (m) { if (isOpen(m)) close(m); }); };
+    menus.forEach(function (m) {
+      m.btn.addEventListener('click', function () {
+        if (!isOpen(m)) { open(m, 'click'); return; }
+        if (m.by === 'hover' && Date.now() - m.at < 500) { m.by = 'click'; return; }   // a click right after a hover-open pins it
+        close(m);
+      });
+      m.btn.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowDown' && e.key !== 'Down') return;
+        e.preventDefault();
+        open(m, 'click');
+        var first = m.panel.querySelector('a[href]');
+        if (first) first.focus();
+      });
+      m.li.addEventListener('keydown', function (e) {
+        if ((e.key === 'Escape' || e.key === 'Esc') && isOpen(m)) { e.preventDefault(); e.stopPropagation(); close(m, true); }
+      });
+      m.li.addEventListener('focusout', function (e) {
+        if (!isOpen(m)) return;
+        var to = e.relatedTarget;
+        if (to && m.li.contains(to)) return;
+        if (!to && m.li.matches(':hover')) return;   // a click on a non-focusable part of the open panel
+        close(m);
+      });
+      m.li.addEventListener('pointerenter', function (e) {
+        if (e.pointerType !== 'mouse' || !fine.matches || !wide.matches) return;
+        clearTimeout(m.leaveT);
+        if (isOpen(m)) return;
+        clearTimeout(m.enterT);
+        m.enterT = setTimeout(function () { open(m, 'hover'); }, 80);
+      });
+      m.li.addEventListener('pointerleave', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        clearTimeout(m.enterT);
+        if (isOpen(m) && m.by === 'hover') m.leaveT = setTimeout(function () { if (m.by === 'hover') close(m); }, 200);
+      });
+      m.panel.addEventListener('click', function (e) {
+        if (e.target.closest && e.target.closest('a[href]')) closeAll();   // same-page links (e.g. /agents#…) do not unload the page
       });
     });
+    document.addEventListener('click', function (e) { if (!nav.contains(e.target)) closeAll(); });
+    document.addEventListener('keydown', function (e) {
+      if ((e.key === 'Escape' || e.key === 'Esc')) menus.forEach(function (m) { if (isOpen(m) && !m.li.contains(document.activeElement)) close(m); });
+    });
+    var onWidth = function () { closeAll(); };
+    if (wide.addEventListener) wide.addEventListener('change', onWidth); else if (wide.addListener) wide.addListener(onWidth);
+  }
 
-    // Close mobile menu when a link is clicked
-    mobile.querySelectorAll('a').forEach(function(a) {
-      a.addEventListener('click', function() {
-        mobile.classList.remove('open');
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
+  // Mobile menu (<1024px, §3.3): a dialog next to its trigger, without aria-modal (its close control is the hamburger
+  // in the nav). While open: focus trap [hamburger, …menu], scroll lock (html.zx-menu-open), the page, the bar and the
+  // chat are inert; Escape, any link and crossing 1024px close it.
+  function initMobileMenu(nav, menu) {
+    var burger = nav && nav.querySelector('.zynix-nav-hamburger');
+    if (!burger || !menu || menu.getAttribute('data-zx-menu-ready')) return;
+    menu.setAttribute('data-zx-menu-ready', '1');
+    var BEHIND = '.zynix-injected, .zynix-announcement-bar, #zynix-chat-widget';
+    var isOpen = function () { return burger.getAttribute('aria-expanded') === 'true'; };
+    var setInert = function (on) {
+      [].forEach.call(document.querySelectorAll(BEHIND), function (el) { if (on) el.setAttribute('inert', ''); else el.removeAttribute('inert'); });
+    };
+    var focusables = function () {
+      return [burger].concat([].filter.call(menu.querySelectorAll('a[href], button:not([disabled])'), function (el) { return el.getClientRects().length > 0; }));
+    };
+    function open() {
+      menu.hidden = false;
+      menu.classList.add('open');   // ci/smoke.mjs checks .zynix-mobile-menu.open
+      burger.setAttribute('aria-expanded', 'true');
+      burger.setAttribute('aria-label', 'Close menu');
+      document.documentElement.classList.add('zx-menu-open');
+      setInert(true);
+      var first = menu.querySelector('.zynix-mobile-section-trigger, a[href]');
+      if (first) first.focus();
+    }
+    function close(returnFocus) {
+      if (!isOpen()) return;
+      menu.classList.remove('open');
+      menu.hidden = true;
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Open menu');
+      document.documentElement.classList.remove('zx-menu-open');
+      setInert(false);
+      if (returnFocus) burger.focus();
+    }
+    burger.addEventListener('click', function () { if (isOpen()) close(true); else open(); });
+    [].forEach.call(menu.querySelectorAll('.zynix-mobile-section-trigger'), function (btn) {
+      btn.addEventListener('click', function () {
+        var links = document.getElementById(btn.getAttribute('aria-controls'));
+        if (!links) return;
+        var show = btn.getAttribute('aria-expanded') !== 'true';   // several sections may be open at once
+        btn.setAttribute('aria-expanded', show ? 'true' : 'false');
+        links.hidden = !show;
+        links.classList.toggle('open', show);   // the legacy stylesheet shows the list with .open
       });
     });
+    menu.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a[href]')) close(false); });
+    document.addEventListener('keydown', function (e) {
+      if (!isOpen()) return;
+      if (e.key === 'Escape' || e.key === 'Esc') { e.preventDefault(); close(true); return; }
+      if (e.key !== 'Tab') return;
+      var f = focusables(), i = f.indexOf(document.activeElement);
+      if (e.shiftKey) { if (i <= 0) { e.preventDefault(); f[f.length - 1].focus(); } }
+      else if (i === -1 || i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+    });
+    var wide = window.matchMedia ? window.matchMedia('(min-width: 1024px)') : null;
+    var onWidth = function (e) { if (e.matches) close(false); };
+    if (wide && wide.addEventListener) wide.addEventListener('change', onWidth); else if (wide && wide.addListener) wide.addListener(onWidth);
+  }
+
+  // Stamps data-z-anchor-fixed on every link with text in the bundle regions, so the Webflow head script
+  // zynixanchortextfix leaves them alone (§3.10 item 3). It never adds aria-labels to content links.
+  function zxGuardAnchors(root) {
+    var sel = '.zynix-injected a[href], .zynix-mega-nav a[href], .zynix-mobile-menu a[href], .zynix-announcement-bar a[href], #zynix-chat-widget a[href]';
+    [].forEach.call((root || document).querySelectorAll(sel), function (a) {
+      if (!a.hasAttribute('data-z-anchor-fixed') && (a.textContent || '').trim()) a.setAttribute('data-z-anchor-fixed', '1');
+    });
+  }
+
+  // Interim guard against the Webflow head script zynixlinkrewrite 1.0.11, which turns /agents and /agents/* into
+  // /zynix-ai-agents 1.5s after load (§3.10b). Records data-zx-href on bundle links to a protected path (after the
+  // bundle's own INT_FIXES) and puts the href back whenever something changes it: one MutationObserver for 10s plus
+  // sweeps at 1.6s and 3.6s. Only protected paths are guarded; the head script's other fixes still apply.
+  var ZX_PROTECTED_PATHS = ['/agents'];
+  var zxHrefObserver = null;
+  function zxIsProtectedHref(h) {
+    if (!h || h.charAt(0) !== '/') return false;
+    var p = h.split('#')[0].split('?')[0].replace(/\/+$/, '').toLowerCase();
+    return ZX_PROTECTED_PATHS.some(function (x) { return p === x || p.indexOf(x + '/') === 0; });
+  }
+  function zxProtectHrefs(root) {
+    var sel = '.zynix-injected a[href], .zynix-mega-nav a[href], .zynix-mobile-menu a[href], #zynix-chat-widget a[href]';
+    [].forEach.call((root || document).querySelectorAll(sel), function (a) {
+      var h = a.getAttribute('href'), z = a.getAttribute('data-zx-href');
+      if (z != null) { if (h !== z) a.setAttribute('href', z); }
+      else if (zxIsProtectedHref(h)) a.setAttribute('data-zx-href', h);
+    });
+    if (zxHrefObserver || !window.MutationObserver || !document.body) return;
+    var restore = function (a) { var z = a.getAttribute && a.getAttribute('data-zx-href'); if (z != null && a.getAttribute('href') !== z) a.setAttribute('href', z); };
+    zxHrefObserver = new MutationObserver(function (list) { list.forEach(function (m) { restore(m.target); }); });
+    zxHrefObserver.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['href'] });
+    var sweep = function () { [].forEach.call(document.querySelectorAll('[data-zx-href]'), restore); };
+    setTimeout(sweep, 1600);
+    setTimeout(sweep, 3600);
+    setTimeout(function () { zxHrefObserver.disconnect(); }, 10000);
+  }
+
+  // Measures the fixed chrome (announcement bar + nav) and publishes it as --zx-chrome-h and --zx-announce-h-live
+  // (§3.4); CSS turns them into the body offset (.zx-has-chrome), the nav's top and the mobile menu's top. It also
+  // (re)arms the IntersectionObserver that adds .is-scrolled to the nav once the page moves under it (§7.4).
+  var zxScrollObserver = null, zxScrollObservedH = -1;
+  function zxSetChromeHeight() {
+    var nav = document.querySelector('nav.zynix-mega-nav');
+    if (!nav || !document.body) return 0;
+    var bar = document.querySelector('.zynix-announcement-bar');
+    var bh = bar ? bar.offsetHeight : 0, h = bh + nav.offsetHeight;
+    var root = document.documentElement;
+    root.style.setProperty('--zx-announce-h-live', bh + 'px');
+    root.style.setProperty('--zx-chrome-h', h + 'px');
+    document.body.classList.add('zx-has-chrome');
+    var sentinel = document.querySelector('.zx-scroll-sentinel');
+    if (sentinel && h !== zxScrollObservedH && window.IntersectionObserver) {
+      zxScrollObservedH = h;
+      if (zxScrollObserver) zxScrollObserver.disconnect();
+      zxScrollObserver = new IntersectionObserver(function (entries) {
+        nav.classList.toggle('is-scrolled', !entries[entries.length - 1].isIntersecting);
+      }, { rootMargin: '-' + h + 'px 0px 0px 0px' });
+      zxScrollObserver.observe(sentinel);
+    }
+    return h;
+  }
+
+  // Where a path sits in NAV (§3.2 section matching, §3.7): { path, navPath, section, item, landing }.
+  // navPath resolves the aliases that still render (e.g. /products-analytics → /zynix-data-analytics). When a page is
+  // in two sections, the one whose item is also in the footer wins (/security → Company, /press → Resources).
+  function zxNavCurrent(path) {
+    var p = String(path == null ? zxPath() : path).replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
+    var ALIAS = {
+      '/zynix-ai-agents': '/agents', '/products-analytics': '/zynix-data-analytics', '/solutions/zynix-data-analytics': '/zynix-data-analytics',
+      '/company/zynixllm': '/company-zynixllm', '/products-zynixllm': '/company-zynixllm', '/company-trust-center': '/security', '/trust-center': '/security',
+      '/company-about': '/about', '/company-careers': '/careers', '/company-press': '/press', '/newsroom': '/press',
+      '/roi': '/roi-calculator', '/case-studies': '/resources-case-studies', '/blog': '/resources-blog',
+      '/solutions-acos': '/audience-segments/acos-msos', '/solutions-health-systems': '/audience-segments/health-systems',
+      '/solutions-health-plans': '/audience-segments/health-plans', '/solutions-fqhcs': '/audience-segments/fqhcs',
+      '/solutions-independent-practices': '/audience-segments/independent-group-practices', '/solutions-ascs': '/audience-segments/ascs'
+    };
+    var q = ALIAS[p] || p, m;
+    if ((m = /^\/who-we-serve\/([a-z0-9-]+)$/.exec(q))) q = '/audience-segments/' + m[1];
+    if ((m = /^\/resources\/(blog|faq|glossary|webinars|whitepapers)$/.exec(q))) q = '/resources-' + m[1];
+    var r = { path: p, navPath: q, section: null, item: null, landing: false };
+    if (!q) return r;
+    var byId = {}, hits = [];
+    NAV.forEach(function (s) {
+      byId[s.id] = s;
+      if (s.href === q && !r.section) { r.section = s; r.landing = true; }
+      (s.columns || []).forEach(function (c) { (c.items || []).forEach(function (it) { if (it.href === q) hits.push({ s: s, it: it }); }); });
+    });
+    if (hits.length) {
+      var same = r.landing ? hits.filter(function (x) { return x.s === r.section; }) : [];
+      var hit = same[0] || hits.filter(function (x) { return x.it.footer !== false; })[0] || hits[0];
+      if (!r.section) r.section = hit.s;
+      r.item = hit.it;
+    }
+    if (!r.section) {
+      var id = /^\/agents\//.test(q) ? 'agents'
+        : /^\/(audience-segments\/|use-cases|solutions)/.test(q) ? 'solutions'
+        : /^\/case-studies/.test(q) ? 'customers'
+        : /^\/(resources-|resources\/|press|roi-calculator|alternatives|compare-)/.test(q) ? 'resources'
+        : /^\/(about|careers|contact|security)$/.test(q) ? 'company'
+        : /^\/(products-|company-zynixllm)/.test(q) ? 'platform' : null;
+      r.section = id && byId[id] ? byId[id] : null;
+    }
+    return r;
   }
 
   // ── Shared: Agent Detail Page Template ──
@@ -5208,7 +5500,9 @@
     '/health-plans': '/audience-segments/health-plans',
     '/fqhcs': '/audience-segments/fqhcs',
     '/ascs': '/audience-segments/ascs',
-    '/independent-group-practices': '/audience-segments/independent-group-practices'
+    '/independent-group-practices': '/audience-segments/independent-group-practices',
+    // Soft-404 fix, client side (S3, §3.12); the server 301 is a Webflow-dashboard job
+    '/case-study-awv-acos': '/resources-whitepapers'
   };
 
   // ── PAGE ROUTER ──
@@ -11001,46 +11295,73 @@ function renderDataAnalyticsV7() {
   // ── Google Analytics ──
   // ── Link fixer: rewrite known 404 URLs (external + internal) to working equivalents ──
   function rewriteBrokenExternalLinks() {
+    // Owner S3 (§3.12). The misleading CMS TCM → MIPS, MGMA benchmarking → homepage and Star Ratings → Care Compare
+    // entries are gone: they only served the audience "What the Data Shows" citations, which P3 deletes.
     var EXT_FIXES = {
       'https://www.cms.gov/medicare/shared-savings-program/about': 'https://www.cms.gov/priorities/innovation/innovation-models/aco',
-      'https://www.cms.gov/medicare/physician-fee-schedule/transitional-care-management-services': 'https://qpp.cms.gov/mips/quality-measures',
-      'https://www.mgma.com/data/benchmarking-data': 'https://www.mgma.com/',
-      'https://www.ama-assn.org/practice-management/prior-authorization/prior-authorization-and-administrative-burden': 'https://www.ama-assn.org/topics/prior-authorization',
-      'https://www.cms.gov/medicare/health-plans/medicareadvtgspecratestats/star-ratings': 'https://www.medicare.gov/care-compare'
+      'https://www.ama-assn.org/practice-management/prior-authorization/prior-authorization-and-administrative-burden': 'https://www.ama-assn.org/topics/prior-authorization'
     };
-    // Internal 404/redirected URLs that still appear in page links — rewrite to canonical 200 destinations
+    // Internal 404/redirected URLs that still appear in page links, rewritten to canonical 200 destinations.
+    // Exact keys only: the lookup is INT_FIXES[path].
     var INT_FIXES = {
       '/blog-1m-patients': '/resources-blog-1m-patients',
       '/blog/1m-patients': '/resources-blog-1m-patients',
-      '/who-we-serve/acos-msos': '/acos-msos',
-      '/who-we-serve/ascs': '/ascs',
-      '/who-we-serve/fqhcs': '/fqhcs',
-      '/who-we-serve/health-plans': '/health-plans',
-      '/who-we-serve/health-systems': '/health-systems',
-      '/who-we-serve/independent-group-practices': '/independent-group-practices',
+      // Audience pages: canonical /audience-segments/<slug> (DECISIONS 7, 9)
+      '/who-we-serve/acos-msos': '/audience-segments/acos-msos',
+      '/who-we-serve/ascs': '/audience-segments/ascs',
+      '/who-we-serve/fqhcs': '/audience-segments/fqhcs',
+      '/who-we-serve/health-plans': '/audience-segments/health-plans',
+      '/who-we-serve/health-systems': '/audience-segments/health-systems',
+      '/who-we-serve/independent-group-practices': '/audience-segments/independent-group-practices',
+      '/solutions-acos': '/audience-segments/acos-msos',
+      '/solutions-ascs': '/audience-segments/ascs',
+      '/solutions-fqhcs': '/audience-segments/fqhcs',
+      '/solutions-health-plans': '/audience-segments/health-plans',
+      '/solutions-health-systems': '/audience-segments/health-systems',
+      '/solutions-independent-practices': '/audience-segments/independent-group-practices',
+      '/acos-msos': '/audience-segments/acos-msos',
+      '/ascs': '/audience-segments/ascs',
+      '/fqhcs': '/audience-segments/fqhcs',
+      '/health-plans': '/audience-segments/health-plans',
+      '/health-systems': '/audience-segments/health-systems',
+      '/independent-group-practices': '/audience-segments/independent-group-practices',
       '/use-cases/hcc-gap-closure-health-systems': '/use-cases/hcc-gap-closure-health-system-aco',
       '/use-cases/post-discharge-followup-health-systems': '/use-cases/post-discharge-follow-up',
       '/use-cases/after-hours-ed-diversion-aco': '/use-cases/after-hours-ed-diversion',
-      '/solutions-acos': '/acos-msos',
-      '/solutions-ascs': '/ascs',
-      '/solutions-fqhcs': '/fqhcs',
-      '/solutions-health-plans': '/health-plans',
-      '/solutions-health-systems': '/health-systems',
-      '/solutions-independent-practices': '/independent-group-practices',
       '/company-about': '/about',
       '/company-careers': '/careers',
-      // /agents/* deep SPA routes — Webflow returns 404 server-side; route to the
-      // Webflow-authored agent segment pages that render 200.
-      '/agents/chronic-care-management': '/clinical-performance',
-      '/agents/clinical-performance': '/clinical-performance',
-      '/agents/preventive-quality-activation': '/clinical-performance',
-      '/agents/sdoh-determination': '/clinical-performance',
-      '/agents/transitions-of-care': '/clinical-performance',
-      '/agents/predictive-activation': '/predictive-activation',
-      '/agents/operational-efficiency/zynafterhours-triage': '/operational-efficiency',
-      '/agents/operational-efficiency/zynschedule': '/operational-efficiency',
+      '/case-studies': '/resources-case-studies',
+      // /agents/* deep routes 404 on the server: land on the family anchor on the hub (LNK-1 Phase 1)
+      '/agents/chronic-care-management': '/agents#clinical-performance',
+      '/agents/clinical-performance': '/agents#clinical-performance',
+      '/agents/preventive-quality-activation': '/agents#clinical-performance',
+      '/agents/sdoh-determination': '/agents#clinical-performance',
+      '/agents/transitions-of-care': '/agents#clinical-performance',
+      '/agents/predictive-activation': '/agents#predictive-activation',
+      '/agents/operational-efficiency': '/agents#operational-efficiency',
+      '/agents/operational-efficiency/zynafterhours-triage': '/agents#operational-efficiency',
+      '/agents/operational-efficiency/zynschedule': '/agents#operational-efficiency',
       // Solutions / misc
-      '/solutions/zyngap': '/zynix-data-analytics'
+      '/solutions/zyngap': '/zynix-data-analytics',
+      '/solutions/zynix-data-analytics': '/zynix-data-analytics'
+    };
+    // Prefix rules, checked only when no exact key matched; first match wins. The original fragment is dropped and
+    // the query kept, so every remaining /agents/* link lands on a family anchor or the hub (§3.12).
+    var INT_PREFIX_FIXES = [
+      ['/agents/clinical-performance/', '/agents#clinical-performance'],
+      ['/agents/chronic-care-management/', '/agents#clinical-performance'],
+      ['/agents/preventive-quality-activation/', '/agents#clinical-performance'],
+      ['/agents/transitions-of-care/', '/agents#clinical-performance'],
+      ['/agents/predictive-activation/', '/agents#predictive-activation'],
+      ['/agents/operational-efficiency/', '/agents#operational-efficiency'],
+      ['/agents/', '/agents']
+    ];
+    // target + the original query (+ the original fragment unless the target brings its own, or keepHash is false)
+    var join = function (target, rest, keepHash) {
+      var hi = rest.indexOf('#'), query = hi > -1 ? rest.slice(0, hi) : rest, hash = hi > -1 ? rest.slice(hi) : '';
+      var ti = target.indexOf('#');
+      if (ti > -1) return target.slice(0, ti) + query + target.slice(ti);
+      return target + query + (keepHash ? hash : '');
     };
     var links = document.querySelectorAll('a[href]');
     for (var i = 0; i < links.length; i++) {
@@ -11050,8 +11371,13 @@ function renderDataAnalyticsV7() {
       // Internal path match (ignore query/fragment)
       var path = h.split('#')[0].split('?')[0];
       var suffix = h.substring(path.length);
-      if (INT_FIXES[path]) { links[i].setAttribute('href', INT_FIXES[path] + suffix); }
+      if (INT_FIXES[path]) { links[i].setAttribute('href', join(INT_FIXES[path], suffix, true)); continue; }
+      for (var j = 0; j < INT_PREFIX_FIXES.length; j++) {
+        if (path.indexOf(INT_PREFIX_FIXES[j][0]) === 0) { links[i].setAttribute('href', join(INT_PREFIX_FIXES[j][1], suffix, false)); break; }
+      }
     }
+    // Last: keep /agents links on /agents against the zynixlinkrewrite head script (§3.10b)
+    zxProtectHrefs();
   }
 
   function initAnalytics() {
@@ -12982,16 +13308,24 @@ function renderDataAnalyticsV7() {
 
   // ── Custom 404 page renderer ──
   function render404() {
-    return renderInnerHero('404 ERROR', 'Page Not Found', 'The page you\'re looking for doesn\'t exist or has been moved.', IMG.hero, 'Page not found') +
-    '<section style="padding:60px 20px 80px;text-align:center;max-width:600px;margin:0 auto">' +
-      '<p style="font-size:18px;color:var(--z-text-light);margin-bottom:32px">It seems you\'ve followed a broken link or the page has been removed. Let us help you find what you need.</p>' +
-      '<div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">' +
-        '<a href="/" class="zynix-btn-primary" style="text-decoration:none">← Back to Home</a>' +
-        '<a href="/platform" class="zynix-btn-outline" style="text-decoration:none">Explore Platform</a>' +
-        '<a href="/contact" class="zynix-btn-outline" style="text-decoration:none">Contact Us</a>' +
-      '</div>' +
-    '</section>' +
-    renderCTA() + renderFooter();
+    // Wayfinding 404 (owner S3, §3.8): error hero, six NAV cards, footer. No chart, badges, CTA band or orange button.
+    // The do404 path sets noindex, nofollow; the title follows COPY_DECK §2.8.
+    try { document.title = 'Page not found | Zynix AI'; } catch (e) {}
+    var find = function (href) {
+      var hit = null;
+      NAV.forEach(function (s) { (s.columns || []).forEach(function (c) { (c.items || []).forEach(function (it) { if (!hit && it.href === href) hit = it; }); }); });
+      return hit;
+    };
+    var cards = ['/platform', '/agents', '/audience-segments/acos-msos', '/audience-segments/health-plans', '/resources-case-studies', '/contact']
+      .map(find).filter(Boolean);
+    return renderHero({ preset: 'error', eyebrow: '404', title: 'We couldn’t find that page',
+        lead: 'The link may be out of date. These are good places to start.',
+        secondary: { label: 'Go to the homepage', href: '/' }, media: { type: 'none' }, compact: true }) +
+      // The card titles are the H2s under the page's H1 (no hidden heading: the lead already says it).
+      '<section class="zynix-section zynix-section--compact zynix-section--flush-top" aria-label="Good places to start"><div class="zynix-container">' +
+        renderGrid(cards, function (it) { return renderCard({ title: it.label, body: it.desc, href: it.href, level: 2 }); }) +
+      '</div></section>' +
+      renderFooter();
   }
 
   function renderBlogPostFromData(post) {
@@ -13300,40 +13634,6 @@ function renderDataAnalyticsV7() {
           if (roi) roi.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 300);
       }
-      // Subtle parallax on hero image (disabled for reduced-motion and lower-end devices)
-      var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!prefersReducedMotion) {
-        var heroImg = document.querySelector('.zynix-inner-hero-img img, .zynix-homepage-hero .zynix-inner-hero-img img');
-        if (heroImg) {
-          heroImg.style.willChange = 'transform';
-          var ticking = false;
-          window.addEventListener('scroll', function() {
-            if (!ticking) {
-              requestAnimationFrame(function() {
-                var scrollY = window.pageYOffset;
-                if (scrollY < 800) {
-                  heroImg.style.transform = 'translateY(' + (scrollY * 0.08) + 'px)';
-                }
-                ticking = false;
-              });
-              ticking = true;
-            }
-          }, { passive: true });
-        }
-      }
-      // Sticky CTA bar - appears after scrolling past hero
-      var stickyBar = document.createElement('div');
-      stickyBar.className = 'zynix-sticky-cta';
-      stickyBar.innerHTML = '<div style="display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 24px"><span style="font-size:14px;font-weight:600;color:var(--z-text)">Ready to transform your value-based care operations?</span><a href="' + CALENDLY + '" target="_blank" rel="noopener" class="zynix-btn-primary" style="padding:10px 24px;font-size:13px">Request a Demo &rarr;</a></div>';
-      document.body.appendChild(stickyBar);
-
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 800) {
-          stickyBar.classList.add('visible');
-        } else {
-          stickyBar.classList.remove('visible');
-        }
-      }, { passive: true });
 
       // Anti-flicker: reveal page now that content is injected
       document.documentElement.classList.remove('js-loading');
@@ -13457,305 +13757,112 @@ function renderDataAnalyticsV7() {
 
   // ── AI Chatbot / Customer Routing Agent ──
   function initZynixAgent() {
-    // Decision tree for intelligent routing
-    var AGENT_FLOWS = {
-      start: {
-        msg: "Hi! I'm Zynix AI Assistant. I can help you find the right solution for your organization. What best describes you?",
-        options: [
-          { label: '🏥 ACO / MSO Leader', next: 'aco' },
-          { label: '🏨 Health System Executive', next: 'healthsys' },
-          { label: '🏢 FQHC / Community Health', next: 'fqhc' },
-          { label: '💼 Health Plan / Payer', next: 'payer' },
-          { label: '👨‍⚕️ Independent Practice', next: 'indie' },
-          { label: '🔍 Just Exploring', next: 'explore' }
-        ]
-      },
-      aco: {
-        msg: "Great! ACOs face unique challenges with risk adjustment, care gaps, and quality measures. What's your biggest priority right now?",
-        options: [
-          { label: 'HCC Risk Adjustment & RAF Scores', next: 'rec_hcc' },
-          { label: 'Care Gap Closure & Quality', next: 'rec_caregap' },
-          { label: 'Reducing Total Cost of Care', next: 'rec_tcoc' },
-          { label: 'Full AI Operating System', next: 'rec_os' }
-        ]
-      },
-      healthsys: {
-        msg: "Health systems need scalable solutions. What challenge keeps you up at night?",
-        options: [
-          { label: 'Clinical Documentation & Burnout', next: 'rec_scribe' },
-          { label: 'Prior Authorization Bottlenecks', next: 'rec_priorauth' },
-          { label: 'Revenue Cycle & Denials', next: 'rec_rcm' },
-          { label: 'Population Health Analytics', next: 'rec_analytics' }
-        ]
-      },
-      fqhc: {
-        msg: "FQHCs serve critical communities. How can we help your mission?",
-        options: [
-          { label: 'Patient Scheduling & No-Shows', next: 'rec_schedule' },
-          { label: 'UDS Quality Reporting', next: 'rec_quality' },
-          { label: 'Clinical Documentation', next: 'rec_scribe' },
-          { label: 'Care Coordination', next: 'rec_carecoord' }
-        ]
-      },
-      payer: {
-        msg: "Payers need data-driven insights and network management. What's your focus?",
-        options: [
-          { label: 'Risk Stratification & Analytics', next: 'rec_analytics' },
-          { label: 'Provider Network Optimization', next: 'rec_network' },
-          { label: 'Claims & Prior Auth Automation', next: 'rec_priorauth' },
-          { label: 'Quality & HEDIS Measures', next: 'rec_quality' }
-        ]
-      },
-      indie: {
-        msg: "Independent practices need efficient, affordable solutions. What matters most?",
-        options: [
-          { label: 'AI Medical Scribe for Notes', next: 'rec_scribe' },
-          { label: 'Patient Communication & Reminders', next: 'rec_patient_engage' },
-          { label: 'Billing & Revenue Cycle', next: 'rec_rcm' },
-          { label: 'After-Hours & Triage', next: 'rec_afterhours' }
-        ]
-      },
-      explore: {
-        msg: "Welcome! Here are our most popular starting points:",
-        options: [
-          { label: '📋 See All Products', link: '/platform' },
-          { label: '🤖 AI Agents Hub', link: '/agents' },
-          { label: '📊 Solutions by Org Type', link: '/solutions-acos' },
-          { label: '📅 Book a Demo', link: CALENDLY },
-          { label: '📖 Read Our Blog', link: '/resources/blog' }
-        ]
-      },
-      // Recommendation endpoints
-      rec_hcc: {
-        msg: "For HCC Risk Adjustment, I recommend:",
-        recs: [
-          { name: 'Zynix Platform', desc: 'AI-powered HCC coding with 95%+ accuracy', link: '/platform' },
-          { name: 'Analytics Dashboard', desc: 'RAF score tracking & gap identification', link: '/solutions/zynix-data-analytics' },
-          { name: 'Risk Intelligence Agent', desc: 'Automated chart review & suspect coding', link: '/agents' }
-        ]
-      },
-      rec_caregap: {
-        msg: "For Care Gap Closure & Quality, I recommend:",
-        recs: [
-          { name: 'Care Plans', desc: 'Automated patient care plans with gap tracking', link: '/care-plans' },
-          { name: 'Patient Navigator Agent', desc: 'AI outreach for gap closure', link: '/agents/clinical-performance' },
-          { name: 'Quality Measures Agent', desc: 'Automated HEDIS/STAR measure tracking', link: '/agents/preventive-quality-activation' }
-        ]
-      },
-      rec_tcoc: {
-        msg: "To reduce Total Cost of Care, I recommend:",
-        recs: [
-          { name: 'Zynix Platform', desc: 'Full AI operating system for VBC', link: '/platform' },
-          { name: 'Data Platform', desc: 'Unified data across claims, EHR, and ADT feeds', link: '/platform' },
-          { name: 'TCM Solution', desc: 'Transitional Care Management to prevent readmissions', link: '/use-cases/post-discharge-follow-up' }
-        ]
-      },
-      rec_os: {
-        msg: "The Zynix Platform is our flagship AI operating system, used by organizations managing 1M+ VBC patients:",
-        recs: [
-          { name: 'Zynix Platform', desc: 'Complete AI healthcare operating system', link: '/platform' },
-          { name: 'Book a Demo', desc: 'See it live with your data', link: CALENDLY }
-        ]
-      },
-      rec_scribe: {
-        msg: "For Clinical Documentation, I recommend:",
-        recs: [
-          { name: 'ZynScribe', desc: 'AI medical scribe with 70% less documentation time', link: '/zynscribe' },
-          { name: 'AI Medical Scribe Agent', desc: 'Real-time ambient documentation', link: '/agents' }
-        ]
-      },
-      rec_priorauth: {
-        msg: "For Prior Authorization automation, I recommend:",
-        recs: [
-          { name: 'ZynAuth Agent', desc: 'Automated prior auth submission & tracking', link: '/agents/operational-efficiency' },
-          { name: 'Prior Auth Use Case', desc: 'See how practices save 12+ hours/week', link: '/use-cases/prior-auth-high-volume-specialty' }
-        ]
-      },
-      rec_rcm: {
-        msg: "For Revenue Cycle optimization, I recommend:",
-        recs: [
-          { name: 'Claims Optimizer Agent', desc: 'AI-powered claims scrubbing & denial prevention', link: '/agents/operational-efficiency' },
-          { name: 'Zynix RCM Solution', desc: 'End-to-end revenue cycle intelligence', link: '/use-cases/prior-auth-high-volume-specialty' }
-        ]
-      },
-      rec_analytics: {
-        msg: "For Analytics & Population Health, I recommend:",
-        recs: [
-          { name: 'Analytics Dashboard', desc: 'Real-time population health insights', link: '/solutions/zynix-data-analytics' },
-          { name: 'Data Platform', desc: 'Unified data lake across all sources', link: '/platform' }
-        ]
-      },
-      rec_schedule: {
-        msg: "For Patient Scheduling & No-Show Reduction, I recommend:",
-        recs: [
-          { name: 'ZynSchedule Agent', desc: 'AI-powered intelligent scheduling', link: '/agents/operational-efficiency/zynschedule' },
-          { name: 'ZynReminder Agent', desc: 'Automated appointment reminders', link: '/agents/preventive-quality-activation/zynreminder' }
-        ]
-      },
-      rec_quality: {
-        msg: "For Quality Reporting & Measures, I recommend:",
-        recs: [
-          { name: 'Quality Measures Agent', desc: 'Automated HEDIS, STAR, and UDS tracking', link: '/agents/preventive-quality-activation' },
-          { name: 'Analytics Dashboard', desc: 'Quality measure performance insights', link: '/solutions/zynix-data-analytics' }
-        ]
-      },
-      rec_carecoord: {
-        msg: "For Care Coordination, I recommend:",
-        recs: [
-          { name: 'Referral Coordinator Agent', desc: 'AI-managed referral tracking', link: '/agents/operational-efficiency' },
-          { name: 'Post-Discharge Follow-Up', desc: 'Automated TCM outreach', link: '/agents/transitions-of-care' },
-          { name: 'Care Plans', desc: 'Collaborative care plan management', link: '/care-plans' }
-        ]
-      },
-      rec_network: {
-        msg: "For Provider Network Optimization, I recommend:",
-        recs: [
-          { name: 'Analytics Dashboard', desc: 'Provider performance scorecards', link: '/solutions/zynix-data-analytics' },
-          { name: 'Data Platform', desc: 'Network-wide data aggregation', link: '/platform' },
-          { name: 'Health Plans Solution', desc: 'Purpose-built for payer needs', link: '/who-we-serve/health-plans' }
-        ]
-      },
-      rec_patient_engage: {
-        msg: "For Patient Communication & Engagement, I recommend:",
-        recs: [
-          { name: 'ZynReminder Agent', desc: 'Smart appointment reminders', link: '/agents/preventive-quality-activation/zynreminder' },
-          { name: 'ZynAfterHours Agent', desc: '24/7 patient triage & messaging', link: '/agents/operational-efficiency/zynafterhours-triage' },
-          { name: 'Care Plans', desc: 'AI-powered care coordination', link: '/care-plans' }
-        ]
-      },
-      rec_afterhours: {
-        msg: "For After-Hours & Triage, I recommend:",
-        recs: [
-          { name: 'ZynAfterHours & Triage', desc: 'AI-powered 24/7 patient triage', link: '/agents/operational-efficiency/zynafterhours-triage' },
-          { name: 'ZynReminder', desc: 'Next-day follow-up automation', link: '/agents/preventive-quality-activation/zynreminder' }
-        ]
-      }
+    // Chat guide (owner S3; DESIGN_SPEC §3.6, NAV-H): guided links, not a live chat. A named <button> launcher, a light
+    // non-modal panel, no emoji, no invented products, no numbers; hidden while the mobile menu is open (CSS + inert).
+    if (!document.body || document.getElementById('zynix-chat-widget')) return;
+    if (['/sms', '/sms-program', '/sms-consent'].indexOf(zxPath()) > -1) return;   // A2P pages stay single-purpose
+    // One step: organization type → three recommendations. Every href is a NAV target or a customer story.
+    var CHAT_FLOWS = {
+      start: { msg: 'What best describes your organization?', options: [
+        { label: 'ACO', next: 'aco' }, { label: 'MSO, IPA or physician group', next: 'mso' }, { label: 'Health plan', next: 'plan' },
+        { label: 'Health system', next: 'hs' }, { label: 'FQHC or community health center', next: 'fqhc' }, { label: 'Just exploring', next: 'explore' } ] },
+      aco:     { msg: 'Good places to start for ACO teams:', recs: ['/audience-segments/acos-msos', '/use-cases/post-discharge-tcm-readmission', '/case-studies/pbaco'] },
+      mso:     { msg: 'Good places to start for physician organizations:', recs: ['/audience-segments/independent-group-practices', '/use-cases/hcc-gap-raf-optimization', '/care-plans'] },
+      plan:    { msg: 'Good places to start for health plans:', recs: ['/audience-segments/health-plans', '/use-cases/hedis-stars-quality-improvement', '/case-studies-eternal-health'] },
+      hs:      { msg: 'Good places to start for health systems:', recs: ['/audience-segments/health-systems', '/use-cases/post-discharge-tcm-readmission', '/integrations'] },
+      fqhc:    { msg: 'Good places to start for community health centers:', recs: ['/audience-segments/fqhcs', '/use-cases/after-hours-ed-diversion', '/case-studies/amistad'] },
+      explore: { msg: 'A quick tour of Zynix:', recs: ['/platform', '/agents', '/resources-case-studies'] }
     };
-
-    // Build chat widget HTML
-    var chatHTML = '<div id="zynix-chat-widget" style="position:fixed;bottom:24px;right:24px;z-index:10000;font-family:\'Funnel Sans\',Helvetica,Arial,sans-serif;">' +
-      '<div id="zynix-chat-bubble" style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#20449B,#F16529);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(32,68,155,0.4);transition:transform 0.3s;">' +
-        '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>' +
-      '</div>' +
-      '<div id="zynix-chat-panel" style="display:none;position:absolute;bottom:72px;right:0;width:380px;max-height:520px;background:#101d35;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,0.4);overflow:hidden;border:1px solid rgba(255,255,255,0.1);">' +
-        '<div style="background:linear-gradient(135deg,#20449B,#2a5cc7);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">' +
-          '<div style="display:flex;align-items:center;gap:10px;">' +
-            '<img src="' + IMG.symbol + '" alt="Zynix AI" style="height:28px;width:28px;border-radius:6px;">' +
-            '<div><div style="color:white;font-weight:700;font-size:15px;">Zynix AI Assistant</div><div style="color:rgba(255,255,255,0.7);font-size:11px;">Guided answers and quick links</div></div>' +
-          '</div>' +
-          '<button id="zynix-chat-close" style="background:none;border:none;color:white;cursor:pointer;font-size:20px;padding:0;line-height:1;">&times;</button>' +
-        '</div>' +
-        '<div id="zynix-chat-body" style="padding:16px;overflow-y:auto;max-height:400px;"></div>' +
-      '</div>' +
-    '</div>';
-
-    // Inject into DOM
-    var chatContainer = document.createElement('div');
-    chatContainer.innerHTML = chatHTML;
-    document.body.appendChild(chatContainer.firstChild);
-
-    var bubble = document.getElementById('zynix-chat-bubble');
-    var panel = document.getElementById('zynix-chat-panel');
-    var closeBtn = document.getElementById('zynix-chat-close');
-    var chatBody = document.getElementById('zynix-chat-body');
-    var isOpen = false;
-
-    function toggleChat() {
-      isOpen = !isOpen;
-      panel.style.display = isOpen ? 'block' : 'none';
-      bubble.style.transform = isOpen ? 'scale(0.9)' : 'scale(1)';
-    }
-
-    bubble.addEventListener('click', function() {
-      toggleChat();
-      if (isOpen && chatBody.innerHTML === '') {
-        renderStep('start');
-      }
+    var TITLE = 'Find the right starting point';
+    // Rec name and description: the CUSTOMERS record ("Customer story: <name>") or the NAV item (label, desc)
+    var recs = {};
+    Object.keys(CUSTOMERS).forEach(function (k) {
+      var c = CUSTOMERS[k];
+      if (c && c.caseStudy) recs[c.caseStudy] = { name: 'Customer story: ' + c.name, desc: c.segmentLabel || '' };
     });
-    closeBtn.addEventListener('click', toggleChat);
-
-    // Hover pulse on bubble
-    bubble.addEventListener('mouseenter', function() { bubble.style.transform = 'scale(1.1)'; });
-    bubble.addEventListener('mouseleave', function() { if (!isOpen) bubble.style.transform = 'scale(1)'; });
-
-    function renderStep(stepId) {
-      var step = AGENT_FLOWS[stepId];
-      if (!step) return;
-
-      var html = '<div style="margin-bottom:12px;">' +
-        '<div style="background:rgba(32,68,155,0.15);border-radius:12px;padding:12px 16px;font-size:14px;color:#e8eaf0;line-height:1.5;">' +
-          step.msg +
-        '</div>' +
-      '</div>';
-
-      if (step.options) {
-        html += '<div style="display:flex;flex-direction:column;gap:8px;">';
-        step.options.forEach(function(opt) {
-          if (opt.link) {
-            var href = opt.link.startsWith('http') ? opt.link : opt.link;
-            var target = opt.link.startsWith('http') ? ' target="_blank" rel="noopener"' : '';
-            html += '<a href="' + href + '"' + target + ' style="display:block;padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;font-size:13px;color:#94a3b8;text-decoration:none;transition:all 0.2s;cursor:pointer;background:rgba(255,255,255,0.04);" onmouseover="this.style.background=\'rgba(32,68,155,0.2)\';this.style.borderColor=\'rgba(32,68,155,0.5)\';this.style.color=\'#e8eaf0\'" onmouseout="this.style.background=\'rgba(255,255,255,0.04)\';this.style.borderColor=\'rgba(255,255,255,0.1)\';this.style.color=\'#94a3b8\'">' + opt.label + '</a>';
-          } else {
-            html += '<button class="zynix-chat-opt" data-next="' + opt.next + '" style="display:block;width:100%;text-align:left;padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;font-size:13px;color:#94a3b8;background:rgba(255,255,255,0.04);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background=\'rgba(32,68,155,0.2)\';this.style.borderColor=\'rgba(32,68,155,0.5)\';this.style.color=\'#e8eaf0\'" onmouseout="this.style.background=\'rgba(255,255,255,0.04)\';this.style.borderColor=\'rgba(255,255,255,0.1)\';this.style.color=\'#94a3b8\'">' + opt.label + '</button>';
-          }
-        });
-        html += '</div>';
-      }
-
-      if (step.recs) {
-        html += '<div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;">';
-        step.recs.forEach(function(rec) {
-          var href = rec.link.startsWith('http') ? rec.link : rec.link;
-          var target = rec.link.startsWith('http') ? ' target="_blank"' : '';
-          html += '<a href="' + href + '"' + target + ' style="display:block;padding:14px 16px;border:1px solid rgba(255,255,255,0.1);border-radius:12px;text-decoration:none;transition:all 0.2s;background:rgba(255,255,255,0.04);" onmouseover="this.style.background=\'rgba(32,68,155,0.2)\';this.style.borderColor=\'rgba(32,68,155,0.5)\'" onmouseout="this.style.background=\'rgba(255,255,255,0.04)\';this.style.borderColor=\'rgba(255,255,255,0.1)\'">' +
-            '<div style="font-weight:600;color:#F16529;font-size:14px;margin-bottom:2px;">' + rec.name + ' →</div>' +
-            '<div style="color:#666;font-size:12px;line-height:1.4;">' + rec.desc + '</div>' +
-          '</a>';
-        });
-        html += '</div>';
-        // Add restart + demo buttons
-        html += '<div style="display:flex;gap:8px;margin-top:12px;">' +
-          '<button class="zynix-chat-opt" data-next="start" style="flex:1;padding:10px;border:1px solid #e0e4f0;border-radius:10px;font-size:12px;color:#666;background:white;cursor:pointer;">↩ Start Over</button>' +
-          '<a href="' + CALENDLY + '" target="_blank" rel="noopener" style="flex:1;padding:10px;border:none;border-radius:10px;font-size:12px;color:white;background:#F16529;cursor:pointer;text-decoration:none;text-align:center;font-weight:600;">📅 Book a Demo</a>' +
-        '</div>';
-      }
-
-      chatBody.innerHTML = html;
-
-      // Bind option buttons
-      chatBody.querySelectorAll('.zynix-chat-opt').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          renderStep(btn.getAttribute('data-next'));
-        });
+    NAV.forEach(function (s) {
+      (s.columns || []).forEach(function (c) {
+        (c.items || []).forEach(function (it) { if (!recs[it.href]) recs[it.href] = { name: it.label, desc: it.desc || '' }; });
+        (c.more || []).forEach(function (m) { if (!recs[m.href]) recs[m.href] = { name: m.label, desc: '' }; });
       });
-    }
+    });
+    NAV.forEach(function (s) { if (s.href && !recs[s.href]) recs[s.href] = { name: s.label, desc: '' }; });
+    Object.keys(CHAT_FLOWS).forEach(function (k) {
+      (CHAT_FLOWS[k].recs || []).forEach(function (h) {
+        if (!recs[h] && window.console) console.warn('[zynix chat] recommendation is neither a NAV target nor a customer story: ' + h);
+      });
+    });
 
-    // Auto-show after 30s on first visit
-    var chatShown = sessionStorage.getItem('zynix_chat_shown');
-    if (!chatShown) {
-      setTimeout(function() {
-        if (!isOpen) {
-          // Subtle pulse animation
-          bubble.style.animation = 'zynixPulse 2s ease-in-out 3';
-          // Show preview tooltip
-          var tooltip = document.createElement('div');
-          tooltip.id = 'zynix-chat-tooltip';
-          tooltip.innerHTML = '👋 Need help finding the right solution?';
-          tooltip.style.cssText = 'position:absolute;bottom:68px;right:0;background:#101d35;padding:10px 16px;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);font-size:13px;color:#e8eaf0;white-space:nowrap;cursor:pointer;';
-          document.getElementById('zynix-chat-widget').appendChild(tooltip);
-          tooltip.addEventListener('click', function() {
-            tooltip.remove();
-            toggleChat();
-            renderStep('start');
-          });
-          // Auto-hide tooltip after 8s
-          setTimeout(function() {
-            if (tooltip.parentElement) tooltip.remove();
-          }, 8000);
-          sessionStorage.setItem('zynix_chat_shown', '1');
-        }
-      }, 30000);
+    var w = document.createElement('div');
+    w.id = 'zynix-chat-widget';
+    w.className = 'zynix-chat';
+    w.innerHTML =
+      '<button type="button" id="zynix-chat-toggle" class="zynix-chat__launcher" aria-expanded="false" aria-controls="zynix-chat-panel" aria-label="' + TITLE + '">' +
+        '<svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></button>' +
+      '<div id="zynix-chat-panel" class="zynix-chat__panel" role="dialog" aria-modal="false" aria-labelledby="zynix-chat-title" hidden>' +
+        '<div class="zynix-chat__header">' +
+          '<div><p class="zynix-chat__title" id="zynix-chat-title">' + TITLE + '</p><p class="zynix-chat__sub">Guided links, not a live chat.</p></div>' +
+          '<button type="button" id="zynix-chat-close" class="zynix-chat__close" aria-label="Close guide"><svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></button>' +
+        '</div>' +
+        '<div id="zynix-chat-body" class="zynix-chat__body" aria-live="polite"></div>' +
+      '</div>';
+    if (document.documentElement.classList.contains('zx-menu-open')) w.setAttribute('inert', '');   // created while the mobile menu is open
+    document.body.appendChild(w);
+
+    var launcher = document.getElementById('zynix-chat-toggle');
+    var panel = document.getElementById('zynix-chat-panel');
+    var body = document.getElementById('zynix-chat-body');
+    var isOpen = function () { return launcher.getAttribute('aria-expanded') === 'true'; };
+    var focusFirst = function () { var f = body.querySelector('.zynix-chat__option, .zynix-chat__rec'); if (f) f.focus(); };
+
+    function renderStep(id) {
+      var step = CHAT_FLOWS[id];
+      if (!step) return;
+      var h = '<p class="zynix-chat__msg">' + step.msg + '</p>';
+      if (step.options) {
+        h += '<div class="zynix-chat__options">' + step.options.map(function (o) {
+          return '<button type="button" class="zynix-chat-opt zynix-chat__option" data-next="' + zxAttr(o.next) + '">' + o.label + '</button>';
+        }).join('') + '</div>';
+      }
+      if (step.recs) {
+        h += '<ul class="zynix-chat__recs" role="list">' + step.recs.map(function (href) {
+          var r = recs[href];
+          if (!r) return '';
+          var desc = r.desc || (/^\/use-cases\//.test(href) ? 'Use case' : '');
+          return '<li><a class="zynix-chat__rec" href="' + zxAttr(href) + '" data-z-anchor-fixed="1"' +
+            (zxIsProtectedHref(href) ? ' data-zx-href="' + zxAttr(href) + '"' : '') + '>' +
+            '<span class="zynix-chat__rec-name">' + r.name + '</span>' + (desc ? '<span class="zynix-chat__rec-desc">' + desc + '</span>' : '') + '</a></li>';
+        }).join('') + '</ul>';
+        h += '<div class="zynix-chat__footer"><button type="button" class="zynix-chat-opt zynix-chat__restart" data-next="start">Start over</button>' +
+          renderButton(SITE_FACTS.demo.label, SITE_FACTS.demo.href, { variant: 'primary', cta: 'demo', className: 'zynix-chat__demo', ariaLabel: SITE_FACTS.demo.label, anchorFixed: true }) + '</div>';
+      }
+      body.innerHTML = h;
+      zxGuardAnchors(body);
     }
+    function open() {
+      panel.hidden = false;
+      launcher.setAttribute('aria-expanded', 'true');
+      w.classList.add('is-open');
+      if (!body.firstChild) renderStep('start');
+      focusFirst();
+    }
+    function close(returnFocus) {
+      panel.hidden = true;
+      launcher.setAttribute('aria-expanded', 'false');
+      w.classList.remove('is-open');
+      if (returnFocus) launcher.focus();
+    }
+    launcher.addEventListener('click', function () { if (isOpen()) close(false); else open(); });
+    document.getElementById('zynix-chat-close').addEventListener('click', function () { close(true); });
+    body.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('[data-next]');
+      if (!b) return;
+      renderStep(b.getAttribute('data-next'));
+      focusFirst();
+    });
+    w.addEventListener('keydown', function (e) {
+      if ((e.key === 'Escape' || e.key === 'Esc') && isOpen()) { e.preventDefault(); close(true); }
+    });
   }
 
   // Initialize chatbot after page loads
