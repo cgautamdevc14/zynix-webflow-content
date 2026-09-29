@@ -40,6 +40,288 @@
 
   var CALENDLY = 'https://calendly.com/jay-reeser-zynix/30min';
 
+  // ==== ZX:BEGIN facts (owner S2) ====
+  // Registry-only facts (REDESIGN_BRIEF.md claims registry; DECISIONS.md 1, 2, 15-19). Anything not here is not a fact.
+  var SITE_FACTS = {
+    asOf: 'September 2026',
+    category: { long: 'AI infrastructure and workflows for value-based care', short: 'AI infrastructure for value-based care' },  // [VERIFY] D1
+    platform: { noun: 'the Zynix platform', title: 'The Zynix platform' },                                                         // [VERIFY] D2
+    company: {
+      legalLine: 'Zynix Inc. (d/b/a Zynix AI)', legalName: 'Zynix Inc.', brand: 'Zynix AI',
+      street: '3535 Little Rd', city: 'Trinity', region: 'FL', postal: '34655', addressLine: '3535 Little Rd, Trinity, FL 34655',
+      email: 'info@zynix.ai', phone: '(727) 261-1297', phoneHref: 'tel:+17272611297',
+      social: [
+        { id: 'linkedin',  label: 'Zynix AI on LinkedIn',  href: 'https://www.linkedin.com/company/zynix/' },
+        { id: 'x',         label: 'Zynix AI on X',         href: 'https://x.com/zynixai_' },
+        { id: 'instagram', label: 'Zynix AI on Instagram', href: 'https://www.instagram.com/zynixai/' }
+      ]
+    },
+    brand: { logo: 'brand/zynix-logo-color.png', logoInverse: 'brand/zynix-logo-inverse.png', logoRatio: 2.625, symbol: 'logo-symbol.png' },
+    demo: { label: 'Request a demo', href: CALENDLY, length: '30 minutes' },
+    stats: {
+      patients:     { value: '1M+',  label: 'value-based care patients onboarded',       sentence: '1M+ value-based care patients onboarded', source: 'Zynix, September 2026' },
+      states:       { value: '30',   label: 'states with Zynix customer organizations',  sentence: 'organizations in 30 states',              source: 'Zynix, September 2026' },
+      ehrSystems:   { value: '30+',  label: 'EHR systems connected',                     sentence: '30+ EHR systems',                         source: 'Zynix, September 2026' },
+      ehrInstances: { value: '300+', label: 'connected EHR instances',                   sentence: '300+ connected instances',                source: 'Zynix, September 2026' }
+    },
+    ehr: {
+      line: '30+ EHR systems across 300+ connected instances',
+      short: '30+ EHR systems · 300+ connected instances',
+      named: ['Epic', 'Oracle Health (Cerner)', 'athenahealth', 'eClinicalWorks', 'NextGen', 'Allscripts', 'Greenway', 'DrChrono'],
+      standards: ['FHIR', 'HL7 v2 (ADT and results)', 'C-CDA', 'X12 270/271, 276/277, 835 and 837', 'Medicare CCLF and BCDA', 'NCPDP']   // as listed on /integrations (JS:8351ff); [VERIFY] names only: never "FHIR R4", "full FHIR", SMART on FHIR, CDS Hooks or bidirectional scheduling
+    },
+    compliance: {
+      soc2:    { badge: 'SOC 2 Type II', prose: 'SOC 2 Type II audited, report available on request',
+                 request: { label: 'Request the SOC 2 report', href: 'mailto:info@zynix.ai?subject=SOC%202%20Type%20II%20report%20request' } },
+      hipaa:   { badge: 'HIPAA-aligned safeguards · BAA available', prose: 'HIPAA-aligned safeguards · BAA available' },
+      hitrust: { badge: 'HITRUST CSF certification in progress', prose: 'HITRUST CSF certification in progress' }
+    },
+    access: {
+      name: 'the CMS ACCESS Model',
+      line: 'Approved participant in the CMS ACCESS Model',
+      clause: 'a voluntary CMS Innovation Center model in Original Medicare for technology-supported chronic-condition care',   // DECISIONS 17: the one explaining clause, always shown with the line (wording from JS:6058)
+      through: 'ACOs and practices can take part through Zynix.',
+      showOn: ['home-proof', 'aco', 'mso-ipa', 'fqhc', 'about']   // never on health-plan pages (Original Medicare model), never in a trust row, never in the footer (it renders on every page)
+    },
+    // Governance statements (audit §4.1 policy as adopted by DECISIONS 15: "Verify" = off the site until Gautamdev confirms).
+    // status 'confirmed' renders; 'hold' never renders and its text is in Q's banned-string list until the flag flips.
+    governance: {
+      escalation:  { status: 'confirmed', basis: 'DECISIONS 4, 17b (locked role split); listed for Gautamdev',
+                     title: 'Agents escalate, clinicians decide',
+                     text: 'Agents follow the escalation rules your team sets and hand clinical questions to a licensed clinician. They don’t diagnose or recommend treatment.' },
+      review:      { status: 'confirmed', basis: 'existing /zynscribe governance copy (JS:8170), without any EHR write-back claim',
+                     title: 'Physicians approve clinical documentation',
+                     text: 'ZynScribe notes stay drafts until a physician reviews and approves them.' },
+      auditTrail:  { status: 'hold', basis: '[HOLD] scope of agent action logging not confirmed',
+                     title: 'Every action is logged',
+                     text: 'Each call, message, booking and escalation is timestamped and attributed to an agent or a person.' },
+      dataUse:     { status: 'hold', basis: '[HOLD] Gautamdev and counsel',
+                     title: 'How your data is used',
+                     text: 'Your data is used to run your workflows under your BAA. We don’t use it to train models for other customers.' }
+    },
+    founder: {
+      name: 'Jay Chowdappa, MD', title: 'Co-founder and CEO',
+      savings: 'ACOs led by co-founder and CEO Jay Chowdappa, MD, generated $300M+ in shared savings',   // founder or company-story context ONLY; never in a stat row; never attributed to Zynix
+      releaseQuote: 'Healthcare organizations don’t have a knowledge problem—they have a follow-through and execution problem.'   // verbatim, PBACO release Apr 14 2026 (JS:6684); cite the release when used
+    }
+  };
+
+  // Intrinsic sizes (px) of images used in frames; renderProductFrame reads width/height from here.
+  var ASSET_SIZES = {
+    'screenshots/aco-dashboard.png': [1920, 3809], 'screenshots/ai-agent-selection.png': [1920, 1058],
+    'screenshots/care-management.png': [1920, 2048], 'screenshots/performance-overview.png': [1920, 2106],
+    'screenshots/portal-dashboard.png': [1920, 2616], 'screenshots/predictive-analytics.png': [1920, 1172],
+    'screenshots/quality-dashboard.png': [1920, 2512], 'screenshots/zynafterhours.png': [1920, 1066],
+    'screenshots/zynpostdischarge.png': [1920, 1066], 'screenshots/zynschedule.png': [1920, 1066],
+    'screenshots/zynscribe-extension.png': [1920, 1066], 'screenshots/zynscribe-mobile.png': [480, 1066],
+    'screenshots/zynscribe-soap.png': [1920, 1066]
+  };
+
+  // Registry customers only (REDESIGN_BRIEF.md). logo.h = optical height class (px) at desktop; logo.w = rendered width at that height.
+  // logo.file is the trimmed, re-encoded asset S2 creates in images/logos/ (logo.source = the existing file it is made from).
+  // Recompute w after trimming: w = round(trimmedWidth / trimmedHeight * h).
+  // Not listed on purpose: "Innovacare Health" (images/innovacare-health.svg) and "MSPB Health" (images/mspb-health.jpg): [VERIFY], not registry.
+  var CUSTOMERS = {
+    pbaco: { name: 'Palm Beach ACO', legalName: 'Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding)',
+      segment: 'aco', segmentLabel: 'ACO', logoRow: 1,
+      logo: { file: 'logos/palm-beach-aco.webp', source: 'palm-beach-aco.png', h: 40, w: 40 },
+      caseStudy: '/case-studies/pbaco',
+      release: { slug: 'pbaco-partnership', date: '2026-04-14', outlet: 'Business Wire', href: '/press#pbaco-partnership',
+                 outletUrl: 'https://www.businesswire.com/news/home/20260414590241/en/' },
+      sizeNote: 'one of the nation’s largest and most successful risk-bearing accountable care organizations',   // release wording; attribute to the release
+      quote: { source: 'release', name: 'David Klebonis', role: 'President &amp; COO, PBACO Holding',
+        text: 'PBACO is focused on building practical, scalable solutions that help providers succeed in value-based care. We believe this partnership with Zynix AI will strengthen patient outreach, improve follow-through, reduce administrative burden, and support better performance across both quality and cost of care. Importantly, we remain committed to ensuring that automation enhances—rather than compromises—the quality of care delivered to our beneficiaries.' },
+      metrics: [] },
+    eternalhealth: { name: 'eternalHealth', segment: 'health-plan', segmentLabel: 'Medicare Advantage plan', logoRow: 2,
+      logo: { file: 'logos/eternal-health.webp', source: 'eternal-health.png', h: 20, w: 110 },
+      caseStudy: '/case-studies-eternal-health',
+      release: { slug: 'eternalhealth-zynix-ai-nirvanahealth-partnership', date: '2026-06-02', outlet: 'Business Wire', href: '/press#eternalhealth-zynix-ai-nirvanahealth-partnership',
+                 outletUrl: 'https://www.businesswire.com/news/home/20260602667552/en/eternalHealth-Zynix-AI-and-nirvanaHealth-Announce-Integrated-Partnership-to-Scale-AI-Enabled-Care-Management-and-Member-Engagement' },
+      quote: { source: 'release', name: 'Pooja Ika', role: 'Founder and CEO, eternalHealth',
+        text: 'eternalHealth is committed to meeting members where they are with proactive support that improves outcomes and experience. Partnering with Zynix AI strengthens our ability to engage members consistently and efficiently, support our care management teams, and advance our quality goals in Massachusetts and Arizona. Combined with nirvanaHealth’s centralized infrastructure, this partnership helps us deliver high-touch care with smart, modern, and cost-sensitive tools.' },
+      metrics: [] },   // the 45% adherence claim is REMOVED (DECISIONS 16)
+    amistad: { name: 'AMISTAD Community Health Center', shortName: 'AMISTAD', segment: 'fqhc', segmentLabel: 'FQHC', logoRow: 3,
+      logo: { file: 'logos/amistad-chc.webp', source: 'amistad-chc.png', h: 28, w: 78 }, caseStudy: '/case-studies/amistad', metrics: [] },
+    westfloridaaco: { name: 'West Florida ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: 4,
+      logo: { file: 'logos/west-florida-aco.svg', source: 'west-florida-aco.svg', h: 20, w: 112 }, caseStudy: '/case-studies-west-florida-aco', metrics: [] },
+    spacecoastaco: { name: 'Space Coast ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: 5,
+      logo: { file: 'logos/space-coast-aco.svg', source: 'space-coast-aco.svg', h: 20, w: 114 }, caseStudy: '/case-studies-space-coast-aco', metrics: [] },
+    centralfloridaaco: { name: 'Central Florida ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: 6,
+      logo: { file: 'logos/central-florida-aco.svg', source: 'central-florida-aco-logo.svg', h: 24, w: 104 }, caseStudy: '/case-studies-central-florida-aco', metrics: [] },
+    nexthealthcare: { name: 'NEXT Healthcare Solutions', segment: null, segmentLabel: null, logoRow: 7,   // [VERIFY] segment
+      logo: { file: 'logos/next-healthcare.svg', source: 'next-healthcare.svg', h: 28, w: 79 }, caseStudy: null, metrics: [] },
+    goldencareaco: { name: 'GoldenCare ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: 8,
+      logo: { file: 'logos/goldencare-aco.webp', source: 'goldencare-aco.png', h: 36, w: 72 }, caseStudy: null, metrics: [] },
+    sunfloweraco: { name: 'Sunflower ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: null,
+      logo: { file: 'logos/sunflower-aco.webp', source: 'sunflower-aco.png', h: 36, w: 72 }, caseStudy: null, metrics: [] },
+    professionalradiology: { name: 'Professional Radiology', segment: null, segmentLabel: null, logoRow: null,
+      logo: { file: 'logos/professional-radiology.webp', source: 'professional-radiology.png', h: 36, w: 61 }, caseStudy: null, metrics: [] },
+    clsc: { name: 'CLSC', segment: null, segmentLabel: null, logoRow: null,   // [VERIFY] full name
+      logo: { file: 'logos/clsc.webp', source: 'clscfl.png', h: 28, w: 85 }, caseStudy: null, metrics: [] },
+    apolloclinic: { name: 'Apollo Clinic Network', segment: 'practice', segmentLabel: 'Physician group', logoRow: null, logo: null, caseStudy: '/case-studies/apollo-clinic', metrics: [] },   // [VERIFY] segment
+    nhs: { name: 'NHS Health System', segment: 'health-system', segmentLabel: 'Health system', logoRow: null, logo: null, caseStudy: '/case-studies/nhs', metrics: [] },
+    advancedmanagement: { name: 'Advanced Management', segment: null, segmentLabel: null, logoRow: null, logo: null, caseStudy: null, metrics: [] },
+    incentivecareipa: { name: 'IncentiveCare IPA', segment: 'ipa', segmentLabel: 'IPA', logoRow: null, logo: null, caseStudy: null, metrics: [] }
+  };
+  // metrics[] entries (P4 fills them, DECISIONS 16): { value, label, baseline, period, n, source: 'Reported by <customer>', approved: 'YYYY-MM-DD'|null }
+  // A metric with approved === null renders only on that customer's case-study page, visibly attributed, and is listed for Gautamdev [VERIFY].
+
+  // Naming glossary (POS-3). Visible copy, menus, breadcrumbs, schema descriptions and the chat use these names only.
+  var NAMES = {
+    platform: 'the Zynix platform',
+    layers: [   // How-It-Works explorer (4 product layers, D1)
+      { n: 1, id: 'data-foundation', name: 'Data foundation', href: '/products-data-platform' },
+      { n: 2, id: 'intelligence',    name: 'Intelligence',    href: '/zynix-data-analytics' },
+      { n: 3, id: 'agents',          name: 'Agents',          href: '/agents' },
+      { n: 4, id: 'care-plans',      name: 'Care plans',      href: '/care-plans' }
+    ],
+    flow: [     // data-flow diagram (5 steps, D1), each tagged with the layer that performs it
+      { id: 'ingest',    name: 'Ingest',    layers: ['data-foundation'] },
+      { id: 'normalize', name: 'Normalize', layers: ['data-foundation'] },
+      { id: 'reason',    name: 'Reason',    layers: ['intelligence'] },
+      { id: 'surface',   name: 'Surface',   layers: ['intelligence'] },
+      { id: 'execute',   name: 'Execute',   layers: ['agents', 'care-plans'] }
+    ],
+    products: {
+      dataFoundation: { name: 'Data foundation', href: '/products-data-platform' },
+      analytics:      { name: 'Analytics',       href: '/zynix-data-analytics' },
+      agents:         { name: 'AI agents',       href: '/agents' },
+      carePlans:      { name: 'Care plans',      href: '/care-plans' },
+      scribe:         { name: 'ZynScribe',       href: '/zynscribe' },
+      integrations:   { name: 'Integrations',    href: '/integrations' },
+      llm:            { name: 'ZynixLLM',        href: '/company-zynixllm' }
+    },
+    // Intelligence products exist in the bundle but some use cases label them "Planned" (PG-S1). Until Gautamdev confirms
+    // what ships, visible copy leads with the capability; the product name shows only when showName === true. [VERIFY]
+    intelligence: [
+      { id: 'zyngap',       name: 'ZynGap',       capability: 'Care gap and HCC detection',            showName: false },
+      { id: 'zynpredict',   name: 'ZynPredict',   capability: 'Admission and readmission risk',        showName: false },
+      { id: 'zynguide',     name: 'ZynGuide',     capability: 'Point-of-care gap prompts',             showName: false },
+      { id: 'zynanalytics', name: 'ZynAnalytics', capability: 'Population and quality dashboards',     showName: false }
+    ],
+    // Agent families and the agents listed under them on /agents today (renderAgentsHub, JS:7395-7501). This is the ONE agent list
+    // (COPY_DECK §1.4 and §5.1 mirror it). No counts anywhere. Planned agents are never listed (the SDoH determination agent is excluded).
+    // `agents` render; `held` do not render until Gautamdev confirms general availability [HOLD]. GA status of every agent: [VERIFY].
+    agentFamilies: [
+      { id: 'clinical-performance', name: 'Clinical performance', href: '/agents#clinical-performance',
+        agents: ['Chronic care management', 'Transitions of care', 'Preventive and quality activation'], held: [] },   // the last includes AWV outreach and ZynReminder reminders
+      { id: 'predictive-activation', name: 'Predictive activation', href: '/agents#predictive-activation',
+        agents: ['Readmission risk', 'Rising-risk outreach'], held: ['Predictive deterioration monitor'] },
+      { id: 'operational-efficiency', name: 'Operational efficiency', href: '/agents#operational-efficiency',
+        agents: ['ZynAfterHours', 'ZynSchedule', 'Referral management', 'ZynFax'], held: ['Prior authorization'] }   // the ZynAuth page is archived
+    ],
+    carePlans: ['Post-discharge TCM', 'HCC gap closure sprint', 'Medication safety and adherence', 'High-utilizer ED diversion',
+                'Chronic condition visit readiness', 'Preventive screening program'],
+    roles: { agent: 'Outreach agent', rn: 'Care manager, RN', physician: 'Physician lead', coordinator: 'Care coordinator', scheduler: 'Scheduler' },
+    // Names that must not appear in new visible copy: "Zynix OS", "ZIP", "Zynix Intelligent Platform", "operating system" as the
+    // product or category name, "ZynAuth" (archived page), and the chat's invented products ("Risk Intelligence Agent",
+    // "Claims Optimizer Agent", "Zynix RCM Solution"). URLs are unchanged.
+    retiredNote: true
+  };
+
+  var NAV = [
+    { id: 'platform', label: 'Platform', href: '/platform', panel: 'wide',
+      columns: [
+        { heading: 'How it works', items: [
+          { label: 'Platform overview', footerLabel: 'Overview', desc: 'One platform for value-based care operations', href: '/platform', icon: 'layers' },
+          { label: 'Data foundation', desc: 'Claims, EHR, ADT and labs, unified', href: '/products-data-platform', icon: 'database' },
+          { label: 'Analytics', desc: 'Risk, quality and HCC gaps', href: '/zynix-data-analytics', icon: 'chart' },
+          { label: 'Care plans', desc: 'TCM, AWV and CCM workflows', href: '/care-plans', icon: 'clipboard' },
+          { label: 'ZynScribe', desc: 'Ambient clinical documentation', href: '/zynscribe', icon: 'mic' }
+        ] },
+        { heading: 'Foundation', items: [
+          { label: 'Integrations', desc: SITE_FACTS.ehr.short, href: '/integrations', icon: 'link' },
+          { label: 'ZynixLLM', desc: 'How our models are built and governed', href: '/company-zynixllm', icon: 'brain' },
+          { label: 'Security & compliance', desc: 'SOC 2 Type II · BAA available', href: '/security', icon: 'shield', footer: false }
+        ] }
+      ],
+      feature: { kind: 'flow', eyebrow: 'The Zynix platform', title: 'From source data to a documented outcome',
+        steps: ['Ingest', 'Normalize', 'Reason', 'Surface', 'Execute'], cta: 'See the platform', href: '/platform' } },
+
+    { id: 'agents', label: 'AI Agents', href: '/agents', panel: 'narrow',
+      columns: [
+        { heading: null, items: [
+          { label: 'All AI agents', footerLabel: 'All agents', desc: 'How agents work with your care team', href: '/agents', icon: 'bot' },
+          { label: 'Clinical performance', desc: 'Chronic care, transitions, prevention', href: '/agents#clinical-performance', icon: 'heart' },
+          { label: 'Predictive activation', desc: 'Reach patients before the event', href: '/agents#predictive-activation', icon: 'activity' },
+          { label: 'Operational efficiency', desc: 'After-hours, scheduling, intake', href: '/agents#operational-efficiency', icon: 'clock' }
+        ] }
+      ],
+      feature: { kind: 'note', eyebrow: 'Human in the loop',
+        title: 'Agents handle outreach, scheduling and reminders. Your care team makes the clinical decisions.',   /* DECISIONS 4, 17b role split; no logging or audit-trail claim until SITE_FACTS.governance.auditTrail is confirmed */
+        cta: 'How agents work', href: '/agents' } },
+
+    { id: 'solutions', label: 'Solutions', href: '/solutions', panel: 'wide',
+      columns: [
+        { heading: 'By organization', items: [
+          { label: 'ACOs', desc: 'TCM, AWVs, HCC and quality gaps', href: '/audience-segments/acos-msos', icon: 'users' },
+          { label: 'MSOs, IPAs & physician groups', desc: 'Programs across independent practices', href: '/audience-segments/independent-group-practices', icon: 'stethoscope' },
+          { label: 'Health plans', desc: 'Stars, HEDIS gaps and member outreach', href: '/audience-segments/health-plans', icon: 'target' },
+          { label: 'Health systems', desc: 'Post-discharge follow-up and documentation', href: '/audience-segments/health-systems', icon: 'hospital' },
+          { label: 'FQHCs & community health', desc: 'Multilingual outreach and after-hours access', href: '/audience-segments/fqhcs', icon: 'mappin' }
+        ] },
+        { heading: 'By program', items: [   // label-only on purpose (compact column; no desc field)
+          { label: 'Transitional care & readmissions', href: '/use-cases/post-discharge-tcm-readmission', footer: false },
+          { label: 'HCC & risk adjustment', href: '/use-cases/hcc-gap-raf-optimization', footer: false },
+          { label: 'HEDIS & Stars quality', href: '/use-cases/hedis-stars-quality-improvement', footer: false },
+          { label: 'Chronic care & adherence', href: '/use-cases/chronic-care-coordination-scale', footer: false },
+          { label: 'After-hours access', href: '/use-cases/after-hours-ed-diversion', footer: false },
+          { label: 'Rising-risk outreach', href: '/use-cases/rising-risk-patient-outreach', footer: false }
+        ],
+          more: [ { label: 'All use cases', href: '/use-cases' }, { label: 'Solutions overview', href: '/solutions' } ] }
+      ],
+      feature: { kind: 'customer', customer: 'pbaco', eyebrow: 'Customer story', title: 'Palm Beach ACO',
+        body: 'Post-discharge follow-up and AWV engagement across PBACO Holding’s affiliated provider network.',
+        cta: 'Read the customer story', href: '/case-studies/pbaco' } },
+
+    { id: 'customers', label: 'Customers', href: '/resources-case-studies', footer: false },
+
+    { id: 'resources', label: 'Resources', href: '/resources-blog', panel: 'wide',
+      columns: [
+        { heading: 'Proof', items: [
+          { label: 'Customer stories', desc: 'How value-based care teams use Zynix', href: '/resources-case-studies', menu: false },
+          { label: 'Newsroom', desc: 'Announcements and press releases', href: '/press', icon: 'megaphone' },
+          { label: 'ROI calculator', desc: 'Model the impact on your population', href: '/roi-calculator', icon: 'chart' },
+          { label: 'Compare Zynix', desc: 'Side-by-side with other platforms', href: '/alternatives', icon: 'refresh' }
+        ] },
+        { heading: 'Learn', items: [
+          { label: 'Insights', desc: 'Articles on value-based care operations', href: '/resources-blog', icon: 'book' },
+          { label: 'Webinars & events', desc: 'Recorded sessions and upcoming events', href: '/resources-webinars', icon: 'monitor' },
+          { label: 'Research', desc: 'Reports and white papers', href: '/resources-whitepapers', icon: 'file' },
+          { label: 'FAQ', desc: 'Answers to common buyer questions', href: '/resources-faq', icon: 'chat' },
+          { label: 'Glossary', desc: 'Value-based care terms, defined', href: '/resources-glossary', icon: 'search' }
+        ] }
+      ],
+      promo: true },
+
+    { id: 'company', label: 'Company', href: '/about', panel: 'narrow',
+      columns: [
+        { heading: null, items: [
+          { label: 'About', desc: 'Our story and leadership', href: '/about' },
+          { label: 'Careers', desc: 'Open roles', href: '/careers' },
+          { label: 'Newsroom', desc: 'Announcements and media', href: '/press', footer: false },
+          { label: 'Security & trust', desc: 'SOC 2 Type II · BAA available', href: '/security' },
+          { label: 'Contact', desc: 'Talk to our team', href: '/contact' }
+        ] }
+      ] }
+  ];
+
+  // The ONLY promo slot (Resources panel). On-site target. No third-party webinar links, no NAACOS card
+  // (the announcement bar carries NAACOS until its expiry).
+  var NAV_PROMO = {
+    eyebrow: 'Insight',
+    title: 'ACO LEAD Model: Why 2027 rewards ACOs that execute between visits',
+    body: 'Most ACOs can already see who needs attention. The question is whether they can follow through at scale.',
+    cta: 'Read the article',
+    href: '/resources-blog-aco-lead-model-execution-infrastructure-2027'
+  };
+
+  var NAV_ACTIONS = {
+    contact: { label: 'Contact', href: '/contact', minWidth: 1280 },
+    demo: { label: SITE_FACTS.demo.label, href: CALENDLY }
+  };
+  // ==== ZX:END facts ====
+
   // ── Performance: preconnect to critical origins ──
   ['https://cdn.jsdelivr.net', 'https://calendly.com', 'https://www.googletagmanager.com'].forEach(function(origin) {
     var link = document.createElement('link');
@@ -1864,6 +2146,235 @@
   var IC_MAPPIN = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
   var IC_STAR = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
   var IC_TREE = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="M5 12l7-8 7 8"/><path d="M3 17l9-6 9 6"/></svg>';
+
+  // ==== ZX:BEGIN components (owner S2) ====
+  // Shared component helpers (DESIGN_SPEC.md §2 and §4). Helpers return HTML strings and never touch the DOM.
+  // Text arguments (title, lead, body, labels) are trusted internal HTML; attribute values always go through zxAttr().
+  // Facts come only from the facts block (SITE_FACTS, CUSTOMERS, NAMES, NAV). GH, IMG, IC_* and PAGE_SEO are read at
+  // call time, never at load time. Signatures are final; Phase 1b may change bodies only.
+
+  // ── Utilities ──
+  function zxAttr(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function zxImg(file) { return GH + file; }
+  function zxIcon(key) {
+    var m = { shield: IC_SHIELD, lock: IC_LOCK, brain: IC_BRAIN, chart: IC_CHART, users: IC_USERS, phone: IC_PHONE,
+      calendar: IC_CALENDAR, file: IC_FILE, bot: IC_BOT, target: IC_TARGET, search: IC_SEARCH, eye: IC_EYE, globe: IC_GLOBE,
+      gear: IC_GEAR, zap: IC_ZAP, clock: IC_CLOCK, check: IC_CHECK, heart: IC_HEART, database: IC_DATABASE, layers: IC_LAYERS,
+      link: IC_LINK, activity: IC_ACTIVITY, clipboard: IC_CLIPBOARD, mic: IC_MIC, mail: IC_MAIL, bell: IC_BELL,
+      lightbulb: IC_LIGHTBULB, pill: IC_PILL, hospital: IC_HOSPITAL, user: IC_USER, stethoscope: IC_STETHOSCOPE, fax: IC_FAX,
+      cloud: IC_CLOUD, refresh: IC_REFRESH, download: IC_DOWNLOAD, monitor: IC_MONITOR, chat: IC_CHAT, key: IC_KEY,
+      megaphone: IC_MEGAPHONE, book: IC_BOOK, mappin: IC_MAPPIN };
+    return (Object.prototype.hasOwnProperty.call(m, key) ? m[key] : '').replace('<svg ', '<svg aria-hidden="true" focusable="false" ');
+  }
+  function zxPath() { return (location.pathname || '/').replace(/\/$/, '').toLowerCase(); }   // '' for the homepage
+  function zxSeo(path, fields) { PAGE_SEO[path] = Object.assign({}, PAGE_SEO[path] || {}, fields); }
+
+  // ── Facts readers (§4) ──
+  function zxCustomer(id) { return id && Object.prototype.hasOwnProperty.call(CUSTOMERS, id) ? CUSTOMERS[id] : null; }
+  function zxFact(key) { return key && Object.prototype.hasOwnProperty.call(SITE_FACTS.stats, key) ? SITE_FACTS.stats[key] : null; }
+  function zxAccessLine() { var a = SITE_FACTS.access; return a.line + ', ' + a.clause + '. ' + a.through; }
+  function zxComplianceProse() { var c = SITE_FACTS.compliance; return [c.soc2.prose, c.hipaa.prose, c.hitrust.prose].join(' · '); }
+  // Confirmed governance statements only, in the order asked for (default: declaration order). A 'hold' entry never comes back.
+  function zxGovernance(keys) {
+    var g = SITE_FACTS.governance, out = [];
+    if (keys == null) keys = Object.keys(g); else if (typeof keys === 'string') keys = [keys];
+    keys.forEach(function (k) {
+      var e = Object.prototype.hasOwnProperty.call(g, k) ? g[k] : null;
+      if (e && e.status === 'confirmed') out.push({ id: k, status: e.status, title: e.title, text: e.text, basis: e.basis });
+    });
+    return out;
+  }
+  // Hero preset for a path (§2.10). The /company-* aliases and /press/<slug> follow their canonical pages.
+  function zxHeroPreset(path) {
+    var p = String(path == null ? zxPath() : path).replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
+    if (['/about', '/careers', '/press', '/contact', '/company-about', '/company-careers', '/company-press'].indexOf(p) > -1 || p.indexOf('/press/') === 0) return 'company';
+    if (['/privacy-policy', '/terms-of-service', '/sms', '/sms-program', '/sms-consent', '/company-privacy', '/company-terms'].indexOf(p) > -1) return 'legal';
+    if (p.indexOf('/resources-') === 0 || ['/use-cases', '/alternatives', '/roi-calculator', '/roi', '/case-studies'].indexOf(p) > -1 ||
+        /^\/case-studies[\/-](acos|health-systems|health-plans|practices|fqhcs)$/.test(p)) return 'resource';
+    if (p.indexOf('/case-studies') === 0) return 'case';
+    return 'product';
+  }
+
+  // ── Buttons and links (§2.3) ──
+  // opts.anchorFixed (optional, chrome only) stamps data-z-anchor-fixed="1" (§3.10).
+  function renderButton(label, href, opts) {
+    opts = opts || {};
+    var variant = ['primary', 'secondary', 'quiet', 'inverse'].indexOf(opts.variant || 'primary') > -1 ? (opts.variant || 'primary') : 'secondary';
+    var cls = 'zynix-btn zynix-btn--' + variant + (opts.size === 'lg' ? ' zynix-btn--lg' : '') + (opts.className ? ' ' + opts.className : '');
+    var id = opts.id ? ' id="' + zxAttr(opts.id) + '"' : '';
+    var cta = opts.cta ? ' data-zx-cta="' + zxAttr(opts.cta) + '"' : '';
+    var aria = opts.ariaLabel ? ' aria-label="' + zxAttr(opts.ariaLabel) + '"' : '';
+    if (opts.type === 'button' || opts.type === 'submit') {
+      return '<button type="' + opts.type + '" class="' + cls + '"' + id + cta + aria + '>' + label + '</button>';
+    }
+    var newTab = opts.newTab != null ? !!opts.newTab : /^https?:/i.test(href || '');
+    return '<a class="' + cls + '"' + id + ' href="' + zxAttr(href) + '"' +
+      (newTab ? ' target="_blank" rel="noopener" aria-describedby="zx-newtab-desc"' : '') + cta +
+      (opts.anchorFixed ? ' data-z-anchor-fixed="1"' : '') + aria + '>' + label + '</a>';
+  }
+  function renderDemoButton(opts) {
+    opts = opts || {};
+    return renderButton(SITE_FACTS.demo.label, SITE_FACTS.demo.href, { variant: 'primary', cta: 'demo', size: opts.size,
+      className: opts.className, id: opts.id, ariaLabel: opts.ariaLabel, anchorFixed: opts.anchorFixed });
+  }
+  function renderLinkArrow(label, href, opts) {
+    opts = opts || {};
+    var newTab = opts.newTab != null ? !!opts.newTab : /^https?:/i.test(href || '');
+    return '<a class="zynix-link-arrow' + (opts.className ? ' ' + opts.className : '') + '" href="' + zxAttr(href) + '"' +
+      (newTab ? ' target="_blank" rel="noopener" aria-describedby="zx-newtab-desc"' : '') +
+      (opts.anchorFixed ? ' data-z-anchor-fixed="1"' : '') +
+      (opts.ariaLabel ? ' aria-label="' + zxAttr(opts.ariaLabel) + '"' : '') + '>' +
+      label + '<span class="zynix-link-arrow__icon" aria-hidden="true">→</span></a>';
+  }
+
+  // ── Chip (§2.4) ──
+  function renderChip(text, tone, opts) {
+    opts = opts || {};
+    var t = ['brand', 'success', 'warning', 'danger', 'sample'].indexOf(tone) > -1 ? ' zynix-chip--' + tone : '';
+    if (!text && tone === 'sample') text = 'Sample data';
+    var extra = opts.className ? ' ' + opts.className : '';
+    if (opts.href) return '<a class="zynix-chip' + t + ' zynix-chip--link' + extra + '" href="' + zxAttr(opts.href) + '">' + text + '</a>';
+    return '<span class="zynix-chip' + t + extra + '">' + text + '</span>';
+  }
+
+  // ── Trust badge and trust row (§2.5): SITE_FACTS.compliance strings only; never CMS ACCESS ──
+  function renderBadge(key, opts) {
+    opts = opts || {};
+    if (!Object.prototype.hasOwnProperty.call(SITE_FACTS.compliance, key)) return '';
+    var inner = zxIcon({ soc2: 'shield', hipaa: 'lock', hitrust: 'clock' }[key]) + '<span>' + SITE_FACTS.compliance[key].badge + '</span>';
+    var tag = opts.tag || 'li';
+    if (opts.href) {
+      var a = '<a class="zynix-badge" href="' + zxAttr(opts.href) + '">' + inner + '</a>';
+      return tag === 'li' ? '<li>' + a + '</li>' : a;
+    }
+    return '<' + tag + ' class="zynix-badge">' + inner + '</' + tag + '>';
+  }
+  function renderTrustRow(keys, opts) {
+    opts = opts || {};
+    if (keys == null) keys = ['soc2', 'hipaa', 'hitrust'];
+    var items = keys.map(function (k) { return renderBadge(k, { href: opts.href }); }).join('');
+    if (!items) return '';
+    return '<ul class="zynix-trust-row' + (opts.inverse ? ' zynix-trust-row--inverse' : '') + (opts.plain ? ' zynix-trust-row--plain' : '') +
+      (opts.className ? ' ' + opts.className : '') + '" aria-label="Security and compliance">' + items + '</ul>';
+  }
+
+  // ── Card (§2.6): static <article>/<div>, or the whole card is the link when href is set ──
+  function renderCard(opts) {
+    opts = opts || {};
+    var variant = ['subtle', 'inverse', 'row'].indexOf(opts.variant) > -1 ? opts.variant : 'default';
+    var lvl = opts.level || 3, linked = !!opts.href;
+    var cls = 'zynix-card' + (linked ? ' zynix-card--link' : '') + (variant !== 'default' ? ' zynix-card--' + variant : '') + (opts.className ? ' ' + opts.className : '');
+    var media = '';
+    if (opts.media && typeof opts.media === 'object' && opts.media.src) {
+      var src = opts.media.src, sz = ASSET_SIZES[src] || [];
+      var w = opts.media.width || sz[0], h = opts.media.height || sz[1];
+      media = '<span class="zynix-card__media"><img src="' + zxAttr(/^(https?:|data:|\/)/i.test(src) ? src : zxImg(src)) + '" alt="' + zxAttr(opts.media.alt) + '"' +
+        (w ? ' width="' + zxAttr(w) + '"' : '') + (h ? ' height="' + zxAttr(h) + '"' : '') + ' loading="lazy" decoding="async"></span>';
+    } else if (typeof opts.media === 'string' && opts.media) {
+      media = '<span class="zynix-card__media">' + opts.media + '</span>';
+    }
+    var svg = opts.icon ? zxIcon(opts.icon) : '';
+    var icon = svg ? '<span class="zynix-card__icon" aria-hidden="true">' + svg + '</span>' : '';
+    var text = (opts.eyebrow ? '<p class="zynix-card__eyebrow">' + opts.eyebrow + '</p>' : '') +
+      (opts.title ? '<h' + lvl + ' class="zynix-card__title">' + opts.title + '</h' + lvl + '>' : '') +
+      (opts.body ? '<p class="zynix-card__body">' + opts.body + '</p>' : '') +
+      (opts.meta ? '<div class="zynix-card__footer">' + opts.meta + '</div>' : '') +
+      (linked && opts.cta ? '<span class="zynix-card__cta">' + opts.cta + '<span aria-hidden="true"> →</span></span>' : '');
+    if (variant === 'row') text = '<div class="zynix-card__text">' + text + '</div>';   // keeps the text stacked beside the icon
+    var inner = media + icon + text;
+    if (linked) {
+      var newTab = opts.newTab != null ? !!opts.newTab : /^https?:/i.test(opts.href);
+      return '<a class="' + cls + '" href="' + zxAttr(opts.href) + '"' +
+        (newTab ? ' target="_blank" rel="noopener" aria-describedby="zx-newtab-desc"' : '') + '>' + inner + '</a>';
+    }
+    var tag = opts.tag === 'div' ? 'div' : 'article';
+    return '<' + tag + ' class="' + cls + '">' + inner + '</' + tag + '>';
+  }
+
+  // ── Count-aware grid (§2.7, reference implementation) ──
+  function renderGrid(items, renderItem, opts) {
+    opts = opts || {}; var n = (items || []).length; if (!n) return '';
+    var tag = opts.tag || 'ul', itemTag = tag === 'div' ? 'div' : 'li';
+    var cls = 'zynix-cgrid' + (opts.layout === '2x2' ? ' zynix-cgrid--2x2' : '') + (opts.className ? ' ' + opts.className : '');
+    return '<' + tag + ' class="' + cls + '" data-count="' + n + '"' + (tag === 'div' ? '' : ' role="list"') + '>' +
+      items.map(function (it, i) { return '<' + itemTag + ' class="zynix-cgrid__item">' + renderItem(it, i) + '</' + itemTag + '>'; }).join('') +
+      '</' + tag + '>';
+  }
+
+  // ── Section head (§2.1, reference implementation) ──
+  function renderSectionHead(eyebrow, title, lead, opts) {
+    opts = opts || {};
+    var align = opts.align || 'left', lvl = opts.level || 2;
+    var cls = 'zynix-section-head' + (align !== 'left' ? ' zynix-section-head--' + align : '') + (opts.className ? ' ' + opts.className : '');
+    var eb = eyebrow ? '<p class="zynix-eyebrow">' + eyebrow + '</p>' : '';
+    var h = '<h' + lvl + ' class="zynix-section-head__title"' + (opts.id ? ' id="' + zxAttr(opts.id) + '"' : '') + '>' + title + '</h' + lvl + '>';
+    var ld = lead ? '<p class="zynix-lead">' + lead + '</p>' : '';
+    var act = opts.action ? '<div class="zynix-section-head__action">' + renderLinkArrow(opts.action.label, opts.action.href) + '</div>' : '';
+    if (align === 'split') return '<header class="' + cls + '"><div class="zynix-section-head__main">' + eb + h + '</div><div class="zynix-section-head__aside">' + ld + act + '</div></header>';
+    return '<header class="' + cls + '">' + eb + h + ld + act + '</header>';
+  }
+
+  // ── Hero (§2.10): presets product | company | resource | legal | case | error ──
+  function renderHero(opts) {
+    opts = opts || {};
+    var preset = ['product', 'company', 'resource', 'legal', 'case', 'error'].indexOf(opts.preset) > -1 ? opts.preset : 'product';
+    var id = opts.id || 'hero', tid = id + '-title', demoHref = SITE_FACTS.demo.href;
+    var action = function (a, variant) {
+      if (!a || !a.label || !a.href || a.href === '#') return '';                 // a real anchor or URL only
+      if (preset === 'company' && a.href === demoHref) return '';               // company pages never show a demo button
+      return renderButton(a.label, a.href, { variant: variant, size: a.size, newTab: a.newTab, cta: a.cta || (a.href === demoHref ? 'demo' : null) });
+    };
+    var primary = '', secondary = '';
+    if (preset !== 'legal') {                                                    // legal: no buttons
+      primary = opts.primary === undefined ? (preset === 'product' || preset === 'case' ? renderDemoButton() : '') : action(opts.primary, 'primary');
+      secondary = action(opts.secondary, 'secondary');
+    }
+    var badges = (preset === 'company' || preset === 'legal' || preset === 'error') ? null :
+      (opts.badges === undefined ? (preset === 'product' ? ['soc2', 'hipaa'] : null) : opts.badges);
+    var compact = opts.compact === undefined ? (preset === 'resource' || preset === 'legal') : !!opts.compact;
+    var m = (preset === 'resource' || preset === 'legal' || !opts.media) ? { type: 'none' } : opts.media, mediaHtml = '';
+    if (m.type === 'product') {
+      mediaHtml = renderProductFrame(m.frame || {});
+    } else if (m.type === 'proof') {
+      var c = zxCustomer(m.customer);
+      var facts = (m.facts || (c && c.segmentLabel ? [{ label: 'Segment', value: c.segmentLabel }] : [])).filter(function (f) { return f && f.label && f.value; });
+      var logo = c && c.logo ? '<img class="zynix-hero-proof__logo" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="' + zxAttr(c.name) + '" width="' +
+        Math.round(c.logo.w / c.logo.h * 48) + '" height="48">' : '';
+      var dl = facts.length ? '<dl class="zynix-hero-proof__facts">' + facts.map(function (f) { return '<div><dt>' + f.label + '</dt><dd>' + f.value + '</dd></div>'; }).join('') + '</dl>' : '';
+      var link = m.link === null ? null : (m.link || (c && c.release ? { label: 'Read the announcement', href: c.release.href } : null));
+      var more = link && link.href ? renderLinkArrow(link.label, link.href) : '';
+      if (logo || dl || more) mediaHtml = '<aside class="zynix-hero-proof" aria-label="Customer facts">' + logo + dl + more + '</aside>';
+    }
+    var mt = mediaHtml ? m.type : 'none';
+    var cls = 'zynix-hero zynix-hero--' + mt + (compact ? ' zynix-hero--compact' : '') + (preset !== mt ? ' zynix-hero--' + preset : '');
+    var actions = primary + secondary;
+    return '<section class="' + cls + '" id="' + zxAttr(id) + '" aria-labelledby="' + zxAttr(tid) + '">' +
+      '<div class="zynix-container zynix-hero__grid"><div class="zynix-hero__text">' +
+      (opts.eyebrow ? '<p class="zynix-eyebrow">' + opts.eyebrow + '</p>' : '') +
+      '<h1 class="zynix-hero__title" id="' + zxAttr(tid) + '">' + (opts.title || '') + '</h1>' +
+      (opts.lead ? '<p class="zynix-hero__lead">' + opts.lead + '</p>' : '') +
+      (actions ? '<div class="zynix-hero__actions">' + actions + '</div>' : '') +
+      (badges && badges.length ? renderTrustRow(badges) : '') +
+      '</div>' + (mediaHtml ? '<div class="zynix-hero__media">' + mediaHtml + '</div>' : '') + '</div></section>';
+  }
+
+  // ── Final signatures, bodies land in Phase 1b (S2). Until then they render nothing. ──
+  function renderSection(opts, innerHtml) { return ''; }          // §2.1  opts: { id, surface, compact, rule, container, className, labelledBy }
+  function renderEyebrow(text, opts) { return ''; }               // §2.2  opts: { tag:'p'|'span', variant:'default'|'rule'|'muted' }
+  function renderStatRow(stats, opts) { return ''; }              // §2.8  a stat without a source is dropped
+  function renderProductFrame(opts) { return ''; }                // §2.9  "Sample data" chip by default
+  function renderCallouts(items) { return ''; }                   // §2.9  items: [{ title, body }]
+  function renderUiPanel(model) { return ''; }                    // §2.9  illustrative UI kit (zynix-ui)
+  function renderQuote(opts) { return ''; }                       // §2.11 renders only source 'release' | 'approved'
+  function renderCompareTable(opts) { return ''; }                // §2.12
+  function renderFaqList(items, opts) { return ''; }              // §2.13 (not renderFAQ, the /resources-faq page renderer)
+  function initDisclosures(root) { return ''; }                   // §2.13 replaces the router's FAQ toggle in Phase 1b
+  function renderProse(html, opts) { return ''; }                 // §2.14 opts: { wide }
+  function renderLogoRow(ids, opts) { return ''; }                // §2.15 registry customers only
+  function renderRelatedLinks(opts) { return ''; }                // §2.16 max 6 links
+  function renderSplit(a, b, opts) { return ''; }                 // §2.18 opts: { ratio, reverse, center, mediaFirst }
+  function renderField(opts) { return ''; }                       // §2.19
+  // ==== ZX:END components ====
 
   var SVG_GDPR = '<svg viewBox="0 0 40 40" width="32" height="32"><rect width="40" height="40" rx="8" fill="#ea4335" opacity="0.15"/><circle cx="20" cy="20" r="10" fill="none" stroke="#ea4335" stroke-width="2"/><circle cx="20" cy="20" r="4" fill="none" stroke="#ea4335" stroke-width="2"/><path d="M20 6v4M20 30v4M6 20h4M30 20h4" stroke="#ea4335" stroke-width="2" stroke-linecap="round"/></svg>';
 
