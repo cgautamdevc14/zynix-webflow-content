@@ -2251,82 +2251,83 @@
 
   // ── PAGE: AI Agents ──
   function renderAIAgents() {
-    return renderInnerHero('AI AGENT SUITE', 'Specialized AI Agents That Get Work Done',
-      'Stop chatting. Start executing. Our AI agents convert insights into completed actions, 24/7, across every department, handling the work humans shouldn\u2019t have to do.',
-      IMG.doctor, 'Zynix AI Agents', 'Explore Capabilities') +
+    // /zynix-ai-agents: the explainer until its 301 to /agents exists (DESIGN_SPEC §6; smoke needs >= 500 words). Every
+    // /agents link here is a content link that zxProtectHrefs keeps on /agents (§3.10b).
+    var fams = NAMES.agentFamilies.filter(function (f) { return ZX_AGENTS.families[f.id]; });
+    var html = renderHero({ preset: 'product', eyebrow: 'AI agents', title: 'How agents work with your care team',
+      lead: 'Agents handle outreach, scheduling, reminders and after-hours intake. Clinical questions go to your care team by rule.',
+      secondary: { label: 'Browse all agents', href: '/agents' },
+      media: { type: 'product', frame: { html: renderUiPanel(zxAgentsPanel('run')), sample: false, bare: true, className: 'zx-agents-hero-frame',
+        caption: 'One post-discharge follow-up: the agent’s steps and the care manager’s · sample data' } } });
 
-    '<div class="zynix-container"><div class="zynix-summary-block"><p><strong>Zynix AI Agents</strong> are specialized autonomous agents purpose-built for healthcare workflows, executing patient outreach, scheduling, documentation, prior authorization, and care coordination 24/7, with your care team reviewing exceptions and clinical decisions. Each agent is trained on healthcare data, HIPAA-compliant, and designed to work independently or in coordination with other agents to complete end-to-end care workflows at scale.</p></div></div>' +
+    html += renderSection({ id: 'what-agents-do', className: 'zx-agents-def' }, renderSplit(
+      renderSectionHead('Definition', 'What an agent does', null, { id: 'what-agents-do-title' }),
+      renderProse('<p>An agent completes one operational job inside your workflow: a post-discharge call, a wellness-visit invitation, a reminder, a scheduling request, an after-hours call or an incoming fax. It works from the patient’s record on the Zynix platform and follows the scripts, hours and escalation rules your team approves.</p>' +
+        '<p>When a conversation turns clinical, or falls outside those rules, the agent hands it to a person your team names, with the conversation attached. Agents don’t diagnose, prescribe or change the clinical content of a care plan.</p>' +
+        '<p class="zx-agents-def__line">' + ZX_AGENTS.chatbotLine + '</p>'), { ratio: '5-7' }));
 
-    '<section class="zynix-agents-section" id="capabilities"><div class="zynix-container">' +
-    '<span class="zynix-tag">7 SPECIALIZED AGENTS</span>' +
-    '<h2>The Execution Layer of Healthcare</h2>' +
-    '<p class="zynix-section-sub">Each agent is purpose-built for a specific workflow, trained on healthcare data, and designed to work autonomously or in coordination.</p>' +
+    var split = function (title, items, cls) {
+      return '<div class="zx-agents-duty zx-agents-duty--' + cls + '"><h3 class="zx-agents-duty__title"><span class="zx-agents-duty__icon" aria-hidden="true">' +
+        zxIcon(cls === 'agent' ? 'bot' : 'users') + '</span>' + title + '</h3><ul class="zx-agents-duty__list" role="list">' +
+        items.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></div>';
+    };
+    html += renderSection({ id: 'who-does-what', surface: 'subtle', className: 'zx-agents-duties' },
+      renderSectionHead('Who does what', 'Agents take the routine work. Your team keeps the judgment.', 'The split is the same for every agent and every program.', { id: 'who-does-what-title' }) +
+      '<div class="zx-agents-duties__grid">' +
+      split('Agents handle', [
+        'Post-discharge, wellness-visit and care-gap outreach by phone and text',
+        'Scheduling, confirmations, reminders and reschedules',
+        'After-hours intake: answering, capturing the reason for the call and booking routine visits',
+        'Referral tracking, and fax classification and routing',
+        'Contact notes prepared for your team’s review'
+      ], 'agent') +
+      split('Your team owns', [
+        'Clinical judgment, diagnosis and treatment decisions',
+        'The TCM interactive contact and attestation',
+        'Medication discrepancies, reviewed by a pharmacist or prescriber',
+        'Symptom questions, routed to the on-call clinician by rule',
+        zxGovernance('review').length ? 'Sign-off on clinical documentation: ZynScribe notes stay drafts until a physician reviews and approves them' : 'Sign-off on clinical documentation'
+      ], 'team') + '</div>');
 
-    '<div class="zynix-agents-grid">' +
+    html += renderSection({ id: 'families', rule: true, className: 'zx-agents-fams' },
+      renderSectionHead('By program', 'Three agent families', 'Each family is built around the work it takes off your team.', { id: 'families-title' }) +
+      renderGrid(fams, function (f) {
+        var fam = ZX_AGENTS.families[f.id];
+        return renderCard({ title: fam.title, body: fam.lead, meta: '<span class="zx-agents-fams__agents">' + f.agents.join(' · ') + '</span>',
+          href: '/agents#' + f.id, cta: 'See the agents' });
+      }));
 
-    '<div class="zynix-agent-card fade-in-up">' +
-    '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_LIGHTBULB + '</span><h3>ZynTriage</h3></div>' +
-    '<p>24/7 AI-powered triage that assesses symptoms, diverts low-acuity cases, and handles initial intake across 15+ languages.</p>' +
-    '<div class="zynix-agent-metrics"><span>60-80% Cost Reduction</span><span>97.3% Accuracy</span></div></div>' +
+    var steps = [
+      { k: 'trigger', t: 'Something in your data starts the work: an ADT discharge message, a visit coming due, an open quality gap, a new referral or an inbound call.' },
+      { k: 'action', t: 'The agent calls or texts the patient, or routes the document, within the scripts and hours your team approved.' },
+      { k: 'handoff', t: 'Red flags, clinical questions and anything outside the rules go to the person your team names, with the conversation attached.' }
+    ];
+    html += renderSection({ id: 'agent-run', rule: true, className: 'zx-agents-run' },
+      renderSectionHead('How it works', 'How one agent run works', null, { id: 'agent-run-title' }) +
+      '<ol class="zx-agents-steps zx-agents-steps--row" role="list">' + steps.map(function (s, i) {
+        return '<li class="zx-agents-steps__item"><span class="zx-agents-steps__n" aria-hidden="true">' + (i + 1) + '</span><div><h3 class="zx-agents-steps__title">' +
+          ZX_AGENTS.labels[s.k] + '</h3><p class="zx-agents-steps__body">' + s.t + '</p></div></li>';
+      }).join('') + '</ol>');
 
-    '<div class="zynix-agent-card fade-in-up">' +
-    '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_CALENDAR + '</span><h3>ZynScheduling</h3></div>' +
-    '<p>Intelligent scheduling that books appointments through calls, texts, and chat, matching patients with available slots and managing cancellations.</p>' +
-    '<div class="zynix-agent-metrics"><span>70-80% Autonomous Booking</span><span>24/7 Availability</span></div></div>' +
+    html += renderSection({ id: 'faq', rule: true, className: 'zx-agents-faq' }, renderSplit(renderSectionHead('FAQ', 'Questions about agents', null, { id: 'faq-title' }), renderFaqList([
+      { q: 'What is an AI agent in healthcare operations?', a: 'Software that completes a defined operational task, such as an outreach call, a scheduling request, a reminder or a fax that needs routing, within the rules your team sets. Anything clinical or unclear goes to a person.' },
+      { q: 'Which agents are available?', a: 'Agents come in three families: clinical performance, predictive activation and operational efficiency. The <a href="/agents">AI agents page</a> lists each one with its trigger, action and handoff.' },
+      { q: 'How do agents handle patient data?', a: 'Agents run on the Zynix platform, which has HIPAA-aligned safeguards; a BAA is available. The platform is ' + SITE_FACTS.compliance.soc2.prose + '.' }
+    ], { idPrefix: 'faq-zynix-agents' }), { ratio: '4-8' }));
 
-    '<div class="zynix-agent-card fade-in-up">' +
-    '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_PHONE + '</span><h3>ZynOutreach</h3></div>' +
-    '<p>Automatic outreach within 24-48 hours post-discharge for instruction review, medication reconciliation, and symptom monitoring.</p>' +
-    '<div class="zynix-agent-metrics"><span>85%+ Contact Rate</span><span>2.8x vs Manual</span></div></div>' +
-
-    '<div class="zynix-agent-card fade-in-up">' +
-    '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_BELL + '</span><h3>ZynReminders</h3></div>' +
-    '<p>Smart two-way appointment reminders, medication alerts, and preventive care notifications that reduce no-shows.</p>' +
-    '<div class="zynix-agent-metrics"><span>30-50% No-Show Reduction</span><span>Multi-Channel</span></div></div>' +
-
-    '<div class="zynix-agent-card fade-in-up">' +
-    '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_FAX + '</span><h3>ZynFax</h3></div>' +
-    '<p>AI-powered fax processing that classifies documents, extracts data, routes intelligently, and integrates with your EHR.</p>' +
-    '<div class="zynix-agent-metrics"><span>95%+ Classification Accuracy</span><span>Real-time</span></div></div>' +
-
-    '<div class="zynix-agent-card fade-in-up">' +
-    '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_CLIPBOARD + '</span><h3>ZynPA</h3></div>' +
-    '<p>Automated prior authorization submission, tracking, denial management, and expiration alerts, eliminating the admin burden.</p>' +
-    '<div class="zynix-agent-metrics"><span>75%+ Time Reduction</span><span>$20+ Saved Per Auth</span></div></div>' +
-
-    '<div class="zynix-agent-card fade-in-up">' +
-    '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_PILL + '</span><h3>ZynPharmacy</h3></div>' +
-    '<p>Automated discrepancy detection, drug interaction checking, and adherence assessment with clinical team alerts.</p>' +
-    '<div class="zynix-agent-metrics"><span>95%+ Accuracy</span><span>50-70% Time Reduction</span></div></div>' +
-
-    '</div></div></section>' +
-
-    '<section class="zynix-orchestration-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">ORCHESTRATION</span>' +
-    '<h2>Agents That Work Together</h2>' +
-    '<p class="zynix-section-sub">Zynix agents don\u2019t operate in silos. They hand off tasks, share context, and coordinate across workflows, just like a high-performing care team.</p>' +
-    '<div class="zynix-orch-flow">' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_LIGHTBULB + '</span><p>ZynTriage assesses patient</p></div>' +
-    '<div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_CALENDAR + '</span><p>ZynScheduling books visit</p></div>' +
-    '<div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_MIC + '</span><p>ZynScribe documents encounter</p></div>' +
-    '<div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_PHONE + '</span><p>ZynOutreach follows up</p></div>' +
-    '</div></div></section>' +
-
-    '<section class="zynix-page-faq"><div class="zynix-container">' +
-    '<span class="zynix-tag">FAQ</span>' +
-    '<h2>Frequently Asked Questions</h2>' +
-    '<div class="zynix-faq-list">' +
-    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">What is a healthcare AI agent?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>A healthcare AI agent is an autonomous software system trained to perform specific clinical or administrative tasks, such as patient outreach, appointment scheduling, prior authorization, , without requiring human input for each action. Zynix AI agents operate 24/7, communicate across phone, SMS, and chat, and hand off tasks between agents to complete end-to-end healthcare workflows at scale.</p></div></div>' +
-    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Are AI agents HIPAA compliant?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>Yes. All Zynix AI agents are HIPAA-compliant by design. Patient data is encrypted in transit and at rest, access is role-based with full audit logging, Business Associate Agreements (BAAs) are executed with all customers, and all agent communications comply with HIPAA Privacy and Security Rule requirements. Zynix is SOC 2 Type II certified and supports deployment within customer-controlled infrastructure for maximum data control.</p></div></div>' +
-    '<div class="zynix-faq-item"><button class="zynix-faq-q" aria-expanded="false">Do AI agents replace staff?<span class="zynix-faq-toggle">+</span></button><div class="zynix-faq-a"><p>No. Zynix AI agents augment your existing staff by handling high-volume, repetitive tasks, freeing care coordinators, nurses, and administrative teams to focus on complex cases requiring clinical judgment. Agents handle the 80% of routine work (outreach calls, reminders, scheduling, documentation) while escalating to human staff for the 20% of situations that require human intervention or clinical decision-making.</p></div></div>' +
-    '</div></div></section>' +
-
-    renderCTA('Ready to Deploy Your AI Workforce?', 'See how Zynix AI Agents can transform your operations with autonomous execution.', 'Request a Demo') +
-    renderFooter();
+    html += renderCTA('See agents at work in a 30-minute demo', 'What triggers an agent, what it does, and where your team steps in.', null,
+      { secondary: { label: 'Browse all agents', href: '/agents' } });
+    return html + renderFooter();
   }
+
+  // ==== ZX:BEGIN seo (owner P2) ====
+  // Agent pages (COPY_DECK §6; DESIGN_SPEC §8.4). /agents, /zynix-ai-agents, the family pages and the agent pages keep their
+  // PAGE_SEO strings. Two agent URLs render another page's content (no planned or separate monitoring agent is listed), so
+  // they take that page's title and stay out of the index.
+  zxSeo('/agents/sdoh-determination', { title: PAGE_SEO['/agents'].title, desc: PAGE_SEO['/agents'].desc, noindex: true });
+  zxSeo('/agents/chronic-care-management/chronic-disease-monitoring', { title: PAGE_SEO['/agents/chronic-care-management'].title,
+    desc: PAGE_SEO['/agents/chronic-care-management'].desc, noindex: true });
+  // ==== ZX:END seo ====
 
   // ── PAGE: ZynScribe ──
   function renderZynScribe() {
@@ -7388,73 +7389,49 @@ var AUDIENCE_COMPANY_ROUTES = {
 
 function renderAgentPageV7(data) {
   var html = '';
+  // Agent page template (P2). The flat agent URLs 404 on Webflow until the dashboard publishes them, so these pages are
+  // mostly reached through the router in previews; they follow the same claim rules as /agents (DECISIONS 4, 15-19, 17b).
+  data = data || {};
+  var a = ZX_AGENTS.agents[data.agent] || null, fam = ZX_AGENTS.families[data.family] || null, L = ZX_AGENTS.labels;
+  var owners = { agent: 'Agent', team: 'Your team', platform: 'Zynix platform' };
+  html += renderHero({ preset: 'product', eyebrow: data.eyebrow || (fam ? fam.title : 'AI agents'), title: data.headline, lead: data.subhead,
+    secondary: { label: 'See every agent', href: '/agents' + (fam ? '#' + data.family : '') }, media: { type: 'none' } });
 
-  html += renderInnerHero(data.category, data.headline, data.subhead, data.heroImage, data.heroAlt, 'Explore Capabilities');
+  if (a) html += renderSection({ id: 'at-a-glance', surface: 'subtle', compact: true, className: 'zx-agents-glance' },
+    '<div class="zx-agents-glance__head"><h2 class="zx-agents-glance__title" id="at-a-glance-title">' + (data.glanceTitle || a.label + ' at a glance') + '</h2></div>' +
+    '<dl class="zx-agents-glance__list" data-zx-agent="' + zxAttr(data.agent) + '">' + ['trigger', 'action', 'handoff'].map(function (k) {
+      return '<div class="zx-agents-glance__item zx-agents-glance__item--' + k + '"><dt>' + L[k] + '</dt><dd>' + a[k] + '</dd></div>';
+    }).join('') + '</dl>');
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">WHAT IT DOES</span>' +
-    '<h2>' + data.whatHeading + '</h2>' +
-    '<p class="zynix-section-sub">' + data.whatBody + '</p>' +
-    '</div></section>';
+  var steps = '<ol class="zx-agents-steps" role="list">' + (data.steps || []).map(function (s, i) {
+    return '<li class="zx-agents-steps__item"><span class="zx-agents-steps__n" aria-hidden="true">' + (i + 1) + '</span>' +
+      '<div class="zx-agents-steps__main"><h3 class="zx-agents-steps__title">' + s.title + '</h3><p class="zx-agents-steps__body">' + s.body + '</p></div>' +
+      (owners[s.owner] ? '<span class="zynix-chip' + (s.owner === 'team' ? '' : ' zynix-chip--brand') + ' zx-agents-steps__owner">' + owners[s.owner] + '</span>' : '') + '</li>';
+  }).join('') + '</ol>';
+  var aside = data.rule ? '<aside class="zx-agents-rule" aria-label="' + zxAttr(data.rule.label) + '"><p class="zx-agents-rule__label">' + data.rule.label + '</p>' +
+    '<p class="zx-agents-rule__text">' + data.rule.text + '</p><p class="zx-agents-rule__source">' + data.rule.source + '</p></aside>' : '';
+  html += renderSection({ id: 'how-it-works', className: 'zx-agents-how' },
+    renderSectionHead('How it works', data.stepsTitle || 'How it works', data.stepsLead || null, { id: 'how-it-works-title' }) +
+    (aside ? renderSplit(steps, aside, { ratio: '7-5' }) : steps));
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">HOW IT WORKS</span>' +
-    '<h2>' + data.workflowHeading + '</h2>' +
-    '<div class="zynix-orch-flow">';
-  data.workflowSteps.forEach(function(step, i) {
-    if (i > 0) html += '<div class="zynix-orch-arrow">&rarr;</div>';
-    html += '<div class="zynix-orch-step fade-in-up"><span>' + (i + 1) + '</span><p>' + step.title + '</p></div>';
-  });
-  html += '</div>' +
-    '<div class="zynix-careplan-grid" style="margin-top:32px">';
-  data.workflowSteps.forEach(function(step, i) {
-    html += '<div class="zynix-careplan-card fade-in-up"><div class="zynix-cp-num">' + (i + 1) + '</div><div><h4>' + step.title + '</h4><p>' + step.description + '</p></div></div>';
-  });
-  html += '</div></div></section>';
+  var list = function (title, items) {
+    return '<div class="zx-agents-io__col"><h3 class="zx-agents-io__title">' + title + '</h3><ul class="zx-agents-io__list" role="list">' +
+      items.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></div>';
+  };
+  if ((data.inputs || []).length && (data.outputs || []).length) html += renderSection({ id: 'inputs-outputs', rule: true, className: 'zx-agents-io' },
+    renderSectionHead(null, 'What it works from, and what it produces', null, { id: 'inputs-outputs-title' }) +
+    '<div class="zx-agents-io__grid">' + list('Works from', data.inputs) + list('Produces', data.outputs) + '</div>');
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">INPUTS &amp; OUTPUTS</span>' +
-    '<h2>What Goes In. What Comes Out.</h2>' +
-    '<div class="zynix-compare-grid">' +
-    '<div class="zynix-compare-card zynix-compare-bad"><h3>Inputs</h3><ul>';
-  data.inputs.forEach(function(item) { html += '<li>' + item + '</li>'; });
-  html += '</ul></div>' +
-    '<div class="zynix-compare-card zynix-compare-good"><h3>Outputs</h3><ul>';
-  data.outputs.forEach(function(item) { html += '<li>' + item + '</li>'; });
-  html += '</ul></div></div></div></section>';
+  var gov = (data.governance || []).concat(zxGovernance(['auditTrail']).map(function (c) { return { title: c.title, body: c.text }; }));
+  if (gov.length) html += renderSection({ id: 'governance', surface: 'subtle', className: 'zx-agents-gov' },
+    renderSectionHead('Governance', 'Where your team stays in charge', null, { id: 'governance-title' }) +
+    '<ul class="zx-agents-gov__list" role="list" data-count="' + gov.length + '">' + gov.map(function (g) {
+      return '<li class="zx-agents-gov__item"><span class="zx-agents-gov__icon" aria-hidden="true">' + zxIcon(g.icon || 'shield') + '</span>' +
+        '<h3 class="zx-agents-gov__title">' + g.title + '</h3><p class="zx-agents-gov__text">' + g.body + '</p></li>';
+    }).join('') + '</ul>');
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">INTEGRATIONS</span>' +
-    '<h2>Where It Connects</h2>' +
-    '<div class="zynix-feature-grid">';
-  data.integrations.forEach(function(intg) {
-    html += '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_ZAP + '</div><h3>' + intg.system + '</h3><p>' + intg.description + '</p></div>';
-  });
-  html += '</div></div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">GOVERNANCE</span>' +
-    '<h2>Human Oversight Built In</h2>' +
-    '<p class="zynix-section-sub">' + data.governanceBody + '</p>' +
-    '<div class="zynix-problem-grid">';
-  data.governancePoints.forEach(function(g) {
-    html += '<div class="zynix-problem-card fade-in-up"><div class="zynix-problem-icon">' + IC_SHIELD + '</div><h3>' + g.title + '</h3><p>' + g.body + '</p></div>';
-  });
-  html += '</div></div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">RELATED</span>' +
-    '<h2>Related Use Cases</h2>' +
-    '<div class="zynix-agents-grid">';
-  data.relatedUseCases.forEach(function(uc) {
-    html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + uc.ucId + '</span><h3>' + uc.title + '</h3></div>' +
-      '<p><a href="' + uc.url + '">View use case &rarr;</a></p>' +
-      '</div>';
-  });
-  html += '</div></div></section>';
-
-  html += renderCTA(data.ctaHeadline, data.ctaSubline, data.ctaButton);
+  html += zxAgentsRelated(data.useCases || (fam ? fam.useCases : []));
+  html += renderCTA(data.ctaHeadline, data.ctaSubline, null, { secondary: { label: 'See every agent', href: '/agents' + (fam ? '#' + data.family : '') } });
   html += renderFooter();
   return html;
 }
@@ -7521,238 +7498,278 @@ function renderPlatformHub() {
 
 function renderAgentsHub() {
   var html = '';
+  // /agents (DESIGN_SPEC §6 "Agents hub", COPY_DECK §4, §5.1). The governance line is in the hero lead (first screen); family
+  // links on this page are fragment-only; no link returns to /agents; held agents and held governance never render.
+  html += renderHero({ preset: 'product', eyebrow: 'AI agents', title: 'Agents for care operations, with clinicians in charge',
+    lead: 'Agents make calls, send texts, book visits and route faxes. They escalate clinical questions to your team by rule.',
+    secondary: { label: 'How escalation works', href: '#governance' },
+    media: { type: 'product', frame: { html: renderUiPanel(zxAgentsPanel('queue')), sample: false, bare: true, className: 'zx-agents-hero-frame',
+      caption: 'An outreach queue with an owner and an escalation path on every row · sample data' } } });
+  html += zxAgentsGovernance({ id: 'governance' });
+  html += zxAgentsIndex();
+  NAMES.agentFamilies.forEach(function (f, i) { html += zxAgentsFamilySection(f.id, { rule: i > 0, className: i ? '' : 'zx-agents-family--first' }); });   // the index rules off the first
+  html += zxAgentsSequence();
+  html += zxAgentsTeamView();
+  html += '<div class="zynix-section zynix-section--compact zynix-section--subtle zx-agents-statement"><div class="zynix-container">' +
+    '<p class="zx-agents-statement__text">' + ZX_AGENTS.chatbotLine + '</p></div></div>';
+  html += renderSection({ id: 'faq', className: 'zx-agents-faq' },
+    renderSplit(renderSectionHead('FAQ', 'Questions about agents', null, { id: 'faq-title' }), renderFaqList(ZX_AGENTS.faq, { idPrefix: 'faq-agents' }), { ratio: '4-8' }));
+  if (!CROSS_LINKS[zxPath()]) html += renderCrossLinks('/agents');   // the router adds the block on /agents itself
+  html += renderCTA('See agents at work in a 30-minute demo', 'What triggers an agent, what it does, and where your team steps in.', null,
+    { secondary: { label: 'Browse care plans', href: '/care-plans' } });
+  html += renderFooter();
+  return html;
+}
 
-  html += renderInnerHero('AI AGENT SUITE', 'AI Agents That Don\'t Just Inform. They <span style="color:var(--z-accent)">Act</span>',
-    'Twelve purpose-built AI agents that convert clinical intelligence into completed actions. They call patients, book appointments, reconcile medications, process faxes, submit prior authorizations, and document encounters, 24/7, across every department, in 15+ languages.',
-    IMG.doctor, 'Zynix AI Agents Suite', 'Explore Capabilities');
 
-  // Clinical Performance Agents
-  html += '<section id="clinical-performance"><div class="zynix-container">' +
-    '<span class="zynix-tag">CLINICAL PERFORMANCE</span>' +
-    '<h2>Agents for Care Quality and Patient Outcomes</h2>' +
-    '<p class="zynix-section-sub">Automate chronic care management, transitions of care, preventive screening, AWV outreach, and social determinant assessment.</p>' +
-    '<div class="zynix-agents-grid">';
+// ── P2 agents: one model for /agents, /zynix-ai-agents, the family pages and the agent pages ──────────────────────────
+// Which agents exist, and in which family, comes only from NAMES.agentFamilies: `agents` render, `held` never do (every
+// row carries data-zx-agent for Q's check). Words: COPY_DECK §4, §5.1. No counts, no metrics, no status labels.
+var ZX_AGENTS = {
+  labels: { trigger: 'Trigger', action: 'Action', handoff: 'Handoff to your team' },
+  families: {
+    'clinical-performance': { title: 'Clinical performance agents', short: 'Clinical performance',
+      lead: 'For the programs that decide quality scores and shared savings: transitions of care, chronic care and prevention.',
+      useCases: ['/use-cases/post-discharge-tcm-readmission', '/use-cases/chronic-care-coordination-scale', '/use-cases/hedis-stars-quality-improvement'] },
+    'predictive-activation': { title: 'Predictive activation agents', short: 'Predictive activation',
+      lead: 'For acting on risk before it becomes an admission.',
+      useCases: ['/use-cases/rising-risk-patient-outreach', '/use-cases/post-discharge-tcm-readmission'] },
+    'operational-efficiency': { title: 'Operational efficiency agents', short: 'Operational efficiency',
+      lead: 'For the calls, schedules and paperwork that pull staff away from patients.',
+      useCases: ['/use-cases/after-hours-ed-diversion', '/use-cases/after-hours-triage-multi-site', '/use-cases/referral-intake-asc'] }
+  },
+  // Keyed by the NAMES.agentFamilies name. Held agents keep their words here so that confirming one in NAMES is enough.
+  agents: {
+    'Transitions of care': { label: 'Transitions of care agent', icon: 'phone',
+      trigger: 'An ADT discharge message for an attributed patient.',
+      action: 'Calls or texts the patient, confirms they’re home, reviews discharge instructions and the medication list, and books the 7- or 14-day follow-up visit.',
+      handoff: 'Red-flag symptoms go to the on-call nurse right away; medication discrepancies go to a pharmacist or prescriber; the TCM interactive contact and attestation stay with your clinical staff.' },
+    'Chronic care management': { label: 'Chronic care management agent', icon: 'heart',
+      trigger: 'A CCM-enrolled patient is due for a monthly touchpoint.',
+      action: 'Runs risk-tiered check-ins on symptoms and medication adherence, reinforces the care plan and records the contact for CCM documentation.',
+      handoff: 'Changes in symptoms or adherence go to the care manager; time and documentation go to the billing provider for review.' },
+    'Preventive and quality activation': { label: 'Preventive and quality activation agent', icon: 'bell',
+      trigger: 'A patient is due for an annual wellness visit, screening or vaccination, has an open quality gap, or has an upcoming appointment.',
+      action: 'Invites the patient by voice or SMS, books the visit, sends two-way reminders (the ZynReminder capability), confirms or reschedules, and tracks the visit to completion.',
+      handoff: 'Scheduling conflicts, unconfirmed priority visits and patient questions go to a care coordinator.' },
+    'Readmission risk': { label: 'Readmission risk agent', icon: 'activity',
+      trigger: 'A discharge scores high on the readmission model.',
+      action: 'Enrolls the patient in a more intensive post-discharge care plan with more frequent check-ins.',
+      handoff: 'The care manager reviews the plan and owns clinical follow-up.' },
+    'Rising-risk outreach': { label: 'Rising-risk outreach agent', icon: 'chart',
+      trigger: 'Claims, labs or utilization show a patient’s risk climbing.',
+      action: 'Starts proactive outreach to check in, close open gaps and book a visit before an acute event.',
+      handoff: 'Patients who report new symptoms or barriers go to the care team.' },
+    'Predictive deterioration monitor': { label: 'Predictive deterioration monitor', icon: 'target',
+      trigger: 'Lab trends, adherence patterns or visit frequency suggest a chronic condition is worsening.',
+      action: 'Flags the patient and opens a check-in task.',
+      handoff: 'Escalates to the care manager or physician with the signals that triggered it.' },
+    'ZynAfterHours': { label: 'ZynAfterHours', icon: 'clock',
+      trigger: 'A patient calls the practice after hours.',
+      action: 'Answers after-hours calls, verifies identity, captures the reason for the call, books routine visits, and routes symptom questions to your on-call clinician by rule. Callers describing an emergency are told to call 911.',
+      handoff: 'Symptom questions and urgent calls go to the on-call clinician with the call summary attached.' },
+    'ZynSchedule': { label: 'ZynSchedule', icon: 'calendar',
+      trigger: 'A scheduling request by phone, text or web.',
+      action: 'Matches the visit type to provider availability, then books, reschedules and fills cancellations.',
+      handoff: 'Requests outside your scheduling rules go to front-desk staff.' },
+    'Referral management': { label: 'Referral management agent', icon: 'link',
+      trigger: 'A referral order is placed.',
+      action: 'Tracks it to a booked specialist visit, confirms scheduling and returns results to the referring provider.',
+      handoff: 'Stalled or incomplete referrals go to the referral coordinator.' },
+    'ZynFax': { label: 'ZynFax', icon: 'fax',
+      trigger: 'An inbound fax arrives.',
+      action: 'Reads and classifies the document, matches it to the patient record, checks for missing pages or fields and routes it to the right queue.',
+      handoff: 'Documents it can’t match go to staff for review.' },
+    'Prior authorization': { label: 'Prior authorization agent', icon: 'clipboard',
+      trigger: 'An ordered service needs payer authorization.',
+      action: 'Prepares the authorization request, tracks its status and flags expirations.',
+      handoff: 'Denials and appeals go to your authorization staff.' }
+  },
+  // /agents #governance. Each line shows only while the SITE_FACTS.governance entry it rests on is confirmed (zxGovernance);
+  // the held audit-trail entry is added from SITE_FACTS itself once it is confirmed.
+  governance: [
+    { key: 'escalation', icon: 'gear', title: 'Your rules', text: 'Agents follow the scripts, hours and escalation rules your team approves.' },
+    { key: 'escalation', icon: 'stethoscope', title: 'Clinician escalation', text: 'Red-flag answers and clinical questions go to a nurse or physician with the conversation attached. Agents don’t diagnose or make treatment decisions.' },
+    { key: 'review', icon: 'file' }
+  ],
+  sequence: [
+    { icon: 'clock', text: 'ZynAfterHours takes the call', tag: 'Agent' },
+    { icon: 'calendar', text: 'ZynSchedule books the visit', tag: 'Agent' },
+    { icon: 'mic', text: 'ZynScribe drafts the note for physician approval', tag: 'Physician approves', team: true },
+    { icon: 'phone', text: 'The transitions of care agent follows up', tag: 'Agent' }
+  ],
+  assignCallouts: [
+    { title: 'The agent and the script', body: 'A care team member picks which agent works this patient and which approved script it follows.' },
+    { title: 'Who gets each escalation', body: 'Red flags and medication questions go to the people your rules name, with the conversation attached.' },
+    { title: 'What stays with licensed staff', body: 'The TCM interactive contact, attestation and every clinical decision stay with your team.' }
+  ],
+  chatbotLine: '<strong>Agents aren’t chatbots.</strong> A chatbot answers questions; an agent completes a task in your workflow and hands off anything it shouldn’t handle.',
+  faq: [
+    { q: 'Do agents replace staff?', a: 'No. Agents take high-volume routine work, such as outreach calls, reminders and scheduling, so coordinators, nurses and front-desk staff can spend their time on cases that need judgment. Anything clinical goes to your team.' },
+    { q: 'What can an agent do without a person?', a: 'Operational tasks, within the rules your team sets: contacting patients, scheduling, reminders, intake and routing. Agents don’t diagnose, prescribe or change the clinical content of a care plan.' },
+    { q: 'How are agents kept secure?', a: 'Agents run on the Zynix platform, which is SOC 2 Type II audited, with HIPAA-aligned safeguards and a BAA available. Escalation rules route clinical questions to your staff.' }
+  ]
+};
 
-  var clinicalAgents = [
-    { icon: IC_PILL, name: 'Chronic Care Management', desc: 'Longitudinal care automation for chronic disease populations. Risk-tiered outreach, medication adherence tracking, and care plan reinforcement across CCM billing cycles.', metrics: ['85%+ Contact Rate', 'CCM Revenue Capture'], url: '/agents/chronic-care-management' },
-    { icon: IC_PHONE, name: 'Transitions of Care', desc: 'Post-discharge follow-up within TCM billing windows. Medication reconciliation, symptom monitoring, follow-up scheduling, and readmission prevention.', metrics: ['85%+ Contact Rate', '25% Readmission Reduction'], url: '/agents/transitions-of-care' },
-    { icon: IC_BELL, name: 'Preventive & Quality Activation', desc: 'AWV outreach, appointment reminders, vaccination scheduling, and HEDIS quality gap closure. Drive preventive care completion at population scale.', metrics: ['3x AWV Lift', '40% No-Show Reduction'], url: '/agents/preventive-quality-activation' },
-    { icon: IC_HOSPITAL, name: 'SDoH Determination', desc: 'Screen patients for social determinants of health and route to community resources. Identify housing, food, transportation, and financial barriers to care.', metrics: ['Planned', 'Coming Soon'], url: '/agents/sdoh-determination' }
-  ];
+function zxAgentsFamily(id) {
+  var f = null;
+  (NAMES.agentFamilies || []).forEach(function (x) { if (x.id === id) f = x; });
+  return f;
+}
 
-  clinicalAgents.forEach(function(agent) {
-    html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
-      '<p>' + agent.desc + '</p>' +
-      '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      '<p><a href="' + agent.url + '">Explore ' + agent.name + ' &rarr;</a></p>' +
-      '</div>';
+// Illustrative panels (§2.9): role labels from NAMES.roles, "Pt 1042" identifiers, operational counts only, always labelled.
+function zxAgentsPanel(key) {
+  var R = NAMES.roles, agent = function (l) { return { type: 'agent', label: l || R.agent }; }, staff = function (l) { return { type: 'staff', label: l }; };
+  if (key === 'queue') return { label: 'Sample outreach queue, illustrative data', brand: 'Care management', title: 'Outreach queue', meta: 'Today · all practices',
+    tiles: [{ value: '46', label: 'Open' }, { value: '19', label: 'Reached today' }, { value: '5', label: 'With care team' }],
+    rows: [
+      { title: 'Pt 1042 · 72 · CHF', sub: 'Discharged yesterday · TCM window open', owner: agent(), status: { tone: 'brand', label: 'In progress' } },
+      { title: 'Pt 2317 · 66 · COPD', sub: 'Reported new shortness of breath', owner: staff(R.rn), status: { tone: 'warning', label: 'Escalated' } },
+      { title: 'Pt 0588 · 81 · Diabetes', sub: 'Wellness visit due · invited by text', owner: agent(), status: { tone: 'success', label: 'Booked' } },
+      { title: 'Pt 1190 · 59 · CKD', sub: 'Medication list differs from discharge', owner: staff(R.physician), status: { tone: 'neutral', label: 'Review' } }
+    ],
+    footer: 'Every row has an owner. Clinical questions go to a licensed clinician by rule.' };
+  if (key === 'assign') return { label: 'Sample agent assignment, illustrative data', brand: 'Care management', title: 'Assign an agent',
+    meta: 'Pt 1042 · 72 · CHF · discharged yesterday',
+    rows: [
+      { title: 'Transitions of care agent', sub: 'Post-discharge calls and texts inside the TCM window', status: { tone: 'brand', label: 'Selected' } },
+      { title: 'Chronic care management agent', sub: 'Monthly check-ins for CCM-enrolled patients' },
+      { title: 'Preventive and quality activation agent', sub: 'Wellness visits, screenings and reminders' }
+    ],
+    note: { sections: [
+      { label: 'Script', text: 'Post-discharge check-in, approved by your care team' },
+      { label: 'Escalation rules', text: 'Red-flag symptoms → on-call nurse<br>Medication discrepancies → prescriber review' },
+      { label: 'Stays with your team', text: 'TCM interactive contact and attestation' }
+    ] },
+    footer: 'The agent does the outreach and the booking. The clinical contact stays with your staff.' };
+  if (key === 'run') return { label: 'Sample agent run, illustrative data', brand: 'Care management', title: 'Post-discharge follow-up', meta: 'Pt 1042 · 72 · CHF',
+    steps: [
+      { time: 'Day 0', title: 'ADT discharge message received', owner: 'Zynix platform' },
+      { time: 'Day 1', title: 'Check-in call: home, instructions reviewed', owner: R.agent, status: { tone: 'success', label: 'Reached' } },
+      { time: 'Day 1', title: 'New ankle swelling reported', owner: R.rn, status: { tone: 'warning', label: 'Escalated' } },
+      { time: 'Day 2', title: '7-day follow-up visit booked', owner: R.agent, status: { tone: 'success', label: 'Booked' } }
+    ],
+    footer: 'The agent made the calls and the booking. The clinical question went to the care manager.' };
+  return null;
+}
+
+// Rule-divided agent list: agent · trigger → action → handoff (§6). Column labels show once per list from 1024px; below that
+// each row labels its own cells. Unknown names and held agents never render.
+function zxAgentsRows(names, opts) {
+  opts = opts || {};
+  var lvl = opts.level || 3, L = ZX_AGENTS.labels;
+  var rows = (names || []).map(function (n) {
+    var a = ZX_AGENTS.agents[n];
+    if (!a) return '';
+    return '<li class="zx-agents-row" data-zx-agent="' + zxAttr(n) + '">' +
+      '<h' + lvl + ' class="zx-agents-row__name"><span class="zx-agents-row__icon" aria-hidden="true">' + zxIcon(a.icon) + '</span><span>' + a.label + '</span></h' + lvl + '>' +
+      '<dl class="zx-agents-row__spec">' + ['trigger', 'action', 'handoff'].map(function (k) {
+        return '<div class="zx-agents-row__cell zx-agents-row__cell--' + k + '"><dt>' + L[k] + '</dt><dd>' + a[k] + '</dd></div>';
+      }).join('') + '</dl></li>';
+  }).join('');
+  if (!rows) return '';
+  return '<div class="zx-agents-table"><div class="zx-agents-table__head" aria-hidden="true"><span>Agent</span><span>' + L.trigger + '</span><span>' + L.action + '</span><span>' + L.handoff + '</span></div>' +
+    '<ul class="zx-agents-list" role="list">' + rows + '</ul></div>';
+}
+
+function zxAgentsFamilySection(id, opts) {
+  opts = opts || {};
+  var f = zxAgentsFamily(id), fam = ZX_AGENTS.families[id];
+  if (!f || !fam) return '';
+  var sid = opts.id || id;
+  var head = renderSectionHead(opts.eyebrow || null, opts.title || fam.title, opts.lead === undefined ? fam.lead : opts.lead, { id: sid + '-title', align: 'split' });
+  return renderSection({ id: sid, rule: opts.rule !== false, className: 'zx-agents-family' + zxCls(opts.className) }, head + zxAgentsRows(f.agents));
+}
+
+// "How agents work with your team": confirmed governance only.
+function zxAgentsGovernance(opts) {
+  opts = opts || {};
+  var items = [];
+  ZX_AGENTS.governance.forEach(function (g) {
+    var c = zxGovernance(g.key)[0];
+    if (c) items.push({ icon: g.icon, title: g.title || c.title, text: g.text || c.text });
   });
+  zxGovernance(['auditTrail']).forEach(function (c) { items.push({ icon: 'clipboard', title: c.title, text: c.text }); });
+  if (!items.length) return '';
+  var list = '<ul class="zx-agents-gov__list" role="list" data-count="' + items.length + '">' + items.map(function (it) {
+    return '<li class="zx-agents-gov__item"><span class="zx-agents-gov__icon" aria-hidden="true">' + zxIcon(it.icon) + '</span>' +
+      '<h3 class="zx-agents-gov__title">' + it.title + '</h3><p class="zx-agents-gov__text">' + it.text + '</p></li>';
+  }).join('') + '</ul>';
+  var id = opts.id || 'governance';
+  return renderSection({ id: id, surface: 'subtle', className: 'zx-agents-gov' },
+    renderSectionHead(opts.eyebrow === undefined ? 'Governance' : opts.eyebrow, opts.title || 'How agents work with your team', opts.lead || null, { id: id + '-title' }) + list);
+}
 
-  html += '</div></div></section>';
+// In-page index of the families (fragment-only links, which the link-rewrite head script leaves alone, §3.10b).
+function zxAgentsIndex() {
+  var items = (NAMES.agentFamilies || []).map(function (f) {
+    var fam = ZX_AGENTS.families[f.id];
+    if (!fam) return '';
+    return '<li><a class="zx-agents-index__link" href="#' + zxAttr(f.id) + '"><span class="zx-agents-index__name">' + fam.title +
+      '<span class="zx-agents-index__arrow" aria-hidden="true">↓</span></span><span class="zx-agents-index__agents">' +
+      f.agents.map(function (n, i) { return '<span>' + n + (i < f.agents.length - 1 ? ' ·' : '') + '</span>'; }).join(' ') + '</span></a></li>';
+  }).join('');
+  return '<div class="zynix-section zynix-section--compact zx-agents-index"><div class="zynix-container">' +
+    '<nav aria-label="Agent families"><ul class="zx-agents-index__list" role="list">' + items + '</ul></nav></div></div>';
+}
 
-  // Predictive Activation Agents
-  html += '<section id="predictive-activation"><div class="zynix-container">' +
-    '<span class="zynix-tag">PREDICTIVE ACTIVATION</span>' +
-    '<h2>Agents That Act Before Events Occur</h2>' +
-    '<p class="zynix-section-sub">Risk-based proactive outreach triggered by predictive models. Identify rising-risk patients, predict readmissions, and intervene before clinical deterioration.</p>' +
-    '<div class="zynix-agents-grid">';
+// Orchestration strip (moved from /zynix-ai-agents): the page's one inverse band.
+function zxAgentsSequence() {
+  var list = '<ol class="zx-agents-seq" role="list">' + ZX_AGENTS.sequence.map(function (s, i) {
+    return '<li class="zx-agents-seq__step"><div class="zx-agents-seq__top"><span class="zx-agents-seq__n" aria-hidden="true">' + (i + 1) + '</span>' +
+      '<span class="zx-agents-seq__icon" aria-hidden="true">' + zxIcon(s.icon) + '</span></div>' +
+      '<p class="zx-agents-seq__text">' + s.text + '</p><p class="zx-agents-seq__tag' + (s.team ? ' zx-agents-seq__tag--team' : '') + '">' + s.tag + '</p></li>';
+  }).join('') + '</ol>';
+  return renderSection({ id: 'orchestration', surface: 'inverse', className: 'zx-agents-orch' },
+    renderSectionHead('Example sequence', 'Agents hand off to each other, and to people', null, { id: 'orchestration-title' }) + list);
+}
 
-  var predictiveAgents = [
-    { icon: IC_CHART, name: 'Readmission Risk Agent', desc: 'Identifies high-risk patients at the moment of discharge using predictive models validated against real outcomes. Triggers automated intervention sequences.', metrics: ['25% Readmission Reduction', 'Real-Time Scoring'] },
-    { icon: IC_CHART, name: 'Rising Risk Outreach', desc: 'Monitors patient populations continuously for clinical and utilization patterns that signal escalating risk. Initiates proactive outreach before patients reach crisis.', metrics: ['Weeks of Lead Time', 'Continuous Monitoring'] },
-    { icon: IC_LIGHTBULB, name: 'Predictive Deterioration Monitor', desc: 'Tracks chronic disease patients for early signs of clinical deterioration using lab trends, medication adherence patterns, and encounter frequency.', metrics: ['Early Detection', 'Automated Escalation'] }
-  ];
+// "What your team sees": one illustrative panel with numbered callouts (§2.9: 7 of 12 columns, callouts in the other 5).
+function zxAgentsTeamView() {
+  var frame = renderProductFrame({ html: renderUiPanel(zxAgentsPanel('assign')), sample: false, className: 'zx-agents-ui__frame',
+    caption: 'Assigning an agent to a patient · sample data' });
+  var text = renderSectionHead('In the product', 'What your team sees', 'Care teams decide which agent works a patient, what it may do and who takes each escalation.', { id: 'team-view-title' }) +
+    renderCallouts(ZX_AGENTS.assignCallouts);
+  return renderSection({ id: 'team-view', className: 'zx-agents-ui' }, renderSplit(text, frame, { ratio: '5-7' }));
+}
 
-  predictiveAgents.forEach(function(agent) {
-    html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
-      '<p>' + agent.desc + '</p>' +
-      '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      '</div>';
-  });
+// Related links for the agent and family pages, unless S3's CROSS_LINKS already gives the page its one block (§2.16).
+function zxAgentsRelated(useCases, more) {
+  if (CROSS_LINKS[zxPath()]) return '';
+  var groups = [{ label: 'Use cases', items: zxRelatedItems(useCases) }, { label: 'Explore more', items: zxRelatedItems(more || ['/agents', '/care-plans', '/platform']) }];
+  groups = groups.filter(function (g) { return g.items.length; });
+  if (groups.length === 2) { groups[0].items = groups[0].items.slice(0, 3); groups[1].items = groups[1].items.slice(0, 3); }
+  return renderRelatedLinks({ title: 'Related', groups: groups });
+}
 
-  html += '</div></div></section>';
-
-  // Operational Efficiency Agents
-  html += '<section id="operational-efficiency"><div class="zynix-container">' +
-    '<span class="zynix-tag">OPERATIONAL EFFICIENCY</span>' +
-    '<h2>Agents That Eliminate Administrative Burden</h2>' +
-    '<p class="zynix-section-sub">Automate after-hours call handling, appointment scheduling, prior authorization, referral coordination, and fax processing.</p>' +
-    '<div class="zynix-agents-grid">';
-
-  var opsAgents = [
-    { icon: IC_LIGHTBULB, name: 'ZynAfterHours & Triage', desc: '24/7 AI-powered call handling that triages symptoms using Schmitt-Thompson protocols, diverts unnecessary ER visits, and schedules appropriate care. 15+ languages.', metrics: ['97.3% Accuracy', '20-30% ER Diversion'], url: '/agents/operational-efficiency/zynafterhours-triage' },
-    { icon: IC_CALENDAR, name: 'ZynSchedule', desc: 'Always-on appointment scheduling via voice, text, and web. Matches patient urgency with provider availability.', metrics: ['40% No-Show Reduction', '24/7 Availability'], url: '/agents/operational-efficiency/zynschedule' },
-    { icon: IC_CLIPBOARD, name: 'Prior Authorization', desc: 'Automated submission to payer portals with optimized clinical documentation. Status tracking, denial management, appeal preparation.', metrics: ['75% Time Reduction', '$20+ Saved Per Auth'] },
-    { icon: IC_ZAP, name: 'Referral Management', desc: 'Track referrals from order to completed visit. Confirm appointments, retrieve results, prevent leakage.', metrics: ['3x Faster Processing', '50% Less Leakage'] },
-    { icon: IC_FAX, name: 'ZynFax', desc: 'AI-powered fax classification, data extraction, patient matching, and intelligent routing.', metrics: ['90%+ Classification', '75% Staff Time Saved'] }
-  ];
-
-  opsAgents.forEach(function(agent) {
-    html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
-      '<p>' + agent.desc + '</p>' +
-      '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      (agent.url ? '<p><a href="' + agent.url + '">Explore ' + agent.name + ' &rarr;</a></p>' : '') +
-      '</div>';
-  });
-
-  html += '</div></div></section>';
-
-  // Agent dashboards — real product screenshots
-  html += '<section class="zynix-screenshot-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">AGENT DASHBOARDS</span>' +
-    '<h2>See How Agents Work</h2>' +
-    '<p class="zynix-section-sub">Real product screenshots from live AI agent dashboards showing patient interactions, scheduling, triage, and post-discharge follow-up.</p>' +
-    '<div class="zynix-screenshot-strip">' +
-    renderBrowserFrame(IMG.ssZynSchedule, 'ZynSchedule AI agent dashboard showing appointments scheduled, rescheduled, and escalated to staff with patient interaction logs', 'app.zynix.ai/agents/zynschedule') +
-    renderBrowserFrame(IMG.ssZynAfterHours, 'ZynAfterHours AI triage agent dashboard showing after-hours calls handled, emergency escalations, and clinical classifications', 'app.zynix.ai/agents/zynafterhours') +
-    renderBrowserFrame(IMG.ssZynPostDischarge, 'ZynPost Discharge Follow-Up agent dashboard showing discharged patients, AI-scheduled follow-ups, and escalation alerts', 'app.zynix.ai/agents/zynpostdischarge') +
-    '</div>' +
-    renderBrowserFrame(IMG.ssAgentSelection, 'Zynix AI care management agent selection modal allowing coordinators to assign AI agents to patients for automated outreach', 'app.zynix.ai/care-management/assign-agent') +
-    '</div></section>';
-
-  // Agents vs Chatbots
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">WHY AGENTS</span>' +
-    '<h2>Agents Are Not Chatbots</h2>' +
-    '<div class="zynix-compare-grid">' +
-    '<div class="zynix-compare-card zynix-compare-bad"><h3>Chatbots Answer Questions</h3><ul><li>Traditional healthcare chatbots respond to patient queries with pre-scripted answers. They cannot access EHR data, take clinical action, or coordinate across systems.</li></ul></div>' +
-    '<div class="zynix-compare-card zynix-compare-good"><h3>Agents Complete Work</h3><ul><li>Zynix AI agents access patient records, apply clinical protocols, take autonomous action, and coordinate with other agents. Full audit trails and human escalation built in.</li></ul></div>' +
-    '</div></div></section>';
-
-  html += renderCTA('See AI Agents in Action', 'Schedule a demo to see how autonomous agents handle the work that overwhelms your care teams today.', 'Request a Demo');
+// Family page (/agents/clinical-performance and its twins): the family's rows, governance, related, CTA.
+function zxAgentsFamilyPage(id) {
+  var fam = ZX_AGENTS.families[id], f = zxAgentsFamily(id);
+  if (!fam || !f) return renderAgentsHub();
+  var html = renderHero({ preset: 'product', eyebrow: 'AI agents', title: fam.title, lead: fam.lead,
+    secondary: { label: 'See every agent family', href: '/agents' }, media: { type: 'none' } });
+  html += zxAgentsFamilySection(id, { id: 'agents-in-family', title: 'What each agent does', lead: 'Each agent starts from a trigger in your data, does one job and hands the rest to your team.' });
+  html += zxAgentsGovernance({ id: 'governance' });
+  html += zxAgentsRelated(fam.useCases);
+  html += renderCTA('See agents at work in a 30-minute demo', 'What triggers an agent, what it does, and where your team steps in.', null,
+    { secondary: { label: 'Browse care plans', href: '/care-plans' } });
   html += renderFooter();
   return html;
 }
 
 
 function renderClinicalPerformanceHub() {
-  var html = '';
-
-  html += renderInnerHero('CLINICAL PERFORMANCE AGENTS', 'Automate the Clinical Workflows That Drive Quality Outcomes',
-    'AI agents purpose-built for chronic care management, transitions of care, preventive activation, annual wellness visit outreach, and social determinant screening.',
-    IMG.care, 'Clinical Performance AI Agents', 'Explore Capabilities');
-
-  html += '<section id="capabilities"><div class="zynix-container">' +
-    '<span class="zynix-tag">AGENTS IN THIS CATEGORY</span>' +
-    '<h2>Five Agents. One Clinical Mission.</h2>' +
-    '<div class="zynix-agents-grid">';
-
-  var agents = [
-    { icon: IC_PILL, name: 'Chronic Care Management Agent', desc: 'Automates CCM billing workflows with longitudinal patient engagement: medication adherence tracking, risk-tiered outreach cadences, symptom monitoring, and care plan reinforcement.', url: '/agents/chronic-care-management', metrics: ['85%+ Contact Rate', 'CCM Revenue Capture'] },
-    { icon: IC_PHONE, name: 'Transitions of Care Agent', desc: 'Executes post-discharge follow-up within CMS TCM billing windows. Contacts patients within 24-48 hours, reviews discharge instructions, reconciles medications, schedules follow-up visits.', url: '/agents/transitions-of-care', metrics: ['85%+ Contact Rate', '25% Readmission Reduction'] },
-    { icon: IC_BELL, name: 'Preventive & Quality Activation', desc: 'Drives HEDIS quality measure completion through automated patient outreach for preventive screenings, vaccinations, and quality gap closure.', url: '/agents/preventive-quality-activation', metrics: ['3x AWV Lift', '40% Gap Closure Improvement'] },
-    { icon: IC_CHART, name: 'Chronic Disease Monitoring', desc: 'Continuous AI-powered monitoring for patients with diabetes, CHF, COPD, and other chronic conditions. Tracks symptom trends, lab results, and medication patterns.', url: '/agents/chronic-care-management/chronic-disease-monitoring', metrics: ['Continuous Monitoring', 'Early Escalation'] },
-    { icon: IC_HOSPITAL, name: 'SDoH Determination Agent', desc: 'Screens patients for social determinants of health including housing instability, food insecurity, transportation barriers, and financial hardship.', url: '/agents/sdoh-determination', metrics: ['Planned', 'Coming Soon'] }
-  ];
-
-  agents.forEach(function(agent) {
-    html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
-      '<p>' + agent.desc + '</p>' +
-      '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      '<p><a href="' + agent.url + '">Explore ' + agent.name + ' &rarr;</a></p>' +
-      '</div>';
-  });
-
-  html += '</div></div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">RELATED USE CASES</span>' +
-    '<h2>See These Agents in Action</h2>' +
-    '<div class="zynix-agents-grid">' +
-    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">UC01</span><h3>Post-Discharge Follow-Up at Scale</h3></div><p><a href="/use-cases/post-discharge-follow-up">View use case &rarr;</a></p></div>' +
-    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">UC10</span><h3>Chronic Care Coordination at Scale</h3></div><p><a href="/use-cases/chronic-care-coordination-scale">View use case &rarr;</a></p></div>' +
-    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">UC11</span><h3>HEDIS and Stars Quality Improvement</h3></div><p><a href="/use-cases/hedis-stars-quality-improvement">View use case &rarr;</a></p></div>' +
-    '</div></div></section>';
-
-  html += renderCTA('Automate Clinical Performance at Scale', 'See how AI agents drive quality outcomes across your entire patient population.', 'Request a Demo');
-  html += renderFooter();
-  return html;
+  return zxAgentsFamilyPage('clinical-performance');
 }
 
 
 function renderPredictiveActivationHub() {
-  var html = '';
-
-  html += renderInnerHero('PREDICTIVE ACTIVATION AGENTS', 'Intervene Before the Crisis, Not After',
-    'Predictive models identify patients heading toward hospitalization, clinical deterioration, or care disengagement. Activation agents convert those predictions into proactive outreach and intervention, weeks before an event would otherwise occur.',
-    IMG.analytics, 'Predictive Activation AI Agents', 'Explore Capabilities');
-
-  html += '<section id="capabilities"><div class="zynix-container">' +
-    '<span class="zynix-tag">AGENTS IN THIS CATEGORY</span>' +
-    '<h2>From Prediction to Prevention</h2>' +
-    '<div class="zynix-agents-grid">';
-
-  var agents = [
-    { icon: IC_CHART, name: 'Readmission Risk Agent', desc: 'At the moment of discharge, this agent scores every patient against validated readmission risk models. High-risk patients are automatically enrolled in intensified post-discharge care plans.', metrics: ['25% Readmission Reduction', 'Real-Time Risk Scoring'] },
-    { icon: IC_CHART, name: 'Rising Risk Outreach Agent', desc: 'Continuously monitors population-level data for patients whose clinical trajectory is worsening. Triggers proactive outreach to engage patients before they require acute intervention.', metrics: ['Weeks of Lead Time', 'Proactive Engagement'] },
-    { icon: IC_LIGHTBULB, name: 'Predictive Deterioration Monitor', desc: 'Specialized monitoring for chronic disease patients using longitudinal lab trends, vital sign patterns, and encounter frequency analysis. Detects subtle deterioration signals.', metrics: ['Early Detection', 'Automated Clinical Alerts'] }
-  ];
-
-  agents.forEach(function(agent) {
-    html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
-      '<p>' + agent.desc + '</p>' +
-      '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      '</div>';
-  });
-
-  html += '</div></div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">HOW IT WORKS</span>' +
-    '<h2>The Prediction-to-Action Pipeline</h2>' +
-    '<div class="zynix-orch-flow">' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_DOWNLOAD + '</span><p>Data Ingestion</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_CHART + '</span><p>Risk Scoring</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_ALERT + '</span><p>Threshold Activation</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_PHONE + '</span><p>Proactive Outreach</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>' + IC_CHECK + '</span><p>Resolution</p></div>' +
-    '</div></div></section>';
-
-  html += renderCTA('Move from Reactive to Predictive', 'See how predictive activation agents reduce readmissions and total cost of care.', 'Request a Demo');
-  html += renderFooter();
-  return html;
+  return zxAgentsFamilyPage('predictive-activation');
 }
 
 
 function renderOperationalEfficiencyHub() {
-  var html = '';
-
-  html += renderInnerHero('OPERATIONAL EFFICIENCY AGENTS', 'Automate the Administrative Work That Burns Out Your Staff',
-    'AI agents that handle after-hours triage, inbound scheduling, prior authorization, referral coordination, and fax processing. They operate 24/7, integrate with your EHR, and escalate to staff only when human judgment is required.',
-    IMG.enterprise, 'Operational Efficiency AI Agents', 'Explore Capabilities');
-
-  html += '<section id="capabilities"><div class="zynix-container">' +
-    '<span class="zynix-tag">AGENTS IN THIS CATEGORY</span>' +
-    '<h2>Five Agents. Zero Admin Burden.</h2>' +
-    '<div class="zynix-agents-grid">';
-
-  var agents = [
-    { icon: IC_LIGHTBULB, name: 'ZynAfterHours & Triage', desc: 'Answers patient calls 24/7 in 15+ languages. Applies Schmitt-Thompson triage protocols to assess symptom severity, provides self-care guidance, diverts unnecessary ER visits, and schedules appointments.', url: '/agents/operational-efficiency/zynafterhours-triage', metrics: ['97.3% Triage Accuracy', '60-80% Cost Reduction'] },
-    { icon: IC_CALENDAR, name: 'ZynSchedule', desc: 'Captures every inbound scheduling request via phone, text, or web. Matches patient urgency with real-time provider availability, books appointments, handles rescheduling and cancellations.', url: '/agents/operational-efficiency/zynschedule', metrics: ['40% No-Show Reduction', '3x Scheduling Throughput'] },
-    { icon: IC_CLIPBOARD, name: 'Prior Authorization Agent', desc: 'Submits prior authorization requests to payer portals with optimized clinical justification. Tracks status, manages denials, prepares appeals, and alerts before authorizations expire.', metrics: ['75% Processing Time Saved', '10-15% Higher First-Pass'] },
-    { icon: IC_ZAP, name: 'Referral Management Agent', desc: 'Tracks referrals from order to completed specialist visit. Confirms scheduling, retrieves results, closes the loop with referring providers, and prevents referral leakage.', metrics: ['3x Faster Processing', '50% Less Leakage'] },
-    { icon: IC_FAX, name: 'ZynFax', desc: 'Reads, classifies, and routes incoming faxes using AI document understanding. Matches content to patient records, detects missing documentation, and queues items for workflows.', metrics: ['90%+ Classification Accuracy', '75% Staff Time Saved'] }
-  ];
-
-  agents.forEach(function(agent) {
-    html += '<div class="zynix-agent-card fade-in-up">' +
-      '<div class="zynix-agent-header"><span class="zynix-agent-icon">' + agent.icon + '</span><h3>' + agent.name + '</h3></div>' +
-      '<p>' + agent.desc + '</p>' +
-      '<div class="zynix-agent-metrics"><span>' + agent.metrics[0] + '</span><span>' + agent.metrics[1] + '</span></div>' +
-      (agent.url ? '<p><a href="' + agent.url + '">Explore ' + agent.name + ' &rarr;</a></p>' : '') +
-      '</div>';
-  });
-
-  html += '</div></div></section>';
-
-  html += renderCTA('Eliminate Administrative Overhead', 'See how operational AI agents free your staff to focus on patient care.', 'Request a Demo');
-  html += renderFooter();
-  return html;
+  return zxAgentsFamilyPage('operational-efficiency');
 }
 
 
@@ -7763,59 +7780,27 @@ function renderOperationalEfficiencyHub() {
 
 function renderChronicCareAgent() {
   return renderAgentPageV7({
-    agentName: 'Chronic Care Management',
-    category: 'Clinical Performance',
-    headline: 'Longitudinal Care Management at Population Scale',
-    subhead: 'An AI agent that automates CCM workflows across chronic disease populations &mdash; medication adherence tracking, risk-tiered outreach, symptom monitoring, and care plan reinforcement throughout every billing cycle.',
-    heroImage: IMG.care,
-    heroAlt: 'Chronic Care Management AI Agent',
-    whatHeading: 'Automated Chronic Care Coordination',
-    whatBody: '<p>The Chronic Care Management Agent automates the high-volume, repetitive workflows that CCM programs require to remain clinically effective and financially viable. It identifies patients eligible for CCM services, enrolls them into risk-tiered outreach cadences, tracks medication adherence, monitors symptom trends, and reinforces individualized care plans.</p>' +
-      '<p>For each patient, the agent maintains a running clinical context that includes recent lab results, medication fill history, appointment adherence, and prior interaction summaries. Every outreach contact is documented with the structured detail required for CMS CCM billing compliance, including time tracking against the 20-minute monthly threshold.</p>' +
-      '<p>When a patient reports worsening symptoms, medication side effects, or barriers to adherence, the agent escalates to the appropriate clinical team member with full context. The goal is simple: keep chronic disease patients engaged, adherent, and stable between office visits.</p>',
-    workflowHeading: 'From Eligibility to Ongoing Management',
-    workflowSteps: [
-      { title: 'Patient Identification', description: 'The data layer identifies patients with qualifying chronic conditions (2+ chronic conditions) who are eligible for CCM services but not yet enrolled or actively managed.' },
-      { title: 'Enrollment & Consent', description: 'Agent initiates outreach to eligible patients, explains CCM program benefits, and captures verbal or written consent. Consent documentation is recorded in the EHR.' },
-      { title: 'Risk-Tiered Outreach', description: 'Patients are stratified by clinical risk and assigned outreach cadences. High-risk patients receive weekly check-ins. Moderate-risk patients receive biweekly contact. Stable patients receive monthly touchpoints.' },
-      { title: 'Medication & Symptom Monitoring', description: 'During each contact, the agent reviews medication adherence, assesses symptom changes, and checks for barriers to care. Pharmacy fill data is cross-referenced with prescribed medications.' },
-      { title: 'Escalation & Documentation', description: 'Issues requiring clinical judgment are routed to care managers or providers with a complete summary. Every interaction is documented with structured time tracking for CCM billing.' }
+    agent: 'Chronic care management', family: 'clinical-performance',
+    headline: 'Chronic care check-ins between visits',
+    subhead: 'The chronic care management agent runs risk-tiered check-ins on symptoms and medication adherence, and routes every change to your care manager.',
+    stepsTitle: 'From eligibility to monthly check-ins',
+    steps: [
+      { title: 'Find eligible patients', body: 'Patients with two or more chronic conditions who qualify for CCM and aren’t yet enrolled are flagged from claims and clinical data.', owner: 'platform' },
+      { title: 'Invite and enroll', body: 'The agent explains the program and records the patient’s answer. Your team confirms consent and enrollment.', owner: 'agent' },
+      { title: 'Check in on a set cadence', body: 'Higher-risk patients hear from the agent more often; stable patients get a monthly touchpoint. Your team sets the cadence.', owner: 'agent' },
+      { title: 'Ask about symptoms and medications', body: 'Each contact covers symptom changes, medication adherence and barriers to care, with recent pharmacy fills alongside.', owner: 'agent' },
+      { title: 'Escalate and prepare for review', body: 'Anything that needs clinical judgment goes to the care manager with a summary. Contact time and notes are prepared for the billing provider’s review.', owner: 'team' }
     ],
-    inputs: [
-      'EHR patient demographics and problem lists',
-      'Claims data for chronic condition identification',
-      'Pharmacy fill data for medication adherence',
-      'Lab results and vital sign trends',
-      'Prior CCM interaction history',
-      'Care plan goals and interventions'
+    inputs: ['Problem lists and demographics from the EHR', 'Claims, to find qualifying chronic conditions', 'Pharmacy fill data', 'Recent labs and visits', 'Earlier check-ins', 'Care plan goals'],
+    outputs: ['Check-in calls and text messages', 'Contact time and notes prepared for CCM documentation', 'Adherence and barrier flags for the care manager', 'Escalations with a summary of the conversation', 'Monthly status summaries for review'],
+    governance: [
+      { icon: 'stethoscope', title: 'No clinical decisions', body: 'The agent doesn’t adjust medications, change the care plan or make treatment decisions. Clinical concerns go to a licensed care manager or provider.' },
+      { icon: 'gear', title: 'Your escalation thresholds', body: 'Your team decides which symptoms, missed contacts or adherence problems need a person right away.' },
+      { icon: 'file', title: 'Provider review before billing', body: 'No CCM time is billed until the supervising provider reviews and attests to it.' }
     ],
-    outputs: [
-      'Patient outreach calls (voice) and messages (SMS/text)',
-      'Structured CCM encounter documentation with time tracking',
-      'Medication adherence reports',
-      'Escalation alerts to clinical staff with full context',
-      'CCM billing-ready documentation (99490, 99491)',
-      'Monthly patient status summaries'
-    ],
-    integrations: [
-      { system: 'EHR Systems', description: 'Epic, Cerner, athenahealth, eClinicalWorks, NextGen. Reads patient records and writes CCM documentation.' },
-      { system: 'Pharmacy Data', description: 'Prescription fill data, medication history, and adherence patterns from pharmacy benefit managers.' },
-      { system: 'Voice & SMS', description: 'Outbound and inbound voice calls and text messages via SIP/PSTN and SMS gateways.' }
-    ],
-    governanceBody: '<p>The Chronic Care Management Agent operates within defined clinical protocols. It does not make treatment decisions, adjust medications, or override provider care plans. Every clinical concern is escalated to a licensed care manager or provider.</p>',
-    governancePoints: [
-      { title: 'Clinical Escalation Thresholds', body: 'Configurable rules determine when patient-reported symptoms, vital sign changes, or medication issues require immediate human review versus documentation-only follow-up.' },
-      { title: 'Provider Oversight', body: 'Supervising providers review agent-generated documentation and patient status summaries at configurable intervals. No CCM billing is submitted without provider attestation.' },
-      { title: 'Audit Trail', body: 'Every agent interaction is logged with timestamp, content summary, clinical context used, and action taken. Full audit trail available for CMS compliance review.' }
-    ],
-    relatedUseCases: [
-      { ucId: 'UC10', title: 'Chronic Care Coordination at Scale', url: '/use-cases/chronic-care-coordination-scale' },
-      { ucId: 'UC15', title: 'Medication Adherence for Chronic Populations', url: '/use-cases/medication-adherence-chronic-populations' },
-      { ucId: 'UC19', title: 'CCM Billing and Chronic Care Management', url: '/use-cases/ccm-billing-chronic-care' }
-    ],
-    ctaHeadline: 'Scale Chronic Care Management with AI',
-    ctaSubline: 'See how the CCM agent reaches patients your staff cannot &mdash; consistently, compliantly, and at population scale.',
-    ctaButton: 'Request a Demo'
+    useCases: ['/use-cases/chronic-care-coordination-scale', '/use-cases/hedis-stars-quality-improvement'],
+    ctaHeadline: 'See the chronic care management agent in a 30-minute demo',
+    ctaSubline: 'A month of check-ins for one patient on sample data, and where your care manager steps in.'
   });
 }
 
@@ -7826,60 +7811,29 @@ function renderChronicCareAgent() {
 
 function renderTransitionsOfCareAgent() {
   return renderAgentPageV7({
-    agentName: 'Transitions of Care',
-    category: 'Clinical Performance',
-    headline: 'From Discharge to Recovery, Automatically',
-    subhead: 'An AI agent that contacts every discharged patient within 24-48 hours, reviews discharge instructions, reconciles medications, schedules follow-ups, and monitors for readmission red flags &mdash; all within CMS TCM billing windows.',
-    heroImage: IMG.care,
-    heroAlt: 'Transitions of Care AI Agent',
-    whatHeading: 'Systematic Post-Discharge Follow-Through',
-    whatBody: '<p>The Transitions of Care Agent automates the 30-day post-discharge workflow that determines whether a patient recovers safely or bounces back to the hospital. It processes ADT discharge feeds in real time, risk-stratifies each patient, and initiates outreach within the TCM billing window.</p>' +
-      '<p>During the initial contact, the agent confirms the patient arrived home safely, reviews discharge instructions for comprehension, walks through the medication list to identify confusion or missing medications, and schedules the required 7-day or 14-day follow-up visit. If the patient reports worsening symptoms, the agent applies red-flag protocols and escalates to clinical staff immediately.</p>' +
-      '<p>Throughout the 30-day post-discharge period, the agent conducts follow-up check-ins, sends appointment reminders, and monitors for signs of deterioration. Every interaction is documented with the structured detail required for TCM billing code capture (99495, 99496).</p>',
-    workflowHeading: 'The 30-Day TCM Execution Sequence',
-    workflowSteps: [
-      { title: 'Discharge Detection', description: 'ADT feed signals a discharge event. The data layer normalizes the record, enriches it with diagnosis, medications, and prior history, and calculates a readmission risk score.' },
-      { title: 'Risk Stratification', description: 'Patient is scored against validated readmission models. High-risk patients (top quintile) receive intensified outreach. The appropriate TCM care plan template is auto-deployed.' },
-      { title: '24-48 Hour Contact', description: 'Agent calls the patient within the TCM billing window. Confirms safe arrival, reviews discharge instructions, walks through the medication list, and identifies any immediate concerns.' },
-      { title: 'Medication Reconciliation', description: 'Agent compares discharge medication list with the patient\'s reported medications. Discrepancies are flagged and routed to pharmacy or provider review.' },
-      { title: 'Follow-Up Scheduling', description: 'Agent books the 7-day or 14-day follow-up appointment with the appropriate provider. Sends confirmation and pre-visit reminders.' },
-      { title: 'Ongoing Monitoring', description: 'Check-in contacts at day 7, 14, and 30. Symptom assessment, appointment confirmation, and outcome documentation. TCM billing codes captured upon completion.' }
+    agent: 'Transitions of care', family: 'clinical-performance',
+    headline: 'Post-discharge follow-up inside the TCM window',
+    subhead: 'The transitions of care agent contacts discharged patients, books the follow-up visit and routes red flags and medication questions to licensed staff.',
+    stepsTitle: 'From ADT message to follow-up visit',
+    steps: [
+      { title: 'Discharge detected', body: 'An ADT discharge message arrives for an attributed patient. The record is matched and ranked with the patient’s diagnoses, medications and history.', owner: 'platform' },
+      { title: 'Contact inside the window', body: 'The agent calls or texts the patient, confirms they’re home and reviews the discharge instructions.', owner: 'agent' },
+      { title: 'Medication list review', body: 'The agent walks through the medication list with the patient. Any discrepancy goes to a pharmacist or prescriber; the agent never tells a patient to change a medication.', owner: 'agent' },
+      { title: 'Interactive contact and follow-up visit', body: 'Your clinical staff make the TCM interactive contact. The agent books the 7- or 14-day follow-up visit and sends reminders.', owner: 'team' },
+      { title: 'Check-ins through day 30', body: 'Follow-up check-ins and visit reminders continue; red-flag answers go to the on-call nurse right away.', owner: 'agent' }
     ],
-    inputs: [
-      'ADT discharge feeds (real-time)',
-      'Discharge summaries and medication lists',
-      'EHR patient demographics and medical history',
-      'Readmission risk model scores',
-      'Provider scheduling availability',
-      'Pharmacy fill data'
+    rule: { label: 'The CMS rule', text: 'For TCM, CMS requires an interactive contact with the patient or caregiver within 2 business days of discharge, and a face-to-face visit within 7 days (CPT 99496) or 14 days (CPT 99495). The interactive contact is made by the billing practitioner or clinical staff.',
+      source: 'Source: CMS MLN booklet, Transitional Care Management Services.' },
+    inputs: ['ADT discharge messages (HL7 v2)', 'Discharge summaries and medication lists', 'Diagnoses and history from the EHR', 'Readmission risk ranking', 'Provider availability', 'Pharmacy fill data'],
+    outputs: ['Outreach calls and texts inside the window', 'Discharge-instruction review notes', 'Medication discrepancies flagged for review', 'Booked follow-up visits and reminders', 'Escalations to on-call clinical staff', 'Contact details prepared for your team’s TCM documentation'],
+    governance: [
+      { icon: 'stethoscope', title: 'Red flags go to a nurse', body: 'Defined symptoms, such as chest pain or shortness of breath, trigger an immediate handoff to on-call clinical staff. Callers describing an emergency are told to call 911.' },
+      { icon: 'shield', title: 'Medication safety', body: 'Every discrepancy goes to a pharmacist or prescribing provider before the patient is asked to change anything.' },
+      { icon: 'users', title: 'Clinical staff own TCM', body: 'The interactive contact, the face-to-face visit and TCM attestation stay with your practitioners and clinical staff.' }
     ],
-    outputs: [
-      'Patient outreach calls within TCM billing windows',
-      'Discharge instruction comprehension assessments',
-      'Medication reconciliation reports with discrepancies flagged',
-      'Follow-up appointment bookings and confirmations',
-      'TCM billing-ready documentation (99495, 99496)',
-      'Escalation alerts for clinical concerns'
-    ],
-    integrations: [
-      { system: 'ADT Feeds', description: 'Real-time HL7 v2 ADT messages from hospital systems for discharge detection and processing.' },
-      { system: 'EHR Systems', description: 'Epic, Cerner, athenahealth. Reads discharge summaries, writes TCM documentation, and updates patient records.' },
-      { system: 'Scheduling Systems', description: 'Integrates with provider scheduling to book follow-up appointments and check real-time availability.' }
-    ],
-    governanceBody: '<p>The Transitions of Care Agent follows evidence-based post-discharge protocols. It does not make clinical treatment decisions. Any patient reporting emergency symptoms is immediately directed to call 911 or present to the nearest emergency department.</p>',
-    governancePoints: [
-      { title: 'Red Flag Protocols', body: 'Defined symptom combinations (chest pain, shortness of breath, fever with immunosuppression, etc.) trigger immediate escalation to on-call clinical staff with full patient context.' },
-      { title: 'Medication Safety Escalation', body: 'All medication discrepancies are routed to a pharmacist or prescribing provider for review before the patient is instructed to make any changes.' },
-      { title: 'TCM Compliance Documentation', body: 'Every interaction is timestamped and structured for CMS TCM billing compliance. Provider attestation is required before billing submission.' }
-    ],
-    relatedUseCases: [
-      { ucId: 'UC01', title: 'Post-Discharge Follow-Up at Scale', url: '/use-cases/post-discharge-follow-up' },
-      { ucId: 'UC06', title: 'Post-Discharge TCM and Readmission Prevention', url: '/use-cases/post-discharge-tcm-readmission' },
-      { ucId: 'UC30', title: 'Post-Discharge Follow-Up for High-Risk FQHC Patients', url: '/use-cases/post-discharge-followup-fqhc' }
-    ],
-    ctaHeadline: 'Close the Post-Discharge Gap',
-    ctaSubline: 'See how the Transitions of Care Agent achieves 85%+ contact rates versus the 30-40% industry average.',
-    ctaButton: 'Request a Demo'
+    useCases: ['/use-cases/post-discharge-tcm-readmission', '/use-cases/post-discharge-follow-up'],
+    ctaHeadline: 'See post-discharge follow-up in a 30-minute demo',
+    ctaSubline: 'One discharge, from ADT message to a booked follow-up visit, on sample data.'
   });
 }
 
@@ -7890,59 +7844,27 @@ function renderTransitionsOfCareAgent() {
 
 function renderPreventiveQualityAgent() {
   return renderAgentPageV7({
-    agentName: 'Preventive & Quality Activation',
-    category: 'Clinical Performance',
-    headline: 'Drive Preventive Care Completion at Population Scale',
-    subhead: 'AI agents that automate AWV outreach, appointment reminders, vaccination scheduling, and HEDIS quality gap closure. Identify eligible patients, initiate multi-channel outreach, schedule appointments, and confirm completion &mdash; across your entire attributed population.',
-    heroImage: IMG.patient,
-    heroAlt: 'Preventive and Quality Activation Agents',
-    whatHeading: 'From Gap Identification to Confirmed Closure',
-    whatBody: '<p>The Preventive and Quality Activation agent group identifies patients with open quality gaps, overdue preventive screenings, and upcoming Annual Wellness Visit eligibility. It then executes multi-channel outreach campaigns to schedule and confirm the appropriate services.</p>' +
-      '<p>For HEDIS quality measures, the agent cross-references claims, EHR, and lab data to identify which specific measures each patient is missing. It prioritizes outreach by measure impact, patient engagement likelihood, and remaining time in the measurement year. When a patient responds, the agent books the appointment, sends preparation instructions, and follows up to confirm completion.</p>' +
-      '<p>This agent group includes two specialized sub-agents: the AWV Outreach agent for Annual Wellness Visit identification and scheduling, and ZynReminder for intelligent appointment reminders and no-show reduction.</p>',
-    workflowHeading: 'The Gap-to-Closure Workflow',
-    workflowSteps: [
-      { title: 'Gap Identification', description: 'Analytics engine identifies patients with open quality gaps, overdue preventive screenings, or AWV eligibility based on claims, EHR, and lab data analysis.' },
-      { title: 'Patient Prioritization', description: 'Patients are ranked by measure impact (RAF value, quality weight), engagement probability, and remaining measurement year timeline.' },
-      { title: 'Multi-Channel Outreach', description: 'Agent initiates contact via the patient\'s preferred channel (phone, SMS, email). Explains the needed service, answers questions, and offers to schedule.' },
-      { title: 'Appointment Scheduling', description: 'When the patient agrees, the agent books the appointment with an appropriate provider, sends confirmation, and delivers any preparation instructions.' },
-      { title: 'Completion Confirmation', description: 'After the scheduled date, the agent confirms the service was completed by checking claims and EHR data. Uncompleted services trigger follow-up outreach.' }
+    agent: 'Preventive and quality activation', family: 'clinical-performance',
+    headline: 'From open care gap to completed visit',
+    subhead: 'The preventive and quality activation agent invites patients due for wellness visits, screenings and vaccinations, books the visit, sends reminders and tracks it to completion.',
+    stepsTitle: 'From gap list to completed visit',
+    steps: [
+      { title: 'Find the gaps', body: 'Open quality gaps, overdue screenings and annual wellness visits coming due are found in claims, EHR and lab data.', owner: 'platform' },
+      { title: 'Rank the list', body: 'Patients are ranked by the measures they affect and the time left in the measurement year.', owner: 'platform' },
+      { title: 'Invite the patient', body: 'The agent reaches the patient by voice or SMS on their preferred channel, explains the visit and offers times.', owner: 'agent' },
+      { title: 'Book and remind', body: 'It books the visit, sends preparation instructions and two-way reminders (the ZynReminder capability), and reschedules when asked.', owner: 'agent' },
+      { title: 'Confirm completion', body: 'After the visit date, claims and clinical data confirm the service. Open items get another attempt or go to a care coordinator.', owner: 'team' }
     ],
-    inputs: [
-      'Claims data with quality measure analysis',
-      'EHR preventive care history and immunization records',
-      'Lab results for screening measures',
-      'AWV eligibility based on Medicare enrollment',
-      'Patient communication preferences',
-      'Provider scheduling availability'
+    inputs: ['Claims with quality measure status', 'Preventive care and immunization history', 'Lab results for screening measures', 'Medicare enrollment, for wellness-visit timing', 'Patient contact preferences', 'Provider availability'],
+    outputs: ['Invitations by voice and SMS', 'Booked wellness visits, screenings and vaccinations', 'Preparation instructions and two-way reminders', 'Completion status by patient and measure', 'Patients with barriers routed to a care coordinator'],
+    governance: [
+      { icon: 'stethoscope', title: 'Exclusions go to a provider', body: 'When a patient gives a clinical reason not to have a service, the agent records it and a provider confirms the exclusion.' },
+      { icon: 'user', title: 'Opt-outs are honored', body: 'Patients who decline or opt out are removed from automated contact for that service.' },
+      { icon: 'check', title: 'Checked before outreach', body: 'Gaps are checked against claims, clinical and lab data before outreach, to avoid contacting patients who already had the service.' }
     ],
-    outputs: [
-      'Patient outreach for gap closure and preventive services',
-      'Appointment bookings for AWV, screenings, and vaccinations',
-      'Pre-visit preparation instructions',
-      'Gap closure confirmation and documentation',
-      'Quality measure completion tracking and reporting',
-      'Escalation of patients with barriers to care'
-    ],
-    integrations: [
-      { system: 'EHR Systems', description: 'Epic, Cerner, athenahealth. Reads preventive care history and immunization records. Writes scheduling orders.' },
-      { system: 'Claims & Quality Data', description: 'HEDIS measure gaps, HCC opportunities, and quality performance data from claims adjudication and quality reporting systems.' },
-      { system: 'Communication Channels', description: 'Voice (SIP/PSTN), SMS, and email for multi-channel patient outreach and confirmation.' }
-    ],
-    governanceBody: '<p>The Preventive and Quality Activation agents operate within CMS quality measure specifications and evidence-based preventive care guidelines. They schedule services but do not make clinical decisions about patient eligibility or contraindications.</p>',
-    governancePoints: [
-      { title: 'Clinical Exclusion Handling', body: 'Patients who report contraindications or clinical reasons for declining a service are documented and excluded from further outreach for that measure. The exclusion is routed for provider confirmation.' },
-      { title: 'Patient Preference Respect', body: 'Patients who decline outreach or opt out of specific communications are immediately flagged and removed from automated contact lists for the declined service.' },
-      { title: 'Measure Accuracy Validation', body: 'Gap identification is validated against multiple data sources (claims, EHR, labs) before outreach is initiated to minimize false-positive outreach to patients who have already completed the service.' }
-    ],
-    relatedUseCases: [
-      { ucId: 'UC11', title: 'HEDIS and Stars Quality Measure Improvement', url: '/use-cases/hedis-stars-quality-improvement' },
-      { ucId: 'UC28', title: 'Preventive Screening Gap Closure', url: '/use-cases/preventive-screening-gap-fqhc' },
-      { ucId: 'UC17', title: 'Appointment Scheduling and No-Show Reduction', url: '/use-cases/appointment-scheduling-no-show' }
-    ],
-    ctaHeadline: 'Close Quality Gaps Faster',
-    ctaSubline: 'See how AI-driven preventive activation closes gaps 40% faster than manual outreach programs.',
-    ctaButton: 'Request a Demo'
+    useCases: ['/use-cases/hedis-stars-quality-improvement', '/use-cases/preventive-screening-gap-fqhc', '/use-cases/hcc-gap-raf-optimization'],
+    ctaHeadline: 'See gap closure outreach in a 30-minute demo',
+    ctaSubline: 'A wellness-visit list, from the first invitation to a completed visit, on sample data.'
   });
 }
 
@@ -7953,59 +7875,27 @@ function renderPreventiveQualityAgent() {
 
 function renderZynAfterHoursV7() {
   return renderAgentPageV7({
-    agentName: 'ZynAfterHours & Triage',
-    category: 'Operational Efficiency',
-    headline: 'Your Best Nurse. Available 24/7. Speaking 15 Languages.',
-    subhead: 'AI-powered after-hours call handling that triages patient symptoms using evidence-based clinical protocols, diverts unnecessary ER visits, schedules appropriate care, and documents every interaction in your EHR.',
-    heroImage: IMG.doctor,
-    heroAlt: 'ZynAfterHours AI Triage Agent',
-    whatHeading: '24/7 Clinical Triage Without the Staffing Burden',
-    whatBody: '<p>ZynAfterHours answers patient calls around the clock in 15+ languages, including Spanish, Mandarin, Vietnamese, Tagalog, and Korean. It applies Schmitt-Thompson clinical triage protocols to assess symptom severity, determine the appropriate level of care, and take immediate action &mdash; whether that means providing self-care guidance, scheduling a same-day appointment, or instructing the patient to call 911.</p>' +
-      '<p>85% of after-hours callers who reach voicemail never call back. They go to the ER instead, costing $1,500\u20133,000 per avoidable visit. ZynAfterHours eliminates that gap by answering every call within 60 seconds, loading the patient\'s EHR context (demographics, medical history, medications, allergies), and conducting a structured clinical assessment.</p>' +
-      '<p>The agent handles 70-80% of routine inquiries autonomously. For complex cases requiring human clinical judgment, it performs a warm handoff to on-call staff with the complete assessment, EHR context, and recommended disposition.</p>',
-    workflowHeading: 'From Inbound Call to Documented Outcome',
-    workflowSteps: [
-      { title: 'Call Received', description: 'Patient calls the practice number after hours. ZynAfterHours answers within 60 seconds, verifies identity, and loads EHR context including demographics, medical history, medications, and allergies.' },
-      { title: 'Symptom Assessment', description: 'Natural language understanding captures the patient\'s symptoms. Clinical decision support algorithms (Schmitt-Thompson protocols) score urgency on a 1-5 scale based on symptom combination, severity, and patient risk factors.' },
-      { title: 'Disposition Decision', description: 'Based on the clinical assessment: Level 1-2 (self-care guidance provided, follow-up recommended), Level 3 (same-day or next-day appointment scheduled), Level 4-5 (warm handoff to on-call provider or 911 instruction).' },
-      { title: 'Action Taken', description: 'For scheduling dispositions, ZynAfterHours books an appointment with the appropriate provider based on urgency and availability. For self-care dispositions, it delivers evidence-based guidance and red-flag instructions.' },
-      { title: 'Documentation', description: 'Structured encounter note uploaded to the EHR with ICD-10-ready documentation. Includes symptom narrative, assessment, disposition, action taken, and follow-up instructions. Escalation alerts sent to relevant staff.' },
-      { title: 'Follow-Up', description: 'Patient receives follow-up messages confirming next steps. For high-concern cases, automated check-in calls are scheduled within 24 hours.' }
+    agent: 'ZynAfterHours', family: 'operational-efficiency',
+    headline: 'After-hours calls answered, with your on&#8209;call clinician a handoff away',   // non-breaking hyphen: the H1 never breaks inside on-call
+    subhead: 'ZynAfterHours answers after-hours calls, verifies identity, captures the reason for the call and books routine visits. Symptom questions go to your on-call clinician by rule.',
+    stepsTitle: 'From inbound call to handoff',
+    steps: [
+      { title: 'Call answered', body: 'ZynAfterHours answers the practice line after hours and verifies the caller’s identity.', owner: 'agent' },
+      { title: 'Reason captured', body: 'It captures why the patient is calling, in the patient’s own words.', owner: 'agent' },
+      { title: 'Routine requests handled', body: 'Routine visits are booked and rescheduled within your scheduling rules.', owner: 'agent' },
+      { title: 'Symptom questions routed', body: 'Symptom questions go to your on-call clinician by rule, with the call summary attached. Callers describing an emergency are told to call 911.', owner: 'team' },
+      { title: 'Next step confirmed', body: 'The patient gets a confirmation of the next step, and open items go to your staff’s queue.', owner: 'agent' }
     ],
-    inputs: [
-      'Inbound patient voice calls (SIP/PSTN)',
-      'EHR patient context (demographics, history, medications, allergies)',
-      'Schmitt-Thompson clinical triage protocols',
-      'Provider scheduling availability (real-time)',
-      'Practice-specific escalation rules and on-call schedules'
+    inputs: ['Inbound calls to your practice number', 'Patient demographics and upcoming appointments', 'Provider availability', 'Your on-call schedule and escalation rules'],
+    outputs: ['Booked and rescheduled routine visits', 'Call summaries with the reason for the call', 'Handoffs to the on-call clinician', 'Confirmation messages to patients'],
+    governance: [
+      { icon: 'stethoscope', title: 'No medical advice', body: 'ZynAfterHours doesn’t give medical advice or make clinical decisions. Symptom questions go to your on-call clinician.' },
+      { icon: 'phone', title: 'Emergencies', body: 'Callers describing an emergency are told to call 911.' },
+      { icon: 'gear', title: 'Rules your clinicians approve', body: 'The escalation rules and the on-call schedule the agent follows are set and approved by your clinicians.' }
     ],
-    outputs: [
-      'Clinical triage assessments with urgency scoring',
-      'Same-day and next-day appointment bookings',
-      'Self-care guidance with red-flag instructions',
-      'Structured EHR encounter notes (ICD-10 ready)',
-      'Escalation alerts to on-call clinical staff',
-      'Patient follow-up messages and check-in calls'
-    ],
-    integrations: [
-      { system: 'EHR Systems', description: 'Epic, Cerner, athenahealth, eClinicalWorks, NextGen. Reads patient context and writes triage encounter notes.' },
-      { system: 'Telephony', description: 'SIP/PSTN integration for inbound and outbound voice calls. Supports call recording and quality monitoring.' },
-      { system: 'Scheduling Systems', description: 'Real-time provider availability checking and appointment booking across practices and locations.' }
-    ],
-    governanceBody: '<p>ZynAfterHours operates within strict clinical safety parameters. Emergency symptoms trigger immediate escalation protocols. The agent does not provide medical diagnoses or treatment recommendations beyond evidence-based triage guidance.</p>',
-    governancePoints: [
-      { title: 'Emergency Escalation', body: 'The system recognizes emergency keywords and symptom combinations immediately. It connects to a live nurse or instructs the patient to call 911 within seconds. No delay. No ambiguity.' },
-      { title: 'Clinical Protocol Compliance', body: 'All triage decisions follow Schmitt-Thompson protocols validated for telephone nurse triage. Protocol updates are applied across the system immediately upon release.' },
-      { title: 'Quality Monitoring', body: 'Call recordings and triage decisions are available for clinical review. Configurable sampling rates for quality assurance. Triage accuracy validated at 97.3% against clinical review.' }
-    ],
-    relatedUseCases: [
-      { ucId: 'UC02', title: 'After-Hours Patient Triage Across Multiple Sites', url: '/use-cases/after-hours-triage-multi-site' },
-      { ucId: 'UC09', title: 'After-Hours Access and ED Diversion', url: '/use-cases/after-hours-ed-diversion' },
-      { ucId: 'UC26', title: 'After-Hours Triage for Multilingual Populations', url: '/use-cases/after-hours-triage-multilingual-fqhc' }
-    ],
-    ctaHeadline: 'Never Miss Another After-Hours Call',
-    ctaSubline: 'See how ZynAfterHours delivers 97.3% triage accuracy while reducing costs 60-80% versus traditional nurse lines.',
-    ctaButton: 'Request a Demo'
+    useCases: ['/use-cases/after-hours-ed-diversion', '/use-cases/after-hours-triage-multi-site'],
+    ctaHeadline: 'See ZynAfterHours in a 30-minute demo',
+    ctaSubline: 'An after-hours call, from answer to handoff, on sample data.'
   });
 }
 
@@ -8016,59 +7906,27 @@ function renderZynAfterHoursV7() {
 
 function renderZynScheduleV7() {
   return renderAgentPageV7({
-    agentName: 'ZynSchedule',
-    category: 'Operational Efficiency',
-    headline: 'Always-On Appointment Scheduling',
-    subhead: 'AI-powered inbound call handling and smart scheduling that books patients 24/7, reduces no-shows by 40%, and fills every available appointment slot &mdash; without staff involvement.',
-    heroImage: IMG.patient,
-    heroAlt: 'ZynSchedule AI Scheduling Agent',
-    whatHeading: 'Scheduling That Never Sleeps',
-    whatBody: '<p>ZynSchedule captures every inbound scheduling request via phone, text, or web portal. It verifies patient identity, determines the reason for the visit, checks real-time provider availability across practices and locations, and books the optimal appointment slot based on urgency, provider preference, and patient convenience.</p>' +
-      '<p>When patients call during business hours and lines are busy, ZynSchedule handles overflow. When patients call at 9 PM because that is when they have time, ZynSchedule is there. When a patient needs to reschedule, ZynSchedule finds the next best slot and sends updated confirmation without any staff intervention.</p>' +
-      '<p>The agent also manages cancellation recovery: when a patient cancels, ZynSchedule immediately identifies patients on the waitlist who could fill the slot and contacts them proactively. The result is fewer empty slots, fewer no-shows, and 3x scheduling throughput compared to manual processes.</p>',
-    workflowHeading: 'From Request to Confirmed Appointment',
-    workflowSteps: [
-      { title: 'Request Received', description: 'Patient contacts the practice via phone, text, or web. ZynSchedule verifies identity using date of birth, name, and phone number. Loads patient context from EHR.' },
-      { title: 'Visit Reason Assessment', description: 'Agent determines the type of visit needed (follow-up, new patient, urgent, wellness, specialist referral) and any special requirements (interpreter, specific equipment, fasting labs).' },
-      { title: 'Availability Matching', description: 'Real-time check of provider availability across all locations. Matches urgency level with scheduling rules, provider preferences, and insurance verification.' },
-      { title: 'Booking Confirmation', description: 'Appointment booked in the scheduling system. Confirmation sent via the patient\'s preferred channel (text, email, voice). Pre-visit preparation instructions delivered if applicable.' },
-      { title: 'Reminder Sequence', description: 'Automated reminders at 72 hours, 24 hours, and 2 hours before the appointment. Two-way communication allows patients to confirm or reschedule directly.' }
+    agent: 'ZynSchedule', family: 'operational-efficiency',
+    headline: 'Patient scheduling by phone, text and web',
+    subhead: 'ZynSchedule matches the visit type to provider availability, then books, reschedules and fills cancellations. Requests outside your rules go to front-desk staff.',
+    stepsTitle: 'From request to confirmed visit',
+    steps: [
+      { title: 'Request received', body: 'A patient asks for a visit by phone, text or web, and ZynSchedule verifies their identity.', owner: 'agent' },
+      { title: 'Visit type set', body: 'It works out the kind of visit needed and any requirements, such as an interpreter or fasting labs.', owner: 'agent' },
+      { title: 'Availability matched', body: 'Open slots are matched within your scheduling rules and provider preferences.', owner: 'agent' },
+      { title: 'Booked and confirmed', body: 'The visit is booked, and the patient gets a confirmation and any preparation instructions.', owner: 'agent' },
+      { title: 'Cancellations refilled', body: 'When a patient cancels, the open slot is offered to patients on the waitlist. Requests outside your rules go to front-desk staff.', owner: 'team' }
     ],
-    inputs: [
-      'Inbound patient requests (phone, SMS, web)',
-      'EHR patient demographics and visit history',
-      'Real-time provider scheduling availability',
-      'Insurance eligibility verification',
-      'Practice scheduling rules and preferences',
-      'Waitlist and cancellation data'
+    inputs: ['Scheduling requests by phone, text and web', 'Patient demographics and visit history', 'Provider availability', 'Your scheduling rules and appointment types', 'Waitlists'],
+    outputs: ['Booked, rescheduled and cancelled visits', 'Confirmations and preparation instructions', 'Visit reminders', 'Waitlist offers for open slots', 'Exceptions routed to front-desk staff'],
+    governance: [
+      { icon: 'gear', title: 'Your scheduling rules', body: 'Bookings follow your provider preferences, appointment types, durations and new-patient rules.' },
+      { icon: 'stethoscope', title: 'Symptoms go to a person', body: 'Patients who describe symptoms during a scheduling call are routed to clinical staff, and told to call 911 in an emergency.' },
+      { icon: 'lock', title: 'Minimum necessary', body: 'Identity checks and messages use only the information needed to book the visit.' }
     ],
-    outputs: [
-      'Confirmed appointment bookings in the scheduling system',
-      'Patient confirmation messages (SMS, email, voice)',
-      'Pre-visit preparation instructions',
-      'Automated reminder sequences',
-      'Cancellation recovery outreach to waitlisted patients',
-      'Scheduling analytics (fill rate, no-show rate, throughput)'
-    ],
-    integrations: [
-      { system: 'EHR/PM Systems', description: 'Epic, Cerner, athenahealth, eClinicalWorks, NextGen. Reads availability and writes appointment bookings.' },
-      { system: 'Communication Channels', description: 'Voice (SIP/PSTN), SMS, email, and web portal integration for omni-channel scheduling access.' },
-      { system: 'Insurance Verification', description: 'Real-time eligibility checks against payer systems to verify coverage before booking.' }
-    ],
-    governanceBody: '<p>ZynSchedule operates within practice-defined scheduling rules. It does not override provider availability preferences, bypass insurance requirements, or schedule services outside the scope of practice-approved appointment types.</p>',
-    governancePoints: [
-      { title: 'Scheduling Rules Engine', body: 'All booking decisions follow practice-configured rules including provider preferences, appointment type durations, buffer times, and new patient vs. established patient slots.' },
-      { title: 'Urgent Escalation', body: 'Patients describing acute symptoms during a scheduling call are transferred to ZynAfterHours triage or directed to emergency services. Scheduling agents do not perform clinical triage.' },
-      { title: 'Data Privacy', body: 'Patient identity verification follows minimum necessary principles. Scheduling data is encrypted and access-controlled per HIPAA requirements.' }
-    ],
-    relatedUseCases: [
-      { ucId: 'UC17', title: 'Appointment Scheduling and No-Show Reduction', url: '/use-cases/appointment-scheduling-no-show' },
-      { ucId: 'UC23', title: 'Patient Scheduling and Pre-Procedure Preparation', url: '/use-cases/surgical-scheduling-pre-procedure' },
-      { ucId: 'UC16', title: 'After-Hours Call Handling and Patient Triage', url: '/use-cases/after-hours-call-handling-group-practices' }
-    ],
-    ctaHeadline: 'Fill Every Slot. Reduce Every No-Show.',
-    ctaSubline: 'See how ZynSchedule delivers 3x scheduling throughput and 40% no-show reduction.',
-    ctaButton: 'Request a Demo'
+    useCases: ['/use-cases/surgical-scheduling-pre-procedure', '/use-cases/referral-intake-asc'],
+    ctaHeadline: 'See ZynSchedule in a 30-minute demo',
+    ctaSubline: 'A scheduling request, from first message to confirmed visit, on sample data.'
   });
 }
 
@@ -8079,59 +7937,29 @@ function renderZynScheduleV7() {
 
 function renderZynReminderV7() {
   return renderAgentPageV7({
-    agentName: 'ZynReminder',
-    category: 'Clinical Performance &mdash; Preventive & Quality Activation',
-    headline: 'Smart Reminders That Drive Action',
-    subhead: 'Automated two-way appointment reminders that reduce no-shows by 40%, enable instant rescheduling, and keep patients engaged through their preferred communication channel.',
-    heroImage: IMG.patient,
-    heroAlt: 'ZynReminder AI Appointment Reminders',
-    whatHeading: 'Beyond One-Way Reminder Calls',
-    whatBody: '<p>ZynReminder replaces manual reminder calls and one-way notification systems with intelligent, two-way patient communication. It sends personalized reminders via voice, text, or email based on the patient\'s preferred channel and engagement history. When a patient responds that they cannot make their appointment, ZynReminder immediately offers alternative times and rebooks the slot.</p>' +
-      '<p>Reminder timing is optimized by AI based on appointment type, patient behavior patterns, and historical engagement data. A specialist consultation that requires fasting labs gets different reminder timing and content than a routine follow-up. Patients who historically confirm via text receive text reminders. Patients who respond better to voice calls get voice reminders.</p>' +
-      '<p>For practices with 20-30% no-show rates, ZynReminder typically reduces no-shows to 12-15% within 60 days of deployment. The financial impact of recovering those appointment slots is immediate and measurable.</p>',
-    workflowHeading: 'The Reminder-to-Confirmation Sequence',
-    workflowSteps: [
-      { title: 'Appointment Detection', description: 'ZynReminder monitors the scheduling system for new, rescheduled, and upcoming appointments. Each appointment is tagged with type, preparation requirements, and patient communication preferences.' },
-      { title: '72-Hour Reminder', description: 'First reminder sent via the patient\'s preferred channel. Includes appointment details, preparation instructions (fasting, documents to bring), and a confirmation/reschedule option.' },
-      { title: '24-Hour Reminder', description: 'Second reminder with confirmation request. If the patient has not confirmed, the reminder is sent via an alternate channel (e.g., SMS if voice was sent first).' },
-      { title: '2-Hour Reminder', description: 'Final reminder for confirmed patients. For patients who have not confirmed, an urgent outreach attempt is made.' },
-      { title: 'Reschedule Handling', description: 'When a patient indicates they cannot attend, ZynReminder immediately offers alternative slots from the provider\'s schedule and rebooks. The vacated slot is offered to waitlisted patients.' }
+    agent: 'Preventive and quality activation', family: 'clinical-performance',
+    eyebrow: 'Preventive and quality activation',
+    headline: 'Two-way reminders that confirm or reschedule',
+    subhead: 'ZynReminder is the reminder capability of the preventive and quality activation agent: two-way reminders by text and voice, with reschedule requests handled or routed to your scheduling team.',
+    glanceTitle: 'The agent ZynReminder belongs to',
+    stepsTitle: 'From booked visit to confirmed visit',
+    steps: [
+      { title: 'Upcoming visit found', body: 'New, rescheduled and upcoming appointments are picked up from your scheduling system, with any preparation the visit needs.', owner: 'platform' },
+      { title: 'First reminder', body: 'A reminder goes out on the patient’s preferred channel, with preparation instructions and a way to confirm or reschedule.', owner: 'agent' },
+      { title: 'Follow-up reminder', body: 'If there’s no reply, the next reminder uses another channel.', owner: 'agent' },
+      { title: 'Confirm or reschedule', body: 'Patients confirm, or pick another time; requests outside your rules go to your scheduling team.', owner: 'agent' },
+      { title: 'Slot offered again', body: 'A freed slot is offered to patients on the waitlist.', owner: 'agent' }
     ],
-    inputs: [
-      'Scheduling system appointment data',
-      'Patient communication preferences',
-      'Patient engagement history and response patterns',
-      'Appointment type and preparation requirements',
-      'Provider availability for rescheduling',
-      'Waitlist data for cancellation recovery'
+    inputs: ['Appointments from your scheduling system', 'Patient contact preferences', 'Appointment types and preparation needs', 'Provider availability', 'Waitlists'],
+    outputs: ['Reminders by text and voice', 'Confirmations and rescheduled visits', 'Preparation instructions', 'Freed slots offered to the waitlist', 'Requests routed to your scheduling team'],
+    governance: [
+      { icon: 'calendar', title: 'Logistics only', body: 'Reminders cover the date, time, location and preparation. They don’t share results or discuss treatment.' },
+      { icon: 'user', title: 'Opt out at any time', body: 'Patients can opt out of automated reminders by replying or by contacting the practice.' },
+      { icon: 'stethoscope', title: 'Clinical questions go to your team', body: 'Patients who mention symptoms are routed to the practice’s clinical line.' }
     ],
-    outputs: [
-      'Multi-channel reminders (voice, SMS, email)',
-      'Appointment confirmations and reschedule bookings',
-      'Pre-visit preparation instructions',
-      'No-show risk flags for clinical review',
-      'Cancellation recovery outreach to waitlisted patients',
-      'Engagement analytics (confirmation rate, response time, no-show rate)'
-    ],
-    integrations: [
-      { system: 'Scheduling Systems', description: 'Epic, Cerner, athenahealth, eClinicalWorks. Monitors appointments and writes reschedule bookings.' },
-      { system: 'Communication Channels', description: 'Voice, SMS, and email delivery with two-way response handling and conversation threading.' },
-      { system: 'Analytics', description: 'Feeds no-show rate, confirmation rate, and engagement data into Zynix analytics dashboards for operational reporting.' }
-    ],
-    governanceBody: '<p>ZynReminder communicates appointment logistics and preparation instructions. It does not provide clinical advice, share test results, or discuss treatment plans during reminder interactions.</p>',
-    governancePoints: [
-      { title: 'Communication Compliance', body: 'All reminders comply with TCPA regulations for automated communications. Patients can opt out of automated reminders at any time via reply or through the practice.' },
-      { title: 'Content Boundaries', body: 'Reminder messages contain only appointment logistics (date, time, location, preparation). No PHI beyond the minimum necessary for appointment identification is included in SMS or email.' },
-      { title: 'Escalation Path', body: 'Patients who report symptoms or clinical concerns during a reminder interaction are transferred to ZynAfterHours triage or instructed to contact the practice clinical line.' }
-    ],
-    relatedUseCases: [
-      { ucId: 'UC17', title: 'Appointment Scheduling and No-Show Reduction', url: '/use-cases/appointment-scheduling-no-show' },
-      { ucId: 'UC11', title: 'HEDIS and Stars Quality Improvement', url: '/use-cases/hedis-stars-quality-improvement' },
-      { ucId: 'UC28', title: 'Preventive Screening Gap Closure', url: '/use-cases/preventive-screening-gap-fqhc' }
-    ],
-    ctaHeadline: 'Cut No-Shows by 40%',
-    ctaSubline: 'See how ZynReminder recovers thousands in lost appointment revenue with intelligent two-way reminders.',
-    ctaButton: 'Request a Demo'
+    useCases: ['/use-cases/hedis-stars-quality-improvement', '/use-cases/surgical-scheduling-pre-procedure'],
+    ctaHeadline: 'See two-way reminders in a 30-minute demo',
+    ctaSubline: 'One upcoming visit, from first reminder to confirmation, on sample data.'
   });
 }
 
@@ -8142,93 +7970,43 @@ function renderZynReminderV7() {
 
 
 function renderChronicDiseaseMonitoring() {
-  var html = '';
-
-  html += renderInnerHero('CLINICAL PERFORMANCE', 'Continuous Monitoring Between Visits',
-    'AI-powered chronic disease monitoring that tracks symptoms, lab trends, and medication patterns for patients with diabetes, CHF, COPD, and CKD. Detects deterioration early and routes alerts to clinical teams.',
-    IMG.care, 'Chronic Disease Monitoring', 'Explore Capabilities');
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">WHAT IT DOES</span>' +
-    '<h2>Filling the Gap Between Office Visits</h2>' +
-    '<p class="zynix-section-sub">Most chronic disease patients are seen 2-4 times per year. Between those visits, clinical teams have limited visibility. The Chronic Disease Monitoring agent fills that gap with periodic automated check-ins, cross-referencing patient-reported data with pharmacy fill records and lab result trends to identify early warning signals.</p>' +
-    '</div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">HOW IT WORKS</span>' +
-    '<h2>Structured Check-In Workflow</h2>' +
-    '<div class="zynix-orch-flow">' +
-    '<div class="zynix-orch-step fade-in-up"><span>1</span><p>Patient Enrollment</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>2</span><p>Automated Check-In</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>3</span><p>Trend Analysis</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>4</span><p>Alert or Continue</p></div>' +
-    '</div></div></section>';
-
-  html += renderCTA('Monitor Chronic Patients Continuously', 'See how continuous AI monitoring detects deterioration before it becomes a hospitalization.', 'Request a Demo');
-  html += renderFooter();
-  return html;
+  // Check-ins between visits are the chronic care management agent's job; no separate monitoring agent is listed (NAMES).
+  return renderChronicCareAgent();
 }
 
 
 function renderAWVOutreach() {
-  var html = '';
-
-  html += renderInnerHero('CLINICAL PERFORMANCE', 'Annual Wellness Visits: Identified, Scheduled, Completed',
-    'AI-powered identification of AWV-eligible patients, automated outreach campaigns, appointment scheduling, and completion tracking. Increase AWV completion rates by 3x compared to manual outreach programs.',
-    IMG.patient, 'AWV Outreach Agent', 'Explore Capabilities');
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">WHAT IT DOES</span>' +
-    '<h2>Automated AWV Pipeline</h2>' +
-    '<p class="zynix-section-sub">The AWV Outreach agent identifies Medicare patients eligible for Annual Wellness Visits who have not yet been scheduled. It cross-references enrollment data, claims history, and scheduling records to build a prioritized outreach list. Post-visit, it confirms completion and updates quality tracking dashboards.</p>' +
-    '</div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">HOW IT WORKS</span>' +
-    '<h2>The AWV Outreach Sequence</h2>' +
-    '<div class="zynix-orch-flow">' +
-    '<div class="zynix-orch-step fade-in-up"><span>1</span><p>Eligibility ID</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>2</span><p>Prioritized Outreach</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>3</span><p>Scheduling</p></div><div class="zynix-orch-arrow">&rarr;</div>' +
-    '<div class="zynix-orch-step fade-in-up"><span>4</span><p>Completion Tracking</p></div>' +
-    '</div></div></section>';
-
-  html += renderCTA('Triple Your AWV Completion Rate', 'See how AI-driven AWV outreach delivers 3x improvement over manual scheduling programs.', 'Request a Demo');
-  html += renderFooter();
-  return html;
+  return renderAgentPageV7({
+    agent: 'Preventive and quality activation', family: 'clinical-performance',
+    eyebrow: 'Preventive and quality activation',
+    headline: 'Annual wellness visits, from due list to done',
+    subhead: 'Wellness-visit outreach is part of the preventive and quality activation agent: it finds Medicare patients due for an annual wellness visit, invites them, books the visit and tracks completion.',
+    glanceTitle: 'The agent that runs wellness-visit outreach',
+    stepsTitle: 'From due list to completed visit',
+    steps: [
+      { title: 'Build the due list', body: 'Medicare patients due for an annual wellness visit, and not yet scheduled, are found from enrollment, claims and scheduling records.', owner: 'platform' },
+      { title: 'Invite the patient', body: 'The agent invites each patient by voice or text and answers questions about the visit.', owner: 'agent' },
+      { title: 'Book the visit', body: 'It books the visit with the right provider and sends preparation instructions.', owner: 'agent' },
+      { title: 'Remind and reschedule', body: 'Two-way reminders confirm the visit or find a new time.', owner: 'agent' },
+      { title: 'Confirm completion', body: 'After the visit date, claims and clinical data confirm it happened. Open items go back to the list or to a care coordinator.', owner: 'team' }
+    ],
+    inputs: ['Medicare enrollment and attribution', 'Claims history, including earlier wellness visits', 'Scheduling records', 'Patient contact preferences', 'Provider availability'],
+    outputs: ['Invitations by voice and text', 'Booked wellness visits', 'Preparation instructions and reminders', 'Completion status by patient', 'Patients with barriers routed to a care coordinator'],
+    governance: [
+      { icon: 'stethoscope', title: 'Clinicians run the visit', body: 'The agent books the wellness visit; the visit itself, and any clinical question, stays with your clinicians.' },
+      { icon: 'user', title: 'Opt-outs are honored', body: 'Patients who decline or opt out are removed from automated contact for the visit.' },
+      { icon: 'check', title: 'Checked before outreach', body: 'Due dates are checked against claims and scheduling records before outreach, to avoid inviting patients who already had their visit.' }
+    ],
+    useCases: ['/use-cases/hedis-stars-quality-improvement', '/use-cases/preventive-screening-gap-fqhc'],
+    ctaHeadline: 'See wellness-visit outreach in a 30-minute demo',
+    ctaSubline: 'From the due list to a completed visit, on sample data.'
+  });
 }
 
 
 function renderSDoHAgent() {
-  var html = '';
-
-  html += renderInnerHero('PLANNED CAPABILITY', 'Social Determinants of Health Screening and Navigation',
-    'An AI agent that screens patients for social determinants of health, including housing instability, food insecurity, transportation barriers, financial hardship, and social isolation, and routes identified needs to community resources and care navigators.',
-    IMG.patients, 'SDoH Determination Agent', 'Explore Capabilities');
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">PLANNED</span>' +
-    '<h2>Addressing the Non-Clinical Drivers of Health Outcomes</h2>' +
-    '<p class="zynix-section-sub">Social determinants of health account for an estimated 30-55% of health outcomes. The SDoH Determination Agent will automate validated screening instruments (PRAPARE, AHC HRSN), identify patients with unmet social needs, and connect them with community resources.</p>' +
-    renderFeatureCards([
-      { icon: IC_HOSPITAL, title: 'Housing & Food Security', desc: 'Screen for housing instability, food insecurity, and utility needs. Route to local assistance programs.' },
-      { icon: IC_CAR, title: 'Transportation Barriers', desc: 'Identify patients who miss appointments due to transportation. Connect with ride services and community transit.' },
-      { icon: IC_DOLLAR, title: 'Financial Hardship', desc: 'Screen for inability to pay for medications, copays, or basic needs. Route to financial assistance and pharmacy discount programs.' }
-    ]) +
-    '</div></section>';
-
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">RELATED USE CASES</span>' +
-    '<h2>See Related Work</h2>' +
-    '<div class="zynix-agents-grid">' +
-    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">UC27</span><h3>SDoH Screening and Care Navigation</h3></div><p><a href="/use-cases/sdoh-screening-care-navigation">View use case &rarr;</a></p></div>' +
-    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">UC28</span><h3>Preventive Screening Gap Closure</h3></div><p><a href="/use-cases/preventive-screening-gap-fqhc">View use case &rarr;</a></p></div>' +
-    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">UC29</span><h3>Medication Adherence for Complex Chronic Patients</h3></div><p><a href="/use-cases/medication-adherence-complex-chronic">View use case &rarr;</a></p></div>' +
-    '</div></div></section>';
-
-  html += renderCTA('Interested in SDoH Screening?', 'Contact us to learn about our development timeline and early access program.', 'Contact Us');
-  html += renderFooter();
-  return html;
+  // A planned agent is never listed or given a page (DECISIONS 15-19; COPY_DECK §5.1): this URL shows the agents hub.
+  return renderAgentsHub();
 }
 
 
