@@ -4872,8 +4872,28 @@
 
   // ── Init (§5.15): each idempotent, early return without its root, listeners registered once ──
   function initHomepage() {
-    [[initHeroWidget, '[data-zx-hw]'], [initHowItWorks, '[data-zx-hiw]'], [initDataFlow, '[data-zx-flow]']].forEach(function (x) {
+    [[initHeroWidget, '[data-zx-hw]'], [initHowItWorks, '[data-zx-hiw]'], [initDataFlow, '[data-zx-flow]'], [zxHomeAnchors, '.zynix-injected']].forEach(function (x) {
       try { x[0](document.querySelector(x[1])); } catch (e) { try { console.warn('[zx] home init', e); } catch (e2) {} }
+    });
+  }
+
+  // Same-page links on the homepage ("See how it works", "See the data flow") land below the fixed chrome. Webflow's own
+  // anchor scroll ignores the bundle's fixed nav and parks the target under it, so these links scroll themselves.
+  function zxHomeAnchors(root) {
+    if (!root || root.__zxHomeAnchors) return;
+    root.__zxHomeAnchors = true;
+    [].forEach.call(root.querySelectorAll('.zx-home-hero a[href^="#"], .zx-hiw a[href^="#"]'), function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href').slice(1), el = id ? document.getElementById(id) : null;
+        if (!el) return;
+        e.preventDefault(); e.stopPropagation();
+        var chrome = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--zx-chrome-h')) || 0;
+        var still = zxHomeMq('(prefers-reduced-motion: reduce)');
+        window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - chrome), behavior: still && still.matches ? 'auto' : 'smooth' });
+        try { history.pushState(null, '', '#' + id); } catch (err) {}
+        if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+        el.focus({ preventScroll: true });   // keyboard users continue from the section they jumped to
+      });
     });
   }
 
