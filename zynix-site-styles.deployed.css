@@ -4186,6 +4186,137 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 
 
 /* ════ ZX:BEGIN page:company (owner P5) ════ */
+/* /about, /careers, /contact (DESIGN_SPEC §6 Company and Contact templates). Every selector starts with zx-co-. */
+
+/* ── Shared ── */
+.zx-co-nowrap { white-space:nowrap; }
+.zx-co-dl { display:grid; gap:0; margin:0; border-top:1px solid var(--zx-border); }
+.zx-co-dl > div { display:grid; grid-template-columns:minmax(0,9rem) minmax(0,1fr); gap:var(--zx-space-4); padding:var(--zx-space-4) 0; border-bottom:1px solid var(--zx-border); }
+.zx-co-dl dt { margin:0; padding-top:3px; font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.4 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase; color:var(--zx-text-muted); }
+.zx-co-dl dd { margin:0; font-size:var(--zx-fs-body); line-height:1.55; color:var(--zx-text); }
+@media (max-width:479.98px) { .zx-co-dl > div { grid-template-columns:minmax(0,1fr); gap:var(--zx-space-1); } }
+
+/* ── /about: registry facts directly under the hero ── */
+.zx-co-facts { padding-block:0 var(--zx-section-y-sm); }
+
+/* ── /about: story ── */
+.zx-co-story .zynix-section-head { margin-bottom:0; }
+.zx-co-story__body p { margin:0 0 var(--zx-space-5); max-width:62ch; font-size:var(--zx-fs-lead); line-height:1.65; color:var(--zx-text-secondary); }
+.zx-co-story__body p:first-child { color:var(--zx-text); }
+.zx-co-story .zynix-quote { margin-top:var(--zx-space-10); }
+
+/* ── /about: mission and principles ── */
+.zx-co-beliefs__title { margin:var(--zx-space-12) 0 var(--zx-space-5); font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.2 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase; color:var(--zx-text-muted); }
+.zx-co-beliefs { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--zx-space-6) var(--zx-grid-gap); list-style:none; margin:0; padding:0; }
+.zx-co-beliefs__item { margin:0; padding-top:var(--zx-space-5); border-top:1px solid var(--zx-border-strong); }
+.zx-co-beliefs__n { display:block; margin-bottom:var(--zx-space-3); font:var(--zx-fw-semibold) var(--zx-fs-sm)/1 var(--zx-font-sans); font-variant-numeric:tabular-nums; color:var(--zx-blue-600); }
+.zx-co-beliefs__text { margin:0; max-width:30ch; font-size:var(--zx-fs-h3); line-height:1.35; letter-spacing:var(--zx-tr-h3); font-weight:var(--zx-fw-medium); color:var(--zx-text); }
+@media (min-width:768px) { .zx-co-beliefs { grid-template-columns:repeat(3, minmax(0,1fr)); } }
+
+/* ── /about: leadership (one crop and one tone for every headshot) ── */
+.zx-co-people.zynix-cgrid { row-gap:var(--zx-space-10); }
+@media (min-width:768px) {
+  .zx-co-people.zynix-cgrid { grid-template-columns:repeat(3, minmax(0,1fr)); }
+  .zx-co-people.zynix-cgrid > :last-child { grid-column:auto; }
+}
+.zx-co-person { margin:0; }
+.zx-co-person__photo { display:block; width:100%; max-width:264px; height:auto; aspect-ratio:4 / 5; object-fit:cover; object-position:50% 22%;
+  margin:0 0 var(--zx-space-5); border-radius:var(--zx-radius-lg); background:var(--zx-surface-sunken); filter:grayscale(1) contrast(1.04); }
+.zx-co-person__name { margin:0; font-size:var(--zx-fs-h4); line-height:1.35; font-weight:var(--zx-fw-semibold); color:var(--zx-text); }
+.zx-co-person__title { margin:2px 0 0; font-size:var(--zx-fs-sm); line-height:1.45; font-weight:var(--zx-fw-medium); color:var(--zx-blue-600); }
+.zx-co-person__bio { margin:var(--zx-space-3) 0 var(--zx-space-3); font-size:15px; line-height:1.6; color:var(--zx-text-secondary); }
+@media (max-width:767.98px) {
+  .zx-co-people.zynix-cgrid { row-gap:var(--zx-space-8); }
+  .zx-co-person { display:grid; grid-template-columns:96px minmax(0,1fr); column-gap:var(--zx-space-4); align-items:start; }
+  .zx-co-person__photo { grid-row:1 / span 4; max-width:none; margin:0; border-radius:var(--zx-radius-md); }
+  .zx-co-person > :not(.zx-co-person__photo) { grid-column:2; }
+}
+
+/* ── /about: milestones ── */
+.zx-co-milestones .zynix-section-head { margin-bottom:0; }
+.zx-co-timeline { list-style:none; margin:0; padding:0; border-top:1px solid var(--zx-border); }
+.zx-co-timeline__item { display:grid; grid-template-columns:minmax(0,8.5rem) minmax(0,1fr); gap:var(--zx-space-6); margin:0; padding:var(--zx-space-5) 0; border-bottom:1px solid var(--zx-border); }
+.zx-co-timeline__when { margin:0; padding-top:2px; font:var(--zx-fw-semibold) var(--zx-fs-sm)/1.5 var(--zx-font-sans); font-variant-numeric:tabular-nums; color:var(--zx-blue-600); }
+.zx-co-timeline__text { margin:0; max-width:64ch; font-size:17px; line-height:1.55; color:var(--zx-text); }
+.zx-co-timeline__body .zynix-link-arrow { margin-top:var(--zx-space-2); }
+@media (max-width:479.98px) { .zx-co-timeline__item { grid-template-columns:minmax(0,1fr); gap:var(--zx-space-1); } }
+
+/* ── /about: where we are, how we handle data ── */
+.zx-co-details__grid { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--zx-space-12); }
+@media (min-width:1024px) { .zx-co-details__grid { grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--zx-space-16); } }
+.zx-co-details__title { margin:0 0 var(--zx-space-5); font-size:var(--zx-fs-h3); line-height:var(--zx-lh-snug); letter-spacing:var(--zx-tr-h3); }
+.zx-co-details .zynix-trust-row { margin-top:0; }
+.zx-co-details__links { display:flex; flex-wrap:wrap; gap:var(--zx-space-3) var(--zx-space-6); margin-top:var(--zx-space-6); }
+
+/* ── /careers: what the work is like ── */
+.zx-co-work__list { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--zx-space-8) var(--zx-grid-gap); list-style:none; margin:0; padding:0; }
+@media (min-width:768px) { .zx-co-work__list { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+@media (min-width:1024px) { .zx-co-work__list { grid-template-columns:repeat(4, minmax(0,1fr)); } }
+.zx-co-work__item { margin:0; padding-top:var(--zx-space-5); border-top:1px solid var(--zx-border-strong); }
+.zx-co-work__n { display:block; margin-bottom:var(--zx-space-3); font:var(--zx-fw-semibold) var(--zx-fs-sm)/1 var(--zx-font-sans); font-variant-numeric:tabular-nums; color:var(--zx-blue-600); }
+.zx-co-work__title { margin:0 0 var(--zx-space-2); font-size:var(--zx-fs-h4); line-height:1.35; letter-spacing:0; }
+.zx-co-work__body { margin:0; font-size:15px; line-height:1.6; color:var(--zx-text-secondary); }
+.zx-co-benefits { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--zx-space-2) var(--zx-space-8); margin-top:var(--zx-space-12); padding:var(--zx-space-6) var(--zx-space-6); border-radius:var(--zx-radius-lg); background:var(--zx-surface-subtle); }
+@media (min-width:768px) { .zx-co-benefits { grid-template-columns:minmax(0,10rem) minmax(0,1fr); align-items:baseline; } .zx-co-benefits__note { grid-column:2; } }
+.zx-co-benefits__title { margin:0; font-size:var(--zx-fs-body); line-height:1.5; font-weight:var(--zx-fw-semibold); color:var(--zx-text); }
+.zx-co-benefits__list { display:flex; flex-wrap:wrap; gap:var(--zx-space-2) var(--zx-space-6); list-style:none; margin:0; padding:0; font-size:var(--zx-fs-body); line-height:1.5; color:var(--zx-text); }
+.zx-co-benefits__list li { display:inline-flex; align-items:center; gap:var(--zx-space-2); margin:0; }
+.zx-co-benefits__list li::before { content:""; flex:none; width:6px; height:6px; border-radius:50%; background:var(--zx-blue-400); }
+.zx-co-benefits__note { margin:0; font-size:var(--zx-fs-sm); line-height:1.5; color:var(--zx-text-muted); }
+
+/* ── /careers: open roles, grouped by team ── */
+.zx-co-roles__group { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--zx-space-3); padding:var(--zx-space-6) 0 var(--zx-space-2); border-top:1px solid var(--zx-border-strong); }
+@media (min-width:1024px) { .zx-co-roles__group { grid-template-columns:repeat(12, minmax(0,1fr)); column-gap:var(--zx-space-12); } .zx-co-roles__team { grid-column:1 / span 3; } .zx-co-roles__list { grid-column:4 / span 9; } }
+.zx-co-roles__team { margin:0; padding-top:var(--zx-space-3); font-size:var(--zx-fs-h4); line-height:1.35; letter-spacing:0; }
+.zx-co-roles__list { list-style:none; margin:0; padding:0; }
+.zx-co-roles__list > li { margin:0; }
+.zx-co-roles__list > li + li { border-top:1px solid var(--zx-border); }
+.zx-co-role { display:grid; grid-template-columns:minmax(0,1fr) auto auto; align-items:center; gap:var(--zx-space-2) var(--zx-space-6); min-height:56px; padding:var(--zx-space-3) 0;
+  color:var(--zx-text); text-decoration:none; }
+.zx-co-role__title { font-size:var(--zx-fs-body); line-height:1.4; font-weight:var(--zx-fw-semibold); }
+.zx-co-role__meta { font-size:var(--zx-fs-sm); line-height:1.4; color:var(--zx-text-secondary); white-space:nowrap; }
+.zx-co-role__arrow { color:var(--zx-text-muted); transition:transform var(--zx-dur-1) var(--zx-ease-out), color var(--zx-dur-1) var(--zx-ease-out); }
+.zx-co-role:hover .zx-co-role__title { color:var(--zx-link); text-decoration:underline; text-underline-offset:3px; }
+.zx-co-role:hover .zx-co-role__arrow { color:var(--zx-link); transform:translateX(2px); }
+@media (max-width:767.98px) {
+  .zx-co-role { grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"title arrow" "meta arrow"; row-gap:2px; }
+  .zx-co-role__title { grid-area:title; } .zx-co-role__meta { grid-area:meta; white-space:normal; } .zx-co-role__arrow { grid-area:arrow; }
+}
+.zx-co-roles__note { margin:var(--zx-space-8) 0 0; font-size:15px; line-height:1.6; color:var(--zx-text-secondary); }
+
+/* ── /contact: the two paths ── */
+.zx-co-paths { padding-top:var(--zx-space-4); }
+.zx-co-paths .zynix-split { row-gap:var(--zx-space-12); }
+.zx-co-book { padding-bottom:var(--zx-space-8); border-bottom:1px solid var(--zx-border); }
+.zx-co-book__title { margin:0 0 var(--zx-space-3); font-size:var(--zx-fs-h3); line-height:var(--zx-lh-snug); letter-spacing:var(--zx-tr-h3); }
+.zx-co-book__text { margin:0 0 var(--zx-space-6); max-width:48ch; font-size:var(--zx-fs-body); line-height:1.6; color:var(--zx-text-secondary); }
+.zx-co-reach { padding-top:var(--zx-space-8); }
+.zx-co-reach__title { margin:0 0 var(--zx-space-3); font-size:var(--zx-fs-body); line-height:1.4; font-weight:var(--zx-fw-semibold); letter-spacing:0; }
+.zx-co-reach .zx-co-dl { margin-bottom:var(--zx-space-8); }
+.zx-co-reach .zx-co-dl > div { grid-template-columns:minmax(0,6rem) minmax(0,1fr); }
+.zx-co-reach__text { margin:0; font-size:var(--zx-fs-body); line-height:1.6; color:var(--zx-text-secondary); }
+.zx-co-trust { margin-top:var(--zx-space-8); padding-top:var(--zx-space-8); border-top:1px solid var(--zx-border); }
+.zx-co-trust .zynix-logo-row { margin-top:var(--zx-space-8); }
+.zx-co-trust .zynix-logo-row__list { grid-template-columns:repeat(3, minmax(0,1fr)); row-gap:var(--zx-space-4); }
+.zx-co-trust .zynix-logo-row__item:nth-child(n+7) { display:none; }
+
+/* ── /contact: the form card (#form; field markup from renderField) ── */
+.zx-co-form { box-sizing:border-box; padding:clamp(24px, 12px + 2.4vw, 40px); border:1px solid var(--zx-border); border-radius:var(--zx-radius-xl); background:var(--zx-surface); box-shadow:var(--zx-shadow-md); }
+.zx-co-form__title { margin:0; font-size:var(--zx-fs-h3); line-height:var(--zx-lh-snug); letter-spacing:var(--zx-tr-h3); }
+.zx-co-form__intro { margin:var(--zx-space-2) 0 0; font-size:15px; line-height:1.55; color:var(--zx-text-secondary); }
+.zx-co-form__legend { margin:var(--zx-space-4) 0 var(--zx-space-4); font-size:var(--zx-fs-sm); line-height:1.4; color:var(--zx-text-muted); }
+.zx-co-form__row { display:grid; grid-template-columns:minmax(0,1fr); column-gap:var(--zx-space-4); }
+@media (min-width:480px) { .zx-co-form__row { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+.zx-co-form .zynix-field { margin-bottom:var(--zx-space-4); }
+.zx-co-form .zynix-field textarea { min-height:112px; }
+.zx-co-form__submit { width:100%; margin-top:var(--zx-space-2); }
+.zx-co-form__note { margin:var(--zx-space-4) 0 0; font-size:var(--zx-fs-xs); line-height:1.55; color:var(--zx-text-muted); }
+.zx-co-form__note a { color:var(--zx-text-secondary); text-decoration:underline; text-underline-offset:2px; }
+.zx-co-form .zx-form-err { margin:var(--zx-space-3) 0 0; font-size:var(--zx-fs-sm); line-height:1.5; font-weight:var(--zx-fw-medium); color:var(--zx-danger-600); }
+.zx-co-form__done { padding:var(--zx-space-6) 0; }
+.zx-co-form__done:focus { outline:none; }
+.zx-co-form__done p { margin:0; font-size:var(--zx-fs-body); line-height:1.6; color:var(--zx-text-secondary); }
+.zx-co-form__done .zx-co-form__done-title { margin-bottom:var(--zx-space-2); font-size:var(--zx-fs-h4); font-weight:var(--zx-fw-semibold); color:var(--zx-text); }
 /* ════ ZX:END page:company ════ */
 
 

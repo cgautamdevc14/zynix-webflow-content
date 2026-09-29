@@ -2618,89 +2618,25 @@
 
   // ── PAGE: About ──
   function renderAbout() {
-    return renderInnerHero('ABOUT ZYNIX', 'We Are Building Healthcare\u2019s <span style="color:var(--z-accent)">Intelligence</span>',
-      'Purpose-built AI for medicine. Not another tool, but an operating system that transforms how healthcare organizations deliver care at scale.',
-      IMG.patients, 'Zynix AI Team') +
+    return renderAboutV7();   // /about and /company-about render the V7 page (DESIGN_SPEC §6: the old renderer delegates)
+  }
 
-    '<section class="zynix-manifesto-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">OUR MANIFESTO</span>' +
-    '<h2>Healthcare Is Broken, But Not For The Reason You Think</h2>' +
-    '<p class="zynix-section-sub">The gap isn\u2019t knowledge. It\u2019s execution. Every organization knows who needs care. The problem is delivering that care at scale, consistently, across every patient.</p>' +
-    '<div class="zynix-about-quote fade-in-up"><blockquote>\u201cZynix is not about replacing doctors. It\u2019s about multiplying the impact of every person in healthcare so the system works for patients, not against them.\u201d</blockquote></div>' +
-    '</div></section>' +
+  // ==== ZX:BEGIN seo (owner P5) ====
+  // Company pages (COPY_DECK §6). /careers names the teams its role list actually carries.
+  zxSeo('/about', { title: 'About Zynix AI: physician-led VBC infrastructure',
+    desc: 'Zynix AI builds AI infrastructure and workflows for value-based care. Physician-led, based in Trinity, Florida, with organizations in 30 states.' });
+  zxSeo('/careers', { title: 'Careers | Zynix AI',
+    desc: 'Help ACOs, health plans and health systems reach patients between visits. See open roles in engineering, product, design, operations and sales.' });
+  zxSeo('/contact', { title: 'Contact Zynix AI | Request a demo',
+    desc: 'Book 30 minutes with our team or send a message. Zynix AI, 3535 Little Rd, Trinity, FL 34655. info@zynix.ai · (727) 261-1297.' });
+  // ==== ZX:END seo ====
 
-    '<section class="zynix-capabilities-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">WHY WE EXIST</span>' +
-    '<h2>Why Healthcare Needs Its Own AI</h2>' +
-    renderFeatureCards([
-      { icon: IC_BRAIN, title: 'Clinical Reasoning Engine', desc: 'Built on real medical conversations and protocols, not internet data. Understands medicine at its core.' },
-      { icon: IC_SHIELD, title: 'Safety Constellation', desc: 'Multi-layer safety woven into every output. Protocol validation, uncertainty detection, human escalation.' },
-      { icon: IC_TARGET, title: 'Certainty Calibration', desc: 'Knows what it doesn\u2019t know. Flags uncertainty explicitly and escalates to human clinicians when needed.' },
-      { icon: IC_EYE, title: 'Multimodal Understanding', desc: 'Processes text, structured data, clinical workflows, EHR records, and imaging notes in unified context.' }
-    ]) +
-    '</div></section>' +
-
-    '<section class="zynix-mission-section"><div class="zynix-container">' +
-    '<span class="zynix-tag">MISSION & VISION</span>' +
-    '<h2>What We\u2019re Building Toward</h2>' +
-    '<div class="zynix-compare-grid">' +
-    '<div class="zynix-compare-card zynix-compare-good fade-in-up"><h3>Our Mission</h3><p style="font-size:16px;line-height:1.8">To transform healthcare operations by building the AI operating system that turns insight into action, enabling every organization to deliver the right care, to the right patient, at the right time.</p></div>' +
-    '<div class="zynix-compare-card zynix-compare-good fade-in-up"><h3>Our Vision</h3><p style="font-size:16px;line-height:1.8">A world where healthcare\u2019s intelligence gap is closed, where AI handles the operational complexity so human caregivers can focus entirely on what they do best: caring for patients.</p></div>' +
-    '</div></div></section>' +
-
-    // LEADERSHIP
-    '<section id="team" style="padding:80px 0"><div class="zynix-container">' +
-    '<span class="zynix-tag">OUR TEAM</span>' +
-    '<h2>Leadership</h2>' +
-    '<p class="zynix-section-sub">Physician-led. Engineer-driven. Building the AI operating system that executes value-based care at scale.</p>' +
-    '<div class="zynix-feature-grid" style="margin-top:40px">' +
-
-    // Jay
-    '<div class="zynix-feature-card fade-in-up" style="text-align:center">' +
-    '<div style="width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:3px solid var(--z-border)">' +
-    '<img src="' + GH + 'headshot-jay.png" alt="Jay Chowdappa, MD" style="width:100%;height:100%;object-fit:cover" loading="lazy">' +
-    '</div>' +
-    '<h3 style="font-size:20px;font-weight:700;margin:0 0 4px">Jay Chowdappa, MD</h3>' +
-    '<p style="font-size:14px;color:var(--z-accent);font-weight:600;margin:0 0 12px">CEO & Co-Founder</p>' +
-    '<p style="font-size:13px;color:var(--z-text-secondary);line-height:1.7;max-width:320px;margin:0 auto">Physician executive with 30+ years in healthcare. Founded and operated six successful Medicare ACOs with over $300M in total shared savings. Co-founded Assurity DCE. Built Zynix to close the gap between healthcare intelligence and execution.</p>' +
-    '<a href="https://www.linkedin.com/in/jayadeva-jay-chowdappa-m-d-6b221616/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--z-blue);font-weight:500;text-decoration:none">' + SVG_LINKEDIN + ' LinkedIn</a>' +
-    '</div>' +
-
-    // Gautamdev
-    '<div class="zynix-feature-card fade-in-up" style="text-align:center">' +
-    '<div style="width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:3px solid var(--z-border)">' +
-    '<img src="' + GH + 'headshot-gautam.png" alt="Gautamdev Chowdary" style="width:100%;height:100%;object-fit:cover" loading="lazy">' +
-    '</div>' +
-    '<h3 style="font-size:20px;font-weight:700;margin:0 0 4px">Gautamdev Chowdary</h3>' +
-    '<p style="font-size:14px;color:var(--z-accent);font-weight:600;margin:0 0 12px">CTO & Co-Founder</p>' +
-    '<p style="font-size:13px;color:var(--z-text-secondary);line-height:1.7;max-width:320px;margin:0 auto">Technology leader who built AI systems for the USDA achieving 94.6% accuracy and saving millions. Architected ZynixLLM and the four-layer platform powering autonomous healthcare agents across 30 states.</p>' +
-    '<a href="https://www.linkedin.com/in/cgautamdevc/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--z-blue);font-weight:500;text-decoration:none">' + SVG_LINKEDIN + ' LinkedIn</a>' +
-    '</div>' +
-
-    // David
-    '<div class="zynix-feature-card fade-in-up" style="text-align:center">' +
-    '<div style="width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:3px solid var(--z-border)">' +
-    '<img src="' + GH + 'headshot-david.jpg" alt="David McDonald" style="width:100%;height:100%;object-fit:cover" loading="lazy">' +
-    '</div>' +
-    '<h3 style="font-size:20px;font-weight:700;margin:0 0 4px">David McDonald</h3>' +
-    '<p style="font-size:14px;color:var(--z-accent);font-weight:600;margin:0 0 12px">VP of Sales</p>' +
-    '<p style="font-size:13px;color:var(--z-text-secondary);line-height:1.7;max-width:320px;margin:0 auto">Healthcare sales executive specializing in value-based care technology. Leads go-to-market for ACOs, health systems, and health plans. Connects healthcare operations leaders with AI solutions that deliver measurable ROI.</p>' +
-    '<a href="https://www.linkedin.com/in/mcdonalddavidl/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--z-blue);font-weight:500;text-decoration:none">' + SVG_LINKEDIN + ' LinkedIn</a>' +
-    '</div>' +
-
-    '</div></div></section>' +
-
-    // TEAM STATS
-    '<section style="padding:60px 0;background:var(--z-bg-alt)"><div class="zynix-container">' +
-    '<div class="zynix-metrics-bar" style="margin:0">' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">1M+</span><span class="zynix-metric-label">Patients Served</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">30</span><span class="zynix-metric-label">States</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">10+</span><span class="zynix-metric-label">ACOs</span></div>' +
-    '<div class="zynix-metric fade-in-up"><span class="zynix-metric-value">$150M+</span><span class="zynix-metric-label">Shared Savings</span></div>' +
-    '</div></div></section>' +
-
-    renderCTA('Join Us in Transforming Healthcare', 'See how Zynix is building the future of healthcare intelligence.', 'Request a Demo') +
-    renderFooter();
+  // Related block for a company page. The router's renderCrossLinks() owns related links; these pages have no
+  // CROSS_LINKS entry yet, so the page renders its own block and stands down as soon as one exists (one block per page).
+  function zxCoRelated(items) {
+    var p = zxPath();
+    if (typeof CROSS_LINKS !== 'undefined' && CROSS_LINKS[p]) return '';
+    return renderRelatedLinks({ title: 'Related', groups: [{ label: 'Company', items: items }] });
   }
 
   // ── PAGE: Trust Center ──
@@ -2798,40 +2734,77 @@
   }
 
   function renderContact() {
-    return '<section class="zynix-inner-hero" style="padding:140px 0 60px;background:var(--z-bg-dark)"><div class="zynix-container">' +
-    '<div style="text-align:center;position:relative;z-index:1">' +
-    '<span class="zynix-tag">CONTACT US</span>' +
-    '<h1 style="color:#fff;font-size:42px;font-weight:800;margin:0 0 16px">Get in Touch</h1>' +
-    '<p style="color:rgba(255,255,255,0.8);font-size:18px;max-width:600px;margin:0 auto">Schedule a demo, ask questions, or explore partnership opportunities with Zynix AI.</p>' +
-    '</div></div></section>' +
+    // Contact template (DESIGN_SPEC §6, COPY_DECK §4): company-preset hero, two paths side by side (the form + Book 30
+    // minutes via CALENDLY), phone and email, trust block, no newsletter. The form is first in the DOM, so it is first on
+    // phones and the reading and tab order match the visual order at every width (no CSS reordering).
+    // The HubSpot handler, the field names, the segment values, the SMS disclosure sentence and sms_consent 'No' are
+    // unchanged (ci/redesign-checks.mjs); only labels, markup classes and the post-submit messages changed.
+    var co = SITE_FACTS.company, F = SITE_FACTS;
+    var tel = '<span class="zx-co-nowrap"><a href="' + zxAttr(co.phoneHref) + '">' + co.phone + '</a></span>', mail = '<a href="mailto:' + zxAttr(co.email) + '">' + co.email + '</a>';
+    var segments = [
+      ['', 'Select your organization type'], ['ACO / MSO', 'ACO or MSO'], ['Independent Practice', 'Physician group or IPA'],
+      ['Health Plan', 'Health plan'], ['Health System', 'Health system'], ['FQHC', 'FQHC or community health center'],
+      ['ASC', 'Ambulatory surgery center'], ['Other', 'Other']
+    ].map(function (s) { return { value: s[0], label: s[1] }; });
 
-    '<section class="zynix-contact-section"><div class="zynix-container">' +
-    '<div class="zynix-contact-grid">' +
-    '<div class="zynix-contact-info">' +
-    '<h3>Contact Information</h3>' +
-    '<div class="zynix-contact-item"><strong>Email</strong><p><a href="mailto:info@zynix.ai" style="color:#F16529">info@zynix.ai</a></p></div>' +
-    '<div class="zynix-contact-item"><strong>Address</strong><p>3535 Little Rd<br>Trinity, FL 34655</p></div>' +
-    '<div class="zynix-contact-divider"></div>' +
-    '<h3>What to Expect</h3>' +
-    '<div class="zynix-expect-list">' +
-    '<div class="zynix-expect-item"><span>1</span><p>Submit your information</p></div>' +
-    '<div class="zynix-expect-item"><span>2</span><p>Discovery call within 24 hours</p></div>' +
-    '<div class="zynix-expect-item"><span>3</span><p>Personalized demo of Zynix</p></div>' +
-    '<div class="zynix-expect-item"><span>4</span><p>Implementation roadmap</p></div>' +
-    '</div></div>' +
-    '<div class="zynix-contact-form-wrap">' +
-    '<h3>Request a Demo</h3>' +
-    '<form class="zynix-contact-form" id="zynix-demo-form" onsubmit="event.preventDefault();var f=this;var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'phone\',value:f.querySelector(\'[name=phone]\').value},{name:\'company\',value:f.querySelector(\'[name=company]\').value},{name:\'healthcare_segment\',value:f.querySelector(\'[name=segment]\').value},{name:\'message\',value:f.querySelector(\'[name=message]\').value},{name:\'sms_consent\',value:\'No\'}],context:{pageUri:location.href,pageName:document.title}};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(r){if(!r.ok){throw new Error(r.status)}f.innerHTML=\'<div style=padding:40px;text-align:center><h3 style=color:#F16529>Thank you!</h3><p>We\\\'ll be in touch within 24 hours.</p></div>\'}).catch(function(){var m=f.querySelector(\'.zx-form-err\');if(!m){m=document.createElement(\'p\');m.className=\'zx-form-err\';m.setAttribute(\'role\',\'alert\');m.style.cssText=\'color:#b91c1c;font-size:14px;line-height:1.5;margin:12px 0 0;text-align:center\';f.appendChild(m)}m.textContent=\'We could not send your request. Please email info@zynix.ai or call (727) 261-1297.\'})">' +
-    '<div class="zynix-form-row"><div class="zynix-form-group"><label>First Name</label><input type="text" name="firstname" aria-label="First Name" autocomplete="given-name" placeholder="John" required></div><div class="zynix-form-group"><label>Last Name</label><input type="text" name="lastname" aria-label="Last Name" autocomplete="family-name" placeholder="Smith" required></div></div>' +
-    '<div class="zynix-form-group"><label>Work Email</label><input type="email" name="email" aria-label="Work Email" autocomplete="email" placeholder="john@organization.com" required></div>' +
-    '<div class="zynix-form-group"><label>Phone Number</label><input type="tel" name="phone" aria-label="Phone Number" autocomplete="tel" placeholder="(555) 123-4567"></div>' +
-    '<div class="zynix-form-group"><label>Organization</label><input type="text" name="company" aria-label="Organization" autocomplete="organization" placeholder="Your organization name"></div>' +
-    '<div class="zynix-form-group"><label>Healthcare Segment</label><select name="segment" aria-label="Healthcare Segment"><option value="">Select your segment</option><option>ACO / MSO</option><option>Health System</option><option>FQHC</option><option>Health Plan</option><option>Independent Practice</option><option>ASC</option><option>Other</option></select></div>' +
-    '<div class="zynix-form-group"><label>Message (Optional)</label><textarea name="message" aria-label="Message (Optional)" rows="4" placeholder="Tell us about your goals..."></textarea></div>' +
-        '<button type="submit" class="zynix-btn-primary" style="width:100%;text-align:center">Request a Demo &rarr;</button>' +
-    '<p style="font-size:11px;color:var(--z-text-muted);margin-top:12px;text-align:center;line-height:1.5">We use your details only to respond to your demo request. This form does not sign you up for text messages; to receive SMS notifications, use our <a href="/sms-consent" style="color:var(--z-text-muted);text-decoration:underline">SMS opt-in form</a>. <a href="/privacy-policy" style="color:var(--z-text-muted);text-decoration:underline">Privacy Policy</a></p>' +
-    '</form></div></div></div></section>' +
-    renderFooter();
+    var book = '<div class="zx-co-book">' +
+        '<h2 class="zx-co-book__title" id="book-title">Book 30 minutes with our team</h2>' +
+        '<p class="zx-co-book__text">We’ll walk through post-discharge follow-up, care gap closure or wellness visit outreach on sample data, and map it to your programs.</p>' +
+        renderButton('Book 30 minutes', F.demo.href, { variant: 'primary', size: 'lg', cta: 'demo', newTab: true }) +
+      '</div>' +
+      '<div class="zx-co-reach">' +
+        '<h3 class="zx-co-reach__title">Other ways to reach us</h3>' +
+        '<dl class="zx-co-dl">' +
+          '<div><dt>Phone</dt><dd>' + tel + '</dd></div>' +
+          '<div><dt>Email</dt><dd>' + mail + '</dd></div>' +
+          '<div><dt>Address</dt><dd>' + co.legalLine + '<br>' + co.addressLine + '</dd></div>' +
+        '</dl>' +
+        '<h3 class="zx-co-reach__title">What happens next</h3>' +
+        '<p class="zx-co-reach__text">We reply by email, usually within one business day.</p>' +
+      '</div>' +
+      '<div class="zx-co-trust">' +
+        renderTrustRow(['soc2', 'hipaa'], { href: '/security' }) +
+        renderLogoRow(null, { id: 'contact-logos', max: 6, label: 'Used by ACOs, health plans and provider organizations' }) +
+      '</div>';
+
+    // The form: field names, the inline HubSpot handler and its payload are the ones the site has always sent.
+    var form = '<div class="zx-co-form" id="form">' +
+      '<h2 class="zx-co-form__title" id="form-title">Send a message</h2>' +
+      '<p class="zx-co-form__intro">Tell us about your organization and what you’d like to see.</p>' +
+      '<p class="zx-co-form__legend" aria-hidden="true">* Required</p>' +
+      '<form class="zynix-contact-form" id="zynix-demo-form" aria-labelledby="form-title" onsubmit="event.preventDefault();var f=this;var b=f.querySelector(\'[type=submit]\');if(b){b.disabled=true;b.classList.add(\'is-loading\');b.textContent=\'Sending…\'}var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'phone\',value:f.querySelector(\'[name=phone]\').value},{name:\'company\',value:f.querySelector(\'[name=company]\').value},{name:\'healthcare_segment\',value:f.querySelector(\'[name=segment]\').value},{name:\'message\',value:f.querySelector(\'[name=message]\').value},{name:\'sms_consent\',value:\'No\'}],context:{pageUri:location.href,pageName:document.title}};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(r){if(!r.ok){throw new Error(r.status)}f.innerHTML=\'<div class=zx-co-form__done role=status tabindex=-1><p class=zx-co-form__done-title>Thanks. Your message is on its way.</p><p>We reply by email, usually within one business day.</p></div>\';var s=f.querySelector(\'.zx-co-form__done\');if(s)s.focus()}).catch(function(){if(b){b.disabled=false;b.classList.remove(\'is-loading\');b.textContent=\'Send message\'}var m=f.querySelector(\'.zx-form-err\');if(!m){m=document.createElement(\'p\');m.className=\'zx-form-err\';m.setAttribute(\'role\',\'alert\');f.appendChild(m)}m.textContent=\'We could not send your message. Please email info@zynix.ai or call (727) 261-1297.\'})">' +
+        '<div class="zx-co-form__row">' +
+          renderField({ id: 'zx-co-firstname', name: 'firstname', label: 'First name', required: true, autocomplete: 'given-name' }) +
+          renderField({ id: 'zx-co-lastname', name: 'lastname', label: 'Last name', required: true, autocomplete: 'family-name' }) +
+        '</div>' +
+        renderField({ id: 'zx-co-email', name: 'email', type: 'email', label: 'Work email', required: true, autocomplete: 'email' }) +
+        '<div class="zx-co-form__row">' +
+          renderField({ id: 'zx-co-phone', name: 'phone', type: 'tel', label: 'Phone', autocomplete: 'tel' }) +
+          renderField({ id: 'zx-co-company', name: 'company', label: 'Organization', autocomplete: 'organization' }) +
+        '</div>' +
+        renderField({ id: 'zx-co-segment', name: 'segment', type: 'select', label: 'Organization type', options: segments }) +
+        renderField({ id: 'zx-co-message', name: 'message', type: 'textarea', label: 'What would you like to discuss?', rows: 4 }) +
+        '<button type="submit" class="zynix-btn zynix-btn--quiet zynix-btn--lg zx-co-form__submit">Send message</button>' +
+        '<p class="zx-co-form__note">We use your details only to respond to your demo request. This form does not sign you up for text messages; to receive SMS notifications, use our <a href="/sms-consent">SMS opt-in form</a>. <a href="/privacy-policy">Privacy Policy</a></p>' +
+      '</form>' +
+    '</div>';
+
+    var html = renderHero({ preset: 'company', compact: true, eyebrow: 'Contact', title: 'Talk to the Zynix team',
+      lead: 'Book 30 minutes directly, or send a note and we’ll reply by email. You can also call ' + tel + ' or write to ' + mail + '.' });
+    html += renderSection({ id: 'paths', className: 'zx-co-paths', labelledBy: 'form-title' },
+      renderSplit(form, book, { ratio: '7-5' }));
+    html += zxCoRelated([
+      { label: 'Security & trust', desc: 'SOC 2 Type II · BAA available', href: '/security', icon: 'shield' },
+      { label: 'Customer stories', desc: 'How value-based care teams use Zynix', href: '/resources-case-studies', icon: 'users' },
+      { label: 'Platform overview', desc: 'One platform for value-based care operations', href: '/platform', icon: 'layers' },
+      { label: 'FAQ', desc: 'Answers to common buyer questions', href: '/resources-faq', icon: 'chat' }
+    ]);
+    html += renderCTA('Working through a security review?',
+      'We support questionnaires, documentation requests and BAA execution in every evaluation.', null,
+      { hideDemo: true, primary: { label: F.compliance.soc2.request.label, href: F.compliance.soc2.request.href, newTab: false },
+        secondary: { label: 'Security and trust', href: '/security' }, badges: [] });
+    html += renderFooter();
+    return html;
   }
 
   // ── PAGE: FAQ ──
@@ -4119,77 +4092,82 @@
   }
 
   function renderCareers() {
-    var wellfound = 'https://wellfound.com/company/zynix-ai';
-    var jobs = [
-      { title: 'Engineering Manager', loc: 'Bengaluru', type: 'In Office', dept: 'Engineering' },
-      { title: 'Senior Product Manager: Healthcare AI / Care Management', loc: 'Bangalore', type: 'In Office', dept: 'Product' },
-      { title: 'Project Manager: HealthTech', loc: 'Bengaluru', type: 'In Office', dept: 'Operations' },
-      { title: 'Talent Acquisition: HR Recruiter', loc: 'Bengaluru', type: 'In Office', dept: 'Operations' },
-      { title: 'Software Development Engineer II', loc: 'Bengaluru', type: 'In Office', dept: 'Engineering' },
-      { title: 'Product Designer', loc: 'Bangalore', type: 'In Office', dept: 'Design' },
-      { title: 'Mobile Developer', loc: 'Bangalore', type: 'In Office', dept: 'Engineering' },
-      { title: 'Software Engineering Intern', loc: 'Bangalore', type: 'In Office', dept: 'Engineering' },
-      { title: 'Quality Analyst: Healthcare AI', loc: 'Bengaluru', type: 'In Office', dept: 'Engineering' },
-      { title: 'SDE-1', loc: 'Bangalore', type: 'In Office', dept: 'Engineering' },
-      { title: 'AI/ML Engineer', loc: 'Seattle / Remote', type: 'Hybrid', dept: 'Engineering' },
-      { title: 'Healthcare Data Engineer', loc: 'Tampa / Remote', type: 'Hybrid', dept: 'Engineering' },
-      { title: 'Sales Development Representative', loc: 'Tampa', type: 'In Office', dept: 'Sales' }
+    // Company template (DESIGN_SPEC §6, COPY_DECK §4, §7.3 row 40): no statistics, no role count, no demo button.
+    // Roles as posted on Wellfound [VERIFY current]; locations as listed per role [VERIFY].
+    var wellfound = 'https://wellfound.com/company/zynix-ai', careersMail = 'careers@zynix.ai';
+    var teams = [
+      { name: 'Engineering', roles: [
+        { title: 'Engineering Manager', loc: 'Bengaluru', type: 'In office' },
+        { title: 'Software Development Engineer II', loc: 'Bengaluru', type: 'In office' },
+        { title: 'SDE-1', loc: 'Bengaluru', type: 'In office' },
+        { title: 'Mobile Developer', loc: 'Bengaluru', type: 'In office' },
+        { title: 'Quality Analyst: Healthcare AI', loc: 'Bengaluru', type: 'In office' },
+        { title: 'Software Engineering Intern', loc: 'Bengaluru', type: 'In office' },
+        { title: 'AI/ML Engineer', loc: 'Seattle or remote', type: 'Hybrid' },
+        { title: 'Healthcare Data Engineer', loc: 'Tampa or remote', type: 'Hybrid' }
+      ] },
+      { name: 'Product and design', roles: [
+        { title: 'Senior Product Manager: Healthcare AI / Care Management', loc: 'Bengaluru', type: 'In office' },
+        { title: 'Product Designer', loc: 'Bengaluru', type: 'In office' }
+      ] },
+      { name: 'Operations', roles: [
+        { title: 'Project Manager: HealthTech', loc: 'Bengaluru', type: 'In office' },
+        { title: 'Talent Acquisition: HR Recruiter', loc: 'Bengaluru', type: 'In office' }
+      ] },
+      { name: 'Sales', roles: [
+        { title: 'Sales Development Representative', loc: 'Tampa', type: 'In office' }
+      ] }
     ];
+    var work = [
+      { title: 'Software that runs in care programs', body: 'What you build is used by care teams at ACOs, health plans and health systems to reach patients between visits.' },
+      { title: 'Problems with real constraints', body: 'Messy claims and clinical data, CMS program rules, multilingual patients and clinicians who need to trust what they use.' },
+      { title: 'Physician-led, engineer-driven', body: 'Our CEO is a physician who ran value-based care organizations. Product decisions start from how care programs actually run.' },
+      { title: 'Small teams, clear ownership', body: 'Teams in Tampa, Seattle and Bengaluru own their work from design to production.' }
+    ];
+    var html = '';
 
-    return renderInnerHero('CAREERS', 'Build Healthcare\u2019s Most Important AI',
-      'We\u2019re a team of engineers, clinicians, and operators building the AI operating system for value-based care. Over 1 million patients. 30 states. And we\u2019re just getting started.',
-      IMG.patients, 'Zynix AI Careers') +
+    html += renderHero({ preset: 'company', eyebrow: 'Careers', title: 'Help care teams finish the work',
+      lead: 'We build software that ACOs, health plans and health systems use to reach patients between visits. See open roles in engineering, product, design, operations and sales.',
+      primary: { label: 'See open roles', href: '#roles' }, secondary: { label: 'About Zynix AI', href: '/about' } });
 
-    // WHY ZYNIX
-    '<section style="padding:80px 0"><div class="zynix-container">' +
-    '<span class="zynix-tag">WHY ZYNIX</span>' +
-    '<h2>Why You\u2019ll Want to Be Here</h2>' +
-    '<div class="zynix-feature-grid" style="margin-top:40px">' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_TARGET + '</div><h3>Real Impact, Not Demos</h3><p>Our AI agents handle 85%+ of post-discharge follow-ups. Patients get called. TCM gets billed. Readmissions drop. Your code runs in production on day one.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_BRAIN + '</div><h3>Hardest Problems in AI</h3><p>Healthcare is the ultimate AI challenge. Ambiguous data, life-or-death stakes, regulatory constraints, multilingual patients. We build AI that earns clinical trust.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_CHART + '</div><h3>Rocketship Growth</h3><p>From 0 to 1M+ patients in under two years. Expanding across ACOs, health systems, health plans, and FQHCs. The market is $850B+ and we\u2019re early.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_USERS + '</div><h3>Physician-Led, Engineer-Driven</h3><p>Founded by a physician who ran six ACOs with $300M+ in shared savings. We build for people who understand healthcare operations, not just technology demos.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_GLOBE + '</div><h3>Global Team, Real Ownership</h3><p>Seattle. Tampa. Bengaluru. Small teams with high autonomy. No layers of middle management. Ship fast, learn faster.</p></div>' +
-    '<div class="zynix-feature-card fade-in-up"><div class="zynix-feature-icon">' + IC_HEART + '</div><h3>Culture of Builders</h3><p>Healthcare benefits. Generous vacation. Professional development budget. Parental leave. We invest in the people building the future of care.</p></div>' +
-    '</div></div></section>' +
+    html += renderSection({ id: 'work', rule: true, className: 'zx-co-work' },
+      renderSectionHead('Working at Zynix', 'What the work is like', '', { id: 'work-title' }) +
+      '<ul class="zx-co-work__list" role="list">' + work.map(function (w, i) {
+        return '<li class="zx-co-work__item"><span class="zx-co-work__n" aria-hidden="true">0' + (i + 1) + '</span><h3 class="zx-co-work__title">' + w.title + '</h3><p class="zx-co-work__body">' + w.body + '</p></li>';
+      }).join('') + '</ul>' +
+      '<div class="zx-co-benefits"><h3 class="zx-co-benefits__title">Benefits</h3>' +
+        '<ul class="zx-co-benefits__list" role="list"><li>Health benefits</li><li>Paid time off</li><li>Parental leave</li><li>Professional development</li><li>Equity participation</li></ul>' +
+        '<p class="zx-co-benefits__note">Benefits vary by country and role. We share the details during the interview process.</p></div>');
 
-    // CULTURE PERKS
-    '<section style="padding:60px 0;background:var(--z-bg-alt)"><div class="zynix-container" style="text-align:center">' +
-    '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:24px">' +
-    '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--z-bg-card);border:1px solid var(--z-border);border-radius:40px;font-size:14px;font-weight:500;color:var(--z-text-secondary)">' + IC_HOSPITAL + ' Healthcare Benefits</span>' +
-    '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--z-bg-card);border:1px solid var(--z-border);border-radius:40px;font-size:14px;font-weight:500;color:var(--z-text-secondary)">' + IC_TREE + ' Generous Vacation</span>' +
-    '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--z-bg-card);border:1px solid var(--z-border);border-radius:40px;font-size:14px;font-weight:500;color:var(--z-text-secondary)">' + IC_BABY + ' Parental Leave</span>' +
-    '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--z-bg-card);border:1px solid var(--z-border);border-radius:40px;font-size:14px;font-weight:500;color:var(--z-text-secondary)">' + IC_BOOK + ' Professional Development</span>' +
-    '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--z-bg-card);border:1px solid var(--z-border);border-radius:40px;font-size:14px;font-weight:500;color:var(--z-text-secondary)">' + IC_HOSPITAL + ' Remote-Friendly</span>' +
-    '<span style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:var(--z-bg-card);border:1px solid var(--z-border);border-radius:40px;font-size:14px;font-weight:500;color:var(--z-text-secondary)">' + IC_ROCKET + ' Equity Participation</span>' +
-    '</div></div></section>' +
+    html += renderSection({ id: 'roles', surface: 'subtle', className: 'zx-co-roles' },
+      renderSectionHead('', 'Open roles',
+        'Apply on Wellfound. Each role lists its location and working arrangement.',
+        { id: 'roles-title', align: 'split', action: { label: 'View all roles on Wellfound', href: wellfound } }) +
+      teams.map(function (t, ti) {
+        var hid = 'roles-team-' + (ti + 1);
+        return '<div class="zx-co-roles__group"><h3 class="zx-co-roles__team" id="' + hid + '">' + t.name + '</h3>' +
+          '<ul class="zx-co-roles__list" role="list" aria-labelledby="' + hid + '">' + t.roles.map(function (r) {
+            return '<li><a class="zx-co-role" href="' + zxAttr(wellfound) + '"' + zxNewTab(wellfound, true) + '>' +
+              '<span class="zx-co-role__title">' + r.title + '</span>' +
+              '<span class="zx-co-role__meta">' + r.loc + ' · ' + r.type + '</span>' +
+              '<span class="zx-co-role__arrow" aria-hidden="true">→</span></a></li>';
+          }).join('') + '</ul></div>';
+      }).join('') +
+      '<p class="zx-co-roles__note">Prefer email? Send your resume to <a href="mailto:' + careersMail + '">' + careersMail + '</a>.</p>');
 
-    // OPEN POSITIONS
-    '<section style="padding:80px 0" id="positions"><div class="zynix-container">' +
-    '<span class="zynix-tag">OPEN POSITIONS</span>' +
-    '<h2>13 Roles Across Engineering, Product, Design &amp; Operations</h2>' +
-    '<p class="zynix-section-sub">All positions include equity. Apply through Wellfound or send your resume directly.</p>' +
-    '<div style="margin-top:40px;max-width:800px;margin-left:auto;margin-right:auto">' +
-    (function() {
-      var jobHtml = '';
-      for (var ji = 0; ji < jobs.length; ji++) {
-        var j = jobs[ji];
-        jobHtml += '<a href="' + wellfound + '" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--z-border);text-decoration:none;color:inherit;transition:background 0.15s;border-radius:8px' + (ji === 0 ? ';border-top:1px solid var(--z-border)' : '') + '"' +
-          ' onmouseover="this.style.background=\'var(--z-bg-alt)\'" onmouseout="this.style.background=\'transparent\'">' +
-          '<div><div style="font-size:16px;font-weight:600;color:var(--z-text)">' + j.title + '</div>' +
-          '<div style="font-size:13px;color:var(--z-text-muted);margin-top:4px">' + j.loc + ' &middot; ' + j.type + ' &middot; ' + j.dept + '</div></div>' +
-          '<span style="font-size:13px;font-weight:500;color:var(--z-accent);white-space:nowrap">Apply &rarr;</span></a>';
-      }
-      return jobHtml;
-    })() +
-    '</div>' +
-    '<div style="text-align:center;margin-top:40px">' +
-    '<a href="' + wellfound + '" class="zynix-btn-primary" target="_blank" rel="noopener">View All on Wellfound &rarr;</a>' +
-    '<p style="margin-top:16px;font-size:14px;color:var(--z-text-muted)">Or email your resume to <a href="mailto:careers@zynix.ai" style="color:var(--z-accent);font-weight:500">careers@zynix.ai</a></p>' +
-    '</div></div></section>' +
+    html += zxCoRelated([
+      { label: 'About', desc: 'Our story and leadership', href: '/about', icon: 'users' },
+      { label: 'Customer stories', desc: 'How value-based care teams use Zynix', href: '/resources-case-studies', icon: 'heart' },
+      { label: 'Newsroom', desc: 'Announcements and media', href: '/press', icon: 'megaphone' },
+      { label: 'Insights', desc: 'Articles on value-based care operations', href: '/resources-blog', icon: 'book' }
+    ]);
 
-    renderCTA('Ready to Build the Future of Healthcare AI?', 'Join a team where your work directly improves patient outcomes at scale.', 'View Open Roles') +
-    renderFooter();
+    html += renderCTA('See open roles',
+      'Every opening is posted on Wellfound. Don’t see a fit yet? Send your resume to ' + careersMail + ' and tell us what you want to work on.', null,
+      { hideDemo: true, primary: { label: 'View roles on Wellfound', href: wellfound, newTab: true },
+        secondary: { label: 'Email ' + careersMail, href: 'mailto:' + careersMail, newTab: false }, badges: [] });
+    html += renderFooter();
+    return html;
   }
 
   function renderPress() {
@@ -6958,53 +6936,125 @@ function renderWhoWeServeFQHCs() {
 
 
 function renderAboutV7() {
+  // Company template (DESIGN_SPEC §6, COPY_DECK §4 and §5.6): company-preset hero, registry facts with a source line,
+  // story, mission, leadership, milestones, locations, data handling, customers, related, company CTA preset.
+  // $300M+ appears only as founder context (SITE_FACTS.founder); no Zynix-attributed metrics.
+  var F = SITE_FACTS, co = F.company, pb = zxCustomer('pbaco'), eh = zxCustomer('eternalhealth');
   var html = '';
 
-  html += renderInnerHero('ABOUT ZYNIX AI', 'Physician-led. Built for the people running value-based care every day.',
-    'Zynix AI combines a clinical intelligence engine with purpose-built AI agents and orchestrated care plans, built by operators who spent decades watching the gap between knowing and acting cost organizations their shared savings and their patients their care.',
-    IMG.patients, 'Zynix AI leadership team');
+  html += renderHero({ preset: 'company', eyebrow: 'About Zynix AI',
+    title: 'Physician-led, built by <span class="zx-co-nowrap">value-based</span> care operators',
+    lead: 'Our co-founder and CEO, Jay Chowdappa, MD, led ACOs that generated $300M+ in shared savings. We built Zynix to close the gap between knowing and doing.',
+    primary: { label: 'Meet the leadership', href: '#leadership' },
+    secondary: { label: 'Contact us', href: '/contact' } });
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">OUR STORY</span>' +
-    '<h2>Thirty Years Inside the System. One Conclusion.</h2>' +
-    '<p class="zynix-section-sub">Jayadeva (Jay) Chowdappa, M.D. has spent more than thirty years operating inside US healthcare, as a physician, managed care leader, and ACO operator. After building Apollo Medical Group and Next Healthcare Solutions, he spent over a decade running MSSP ACOs, REACH ACOs, and Medicare Advantage programs across seven states, managing more than 35,000 Medicare patients across 140 practices.</p>' +
-    '<p class="zynix-section-sub">He brought together a team of engineers, clinical informaticists, and healthcare operators to build what was missing. A platform that combines a data and analytics intelligence engine with purpose-built AI agents, orchestrated by deployable care plans that coordinate multiple workflows until the work is actually done.</p>' +
-    '</div></section>';
+  // Registry facts, with their source line (COPY_DECK §7.6 row 102).
+  html += renderSection({ className: 'zx-co-facts', labelledBy: 'zx-co-facts-title' },
+    '<h2 class="zx-visually-hidden" id="zx-co-facts-title">Zynix AI at a glance</h2>' +
+    renderStatRow([{ fact: 'patients' }, { fact: 'states' }, { fact: 'ehrSystems' }, { fact: 'ehrInstances' }]));
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">OUR MISSION</span>' +
-    '<h2>Why We Exist</h2>' +
-    '<div class="zynix-about-quote"><blockquote>To give value-based care organizations the intelligence to see what matters and the execution infrastructure to act on it so more patients receive the care they need, and the organizations delivering it can sustain the work.</blockquote></div>' +
-    '</div></section>';
+  // Story, told by the founder's own words from the PBACO release.
+  html += renderSection({ id: 'story', rule: true, className: 'zx-co-story' },
+    renderSplit(
+      renderSectionHead('Our story', 'Why we built Zynix', '', { id: 'story-title' }),
+      '<div class="zx-co-story__body">' +
+        '<p>Our co-founder and CEO, Jay Chowdappa, MD, is a physician who spent his career running value-based care organizations. The ACOs he led generated $300M+ in shared savings. The same pattern held everywhere: the data showed who needed care, and the organization didn’t have the capacity to reach them all.</p>' +
+        '<p>He brought together engineers, clinical informaticists and healthcare operators to build the missing piece: a platform that connects the data, ranks the work and gets it done, with clinicians in charge of clinical decisions.</p>' +
+      '</div>' +
+      renderQuote({ text: F.founder.releaseQuote, source: 'release', logo: null,
+        name: 'Jayadeva (Jay) Chowdappa, M.D.', role: 'Co-Founder and CEO, Zynix AI · PBACO partnership release, April 14, 2026',
+        href: pb.release.href, linkLabel: 'Read the release' }),
+      { ratio: '5-7' }));
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">WHAT WE BELIEVE</span>' +
-    '<h2>Healthcare\'s Doing Problem Is Solvable</h2>' +
-    renderFeatureCards([
-      { icon: IC_LIGHTBULB, title: 'The Chaos Is Not Inevitable', desc: 'What looks like an inherent limitation of care operations is almost always a workflow problem with a workflow solution.' },
-      { icon: IC_SEARCH, title: 'Clinical Trust Is Earned Through Precision', desc: 'AI in healthcare only works if the clinicians and operators using it believe it understands the domain.' },
-      { icon: IC_ZAP, title: 'Insight Without Execution Is a Missed Deadline', desc: 'Seeing who needs care is not the same as reaching them. Zynix AI connects intelligence to agents that act.' },
-      { icon: IC_USERS, title: 'Built by People Accountable for Outcomes', desc: 'The founding team has run ACOs, managed risk contracts, and been in the room where performance-year results are reviewed.' }
-    ]) +
-    '</div></section>';
+  // Mission and principles.
+  var beliefs = [
+    'Most operational chaos is a workflow problem with a workflow answer.',
+    'Clinicians trust software that understands their work and knows when to hand off.',
+    'Seeing who needs care isn’t the same as reaching them.'
+  ];
+  html += renderSection({ id: 'mission', surface: 'subtle', className: 'zx-co-mission' },
+    renderSectionHead('Mission', 'What we’re here to do',
+      'Give value-based care organizations the intelligence to see what matters and the capacity to act on it, so more patients get the care they need and the teams delivering it can sustain the work.',
+      { id: 'mission-title', align: 'split' }) +
+    '<h3 class="zx-co-beliefs__title">What we believe</h3>' +
+    '<ol class="zx-co-beliefs" role="list">' + beliefs.map(function (b, i) {
+      return '<li class="zx-co-beliefs__item"><span class="zx-co-beliefs__n" aria-hidden="true">0' + (i + 1) + '</span><p class="zx-co-beliefs__text">' + b + '</p></li>';
+    }).join('') + '</ol>');
 
-  html += '<section><div class="zynix-container">' +
-    '<span class="zynix-tag">OUR TEAM</span>' +
-    '<h2>Our Leadership Team</h2>' +
-    '<p class="zynix-section-sub">The driving force behind Zynix AI, operators and builders who have been accountable for the problems this platform is designed to solve.</p>' +
-    '<div class="zynix-agents-grid">' +
-    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_STETHOSCOPE + '</span><h3>Jayadeva (Jay) Chowdappa, M.D.</h3></div><p style="font-size:13px;color:var(--z-accent);font-weight:600;margin-bottom:8px">Co-Founder & CEO</p><p>Physician executive with 30+ years in Internal Medicine, managed care, and physician leadership. Built Next Healthcare Solutions into a multi-state ACO network serving 35,000+ Medicare patients across 140 practices and seven states.</p><div class="zynix-agent-metrics"><span><a href="https://www.linkedin.com/in/jayadeva-jay-chowdappa-m-d-6b221616/" target="_blank" rel="noopener">LinkedIn</a></span></div></div>' +
-    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_MONITOR + '</span><h3>Gautamdev Chowdary</h3></div><p style="font-size:13px;color:var(--z-accent);font-weight:600;margin-bottom:8px">Co-Founder & CTO</p><p>Architects Kubernetes-orchestrated microservices, production ML pipelines, and HIPAA-secure LLM agents. Background spans graduate-level AI research and deployment of predictive analytics stacks.</p><div class="zynix-agent-metrics"><span><a href="https://www.linkedin.com/in/cgautamdevc/" target="_blank" rel="noopener">LinkedIn</a></span></div></div>' +
-    '<div class="zynix-agent-card fade-in-up"><div class="zynix-agent-header"><span class="zynix-agent-icon">' + IC_CHART + '</span><h3>David McDonald</h3></div><p style="font-size:13px;color:var(--z-accent);font-weight:600;margin-bottom:8px">Vice President, Sales</p><p>31 years of healthcare industry experience spanning population health, clinical analytics, risk adjustment, and the commercial partnerships that connect clinical performance to financial outcomes.</p><div class="zynix-agent-metrics"><span><a href="https://www.linkedin.com/in/mcdonalddavidl/" target="_blank" rel="noopener">LinkedIn</a></span></div></div>' +
-    '</div></div></section>';
+  // Leadership: one bio set, one crop and tone. Titles and bios [VERIFY] (COPY_DECK §5.6).
+  var people = [
+    { name: 'Jay Chowdappa, MD', first: 'Jay', title: F.founder.title, img: 'headshot-jay.png', w: 400, h: 400,
+      bio: 'Physician executive in internal medicine and managed care. The ACOs he led generated $300M+ in shared savings.',
+      linkedin: 'https://www.linkedin.com/in/jayadeva-jay-chowdappa-m-d-6b221616/' },
+    { name: 'Gautamdev Chowdary', first: 'Gautamdev', title: 'Co-founder and CTO', img: 'headshot-gautam.png', w: 300, h: 400,
+      bio: 'Leads engineering, data and AI across the Zynix platform.',
+      linkedin: 'https://www.linkedin.com/in/cgautamdevc/' },
+    { name: 'David McDonald', first: 'David', title: 'Vice President, Sales', img: 'headshot-david.jpg', w: 300, h: 400,
+      bio: 'Leads go-to-market for ACOs, health plans and health systems.',
+      linkedin: 'https://www.linkedin.com/in/mcdonalddavidl/' }
+  ];
+  html += renderSection({ id: 'leadership', className: 'zx-co-leadership' },
+    renderSectionHead('Our team', 'Leadership',
+      'Operators and builders who have been accountable for the problems the Zynix platform is designed to solve.', { id: 'leadership-title' }) +
+    renderGrid(people, function (p) {
+      return '<article class="zx-co-person">' +
+        '<img class="zx-co-person__photo" src="' + zxAttr(zxImg(p.img)) + '" alt="' + zxAttr(p.name) + '" width="' + p.w + '" height="' + p.h + '" loading="lazy" decoding="async">' +
+        '<h3 class="zx-co-person__name">' + p.name + '</h3>' +
+        '<p class="zx-co-person__title">' + p.title + '</p>' +
+        '<p class="zx-co-person__bio">' + p.bio + '</p>' +
+        renderLinkArrow(p.first + ' on LinkedIn', p.linkedin, { newTab: true }) +
+      '</article>';
+    }, { className: 'zx-co-people' }));
 
-  html += renderMetricsBar([
-    { value: '1M+', label: 'Patients Served' },
-    { value: '40%', label: 'Reduction in Admin Burden' },
-    { value: '25%', label: 'Revenue Capture Improvement' }
+  // Milestones: registry facts and published releases only (COPY_DECK §5.6). Founding year held [VERIFY].
+  var milestones = [
+    { when: 'April 2026', text: 'Strategic partnership with PBACO Holding announced', href: pb.release.href, link: 'Read the release' },
+    { when: 'June 2026', text: 'Partnership with eternalHealth and nirvanaHealth announced', href: eh.release.href, link: 'Read the release' },
+    { when: '2026', text: F.stats.patients.sentence + ' at ' + F.stats.states.sentence },
+    { when: 'Today', text: zxAccessLine() },
+    { when: 'Today', text: F.compliance.soc2.badge + ' audited. ' + F.compliance.hitrust.prose + '.' }   // a period, not a semicolon: HITRUST's "certification" must not read as SOC 2's
+  ];
+  html += renderSection({ id: 'milestones', rule: true, className: 'zx-co-milestones' },
+    renderSplit(
+      renderSectionHead('Timeline', 'Milestones', '', { id: 'milestones-title' }),
+      '<ol class="zx-co-timeline" role="list">' + milestones.map(function (m) {
+        return '<li class="zx-co-timeline__item"><p class="zx-co-timeline__when">' + m.when + '</p><div class="zx-co-timeline__body"><p class="zx-co-timeline__text">' + m.text + '</p>' +
+          (m.href ? renderLinkArrow(m.link, m.href) : '') + '</div></li>';
+      }).join('') + '</ol>',
+      { ratio: '4-8' }));
+
+  // Where we are and how we handle data.
+  html += renderSection({ id: 'company-details', surface: 'subtle', className: 'zx-co-details', labelledBy: 'where-title' },
+    '<div class="zx-co-details__grid">' +
+      '<div class="zx-co-details__col">' +
+        '<h2 class="zx-co-details__title" id="where-title">Where we are</h2>' +
+        '<dl class="zx-co-dl">' +
+          '<div><dt>Headquarters</dt><dd>' + co.addressLine + '</dd></div>' +
+          '<div><dt>Team locations</dt><dd>Tampa, Florida · Seattle, Washington · Bengaluru, India</dd></div>' +
+          '<div><dt>Company</dt><dd>' + co.legalLine + '</dd></div>' +
+        '</dl>' +
+      '</div>' +
+      '<div class="zx-co-details__col">' +
+        '<h2 class="zx-co-details__title" id="data-title">How we handle data</h2>' +
+        renderTrustRow(['soc2', 'hipaa']) +
+        '<div class="zx-co-details__links">' + renderLinkArrow('Security and trust', '/security') +
+          renderLinkArrow(F.compliance.soc2.request.label, F.compliance.soc2.request.href, { newTab: false }) + '</div>' +
+      '</div>' +
+    '</div>');
+
+  // Customers: registry logos only.
+  html += renderSection({ id: 'customers', compact: true, rule: true, className: 'zx-co-customers', labelledBy: 'customers-logos-label' },
+    renderLogoRow(null, { id: 'customers-logos' }));
+
+  html += zxCoRelated([
+    { label: 'Platform overview', desc: 'One platform for value-based care operations', href: '/platform', icon: 'layers' },
+    { label: 'Customer stories', desc: 'How value-based care teams use Zynix', href: '/resources-case-studies', icon: 'users' },
+    { label: 'Newsroom', desc: 'Announcements and media', href: '/press', icon: 'megaphone' },
+    { label: 'Security & trust', desc: 'SOC 2 Type II · BAA available', href: '/security', icon: 'shield' }
   ]);
 
-  html += renderCTA('Built on Clinical Insight. Powered by AI Agents.', 'Talk to our team about what Zynix AI looks like for your organization.', 'Book a Demo');
+  html += renderCTA('Talk to our team', 'Questions about Zynix, partnerships or working with us.', null,
+    { hideDemo: true, primary: { label: 'Contact us', href: '/contact' }, secondary: { label: 'See open roles', href: '/careers' }, badges: [] });
   html += renderFooter();
   return html;
 }
