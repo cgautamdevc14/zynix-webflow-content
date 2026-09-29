@@ -3500,9 +3500,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
    /care-plans, /zynscribe, /integrations, /company-zynixllm, /security. Every selector starts with a zx-plat- class; shared
    components are restyled only as descendants of one. Tokens only; no raw hex. */
 
-/* Split sections: head beside the content at >= 1024, stacked below. */
+/* Split sections: head beside the content at >= 1024, stacked below. The H2 keeps the --zx-fs-h2 token (§1.2) like every
+   other section head; the column width wraps it. */
 .zx-plat-split .zynix-split__a > .zynix-section-head { margin-bottom:0; }
-.zx-plat-split .zynix-section-head__title { font-size:clamp(1.5rem, 1.15rem + 1.2vw, 2.125rem); }
 @media (max-width:1023.98px) { .zx-plat-split .zynix-split { gap:var(--zx-space-6); } }
 .zx-plat-text { margin:0; max-width:60ch; font-size:var(--zx-fs-lead); line-height:var(--zx-lh-lead); color:var(--zx-text-secondary); }
 

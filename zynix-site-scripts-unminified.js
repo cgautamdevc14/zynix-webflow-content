@@ -2146,7 +2146,7 @@
         { title: 'One view of each patient', body: 'Claims history, the latest ADT event, pharmacy fills and open gaps sit on one record, whatever EHR the practice runs.' },
         { title: 'The same record everywhere', body: 'Analytics, care plans, agents and ZynScribe read the same matched record, so the worklist and the outreach agree.' },
         { title: 'Standard interfaces', body: SITE_FACTS.ehr.standards.join(' · ') + '.' },
-        { title: 'Protected in transit and at rest', body: 'Data is encrypted in transit and at rest, and access follows least-privilege controls.' }
+        { title: 'Protected in transit and at rest', body: 'Data is encrypted in transit and at rest, and access follows least-privilege controls.' }   // [VERIFY] V1, V2
       ], { split: true }));
 
     html += zxPlatProof({ title: 'Who uses the data foundation',
@@ -2156,7 +2156,7 @@
     html += zxPlatFaq('faq-data', [
       { q: 'What data sources does Zynix connect?', a: 'Zynix connects to ' + SITE_FACTS.ehr.line + ', including Epic, Oracle Health (Cerner), athenahealth, eClinicalWorks, NextGen and Allscripts, plus claims (Medicare CCLF and BCDA, payer X12 837 and 835), HL7 v2 ADT messages, lab results, pharmacy fills and SDoH screening data.' },
       { q: 'How does patient matching work?', a: 'Zynix matches records from every source to one record per patient, using identifiers such as name, date of birth, MRN and address, and resolves duplicates and discrepancies so analytics and outreach work from the same longitudinal profile.' },
-      { q: 'Is data encrypted at rest and in transit?', a: 'Yes. Patient data is encrypted in transit and at rest, and access follows least-privilege controls. Zynix is ' + SITE_FACTS.compliance.soc2.prose + ', with HIPAA-aligned safeguards and a BAA available.' }
+      { q: 'Is data encrypted at rest and in transit?', a: 'Yes. Patient data is encrypted in transit and at rest, and access follows least-privilege controls. Zynix is ' + SITE_FACTS.compliance.soc2.prose + ', with HIPAA-aligned safeguards and a BAA available.' }   // [VERIFY] V1, V2
     ]);
 
     html += renderCTA('See the data foundation in a 30-minute demo', 'How claims, EHR and ADT data become one patient record and a worklist, shown on sample data.', null,
@@ -2191,6 +2191,18 @@
   // Page-local helpers for the P1 product and layer pages (DESIGN_SPEC §6 "Product / layer" and "Platform overview"). They
   // compose S2's §2 helpers and emit zx-plat-* markup, styled only in the page:platform CSS block. Facts come from
   // SITE_FACTS, CUSTOMERS and NAMES; illustrative panels carry the "Sample data" chip and role labels only (§2.9).
+  //
+  // [VERIFY] P1 register, for Gautamdev (§8.4). Statements outside the claims registry, each restated from the live page at
+  // c95cc03; tags V1–V8 mark every use. Any he does not confirm takes the fallback after the arrow.
+  //  V1 encryption in transit and at rest (/security, /products-data-platform, /zynscribe) → remove (registry compliance lines stay)
+  //  V2 least-privilege access, RBAC, MFA for all administrative access, periodic access reviews (/security, /products-data-platform) → remove
+  //  V3 periodic third-party penetration testing with results under NDA; vulnerability scanning (/security) → remove
+  //  V4 SOC 2 report via the Drata trust portal under NDA, covering the platform and supporting systems (/security) → "on request" (registry)
+  //  V5 monitoring, incident response, notification terms, tested backups, BCP, prod/non-prod separation (/security) → remove
+  //  V6 per-EHR connection methods and typical data (/integrations table; the Epic row in its sample panel) → "Confirmed during scoping"
+  //  V7 ZynScribe speaker separation, browser use alongside the EHR, a mobile app for bedside and telehealth visits, suggested
+  //     ICD-10/CPT codes (/zynscribe) → remove the clause
+  //  V8 Zynix maintains connectors as standards and vendor APIs change (/integrations) → remove the step
 
   // A zynix-ui sample panel inside a product frame (the panel carries its own chip, so the frame does not add one).
   // zxPlatPanel returns hero frame options (trimmed below 480px to keep the hero within 1.2 screens, §2.10).
@@ -7279,7 +7291,7 @@ function renderSecurityV7() {
   // overclaiming compliance pill; CTA band through the /security preset of renderCTA, §2.21). Compliance wording: DECISIONS 17.
   var c = SITE_FACTS.compliance, req = c.soc2.request;
   var status = [
-    { icon: 'shield', chip: ['Audited', 'success'], title: 'SOC 2 Type II', body: c.soc2.prose + '. The report covers the Zynix AI platform and supporting systems.' },
+    { icon: 'shield', chip: ['Audited', 'success'], title: 'SOC 2 Type II', body: c.soc2.prose + '. The report covers the Zynix AI platform and supporting systems.' },   // [VERIFY] V4 scope
     { icon: 'lock', chip: ['BAA available', 'brand'], title: 'HIPAA', body: 'HIPAA-aligned safeguards and operating practices for every deployment involving PHI. A Business Associate Agreement is available for customers handling PHI.' },
     { icon: 'clock', chip: ['In progress', 'neutral'], title: 'HITRUST CSF', body: c.hitrust.prose + ', following a completed readiness assessment.' }
   ];
@@ -7295,6 +7307,7 @@ function renderSecurityV7() {
         renderChip(s.chip[0], s.chip[1]) + '</div><h3 class="zynix-card__title">' + s.title + '</h3><p class="zynix-card__body">' + s.body + '</p></article>';
     }));
 
+  // [VERIFY] V1 (data protection), V2 (identity and access), V3 (testing), V5 (the rest): every row below is P1 register.
   html += zxPlatSplit('program', ['Security program', 'How we protect customer data', 'A summary for procurement and compliance reviewers. The detail is in the SOC 2 report.'],
     zxPlatRows([
       { title: 'Data protection', points: ['Encryption in transit and at rest across platform components', 'Access based on least privilege', 'Production separated from non-production environments'] },
@@ -7311,20 +7324,20 @@ function renderSecurityV7() {
 
   html += zxPlatSplit('documents', ['For your review', 'What you can request', 'Write to <a href="mailto:' + SITE_FACTS.company.email + '">' + SITE_FACTS.company.email + '</a>, or use the request button on this page.'],
     zxPlatRows([
-      { title: 'SOC 2 Type II report', body: 'Shared through our Drata trust portal, under NDA.' },
-      { title: 'Penetration test results', body: 'Results of third-party testing are available to customers under NDA.' },
+      { title: 'SOC 2 Type II report', body: 'Shared through our Drata trust portal, under NDA.' },   // [VERIFY] V4
+      { title: 'Penetration test results', body: 'Results of third-party testing are available to customers under NDA.' },   // [VERIFY] V3
       { title: 'Security questionnaires', body: 'We complete procurement and security questionnaires as part of every evaluation.' },
       { title: 'Business Associate Agreement', body: 'Available for customers operating HIPAA-regulated workflows.' },
       { title: 'Deployment and data flows', body: 'Deployment options, data sources and interfaces are agreed during scoping.' }
     ], { split: true }), { surface: 'subtle' });
 
   html += zxPlatFaq('faq-security', [
-    { q: 'Is Zynix AI SOC 2 Type II audited?', a: 'Yes. Zynix AI is SOC 2 Type II audited. The report covers our platform and supporting systems and is available on request under NDA.' },
+    { q: 'Is Zynix AI SOC 2 Type II audited?', a: 'Yes. Zynix AI is SOC 2 Type II audited. The report covers our platform and supporting systems and is available on request under NDA.' },   // [VERIFY] V4
     { q: 'Is a Business Associate Agreement (BAA) available?', a: 'Yes. A BAA is available for customers operating HIPAA-regulated workflows. Write to ' + SITE_FACTS.company.email + ' to start one.' },
-    { q: 'How does Zynix AI handle protected health information (PHI)?', a: 'PHI is processed under your executed BAA and our HIPAA-aligned safeguards, including encryption in transit and at rest and least-privilege access controls.' },
+    { q: 'How does Zynix AI handle protected health information (PHI)?', a: 'PHI is processed under your executed BAA and our HIPAA-aligned safeguards, including encryption in transit and at rest and least-privilege access controls.' },   // [VERIFY] V1, V2
     { q: 'What is your HITRUST status?', a: 'HITRUST CSF certification is in progress, following a completed readiness assessment.' },
     { q: 'Do you support customer security assessments?', a: 'Yes. We support procurement and security reviews as part of every evaluation. Write to ' + SITE_FACTS.company.email + ' to send a questionnaire.' },
-    { q: 'Do you run penetration testing and vulnerability management?', a: 'Yes. Third-party penetration testing is conducted periodically, with results available to customers under NDA, and vulnerability scanning with prioritized remediation is part of ongoing security operations.' }
+    { q: 'Do you run penetration testing and vulnerability management?', a: 'Yes. Third-party penetration testing is conducted periodically, with results available to customers under NDA, and vulnerability scanning with prioritized remediation is part of ongoing security operations.' }   // [VERIFY] V3
   ], 'Security questions');
 
   html += renderCTA('Working through a security review?', 'We support questionnaires, documentation requests and BAA execution in every evaluation.', null,
@@ -8562,18 +8575,18 @@ function renderZynScribeV7() {
 
   html += renderSection({ id: 'how-it-works', surface: 'subtle' },
     renderSectionHead('How it works', 'Before, during and after the visit',
-      'ZynScribe works in the browser alongside your EHR, and in a mobile app for bedside and telehealth visits.', { id: 'how-it-works-title' }) +
+      'ZynScribe works in the browser alongside your EHR, and in a mobile app for bedside and telehealth visits.', { id: 'how-it-works-title' }) +   // [VERIFY] V7
     zxPlatSteps([
       { title: 'Before the visit', body: 'A pre-visit review shows the patient’s open HCC and quality gaps, so they can be addressed in the encounter.' },
-      { title: 'During the visit', body: 'ZynScribe listens to the conversation, separates the speakers and drafts a structured SOAP note.' },
-      { title: 'After the visit', body: 'The physician reviews and edits the draft and the suggested ICD-10 and CPT codes, then approves it.' }
+      { title: 'During the visit', body: 'ZynScribe listens to the conversation, separates the speakers and drafts a structured SOAP note.' },   // [VERIFY] V7
+      { title: 'After the visit', body: 'The physician reviews and edits the draft and the suggested ICD-10 and CPT codes, then approves it.' }   // [VERIFY] V7 codes
     ]));
 
   html += zxPlatSplit('physician-control', ['Physician control', 'Physicians approve every note', 'ZynScribe drafts. Physicians decide what goes in the record.'],
     zxPlatRows([
       { title: review ? review.title : 'Physicians approve clinical documentation', body: review ? review.text : '' },
       { title: 'Nothing filed or billed before approval', body: 'Suggested codes are shown with the draft. Nothing is filed or used for billing until the physician approves the note.' },
-      { title: SITE_FACTS.compliance.hipaa.prose, body: 'Audio and notes are encrypted in transit and at rest.' },
+      { title: SITE_FACTS.compliance.hipaa.prose, body: 'Audio and notes are encrypted in transit and at rest.' },   // [VERIFY] V1
       { title: SITE_FACTS.compliance.soc2.prose, body: 'ZynScribe runs on the Zynix platform and is covered by the same security program.' }
     ], { split: true }));
 
@@ -8581,7 +8594,7 @@ function renderZynScribeV7() {
     renderSectionHead('What changes for your team', 'A draft to review instead of a blank note', null, { id: 'what-changes-title' }) +
     renderGrid([
       { icon: 'stethoscope', title: 'Physicians', body: 'A structured draft to review and approve, with the patient’s open gaps in view.' },
-      { icon: 'clipboard', title: 'Coding and risk adjustment teams', body: 'Suggested ICD-10 and CPT codes that the physician has reviewed, attached to an approved note.' },
+      { icon: 'clipboard', title: 'Coding and risk adjustment teams', body: 'Suggested ICD-10 and CPT codes that the physician has reviewed, attached to an approved note.' },   // [VERIFY] V7 codes
       { icon: 'users', title: 'Care teams', body: 'Approved notes join the patient’s record in the Zynix platform, so open gaps and care plans reflect the visit.' }
     ], renderCard));
 
@@ -8651,7 +8664,7 @@ function renderCarePlansV7() {
       { title: 'Nothing waits to be noticed', body: 'A discharge or a due date opens the plan, so the first step happens without anyone finding it in a report.' },
       { title: 'People where judgment is needed', body: 'The interactive TCM contact and every clinical question stay with licensed staff.' },
       { title: 'Closes only when complete', body: 'The plan stays open until the follow-up visit is documented.' }
-    ], { split: true }), { rule: true });
+    ], { split: true }), { rule: true, ratio: '5-7' });
 
   html += zxPlatProof({ title: 'Post-discharge and wellness-visit outreach at Palm Beach ACO',
     lead: 'PBACO Holding, one of the nation’s largest risk-bearing ACOs, started with outreach for post-discharge follow-up and annual wellness visits.',
@@ -8763,7 +8776,7 @@ function renderDataAnalyticsV7() {
       { title: 'Care managers and coordinators', body: 'A ranked list with the reason each patient was flagged and the next step already assigned.' },
       { title: 'Physicians', body: 'The open HCC and quality gaps for the patient in front of them, before the visit starts.' },
       { title: 'Risk adjustment teams', body: 'Suspected HCCs not yet recaptured this year, ranked by RAF impact and closure window.' }
-    ], { split: true }));
+    ], { split: true }), { ratio: '5-7' });
 
   html += zxPlatProof({ title: 'Used by ACOs and health plans',
     lead: 'eternalHealth, a Medicare Advantage plan, works with Zynix to engage members and advance its quality goals in Massachusetts and Arizona.',
@@ -8788,10 +8801,10 @@ function renderDataAnalyticsV7() {
   function renderIntegrations() {
     // Integrations (§6: all 8 named EHRs as a table; "EHR · method · data", no direction column because no write-back or
     // bidirectional flow is verified per EHR; no "24+ connectors", timelines, SLA or FHIR-version claims). Methods and data
-    // are the ones this page already listed, restated without version or direction claims [VERIFY per EHR].
+    // are the ones this page already listed, restated without version or direction claims ([VERIFY] V6, per EHR).
     var ehrRows = [
-      ['Epic', 'FHIR APIs · HL7 v2 ADT', 'Clinical data, admit, discharge and transfer events'],
-      ['Oracle Health (Cerner)', 'FHIR and Millennium APIs · HL7 v2 ADT', 'ADT events, patient search, clinical documents, scheduling'],
+      ['Epic', 'FHIR APIs · ADT feeds', 'Clinical data, admit, discharge and transfer events'],
+      ['Oracle Health (Cerner)', 'FHIR and Millennium APIs', 'ADT events, patient search, clinical documents, scheduling'],
       ['athenahealth', 'athenahealth API', 'Demographics, clinical data, scheduling, claims'],
       ['eClinicalWorks', 'HL7 v2 · API · FHIR', 'ADT events, clinical documents, scheduling'],
       ['NextGen', 'NextGen API · HL7 v2', 'Patient records, scheduling, claims data'],
@@ -8808,7 +8821,7 @@ function renderDataAnalyticsV7() {
         rows: [
           { title: 'Practices 1–7 · eClinicalWorks', sub: 'ADT events and clinical documents', owner: { type: 'system', label: 'HL7 v2' }, status: { tone: 'success', label: 'Connected' } },
           { title: 'Practices 8–12 · athenahealth', sub: 'Demographics, clinical data and scheduling', owner: { type: 'system', label: 'API' }, status: { tone: 'success', label: 'Connected' } },
-          { title: 'Partner hospital · Epic', sub: 'Admit, discharge and transfer events', owner: { type: 'system', label: 'HL7 v2 ADT' }, status: { tone: 'success', label: 'Connected' } },
+          { title: 'Partner hospital · Epic', sub: 'Admit, discharge and transfer events', owner: { type: 'system', label: 'ADT feed' }, status: { tone: 'success', label: 'Connected' } },   // [VERIFY] V6
           { title: 'Medicare claims', sub: 'Monthly CCLF files and BCDA', owner: { type: 'system', label: 'CCLF · BCDA' }, status: { tone: 'success', label: 'Loaded' } }
         ],
         footer: 'Each practice keeps its own EHR; the care team works from one record and one worklist.' },
@@ -8839,7 +8852,7 @@ function renderDataAnalyticsV7() {
         { title: 'Scope', body: 'We confirm your EHRs, versions and the interfaces each one supports, plus your claims and ADT sources.' },
         { title: 'Connect', body: 'Interfaces are set up with your IT team and each vendor over secure connections.' },
         { title: 'Validate', body: 'Matched patient records are checked with your team before worklists go live.' },
-        { title: 'Maintain', body: 'We manage connector updates as standards and vendor APIs change.' }
+        { title: 'Maintain', body: 'We manage connector updates as standards and vendor APIs change.' }   // [VERIFY] V8
       ]));
 
     html += zxPlatProof({ title: 'One record across practices',
