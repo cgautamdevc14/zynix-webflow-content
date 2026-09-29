@@ -137,9 +137,13 @@
       sizeNote: 'one of the nation’s largest and most successful risk-bearing accountable care organizations',   // release wording; attribute to the release
       quote: { source: 'release', name: 'David Klebonis', role: 'President &amp; COO, PBACO Holding',
         text: 'PBACO is focused on building practical, scalable solutions that help providers succeed in value-based care. We believe this partnership with Zynix AI will strengthen patient outreach, improve follow-through, reduce administrative burden, and support better performance across both quality and cost of care. Importantly, we remain committed to ensuring that automation enhances—rather than compromises—the quality of care delivered to our beneficiaries.' },
-      metrics: [   // P4, DECISIONS 16: kept from the pre-redesign case study, attributed, [VERIFY] with PBACO (n unknown; not approved)
-        { value: '85%', label: 'TCM contact rate: discharged patients contacted within 2 business days', baseline: '32%', period: 'first quarter of deployment', n: null, source: 'Reported by Palm Beach ACO', approved: null },
-        { value: '3x', label: 'Annual wellness visits completed, compared with before deployment', baseline: null, period: 'first quarter of deployment', n: null, source: 'Reported by Palm Beach ACO', approved: null }
+      metrics: [   // P4, DECISIONS 16: kept from the pre-redesign case study, attributed, [VERIFY] with PBACO (n unknown; not approved).
+        // HELD (Phase 3 fix round 1): the partnership was announced on Apr 14 2026 and the release describes a first outreach phase,
+        // so "first quarter of deployment" needs PBACO's written confirmation of both figures and the period before it can ship.
+        // A metric with `hold` renders only once `approved` is set to the date of that written confirmation; until then
+        // /case-studies/pbaco shows only the release-grounded before/after table (zxCustResults).
+        { value: '85%', label: 'TCM contact rate: discharged patients contacted within 2 business days', baseline: '32%', period: 'first quarter of deployment', n: null, source: 'Reported by Palm Beach ACO', approved: null, hold: 'PBACO written confirmation of the figure and the period' },
+        { value: '3x', label: 'Annual wellness visits completed, compared with before deployment', baseline: null, period: 'first quarter of deployment', n: null, source: 'Reported by Palm Beach ACO', approved: null, hold: 'PBACO written confirmation of the figure and the period' }
       ] },
     eternalhealth: { name: 'eternalHealth', segment: 'health-plan', segmentLabel: 'Medicare Advantage plan', logoRow: 2,
       logo: { file: 'logos/eternal-health.webp', source: 'eternal-health.png', h: 20, w: 111 },
@@ -3203,7 +3207,7 @@
         renderSectionHead('Customer stories', 'What each organization runs on Zynix',
           'Pick an organization type, or read them all. Each story names the workflows, who does what, and what changed.', { id: 'stories-title' }) +
         zxCustFilter() + zxCustGrid(ZX_CUST_ORDER) +
-        '<p class="zx-cust-method">Results on story pages are reported by the customer and dated.</p>' + zxCustSegNav('')) +
+        zxCustMethodNote(ZX_CUST_ORDER) + zxCustSegNav('')) +
       renderSection({ id: 'more-customers', compact: true, rule: true },
         '<div class="zx-cust-also">' + renderSectionHead(null, 'Also working with Zynix', 'ACOs, IPAs and provider organizations beyond the stories above.', { id: 'more-customers-title' }) +
         '<ul class="zx-cust-also__list" role="list">' + others.map(function (id) {
@@ -13493,9 +13497,19 @@ function renderDataAnalyticsV7() {
         (r.link ? renderLinkArrow(r.link[0], r.link[1]) : '') + '</li>';
     }).join('') + '</ol>' + (s.next ? '<p class="zx-cust-next">' + s.next + '</p>' : '');
   }
-  // Results: attributed metrics only (CUSTOMERS[id].metrics, DECISIONS 16) with period and baseline, then before/after.
+  // Metrics a story page may show: attributed CUSTOMERS[id].metrics (DECISIONS 16), minus any flagged `hold` whose customer's
+  // written confirmation is not yet recorded in `approved` (a held metric stays in the data and on Gautamdev's [VERIFY] list).
+  function zxCustMetrics(c) {
+    return ((c && c.metrics) || []).filter(function (m) { return m && m.value && m.source && (!m.hold || m.approved); });
+  }
+  // The "reported by the customer" note belongs only on lists where at least one story shows a metric.
+  function zxCustMethodNote(ids) {
+    return (ids || []).some(function (id) { return zxCustMetrics(zxCustomer(id)).length; }) ?
+      '<p class="zx-cust-method">Results on story pages are reported by the customer and dated.</p>' : '';
+  }
+  // Results: attributed metrics only (zxCustMetrics) with period and baseline, then before/after.
   function zxCustResults(c, s) {
-    var ms = c.metrics || [];
+    var ms = zxCustMetrics(c);
     var cap = function (t) { return t ? t.charAt(0).toUpperCase() + t.slice(1) : ''; };
     var stats = ms.length ? renderStatRow(ms.map(function (m) {
       return { value: m.value, label: m.label + '<span class="zx-cust-stat-meta">' + cap(m.period) + (m.baseline ? ' · before: ' + m.baseline : '') + '</span>', source: m.source };
@@ -13556,7 +13570,7 @@ function renderDataAnalyticsV7() {
         primary: { label: SITE_FACTS.demo.label, href: SITE_FACTS.demo.href }, secondary: { label: 'All customer stories', href: '/resources-case-studies' } }) +
       renderSection({ id: 'stories', className: 'zx-cust-stories zx-cust-stories--first' },
         renderSectionHead(null, g.one + ' customer ' + (ids.length > 1 ? 'stories' : 'story'), null, { id: 'stories-title' }) + zxCustGrid(ids) +
-        '<p class="zx-cust-method">Results on story pages are reported by the customer and dated.</p>' + zxCustSegNav(segId)) +
+        zxCustMethodNote(ids) + zxCustSegNav(segId)) +
       (q ? renderSection({ id: 'on-the-record', surface: 'subtle' },
         renderSectionHead('On the record', 'In their own words', null, { id: 'on-the-record-title' }) +
         '<div class="zx-cust-featured zx-cust-featured--one">' + zxCustFeatured(g.quote, ctx[g.quote] || '') + '</div>') : '') +
