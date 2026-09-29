@@ -3119,6 +3119,12 @@ html.zx-menu-open #zynix-chat-widget { display:none; }
 .zynix-footer .zynix-footer__legal { display:flex; flex-wrap:wrap; gap:4px var(--zx-space-5); margin:0; padding:0; list-style:none; }
 .zynix-footer .zynix-footer__legal li { margin:0; padding:0; }
 .zynix-footer .zynix-footer__legal a { display:inline-flex; align-items:center; min-height:24px; font-size:13px; }
+/* Room for the fixed chat launcher (§3.6: 52px, 20px from the right; 16px below 480): at the end of the page it sits on the
+   bottom row, so on pages that have the chat the row's content stops 84px (20 + 52 + 12 air) short of the viewport's right
+   edge. The reserve shrinks by the container's outer margin, so it is a no-op from ~1370px up and needs no breakpoint;
+   below that the legal links (incl. /sms-program, §3.5) end left of the launcher, or wrap onto their own line at phone widths. */
+body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-container {
+  padding-inline-end:max(var(--zx-gutter), calc(84px - max(0px, (100% - var(--zx-container)) / 2 - var(--zx-gutter)))); }
 /* Compact signup (§2.22 footer variant): label + input + button on one row; the button is the quiet (white) action on ink */
 .zynix-footer .zynix-footer__signup { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:var(--zx-space-2); max-width:400px; margin:var(--zx-space-6) 0 0; }
 .zynix-footer .zynix-footer__signup > :is(.zynix-footer__signup-title, .zynix-footer__signup-note, .zynix-form-status, [role="status"], [aria-live]) { grid-column:1 / -1; }
