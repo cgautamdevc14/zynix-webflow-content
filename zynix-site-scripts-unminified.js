@@ -5310,17 +5310,20 @@ function renderUseCaseV7(data) {
   html += renderSection({ id: 'fit', className: 'zx-sol-fit' },
     renderSectionHead('Where it fits', 'Runs on the Zynix platform', 'The same data foundation, agents and care plans run every workflow on this site, whatever type of organization runs it.', { id: 'fit-title' }) +
     '<div class="zx-sol-fit__grid"><div class="zx-sol-fit__col"><h3 class="zx-sol-fit__title">Products used</h3>' + zxSolLinks(prods) + '</div>' +
-    (variants.length ? '<div class="zx-sol-fit__col"><h3 class="zx-sol-fit__title">The same workflow for other organizations</h3>' + zxSolLinks(variants, 'zx-sol-links--plain') + '</div>' : '') +
+    (variants.length ? '<div class="zx-sol-fit__col"><h3 class="zx-sol-fit__title">More in ' + (g ? g.name.charAt(0).toLowerCase() + g.name.slice(1) : 'this program') + '</h3>' + zxSolLinks(variants, 'zx-sol-links--plain') + '</div>' : '') +
     '</div>');
 
   // One related block per page (§2.16). Six use cases still have a CROSS_LINKS entry, which the router inserts instead.
   if (!(typeof CROSS_LINKS !== 'undefined' && CROSS_LINKS[path])) {
-    var rel = (data.readNext || []).map(zxSolBySlug).filter(Boolean).slice(0, 3).map(function (u) {
+    // Related use cases come from other programs (the same program is already listed above)
+    var others = (data.readNext || []).map(zxSolBySlug).filter(function (u) { return u && u.group !== data.group; });
+    zxSolAll().forEach(function (u) { if (others.length < 3 && u.group !== data.group && u.audience === data.audience && others.indexOf(u) < 0) others.push(u); });
+    var rel = others.slice(0, 3).map(function (u) {
       var ug = zxSolGroup(u.group);
       return { href: '/use-cases/' + u.slug, label: u.title, desc: ug ? ug.name : '', icon: ug ? ug.icon : 'layers' };
     });
     var more = [];
-    if (aud) more.push({ href: aud.href, label: 'Zynix for ' + aud.label, desc: 'Workflows, customers and how it connects', icon: 'users' });
+    if (aud) more.push({ href: aud.href, label: aud.label, desc: 'What Zynix runs for this type of organization', icon: 'users' });
     var story = data.story ? zxCustomer(data.story) : null;
     if (story && story.caseStudy) more.push({ href: story.caseStudy, label: story.name, desc: 'Customer story' + (story.segmentLabel ? ' · ' + story.segmentLabel : ''), icon: 'book' });
     more.push({ href: '/use-cases', label: 'All use cases', desc: 'Every workflow, by program and organization', icon: 'layers' });
@@ -5360,7 +5363,7 @@ function renderAudiencePageV7(d) {
 
   // The problem (MSO/IPA page, COPY_DECK §5.3)
   if (d.problem) {
-    html += renderSection({ id: 'problem', className: 'zx-sol-problem', surface: surf() }, renderSplit(
+    html += renderSection({ id: 'problem', className: 'zx-sol-problem zx-sol-problem--aside', surface: surf() }, renderSplit(
       renderSectionHead('The problem', d.problem.title, '', { id: 'problem-title' }),
       '<div class="zx-sol-prose">' + d.problem.body.map(function (x) { return '<p>' + x + '</p>'; }).join('') + '</div>', { ratio: '5-7' }));
   }
@@ -5389,7 +5392,7 @@ function renderAudiencePageV7(d) {
     renderSectionHead(c.eyebrow || 'How it connects', c.title, c.body, { id: 'connect-title', action: c.link, align: 'split' }) + zxSolFlow() +
     '<div class="zx-sol-connect__foot">' + (c.bullets ? '<div class="zx-sol-bullets"><h3 class="zx-sol-bullets__title">' + c.bullets.title + '</h3><ul class="zx-sol-bullets__list" role="list">' +
       c.bullets.items.map(function (b) { return '<li>' + b + '</li>'; }).join('') + '</ul></div>' : '') +
-    renderTrustRow(['soc2', 'hipaa', 'hitrust'], { href: '/security', className: 'zx-sol-trust' }) + '</div>');
+    '<p class="zx-sol-trust">' + renderLinkArrow('Security and trust', '/security') + '<span class="zx-sol-trust__desc">' + zxComplianceProse() + '</span></p>' + '</div>');
 
   // Segment callout: the CMS ACCESS Model (ACO, MSO/IPA, FQHC only), Stars and risk adjustment (plans), governance
   if (d.callout) {
@@ -8689,18 +8692,21 @@ function renderSolutionsOverview() {
     { id: 'care-navigation', label: 'Care navigation &amp; SDoH', line: 'Screening, resource referrals and follow-up for patients facing barriers.', icon: 'mappin' },
     { id: 'front-office', label: 'Front-office automation', line: 'Referrals, fax intake, scheduling and authorization paperwork.', icon: 'file' }
   ];
+  // The organization picker is the hero's media: the page's main job is to send each buyer to their page.
+  var picker = '<nav class="zx-sol-orgnav" aria-labelledby="organizations-title"><h2 class="zx-sol-orgnav__title" id="organizations-title">By organization</h2>' +
+    '<ul class="zx-sol-orgnav__list" role="list">' + orgs.map(function (o) {
+      var a = ZX_SOL_AUD[o.aud];
+      return '<li><a class="zx-sol-orgnav__link" href="' + zxAttr(a.href) + '"><span class="zx-sol-orgnav__icon" aria-hidden="true">' + zxIcon(o.icon) + '</span>' +
+        '<span class="zx-sol-orgnav__text"><span class="zx-sol-orgnav__name">' + a.label + '</span><span class="zx-sol-orgnav__line">' + o.line + '</span>' +
+        '<span class="zx-sol-orgnav__proof"><span class="zx-visually-hidden">Customers: </span>' + o.proof + '</span></span>' +
+        '<span class="zx-sol-orgnav__arrow" aria-hidden="true">→</span></a></li>';
+    }).join('') + '</ul></nav>';
   var html = renderHero({ preset: 'product', compact: true, eyebrow: 'Solutions', title: 'Find the workflows for your organization',
     lead: 'ACOs, MSOs and IPAs, health plans, health systems and FQHCs run different programs. Start with your organization type, or browse by workflow.',
-    secondary: { label: 'Browse all use cases', href: '/use-cases' } });
+    secondary: { label: 'Browse all use cases', href: '/use-cases' },
+    media: { type: 'product', frame: { html: picker, sample: false, bare: true, className: 'zx-sol-orgframe' } } });
   html += '<section class="zynix-section zynix-section--compact zynix-section--rule zx-sol-logos" aria-label="Customers"><div class="zynix-container">' +
     renderLogoRow(null, { id: 'solutions-logos' }) + '</div></section>';
-  html += renderSection({ id: 'organizations', surface: 'subtle', className: 'zx-sol-orgs' },
-    renderSectionHead('Who we serve', 'By organization', 'Each page shows the three workflows we run most for that type of organization, the customers who run them, and how the data connects.', { id: 'organizations-title', align: 'split' }) +
-    renderGrid(orgs, function (o) {
-      var a = ZX_SOL_AUD[o.aud];
-      return renderCard({ href: a.href, icon: o.icon, title: a.label, body: o.line,
-        meta: '<span class="zx-sol-orgs__proof"><span class="zx-visually-hidden">Customers: </span>' + o.proof + '</span>', cta: o.cta });
-    }));
   html += renderSection({ id: 'workflows', className: 'zx-sol-flows' },
     renderSectionHead('By program', 'By workflow', zxSolAll().length + ' use cases, grouped into ' + ZX_SOL_GROUPS.length + ' programs. Each one shows the steps, who owns them and what it runs on.', { id: 'workflows-title', align: 'split' }) +
     zxSolLinks(flows.map(function (f) { return { href: '/use-cases#' + f.id, label: f.label, desc: f.line, icon: f.icon }; }), 'zx-sol-links--3') +
