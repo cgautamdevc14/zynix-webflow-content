@@ -14346,7 +14346,7 @@ function renderDataAnalyticsV7() {
       // still get the right preview image, title, and description. Every
       // page falls back to IMG.hero even if it's not in PAGE_SEO.
       var ogTitle = s.title || document.title || 'Zynix AI';
-      var ogDesc = s.desc || 'Zynix AI — the AI operating system for value-based healthcare.';
+      var ogDesc = s.desc || 'Zynix AI — AI infrastructure and workflows for value-based care.';
       var ogImg = s.img || (typeof IMG !== 'undefined' && IMG.hero) || '';
       setMetaByAttr('property', 'og:title', ogTitle);
       setMetaByAttr('property', 'og:description', ogDesc);
