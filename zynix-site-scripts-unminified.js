@@ -213,9 +213,7 @@
     carePlans: ['Post-discharge TCM', 'HCC gap closure sprint', 'Medication safety and adherence', 'High-utilizer ED diversion',
                 'Chronic condition visit readiness', 'Preventive screening program'],
     roles: { agent: 'Outreach agent', rn: 'Care manager, RN', physician: 'Physician lead', coordinator: 'Care coordinator', scheduler: 'Scheduler' },
-    // Names that must not appear in new visible copy: "Zynix OS", "ZIP", "Zynix Intelligent Platform", "operating system" as the
-    // product or category name, "ZynAuth" (archived page), and the chat's invented products ("Risk Intelligence Agent",
-    // "Claims Optimizer Agent", "Zynix RCM Solution"). URLs are unchanged.
+    // Retired names that must not appear in visible copy are listed in DECISIONS.md item 2 and COPY_DECK.md section 7 (and the chat's invented product names)
     retiredNote: true
   };
 
