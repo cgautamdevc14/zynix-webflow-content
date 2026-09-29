@@ -3621,6 +3621,13 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-plat-status__top { display:flex; align-items:center; justify-content:space-between; gap:var(--zx-space-3); margin:0 0 var(--zx-space-4); }
 .zx-plat-status__top .zynix-card__icon { margin:0; }
 
+/* /integrations EHR table: a hairline list on phones (§2.7: short EHR items never become tall single cards). */
+@media (max-width:767.98px) {
+  .zx-plat-ehrs .zynix-table-wrap .zynix-compare-table tbody tr { margin:0; padding:var(--zx-space-4) 0; border:0; border-bottom:1px solid var(--zx-border); border-radius:0; background:none; }
+  .zx-plat-ehrs .zynix-table-wrap .zynix-compare-table tbody tr:first-child { border-top:1px solid var(--zx-border); }
+  .zx-plat-ehrs .zynix-table-wrap .zynix-compare-table td, .zx-plat-ehrs .zynix-table-wrap .zynix-compare-table td:first-child { padding-top:var(--zx-space-1); }
+}
+
 /* /integrations standards line */
 .zx-plat-standards { margin-top:var(--zx-space-8); }
 .zx-plat-standards__label { margin:0 0 var(--zx-space-3); font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.2 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase; color:var(--zx-text-muted); }
