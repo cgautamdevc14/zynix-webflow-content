@@ -3764,6 +3764,18 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-flow--expanded .zx-flow__step { padding:20px; border:1px solid var(--zx-border-inverse); border-radius:var(--zx-radius-lg); background:var(--zx-surface-inverse-raised); }
   .zx-flow--expanded .zx-flow__step-head { display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px; margin-bottom:12px; }
   .zx-flow--expanded .zx-flow__layer-links { flex-basis:100%; }
+  /* Expanded at every desktop width: sources and outputs stay chip rows above and below the five steps, so each step gets a
+     fifth of the container, not a fifth of the space left between two side columns (the >=1280 three-column rules below
+     are for the homepage tab mode; these selectors outrank them) */
+  .zx-flow.zx-flow--expanded { grid-template-columns:minmax(0,1fr); }
+  .zx-flow--expanded .zx-flow__main { padding-top:0; }
+  .zx-flow--expanded .zx-flow__col .zx-flow__list { display:flex; flex-wrap:wrap; gap:8px; }
+  .zx-flow--expanded .zx-flow__col .zx-flow__item { display:inline-flex; align-items:center; gap:8px; padding:5px 12px 5px 6px; border:1px solid var(--zx-border-inverse); border-radius:var(--zx-radius-pill); }
+  .zx-flow--expanded .zx-flow__col .zx-flow__icon { width:24px; height:24px; border-radius:50%; }
+  .zx-flow--expanded .zx-flow__col .zx-flow__icon svg { width:13px; height:13px; }
+  .zx-flow--expanded .zx-flow__col .zx-flow__item-text { padding-top:0; }
+  .zx-flow--expanded .zx-flow__col .zx-flow__item-label { font-size:13px; font-weight:var(--zx-fw-medium); }
+  .zx-flow--expanded .zx-flow__col .zx-flow__item-detail { display:none; }
 }
 /* ≥1280: sources · pipeline · outputs as three columns; the connector runs from the sources into the outputs */
 @media (min-width:1280px) {
