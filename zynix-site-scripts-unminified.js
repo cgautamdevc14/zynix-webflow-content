@@ -13884,9 +13884,9 @@ function renderDataAnalyticsV7() {
     return renderHero({ preset: 'error', eyebrow: '404', title: 'We couldn’t find that page',
         lead: 'The link may be out of date. These are good places to start.',
         secondary: { label: 'Go to the homepage', href: '/' }, media: { type: 'none' }, compact: true }) +
-      '<section class="zynix-section zynix-section--compact" aria-labelledby="zx-404-links-title"><div class="zynix-container">' +
-        '<h2 class="zx-visually-hidden" id="zx-404-links-title">Good places to start</h2>' +
-        renderGrid(cards, function (it) { return renderCard({ title: it.label, body: it.desc, href: it.href }); }) +
+      // The card titles are the H2s under the page's H1 (no hidden heading: the lead already says it).
+      '<section class="zynix-section zynix-section--compact zynix-section--flush-top" aria-label="Good places to start"><div class="zynix-container">' +
+        renderGrid(cards, function (it) { return renderCard({ title: it.label, body: it.desc, href: it.href, level: 2 }); }) +
       '</div></section>' +
       renderFooter();
   }
