@@ -2587,14 +2587,15 @@ a.zynix-card--inverse:hover { border-color:rgba(255,255,255,.3); box-shadow:none
 .zynix-ui__footer::before { content:""; flex:none; width:14px; height:14px; margin-top:1px; background:currentColor;
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Zm0 1.3a5.2 5.2 0 1 1 0 10.4A5.2 5.2 0 0 1 8 2.8Zm-.65 2.45v1.3h1.3v-1.3h-1.3Zm0 2.6v3.9h1.3v-3.9h-1.3Z'/%3E%3C/svg%3E") center / contain no-repeat;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Zm0 1.3a5.2 5.2 0 1 1 0 10.4A5.2 5.2 0 0 1 8 2.8Zm-.65 2.45v1.3h1.3v-1.3h-1.3Zm0 2.6v3.9h1.3v-3.9h-1.3Z'/%3E%3C/svg%3E") center / contain no-repeat; }
-/* Timeline variant (model.steps: time, title, owner, status) and documentation variant (model.note.sections). §2.9 names the
-   data only; S2's renderUiPanel emits these classes (listed in S1's hand-back so both sides use the same names). */
+/* Timeline variant (model.steps) and documentation variant (model.note.sections), as S2's renderUiPanel emits them:
+   li.zynix-ui__step > span.__step-time + div.__step-main (p.__step-title + p.__step-owner) + span.__status */
 .zynix-ui__steps { display:grid; gap:0; border-top:1px solid var(--zx-border); }
-.zynix-ui__step { display:grid; grid-template-columns:56px minmax(0,1fr) auto; grid-template-areas:"time main status" "time owner status"; align-items:center; gap:2px var(--zx-space-3);
+.zynix-ui__step { display:grid; grid-template-columns:52px minmax(0,1fr) auto; grid-template-areas:"time main status"; align-items:center; gap:2px var(--zx-space-3);
   min-height:52px; box-sizing:border-box; padding:8px 0; border-bottom:1px solid var(--zx-border); }
 .zynix-ui__step-time { grid-area:time; align-self:start; padding-top:2px; font:var(--zx-fw-semibold) 12px/1.3 var(--zx-font-sans); color:var(--zx-text-muted); font-variant-numeric:tabular-nums; }
-.zynix-ui__step-title { grid-area:main; font:var(--zx-fw-semibold) 14px/1.35 var(--zx-font-sans); color:var(--zx-text); }
-.zynix-ui__step > .zynix-ui__owner { grid-area:owner; }
+.zynix-ui__step-main { grid-area:main; min-width:0; }
+.zynix-ui__step-title { font:var(--zx-fw-semibold) 14px/1.35 var(--zx-font-sans); color:var(--zx-text); }
+.zynix-ui__step-owner { margin-top:2px; font:var(--zx-fw-medium) 12px/1.35 var(--zx-font-sans); color:var(--zx-text-secondary); }
 .zynix-ui__step > .zynix-ui__status { grid-area:status; }
 .zynix-ui__note { display:grid; gap:var(--zx-space-3); padding:14px 16px; border:1px solid var(--zx-border); border-radius:var(--zx-radius-md); background:var(--zx-gray-25); }
 .zynix-ui__note-section { display:grid; gap:2px; }
@@ -2882,8 +2883,8 @@ html.zx-menu-open #zynix-chat-widget { display:none; }
 .zynix-skip-nav { position:fixed; top:8px; left:8px; z-index:var(--zx-z-skip); box-sizing:border-box; width:auto; height:auto; overflow:visible;
   display:inline-flex; align-items:center; min-height:44px; padding:0 var(--zx-space-5); border-radius:var(--zx-radius-md);
   background:var(--zx-blue-600); color:#fff; font:var(--zx-fw-semibold) 15px/1.2 var(--zx-font-sans); text-decoration:none;
-  box-shadow:var(--zx-shadow-md); transform:translateY(calc(-100% - 16px)); }
-.zynix-skip-nav:focus, .zynix-skip-nav:focus-visible { transform:none; color:#fff; outline:2px solid var(--zx-blue-600); outline-offset:2px; }
+  box-shadow:none; transform:translateY(calc(-100% - 24px)); }
+.zynix-skip-nav:focus, .zynix-skip-nav:focus-visible { transform:none; color:#fff; box-shadow:var(--zx-shadow-md); outline:2px solid var(--zx-blue-600); outline-offset:2px; }
 
 /* ── Announcement bar (§3.4): one line, 36px, 13px/500 ink on the brand surface; long text ≥768, short text below ── */
 .zynix-announcement-bar { position:fixed; top:0; left:0; right:0; z-index:var(--zx-z-announce); box-sizing:border-box; margin:0;
@@ -3010,7 +3011,7 @@ html.zx-menu-open #zynix-chat-widget { display:none; }
 .zynix-mega-nav .zynix-mega-feature__steps { display:flex; flex-wrap:wrap; align-items:center; gap:4px 6px; margin:var(--zx-space-1) 0 0; padding:0; list-style:none;
   font:var(--zx-fw-semibold) 13px/1.4 var(--zx-font-sans); color:var(--zx-text-secondary); }
 .zynix-mega-nav .zynix-mega-feature__steps > li { margin:0; padding:0; }
-.zynix-mega-nav .zynix-mega-feature__steps [aria-hidden="true"] { margin-left:6px; color:var(--zx-gray-400); font-weight:var(--zx-fw-regular); }
+.zynix-mega-nav .zynix-mega-feature__steps :is(.zynix-mega-feature__sep, [aria-hidden="true"]) { margin-left:6px; color:var(--zx-gray-400); font-weight:var(--zx-fw-regular); }
 .zynix-mega-nav .zynix-mega-feature .zynix-link-arrow { margin-top:var(--zx-space-2); }
 /* pre-S3 markup: hover/focus reveal without visibility:hidden (display:none keeps the head anchor scripts off closed links), light icon tiles */
 .zynix-mega-nav .zynix-nav-dropdown:not([data-zx-nav]) > .zynix-mega-panel { display:none; left:50%; transform:translateX(-50%); }
@@ -3047,6 +3048,9 @@ html.zx-menu-open #zynix-chat-widget { display:none; }
   border:0; color:var(--zx-text-secondary); font:var(--zx-fw-regular) 16px/1.3 var(--zx-font-sans); text-decoration:none; }
 .zynix-mobile-menu :is(.zynix-mobile-link, .zynix-mobile-section-links a):hover { color:var(--zx-link); }
 .zynix-mobile-menu .zynix-mobile-link--top { min-height:56px; color:var(--zx-text); font-weight:var(--zx-fw-semibold); }
+.zynix-mobile-menu .zynix-mobile-link--story { color:var(--zx-link); font-weight:var(--zx-fw-semibold); }
+.zynix-mobile-menu .zynix-mobile-section-trigger.is-current, .zynix-mobile-menu .zynix-mobile-link--top:is(.is-current, [aria-current="page"]) { color:var(--zx-blue-700); }
+.zynix-mobile-menu .zynix-mobile-link[aria-current="page"] { color:var(--zx-blue-700); font-weight:var(--zx-fw-semibold); }
 .zynix-mobile-menu .zynix-mobile-menu__footer { display:grid; gap:var(--zx-space-2); margin-top:var(--zx-space-6); }
 .zynix-mobile-menu .zynix-mobile-menu__footer .zynix-mobile-cta { width:100%; margin:0; }
 .zynix-mobile-menu .zynix-mobile-menu__footer .zynix-mobile-link { color:var(--zx-text); font-weight:var(--zx-fw-semibold); }
