@@ -4659,11 +4659,13 @@
     steps: [
       { time: 'Hour 0', owner: 'system', ownerLabel: 'Zynix platform',   text: 'The ADT discharge message arrives, the patient is matched to their record and a post-discharge care plan opens.' },
       { time: 'Hour 1', owner: 'system', ownerLabel: 'Zynix platform',   text: 'The patient joins today’s TCM worklist, ranked by risk.' },
-      { time: 'Day 1',  owner: 'agent',  ownerLabel: 'Outreach agent',   text: 'The outreach agent calls, confirms the patient is home and has their discharge paperwork, and asks if they have questions.' },
+      { time: 'Day 1',  owner: 'agent',  ownerLabel: 'Outreach agent',   text: 'The outreach agent calls, confirms the patient is home with their discharge paperwork, and notes a question about a new medication.' },
       { time: 'Day 1',  owner: 'staff',  ownerLabel: 'Care manager, RN', text: 'The care manager, RN makes the interactive TCM contact and answers the medication question the agent escalated by rule.', escalation: true },
       { time: 'Day 2',  owner: 'agent',  ownerLabel: 'Scheduling agent', text: 'The follow-up visit is booked inside the 7- or 14-day window and reminders are set.' }
     ],
     note: 'Your care plan sets the steps, owners and escalation rules. The plan stays open until the visit is documented.',
+    // plan-facing line: no numbers, care-team oversight stated (DECISIONS 17b)
+    plans: 'Health plans can run the same pattern for HEDIS and Stars gaps: ranked member lists, agent outreach, <span class="zx-home-nowrap">care-team</span> escalation.',
     // CMS-1 (COPY_DECK §0.3); the MLN booklet answered 200 on 2026-09-29.
     rule: { text: 'For TCM, CMS requires an interactive contact with the patient or caregiver within 2 business days of discharge.',
             label: 'CMS: Transitional Care Management Services (PDF)',
@@ -4671,8 +4673,8 @@
   };
 
   // §5.7 Capabilities. media: 'capture' (an admissible screenshot, §2.9) | 'panel' | 'text'; switching is a data change.
-  // Until two captures pass §2.9 the fallback ships: connect and document 'text', act 'panel' [VERIFY launch dependency].
-  // Text rows show `points` (<= 2, worded for a reader who sees no panel); `callouts` describe a panel or capture.
+  // Until two captures pass §2.9 the fallback ships: connect and document 'text', act 'panel' [VERIFY launch dependency],
+  // rendered as one list in story order beside the single panel. Once a capture exists, every row gets its own split.
   var HOME_CAPABILITIES = [
     { id: 'connect', media: 'text', capture: null, eyebrow: 'Data foundation · Intelligence', title: 'See who needs attention this week, and why',
       body: 'Zynix ranks discharges, care gaps and risk into worklists and shows why each patient is on them, so teams start where the window is closing.',
@@ -4687,9 +4689,7 @@
           { title: 'Pt 3350 · 59 · Diabetes', sub: 'AWV due · HbA1c gap open',             owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'neutral', label: 'Queued' } } ] },
       callouts: [ { title: 'Ranked by risk and deadline', body: 'Discharges and gaps are sorted so the team starts where the window is closing.' },
                   { title: 'An owner on every row', body: 'Each patient shows whether an agent or a named role has the next step.' },
-                  { title: 'Escalations reach the RN', body: 'When a call raises a clinical question, the row moves to the care manager, RN.' } ],
-      points: [ { title: 'An owner for every patient', body: 'Every patient on a worklist has a next step, owned by an agent or a named role.' },
-                { title: 'Escalations reach the RN', body: 'When a call raises a clinical question, the patient moves to the care manager, RN.' } ] },
+                  { title: 'Why each patient is on the list', body: 'The discharge, the open gap and its deadline show on the row.' } ] },
     { id: 'act', media: 'panel', capture: null, eyebrow: 'Agents · Care plans', title: 'A plan with an owner for every step',
       body: 'Care plans sequence agents and people around one goal, such as a discharge or a wellness visit. Agents make the calls, send the texts and book visits; your care team takes escalations and clinical decisions.',
       links: [ { label: 'See how agents work', href: '/agents' }, { label: 'Browse care plans', href: '/care-plans' } ],
@@ -4714,8 +4714,7 @@
                             { label: 'Plan', text: 'Continue medications; daily weights; follow up in 2 weeks.' } ] },
         footer: 'Draft · waiting for physician review and sign-off.' },
       callouts: [ { title: 'Drafted during the visit', body: 'ZynScribe turns the visit conversation into a structured SOAP note draft.' },
-                  { title: 'Physician reviews every note', body: 'Nothing is filed or used for billing until the physician approves it.' } ],
-      points: [ { title: 'Drafted from the conversation', body: 'Subjective, objective, assessment and plan sections, drafted from what was said in the visit.' } ] }
+                  { title: 'Physician reviews every note', body: 'Nothing is filed or used for billing until the physician approves it.' } ] }
   ];
 
   // /roi-calculator shows unsourced figures today (DECISIONS 15), so its link waits for P6's rebuild (editable assumptions,
@@ -4729,7 +4728,7 @@
     { q: 'How is Zynix different from a population health analytics platform?',
       a: 'Analytics tells you who needs attention. Zynix also covers the work that follows: care plans that give each step an owner, agents that handle outreach and scheduling, and documentation that closes the loop. If you already use an analytics platform, ask us how Zynix works alongside it.' },
     { q: 'How do AI agents work with our care team?',
-      a: 'Agents handle operational work: outreach calls and texts, scheduling, reminders, after-hours intake and fax routing. They follow the escalation rules your team sets and hand clinical questions to a nurse or physician with the conversation attached. Agents don’t diagnose, prescribe or make treatment decisions. Unlike a chatbot, which answers questions, an agent completes a task inside your workflow.' },
+      a: 'Agents handle operational work: outreach calls and texts, scheduling, reminders, after-hours intake and fax routing. They follow the escalation rules your team sets and hand clinical questions to a nurse or physician. Agents don’t diagnose, prescribe or make treatment decisions. Unlike a chatbot, which answers questions, an agent completes a task inside your workflow.' },
     { q: 'Which EHRs and data sources does Zynix connect to?',
       a: 'Zynix connects to Epic, Oracle Health (Cerner), athenahealth, eClinicalWorks, NextGen, Allscripts, Greenway, DrChrono and other EHRs, along with Medicare and payer claims, ADT feeds, labs and pharmacy data. Connections use FHIR, HL7, C-CDA and X12 standards. The integrations page has the detail.' },
     { q: 'How does Zynix protect patient data?',
@@ -4766,7 +4765,8 @@
       return '<button type="button" class="zx-hw__tab" role="tab" id="zx-hw-tab-' + t.id + '" aria-controls="zx-hw-panel-' + t.id + '" aria-selected="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? '-1' : '0') + '">' + t.label + '</button>';
     }).join('');
     var panels = tabs.map(function (t, i) {
-      var tiles = (t.tiles || []).length ? '<dl class="zynix-ui__tiles">' + t.tiles.map(function (x) {
+      // a tab with a pipeline shows it alone (its tiles would repeat the stage counts)
+      var tiles = (t.tiles || []).length && !(t.pipeline || []).length ? '<dl class="zynix-ui__tiles">' + t.tiles.map(function (x) {
         return '<div class="zynix-ui__tile"><dt class="zynix-ui__tile-label">' + x.label + '</dt><dd class="zynix-ui__tile-value">' + x.value + '</dd></div>'; }).join('') + '</dl>' : '';
       var rows = (t.rows || []).length ? '<ul class="zynix-ui__rows" role="list">' + t.rows.map(function (r) {
         return '<li class="zynix-ui__row"><div class="zynix-ui__row-main"><p class="zynix-ui__row-title">' + r.title + '</p>' + zxEl('p', 'zynix-ui__row-sub', r.sub) + '</div>' +
@@ -4803,11 +4803,12 @@
       var layers = (f.layers || []).map(function (k) { return layerOf[k]; }).filter(Boolean);
       return { id: s.id, n: i + 1, name: f.name, layers: layers, summary: s.summary, detail: s.detail, tags: s.tags || [] };
     });
-    // No step numerals (arrows and list order give the sequence); layer tags carry the How-It-Works 01–04.
+    // No step numerals; layer tags carry the How-It-Works 01–04. Nodes print their summary (the path reads without a
+    // click); the selected panel adds the detail and tags.
     var lnum = function (l) { return '<span class="zx-flow__lnum">' + (l.n < 10 ? '0' : '') + l.n + '</span>'; };
     var nodes = steps.map(function (s, i) {
       return '<button type="button" class="zx-flow__node" role="tab" id="zx-flow-tab-' + s.id + '" aria-controls="zx-flow-step-' + s.id + '" aria-selected="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? '-1' : '0') + '">' +
-        '<span class="zx-flow__node-name">' + s.name + '</span>' +
+        '<span class="zx-flow__node-name">' + s.name + '</span><span class="zx-flow__node-summary">' + s.summary + '</span>' +
         s.layers.map(function (l) { return '<span class="zx-flow__node-layer">' + lnum(l) + l.name + '</span>'; }).join('') + '</button>';
     }).join('');
     var panels = steps.map(function (s, i) {
@@ -4866,11 +4867,11 @@
   }
 
   // ── §5.7 Capabilities: rows by media mode ──
-  // Text rows form one two-column band at the first text row's position; a panel or capture row is a 5/7 split with
-  // its callouts as a hairline row beneath it. Points and callouts are unnumbered (parallel properties).
+  // No capture (the §5.7 fallback): one list in story order; the panel follows its row in the DOM, beside the list at
+  // >= 1024. With a capture: media rows are 5/7 splits with callouts beneath; text rows share a two-column band.
   function zxHomePoints(items, cls) {
     items = (items || []).filter(function (it) { return it && it.title; });
-    return items.length ? '<ul class="zx-home-points' + zxCls(cls) + '" role="list" data-count="' + items.length + '">' + items.map(function (it) {
+    return items.length ? '<ul class="zx-home-points' + zxCls(cls) + '" role="list">' + items.map(function (it) {
       return '<li class="zx-home-points__item"><p class="zx-home-points__title">' + it.title + '</p>' + zxEl('p', 'zx-home-points__body', it.body) + '</li>';
     }).join('') + '</ul>' : '';
   }
@@ -4880,24 +4881,32 @@
       '<p class="zx-home-cap__body">' + row.body + '</p>' +
       '<div class="zx-home-cap__links">' + (row.links || []).map(function (l) { return renderLinkArrow(l.label, l.href); }).join('') + '</div>';
   }
+  function zxHomeCapFrame(row, mode) {
+    return mode === 'capture'
+      ? renderProductFrame({ src: row.capture.src, alt: row.capture.alt, caption: row.capture.caption || row.caption, sample: true, sampleLabel: 'Sample data' })
+      : renderProductFrame({ html: renderUiPanel(Object.assign({}, row.panel, { chip: null })), sample: true, sampleLabel: 'Sample data', caption: row.caption });
+  }
   function zxHomeCapabilities(rows) {
+    var modes = rows.map(zxHomeCapMode);
+    if (modes.indexOf('capture') < 0) {
+      return '<div class="zx-home-caplist">' + rows.map(function (row, i) {
+        return '<div class="zx-home-caplist__item">' + zxHomeCapText(row) + '</div>' +
+          (modes[i] === 'panel' ? '<div class="zx-home-caplist__media">' + zxHomeCapFrame(row, 'panel') + '</div>' : '');
+      }).join('') + '</div>';
+    }
     var out = [], band = null, k = 0;
-    rows.forEach(function (row) {
-      var mode = zxHomeCapMode(row);
-      if (mode === 'text') {
-        var item = '<div class="zx-home-cap__col">' + zxHomeCapText(row) + zxHomePoints((row.points || row.callouts || []).slice(0, 2)) + '</div>';
+    rows.forEach(function (row, i) {
+      if (modes[i] === 'text') {
+        var item = '<div class="zx-home-cap__col">' + zxHomeCapText(row) + zxHomePoints((row.callouts || []).slice(0, 2)) + '</div>';
         if (band) { band.push(item); return; }
         band = [item]; out.push(band); return;
       }
-      var frame = mode === 'capture'
-        ? renderProductFrame({ src: row.capture.src, alt: row.capture.alt, caption: row.capture.caption || row.caption, sample: true, sampleLabel: 'Sample data' })
-        : renderProductFrame({ html: renderUiPanel(Object.assign({}, row.panel, { chip: null })), sample: true, sampleLabel: 'Sample data', caption: row.caption });
-      out.push('<div class="zx-home-cap zx-home-cap--' + mode + '">' + renderSplit(zxHomeCapText(row), frame, { ratio: '5-7', reverse: k++ % 2 === 0, center: true }) +
+      out.push('<div class="zx-home-cap">' + renderSplit(zxHomeCapText(row), zxHomeCapFrame(row, modes[i]), { ratio: '5-7', reverse: k++ % 2 === 0, center: true }) +
         zxHomePoints(row.callouts, 'zx-home-points--row') + '</div>');
     });
-    return out.map(function (x) {
+    return '<div class="zx-home-caps__rows">' + out.map(function (x) {
       return typeof x === 'string' ? x : '<div class="zx-home-cap zx-home-cap--text" data-count="' + x.length + '">' + x.join('') + '</div>';
-    }).join('');
+    }).join('') + '</div>';
   }
 
   // ── Init (§5.15): each idempotent, early return without its root, listeners registered once ──
@@ -5077,14 +5086,16 @@
     var soc2Short = C.soc2.prose.split(',')[0];   // "SOC 2 Type II audited"
 
     // 1. Hero (§5.1) with the hero widget (protected, §5.2) and the real logo row (protected, §5.14) at the fold
-    var hero = '<section class="zx-home-hero" id="hero" aria-labelledby="hero-title"><div class="zynix-container">' +
+    // data-zx-chat-avoid: keeps the chat launcher off the first screen below 1280 (request to S3, §7.3)
+    var hero = '<section class="zx-home-hero" id="hero" aria-labelledby="hero-title" data-zx-chat-avoid><div class="zynix-container">' +
       '<div class="zx-home-hero__grid"><div class="zx-home-hero__text">' +
         '<p class="zynix-eyebrow"><span class="zx-home-hero__eyebrow-long">' + SITE_FACTS.category.long + '</span><span class="zx-home-hero__eyebrow-short">' + SITE_FACTS.category.short + '</span></p>' +
         '<h1 class="zx-home-hero__title" id="hero-title">Turn your data into completed follow-up.</h1>' +
         '<p class="zx-home-hero__lead">For ACOs, health plans, MSOs, IPAs and health systems: Zynix connects claims, EHR and ADT data, flags discharges, care gaps and AWVs due, and gives care teams AI outreach agents.</p>' +
         '<div class="zx-home-hero__actions">' + renderDemoButton({ size: 'lg' }) + renderButton('See how it works', '#how-it-works', { variant: 'secondary', size: 'lg' }) + '</div>' +
-        '<ul class="zx-home-hero__proof" role="list" aria-label="Zynix at a glance">' + [['database', SITE_FACTS.ehr.short], ['shield', soc2Short], ['lock', C.hipaa.prose]].map(function (x) {
-          return '<li><span class="zx-home-hero__proof-icon" aria-hidden="true">' + zxIcon(x[0]) + '</span>' + x[1] + '</li>'; }).join('') + '</ul>' +
+        // quiet text, hairline separators (§5.1)
+        '<ul class="zx-home-hero__proof" role="list" aria-label="Zynix at a glance">' + [SITE_FACTS.ehr.short, soc2Short, C.hipaa.prose].map(function (x) {
+          return '<li>' + x + '</li>'; }).join('') + '</ul>' +
       '</div><div class="zx-home-hero__media">' + renderHeroWidget(HERO_WIDGET) + '</div></div>' +
       renderLogoRow(null, { eager: true, id: 'hero-logos', label: 'Used by ACOs, health plans and provider organizations', link: { label: 'Customer stories', href: '/resources-case-studies' } }) +
     '</div></section>';
@@ -5114,14 +5125,15 @@
         'Same patient, same discharge. The difference is who does the follow-up, and whether anyone knows it happened.', { id: 'agents-at-work-title' }) +
       zxHomeLabel('Without a follow-through layer', 'zx-home-without-label') +
       '<ul class="zx-home-without" role="list" aria-labelledby="zx-home-without-label">' + ep.without.map(function (w) { return '<li>' + w + '</li>'; }).join('') + '</ul>' +
-      '<p class="zx-home-cms">' + ep.rule.text + ' <a class="zx-home-cms__link" href="' + zxAttr(ep.rule.href) + '"' + zxNewTab(ep.rule.href) + '>' + ep.rule.label + '</a></p>',
+      '<p class="zx-home-cms">' + ep.rule.text + ' <a class="zx-home-cms__link" href="' + zxAttr(ep.rule.href) + '"' + zxNewTab(ep.rule.href) + '>' + ep.rule.label + '</a></p>' +
+      '<p class="zx-home-plans">' + ep.plans + '</p>',
       zxHomeEpisode(ep), { ratio: '5-7' }));
 
-    // 5. Capabilities (§5.7)
+    // 5. Capabilities (§5.7): the H2 names the three jobs (it no longer echoes the H1)
     var caps = renderSection({ id: 'capabilities', surface: 'subtle', className: 'zx-home-caps' },
-      renderSectionHead('What the platform does', 'Finish the <span class="zx-home-nowrap">follow-up</span> your data creates', 'See the work, assign it and document it, in one platform.',
+      renderSectionHead('What the platform does', 'See the work, assign it and document it', null,
         { id: 'capabilities-title', action: { label: 'Watch the recorded webinar', href: '/resources-webinars' } }) +
-      '<div class="zx-home-caps__rows">' + zxHomeCapabilities(HOME_CAPABILITIES) + '</div>');
+      zxHomeCapabilities(HOME_CAPABILITIES));
 
     // 6. Interoperability (§5.8): the EHR line as text, named EHRs as text wordmarks, standards as chips
     var interop = renderSection({ id: 'interoperability', className: 'zx-home-interop' }, renderSplit(
@@ -5145,13 +5157,13 @@
       var logo = c.logo ? '<img class="zx-home-customers__logo zx-home-customers__logo--h' + c.logo.h + '" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + c.logo.w + '" height="' + c.logo.h + '" loading="lazy" decoding="async">' : '';
       return renderCard({ href: c.caseStudy, media: logo, eyebrow: c.segmentLabel, title: c.name, body: line, cta: 'Read the case study', className: 'zx-home-customers__card' });
     };
-    // The PBACO mark sits above the quote as a logo (beside the name it read as a headshot).
-    var pbMark = pb && pb.logo ? '<img class="zx-home-quote__mark" src="' + zxAttr(zxImg(pb.logo.file)) + '" alt="' + zxAttr(pb.name) + '" width="' + pb.logo.w + '" height="' + pb.logo.h + '" loading="lazy" decoding="async">' : '';
+    // The attribution opens with a PBACO lockup (seal + name as text, so the image is decorative), not a floating seal.
+    var pbOrg = pb && pb.logo ? '<span class="zx-home-quote__org"><img class="zx-home-quote__mark" src="' + zxAttr(zxImg(pb.logo.file)) + '" alt="" width="' + pb.logo.w + '" height="' + pb.logo.h + '" loading="lazy" decoding="async">' + pb.name + '</span>' : '';
     var customers = renderSection({ id: 'customers', surface: 'subtle', className: 'zx-home-customers' },
       renderSectionHead('Customer stories', 'Customers, on the record',
         'Palm Beach ACO and eternalHealth announced their partnerships with Zynix in published releases.<span class="zx-home-customers__more"> PBACO Holding, one of the nation’s largest risk-bearing ACOs, started with outreach for post-discharge follow-up and annual wellness visits.</span>', { id: 'customers-title' }) +
       renderSplit(
-        pbMark + renderQuote({ customer: 'pbaco', variant: 'large', href: null, text: pbQuote, logo: null }).replace('</figcaption>', '<span class="zx-home-quote__links">' +
+        renderQuote({ customer: 'pbaco', variant: 'large', href: null, text: pbQuote, logo: null }).replace('__cite">', '__cite">' + pbOrg).replace('</figcaption>', '<span class="zx-home-quote__links">' +
           (pb && pb.release ? renderLinkArrow('Read the announcement', pb.release.href) : '') + (pb && pb.caseStudy ? renderLinkArrow('Read the case study', pb.caseStudy) : '') + '</span></figcaption>'),
         '<div class="zx-home-customers__cards">' +
           card('eternalhealth', 'Outreach and care management workflows for members in Massachusetts and Arizona, in use since January 1, 2026.') +
@@ -5184,14 +5196,14 @@
     // 9. Who we serve (§5.11): the five NAV audiences as linked rows (no ASCs)
     var sol = NAV.filter(function (s) { return s.id === 'solutions'; })[0];
     var orgs = sol ? ((sol.columns || []).filter(function (c) { return c.heading === 'By organization'; })[0] || { items: [] }).items : [];
-    var audiences = renderSection({ id: 'audiences', compact: true, rule: true, className: 'zx-home-audiences' }, renderSplit(
+    var audiences = renderSection({ id: 'audiences', surface: 'subtle', compact: true, className: 'zx-home-audiences' }, renderSplit(
       renderSectionHead(null, 'Built for organizations accountable for cost and quality', null,
         { id: 'audiences-title', action: { label: 'Solutions overview', href: '/solutions' } }),
       renderGrid(orgs, function (it) { return renderCard({ variant: 'row', title: it.label, body: it.desc, href: it.href, icon: it.icon }); }, { className: 'zx-home-audiences__list' }),
       { ratio: '5-7' }));
 
     // 10. FAQ (§5.12): .zynix-faq-item markup feeds the FAQPage JSON-LD
-    var faq = renderSection({ id: 'faq', rule: true, className: 'zx-home-faq' }, renderSplit(
+    var faq = renderSection({ id: 'faq', className: 'zx-home-faq' }, renderSplit(
       renderSectionHead(null, 'Questions buyers ask first', null, { id: 'faq-title', action: { label: 'More questions', href: '/resources-faq' } }),
       renderFaqList(HOME_FAQ, { idPrefix: 'faq-home' }), { ratio: '4-8' }));
 

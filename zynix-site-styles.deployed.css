@@ -3502,6 +3502,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-home-proof, .zx-home-hiw, .zx-home-flow, .zx-home-agents, .zx-home-caps, .zx-home-interop, .zx-home-customers, .zx-home-security, .zx-home-audiences, .zx-home-faq, .zx-home-end {
   --zx-section-y:clamp(40px, 22px + 3.5vw, 72px); --zx-section-y-sm:clamp(32px, 20px + 2vw, 48px); --zx-head-gap:clamp(24px, 16px + 1.4vw, 36px); }
 .zx-home-hiw, .zx-home-flow, .zx-home-agents, .zx-home-caps, .zx-home-customers { --zx-section-y:clamp(40px, 16px + 4.45vw, 80px); }
+.zx-home-agents { --zx-section-y:clamp(40px, 16px + 4.2vw, 76px); }   /* keeps the episode chapter within its §5.0 budget + 15% */
 
 /* ── §5.1 Hero ── */
 .zx-home-hero { padding:48px 0 32px; background:var(--zx-surface); }
@@ -3511,24 +3512,27 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-home-hero__lead { margin:20px 0 0; font-size:var(--zx-fs-lead); line-height:var(--zx-lh-lead); color:var(--zx-text-secondary); max-width:36em; }
 .zx-home-hero__actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
 .zx-home-hero__text, .zx-home-hero__media { min-width:0; }   /* the widget's tab bar scrolls inside a 280px column instead of widening it (320px) */
-/* Proof list: three stacked rows with a 14px icon each, at every width (an inline row wrapped 2+1 at 1440, 1024 and 768) */
-.zx-home-hero__proof { display:grid; gap:8px; list-style:none; margin:24px 0 0; padding:0; font-size:var(--zx-fs-sm); line-height:1.4; color:var(--zx-text-secondary); }
-.zx-home-hero__proof li { display:flex; align-items:center; gap:10px; }
-.zx-home-hero__proof-icon { display:inline-grid; place-items:center; flex:none; width:16px; height:16px; color:var(--zx-blue-600); }
-.zx-home-hero__proof-icon svg { width:15px; height:15px; stroke-width:2; }
+/* Proof list: quiet 14px text, no icons (§5.1). The three items never fit one line in the text column, so the EHR line
+   takes the first line and the two compliance items share the second, split by a hairline (review round 3). */
+.zx-home-hero__proof { display:flex; flex-wrap:wrap; gap:6px 0; list-style:none; margin:24px 0 0; padding:0; font-size:var(--zx-fs-sm); line-height:1.45; color:var(--zx-text-secondary); }
+.zx-home-hero__proof li:first-child { flex-basis:100%; }
+.zx-home-hero__proof li + li + li { margin-left:12px; padding-left:12px; border-left:1px solid var(--zx-border-strong); }
 .zx-home-hero__eyebrow-short { display:none; }
 .zx-home-hero .zynix-logo-row { margin-top:44px; padding-top:24px; border-top:1px solid var(--zx-border); }
 .zx-home-hero .zynix-logo-row__img { opacity:.78; }
-/* Optical balance by visual area, not height (review rounds 1–2; the files are S2's): the dense PBACO seal steps down to
-   40px and .6 so it no longer out-weighs the wordmarks; the small Florida, Central Florida and eternalHealth wordmarks step
-   up; the heavy NEXT wordmark steps down; the yellow GoldenCare script is darkened to a solid grey and enlarged (plain
-   grayscale leaves it near-white and hairline-thin). */
-.zx-home-hero .zynix-logo-row__img[src*="palm-beach-aco"] { height:40px; opacity:.6; }
+/* Optical balance by visual area, not height (review rounds 1–3; the files are S2's). Every logo keeps the shared tint
+   (grayscale, .78). The PBACO seal's lettering is unreadable at any row size, so it is shown as a lockup with the name
+   beside it (interim, until renderLogoRow takes a text lockup: request to S2). The name is generated content with empty
+   alternative text, so a screen reader still hears the image's alt "Palm Beach ACO" once. */
+.zx-home-hero .zynix-logo-row__item:has(> [src*="palm-beach-aco"]) { gap:8px; }
+.zx-home-hero .zynix-logo-row__item:has(> [src*="palm-beach-aco"])::after { content:"Palm Beach ACO" / ""; flex:none;
+  font:var(--zx-fw-semibold) 14px/1.15 var(--zx-font-sans); letter-spacing:-.005em; color:var(--zx-gray-700); opacity:.82; white-space:nowrap; }
+.zx-home-hero .zynix-logo-row__img[src*="palm-beach-aco"] { height:36px; flex:none; }
 .zx-home-hero .zynix-logo-row__img:is([src*="west-florida-aco"], [src*="space-coast-aco"]) { height:24px; }
 .zx-home-hero .zynix-logo-row__img[src*="eternal-health"] { height:25px; }
 .zx-home-hero .zynix-logo-row__img[src*="central-florida"] { height:31px; }
-.zx-home-hero .zynix-logo-row__img[src*="next-healthcare"] { height:24px; opacity:.6; }
-.zx-home-hero .zynix-logo-row__img[src*="goldencare"] { height:38px; filter:grayscale(1) brightness(.4) contrast(2.2); opacity:.9; }
+.zx-home-hero .zynix-logo-row__img[src*="next-healthcare"] { height:28px; opacity:.66; }
+.zx-home-hero .zynix-logo-row__img[src*="goldencare"] { height:36px; filter:grayscale(1) brightness(.55) contrast(1.5); }
 /* ≥1024: the first and last logos sit flush with the label and the "Customer stories" link */
 @media (min-width:1024px) {
   .zx-home-hero .zynix-logo-row__list { display:flex; justify-content:space-between; align-items:center; gap:16px; }
@@ -3537,6 +3541,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 @media (min-width:1280px) { .zx-home-hero__grid { grid-template-columns:minmax(0,592px) minmax(0,560px); justify-content:space-between; } }
 @media (min-width:1024px) and (max-width:1279.98px) {
   .zx-home-hero__grid { grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); column-gap:40px; }
+  .zx-home-hero .zynix-logo-row__img[src*="palm-beach-aco"] { height:30px; }   /* eight logos share ~960px */
+  .zx-home-hero .zynix-logo-row__item:has(> [src*="palm-beach-aco"]) { gap:6px; }
+  .zx-home-hero .zynix-logo-row__item:has(> [src*="palm-beach-aco"])::after { font-size:13px; }
   .zx-home-hero__title { font-size:3rem; }          /* 48px: "completed follow-up." ≈ 439px ≤ 482px text column at 1024 */
 }
 @media (max-width:1023.98px) { .zx-home-hero__text { max-width:680px; } .zx-home-hero__media { max-width:640px; } }
@@ -3550,10 +3557,15 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 @media (max-width:379.98px) { .zx-home-hero__title { font-size:2rem; } }   /* 360: "completed follow-up." ≈ 292px, so the H1 stays on 2 lines */
 @media (max-width:479.98px) {
   .zx-home-hero__actions .zynix-btn { width:100%; }
-  .zx-home-hero__proof { gap:6px; margin-top:20px; }
+  .zx-home-hero__proof { display:grid; gap:4px; margin-top:20px; }   /* stacked, one item per line (§5.1) */
+  .zx-home-hero__proof li + li + li { margin:0; padding:0; border:0; }
   .zx-home-hero__lead { margin-top:16px; }
   .zx-home-hero .zynix-logo-row { margin-top:32px; padding-top:18px; }
   .zx-home-hero .zynix-logo-row__img { transform:none; opacity:.86; }   /* no 0.85 scale: the wordmarks' lettering stays legible */
+  /* the PBACO lockup fits its ~106px cell: a smaller seal and the name on two lines */
+  .zx-home-hero .zynix-logo-row__item:has(> [src*="palm-beach-aco"]) { gap:6px; justify-content:flex-start; }
+  .zx-home-hero .zynix-logo-row__img[src*="palm-beach-aco"] { height:30px; }
+  .zx-home-hero .zynix-logo-row__item:has(> [src*="palm-beach-aco"])::after { flex:0 1 auto; font-size:12px; line-height:1.2; white-space:normal; }
 }
 
 /* ── §5.2 ★ Hero widget (on top of the zynix-ui kit) ── */
@@ -3592,8 +3604,16 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
    rhythm and share the remaining height. */
 .zx-hw__panel > .zynix-ui__rows { display:flex; flex-direction:column; flex:1 0 auto; margin-bottom:16px; }
 .zx-hw__panel > .zynix-ui__rows > .zynix-ui__row { flex:1 0 auto; }
-.zx-hw__panel > .zynix-ui__pipeline { flex:1 0 auto; align-content:space-evenly; row-gap:12px; margin-bottom:12px; padding:12px 0 4px; border-top:1px solid var(--zx-border); }
+/* The AWV tab is the funnel alone (its tiles would repeat the stage counts, review round 3): each stage reads as a
+   label and count over a full-width bar, and the four stages share the panel's height */
+.zx-hw__panel > .zynix-ui__pipeline { flex:1 0 auto; align-content:space-evenly; row-gap:16px; margin-bottom:12px; padding:16px 0 8px; border-top:1px solid var(--zx-border); }
 .zx-hw__panel > .zynix-ui__pipeline .zynix-ui__stage-bar { height:10px; border-radius:5px; }
+@media (min-width:480px) {   /* phones keep the one-line stages, so the AWV panel is no taller than the three-row tabs */
+  .zx-hw__panel > .zynix-ui__pipeline .zynix-ui__stage { grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"label value" "bar bar"; row-gap:8px; }
+  .zx-hw__panel > .zynix-ui__pipeline .zynix-ui__stage-label { grid-area:label; font-size:14px; color:var(--zx-text); }
+  .zx-hw__panel > .zynix-ui__pipeline .zynix-ui__stage-value { grid-area:value; font-size:16px; }
+  .zx-hw__panel > .zynix-ui__pipeline .zynix-ui__stage-bar { grid-area:bar; height:12px; border-radius:6px; }
+}
 .zx-hw__panel > .zynix-ui__footer { margin-top:auto; }
 @media (min-width:1024px) and (max-width:1279.98px) {
   /* ~420px column: brand and the required sample chip stay on one 44px line; the "Demo" badge steps aside at this width */
@@ -3629,7 +3649,8 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-home-proof .zynix-stat { padding-top:0; padding-bottom:12px; }
   .zx-home-proof .zynix-stat__value { font-size:1.75rem; }   /* 28px numerals keep both stats on one row with 2-line labels */
   .zx-home-proof .zynix-stat-row__source { margin-top:8px; }
-  .zx-home-proof__access { margin-top:16px; padding-top:14px; font-size:13px; line-height:1.5; }
+  .zx-home-proof__access { margin-top:12px; padding-top:12px; font-size:13px; line-height:1.5; }
+  .zx-home-proof .zynix-split { gap:20px; }   /* §5.0: the band stays within its 390 budget + 15% */
 }
 
 /* Sections reached through the homepage's own same-page links take focus (tabindex -1) without a ring around the section */
@@ -3720,6 +3741,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-flow__lnum { margin-right:6px; font-variant-numeric:tabular-nums; opacity:.72; }
 .zx-flow__dot { display:none; }
 .zx-flow__nodes { display:none; }
+.zx-flow__node-summary { display:block; font:var(--zx-fw-regular) 13px/1.35 var(--zx-font-sans); color:var(--zx-text-inverse-secondary); }
 .zx-flow__steps { display:grid; }
 .zx-flow__step { min-width:0; }
 .zx-flow__step-title { margin:0; font:var(--zx-fw-semibold) var(--zx-fs-h4)/1.3 var(--zx-font-sans); letter-spacing:0; color:var(--zx-text-inverse); }
@@ -3757,19 +3779,20 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
     border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:7px solid rgba(255,255,255,.44); }
   .zx-flow__node:hover { border-color:rgba(255,255,255,.32); }
   .zx-flow__node[aria-selected="true"] { border-color:var(--zx-blue-200); background:var(--zx-blue-800); }
-  .zx-flow__node-name { margin-bottom:2px; font:var(--zx-fw-semibold) var(--zx-fs-body)/1.25 var(--zx-font-sans); color:var(--zx-text-inverse); }
+  .zx-flow__node-name { font:var(--zx-fw-semibold) var(--zx-fs-body)/1.25 var(--zx-font-sans); color:var(--zx-text-inverse); }
+  .zx-flow__node-summary { flex:1 0 auto; margin-bottom:6px; }   /* the layer lines share one bottom edge across the row */
+  .zx-flow__node[aria-selected="true"] .zx-flow__node-summary { color:var(--zx-text-inverse); }
   .zx-flow__node-layer { font:var(--zx-fw-medium) 12px/1.3 var(--zx-font-sans); color:var(--zx-eyebrow-inverse); white-space:nowrap; }
   .zx-flow__node-layer .zx-flow__lnum { margin-right:4px; }
   .zx-flow:not(.zx-flow--expanded) .zx-flow__steps { margin-top:20px; }
-  /* The selected step: summary, detail, then its tags under the detail, in one column (review round 2) */
-  .zx-flow:not(.zx-flow--expanded) .zx-flow__step { grid-area:1 / 1; display:block;
-    padding:22px 28px 24px; border:1px solid var(--zx-border-inverse); border-radius:var(--zx-radius-lg); background:var(--zx-surface-inverse-raised); }
-  .zx-flow:not(.zx-flow--expanded) .zx-flow__step > * { max-width:600px; }
-  .zx-flow:not(.zx-flow--expanded) .zx-flow__step[hidden] { display:block; visibility:hidden; }
-  .zx-flow:not(.zx-flow--expanded) .zx-flow__step-head { display:none; }
-  .zx-flow:not(.zx-flow--expanded) .zx-flow__summary { font-size:var(--zx-fs-h4); }
-  .zx-flow:not(.zx-flow--expanded) .zx-flow__detail { margin:6px 0 0; }
-  .zx-flow:not(.zx-flow--expanded) .zx-flow__tags { margin:16px 0 0; }
+  /* The selected step's panel: the node above already names it and prints its summary, so the panel carries the detail
+     (as its lead) and the tags on one line; every panel is about the same height, so none leaves a band of dead space */
+  .zx-flow:not(.zx-flow--expanded) .zx-flow__step { grid-area:1 / 1; display:flex; flex-direction:column; justify-content:center;
+    padding:20px 28px; border:1px solid var(--zx-border-inverse); border-radius:var(--zx-radius-lg); background:var(--zx-surface-inverse-raised); }
+  .zx-flow:not(.zx-flow--expanded) .zx-flow__step[hidden] { display:flex; visibility:hidden; }
+  .zx-flow:not(.zx-flow--expanded) .zx-flow__step-head, .zx-flow:not(.zx-flow--expanded) .zx-flow__summary { display:none; }
+  .zx-flow:not(.zx-flow--expanded) .zx-flow__detail { margin:0; font-size:var(--zx-fs-body); color:var(--zx-text-inverse); max-width:64ch; }
+  .zx-flow:not(.zx-flow--expanded) .zx-flow__tags { margin:14px 0 0; }
   .zx-flow__step:focus-visible { outline-offset:2px; }
   /* expanded variant (P1 /platform): every step open, five columns */
   .zx-flow--expanded .zx-flow__steps { grid-template-columns:repeat(5, minmax(0,1fr)); gap:16px; }
@@ -3819,8 +3842,8 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   /* §5.0 fallback 3: tags, sources and outputs read as one 12px text line each (nothing is hidden) */
   .zx-flow__tags, .zx-flow__col .zx-flow__list { display:block; margin-top:8px; font:var(--zx-fw-medium) 12px/1.6 var(--zx-font-sans); color:var(--zx-text-inverse-secondary); }
   .zx-flow__col .zx-flow__list { margin-top:0; font-size:13px; color:var(--zx-text-inverse); }
-  .zx-flow__tags li, .zx-flow__col .zx-flow__item { display:inline; min-height:0; padding:0; border:0; border-radius:0; background:none; font:inherit; color:inherit; }
-  .zx-flow__col .zx-flow__item:last-child { border:0; }
+  /* :last-child too, or the ≤1279 inline-flex rule (0,3,0) keeps the last item a box that wraps with its "·" (review round 3) */
+  .zx-flow__tags li, .zx-flow__col .zx-flow__item, .zx-flow__col .zx-flow__item:last-child { display:inline; gap:0; min-height:0; padding:0; border:0; border-radius:0; background:none; font:inherit; color:inherit; }
   .zx-flow__col .zx-flow__icon { display:none; }
   .zx-flow__col .zx-flow__item-text, .zx-flow__col .zx-flow__item-label { display:inline; padding:0; font:inherit; }
   .zx-flow__tags li + li::before, .zx-flow__col .zx-flow__item + .zx-flow__item::before { content:"\00a0· "; color:var(--zx-text-inverse-muted); }
@@ -3829,13 +3852,15 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 
 /* ── §5.6 Agents at work ── (a chapter with its head in the left column of the 5/7 split, above the "without" list) */
 .zx-home-agents .zynix-section-head { margin-bottom:0; }
-.zx-home-agents .zx-home-label { margin-top:28px; }
+.zx-home-agents .zx-home-label { margin-top:20px; }
 .zx-home-without { list-style:none; margin:0; padding:0; border-top:1px solid var(--zx-border); }
-.zx-home-without li { position:relative; padding:8px 0 8px 26px; border-bottom:1px solid var(--zx-border); font-size:15px; line-height:1.5; color:var(--zx-text-secondary); }
-.zx-home-without li::before { content:"—"; position:absolute; left:0; top:8px; color:var(--zx-gray-400); }
-.zx-home-cms { margin:20px 0 0; font-size:var(--zx-fs-sm); line-height:1.55; color:var(--zx-text-secondary); max-width:56ch; }
+.zx-home-without li { position:relative; padding:5px 0 5px 26px; border-bottom:1px solid var(--zx-border); font-size:15px; line-height:1.5; color:var(--zx-text-secondary); }
+.zx-home-without li::before { content:"—"; position:absolute; left:0; top:5px; color:var(--zx-gray-400); }
+.zx-home-cms { margin:14px 0 0; font-size:var(--zx-fs-sm); line-height:1.55; color:var(--zx-text-secondary); max-width:56ch; }
 .zx-home-cms__link { color:var(--zx-link); font-weight:var(--zx-fw-semibold); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px; }
 .zx-home-cms__link:hover { color:var(--zx-link-hover); }
+/* the plan-facing reading of the episode (review round 3) */
+.zx-home-plans { margin:10px 0 0; font-size:var(--zx-fs-sm); line-height:1.55; color:var(--zx-text-secondary); max-width:56ch; }
 @media (min-width:1024px) { .zx-home-agents .zynix-split { align-items:center; } }
 
 .zx-ep { position:relative; margin:0; padding:16px 28px 20px; border:1px solid var(--zx-border); border-radius:var(--zx-radius-xl); background:var(--zx-surface); box-shadow:var(--zx-shadow-md); }
@@ -3871,74 +3896,93 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 @media (max-width:479.98px) {
   /* Phones: the episode is a plain timeline (no frame), the "without" rows are tighter and the note is left to the plan */
   /* the "without" items are plain lines on phones (no rules), and the timeline steps sit closer together */
-  .zx-home-agents .zx-home-label { margin-top:24px; }
+  .zx-home-agents .zx-home-label { margin-top:20px; }
   .zx-home-without { border-top:0; }
   .zx-home-without li { padding:3px 0 3px 22px; border-bottom:0; font-size:14px; }
   .zx-home-without li::before { top:3px; }
-  .zx-home-cms { margin-top:14px; }
+  .zx-home-cms { margin-top:12px; }
   .zx-ep { padding:0; border:0; border-radius:0; background:none; box-shadow:none; }
   .zx-ep__head { justify-content:flex-start; margin:0 0 4px; }
-  .zx-ep__step { padding:6px 0 8px 24px; row-gap:4px; }
+  .zx-ep__step { padding:4px 0 6px 24px; row-gap:4px; }
   .zx-ep__note { display:none; }
 }
 
 /* ── §5.7 Capabilities ── */
-.zx-home-caps__rows { display:grid; gap:64px; }
 .zx-home-nowrap { white-space:nowrap; }
-.zx-home-cap__title { margin:0; font-size:var(--zx-fs-h3); line-height:var(--zx-lh-snug); letter-spacing:var(--zx-tr-h3); color:var(--zx-text); max-width:30ch; }
-.zx-home-cap__body { margin:14px 0 0; font-size:var(--zx-fs-body); line-height:var(--zx-lh-body); color:var(--zx-text-secondary); max-width:58ch; }
-.zx-home-cap__links { display:flex; flex-wrap:wrap; gap:8px 24px; margin-top:20px; }
-.zx-home-cap .zynix-product-frame__caption { font-size:13px; }
-.zx-home-cap .zynix-ui__step { min-height:46px; padding:6px 0; }
-.zx-home-cap .zynix-ui__brand img { display:none; }   /* the shared symbol is light artwork for dark surfaces (request to S2) */
+/* One title style for every capability (review round 3): the H3 tier, measured on its own column */
+.zx-home-cap__title { margin:0; font-size:var(--zx-fs-h3); line-height:var(--zx-lh-snug); letter-spacing:var(--zx-tr-h3); color:var(--zx-text); text-wrap:balance; }
+.zx-home-cap__body { margin:12px 0 0; font-size:var(--zx-fs-body); line-height:var(--zx-lh-body); color:var(--zx-text-secondary); max-width:58ch; }
+.zx-home-cap__links { display:flex; flex-wrap:wrap; gap:8px 24px; margin-top:16px; }
+.zx-home-caps .zynix-product-frame__caption { font-size:13px; }
+.zx-home-caps .zynix-ui__step { min-height:46px; padding:6px 0; }
+.zx-home-caps .zynix-ui__brand img { display:none; }   /* the shared symbol is light artwork for dark surfaces (request to S2) */
+/* The head's webinar link sits at the right end of the head, level with the H2's last line (>= 768) */
+@media (min-width:768px) {
+  .zx-home-caps .zynix-section-head { display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:32px; align-items:end; max-width:none; }
+  .zx-home-caps .zynix-section-head > * { grid-column:1; }
+  .zx-home-caps .zynix-section-head > .zynix-section-head__action { grid-column:2; grid-row:1 / span 2; margin:0 0 6px; }
+}
 
-/* Points and callouts: parallel properties as an unnumbered hairline list, no rule marks (review round 2) */
+/* List mode (no admissible capture yet, the §5.7 fallback): the three capabilities as one hairline list in story order;
+   the care-plan panel follows its row in the DOM and sits beside the whole list at >= 1024, centred on it */
+.zx-home-caplist { display:grid; grid-template-columns:minmax(0,1fr); border-top:1px solid var(--zx-border); }
+.zx-home-caplist__item { min-width:0; padding:28px 0; }
+.zx-home-caplist__item ~ .zx-home-caplist__item { border-top:1px solid var(--zx-border); }   /* ~: the panel sits between rows 2 and 3 in the DOM */
+.zx-home-caplist__item:last-child { padding-bottom:0; }
+.zx-home-caplist__media { min-width:0; padding:0 0 28px; }
+@media (min-width:1024px) {
+  .zx-home-caplist { grid-template-columns:minmax(0,5fr) minmax(0,7fr); column-gap:var(--zx-space-12); }
+  .zx-home-caplist__item { grid-column:1; padding:24px 0; }
+  .zx-home-caplist__item:last-child { padding-bottom:0; }
+  .zx-home-caplist__media { grid-column:2; grid-row:1 / span 3; align-self:center; padding:24px 0 0; }
+}
+
+/* Capture mode (a row has an admissible capture): media rows are 5/7 splits with their callouts as a three-column
+   hairline row beneath; the remaining text rows share one two-column band */
+.zx-home-caps__rows { display:grid; gap:64px; }
 .zx-home-points { display:grid; list-style:none; margin:24px 0 0; padding:0; }
 .zx-home-points__item { padding:12px 0; border-top:1px solid var(--zx-border); }
 .zx-home-points__item:last-child { padding-bottom:0; }
 .zx-home-points__title { margin:0; font:var(--zx-fw-semibold) var(--zx-fs-body)/1.4 var(--zx-font-sans); color:var(--zx-text); }
 .zx-home-points__body { margin:4px 0 0; font-size:var(--zx-fs-sm); line-height:1.5; color:var(--zx-text-secondary); max-width:52ch; }
-
-/* Text mode (no admissible capture yet, §5.7 fallback): the text rows sit side by side as one two-column band, each with
-   at most two points, so no row shows an empty media side (review round 2). Each switches to a split through row.media. */
 .zx-home-cap--text { display:grid; gap:40px; }
-@media (min-width:768px) { .zx-home-cap--text[data-count="2"] { grid-template-columns:repeat(2, minmax(0,1fr)); column-gap:40px; } }
-@media (min-width:1024px) { .zx-home-cap--text[data-count="2"] { column-gap:var(--zx-space-12); } }
+@media (min-width:768px) { .zx-home-cap--text[data-count="2"] { grid-template-columns:repeat(2, minmax(0,1fr)); column-gap:var(--zx-space-12); } }
 .zx-home-cap__col { min-width:0; }
-.zx-home-cap--text .zx-home-cap__title { font-size:var(--zx-fs-h4); line-height:1.3; letter-spacing:-.005em; }
-.zx-home-cap--text .zx-home-cap__body { margin-top:10px; }
-.zx-home-cap--text .zx-home-cap__links { margin-top:16px; }
-
-/* Panel or capture mode: the 5/7 split (panel left of the text at >= 1024), its callouts as a three-column hairline row
-   beneath the whole row; below 1024 the panel carries the row and the callouts step aside (§5.7) */
 .zx-home-points--row { margin-top:28px; }
 @media (min-width:1024px) {
   .zx-home-points--row { grid-template-columns:repeat(3, minmax(0,1fr)); column-gap:var(--zx-space-12); }
   .zx-home-points--row .zx-home-points__item { padding:14px 0 0; }
 }
 @media (max-width:1023.98px) { .zx-home-points--row { display:none; } }
+
 @media (max-width:767.98px) {
   .zx-home-caps__rows { gap:48px; }
   .zx-home-cap .zynix-split { gap:24px; }
+  .zx-home-caplist__item { padding:24px 0; }
+  .zx-home-caplist__media { padding-bottom:24px; }
   /* §5.0 fallback 1 (compact panel): four steps from the discharge to the booked visit, so the plan keeps its trigger;
      the documented visit (Day 7) is the step that gives way */
-  .zx-home-cap .zynix-ui__step:last-child { display:none; }
+  .zx-home-caps .zynix-ui__step:last-child { display:none; }
 }
 @media (max-width:479.98px) {
   .zx-home-caps__rows { gap:40px; }
-  .zx-home-cap--text { gap:32px; }
-  .zx-home-cap--text .zx-home-points { display:none; }   /* text mode on phones: no title-only points; the body carries the row */
-  .zx-home-cap .zynix-product-frame__caption { display:none; }   /* §5.0 fallback 2 (the chip stays) */
+  .zx-home-caplist__item { padding:20px 0; }
+  .zx-home-caplist__media { padding-bottom:20px; }
+  .zx-home-cap__title { font-size:var(--zx-fs-h4); line-height:1.3; }
+  .zx-home-cap--text .zx-home-points { display:none; }
+  .zx-home-caps .zynix-product-frame__caption { display:none; }   /* §5.0 fallback 2 (the chip stays) */
   /* the frame's "Sample data" chip is the notice; the panel's own bar and meta line give way to it */
-  .zx-home-cap .zynix-ui__bar, .zx-home-cap .zynix-ui__meta { display:none; }
-  .zx-home-cap .zynix-ui__head { min-height:26px; padding-right:96px; align-items:center; }
+  .zx-home-caps .zynix-ui__bar, .zx-home-caps .zynix-ui__meta { display:none; }
+  .zx-home-caps .zynix-ui__head { min-height:26px; padding-right:96px; align-items:center; }
   .zx-home-cap__body { font-size:15px; line-height:1.55; }
   .zx-home-cap__links { gap:4px 20px; margin-top:12px; }
-  .zx-home-cap--text .zx-home-cap__links { margin-top:12px; }
 }
 
 /* ── §5.8 Interoperability ── */
 .zx-home-interop .zynix-section-head { margin-bottom:0; }
+/* the body is two sentences of detail, so it reads at 17px, not the 19px lead size (review round 3) */
+.zx-home-interop .zynix-lead { font-size:1.0625rem; line-height:1.6; max-width:52ch; }
+.zx-home-interop .zynix-section-head__title { text-wrap:balance; }
 .zx-home-ehr { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); list-style:none; margin:0 0 32px; padding:0; border-top:1px solid var(--zx-border); border-left:1px solid var(--zx-border); }
 .zx-home-ehr li { display:flex; align-items:center; box-sizing:border-box; min-height:56px; padding:8px 16px; border-right:1px solid var(--zx-border); border-bottom:1px solid var(--zx-border);
   font:var(--zx-fw-semibold) 15px/1.3 var(--zx-font-sans); color:var(--zx-text); }
@@ -3957,15 +4001,19 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-home-standards li + li::before { content:"\00a0· "; color:var(--zx-text-muted); }
   .zx-home-standards .zynix-chip { display:inline; min-height:0; padding:0; border:0; background:none; font:inherit; color:inherit; white-space:normal; }
   .zx-home-interop .zx-home-label { margin-bottom:8px; }
+  .zx-home-interop { --zx-section-y:32px; }   /* §5.0: the band stays within its 390 budget + 15% */
+  .zx-home-interop .zynix-lead { font-size:15px; line-height:1.5; }
+  .zx-home-interop .zynix-section-head__action { margin-top:12px; }
 }
 @media (min-width:1024px) { .zx-home-interop .zynix-split { align-items:center; } }
 
 /* ── §5.9 Customers ── */
-/* The PBACO mark above the quote, as a logo (40px optical height, one tint with the logo row) */
-.zx-home-quote__mark { display:block; width:auto; height:40px; margin:0 0 16px 28px; filter:grayscale(1); opacity:.7; }
+/* The attribution opens with the PBACO lockup: the seal (one tint with the logo row) and the name as text */
+.zx-home-quote__org { display:flex; align-items:center; gap:10px; flex-basis:100%; margin-bottom:6px; font:var(--zx-fw-semibold) 14px/1.2 var(--zx-font-sans); color:var(--zx-gray-700); }
+.zx-home-quote__mark { display:block; flex:none; width:auto; height:36px; filter:grayscale(1) contrast(1.05); opacity:.78; }
 .zx-home-customers .zynix-quote { padding-left:28px; }
 .zx-home-customers .zynix-quote--large .zynix-quote__text p { font-size:clamp(1.125rem, .95rem + .7vw, 1.5rem); line-height:1.45; }
-.zx-home-customers .zynix-quote__cite { margin-top:20px; }
+.zx-home-customers .zynix-quote__cite { margin-top:24px; }
 .zx-home-quote__links { display:flex; flex-wrap:wrap; flex-basis:100%; gap:6px 24px; margin-top:8px; }
 .zx-home-quote__links .zynix-link-arrow { flex-basis:auto; margin:0; }
 .zx-home-customers__cards { display:grid; gap:16px; }
@@ -3983,8 +4031,8 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-home-customers .zynix-card__media img.zx-home-customers__logo--h28 { height:32px; }
 .zx-home-customers .zynix-card__media img.zx-home-customers__logo--h32 { height:32px; }
 .zx-home-customers .zynix-card__cta { margin-top:8px; }
-/* The section's link row runs under both columns, left-aligned with the quote */
-.zx-home-customers__links { display:flex; flex-wrap:wrap; gap:8px 28px; margin-top:28px; padding:16px 0 0 28px; border-top:1px solid var(--zx-border); }
+/* The section's link row runs under both columns, on the container edge with the hairline above it */
+.zx-home-customers__links { display:flex; flex-wrap:wrap; gap:8px 28px; margin-top:28px; padding-top:16px; border-top:1px solid var(--zx-border); }
 .zx-home-customers .zynix-section-head { max-width:880px; }
 .zx-home-customers .zynix-section-head .zynix-lead { max-width:70ch; }
 @media (max-width:1279.98px) {
@@ -3993,10 +4041,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-home-customers .zynix-card__title { margin-top:4px; }
 }
 @media (min-width:1024px) { .zx-home-customers .zynix-split { align-items:start; } }   /* the quote and the first card share a top edge */
-@media (max-width:767.98px) { .zx-home-customers__links { padding-left:0; } }
 @media (max-width:479.98px) {
   .zx-home-customers__more { display:none; }   /* the lead's first sentence only; the quote and the cards carry the rest */
-  .zx-home-quote__mark { height:36px; margin:0 0 14px 18px; }
+  .zx-home-quote__mark { height:32px; }
   .zx-home-customers .zynix-quote { padding-left:18px; }
   .zx-home-customers .zynix-quote--large .zynix-quote__text p { font-size:17px; line-height:1.5; letter-spacing:0; }
   .zx-home-customers .zynix-quote__cite { margin-top:14px; column-gap:6px; }
@@ -4039,21 +4086,23 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-home-sec__actions { margin-top:24px; }
 }
 
-/* ── §5.11 Who we serve ── (a utility band: white with a top hairline, the head in the left column, the five audiences
-   as one hairline list of linked rows on the right, each row with a chevron; review round 2) */
+/* ── §5.11 Who we serve ── (a compact subtle band, §5.0: the head in the left column, the five audiences as one hairline
+   list of linked rows on the right, each with a chevron; title and descriptor share a line where the column allows it,
+   so no row is left alone in a grid and every title starts on the same line as its row; review round 3) */
 .zx-home-audiences .zynix-section-head { margin-bottom:0; }
 .zx-home-audiences .zynix-section-head__action { margin-top:20px; }
 .zx-home-audiences .zx-home-audiences__list { display:block; border-top:1px solid var(--zx-border); }
-@media (min-width:768px) {
-  .zx-home-audiences .zx-home-audiences__list { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:0 32px; }
-  .zx-home-audiences .zx-home-audiences__list.zynix-cgrid > :nth-child(n) { grid-column:auto; }   /* the shared 5-item spans (3+2 on a 6-column grid) do not apply */
-}
-.zx-home-audiences .zynix-card { position:relative; align-items:center; padding:14px 40px 14px 0; border:0; border-bottom:1px solid var(--zx-border); border-radius:0; background:none; box-shadow:none; }
+.zx-home-audiences .zynix-card { position:relative; align-items:flex-start; padding:14px 40px 14px 0; border:0; border-bottom:1px solid var(--zx-border); border-radius:0; background:none; box-shadow:none; }
 .zx-home-audiences .zynix-card:hover { box-shadow:none; background:none; }
 .zx-home-audiences .zynix-card:hover .zynix-card__title { color:var(--zx-link); }
-.zx-home-audiences .zynix-card__icon { width:36px; height:36px; }
-.zx-home-audiences .zynix-card__title { font-size:var(--zx-fs-body); }
-.zx-home-audiences .zynix-card__body { margin:0; font-size:14px; }
+.zx-home-audiences .zynix-card__icon { width:32px; height:32px; }
+.zx-home-audiences .zynix-card__text { flex:1; min-width:0; padding-top:5px; }
+.zx-home-audiences .zynix-card__title { margin:0; font-size:var(--zx-fs-body); line-height:1.4; }
+.zx-home-audiences .zynix-card__body { margin:2px 0 0; font-size:14px; line-height:1.45; }
+@media (min-width:768px) and (max-width:1023.98px), (min-width:1280px) {
+  .zx-home-audiences .zynix-card__text { display:grid; grid-template-columns:minmax(0,14.5rem) minmax(0,1fr); column-gap:24px; align-items:baseline; }
+  .zx-home-audiences .zynix-card__body { margin:0; }
+}
 /* A drawn chevron (no text, so it never joins the link's accessible name) marks each row as a link */
 :is(.zx-home-audiences, .zx-home-customers) a.zynix-card::after { content:""; position:absolute; right:8px; top:50%; box-sizing:border-box; width:9px; height:9px; margin-top:-4px;
   border-top:2px solid currentColor; border-right:2px solid currentColor; color:var(--zx-text-muted); transform:rotate(45deg); transition:color var(--zx-dur-1) var(--zx-ease-out); }
@@ -4062,6 +4111,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 @media (max-width:479.98px) {
   .zx-home-audiences .zynix-card { padding:11px 28px 11px 0; }
   .zx-home-audiences .zynix-card__icon { display:none; }
+  .zx-home-audiences .zynix-card__text { padding-top:0; }
   .zx-home-customers a.zynix-card::after { display:block; right:4px; }
 }
 
