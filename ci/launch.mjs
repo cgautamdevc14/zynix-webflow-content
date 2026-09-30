@@ -3,6 +3,12 @@
 //   node ci/launch.mjs                  print the checklist (the LAUNCH lines ci/static-checks.mjs prints) and the weights
 //   node ci/launch.mjs --json           the same as JSON
 //   node ci/launch.mjs --write-weight   ratchet the weight ceilings in ci/baseline.json DOWN to measured + headroom (never raises)
+//   node ci/launch.mjs --build-plan     the ordered steps of launch item "build" (final QA round 3) with this tree's state, and
+//                                       the workflow edit of step A as a diff (printed for the orchestrator, never applied)
+//   node ci/launch.mjs --verify-build-live [--base https://www.zynix.ai] [--cdn <jsDelivr @main URL>] [--pages /,/platform]
+//                                       step C, read-only: the live pages load only the dist/ URLs and jsDelivr @main serves
+//                                       dist/ files equal to a fresh build of the @main sources (exit 0 = verified); add
+//                                       --checklist to print the checklist with that result
 //   node ci/launch.mjs --remeasure-weight --reason "<why>"
 //                                       set every ceiling (sources and deploy build) to measured + headroom, UP or down, and log
 //                                       the change with its reason in weight.log (final QA round 2). For the orchestrator's run
@@ -21,8 +27,12 @@
 //   dead-code        banned strings inside DEAD_FUNCTIONS: they ship in the public bundle although no visitor can reach them
 //   a2p:<id>         A2P_ITEMS below: visible defects in the frozen renderers that are not banned strings
 //   weight           the weight targets below are not met by the deploy build (bundle + stylesheet brotli, stylesheet brotli, @import)
-//   build            production does not load the deploy build yet (ci/build.mjs; final QA round 2): dist/ committed, the
-//                    workflow purging it, the Webflow head and footer pointing at it; open until signed off
+//   build            production does not load the deploy build yet (ci/build.mjs; final QA round 2). Final QA round 3: the
+//                    ORDER is part of the item (A: dist/ of the current production sources + the workflow on main; B: Webflow
+//                    head and footer switched; C: verified live; D: the redesign merge with its dist/ as the last commit), and
+//                    the item closes itself only when `node ci/static-checks.mjs --launch` verifies C live (verifyBuildLive)
+//                    with this tree's workflow purging dist/ and a current dist/. A sign-off is honored only when it records
+//                    the decision to ship the sources unminified ({"shipSources": true}).
 // Sign-off: the orchestrator records a decision in ci/baseline.json `launchSignoffs`, e.g.
 //   "launchSignoffs": { "dead-code": { "by": "orchestrator", "date": "2026-09-30", "note": "unreachable; delete in Phase 4" } }
 // A signed-off item still prints (with the sign-off) but no longer fails --launch. An item that is fixed disappears by itself.
@@ -39,7 +49,7 @@ import fs from 'node:fs';
 import zlib from 'node:zlib';
 import crypto from 'node:crypto';
 import { extractFunction } from './extract-function.mjs';
-import { build, distState, DIST } from './build.mjs';
+import { build, distState, DIST, SRC } from './build.mjs';
 
 // Visible defects in the A2P-frozen renderers (ci/a2p-freeze.json) that are not banned strings. An entry applies while every
 // listed function still hashes to its pinned SHA-256; when one changes, the item says so (verify the fix, then delete the entry).
@@ -110,7 +120,9 @@ export function writeWeight(baseline, w) {
 }
 
 // Every open item. `judged` = judge() from ci/banned-strings.mjs on the same source.
-export function launchChecklist({ js, css, baseline, judged, weight }) {
+// `workflow` = the text of .github/workflows/site-bundle.yml in this tree (or null); `live` = verifyBuildLive() when the caller
+// ran it (node ci/static-checks.mjs --launch, node ci/launch.mjs --verify-build-live), else undefined.
+export function launchChecklist({ js, css, baseline, judged, weight, workflow = null, live }) {
   const signoffs = baseline.launchSignoffs || {}; const items = [];
   const add = (id, area, owner, text, fix) => items.push({ id, area, owner, text, fix, signoff: signoffs[id] || null });
   const lineOf = i => js.slice(0, i).split('\n').length;
@@ -153,17 +165,125 @@ export function launchChecklist({ js, css, baseline, judged, weight }) {
     if (miss.length) add('weight', 'performance', 'S1 (stylesheet), S2 (bundle); orchestrator agrees the budget',
       'weight targets not met: ' + miss.join('; ') + ctx, 'S1 cuts the stylesheet (dead legacy rules, duplicated blocks); or the orchestrator agrees different targets in ci/baseline.json weight.targets or signs off launchSignoffs["weight"]');
   }
-  // the deploy build is not what production loads until dist/ is committed, purged by the workflow and loaded by Webflow
-  if (weight && weight.built) {
-    const d = weight.built.dist || {}; const save = B ? `the build is ${fmt(B.totalBr4)} B brotli-4 against ${fmt(weight.totalBr4)} B for the sources (${fmt(weight.totalBr4 - B.totalBr4)} B, ${((1 - B.totalBr4 / weight.totalBr4) * 100).toFixed(1)}% less)` : 'the build currently fails (see the static check)';
-    add('build', 'performance', 'orchestrator (commit dist/, workflow purge list) and Gautamdev (Webflow head and footer, dashboard job)',
-      `production loads the unminified sources; ${save}. dist/ is ${d.present ? (d.fresh ? 'committed and current' : 'committed but STALE') : 'not committed'}`,
-      `(1) as the last commit before main, run ZX_ESBUILD=<node_modules/esbuild> node ci/build.mjs (writes ${DIST.js} and ${DIST.css} after the self-checks and the esbuild proof) and commit dist/; ` +
-      `(2) add both dist/ paths to the purge and "prove the CDN serves this commit" loops of .github/workflows/site-bundle.yml, and dist/** to its push paths; ` +
-      `(3) after that merge is live, point the Webflow footer script at https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@main/${DIST.js} and the head stylesheet (and its preload) at …@main/${DIST.css} (keep that file name: the bundle's CD revalidation finds the stylesheet by "zynix-site-styles.deployed.css"); ` +
-      `(4) confirm with node ci/smoke.mjs (it serves the build for dist/ URLs) and record launchSignoffs["build"]. Or sign off shipping the sources unminified`);
-  }
+  // the deploy build is not what production loads until dist/ is on main, purged by the workflow and loaded by Webflow
+  if (weight && weight.built) buildItem({ add, weight, B, workflow, live, signoff: signoffs.build || null, items });
   return items;
+}
+
+// ── launch item "build" (final QA round 3): the ORDER of the switch, the workflow state, the live proof ─────────────
+// Final QA round 3 measured (390 px, Slow 4G + 4x CPU, 104 pages): the sources are slower than production on every page
+// (FCP +208/+220/+312 ms quartiles), the build is faster (median -124 ms). The round-2 order (commit dist/ last, merge, THEN
+// switch the Webflow head) therefore guaranteed a window after the CD merge in which every visitor got the slower sources.
+// The order below switches production to a build of its CURRENT sources first, so the redesign merge goes live minified.
+export const WORKFLOW = '.github/workflows/site-bundle.yml';
+export const CDN_MAIN = 'https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@main';
+export const LIVE_BASE = 'https://www.zynix.ai';
+// bundle pages of each template family plus one native blog post (the footer script and the stylesheet load there too)
+export const LIVE_PAGES = ['/', '/platform', '/agents', '/case-studies/pbaco', '/contact', '/sms-consent', '/blog-posts/best-ai-medical-scribes-comparison-2026'];
+const SRC_LOOP = 'for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css; do';
+const DIST_LOOP = `for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css ${DIST.js} ${DIST.css}; do`;
+const BUILD_STEP = `      - name: Deploy build is current (dist/ = node ci/build.mjs of this commit's sources; production loads dist/)\n        run: node ci/build.mjs --check\n`;
+
+// What the workflow in this tree does with dist/ (read-only; the workflow belongs to the orchestrator, DESIGN_SPEC §8.2 Q).
+export function workflowState(text) {
+  if (!text) return { ok: false, missing: [`${WORKFLOW} is missing`] };
+  const lines = text.split('\n'), missing = [];
+  const blockAfter = (re, indent) => { const i = lines.findIndex(l => re.test(l)); if (i < 0) return null; const out = []; for (let k = i + 1; k < lines.length; k++) { const l = lines[k]; if (l.trim() && (l.length - l.trimStart().length) <= indent) break; out.push(l); } return out.join('\n'); };
+  const push = blockAfter(/^  push:\s*$/, 2);
+  if (!push || !(/['"]?dist\/\*\*['"]?/.test(push) || (push.includes(DIST.js) && push.includes(DIST.css)))) missing.push("'dist/**' in the push paths (else a dist/-only commit is never purged)");
+  const steps = []; lines.forEach((l, i) => { const m = l.match(/^(\s*)- name:\s*(.+)$/); if (m) steps.push({ i, indent: m[1].length, name: m[2] }); });
+  const body = s => { const out = []; for (let k = s.i + 1; k < lines.length; k++) { const l = lines[k]; if (l.trim() && (l.length - l.trimStart().length) <= s.indent) break; out.push(l); } return out.join('\n'); };
+  const loopsOk = s => { const loops = [...body(s).matchAll(/for f in ([^;\n]+);\s*do/g)].map(m => m[1]); return loops.length > 0 && loops.every(x => x.includes(DIST.js) && x.includes(DIST.css)); };
+  const purge = steps.filter(s => /purge/i.test(s.name)), prove = steps.filter(s => /prove the CDN/i.test(s.name));
+  if (!purge.length || !purge.every(loopsOk)) missing.push('both dist/ files in the "Purge jsDelivr @main" loop');
+  if (!prove.length || !prove.every(loopsOk)) missing.push('both dist/ files in every loop of "Prove the CDN serves this commit"');
+  const deployAt = text.search(/\n  deploy:\s*\n/);
+  if (!/node ci\/build\.mjs --check/.test(deployAt > -1 ? text.slice(0, deployAt) : text)) missing.push('a checks-job step "node ci/build.mjs --check" (no PR may change the sources without rebuilding dist/)');
+  return { ok: missing.length === 0, missing };
+}
+
+// The workflow edit the orchestrator applies in step A (printed by --build-plan and tools/prelaunch_dist.mjs; never applied by Q).
+export function proposedWorkflow(text) {
+  const done = [], problems = []; let t = text;
+  if (!/['"]dist\/\*\*['"]/.test(t)) {
+    const re = /(\n  push:\n(?:(?: {4,}.*|\s*)\n)*? {6}- 'zynix-site-styles\.deployed\.css'\n)/;
+    if (re.test(t)) { t = t.replace(re, `$1      - 'dist/**'\n`); done.push("push paths: + 'dist/**'"); } else problems.push("push paths: anchor \"- 'zynix-site-styles.deployed.css'\" under push: not found");
+  }
+  if (!/node ci\/build\.mjs --check/.test(t)) {
+    const re = /( {6}- name: Static checks\n {8}run: node ci\/static-checks\.mjs\n)/;
+    if (re.test(t)) { t = t.replace(re, `$1${BUILD_STEP}`); done.push('checks job: + step "node ci/build.mjs --check"'); } else problems.push('checks job: anchor "- name: Static checks / run: node ci/static-checks.mjs" not found');
+  }
+  const n = t.split(SRC_LOOP).length - 1;
+  if (n) { t = t.split(SRC_LOOP).join(DIST_LOOP); done.push(`purge, prove, re-purge and summary loops: + ${DIST.js} ${DIST.css} (${n} loop(s))`); }
+  else if (!t.includes(DIST_LOOP)) problems.push(`no "${SRC_LOOP}" loop found`);
+  const head = '#   zynix-site-scripts-unminified.js   and   zynix-site-styles.deployed.css\n';
+  if (t.includes(head) && !t.includes('dist/zynix-site-scripts.deployed.js   and')) { t = t.replace(head, head + `#   or, once the Webflow head and footer point at them, their deploy build (ci/build.mjs):\n#   ${DIST.js}   and   ${DIST.css}\n`); done.push('header comment'); }
+  const after = workflowState(t);
+  if (!after.ok) problems.push('after the edit, still missing: ' + after.missing.join('; '));
+  return { text: t, done, problems };
+}
+
+// Step C, read-only: every checked page loads the bundle and the stylesheet ONLY from the …@main/dist/ URLs (script, stylesheet
+// link and any preload of either file), and jsDelivr @main serves dist/ files that equal a fresh build (ci/build.mjs) of the
+// @main sources, i.e. the deploy job purged and proved them. Returns { checked, ok, problems, notes }.
+export async function verifyBuildLive({ base = LIVE_BASE, cdn = CDN_MAIN, pages = LIVE_PAGES, timeoutMs = 30000 } = {}) {
+  const problems = [], notes = []; base = base.replace(/\/$/, ''); cdn = cdn.replace(/\/$/, '');
+  const get = async u => { const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), timeoutMs);
+    try { const r = await fetch(u, { signal: ctl.signal, redirect: 'follow', headers: { 'User-Agent': 'Mozilla/5.0 (zynix launch check: read-only)', 'Cache-Control': 'no-cache' } }); return { status: r.status, type: r.headers.get('content-type') || '', text: r.ok ? await r.text() : '' }; }
+    catch (e) { return { status: 0, error: e.name === 'AbortError' ? 'timeout' : e.message, text: '' }; } finally { clearTimeout(t); } };
+  const attr = (tag, a) => (tag.match(new RegExp('\\b' + a + '\\s*=\\s*["\']([^"\']*)["\']', 'i')) || [])[1] || '';
+  const isDist = (u, f) => u === `${cdn}/${f}`;
+  let reached = 0;
+  for (const p of pages) {
+    const r = await get(base + p); if (r.status !== 200) { problems.push(`${p}: HTTP ${r.status || r.error}`); continue; } reached++;
+    const html = r.text;
+    const scripts = [...html.matchAll(/<script\b[^>]*>/gi)].map(m => attr(m[0], 'src')).filter(u => /zynix-site-scripts(?:-unminified|\.deployed)\.js/.test(u));
+    const links = [...html.matchAll(/<link\b[^>]*>/gi)].map(m => ({ rel: attr(m[0], 'rel').toLowerCase(), href: attr(m[0], 'href') })).filter(l => /zynix-site-(?:styles|scripts)[\w.-]*\.(?:css|js)/.test(l.href));
+    const sheets = links.filter(l => /\bstylesheet\b/.test(l.rel)), preloads = links.filter(l => /preload|prefetch/.test(l.rel));
+    const bad = [];
+    if (!scripts.length) bad.push('no bundle <script>'); for (const u of scripts) if (!isDist(u, DIST.js)) bad.push(`script ${u}`);
+    if (!sheets.length) bad.push('no stylesheet <link>'); for (const l of sheets) if (!isDist(l.href, DIST.css)) bad.push(`stylesheet ${l.href}`);
+    for (const l of preloads) if (!isDist(l.href, /\.css$/.test(l.href) ? DIST.css : DIST.js)) bad.push(`${l.rel} ${l.href}`);
+    const stray = [...new Set([...html.matchAll(/zynix-webflow-content@[^/"'\s]+\/(zynix-site-scripts-unminified\.js|zynix-site-styles\.deployed\.css)/g)].map(m => m[0]))];
+    for (const s of stray) if (!bad.some(b => b.includes(s))) bad.push(`other reference ${s}`);
+    if (bad.length) problems.push(`${p}: not on the deploy build: ${bad.join('; ')}`); else notes.push(`${p}: dist/ only (${scripts.length} script, ${sheets.length} stylesheet, ${preloads.length} preload)`);
+  }
+  if (reached) {
+    const [dj, dc, sj, sc] = await Promise.all([get(`${cdn}/${DIST.js}`), get(`${cdn}/${DIST.css}`), get(`${cdn}/${SRC.js}`), get(`${cdn}/${SRC.css}`)]);
+    if (dj.status !== 200 || !/javascript/.test(dj.type)) problems.push(`${cdn}/${DIST.js}: HTTP ${dj.status || dj.error} ${dj.type}`);
+    if (dc.status !== 200 || !/css/.test(dc.type)) problems.push(`${cdn}/${DIST.css}: HTTP ${dc.status || dc.error} ${dc.type}`);
+    if (dj.text && dc.text && sj.text && sc.text) {
+      const b = build({ js: sj.text, css: sc.text });
+      if (b.problems.length) problems.push('ci/build.mjs cannot build the @main sources: ' + b.problems.join(' | '));
+      else { const stale = [dj.text !== b.js ? DIST.js : null, dc.text !== b.css ? DIST.css : null].filter(Boolean);
+        if (stale.length) problems.push(`jsDelivr @main serves ${stale.join(' and ')} that do NOT equal a fresh build of the @main sources (a stale dist/ commit, or a CDN cache the deploy job did not purge)`);
+        else notes.push(`jsDelivr @main: dist/ = a fresh build of the @main sources (sha256 ${sha(dj.text).slice(0, 12)}… / ${sha(dc.text).slice(0, 12)}…)`); }
+    } else if (!problems.some(x => x.startsWith(cdn))) problems.push('could not fetch the @main sources from jsDelivr to compare');
+  }
+  return { checked: reached > 0, ok: reached > 0 && problems.length === 0, base, cdn, pages, problems, notes };
+}
+
+function buildItem({ add, weight, B, workflow, live, signoff, items }) {
+  const d = weight.built.dist || {}, wf = workflowState(workflow);
+  const save = B ? `the build is ${fmt(B.totalBr4)} B brotli-4 against ${fmt(weight.totalBr4)} B for the sources (${fmt(weight.totalBr4 - B.totalBr4)} B, ${((1 - B.totalBr4 / weight.totalBr4) * 100).toFixed(1)}% less)` : 'the build currently fails (see the static check)';
+  const distOk = d.present && d.fresh, liveOk = !!(live && live.ok);
+  if (B && wf.ok && distOk && liveOk) return;   // closed: verified live in this run (node ci/static-checks.mjs --launch)
+  const state = [
+    `(A) the workflow in this tree ${wf.ok ? 'purges, proves and checks dist/' : 'lacks ' + wf.missing.join(', ')}`,
+    `(B/C) live head ${!live ? 'not checked in this run (node ci/launch.mjs --verify-build-live, or node ci/static-checks.mjs --launch)' : live.ok ? 'verified on dist/' : (live.checked ? 'NOT verified: ' : 'could not be checked: ') + live.problems.slice(0, 2).map(x => x.split(live.cdn + '/').join('…@main/')).join(' | ') + (live.problems.length > 2 ? ` (+${live.problems.length - 2} more; node ci/launch.mjs --verify-build-live lists them)` : '')}`,
+    `(D) dist/ in this tree ${d.present ? (d.fresh ? 'committed and current' : 'committed but STALE') : 'not committed'}`];
+  const next = !wf.ok ? 'A' : !liveOk ? (live && live.checked ? 'B, then C' : 'C (or B first)') : 'D';
+  const honored = signoff && signoff.shipSources === true;
+  const note = signoff && !honored ? ` A launchSignoffs["build"] entry is recorded but NOT honored: this item closes itself only when C is verified live in the --launch run; a sign-off can only record the decision to ship the sources unminified ({"shipSources": true}).` : '';
+  add('build', 'performance', 'orchestrator (A, D: main PR, workflow, release-branch merge) and Gautamdev (B: Webflow head and footer, dashboard job)',
+    `production loads the unminified sources; ${save}. State: ${state.join('; ')}. Next step: ${next}.${note}`,
+    `ORDER (final QA round 3): switch production to the build BEFORE the redesign merge, never after it: merging first and switching the head later gives every visitor in between the slower sources (the sources measured slower than production on 104/104 pages, the build faster). ` +
+    `(A) Now, on main, one PR that changes nothing live: ci/build.mjs; ${DIST.js} and ${DIST.css} built from main's CURRENT sources (node ci/build.mjs in that checkout); ci/smoke.mjs answering the dist/ URLs; and in ${WORKFLOW}: 'dist/**' in the push paths, both dist/ files in the purge loop and in every "prove the CDN serves this commit" loop, and a checks step "node ci/build.mjs --check" (no later PR can change the sources without rebuilding dist/). node tools/prelaunch_dist.mjs --main <a branch of main> prepares everything except the workflow, whose edit it prints (as does node ci/launch.mjs --build-plan) for the orchestrator to apply. Merge it; the deploy job purges and proves the dist/ files. ` +
+    `(B) Gautamdev points the Webflow footer script at ${CDN_MAIN}/${DIST.js} and the head stylesheet and its preload at ${CDN_MAIN}/${DIST.css} (keep that file name: the bundle's CD revalidation finds the stylesheet by "zynix-site-styles.deployed.css"), and publishes. Same code, about 110–120 ms faster on bundle pages. ` +
+    `(C) Verify live: node ci/launch.mjs --verify-build-live (every checked page loads only the dist/ URLs; jsDelivr serves dist/ files equal to a fresh build of the @main sources) and BASE=https://www.zynix.ai node tools/verify_preview.mjs. ` +
+    `(D) Merge main into the release branch (keep the release branch's ci/smoke.mjs and ci/build.mjs), rebuild dist/ as its LAST commit (ZX_ESBUILD=<node_modules/esbuild> node ci/build.mjs), run node ci/static-checks.mjs --launch, then merge it to main: the redesign goes live already minified. ` +
+    `(E) This item closes itself when node ci/static-checks.mjs --launch verifies C live with this tree's workflow and a current dist/; record launchSignoffs["build"] only after that. Shipping the sources unminified instead is a decision recorded as launchSignoffs["build"] = {"shipSources": true, …}`);
+  const it = items[items.length - 1]; if (!honored) it.signoff = null;
 }
 
 export const printChecklist = (items, launch) => {
@@ -188,8 +308,37 @@ if (process.argv[1] && process.argv[1].endsWith('launch.mjs')) {
     const e = remeasureWeight(baseline, w, reason, commit); fs.writeFileSync('ci/baseline.json', JSON.stringify(baseline, null, 2) + '\n');
     console.log('weight ceilings re-measured: ' + JSON.stringify(e.to) + ' (logged in ci/baseline.json weight.log)'); process.exit(0);
   }
+  const workflow = fs.existsSync(WORKFLOW) ? fs.readFileSync(WORKFLOW, 'utf8') : null;
+  const opt = (k, d) => { const i = process.argv.indexOf(k); return i > -1 ? process.argv[i + 1] : d; };
+  // --build-plan: the ordered steps of launch item "build" and the workflow edit of step A (printed, never applied)
+  if (process.argv.includes('--build-plan')) {
+    const it = launchChecklist({ js, css, baseline, judged: judge(js, baseline), weight: w, workflow }).find(x => x.id === 'build');
+    console.log(it ? it.text + '\n\n' + it.fix.replace(/ \(([A-E])\) /g, '\n($1) ').replace(/^ORDER/, 'ORDER') : 'launch item "build" is closed');
+    const pw = proposedWorkflow(workflow || '');
+    console.log(`\nstep A, ${WORKFLOW} (the orchestrator applies this; Q never edits the workflow): ${pw.done.length ? pw.done.join('; ') : 'nothing to change'}${pw.problems.length ? '\nPROBLEMS: ' + pw.problems.join(' | ') : ''}`);
+    if (pw.done.length && workflow) {
+      const os = await import('node:os'); const path = await import('node:path'); const { spawnSync } = await import('node:child_process');
+      const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'zx-wf-'));
+      for (const [k, t] of [['old', workflow], ['new', pw.text]]) { fs.mkdirSync(path.join(dir, k, path.dirname(WORKFLOW)), { recursive: true }); fs.writeFileSync(path.join(dir, k, WORKFLOW), t); }
+      const d = spawnSync('git', ['diff', '--no-index', '--no-color', 'old/' + WORKFLOW, 'new/' + WORKFLOW], { cwd: dir, encoding: 'utf8' });
+      const patch = (d.stdout || '').split('a/old/').join('a/').split('b/new/').join('b/');
+      fs.writeFileSync(path.join(dir, 'site-bundle.patch'), patch);
+      console.log(patch || '(git diff unavailable)');
+      console.log(`patch: ${path.join(dir, 'site-bundle.patch')} (git apply it at the root of a checkout of main); proposed file: ${path.join(dir, 'new', WORKFLOW)}`);
+    }
+    process.exit(0);
+  }
+  // --verify-build-live [--base URL] [--cdn URL] [--pages /,/platform]: step C, read-only
+  let live;
+  if (process.argv.includes('--verify-build-live')) {
+    live = await verifyBuildLive({ base: opt('--base', LIVE_BASE), cdn: opt('--cdn', CDN_MAIN), pages: opt('--pages') ? opt('--pages').split(',') : LIVE_PAGES });
+    for (const n of live.notes) console.log('PASS  ' + n);
+    for (const p of live.problems) console.log('FAIL  ' + p);
+    console.log(live.ok ? `build live: VERIFIED on ${live.base} (${live.pages.length} pages) and ${live.cdn}` : `build live: NOT verified (${live.problems.length} problem(s))`);
+    if (!process.argv.includes('--json') && !process.argv.includes('--checklist')) process.exit(live.ok ? 0 : 1);
+  }
   const Bw = w.built;
-  const items = launchChecklist({ js, css, baseline, judged: judge(js, baseline), weight: w });
+  const items = launchChecklist({ js, css, baseline, judged: judge(js, baseline), weight: w, workflow, live });
   if (process.argv.includes('--json')) console.log(JSON.stringify({ weight: w, items }, null, 1));
   else { console.log(`weight: bundle ${fmt(w.jsRaw)} B raw / ${fmt(w.jsBr4)} B br4; stylesheet ${fmt(w.cssRaw)} B raw / ${fmt(w.cssBr4)} B br4; total br4 ${fmt(w.totalBr4)} B; @import ${w.cssImports}`);
     console.log(`deploy build (ci/build.mjs): bundle ${fmt(Bw.jsRaw)} B raw / ${fmt(Bw.jsBr4)} B br4; stylesheet ${fmt(Bw.cssRaw)} B raw / ${fmt(Bw.cssBr4)} B br4; total br4 ${fmt(Bw.totalBr4)} B; ${Bw.problems.length ? 'self-checks FAILED' : 'self-checks passed'}`);

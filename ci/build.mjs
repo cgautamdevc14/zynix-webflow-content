@@ -32,10 +32,13 @@
 // the name "zynix-site-styles.deployed.css" on purpose: the frozen CD revalidation IIFE at the top of the bundle finds the
 // stylesheet with link[href*="zynix-site-styles.deployed.css"]; a ".min.css" name would silently stop revalidating the
 // stylesheet, and returning visitors would pair a new bundle with a 7-day-old stylesheet (jsDelivr's browser cache).
-// Going live needs three steps outside this file (launch item "build", ci/launch.mjs): commit dist/ as the last commit
-// before main (ci/static-checks.mjs fails while a committed dist/ is stale), add the dist/ paths to the purge-and-verify
-// loop of .github/workflows/site-bundle.yml (orchestrator), and point the Webflow head and footer at the dist/ URLs
-// (dashboard job for Gautamdev). Until then production keeps loading the sources and nothing changes.
+// Going live happens in this ORDER (launch item "build", ci/launch.mjs; final QA round 3 — the reverse order, redesign merge
+// first and the Webflow switch after it, served every visitor in between the sources, which measured slower than production
+// on all 104 bundle pages): (A) on main, a PR that changes nothing live: this file, dist/ built from main's CURRENT sources,
+// ci/smoke.mjs answering the dist/ URLs, and the workflow purging, proving and checking dist/ (node ci/build.mjs --check;
+// tools/prelaunch_dist.mjs prepares it, the orchestrator applies the workflow edit); (B) Gautamdev points the Webflow head
+// and footer at the …@main/dist/ URLs; (C) node ci/launch.mjs --verify-build-live proves it; (D) the redesign merges with
+// its own dist/ as the last commit (ci/static-checks.mjs fails while a committed dist/ is stale), so it goes live minified.
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
