@@ -2963,6 +2963,8 @@
   }
   // One related block (§2.16): items are NAV hrefs (label, descriptor and icon come from NAV) or {href, label, desc, icon}.
   // When S3's CROSS_LINKS has an entry for the page, the router inserts that block instead, so this returns ''.
+  // A NAV item without an icon (Customer stories is a top-level link, so it has none) takes S3's CROSS_ICONS icon for the
+  // same href, the one S3's related blocks show, so every row in the block carries an icon.
   function zxResRelated(groups) {
     if (typeof CROSS_LINKS !== 'undefined' && CROSS_LINKS[zxPath()]) return '';
     var nav = {};
@@ -2970,7 +2972,8 @@
     return renderRelatedLinks({ title: 'Related', groups: groups.map(function (g) {
       return { label: g.label, items: g.items.map(function (it) {
         if (typeof it !== 'string') return it;
-        var n = nav[it]; return n ? { href: it, label: n.label, desc: n.desc, icon: n.icon } : null;
+        var n = nav[it]; if (!n) return null;
+        return { href: it, label: n.label, desc: n.desc, icon: n.icon || (typeof CROSS_ICONS !== 'undefined' && CROSS_ICONS[it]) || 'link' };
       }).filter(Boolean) };
     }) });
   }
@@ -11935,8 +11938,8 @@ function renderDataAnalyticsV7() {
     var names = { innovaccer: 'Innovaccer', 'health-catalyst': 'Health Catalyst', navina: 'Navina', abridge: 'Abridge', commure: 'Commure', 'notable-health': 'Notable', 'point-solutions': 'point solutions' };
     return renderHero({ preset: 'resource', eyebrow: 'Compare Zynix', title: cfg.title || 'Zynix AI vs ' + name,
         lead: cfg.lead || 'A side-by-side look at ' + name + ' and Zynix AI for value-based care teams, with ' + name + '’s capabilities cited to its own published materials.',
-        primary: { label: 'See the side-by-side', href: '#comparison' }, secondary: { label: 'All comparisons', href: '/alternatives' } }) +
-      renderSection({ id: 'comparison', compact: true, className: 'zynix-section--flush-top zx-res-compare' },
+        primary: { label: SITE_FACTS.demo.label, href: SITE_FACTS.demo.href }, secondary: { label: 'See the side-by-side', href: '#comparison' } }) +
+      renderSection({ id: 'comparison', compact: true, rule: true, className: 'zx-res-compare' },
         renderSectionHead('At a glance', 'Two different starting points', null, { id: 'comparison-title' }) + glance +
         '<h3 class="zx-res-compare__sub">Capability by capability</h3>' + table +
         (cfg.themSrc ? '<p class="zx-res-compare__note">' + label + ' details come from ' + cfg.themSrc + ', unless a row cites another source. Tell us if something has changed.</p>' : '')) +
@@ -11945,8 +11948,9 @@ function renderDataAnalyticsV7() {
       renderSection({ id: 'faq', className: 'zx-res-compare-faq' },
         renderSplit(renderSectionHead('FAQ', 'Common questions', null, { id: 'faq-title' }),
           renderFaqList(cfg.faqs, { idPrefix: 'cmp-faq', openFirst: true }), { ratio: '4-8' })) +
-      zxResRelated([{ label: 'More comparisons', items: others.map(function (s) { return zxResCompareLink(s, names[s]); }) },
-        { label: 'Platform', items: ['/platform', '/agents', '/care-plans'] }]) +
+      zxResRelated([{ label: 'More comparisons', items: others.map(function (s) { return zxResCompareLink(s, names[s]); })
+          .concat([{ href: '/alternatives', label: 'All comparisons', desc: 'The full comparison list', icon: 'refresh' }]) },
+        { label: 'Platform', items: ['/platform', '/agents'] }]) +
       renderCTA('', '') +
       renderFooter();
   }

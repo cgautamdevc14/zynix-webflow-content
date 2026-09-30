@@ -4718,7 +4718,11 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-res-gloss__group { grid-template-columns:96px minmax(0,1fr); gap:var(--zx-space-8); }
 }
 @media (min-width:1024px) {
+  /* One row of 26 tiles (26 × 36px + gaps ≈ 1,036px) is wider than the 944px container at 1024: tiles start at 36px and
+     shrink evenly to fit, so nothing passes the gutter between 1024 and about 1120 (§7.3). */
   .zx-res-az__list { flex-wrap:nowrap; justify-content:space-between; }
+  .zx-res-az__list li { flex:0 1 36px; min-width:0; }
+  .zx-res-az__link, .zx-res-az__off { min-width:0; }
   .zx-res-gloss__terms { grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--zx-space-8) var(--zx-space-12); }
   .zx-res-term { max-width:none; }
 }
