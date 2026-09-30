@@ -5957,6 +5957,14 @@ function zxSolFrame(model, caption) {
   return renderProductFrame({ html: renderUiPanel(model), sample: false, className: 'zx-sol-frame', caption: caption });
 }
 
+// One verbatim sentence of a customer's release quote (final QA m-P3a: the audience proof strip pulls one sentence, as /platform
+// does; the full quote stays on the case study and /press). '' when the customer has no release or approved quote.
+function zxSolPull(id, n) {
+  var c = zxCustomer(id), t = c && c.quote && (c.quote.source === 'release' || c.quote.source === 'approved') ? c.quote.text : '';
+  var s = (String(t || '').match(/[^.!?]+[.!?]+/g) || [])[n == null ? 1 : n];
+  return s ? s.replace(/^\s+|\s+$/g, '') : '';
+}
+
 // Compact data flow (NAMES.flow, step summaries as on the homepage diagram) with a link to the full diagram.
 var ZX_SOL_FLOW_SUMMARY = { ingest: 'Bring every source in.', normalize: 'Clean, code and match.', reason: 'Read the record in context.',
   surface: 'Rank the work.', execute: 'Carry it through.' };
@@ -6063,7 +6071,15 @@ function renderAudiencePageV7(d) {
       (p.names ? '<ul class="zx-sol-names__list" role="list">' + p.names.map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ul>' : '') +
       zxEl('p', 'zx-sol-names__note', p.note) + (p.link ? renderLinkArrow(p.link.label, p.link.href) : '') + '</div>';
     else who = renderLogoRow(null, { id: 'proof-logos' });
-    var side = p.quote ? renderQuote({ customer: p.quote, logo: p.logos ? null : undefined }) : (p.card ? renderCard(Object.assign({ level: 2 }, p.card)) : '');
+    // A release quote is pulled to one sentence (zxSolPull; hyphenated words kept whole, display only). Its link goes to the
+    // customer's case study unless the proof block already links there; then it keeps the release link (no two links to one page).
+    var side = '';
+    if (p.quote) {
+      var qc = zxCustomer(p.quote), pull = zxSolPull(p.quote, p.quoteSentence);
+      var toStory = !!(qc && qc.caseStudy) && !(p.link && p.link.href === qc.caseStudy);
+      side = renderQuote({ customer: p.quote, text: pull ? zxSolNw(pull) : undefined, logo: p.logos ? null : undefined,
+        href: toStory ? qc.caseStudy : undefined, linkLabel: toStory ? 'Read the case study' : undefined });
+    } else if (p.card) side = renderCard(Object.assign({ level: 2 }, p.card));
     html += '<section class="zynix-section zynix-section--compact zynix-section--rule zx-sol-proof" id="proof" aria-labelledby="proof-title"><div class="zynix-container">' +
       '<h2 class="zx-visually-hidden" id="proof-title">Customers</h2>' + (side ? renderSplit(who, side, { ratio: '5-7', center: true }) : who) + '</div></section>';
   }
@@ -7124,7 +7140,8 @@ function renderUseCasesListing() {
   html += renderRelatedLinks({ title: 'Related', groups: [   // names, descriptors and icons from S3's link data (zxLinkItem)
     { label: 'By organization', items: ['/solutions', '/resources-case-studies'].map(zxLinkItem) },
     { label: 'Platform', items: [NAMES.products.agents.href, NAMES.products.carePlans.href, '/platform'].map(zxLinkItem) }] });
-  html += renderCTA(null, null, null);
+  html += renderCTA('See any of these workflows on sample data',
+    'In a 30-minute demo we’ll show what triggers each one, what the agents do and where your team steps in.', null);
   html += renderFooter();
   return html;
 }
@@ -9166,7 +9183,8 @@ function renderSolutionsOverview() {
       '<p class="zx-sol-also__item"><span class="zx-sol-also__label">Also served</span>' + renderLinkArrow('Ambulatory surgery centers', '/audience-segments/ascs') + '<span class="zx-sol-also__desc">Referral intake, pre-procedure scheduling and post-op follow-up.</span></p>' +
       '<p class="zx-sol-also__item"><span class="zx-sol-also__label">How it fits together</span>' + renderLinkArrow('See the data flow', '/platform#data-flow') + '<span class="zx-sol-also__desc">Every workflow runs on the same data flow, from source data to a documented outcome.</span></p>' +
     '</div>');
-  html += renderCTA(null, null, null);
+  html += renderCTA('Find the workflow your team runs first',
+    'Book 30 minutes with our team. Tell us your organization type and programs, and we’ll walk through the workflows that fit on sample data.', null);
   html += renderFooter();
   return html;
 }

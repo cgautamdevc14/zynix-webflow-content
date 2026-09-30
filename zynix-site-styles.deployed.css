@@ -2518,7 +2518,8 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 /* Audience proof strip */
 .zx-sol-proof .zynix-logo-row__list { grid-template-columns:repeat(3, minmax(0,1fr)); row-gap:var(--zx-space-5); }
 @media (min-width:768px) and (max-width:1023.98px) { .zx-sol-proof .zynix-logo-row__list { grid-template-columns:repeat(4, minmax(0,1fr)); } }
-.zx-sol-proof .zynix-quote__text p { font-size:clamp(1.0625rem, 1rem + .35vw, 1.25rem); line-height:1.55; }
+/* One-sentence release pull (final QA m-P3a), set as /platform's pull */
+.zx-sol-proof .zynix-quote__text p { font-size:clamp(1.25rem, 1.1rem + .6vw, 1.625rem); line-height:1.4; letter-spacing:-.01em; }
 .zx-sol-proof .zynix-card { max-width:620px; }
 .zx-sol-names__list { display:flex; flex-wrap:wrap; gap:var(--zx-space-2) var(--zx-space-5); list-style:none; margin:var(--zx-space-3) 0 var(--zx-space-4); padding:0;
   font:var(--zx-fw-semibold) var(--zx-fs-h4)/1.35 var(--zx-font-sans); color:var(--zx-text); }
