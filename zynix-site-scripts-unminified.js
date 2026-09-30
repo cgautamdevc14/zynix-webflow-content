@@ -8696,7 +8696,7 @@ function zxAgentsPanel(key) {
     tiles: [{ value: '46', label: 'Open' }, { value: '19', label: 'Reached today' }, { value: '5', label: 'With care team' }],
     rows: [
       { title: 'Pt 1042 · 72 · CHF', sub: 'Discharged yesterday · TCM window open', owner: agent(), status: { tone: 'brand', label: 'In progress' } },
-      { title: 'Pt 2317 · 66 · COPD', sub: 'Reported new shortness of breath', owner: staff(R.rn), status: { tone: 'warning', label: 'Escalated' } },
+      { title: 'Pt 2317 · 68 · COPD', sub: 'Reported new shortness of breath', owner: staff(R.rn), status: { tone: 'warning', label: 'Escalated' } },
       { title: 'Pt 0588 · 81 · Diabetes', sub: 'Wellness visit due · invited by text', owner: agent(), status: { tone: 'success', label: 'Booked' } },
       { title: 'Pt 1190 · 59 · CKD', sub: 'Medication list differs from discharge', owner: staff(R.physician), status: { tone: 'neutral', label: 'Review' } }
     ],
