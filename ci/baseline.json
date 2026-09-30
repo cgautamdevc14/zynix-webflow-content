@@ -66,13 +66,13 @@
   "bannedStrings": {},
   "weight": {
     "ceilings": {
-      "cssBr4": 61166,
-      "totalBr4": 410610,
+      "cssBr4": 62576,
+      "totalBr4": 415170,
       "cssImports": 0
     },
     "builtCeilings": {
-      "totalBr4": 346360,
-      "cssBr4": 42370
+      "totalBr4": 348048,
+      "cssBr4": 42740
     },
     "targets": {
       "cssBr4": 30720,
@@ -130,6 +130,33 @@
           "styleAttributes": 1016
         },
         "reason": "Final QA polish round (Q): ratchet down on rd/final bb6a765 after round 3's last merge (final_suite_r3 issue 1): locks in round 3's measured sizes, removes the @import allowance and adds builtCeilings.cssBr4"
+      },
+      {
+        "date": "2026-09-30",
+        "commit": "1473d53",
+        "from": {
+          "ceilings": {
+            "cssBr4": 61166,
+            "totalBr4": 410610,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 346360,
+            "cssBr4": 42370
+          }
+        },
+        "to": {
+          "ceilings": {
+            "cssBr4": 62576,
+            "totalBr4": 415170,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 348048,
+            "cssBr4": 42740
+          }
+        },
+        "reason": "Final polish round (Q change, run by the release engineer after the round's LAST merge, 1473d53): --write-weight had nothing to lower and the merged tree failed totalBr4 by 2,512 B, because rd/qpol ratcheted the ceilings to bb6a765 + 2,048 while the ten polish branches were in flight. Accepted growth vs bb6a765, all owner-local and far under DESIGN_SPEC 7.4's 15 KB raw per stream (br4 total / raw JS+CSS): P4 +771 (1,606+763), P5 +733 (892+1,478), P1 +660 (609+1,107), S1 +554 (0+1,656), P3 +550 (1,468+96), S3 +255 (1,417+0), P6 +208 (514+402), P7 +173 (153+0), S2 +146 (1,165+0), H -163 (226+0), Q 0; merged +4,560 br4 (+8,050 JS, +5,502 CSS raw). Every ceiling set to measured + 2,048."
       }
     ]
   },
