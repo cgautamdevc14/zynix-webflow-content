@@ -5695,7 +5695,7 @@ function renderUseCaseV7(data) {
   var gaps = (data.gaps || []).map(function (x) {
     return '<li class="zx-sol-gaps__item"><p class="zx-sol-gaps__tool">' + x.tool + '</p><p class="zx-sol-gaps__text">' + x.text + '</p></li>';
   }).join('');
-  html += renderSection({ id: 'problem', className: 'zx-sol-problem' }, renderSplit(
+  html += renderSection({ id: 'problem', className: 'zx-sol-problem', rule: true }, renderSplit(
     renderSectionHead('The problem', data.problem.title, '', { id: 'problem-title' }) +
       '<div class="zx-sol-prose">' + data.problem.body.map(function (p) { return '<p>' + p + '</p>'; }).join('') + '</div>',
     gaps ? '<aside class="zx-sol-gaps" aria-labelledby="gaps-title"><p class="zx-sol-gaps__label" id="gaps-title">Where today’s tools stop</p><ul class="zx-sol-gaps__list" role="list">' + gaps + '</ul></aside>' : '',
@@ -5712,32 +5712,41 @@ function renderUseCaseV7(data) {
   html += renderSection({ id: 'workflow', surface: 'subtle', className: 'zx-sol-how' },
     renderSectionHead('How it runs', data.how.title, data.how.lead, { id: 'workflow-title', align: 'split' }) + steps + gov);
 
-  // Where it fits: products used (NAMES.products links) and the same workflow for other organization types
+  // Where it fits: the products this workflow runs on (NAMES.products links). The same workflow for other organization
+  // types is not listed here: it is one group of the page's single related block below (§2.16, at most 6 links).
   var prods = (data.runsOn || []).map(zxSolProduct).filter(Boolean);
-  var variants = zxSolAll().filter(function (u) { return u.group === data.group && u.slug !== data.slug; })
-    .sort(function (a, b) { return ZX_SOL_AUD_ORDER.indexOf(a.audience) - ZX_SOL_AUD_ORDER.indexOf(b.audience); })
-    .map(function (u) { return { href: '/use-cases/' + u.slug, label: u.title, kicker: ZX_SOL_AUD[u.audience] ? ZX_SOL_AUD[u.audience].label : '' }; });
-  var moreInGroup = variants.length > 5 && g ? renderLinkArrow('All ' + (variants.length + 1) + ' in ' + g.name.charAt(0).toLowerCase() + g.name.slice(1), '/use-cases#' + g.id, { className: 'zx-sol-fit__all' }) : '';
-  variants = variants.slice(0, 5);
-  html += renderSection({ id: 'fit', className: 'zx-sol-fit' },
-    renderSectionHead('Where it fits', 'Runs on the Zynix platform', 'The same data foundation, agents and care plans run every workflow on this site, whatever type of organization runs it.', { id: 'fit-title' }) +
-    '<div class="zx-sol-fit__grid"><div class="zx-sol-fit__col"><h3 class="zx-sol-fit__title">Products used</h3>' + zxSolLinks(prods) + '</div>' +
-    (variants.length ? '<div class="zx-sol-fit__col"><h3 class="zx-sol-fit__title">More in ' + (g ? g.name.charAt(0).toLowerCase() + g.name.slice(1) : 'this program') + '</h3>' + zxSolLinks(variants, 'zx-sol-links--plain') + moreInGroup + '</div>' : '') +
-    '</div>');
+  html += renderSection({ id: 'fit', className: 'zx-sol-fit' }, renderSplit(
+    renderSectionHead('Where it fits', 'Runs on the Zynix platform', 'The same data foundation, agents and care plans run every workflow on this site, whatever type of organization runs it.', { id: 'fit-title' }),
+    '<h3 class="zx-sol-fit__title">Products used</h3>' + zxSolLinks(prods), { ratio: '5-7' }));
 
   // One related block per page (§2.16). If S3's CROSS_LINKS ever gives this page an entry, the router inserts that instead.
   if (!(typeof CROSS_LINKS !== 'undefined' && CROSS_LINKS[path])) {
-    // Related use cases come from other programs (the same program is already listed above)
-    var others = (data.readNext || []).map(zxSolBySlug).filter(function (u) { return u && u.group !== data.group; });
-    zxSolAll().forEach(function (u) { if (others.length < 3 && u.group !== data.group && u.audience === data.audience && others.indexOf(u) < 0) others.push(u); });
     // Names, descriptors and icons come from S3's link data (zxLinkItem), as on every other page: the use case's title and
     // workflow group, the audience's NAV descriptor, the customer story's line.
-    var rel = others.slice(0, 3).map(function (u) { return zxLinkItem('/use-cases/' + u.slug); });
+    // 1. The same workflow for other organization types (the descriptor names the organization type, since the program is the group label)
+    var variants = zxSolAll().filter(function (u) { return u.group === data.group && u.slug !== data.slug; })
+      .sort(function (a, b) { return ZX_SOL_AUD_ORDER.indexOf(a.audience) - ZX_SOL_AUD_ORDER.indexOf(b.audience); })
+      .map(function (u) { var it = zxLinkItem('/use-cases/' + u.slug); return it && ZX_SOL_AUD[u.audience] ? Object.assign({}, it, { desc: ZX_SOL_AUD[u.audience].label }) : it; });
+    // 2. Use cases from other programs: the record's read-next list, then the same organization type's other programs
+    var others = (data.readNext || []).map(zxSolBySlug).filter(function (u) { return u && u.group !== data.group; });
+    zxSolAll().forEach(function (u) { if (others.length < 3 && u.group !== data.group && u.audience === data.audience && others.indexOf(u) < 0) others.push(u); });
+    // 3. The audience page and the customer story
     var more = [];
     if (aud) more.push(zxLinkItem(aud.href));
     var story = data.story ? zxCustomer(data.story) : null;
     if (story && story.caseStudy) more.push(zxLinkItem(story.caseStudy));
-    html += renderRelatedLinks({ title: 'Related', groups: [{ label: 'Use cases', items: rel }, { label: 'Explore more', items: more.slice(0, 3) }] });
+    var relGroups = [
+      { label: g ? 'More in ' + g.name.charAt(0).toLowerCase() + g.name.slice(1) : 'More in this program', items: variants },
+      { label: 'Other programs', items: others.map(function (u) { return zxLinkItem('/use-cases/' + u.slug); }) },
+      { label: 'Explore more', items: more }];
+    // Six links in all, taken in turn from each group so every group keeps a share
+    var pools = relGroups.map(function (x) { return x.items.filter(function (it) { return it && it.href && it.label; }); });
+    relGroups.forEach(function (x) { x.items = []; });
+    for (var left = 6, took = true; left > 0 && took;) {
+      took = false;
+      pools.forEach(function (pool, i) { if (left > 0 && pool.length) { relGroups[i].items.push(pool.shift()); left--; took = true; } });
+    }
+    html += renderRelatedLinks({ title: 'Related', groups: relGroups });
   }
 
   html += renderCTA('See ' + data.cta + ' run end to end',
@@ -6335,7 +6344,7 @@ USE_CASES.UC02 = {
   id: 'UC02', slug: 'after-hours-triage-multi-site', group: 'after-hours', audience: 'system', also: ['aco'],
   title: 'After-hours calls answered at every site',
   teaser: 'One consistent after-hours line across your sites: the reason captured, routine visits booked, symptom questions to the on-call clinician.',
-  lead: 'Each of your sites handles after-hours calls differently. ZynAfterHours answers every call the same way, books routine visits and routes symptom questions to your on-call clinician.',
+  lead: 'Each of your sites handles after-hours calls differently. ZynAfterHours gives them one process: it answers, books routine visits and routes symptom questions to your on-call clinician by rule.',
   problem: { title: 'After-hours access depends on which site a patient calls',
     body: ['A multi-site system rarely has one after-hours model. One site has a nurse line, another an answering service, another a voicemail that says to call 911. On-call physicians field everything from chest pain to refill requests.',
       'Patients who can’t reach anyone make their own decision, and some of them go to the ED with a question that could have waited for a morning visit.'] },
@@ -6343,7 +6352,7 @@ USE_CASES.UC02 = {
     { tool: 'Patient portals', text: 'Asynchronous by design, and least used by the patients who call most.' }],
   how: { title: 'One after-hours process for every site', lead: 'ZynAfterHours handles intake and booking. Your on-call clinicians handle every symptom question.' },
   steps: [
-    { owner: 'agent', who: 'ZynAfterHours', title: 'The call is answered', body: 'Every after-hours call is answered, the caller’s identity is verified and the reason for the call is captured. Callers describing an emergency are told to call 911.' },
+    { owner: 'agent', who: 'ZynAfterHours', title: 'The call is answered', body: 'The call is answered, the caller’s identity is verified and the reason for the call is captured. Callers describing an emergency are told to call 911.' },
     { owner: 'staff', who: 'On-call clinician', title: 'Symptom questions go to the on-call clinician', body: 'Symptom and medication questions are routed by your rules, with the call summary attached.' },
     { owner: 'agent', who: 'ZynSchedule', title: 'Routine needs get a visit', body: 'Appointment requests are booked at the patient’s preferred site for the next available time.' },
     { owner: 'system', who: 'Zynix platform', title: 'The care team sees it in the morning', body: 'Calls that need follow-up are flagged for the patient’s care team when the site opens.' }],
@@ -6372,9 +6381,9 @@ USE_CASES.UC09 = {
       'A patient with a question at midnight decides alone whether it can wait. Some of those decisions become ED visits that a morning appointment would have handled, and each one counts against total cost of care.'] },
   gaps: [{ tool: 'Nurse lines', text: 'Clinically strong when staffed, and costly to staff for every after-hours hour.' },
     { tool: 'Portal messages', text: 'A reply tomorrow is not access tonight.' }],
-  how: { title: 'An answer every hour the practice is closed', lead: 'ZynAfterHours does intake and booking. Symptom questions always go to your on-call clinician.' },
+  how: { title: 'After-hours calls answered and routed by rule', lead: 'ZynAfterHours does intake and booking. Symptom questions always go to your on-call clinician.' },
   steps: [
-    { owner: 'agent', who: 'ZynAfterHours', title: 'Every call answered', body: 'The caller is verified and the reason for the call captured. Callers describing an emergency are told to call 911.' },
+    { owner: 'agent', who: 'ZynAfterHours', title: 'Answered and verified', body: 'The call is answered, the caller verified and the reason for the call captured. Callers describing an emergency are told to call 911.' },
     { owner: 'staff', who: 'On-call clinician', title: 'Symptom questions go to the on-call clinician', body: 'They are routed by the rules your clinicians approve, with the call summary attached.' },
     { owner: 'agent', who: 'ZynSchedule', title: 'Routine needs are booked', body: 'Appointment requests get the next available visit at the patient’s own practice.' },
     { owner: 'system', who: 'Zynix platform', title: 'Flagged for the morning', body: 'Calls from recently discharged or high-risk patients are flagged for the care team the next morning.' }],
@@ -6796,7 +6805,7 @@ function renderUseCasesListing() {
   var all = zxSolAll();
   var html = renderHero({ preset: 'resource', eyebrow: 'Use cases', title: 'Value-based care workflows, step by step',
     lead: 'Grouped by program: transitions of care, risk adjustment and quality, chronic care, after-hours access, care navigation and front-office work. Filter by organization type.',
-    primary: { label: SITE_FACTS.demo.label, href: SITE_FACTS.demo.href }, secondary: { label: 'Filter by organization', href: '#filter' } });
+    primary: { label: SITE_FACTS.demo.label, href: SITE_FACTS.demo.href }, secondary: { label: 'See customer stories', href: '/resources-case-studies' } });
 
   var chips = [{ k: 'all', label: 'All organizations' }].concat(ZX_SOL_AUD_ORDER.map(function (k) { return { k: k, label: ZX_SOL_AUD[k].label }; }));
   html += '<section class="zynix-section zynix-section--compact zynix-section--subtle zx-sol-filter" id="filter" aria-labelledby="filter-label"><div class="zynix-container">' +
@@ -6916,7 +6925,7 @@ var USE_CASE_SEO = {};
 // Shared pieces: the ACCESS callout (never on the health-plan page) and the "how it connects" copy.
 function zxSolAccessCallout() {
   return { id: 'access', eyebrow: 'CMS ACCESS Model', title: 'Take part in the CMS ACCESS Model through Zynix',
-    body: [zxAccessLine(), 'Clinicians refer eligible patients, stay involved in their care and can bill the ACCESS co-management fee, without enrolling in ACCESS themselves.'],
+    body: [zxAccessLine()],   // registry wording only; the co-management billing sentence is off until verified against the CMS model documents [VERIFY]
     link: { label: 'Ask about ACCESS', href: '/contact' } };
 }
 var ZX_SOL_FLOW_LINK = { label: 'See the data flow', href: '/platform#data-flow' };
@@ -8834,13 +8843,13 @@ function renderSolutionsOverview() {
         '<span class="zx-sol-orgnav__arrow" aria-hidden="true">→</span></a></li>';
     }).join('') + '</ul></nav>';
   var html = renderHero({ preset: 'product', compact: true, eyebrow: 'Solutions', title: 'Find the workflows for your organization',
-    lead: 'ACOs, MSOs and IPAs, health plans, health systems and FQHCs run different programs. Start with your organization type, or browse by workflow.',
+    lead: 'ACOs, MSOs and IPAs, health plans, health systems and FQHCs run different programs. Start with your organization type, or browse by program.',
     secondary: { label: 'Browse all use cases', href: '/use-cases' },
     media: { type: 'product', frame: { html: picker, sample: false, bare: true, className: 'zx-sol-orgframe' } } });
   html += '<section class="zynix-section zynix-section--compact zynix-section--rule zx-sol-logos" aria-label="Customers"><div class="zynix-container">' +
     renderLogoRow(null, { id: 'solutions-logos' }) + '</div></section>';
   html += renderSection({ id: 'workflows', className: 'zx-sol-flows' },
-    renderSectionHead('By program', 'By workflow', zxSolAll().length + ' use cases, grouped into ' + ZX_SOL_GROUPS.length + ' programs. Each one shows the steps, who owns them and what it runs on.', { id: 'workflows-title', align: 'split' }) +
+    renderSectionHead('Use cases', 'By program', zxSolAll().length + ' use cases, grouped into ' + ZX_SOL_GROUPS.length + ' programs. Each one shows the steps, who owns them and what it runs on.', { id: 'workflows-title', align: 'split' }) +
     zxSolLinks(flows.map(function (f) { return { href: '/use-cases#' + f.id, label: f.label, desc: f.line, icon: f.icon }; }), 'zx-sol-links--3') +
     '<div class="zx-sol-also">' +
       '<p class="zx-sol-also__item"><span class="zx-sol-also__label">Also served</span>' + renderLinkArrow('Ambulatory surgery centers', '/audience-segments/ascs') + '<span class="zx-sol-also__desc">Referral intake, pre-procedure scheduling and post-op follow-up.</span></p>' +
