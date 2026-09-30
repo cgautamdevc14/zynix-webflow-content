@@ -2,7 +2,7 @@
 
 > Zynix AI is a healthcare intelligence platform that unifies clinical, claims, and operational data to power autonomous AI agents for value-based care organizations — ACOs, health systems, health plans, FQHCs, independent practices, and ASCs. The platform closes care gaps, surfaces rising-risk patients, automates prior authorization and eligibility, improves HCC risk adjustment, and reduces readmissions.
 
-Zynix AI (legal entity Zynix Inc, dba Zyncare for patient SMS) is headquartered in Trinity, Florida. Founded in 2023 by Jayadeva (Jay) Chowdappa, M.D. — a practicing physician who founded six ACOs generating $300M+ in MSSP savings before Zynix. The platform serves 1M+ value-based care patients across 30+ U.S. states and 16+ organizations. HIPAA-compliant, SOC 2 Type II certified, HITRUST in progress. Deployable via Cloud, Private Cloud, On-Premises, or Hybrid.
+Zynix AI (legal entity Zynix Inc, dba Zyncare for patient SMS) is headquartered in Trinity, Florida. Founded in 2024 by Jayadeva (Jay) Chowdappa, M.D. — a practicing physician who founded six ACOs generating $300M+ in MSSP savings before Zynix. The platform serves 1M+ value-based care patients across 30+ U.S. states and 16+ organizations. HIPAA-compliant, SOC 2 Type II certified, HITRUST in progress. Deployable via Cloud, Private Cloud, On-Premises, or Hybrid.
 
 ## Platform
 
