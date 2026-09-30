@@ -2,6 +2,8 @@
 //
 //   node ci/banned-strings.mjs                    counts per scope vs ci/baseline.json (non-zero scopes only)
 //   node ci/banned-strings.mjs --hits [scope]     every hit with line number, pattern and context (optionally one scope)
+//   node ci/banned-strings.mjs --exempt           every EXEMPT hit with its reason (facts data, dead code, URL slug, dated)
+//   node ci/banned-strings.mjs --dead             the reachability report: routes, the dead list, and every unreachable function
 //   node ci/banned-strings.mjs --phase 1          also show which scopes would fail if that phase's must-be-zero list applied
 //   node ci/banned-strings.mjs --write-baseline   ratchet DOWN: lower each scope's baseline to its current count (never raises;
 //                                                 drops scopes that no longer exist). Owning streams run this in their PR.
@@ -14,12 +16,44 @@
 // Strings: the claims list below (the same list as redesign-2026-09/tools/rd_checks.mjs) plus emoji (literal characters,
 // \uD83x\uDxxx and \u{…} escapes, and numeric HTML entities). Held governance texts are NOT in this list: they are data
 // that only zxGovernance() reads, and rd_checks checks them in the rendered DOM.
-// Exempt (DECISIONS 16, §8.2 Q): inside the facts block, the `metrics: [ … ]` arrays of CUSTOMERS, the
-// `governance: { … }` object of SITE_FACTS and the `held: [ … ]` arrays of NAMES.agentFamilies.
+// Exempt hits are not counted in any scope. They are listed by --exempt and summed in the static check's output. Four kinds:
+//   facts  (DECISIONS 16, §8.2 Q): inside the facts block, the `metrics: [ … ]` arrays of CUSTOMERS, the `governance: { … }`
+//          object of SITE_FACTS and the `held: [ … ]` arrays of NAMES.agentFamilies.
+//   dead   (Phase 3 integration, finding 1, 2026-09-29): the functions in DEAD_FUNCTIONS below (and the comment lines directly
+//          above each). DESIGN_SPEC §6 forbids editing dead functions and §8.1 the routes table, so no stream can clear them.
+//          The list is VERIFIED on every run: a listed function must be unreachable from the router (the routes table after
+//          later-key override and REDIRECTS) and from every reachable function or top-level statement (see reachability()).
+//          A listed function that is reachable fails the static check, so this list can never hide copy a visitor can see.
+//          Deleting the functions with their dead routes keys is the alternative (needs an ownership exception to §6/§8.1).
+//   url    a hit inside a lower-case URL or path token that starts with "/" or "http(s)://", with the hit joined to the rest
+//          of the token by "/", "-", "_", "." or "#" ('/blog/autonomous-ai-agents-…' in routes, REDIRECTS and CROSS_LINKS keys,
+//          zxSeo path arguments, hrefs and JSON-LD urls). URLs do not change in the redesign (DECISIONS 2, 9); link text does.
+//   dated  DATED_EXEMPTIONS below: one named string in one A2P-frozen function, pinned to that function's SHA-256. It lapses
+//          by itself the moment the function changes (the A2P workstream then fixes the string in the same PR).
 // Rule (enforced by ci/static-checks.mjs): a scope fails if its count is above its ci/baseline.json count (absent = 0),
 // or if it is on the must-be-zero list of the current phase (baseline.phase; "*" = every scope) and has any hit.
 import fs from 'node:fs';
 import vm from 'node:vm';
+import crypto from 'node:crypto';
+
+// Dead renderers (finding 1 of the Phase 3 integration review, 2026-09-29). Each one is shadowed in the routes table by a
+// later key for the same path, redirected away by REDIRECTS, or never referenced; reachability() proves it on every run.
+export const DEAD_FUNCTIONS = [
+  'renderZynixOS', 'renderCarePlans', 'renderZynixLLM', 'renderTrustCenter',                     // P1 legacy (spec §6 "Dead")
+  'renderZynAfterHours', 'renderPostDischarge', 'renderMedRec', 'renderZynReminder',             // P2 legacy agent pages
+  'renderUseCaseTCM', 'renderUseCaseGapClosure', 'renderUseCaseAfterHours', 'renderUseCaseReadmission', // P3 legacy use cases
+  'renderPrivacy'                                                                                // legacy privacy (no route)
+];
+
+// Dated exemptions: a banned string that is visible on the site but may not be edited yet. Each entry names the function, the
+// claims label, the exact text, the function's pinned SHA-256 (ci/a2p-freeze.json at the time of the entry), the date, the
+// owner and the fix. The exemption applies only while the function hashes to `sha256`.
+export const DATED_EXEMPTIONS = [
+  { fn: 'renderPrivacyV7', label: 'SOC 2 ... certified', text: 'including our SOC 2 Type II certification',
+    sha256: '564abd893045071f60fc604fe2d2a292386b63436f6a01f3d14691dbb48f131f', since: '2026-09-29', owner: 'A2P workstream',
+    why: 'renderPrivacyV7 is hash-frozen (ci/a2p-freeze.json) while the A2P campaign is decided; DECISIONS 17 says SOC 2 is audited, never certified',
+    fix: "reword to 'including our SOC 2 Type II audit' in renderPrivacyV7 and the native Webflow /privacy-policy page together, after the campaign decision; then delete this entry" }
+];
 
 export const CLAIMS = [
   ['HIPAA Compliant', /\bHIPAA[\s ]+compliant\b/gi],
@@ -122,17 +156,163 @@ export function exemptRanges(src) {
   return r;
 }
 
+// ── Lexer: comment and literal ranges (strings, template text, regex literals), template ${…} expressions as code ──
+export function lex(src) {
+  const comments = [], literals = []; const n = src.length; const stack = []; let depth = 0, mode = 'code', litStart = -1;
+  const rxPrev = /[(,=:[!&|?{};+\-*%<>~^]$|\b(return|typeof|case|in|of|delete|void|throw|new)$/;
+  for (let i = 0; i < n; i++) {
+    const c = src[i], d = src[i + 1];
+    if (mode === 'tpl') {
+      if (c === '\\') { i++; continue; }
+      if (c === '`') { literals.push([litStart, i]); mode = 'code'; continue; }
+      if (c === '$' && d === '{') { literals.push([litStart, i]); stack.push(depth); depth++; i++; mode = 'code'; continue; }
+      continue;
+    }
+    if (c === '/' && d === '/') { let e = src.indexOf('\n', i); if (e < 0) e = n; comments.push([i, e]); i = e - 1; continue; }
+    if (c === '/' && d === '*') { let e = src.indexOf('*/', i + 2); e = e < 0 ? n : e + 2; comments.push([i, e]); i = e - 1; continue; }
+    if (c === "'" || c === '"') { let j = i + 1; while (j < n && src[j] !== c && src[j] !== '\n') { if (src[j] === '\\') j++; j++; } literals.push([i + 1, j]); i = j; continue; }
+    if (c === '`') { mode = 'tpl'; litStart = i + 1; continue; }
+    if (c === '/') {
+      const before = src.slice(Math.max(0, i - 12), i).replace(/\s+$/, '');
+      if (!before || rxPrev.test(before)) { let j = i + 1, cls = false; while (j < n) { const x = src[j]; if (x === '\\') { j += 2; continue; } if (x === '\n') break; if (cls) { if (x === ']') cls = false; } else if (x === '[') cls = true; else if (x === '/') break; j++; } literals.push([i + 1, j]); i = j; continue; }
+    }
+    if (c === '{') { depth++; continue; }
+    if (c === '}') { depth--; if (stack.length && depth === stack[stack.length - 1]) { stack.pop(); mode = 'tpl'; litStart = i + 1; } continue; }
+  }
+  return { comments, literals };
+}
+// Replace the given ranges with spaces (newlines kept, so line numbers and ASI do not change).
+export function blank(src, ranges) {
+  let out = '', at = 0;
+  for (const [s, e] of [...ranges].sort((a, b) => a[0] - b[0])) { if (s < at) continue; out += src.slice(at, s) + src.slice(s, e).replace(/[^\n]/g, ' '); at = e; }
+  return out + src.slice(at);
+}
+
+// Top-level entries of an object literal: [{ key, start, end, valueStart }] (key = the string key, or null). `src` should
+// have its comments blanked; `codeOnly` has comments and literals blanked (for bracket depth and commas).
+function objectEntries(src, codeOnly, open) {
+  const close = matchBrace(src, open); if (close < 0) return { close: -1, entries: [] };
+  const entries = []; let d = 0, s = open + 1;
+  const push = e => { const text = src.slice(s, e); const m = text.match(/^\s*(?:(['"])((?:\\.|(?!\1)[^\\])*)\1|([A-Za-z_$][\w$]*))\s*:/); if (codeOnly.slice(s, e).trim()) entries.push({ key: m ? (m[2] !== undefined ? m[2] : m[3]) : null, start: s, end: e, valueStart: m ? s + m[0].length : s }); };
+  for (let k = open + 1; k < close; k++) { const c = codeOnly[k]; if (c === '{' || c === '[' || c === '(') d++; else if (c === '}' || c === ']' || c === ')') d--; else if (c === ',' && d === 0) { push(k); s = k + 1; } }
+  push(close);
+  return { close, entries };
+}
+
+// Reachability of every declared function from the router (DESIGN_SPEC §6: later routes keys override earlier ones; REDIRECTS
+// is applied once, before the lookup) and from top-level code. Conservative: an identifier anywhere in reachable code outside
+// comments (string contents included) counts as a reference, so a function is only called dead when nothing can reach it.
+export function reachability(src) {
+  const { comments, literals } = lex(src);
+  const noComments = blank(src, comments), codeOnly = blank(noComments, literals);
+  const { scopes } = scopesOf(src);
+  const fns = scopes.filter(s => !s.name.startsWith('block:') && s.name !== '(bundle)' && s.name !== 'PAGE_SEO');
+  const outer = fns.filter(f => !fns.some(g => g !== f && g.start <= f.start && g.end >= f.end));
+  const base = name => name.replace(/#\d+$/, ''); const names = new Set(fns.map(f => base(f.name)));
+  const idsIn = (a, b) => { const out = new Set(); const re = /[A-Za-z_$][\w$]*/g; re.lastIndex = a; let m; const t = noComments; while ((m = re.exec(t)) && m.index < b) { if (names.has(m[0]) && !/[\w$]/.test(t[m.index - 1] || '')) out.add(m[0]); } return out; };
+  const find = re => { const m = re.exec(codeOnly); return m ? codeOnly.indexOf('{', m.index + m[0].length - 1) : -1; };
+  const rOpen = find(/\bvar routes\s*=\s*\{/g), xOpen = find(/\bvar REDIRECTS\s*=\s*\{/g);
+  if (rOpen < 0 || xOpen < 0) return { ok: false, error: 'routes or REDIRECTS object literal not found' };
+  const R = objectEntries(noComments, codeOnly, rOpen), X = objectEntries(noComments, codeOnly, xOpen);
+  const redirects = new Map(); for (const e of X.entries) if (e.key !== null) { const v = noComments.slice(e.valueStart, e.end).trim().match(/^(['"])(.*)\1$/); if (v) redirects.set(e.key, v[2]); }
+  const targets = new Set(redirects.values());
+  const last = new Map(); for (const e of R.entries) if (e.key !== null) last.set(e.key, e);
+  const routeInfo = []; const roots = new Map();   // name -> why
+  for (const e of R.entries) {
+    const eff = last.get(e.key) === e; const redirected = redirects.has(e.key) && !targets.has(e.key);
+    const live = e.key !== null && eff && !redirected;
+    const ids = [...idsIn(e.valueStart, e.end)];
+    routeInfo.push({ key: e.key, ids, live, why: e.key === null ? 'unparsed entry' : !eff ? 'overridden by a later key' : redirected ? 'redirected to ' + redirects.get(e.key) : 'live' });
+    if (live || e.key === null) for (const id of ids) if (!roots.has(id)) roots.set(id, `routes['${e.key}']`);
+  }
+  // top-level code: everything outside the outermost functions, the routes literal and the REDIRECTS literal
+  const holes = outer.map(f => [f.start, f.end]).concat([[rOpen, R.close + 1], [xOpen, X.close + 1]]).sort((a, b) => a[0] - b[0]);
+  let at = 0; for (const [s, e] of holes) { if (s > at) for (const id of idsIn(at, s)) if (!roots.has(id)) roots.set(id, 'top-level code near line ' + (src.slice(0, at).split('\n').length)); at = Math.max(at, e); }
+  for (const id of idsIn(at, src.length)) if (!roots.has(id)) roots.set(id, 'top-level code (end)');
+  const edges = new Map(); for (const f of fns) { const k = base(f.name); if (!edges.has(k)) edges.set(k, new Set()); for (const id of idsIn(f.start, f.end)) if (id !== k) edges.get(k).add(id); }
+  const via = new Map(roots); const queue = [...roots.keys()];
+  while (queue.length) { const k = queue.shift(); for (const id of edges.get(k) || []) if (!via.has(id)) { via.set(id, k); queue.push(id); } }
+  const chain = k => { const out = [k]; let x = k; for (let i = 0; i < 12 && via.has(x) && names.has(via.get(x)); i++) { x = via.get(x); out.push(x); } out.push(via.get(x)); return out.join(' <- '); };
+  const unreachable = [...names].filter(k => !via.has(k)).sort();
+  return { ok: true, reachable: via, chain, unreachable, routes: routeInfo, redirects, fns, outer };
+}
+
+// Is the hit at [i, i+len) inside a lower-case URL/path token? (see the header: kind "url")
+export function inUrlToken(src, i, len) {
+  const ok = ch => /[a-z0-9\-._~/:#?=&%+]/.test(ch);
+  const hit = src.slice(i, i + len); if (hit !== hit.toLowerCase()) return false;
+  let a = i, b = i + len; while (a > 0 && ok(src[a - 1])) a--; while (b < src.length && ok(src[b])) b++;
+  const tok = src.slice(a, b);
+  if (!(tok.startsWith('/') || /^https?:\/\//.test(tok))) return false;
+  const pre = src[i - 1] || '', post = src[i + len] || '';
+  return (i > a && /[\/\-_.#]/.test(pre)) || (i + len < b && /[\/\-_.#]/.test(post));
+}
+
+const sha = t => crypto.createHash('sha256').update(t).digest('hex');
+// All exemptions with their reasons; problems = exemptions that are no longer valid (fail the static check).
+export function exemptions(src, scopes) {
+  const out = []; const problems = []; const notes = [];
+  for (const [a, b] of exemptRanges(src)) out.push({ start: a, end: b, kind: 'facts', why: 'facts data (DECISIONS 16)' });
+  const R = reachability(src);
+  if (!R.ok) problems.push('dead-code verification could not run: ' + R.error);
+  else for (const name of DEAD_FUNCTIONS) {
+    const decl = scopes.filter(s => s.name === name || s.name.startsWith(name + '#'));
+    if (!decl.length) { notes.push(`${name} is no longer in the bundle: remove it from DEAD_FUNCTIONS`); continue; }
+    if (R.reachable.has(name)) { problems.push(`${name} is listed as dead but is reachable: ${R.chain(name)}`); continue; }
+    for (const s of decl) {
+      // include the comment-only lines directly above the declaration (its header comment)
+      let a = s.start; for (;;) { const prevEnd = src.lastIndexOf('\n', a - 1); if (prevEnd < 0) break; const prevStart = src.lastIndexOf('\n', prevEnd - 1) + 1; const line = src.slice(prevStart, prevEnd); if (/^\s*\/\/.*$/.test(line)) a = prevStart; else break; }
+      out.push({ start: a, end: s.end, kind: 'dead', why: `dead function ${s.name} (not reachable from the router or live code)` });
+    }
+  }
+  for (const x of DATED_EXEMPTIONS) {
+    const s = scopes.find(q => q.name === x.fn); if (!s) { notes.push(`dated exemption ${x.fn}: function not found (remove the entry)`); continue; }
+    let text = null; try { text = extractFunction(src, x.fn); } catch (e) { problems.push(`dated exemption ${x.fn}: ${e.message}`); continue; }
+    if (sha(text) !== x.sha256) { notes.push(`dated exemption for ${x.fn} (since ${x.since}) LAPSED: the function changed (sha256 ${sha(text).slice(0, 12)}… != pinned ${x.sha256.slice(0, 12)}…), so "${x.text}" counts again. Fix: ${x.fix}`); continue; }
+    const at = src.indexOf(x.text, s.start);
+    if (at < 0 || at >= s.end) { notes.push(`dated exemption for ${x.fn}: "${x.text}" is no longer in the function (remove the entry)`); continue; }
+    out.push({ start: at, end: at + x.text.length, kind: 'dated', label: x.label, why: `dated exemption since ${x.since} (${x.owner}): ${x.why}. Fix: ${x.fix}` });
+  }
+  return { ranges: out, problems, notes, reach: R };
+}
+
+// Same algorithm as ci/extract-function.mjs (kept here so this module has no other local import).
+function extractFunction(src, name) {
+  const start = src.search(new RegExp('(^|\\n)[ \\t]*function ' + name + '\\s*\\(')); if (start < 0) throw new Error('not found: ' + name);
+  const i = src.indexOf('function ' + name, start), open = src.indexOf('{', src.indexOf(')', i));
+  let depth = 0, k = open, st = null;
+  for (; k < src.length; k++) {
+    const c = src[k], n = src[k + 1];
+    if (st === 'line') { if (c === '\n') st = null; continue; }
+    if (st === 'block') { if (c === '*' && n === '/') { st = null; k++; } continue; }
+    if (st === "'" || st === '"' || st === '`') { if (c === '\\') { k++; continue; } if (c === st) st = null; continue; }
+    if (c === '/' && n === '/') { st = 'line'; k++; continue; }
+    if (c === '/' && n === '*') { st = 'block'; k++; continue; }
+    if (c === "'" || c === '"' || c === '`') { st = c; continue; }
+    if (c === '{') depth++; else if (c === '}') { depth--; if (depth === 0) break; }
+  }
+  return src.slice(i, k + 1);
+}
+
 export function countScopes(src) {
-  const hits = findHits(src), ex = exemptRanges(src), { scopes, warnings } = scopesOf(src);
-  const live = hits.filter(h => !ex.some(([a, b]) => h.index >= a && h.index < b));
+  const hits = findHits(src), { scopes, warnings } = scopesOf(src);
+  const ex = exemptions(src, scopes);
+  const live = [], exempt = [];
+  for (const h of hits) {
+    const r = ex.ranges.find(x => h.index >= x.start && h.index < x.end && (!x.label || x.label === h.label));
+    if (r) { exempt.push({ ...h, kind: r.kind, why: r.why }); continue; }
+    if (inUrlToken(src, h.index, h.text.length)) { exempt.push({ ...h, kind: 'url', why: 'URL or path token (URLs are unchanged, DECISIONS 2, 9)' }); continue; }
+    live.push(h);
+  }
   const counts = {};
   for (const s of scopes) { const n = live.filter(h => h.index >= s.start && h.index < s.end).length; if (n) counts[s.name] = n; }
-  return { counts, hits: live, scopes, warnings, exempted: hits.length - live.length };
+  const byKind = {}; for (const h of exempt) byKind[h.kind] = (byKind[h.kind] || 0) + 1;
+  return { counts, hits: live, scopes, warnings, exempted: exempt.length, exempt, exemptByKind: byKind, exemptProblems: ex.problems, exemptNotes: ex.notes, reach: ex.reach };
 }
 
 // The ratchet decision. baseline = ci/baseline.json object; phase overrides baseline.phase.
 export function judge(src, baseline, phase) {
-  const { counts, hits, scopes, warnings, exempted } = countScopes(src);
+  const { counts, hits, scopes, warnings, exempted, exempt, exemptByKind, exemptProblems, exemptNotes } = countScopes(src);
   const base = baseline.bannedStrings || {}; const ph = phase === undefined || phase === null || phase === '' ? (+baseline.phase || 0) : +phase;
   const zeroLists = baseline.mustBeZeroByPhase || {};
   const mustZero = new Set(); let all = false;
@@ -144,7 +324,7 @@ export function judge(src, baseline, phase) {
     if ((all || mustZero.has(s)) && n > 0) zeroFails.push({ scope: s, count: n });
   }
   for (const [s, b] of Object.entries(base)) { const n = counts[s] || 0; if (n < b) lower.push({ scope: s, count: n, baseline: b }); }
-  return { phase: ph, counts, hits, scopes, warnings, exempted, rises, zeroFails, lower, mustZero: all ? ['*'] : [...mustZero] };
+  return { phase: ph, counts, hits, scopes, warnings, exempted, exempt, exemptByKind, exemptProblems, exemptNotes, rises, zeroFails, lower, mustZero: all ? ['*'] : [...mustZero] };
 }
 
 const lineOf = (src, i) => src.slice(0, i).split('\n').length;
@@ -156,9 +336,20 @@ if (process.argv[1] && process.argv[1].endsWith('banned-strings.mjs')) {
   const JS = 'zynix-site-scripts-unminified.js', BL = 'ci/baseline.json';
   const src = fs.readFileSync(JS, 'utf8'); const baseline = JSON.parse(fs.readFileSync(BL, 'utf8'));
   const r = judge(src, baseline, arg('--phase'));
+  const ctx = i => src.slice(Math.max(0, i - 50), i + 50).replace(/\s+/g, ' ');
   if (argv.includes('--hits')) {
     const only = arg('--hits'); const sc = only && !only.startsWith('--') ? r.scopes.find(s => s.name === only) : null;
-    for (const h of r.hits) { if (sc && !(h.index >= sc.start && h.index < sc.end)) continue; const s = innermost(r.scopes, h.index); console.log(`L${lineOf(src, h.index)}\t${h.label}\t${s ? s.name : '(top level)'}\t${src.slice(Math.max(0, h.index - 50), h.index + 50).replace(/\s+/g, ' ')}`); }
+    for (const h of r.hits) { if (sc && !(h.index >= sc.start && h.index < sc.end)) continue; const s = innermost(r.scopes, h.index); console.log(`L${lineOf(src, h.index)}\t${h.label}\t${s ? s.name : '(top level)'}\t${ctx(h.index)}`); }
+  } else if (argv.includes('--exempt')) {
+    for (const h of r.exempt) { const s = innermost(r.scopes, h.index); console.log(`L${lineOf(src, h.index)}\t${h.kind}\t${h.label}\t${s ? s.name : '(top level)'}\t${ctx(h.index)}`); }
+    console.log(`\n${r.exempted} exempt hit(s): ` + Object.entries(r.exemptByKind).map(([k, n]) => `${k} ${n}`).join(', '));
+    for (const p of r.exemptProblems) console.log('PROBLEM  ' + p); for (const n of r.exemptNotes) console.log('NOTE  ' + n);
+  } else if (argv.includes('--dead')) {
+    const R = countScopes(src).reach; if (!R.ok) { console.log('reachability failed: ' + R.error); process.exit(1); }
+    console.log(`routes: ${R.routes.length} entries, ${R.routes.filter(x => x.live).length} live; REDIRECTS: ${R.redirects.size}`);
+    for (const x of R.routes.filter(x => !x.live)) console.log(`  not live  '${x.key}' -> ${x.ids.join(', ') || '(no function)'}  (${x.why})`);
+    console.log(`\nDEAD_FUNCTIONS (${DEAD_FUNCTIONS.length}):`); for (const n of DEAD_FUNCTIONS) console.log(`  ${R.reachable.has(n) ? 'REACHABLE ' + R.chain(n) : 'dead      ' + n}`);
+    console.log(`\nall unreachable functions (${R.unreachable.length}): ${R.unreachable.join(', ')}`);
   } else if (argv.includes('--write-baseline') || argv.includes('--init-baseline')) {
     const init = argv.includes('--init-baseline'); const names = new Set(r.scopes.map(s => s.name)); const next = {};
     for (const s of [...names].sort()) { const n = r.counts[s] || 0; const b = (baseline.bannedStrings || {})[s] || 0; const v = init ? n : Math.min(n, b); if (v) next[s] = v; }
@@ -167,7 +358,8 @@ if (process.argv[1] && process.argv[1].endsWith('banned-strings.mjs')) {
   } else {
     const rows = Object.entries(r.counts).sort((a, b) => b[1] - a[1]);
     for (const [s, n] of rows) { const b = (baseline.bannedStrings || {})[s] || 0; console.log(`${String(n).padStart(5)}  baseline ${String(b).padStart(5)}  ${n > b ? 'RISE ' : n < b ? 'lower' : '     '}  ${r.mustZero.includes('*') || r.mustZero.includes(s) ? 'MUST-BE-ZERO ' : ''}${s}`); }
-    console.log(`\n${r.hits.length} hit(s) (${r.exempted} exempt) in ${r.scopes.length} scopes; phase ${r.phase}; rises ${r.rises.length}; must-be-zero failures ${r.zeroFails.length}` + (r.zeroFails.length ? ': ' + r.zeroFails.map(z => `${z.scope} (${z.count})`).join(', ') : ''));
+    console.log(`\n${r.hits.length} hit(s) (${r.exempted} exempt: ${Object.entries(r.exemptByKind).map(([k, n]) => `${k} ${n}`).join(', ') || 'none'}) in ${r.scopes.length} scopes; phase ${r.phase}; rises ${r.rises.length}; must-be-zero failures ${r.zeroFails.length}` + (r.zeroFails.length ? ': ' + r.zeroFails.map(z => `${z.scope} (${z.count})`).join(', ') : ''));
+    for (const p of r.exemptProblems) console.log('PROBLEM  ' + p); for (const n of r.exemptNotes) console.log('NOTE  ' + n);
     if (r.warnings.length) console.log('warnings: ' + r.warnings.join(' | '));
   }
 }
