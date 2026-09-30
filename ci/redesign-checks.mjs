@@ -96,7 +96,7 @@ export function runRedesignChecks({ js, css, baseline, phase, check }) {
 
   // 3. inline style ratchet
   const styles = (js.match(/style="/g) || []).length;
-  check(`inline styles: style=" count ${styles} <= baseline ${baseline.styleAttributes}`, styles <= baseline.styleAttributes, styles < baseline.styleAttributes ? `down ${baseline.styleAttributes - styles}; lower ci/baseline.json styleAttributes` : '');
+  check(`inline styles: style=" count ${styles} <= baseline ${baseline.styleAttributes}`, styles <= baseline.styleAttributes, styles < baseline.styleAttributes ? `down ${baseline.styleAttributes - styles}; lower it with node ci/launch.mjs --write-weight after the last merge of the round` : '');
 
   // 4. contact SMS disclosure
   const at = js.indexOf('id="zynix-demo-form"'); const form = at < 0 ? '' : js.slice(at, js.indexOf('</form>', at) + 7);
