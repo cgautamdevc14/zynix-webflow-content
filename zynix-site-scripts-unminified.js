@@ -5597,6 +5597,8 @@
 
     // 7. Customers (§5.9): one verbatim release quote, two cards (no numbers), the stories link (ROI link: HOME_ROI_LINK)
     var pb = zxCustomer('pbaco');
+    // PBACO's size in the release's words, attributed to the release: the same helper and wording as /care-plans (DECISIONS 15)
+    var pbSize = typeof zxPlatPbacoSize === 'function' ? zxPlatPbacoSize() : 'PBACO Holding';
     // A verbatim excerpt: the release quote from "We believe…" to the end; the full quote stays on the case study and /press.
     var pbQuote = pb && pb.quote && pb.quote.text ? pb.quote.text.replace(/^[^.]*\.\s+(?=We believe)/, '') : null;
     var card = function (id, line) {
@@ -5608,7 +5610,8 @@
     var pbOrg = pb && pb.logo ? '<span class="zx-home-quote__org"><img class="zx-home-quote__mark" src="' + zxAttr(zxImg(pb.logo.file)) + '" alt="" width="' + pb.logo.w + '" height="' + pb.logo.h + '" loading="lazy" decoding="async">' + pb.name + '</span>' : '';
     var customers = renderSection({ id: 'customers', surface: 'subtle', className: 'zx-home-customers' },
       renderSectionHead('Customer stories', 'Customers, on the record',
-        'Palm Beach ACO and eternalHealth announced their partnerships with Zynix in published releases.<span class="zx-home-customers__more"> PBACO Holding, one of the nation’s largest risk-bearing ACOs, started with outreach for post-discharge follow-up and annual wellness visits.</span>', { id: 'customers-title' }) +
+        'Palm Beach ACO and eternalHealth announced their partnerships with Zynix in published releases.<span class="zx-home-customers__more"> ' +
+          pbSize + (pbSize === 'PBACO Holding' ? '' : ',') + ' started with outreach for post-discharge follow-up and annual wellness visits.</span>', { id: 'customers-title' }) +
       renderSplit(
         renderQuote({ customer: 'pbaco', variant: 'large', href: null, text: pbQuote, logo: null }).replace('__cite">', '__cite">' + pbOrg).replace('</figcaption>', '<span class="zx-home-quote__links">' +
           (pb && pb.release ? renderLinkArrow('Read the announcement', pb.release.href) : '') + (pb && pb.caseStudy ? renderLinkArrow('Read the case study', pb.caseStudy) : '') + '</span></figcaption>'),
