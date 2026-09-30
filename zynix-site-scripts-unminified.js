@@ -849,7 +849,7 @@
       ],
       areaServed:{'@type':'Country',name:'United States'},
       numberOfEmployees:{'@type':'QuantitativeValue',minValue:50,maxValue:100},
-      foundingDate:'2023',
+      foundingDate:'2024',
       naics:'541511',
       knowsAbout:['Value-Based Care','Healthcare Artificial Intelligence','Population Health Management','Care Gap Closure','Transitional Care Management','HCC Risk Adjustment','HEDIS Quality Measures','ACO Management','Medicare Shared Savings Program','HIPAA Compliance','Healthcare Workflow Automation','Clinical Documentation','AI Voice Agents for Healthcare','Patient Outreach Automation','Care Coordination Software'],
       hasOfferCatalog:{'@type':'OfferCatalog',name:'Healthcare AI Platform',itemListElement:[
@@ -6809,9 +6809,9 @@ function renderAboutV7() {
     }, { className: 'zx-co-people' }));
 
   // Milestones: registry facts and published releases and posts only (COPY_DECK §5.6), oldest first, one "Today" row.
-  // Founding year 2023 = the Organization JSON-LD foundingDate [VERIFY]; the ACCESS approval date stays held [VERIFY].
+  // Founding year 2024 = the Organization JSON-LD foundingDate (confirmed by Gautamdev 2026-09-30; not 2023); the ACCESS approval date stays held [VERIFY].
   var milestones = [
-    { when: '2023', text: 'Zynix AI founded to close the gap between knowing and doing in <span class="zx-co-nowrap">value-based</span> care' },
+    { when: '2024', text: 'Zynix AI founded to close the gap between knowing and doing in <span class="zx-co-nowrap">value-based</span> care' },
     { when: 'March 2026', text: F.stats.patients.sentence + ' at ' + F.stats.states.sentence, href: '/resources-blog-1m-patients', link: 'Read the announcement' },
     { when: 'April 2026', text: 'Strategic partnership with PBACO Holding announced', href: pb.release.href, link: 'Read the release' },
     { when: 'June 2026', text: 'Partnership with eternalHealth and nirvanaHealth announced', href: eh.release.href, link: 'Read the release' },
