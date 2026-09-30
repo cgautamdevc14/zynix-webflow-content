@@ -2,6 +2,8 @@ name: Site bundle — check and deploy
 
 # Production (www.zynix.ai, Webflow) loads two files from this repo through jsDelivr @main:
 #   zynix-site-scripts-unminified.js   and   zynix-site-styles.deployed.css
+#   or, once the Webflow head and footer point at them, their deploy build (ci/build.mjs):
+#   dist/zynix-site-scripts.deployed.js   and   dist/zynix-site-styles.deployed.css
 # A merge to main is therefore a production deploy. This workflow is the gate and the deploy step:
 #   pull request -> static checks + headless smoke test against the live site with the PR's files swapped in
 #   push to main -> the same checks, then purge jsDelivr's @main cache and prove the CDN serves the new bytes
@@ -16,6 +18,7 @@ on:
     paths:
       - 'zynix-site-scripts-unminified.js'
       - 'zynix-site-styles.deployed.css'
+      - 'dist/**'
       - 'ci/**'
       - '.github/workflows/site-bundle.yml'
   workflow_dispatch:
@@ -40,6 +43,8 @@ jobs:
         run: node --check zynix-site-scripts-unminified.js
       - name: Static checks
         run: node ci/static-checks.mjs
+      - name: Deploy build is current (dist/ = node ci/build.mjs of this commit's sources; production loads dist/)
+        run: node ci/build.mjs --check
       - name: Smoke test (live pages, this commit's files swapped in; read-only)
         run: |
           set +e
@@ -64,20 +69,20 @@ jobs:
       - uses: actions/checkout@v5
       - name: Purge jsDelivr @main
         run: |
-          for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css; do
+          for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css dist/zynix-site-scripts.deployed.js dist/zynix-site-styles.deployed.css; do
             echo "purging $f"; curl -fsS --retry 3 "$PURGE/$f" | head -c 400; echo
           done
       - name: Prove the CDN serves this commit
         run: |
           for i in $(seq 1 40); do
             ok=1
-            for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css; do
+            for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css dist/zynix-site-scripts.deployed.js dist/zynix-site-styles.deployed.css; do
               want=$(sha256sum "$f" | cut -d' ' -f1)
               got=$(curl -fsS --retry 2 "$CDN/$f" | sha256sum | cut -d' ' -f1)
               if [ "$want" != "$got" ]; then ok=0; echo "attempt $i: $f not current yet"; fi
             done
             if [ "$ok" = "1" ]; then break; fi
-            if [ $((i % 10)) = 0 ]; then for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css; do curl -fsS "$PURGE/$f" >/dev/null || true; done; fi
+            if [ $((i % 10)) = 0 ]; then for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css dist/zynix-site-scripts.deployed.js dist/zynix-site-styles.deployed.css; do curl -fsS "$PURGE/$f" >/dev/null || true; done; fi
             sleep 15
           done
           if [ "$ok" != "1" ]; then echo "::error::jsDelivr @main still serves old bytes after 10 minutes"; exit 1; fi
@@ -86,7 +91,7 @@ jobs:
             echo ""
             echo "| file | sha256 |"
             echo "|---|---|"
-            for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css; do echo "| \`$f\` | \`$(sha256sum "$f" | cut -d' ' -f1)\` |"; done
+            for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css dist/zynix-site-scripts.deployed.js dist/zynix-site-styles.deployed.css; do echo "| \`$f\` | \`$(sha256sum "$f" | cut -d' ' -f1)\` |"; done
             echo ""
             echo "Returning visitors pick it up on their next page view (the bundle re-validates its own cache in the background)."
           } >> "$GITHUB_STEP_SUMMARY"

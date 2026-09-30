@@ -6,6 +6,10 @@ import { spawn } from 'node:child_process'; import fs from 'node:fs'; import os 
 const BASE = process.env.SITE || 'https://www.zynix.ai'; const PORT = 9400 + Math.floor(Math.random() * 400); const sleep = ms => new Promise(r => setTimeout(r, ms));
 const CHROME = process.env.CHROME_BIN || (process.platform === 'darwin' ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' : '/usr/bin/google-chrome');
 const JS = fs.readFileSync('zynix-site-scripts-unminified.js'), CSS = fs.readFileSync('zynix-site-styles.deployed.css');
+// Deploy build (launch item "build", step A): once the Webflow head loads …@main/dist/ (step B), requests for the dist/ URLs are
+// answered with this checkout's build (ci/build.mjs, made in memory), so a PR's smoke test keeps exercising the PR's code.
+const { buildJs, buildCss } = await import('./build.mjs');
+const JS_DIST = Buffer.from(buildJs(JS.toString('utf8')), 'utf8'), CSS_DIST = Buffer.from(buildCss(CSS.toString('utf8')), 'utf8');
 const results = []; const check = (name, ok, detail = '') => { results.push({ name, ok: !!ok }); console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? '  — ' + detail : ''}`); };
 
 const prof = fs.mkdtempSync(path.join(os.tmpdir(), 'zx-smoke-'));
@@ -25,7 +29,9 @@ async function open(pathname, opts = {}) {
     if (method === 'Runtime.exceptionThrown') st.errors.push(((prm.exceptionDetails.exception && prm.exceptionDetails.exception.description) || prm.exceptionDetails.text || '').slice(0, 220));
     if (method !== 'Fetch.requestPaused') return; const url = prm.request.url; const ok = (type, body) => S('Fetch.fulfillRequest', { requestId: prm.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: type }, { name: 'Access-Control-Allow-Origin', value: '*' }, { name: 'ETag', value: '"smoke"' }], body: body.toString('base64') });
     try {
-      if (/zynix-site-scripts-unminified\.js/.test(url)) { st.js++; await ok('application/javascript; charset=utf-8', JS); }
+      if (/\/dist\/zynix-site-scripts\.deployed\.js/.test(url)) { st.js++; await ok('application/javascript; charset=utf-8', JS_DIST); }
+      else if (/\/dist\/zynix-site-styles\.deployed\.css/.test(url)) { st.css++; await ok('text/css; charset=utf-8', CSS_DIST); }
+      else if (/zynix-site-scripts-unminified\.js/.test(url)) { st.js++; await ok('application/javascript; charset=utf-8', JS); }
       else if (/zynix-site-styles\.deployed\.css/.test(url)) { st.css++; await ok('text/css; charset=utf-8', CSS); }
       else if (/api\.hsforms\.com/.test(url)) { st.hubspot++; await S('Fetch.failRequest', { requestId: prm.requestId, errorReason: 'BlockedByClient' }); }
       else if (prm.responseStatusCode !== undefined) {           // the main document, at response stage
@@ -39,7 +45,7 @@ async function open(pathname, opts = {}) {
   });
   await S('Page.enable'); await S('Runtime.enable'); await S('Network.enable');
   await S('Network.setBlockedURLs', { urls: ['*google-analytics.com*', '*googletagmanager.com*', '*facebook.net*', '*facebook.com/tr*', '*claydar.com*', '*/ag/g/c*', '*snap.licdn.com*', '*doubleclick.net*', '*hs-analytics*', '*hs-scripts.com*'] });
-  await S('Fetch.enable', { patterns: [{ urlPattern: '*zynix-site-scripts-unminified.js*' }, { urlPattern: '*zynix-site-styles.deployed.css*' }, { urlPattern: '*api.hsforms.com*' }, { urlPattern: BASE + '/*', resourceType: 'Document', requestStage: 'Response' }] });
+  await S('Fetch.enable', { patterns: [{ urlPattern: '*zynix-site-scripts-unminified.js*' }, { urlPattern: '*dist/zynix-site-scripts.deployed.js*' }, { urlPattern: '*zynix-site-styles.deployed.css*' }, { urlPattern: '*api.hsforms.com*' }, { urlPattern: BASE + '/*', resourceType: 'Document', requestStage: 'Response' }] });
   await S('Emulation.setDeviceMetricsOverride', opts.mobile ? { width: 390, height: 844, deviceScaleFactor: 2, mobile: true } : { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
   // Production itself loads @main now, so every earlier page in this run already set the bundle's 10-minute
   // re-validation throttle in localStorage. Clear it for the check that needs a first visit.
@@ -105,7 +111,7 @@ const A2P = `(()=>{const vis=e=>!!(e.offsetWidth||e.offsetHeight);const main=doc
 { const pg = await open('/', { mobile: true }); const r = await pg.ev(`(()=>{const b=document.querySelector('.zynix-nav-hamburger');if(b)b.click();const m=document.querySelector('.zynix-mobile-menu');return {overflow:document.documentElement.scrollWidth-window.innerWidth,menu:!!(m&&m.classList.contains('open'))}})()`); check('mobile home: no horizontal overflow, menu opens', r && r.overflow <= 2 && r.menu, JSON.stringify(r)); check('mobile home: no exceptions', pg.st.errors.length === 0, pg.st.errors.join(' | ')); await pg.close(); }
 
 // 4. the page as it will be once Webflow loads @main: background cache revalidation fires and nothing throws
-{ const pg = await open('/', { asMain: true, firstVisit: true, wait: 16000 }); const r = await pg.ev(`({main:[...document.scripts].some(s=>/@main\\/zynix-site-scripts-unminified\\.js/.test(s.src)),words:document.body.innerText.split(/\\s+/).length,stamp:(()=>{try{return !!localStorage.getItem('zx_asset_check')}catch(e){return null}})()})`);
+{ const pg = await open('/', { asMain: true, firstVisit: true, wait: 16000 }); const r = await pg.ev(`({main:[...document.scripts].some(s=>/@main\\/(dist\\/zynix-site-scripts\\.deployed|zynix-site-scripts-unminified)\\.js/.test(s.src)),words:document.body.innerText.split(/\\s+/).length,stamp:(()=>{try{return !!localStorage.getItem('zx_asset_check')}catch(e){return null}})()})`);
   check('@main simulation: page renders from the @main URLs', r && r.main && r.words > 1200, JSON.stringify(r)); check('@main simulation: bundle and stylesheet are re-validated in the background (2 requests each)', pg.st.js >= 2 && pg.st.css >= 2, `bundle ${pg.st.js}x, stylesheet ${pg.st.css}x`); check('@main simulation: no exceptions', pg.st.errors.length === 0, pg.st.errors.join(' | ')); await pg.close(); }
 
 const failed = results.filter(r => !r.ok); console.log(`\n${results.length - failed.length}/${results.length} smoke checks passed`);
