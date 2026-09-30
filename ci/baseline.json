@@ -51,7 +51,6 @@
     "/compare-zynix-vs-navina": 1
   },
   "bannedStrings": {
-    "(bundle)": 47,
-    "renderHomepage": 44
+    "(bundle)": 47
   }
 }
