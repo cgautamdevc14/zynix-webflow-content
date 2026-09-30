@@ -4904,8 +4904,8 @@
   // ── §5.2 Hero widget: one responsive HTML widget with real tabs (tablist, roving tabindex, one panel per tab) ──
   var ZX_HW_PAUSE = '<svg class="zx-hw__icon zx-hw__icon--pause" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16"><rect x="4" y="3" width="2.75" height="10" rx="1" fill="currentColor"/><rect x="9.25" y="3" width="2.75" height="10" rx="1" fill="currentColor"/></svg>' +
     '<svg class="zx-hw__icon zx-hw__icon--play" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16"><path d="M5 3.3v9.4a.6.6 0 0 0 .9.5l7.3-4.7a.6.6 0 0 0 0-1L5.9 2.8a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>';
-  // The coloured symbol (the touch icon, live on @main); SITE_FACTS.brand.symbol is light artwork for dark surfaces.
-  var ZX_HW_MARK = 'apple-touch-icon.png';
+  // The shared colour symbol, rendered like every other zynix-ui bar (renderUiPanel), so the chrome matches site-wide.
+  var ZX_HW_MARK = SITE_FACTS.brand.symbol;
   function renderHeroWidget(model) {
     model = model || HERO_WIDGET;
     var tabs = model.tabs || [];
@@ -4928,7 +4928,7 @@
         tiles + rows + pipeline + zxEl('p', 'zynix-ui__footer', t.footer) + '</div>';
     }).join('');
     return '<div class="zx-hw zynix-ui" data-zx-hw data-zx-sample role="group" aria-label="' + zxAttr(model.label) + '">' +
-      '<div class="zynix-ui__bar"><span class="zynix-ui__brand"><span class="zx-hw__mark" aria-hidden="true"><img src="' + zxAttr(zxImg(ZX_HW_MARK)) + '" alt="" width="32" height="32"></span>' + model.brand + '</span>' +
+      '<div class="zynix-ui__bar"><span class="zynix-ui__brand"><img src="' + zxAttr(zxImg(ZX_HW_MARK)) + '" alt="" width="20" height="20"> ' + model.brand + '</span>' +
         '<span class="zynix-ui__badge">' + model.badge + '</span><span class="zynix-chip zynix-chip--sample">' + model.chip + '</span></div>' +
       '<div class="zx-hw__tabbar"><div class="zx-hw__tabs" role="tablist" aria-label="Sample workspace views" data-zx-allow-overflow>' + tablist + '</div>' +
         '<button type="button" class="zx-hw__pause" aria-pressed="false" aria-label="Pause the sample rotation" hidden>' + ZX_HW_PAUSE + '</button></div>' +
@@ -5029,10 +5029,16 @@
       '<p class="zx-home-cap__body">' + row.body + '</p>' +
       '<div class="zx-home-cap__links">' + (row.links || []).map(function (l) { return renderLinkArrow(l.label, l.href); }).join('') + '</div>';
   }
+  // §5.0 fallback 1 (the 390 height budget): the compact panel variant at every width, no tiles and 3 rows. The care
+  // plan keeps its trigger, the agent's call and the RN's TCM contact (platform, agent and person); the booked visit is
+  // in the episode above.
+  function zxHomeCompact(p) {
+    return Object.assign({}, p, { chip: null, tiles: null, rows: p.rows ? p.rows.slice(0, 3) : null, steps: p.steps ? p.steps.slice(0, 3) : null });
+  }
   function zxHomeCapFrame(row, mode) {
     return mode === 'capture'
       ? renderProductFrame({ src: row.capture.src, alt: row.capture.alt, caption: row.capture.caption || row.caption, sample: true, sampleLabel: 'Sample data' })
-      : renderProductFrame({ html: renderUiPanel(Object.assign({}, row.panel, { chip: null })), sample: true, sampleLabel: 'Sample data', caption: row.caption });
+      : renderProductFrame({ html: renderUiPanel(zxHomeCompact(row.panel)), sample: true, sampleLabel: 'Sample data', caption: row.caption });
   }
   function zxHomeCapabilities(rows) {
     var modes = rows.map(zxHomeCapMode);
@@ -5288,7 +5294,7 @@
       renderSectionHead(null, 'Works with the systems you already run',
         'Zynix connects to ' + SITE_FACTS.ehr.line + ', plus claims, ADT, lab and pharmacy feeds. For a network of independent practices, that means one record and one worklist, even when every practice runs a different EHR.',
         { id: 'interoperability-title', action: { label: 'See all integrations', href: '/integrations' } }),
-      zxHomeLabel('EHRs we connect to include', 'zx-home-ehr-label') +
+      zxHomeLabel('EHR systems we connect to include', 'zx-home-ehr-label') +   // no plural acronym under the uppercase label ("EHRS")
       '<ul class="zx-home-ehr" role="list" aria-labelledby="zx-home-ehr-label">' + SITE_FACTS.ehr.named.map(function (e) {
         var m = /^(.*?)\s*(\([^)]*\))$/.exec(e);   // "Oracle Health (Cerner)": the former name is a muted second line
         return '<li>' + (m ? m[1] + ' <span class="zx-home-ehr__aka">' + m[2] + '</span>' : e) + '</li>'; }).join('') + '</ul>' +
