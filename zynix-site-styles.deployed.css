@@ -297,15 +297,18 @@ html:not(.wf-native) {
 }
 @media (max-width:1023.98px) { html:not(.wf-native) { --zx-nav-h:56px; } }
 /* Metric-matched fallback shown until Funnel Sans arrives (CLS): Arial scaled to Funnel Sans's advance widths (measured in Chrome
-   on 22 KB of site copy: regular 99.9%, semibold vs Arial Bold 94.3%; set to 99% / 94.8%, which kept the font-swap CLS at or
-   below 0.026 on every page measured at 1440 and 390), with Funnel Sans's ascent 1.00 / descent 0.25 / line gap 0.
-   Same unicode-range as Funnel Sans's latin file, so glyphs Funnel Sans lacks (→, ✓) still fall through to the system font. */
-@font-face{font-family:'Funnel Sans Fallback';src:local('Arial'),local('ArialMT');font-weight:400 500;size-adjust:99%;ascent-override:101%;descent-override:25.3%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+   on 22 KB of site copy: regular 99.9%, semibold vs Arial Bold 94.3%), with Funnel Sans's ascent 1.00 / descent 0.25 / line gap 0
+   (the overrides are scaled by size-adjust). 99.5% / 94.8% give the lowest font-swap shift over 104 routes at 6 widths; no single
+   bold value removes every hero-H1 re-wrap, as the width ratio varies by string. Same unicode-range as Funnel Sans's latin file,
+   so glyphs Funnel Sans lacks (→, ✓) still fall through to the system font. */
+@font-face{font-family:'Funnel Sans Fallback';src:local('Arial'),local('ArialMT');font-weight:400 500;size-adjust:99.5%;ascent-override:100.5%;descent-override:25.13%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Funnel Sans Fallback';src:local('Arial Bold'),local('Arial-BoldMT');font-weight:600 700;size-adjust:94.8%;ascent-override:105.5%;descent-override:26.4%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 
 
 /* ── §1.3 Scoped base typography: neutralises Webflow's body, h1–h4 and p rules on bundle pages only ── */
-html:not(.wf-native) body { font-family:var(--zx-font-sans); }
+/* body.zx-has-chrome (set by zxSetChromeHeight), not body: Funnel Sans on Webflow's hidden pre-bundle text (crawler embeds,
+   h1.legal-title) made 29 pages fetch the woff2 during the bundle download and paint ~100 ms later (final QA r3 perf). */
+html:not(.wf-native) body.zx-has-chrome { font-family:var(--zx-font-sans); }
 html:not(.wf-native) { scroll-padding-top:calc(var(--zx-chrome-h) + 16px); }
 :is(.zynix-injected, .zynix-mega-nav, .zynix-mobile-menu, .zynix-announcement-bar,
     .zynix-cookie-banner, .zynix-skip-nav, #zynix-chat-widget) {
@@ -344,8 +347,6 @@ html:not(.wf-native) { scroll-padding-top:calc(var(--zx-chrome-h) + 16px); }
 .zynix-section--rule    { border-top:1px solid var(--zx-border); }
 .zynix-section--inverse.zynix-section--rule { border-top-color:var(--zx-border-inverse); }
 
-.zynix-grid { display:grid; gap:var(--zx-grid-gap); grid-template-columns:repeat(12, minmax(0,1fr)); }
-
 /* ── §1.6 Motion: progressive and reduced-motion safe ── */
 /* Reveal: nothing is hidden unless JS has added html.zx-motion (S2's initAnimations adds it only when
    prefers-reduced-motion is not "reduce"). Legacy .fade-in-up{opacity:0} (CSS:495) is neutralised here. */
@@ -361,7 +362,6 @@ html.zx-motion .zynix-injected .fade-in-up { transition:opacity var(--zx-dur-rev
     transition-duration:.01ms!important; scroll-behavior:auto!important;
   }
   .zynix-injected .fade-in-up { opacity:1!important; transform:none!important; }
-  .zynix-injected .zynix-trust-track { animation:none!important; flex-wrap:wrap; justify-content:flex-start; width:auto; }
 }
 
 /* ── §1.7 Focus ──
@@ -445,6 +445,12 @@ a.zynix-btn:hover, a.zynix-btn:focus { text-decoration:none; }
 a.zynix-chip:hover { text-decoration:underline; text-underline-offset:2px; }
 @media (max-width:767.98px) { .zynix-chip--link { min-height:32px; } }
 .zynix-chip--sample { box-sizing:border-box; }
+/* Filter chips, one look site-wide (final QA m-S1a): one resting state, one selected state (brand tint) and one height
+   (40px, 44px below 1024). html:not(.wf-native) outranks the page:solutions and page:customers rules later in the file. */
+html:not(.wf-native) :is(.zx-sol-chip, .zx-cust-filter__chip, .zynix-filter__chip) { box-sizing:border-box; min-height:40px; border-color:var(--zx-border-strong); background:var(--zx-surface); color:var(--zx-text); }
+html:not(.wf-native) :is(.zx-sol-chip, .zx-cust-filter__chip, .zynix-filter__chip):hover { border-color:var(--zx-gray-400); color:var(--zx-text); }
+html:not(.wf-native) :is(.zx-sol-chip[aria-pressed="true"], .zx-cust-filter__input:checked + .zx-cust-filter__chip, .zynix-filter__chip[aria-pressed="true"]) { background:var(--zx-blue-50); border-color:var(--zx-blue-600); color:var(--zx-blue-700); }
+@media (max-width:1023.98px) { html:not(.wf-native) :is(.zx-sol-chip, .zx-cust-filter__chip, .zynix-filter__chip) { min-height:44px; } }
 
 /* §2.5 Trust badge and trust row */
 .zynix-trust-row { display:flex; flex-wrap:wrap; gap:var(--zx-space-2) var(--zx-space-3); list-style:none; margin:0; padding:0; }
@@ -801,6 +807,9 @@ a.zynix-card--inverse:hover { border-color:rgba(255,255,255,.3); box-shadow:none
   .zynix-logo-row__img { transform:scale(.85); }
 }
 .zynix-logo-row--inverse .zynix-logo-row__img { filter:grayscale(1) brightness(0) invert(1); opacity:.72; }
+/* Customer logo colour, one rule site-wide (final QA m-S1b): grey in multi-customer rows (the logo row above), full colour
+   wherever one customer is named (cards, quotes). html:not(.wf-native) outranks the later page:home / page:customers filters. */
+html:not(.wf-native) :is(.zx-home-customers .zynix-card__media img.zx-home-customers__logo, .zx-home-quote__mark, .zx-cust-card__logo-slot .zx-cust-card__logo) { filter:none; opacity:1; }
 .zynix-logo-row__item { margin:0; padding:0; min-width:0; }
 .zynix-logo-row--inverse .zynix-logo-row__label { color:var(--zx-text-inverse-muted); }
 .zynix-logo-row--inverse .zynix-link-arrow { color:var(--zx-link-inverse); }
@@ -993,9 +1002,10 @@ html.zx-menu-open #zynix-chat-widget { display:none; }
 .zynix-mega-nav .zynix-nav-contact { display:none; align-items:center; min-height:40px; padding:0 4px; color:var(--zx-text-secondary); font:var(--zx-fw-medium) 15px/1 var(--zx-font-sans); text-decoration:none; }
 .zynix-mega-nav .zynix-nav-contact:hover { color:var(--zx-text); }
 @media (min-width:1280px) { .zynix-mega-nav .zynix-nav-contact { display:inline-flex; } }
-.zynix-mega-nav .zynix-nav-cta { min-height:40px; padding:0 var(--zx-space-4); font-size:14px; }
-@media (max-width:1023.98px) { .zynix-mega-nav .zynix-nav-cta { min-height:44px; } }
-@media (max-width:359.98px) { .zynix-mega-nav .zynix-nav-cta { display:none; } }
+/* (0,3,0) so these beat the later legacy-fixes button group (0,2,0); without it the <360px hide never applied (final QA r3) */
+.zynix-mega-nav .zynix-nav-actions .zynix-nav-cta { min-height:40px; padding:0 var(--zx-space-4); font-size:14px; }
+@media (max-width:1023.98px) { .zynix-mega-nav .zynix-nav-actions .zynix-nav-cta { min-height:44px; } }
+@media (max-width:359.98px) { .zynix-mega-nav .zynix-nav-actions .zynix-nav-cta { display:none; } }
 .zynix-mega-nav .zynix-mega-panel { white-space:normal; }
 
 /* Hamburger (<1024): 44×44, three 20×2 bars that form a true X when expanded */
@@ -1177,6 +1187,11 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zynix-footer .zynix-footer__signup .zynix-capture-btn:hover { background:var(--zx-gray-100); border-color:var(--zx-gray-100); color:var(--zx-gray-900); }
 .zynix-footer .zynix-footer__signup-note { margin:var(--zx-space-1) 0 0; font-size:12px; line-height:1.5; color:var(--zx-text-inverse-muted); }
 .zynix-footer .zynix-footer__signup-note a { color:var(--zx-text-inverse-secondary); text-decoration:underline; text-underline-offset:2px; }
+.zynix-footer .zynix-footer__signup-note a:hover, .zynix-footer .zynix-footer__signup-note a:focus-visible { color:var(--zx-text-inverse); }
+/* Status line: the confirmation is as strong as the error (white), and the handler's programmatic focus (tabindex=-1) draws
+   no ring round bare text, which read as an empty focused field (final QA N2) */
+.zynix-footer .zynix-footer__signup-status:not(.zx-form-err) { color:var(--zx-text-inverse); }
+.zynix-injected .zynix-capture-status[tabindex="-1"]:focus-visible { outline:none; }
 /* The newsletter handler (router) writes inline colours meant for light surfaces: the success <p style="color:#20449B"> replaces the
    form's content and the error <p class="zx-form-err" style="color:#b91c1c"> follows the form. !important beats those inline styles
    (§1.8 rule 5) so both read at AA on the inverse footer. */
@@ -1355,8 +1370,6 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 /* Interim (S2 rebuilds renderRelatedSection with classes, §2.16): its inline repeat(N,1fr) link grid (MOB-1) goes 2-up on tablets, 1-up on phones */
 @media (max-width:1023.98px) { .zynix-injected .zynix-container > div > div[style^="display:grid;grid-template-columns:repeat("][style$="gap:10px"] { grid-template-columns:repeat(2, minmax(0,1fr))!important; } }
 @media (max-width:767.98px) { .zynix-injected .zynix-container > div > div[style^="display:grid;grid-template-columns:repeat("][style$="gap:10px"] { grid-template-columns:minmax(0,1fr)!important; } }
-/* Interim (P6 rebuilds it with classes): the inline two-column compare grid collapses on phones */
-@media (max-width:767.98px) { .zynix-injected [class*="zynix-compare-two-col"][style*="grid-template-columns"] { grid-template-columns:1fr!important; } }
 
 /* ── Email capture (re-declared from the injected <style>): subtle surface, hairlines, no gradient ── */
 .zynix-injected .zynix-email-capture { background:var(--zx-surface-subtle); border-top:1px solid var(--zx-border); border-bottom:1px solid var(--zx-border); }
@@ -1392,8 +1405,6 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zynix-injected .zynix-form-group :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea):hover { border-color:var(--zx-gray-400); }
 @media (max-width:767.98px) { .zynix-injected .zynix-form-group :is(input:not([type="checkbox"]):not([type="radio"]), select) { min-height:48px; } }
 
-/* ── Chrome leftovers re-declared from the injected <style> (trust-logo filter; the promo-card and dropdown-featured rules went with their markup) ── */
-.zynix-injected :is(.zynix-trust-marquee, .zynix-trust-track) img, .zynix-injected [class*="trust-marquee"] img, .zynix-injected [class*="trust-track"] img { filter:grayscale(1) brightness(.45) contrast(1.2); opacity:1; }
 /* pre-S3 chat: keep the panel inside a phone screen (replaces the CSS:1385–1392 overrides; !important beats the inline panel styles) */
 @media (max-width:479.98px) {
   #zynix-chat-widget:not(.zynix-chat) #zynix-chat-panel { width:calc(100vw - 32px)!important; right:-8px!important; bottom:68px!important; max-height:70vh!important; }
