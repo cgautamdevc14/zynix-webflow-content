@@ -5631,7 +5631,7 @@ function renderUseCaseV7(data) {
     media: { type: 'product', frame: { html: renderUiPanel({ brand: ep.brand || 'Care operations', chip: ep.steps ? 'Example episode · sample data' : 'Sample data',
       title: ep.title, meta: ep.meta, tiles: ep.tiles, rows: ep.rows, pipeline: ep.pipeline, steps: ep.steps, note: ep.note, footer: ep.footer,
       label: (ep.steps ? 'Example ' + ep.title.charAt(0).toLowerCase() + ep.title.slice(1) : 'Sample ' + ep.title.charAt(0).toLowerCase() + ep.title.slice(1)) + ', illustrative data' }),
-      sample: false, className: 'zx-sol-frame' } } });
+      sample: false, className: 'zx-sol-frame zx-sol-frame--hero' } } });   // hidden below 768px (§7.3); "How it runs" carries the steps
 
   // The problem, and where today's tools stop
   var gaps = (data.gaps || []).map(function (x) {
@@ -5693,10 +5693,10 @@ function renderUseCaseV7(data) {
 // ── Audience page (§6 "Audience", ~3,500px): hero + panel → proof → what we run → a plan at work → how it connects →
 // segment callout → (extra) → related (router, CROSS_LINKS) → CTA ──
 function renderAudiencePageV7(d) {
-  // The audience name is the eyebrow AND part of the H1 (the H1 names the organization type for readers and search),
-  // rendered as a kicker line inside the heading so the visible design is unchanged.
-  var html = renderHero({ preset: 'product', title: '<span class="zynix-eyebrow zx-sol-kicker">' + d.eyebrow + '</span> ' + zxSolNw(d.title), lead: d.lead, secondary: d.secondary,
-    media: { type: 'product', frame: { html: renderUiPanel(d.panel), sample: false, className: 'zx-sol-frame', caption: d.panelCaption } } });
+  // The audience name is the hero eyebrow (a separate p.zynix-eyebrow before the H1, §2.10, as on every other family).
+  // The hero panel is hidden below 768px (§7.3; the "In practice" panel carries the product on phones).
+  var html = renderHero({ preset: 'product', eyebrow: d.eyebrow, title: zxSolNw(d.title), lead: d.lead, secondary: d.secondary,
+    media: { type: 'product', frame: { html: renderUiPanel(d.panel), sample: false, className: 'zx-sol-frame zx-sol-frame--hero', caption: d.panelCaption } } });
 
   // Proof: customers of this segment (registry only) and one release quote or customer story
   // (segment logos, or named customers, or the registry logo row), beside a release quote or a customer story card
@@ -7033,8 +7033,9 @@ function renderWhoWeServeHealthPlans() {
 // ============================================================================
 function renderWhoWeServeIndependentPractices() {
   return renderAudiencePageV7({
-    eyebrow: 'MSOs, IPAs &amp; physician groups',
-    title: 'Run value-based programs across independent practices',
+    // The H1 names MSOs, IPAs and physician groups (§8.4 P3); the eyebrow is COPY_DECK §5.3's collective term.
+    eyebrow: 'Physician organizations',
+    title: 'Value-based programs for MSOs, IPAs and physician groups',
     lead: 'One data layer and one set of workflows for every practice in your network: wellness visits, transitions of care, chronic care and quality gaps, whatever EHR each practice runs.',
     secondary: { label: 'See the workflows', href: '#workflows' },
     panel: { brand: 'Care operations', title: 'Network worklist', meta: 'All practices · this week', label: 'Sample network worklist, illustrative data',

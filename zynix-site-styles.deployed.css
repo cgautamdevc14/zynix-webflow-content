@@ -4091,12 +4091,14 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 /* /solutions, the six audience pages, /use-cases and the 30 use-case pages. Every selector starts with a zx-sol- class;
    shared components are restyled only as descendants of one (DESIGN_SPEC §1.8). Tokens only, no raw colours. */
 
-/* Hero media: an illustrative panel inside a product frame (the panel carries its own "Sample data" chip) */
+/* Hero media: an illustrative panel inside a product frame (the panel carries its own "Sample data" chip).
+   The kit's brand symbol is near-invisible on the light panel bar, so it is hidden here as on P1 and P2 frames. */
 .zx-sol-frame { width:100%; max-width:640px; justify-self:center; }
+.zx-sol-frame .zynix-ui__brand img { display:none; }
 .zx-sol-frame .zynix-ui__steps .zynix-ui__step { padding-block:11px; }
-
-/* Audience hero: the eyebrow is a kicker line inside the H1 */
-.zx-sol-kicker { display:flex; margin:0 0 var(--zx-space-3); }
+/* §2.10 / §7.3: phones get the hero text only, as on the agents pages (the hero must stay within 1.2 screens at 390).
+   Audience pages show their "In practice" panel lower down; use-case pages list the same steps in "How it runs". */
+@media (max-width:767.98px) { .zx-sol-frame--hero { display:none; } }
 
 /* Hyphenated words stay on one line in headings */
 .zx-sol-nw { white-space:nowrap; }
@@ -4228,11 +4230,12 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 
 .zx-sol-orgframe { width:100%; max-width:576px; justify-self:end; }
 .zx-sol-orgnav { padding:var(--zx-space-4) var(--zx-space-4) var(--zx-space-2); }
-.zx-sol-orgnav__title { margin:0 0 var(--zx-space-2); padding:0 var(--zx-space-3); font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.2 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase; color:var(--zx-text-muted); }
+/* The picker's H2 is a real heading (h3 scale inside the panel), not an eyebrow */
+.zx-sol-orgnav__title { margin:0 0 var(--zx-space-2); padding:0 var(--zx-space-3); font:var(--zx-fw-semibold) var(--zx-fs-h3)/var(--zx-lh-snug) var(--zx-font-sans); letter-spacing:-.01em; text-transform:none; color:var(--zx-text); }
 .zx-sol-orgnav__list { list-style:none; margin:0; padding:0; }
 .zx-sol-orgnav__list > li { margin:0; }
 .zx-sol-orgnav__list > li + li { border-top:1px solid var(--zx-border); }
-.zx-sol-orgnav__link { display:flex; align-items:flex-start; gap:var(--zx-space-4); padding:var(--zx-space-3); border-radius:var(--zx-radius-md); color:inherit; text-decoration:none;
+.zx-sol-orgnav__link { display:flex; align-items:flex-start; gap:var(--zx-space-4); padding:10px var(--zx-space-3); border-radius:var(--zx-radius-md); color:inherit; text-decoration:none;
   transition:background-color var(--zx-dur-1) var(--zx-ease-out); }
 .zx-sol-orgnav__link:hover { background:var(--zx-surface-subtle); }
 .zx-sol-orgnav__icon { display:grid; place-items:center; flex:none; width:36px; height:36px; border-radius:var(--zx-radius-md); background:var(--zx-blue-50); color:var(--zx-blue-600); }
@@ -4245,7 +4248,13 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-sol-orgnav__link:hover .zx-sol-orgnav__name, .zx-sol-orgnav__link:hover .zx-sol-orgnav__arrow { color:var(--zx-link); }
 .zx-sol-orgnav__link:hover .zx-sol-orgnav__arrow { transform:translateX(2px); }
 @media (max-width:1023.98px) { .zx-sol-orgframe { max-width:none; justify-self:stretch; } }
-@media (max-width:479.98px) { .zx-sol-orgnav { padding:var(--zx-space-3) var(--zx-space-2) var(--zx-space-2); } .zx-sol-orgnav__icon { display:none; } }
+/* Phones: the picker collapses to a link list (organization name + arrow) so the hero stays within 1.2 screens (§2.10);
+   each audience page carries its own description and customers. */
+@media (max-width:767.98px) {
+  .zx-sol-orgnav { padding:var(--zx-space-3) var(--zx-space-2) var(--zx-space-1); }
+  .zx-sol-orgnav__icon, .zx-sol-orgnav__line, .zx-sol-orgnav__proof { display:none; }
+  .zx-sol-orgnav__link { align-items:center; min-height:48px; box-sizing:border-box; padding-block:var(--zx-space-2); }
+}
 
 /* /use-cases: organization filter, program jump links, workflow groups */
 .zx-sol-filter__row { display:flex; flex-wrap:wrap; align-items:center; gap:var(--zx-space-3) var(--zx-space-4); }
