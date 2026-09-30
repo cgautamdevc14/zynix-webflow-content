@@ -2,10 +2,23 @@
 // stylesheet, so a change is exercised against the live Webflow HTML before it can reach visitors.
 // Read-only: analytics are blocked, no form is submitted, HubSpot is never contacted.
 // Exit codes: 0 = pass, 1 = the bundle or stylesheet is broken, 2 = inconclusive (production could not be loaded).
+// Deploy build (final QA round 2): requests for the dist/ URLs (ci/build.mjs DIST, what the Webflow head loads once it is
+// switched to the build) are answered with this checkout's build, made in memory; the source URLs keep getting the sources.
+// `node ci/smoke.mjs --built` (or ZX_SMOKE_BUILT=1) answers the source URLs with the build too, to exercise the build
+// against the live HTML before the switch. `node ci/smoke.mjs --dist` goes one step further and rewrites every page's HTML
+// to load the dist/ URLs, i.e. the site as it will be after the Webflow switch (launch item "build"), including the bundle's
+// background revalidation of dist/zynix-site-styles.deployed.css.
 import { spawn } from 'node:child_process'; import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path';
 const BASE = process.env.SITE || 'https://www.zynix.ai'; const PORT = 9400 + Math.floor(Math.random() * 400); const sleep = ms => new Promise(r => setTimeout(r, ms));
 const CHROME = process.env.CHROME_BIN || (process.platform === 'darwin' ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' : '/usr/bin/google-chrome');
 const JS = fs.readFileSync('zynix-site-scripts-unminified.js'), CSS = fs.readFileSync('zynix-site-styles.deployed.css');
+const { buildJs, buildCss } = await import('./build.mjs');
+const JS_BUILT = Buffer.from(buildJs(JS.toString('utf8')), 'utf8'), CSS_BUILT = Buffer.from(buildCss(CSS.toString('utf8')), 'utf8');
+const DIST_SIM = process.argv.includes('--dist');
+const BUILT = DIST_SIM || process.argv.includes('--built') || process.env.ZX_SMOKE_BUILT === '1';
+const toDist = html => html.replace(/(zynix-webflow-content@[^/"'\s]+\/)zynix-site-scripts-unminified\.js/g, '$1dist/zynix-site-scripts.deployed.js').replace(/(zynix-webflow-content@[^/"'\s]+\/)zynix-site-styles\.deployed\.css/g, '$1dist/zynix-site-styles.deployed.css');
+if (DIST_SIM) console.log('INFO  --dist: every page loads the dist/ URLs (the Webflow head after the switch)');
+if (BUILT) console.log('INFO  --built: the source URLs are answered with the deploy build (ci/build.mjs)');
 const results = []; const check = (name, ok, detail = '') => { results.push({ name, ok: !!ok }); console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? '  — ' + detail : ''}`); };
 
 const prof = fs.mkdtempSync(path.join(os.tmpdir(), 'zx-smoke-'));
@@ -20,26 +33,29 @@ const WATCHDOG = setTimeout(() => { console.log('\nFAIL  smoke test watchdog: th
 
 async function open(pathname, opts = {}) {
   const { targetId } = await send('Target.createTarget', { url: 'about:blank' }); const { sessionId } = await send('Target.attachToTarget', { targetId, flatten: true }); const S = (m, p) => send(m, p, sessionId);
-  const st = { js: 0, css: 0, errors: [], docStatus: 0, hubspot: 0 };
+  const st = { js: 0, css: 0, built: 0, errors: [], docStatus: 0, hubspot: 0 };
   hs.set(sessionId, async (method, prm) => {
     if (method === 'Runtime.exceptionThrown') st.errors.push(((prm.exceptionDetails.exception && prm.exceptionDetails.exception.description) || prm.exceptionDetails.text || '').slice(0, 220));
     if (method !== 'Fetch.requestPaused') return; const url = prm.request.url; const ok = (type, body) => S('Fetch.fulfillRequest', { requestId: prm.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: type }, { name: 'Access-Control-Allow-Origin', value: '*' }, { name: 'ETag', value: '"smoke"' }], body: body.toString('base64') });
     try {
-      if (/zynix-site-scripts-unminified\.js/.test(url)) { st.js++; await ok('application/javascript; charset=utf-8', JS); }
-      else if (/zynix-site-styles\.deployed\.css/.test(url)) { st.css++; await ok('text/css; charset=utf-8', CSS); }
+      if (/\/dist\/zynix-site-scripts\.deployed\.js/.test(url)) { st.js++; st.built++; await ok('application/javascript; charset=utf-8', JS_BUILT); }
+      else if (/\/dist\/zynix-site-styles\.deployed\.css/.test(url)) { st.css++; st.built++; await ok('text/css; charset=utf-8', CSS_BUILT); }
+      else if (/zynix-site-scripts-unminified\.js/.test(url)) { st.js++; await ok('application/javascript; charset=utf-8', BUILT ? JS_BUILT : JS); }
+      else if (/zynix-site-styles\.deployed\.css/.test(url)) { st.css++; await ok('text/css; charset=utf-8', BUILT ? CSS_BUILT : CSS); }
       else if (/api\.hsforms\.com/.test(url)) { st.hubspot++; await S('Fetch.failRequest', { requestId: prm.requestId, errorReason: 'BlockedByClient' }); }
       else if (prm.responseStatusCode !== undefined) {           // the main document, at response stage
         st.docStatus = prm.responseStatusCode;
-        if (!opts.asMain || prm.responseStatusCode !== 200) { await S('Fetch.continueRequest', { requestId: prm.requestId }); return; }
+        if ((!opts.asMain && !DIST_SIM) || prm.responseStatusCode !== 200) { await S('Fetch.continueRequest', { requestId: prm.requestId }); return; }
         const b = await S('Fetch.getResponseBody', { requestId: prm.requestId }); let html = Buffer.from(b.body, b.base64Encoded ? 'base64' : 'utf8').toString('utf8');
-        html = html.replace(/zynix-webflow-content@[0-9a-f]{7,40}\//g, 'zynix-webflow-content@main/');   // what the page will look like once Webflow points at @main
+        if (opts.asMain) html = html.replace(/zynix-webflow-content@[0-9a-f]{7,40}\//g, 'zynix-webflow-content@main/');   // what the page will look like once Webflow points at @main
+        if (DIST_SIM) { html = toDist(html); if (html.includes('/dist/zynix-site-scripts.deployed.js')) st.distHtml = true; }
         await S('Fetch.fulfillRequest', { requestId: prm.requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/html; charset=utf-8' }], body: Buffer.from(html, 'utf8').toString('base64') });
       } else await S('Fetch.continueRequest', { requestId: prm.requestId });
     } catch (e) { try { await S('Fetch.continueRequest', { requestId: prm.requestId }); } catch {} }
   });
   await S('Page.enable'); await S('Runtime.enable'); await S('Network.enable');
   await S('Network.setBlockedURLs', { urls: ['*google-analytics.com*', '*googletagmanager.com*', '*facebook.net*', '*facebook.com/tr*', '*claydar.com*', '*/ag/g/c*', '*snap.licdn.com*', '*doubleclick.net*', '*hs-analytics*', '*hs-scripts.com*'] });
-  await S('Fetch.enable', { patterns: [{ urlPattern: '*zynix-site-scripts-unminified.js*' }, { urlPattern: '*zynix-site-styles.deployed.css*' }, { urlPattern: '*api.hsforms.com*' }, { urlPattern: BASE + '/*', resourceType: 'Document', requestStage: 'Response' }] });
+  await S('Fetch.enable', { patterns: [{ urlPattern: '*zynix-site-scripts-unminified.js*' }, { urlPattern: '*dist/zynix-site-scripts.deployed.js*' }, { urlPattern: '*zynix-site-styles.deployed.css*' }, { urlPattern: '*api.hsforms.com*' }, { urlPattern: BASE + '/*', resourceType: 'Document', requestStage: 'Response' }] });
   await S('Emulation.setDeviceMetricsOverride', opts.mobile ? { width: 390, height: 844, deviceScaleFactor: 2, mobile: true } : { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
   // Production itself loads @main now, so every earlier page in this run already set the bundle's 10-minute
   // re-validation throttle in localStorage. Clear it for the check that needs a first visit.
@@ -123,8 +139,9 @@ const rect390 = (p, r) => { if (!r) return [false, 'rect probe failed']; const a
 for (const p of ['/platform', '/agents', '/case-studies/pbaco', '/compare-zynix-vs-navina']) { const pg = await open(p, { mobile: true }); const rect = await pg.ev(RECT390); await pg.close(); const [ok, det] = rect390(p, rect); check(`${p} @390: no rect overflow beyond the c95cc03 ratchet`, ok, det); }
 
 // 4. the page as it will be once Webflow loads @main: background cache revalidation fires and nothing throws
-{ const pg = await open('/', { asMain: true, firstVisit: true, wait: 16000 }); const r = await pg.ev(`({main:[...document.scripts].some(s=>/@main\\/zynix-site-scripts-unminified\\.js/.test(s.src)),words:document.body.innerText.split(/\\s+/).length,stamp:(()=>{try{return !!localStorage.getItem('zx_asset_check')}catch(e){return null}})()})`);
-  check('@main simulation: page renders from the @main URLs', r && r.main && r.words > 1200, JSON.stringify(r)); check('@main simulation: bundle and stylesheet are re-validated in the background (2 requests each)', pg.st.js >= 2 && pg.st.css >= 2, `bundle ${pg.st.js}x, stylesheet ${pg.st.css}x`); check('@main simulation: no exceptions', pg.st.errors.length === 0, pg.st.errors.join(' | ')); await pg.close(); }
+{ const pg = await open('/', { asMain: true, firstVisit: true, wait: 16000 }); const r = await pg.ev(`({main:[...document.scripts].some(s=>/@main\\/(dist\\/zynix-site-scripts\\.deployed|zynix-site-scripts-unminified)\\.js/.test(s.src)),words:document.body.innerText.split(/\\s+/).length,stamp:(()=>{try{return !!localStorage.getItem('zx_asset_check')}catch(e){return null}})()})`);
+  check('@main simulation: page renders from the @main URLs', r && r.main && r.words > 1200, JSON.stringify(r)); check('@main simulation: bundle and stylesheet are re-validated in the background (2 requests each)', pg.st.js >= 2 && pg.st.css >= 2, `bundle ${pg.st.js}x, stylesheet ${pg.st.css}x`);
+  if (DIST_SIM) check('--dist: the page loaded the deploy build from the dist/ URLs, and revalidated both', pg.st.distHtml && pg.st.built >= 4, `dist HTML ${!!pg.st.distHtml}, dist requests ${pg.st.built}`); check('@main simulation: no exceptions', pg.st.errors.length === 0, pg.st.errors.join(' | ')); await pg.close(); }
 
 const failed = results.filter(r => !r.ok); console.log(`\n${results.length - failed.length}/${results.length} smoke checks passed`);
 try { await send('Browser.close'); } catch {} chrome.kill(); process.exit(failed.length ? 1 : 0);

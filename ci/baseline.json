@@ -14,9 +14,16 @@
     "Exempt hits (not counted; ci/banned-strings.mjs header): facts data, DEAD_FUNCTIONS (verified unreachable on every run),",
     "  URL/path tokens, DATED_EXEMPTIONS (renderPrivacyV7 'SOC 2 Type II certification', A2P-frozen) and VERIFY_EXEMPTIONS ('$936,988,750' on /press, [VERIFY]).",
     "  List them: node ci/banned-strings.mjs --exempt; reachability report: node ci/banned-strings.mjs --dead",
-    "weight (final QA round 1, 2026-09-29; ci/launch.mjs): ceilings = failing ratchet on brotli-4 bytes of the stylesheet and of bundle + stylesheet, and on @import rules in the stylesheet",
-    "  (measured + 2,048 B headroom at d3cd1fe; lower with node ci/launch.mjs --write-weight after each merge, never raise without a reason in the PR). targets = the launch item",
-    "  'weight': production's bundle + stylesheet at c95cc03 (362,039 B brotli-4), a 30 KB stylesheet, no @import; unmet targets print as a LAUNCH line.",
+    "weight (final QA round 1, 2026-09-29; ci/launch.mjs): ceilings = failing ratchet on brotli-4 bytes of the SOURCE stylesheet and of bundle + stylesheet (what production loads today),",
+    "  and on @import rules in the stylesheet (measured + 2,048 B headroom at d3cd1fe; lower with node ci/launch.mjs --write-weight, never raise without a reason in the PR). targets = the launch item",
+    "  'weight': production's bundle + stylesheet at c95cc03 (362,039 B brotli-4), a 30 KB stylesheet, no @import, compared with the DEPLOY BUILD (ci/build.mjs) since final QA round 2.",
+    "  RAISED by hand in final QA round 2 (2026-09-29, Q): ceilings.totalBr4 405,675 -> 412,698 (= 410,650 measured at 851218d + 2,048). The d3cd1fe ceiling was set on the base while ten",
+    "  round-1 branches that grow the bundle were in flight: the round-1 a11y, form-validation and link fixes grew the bundle by S2 +9,084, S3 +7,823, P6 +5,529, P1 +4,928, P4 +2,267 B raw",
+    "  (each within DESIGN_SPEC 7.4's 15 KB per stream), so rd/final failed the plain CI run (audit/final_suite_r1.md 1). From now on the ceilings are re-measured with --write-weight after",
+    "  the LAST merge of a round, never on the base while branches are in flight. ceilings.cssBr4 (69,070; 64,083 measured) is left alone for the same reason.",
+    "  builtCeilings (final QA round 2): the same ratchet on the deploy build (ci/build.mjs, whitespace-only minification; 347,120 B brotli-4 at 851218d + 2,048). --write-weight lowers",
+    "  both sets and adds builtCeilings.cssBr4 on its first run after the last merge of round 2. When a round's accepted growth passes a ceiling, the orchestrator runs",
+    "  node ci/launch.mjs --remeasure-weight --reason \"…\" after that round's last merge: every ceiling = measured + 2,048, up or down, logged in weight.log with the reason.",
     "launchSignoffs: orchestrator decisions on open launch items (ci/launch.mjs), keyed by item id, e.g. \"dead-code\": {\"by\": \"orchestrator\", \"date\": \"…\", \"note\": \"…\"}.",
     "  Every open item prints as a LAUNCH line in ci/static-checks.mjs; node ci/static-checks.mjs --launch fails while an item is open and not signed off (launch precondition 6)."
   ],
@@ -59,14 +66,42 @@
   "weight": {
     "ceilings": {
       "cssBr4": 69070,
-      "totalBr4": 405675,
+      "totalBr4": 412698,
       "cssImports": 1
+    },
+    "builtCeilings": {
+      "totalBr4": 349168
     },
     "targets": {
       "cssBr4": 30720,
       "totalBr4": 362039,
       "cssImports": 0
-    }
+    },
+    "log": [
+      {
+        "date": "2026-09-29",
+        "commit": "851218d",
+        "from": {
+          "ceilings": {
+            "cssBr4": 69070,
+            "totalBr4": 405675,
+            "cssImports": 1
+          },
+          "builtCeilings": {}
+        },
+        "to": {
+          "ceilings": {
+            "cssBr4": 69070,
+            "totalBr4": 412698,
+            "cssImports": 1
+          },
+          "builtCeilings": {
+            "totalBr4": 349168
+          }
+        },
+        "reason": "Final QA round 2 (Q), by hand: totalBr4 = 410,650 measured at 851218d + 2,048. The d3cd1fe ceiling was set on the base while ten round-1 branches were in flight; their a11y, form-validation and link fixes grew the bundle by S2 +9,084, S3 +7,823, P6 +5,529, P1 +4,928, P4 +2,267 B raw (each within DESIGN_SPEC 7.4's 15 KB per stream). cssBr4 left at 69,070 so in-flight round-2 CSS is not failed. builtCeilings.totalBr4 added for the new deploy build (ci/build.mjs): 347,120 + 2,048."
+      }
+    ]
   },
   "launchSignoffs": {}
 }
