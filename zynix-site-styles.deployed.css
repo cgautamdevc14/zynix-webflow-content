@@ -2686,15 +2686,19 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-cust-stories:has(#zx-cust-f-practice:checked) .zx-cust-grid > [data-zx-seg]:not([data-zx-seg="practice"]) { display:none; }
 
 .zx-cust-card { display:flex; flex-direction:column; }
-/* One 40px mark slot on every card: logos on the logo row's optical height classes (equal visual area, §2.15), set 1.3x larger
-   for the card (about 4,000px2 each, capped at the slot height), or the name as a text wordmark. */
+/* One 40px mark slot on every card with a logo: logos on the logo row's optical height classes (equal visual area, §2.15), set
+   1.3x larger for the card (about 4,000px2 each, capped at the slot height). A card with no logo has no slot. */
 .zx-cust-card__logo-slot { display:flex; align-items:center; height:40px; margin-bottom:var(--zx-space-5); }
 .zx-cust-card__logo { display:block; width:auto; max-width:100%; object-fit:contain; object-position:left center; filter:grayscale(1) contrast(1.05); opacity:.8; }
 .zx-cust-card__logo--h20 { height:26px; } .zx-cust-card__logo--h24 { height:31px; } .zx-cust-card__logo--h28 { height:36px; }
 .zx-cust-card__logo--h32, .zx-cust-card__logo--h36, .zx-cust-card__logo--h40 { height:40px; }
-.zx-cust-card__wordmark { display:block; overflow:hidden; font-size:1.0625rem; font-weight:var(--zx-fw-semibold); line-height:1.2; letter-spacing:-.01em;
-  white-space:nowrap; text-overflow:ellipsis; color:var(--zx-gray-600); }
 .zx-cust-card .zynix-card__cta { margin-top:auto; padding-top:var(--zx-space-4); }
+/* In a row of cards (all stories, 768px up) a card with no logo keeps the slot's height, so its segment and title line up with
+   the cards beside it; alone (a filtered view, a one-story segment page) or stacked on a phone, its text starts at the top. */
+@media (min-width:768px) {
+  .zx-cust-grid:not([data-count="1"]) .zx-cust-card--nologo::before { content:''; display:block; flex:none; height:40px; margin-bottom:var(--zx-space-5); }
+  .zx-cust-stories:has(.zx-cust-filter__input:not(#zx-cust-f-all):checked) .zx-cust-card--nologo::before { display:none; }
+}
 
 .zx-cust-method { margin:var(--zx-space-5) 0 0; font-size:var(--zx-fs-sm); line-height:1.5; color:var(--zx-text-muted); }
 .zx-cust-segnav { display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--zx-space-2) var(--zx-space-6); margin-top:var(--zx-space-8); padding-top:var(--zx-space-6); border-top:1px solid var(--zx-border); }
@@ -2755,7 +2759,10 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-cust-onrecord__title { margin:0; font-size:var(--zx-fs-h4); line-height:1.35; font-weight:var(--zx-fw-semibold); letter-spacing:0; color:var(--zx-text); }
 .zx-cust-onrecord .zynix-quote { max-width:820px; }
 
-/* ── Newsroom: release index, inline releases (meta rail + verbatim text), media kit, one media contact ── */
+/* ── Newsroom: hero glance (latest releases), release index, inline releases (meta rail + verbatim text), media kit, one media contact ── */
+.zx-cust-glance__link { color:var(--zx-text); text-decoration:underline; text-decoration-color:var(--zx-border-strong); text-decoration-thickness:1px; text-underline-offset:4px;
+  transition:color var(--zx-dur-1) var(--zx-ease-out), text-decoration-color var(--zx-dur-1) var(--zx-ease-out); }
+.zx-cust-glance__link:hover { color:var(--zx-link); text-decoration-color:currentColor; }
 .zx-cust-news { padding-top:var(--zx-section-y-sm); }
 .zx-cust-news__index { margin:0 0 var(--zx-space-4); padding:0; list-style:none; border-top:1px solid var(--zx-border); }
 .zx-cust-news__jump { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--zx-space-1); padding:var(--zx-space-4) 0; border-bottom:1px solid var(--zx-border);
