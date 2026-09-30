@@ -475,10 +475,6 @@ body {
   padding: 100px 24px 40px;
   border-top: none;
 }
-.zynix-footer-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px;
-}
 .zynix-footer-brand p { font-size: 14px; line-height: 1.7; margin: 0; color: rgba(255,255,255,0.5); }
 .zynix-footer-col h4 { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; color: rgba(255,255,255,0.6); margin: 0 0 16px; text-transform: uppercase; }
 .zynix-footer-col a { display: block; font-size: 14px; color: rgba(255,255,255,0.55); text-decoration: none; padding: 4px 0; transition: color 0.2s; }
@@ -633,18 +629,9 @@ body {
   font-family: var(--z-font);
   transition: box-shadow 0.3s;
 }
-.zynix-mega-nav.scrolled {
-  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-}
 .zynix-nav-logo {
   display: flex; align-items: center; gap: 10px; text-decoration: none;
 }
-.zynix-nav-logo-text {
-  font-size: 24px; font-weight: 700; color: #1A1F2E;
-  letter-spacing: -0.5px; white-space: nowrap;
-  display: none; /* Logo symbol only — no text */
-}
-.zynix-nav-logo-text .zynix-logo-dot { color: var(--z-accent); }
 
 /* ── Announcement Banner ── */
 .zynix-announcement-bar {
@@ -663,8 +650,6 @@ body {
   z-index: 1002;
 }
 /* Push nav down when banner is visible */
-.zynix-mega-nav.has-banner { top: 40px; }
-body.has-announcement-bar { padding-top: 40px; }
 .zynix-announcement-bar a {
   color: #fff;
   text-decoration: underline;
@@ -700,18 +685,6 @@ body.has-announcement-bar { padding-top: 40px; }
 .zynix-nav-dropdown:hover .zynix-nav-trigger .chevron { transform: rotate(180deg); }
 
 /* ── Nav Icon Styles ── */
-.zynix-nav-icon {
-  display: inline-flex;
-  width: 40px;
-  height: 40px;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  border-radius: 10px;
-  margin-right: 14px;
-  flex-shrink: 0;
-  color: #fff;
-}
 
 /* ── Nav Item Descriptions ── */
 .zynix-mega-col a small {
@@ -733,15 +706,6 @@ body.has-announcement-bar { padding-top: 40px; }
   box-shadow: 0 20px 60px rgba(0,0,0,0.1);
   display: flex; gap: 36px;
 }
-.zynix-dropdown-panel-inner {
-  background: rgba(255,255,255,0.98);
-  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--z-border);
-  border-radius: var(--z-radius);
-  padding: 16px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-  min-width: 240px;
-}
 .zynix-mega-col { min-width: 220px; }
 .zynix-mega-col h5 {
   font-size: 12px; font-weight: 700; letter-spacing: 2px;
@@ -749,22 +713,22 @@ body.has-announcement-bar { padding-top: 40px; }
   margin: 0 0 12px; padding: 0 10px;
 }
 .zynix-mega-col h5:not(:first-child) { margin-top: 20px; }
-.zynix-mega-col a, .zynix-dropdown-panel-inner a {
+.zynix-mega-col a {
   display: flex; align-items: center; padding: 10px 12px; border-radius: 10px;
   color: var(--z-text-secondary); font-size: 14px; font-weight: 500;
   text-decoration: none; transition: all 0.15s;
 }
-.zynix-mega-col a:hover, .zynix-dropdown-panel-inner a:hover {
+.zynix-mega-col a:hover {
   background: var(--z-bg-alt); color: var(--z-text);
 }
-.zynix-mega-col a div, .zynix-dropdown-panel-inner a div {
+.zynix-mega-col a div {
   display: flex; flex-direction: column;
 }
-.zynix-mega-col a strong, .zynix-dropdown-panel-inner a strong {
+.zynix-mega-col a strong {
   font-weight: 600; font-size: 14px; color: var(--z-text);
 }
 /* Active page in nav */
-.zynix-mega-col a.active, .zynix-dropdown-panel-inner a.active {
+.zynix-mega-col a.active {
   color: var(--z-blue); background: var(--z-blue-light);
 }
 
@@ -863,20 +827,6 @@ body.has-announcement-bar { padding-top: 40px; }
 .zynix-story-block p { font-size: 15px; color: var(--z-text-secondary); line-height: 1.8; margin: 0; }
 
 /* ── Agent Hub Link Cards ── */
-.zynix-agent-link-card {
-  background: var(--z-bg-card); padding: 24px; border-radius: var(--z-radius);
-  border: 1px solid var(--z-border); transition: all 0.25s;
-  text-decoration: none; display: block; color: inherit;
-}
-.zynix-agent-link-card:hover {
-  border-color: var(--z-blue); box-shadow: var(--z-shadow-md);
-  transform: translateY(-2px);
-}
-.zynix-agent-link-card h3 { font-size: 16px; font-weight: 600; color: var(--z-text); margin: 0 0 6px; }
-.zynix-agent-link-card p { font-size: 13px; color: var(--z-text-secondary); line-height: 1.6; margin: 0; }
-.zynix-agent-link-card .zynix-card-arrow {
-  display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--z-blue);
-}
 
 /* ── Comparison Table ── */
 .zynix-compare-table { width: 100%; border-collapse: collapse; margin-top: 32px; }
@@ -976,52 +926,6 @@ body.has-announcement-bar { padding-top: 40px; }
 }
 
 /* ── Comparison Section ── */
-.zynix-comparison-section {
-  padding: 100px 0;
-  background: var(--z-bg-alt);
-  text-align: center;
-}
-.zynix-comparison-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 48px;
-  text-align: left;
-}
-.zynix-comparison-col {
-  background: var(--z-bg-card);
-  border-radius: var(--z-radius);
-  padding: 32px;
-  border: 1px solid var(--z-border);
-}
-.zynix-comparison-col h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 0 20px;
-}
-.zynix-comparison-col ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.zynix-comparison-col ul li {
-  padding: 10px 0;
-  border-bottom: 1px solid var(--z-border);
-  font-size: 14px;
-  color: var(--z-text-secondary);
-  line-height: 1.5;
-}
-.zynix-comparison-col ul li:last-child { border-bottom: none; }
-.zynix-comparison-before {
-  background: #FEF2F2;
-  border-color: #FECACA;
-}
-.zynix-comparison-before h3 { color: #DC2626; }
-.zynix-comparison-after {
-  background: #F0FDF4;
-  border-color: #BBF7D0;
-}
-.zynix-comparison-after h3 { color: var(--z-success); }
 
 /* ── Results / Flywheel Sections ── */
 .zynix-results-section {
@@ -1067,65 +971,6 @@ body.has-announcement-bar { padding-top: 40px; }
 .zynix-card-link:hover { text-decoration: underline; color: var(--z-accent); }
 
 /* ── Related Content Sections ── */
-.zynix-related-section {
-  padding: 60px 0;
-  border-top: 1px solid var(--z-border);
-  background: var(--z-bg-alt);
-}
-.zynix-related-section .zynix-tag { margin-bottom: 8px; }
-.zynix-related-section h2 { font-size: 26px; font-weight: 600; color: var(--z-text); margin: 0 0 28px; }
-.zynix-related-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.zynix-related-card {
-  background: var(--z-bg-card);
-  border: 1px solid var(--z-border);
-  border-radius: var(--z-radius);
-  padding: 20px;
-  text-decoration: none;
-  color: var(--z-text);
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.zynix-related-card:hover {
-  border-color: var(--z-blue);
-  transform: translateY(-2px);
-  box-shadow: var(--z-shadow-sm);
-}
-.zynix-related-card .zynix-rc-icon {
-  font-size: 20px;
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--z-peach);
-  border-radius: 10px;
-}
-.zynix-related-card .zynix-rc-text h4 {
-  font-size: 14px;
-  font-weight: 600;
-  margin: 0 0 3px;
-  color: var(--z-text);
-}
-.zynix-related-card .zynix-rc-text p {
-  font-size: 12px;
-  color: var(--z-text-secondary);
-  margin: 0;
-  line-height: 1.4;
-}
-.zynix-related-card .zynix-rc-arrow {
-  margin-left: auto;
-  color: var(--z-text-muted);
-  font-size: 16px;
-  flex-shrink: 0;
-}
-.zynix-related-card:hover .zynix-rc-arrow { color: var(--z-blue); }
 
 /* ── Breadcrumb ── */
 .zynix-breadcrumb {
@@ -1138,73 +983,14 @@ body.has-announcement-bar { padding-top: 40px; }
   text-decoration: none;
 }
 .zynix-breadcrumb a:hover { color: var(--z-blue); text-decoration: underline; }
-.zynix-breadcrumb .zynix-bc-sep { margin: 0 8px; color: var(--z-text-muted); }
-.zynix-breadcrumb .zynix-bc-current { color: var(--z-text); font-weight: 500; }
 
 /* ── Screenshot Gallery ── */
-.zynix-screenshot-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-  margin-top: 40px;
-}
-.zynix-screenshot-card {
-  border-radius: var(--z-radius-lg);
-  overflow: hidden;
-  border: 1px solid var(--z-border);
-  transition: all 0.3s;
-  background: var(--z-bg-card);
-}
-.zynix-screenshot-card:hover {
-  border-color: var(--z-blue);
-  transform: translateY(-4px);
-  box-shadow: var(--z-shadow-lg);
-}
-.zynix-screenshot-card img {
-  width: 100%;
-  display: block;
-}
-.zynix-screenshot-card .caption {
-  padding: 16px;
-  font-size: 14px;
-  color: var(--z-text-secondary);
-}
 
 /* ── Gradient Accent Borders ── */
-.zynix-gradient-border {
-  position: relative;
-  border: none;
-}
-.zynix-gradient-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: var(--z-radius);
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(241,101,41,0.2), rgba(32,68,155,0.2));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
 
 /* ── Glow Effects (subtler for light theme) ── */
-.zynix-glow-accent {
-  box-shadow: 0 0 40px rgba(241,101,41,0.05), 0 0 80px rgba(241,101,41,0.02);
-}
-.zynix-glow-blue {
-  box-shadow: 0 0 40px rgba(32,68,155,0.06), 0 0 80px rgba(32,68,155,0.03);
-}
 
 /* ── Scroll animations ── */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes countUp {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
-}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 991px) {
@@ -1217,7 +1003,6 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-safety-grid { grid-template-columns: repeat(2, 1fr); }
   .zynix-metrics-bar { gap: 32px; flex-wrap: wrap; }
   .zynix-compare-grid { grid-template-columns: 1fr; }
-  .zynix-footer-inner { grid-template-columns: 1fr 1fr; }
   .zynix-contact-grid { grid-template-columns: 1fr; }
   .zynix-blog-grid { grid-template-columns: 1fr; }
   .zynix-case-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1226,9 +1011,6 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-nav-hamburger { display: flex; }
   .zynix-wf-step-card { flex-direction: column; }
   .zynix-homepage-hero h1 { font-size: 36px; }
-  .zynix-comparison-grid { grid-template-columns: 1fr; }
-  .zynix-related-grid { grid-template-columns: repeat(2, 1fr); }
-  .zynix-screenshot-gallery { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
   .zynix-roi-calculator { grid-template-columns: 1fr; }
   .zynix-testimonials-grid { grid-template-columns: 1fr; }
 }
@@ -1245,7 +1027,6 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-flywheel-arrow, .zynix-orch-arrow { display: none; }
   .zynix-flywheel-grid, .zynix-orch-flow { flex-direction: column; }
   .zynix-metrics-bar { flex-direction: column; gap: 24px; padding: 40px 24px; }
-  .zynix-footer-inner { grid-template-columns: 1fr; }
   .zynix-cta-section h2 { font-size: 26px; }
   .zynix-contact-grid { grid-template-columns: 1fr; }
   .zynix-form-row { grid-template-columns: 1fr; }
@@ -1255,11 +1036,8 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-homepage-hero { padding: 100px 0 60px; }
   .zynix-homepage-hero h1 { font-size: 30px; }
   .zynix-trust-track { gap: 32px; }
-  .zynix-comparison-col { padding: 24px; }
   .zynix-compare-table { font-size: 12px; }
   .zynix-compare-table th, .zynix-compare-table td { padding: 10px 12px; }
-  .zynix-related-grid { grid-template-columns: 1fr; }
-  .zynix-screenshot-gallery { grid-template-columns: 1fr; gap: 16px; }
 }
 
 /* ── Hide Webflow Template Default Content ── */
@@ -1323,16 +1101,8 @@ body.has-announcement-bar { padding-top: 40px; }
 .zynix-testimonial-author span { display: block; font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; }
 
 /* ── CTA Section Extra ── */
-.zynix-cta-btns { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 24px; position: relative; }
-.zynix-cta-trust { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; position: relative; }
-.zynix-cta-trust span { font-size: 13px; color: rgba(255,255,255,0.7); display: inline-flex; align-items: center; gap: 5px; }
 
 /* ── Footer Compliance Badges ── */
-.zynix-footer-compliance { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; max-width: 1200px; margin: 32px auto 0; padding: 24px 40px; border-top: 1px solid rgba(255,255,255,0.1); }
-.zynix-compliance-badge { display: flex; align-items: center; gap: 10px; }
-.zynix-compliance-icon { width: 32px; height: 32px; flex-shrink: 0; }
-.zynix-compliance-badge > div strong { display: block; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9); line-height: 1.2; }
-.zynix-compliance-badge > div span { display: block; font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.3; }
 
 /* ── AI Chat Widget: replaced by the ZX chrome block (§3.6) ── */
 
@@ -1410,7 +1180,6 @@ body.has-announcement-bar { padding-top: 40px; }
     padding: 20px;
   }
   /* Push banner-adjusted nav */
-  .zynix-mega-nav.has-banner { top: 36px; }
   .zynix-announcement-bar {
     font-size: 12px;
     padding: 8px 36px 8px 16px;
@@ -1675,13 +1444,11 @@ body.has-announcement-bar { padding-top: 40px; }
   }
 
   /* ── Comparison Grid ── */
-  .zynix-compare-grid,
-  .zynix-comparison-grid {
+  .zynix-compare-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
-  .zynix-compare-card,
-  .zynix-comparison-col {
+  .zynix-compare-card {
     padding: 24px 20px;
   }
   .zynix-compare-card h3 {
@@ -1791,10 +1558,6 @@ body.has-announcement-bar { padding-top: 40px; }
   .zynix-footer {
     padding: 56px 20px 32px;
   }
-  .zynix-footer-inner {
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
   .zynix-footer-brand {
     grid-column: 1 / -1;
   }
@@ -1869,19 +1632,8 @@ body.has-announcement-bar { padding-top: 40px; }
   }
 
   /* ── Related Content ── */
-  .zynix-related-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .zynix-related-card {
-    padding: 16px;
-  }
 
   /* ── Screenshot Gallery ── */
-  .zynix-screenshot-gallery {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
 
   /* ── Legal Pages ── */
   .zynix-legal-content h2 {
@@ -1984,15 +1736,6 @@ body.has-announcement-bar { padding-top: 40px; }
   }
 
   /* ── Agent Link Cards ── */
-  .zynix-agent-link-card {
-    padding: 20px 18px;
-  }
-  .zynix-agent-link-card h3 {
-    font-size: 15px;
-  }
-  .zynix-agent-link-card p {
-    font-size: 12px;
-  }
 }
 
 /* ── Extra-small iPhone (375px and below) ── */
@@ -2015,9 +1758,6 @@ body.has-announcement-bar { padding-top: 40px; }
     grid-template-columns: 1fr;
   }
 
-  .zynix-footer-inner {
-    grid-template-columns: 1fr;
-  }
 
   .zynix-kpi-chip {
     flex: 1 1 100%;
@@ -2366,11 +2106,14 @@ html.zx-motion .zynix-injected .fade-in-up { transition:opacity var(--zx-dur-rev
 .zynix-section--inverse .zynix-section-head__title { color:var(--zx-text-inverse); }
 .zynix-section-head--center .zynix-eyebrow { justify-content:center; }
 
-/* §2.2 Eyebrow */
+/* §2.2 Eyebrow: shown as written (sentence case), never uppercased, so plural acronyms and product names survive
+   ("ACOs", "FQHCs", "EHRs", "ZynScribe", not "ACOS", "FQHCS", "EHRS", "ZYNSCRIBE"). 12px uppercase micro-labels stay for metadata. */
 .zynix-eyebrow { display:inline-flex; align-items:center; gap:var(--zx-space-2); margin:0 0 var(--zx-space-3);
-  font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.2 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase;
+  font:var(--zx-fw-semibold) var(--zx-fs-sm)/1.2 var(--zx-font-sans); letter-spacing:0; text-transform:none;
   color:var(--zx-eyebrow); background:none; border:0; padding:0; border-radius:0; }
 p.zynix-eyebrow { display:flex; }
+/* The A2P-frozen legal renderers pass all-caps text ("ZYNIX INC. (D/B/A ZYNIX AI)", "TERMS OF SERVICE"): keep their tracked 12px label unchanged */
+.zynix-hero--legal .zynix-eyebrow { font-size:var(--zx-fs-xs); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase; }
 .zynix-eyebrow--rule::before { content:""; width:16px; height:2px; background:currentColor; }
 .zynix-eyebrow--muted { color:var(--zx-text-muted); }
 :is(.zynix-section--inverse, .zynix-cta-section:not(.zynix-cta-section--subtle), .zx-flow) .zynix-eyebrow { color:var(--zx-eyebrow-inverse); }
@@ -2929,7 +2672,6 @@ html.zx-menu-open #zynix-chat-widget { display:none; }
 /* pre-S3 markup: IMG.logo is a 1080×1081 PNG whose wordmark fills the band (166,398)–(914,683); scaled so the wordmark is 32px (26px) tall. */
 .zynix-mega-nav .zynix-nav-logo > img:not(.zynix-nav-logo__img) { display:block; width:auto; height:121px; margin:-45px -19px; }
 @media (max-width:1023.98px) { .zynix-mega-nav .zynix-nav-logo > img:not(.zynix-nav-logo__img) { height:99px; margin:-36px -15px; } }
-.zynix-mega-nav .zynix-nav-logo-text { display:none; }
 
 .zynix-mega-nav .zynix-nav-items { display:flex; align-items:center; gap:2px; flex:0 1 auto; min-width:0; list-style:none; margin:0; padding:0; }
 .zynix-mega-nav .zynix-nav-items > li { margin:0; padding:0; }
@@ -3036,8 +2778,6 @@ html.zx-menu-open #zynix-chat-widget { display:none; }
 .zynix-mega-nav .zynix-mega-col > a:hover { background:var(--zx-gray-50); color:var(--zx-text); }
 .zynix-mega-nav .zynix-mega-col > h5 { margin:0 0 var(--zx-space-2); padding:0 12px; font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.3 var(--zx-font-sans); letter-spacing:.08em; text-transform:uppercase; color:var(--zx-text-muted); }
 .zynix-mega-nav .zynix-mega-col > h5:not(:first-child) { margin-top:var(--zx-space-5); }
-.zynix-mega-nav .zynix-nav-icon { display:grid; place-items:center; flex:none; width:32px; height:32px; margin-right:12px; border-radius:var(--zx-radius-md); background:var(--zx-blue-50); color:var(--zx-blue-600); font-size:16px; }
-.zynix-mega-nav .zynix-nav-icon svg { width:18px; height:18px; }
 .zynix-mega-nav .zynix-mega-col > a small { color:var(--zx-text-muted); font-size:13px; line-height:1.35; }
 
 /* ── Mobile menu (<1024, §3.3): a sheet under the fixed chrome; several sections may be open at once ── */
@@ -3144,13 +2884,10 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zynix-footer .zynix-capture-form p[style], .zynix-footer .zx-form-err { color:var(--zx-text-inverse)!important; }
 @media (max-width:479.98px) { .zynix-footer .zynix-footer__signup { grid-template-columns:minmax(0,1fr); } .zynix-footer .zynix-footer__signup .zynix-capture-btn { width:100%; } }
 /* pre-S2 markup: one grid, <h4> column heads, compliance badges and a one-paragraph bottom bar */
-.zynix-footer > .zynix-footer-inner { box-sizing:border-box; max-width:calc(var(--zx-container) + 2 * var(--zx-gutter)); margin:0 auto; padding-inline:var(--zx-gutter); gap:40px; }
 .zynix-footer .zynix-footer-col h4 { margin:0 0 var(--zx-space-3); font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.3 var(--zx-font-sans); letter-spacing:.08em; text-transform:uppercase; color:var(--zx-text-inverse-muted); }
 .zynix-footer .zynix-footer-col > a { display:flex; align-items:center; box-sizing:border-box; min-height:32px; padding:6px 0; font-size:14px; line-height:1.35; color:var(--zx-text-inverse-secondary); text-decoration:none; }
 .zynix-footer .zynix-footer-col > a:hover { color:#fff; text-decoration:underline; text-underline-offset:3px; }
 .zynix-footer .zynix-footer-brand > p { color:var(--zx-text-inverse-secondary); }
-.zynix-footer > .zynix-footer-compliance { box-sizing:border-box; max-width:none; margin:40px max(var(--zx-gutter), calc((100% - var(--zx-container)) / 2)) 0; padding:24px 0 0; justify-content:flex-start; border-top:1px solid var(--zx-border-inverse); }
-.zynix-footer .zynix-compliance-badge > div span { color:var(--zx-text-inverse-muted); font-size:12px; }
 .zynix-footer > .zynix-footer-bottom:not(.zynix-container) { box-sizing:border-box; max-width:none; margin:32px max(var(--zx-gutter), calc((100% - var(--zx-container)) / 2)) 0; padding:24px 0 0; border-top:1px solid var(--zx-border-inverse); }
 .zynix-footer > .zynix-footer-bottom:not(.zynix-container) p { color:var(--zx-text-inverse-muted); }
 
@@ -3194,8 +2931,6 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zynix-breadcrumb:not(nav) { padding:16px 0 0; font-size:13px; line-height:1.4; color:var(--zx-text-muted); }
 .zynix-breadcrumb:not(nav) a { color:var(--zx-text-secondary); text-decoration:none; }
 .zynix-breadcrumb:not(nav) a:hover { color:var(--zx-link); text-decoration:underline; text-underline-offset:3px; }
-.zynix-breadcrumb:not(nav) .zynix-bc-sep { margin:0 8px; color:var(--zx-gray-400); }
-.zynix-breadcrumb:not(nav) .zynix-bc-current { color:var(--zx-text); font-weight:var(--zx-fw-medium); }
 
 /* ── 404 (§3.8): error-preset hero + a 6-card wayfinding grid; nothing else to add beyond the components ── */
 .zynix-hero--error .zynix-hero__actions .zynix-btn--secondary { min-width:0; }
@@ -3217,12 +2952,12 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
    .zynix-injected (or a chrome root), so it outranks the legacy rule it re-skins and cannot reach the native pages.
    `!important` appears only where an inline style="" in legacy markup must be beaten (the selector says so with [style*=…]). */
 
-/* ── Eyebrows: .zynix-tag loses its pill, fill and bar; centred legacy tags stay centred ── */
+/* ── Eyebrows: .zynix-tag loses its pill, fill and bar; centred legacy tags stay centred. Every legacy tag string is written in
+   capitals ("HOW IT WORKS", "SMS OPT-IN"), so the tag keeps the tracked 12px label; only .zynix-eyebrow (sentence-case source) drops the transform ── */
 .zynix-injected .zynix-tag { display:inline-flex; align-items:center; gap:var(--zx-space-2); margin:0 0 var(--zx-space-3); padding:0; border:0; border-radius:0; background:none;
   font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.2 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase; color:var(--zx-eyebrow); }
 .zynix-injected :is(.zynix-section-dark, .zynix-results-section, .zynix-cta-section:not(.zynix-cta-section--subtle), .zynix-inner-hero[style*="--z-bg-dark"],
   .zynix-testimonials-section:not([style*="--z-bg-alt"]), section[style*="--z-bg-dark"]) .zynix-tag { color:var(--zx-eyebrow-inverse); }   /* fixes the 1.96:1 hero eyebrow on the SMS pages (A11Y-4) */
-.zynix-injected .zynix-related-section .zynix-tag { margin-bottom:var(--zx-space-2); }
 
 /* ── Section subtitles → lead; legacy section H2s re-skinned with tokens (their centring stays until a page stream converts them) ── */
 .zynix-injected .zynix-section-sub { font-size:var(--zx-fs-lead); line-height:var(--zx-lh-lead); color:var(--zx-text-secondary); max-width:var(--zx-measure-lead); }
@@ -3294,9 +3029,6 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zynix-injected a:is(.zynix-agent-link-card, .zynix-related-card, .zynix-case-card, .zynix-blog-card):hover :is(h3, h4) { color:var(--zx-link); }
 .zynix-injected :is(.zynix-agent-link-card, .zynix-case-card, .zynix-blog-card) h3 { font:var(--zx-fw-semibold) var(--zx-fs-h4)/1.35 var(--zx-font-sans); letter-spacing:0; color:var(--zx-text); }
 .zynix-injected :is(.zynix-agent-link-card, .zynix-case-card, .zynix-blog-card) p { font-size:15px; line-height:1.6; color:var(--zx-text-secondary); }
-.zynix-injected .zynix-related-card .zynix-rc-text h4 { font:var(--zx-fw-semibold) 15px/1.35 var(--zx-font-sans); color:var(--zx-text); }
-.zynix-injected .zynix-related-card .zynix-rc-text p { font-size:13px; color:var(--zx-text-secondary); }
-.zynix-injected .zynix-agent-link-card .zynix-card-arrow { font-size:var(--zx-fs-sm); font-weight:var(--zx-fw-semibold); color:var(--zx-link); }
 .zynix-injected .zynix-blog-featured { background:var(--zx-surface-brand); border-color:var(--zx-blue-100); border-left:1px solid var(--zx-blue-100); }
 .zynix-injected :is(.zynix-blog-cat, .zynix-case-seg) { padding:0; background:none; border-radius:0; font-size:12px; font-weight:var(--zx-fw-semibold); letter-spacing:var(--zx-tr-eyebrow); color:var(--zx-eyebrow); }
 .zynix-injected .zynix-customer-chip { border-radius:var(--zx-radius-md); box-shadow:none; transition:none; }
@@ -3374,9 +3106,6 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 /* ── CTA band without a modifier: the inverse (#0B1324) band the frozen legal pages write inline ── */
 .zynix-injected .zynix-cta-section:not(.zynix-cta-section--subtle) h2:not(.zynix-cta-section__title) { font-size:var(--zx-fs-h2); font-weight:var(--zx-fw-semibold); line-height:var(--zx-lh-heading); letter-spacing:var(--zx-tr-h2); }
 .zynix-injected .zynix-cta-section:not(.zynix-cta-section--subtle) > .zynix-container:not(.zynix-cta-section__inner) > p { max-width:var(--zx-measure-lead); margin-inline:auto; color:var(--zx-text-inverse-secondary); font-size:var(--zx-fs-lead); line-height:var(--zx-lh-lead); }
-.zynix-injected .zynix-cta-btns { gap:var(--zx-space-3); margin-bottom:var(--zx-space-6); }
-.zynix-injected .zynix-cta-trust span { color:var(--zx-text-inverse-secondary); }
-@media (max-width:479.98px) { .zynix-injected .zynix-cta-btns { flex-direction:column; align-items:stretch; } }
 
 /* ── Testimonials → quote look; stars hidden; the homepage's light testimonial band gets its heading back (HOME-1, until H ships) ── */
 .zynix-injected .zynix-testimonial-stars { display:none; }
@@ -3415,23 +3144,10 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 @media (max-width:767.98px) { .zynix-injected [class*="zynix-compare-two-col"][style*="grid-template-columns"] { grid-template-columns:1fr!important; } }
 
 /* ── Product frames (re-declared from the injected <style> S3 removes: light frames, no macOS dots, no invented URL bar) ── */
-.zynix-injected .zynix-browser-frame { overflow:hidden; background:var(--zx-surface); border:1px solid var(--zx-border); border-radius:var(--zx-radius-xl); box-shadow:var(--zx-shadow-md); }
-.zynix-injected .zynix-browser-bar { display:none; }
-.zynix-injected .zynix-browser-frame img { display:block; width:100%; height:auto; }
 .zynix-injected .zynix-screenshot-strip { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:var(--zx-grid-gap); align-items:start; overflow:visible; padding:var(--zx-space-2) 0 0; scroll-snap-type:none; }
-.zynix-injected .zynix-screenshot-strip .zynix-browser-frame { flex:none; min-width:0; max-width:none; scroll-snap-align:none; }
 /* The base strip had 24px of bottom padding; keep that air when something follows it (/agents: the strip sat flush on the large frame) */
 .zynix-injected .zynix-screenshot-strip:not(:last-child) { margin-bottom:var(--zx-space-6); }
 .zynix-injected .zynix-screenshot-strip-lg { gap:var(--zx-space-8); }
-.zynix-injected .zynix-screenshot-card { border-radius:var(--zx-radius-xl); transition:border-color var(--zx-dur-1) var(--zx-ease-out); }
-.zynix-injected .zynix-screenshot-card:hover { transform:none; box-shadow:none; border-color:var(--zx-border-strong); }
-.zynix-injected .zynix-product-showcase { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:var(--zx-space-12); align-items:center; margin:var(--zx-space-12) 0; }
-.zynix-injected .zynix-product-showcase[style*="direction:rtl"] { grid-template-columns:minmax(0,7fr) minmax(0,5fr); }
-.zynix-injected .zynix-product-showcase[style*="direction:rtl"] > * { direction:ltr; }   /* the reverse variant must not flip text direction */
-.zynix-injected .zynix-product-showcase > * { min-width:0; }
-.zynix-injected .zynix-product-showcase-text h3 { margin:0 0 var(--zx-space-3); font:var(--zx-fw-semibold) var(--zx-fs-h3)/var(--zx-lh-snug) var(--zx-font-sans); letter-spacing:var(--zx-tr-h3); color:var(--zx-text); }
-.zynix-injected .zynix-product-showcase-text p { margin:0 0 var(--zx-space-5); font-size:var(--zx-fs-body); line-height:var(--zx-lh-body); color:var(--zx-text-secondary); }
-@media (max-width:1023.98px) { .zynix-injected .zynix-product-showcase, .zynix-injected .zynix-product-showcase[style*="direction:rtl"] { grid-template-columns:minmax(0,1fr); gap:var(--zx-space-8); } }
 .zynix-injected .zynix-inner-hero-img img { border-radius:var(--zx-radius-xl); box-shadow:var(--zx-shadow-lg); }
 
 /* ── Email capture (re-declared from the injected <style>): subtle surface, hairlines, no gradient ── */
@@ -3474,16 +3190,10 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 @media (max-width:767.98px) { .zynix-injected .zynix-form-group :is(input:not([type="checkbox"]):not([type="radio"]), select) { min-height:48px; } }
 .zynix-injected .zynix-contact-form-wrap { border-radius:var(--zx-radius-xl); box-shadow:var(--zx-shadow-md); }
 
-/* ── Chrome leftovers re-declared from the injected <style> (promo card, dropdown-featured, trust-logo filter) ── */
-.zynix-mega-nav .zynix-nav-promo-card { display:flex; flex-direction:column; justify-content:center; box-sizing:border-box; min-width:260px; max-width:280px; padding:24px;
-  border-radius:var(--zx-radius-lg); background:var(--zx-surface-inverse); }   /* pre-S3 markup only: its inline text is white, so the card stays dark (solid, no gradient) */
-.zynix-mega-nav .zynix-nav-promo-card a:hover { opacity:.92; transform:none; }
-.zynix-mega-nav .zynix-dropdown-featured { margin-top:var(--zx-space-2); padding:var(--zx-space-3) 12px 0; border-top:1px solid var(--zx-border); }
-.zynix-mega-nav .zynix-dropdown-featured a { color:var(--zx-link); font:var(--zx-fw-semibold) 14px/1.4 var(--zx-font-sans); text-decoration:none; }
-.zynix-mega-nav .zynix-dropdown-featured a:hover { text-decoration:underline; text-underline-offset:3px; }
+/* ── Chrome leftovers re-declared from the injected <style> (trust-logo filter; the promo-card and dropdown-featured rules went with their markup) ── */
 .zynix-injected :is(.zynix-trust-marquee, .zynix-trust-track) img, .zynix-injected [class*="trust-marquee"] img, .zynix-injected [class*="trust-track"] img { filter:grayscale(1) brightness(.45) contrast(1.2); opacity:1; }
 .zynix-injected .zynix-trust-strip { background:var(--zx-surface-subtle); }
-.zynix-injected .zynix-trust-label { font-size:12px; letter-spacing:var(--zx-tr-eyebrow); color:var(--zx-text-muted); }
+.zynix-injected .zynix-trust-label { font-size:12px; letter-spacing:var(--zx-tr-eyebrow); text-transform:none; color:var(--zx-text-muted); }   /* source text is already caps except "ACOs"/"FQHCs", which uppercasing broke */
 /* pre-S3 chat: keep the panel inside a phone screen (replaces the CSS:1385–1392 overrides; !important beats the inline panel styles) */
 @media (max-width:479.98px) {
   #zynix-chat-widget:not(.zynix-chat) #zynix-chat-panel { width:calc(100vw - 32px)!important; right:-8px!important; bottom:68px!important; max-height:70vh!important; }
