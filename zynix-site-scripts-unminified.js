@@ -132,7 +132,7 @@
   var CUSTOMERS = {
     pbaco: { name: 'Palm Beach ACO', legalName: 'Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding)',
       segment: 'aco', segmentLabel: 'ACO', logoRow: 1,
-      logo: { file: 'logos/palm-beach-aco.webp', source: 'palm-beach-aco.png', h: 40, w: 40 },
+      logo: { file: 'logos/palm-beach-aco.webp', source: 'palm-beach-aco.png', h: 40, w: 40, named: true },   // named: the seal's lettering is unreadable at row size, so renderLogoRow shows the name beside it
       caseStudy: '/case-studies/pbaco',
       release: { slug: 'pbaco-partnership', date: '2026-04-14', outlet: 'Business Wire', href: '/press#pbaco-partnership',
                  outletUrl: 'https://www.businesswire.com/news/home/20260414590241/en/' },
@@ -170,7 +170,7 @@
     // images/logos/<name>.webp for any colour context. GoldenCare's script still reads lighter than the other marks, so it is
     // out of the default row and CLSC (now on a transparent background) takes slot 8.
     goldencareaco: { name: 'GoldenCare ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: null,
-      logo: { file: 'logos/goldencare-aco-ink.webp', source: 'goldencare-aco.png', h: 36, w: 90 }, caseStudy: null, metrics: [] },
+      logo: { file: 'logos/goldencare-aco-ink.webp', source: 'goldencare-aco.png', h: 40, w: 100 }, caseStudy: null, metrics: [] },   // h40 (final QA): the thin script reads better one class up; Sunflower is already at the largest class
     sunfloweraco: { name: 'Sunflower ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: null,
       logo: { file: 'logos/sunflower-aco-ink.webp', source: 'sunflower-aco.png', h: 40, w: 70 }, caseStudy: null, metrics: [] },
     professionalradiology: { name: 'Professional Radiology', segment: null, segmentLabel: null, logoRow: null,
@@ -885,7 +885,6 @@
         applicationCategory:'HealthcareApplication',
         applicationSubCategory:'Value-Based Care Software',
         operatingSystem:'Web Browser',
-        offers:{'@type':'Offer',price:'0',priceCurrency:'USD',description:'Contact for enterprise pricing'},
         publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
         audience:{'@type':'Audience',audienceType:'Healthcare Organizations — ACOs, Health Systems, Health Plans, FQHCs, Independent Practices'},
         featureList:['SOC 2 Type II audited','HIPAA-aligned safeguards · BAA available','Epic EHR integration','athenahealth integration','ADT feed processing','Voice and SMS outreach agents','Care gap closure','TCM follow-up','AWV outreach'],
@@ -936,7 +935,6 @@
         operatingSystem:'Web Browser',
         browserRequirements:'Any modern browser',
         featureList:['HIPAA-aligned safeguards · BAA available','EHR integration','Outreach and scheduling agents','Population analytics','Care coordination'],
-        offers:{'@type':'Offer',price:'0',priceCurrency:'USD',description:'Contact for enterprise pricing'},
         brand:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
         publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
         audience:{'@type':'Audience',audienceType:'Healthcare Organizations'},
@@ -1019,7 +1017,6 @@
         name:seo.title.split('|')[0].trim(),
         description:seo.desc,
         image:{'@type':'ImageObject',url:seo.img||IMG.hero,width:1200,height:630},
-        totalTime:'PT14D',
         supply:[{'@type':'HowToSupply',name:'Zynix AI Platform'},{'@type':'HowToSupply',name:'EHR or Data Feed'}],
         tool:[{'@type':'HowToTool',name:'AI Agents'},{'@type':'HowToTool',name:'Care Plan Templates'}],
         step:[
@@ -1641,9 +1638,18 @@
     opts = opts || {};
     var preset = ['product', 'company', 'resource', 'legal', 'case', 'error'].indexOf(opts.preset) > -1 ? opts.preset : 'product';
     var id = opts.id || 'hero', tid = id + '-title', demoHref = SITE_FACTS.demo.href;
+    // A jump within the page ('#x' or '/this-page#x') is navigation, not a conversion: on company and resource pages it renders
+    // as a secondary button, so orange stays with the nav's "Request a demo" and real conversions (demo, /contact, mailto:).
+    var inPage = function (href) {
+      href = String(href || '');
+      if (href.charAt(0) === '#') return true;
+      var p = zxHrefPath(href);
+      return href.indexOf('#') > -1 && p !== null && p === zxPath();
+    };
     var action = function (a, variant) {
       if (!a || !a.label || !a.href || a.href === '#') return '';  // a real anchor or URL only
       if (preset === 'company' && a.href === demoHref) return '';  // company pages never show a demo button
+      if (variant === 'primary' && (preset === 'company' || preset === 'resource') && inPage(a.href)) variant = 'secondary';
       return renderButton(a.label, a.href, { variant: variant, size: a.size, newTab: a.newTab, cta: a.cta || (a.href === demoHref ? 'demo' : null) });
     };
     var primary = '', secondary = '';
@@ -1654,8 +1660,17 @@
     var badges = (preset === 'company' || preset === 'legal' || preset === 'error') ? null :
       (opts.badges === undefined ? (preset === 'product' ? ['soc2', 'hipaa'] : null) : opts.badges);
     var compact = opts.compact === undefined ? (preset === 'resource' || preset === 'legal') : !!opts.compact;
-    var m = (preset === 'resource' || preset === 'legal' || !opts.media) ? { type: 'none' } : opts.media, mediaHtml = '';
-    if (m.type === 'product') {
+    // media 'glance' is the one media type a resource hero takes (legal heroes take none).
+    var m = (preset === 'legal' || !opts.media || (preset === 'resource' && opts.media.type !== 'glance')) ? { type: 'none' } : opts.media, mediaHtml = '';
+    if (m.type === 'glance') {
+      // "At a glance" (final QA): a short fact list in the right column of a text-led hero, so the first screen of /security,
+      // /about, /press and the resource pages is not half empty. media: { type:'glance', title, label, items:[{label, value}], link:{label, href} }
+      var gi = (m.items || []).filter(function (f) { return f && f.label && f.value; });
+      if (gi.length) mediaHtml = '<aside class="zynix-hero-proof zynix-hero-glance" aria-label="' + zxAttr(m.label || 'At a glance') + '">' +
+        zxEl('p', 'zynix-eyebrow', m.title) +
+        '<dl class="zynix-hero-proof__facts">' + gi.map(function (f) { return '<div><dt>' + f.label + '</dt><dd>' + f.value + '</dd></div>'; }).join('') + '</dl>' +
+        (m.link && m.link.label && m.link.href ? renderLinkArrow(m.link.label, m.link.href) : '') + '</aside>';
+    } else if (m.type === 'product') {
       mediaHtml = renderProductFrame(m.frame || {});
     } else if (m.type === 'proof') {
       var c = zxCustomer(m.customer);
@@ -1667,7 +1682,7 @@
       var more = link && link.href ? renderLinkArrow(link.label, link.href) : '';
       if (logo || dl || more) mediaHtml = '<aside class="zynix-hero-proof" aria-label="Customer facts">' + logo + dl + more + '</aside>';
     }
-    var mt = mediaHtml ? m.type : 'none';
+    var mt = mediaHtml ? (m.type === 'glance' ? 'proof' : m.type) : 'none';   // a glance aside uses the proof layout (6/6 grid)
     // "zynix-hero--product" means "has a product frame", so a product-preset hero without media is only zynix-hero--none.
     var presetCls = preset === mt || ['product', 'proof', 'none'].indexOf(preset) > -1 ? '' : ' zynix-hero--' + preset;
     var cls = 'zynix-hero zynix-hero--' + mt + (compact ? ' zynix-hero--compact' : '') + presetCls;
@@ -1803,6 +1818,9 @@
     var source = opts.source || q.source;
     var text = opts.text || q.text;
     if (!text || (source !== 'release' && source !== 'approved')) return '';
+    // An em dash never starts a line ("—rather than…"): a closed dash gets word joiners (U+2060, invisible, no width) on both
+    // sides; a spaced dash gets a no-break space before it. The quote's words are unchanged.
+    text = String(text).replace(/(\s*)(?:—|&mdash;|&#8212;)/g, function (d, sp) { return sp ? '\u00a0—' : '\u2060—\u2060'; });
     var name = opts.name || q.name, role = opts.role || q.role;
     var logo = '';
     if (opts.logo !== null) {
@@ -2030,14 +2048,21 @@
     if (!list.length) return '';
     var lid = (opts.id || 'logos') + '-label';
     var hs = [20, 24, 28, 32, 36, 40];
+    // Below 480px the CSS hides items maxMobile+1 and up (display:none). Those stay loading="lazy" even in an eager row, so a
+    // phone never downloads a logo it never shows (a lazy image that is display:none is not fetched).
+    var maxMobile = opts.maxMobile || 6;
     var link = opts.link === null ? null : (opts.link || { label: 'Customer stories', href: '/resources-case-studies' });
     return '<div class="zynix-logo-row' + (opts.inverse ? ' zynix-logo-row--inverse' : '') + zxCls(opts.className) + '" aria-labelledby="' + zxAttr(lid) + '">' +
       '<div class="zynix-logo-row__head"><p class="zynix-logo-row__label" id="' + zxAttr(lid) + '">' + (opts.label || 'Used by ACOs, health plans and provider organizations') + '</p>' +
       (link ? renderLinkArrow(link.label, link.href, { anchorFixed: true }) : '') + '</div>' +
-      '<ul class="zynix-logo-row__list" data-count="' + list.length + '" role="list">' + list.map(function (c) {
+      '<ul class="zynix-logo-row__list" data-count="' + list.length + '" role="list">' + list.map(function (c, i) {
         var h = hs.indexOf(c.logo.h) > -1 ? c.logo.h : 32;
-        return '<li class="zynix-logo-row__item"><img class="zynix-logo-row__img zynix-logo-row__img--h' + h + '" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="' + zxAttr(c.name) + '"' +
-          ' width="' + zxAttr(c.logo.w) + '" height="' + zxAttr(h) + '" loading="' + (opts.eager ? 'eager' : 'lazy') + '" decoding="async"></li>';
+        var img = '<img class="zynix-logo-row__img zynix-logo-row__img--h' + h + '" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="' + zxAttr(c.name) + '"' +
+          ' width="' + zxAttr(c.logo.w) + '" height="' + zxAttr(h) + '" loading="' + (opts.eager && i < maxMobile ? 'eager' : 'lazy') + '" decoding="async">';
+        // logo.named: a seal whose lettering is unreadable at row size (PBACO) shows as a lockup with the customer's name beside
+        // it. The name is aria-hidden because the image's alt already says it, so a screen reader hears the name once.
+        if (c.logo.named) img = '<span class="zynix-logo-row__lockup">' + img + '<span class="zynix-logo-row__name" aria-hidden="true">' + (c.shortName || c.name) + '</span></span>';
+        return '<li class="zynix-logo-row__item' + (c.logo.named ? ' zynix-logo-row__item--named' : '') + '">' + img + '</li>';
       }).join('') + '</ul></div>';
   }
 
@@ -2091,6 +2116,7 @@
     var label = '<label class="zynix-field__label" for="' + id + '">' + opts.label + (req ? ' ' + req : '') + '</label>';
     var tail = (opts.hint ? '<p class="zynix-field__hint" id="' + zxAttr(hintId) + '">' + opts.hint + '</p>' : '') +
       '<p class="zynix-field__error" id="' + zxAttr(errId) + '" role="alert" hidden></p></div>';
+    if (opts.error) common += zxA('data-zx-error', opts.error);   // the field's own error text (initFieldValidation); default by type and label
     var control;
     if (type === 'select') {
       control = '<select class="zynix-input"' + common + '>' + (opts.options || []).map(function (o) {
@@ -2103,6 +2129,63 @@
       control = '<input class="zynix-input" type="' + zxAttr(['text', 'email', 'tel', 'url', 'number'].indexOf(type) > -1 ? type : 'text') + '"' + common + '>';
     }
     return '<div class="zynix-field">' + label + control + tail;
+  }
+
+  // ── Field validation (§2.19, §7.2 item 7): errors in text, with aria-invalid and aria-describedby ──
+  // Binds a form built with renderField. The browser's own constraints decide what is valid (required, type=email, …); this only
+  // reports it. When a submit is blocked, each invalid field gets its message in #<id>-err, aria-invalid="true" and the error id
+  // in aria-describedby; the browser bubble is suppressed and the first invalid field takes focus. Editing a flagged field
+  // clears its error once it is valid. The form's own submit handler is untouched: it still runs only when every field is valid.
+  function zxFieldMessage(el) {
+    var custom = el.getAttribute('data-zx-error');
+    if (custom) return custom;
+    var type = (el.getAttribute('type') || '').toLowerCase(), v = el.validity || {};
+    if (type === 'email') return 'Enter a work email address.';
+    if (type === 'checkbox') return 'Check this box to continue.';
+    if (type === 'tel' && !v.valueMissing) return 'Enter a phone number.';
+    var lab = el.id && el.form ? el.form.querySelector('label[for="' + el.id + '"]') : null, t = '';
+    if (lab) {
+      lab = lab.cloneNode(true);
+      Array.prototype.forEach.call(lab.querySelectorAll('.zynix-field__req, .zx-visually-hidden'), function (n) { n.parentNode.removeChild(n); });
+      t = lab.textContent.replace(/\s+/g, ' ').trim().replace(/[?:.]$/, '');
+    }
+    if (!t) return 'Complete this field.';
+    t = t.charAt(0).toLowerCase() + t.slice(1);
+    return (el.tagName === 'SELECT' ? 'Choose your ' : 'Enter your ') + t + '.';
+  }
+  function initFieldValidation(form) {
+    if (!form || form.__zxValidation || !form.querySelectorAll) return;
+    form.__zxValidation = true;
+    var errOf = function (el) { return el.id ? document.getElementById(el.id + '-err') : null; };
+    var set = function (el, on) {
+      var err = errOf(el);
+      if (!err) return;
+      var ids = (el.getAttribute('aria-describedby') || '').split(/\s+/).filter(function (x) { return x && x !== err.id; });
+      if (on) {
+        var msg = zxFieldMessage(el);
+        if (err.textContent !== msg) err.textContent = msg;
+        err.hidden = false;
+        el.setAttribute('aria-invalid', 'true');
+        ids.push(err.id);
+      } else {
+        err.textContent = '';
+        err.hidden = true;
+        el.removeAttribute('aria-invalid');
+      }
+      if (ids.length) el.setAttribute('aria-describedby', ids.join(' ')); else el.removeAttribute('aria-describedby');
+    };
+    var first = null;
+    Array.prototype.forEach.call(form.querySelectorAll('input, select, textarea'), function (el) {
+      if (!errOf(el)) return;
+      el.addEventListener('invalid', function (e) {
+        e.preventDefault();   // the text error replaces the browser bubble
+        set(el, true);
+        if (!first) { first = el; setTimeout(function () { if (first) first.focus(); first = null; }, 0); }   // invalid fires in tree order
+      });
+      var recheck = function () { if (el.getAttribute('aria-invalid') === 'true' && el.validity && el.validity.valid) set(el, false); };
+      el.addEventListener('input', recheck);
+      el.addEventListener('change', recheck);
+    });
   }
   // ==== ZX:END components ====
 
@@ -2149,7 +2232,7 @@
   }
 
   // ── CTA band (§2.21): btnText is ignored; one orange action at most; no self-links. Company-preset pages get no demo
-  // button and no trust row unless opts say otherwise. ──
+  // button unless opts say otherwise; only /security gets a trust row unless opts.badges asks for one. ──
   function renderCTA(title, subtitle, btnText, opts) {
     opts = opts || {};
     var here = zxPath(), company = zxHeroPreset(here) === 'company';
@@ -2169,7 +2252,9 @@
     else if (!hideDemo) primary = renderDemoButton({ size: 'lg' });
     var sec = opts.secondary === undefined ? { label: 'Contact us', href: '/contact' } : opts.secondary;
     if (sec && ok(sec) && !(hideDemo && isDemo(sec)) && !(isDemo(sec) && !opts.primary)) secondary = btn(sec, surface === 'inverse' ? 'inverse' : 'secondary', sec.cta || null);
-    var badges = opts.badges !== undefined ? (opts.badges || []) : (company ? [] : ['soc2', 'hipaa', 'hitrust']);
+    // No trust row by default: the hero carries the badges and the footer repeats all three on every page, so a CTA row sat
+    // ~650px above identical footer badges (final QA). /security keeps it (the band is about the compliance review itself).
+    var badges = opts.badges !== undefined ? (opts.badges || []) : (here === '/security' ? ['soc2', 'hipaa', 'hitrust'] : []);
     var trust = badges.length ? renderTrustRow(badges, { inverse: surface === 'inverse', href: here === '/security' ? null : '/security' }) : '';
     var id = opts.id || 'final-cta', tid = id + '-title';
     var actions = primary + secondary;
@@ -2189,14 +2274,17 @@
     if (['/contact', '/sms', '/sms-program', '/sms-consent'].indexOf(zxPath()) > -1) return '';
     var title = 'Get new research and webinars by email';
     var note = 'Occasional emails when we publish new research, webinars or product updates. Unsubscribe anytime. <a href="/privacy-policy">Privacy Policy</a>';
-    var field = function (id, by) {
+    // The status line is in the page from the start (an empty polite live region), so the router's handler can announce the
+    // validation error, the success and the failure by writing text into it (WCAG 4.1.3); the form itself is never replaced.
+    var field = function (id, by, statusCls) {
       return '<label class="zx-visually-hidden" for="' + id + '">Work email</label>' +
         '<input class="zynix-input zynix-capture-email" id="' + id + '" type="email" autocomplete="email" placeholder="Work email" required aria-describedby="' + by + '">' +
-        '<button type="submit" class="zynix-btn zynix-btn--quiet zynix-capture-btn">Subscribe</button>';
+        '<button type="submit" class="zynix-btn zynix-btn--quiet zynix-capture-btn">Subscribe</button>' +
+        '<p class="zynix-form-status zynix-capture-status' + zxCls(statusCls) + '" id="' + id + '-status" role="status" aria-live="polite"></p>';
     };
     if (opts.variant === 'footer') {
       return '<form class="zynix-capture-form zynix-footer__signup" novalidate>' +
-        '<p class="zynix-footer__signup-title" id="zx-footer-signup-title">' + title + '</p>' + field('zx-footer-email', 'zx-footer-signup-title') +
+        '<p class="zynix-footer__signup-title" id="zx-footer-signup-title">' + title + '</p>' + field('zx-footer-email', 'zx-footer-signup-title', 'zynix-footer__signup-status') +
         '<p class="zynix-footer__signup-note">' + note + '</p></form>';
     }
     return '<section class="zynix-section zynix-section--compact zynix-section--subtle zynix-email-capture" id="newsletter" aria-labelledby="newsletter-title">' +
@@ -13810,30 +13898,64 @@ function renderDataAnalyticsV7() {
       initROICalculator();
       initAnalytics();
       rewriteBrokenExternalLinks();
-      // Email capture form handler
+      // Email capture form handler (renderEmailCapture: footer signup and the resource block). Every outcome is written into
+      // the form's status line (role=status, aria-live=polite), so it is announced (WCAG 4.1.3). An invalid address is never
+      // posted: the field gets aria-invalid and the message joins its aria-describedby, and focus goes back to it. The button is
+      // never disabled or replaced while it has focus, so focus is never dropped to <body> (2.4.3); on success the field and
+      // button are removed and focus moves to the confirmation, as on /contact.
       document.querySelectorAll('.zynix-capture-form').forEach(function(form) {
+        var email = form.querySelector('.zynix-capture-email');
+        var btn = form.querySelector('.zynix-capture-btn');
+        var status = form.querySelector('.zynix-capture-status');
+        if (!email || !btn || form.__zxCapture) return;
+        form.__zxCapture = true;
+        var baseDesc = email.getAttribute('aria-describedby') || '';
+        var busy = false;
+        var say = function(text, isError) {
+          if (!status) return;
+          status.textContent = text;
+          status.classList.toggle('zx-form-err', !!isError);
+        };
+        var markInvalid = function(on) {
+          var ids = baseDesc ? baseDesc.split(/\s+/) : [];
+          if (on) { email.setAttribute('aria-invalid', 'true'); if (status && status.id) ids.push(status.id); }
+          else email.removeAttribute('aria-invalid');
+          if (ids.length) email.setAttribute('aria-describedby', ids.join(' ')); else email.removeAttribute('aria-describedby');
+        };
+        email.addEventListener('input', function() {
+          if (email.getAttribute('aria-invalid') === 'true' && email.checkValidity()) { markInvalid(false); say('', false); }
+        });
         form.addEventListener('submit', function(e) {
           e.preventDefault();
-          var email = form.querySelector('.zynix-capture-email');
-          if (!email || !email.value) return;
-          var btn = form.querySelector('.zynix-capture-btn');
+          if (busy) return;
+          if (!email.checkValidity()) {   // empty or not an address (type=email, required; the form is novalidate)
+            markInvalid(true);
+            say('Enter a work email address.', true);
+            email.focus();
+            return;
+          }
+          markInvalid(false);
+          say('', false);
+          busy = true;
+          btn.setAttribute('aria-disabled', 'true');
           btn.textContent = 'Subscribing...';
-          btn.disabled = true;
           // Submit to HubSpot (portal 242472215). ZX_HS_NEWSLETTER_FORM: swap in a dedicated newsletter form GUID when one exists.
           var ZX_HS_NEWSLETTER_FORM = '66a6d29e-8c74-4f74-8235-0205ed4d6ed3';
-          var payload = { fields: [ { name: 'email', value: email.value }, { name: 'message', value: 'Newsletter signup: VBC Intelligence Weekly' }, { name: 'sms_consent', value: 'No' } ], context: { pageUri: window.location.href, pageName: document.title } };
+          var payload = { fields: [ { name: 'email', value: email.value }, { name: 'message', value: 'Newsletter signup: VBC Intelligence' }, { name: 'sms_consent', value: 'No' } ], context: { pageUri: window.location.href, pageName: document.title } };
           var fail = function() {
+            busy = false;
+            btn.removeAttribute('aria-disabled');
             btn.textContent = 'Subscribe';
-            btn.disabled = false;
-            var m = form.parentNode.querySelector('.zx-form-err');
-            if (!m) { m = document.createElement('p'); m.className = 'zx-form-err'; m.setAttribute('role', 'alert'); m.style.cssText = 'color:#b91c1c;font-size:14px;margin:12px 0 0'; form.parentNode.insertBefore(m, form.nextSibling); }
-            m.textContent = 'We could not subscribe you right now. Please email info@zynix.ai and we will add you.';
+            say('We could not subscribe you right now. Please email info@zynix.ai and we will add you.', true);
           };
           fetch('https://api.hsforms.com/submissions/v3/integration/submit/242472215/' + ZX_HS_NEWSLETTER_FORM, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
             .then(function(r) {
               if (!r.ok) throw new Error('HubSpot ' + r.status);
               if (window.gtag) window.gtag('event', 'newsletter_signup', { email_domain: email.value.split('@')[1] });
-              form.innerHTML = '<p style="color:#20449B;font-weight:600;font-size:15px">&#10003; Thanks \u2014 you\'re on the list.</p>';
+              var label = email.id ? form.querySelector('label[for="' + email.id + '"]') : null;
+              [label, email, btn].forEach(function(el) { if (el && el.parentNode) el.parentNode.removeChild(el); });
+              say('Thanks. You’re on the list.', false);
+              if (status) { status.setAttribute('tabindex', '-1'); status.focus(); }
             })
             .catch(fail);
         });
@@ -13842,6 +13964,8 @@ function renderDataAnalyticsV7() {
       if (path === '') initHomepage();
       // FAQ and other disclosures (native <button>s; hidden-attribute panels; legacy .open markup still works)
       initDisclosures(document);
+      // renderField forms (/contact): text errors with aria-invalid and aria-describedby instead of the browser's bubbles
+      Array.prototype.forEach.call(document.querySelectorAll('form'), function(f) { if (f.querySelector('.zynix-field__error')) initFieldValidation(f); });
       initFilters(document);   // shared filter chip groups (renderFilter); a no-op on pages without one
       // Handle hash scrolling after page render
       var hash = window.location.hash;
