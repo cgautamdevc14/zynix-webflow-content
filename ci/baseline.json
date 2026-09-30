@@ -4,16 +4,21 @@
     "phase: 3 since 2026-09-29 (Phase 3 integration, Q fix round 1); the orchestrator sets it to 1, 2, 3 after each phase merges. A scope listed in",
     "  mustBeZeroByPhase[p] for every p <= phase must have zero banned-string hits ('*' = every scope).",
     "  Preview a later phase without editing this file: node ci/static-checks.mjs --phase 1",
-    "bannedStrings: hits per scope (absent = 0; c95cc03 counts ratcheted down after each phase; 2026-09-29 at a447c24: only \"(bundle)\" 1 = the top-level slug ZX_BLOG_AGENTS_OPS, 0 after S3's slug fix). A PR fails if any scope rises. Owning streams lower their",
+    "bannedStrings: hits per scope (absent = 0; c95cc03 counts ratcheted down after each phase; 2026-09-29 final QA round 1: every scope 0, the last hit (\"(bundle)\" 1, the slug ZX_BLOG_AGENTS_OPS) was fixed by S3). A PR fails if any scope rises. Owning streams lower their",
     "  own scopes with: node ci/banned-strings.mjs --write-baseline (never raises). Inspect: node ci/banned-strings.mjs --hits <scope>",
     "styleAttributes: max count of style=\" in the bundle (2,196 at c95cc03; 1,229 after Phase 3; 1,017 after the Phase 3 integration merge of rd/h, a447c24, 2026-09-29); lower it after each phase.",
     "undefinedVars: var(--z*) names used without a fallback and defined nowhere at c95cc03; S1's token block defines them,",
     "  then remove them here. Any other undefined name fails.",
-    "smokeOverflow390: ci/smoke.mjs rect-overflow ratchet, outermost offending elements per page at 390px on production",
-    "  with c95cc03's files. Fails when a page gets worse; from phase 3 every count must be 0 (launch precondition 6).",
+    "smokeOverflow390: ci/smoke.mjs rect-overflow ratchet, outermost offending elements per page at 390px (c95cc03 counts on production;",
+    "  every page 0 since the final QA round 1, 2026-09-29, when all five measured 0). Fails when a page gets worse; from phase 3 every count must be 0 (launch precondition 6).",
     "Exempt hits (not counted; ci/banned-strings.mjs header): facts data, DEAD_FUNCTIONS (verified unreachable on every run),",
-    "  URL/path tokens, and DATED_EXEMPTIONS (renderPrivacyV7 'SOC 2 Type II certification', A2P-frozen, since 2026-09-29).",
-    "  List them: node ci/banned-strings.mjs --exempt; reachability report: node ci/banned-strings.mjs --dead"
+    "  URL/path tokens, DATED_EXEMPTIONS (renderPrivacyV7 'SOC 2 Type II certification', A2P-frozen) and VERIFY_EXEMPTIONS ('$936,988,750' on /press, [VERIFY]).",
+    "  List them: node ci/banned-strings.mjs --exempt; reachability report: node ci/banned-strings.mjs --dead",
+    "weight (final QA round 1, 2026-09-29; ci/launch.mjs): ceilings = failing ratchet on brotli-4 bytes of the stylesheet and of bundle + stylesheet, and on @import rules in the stylesheet",
+    "  (measured + 2,048 B headroom at d3cd1fe; lower with node ci/launch.mjs --write-weight after each merge, never raise without a reason in the PR). targets = the launch item",
+    "  'weight': production's bundle + stylesheet at c95cc03 (362,039 B brotli-4), a 30 KB stylesheet, no @import; unmet targets print as a LAUNCH line.",
+    "launchSignoffs: orchestrator decisions on open launch items (ci/launch.mjs), keyed by item id, e.g. \"dead-code\": {\"by\": \"orchestrator\", \"date\": \"…\", \"note\": \"…\"}.",
+    "  Every open item prints as a LAUNCH line in ci/static-checks.mjs; node ci/static-checks.mjs --launch fails while an item is open and not signed off (launch precondition 6)."
   ],
   "commit": "c95cc03",
   "phase": 3,
@@ -44,13 +49,24 @@
   "styleAttributes": 1017,
   "undefinedVars": [],
   "smokeOverflow390": {
-    "/": 3,
-    "/platform": 7,
+    "/": 0,
+    "/platform": 0,
     "/agents": 0,
     "/case-studies/pbaco": 0,
-    "/compare-zynix-vs-navina": 1
+    "/compare-zynix-vs-navina": 0
   },
-  "bannedStrings": {
-    "(bundle)": 1
-  }
+  "bannedStrings": {},
+  "weight": {
+    "ceilings": {
+      "cssBr4": 69070,
+      "totalBr4": 405675,
+      "cssImports": 1
+    },
+    "targets": {
+      "cssBr4": 30720,
+      "totalBr4": 362039,
+      "cssImports": 0
+    }
+  },
+  "launchSignoffs": {}
 }
