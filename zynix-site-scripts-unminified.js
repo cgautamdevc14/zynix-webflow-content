@@ -2946,7 +2946,9 @@
   // ── PAGE: Contact ──
   function renderROI() {
     // Every assumption is editable, has a default and says where the number comes from (DESIGN_SPEC §6, PG-T1).
-    var v = ZX_RES_ROI_DEFAULTS, r = zxResRoiCalc(v);
+    // The defaults are placeholders, not Zynix results, so no estimate shows until the visitor changes a number
+    // (data-zx-roi-when="empty" | "ready"; initROICalculator swaps them on the first input).
+    var v = ZX_RES_ROI_DEFAULTS, dash = '\u2014';
     var slider = function (s) {
       var pct = Math.round((v[s.key] - s.min) / (s.max - s.min) * 100);
       return '<div class="zx-res-roi__slider">' +
@@ -2959,13 +2961,14 @@
     var field = function (a) {
       return '<div class="zynix-field zx-res-roi__field">' +
         '<label class="zynix-field__label" for="roi-' + a.id + '">' + a.label + (a.unit === '%' ? '<span class="zx-visually-hidden"> (percent)</span>' : '<span class="zx-visually-hidden"> (US dollars)</span>') + '</label>' +
-        '<div class="zx-res-roi__control' + (a.unit === '$' ? ' zx-res-roi__control--usd' : '') + '"><input class="zynix-input" type="number" inputmode="decimal" id="roi-' + a.id + '" min="0"' + (a.unit === '%' ? ' max="100"' : '') + ' step="' + a.step + '" value="' + v[a.key] + '"' +
-        ' aria-describedby="roi-' + a.id + '-src" data-zx-roi-input="' + a.key + '"><span class="zx-res-roi__unit" aria-hidden="true">' + a.unit + '</span></div>' +
+        '<div class="zx-res-roi__control' + (a.unit === '$' ? ' zx-res-roi__control--usd' : '') + '"><input class="zynix-input" type="number" inputmode="decimal" id="roi-' + a.id + '" min="0"' + (a.unit === '%' ? ' max="100"' : '') + ' step="any" value="' + v[a.key] + '"' +
+        ' aria-describedby="roi-' + a.id + '-msg roi-' + a.id + '-src" data-zx-roi-input="' + a.key + '" data-zx-roi-unit="' + a.unit + '"><span class="zx-res-roi__unit" aria-hidden="true">' + a.unit + '</span></div>' +
+        '<p class="zynix-field__error zx-res-roi__msg" id="roi-' + a.id + '-msg" hidden></p>' +
         '<p class="zynix-field__hint" id="roi-' + a.id + '-src"><span class="zx-res-roi__src">Source:</span> ' + a.src + '</p></div>';
     };
     var line = function (key, subKey, label, sub) {
-      return '<div class="zx-res-roi__line"><dt>' + label + '</dt><dd class="zx-res-roi__line-value" data-zx-roi-out="' + key + '">' + zxResUsd(r[key]) + '</dd>' +
-        '<dd class="zx-res-roi__line-sub"><span data-zx-roi-out="' + subKey + '">' + zxResNum(r[subKey]) + '</span> ' + sub + '</dd></div>';
+      return '<div class="zx-res-roi__line"><dt>' + label + '</dt><dd class="zx-res-roi__line-value" data-zx-roi-out="' + key + '">' + dash + '</dd>' +
+        '<dd class="zx-res-roi__line-sub" data-zx-roi-when="ready" hidden><span data-zx-roi-out="' + subKey + '">' + dash + '</span> ' + sub + '</dd></div>';
     };
     var sliders = [
       { id: 'lives', key: 'lives', label: 'Attributed lives', min: 1000, max: 500000, step: 1000, unit: 'lives', hint: 'Patients or members in your value-based contracts.' },
@@ -2988,7 +2991,8 @@
         { id: 'readmit-cost', key: 'readmitCost', label: 'Cost per readmission', unit: '$', step: 500, src: 'your claims data.' }
       ] }
     ];
-    var peek = '<p class="zx-res-roi__peek">Illustrative estimate so far: <strong data-zx-roi-out="total">' + zxResUsd(r.total) + '</strong> a year. <a href="#roi-results">See the breakdown</a></p>';
+    var peek = '<p class="zx-res-roi__peek"><span data-zx-roi-when="empty">Change any number to see an illustrative estimate.</span>' +
+      '<span data-zx-roi-when="ready" hidden>Illustrative estimate so far: <strong data-zx-roi-out="total">' + dash + '</strong> a year. <a href="#roi-results">See the breakdown</a></span></p>';
     var inputs = '<fieldset class="zx-res-roi__set"><legend class="zx-res-roi__legend">Your population</legend>' + sliders.map(slider).join('') + peek + '</fieldset>' +
       '<fieldset class="zx-res-roi__set"><legend class="zx-res-roi__legend">Your assumptions</legend>' +
       '<p class="zx-res-roi__intro">Every default below is a placeholder. Replace it with your own numbers.</p>' +
@@ -2996,8 +3000,9 @@
       peek + '</fieldset>';
     var results = '<div class="zx-res-roi__results" id="roi-results" role="group" aria-labelledby="roi-results-title">' +
       '<h2 class="zx-res-roi__results-title" id="roi-results-title">Illustrative estimate</h2>' +
-      '<p class="zx-res-roi__total"><span class="zx-res-roi__total-value" data-zx-roi-out="total">' + zxResUsd(r.total) + '</span>' +
-      '<span class="zx-res-roi__total-label">estimated value a year, about <span data-zx-roi-out="perLife">' + zxResUsd(r.perLife, 1) + '</span> per attributed life</span></p>' +
+      '<p class="zx-res-roi__total"><span class="zx-res-roi__total-value" data-zx-roi-out="total">' + dash + '</span>' +
+      '<span class="zx-res-roi__total-label" data-zx-roi-when="empty">Change any number to see an estimate.</span>' +
+      '<span class="zx-res-roi__total-label" data-zx-roi-when="ready" hidden>estimated value a year, about <span data-zx-roi-out="perLife">' + dash + '</span> per attributed life</span></p>' +
       '<dl class="zx-res-roi__lines">' +
         line('tcm', 'tcmN', 'TCM payments from added contacts', 'more completed TCM episodes a year') +
         line('gap', 'gapN', 'Value of closed care gaps', 'gaps closed') +
@@ -3006,20 +3011,21 @@
       '<p class="zx-res-roi__note">This estimate uses the assumptions shown, which you can change. It is not a guarantee of results.</p>' +
       '<p class="zx-visually-hidden" aria-live="polite" data-zx-roi-out="summary"></p>' +
       renderButton('Book a 30-minute analysis', SITE_FACTS.demo.href, { variant: 'secondary', cta: 'demo', className: 'zx-res-roi__cta' }) +
-      '<div class="zx-res-roi__how"><p class="zx-res-roi__how-title">How it is calculated</p><ol class="zx-res-roi__how-list">' +
+    '</div>';
+    var how = '<div class="zx-res-roi__how"><p class="zx-res-roi__how-title">How it is calculated</p><ol class="zx-res-roi__how-list">' +
         '<li>TCM: discharges × 12 × (target rate − current rate) × payment per episode. It assumes each added contact becomes a completed, billable episode.</li>' +
         '<li>Care gaps: open gaps × share closed × value per gap.</li>' +
         '<li>Readmissions: discharges × 12 × readmission rate × modeled reduction × cost per readmission.</li>' +
-      '</ol></div>' +
-    '</div>';
+        '<li>An empty field uses its default. A percentage above 100 counts as 100, and a negative number counts as 0.</li>' +
+      '</ol></div>';
     return renderHero({ preset: 'resource', eyebrow: 'ROI calculator', title: 'Model the impact on your population',
         lead: 'Enter your panel size, discharges and open gaps, adjust every assumption, and see an illustrative estimate. It’s a planning tool, not a guarantee.',
         primary: { label: 'Start the calculator', href: '#roi-calculator' }, secondary: { label: 'Book a 30-minute analysis', href: SITE_FACTS.demo.href } }) +
       '<section class="zynix-section zynix-section--compact zynix-section--flush-top zx-res-roi" id="roi-calculator" aria-label="ROI calculator" data-zx-roi>' +
-        '<div class="zynix-container"><div class="zx-res-roi__grid"><div class="zx-res-roi__inputs">' + inputs + '</div>' + results + '</div></div>' +
+        '<div class="zynix-container"><div class="zx-res-roi__grid"><div class="zx-res-roi__inputs">' + inputs + '</div>' + results + how + '</div></div>' +
       '</section>' +
       zxResRelated([{ label: 'Resources', items: ['/resources-case-studies', '/alternatives', '/resources-faq'] }, { label: 'Platform', items: ['/care-plans', '/zynix-data-analytics', '/agents'] }]) +
-      renderCTA('', '') +
+      renderCTA('Check these numbers against your own panel', 'Book 30 minutes with our team. We’ll go through each assumption with your own figures and show the workflows behind each line on sample data.') +
       renderFooter();
   }
 
@@ -3032,6 +3038,7 @@
   var ZX_RES_NAACOS_END = Date.UTC(2026, 9, 17, 4, 0, 0);   // NAACOS Fall 2026 ends Oct 16 (the announcement bar's expiry)
   function zxResNaacosLive() { return Date.now() < ZX_RES_NAACOS_END; }
   function zxResNum(n) { return Math.round(+n || 0).toLocaleString('en-US'); }
+  function zxResTrim(n) { return (+n || 0).toLocaleString('en-US', { maximumFractionDigits: 2 }); }
   function zxResUsd(n, exact) { n = +n || 0; return '$' + (exact ? Math.round(n) : Math.round(n / 1000) * 1000).toLocaleString('en-US'); }
   function zxResDate(iso) {
     var p = String(iso).split('-'), m = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -3270,7 +3277,8 @@
       '<section class="zynix-section zynix-section--compact zynix-section--flush-top zx-res-faq" aria-label="Frequently asked questions"><div class="zynix-container">' +
         '<div class="zx-res-faq__grid">' + nav + '<div class="zx-res-faq__body">' + body + '</div></div></div></section>' +
       zxResRelated([{ label: 'Go deeper', items: ['/security', '/integrations', '/agents', '/platform', '/resources-glossary', '/resources-case-studies'] }]) +
-      renderCTA('', '') +
+      renderCTA('Ask us what this page doesn’t cover',
+        'Book 30 minutes with our team. We’ll take your product, security and procurement questions and show the workflows on sample data.') +
       renderFooter();
   }
 
@@ -3318,7 +3326,8 @@
         '</div>') +
       zxResNewsletter() +
       zxResRelated([{ label: 'More resources', items: ['/resources-webinars', '/resources-whitepapers', '/resources-glossary', '/resources-faq', '/resources-case-studies', '/press'] }]) +
-      renderCTA('', '') +
+      renderCTA('See the workflows these articles describe',
+        'Book 30 minutes with our team. We’ll walk through post-discharge follow-up, care gap closure or wellness visit outreach on sample data, and map it to your programs.') +
       renderFooter();
   }
 
@@ -3345,7 +3354,8 @@
         lead: 'Customer organizations in 30 states now run value-based care programs on the Zynix platform.',
         date: '2026-03-15', read: '3 min read', html: html }) +
       zxResRelated([{ label: 'Keep reading', items: ['/resources-case-studies', '/press', '/integrations', '/platform', '/resources-blog'] }]) +
-      renderCTA('', '') +
+      renderCTA('See the platform behind the milestone',
+        'Book 30 minutes with our team. We’ll show how the Zynix platform runs post-discharge follow-up, care gap closure and wellness visit outreach, on sample data.') +
       renderFooter();
   }
 
@@ -3432,7 +3442,8 @@
         { href: '/resources-blog-aco-lead-model-execution-infrastructure-2027', label: 'ACO LEAD Model: executing between visits', desc: 'Why 2027 rewards follow-through', icon: 'book' },
         '/audience-segments/acos-msos', '/care-plans', '/zynix-data-analytics', '/resources-blog'] }]) +
       (naacos ? renderCTA('Meet us at NAACOS Fall 2026', 'Find Zynix AI at the NAACOS Fall Conference (October 14–16, Washington, DC) to talk through LEAD readiness and see the workflows on sample data.', '',
-          { primary: { label: 'Book a meeting', href: SITE_FACTS.demo.href } }) : renderCTA('', '')) +
+          { primary: { label: 'Book a meeting', href: SITE_FACTS.demo.href } }) :
+        renderCTA('Talk through your LEAD readiness', 'Book 30 minutes with our team. We’ll walk through the between-visit workflows on sample data and map them to your ACO’s programs.')) +
       renderFooter();
   }
 
@@ -4627,7 +4638,8 @@
         '<p class="zx-res-gloss__empty" data-zx-res-gloss-empty hidden>No terms match that search. <a href="/contact">Ask our team</a> about it.</p>' +
       '</div></section>' +
       zxResRelated([{ label: 'Keep learning', items: ['/resources-blog', '/resources-faq', '/resources-whitepapers', '/platform', '/agents', '/care-plans'] }]) +
-      renderCTA('', '') +
+      renderCTA('See these terms at work in a 30-minute demo',
+        'Transitional care, care gap closure and wellness visits, shown as worklists and care plans on sample data.') +
       renderFooter();
   }
 
@@ -4684,7 +4696,8 @@
         renderSectionHead('Events', 'Where to meet the team', null, { id: 'events-title' }) + events) +
       zxResNewsletter() +
       zxResRelated([{ label: 'More resources', items: ['/resources-blog', '/resources-whitepapers', '/resources-case-studies', '/press'] }]) +
-      renderCTA('', '') +
+      renderCTA('Want a walkthrough for your own team?',
+        'Book 30 minutes with our team. We’ll show the workflows from our sessions on sample data and map them to your programs.') +
       renderFooter();
   }
 
@@ -4732,7 +4745,8 @@
 
     html += zxResNewsletter() +
       zxResRelated([{ label: 'More resources', items: ['/resources-blog', '/resources-webinars', '/resources-case-studies', '/roi-calculator'] }]) +
-      renderCTA('', '') +
+      renderCTA('Put the research to work on your programs',
+        'Book 30 minutes with our team. We’ll walk through post-discharge follow-up, care gap closure or wellness visit outreach on sample data, and map it to your programs.') +
     renderFooter();
 
     return html;
@@ -11666,34 +11680,68 @@ function renderDataAnalyticsV7() {
     var root = document.querySelector('[data-zx-roi]');
     if (!root || root.__zxRoi) return;
     root.__zxRoi = true;
-    var inputs = root.querySelectorAll('[data-zx-roi-input]'), outs = {}, timer = null;
+    var inputs = root.querySelectorAll('[data-zx-roi-input]'), outs = {}, timer = null, ready = false;
     Array.prototype.forEach.call(root.querySelectorAll('[data-zx-roi-out]'), function (el) { var k = el.getAttribute('data-zx-roi-out'); (outs[k] = outs[k] || []).push(el); });
     var set = function (k, t) { (outs[k] || []).forEach(function (el) { el.textContent = t; }); };
     var fill = function (el) {   // slider track fill (CSS reads --slider-pct)
       var min = +el.min || 0, max = +el.max || 100;
       el.style.setProperty('--slider-pct', Math.round((+el.value - min) / (max - min) * 100) + '%');
     };
+    // Number fields: an empty field uses its default; an unreadable or out-of-range value is flagged (aria-invalid plus a
+    // message under the field) and the estimate uses the nearest allowed value, which the message states.
+    var check = function (el) {
+      var key = el.getAttribute('data-zx-roi-input'), pct = el.getAttribute('data-zx-roi-unit') === '%', def = ZX_RES_ROI_DEFAULTS[key];
+      var fmt = function (n) { return pct ? zxResTrim(n) + '%' : '$' + zxResTrim(n); };
+      var raw = el.value, x = parseFloat(raw), msg = '', bad = false, use = x;
+      if (el.validity && el.validity.badInput) { bad = true; use = def; msg = 'Enter a number. Until then the estimate uses the default, ' + fmt(def) + '.'; }
+      else if (raw === '' || !isFinite(x)) { use = def; msg = 'This field is empty, so the estimate uses the default, ' + fmt(def) + '.'; }
+      else if (x < 0 || (pct && x > 100)) {
+        bad = true; use = x < 0 ? 0 : 100;
+        msg = (pct ? 'Enter a value from 0 to 100.' : 'Enter a value of 0 or more.') + ' Until then the estimate uses ' + fmt(use) + '.';
+      }
+      var box = document.getElementById(el.id + '-msg');
+      if (bad) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
+      if (box) { box.textContent = msg; box.hidden = !msg; box.classList.toggle('is-note', !!msg && !bad); }
+      var lab = bad && document.querySelector('label[for="' + el.id + '"]');
+      return { value: use, bad: bad, label: lab && lab.firstChild ? lab.firstChild.nodeValue : 'One assumption' };
+    };
     var calc = function (announce) {
-      var v = {};
-      Array.prototype.forEach.call(inputs, function (el) { v[el.getAttribute('data-zx-roi-input')] = el.value; });
-      var r = zxResRoiCalc(v);
+      var v = {}, flagged = [];
       Array.prototype.forEach.call(inputs, function (el) {
-        if (el.type !== 'range') return;
-        var t = zxResNum(el.value), out = document.getElementById(el.id + '-val');
-        if (out) out.textContent = t;
-        el.setAttribute('aria-valuetext', t + ' ' + (el.getAttribute('data-zx-roi-unit') || ''));
-        fill(el);
+        var key = el.getAttribute('data-zx-roi-input');
+        if (el.type === 'range') {
+          v[key] = el.value;
+          var t = zxResNum(el.value), out = document.getElementById(el.id + '-val');
+          if (out) out.textContent = t;
+          el.setAttribute('aria-valuetext', t + ' ' + (el.getAttribute('data-zx-roi-unit') || ''));
+          fill(el);
+          return;
+        }
+        var c = check(el);
+        v[key] = c.value;
+        if (c.bad) flagged.push(c.label);
       });
+      if (!ready) return;
+      var r = zxResRoiCalc(v);
       set('total', zxResUsd(r.total)); set('perLife', zxResUsd(r.perLife, 1));
       set('tcm', zxResUsd(r.tcm)); set('tcmN', zxResNum(r.tcmN));
       set('gap', zxResUsd(r.gap)); set('gapN', zxResNum(r.gapN));
       set('readmit', zxResUsd(r.readmit)); set('readmitN', zxResNum(r.readmitN));
       if (announce) {
         clearTimeout(timer);
-        timer = setTimeout(function () { set('summary', 'Illustrative estimate updated: ' + zxResUsd(r.total) + ' a year.'); }, 600);
+        timer = setTimeout(function () {
+          set('summary', 'Illustrative estimate updated: ' + zxResUsd(r.total) + ' a year.' +
+            (flagged.length ? ' ' + flagged.join(' and ') + (flagged.length > 1 ? ' need' : ' needs') + ' a valid value.' : ''));
+        }, 600);
       }
     };
-    Array.prototype.forEach.call(inputs, function (el) { el.addEventListener('input', function () { calc(true); }); });
+    // No estimate until the visitor changes a number: the defaults are placeholders, not results.
+    var reveal = function () {
+      if (ready) return;
+      ready = true;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-zx-roi-when]'), function (el) { el.hidden = el.getAttribute('data-zx-roi-when') !== 'ready'; });
+    };
+    Array.prototype.forEach.call(inputs, function (el) { el.addEventListener('input', function () { reveal(); calc(true); }); });
     calc(false);
   }
 
@@ -11952,13 +12000,15 @@ function renderDataAnalyticsV7() {
       renderSection({ id: 'faq', surface: 'subtle', className: 'zx-res-alt-faq' },
         renderSplit(renderSectionHead('FAQ', 'Choosing a value-based care platform', null, { id: 'faq-title' }), renderFaqList(faqs, { idPrefix: 'alt-faq', openFirst: true }), { ratio: '4-8' })) +
       zxResRelated([{ label: 'Platform', items: ['/platform', '/agents', '/care-plans'] }, { label: 'Proof', items: ['/resources-case-studies', '/security', '/integrations'] }]) +
-      renderCTA('', '') +
+      renderCTA('Run the comparison on your own programs',
+        'Book 30 minutes with our team. We’ll walk through post-discharge follow-up, care gap closure or wellness visit outreach on sample data, next to the tools you use today.') +
       renderFooter();
   }
 
   // ── PAGE: Compare — Zynix vs Point Solutions ──
   function renderComparePointSolutions() { return renderCompareVs({
     slug: 'point-solutions', name: 'point solutions', title: 'Zynix AI vs point solutions', label: 'A point-solution stack',
+    cta: { title: 'See one platform next to your current tools', sub: 'Book 30 minutes with our team. We’ll run one of your programs on sample data and show where your current tools fit around it.' },
     lead: 'What changes when data, worklists, care plans and outreach run on one platform instead of a separate tool for each job.',
     them: 'A separate tool for each job: scheduling, outreach, documentation and analytics, each with its own integration, data and contract.',
     rows: [
@@ -12065,7 +12115,8 @@ function renderDataAnalyticsV7() {
       zxResRelated([{ label: 'More comparisons', items: others.map(function (s) { return zxResCompareLink(s, names[s]); })
           .concat(['/alternatives']) },
         { label: 'Platform', items: ['/platform', '/agents'] }]) +
-      renderCTA('', '') +
+      renderCTA(cfg.cta ? cfg.cta.title : 'See Zynix next to ' + name + ' on your own workflows',
+        cfg.cta ? cfg.cta.sub : 'Book 30 minutes with our team. We’ll walk through one of your programs on sample data and show where Zynix and ' + name + ' each fit.') +
       renderFooter();
   }
 
@@ -12118,7 +12169,7 @@ function renderDataAnalyticsV7() {
       { label: 'Documentation', them: 'Clinician Copilot supports the clinician during the visit.', src: 'navina.ai, accessed 19 Sep 2026', us: 'ZX_DOCS' },
       { label: 'Customer evidence', them: 'Navina publishes customer results at navina.ai/case-studies.', src: 'navina.ai, accessed 19 Sep 2026', us: 'Customer stories at zynix.ai, and partnership releases from Palm Beach ACO and eternalHealth.' }
     ],
-    fitThem: ['Your priority is visit-level HCC capture and chart summaries for clinicians.'],
+    fitThem: ['Your priority is visit-level HCC capture and chart summaries for clinicians.', 'You want a clinician-first copilot with risk adjustment, quality and analytics products from one vendor.'],
     fitUs: ['You need the work between visits done: outreach, scheduling, post-discharge follow-up and gap closure.', 'You want point-of-care prompts and follow-up running from the same list of gaps.'],
     both: 'Navina can support the visit while Zynix runs outreach and follow-up between visits. Zynix can also cover point-of-care gap prompts itself.',
     faqs: [
@@ -12130,6 +12181,7 @@ function renderDataAnalyticsV7() {
 
   function renderCompareOliveAI() { return renderCompareVs({
     slug: 'olive-ai', name: 'Olive AI',
+    cta: { title: 'Replacing Olive AI? See Zynix on your own workflows', sub: 'Book 30 minutes with our team. We’ll walk through one of your value-based care programs on sample data and map it to your systems.' },
     lead: 'Olive AI wound down in 2023. For teams re-evaluating automation, here is where its products went and where Zynix fits, cited to news coverage of the wind-down.',
     them: 'Olive AI announced its wind-down on 31 October 2023. It sold its clearinghouse and patient-access units to Waystar and its prior-authorization unit to Humata Health.',
     themSrc: 'Healthcare Dive, 1 Nov 2023; HIT Consultant, 31 Oct 2023',

@@ -4062,9 +4062,19 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-res-roi__legend + * { clear:both; }
 .zx-res-roi__intro { margin:0 0 var(--zx-space-5); font-size:15px; line-height:1.55; color:var(--zx-text-secondary); }
 .zx-res-roi__slider { margin:0 0 var(--zx-space-6); }
-.zx-res-roi__slider-head { display:flex; justify-content:space-between; align-items:baseline; gap:var(--zx-space-4); margin-bottom:var(--zx-space-3); }
+.zx-res-roi__slider-head { display:flex; justify-content:space-between; align-items:baseline; gap:var(--zx-space-4); }
 .zx-res-roi__value { font:var(--zx-fw-semibold) var(--zx-fs-h4)/1.2 var(--zx-font-sans); font-variant-numeric:tabular-nums; color:var(--zx-text); }
-.zx-res-roi__slider .zynix-field__hint { margin-top:var(--zx-space-2); }
+.zx-res-roi__slider .zynix-field__hint { margin-top:0; }
+/* 44px hit box (§7.2 targets): the input is 44px tall and transparent; the 8px track and its fill are drawn on the track pseudo-elements. */
+.zx-res-roi__slider .zynix-roi-slider { display:block; height:44px; margin:0; background:transparent; border-radius:0; }
+.zx-res-roi__slider .zynix-roi-slider::-webkit-slider-runnable-track { height:8px; border-radius:4px;
+  background:linear-gradient(90deg, var(--zx-blue-600) var(--slider-pct, 50%), var(--zx-gray-200) var(--slider-pct, 50%)); }
+.zx-res-roi__slider .zynix-roi-slider::-webkit-slider-thumb { margin-top:-8px; }
+/* Focus shows as a ring on the thumb, so it never runs into the label above the 44px box; forced-colors mode keeps an outline. */
+.zx-res-roi__slider .zynix-roi-slider[type="range"]:focus-visible { outline:none; }   /* beats .zynix-injected :is(input[type="range"]):focus-visible */
+.zx-res-roi__slider .zynix-roi-slider:focus-visible::-webkit-slider-thumb { box-shadow:0 0 0 3px var(--zx-focus-ring); }
+.zx-res-roi__slider .zynix-roi-slider:focus-visible::-moz-range-thumb { box-shadow:0 0 0 3px var(--zx-focus-ring); }
+@media (forced-colors:active) { .zx-res-roi__slider .zynix-roi-slider[type="range"]:focus-visible { outline:2px solid CanvasText; outline-offset:0; } }
 .zx-res-roi__group + .zx-res-roi__group { margin-top:var(--zx-space-6); }
 .zx-res-roi__group-title { margin:0 0 var(--zx-space-3); font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.2 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase; color:var(--zx-text-muted); }
 .zx-res-roi__fields { display:grid; gap:0 var(--zx-space-6); align-items:start; }
@@ -4075,6 +4085,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-res-roi__unit { position:absolute; top:50%; right:14px; transform:translateY(-50%); font-size:15px; color:var(--zx-text-muted); pointer-events:none; }
 .zx-res-roi__control--usd .zx-res-roi__unit { right:auto; left:14px; }
 .zx-res-roi__src { font-weight:var(--zx-fw-semibold); color:var(--zx-text-secondary); }
+.zx-res-roi__msg.is-note { font-weight:var(--zx-fw-regular); color:var(--zx-text-secondary); }
 .zx-res-roi__peek { margin:var(--zx-space-6) 0 0; padding:var(--zx-space-3) var(--zx-space-4); border-radius:var(--zx-radius-md); background:var(--zx-surface-brand); font-size:15px; line-height:1.5; color:var(--zx-text); }
 .zx-res-roi__peek strong { font-variant-numeric:tabular-nums; }
 .zx-res-roi__results { box-sizing:border-box; padding:clamp(24px, 16px + 2vw, 36px); border:1px solid var(--zx-border); border-radius:var(--zx-radius-xl); background:var(--zx-surface); box-shadow:var(--zx-shadow-md); }
@@ -4089,14 +4100,17 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-res-roi__line-sub { grid-column:1 / -1; margin:0; font-size:13px; line-height:1.4; color:var(--zx-text-muted); }
 .zx-res-roi__note { margin:var(--zx-space-4) 0 0; font-size:13px; line-height:1.5; color:var(--zx-text-secondary); }
 .zx-res-roi__results .zx-res-roi__cta { width:100%; margin-top:var(--zx-space-5); }
-.zx-res-roi__how { margin-top:var(--zx-space-6); padding-top:var(--zx-space-4); border-top:1px solid var(--zx-border); }
+.zx-res-roi__how { min-width:0; padding-top:var(--zx-space-4); border-top:1px solid var(--zx-border); }
 .zx-res-roi__how-title { margin:0 0 var(--zx-space-2); font:var(--zx-fw-semibold) var(--zx-fs-sm)/1.4 var(--zx-font-sans); color:var(--zx-text); }
 .zx-res-roi__how-list { margin:0; padding-left:1.2em; }
 .zx-res-roi__how-list li { margin:0 0 6px; font-size:13px; line-height:1.5; color:var(--zx-text-secondary); }
 @media (min-width:768px) { .zx-res-roi__fields { grid-template-columns:repeat(2, minmax(0,1fr)); } }
 @media (min-width:1024px) {
+  /* The method note sits under the inputs, so the results card spans both rows and stays in view while every input is edited. */
   .zx-res-roi__grid { grid-template-columns:minmax(0,7fr) minmax(0,5fr); column-gap:var(--zx-space-12); align-items:start; }
-  .zx-res-roi__results { position:sticky; top:calc(var(--zx-chrome-h) + 24px); }
+  .zx-res-roi__inputs { grid-column:1; grid-row:1; }
+  .zx-res-roi__how { grid-column:1; grid-row:2; }
+  .zx-res-roi__results { grid-column:2; grid-row:1 / span 2; position:sticky; top:calc(var(--zx-chrome-h) + 24px); }
   .zx-res-roi__peek { display:none; }
 }
 
@@ -4118,9 +4132,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-res-compare .zynix-table-wrap .zynix-compare-table { table-layout:fixed; }
 .zx-res-compare .zynix-table-wrap .zynix-compare-table thead th:first-child { width:22%; }
 .zx-res-compare__note { margin:var(--zx-space-5) 0 0; font-size:13px; line-height:1.5; color:var(--zx-text-muted); }
-.zx-res-fit { display:grid; gap:var(--zx-grid-gap); }
+.zx-res-fit { display:grid; gap:var(--zx-grid-gap); align-items:start; }
 .zx-res-fit__col { box-sizing:border-box; padding:clamp(20px, 16px + 1vw, 28px); border-radius:var(--zx-radius-lg); background:var(--zx-surface); border:1px solid var(--zx-border); }
-.zx-res-fit__col--us { border-color:var(--zx-blue-200); box-shadow:inset 0 3px 0 var(--zx-blue-600); }
+.zx-res-fit__col--us { border-color:var(--zx-blue-100); background:var(--zx-surface-brand); }
 .zx-res-fit__title { margin:0 0 var(--zx-space-4); font-size:var(--zx-fs-h4); line-height:1.35; font-weight:var(--zx-fw-semibold); }
 .zx-res-fit__list { margin:0; padding:0; list-style:none; }
 .zx-res-fit__list li { position:relative; margin:0; padding:var(--zx-space-2) 0 var(--zx-space-2) 22px; font-size:15px; line-height:1.55; color:var(--zx-text-secondary); }
