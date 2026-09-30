@@ -16,6 +16,8 @@
 //      is no longer valid (a DEAD_FUNCTIONS entry became reachable). List them: node ci/banned-strings.mjs --exempt
 //   6. Weight (ci/launch.mjs; final QA round 1): brotli-4 bytes of the stylesheet and of bundle + stylesheet, and the stylesheet's
 //      @import rules, may not exceed ci/baseline.json weight.ceilings. The weight TARGETS are a launch item, not a check.
+//      Final QA round 2: the deploy build (ci/build.mjs, whitespace-only minification, no dependencies) is built on every run;
+//      it must pass its self-checks, a committed dist/ must equal it, and it may not exceed weight.builtCeilings.
 // Returns { judged, weight } so ci/static-checks.mjs can print the launch checklist (ci/launch.mjs) from the same run.
 // ci/baseline.json documents its own fields. Try a phase without changing it: node ci/static-checks.mjs --phase 1
 import { judge } from './banned-strings.mjs';
