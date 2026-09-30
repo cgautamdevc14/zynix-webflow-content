@@ -1710,24 +1710,46 @@
     opts = opts || {};
     var preset = ['product', 'company', 'resource', 'legal', 'case', 'error'].indexOf(opts.preset) > -1 ? opts.preset : 'product';
     var id = opts.id || 'hero', tid = id + '-title', demoHref = SITE_FACTS.demo.href;
-    // A jump within the page ('#x' or '/this-page#x') is navigation, not a conversion: on company and resource pages it renders
-    // as a secondary button, so orange stays with the nav's "Request a demo" and real conversions (demo, /contact, mailto:).
+    // A jump within the page ('#x' or '/this-page#x') is navigation, not a conversion: on company and resource pages it is never
+    // orange, so orange stays with the nav's "Request a demo" and real conversions (demo, /contact, mailto:).
     var inPage = function (href) {
       href = String(href || '');
       if (href.charAt(0) === '#') return true;
       var p = zxHrefPath(href);
       return href.indexOf('#') > -1 && p !== null && p === zxPath();
     };
+    var real = function (a) { return !!(a && a.label && a.href && a.href !== '#'); };  // a real anchor or URL only
+    var converts = function (a) {
+      return real(a) && !(preset === 'company' && a.href === demoHref) &&
+        (a.href === demoHref || zxHrefPath(a.href) === '/contact' || /^mailto:/i.test(a.href));
+    };
     var action = function (a, variant) {
-      if (!a || !a.label || !a.href || a.href === '#') return '';  // a real anchor or URL only
+      if (!real(a)) return '';
       if (preset === 'company' && a.href === demoHref) return '';  // company pages never show a demo button
-      if (variant === 'primary' && (preset === 'company' || preset === 'resource') && inPage(a.href)) variant = 'secondary';
       return renderButton(a.label, a.href, { variant: variant, size: a.size, newTab: a.newTab, cta: a.cta || (a.href === demoHref ? 'demo' : null) });
     };
-    var primary = '', secondary = '';
+    var quietLink = function (a) {
+      return real(a) && !(preset === 'company' && a.href === demoHref) ? renderLinkArrow(a.label, a.href, { newTab: a.newTab }) : '';
+    };
+    var primary = '', secondary = '', quiet = '';
     if (preset !== 'legal') {  // legal: no buttons
-      primary = opts.primary === undefined ? (preset === 'product' || preset === 'case' ? renderDemoButton() : '') : action(opts.primary, 'primary');
-      secondary = action(opts.secondary, 'secondary');
+      var pa = opts.primary, sa = opts.secondary, pv = 'primary';
+      if (preset === 'company' || preset === 'resource') {
+        // Final polish (m-S2a): a company or resource hero never shows two equal outline buttons. A conversion secondary takes
+        // the empty or in-page primary slot as the one filled button, and the in-page jump follows it as a quiet link-arrow
+        // (/about, /roi-calculator). Without a conversion, the page's own jump keeps its place as the one (outline) button and
+        // the other action becomes the quiet link (/press, /careers, the resource hubs).
+        var jump = real(pa) && inPage(pa.href);
+        if (converts(sa) && (jump || !real(pa))) {
+          if (jump) quiet = quietLink(pa);
+          pa = sa; sa = null;
+        } else if (jump) {
+          pv = 'secondary';
+          quiet = quietLink(sa); sa = null;
+        }
+      }
+      primary = pa === undefined ? (preset === 'product' || preset === 'case' ? renderDemoButton() : '') : action(pa, pv);
+      secondary = action(sa, 'secondary');
     }
     var badges = (preset === 'company' || preset === 'legal' || preset === 'error') ? null :
       (opts.badges === undefined ? (preset === 'product' ? ['soc2', 'hipaa'] : null) : opts.badges);
@@ -1758,7 +1780,7 @@
     // "zynix-hero--product" means "has a product frame", so a product-preset hero without media is only zynix-hero--none.
     var presetCls = preset === mt || ['product', 'proof', 'none'].indexOf(preset) > -1 ? '' : ' zynix-hero--' + preset;
     var cls = 'zynix-hero zynix-hero--' + mt + (compact ? ' zynix-hero--compact' : '') + presetCls;
-    var actions = primary + secondary;
+    var actions = primary + secondary + quiet;
     return '<section class="' + cls + '" id="' + zxAttr(id) + '" aria-labelledby="' + zxAttr(tid) + '">' +
       '<div class="zynix-container zynix-hero__grid"><div class="zynix-hero__text">' +
       zxEl('p', 'zynix-eyebrow', opts.eyebrow) +
