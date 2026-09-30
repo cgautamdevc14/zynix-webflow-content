@@ -3208,11 +3208,20 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 /* Homepage rhythm: DECISIONS 11 caps the page at 8,500px (1440) and 11,000px (390), so homepage sections use a tighter
    section padding than the site default (112 at 1440, 64 at 390). Review round 2: the chapter sections (how-it-works,
    data-flow, agents-at-work, capabilities, customers) get 80px at 1440 and the utility bands keep 72 (48 when compact),
-   so the platform chapters read as the page's main movement; every band is 40px (32 compact) on phones. */
+   so the platform chapters read as the page's main movement. Below 480 every band is 32px (28 compact) with a 20px
+   head gap: the 390 page must stay within 11,000px while the footer runs 1,600px there (§5.0 budgets it at 900). */
 .zx-home-proof, .zx-home-hiw, .zx-home-flow, .zx-home-agents, .zx-home-caps, .zx-home-interop, .zx-home-customers, .zx-home-security, .zx-home-audiences, .zx-home-faq, .zx-home-end {
   --zx-section-y:clamp(40px, 22px + 3.5vw, 72px); --zx-section-y-sm:clamp(32px, 20px + 2vw, 48px); --zx-head-gap:clamp(24px, 16px + 1.4vw, 36px); }
 .zx-home-hiw, .zx-home-flow, .zx-home-agents, .zx-home-caps, .zx-home-customers { --zx-section-y:clamp(40px, 16px + 4.45vw, 80px); }
 .zx-home-agents { --zx-section-y:clamp(40px, 16px + 4.2vw, 76px); }   /* keeps the episode chapter within its §5.0 budget + 15% */
+@media (max-width:479.98px) {
+  .zx-home-proof, .zx-home-hiw, .zx-home-flow, .zx-home-agents, .zx-home-caps, .zx-home-interop, .zx-home-customers, .zx-home-security, .zx-home-audiences, .zx-home-faq, .zx-home-end {
+    --zx-section-y:32px; --zx-section-y-sm:28px; --zx-head-gap:20px; }
+  /* a head's arrow link sits 12px under its H2, as in #interoperability */
+  :is(.zx-home-caps, .zx-home-faq) .zynix-section-head__action { margin-top:12px; }
+  /* section leads read at 16px on phones (the hero lead keeps the lead size) */
+  :is(.zx-home-hiw, .zx-home-flow, .zx-home-agents, .zx-home-customers, .zx-home-security, .zx-home-end) .zynix-lead { font-size:var(--zx-fs-body); line-height:1.5; }
+}
 
 /* ── §5.1 Hero ── */
 .zx-home-hero { padding:48px 0 32px; background:var(--zx-surface); }
@@ -3266,11 +3275,14 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 }
 @media (max-width:379.98px) { .zx-home-hero__title { font-size:2rem; } }   /* 360: "completed follow-up." ≈ 292px, so the H1 stays on 2 lines */
 @media (max-width:479.98px) {
+  .zx-home-hero__grid { row-gap:28px; }
   .zx-home-hero__actions .zynix-btn { width:100%; }
   .zx-home-hero__proof { display:grid; gap:4px; margin-top:20px; }   /* stacked, one item per line (§5.1) */
   .zx-home-hero__proof li + li + li { margin:0; padding:0; border:0; }
   .zx-home-hero__lead { margin-top:16px; }
   .zx-home-hero .zynix-logo-row { margin-top:32px; padding-top:18px; }
+  .zx-home-hero .zynix-logo-row__list { row-gap:12px; }
+  .zx-home-hero .zynix-logo-row__item { height:40px; }   /* the tallest logo is 36px */
   .zx-home-hero .zynix-logo-row__img { transform:none; opacity:.86; }   /* no 0.85 scale: the wordmarks' lettering stays legible */
   /* the PBACO lockup fits its ~106px cell: a smaller seal and the name on two lines */
   .zx-home-hero .zynix-logo-row__item:has(> [src*="palm-beach-aco"]) { gap:6px; justify-content:flex-start; }
@@ -3280,8 +3292,6 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 
 /* ── §5.2 ★ Hero widget (on top of the zynix-ui kit) ── */
 .zx-hw { width:100%; }
-.zx-hw__mark { display:block; flex:none; width:12px; height:20px; overflow:hidden; }
-.zx-hw__mark img { display:block; width:32px; height:32px; max-width:none; margin:-6px 0 0 -10px; }
 .zx-hw__tabbar { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:0 16px 0 8px; border-bottom:1px solid var(--zx-border); background:var(--zx-surface); }
 .zx-hw__tabs { display:flex; min-width:0; overflow-x:auto; overflow-y:hidden; scrollbar-width:none; }
 .zx-hw__tabs::-webkit-scrollbar { display:none; }
@@ -3358,6 +3368,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-home-proof__def { font-size:15px; line-height:1.55; }
   .zx-home-proof .zynix-stat { padding-top:0; padding-bottom:12px; }
   .zx-home-proof .zynix-stat__value { font-size:1.75rem; }   /* 28px numerals keep both stats on one row with 2-line labels */
+  .zx-home-proof .zynix-stat__label { font-size:13px; }
   .zx-home-proof .zynix-stat-row__source { margin-top:8px; }
   .zx-home-proof__access { margin-top:12px; padding-top:12px; font-size:13px; line-height:1.5; }
   .zx-home-proof .zynix-split { gap:20px; }   /* §5.0: the band stays within its 390 budget + 15% */
@@ -3366,9 +3377,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 /* Sections reached through the homepage's own same-page links take focus (tabindex -1) without a ring around the section */
 .zx-home-hiw[tabindex="-1"]:focus-visible, .zx-home-flow[tabindex="-1"]:focus-visible { outline:none; }
 
-/* Stacked splits on phones: 28px between the two halves (the shared default is 40), 24px below 480 */
+/* Stacked splits on phones: 28px between the two halves (the shared default is 40), 20px below 480 */
 @media (max-width:767.98px) { :is(.zx-home-proof, .zx-home-agents, .zx-home-interop, .zx-home-customers, .zx-home-security, .zx-home-audiences, .zx-home-faq) .zynix-split { gap:28px; } }
-@media (max-width:479.98px) { :is(.zx-home-proof, .zx-home-agents, .zx-home-interop, .zx-home-customers, .zx-home-security, .zx-home-audiences, .zx-home-faq, .zx-home-caps) .zynix-split { gap:24px; } }
+@media (max-width:479.98px) { :is(.zx-home-proof, .zx-home-agents, .zx-home-interop, .zx-home-customers, .zx-home-security, .zx-home-audiences, .zx-home-faq, .zx-home-caps) .zynix-split { gap:20px; } }
 
 /* ── Shared small label (eyebrow-sized, muted) ── */
 .zx-home-label { margin:0 0 12px; font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.2 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase; color:var(--zx-text-muted); }
@@ -3400,7 +3411,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-hiw__footer .zynix-link-arrow { margin:0; }
 .zx-hiw__footer button.zynix-link-arrow { padding:0; border:0; background:none; cursor:pointer; }
 @media (max-width:479.98px) {
-  .zx-hiw__tab { grid-template-columns:32px minmax(0,1fr) auto; min-height:60px; padding:10px 16px 10px 14px; }
+  .zx-hiw__tab { grid-template-columns:32px minmax(0,1fr) auto; min-height:56px; padding:8px 16px 8px 14px; }
   .zx-hiw__short { font-size:14px; }
   .zx-hiw__panel { padding:4px 16px 24px 46px; }
   .zx-hiw__footer { gap:4px 16px; margin-top:16px; padding-top:12px; }   /* the links wrap inline (review round 2) */
@@ -3558,11 +3569,11 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 }
 @media (max-width:479.98px) {
   .zx-flow { gap:28px; }
-  .zx-flow__step { padding-bottom:20px; }
+  .zx-flow__step { padding-bottom:16px; }
   .zx-flow__step-head { margin-bottom:4px; }
-  .zx-flow__detail { font-size:14px; }
+  .zx-flow__detail { font-size:14px; line-height:1.5; }
   /* §5.0 fallback 3: tags, sources and outputs read as one 12px text line each (nothing is hidden) */
-  .zx-flow__tags, .zx-flow__col .zx-flow__list { display:block; margin-top:8px; font:var(--zx-fw-medium) 12px/1.6 var(--zx-font-sans); color:var(--zx-text-inverse-secondary); }
+  .zx-flow__tags, .zx-flow__col .zx-flow__list { display:block; margin-top:6px; font:var(--zx-fw-medium) 12px/1.6 var(--zx-font-sans); color:var(--zx-text-inverse-secondary); }
   .zx-flow__col .zx-flow__list { margin-top:0; font-size:13px; color:var(--zx-text-inverse); }
   /* :last-child too, or the ≤1279 inline-flex rule (0,3,0) keeps the last item a box that wraps with its "·" (review round 3) */
   .zx-flow__tags li, .zx-flow__col .zx-flow__item, .zx-flow__col .zx-flow__item:last-child { display:inline; gap:0; min-height:0; padding:0; border:0; border-radius:0; background:none; font:inherit; color:inherit; }
@@ -3618,14 +3629,14 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 @media (max-width:479.98px) {
   /* Phones: the episode is a plain timeline (no frame), the "without" rows are tighter and the note is left to the plan */
   /* the "without" items are plain lines on phones (no rules), and the timeline steps sit closer together */
-  .zx-home-agents .zx-home-label { margin-top:20px; }
+  .zx-home-agents .zx-home-label { margin-top:16px; }
   .zx-home-without { border-top:0; }
   .zx-home-without li { padding:3px 0 3px 22px; border-bottom:0; font-size:14px; }
   .zx-home-without li::before { top:3px; }
   .zx-home-cms { margin-top:12px; }
   .zx-ep { padding:0; border:0; border-radius:0; background:none; box-shadow:none; }
   .zx-ep__head { justify-content:flex-start; margin:0 0 4px; }
-  .zx-ep__step { padding:4px 0 6px 24px; row-gap:4px; }
+  .zx-ep__step { padding:3px 0 5px 24px; row-gap:2px; }
   .zx-ep__note { display:none; }
 }
 
@@ -3637,7 +3648,6 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-home-cap__links { display:flex; flex-wrap:wrap; gap:8px 24px; margin-top:16px; }
 .zx-home-caps .zynix-product-frame__caption { font-size:13px; }
 .zx-home-caps .zynix-ui__step { min-height:46px; padding:6px 0; }
-.zx-home-caps .zynix-ui__brand img { display:none; }   /* the shared symbol is light artwork for dark surfaces (request to S2) */
 /* The head's webinar link sits at the right end of the head, level with the H2's last line (>= 768) */
 @media (min-width:768px) {
   .zx-home-caps .zynix-section-head { display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:32px; align-items:end; max-width:none; }
@@ -3682,14 +3692,11 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-home-cap .zynix-split { gap:24px; }
   .zx-home-caplist__item { padding:24px 0; }
   .zx-home-caplist__media { padding-bottom:24px; }
-  /* §5.0 fallback 1 (compact panel): four steps from the discharge to the booked visit, so the plan keeps its trigger;
-     the documented visit (Day 7) is the step that gives way */
-  .zx-home-caps .zynix-ui__step:last-child { display:none; }
 }
 @media (max-width:479.98px) {
   .zx-home-caps__rows { gap:40px; }
-  .zx-home-caplist__item { padding:20px 0; }
-  .zx-home-caplist__media { padding-bottom:20px; }
+  .zx-home-caplist__item { padding:16px 0; }
+  .zx-home-caplist__media { padding-bottom:16px; }
   .zx-home-cap__title { font-size:var(--zx-fs-h4); line-height:1.3; }
   .zx-home-cap--text .zx-home-points { display:none; }
   .zx-home-caps .zynix-product-frame__caption { display:none; }   /* §5.0 fallback 2 (the chip stays) */
@@ -3767,7 +3774,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-home-customers__more { display:none; }   /* the lead's first sentence only; the quote and the cards carry the rest */
   .zx-home-quote__mark { height:32px; }
   .zx-home-customers .zynix-quote { padding-left:18px; }
-  .zx-home-customers .zynix-quote--large .zynix-quote__text p { font-size:17px; line-height:1.5; letter-spacing:0; }
+  .zx-home-customers .zynix-quote--large .zynix-quote__text p { font-size:var(--zx-fs-body); line-height:1.5; letter-spacing:0; }
   .zx-home-customers .zynix-quote__cite { margin-top:14px; column-gap:6px; }
   .zx-home-customers .zynix-quote__role { font-size:13px; }
   /* the two cards become hairline rows: eyebrow, name, one line, link (no logo: the eyebrow and the name identify them) */
@@ -3781,7 +3788,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-home-customers .zynix-card__cta { display:none; }
   .zx-home-customers .zynix-card { position:relative; padding-right:32px; }
   .zx-home-quote__links { gap:4px 16px; }
-  .zx-home-customers__links { gap:4px 24px; margin-top:20px; padding-top:14px; border-top:0; }
+  .zx-home-customers__links { gap:4px 24px; margin-top:16px; padding-top:0; border-top:0; }
 }
 
 /* ── §5.10 Security and governance ── */
@@ -3799,13 +3806,14 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-home-sec--gov .zx-home-sec__row { align-items:start; }
 .zx-home-sec--gov .zx-home-sec__title { padding-top:2px; }
 @media (max-width:479.98px) {   /* §5.0 fallback 4: the compliance explanations collapse to the badge row */
-  .zx-home-sec__badges.zynix-trust-row { display:flex; margin-bottom:8px; }
+  .zx-home-sec__badges.zynix-trust-row { display:flex; gap:6px; margin-bottom:8px; }
+  .zx-home-sec__badges .zynix-badge { min-height:24px; }
   .zx-home-sec:not(.zx-home-sec--gov) { display:none; }
-  .zx-home-gov { margin-top:24px; }
-  .zx-home-sec--gov .zx-home-sec__row { grid-template-columns:32px minmax(0,1fr); gap:12px; padding:12px 0; }
-  .zx-home-sec--gov .zx-home-sec__icon { width:32px; height:32px; }
-  .zx-home-sec--gov .zx-home-sec__icon svg { width:17px; height:17px; }
-  .zx-home-sec__actions { margin-top:24px; }
+  .zx-home-gov { margin-top:20px; }
+  /* the governance statements are text rows (no icon tiles, as in the audience list), so each title keeps one line */
+  .zx-home-sec--gov .zx-home-sec__row { grid-template-columns:minmax(0,1fr); padding:12px 0; }
+  .zx-home-sec--gov .zx-home-sec__icon { display:none; }
+  .zx-home-sec__actions { margin-top:20px; }
 }
 
 /* ── §5.11 Who we serve ── (a compact subtle band, §5.0: the head in the left column, the five audiences as one hairline
@@ -3831,7 +3839,8 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 :is(.zx-home-audiences, .zx-home-customers) a.zynix-card:hover::after { color:var(--zx-link); }
 .zx-home-customers a.zynix-card::after { display:none; }
 @media (max-width:479.98px) {
-  .zx-home-audiences .zynix-card { padding:11px 28px 11px 0; }
+  .zx-home-audiences .zynix-card { padding:10px 28px 10px 0; }
+  .zx-home-audiences .zynix-section-head__action { margin-top:12px; }
   .zx-home-audiences .zynix-card__icon { display:none; }
   .zx-home-audiences .zynix-card__text { padding-top:0; }
   .zx-home-customers a.zynix-card::after { display:block; right:4px; }
@@ -3840,6 +3849,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 /* ── §5.12 FAQ ── */
 .zx-home-faq .zynix-section-head { margin-bottom:24px; }
 @media (max-width:1023.98px) { .zx-home-faq .zynix-split { gap:8px; } .zx-home-faq .zynix-section-head { margin-bottom:16px; } }
+@media (max-width:479.98px) { .zx-home-faq .zynix-faq-q { min-height:48px; padding:14px 0; } }   /* 48px targets (§7.2 asks 44) */
 /* ════ ZX:END page:home ════ */
 
 
