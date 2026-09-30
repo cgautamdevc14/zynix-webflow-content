@@ -3864,13 +3864,14 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 @media (max-width:1023.98px) { .zx-plat-split .zynix-split { gap:var(--zx-space-6); } }
 .zx-plat-text { margin:0; max-width:60ch; font-size:var(--zx-fs-lead); line-height:var(--zx-lh-lead); color:var(--zx-text-secondary); }
 
-/* /platform lede statement and audience links */
-.zx-plat-lede__text { margin:0; max-width:36ch; font:var(--zx-fw-medium) clamp(1.375rem, 1.05rem + 1.2vw, 2rem)/1.3 var(--zx-font-sans); letter-spacing:-.015em; color:var(--zx-text); text-wrap:balance; }
-.zx-plat-lede__for { display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--zx-space-3) var(--zx-space-6); margin-top:var(--zx-space-8); }
+/* /platform "Built for" line: one row of audience links between the hero and the data flow (final QA: the restating lede
+   statement is gone). Links wrap on narrow screens instead of stacking into a tall list. */
+.zx-plat-for { padding-block:var(--zx-space-5); border-top:1px solid var(--zx-border); background:var(--zx-surface); }
+.zx-plat-lede__for { display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--zx-space-2) var(--zx-space-6); }
 .zx-plat-lede__label { margin:0; font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.2 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase; color:var(--zx-text-muted); }
-.zx-plat-lede__links { display:flex; flex-wrap:wrap; gap:var(--zx-space-2) var(--zx-space-6); list-style:none; margin:0; padding:0; }
+.zx-plat-lede__links { display:flex; flex-wrap:wrap; gap:0 var(--zx-space-6); list-style:none; margin:0; padding:0; }
 .zx-plat-lede__links .zynix-link-arrow { font-size:15px; min-height:32px; }
-@media (max-width:767.98px) { .zx-plat-lede__for { display:block; } .zx-plat-lede__label { margin-bottom:var(--zx-space-2); } .zx-plat-lede__links { flex-direction:column; gap:0; } }
+@media (max-width:767.98px) { .zx-plat-lede__for { display:block; } .zx-plat-lede__label { margin-bottom:var(--zx-space-1); } .zx-plat-lede__links { gap:0 var(--zx-space-5); } }
 
 /* Numbered steps: columns by count at >= 1024, a numbered list below (and always with --stack). */
 .zx-plat-steps { display:grid; grid-template-columns:minmax(0,1fr); gap:0; list-style:none; margin:0; padding:0; }
@@ -3914,17 +3915,14 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 }
 .zx-plat-follow { margin-bottom:var(--zx-space-12); }
 
-/* Proof module: quote or story card beside a 2 x 2 stat row, then the logo row. */
+/* Proof module (final QA): the head and one line of registry facts beside a case-study card or a one-sentence release pull,
+   then the logo row. */
 .zx-plat-proof__grid { margin-bottom:var(--zx-space-12); }
-@media (min-width:1024px) { .zx-plat-proof__grid { align-items:center; } }
-.zx-plat-proof__grid .zx-plat-proof__stats .zynix-stat-row__list { grid-template-columns:repeat(2, minmax(0,1fr)); }
-.zx-plat-proof__grid .zx-plat-proof__stats .zynix-stat:nth-child(odd) { padding-left:0; border-left:0; }
-.zx-plat-proof__grid .zx-plat-proof__stats .zynix-stat:nth-child(even) { padding-left:var(--zx-space-6); border-left:1px solid var(--zx-border); }
-.zx-plat-proof__grid .zx-plat-proof__stats .zynix-stat:nth-child(n+3) { border-top:1px solid var(--zx-border); padding-top:var(--zx-space-6); }
-.zx-plat-proof__grid .zx-plat-proof__stats .zynix-stat { padding-bottom:var(--zx-space-6); }
-@media (max-width:767.98px) { .zx-plat-proof__grid .zx-plat-proof__stats .zynix-stat:nth-child(even) { padding-left:var(--zx-space-4); } .zx-plat-proof__grid .zx-plat-proof__stats .zynix-stat { padding-bottom:var(--zx-space-4); } }
-.zx-plat-proof > .zynix-container > .zx-plat-proof__stats { margin-bottom:var(--zx-space-12); }
+.zx-plat-proof__grid .zynix-split__a > .zynix-section-head { margin-bottom:0; }
+.zx-plat-proof__facts { margin:var(--zx-space-6) 0 0; padding-top:var(--zx-space-5); max-width:56ch; border-top:1px solid var(--zx-border); font-size:var(--zx-fs-sm); line-height:1.55; color:var(--zx-text-secondary); }
+.zx-plat-proof__src { color:var(--zx-text-muted); white-space:nowrap; }
 .zx-plat-proof .zynix-quote__text p { font-size:clamp(1.125rem, 1.02rem + .45vw, 1.3125rem); line-height:1.5; }
+.zx-plat-proof__grid--pull .zynix-quote__text p { font-size:clamp(1.25rem, 1.1rem + .6vw, 1.625rem); line-height:1.4; letter-spacing:-.01em; }
 .zx-plat-proof__logos { padding-top:var(--zx-space-8); border-top:1px solid var(--zx-border); }
 @media (min-width:1024px) { .zx-plat-proof__logos .zynix-logo-row__list[data-count="6"] { grid-template-columns:repeat(6, minmax(0,1fr)); } }
 .zx-plat-story { display:flex; flex-direction:column; }
@@ -3972,6 +3970,11 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-plat-flow__head { margin-left:calc(-1 * var(--zx-space-10)); }
 }
 
+/* /platform #deployment: owners and inputs under each step */
+.zx-plat-steps__meta { display:grid; gap:var(--zx-space-3); margin:var(--zx-space-4) 0 0; }
+.zx-plat-steps__meta dt { margin:0; font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.3 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase; color:var(--zx-text-muted); }
+.zx-plat-steps__meta dd { margin:2px 0 0; font-size:14px; line-height:1.5; color:var(--zx-text); }
+
 /* /platform layer cards */
 .zx-plat-layers .zynix-card__eyebrow { color:var(--zx-blue-600); }
 
@@ -3985,6 +3988,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zx-plat-ehrs .zynix-table-wrap .zynix-compare-table tbody tr:first-child { border-top:1px solid var(--zx-border); }
   .zx-plat-ehrs .zynix-table-wrap .zynix-compare-table td, .zx-plat-ehrs .zynix-table-wrap .zynix-compare-table td:first-child { padding-top:var(--zx-space-1); }
 }
+
+/* /integrations: named EHRs without a method on file, one line under the table */
+.zx-plat-ehrs__also { margin:var(--zx-space-5) 0 0; max-width:72ch; font-size:15px; line-height:1.6; color:var(--zx-text-secondary); }
 
 /* /integrations standards line */
 .zx-plat-standards { margin-top:var(--zx-space-8); }

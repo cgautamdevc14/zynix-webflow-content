@@ -2349,7 +2349,7 @@
       ], { split: true }));
 
     html += zxPlatProof({ title: 'Who uses the data foundation',
-      lead: 'Every Zynix customer starts here: their worklists, care plans and agents all read the same matched record.', story: 'pbaco' });
+      lead: 'Every Zynix customer starts here: their worklists, care plans and agents all read the same matched record.', story: 'westfloridaaco' });
     html += zxPlatStack();
 
     html += zxPlatFaq('faq-data', [
@@ -2402,6 +2402,11 @@
   //  V7 ZynScribe speaker separation, browser use alongside the EHR, a mobile app for bedside and telehealth visits, suggested
   //     ICD-10/CPT codes (/zynscribe) → remove the clause
   //  V8 Zynix maintains connectors as standards and vendor APIs change (/integrations) → remove the step
+  //  V9 the four deployment steps, their owners and inputs (/platform #deployment, linked from /security and /company-zynixllm);
+  //     no durations → back to "agreed during scoping"
+  // Held until Gautamdev confirms wording (final QA): a "Data use and AI" group on /security (training use of customer data,
+  // hosting provider and region, SSO/SAML, audit logging, subprocessors). The page renders SITE_FACTS.governance dataUse and
+  // auditTrail there as soon as S2 flips them to confirmed; the other three need facts entries first.
 
   // A zynix-ui sample panel inside a product frame (the panel carries its own chip, so the frame does not add one).
   // zxPlatPanel returns hero frame options (trimmed below 480px to keep the hero within 1.2 screens, §2.10).
@@ -2411,12 +2416,15 @@
   function zxPlatFrame(model, caption) { return renderProductFrame({ html: renderUiPanel(model), sample: false, caption: caption, className: 'zx-plat-frame' }); }
 
   // Numbered steps: columns at >= 1024 (by count), a numbered list below. opts.stack keeps the list at every width.
+  // s.meta = [[label, text], …] adds a short definition list under the body (owners and inputs on /platform #deployment).
   function zxPlatSteps(items, opts) {
     opts = opts || {};
     return '<ol class="zx-plat-steps' + (opts.stack ? ' zx-plat-steps--stack' : '') + zxCls(opts.className) + '" data-count="' + items.length + '">' +
       items.map(function (s, i) {
+        var meta = s.meta && s.meta.length ? '<dl class="zx-plat-steps__meta">' + s.meta.map(function (m) {
+          return '<div><dt>' + m[0] + '</dt><dd>' + m[1] + '</dd></div>'; }).join('') + '</dl>' : '';
         return '<li class="zx-plat-steps__item"><span class="zx-plat-steps__n" aria-hidden="true">' + (i < 9 ? '0' : '') + (i + 1) + '</span>' +
-          '<div class="zx-plat-steps__main"><h3 class="zx-plat-steps__title">' + s.title + '</h3>' + zxEl('p', 'zx-plat-steps__body', s.body) + '</div></li>';
+          '<div class="zx-plat-steps__main"><h3 class="zx-plat-steps__title">' + s.title + '</h3>' + zxEl('p', 'zx-plat-steps__body', s.body) + meta + '</div></li>';
       }).join('') + '</ol>';
   }
 
@@ -2439,7 +2447,8 @@
       renderSplit(renderSectionHead(head[0], head[1], head[2], { id: id + '-title', action: head[3] }), body, { ratio: opts.ratio || '4-8' }));
   }
 
-  // Customer story card: registry customer, its case study, one release-backed line, no metric (DECISIONS 15).
+  // Customer story card: registry customer, its case study, one release-backed line, no metric (DECISIONS 15). Customers
+  // without a line here use the card line of their P4 story page (ZX_CUST_STORIES, read only), so the two never drift.
   var ZX_PLAT_STORIES = {
     pbaco: 'Post-discharge follow-up and AWV engagement across PBACO Holding’s affiliated provider network.',
     eternalhealth: 'Outreach and care management workflows for members in Massachusetts and Arizona, in use since January 1, 2026.',
@@ -2447,23 +2456,65 @@
   };
   function zxPlatStory(id) {
     var c = zxCustomer(id);
-    if (!c || !c.caseStudy || !ZX_PLAT_STORIES[id]) return '';
+    var line = ZX_PLAT_STORIES[id] || (typeof ZX_CUST_STORIES === 'object' && ZX_CUST_STORIES && ZX_CUST_STORIES[id] ? ZX_CUST_STORIES[id].card : '');
+    if (!c || !c.caseStudy || !line) return '';
     var logo = c.logo ? '<img class="zx-plat-story__logo" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + Math.round(c.logo.w / c.logo.h * 32) +
       '" height="32" loading="lazy" decoding="async">' : '';
     return '<a class="zynix-card zynix-card--link zx-plat-story" href="' + zxAttr(c.caseStudy) + '">' + logo +
       '<p class="zynix-card__eyebrow">Customer story · ' + c.segmentLabel + '</p><h3 class="zynix-card__title">' + c.name + '</h3>' +
-      '<p class="zynix-card__body">' + ZX_PLAT_STORIES[id] + '</p><span class="zynix-card__cta">Read the customer story<span aria-hidden="true"> →</span></span></a>';
+      '<p class="zynix-card__body">' + line + '</p><span class="zynix-card__cta">Read the customer story<span aria-hidden="true"> →</span></span></a>';
   }
 
-  // Proof module (§6): a release quote or one story card, the registry stat row with its source, and the logo row.
+  // One verbatim sentence of a customer's release quote (final QA: the full quote stays on the case study and /press).
+  function zxPlatPull(id, n) {
+    var c = zxCustomer(id), t = c && c.quote && (c.quote.source === 'release' || c.quote.source === 'approved') ? c.quote.text : '';
+    var s = (t.match(/[^.!?]+[.!?]+/g) || [])[n || 0];
+    return s ? s.replace(/^\s+|\s+$/g, '') : '';
+  }
+
+  // PBACO's size, in the release's words and attributed to it (facts layer: "attribute to the release").
+  function zxPlatPbacoSize() {
+    var c = zxCustomer('pbaco');
+    return c && c.sizeNote && c.release ? 'PBACO Holding, which the <a href="' + zxAttr(c.release.href) + '">April 2026 partnership release</a> describes as ' + c.sizeNote : 'PBACO Holding';
+  }
+
+  // One line of registry facts with its source (final QA: replaces the four-stat block on product pages).
+  function zxPlatFacts(keys) {
+    var st = SITE_FACTS.stats;
+    var parts = (keys || ['patients', 'states', 'ehr']).map(function (k) { return k === 'ehr' ? SITE_FACTS.ehr.line : (st[k] ? st[k].sentence : ''); }).filter(Boolean);
+    return parts.length ? '<p class="zx-plat-proof__facts">' + parts.join(' · ') + '. <span class="zx-plat-proof__src">Source: Zynix, ' + SITE_FACTS.asOf + '.</span></p>' : '';
+  }
+
+  // Proof module (§6, final QA): the head with one line of registry facts beside the segment's case-study card, or a
+  // one-sentence release pull with its attribution link (opts.pull), then the logo row. No stat block, no full quote.
   function zxPlatProof(opts) {
     opts = opts || {};
-    var lead = opts.quote ? renderQuote({ customer: opts.quote, href: zxCustomer(opts.quote).caseStudy, linkLabel: 'Read the case study' }) : zxPlatStory(opts.story);
-    var stats = renderStatRow([{ fact: 'patients' }, { fact: 'states' }, { fact: 'ehrSystems' }, { fact: 'ehrInstances' }], { className: 'zx-plat-proof__stats' });
+    var c = opts.pull ? zxCustomer(opts.pull) : null, pull = c ? zxPlatPull(opts.pull, opts.sentence == null ? 1 : opts.sentence) : '';
+    var aside = pull ? renderQuote({ customer: opts.pull, text: pull, href: c.caseStudy, linkLabel: 'Read the case study' }) : zxPlatStory(opts.story);
+    var head = renderSectionHead(opts.eyebrow || 'Customers', opts.title, opts.lead, { id: 'customers-title' }) + zxPlatFacts(opts.facts);
     return renderSection({ id: 'customers', surface: opts.surface || 'subtle', rule: opts.surface === 'default', className: 'zx-plat-proof' },
-      renderSectionHead(opts.eyebrow || 'Customers', opts.title, opts.lead, { id: 'customers-title' }) +
-      (lead ? renderSplit(lead, stats, { ratio: '7-5', className: 'zx-plat-proof__grid' }) : stats) +
+      (aside ? renderSplit(head, aside, { ratio: pull ? '6-6' : '7-5', center: true, className: 'zx-plat-proof__grid' + (pull ? ' zx-plat-proof__grid--pull' : '') }) : head) +
       renderLogoRow(opts.logos || null, { id: 'zx-plat-logos', className: 'zx-plat-proof__logos' }));
+  }
+
+  // How a deployment runs (final QA; /platform #deployment): four steps with owners and inputs, no durations ([VERIFY] V9).
+  // Restated from /integrations "How a connection comes together" and the escalation-rule copy; nothing new is claimed.
+  function zxPlatDeploy(opts) {
+    opts = opts || {};
+    var steps = [
+      { title: 'Scope', body: 'Agree the first program, the data it needs and who owns each step, in one plan.',
+        meta: [['Owners', 'Your program, clinical and IT leads, with the Zynix team'], ['Inputs', 'The first program, your EHRs and versions, claims and ADT sources']] },
+      { title: 'Connect data', body: 'Interfaces are set up with your IT team and each vendor. Matched patient records are checked with your team before any worklist goes live.',
+        meta: [['Owners', 'Your IT team, each EHR vendor and the Zynix integration team'], ['Inputs', 'EHR interfaces, claims files and ADT feeds']] },
+      { title: 'First workflow live', body: 'The first care plan runs from your worklist. Agents follow your rules, and clinical questions go to your staff.',
+        meta: [['Owners', 'Your care team, with the Zynix team'], ['Inputs', 'The scripts, hours and escalation rules your clinical team approves']] },
+      { title: 'Expand', body: 'Add programs, practices and data sources on the same patient record, one plan at a time.',
+        meta: [['Owners', 'Your program leaders, with the Zynix team'], ['Inputs', 'What the first workflow shows, and the next program on your list']] }
+    ];
+    return renderSection({ id: 'deployment', surface: opts.surface, rule: opts.rule, className: 'zx-plat-deploy' },
+      renderSectionHead('Deployment', 'How a deployment runs',
+        'Four steps, one plan. Timelines depend on your data sources and scope, so we set them with you during scoping.',
+        { id: 'deployment-title', action: opts.action }) + zxPlatSteps(steps, { className: 'zx-plat-deploy__steps' }));
   }
 
   // Interoperability and security strip (§6): the registry EHR line with the named EHRs, and the trust row.
@@ -7410,7 +7461,8 @@ function renderZynixLLMV7() {
     ]), { split: true }));
 
   html += zxPlatSplit('deployment', ['Security', 'Security and deployment', 'ZynixLLM runs inside the Zynix platform and is covered by the same security program.', { label: 'Security and trust', href: '/security' }],
-    zxPlatRows(zxPlatCompliance().concat([{ title: 'Deployment', body: 'Deployment options are agreed during scoping.' }]), { split: true }), { surface: 'subtle' });
+    zxPlatRows(zxPlatCompliance().concat([{ title: 'Deployment', body: 'ZynixLLM is set up as part of the Zynix platform deployment, starting with the rules your clinical team approves.',   // [VERIFY] V9
+      link: { label: 'How a deployment runs', href: '/platform#deployment' } }]), { split: true }), { surface: 'subtle' });
 
   html += renderCTA('See how Zynix keeps clinicians in charge', 'We’ll walk through escalation rules and physician review on sample data.', null,
     { secondary: { label: 'Security and trust', href: '/security' } });
@@ -7441,14 +7493,16 @@ function renderSecurityV7() {
     }));
 
   // [VERIFY] V1 (data protection), V2 (identity and access), V3 (testing), V5 (the rest): every row below is P1 register.
+  // "Data use and AI" leads the list once SITE_FACTS.governance dataUse or auditTrail is confirmed (held today, so no row renders).
+  var dataUse = zxGovernance(['dataUse', 'auditTrail']);
   html += zxPlatSplit('program', ['Security program', 'How we protect customer data', 'A summary for procurement and compliance reviewers. The detail is in the SOC 2 report.'],
-    zxPlatRows([
+    zxPlatRows((dataUse.length ? [{ title: 'Data use and AI', points: dataUse.map(function (g) { return g.text; }) }] : []).concat([
       { title: 'Data protection', points: ['Encryption in transit and at rest across platform components', 'Access based on least privilege', 'Production separated from non-production environments'] },
       { title: 'Identity and access', points: ['Role-based access controls across systems', 'Multi-factor authentication for all administrative access', 'Periodic access reviews'] },
       { title: 'Monitoring and incident response', points: ['Continuous security monitoring across key systems', 'A documented incident response plan with defined escalation paths', 'Customer notification obligations defined in agreements'] },
       { title: 'Testing and vulnerabilities', points: ['Third-party penetration testing, conducted periodically', 'Vulnerability scanning with prioritized remediation'] },
       { title: 'Business continuity', points: ['Backup and recovery procedures for critical systems, tested periodically', 'Business continuity planning for operational resilience'] }
-    ], { split: true }), { surface: 'subtle' });
+    ]), { split: true }), { surface: 'subtle' });
 
   html += renderSection({ id: 'ai-governance', className: 'zx-plat-governance' },
     renderSectionHead('AI governance', 'How agents and models are kept in check', 'Two rules apply wherever agents or ZynScribe are used.',
@@ -7461,7 +7515,8 @@ function renderSecurityV7() {
       { title: 'Penetration test results', body: 'Results of third-party testing are available to customers under NDA.' },   // [VERIFY] V3
       { title: 'Security questionnaires', body: 'We complete procurement and security questionnaires as part of every evaluation.' },
       { title: 'Business Associate Agreement', body: 'Available for customers operating HIPAA-regulated workflows.' },
-      { title: 'Deployment and data flows', body: 'Deployment options, data sources and interfaces are agreed during scoping.' }
+      { title: 'Deployment plan', body: 'Your data sources, interfaces, first workflow and the owner of each step are agreed in one plan during scoping.',   // [VERIFY] V9
+        link: { label: 'How a deployment runs', href: '/platform#deployment' } }
     ], { split: true }), { surface: 'subtle' });
 
   html += zxPlatFaq('faq-security', [
@@ -7471,7 +7526,7 @@ function renderSecurityV7() {
     { q: 'What is your HITRUST status?', a: 'HITRUST CSF certification is in progress, following a completed readiness assessment.' },
     { q: 'Do you support customer security assessments?', a: 'Yes. We support procurement and security reviews as part of every evaluation. Write to ' + SITE_FACTS.company.email + ' to send a questionnaire.' },
     { q: 'Do you run penetration testing and vulnerability management?', a: 'Yes. Third-party penetration testing is conducted periodically, with results available to customers under NDA, and vulnerability scanning with prioritized remediation is part of ongoing security operations.' }   // [VERIFY] V3
-  ], 'Security questions');
+  ].concat(zxGovernance(['dataUse']).map(function (g) { return { q: 'How is customer data used?', a: g.text }; })), 'Security questions');
 
   html += renderCTA('Working through a security review?', 'We support questionnaires, documentation requests and BAA execution in every evaluation.', null,
     { primary: { label: req.label, href: req.href }, secondary: { label: 'Request a demo', href: CALENDLY } });
@@ -8102,8 +8157,9 @@ function renderAgentPageV7(data) {
 
 
 function renderPlatformHub() {
-  // Platform overview (§6, COPY_DECK §5.2): one-sentence hero, the data flow in expanded form, the four layers, the worklist,
-  // proof, security and deployment, CTA.
+  // Platform overview (§6, COPY_DECK §5.2, final QA round 1): the hero carries the care-gap worklist (the product on the first
+  // screen, like every layer page), one "Built for" link line, the data flow in expanded form, the four layers, proof (a
+  // one-sentence release pull, not the full quote), how a deployment runs, security, CTA.
   var solutions = NAV.filter(function (s) { return s.id === 'solutions'; })[0];
   var audiences = solutions ? solutions.columns[0].items : [];
   var layerCopy = {
@@ -8114,50 +8170,41 @@ function renderPlatformHub() {
   };
   var html = renderHero({ preset: 'product', eyebrow: 'Platform', title: 'The Zynix platform for <span class="zx-plat-nowrap">value-based</span> care operations',
     lead: 'Four layers that work as one: a data foundation, intelligence that ranks the work, agents that handle outreach and scheduling, and care plans that see each episode through.',
-    secondary: { label: 'See the data flow', href: '#data-flow' }, media: { type: 'none' }, compact: true });
+    secondary: { label: 'See the data flow', href: '#data-flow' },
+    media: { type: 'product', frame: zxPlatPanel({ label: 'Care-gap worklist, illustrative data', brand: 'Care management', title: 'Care-gap worklist', meta: 'Today · all practices',
+      tiles: [{ value: '18', label: 'Discharges this week' }, { value: '214', label: 'Open care gaps' }, { value: '96', label: 'AWVs due' }],
+      rows: [
+        { title: 'Pt 1042 · 72 · CHF', sub: 'Discharged yesterday · TCM contact due', owner: { type: 'agent', label: NAMES.roles.agent }, status: { tone: 'brand', label: 'In progress' } },
+        { title: 'Pt 3561 · 81 · CKD', sub: 'Medication question from the check-in call', owner: { type: 'staff', label: NAMES.roles.rn }, status: { tone: 'warning', label: 'Escalated' } },
+        { title: 'Pt 0884 · 75 · COPD', sub: 'AWV due · two open quality gaps', owner: { type: 'agent', label: NAMES.roles.agent }, status: { tone: 'success', label: 'Booked' } },
+        { title: 'Pt 2317 · 68 · Diabetes', sub: 'HCC not yet recaptured this year', owner: { type: 'staff', label: NAMES.roles.coordinator }, status: { label: 'Queued' } }
+      ],
+      footer: 'Clinical questions go to licensed staff by rule.' },
+      'The worklist your care team opens each morning: ranked by risk and deadline, with an owner on every row · sample data') } });
 
-  html += renderSection({ id: 'overview', compact: true, rule: true, className: 'zx-plat-lede' },
-    '<p class="zx-plat-lede__text">The Zynix platform gives ACOs, health plans, MSOs, IPAs and health systems one place to connect their data, see who needs attention and get the follow-up done.</p>' +
-    '<div class="zx-plat-lede__for"><p class="zx-plat-lede__label" id="zx-plat-for">Built for</p><ul class="zx-plat-lede__links" role="list" aria-labelledby="zx-plat-for">' +
-    audiences.map(function (a) { return '<li>' + renderLinkArrow(a.label, a.href) + '</li>'; }).join('') + '</ul></div>');
+  html += '<div class="zx-plat-for"><div class="zynix-container"><div class="zx-plat-lede__for"><p class="zx-plat-lede__label" id="zx-plat-for">Built for</p>' +
+    '<ul class="zx-plat-lede__links" role="list" aria-labelledby="zx-plat-for">' +
+    audiences.map(function (a) { return '<li>' + renderLinkArrow(a.label, a.href) + '</li>'; }).join('') + '</ul></div></div></div>';
 
   html += zxPlatFlow();
 
   html += renderSection({ id: 'layers', className: 'zx-plat-layers' },
     renderSectionHead('Layers', 'Four layers, one platform',
-      'The Zynix platform has four layers, and each one feeds the next. A flagged patient becomes a task with an owner, not a line in a report.', { id: 'layers-title' }) +
+      'Every layer reads the same patient record, so the discharge analytics flags is the one the agent calls about and the care plan follows to a documented visit.', { id: 'layers-title' }) +
     renderGrid(NAMES.layers, function (l) {
       var c = layerCopy[l.id] || ['', 'Learn about ' + l.name];
       return renderCard({ href: l.href, eyebrow: 'Layer ' + l.n, title: l.name, body: c[0], cta: c[1] });
     }));
 
-  html += renderSection({ id: 'worklist', surface: 'subtle', className: 'zx-plat-worklist' },
-    renderSplit(
-      renderSectionHead('In the product', 'The worklist your care team opens every morning',
-        'One list, ranked by risk and deadline, showing who owns each step and what happened last.', { id: 'worklist-title' }) +
-      renderCallouts([
-        { title: 'Ranked by risk and deadline', body: 'Discharges and gaps are sorted so the team starts where the window is closing.' },
-        { title: 'An owner on every row', body: 'Each patient shows whether an agent or a named role has the next step.' },
-        { title: 'Escalations reach the RN', body: 'When a call raises a clinical question, the row moves to the care manager, RN.' }
-      ]),
-      zxPlatFrame({ label: 'Care-gap worklist, illustrative data', brand: 'Care management', title: 'Care-gap worklist', meta: 'Today · all practices',
-        tiles: [{ value: '18', label: 'Discharges this week' }, { value: '214', label: 'Open care gaps' }, { value: '96', label: 'AWVs due' }],
-        rows: [
-          { title: 'Pt 1042 · 72 · CHF', sub: 'Discharged yesterday · TCM contact due', owner: { type: 'agent', label: NAMES.roles.agent }, status: { tone: 'brand', label: 'In progress' } },
-          { title: 'Pt 3561 · 81 · CKD', sub: 'Medication question from the check-in call', owner: { type: 'staff', label: NAMES.roles.rn }, status: { tone: 'warning', label: 'Escalated' } },
-          { title: 'Pt 0884 · 75 · COPD', sub: 'AWV due · two open quality gaps', owner: { type: 'agent', label: NAMES.roles.agent }, status: { tone: 'success', label: 'Booked' } },
-          { title: 'Pt 2317 · 68 · Diabetes', sub: 'HCC not yet recaptured this year', owner: { type: 'staff', label: NAMES.roles.coordinator }, status: { label: 'Queued' } }
-        ],
-        footer: 'Clinical questions go to licensed staff by rule.' }, 'Care-gap worklist · illustrative sample data'),
-      { ratio: '5-7', center: true }));
+  html += zxPlatProof({ title: 'In use at Palm Beach ACO and eternalHealth',
+    lead: 'Both announced their partnerships with Zynix in published releases: Palm Beach ACO in April 2026, starting with post-discharge follow-up and annual wellness visit outreach, and eternalHealth in June 2026, for member outreach and care management.',
+    pull: 'pbaco' });
 
-  html += zxPlatProof({ title: 'Customers, on the record',
-    lead: 'Palm Beach ACO and eternalHealth announced their partnerships with Zynix in published releases. PBACO Holding, one of the nation’s largest risk-bearing ACOs, started with outreach for post-discharge follow-up and annual wellness visits.',
-    quote: 'pbaco', surface: 'default' });
+  html += zxPlatDeploy({ rule: true });
 
-  html += zxPlatSplit('security', ['Security', 'Security and deployment', 'Security reviews are part of every evaluation. Here is where we stand.', { label: 'Security and trust', href: '/security' }],
-    zxPlatRows(zxPlatCompliance().concat(zxGovernance(['escalation']).map(function (g) { return { title: g.title, body: g.text }; }),
-      [{ title: 'Deployment', body: 'Deployment options are agreed during scoping, along with your data sources and interfaces.' }]), { split: true }), { ratio: '4-8', surface: 'subtle' });
+  html += zxPlatSplit('security', ['Security', 'Security and governance', 'Security reviews are part of every evaluation. Here is where we stand.', { label: 'Security and trust', href: '/security' }],
+    zxPlatRows(zxPlatCompliance().concat(zxGovernance(['escalation']).map(function (g) { return { title: g.title, body: g.text }; })), { split: true }),
+    { ratio: '4-8', surface: 'subtle' });
 
   html += renderCTA('See the Zynix platform in a 30-minute demo', 'One discharge, one care gap and one wellness visit, from source data to a documented outcome.', null,
     { secondary: { label: 'See integrations', href: '/integrations' } });
@@ -8726,8 +8773,8 @@ function renderZynScribeV7() {
       { icon: 'users', title: 'Care teams', body: 'Approved notes join the patient’s record in the Zynix platform, so open gaps and care plans reflect the visit.' }
     ], renderCard));
 
-  html += zxPlatProof({ title: 'Part of the Zynix platform',
-    lead: 'ZynScribe runs on the same platform and patient record that ACOs, health plans and provider organizations use for outreach, care plans and analytics.' });
+  html += zxPlatProof({ title: 'ZynScribe at NHS Health System',
+    lead: 'NHS Health System runs ZynScribe alongside post-discharge outreach and after-hours access, on the same platform and patient record.', story: 'nhs' });
   html += zxPlatStack();
 
   html += renderCTA('See ZynScribe in a 30-minute demo', 'A visit, a drafted note and the physician’s review, start to finish.', null,
@@ -8795,7 +8842,7 @@ function renderCarePlansV7() {
     ], { split: true }), { rule: true, ratio: '5-7' });
 
   html += zxPlatProof({ title: 'Post-discharge and wellness-visit outreach at Palm Beach ACO',
-    lead: 'PBACO Holding, one of the nation’s largest risk-bearing ACOs, started with outreach for post-discharge follow-up and annual wellness visits.',
+    lead: zxPlatPbacoSize() + ', started with outreach for post-discharge follow-up and annual wellness visits.',
     story: 'pbaco', logos: ['pbaco', 'westfloridaaco', 'spacecoastaco', 'centralfloridaaco', 'goldencareaco', 'sunfloweraco'] });
   html += zxPlatStack();
 
@@ -8927,7 +8974,7 @@ function renderDataAnalyticsV7() {
 
   // ── PAGE: Integrations ──
   function renderIntegrations() {
-    // Integrations (§6: all 8 named EHRs as a table; "EHR · method · data", no direction column because no write-back or
+    // Integrations (§6: the named EHRs with a method on file as a table, the rest on one line under it (final QA); "EHR · method · data", no direction column because no write-back or
     // bidirectional flow is verified per EHR; no "24+ connectors", timelines, SLA or FHIR-version claims). Methods and data
     // are the ones this page already listed, restated without version or direction claims ([VERIFY] V6, per EHR).
     var ehrRows = [
@@ -8936,10 +8983,14 @@ function renderDataAnalyticsV7() {
       ['athenahealth', 'athenahealth API', 'Demographics, clinical data, scheduling, claims'],
       ['eClinicalWorks', 'HL7 v2 · API · FHIR', 'ADT events, clinical documents, scheduling'],
       ['NextGen', 'NextGen API · HL7 v2', 'Patient records, scheduling, claims data'],
-      ['Allscripts', 'Open API · HL7 v2', 'Clinical data, ADT notifications, scheduling'],
-      ['Greenway', 'Confirmed during scoping', 'Scoped with each practice'],
-      ['DrChrono', 'Confirmed during scoping', 'Scoped with each practice']
+      ['Allscripts', 'Open API · HL7 v2', 'Clinical data, ADT notifications, scheduling']
     ];
+    // Named EHRs without a method on file go on one line under the table, not as placeholder rows (final QA round 1).
+    var tableNames = ehrRows.map(function (r) { return r[0]; });
+    var also = SITE_FACTS.ehr.named.filter(function (n) { return tableNames.indexOf(n) < 0; });
+    var alsoLine = also.length ? '<p class="zx-plat-ehrs__also">We also connect to ' +
+      (also.length > 1 ? also.slice(0, -1).join(', ') + ' and ' + also[also.length - 1] : also[0]) +
+      '. The interface for each is confirmed with the practice during scoping.</p>' : '';
     var html = renderHero({ preset: 'product', eyebrow: 'Integrations', title: 'Works with the EHRs you already run',
       lead: '30+ EHR systems across 300+ connected instances, plus claims, ADT, lab and pharmacy feeds, over FHIR, HL7 v2, C-CDA and X12.',
       secondary: { label: 'Ask about your EHR', href: '/contact' },
@@ -8961,7 +9012,7 @@ function renderDataAnalyticsV7() {
         { id: 'ehrs-title' }) +
       renderCompareTable({ caption: 'EHR connections: how Zynix connects and the data it typically reads', captionHidden: true,
         columns: [{ label: 'EHR' }, { label: 'How we connect' }, { label: 'Typical data' }],
-        rows: ehrRows.map(function (r) { return { label: r[0], cells: [{ text: r[1] }, { text: r[2] }] }; }) }));
+        rows: ehrRows.map(function (r) { return { label: r[0], cells: [{ text: r[1] }, { text: r[2] }] }; }) }) + alsoLine);
 
     html += zxPlatSplit('data-feeds', ['Beyond the EHR', 'Claims, ADT, labs and pharmacy', 'Value-based care runs on more than the chart.'],
       zxPlatRows([
@@ -8984,8 +9035,8 @@ function renderDataAnalyticsV7() {
       ]));
 
     html += zxPlatProof({ title: 'One record across practices',
-      lead: 'For a network of independent practices, Zynix means one record and one worklist, even when every practice runs a different EHR.',
-      story: 'pbaco' });
+      lead: 'At Central Florida ACO, Zynix brings claims, clinical, ADT and lab data together across the participating practices, and each practice keeps working in its own EHR.',
+      story: 'centralfloridaaco', facts: ['patients', 'states'] });
     html += zxPlatStack({ interop: false });
 
     html += zxPlatFaq('faq-integrations', [
