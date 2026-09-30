@@ -30,6 +30,11 @@
 //          zxSeo path arguments, hrefs and JSON-LD urls). URLs do not change in the redesign (DECISIONS 2, 9); link text does.
 //   dated  DATED_EXEMPTIONS below: one named string in one A2P-frozen function, pinned to that function's SHA-256. It lapses
 //          by itself the moment the function changes (the A2P workstream then fixes the string in the same PR).
+//   verify VERIFY_EXEMPTIONS below (final QA round 1, 2026-09-29): one named string that a reviewer escalated to Gautamdev
+//          ([VERIFY]), pinned to the exact sentence it sits in. It lapses the moment that sentence changes or disappears.
+// Every dated and verify exemption, and the dead-code exemption as a whole, is ALSO printed by ci/static-checks.mjs as a
+// LAUNCH line (text, owner, fix; ci/launch.mjs), and `node ci/static-checks.mjs --launch` fails while any of them is open,
+// so launch precondition 6 ("whole bundle zero", DESIGN_SPEC §8.0) is never signed off without naming them.
 // Rule (enforced by ci/static-checks.mjs): a scope fails if its count is above its ci/baseline.json count (absent = 0),
 // or if it is on the must-be-zero list of the current phase (baseline.phase; "*" = every scope) and has any hit.
 import fs from 'node:fs';
@@ -55,6 +60,17 @@ export const DATED_EXEMPTIONS = [
     fix: "reword to 'including our SOC 2 Type II audit' in renderPrivacyV7 and the native Webflow /privacy-policy page together, after the campaign decision; then delete this entry" }
 ];
 
+// Verify exemptions: a banned string a reviewer escalated to Gautamdev ([VERIFY]) instead of assigning a rewrite. Each entry
+// names the claims label, the exact text, the exact sentence around it (`context`: the exemption applies only while the bundle
+// contains that sentence verbatim, so any edit to it ends the exemption), where it renders, the owner, the decision and the fix.
+export const VERIFY_EXEMPTIONS = [
+  { label: '$936M', text: '$936,988,750', page: '/press', where: 'PRESS_RELEASES (the PBACO release body that renderPressV7 reprints)',
+    context: 'PBACO Holding, LLC is the largest ACO in 2026 by participant count and has generated $936,988,750 in savings for the Medicare Shared Savings Program, the highest in program history.',
+    since: '2026-09-29', owner: 'P4; Gautamdev decides ([VERIFY], final QA claims issue 6)',
+    why: 'verbatim "About PBACO" boilerplate of the Apr 14 2026 Business Wire release; not a quote (DECISIONS 15), and COPY_DECK #67/#101 removed the same superlative and dollar figure elsewhere',
+    fix: 'Gautamdev chooses: keep the release verbatim under a "Full text of the Business Wire release" label (then record the decision here), or trim the About-PBACO paragraph and link to Business Wire (then delete this entry)' }
+];
+
 export const CLAIMS = [
   ['HIPAA Compliant', /\bHIPAA[\s ]+compliant\b/gi],
   ['HIPAA-compliant', /\bHIPAA-compliant\b/gi],
@@ -74,7 +90,7 @@ export const CLAIMS = [
   ['Zynix OS', /\bZynix OS\b/gi],
   ['operating system', /\boperating system\b/gi],
   ['autonomous', /\bautonomous\b/gi],
-  ['$936M', /\$936M\b/gi],
+  ['$936M', /\$936(?:M\b|,\d{3})/gi],               // "$936M" and the spelled-out "$936,988,750" (final QA round 1)
   ['$150M', /\$150M\b/gi],
   ['10+ ACOs', /(?<![\w.])10\+ ACOs\b/gi],
   ['documented back to the EHR', /\bdocumented back to the EHR\b/gi],
@@ -262,7 +278,7 @@ export function exemptions(src, scopes) {
     for (const s of decl) {
       // include the comment-only lines directly above the declaration (its header comment)
       let a = s.start; for (;;) { const prevEnd = src.lastIndexOf('\n', a - 1); if (prevEnd < 0) break; const prevStart = src.lastIndexOf('\n', prevEnd - 1) + 1; const line = src.slice(prevStart, prevEnd); if (/^\s*\/\/.*$/.test(line)) a = prevStart; else break; }
-      out.push({ start: a, end: s.end, kind: 'dead', why: `dead function ${s.name} (not reachable from the router or live code)` });
+      out.push({ start: a, end: s.end, kind: 'dead', entry: { fn: s.name }, why: `dead function ${s.name} (not reachable from the router or live code)` });
     }
   }
   for (const x of DATED_EXEMPTIONS) {
@@ -271,7 +287,14 @@ export function exemptions(src, scopes) {
     if (sha(text) !== x.sha256) { notes.push(`dated exemption for ${x.fn} (since ${x.since}) LAPSED: the function changed (sha256 ${sha(text).slice(0, 12)}… != pinned ${x.sha256.slice(0, 12)}…), so "${x.text}" counts again. Fix: ${x.fix}`); continue; }
     const at = src.indexOf(x.text, s.start);
     if (at < 0 || at >= s.end) { notes.push(`dated exemption for ${x.fn}: "${x.text}" is no longer in the function (remove the entry)`); continue; }
-    out.push({ start: at, end: at + x.text.length, kind: 'dated', label: x.label, why: `dated exemption since ${x.since} (${x.owner}): ${x.why}. Fix: ${x.fix}` });
+    out.push({ start: at, end: at + x.text.length, kind: 'dated', label: x.label, entry: x, why: `dated exemption since ${x.since} (${x.owner}): ${x.why}. Fix: ${x.fix}` });
+  }
+  for (const x of VERIFY_EXEMPTIONS) {
+    const c = src.indexOf(x.context); const i = c < 0 ? -1 : x.context.indexOf(x.text);
+    if (c < 0) { notes.push(`verify exemption "${x.text}" (${x.where}): the pinned sentence is no longer in the bundle, so the exemption ended; if the string is gone, delete the entry`); continue; }
+    if (i < 0) { problems.push(`verify exemption "${x.text}": its context sentence does not contain the text (fix the entry)`); continue; }
+    if (src.indexOf(x.context, c + 1) > -1) notes.push(`verify exemption "${x.text}": the pinned sentence occurs more than once; only the first is exempt`);
+    out.push({ start: c + i, end: c + i + x.text.length, kind: 'verify', label: x.label, entry: x, why: `verify exemption since ${x.since} (${x.owner}): ${x.why}. Fix: ${x.fix}` });
   }
   return { ranges: out, problems, notes, reach: R };
 }
@@ -300,7 +323,7 @@ export function countScopes(src) {
   const live = [], exempt = [];
   for (const h of hits) {
     const r = ex.ranges.find(x => h.index >= x.start && h.index < x.end && (!x.label || x.label === h.label));
-    if (r) { exempt.push({ ...h, kind: r.kind, why: r.why }); continue; }
+    if (r) { exempt.push({ ...h, kind: r.kind, why: r.why, entry: r.entry || null }); continue; }
     if (inUrlToken(src, h.index, h.text.length)) { exempt.push({ ...h, kind: 'url', why: 'URL or path token (URLs are unchanged, DECISIONS 2, 9)' }); continue; }
     live.push(h);
   }

@@ -14,8 +14,12 @@
 //      must-be-zero list of the current phase (ci/baseline.json `phase`, or `--phase N` / env ZX_PHASE) has a hit.
 //      Exempt hits (facts data, dead functions, URL slugs, dated) are not counted; a separate check fails when an exemption
 //      is no longer valid (a DEAD_FUNCTIONS entry became reachable). List them: node ci/banned-strings.mjs --exempt
+//   6. Weight (ci/launch.mjs; final QA round 1): brotli-4 bytes of the stylesheet and of bundle + stylesheet, and the stylesheet's
+//      @import rules, may not exceed ci/baseline.json weight.ceilings. The weight TARGETS are a launch item, not a check.
+// Returns { judged, weight } so ci/static-checks.mjs can print the launch checklist (ci/launch.mjs) from the same run.
 // ci/baseline.json documents its own fields. Try a phase without changing it: node ci/static-checks.mjs --phase 1
 import { judge } from './banned-strings.mjs';
+import { measureWeight, weightChecks } from './launch.mjs';
 
 const stripCss = c => c.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/g, '""');
 
@@ -109,4 +113,9 @@ export function runRedesignChecks({ js, css, baseline, phase, check }) {
   check(`banned strings: must-be-zero scopes are clean (phase ${r.phase}: ${r.mustZero.length ? r.mustZero.join(', ') : 'none yet'})`, r.zeroFails.length === 0,
     r.zeroFails.map(z => `${z.scope} (${z.count})`).join(', '));
   if (r.warnings.length) console.log('WARN  banned strings: ' + r.warnings.join(' | '));
+
+  // 6. weight ceilings (ratchet); the targets are the launch item 'weight'
+  const weight = measureWeight(js, css);
+  weightChecks(weight, baseline, check);
+  return { judged: r, weight };
 }
