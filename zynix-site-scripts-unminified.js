@@ -9525,7 +9525,7 @@ function renderDataAnalyticsV7() {
   display:flex;align-items:center;justify-content:space-between;
   height:72px;max-width:1200px;margin:0 auto;padding:0 24px;
 }.zxb-willai .nav-logo{
-  font-family:'Funnel Sans',sans-serif;font-weight:800;font-size:1.25rem;
+  font-family:var(--zx-font-sans);font-weight:700;font-size:1.25rem;
   color:var(--zynblue);text-decoration:none;letter-spacing:-.02em;
 }.zxb-willai .nav-links{display:flex;align-items:center;gap:28px;list-style:none}.zxb-willai .nav-links a{font-size:.9rem;font-weight:500;color:var(--text-primary);transition:color .2s}.zxb-willai .nav-links a:hover{color:var(--zynblue)}.zxb-willai .nav-actions{display:flex;align-items:center;gap:10px}
 @media(max-width:768px){.nav-links{display:none}}.zxb-willai .blog-hero{
@@ -9548,8 +9548,8 @@ function renderDataAnalyticsV7() {
   font-size:.6875rem;font-weight:700;font-family:'Roboto',sans-serif;
   text-transform:uppercase;letter-spacing:.06em;
 }.zxb-willai .read-time{font-size:.8125rem;color:var(--text-muted)}.zxb-willai .blog-hero h1{
-  font-family:'Funnel Sans',sans-serif;
-  font-weight:800;
+  font-family:var(--zx-font-sans);
+  font-weight:700;
   color:var(--zynblue);
   letter-spacing:-.02em;
   margin-bottom:0;
@@ -9592,11 +9592,11 @@ function renderDataAnalyticsV7() {
 }.zxb-willai .article-body{padding:64px 0 16px}.zxb-willai .article-content p{
   font-size:1.0625rem;line-height:1.78;color:var(--text-soft);margin-bottom:22px;
 }.zxb-willai .article-content h2{
-  font-family:'Funnel Sans',sans-serif;font-weight:800;
+  font-family:var(--zx-font-sans);font-weight:700;
   font-size:1.75rem;color:var(--zynblue);
   margin:52px 0 16px;letter-spacing:-.01em;line-height:1.22;
 }.zxb-willai .article-content h3{
-  font-family:'Funnel Sans',sans-serif;font-weight:700;
+  font-family:var(--zx-font-sans);font-weight:700;
   font-size:1.1875rem;color:var(--zynblue);margin:32px 0 10px;
 }.zxb-willai .article-content strong{color:var(--text-primary);font-weight:700}.zxb-willai .quick-answer{
   width:100%;
@@ -9609,9 +9609,9 @@ function renderDataAnalyticsV7() {
 }.zxb-willai .qa-title{
   margin:0 0 44px;
   color:var(--zynblue);
-  font-family:'Funnel Sans',sans-serif;
+  font-family:var(--zx-font-sans);
   font-size:clamp(2rem,3.4vw,2.6rem);
-  font-weight:800;line-height:1.16;letter-spacing:-.02em;
+  font-weight:700;line-height:1.16;letter-spacing:-.02em;
 }.zxb-willai .qa-cols{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;
 }.zxb-willai .qa-col{
@@ -9623,12 +9623,12 @@ function renderDataAnalyticsV7() {
   align-self:flex-start;
   display:inline-flex;align-items:center;gap:9px;
   padding:11px 18px;border-radius:999px;color:var(--white);
-  font-family:'Funnel Sans',sans-serif;
+  font-family:var(--zx-font-sans);
   font-size:clamp(1.05rem,1.5vw,1.28rem);font-weight:700;line-height:1.1;
 }.zxb-willai .qa-badge svg{width:18px;height:18px;flex:0 0 auto}.zxb-willai .qa-badge-yes{background:var(--zynorange)}.zxb-willai .qa-badge-no{background:var(--zynblue)}.zxb-willai .qa-col-head{
   display:block;margin:26px 0 14px;
   color:var(--text-primary);
-  font-family:'Funnel Sans',sans-serif;
+  font-family:var(--zx-font-sans);
   font-size:clamp(1.18rem,1.7vw,1.5rem);font-weight:700;line-height:1.4;
 }.zxb-willai .qa-col p{
   margin:0;color:var(--text-soft);
@@ -9640,12 +9640,12 @@ function renderDataAnalyticsV7() {
   background:linear-gradient(120deg,var(--zynblue-light) 0%,var(--highlight) 100%);
 }.zxb-willai .qa-footer .qa-footer-text{
   margin:0;color:var(--zynblue);
-  font-family:'Funnel Sans',sans-serif;
+  font-family:var(--zx-font-sans);
   font-size:clamp(1.15rem,1.9vw,1.6rem);font-weight:700;
   line-height:1.4;letter-spacing:-.01em;
-}.zxb-willai .qa-footer .qa-footer-text b{color:var(--zynorange);font-weight:800;font-style:italic}
+}.zxb-willai .qa-footer .qa-footer-text b{color:var(--zynorange);font-weight:700;font-style:italic}
 @media(max-width:640px){.qa-cols{grid-template-columns:1fr}}.zxb-willai .aco-gaps-wrap{border:1px solid var(--divider);border-radius:14px;overflow:hidden;margin:36px 0}.zxb-willai .aco-gaps-header{background:var(--zynblue);padding:22px 28px}.zxb-willai .aco-gaps-header .section-eyebrow{color:var(--zynorange);margin-bottom:12px}.zxb-willai .aco-gaps-header h3{
-  font-family:'Funnel Sans',sans-serif;font-weight:800;
+  font-family:var(--zx-font-sans);font-weight:700;
   font-size:1.0625rem;color:var(--white);line-height:1.4;margin:0;
 }.zxb-willai .aco-insight{
   background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
@@ -9654,7 +9654,7 @@ function renderDataAnalyticsV7() {
 }.zxb-willai .aco-insight b{color:var(--zynorange-tint);font-style:normal}.zxb-willai .aco-gaps-grid{display:grid;grid-template-columns:1fr 1fr}.zxb-willai .gap-card{padding:22px 26px;border-right:1px solid var(--divider);border-bottom:1px solid var(--divider)}.zxb-willai .gap-card:nth-child(2n){border-right:none}.zxb-willai .gap-card:nth-child(3), .zxb-willai .gap-card:nth-child(4){border-bottom:none}.zxb-willai .gap-icon{
   width:38px;height:38px;background:var(--zynblue-light);border-radius:8px;
   display:flex;align-items:center;justify-content:center;margin-bottom:13px;
-}.zxb-willai .gap-icon svg{width:18px;height:18px;stroke:var(--zynblue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.zxb-willai .gap-title{font-family:'Funnel Sans',sans-serif;font-size:.9375rem;font-weight:800;color:var(--zynblue);margin-bottom:7px}.zxb-willai .gap-desc{font-size:.875rem;color:var(--text-secondary);line-height:1.6;margin:0}.zxb-willai .gap-desc strong{color:var(--text-primary)}.zxb-willai .gap-outcome{
+}.zxb-willai .gap-icon svg{width:18px;height:18px;stroke:var(--zynblue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.zxb-willai .gap-title{font-family:var(--zx-font-sans);font-size:.9375rem;font-weight:700;color:var(--zynblue);margin-bottom:7px}.zxb-willai .gap-desc{font-size:.875rem;color:var(--text-secondary);line-height:1.6;margin:0}.zxb-willai .gap-desc strong{color:var(--text-primary)}.zxb-willai .gap-outcome{
   display:inline-flex;align-items:center;gap:5px;margin-top:10px;
   font-size:.6875rem;font-weight:700;color:var(--zynorange);
   text-transform:uppercase;letter-spacing:.04em;
@@ -9676,7 +9676,7 @@ function renderDataAnalyticsV7() {
   background:var(--card-bg);border:1px solid var(--divider);
   border-radius:12px;padding:26px 30px;margin:36px 0;
 }.zxb-willai .roi-metrics .section-eyebrow{margin-bottom:4px}.zxb-willai .roi-metrics-title{
-  font-family:'Funnel Sans',sans-serif;font-weight:800;
+  font-family:var(--zx-font-sans);font-weight:700;
   font-size:1.0625rem;color:var(--zynblue);margin-bottom:18px;
 }.zxb-willai .checklist{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}.zxb-willai .checklist li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--text-primary);line-height:1.5}.zxb-willai .check-dot{
   flex-shrink:0;width:20px;height:20px;background:var(--zynorange);
@@ -9698,15 +9698,15 @@ function renderDataAnalyticsV7() {
 }.zxb-willai .framework-step:hover{border-color:var(--zynblue);box-shadow:0 4px 16px rgba(32,68,155,.08)}.zxb-willai .step-num{
   flex-shrink:0;width:38px;height:38px;background:var(--zynblue);color:var(--white);
   border-radius:8px;display:flex;align-items:center;justify-content:center;
-  font-family:'Funnel Sans',sans-serif;font-weight:800;font-size:1.125rem;
+  font-family:var(--zx-font-sans);font-weight:700;font-size:1.125rem;
 }.zxb-willai .step-body h4{
-  font-family:'Funnel Sans',sans-serif;font-weight:800;
+  font-family:var(--zx-font-sans);font-weight:700;
   font-size:.9375rem;color:var(--zynblue);margin-bottom:5px;
 }.zxb-willai .step-body p{font-size:.875rem;color:var(--text-secondary);line-height:1.6;margin:0}.zxb-willai .dw-block{
   background:linear-gradient(135deg,var(--zynblue) 0%,var(--zynblue-mid) 100%);
   border-radius:14px;padding:28px 30px;margin:36px 0;
 }.zxb-willai .dw-block .section-eyebrow{color:var(--zynorange)}.zxb-willai .dw-block-title{
-  font-family:'Funnel Sans',sans-serif;font-weight:800;
+  font-family:var(--zx-font-sans);font-weight:700;
   font-size:1.125rem;color:var(--white);margin:8px 0 22px;line-height:1.35;
 }.zxb-willai .dw-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.zxb-willai .dw-item{
   background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);
@@ -9714,7 +9714,7 @@ function renderDataAnalyticsV7() {
 }.zxb-willai .dw-icon{
   flex-shrink:0;width:30px;height:30px;background:var(--zynorange);
   border-radius:6px;display:flex;align-items:center;justify-content:center;
-}.zxb-willai .dw-icon svg{width:15px;height:15px;stroke:var(--white);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.zxb-willai .dw-text-title{font-family:'Funnel Sans',sans-serif;font-weight:800;font-size:.9rem;color:var(--white);margin-bottom:3px}.zxb-willai .dw-text-sub{font-size:.8125rem;color:rgba(255,255,255,.65);line-height:1.45}
+}.zxb-willai .dw-icon svg{width:15px;height:15px;stroke:var(--white);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.zxb-willai .dw-text-title{font-family:var(--zx-font-sans);font-weight:700;font-size:.9rem;color:var(--white);margin-bottom:3px}.zxb-willai .dw-text-sub{font-size:.8125rem;color:rgba(255,255,255,.65);line-height:1.45}
 @media(max-width:620px){.dw-grid{grid-template-columns:1fr}}.zxb-willai .pull-quote{
   margin:32px 0;
   padding:24px 28px;
@@ -9723,19 +9723,19 @@ function renderDataAnalyticsV7() {
   border:1px solid var(--divider);
 }.zxb-willai .pull-quote p{
   margin:0;
-  font-family:'Funnel Sans',sans-serif;
+  font-family:var(--zx-font-sans);
   font-size:1.125rem;font-weight:700;
   color:var(--zynblue);
   font-style:italic;
   line-height:1.65;
 }.zxb-willai .cta-block{background:var(--zynblue);padding:72px 24px;text-align:center}.zxb-willai .cta-block h2{
-  font-family:'Funnel Sans',sans-serif;font-weight:800;
+  font-family:var(--zx-font-sans);font-weight:700;
   font-size:clamp(1.5rem,3vw,2rem);color:var(--white);
   letter-spacing:-.02em;margin-bottom:14px;
 }.zxb-willai .cta-block p{font-size:1rem;color:rgba(255,255,255,.75);max-width:540px;margin:0 auto 28px;line-height:1.65}.zxb-willai .cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.zxb-willai .site-footer{background:#0D1827;padding:52px 24px 28px}.zxb-willai .footer-inner{max-width:1200px;margin:0 auto}.zxb-willai .footer-grid{
   display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:36px;
   padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:24px;
-}.zxb-willai .footer-brand-name{font-family:'Funnel Sans',sans-serif;font-weight:800;font-size:1.1rem;color:#fff}.zxb-willai .footer-brand p{font-size:.875rem;line-height:1.65;color:rgba(255,255,255,.55);margin-top:10px;max-width:270px}.zxb-willai .footer-col h6{
+}.zxb-willai .footer-brand-name{font-family:var(--zx-font-sans);font-weight:700;font-size:1.1rem;color:#fff}.zxb-willai .footer-brand p{font-size:.875rem;line-height:1.65;color:rgba(255,255,255,.55);margin-top:10px;max-width:270px}.zxb-willai .footer-col h6{
   font-family:'Roboto',sans-serif;font-size:.6875rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.08em;color:#fff;margin-bottom:12px;
 }.zxb-willai .footer-col ul{list-style:none}.zxb-willai .footer-col ul li{margin-bottom:7px}.zxb-willai .footer-col ul li a{font-size:.875rem;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s}.zxb-willai .footer-col ul li a:hover{color:#fff}.zxb-willai .footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:.8125rem;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:8px}
@@ -9780,13 +9780,17 @@ function renderDataAnalyticsV7() {
 
       <!-- Right: In-house hero image — desktop + iPad only -->
       <div class="hero-visual">
-        <img
-          src="https://242472215.fs1.hubspotusercontent-na2.net/hub/242472215/hubfs/Blog1%20hero%20image.png?width=1000"
-          alt="AI and healthcare cost — value-based care execution framework by Zynix AI"
-          loading="eager"
-          width="1000"
-          height="562"
-        >
+        <picture>
+          <!-- Phones: .hero-visual is display:none below 768px, so they get a 1x1 placeholder and never download the hero image -->
+          <source media="(max-width: 767.98px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+          <img
+            src="https://242472215.fs1.hubspotusercontent-na2.net/hub/242472215/hubfs/Blog1%20hero%20image.png?width=1000"
+            alt="AI and healthcare cost — value-based care execution framework by Zynix AI"
+            loading="eager"
+            width="1000"
+            height="562"
+          >
+        </picture>
       </div>
 
     </div>
@@ -10103,7 +10107,7 @@ function renderDataAnalyticsV7() {
       color: #CCC;
       font-size: .75rem;
     }.zxb-agentic .hero-h1{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       line-height: 1.12;
       letter-spacing: -.02em;
       color: #20449B;
@@ -10111,7 +10115,7 @@ function renderDataAnalyticsV7() {
     }.zxb-agentic .h1-main{
       display: block;
       font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-      font-weight: 800;
+      font-weight: 700;
       color: #20449B;
     }.zxb-agentic .h1-sub{
       display: block;
@@ -10143,17 +10147,17 @@ function renderDataAnalyticsV7() {
       color: #2a2728;
       margin-bottom: 1.5rem;
     }.zxb-agentic .prose p:last-child{ margin-bottom: 0; }.zxb-agentic .prose strong{ color: #131011; font-weight: 700; }.zxb-agentic .section-heading{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: clamp(1.5rem, 2.5vw, 1.875rem);
-      font-weight: 800;
+      font-weight: 700;
       color: #20449B;
       line-height: 1.2;
       letter-spacing: -.015em;
       margin: 3rem 0 1.25rem;
     }.zxb-agentic .section-heading:first-child{ margin-top: 0; }.zxb-agentic .subsection-heading{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: 1.25rem;
-      font-weight: 800;
+      font-weight: 700;
       color: #20449B;
       line-height: 1.3;
       margin: 2rem 0 .75rem;
@@ -10178,7 +10182,7 @@ function renderDataAnalyticsV7() {
       border-top: 3px solid #F16529;
       border-bottom: 1px solid #E4E7EC;
     }.zxb-agentic .pull-quote p{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: clamp(1.125rem, 2vw, 1.375rem);
       font-weight: 700;
       color: #20449B;
@@ -10187,9 +10191,9 @@ function renderDataAnalyticsV7() {
       font-style: italic;
     }.zxb-agentic .governance-callout{
       display: block;
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: 1.0625rem;
-      font-weight: 800;
+      font-weight: 700;
       color: #20449B;
       background: #EAF1FC;
       border-radius: 8px;
@@ -10229,9 +10233,9 @@ function renderDataAnalyticsV7() {
       background: #20449B;
       padding: 22px 28px;
     }.zxb-agentic .aco-gaps-header h3{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: 1.25rem;
-      font-weight: 800;
+      font-weight: 700;
       color: #FFFFFF;
       margin-bottom: 14px;
       line-height: 1.3;
@@ -10271,9 +10275,9 @@ function renderDataAnalyticsV7() {
       stroke-linecap: round;
       stroke-linejoin: round;
     }.zxb-agentic .gap-title{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: 1rem;
-      font-weight: 800;
+      font-weight: 700;
       color: #20449B;
       margin-bottom: 8px;
       line-height: 1.3;
@@ -10333,14 +10337,14 @@ function renderDataAnalyticsV7() {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: 1.125rem;
-      font-weight: 800;
+      font-weight: 700;
       flex-shrink: 0;
     }.zxb-agentic .step-body{ flex: 1; }.zxb-agentic .step-body h4{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: 1rem;
-      font-weight: 800;
+      font-weight: 700;
       color: #20449B;
       margin-bottom: 6px;
       line-height: 1.3;
@@ -10356,9 +10360,9 @@ function renderDataAnalyticsV7() {
       border-radius: 14px;
       padding: 32px 36px;
     }.zxb-agentic .roi-metrics-title{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: 1.35rem;
-      font-weight: 800;
+      font-weight: 700;
       color: #20449B;
       margin-bottom: 24px;
       line-height: 1.3;
@@ -10394,7 +10398,7 @@ function renderDataAnalyticsV7() {
       stroke-linejoin: round;
     }.zxb-agentic .checklist .item-title{
       display: block;
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: 1.02rem;
       font-weight: 700;
       color: #131011;
@@ -10416,9 +10420,9 @@ function renderDataAnalyticsV7() {
       border-radius: 14px;
       padding: 28px 28px 24px;
     }.zxb-agentic .dw-block-title{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: 1.125rem;
-      font-weight: 800;
+      font-weight: 700;
       color: #FFFFFF;
       line-height: 1.4;
       margin-bottom: 20px;
@@ -10453,9 +10457,9 @@ function renderDataAnalyticsV7() {
       stroke-linecap: round;
       stroke-linejoin: round;
     }.zxb-agentic .dw-text-title{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: .9375rem;
-      font-weight: 800;
+      font-weight: 700;
       color: #FFFFFF;
       margin-bottom: 4px;
       line-height: 1.25;
@@ -10479,9 +10483,9 @@ function renderDataAnalyticsV7() {
       color: rgba(255,255,255,.55);
       margin-bottom: 14px;
     }.zxb-agentic .cta-block h2{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: clamp(1.375rem, 2.5vw, 1.875rem);
-      font-weight: 800;
+      font-weight: 700;
       color: #FFFFFF;
       line-height: 1.25;
       margin-bottom: 14px;
@@ -10500,9 +10504,9 @@ function renderDataAnalyticsV7() {
       gap: 8px;
       background: #F16529;
       color: #FFFFFF;
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: 1rem;
-      font-weight: 800;
+      font-weight: 700;
       padding: 14px 30px;
       border-radius: 8px;
       text-decoration: none;
@@ -10541,9 +10545,9 @@ function renderDataAnalyticsV7() {
       max-width: 640px;
       margin: 0 auto;
     }.zxb-agentic .cta-section h2{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: clamp(1.75rem, 3vw, 2.25rem);
-      font-weight: 800;
+      font-weight: 700;
       color: #FFFFFF;
       line-height: 1.2;
       margin-bottom: 16px;
@@ -10565,9 +10569,9 @@ function renderDataAnalyticsV7() {
       grid-template-columns: 260px 1fr;
       gap: 60px;
     }.zxb-agentic .footer-logo-text{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-size: 1.0625rem;
-      font-weight: 800;
+      font-weight: 700;
       color: #FFFFFF;
       margin-bottom: 12px;
     }.zxb-agentic .footer-brand-desc{
@@ -11199,10 +11203,10 @@ function renderDataAnalyticsV7() {
       font-family: 'Roboto', sans-serif; font-size: 0.75rem; font-weight: 700;
       letter-spacing: 0.08em; text-transform: uppercase;
       padding: 5px 14px; border-radius: 999px; display: inline-block;
-    }.zxb-lead .read-time{ font-family: 'Roboto', sans-serif; font-size: 0.8125rem; color: #747475; }.zxb-lead .blog-hero h1{ font-family: 'Funnel Sans', sans-serif; margin-bottom: 22px; line-height: 1.12; }.zxb-lead .h1-main{
+    }.zxb-lead .read-time{ font-family: 'Roboto', sans-serif; font-size: 0.8125rem; color: #747475; }.zxb-lead .blog-hero h1{ font-family: var(--zx-font-sans); margin-bottom: 22px; line-height: 1.12; }.zxb-lead .h1-main{
       display: block;
       font-size: clamp(2.25rem, 4.2vw, 3.5rem);
-      font-weight: 800;
+      font-weight: 700;
       color: #20449B;
     }.zxb-lead .h1-sub{
       display: block;
@@ -11226,8 +11230,8 @@ function renderDataAnalyticsV7() {
       70%  { transform: scale(1.32); opacity: 0; }
       100% { transform: scale(1.32); opacity: 0; }
     }.zxb-lead .hero-flow-dash{ stroke-dasharray: 4 3; animation: heroDashFlow 1.1s linear infinite; }.zxb-lead .hero-pulse-ring{ transform-box: fill-box; transform-origin: center; animation: heroPulse 2.6s ease-out infinite; }@media (prefers-reduced-motion: reduce){.zxb-lead .hero-visual, .zxb-lead .hero-flow-dash, .zxb-lead .hero-pulse-ring{ animation: none; }}.zxb-lead .article-wrapper{ padding: 72px 0 0; }.zxb-lead .article-body-pad{ padding-bottom: 80px; }.zxb-lead .article-body h2{
-      font-family: 'Funnel Sans', sans-serif;
-      font-size: 1.875rem; font-weight: 800;
+      font-family: var(--zx-font-sans);
+      font-size: 1.875rem; font-weight: 700;
       color: #20449B;
       margin: 56px 0 18px; line-height: 1.2;
     }.zxb-lead .article-body p{
@@ -11255,7 +11259,7 @@ function renderDataAnalyticsV7() {
       background: #F7F8FA; border: 1px solid #E4E7EC;
       border-radius: 12px; padding: 24px 28px; margin: 28px 0;
     }.zxb-lead .pull-quote p{
-      font-family: 'Funnel Sans', sans-serif;
+      font-family: var(--zx-font-sans);
       font-weight: 700; font-style: italic;
       color: #20449B; font-size: 1.125rem;
       line-height: 1.65; margin: 0;
@@ -11267,17 +11271,17 @@ function renderDataAnalyticsV7() {
     }.zxb-lead .framework-step:hover{ border-color: #20449B; box-shadow: 0 4px 16px rgba(32,68,155,0.08); }.zxb-lead .step-num{
       width: 38px; height: 38px; min-width: 38px;
       background: #20449B; color: #ffffff; border-radius: 8px;
-      font-family: 'Funnel Sans', sans-serif; font-weight: 800; font-size: 1.125rem;
+      font-family: var(--zx-font-sans); font-weight: 700; font-size: 1.125rem;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }.zxb-lead .step-body h4{
-      font-family: 'Funnel Sans', sans-serif; font-weight: 800;
+      font-family: var(--zx-font-sans); font-weight: 700;
       color: #20449B; font-size: 1.0625rem;
       margin-bottom: 8px; line-height: 1.25;
     }.zxb-lead .step-body p{ font-size: 0.9375rem; color: #4a4647; line-height: 1.65; margin: 0; }.zxb-lead .roi-metrics{
       background: #F7F8FA; border: 1px solid #E4E7EC;
       border-radius: 12px; padding: 26px 28px; margin: 28px 0;
     }.zxb-lead .roi-metrics .section-eyebrow{ margin-bottom: 14px; }.zxb-lead .roi-metrics-title{
-      font-family: 'Funnel Sans', sans-serif; font-weight: 800;
+      font-family: var(--zx-font-sans); font-weight: 700;
       color: #20449B; font-size: 1.0625rem;
       margin-bottom: 18px; line-height: 1.3;
     }.zxb-lead .checklist{
@@ -11288,7 +11292,7 @@ function renderDataAnalyticsV7() {
       background: #F16529; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       margin-top: 1px; flex-shrink: 0;
-    }.zxb-lead .check-dot svg{ display: block; }.zxb-lead .roi-metrics-note{ font-size: 0.875rem; color: #606061; border-top: 1px solid #E4E7EC; padding-top: 14px; margin: 0; line-height: 1.6; }.zxb-lead .cta-block{ background: #20449B; padding: 72px 24px; text-align: center; }.zxb-lead .cta-inner{ max-width: 640px; margin: 0 auto; }.zxb-lead .cta-headline{ font-family: 'Funnel Sans', sans-serif; font-weight: 800; color: #ffffff; font-size: 1.875rem; line-height: 1.2; margin-bottom: 16px; }.zxb-lead .cta-body{ color: rgba(255,255,255,0.75); font-size: 1rem; line-height: 1.65; max-width: 540px; margin: 0 auto 28px; }.zxb-lead .cta-btn{
+    }.zxb-lead .check-dot svg{ display: block; }.zxb-lead .roi-metrics-note{ font-size: 0.875rem; color: #606061; border-top: 1px solid #E4E7EC; padding-top: 14px; margin: 0; line-height: 1.6; }.zxb-lead .cta-block{ background: #20449B; padding: 72px 24px; text-align: center; }.zxb-lead .cta-inner{ max-width: 640px; margin: 0 auto; }.zxb-lead .cta-headline{ font-family: var(--zx-font-sans); font-weight: 700; color: #ffffff; font-size: 1.875rem; line-height: 1.2; margin-bottom: 16px; }.zxb-lead .cta-body{ color: rgba(255,255,255,0.75); font-size: 1rem; line-height: 1.65; max-width: 540px; margin: 0 auto 28px; }.zxb-lead .cta-btn{
       display: inline-block; background: #F16529; color: #ffffff;
       font-family: 'Roboto', sans-serif; font-weight: 700; font-size: 1rem;
       padding: 14px 28px; border-radius: 6px; text-decoration: none;
@@ -11382,7 +11386,7 @@ function renderDataAnalyticsV7() {
               <path d="M73,110 Q90,97 107,110 Q90,123 73,110 Z"
                 fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linejoin="round"/>
               <circle cx="90" cy="110" r="4.5" fill="rgba(255,255,255,0.92)"/>
-              <text x="90"  y="164" text-anchor="middle" font-family="Funnel Sans, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff">See It</text>
+              <text x="90"  y="164" text-anchor="middle" font-family="Funnel Sans, Funnel Sans Fallback, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff">See It</text>
               <text x="90"  y="177" text-anchor="middle" font-family="Roboto, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.58)">Risk &#xB7; Gaps &#xB7; Data</text>
 
               <!-- Connector 1 → 2 -->
@@ -11397,7 +11401,7 @@ function renderDataAnalyticsV7() {
               <circle cx="240" cy="110" r="36" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
               <path d="M228,98 L240,110 L228,122" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M240,98 L252,110 L240,122" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="240" y="172" text-anchor="middle" font-family="Funnel Sans, sans-serif" font-size="11.5" font-weight="800" fill="#ffffff">Act On It</text>
+              <text x="240" y="172" text-anchor="middle" font-family="Funnel Sans, Funnel Sans Fallback, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff">Act On It</text>
               <text x="240" y="185" text-anchor="middle" font-family="Roboto, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.82)">AI Digital Workforce</text>
 
               <!-- Connector 2 → 3 -->
@@ -11411,7 +11415,7 @@ function renderDataAnalyticsV7() {
               <circle cx="390" cy="110" r="13" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.4"/>
               <path d="M383,110 L388,115 L397,105"
                 stroke="rgba(255,255,255,0.95)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="390" y="164" text-anchor="middle" font-family="Funnel Sans, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff">Done</text>
+              <text x="390" y="164" text-anchor="middle" font-family="Funnel Sans, Funnel Sans Fallback, sans-serif" font-size="11.5" font-weight="700" fill="#ffffff">Done</text>
               <text x="390" y="177" text-anchor="middle" font-family="Roboto, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.58)">TCM &#xB7; AWV &#xB7; Care Gaps</text>
 
               <!-- Capability pills — centered in 480px viewBox -->
