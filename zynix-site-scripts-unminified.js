@@ -1313,21 +1313,24 @@
   }
 
   // Breadcrumb (owner S3; DESIGN_SPEC §2.17, §3.7): always Home / {NAV section} / {page}. The section comes from the
-  // NAV section that holds the page (zxNavCurrent); the page label from its NAV item, else CUSTOMERS (case studies),
-  // else USE_CASES (use cases), else LINK_NAMES. Not rendered on the homepage, the section landing pages, the SMS and
-  // legal pages or the 404. No JSON-LD (schema unchanged).
+  // NAV section that holds the page (zxNavCurrent); the page label from USE_CASES for a use-case page, else its NAV
+  // item, else CUSTOMERS (case studies), else LINK_NAMES. A use-case page is named by its own title (its H1) wherever it
+  // is listed (zxLinkData), so the six that also sit in the Solutions menu use that title here too, not their shorter
+  // menu label (final QA r1). Not rendered on the homepage, the section landing pages, the SMS and legal pages or the
+  // 404. No JSON-LD (schema unchanged).
   function renderBreadcrumb(pagePath) {
     var p = String(pagePath == null ? zxPath() : pagePath).replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
     if (!p || ['/sms', '/sms-program', '/sms-consent', '/privacy-policy', '/terms-of-service'].indexOf(p) > -1) return '';
     var cur = zxNavCurrent(p);
     if (!cur.section || cur.landing) return '';
-    var q = cur.navPath, label = cur.item ? cur.item.label : '';
-    if (!label) Object.keys(CUSTOMERS).some(function (k) {
-      var c = CUSTOMERS[k]; if (c && c.caseStudy && (c.caseStudy === q || c.caseStudy === p)) { label = c.name; return true; } return false;
-    });
-    var uc = !label && typeof USE_CASES !== 'undefined' ? /^\/use-cases\/([a-z0-9-]+)$/.exec(q) : null;
+    var q = cur.navPath, label = '';
+    var uc = typeof USE_CASES !== 'undefined' ? /^\/use-cases\/([a-z0-9-]+)$/.exec(q) : null;
     if (uc) Object.keys(USE_CASES).some(function (k) {
       if (USE_CASES[k] && USE_CASES[k].slug === uc[1] && USE_CASES[k].title) { label = USE_CASES[k].title; return true; } return false;
+    });
+    if (!label && cur.item) label = cur.item.label;
+    if (!label) Object.keys(CUSTOMERS).some(function (k) {
+      var c = CUSTOMERS[k]; if (c && c.caseStudy && (c.caseStudy === q || c.caseStudy === p)) { label = c.name; return true; } return false;
     });
     if (!label) label = LINK_NAMES[q] || LINK_NAMES[p] || '';
     if (!label) return '';
@@ -3674,6 +3677,7 @@
 
     initMegaMenu(nav);
     initMobileMenu(nav, mobile);
+    zxSamePageLinks();   // in-page #links land below the fixed chrome, on every bundle page
 
     if (bar) {
       bar.querySelector('.zynix-announce-close').addEventListener('click', function () {
@@ -3960,6 +3964,70 @@
       r.section = id && byId[id] ? byId[id] : null;
     }
     return r;
+  }
+
+  // Same-page #fragment links on every bundle page: "#id" and "<this path>#id" in the page, the desktop panels and the
+  // mobile menu. webflow.js's scroll module takes every click on 'a[href*="#"]:not(.w-tab-link)' (delegated on document)
+  // and puts the target at the very top of the viewport, under the fixed chrome, then leaves focus on the link. This
+  // handles those clicks instead: the target lands 16px below the chrome (--zx-chrome-h, the same offset as the CSS
+  // scroll-margin), the hash is pushed and focus moves to the target (tabindex=-1 until it blurs; no second scroll).
+  // It sees the click first (capture phase) but never stops it, so the panel and mobile-menu close handlers and the
+  // analytics listener still run; the scroll happens once they have (after the mobile menu has dropped `inert`).
+  // webflow.js sits this one click out through the only exclusion its selector has, .w-tab-link, which is on the link
+  // only while the click is dispatched and is gone before the next frame. Left alone: the skip link (its own handler),
+  // the homepage links H's zxHomeAnchors binds, modified clicks, new-tab links, and targets that are missing or hidden.
+  var zxSamePageBound = false;
+  function zxSamePageLinks() {
+    if (zxSamePageBound || !window.addEventListener || !document.documentElement.closest) return;
+    zxSamePageBound = true;
+    var OPT_OUT = 'w-tab-link', pending = null;
+    var trim = function (p) { return String(p || '').replace(/\/+$/, ''); };
+    function hit(e) {
+      if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return null;
+      var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a || a.classList.contains('zynix-skip-nav') || a.classList.contains(OPT_OUT)) return null;
+      if ((a.getAttribute('target') || '_self') !== '_self' || !a.closest('.zynix-injected, .zynix-mega-nav, .zynix-mobile-menu')) return null;
+      var h = a.getAttribute('href'), i = h.indexOf('#');
+      if (i < 0 || i === h.length - 1 || (i > 0 && trim(h.slice(0, i)) !== trim(window.location.pathname))) return null;
+      var main = document.getElementById('main-content');
+      if (i === 0 && main && main.__zxHomeAnchors && a.closest('.zx-home-hero, .zx-hiw')) return null;   // H's own handler
+      var id;
+      try { id = decodeURIComponent(h.slice(i + 1)); } catch (err) { return null; }
+      var el = document.getElementById(id);
+      return el && el.getClientRects().length ? { a: a, el: el, id: id } : null;
+    }
+    function land(p) {
+      var el = p.el, root = document.documentElement;
+      var chrome = parseFloat(getComputedStyle(root).getPropertyValue('--zx-chrome-h')) || 0;
+      var top = Math.max(0, Math.round(el.getBoundingClientRect().top + (window.pageYOffset || root.scrollTop || 0) - chrome - 16));
+      var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      try { window.scrollTo({ top: top, behavior: still ? 'auto' : 'smooth' }); } catch (err) { window.scrollTo(0, top); }
+      if (window.location.hash !== '#' + p.id) { try { history.pushState(null, '', '#' + p.id); } catch (err) {} }
+      if (!el.hasAttribute('tabindex') && el.tabIndex < 0) {
+        el.setAttribute('tabindex', '-1');
+        el.addEventListener('blur', function onBlur() { el.removeAttribute('tabindex'); el.removeEventListener('blur', onBlur); });
+      }
+      // No ring around the whole section (as with the skip link, H's section links and webflow.js); the next Tab
+      // continues from here. Browsers without the focusVisible option show their ring, which is harmless.
+      try { el.focus({ preventScroll: true, focusVisible: false }); } catch (err) {}
+    }
+    function finish() {
+      var p = pending;
+      pending = null;
+      if (!p) return;
+      p.a.classList.remove(OPT_OUT);
+      land(p);
+    }
+    window.addEventListener('click', function (e) {
+      finish();   // a previous click that never reached window (a later listener stopped it) and no frame since
+      var p = hit(e);
+      if (!p) return;
+      e.preventDefault();
+      p.a.classList.add(OPT_OUT);
+      pending = p;
+      requestAnimationFrame(finish);   // fallback for a click that is stopped before it reaches window
+    }, true);
+    window.addEventListener('click', finish);
   }
 
   // ── Shared: Agent Detail Page Template ──
@@ -14060,6 +14128,46 @@ function renderDataAnalyticsV7() {
     w.addEventListener('keydown', function (e) {
       if ((e.key === 'Escape' || e.key === 'Esc') && isOpen()) { e.preventDefault(); close(true); }
     });
+
+    // Keyboard focus never ends up under the launcher (§7.3: it never overlaps a CTA; WCAG 2.4.11): when a control outside
+    // the chat and the fixed chrome has keyboard focus where the launcher covers it, the page scrolls just enough to clear
+    // it. Checked a frame after each keyboard focus move (after the browser's own focus scroll) and when the launcher
+    // appears on a phone. Pointer focus is left alone (a scroll between press and release would lose the click).
+    var byPointer = false;
+    function clearOfLauncher() {
+      var t = document.activeElement;
+      if (byPointer || w.hidden || !t || t === document.body || !t.getBoundingClientRect || w.contains(t)) return;
+      if (t.closest && t.closest('.zynix-mega-nav, .zynix-mobile-menu, .zynix-announcement-bar, .zynix-skip-nav')) return;
+      var l = launcher.getBoundingClientRect(), r = t.getBoundingClientRect(), gap = 8;
+      if (!l.width || !r.width || r.right <= l.left - gap || r.left >= l.right + gap || r.bottom <= l.top - gap || r.top >= l.bottom + gap) return;
+      var chrome = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--zx-chrome-h')) || 0;
+      var dy = Math.min(Math.ceil(r.bottom - l.top) + 12, Math.floor(r.top - chrome - 16));   // never push its top under the chrome
+      if (dy > 0) window.scrollBy(0, dy);
+    }
+    document.addEventListener('pointerdown', function () { byPointer = true; }, true);
+    document.addEventListener('keydown', function () { byPointer = false; }, true);
+    document.addEventListener('focusin', function () { if (!byPointer) requestAnimationFrame(clearOfLauncher); });
+
+    // Phones (<768px): on the first screen the launcher would sit on the hero's product panel (§7.3), so it shows only
+    // once the page is scrolled more than about one screen, and whenever the guide is open or holds focus. An
+    // IntersectionObserver on the chrome's scroll sentinel, no scroll listener (§7.4): the sentinel leaves a root
+    // stretched one screen upward once the page has scrolled ~one screen. Wider viewports and browsers without the
+    // observer always show it.
+    var phone = window.matchMedia ? window.matchMedia('(max-width: 767.98px)') : null;
+    var sentinel = document.querySelector('.zx-scroll-sentinel');
+    if (phone && sentinel && window.IntersectionObserver) {
+      var past = false;
+      var sync = function () {
+        var show = !phone.matches || past || isOpen() || w.contains(document.activeElement);
+        if (w.hidden !== show) return;
+        w.hidden = !show;
+        if (show) requestAnimationFrame(clearOfLauncher);   // it may appear over the control that keyboard focus just scrolled to
+      };
+      new IntersectionObserver(function (entries) { past = !entries[entries.length - 1].isIntersecting; sync(); }, { rootMargin: '100% 0px 0px 0px' }).observe(sentinel);
+      if (phone.addEventListener) phone.addEventListener('change', sync); else if (phone.addListener) phone.addListener(sync);
+      w.addEventListener('focusout', function () { setTimeout(sync, 0); });   // closed and left while back on the first screen
+      sync();
+    }
   }
 
   // Initialize chatbot after page loads
