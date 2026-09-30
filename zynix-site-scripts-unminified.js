@@ -7547,16 +7547,25 @@ function renderAboutV7() {
   var F = SITE_FACTS, co = F.company, pb = zxCustomer('pbaco'), eh = zxCustomer('eternalhealth');
   var html = '';
 
-  html += renderHero({ preset: 'company', eyebrow: 'About Zynix AI',
+  // Registry facts (COPY_DECK §7.6 row 102) in the hero's "At a glance" aside, so the right column of the first screen is
+  // not empty (final QA m-P5a). The aside has no source slot, so their source line (§2.8) is added inside it; the wrapper
+  // .zx-co-hero scopes the page CSS. If the hero ever renders without the aside, the sourced stat row returns under it.
+  var factKeys = ['patients', 'states', 'ehrSystems', 'ehrInstances'], factSources = [];
+  factKeys.forEach(function (k) { if (factSources.indexOf(F.stats[k].source) < 0) factSources.push(F.stats[k].source); });
+  var hero = renderHero({ preset: 'company', eyebrow: 'About Zynix AI',
     title: 'Physician-led, built by <span class="zx-co-nowrap">value-based</span> care operators',
     lead: 'Our co-founder and CEO, Jay Chowdappa, MD, led ACOs that generated $300M+ in shared savings. We built Zynix to close the gap between knowing and doing.',
     primary: { label: 'Meet the leadership', href: '#leadership' },
-    secondary: { label: 'Contact us', href: '/contact' } });
-
-  // Registry facts, with their source line (COPY_DECK §7.6 row 102).
-  html += renderSection({ className: 'zx-co-facts', labelledBy: 'zx-co-facts-title' },
-    '<h2 class="zx-visually-hidden" id="zx-co-facts-title">Zynix AI at a glance</h2>' +
-    renderStatRow([{ fact: 'patients' }, { fact: 'states' }, { fact: 'ehrSystems' }, { fact: 'ehrInstances' }]));
+    secondary: { label: 'Contact us', href: '/contact' },
+    media: { type: 'glance', title: 'At a glance', label: 'Zynix AI at a glance',
+      items: factKeys.map(function (k) { return { label: F.stats[k].label, value: F.stats[k].value }; }) } });
+  if (hero.indexOf('</aside>') > -1) {
+    html += '<div class="zx-co-hero">' + hero.replace('</aside>', '<p class="zx-co-glance__source">Source: ' + factSources.join('; ') + '.</p></aside>') + '</div>';
+  } else {
+    html += hero + renderSection({ className: 'zx-co-facts', labelledBy: 'zx-co-facts-title' },
+      '<h2 class="zx-visually-hidden" id="zx-co-facts-title">Zynix AI at a glance</h2>' +
+      renderStatRow(factKeys.map(function (k) { return { fact: k }; })));
+  }
 
   // Story, told by the founder's own words from the PBACO release.
   html += renderSection({ id: 'story', rule: true, className: 'zx-co-story' },
