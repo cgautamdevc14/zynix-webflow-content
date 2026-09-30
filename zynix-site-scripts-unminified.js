@@ -827,6 +827,7 @@
   }
 
   function injectJSONLD(pagePath, seo) {
+    var ldForeign = [].slice.call(document.head.querySelectorAll('script[type="application/ld+json"]'));   // Webflow's blocks (see the end)
     // Organization (every page)
     var orgSchema = {
       '@context':'https://schema.org','@type':'Organization',
@@ -1063,6 +1064,74 @@
       sc.textContent = JSON.stringify(s);
       document.head.appendChild(sc);
     });
+
+    // Webflow's page-settings JSON-LD and the zynixjsonlduniversal head script still carry retired wording and pre-redesign
+    // names until Gautamdev's dashboard job is published (DESIGN_SPEC §4 and §8.0, launch precondition 3). For readers that
+    // run JavaScript, those head blocks are brought to the job list's `replacement` state in place: every JSON-LD item that
+    // `rd_checks --jobs` lists against rd/final 3c68937 (claims and drift; not the A2P pages, not the /resources-faq FAQPage
+    // that zynixfaqschemadedupe removes) plus the site-wide Organization description; the rows are in
+    // shots/s2final3/ld_rewrite_rows.json. A key is the FNV-1a hash and length of "@type|property|old string", so the old
+    // wording never ships in the bundle and a string only matches in its own place. A value is 'd' (this page's meta
+    // description), 't' (its title without " | Zynix AI"), 'T' (its title), 'o' (the Organization description above) or a
+    // literal. Only string values change, never the structure, and only in head blocks the bundle did not write. A string
+    // Webflow no longer serves no longer matches, so this retires itself as the job is published. The raw HTML (no-JS
+    // title, meta, og/twitter and JSON-LD) is untouched: that part of the job stays Gautamdev's. If the job rules change,
+    // regenerate the map (shots/s2final3/genmap.mjs), or a rewritten block can hide a new item from the regenerated list.
+    var LD_RETIRED = {
+      'qejtkk.38':'t', '100dw7c.179':'d', '1s3mz11.29':'T', '112mvay.179':'d', '1n2qrzk.324':'o', '189zn8f.63':'T',
+      '91ih5o.230':'d', '10k8g73.65':'t', 'zg935u.269':'d', '1paqlol.66':'t', 'unql5g.166':'d', 'ysl6zr.37':'t', 'hf7ixs.51':'t',
+      '23rdfl.196':'d', '1iqdsea.55':'T', '12gi3pt.167':'d', 'acvdbj.32':'t', 'nslspc.147':'d', '4ytqzz.41':'T',
+      'ujn3se.120':'d', 'skbtn1.43':'T', 'waetmp.110':'d', '62y8ao.35':'T', 'p18qkt.121':'d', 'gt4wov.38':'T', '19w8l4l.136':'d',
+      'yadk6d.42':'T', '5la3ne.127':'d', '1bfqbmr.44':'T', '1al73pd.127':'d', 'ox9cu9.51':'T', '1t9l4h5.123':'d',
+      '12d4um9.39':'T', '15adp16.137':'d', '1dv2pz5.40':'T', 'mbsz1c.177':'d', 'cgqzxw.36':'T', '9vvej6.160':'d',
+      'elsgm0.21':'T', '103koa7.181':'d', '1rjx2zy.83':'T', '1mm3ymp.214':'d', '1unpagq.32':'T', '1h1owbo.171':'d',
+      '19d5q8d.86':'T', 'rvqlpu.248':'d', '137we64.35':'T', '114yb24.176':'d', 'or2z2w.90':'T', 'pah6fa.225':'d',
+      '19543of.81':'T', '1qev8rq.192':'d', 'cyxx2q.87':'T', '14wzwdz.222':'d', '158ey4i.40':'T', 'hwqkaf.177':'d',
+      '1qw613v.148':'d', '13chkl5.43':'t', '14cqw6b.193':'d', '1ie93ad.44':'t', '8raev3.195':'d', '6gaaso.52':'t',
+      'k66umn.189':'d', '1oxcuan.47':'t', '53oge2.175':'d', '7zetyj.29':'T', '1voyjv8.153':'d', '1gz2skd.33':'t',
+      '21jsr2.183':'d', 'jzlvbc.50':'After-hours intake', '1hfsqcr.32':'t', '158ctkt.140':'d', '1fa36ro.40':'t',
+      'tc7xea.160':'d', '1gfdiit.37':'t', 'm78cve.204':'d', 'b4hhbz.24':'t', 'fye40w.145':'d', '1fthed7.173':'d',
+      '14w155d.101':'Will AI Make Healthcare More Expensive? Only If It Optimizes the Wrong Workflows', '1g3ixzg.97':'t',
+      '1wt8d7y.173':'d', 'ac6u3e.32':'t', 'lrnzoi.140':'d', '17x3wu7.37':'t', 'pt9iza.141':'d', 'e0jd2.42':'t', '39ikl4.147':'d',
+      '1rve7um.41':'t', 'dcsfs8.142':'d', '1cybrlt.45':'T', 'zpa9v6.176':'d', 'cdyqiu.53':'t', '1sipnw2.187':'d',
+      'blmlkf.29':'t', 'xexlc9.182':'d', '5bbnt8.58':'t', 'p80srt.171':'d', '1y103t1.33':'t', '11qjok2.157':'d',
+      '1tbs98s.40':'t', 'lqe5oy.172':'d', '5gdqc4.131':'o'
+    };
+    var ldValues = { d: seo.desc, t: String(seo.title || '').split('|')[0].trim(), T: seo.title, o: orgSchema.description };
+    function ldKey(s) {
+      s = s.replace(/\s+/g, ' ').trim();
+      for (var h = 0x811c9dc5, i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 0x01000193);
+      return (h >>> 0).toString(36) + '.' + s.length;
+    }
+    function ldRewrite(node, type, prop) {   // objects and arrays; true when a string changed
+      var changed = false;
+      if (!Array.isArray(node) && node['@type']) type = [].concat(node['@type']).join(',');
+      Object.keys(node).forEach(function(k) {
+        var v = node[k], p = Array.isArray(node) ? prop : k, r;
+        if (typeof v === 'string') {
+          r = LD_RETIRED[ldKey(type + '|' + p + '|' + v)];
+          r = r && (ldValues.hasOwnProperty(r) ? ldValues[r] : r);
+          if (r && r !== v) { node[k] = r; changed = true; }
+        } else if (v && typeof v === 'object' && ldRewrite(v, type, p)) changed = true;
+      });
+      return changed;
+    }
+    function ldFix(sc) {
+      var j;
+      if (!sc || sc.nodeType !== 1 || sc.tagName !== 'SCRIPT' || !/ld\+json/i.test(sc.type || '')) return;
+      try { j = JSON.parse(sc.textContent); } catch (e) { return; }
+      if (j && typeof j === 'object' && ldRewrite(j, '', '')) sc.textContent = JSON.stringify(j);
+    }
+    function ldFixAll() { try { ldForeign.forEach(ldFix); } catch (e) {} }
+    ldFixAll();
+    // zynixjsonlduniversal writes its @graph again 1.5s after DOMContentLoaded: rewrite each block the head scripts add.
+    if (window.MutationObserver) {
+      var ldWatch = new MutationObserver(function(list) {
+        try { list.forEach(function(m) { for (var i = 0, n; i < m.addedNodes.length; i++) { n = m.addedNodes[i]; if (n.tagName === 'SCRIPT') { ldForeign.push(n); ldFix(n); } } }); } catch (e) {}
+      });
+      ldWatch.observe(document.head, { childList: true });
+      setTimeout(function() { ldWatch.disconnect(); ldFixAll(); }, 15000);
+    }
   }
 
   // ── Cross-Link Renderers ──
