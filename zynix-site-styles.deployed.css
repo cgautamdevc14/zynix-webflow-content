@@ -3328,7 +3328,10 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 
 /* Hero media: an illustrative panel inside a product frame (the panel carries its own "Sample data" chip).
    The kit's brand symbol is near-invisible on the light panel bar, so it is hidden here as on P1 and P2 frames. */
-.zx-sol-frame { width:100%; max-width:640px; justify-self:center; }
+/* Section frames (audience "In practice") fill the split's media column, as on every other family; the hero frame keeps
+   its 640px cap where the hero stacks (768-1023px). */
+.zx-sol-frame { width:100%; }
+.zx-sol-frame--hero { max-width:640px; justify-self:center; }
 .zx-sol-frame .zynix-ui__brand img { display:none; }
 .zx-sol-frame .zynix-ui__steps .zynix-ui__step { padding-block:11px; }
 /* §2.10 / §7.3: phones get the hero text only, as on the agents pages (the hero must stay within 1.2 screens at 390).
@@ -3387,11 +3390,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 @media (min-width:768px) { .zx-sol-links--3 { grid-template-columns:repeat(2, minmax(0,1fr)); } }
 @media (min-width:1024px) { .zx-sol-links--3 { grid-template-columns:repeat(3, minmax(0,1fr)); } }
 
-/* Where it fits */
-.zx-sol-fit__grid { display:grid; gap:var(--zx-space-10); }
-@media (min-width:1024px) { .zx-sol-fit__grid { grid-template-columns:repeat(2, minmax(0,1fr)); column-gap:var(--zx-space-12); } }
+/* Where it fits: the section head beside the products list (the other use cases are in the related block) */
 .zx-sol-fit__title { margin:0 0 var(--zx-space-4); font-size:var(--zx-fs-h4); line-height:1.35; letter-spacing:0; }
-.zx-sol-fit__all { margin-top:var(--zx-space-4); }
+@media (max-width:1023.98px) { .zx-sol-fit .zynix-split { row-gap:var(--zx-space-2); } }
 
 /* Audience proof strip */
 .zx-sol-proof .zynix-logo-row__list { grid-template-columns:repeat(3, minmax(0,1fr)); row-gap:var(--zx-space-5); }
