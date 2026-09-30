@@ -2495,9 +2495,8 @@
   //  V8 Zynix maintains connectors as standards and vendor APIs change (/integrations) → remove the step
   //  V9 the four deployment steps, their owners and inputs (/platform #deployment, linked from /security and /company-zynixllm);
   //     no durations → back to "agreed during scoping"
-  // Held until Gautamdev confirms wording (final QA): a "Data use and AI" group on /security (training use of customer data,
-  // hosting provider and region, SSO/SAML, audit logging, subprocessors). The page renders SITE_FACTS.governance dataUse and
-  // auditTrail there as soon as S2 flips them to confirmed; the other three need facts entries first.
+  // Held until Gautamdev supplies wording (final QA): training use, hosting and region, SSO/SAML, audit logging and
+  // subprocessors on /security. renderSecurityV7 renders each once S2 confirms SITE_FACTS.governance[key], with no P1 change.
 
   // A zynix-ui sample panel inside a product frame (the panel carries its own chip, so the frame does not add one).
   // zxPlatPanel returns hero frame options (trimmed below 480px to keep the hero within 1.2 screens, §2.10).
@@ -7676,17 +7675,24 @@ function renderSecurityV7() {
         renderChip(s.chip[0], s.chip[1]) + '</div><h3 class="zynix-card__title">' + s.title + '</h3><p class="zynix-card__body">' + s.body + '</p></article>';
     }));
 
-  // [VERIFY] V1 (data protection), V2 (identity and access), V3 (testing), V5 (the rest): every row below is P1 register.
-  // "Data use and AI" leads the list once SITE_FACTS.governance dataUse or auditTrail is confirmed (held today, so no row renders).
-  var dataUse = zxGovernance(['dataUse', 'auditTrail']);
+  // [VERIFY] V1 (data protection), V2 (identity and access), V3 (testing), V5 (the rest): P1 register. No cadence or scope is
+  // invented for "periodically" / "across key systems" (final QA). Held topics join their group once confirmed.
+  var topics = [['dataUse', 'Data use and AI', 'Is customer data used to train AI models?'], ['auditTrail', 'Data use and AI', 'Are agent actions logged?'],
+    ['hosting', 'Data protection', 'Where is customer data hosted?'], ['sso', 'Identity and access', 'Do you support single sign-on (SSO/SAML)?'],
+    ['subprocessors', 'Vendors and subprocessors', 'Which subprocessors handle customer data?']].reduce(function (out, h) {   // S2 has still to add hosting, sso, subprocessors
+      return out.concat(zxGovernance([h[0]]).map(function (g) { return { group: h[1], q: h[2], a: g.text }; }));
+    }, []);
+  var held = function (group) { return topics.filter(function (f) { return f.group === group; }).map(function (f) { return f.a; }); };
   html += zxPlatSplit('program', ['Security program', 'How we protect customer data', 'A summary for procurement and compliance reviewers. The detail is in the SOC 2 report.'],
-    zxPlatRows((dataUse.length ? [{ title: 'Data use and AI', points: dataUse.map(function (g) { return g.text; }) }] : []).concat([
-      { title: 'Data protection', points: ['Encryption in transit and at rest across platform components', 'Access based on least privilege', 'Production separated from non-production environments'] },
-      { title: 'Identity and access', points: ['Role-based access controls across systems', 'Multi-factor authentication for all administrative access', 'Periodic access reviews'] },
+    zxPlatRows([
+      { title: 'Data use and AI', points: held('Data use and AI') },
+      { title: 'Data protection', points: ['Encryption in transit and at rest across platform components', 'Access based on least privilege', 'Production separated from non-production environments'].concat(held('Data protection')) },
+      { title: 'Identity and access', points: ['Role-based access controls across systems', 'Multi-factor authentication for all administrative access', 'Periodic access reviews'].concat(held('Identity and access')) },
       { title: 'Monitoring and incident response', points: ['Continuous security monitoring across key systems', 'A documented incident response plan with defined escalation paths', 'Customer notification obligations defined in agreements'] },
       { title: 'Testing and vulnerabilities', points: ['Third-party penetration testing, conducted periodically', 'Vulnerability scanning with prioritized remediation'] },
-      { title: 'Business continuity', points: ['Backup and recovery procedures for critical systems, tested periodically', 'Business continuity planning for operational resilience'] }
-    ]), { split: true }), { surface: 'subtle' });
+      { title: 'Business continuity', points: ['Backup and recovery procedures for critical systems, tested periodically', 'Business continuity planning for operational resilience'] },
+      { title: 'Vendors and subprocessors', points: held('Vendors and subprocessors') }
+    ].filter(function (r) { return r.points.length; }), { split: true }), { surface: 'subtle' });
 
   html += renderSection({ id: 'ai-governance', className: 'zx-plat-governance' },
     renderSectionHead('AI governance', 'How agents and models are kept in check', 'Two rules apply wherever agents or ZynScribe are used.',
@@ -7710,7 +7716,7 @@ function renderSecurityV7() {
     { q: 'What is your HITRUST status?', a: 'HITRUST CSF certification is in progress, following a completed readiness assessment.' },
     { q: 'Do you support customer security assessments?', a: 'Yes. We support procurement and security reviews as part of every evaluation. Write to ' + SITE_FACTS.company.email + ' to send a questionnaire.' },
     { q: 'Do you run penetration testing and vulnerability management?', a: 'Yes. Third-party penetration testing is conducted periodically, with results available to customers under NDA, and vulnerability scanning with prioritized remediation is part of ongoing security operations.' }   // [VERIFY] V3
-  ].concat(zxGovernance(['dataUse']).map(function (g) { return { q: 'How is customer data used?', a: g.text }; })), 'Security questions');
+  ].concat(topics), 'Security questions');
 
   html += renderCTA('Working through a security review?', 'We support questionnaires, documentation requests and BAA execution in every evaluation.', null,
     { primary: { label: req.label, href: req.href }, secondary: { label: 'Request a demo', href: CALENDLY } });
