@@ -54,7 +54,7 @@
       "*"
     ]
   },
-  "styleAttributes": 1016,
+  "styleAttributes": 985,
   "undefinedVars": [],
   "smokeOverflow390": {
     "/": 0,
@@ -67,11 +67,11 @@
   "weight": {
     "ceilings": {
       "cssBr4": 62576,
-      "totalBr4": 415170,
+      "totalBr4": 391009,
       "cssImports": 0
     },
     "builtCeilings": {
-      "totalBr4": 348048,
+      "totalBr4": 325145,
       "cssBr4": 42740
     },
     "targets": {
@@ -157,6 +157,35 @@
           }
         },
         "reason": "Final polish round (Q change, run by the release engineer after the round's LAST merge, 1473d53): --write-weight had nothing to lower and the merged tree failed totalBr4 by 2,512 B, because rd/qpol ratcheted the ceilings to bb6a765 + 2,048 while the ten polish branches were in flight. Accepted growth vs bb6a765, all owner-local and far under DESIGN_SPEC 7.4's 15 KB raw per stream (br4 total / raw JS+CSS): P4 +771 (1,606+763), P5 +733 (892+1,478), P1 +660 (609+1,107), S1 +554 (0+1,656), P3 +550 (1,468+96), S3 +255 (1,417+0), P6 +208 (514+402), P7 +173 (153+0), S2 +146 (1,165+0), H -163 (226+0), Q 0; merged +4,560 br4 (+8,050 JS, +5,502 CSS raw). Every ceiling set to measured + 2,048."
+      },
+      {
+        "date": "2026-09-30",
+        "commit": "f97693b",
+        "from": {
+          "ceilings": {
+            "cssBr4": 62576,
+            "totalBr4": 415170,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 348048,
+            "cssBr4": 42740
+          },
+          "styleAttributes": 1016
+        },
+        "to": {
+          "ceilings": {
+            "cssBr4": 62576,
+            "totalBr4": 391009,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 325145,
+            "cssBr4": 42740
+          },
+          "styleAttributes": 985
+        },
+        "reason": "Dead-code deletion (rd/deadcode, 2026-09-30): 35 unreachable functions and 26 shadowed or redirected routes keys removed; bundle 1,483,577 -> 1,386,049 B raw, deploy build 345,994 -> 323,097 B brotli-4. No open PRs at the time of the run."
       }
     ]
   },
@@ -170,11 +199,6 @@
       "by": "orchestrator (launch step D; Gautamdev asked for the changes to be made)",
       "date": "2026-09-30",
       "note": "Kept: verbatim \"About PBACO\" boilerplate inside the reprinted Apr 14 2026 Business Wire release, already live on production. [VERIFY] Gautamdev: keep verbatim or trim and link to Business Wire."
-    },
-    "dead-code": {
-      "by": "orchestrator (launch step D; Gautamdev asked for the changes to be made)",
-      "date": "2026-09-30",
-      "note": "All unreachable functions (35) and every figure the item lists are signed off for launch: reachability is verified on every run, so no visitor sees them, and production ships the same code today. Follow-up: delete them with their shadowed routes keys (ownership exception) in a separate PR."
     },
     "a2p:carrier-sprint": {
       "by": "orchestrator (launch step D; Gautamdev asked for the changes to be made)",
