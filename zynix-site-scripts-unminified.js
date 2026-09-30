@@ -3127,9 +3127,11 @@
   // ── PAGE: Contact ──
   function renderROI() {
     // Every assumption is editable, has a default and says where the number comes from (DESIGN_SPEC §6, PG-T1).
-    // The defaults are placeholders, not Zynix results, so no estimate shows until the visitor changes a number
-    // (data-zx-roi-when="empty" | "ready"; initROICalculator swaps them on the first input).
-    var v = ZX_RES_ROI_DEFAULTS, dash = '\u2014';
+    // The defaults are placeholders, not Zynix results, so no estimate shows until the visitor changes a number. Until then
+    // the card's headline is the one prompt (in the total's own slot, so it stays in view while editing), the three lines show
+    // their labels only and the in-form running total is hidden (data-zx-roi-when="ready"; initROICalculator reveals them and
+    // drops .is-empty on the first input). No dashes: an empty state must not read as a failed load (final QA m-P6b).
+    var v = ZX_RES_ROI_DEFAULTS;
     var slider = function (s) {
       var pct = Math.round((v[s.key] - s.min) / (s.max - s.min) * 100);
       return '<div class="zx-res-roi__slider">' +
@@ -3148,8 +3150,8 @@
         '<p class="zynix-field__hint" id="roi-' + a.id + '-src"><span class="zx-res-roi__src">Source:</span> ' + a.src + '</p></div>';
     };
     var line = function (key, subKey, label, sub) {
-      return '<div class="zx-res-roi__line"><dt>' + label + '</dt><dd class="zx-res-roi__line-value" data-zx-roi-out="' + key + '">' + dash + '</dd>' +
-        '<dd class="zx-res-roi__line-sub" data-zx-roi-when="ready" hidden><span data-zx-roi-out="' + subKey + '">' + dash + '</span> ' + sub + '</dd></div>';
+      return '<div class="zx-res-roi__line"><dt>' + label + '</dt><dd class="zx-res-roi__line-value" data-zx-roi-out="' + key + '" data-zx-roi-when="ready" hidden></dd>' +
+        '<dd class="zx-res-roi__line-sub" data-zx-roi-when="ready" hidden><span data-zx-roi-out="' + subKey + '"></span> ' + sub + '</dd></div>';
     };
     var sliders = [
       { id: 'lives', key: 'lives', label: 'Attributed lives', min: 1000, max: 500000, step: 1000, unit: 'lives', hint: 'Patients or members in your value-based contracts.' },
@@ -3172,18 +3174,18 @@
         { id: 'readmit-cost', key: 'readmitCost', label: 'Cost per readmission', unit: '$', step: 500, src: 'your claims data.' }
       ] }
     ];
-    var peek = '<p class="zx-res-roi__peek"><span data-zx-roi-when="empty">Change any number to see an illustrative estimate.</span>' +
-      '<span data-zx-roi-when="ready" hidden>Illustrative estimate so far: <strong data-zx-roi-out="total">' + dash + '</strong> a year. <a href="#roi-results">See the breakdown</a></span></p>';
+    // One running total below 1024px, after the population sliders (the long assumptions list sits between it and the card);
+    // the card follows the assumptions directly, so a second one there only repeated it. Hidden at >= 1024 (sticky card).
+    var peek = '<p class="zx-res-roi__peek" data-zx-roi-when="ready" hidden>Illustrative estimate so far: <strong data-zx-roi-out="total"></strong> a year. <a href="#roi-results">See the breakdown</a></p>';
     var inputs = '<fieldset class="zx-res-roi__set"><legend class="zx-res-roi__legend">Your population</legend>' + sliders.map(slider).join('') + peek + '</fieldset>' +
       '<fieldset class="zx-res-roi__set"><legend class="zx-res-roi__legend">Your assumptions</legend>' +
       '<p class="zx-res-roi__intro">Every default below is a placeholder. Replace it with your own numbers.</p>' +
       groups.map(function (g) { return '<div class="zx-res-roi__group"><p class="zx-res-roi__group-title">' + g.title + '</p><div class="zx-res-roi__fields">' + g.items.map(field).join('') + '</div></div>'; }).join('') +
-      peek + '</fieldset>';
+      '</fieldset>';
     var results = '<div class="zx-res-roi__results" id="roi-results" role="group" aria-labelledby="roi-results-title">' +
       '<h2 class="zx-res-roi__results-title" id="roi-results-title">Illustrative estimate</h2>' +
-      '<p class="zx-res-roi__total"><span class="zx-res-roi__total-value" data-zx-roi-out="total">' + dash + '</span>' +
-      '<span class="zx-res-roi__total-label" data-zx-roi-when="empty">Change any number to see an estimate.</span>' +
-      '<span class="zx-res-roi__total-label" data-zx-roi-when="ready" hidden>estimated value a year, about <span data-zx-roi-out="perLife">' + dash + '</span> per attributed life</span></p>' +
+      '<p class="zx-res-roi__total is-empty"><span class="zx-res-roi__total-value" data-zx-roi-out="total">Change any number to see the estimate.</span>' +
+      '<span class="zx-res-roi__total-label" data-zx-roi-when="ready" hidden>estimated value a year, about <span data-zx-roi-out="perLife"></span> per attributed life</span></p>' +
       '<dl class="zx-res-roi__lines">' +
         line('tcm', 'tcmN', 'TCM payments from added contacts', 'more completed TCM episodes a year') +
         line('gap', 'gapN', 'Value of closed care gaps', 'gaps closed') +
@@ -3201,7 +3203,8 @@
       '</ol></div>';
     return renderHero({ preset: 'resource', eyebrow: 'ROI calculator', title: 'Model the impact on your population',
         lead: 'Enter your panel size, discharges and open gaps, adjust every assumption, and see an illustrative estimate. It’s a planning tool, not a guarantee.',
-        primary: { label: 'Start the calculator', href: '#roi-calculator' }, secondary: { label: 'Book a 30-minute analysis', href: SITE_FACTS.demo.href } }) +
+        // One hero action: the calculator starts right under the hero, so a "Start the calculator" jump added nothing (final QA m-P6a).
+        primary: { label: 'Book a 30-minute analysis', href: SITE_FACTS.demo.href } }) +
       '<section class="zynix-section zynix-section--compact zynix-section--flush-top zx-res-roi" id="roi-calculator" aria-label="ROI calculator" data-zx-roi>' +
         '<div class="zynix-container"><div class="zx-res-roi__grid"><div class="zx-res-roi__inputs">' + inputs + '</div>' + results + how + '</div></div>' +
       '</section>' +
@@ -12051,6 +12054,7 @@ function renderDataAnalyticsV7() {
       if (ready) return;
       ready = true;
       Array.prototype.forEach.call(root.querySelectorAll('[data-zx-roi-when]'), function (el) { el.hidden = el.getAttribute('data-zx-roi-when') !== 'ready'; });
+      Array.prototype.forEach.call(root.querySelectorAll('.zx-res-roi__total.is-empty'), function (el) { el.classList.remove('is-empty'); });
     };
     Array.prototype.forEach.call(inputs, function (el) { el.addEventListener('input', function () { reveal(); calc(true); }); });
     calc(false);

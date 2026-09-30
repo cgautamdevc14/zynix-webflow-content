@@ -3257,6 +3257,8 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-res-roi__total { display:flex; flex-direction:column; gap:var(--zx-space-2); margin:var(--zx-space-4) 0 var(--zx-space-6); }
 .zx-res-roi__total-value { font:var(--zx-fw-semibold) var(--zx-fs-stat)/1 var(--zx-font-sans); letter-spacing:-.02em; font-variant-numeric:tabular-nums lining-nums; color:var(--zx-text); }
 .zx-res-roi__total-label { font-size:var(--zx-fs-sm); line-height:1.45; color:var(--zx-text-secondary); }
+/* Empty state (before the first change): the prompt takes the total's slot as the card's headline, so nothing reads as a failed load. */
+.zx-res-roi__total.is-empty .zx-res-roi__total-value { font:var(--zx-fw-semibold) var(--zx-fs-h3)/var(--zx-lh-snug) var(--zx-font-sans); letter-spacing:var(--zx-tr-h3); font-variant-numeric:normal; }
 .zx-res-roi__lines { margin:0; border-top:1px solid var(--zx-border); }
 .zx-res-roi__line { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:2px var(--zx-space-4); padding:var(--zx-space-3) 0; border-bottom:1px solid var(--zx-border); }
 .zx-res-roi__line dt { font-size:var(--zx-fs-sm); line-height:1.4; color:var(--zx-text); }
@@ -3296,7 +3298,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-res-compare .zynix-table-wrap .zynix-compare-table { table-layout:fixed; }
 .zx-res-compare .zynix-table-wrap .zynix-compare-table thead th:first-child { width:22%; }
 .zx-res-compare__note { margin:var(--zx-space-5) 0 0; font-size:13px; line-height:1.5; color:var(--zx-text-muted); }
-.zx-res-fit { display:grid; gap:var(--zx-grid-gap); align-items:start; }
+.zx-res-fit { display:grid; gap:var(--zx-grid-gap); align-items:stretch; }   /* side-by-side fit cards share one height (final QA n3) */
 .zx-res-fit__col { box-sizing:border-box; padding:clamp(20px, 16px + 1vw, 28px); border-radius:var(--zx-radius-lg); background:var(--zx-surface); border:1px solid var(--zx-border); }
 .zx-res-fit__col--us { border-color:var(--zx-blue-100); background:var(--zx-surface-brand); }
 .zx-res-fit__title { margin:0 0 var(--zx-space-4); font-size:var(--zx-fs-h4); line-height:1.35; font-weight:var(--zx-fw-semibold); }
