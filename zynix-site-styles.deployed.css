@@ -1,22 +1,9 @@
-/*
- * DEPLOYED stylesheet — this is the file www.zynix.ai actually loads.
- *
- * Content = zynix-site-styles.css exactly as it was at commit 809946a (2026-04-07),
- * which the site head was pinned to, plus one change: the "Hide Webflow Template
- * Default Content" rule is scoped with :where(html:not(.wf-native)) so pages built
- * natively in Webflow (blog hub, CMS blog posts) are not hidden. :where() adds zero
- * specificity, so every other page matches exactly as before.
- *
- * NOTE: zynix-site-styles.css at HEAD is a newer, minified version (commit 4c75993,
- * 2026-04-14) that has never been deployed. Do not assume the two are the same.
- */
-/* ── ZYNIX AI — Clinical Clarity Light Theme ── */
-/* Brand: ZynBlue #20449B, ZynOrange #F16529 */
-/* Inspired by Navina + Tempus — premium healthcare SaaS */
-
-@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@400;500;600;700&display=swap');
-
-/* ── CSS Custom Properties ── */
+/* DEPLOYED stylesheet: www.zynix.ai loads this file through jsDelivr @main (zynix-site-styles.css at HEAD was never deployed).
+   Legacy rules first, then the ZX blocks (DESIGN_SPEC §1.8). Legacy rules whose .zynix-* classes no longer exist in the bundle,
+   the Webflow pages or the head scripts were removed on 2026-09-29 (final QA perf round), with the legacy comments.
+   Funnel Sans 400–700 is declared inline: the former Google Fonts @import chained a second render-blocking request. */
+@font-face{font-family:'Funnel Sans';font-style:normal;font-weight:400 700;font-display:swap;src:url(https://fonts.gstatic.com/s/funnelsans/v3/OpNIno8Dg9bX6Bsp3Wq69Tp8fhjoyU7dDCA.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Funnel Sans';font-style:normal;font-weight:400 700;font-display:swap;src:url(https://fonts.gstatic.com/s/funnelsans/v3/OpNIno8Dg9bX6Bsp3Wq69TpyfhjoyU7d.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root {
   --z-bg: #FFFFFF;
   --z-bg-alt: #F5F7FA;
@@ -49,14 +36,10 @@
   --z-shadow-xl: 0 20px 60px rgba(0,0,0,0.12), 0 8px 20px rgba(0,0,0,0.06);
   --z-font: 'Funnel Sans', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
 }
-
-/* ── Global Light Background ── */
 body {
   background: var(--z-bg);
   color: var(--z-text);
 }
-
-/* ── Inner Page Hero ── */
 .zynix-inner-hero {
   padding: 160px 0 80px;
   background: var(--z-bg);
@@ -75,40 +58,6 @@ body {
   position: absolute; bottom: -30%; left: -10%; width: 500px; height: 500px;
   background: radial-gradient(circle, rgba(241,101,41,0.04) 0%, transparent 70%);
   pointer-events: none;
-}
-.zynix-inner-hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  position: relative; z-index: 1;
-}
-.zynix-inner-hero-text .zynix-tag {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: var(--z-blue);
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  padding: 6px 16px;
-  background: var(--z-blue-light);
-  border-radius: 20px;
-}
-.zynix-inner-hero-text h1 {
-  font-size: clamp(2.25rem, 4vw, 3.25rem);
-  font-weight: 700;
-  line-height: 1.1;
-  margin: 0 0 20px;
-  letter-spacing: -1.5px;
-  color: var(--z-text);
-}
-.zynix-inner-hero-text p {
-  font-size: 1.0625rem;
-  line-height: 1.7;
-  color: var(--z-text-secondary);
-  margin: 0 0 32px;
-  max-width: 540px;
 }
 .zynix-hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
 .zynix-btn-primary {
@@ -141,37 +90,7 @@ body {
   transition: all 0.25s;
 }
 .zynix-btn-secondary:hover { border-color: var(--z-blue); color: var(--z-blue) !important; background: var(--z-blue-light); }
-
-/* ── Hero Trust Badges ── */
-.zynix-hero-trust {
-  display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap;
-}
-.zynix-hero-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-size: 12px; font-weight: 500; color: var(--z-text-muted);
-  padding: 6px 12px;
-  background: var(--z-bg-alt);
-  border: 1px solid var(--z-border);
-  border-radius: 20px;
-  letter-spacing: 0.3px;
-}
-.zynix-inner-hero .zynix-hero-badge {
-  color: rgba(255,255,255,0.9);
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.25);
-}
-
-.zynix-inner-hero-img img {
-  width: 100%;
-  border-radius: 20px;
-  border: 1px solid var(--z-border);
-  box-shadow: var(--z-shadow-xl);
-}
-
-/* Container */
 .zynix-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-/* Section Basics — CSS:175–178 replaced in place by DESIGN_SPEC §1.4 (zero-specificity fallbacks; every explicit section class wins) */
 :where(.zynix-inner-page section) { padding-block:var(--zx-section-y); }
 :where(.zynix-inner-page > section:nth-child(even):not(.zynix-section, .zynix-cta-section, .zynix-footer, .zynix-inner-hero, .zynix-hero, .zynix-homepage-hero)) { background:var(--zx-surface-subtle); }
 .zynix-section-sub {
@@ -182,8 +101,6 @@ body {
   text-align: center;
   line-height: 1.7;
 }
-
-/* Section Tags */
 .zynix-inner-page .zynix-tag {
   display: inline-block;
   font-size: 12px;
@@ -202,23 +119,7 @@ body {
   margin: 0 0 16px;
   letter-spacing: -0.5px;
 }
-
-/* ── Problem Section ── */
 .zynix-problem-section { background: var(--z-bg-alt); }
-.zynix-problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
-.zynix-problem-card {
-  background: var(--z-bg-card);
-  padding: 36px 28px;
-  border-radius: var(--z-radius);
-  border: 1px solid var(--z-border);
-  transition: all 0.25s;
-}
-.zynix-problem-card:hover { transform: translateY(-3px); box-shadow: var(--z-shadow-md); border-color: var(--z-blue); }
-.zynix-problem-icon { font-size: 28px; margin-bottom: 14px; }
-.zynix-problem-card h3 { font-size: 18px; font-weight: 600; color: var(--z-text); margin: 0 0 10px; }
-.zynix-problem-card p { font-size: 14px; color: var(--z-text-secondary); line-height: 1.7; margin: 0; }
-
-/* ── Feature Cards Grid ── */
 .zynix-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .zynix-feature-card {
   background: var(--z-bg-card);
@@ -228,14 +129,8 @@ body {
   transition: all 0.25s;
 }
 .zynix-feature-card:hover { transform: translateY(-3px); box-shadow: var(--z-shadow-md); border-color: var(--z-blue); }
-.zynix-feature-icon { font-size: 24px; margin-bottom: 12px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--z-blue-light); border-radius: 10px; }
 .zynix-feature-card h3 { font-size: 17px; font-weight: 600; color: var(--z-text); margin: 0 0 8px; }
 .zynix-feature-card p { font-size: 14px; color: var(--z-text-secondary); line-height: 1.7; margin: 0; }
-.zynix-feature-metric { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--z-border); }
-.zynix-feature-metric span { font-size: 24px; font-weight: 700; color: var(--z-blue); }
-.zynix-feature-metric small { display: block; font-size: 13px; color: var(--z-text-muted); margin-top: 4px; }
-
-/* ── Metrics Bar ── */
 .zynix-metrics-bar {
   display: flex; justify-content: center; gap: 60px;
   padding: 60px 24px;
@@ -245,8 +140,6 @@ body {
 .zynix-metric { text-align: center; }
 .zynix-metric-value { display: block; font-size: 36px; font-weight: 700; color: #fff; }
 .zynix-metric-label { display: block; font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 6px; }
-
-/* ── Architecture Cards (Zynix OS) ── */
 .zynix-arch-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 48px; }
 .zynix-arch-card {
   background: var(--z-bg-card);
@@ -260,8 +153,6 @@ body {
 .zynix-arch-num { font-size: 13px; font-weight: 700; color: var(--z-blue); margin-bottom: 10px; letter-spacing: 1px; }
 .zynix-arch-card h3 { font-size: 20px; font-weight: 600; color: var(--z-text); margin: 0 0 8px; }
 .zynix-arch-card p { font-size: 14px; color: var(--z-text-secondary); line-height: 1.7; margin: 0; }
-
-/* ── Flywheel (Zynix OS) ── */
 .zynix-flywheel-section { background: var(--z-bg-alt); }
 .zynix-flywheel-grid { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 48px; flex-wrap: wrap; }
 .zynix-flywheel-step {
@@ -279,86 +170,6 @@ body {
 }
 .zynix-flywheel-step p { font-size: 14px; color: var(--z-text); font-weight: 600; margin: 0; }
 .zynix-flywheel-arrow { font-size: 20px; color: var(--z-text-muted); font-weight: 400; }
-
-/* ── Data Layers (Data Platform) ── */
-.zynix-data-layers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 48px; }
-.zynix-data-layer {
-  background: var(--z-bg-card);
-  padding: 32px 28px;
-  border-radius: var(--z-radius);
-  border: 1px solid var(--z-border);
-  transition: all 0.25s;
-}
-.zynix-data-layer:hover { box-shadow: var(--z-shadow-md); border-color: var(--z-blue); }
-.zynix-data-layer h3 { font-size: 18px; font-weight: 600; color: var(--z-text); margin: 0 0 10px; }
-.zynix-data-layer p { font-size: 14px; color: var(--z-text-secondary); line-height: 1.7; margin: 0; }
-
-/* ── Analytics Tracks ── */
-.zynix-track {
-  background: var(--z-bg-card);
-  border-radius: var(--z-radius);
-  border: 1px solid var(--z-border);
-  margin-bottom: 20px;
-  overflow: hidden;
-  transition: all 0.25s;
-}
-.zynix-track:hover { box-shadow: var(--z-shadow-md); }
-.zynix-track-header {
-  display: flex; align-items: center; gap: 16px;
-  padding: 24px 28px;
-  background: var(--z-blue);
-  color: #fff;
-}
-.zynix-track-num {
-  display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center;
-  background: rgba(255,255,255,0.2); border-radius: 8px; font-weight: 700; font-size: 16px; flex-shrink: 0;
-}
-.zynix-track-header h3 { font-size: 18px; font-weight: 600; margin: 0; color: #fff; }
-.zynix-track-body { padding: 24px 28px; }
-.zynix-track-body ul { list-style: none; padding: 0; margin: 0; }
-.zynix-track-body li {
-  padding: 10px 0;
-  border-bottom: 1px solid var(--z-border);
-  font-size: 14px;
-  color: var(--z-text-secondary);
-  padding-left: 24px;
-  position: relative;
-}
-.zynix-track-body li::before { content: '\2713'; position: absolute; left: 0; color: var(--z-success); font-weight: 600; }
-.zynix-track-body li:last-child { border-bottom: 0; }
-
-/* ── AI Agent Cards ── */
-.zynix-agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
-.zynix-agent-card {
-  background: var(--z-bg-card);
-  padding: 28px 24px;
-  border-radius: var(--z-radius);
-  border: 1px solid var(--z-border);
-  transition: all 0.25s;
-}
-.zynix-agent-card:hover { transform: translateY(-3px); box-shadow: var(--z-shadow-md); border-color: var(--z-blue); }
-.zynix-agent-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-.zynix-agent-icon { font-size: 24px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--z-peach); border-radius: 10px; }
-.zynix-agent-header h3 { font-size: 18px; font-weight: 600; color: var(--z-text); margin: 0; }
-.zynix-agent-card p { font-size: 14px; color: var(--z-text-secondary); line-height: 1.7; margin: 0 0 14px; }
-.zynix-agent-metrics { display: flex; gap: 8px; flex-wrap: wrap; }
-.zynix-agent-metrics span {
-  font-size: 12px; font-weight: 600; color: var(--z-blue);
-  padding: 5px 10px; background: var(--z-blue-light); border-radius: 6px; border: 1px solid rgba(32,68,155,0.12);
-}
-
-/* ── Orchestration Flow ── */
-.zynix-orchestration-section { background: var(--z-bg-alt); }
-.zynix-orch-flow { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 48px; flex-wrap: wrap; }
-.zynix-orch-step {
-  background: var(--z-bg-card); padding: 24px 20px; border-radius: var(--z-radius); border: 1px solid var(--z-border); text-align: center; min-width: 130px;
-  box-shadow: var(--z-shadow-sm);
-}
-.zynix-orch-step span { display: block; font-size: 24px; margin-bottom: 8px; }
-.zynix-orch-step p { font-size: 13px; color: var(--z-text); font-weight: 600; margin: 0; }
-.zynix-orch-arrow { font-size: 20px; color: var(--z-text-muted); font-weight: 400; }
-
-/* ── Care Plan Cards ── */
 .zynix-careplan-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 48px; }
 .zynix-careplan-card {
   background: var(--z-bg-card);
@@ -377,8 +188,6 @@ body {
 }
 .zynix-careplan-card h4 { font-size: 16px; font-weight: 600; color: var(--z-text); margin: 0 0 6px; }
 .zynix-careplan-card p { font-size: 13px; color: var(--z-text-secondary); line-height: 1.6; margin: 0; }
-
-/* ── Workflow Timeline ── */
 .zynix-workflow-timeline { margin-top: 48px; padding-left: 24px; border-left: 2px solid var(--z-border); }
 .zynix-wf-step { display: flex; gap: 20px; margin-bottom: 28px; position: relative; }
 .zynix-wf-dot {
@@ -388,8 +197,6 @@ body {
 }
 .zynix-wf-content h4 { font-size: 16px; font-weight: 600; color: var(--z-text); margin: 0 0 6px; }
 .zynix-wf-content p { font-size: 14px; color: var(--z-text-secondary); line-height: 1.7; margin: 0; }
-
-/* ── Comparison Grid (ZynixLLM) ── */
 .zynix-compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
 .zynix-compare-card {
   padding: 36px 28px;
@@ -412,8 +219,6 @@ body {
 .zynix-compare-bad li::before { content: '\2717'; position: absolute; left: 0; color: #DC2626; font-weight: 600; }
 .zynix-compare-good li::before { content: '\2713'; position: absolute; left: 0; color: var(--z-success); font-weight: 600; }
 .zynix-compare-card li:last-child { border-bottom: 0; }
-
-/* ── Safety Cards (ZynixLLM) ── */
 .zynix-safety-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
 .zynix-safety-card {
   background: var(--z-bg-card); padding: 28px 20px; border-radius: var(--z-radius); border: 1px solid var(--z-border);
@@ -427,8 +232,6 @@ body {
 }
 .zynix-safety-card h4 { font-size: 15px; font-weight: 600; color: var(--z-text); margin: 0 0 8px; }
 .zynix-safety-card p { font-size: 13px; color: var(--z-text-secondary); line-height: 1.6; margin: 0; }
-
-/* ── CTA Section ── */
 .zynix-cta-section {
   padding: 100px 24px;
   background: var(--z-blue);
@@ -467,8 +270,6 @@ body {
   border-color: rgba(255,255,255,0.5);
   background: rgba(255,255,255,0.1);
 }
-
-/* ── Footer ── */
 .zynix-footer {
   background: var(--z-bg-dark);
   color: rgba(255,255,255,0.6);
@@ -484,38 +285,8 @@ body {
   padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);
 }
 .zynix-footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.55); margin: 0; }
-
-/* ── Fade-in animations ── */
 .fade-in-up { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .fade-in-up.visible { opacity: 1; transform: translateY(0); }
-
-/* ── About Quote ── */
-.zynix-about-quote { max-width: 700px; margin: 48px auto 0; text-align: center; }
-.zynix-about-quote blockquote {
-  font-size: 18px; font-style: italic; color: var(--z-text-secondary); line-height: 1.8;
-  border-left: 3px solid var(--z-blue); padding-left: 24px; margin: 0; text-align: left;
-}
-
-/* ── Contact Page ── */
-.zynix-contact-section { padding: 100px 0; }
-.zynix-contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; }
-.zynix-contact-info h3 { font-size: 22px; font-weight: 600; color: var(--z-text); margin: 0 0 24px; }
-.zynix-contact-item { margin-bottom: 20px; }
-.zynix-contact-item strong { font-size: 13px; color: var(--z-text-muted); text-transform: uppercase; letter-spacing: 1px; }
-.zynix-contact-item p { font-size: 16px; color: var(--z-text); margin: 4px 0 0; }
-.zynix-contact-divider { height: 1px; background: var(--z-border); margin: 32px 0; }
-.zynix-expect-item { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-.zynix-expect-item span {
-  display: inline-flex; width: 28px; height: 28px; align-items: center; justify-content: center;
-  background: var(--z-blue); color: #fff; border-radius: 50%; font-size: 12px; font-weight: 600; flex-shrink: 0;
-}
-.zynix-expect-item p { font-size: 15px; color: var(--z-text-secondary); margin: 0; }
-.zynix-contact-form-wrap {
-  background: var(--z-bg-card); padding: 40px; border-radius: var(--z-radius-lg); border: 1px solid var(--z-border);
-  box-shadow: var(--z-shadow-md);
-}
-.zynix-contact-form-wrap h3 { font-size: 22px; font-weight: 600; color: var(--z-text); margin: 0 0 24px; }
-.zynix-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .zynix-form-group { margin-bottom: 16px; }
 .zynix-form-group label { display: block; font-size: 14px; font-weight: 500; color: var(--z-text); margin-bottom: 6px; }
 .zynix-form-group input, .zynix-form-group select, .zynix-form-group textarea {
@@ -537,8 +308,6 @@ body {
   background: var(--z-bg);
   color: var(--z-text);
 }
-
-/* ── FAQ Accordion ── */
 .zynix-faq-section { padding: 100px 0; }
 .zynix-faq-list { max-width: 800px; margin: 0 auto; }
 .zynix-faq-item {
@@ -555,70 +324,11 @@ body {
 .zynix-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
 .zynix-faq-item.open .zynix-faq-a { max-height: 300px; }
 .zynix-faq-a p { padding: 0 24px 20px; font-size: 14px; color: var(--z-text-secondary); line-height: 1.7; margin: 0; }
-
-/* ── Blog Cards ── */
-.zynix-blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-.zynix-blog-card {
-  background: var(--z-bg-card); padding: 28px; border-radius: var(--z-radius); border: 1px solid var(--z-border);
-  transition: all 0.25s; cursor: pointer;
-}
-.zynix-blog-card:hover { transform: translateY(-3px); box-shadow: var(--z-shadow-md); border-color: var(--z-blue); }
-.zynix-blog-cat {
-  display: inline-block; font-size: 11px; font-weight: 600; color: var(--z-blue);
-  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;
-  padding: 3px 10px; background: var(--z-blue-light); border-radius: 4px;
-}
-.zynix-blog-card h3 { font-size: 17px; font-weight: 600; color: var(--z-text); margin: 0 0 10px; line-height: 1.4; }
-.zynix-blog-date { font-size: 13px; color: var(--z-text-muted); }
-.zynix-blog-featured {
-  grid-column: 1 / -1;
-  background: linear-gradient(135deg, var(--z-blue-light) 0%, #fff 100%);
-  border-color: var(--z-blue);
-  border-left: 4px solid var(--z-blue);
-}
-.zynix-blog-featured h3 { font-size: 22px; }
-.zynix-blog-post-section { padding: 60px 0 80px; }
-.zynix-blog-post-content p { margin: 0 0 20px; }
-
-/* ── Case Study Cards ── */
-.zynix-case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.zynix-case-card {
-  background: var(--z-bg-card); padding: 28px; border-radius: var(--z-radius); border: 1px solid var(--z-border);
-  transition: all 0.25s;
-}
-.zynix-case-card:hover { transform: translateY(-3px); box-shadow: var(--z-shadow-md); border-color: var(--z-blue); }
-.zynix-case-seg {
-  display: inline-block; font-size: 11px; font-weight: 600; color: var(--z-blue);
-  text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px;
-  background: var(--z-blue-light); border-radius: 6px; margin-bottom: 12px;
-}
-.zynix-case-card h3 { font-size: 17px; font-weight: 600; color: var(--z-text); margin: 0 0 14px; }
-.zynix-case-metric span { font-size: 28px; font-weight: 700; color: var(--z-blue); display: block; }
-.zynix-case-metric small { font-size: 13px; color: var(--z-text-secondary); margin-top: 4px; display: block; }
-
-/* ── Legal Pages ── */
 .zynix-legal-section { padding: 100px 0; }
 .zynix-legal-content { max-width: 800px; margin: 0 auto; }
 .zynix-legal-content h2 { font-size: 22px; font-weight: 600; color: var(--z-text); margin: 40px 0 12px; text-align: left; }
 .zynix-legal-content h2:first-child { margin-top: 0; }
 .zynix-legal-content p { font-size: 15px; color: var(--z-text-secondary); line-height: 1.8; margin: 0 0 16px; }
-
-/* ── Customer Chips (Solution Pages) ── */
-.zynix-customers-section { text-align: center; }
-.zynix-customer-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 32px; }
-.zynix-customer-chip {
-  padding: 10px 20px;
-  background: var(--z-bg-card);
-  border: 1px solid var(--z-border);
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--z-text);
-  transition: all 0.25s;
-}
-.zynix-customer-chip:hover { border-color: var(--z-blue); box-shadow: var(--z-shadow-sm); background: var(--z-blue-light); }
-
-/* ── Mega Menu Navigation ── */
 .zynix-mega-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
   display: flex; align-items: center; justify-content: space-between;
@@ -632,8 +342,6 @@ body {
 .zynix-nav-logo {
   display: flex; align-items: center; gap: 10px; text-decoration: none;
 }
-
-/* ── Announcement Banner ── */
 .zynix-announcement-bar {
   background: #20449B;
   color: #fff;
@@ -649,7 +357,6 @@ body {
   right: 0;
   z-index: 1002;
 }
-/* Push nav down when banner is visible */
 .zynix-announcement-bar a {
   color: #fff;
   text-decoration: underline;
@@ -683,10 +390,6 @@ body {
   font-size: 10px; transition: transform 0.2s; color: var(--z-text-muted);
 }
 .zynix-nav-dropdown:hover .zynix-nav-trigger .chevron { transform: rotate(180deg); }
-
-/* ── Nav Icon Styles ── */
-
-/* ── Nav Item Descriptions ── */
 .zynix-mega-col a small {
   display: block;
   font-size: 13px;
@@ -695,8 +398,6 @@ body {
   margin-top: 3px;
   line-height: 1.3;
 }
-
-/* ── Mega Panel (Products, Solutions - multi-column) ── */
 .zynix-mega-panel-inner {
   background: rgba(255,255,255,0.98);
   backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
@@ -727,19 +428,15 @@ body {
 .zynix-mega-col a strong {
   font-weight: 600; font-size: 14px; color: var(--z-text);
 }
-/* Active page in nav */
 .zynix-mega-col a.active {
   color: var(--z-blue); background: var(--z-blue-light);
 }
-
 .zynix-nav-actions { display: flex; align-items: center; gap: 16px; }
 .zynix-nav-contact {
   color: var(--z-text-secondary); font-size: 15px; font-weight: 500;
   text-decoration: none; transition: color 0.2s;
 }
 .zynix-nav-contact:hover { color: var(--z-text); }
-
-/* ── Mobile hamburger ── */
 .zynix-nav-hamburger {
   display: none; background: none; border: none; cursor: pointer;
   width: 32px; height: 32px; position: relative;
@@ -752,8 +449,6 @@ body {
 .zynix-nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(3px, 3px); }
 .zynix-nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .zynix-nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(3px, -3px); }
-
-/* ── Mobile menu overlay ── */
 .zynix-mobile-menu {
   display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
   background: rgba(255,255,255,0.98); z-index: 9998;
@@ -783,8 +478,6 @@ body {
   background: var(--z-accent); color: #fff !important; border-radius: 8px;
   font-size: 16px; font-weight: 600; text-decoration: none; margin-top: 24px;
 }
-
-/* ── Use Case Page ── */
 .zynix-workflow-steps { margin-top: 48px; }
 .zynix-wf-step-card {
   background: var(--z-bg-card); padding: 28px; border-radius: var(--z-radius);
@@ -805,8 +498,6 @@ body {
   display: inline-block; font-size: 11px; font-weight: 600; color: #fff;
   background: var(--z-blue); padding: 3px 8px; border-radius: 4px; margin-top: 8px;
 }
-
-/* ── KPI chips ── */
 .zynix-kpi-grid { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; justify-content: center; }
 .zynix-kpi-chip {
   background: var(--z-bg-card); border: 1px solid var(--z-border); border-radius: var(--z-radius);
@@ -816,8 +507,6 @@ body {
 .zynix-kpi-chip:hover { border-color: var(--z-blue); box-shadow: var(--z-shadow-sm); }
 .zynix-kpi-chip strong { display: block; font-size: 14px; font-weight: 700; color: var(--z-blue); }
 .zynix-kpi-chip span { font-size: 13px; color: var(--z-text-secondary); }
-
-/* ── Story walkthrough ── */
 .zynix-story-block {
   background: var(--z-bg-alt);
   border: 1px solid var(--z-border); border-radius: var(--z-radius-lg);
@@ -825,10 +514,6 @@ body {
 }
 .zynix-story-block h3 { font-size: 18px; font-weight: 600; color: var(--z-text); margin: 0 0 14px; }
 .zynix-story-block p { font-size: 15px; color: var(--z-text-secondary); line-height: 1.8; margin: 0; }
-
-/* ── Agent Hub Link Cards ── */
-
-/* ── Comparison Table ── */
 .zynix-compare-table { width: 100%; border-collapse: collapse; margin-top: 32px; }
 .zynix-compare-table th {
   padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 1px;
@@ -843,136 +528,18 @@ body {
 .zynix-compare-table td:first-child { font-weight: 600; color: var(--z-text); }
 .zynix-compare-table td:nth-child(2) { text-align: center; background: var(--z-blue-light); color: var(--z-success); font-weight: 600; }
 .zynix-compare-table td:nth-child(3) { text-align: center; color: var(--z-text-secondary); }
-
-/* ── Careers / Placeholder ── */
 .zynix-placeholder-section { text-align: center; padding: 120px 24px; }
 .zynix-placeholder-section h2 { font-size: 32px; font-weight: 600; color: var(--z-text); margin: 0 0 16px; }
 .zynix-placeholder-section p { font-size: 16px; color: var(--z-text-secondary); max-width: 500px; margin: 0 auto 32px; }
-
-/* ── Homepage Hero ── */
-.zynix-homepage-hero {
-  padding: 140px 0 80px;
-  background: var(--z-bg);
-  color: var(--z-text);
-  position: relative;
-  overflow: hidden;
-}
-.zynix-homepage-hero::before {
-  content: '';
-  position: absolute; top: -30%; right: -10%; width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(32,68,155,0.05) 0%, transparent 60%);
-  pointer-events: none;
-}
-.zynix-homepage-hero::after {
-  content: '';
-  position: absolute; bottom: -20%; left: -5%; width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(241,101,41,0.03) 0%, transparent 60%);
-  pointer-events: none;
-}
-.zynix-homepage-hero .zynix-inner-hero-grid { position: relative; z-index: 1; }
-.zynix-homepage-hero h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 700; line-height: 1.08; margin: 0 0 20px; letter-spacing: -1.5px; color: var(--z-text); position: static !important; }
-.zynix-homepage-hero p { font-size: 1.0625rem; line-height: 1.7; color: var(--z-text-secondary); max-width: 540px; }
-
-/* ── Customer Trust Strip ── */
-.zynix-trust-strip {
-  background: var(--z-bg-alt);
-  border-top: 1px solid var(--z-border);
-  border-bottom: 1px solid var(--z-border);
-  padding: 28px 0;
-  overflow: hidden;
-}
-.zynix-trust-label {
-  text-align: center;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: var(--z-text-muted);
-  margin: 0 0 16px;
-  text-transform: uppercase;
-}
-.zynix-trust-marquee {
-  overflow: hidden;
-  position: relative;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
-.zynix-trust-track {
-  display: flex;
-  gap: 48px;
-  animation: marqueeScroll 40s linear infinite;
-  white-space: nowrap;
-  width: max-content;
-}
-.zynix-trust-track span {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--z-text-muted);
-  letter-spacing: 0.5px;
-  flex-shrink: 0;
-}
 @keyframes marqueeScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
-/* ── Crisis Section ── */
-.zynix-crisis-section {
-  padding: 100px 0;
-  background: var(--z-bg);
-  text-align: center;
-}
-.zynix-crisis-section .zynix-metrics-bar {
-  margin-top: 48px;
-}
-
-/* ── Comparison Section ── */
-
-/* ── Results / Flywheel Sections ── */
-.zynix-results-section {
-  padding: 100px 0;
-  background: var(--z-blue);
-  color: #fff;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.zynix-results-section::before {
-  content: '';
-  position: absolute; top: -50%; right: -20%; width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(241,101,41,0.12) 0%, transparent 60%);
-  pointer-events: none;
-}
-.zynix-results-section .zynix-tag { color: rgba(255,255,255,0.8); }
-.zynix-results-section h2 { color: #fff !important; }
-.zynix-results-section .zynix-metric-value { color: #fff; }
-.zynix-results-section .zynix-metric-label { color: rgba(255,255,255,0.65); }
-
 .zynix-flywheel-section {
   padding: 100px 0;
   background: var(--z-bg);
   text-align: center;
 }
-
-.zynix-solutions-section {
-  padding: 100px 0;
-  background: var(--z-bg-alt);
-  text-align: center;
-}
-
-/* ── Card Links ── */
-.zynix-card-link {
-  display: inline-block;
-  margin-top: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--z-blue);
-  text-decoration: none;
-}
-.zynix-card-link:hover { text-decoration: underline; color: var(--z-accent); }
-
-/* ── Related Content Sections ── */
-
-/* ── Breadcrumb ── */
 .zynix-breadcrumb {
   padding: 12px 0;
   font-size: 13px;
@@ -983,64 +550,33 @@ body {
   text-decoration: none;
 }
 .zynix-breadcrumb a:hover { color: var(--z-blue); text-decoration: underline; }
-
-/* ── Screenshot Gallery ── */
-
-/* ── Gradient Accent Borders ── */
-
-/* ── Glow Effects (subtler for light theme) ── */
-
-/* ── Scroll animations ── */
-
-/* ── RESPONSIVE ── */
 @media (max-width: 991px) {
-  .zynix-inner-hero-grid { grid-template-columns: 1fr; gap: 40px; }
-  .zynix-inner-hero-text h1 { font-size: 36px; }
-  .zynix-problem-grid { grid-template-columns: 1fr; }
   .zynix-feature-grid { grid-template-columns: repeat(2, 1fr); }
-  .zynix-agents-grid { grid-template-columns: repeat(2, 1fr); }
   .zynix-arch-grid { grid-template-columns: 1fr; }
   .zynix-safety-grid { grid-template-columns: repeat(2, 1fr); }
   .zynix-metrics-bar { gap: 32px; flex-wrap: wrap; }
   .zynix-compare-grid { grid-template-columns: 1fr; }
-  .zynix-contact-grid { grid-template-columns: 1fr; }
-  .zynix-blog-grid { grid-template-columns: 1fr; }
-  .zynix-case-grid { grid-template-columns: repeat(2, 1fr); }
   .zynix-mega-nav { padding: 0 20px; }
   .zynix-nav-items, .zynix-nav-actions .zynix-nav-contact { display: none; }
   .zynix-nav-hamburger { display: flex; }
   .zynix-wf-step-card { flex-direction: column; }
-  .zynix-homepage-hero h1 { font-size: 36px; }
-  .zynix-roi-calculator { grid-template-columns: 1fr; }
-  .zynix-testimonials-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 767px) {
   .zynix-inner-hero { padding: 100px 0 60px; }
-  .zynix-inner-hero-text h1 { font-size: 30px; }
   :where(.zynix-inner-page section) { padding: 70px 0; }
   .zynix-inner-page section > .zynix-container > h2 { font-size: 26px; }
   .zynix-feature-grid { grid-template-columns: 1fr; }
-  .zynix-agents-grid { grid-template-columns: 1fr; }
   .zynix-careplan-grid { grid-template-columns: 1fr; }
   .zynix-safety-grid { grid-template-columns: 1fr; }
   .zynix-hero-btns { flex-direction: column; }
-  .zynix-flywheel-arrow, .zynix-orch-arrow { display: none; }
-  .zynix-flywheel-grid, .zynix-orch-flow { flex-direction: column; }
+  .zynix-flywheel-arrow { display: none; }
+  .zynix-flywheel-grid { flex-direction: column; }
   .zynix-metrics-bar { flex-direction: column; gap: 24px; padding: 40px 24px; }
   .zynix-cta-section h2 { font-size: 26px; }
-  .zynix-contact-grid { grid-template-columns: 1fr; }
-  .zynix-form-row { grid-template-columns: 1fr; }
-  .zynix-case-grid { grid-template-columns: 1fr; }
-  .zynix-blog-grid { grid-template-columns: 1fr; }
   .zynix-kpi-grid { flex-direction: column; align-items: center; }
-  .zynix-homepage-hero { padding: 100px 0 60px; }
-  .zynix-homepage-hero h1 { font-size: 30px; }
-  .zynix-trust-track { gap: 32px; }
   .zynix-compare-table { font-size: 12px; }
   .zynix-compare-table th, .zynix-compare-table td { padding: 10px 12px; }
 }
-
-/* ── Hide Webflow Template Default Content ── */
 :where(html:not(.wf-native)) body > .w-nav,
 :where(html:not(.wf-native)) body > .navbar,
 :where(html:not(.wf-native)) body > [data-collapse="medium"],
@@ -1050,68 +586,13 @@ body {
 :where(html:not(.wf-native)) body > .w-footer,
 :where(html:not(.wf-native)) body > section:not(.zynix-inner-page *):not(.zynix-homepage-hero):not(.zynix-inner-hero):not(.zynix-cta-section):not(.zynix-footer):not([class*="zynix"]),
 :where(html:not(.wf-native)) .w-container:not([class*="zynix"]),
-:where(html:not(.wf-native)) .hero-section:not([class*="zynix"]),
+:where(html:not(.wf-native)) .hero-section:not([class*="zynix"]):not(.zynix-injected *),
 [data-wf-page]:where(:not(.wf-native)) > div:not(.zynix-inner-page):not(.zynix-mega-nav):not(.zynix-mobile-menu) {
   display: none !important;
 }
-
-/* ── Image Quality Improvements ── */
-.zynix-inner-hero-img img {
-  width: 100%;
-  max-width: 560px;
-  height: auto;
-  border-radius: 20px;
-  border: 1px solid var(--z-border);
-  box-shadow: var(--z-shadow-xl);
-  object-fit: cover;
-}
-.zynix-feature-icon img,
-.zynix-agent-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* ── ROI Calculator ── */
-.zynix-roi-section { padding: 100px 0; }
-.zynix-roi-calculator { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 48px; background: #fff; border: 1px solid var(--z-border); border-radius: 20px; padding: 40px; box-shadow: var(--z-shadow-md); }
-.zynix-roi-inputs { display: flex; flex-direction: column; gap: 28px; }
-.zynix-roi-input-group label { font-size: 14px; font-weight: 600; color: var(--z-text); display: block; margin-bottom: 10px; }
 .zynix-roi-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #e5e7eb; outline: none; cursor: pointer; }
 .zynix-roi-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--z-blue); cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
 .zynix-roi-slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--z-blue); cursor: pointer; border: 2px solid #fff; }
-.zynix-roi-value { font-size: 22px; font-weight: 700; color: var(--z-blue); margin-top: 8px; }
-.zynix-roi-results { background: var(--z-bg-alt); border-radius: 16px; padding: 32px; }
-.zynix-roi-results h3 { font-size: 18px; font-weight: 700; color: var(--z-text); margin: 0 0 24px; }
-.zynix-roi-result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.zynix-roi-result { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid var(--z-border); }
-.zynix-roi-number { display: block; font-size: 28px; font-weight: 800; color: var(--z-blue); margin-bottom: 4px; line-height: 1.1; }
-.zynix-roi-label { display: block; font-size: 13px; color: var(--z-text-secondary); font-weight: 500; line-height: 1.4; }
-
-/* ── Testimonials Section ── */
-.zynix-testimonials-section { padding: 100px 0; background: var(--z-bg-dark); }
-.zynix-testimonials-section .zynix-container { text-align: center; }
-.zynix-testimonials-section .zynix-tag { color: var(--z-accent); background: rgba(196,75,22,0.12); border-color: rgba(196,75,22,0.3); }
-.zynix-testimonials-section h2 { color: #fff !important; }
-.zynix-testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; text-align: left; }
-.zynix-testimonial-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 28px; }
-.zynix-testimonial-stars { color: #F59E0B; font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
-.zynix-testimonial-quote { font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.8); margin: 0 0 20px; font-style: italic; }
-.zynix-testimonial-author strong { display: block; font-size: 14px; font-weight: 700; color: #fff; }
-.zynix-testimonial-author span { display: block; font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; }
-
-/* ── CTA Section Extra ── */
-
-/* ── Footer Compliance Badges ── */
-
-/* ── AI Chat Widget: replaced by the ZX chrome block (§3.6) ── */
-
-/* ══════════════════════════════════════════════════════════════
-   iPHONE / MOBILE-FIRST OPTIMIZATION
-   Targets: 375px, 390px, 393px, 414px, 430px
-   ══════════════════════════════════════════════════════════════ */
-
-/* ── iOS Safe Areas ── */
 @supports (padding: env(safe-area-inset-bottom)) {
   .zynix-inner-page {
     padding-left: env(safe-area-inset-left);
@@ -1124,18 +605,13 @@ body {
     padding-bottom: calc(100px + env(safe-area-inset-bottom));
   }
 }
-
-/* ── Global touch & iOS fixes ── */
 @media (max-width: 480px) {
-  /* Prevent iOS zoom on input focus (must be ≥16px) */
   input, select, textarea,
   .zynix-form-group input,
   .zynix-form-group select,
   .zynix-form-group textarea {
     font-size: 16px !important;
   }
-
-  /* Touch optimization */
   a, button,
   .zynix-btn-primary,
   .zynix-btn-secondary,
@@ -1144,8 +620,6 @@ body {
   .zynix-faq-q {
     -webkit-tap-highlight-color: transparent;
   }
-
-  /* Enforce 48px min tap targets (Apple HIG = 44px, we use 48 for comfort) */
   .zynix-btn-primary,
   .zynix-btn-secondary,
   .zynix-nav-cta,
@@ -1155,13 +629,9 @@ body {
     align-items: center;
     justify-content: center;
   }
-
-  /* ── Container: 20px side padding ── */
   .zynix-container {
     padding: 0 20px;
   }
-
-  /* ── Navigation: compact 64px height ── */
   .zynix-mega-nav {
     height: 64px;
     padding: 0 16px;
@@ -1179,7 +649,6 @@ body {
     top: 64px;
     padding: 20px;
   }
-  /* Push banner-adjusted nav */
   .zynix-announcement-bar {
     font-size: 12px;
     padding: 8px 36px 8px 16px;
@@ -1189,36 +658,8 @@ body {
     right: 8px;
     font-size: 16px;
   }
-
-  /* ── Hero Section: breathable, premium, centered ── */
   .zynix-inner-hero {
     padding: 88px 0 48px;
-  }
-  .zynix-inner-hero-grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-  .zynix-inner-hero-text {
-    text-align: center;
-  }
-  .zynix-inner-hero-text .zynix-tag {
-    font-size: 11px;
-    padding: 5px 12px;
-    margin-bottom: 12px;
-  }
-  .zynix-inner-hero-text h1 {
-    font-size: clamp(1.625rem, 6.5vw, 2rem);
-    letter-spacing: -1px;
-    line-height: 1.12;
-    margin-bottom: 14px;
-  }
-  .zynix-inner-hero-text p {
-    font-size: 0.9375rem;
-    line-height: 1.65;
-    margin-bottom: 24px;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
   }
   .zynix-hero-btns {
     flex-direction: column;
@@ -1231,41 +672,6 @@ body {
     justify-content: center;
     text-align: center;
   }
-  .zynix-inner-hero-img {
-    text-align: center;
-  }
-  .zynix-inner-hero-img img {
-    max-width: 100%;
-    border-radius: 16px;
-    margin: 0 auto;
-  }
-
-  /* ── Homepage Hero ── */
-  .zynix-homepage-hero {
-    padding: 88px 0 48px;
-  }
-  .zynix-homepage-hero .zynix-inner-hero-text {
-    text-align: center;
-  }
-  .zynix-homepage-hero h1 {
-    font-size: clamp(1.625rem, 6.5vw, 2rem);
-    letter-spacing: -1px;
-    line-height: 1.12;
-  }
-  .zynix-homepage-hero p {
-    font-size: 0.9375rem;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .zynix-homepage-hero .zynix-inner-hero-img {
-    text-align: center;
-  }
-  .zynix-homepage-hero .zynix-inner-hero-img img {
-    margin: 0 auto;
-  }
-
-  /* ── Section Spacing: balanced rhythm ── */
   :where(.zynix-inner-page section) {
     padding: 56px 0;
   }
@@ -1285,24 +691,6 @@ body {
     letter-spacing: 1.5px;
     margin-bottom: 10px;
   }
-
-  /* ── Problem Cards: single col with tighter padding ── */
-  .zynix-problem-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-top: 32px;
-  }
-  .zynix-problem-card {
-    padding: 24px 20px;
-  }
-  .zynix-problem-card h3 {
-    font-size: 16px;
-  }
-  .zynix-problem-card p {
-    font-size: 13px;
-  }
-
-  /* ── Feature Cards: single col ── */
   .zynix-feature-grid {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -1316,11 +704,6 @@ body {
   .zynix-feature-card p {
     font-size: 13px;
   }
-  .zynix-feature-metric span {
-    font-size: 20px;
-  }
-
-  /* ── Metrics Bar ── */
   .zynix-metrics-bar {
     flex-direction: column;
     gap: 20px;
@@ -1333,8 +716,6 @@ body {
   .zynix-metric-label {
     font-size: 13px;
   }
-
-  /* ── Architecture Cards ── */
   .zynix-arch-grid {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -1346,28 +727,6 @@ body {
   .zynix-arch-card h3 {
     font-size: 17px;
   }
-
-  /* ── Agent Cards ── */
-  .zynix-agents-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-top: 32px;
-  }
-  .zynix-agent-card {
-    padding: 24px 20px;
-  }
-  .zynix-agent-header h3 {
-    font-size: 16px;
-  }
-  .zynix-agent-card p {
-    font-size: 13px;
-  }
-  .zynix-agent-metrics span {
-    font-size: 11px;
-    padding: 4px 8px;
-  }
-
-  /* ── Safety Cards ── */
   .zynix-safety-grid {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
@@ -1382,8 +741,6 @@ body {
   .zynix-safety-card p {
     font-size: 12px;
   }
-
-  /* ── Care Plan Cards ── */
   .zynix-careplan-grid {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -1398,52 +755,19 @@ body {
   .zynix-careplan-card p {
     font-size: 12px;
   }
-
-  /* ── Flywheel & Orchestration ── */
-  .zynix-flywheel-grid,
-  .zynix-orch-flow {
+  .zynix-flywheel-grid {
     flex-direction: column;
     gap: 8px;
     margin-top: 32px;
   }
-  .zynix-flywheel-step,
-  .zynix-orch-step {
+  .zynix-flywheel-step {
     min-width: auto;
     width: 100%;
     padding: 18px 16px;
   }
-  .zynix-flywheel-arrow,
-  .zynix-orch-arrow {
+  .zynix-flywheel-arrow {
     display: none;
   }
-
-  /* ── Data Layers ── */
-  .zynix-data-layers {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-top: 32px;
-  }
-  .zynix-data-layer {
-    padding: 24px 20px;
-  }
-
-  /* ── Analytics Tracks ── */
-  .zynix-track-header {
-    padding: 18px 20px;
-    gap: 12px;
-  }
-  .zynix-track-header h3 {
-    font-size: 16px;
-  }
-  .zynix-track-body {
-    padding: 18px 20px;
-  }
-  .zynix-track-body li {
-    font-size: 13px;
-    padding: 8px 0 8px 20px;
-  }
-
-  /* ── Comparison Grid ── */
   .zynix-compare-grid {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -1454,8 +778,6 @@ body {
   .zynix-compare-card h3 {
     font-size: 17px;
   }
-
-  /* ── Comparison Table ── */
   .zynix-compare-table {
     font-size: 11px;
   }
@@ -1463,38 +785,6 @@ body {
   .zynix-compare-table td {
     padding: 8px 10px;
   }
-
-  /* ── Blog Cards ── */
-  .zynix-blog-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .zynix-blog-card {
-    padding: 22px 20px;
-  }
-  .zynix-blog-card h3 {
-    font-size: 15px;
-  }
-  .zynix-blog-featured h3 {
-    font-size: 18px;
-  }
-
-  /* ── Case Study Cards ── */
-  .zynix-case-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .zynix-case-card {
-    padding: 22px 20px;
-  }
-  .zynix-case-card h3 {
-    font-size: 15px;
-  }
-  .zynix-case-metric span {
-    font-size: 24px;
-  }
-
-  /* ── FAQ Accordion ── */
   .zynix-faq-q {
     padding: 16px 20px;
     font-size: 14px;
@@ -1503,23 +793,6 @@ body {
   .zynix-faq-a p {
     padding: 0 20px 16px;
     font-size: 13px;
-  }
-
-  /* ── Contact Form ── */
-  .zynix-contact-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  .zynix-contact-form-wrap {
-    padding: 24px 20px;
-    border-radius: 16px;
-  }
-  .zynix-contact-form-wrap h3 {
-    font-size: 18px;
-  }
-  .zynix-form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
   }
   .zynix-form-group label {
     font-size: 13px;
@@ -1531,8 +804,6 @@ body {
     border-radius: 10px;
     min-height: 48px;
   }
-
-  /* ── CTA Section ── */
   .zynix-cta-section {
     padding: 64px 20px;
   }
@@ -1553,8 +824,6 @@ body {
     width: 100%;
     justify-content: center;
   }
-
-  /* ── Footer ── */
   .zynix-footer {
     padding: 56px 20px 32px;
   }
@@ -1579,8 +848,6 @@ body {
   .zynix-footer-bottom p {
     font-size: 12px;
   }
-
-  /* ── KPI Chips ── */
   .zynix-kpi-grid {
     gap: 10px;
   }
@@ -1595,17 +862,6 @@ body {
   .zynix-kpi-chip span {
     font-size: 12px;
   }
-
-  /* ── Customer Chips ── */
-  .zynix-customer-list {
-    gap: 8px;
-  }
-  .zynix-customer-chip {
-    padding: 8px 14px;
-    font-size: 13px;
-  }
-
-  /* ── Workflow Steps ── */
   .zynix-wf-step-card {
     padding: 22px 18px;
     gap: 14px;
@@ -1618,8 +874,6 @@ body {
   .zynix-wf-step-card p {
     font-size: 13px;
   }
-
-  /* ── Story Block ── */
   .zynix-story-block {
     padding: 28px 22px;
     border-radius: 16px;
@@ -1630,12 +884,6 @@ body {
   .zynix-story-block p {
     font-size: 14px;
   }
-
-  /* ── Related Content ── */
-
-  /* ── Screenshot Gallery ── */
-
-  /* ── Legal Pages ── */
   .zynix-legal-content h2 {
     font-size: 18px;
     margin-top: 32px;
@@ -1643,35 +891,10 @@ body {
   .zynix-legal-content p {
     font-size: 14px;
   }
-
-  /* ── Trust Strip ── */
-  .zynix-trust-strip {
-    padding: 20px 0;
-  }
-  .zynix-trust-label {
-    font-size: 10px;
-    margin-bottom: 12px;
-  }
-  .zynix-trust-track {
-    gap: 28px;
-  }
-  .zynix-trust-track span {
-    font-size: 12px;
-  }
-
-  /* ── Breadcrumb ── */
   .zynix-breadcrumb {
     font-size: 12px;
     padding: 10px 0;
   }
-
-  /* ── About Quote ── */
-  .zynix-about-quote blockquote {
-    font-size: 15px;
-    padding-left: 18px;
-  }
-
-  /* ── Mobile Menu polish ── */
   .zynix-mobile-section-trigger {
     font-size: 15px;
     padding: 14px 0;
@@ -1694,13 +917,6 @@ body {
     align-items: center;
     justify-content: center;
   }
-
-  /* ── Results Section (blue bg) ── */
-  .zynix-results-section {
-    padding: 56px 0;
-  }
-
-  /* ── Placeholder / Careers ── */
   .zynix-placeholder-section {
     padding: 80px 20px;
   }
@@ -1710,13 +926,6 @@ body {
   .zynix-placeholder-section p {
     font-size: 14px;
   }
-
-  /* ── Crisis Section ── */
-  .zynix-crisis-section {
-    padding: 56px 0;
-  }
-
-  /* ── Workflow Timeline (left-border style) ── */
   .zynix-workflow-timeline {
     margin-top: 32px;
     padding-left: 20px;
@@ -1734,79 +943,36 @@ body {
   .zynix-wf-content p {
     font-size: 13px;
   }
-
-  /* ── Agent Link Cards ── */
 }
-
-/* ── Extra-small iPhone (375px and below) ── */
 @media (max-width: 375px) {
   .zynix-container {
     padding: 0 16px;
   }
-
-  .zynix-inner-hero-text h1,
-  .zynix-homepage-hero h1 {
-    font-size: 1.5rem;
-    letter-spacing: -0.8px;
-  }
-
   .zynix-inner-page section > .zynix-container > h2 {
     font-size: 1.25rem;
   }
-
   .zynix-safety-grid {
     grid-template-columns: 1fr;
   }
-
-
   .zynix-kpi-chip {
     flex: 1 1 100%;
   }
-
   .zynix-mega-nav {
     padding: 0 12px;
   }
-
   .zynix-nav-cta {
     padding: 8px 16px;
     font-size: 13px;
   }
 }
-
-/* ── Live-site additional components (testimonials, pipeline diagram, ROI, discharge) ── */
-
-/* Tablet collapse for wider grids */
 @media (max-width: 991px) {
-  .zynix-testimonials-grid { grid-template-columns: 1fr; }
   .zpa-diagram { grid-template-columns: 1fr; gap: 24px; }
   .zpa-nodes { flex-wrap: wrap; justify-content: center; gap: 12px; }
   .zpa-flow { display: none; }
   .zd-grid { grid-template-columns: 1fr; gap: 16px; }
   .zd-vs { text-align: center; }
-  .zynix-roi-calculator { flex-direction: column; }
 }
-
 @media (max-width: 480px) {
-  /* ── Testimonials ── */
-  .zynix-testimonials-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .zynix-testimonial-card {
-    padding: 24px 20px;
-  }
-  .zynix-testimonial-quote {
-    font-size: 14px;
-    line-height: 1.7;
-  }
-  .zynix-testimonial-author {
-    font-size: 13px;
-  }
-  .zynix-testimonial-stars {
-    font-size: 14px;
-  }
-
-  /* ── Architecture Pipeline Diagram ── */
   .zpa-diagram {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -1843,8 +1009,6 @@ body {
   .zpa-ico {
     font-size: 18px;
   }
-
-  /* ── Discharge / Before-After Grid ── */
   .zd-grid {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -1866,57 +1030,17 @@ body {
     font-size: 13px;
     padding: 8px 0;
   }
-
-  /* ── ROI Calculator ── */
-  .zynix-roi-calculator {
-    flex-direction: column;
-    gap: 24px;
-    padding: 24px 20px;
-    border-radius: 16px;
-  }
-  .zynix-roi-inputs {
-    width: 100%;
-  }
-  .zynix-roi-input-group label {
-    font-size: 13px;
-  }
   .zynix-roi-slider {
     width: 100%;
   }
-  .zynix-roi-value {
-    font-size: 14px;
-  }
-  .zynix-roi-results {
-    width: 100%;
-  }
-  .zynix-roi-result-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .zynix-roi-result {
-    padding: 16px 12px;
-    text-align: center;
-  }
-  .zynix-roi-number {
-    font-size: 20px;
-  }
-  .zynix-roi-label {
-    font-size: 12px;
-  }
-
-  /* ── FAQ Section (homepage version) ── */
   .zynix-faq-section .zynix-faq-list {
     max-width: 100%;
   }
 }
-
-
-/* a11y 2026-09-19: footer legal links + social icons were default browser blue on navy (1.85:1) */
 .zynix-footer-bottom a,.zynix-footer-bottom a:visited{color:#cbd5e1;text-decoration:underline;text-underline-offset:2px}
 .zynix-footer-bottom a:hover,.zynix-footer-bottom a:focus-visible{color:#ffffff}
 .zynix-footer-social a,.zynix-footer-social a:visited{color:#cbd5e1}
 .zynix-footer-social a:hover,.zynix-footer-social a:focus-visible{color:#ffffff}
-
 
 /* ════ ZX:BEGIN foundation (owner S1) ════ */
 /* Zynix design tokens 2026 — bundle pages only (native /blog-posts/* and /naacos-* carry html.wf-native).
@@ -1953,7 +1077,7 @@ html:not(.wf-native) {
   --zx-focus-ring:var(--zx-blue-600); --zx-focus-ring-inverse:#FFFFFF;
 
   /* Type */
-  --zx-font-sans:'Funnel Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --zx-font-sans:'Funnel Sans', 'Funnel Sans Fallback', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --zx-font-mono:ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --zx-fs-display:clamp(2.25rem, 1.5rem + 3vw, 4rem);      /* 36 → 64, homepage H1 only */
   --zx-fs-h1:clamp(2rem, 1.45rem + 2.2vw, 3.25rem);         /* 32 → 52 */
@@ -2017,6 +1141,13 @@ html:not(.wf-native) {
   --z-bg-light:var(--zx-surface-subtle); --z-card-bg:var(--zx-surface);
 }
 @media (max-width:1023.98px) { html:not(.wf-native) { --zx-nav-h:56px; } }
+/* Metric-matched fallback shown until Funnel Sans arrives (CLS): Arial scaled to Funnel Sans's advance widths (measured in Chrome
+   on 22 KB of site copy: regular 99.9%, semibold vs Arial Bold 94.3%; set to 99% / 94.8%, which kept the font-swap CLS at or
+   below 0.026 on every page measured at 1440 and 390), with Funnel Sans's ascent 1.00 / descent 0.25 / line gap 0.
+   Same unicode-range as Funnel Sans's latin file, so glyphs Funnel Sans lacks (→, ✓) still fall through to the system font. */
+@font-face{font-family:'Funnel Sans Fallback';src:local('Arial'),local('ArialMT');font-weight:400 500;size-adjust:99%;ascent-override:101%;descent-override:25.3%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Funnel Sans Fallback';src:local('Arial Bold'),local('Arial-BoldMT');font-weight:600 700;size-adjust:94.8%;ascent-override:105.5%;descent-override:26.4%;line-gap-override:0%;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
 
 /* ── §1.3 Scoped base typography: neutralises Webflow's body, h1–h4 and p rules on bundle pages only ── */
 html:not(.wf-native) body { font-family:var(--zx-font-sans); }
@@ -2041,7 +1172,6 @@ html:not(.wf-native) { scroll-padding-top:calc(var(--zx-chrome-h) + 16px); }
 .zynix-injected :where(.zynix-section--inverse, .zynix-cta-section:not(.zynix-cta-section--subtle), .zynix-footer) :where(a:not([class])) { color:var(--zx-link-inverse); }
 .zynix-injected :where(button,input,select,textarea) { font:inherit; letter-spacing:inherit; }
 .zynix-injected :where(img,video) { max-width:100%; height:auto; }
-.zynix-injected :where([id]) { scroll-margin-top:calc(var(--zx-chrome-h) + 16px); }
 .zx-visually-hidden { position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
 
 /* ── §1.4 Layout primitives (the two :where() section fallbacks replace CSS:175–178 in place) ── */
@@ -2667,7 +1797,7 @@ html.zx-menu-open #zynix-chat-widget { display:none; }
 .zynix-mega-nav:not(:has(> .zynix-mega-nav__inner)) { gap:var(--zx-space-4); padding-inline:max(var(--zx-gutter), calc((100% - var(--zx-container)) / 2)); }
 
 .zynix-mega-nav .zynix-nav-logo { display:flex; align-items:center; flex:none; gap:0; margin-right:var(--zx-space-8); text-decoration:none; border-radius:var(--zx-radius-xs); }
-.zynix-mega-nav .zynix-nav-logo__img { display:block; width:84px; height:32px; }
+.zynix-mega-nav .zynix-nav-logo__img { display:block; width:84px; height:32px; margin:0; }   /* margin:0 cancels the legacy <768 `.zynix-nav-logo img` margin (-32px 0) that collapsed the link to 0px tall */
 @media (max-width:1023.98px) { .zynix-mega-nav .zynix-nav-logo__img { width:68px; height:26px; } }
 /* pre-S3 markup: IMG.logo is a 1080×1081 PNG whose wordmark fills the band (166,398)–(914,683); scaled so the wordmark is 32px (26px) tall. */
 .zynix-mega-nav .zynix-nav-logo > img:not(.zynix-nav-logo__img) { display:block; width:auto; height:121px; margin:-45px -19px; }
@@ -2989,9 +2119,6 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 /* Newsletter button: overrides the inline blue #20449B (quiet look) */
 .zynix-injected .zynix-capture-btn[style*="background"] { background:var(--zx-gray-900)!important; border:1px solid var(--zx-gray-900)!important; color:#fff!important; min-height:44px; }
 .zynix-injected .zynix-capture-btn[style*="background"]:hover { background:var(--zx-gray-700)!important; border-color:var(--zx-gray-700)!important; }
-/* "Explore →" and card links → link-arrow look (the base link rule covers unclassed links) */
-.zynix-injected .zynix-card-link { display:inline-flex; align-items:center; gap:6px; min-height:24px; font:var(--zx-fw-semibold) var(--zx-fs-sm)/1.4 var(--zx-font-sans); color:var(--zx-link); text-decoration:none; }
-.zynix-injected .zynix-card-link:hover { color:var(--zx-link-hover); text-decoration:underline; text-underline-offset:3px; }
 
 /* ── Cards: static card look (white, 1px hairline, 12px radius), no hover lift, no coloured left borders ── */
 .zynix-injected :is(.zynix-problem-card, .zynix-feature-card, .zynix-agent-card, .zynix-safety-card, .zynix-data-layer, .zynix-arch-card, .zynix-careplan-card,
@@ -3011,7 +2138,6 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zynix-injected .zynix-arch-num { font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.2 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); color:var(--zx-eyebrow); }
 .zynix-injected .zynix-kpi-chip strong { color:var(--zx-text); font-weight:var(--zx-fw-semibold); }
 .zynix-injected .zynix-kpi-chip span { font-size:14px; color:var(--zx-text-secondary); }
-.zynix-injected .zynix-agent-metrics span { font-size:12px; font-weight:var(--zx-fw-medium); color:var(--zx-blue-700); background:var(--zx-blue-50); border:0; border-radius:var(--zx-radius-xs); padding:4px 8px; }
 /* Number badges and timeline dots: flat brand fills */
 .zynix-injected :is(.zynix-cp-num, .zynix-wf-step-num, .zynix-track-num) { border-radius:var(--zx-radius-md); font-weight:var(--zx-fw-semibold); }
 .zynix-injected .zynix-safety-num { font-weight:var(--zx-fw-semibold); }
@@ -3029,10 +2155,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zynix-injected a:is(.zynix-agent-link-card, .zynix-related-card, .zynix-case-card, .zynix-blog-card):hover :is(h3, h4) { color:var(--zx-link); }
 .zynix-injected :is(.zynix-agent-link-card, .zynix-case-card, .zynix-blog-card) h3 { font:var(--zx-fw-semibold) var(--zx-fs-h4)/1.35 var(--zx-font-sans); letter-spacing:0; color:var(--zx-text); }
 .zynix-injected :is(.zynix-agent-link-card, .zynix-case-card, .zynix-blog-card) p { font-size:15px; line-height:1.6; color:var(--zx-text-secondary); }
-.zynix-injected .zynix-blog-featured { background:var(--zx-surface-brand); border-color:var(--zx-blue-100); border-left:1px solid var(--zx-blue-100); }
 .zynix-injected :is(.zynix-blog-cat, .zynix-case-seg) { padding:0; background:none; border-radius:0; font-size:12px; font-weight:var(--zx-fw-semibold); letter-spacing:var(--zx-tr-eyebrow); color:var(--zx-eyebrow); }
-.zynix-injected .zynix-customer-chip { border-radius:var(--zx-radius-md); box-shadow:none; transition:none; }
-.zynix-injected .zynix-customer-chip:hover { border-color:var(--zx-border); box-shadow:none; background:var(--zx-surface); }
 
 /* ── Metrics → stat-row look (full-bleed blue band removed; legacy metrics carry no source: S2 marks them data-zx-unsourced) ── */
 .zynix-injected .zynix-metrics-bar { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:0; margin:0; padding:0; border-radius:0; background:none; border-top:1px solid var(--zx-border); text-align:left; }
@@ -3073,48 +2196,21 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
   .zynix-injected > .zynix-metrics-bar .zynix-metric:nth-child(-n+2) { padding-top:0; }
   .zynix-injected > .zynix-metrics-bar .zynix-metric:nth-last-child(-n+2) { padding-bottom:0; }
 }
-.zynix-injected .zynix-results-section { background:var(--zx-surface-inverse); }
-.zynix-injected .zynix-feature-metric span, .zynix-injected .zynix-case-metric span { font-weight:var(--zx-fw-semibold); font-variant-numeric:tabular-nums lining-nums; }
-.zynix-injected .zynix-case-metric small { font-size:13px; color:var(--zx-text-secondary); }
-/* Case-study stat tiles (inline-styled; P4 rebuilds them with attribution): numbers keep --z-primary blue, weight 600 not 800 */
-.zynix-injected .zynix-case-stat .zynix-metric-value[style*="font-weight:800"] { font-weight:var(--zx-fw-semibold)!important; letter-spacing:-.02em; font-variant-numeric:tabular-nums lining-nums; }
-
-/* ── Dark sections without CSS: .zynix-section-dark (JS:8281 at c95cc03) → inverse section; fixes the invisible /solutions H2 ── */
-.zynix-injected .zynix-section-dark { background:var(--zx-surface-inverse); color:var(--zx-text-inverse); }
-.zynix-injected .zynix-section-dark :is(h2, h3) { color:var(--zx-text-inverse); }
-.zynix-injected .zynix-section-dark p { color:var(--zx-text-inverse-secondary); }
 
 /* ── Heroes: glows removed; §2.10 type, spacing and grid; the inline dark variant (SMS pages) keeps white text ── */
 .zynix-injected :is(.zynix-inner-hero, .zynix-homepage-hero, .zynix-cta-section, .zynix-results-section)::before,
 .zynix-injected :is(.zynix-inner-hero, .zynix-homepage-hero, .zynix-cta-section, .zynix-results-section)::after { content:none; display:none; }
 .zynix-injected .zynix-inner-hero { padding:clamp(40px, 24px + 3vw, 72px) 0 clamp(48px, 32px + 3vw, 80px); background:var(--zx-surface); color:var(--zx-text); }
 .zynix-injected .zynix-inner-hero[style*="--z-bg-dark"] { color:var(--zx-text-inverse); }
-.zynix-injected .zynix-inner-hero-grid { grid-template-columns:minmax(0,6fr) minmax(0,6fr); column-gap:var(--zx-space-12); row-gap:var(--zx-space-10); }
-@media (max-width:1023.98px) { .zynix-injected .zynix-inner-hero-grid { grid-template-columns:minmax(0,1fr); } }
-.zynix-injected .zynix-inner-hero-text { text-align:left; min-width:0; }
-.zynix-injected .zynix-inner-hero-text h1 { margin:0; font-size:var(--zx-fs-h1); font-weight:var(--zx-fw-semibold); line-height:var(--zx-lh-tight); letter-spacing:var(--zx-tr-h1); color:inherit; }
-.zynix-injected .zynix-inner-hero-text > p { max-width:var(--zx-measure-lead); margin:var(--zx-space-5) 0 0; font-size:var(--zx-fs-lead); line-height:var(--zx-lh-lead); color:var(--zx-text-secondary); }
 .zynix-injected .zynix-hero-btns { display:flex; flex-wrap:wrap; gap:var(--zx-space-3); margin-top:var(--zx-space-8); }
-.zynix-injected .zynix-hero-trust { display:flex; flex-wrap:wrap; gap:var(--zx-space-2); margin-top:var(--zx-space-6)!important; }   /* inline margin-top:4px */
-.zynix-injected .zynix-inner-hero-img { min-width:0; }
 @media (max-width:479.98px) {
   .zynix-injected .zynix-hero-btns { flex-direction:column; align-items:stretch; }
   .zynix-injected .zynix-hero-btns > * { width:100%; }
 }
-.zynix-injected .zynix-homepage-hero h1 { font-weight:var(--zx-fw-semibold); letter-spacing:var(--zx-tr-display); }
 
 /* ── CTA band without a modifier: the inverse (#0B1324) band the frozen legal pages write inline ── */
 .zynix-injected .zynix-cta-section:not(.zynix-cta-section--subtle) h2:not(.zynix-cta-section__title) { font-size:var(--zx-fs-h2); font-weight:var(--zx-fw-semibold); line-height:var(--zx-lh-heading); letter-spacing:var(--zx-tr-h2); }
 .zynix-injected .zynix-cta-section:not(.zynix-cta-section--subtle) > .zynix-container:not(.zynix-cta-section__inner) > p { max-width:var(--zx-measure-lead); margin-inline:auto; color:var(--zx-text-inverse-secondary); font-size:var(--zx-fs-lead); line-height:var(--zx-lh-lead); }
-
-/* ── Testimonials → quote look; stars hidden; the homepage's light testimonial band gets its heading back (HOME-1, until H ships) ── */
-.zynix-injected .zynix-testimonial-stars { display:none; }
-.zynix-injected .zynix-testimonial-card { padding:0 0 0 var(--zx-space-6); background:none; border:0; border-left:2px solid var(--zx-blue-600); border-radius:0; }
-.zynix-injected .zynix-testimonials-section:not([style*="--z-bg-alt"]) .zynix-testimonial-card { border-left-color:var(--zx-blue-200); }
-.zynix-injected .zynix-testimonial-quote { font-size:17px; line-height:1.55; font-style:normal; color:var(--zx-text); }
-.zynix-injected .zynix-testimonials-section:not([style*="--z-bg-alt"]) .zynix-testimonial-quote { color:var(--zx-text-inverse); }
-.zynix-injected .zynix-testimonials-section:not([style*="--z-bg-alt"]) .zynix-testimonial-author span { color:var(--zx-text-inverse-muted); }
-.zynix-injected .zynix-testimonials-section[style*="--z-bg-alt"] h2 { color:var(--zx-text)!important; }   /* beats CSS:1350 `color:#fff !important` on a light band */
 
 /* ── FAQ: legacy markup restyled in place by the §2.13 rules; per-page FAQ sections keep their centred heads ── */
 .zynix-injected .zynix-faq-section .zynix-faq-list, .zynix-injected .zynix-page-faq .zynix-faq-list { max-width:var(--zx-container-narrow); margin-inline:auto; }
@@ -3143,13 +2239,6 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 /* Interim (P6 rebuilds it with classes): the inline two-column compare grid collapses on phones */
 @media (max-width:767.98px) { .zynix-injected [class*="zynix-compare-two-col"][style*="grid-template-columns"] { grid-template-columns:1fr!important; } }
 
-/* ── Product frames (re-declared from the injected <style> S3 removes: light frames, no macOS dots, no invented URL bar) ── */
-.zynix-injected .zynix-screenshot-strip { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:var(--zx-grid-gap); align-items:start; overflow:visible; padding:var(--zx-space-2) 0 0; scroll-snap-type:none; }
-/* The base strip had 24px of bottom padding; keep that air when something follows it (/agents: the strip sat flush on the large frame) */
-.zynix-injected .zynix-screenshot-strip:not(:last-child) { margin-bottom:var(--zx-space-6); }
-.zynix-injected .zynix-screenshot-strip-lg { gap:var(--zx-space-8); }
-.zynix-injected .zynix-inner-hero-img img { border-radius:var(--zx-radius-xl); box-shadow:var(--zx-shadow-lg); }
-
 /* ── Email capture (re-declared from the injected <style>): subtle surface, hairlines, no gradient ── */
 .zynix-injected .zynix-email-capture { background:var(--zx-surface-subtle); border-top:1px solid var(--zx-border); border-bottom:1px solid var(--zx-border); }
 .zynix-injected .zynix-capture-email:focus-visible { outline:2px solid var(--zx-focus-ring); outline-offset:0; }
@@ -3160,11 +2249,6 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 @media (max-width:479.98px) { .zynix-injected .zynix-email-capture .zynix-capture-form { flex-direction:column; } .zynix-injected .zynix-email-capture .zynix-capture-btn { width:100%; } }
 
 /* ── ROI calculator: one column below 1024 (re-declared after CSS:1332 to fix the cascade bug); slider re-declared from the injected <style> ── */
-@media (max-width:1023.98px) { .zynix-injected .zynix-roi-calculator { grid-template-columns:minmax(0,1fr); } }
-.zynix-injected .zynix-roi-calculator { box-shadow:var(--zx-shadow-sm); border-radius:var(--zx-radius-xl); }
-.zynix-injected .zynix-roi-input-group label { font:var(--zx-fw-semibold) var(--zx-fs-sm)/1.4 var(--zx-font-sans); color:var(--zx-text); }
-.zynix-injected .zynix-roi-results h3[style*="rgba(255,255,255"] { color:var(--zx-text-muted)!important; }   /* inline white label on a light panel */
-.zynix-injected .zynix-roi-number { font-weight:var(--zx-fw-semibold); font-variant-numeric:tabular-nums lining-nums; }
 .zynix-injected .zynix-roi-slider { -webkit-appearance:none; appearance:none; width:100%; height:8px; border-radius:4px; cursor:pointer;
   background:linear-gradient(90deg, var(--zx-blue-600) var(--slider-pct, 50%), var(--zx-gray-200) var(--slider-pct, 50%)); }
 .zynix-injected .zynix-roi-slider::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:24px; height:24px; border-radius:50%; background:var(--zx-blue-600); border:3px solid #fff; box-shadow:0 1px 4px rgba(16,24,40,.3); cursor:pointer; }
@@ -3173,9 +2257,9 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zynix-injected .zynix-roi-slider::-moz-range-progress { height:8px; border-radius:4px; background:var(--zx-blue-600); }
 
 /* ── Interim for the 8 case renderers (P4 rebuilds them): the inline 4-up highlight grid goes 2×2 on phones ── */
-@media (max-width:767.98px) { .zynix-injected [style*="grid-template-columns:repeat(4,1fr)"].zynix-case-highlight { grid-template-columns:repeat(2, minmax(0,1fr))!important; } }
 
 /* ── Legal pages: headings, lists and spacing for the long-form policy text (renderers are frozen; CSS only) ── */
+.zynix-injected .zynix-legal-section { padding-block:var(--zx-section-y-sm) var(--zx-section-y); }   /* legacy CSS:600 was a fixed 100px at every width */
 .zynix-injected .zynix-legal-content { color:var(--zx-text-secondary); }
 .zynix-injected .zynix-legal-content h2 { font-size:var(--zx-fs-h3); line-height:var(--zx-lh-snug); letter-spacing:var(--zx-tr-h3); }
 .zynix-injected .zynix-legal-content h3 { margin:var(--zx-space-6) 0 var(--zx-space-2); font:var(--zx-fw-semibold) var(--zx-fs-h4)/1.35 var(--zx-font-sans); color:var(--zx-text); }
@@ -3188,16 +2272,56 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zynix-injected .zynix-form-group :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea) { min-height:44px; border-color:var(--zx-gray-300); border-radius:var(--zx-radius-sm); font-size:16px; color:var(--zx-text); }
 .zynix-injected .zynix-form-group :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea):hover { border-color:var(--zx-gray-400); }
 @media (max-width:767.98px) { .zynix-injected .zynix-form-group :is(input:not([type="checkbox"]):not([type="radio"]), select) { min-height:48px; } }
-.zynix-injected .zynix-contact-form-wrap { border-radius:var(--zx-radius-xl); box-shadow:var(--zx-shadow-md); }
 
 /* ── Chrome leftovers re-declared from the injected <style> (trust-logo filter; the promo-card and dropdown-featured rules went with their markup) ── */
 .zynix-injected :is(.zynix-trust-marquee, .zynix-trust-track) img, .zynix-injected [class*="trust-marquee"] img, .zynix-injected [class*="trust-track"] img { filter:grayscale(1) brightness(.45) contrast(1.2); opacity:1; }
-.zynix-injected .zynix-trust-strip { background:var(--zx-surface-subtle); }
-.zynix-injected .zynix-trust-label { font-size:12px; letter-spacing:var(--zx-tr-eyebrow); text-transform:none; color:var(--zx-text-muted); }   /* source text is already caps except "ACOs"/"FQHCs", which uppercasing broke */
 /* pre-S3 chat: keep the panel inside a phone screen (replaces the CSS:1385–1392 overrides; !important beats the inline panel styles) */
 @media (max-width:479.98px) {
   #zynix-chat-widget:not(.zynix-chat) #zynix-chat-panel { width:calc(100vw - 32px)!important; right:-8px!important; bottom:68px!important; max-height:70vh!important; }
 }
+
+/* ── Pasted long-form articles (the Phase 4 codemod restyles them; until then CSS only, scoped to each article's .zxb-* wrapper) ── */
+/* will-ai: its :root variables were dropped (a stray selector prefix) so every var() was empty (white-on-white badges and CTA);
+   defined here with token values. Its @media rules lost their scope, so they are re-declared below at the spec breakpoints. */
+.zynix-injected .zxb-willai { --zynblue:var(--zx-blue-600); --zynblue-light:var(--zx-blue-50); --highlight:var(--zx-blue-100);
+  --zynorange:var(--zx-action); --zynorange-hover:var(--zx-action-hover); --zynorange-light:var(--zx-orange-50); --zynorange-tint:var(--zx-orange-50);
+  --text-primary:var(--zx-text); --text-soft:var(--zx-gray-700); --text-secondary:var(--zx-text-secondary); --text-muted:var(--zx-text-muted);
+  --divider:var(--zx-border); --card-bg:var(--zx-surface-subtle); }
+.zynix-injected .zxb-willai .section-eyebrow { color:var(--zx-eyebrow); }
+.zynix-injected .zxb-willai .section-eyebrow::after { background:linear-gradient(90deg, currentColor, transparent); }
+.zynix-injected .zxb-willai :is(.aco-gaps-header, .dw-block) .section-eyebrow { color:var(--zx-eyebrow-inverse); }
+.zynix-injected .zxb-willai .qa-footer .qa-footer-text b { color:inherit; }
+.zynix-injected .zxb-willai :is(.tag-pill, .gap-outcome) { font-size:var(--zx-fs-xs); }
+.zynix-injected .zxb-willai .gap-outcome { color:var(--zx-text-secondary); }
+.zynix-injected .zxb-willai .qa-col:hover { transform:none; }
+@media (max-width:1023.98px) {
+  .zynix-injected .zxb-willai .hero-grid { grid-template-columns:minmax(0,1fr) 300px; gap:36px; }
+  .zynix-injected .zxb-willai .hero-visual { width:300px; }
+}
+@media (max-width:767.98px) {
+  .zynix-injected .zxb-willai :is(.hero-grid, .qa-cols, .aco-gaps-grid, .checklist, .dw-grid) { grid-template-columns:minmax(0,1fr); }
+  .zynix-injected .zxb-willai .hero-visual { display:none; }
+  .zynix-injected .zxb-willai .gap-card { border-right:none; }
+  .zynix-injected .zxb-willai .gap-card:nth-child(3) { border-bottom:1px solid var(--zx-border); }
+  .zynix-injected .zxb-willai .qa-badge { max-width:100%; }
+}
+/* LEAD and agentic: #F16529 eyebrows (2.98–3.17:1) and white-on-#F16529 CTA buttons become the token pair */
+.zynix-injected :is(.zxb-lead, .zxb-agentic) .section-eyebrow:not(.section-eyebrow--light) { color:var(--zx-eyebrow); }
+.zynix-injected :is(.zxb-lead, .zxb-agentic) .section-eyebrow:not(.section-eyebrow--light)::after { background:linear-gradient(90deg, currentColor, transparent); }
+.zynix-injected :is(.zxb-lead, .zxb-agentic) .cta-btn { background:var(--zx-action); color:var(--zx-on-action); }
+.zynix-injected :is(.zxb-lead, .zxb-agentic) .cta-btn:hover { background:var(--zx-action-hover); transform:none; }
+.zynix-injected .zxb-agentic .read-time { color:var(--zx-text-muted); }   /* #888 (3.5:1) once the hero is no longer hidden */
+/* Its hero illustration's labels are 13.7px only at its 800px width (1440): below that it stacks under the text at ≤720px
+   (labels ≥12px down to 768) and on phones it is not shown (§7.3). 1440 is the illustration's own limit, not a layout breakpoint. */
+@media (max-width:1439.98px) {
+  .zynix-injected .zxb-agentic .hero-grid { grid-template-columns:minmax(0,1fr); gap:36px; }
+  .zynix-injected .zxb-agentic .hero-meta { justify-content:center; }
+  .zynix-injected .zxb-agentic .hero-visual { max-width:720px; margin-inline:auto; }
+}
+@media (max-width:767.98px) { .zynix-injected .zxb-agentic .hero-visual { display:none; } }
+/* "Platform architecture" band: solid brand blue (the gradient's light end left its 65%-white sub-text at ~3:1) */
+.zynix-injected :is(.zxb-willai, .zxb-agentic) .dw-block { background:var(--zx-blue-600); }
+.zynix-injected :is(.zxb-willai, .zxb-agentic) .dw-text-sub { color:var(--zx-text-inverse-secondary); font-size:var(--zx-fs-sm); }
 /* ════ ZX:END legacy-fixes ════ */
 
 
