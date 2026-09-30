@@ -325,6 +325,7 @@ html:not(.wf-native) { scroll-padding-top:calc(var(--zx-chrome-h) + 16px); }
 .zynix-injected :where(a:not([class])) { color:var(--zx-link); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px; }
 .zynix-injected :where(a:not([class])):hover { color:var(--zx-link-hover); }
 .zynix-injected :where(.zynix-section--inverse, .zynix-cta-section:not(.zynix-cta-section--subtle), .zynix-footer) :where(a:not([class])) { color:var(--zx-link-inverse); }
+.zynix-injected :where(.zynix-section--inverse, .zynix-cta-section:not(.zynix-cta-section--subtle), .zynix-footer) :where(a:not([class])):hover { color:var(--zx-text-inverse); }   /* after the :hover above (same specificity): dark-surface links never hover to --zx-link-hover */
 .zynix-injected :where(button,input,select,textarea) { font:inherit; letter-spacing:inherit; }
 .zynix-injected :where(img,video) { max-width:100%; height:auto; }
 .zx-visually-hidden { position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
@@ -1155,6 +1156,9 @@ html.zx-menu-open #zynix-chat-widget { display:none; }
 .zynix-footer .zynix-footer__legal { display:flex; flex-wrap:wrap; gap:4px var(--zx-space-5); margin:0; padding:0; list-style:none; }
 .zynix-footer .zynix-footer__legal li { margin:0; padding:0; }
 .zynix-footer .zynix-footer__legal a { display:inline-flex; align-items:center; min-height:24px; font-size:13px; }
+/* Hover/focus text goes white on the ink footer. The legal links carry no class, so without this the base
+   `:where(a:not([class])):hover` (--zx-link-hover, 1.68:1 on ink) beats the #cbd5e1 resting rule (restores the 851218d state). */
+.zynix-footer .zynix-footer__legal a:hover, .zynix-footer .zynix-footer__legal a:focus-visible { color:var(--zx-text-inverse); }
 /* Room for the fixed chat launcher (§3.6: 52px, 20px from the right; 16px below 480): at the end of the page it sits on the
    bottom row, so on pages that have the chat the row's content stops 84px (20 + 52 + 12 air) short of the viewport's right
    edge. The reserve shrinks by the container's outer margin, so it is a no-op from ~1370px up and needs no breakpoint;
