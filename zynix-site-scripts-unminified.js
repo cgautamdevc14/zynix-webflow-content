@@ -7732,10 +7732,15 @@ function renderSecurityV7() {
     { icon: 'lock', chip: ['BAA available', 'brand'], title: 'HIPAA', body: 'HIPAA-aligned safeguards and operating practices for every deployment involving PHI. A Business Associate Agreement is available for customers handling PHI.' },
     { icon: 'clock', chip: ['In progress', 'neutral'], title: 'HITRUST CSF', body: c.hitrust.prose + ', following a completed readiness assessment.' }
   ];
+  // Hero aside (final polish, m-P1a): the three statuses in the chip wording of the cards below, security reviews (restated
+  // from "What you can request"), and the SOC 2 request, so the right half of the first screen is not empty at >= 1024.
   var html = renderHero({ preset: 'product', eyebrow: 'Security &amp; trust', title: 'Security and compliance for healthcare data',
     lead: 'SOC 2 Type II audited with the report available on request, HIPAA-aligned safeguards with a BAA available, and HITRUST CSF certification in progress.',
     primary: { label: req.label, href: req.href, cta: 'soc2-report' }, secondary: { label: 'Request a demo', href: CALENDLY },
-    badges: null, media: { type: 'none' }, compact: true });
+    badges: null, compact: true,
+    media: { type: 'glance', title: 'Compliance status', label: 'Compliance status at a glance',
+      items: status.map(function (s) { return { label: s.title, value: s.chip[0] }; }).concat([{ label: 'Security reviews', value: 'Questionnaires supported' }]),
+      link: { label: req.label, href: req.href } } });
 
   html += renderSection({ id: 'compliance', rule: true, className: 'zx-plat-compliance' },
     renderSectionHead('Compliance', 'Where we stand', 'Audit documentation is shared through our Drata trust portal on request.', { id: 'compliance-title' }) +
@@ -8430,10 +8435,19 @@ function renderAgentPageV7(data) {
 
 
 function renderPlatformHub() {
-  // Platform overview (§6, COPY_DECK §5.2, final QA round 1): the hero carries the care-gap worklist (the product on the first
-  // screen, like every layer page), one "Built for" link line, the data flow in expanded form, the four layers, proof (a
-  // one-sentence release pull, not the full quote), how a deployment runs, security, CTA.
+  // Platform overview (§6, COPY_DECK §5.2, final QA round 1): the hero carries one patient across the four layers (final
+  // polish, m-P1b: a cross-layer panel, so the first screen no longer mirrors the /agents outreach queue), one "Built for"
+  // link line, the data flow in expanded form, the four layers, proof (a one-sentence release pull, not the full quote), how
+  // a deployment runs, security, CTA. Pt 1042 · 72 · CHF is the same sample patient as on /, /agents and /care-plans.
   var solutions = NAV.filter(function (s) { return s.id === 'solutions'; })[0];
+  var layerName = {};
+  NAMES.layers.forEach(function (l) { layerName[l.id] = l.name; });
+  var xlayer = [
+    ['data-foundation', 'Discharge matched to one patient record', 'ADT message, claims and EHR history', { tone: 'success', label: 'Matched' }],
+    ['intelligence', 'Ranked first on today’s worklist', 'TCM contact due · two open care gaps', { tone: 'brand', label: 'Ranked' }],
+    ['agents', 'Check-in call made, follow-up visit booked', NAMES.roles.agent, { tone: 'success', label: 'Booked' }],
+    ['care-plans', 'TCM plan open until the visit is documented', NAMES.roles.rn + ' · interactive contact', { tone: 'neutral', label: 'Open' }]
+  ];
   var audiences = solutions ? solutions.columns[0].items : [];
   var layerCopy = {
     'data-foundation': ['Claims, EHR, ADT, lab and pharmacy data, matched to one patient record.', 'See the data foundation'],
@@ -8444,16 +8458,11 @@ function renderPlatformHub() {
   var html = renderHero({ preset: 'product', eyebrow: 'Platform', title: 'The Zynix platform for <span class="zx-plat-nowrap">value-based</span> care operations',
     lead: 'Four layers that work as one: a data foundation, intelligence that ranks the work, agents that handle outreach and scheduling, and care plans that see each episode through.',
     secondary: { label: 'See the data flow', href: '#data-flow' },
-    media: { type: 'product', frame: zxPlatPanel({ label: 'Care-gap worklist, illustrative data', brand: 'Care management', title: 'Care-gap worklist', meta: 'Today · all practices',
-      tiles: [{ value: '18', label: 'Discharges this week' }, { value: '214', label: 'Open care gaps' }, { value: '96', label: 'AWVs due' }],
-      rows: [
-        { title: 'Pt 1042 · 72 · CHF', sub: 'Discharged yesterday · TCM contact due', owner: { type: 'agent', label: NAMES.roles.agent }, status: { tone: 'brand', label: 'In progress' } },
-        { title: 'Pt 3561 · 81 · CKD', sub: 'Medication question from the check-in call', owner: { type: 'staff', label: NAMES.roles.rn }, status: { tone: 'warning', label: 'Escalated' } },
-        { title: 'Pt 0884 · 75 · COPD', sub: 'AWV due · two open quality gaps', owner: { type: 'agent', label: NAMES.roles.agent }, status: { tone: 'success', label: 'Booked' } },
-        { title: 'Pt 2317 · 68 · Diabetes', sub: 'HCC not yet recaptured this year', owner: { type: 'staff', label: NAMES.roles.coordinator }, status: { label: 'Queued' } }
-      ],
+    media: { type: 'product', frame: zxPlatPanel({ label: 'Sample patient path across the four layers, illustrative data', brand: 'Zynix platform',
+      className: 'zx-plat-xlayer', title: 'One discharge, four layers', meta: 'Pt 1042 · 72 · CHF',
+      steps: xlayer.map(function (s) { return { time: layerName[s[0]] || s[0], title: s[1], owner: s[2], status: s[3] }; }),
       footer: 'Clinical questions go to licensed staff by rule.' },
-      'The worklist your care team opens each morning: ranked by risk and deadline, with an owner on every row · sample data') } });
+      'One discharge through every layer: matched, ranked, worked by an agent and carried by a care plan · sample data') } });
 
   html += '<div class="zx-plat-for"><div class="zynix-container"><div class="zx-plat-lede__for"><p class="zx-plat-lede__label" id="zx-plat-for">Built for</p>' +
     '<ul class="zx-plat-lede__links" role="list" aria-labelledby="zx-plat-for">' +
@@ -9038,13 +9047,13 @@ function renderZynScribeV7() {
       { title: SITE_FACTS.compliance.soc2.prose, body: 'ZynScribe runs on the Zynix platform and is covered by the same security program.' }
     ], { split: true }));
 
-  html += renderSection({ id: 'what-changes', rule: true, className: 'zx-plat-roles' },
-    renderSectionHead('What changes for your team', 'A draft to review instead of a blank note', null, { id: 'what-changes-title' }) +
-    renderGrid([
-      { icon: 'stethoscope', title: 'Physicians', body: 'A structured draft to review and approve, with the patient’s open gaps in view.' },
-      { icon: 'clipboard', title: 'Coding and risk adjustment teams', body: 'Suggested ICD-10 and CPT codes that the physician has reviewed, attached to an approved note.' },   // [VERIFY] V7 codes
-      { icon: 'users', title: 'Care teams', body: 'Approved notes join the patient’s record in the Zynix platform, so open gaps and care plans reflect the visit.' }
-    ], renderCard));
+  // The rule-divided list every product page uses for "What changes for your team" (final polish, m-P1c: no icon cards).
+  html += zxPlatSplit('what-changes', ['What changes for your team', 'A draft to review instead of a blank note', null],
+    zxPlatRows([
+      { title: 'Physicians', body: 'A structured draft to review and approve, with the patient’s open gaps in view.' },
+      { title: 'Coding and risk adjustment teams', body: 'Suggested ICD-10 and CPT codes that the physician has reviewed, attached to an approved note.' },   // [VERIFY] V7 codes
+      { title: 'Care teams', body: 'Approved notes join the patient’s record in the Zynix platform, so open gaps and care plans reflect the visit.' }
+    ], { split: true }), { rule: true });
 
   html += zxPlatProof({ title: 'ZynScribe at NHS Health System',
     lead: 'NHS Health System runs ZynScribe alongside post-discharge outreach and after-hours access, on the same platform and patient record.', story: 'nhs' });
@@ -9189,7 +9198,7 @@ function renderDataAnalyticsV7() {
       tiles: [{ value: '14', label: 'High-risk discharges' }, { value: '312', label: 'Open HCC gaps' }, { value: '187', label: 'Quality gaps due' }],
       rows: [
         { title: 'Pt 1042 · 72 · CHF', sub: 'High readmission risk · discharged yesterday', owner: { type: 'staff', label: NAMES.roles.rn }, status: { tone: 'brand', label: 'In progress' } },
-        { title: 'Pt 2317 · 68 · Diabetes', sub: 'HCC not yet recaptured this year · no visit booked', owner: { type: 'staff', label: NAMES.roles.coordinator }, status: { label: 'Queued' } },
+        { title: 'Pt 2746 · 68 · Diabetes', sub: 'HCC not yet recaptured this year · no visit booked', owner: { type: 'staff', label: NAMES.roles.coordinator }, status: { label: 'Queued' } },
         { title: 'Pt 0884 · 75 · COPD', sub: 'AWV due · two open quality gaps', owner: { type: 'agent', label: NAMES.roles.agent }, status: { tone: 'success', label: 'Booked' } },
         { title: 'Pt 3561 · 81 · CKD', sub: 'Rising risk · three ED visits this quarter', owner: { type: 'staff', label: NAMES.roles.rn }, status: { label: 'Review' } }
       ],
