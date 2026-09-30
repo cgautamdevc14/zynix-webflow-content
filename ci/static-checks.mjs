@@ -1,5 +1,5 @@
 // Static guards for the two files that production loads. Fails the build on anything that would break or embarrass the site.
-import fs from 'node:fs'; import crypto from 'node:crypto'; import { extractFunction } from './extract-function.mjs';
+import fs from 'node:fs'; import crypto from 'node:crypto'; import { extractFunction } from './extract-function.mjs'; import { runRedesignChecks } from './redesign-checks.mjs'; import { launchChecklist, printChecklist, verifyBuildLive, WORKFLOW } from './launch.mjs';
 const JS = 'zynix-site-scripts-unminified.js', CSS = 'zynix-site-styles.deployed.css';
 const js = fs.readFileSync(JS, 'utf8'), css = fs.readFileSync(CSS, 'utf8');
 let failed = 0; const check = (name, ok, detail = '') => { console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? '  — ' + detail : ''}`); if (!ok) failed++; };
@@ -32,4 +32,21 @@ if (FREEZE.active) {
   }
   check(`A2P freeze since ${FREEZE.since}: SMS/legal renderers unchanged since ${FREEZE.reference_commit}`, changed.length === 0, changed.length ? `changed: ${changed.join(', ')}. ${FREEZE.reason} ${FREEZE.to_unfreeze}` : 'frozen');
 } else console.log('INFO  A2P freeze inactive (ci/a2p-freeze.json)');
+// Redesign guards (DESIGN_SPEC §8.2 Q; ci/redesign-checks.mjs): CSS lint of ZX blocks, token definitions, inline-style and
+// banned-string ratchets against ci/baseline.json, and the /contact SMS disclosure. `--phase N` (or env ZX_PHASE) previews
+// the must-be-zero list of a later phase without editing ci/baseline.json.
+const BASELINE = JSON.parse(fs.readFileSync('ci/baseline.json', 'utf8')); const phaseAt = process.argv.indexOf('--phase');
+const RD = runRedesignChecks({ js, css, baseline: BASELINE, phase: phaseAt > -1 ? process.argv[phaseAt + 1] : process.env.ZX_PHASE, check });
+// Launch checklist (ci/launch.mjs): every exemption the banned-string check relies on, the A2P-frozen defects and the weight
+// targets print as LAUNCH lines, so precondition 6 is never signed off without naming them. `--launch` (the orchestrator's
+// precondition-6 run, never CI) fails while any item is open and not signed off in ci/baseline.json launchSignoffs.
+// Launch item "build" (final QA round 3) closes only on proof that production already loads the deploy build: with --launch
+// (never in CI, which stays offline-deterministic) the live head and jsDelivr @main are checked read-only (verifyBuildLive).
+const LAUNCH = process.argv.includes('--launch');
+const WF = fs.existsSync(WORKFLOW) ? fs.readFileSync(WORKFLOW, 'utf8') : null;
+const LIVE = LAUNCH ? await verifyBuildLive() : undefined;
+if (LIVE) console.log(`\nINFO  launch item "build", live check (${LIVE.base}, ${LIVE.pages.length} pages; ${LIVE.cdn}): ${LIVE.ok ? 'production loads only the dist/ URLs and jsDelivr serves a current build' : LIVE.problems.length + ' problem(s): ' + LIVE.problems.slice(0, 3).join(' | ')}`);
+console.log('');
+const openItems = printChecklist(launchChecklist({ js, css, baseline: BASELINE, judged: RD.judged, weight: RD.weight, workflow: WF, live: LIVE }), LAUNCH);
+if (LAUNCH) check(`launch (precondition 6): every launch item fixed or signed off`, openItems === 0, openItems ? `${openItems} open item(s) above` : '');
 console.log(`\n${failed ? failed + ' static check(s) FAILED' : 'all static checks passed'}`); process.exit(failed ? 1 : 0);
