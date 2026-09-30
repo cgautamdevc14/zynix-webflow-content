@@ -3410,10 +3410,10 @@
         zxCustMethodNote(ZX_CUST_ORDER) + zxCustSegNav('')) +
       renderSection({ id: 'more-customers', compact: true, rule: true },
         '<div class="zx-cust-also">' + renderSectionHead(null, 'Also working with Zynix', 'ACOs, IPAs and provider organizations beyond the stories above.', { id: 'more-customers-title' }) +
-        '<ul class="zx-cust-also__list" role="list">' + others.map(function (id) {
-          var c = zxCustomer(id); if (!c) return '';
-          var img = c.logo ? '<img class="zx-cust-also__logo" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + zxAttr(c.logo.w) + '" height="' + zxAttr(c.logo.h) + '" loading="lazy" decoding="async">' : '';
-          return '<li class="zx-cust-also__item">' + img + '<span class="zx-cust-also__name">' + c.name + '</span></li>';
+        // Names only, A to Z: several of these organizations have no logo on file, and the thin marks that exist read unevenly.
+        '<ul class="zx-cust-also__list" role="list">' + others.map(zxCustomer).filter(Boolean)
+          .sort(function (a, b) { return a.name.localeCompare(b.name); }).map(function (c) {
+          return '<li class="zx-cust-also__item">' + c.name + '</li>';
         }).join('') + '</ul></div>') +
       renderRelatedLinks({ groups: [   // names, descriptors and icons from S3's link data (zxLinkItem)
         { label: 'Built for', items: ['/audience-segments/acos-msos', '/audience-segments/health-plans', '/audience-segments/health-systems'].map(zxLinkItem) },
@@ -7487,8 +7487,10 @@ function renderPressV7() {
   var co = SITE_FACTS.company, st = SITE_FACTS.stats;
   var boiler = 'Zynix AI builds ' + SITE_FACTS.category.long + '. The Zynix platform connects claims, EHR and ADT data, identifies patients and care gaps that need attention, and helps care teams follow through with care plans, outreach agents and ambient documentation, while clinicians make clinical decisions. Zynix serves ACOs, health plans, MSOs, IPAs and health systems, with ' +
     st.states.sentence + ', ' + st.patients.sentence + ' and ' + SITE_FACTS.ehr.line + '. Zynix is ' + SITE_FACTS.compliance.soc2.prose + '. ' + co.legalLine + ' is physician-led and based in Trinity, Florida.';
-  var file = function (src, alt, w, h, label, meta, cls) {
-    return '<li class="zx-cust-kit__item' + (cls ? ' ' + cls : '') + '"><span class="zx-cust-kit__preview"><img src="' + zxAttr(zxImg(src)) + '" alt="' + zxAttr(alt) + '" width="' + w + '" height="' + h + '" loading="lazy" decoding="async"></span>' +
+  // The preview is a right-sized WebP (images/press/, about 2x its displayed size: 560x315 logo crops, 400/300px square photos);
+  // the link opens the full-size file, which is never loaded by the page itself.
+  var file = function (src, thumb, alt, label, meta, cls) {
+    return '<li class="zx-cust-kit__item' + (cls ? ' ' + cls : '') + '"><span class="zx-cust-kit__preview"><img src="' + zxAttr(zxImg(thumb[0])) + '" alt="' + zxAttr(alt) + '" width="' + thumb[1] + '" height="' + thumb[2] + '" loading="lazy" decoding="async"></span>' +
       '<span class="zx-cust-kit__name">' + label + '</span><span class="zx-cust-kit__meta">' + meta + '</span>' + renderLinkArrow('Open the file', zxImg(src), { ariaLabel: 'Open the file: ' + label }) + '</li>';
   };
   return renderHero({ preset: 'company', eyebrow: 'Newsroom', title: 'News and announcements from Zynix AI',
@@ -7498,17 +7500,17 @@ function renderPressV7() {
       renderSectionHead('Press releases', 'Announcements', 'Official announcements from Zynix AI, as distributed on Business Wire. Full text below.', { id: 'releases-title' }) +
       '<ol class="zx-cust-news__index" role="list">' + rels.map(function (r) {
         return '<li><a class="zx-cust-news__jump" href="#' + zxAttr(r.slug) + '"><time datetime="' + zxAttr(r.date) + '">' + r.dateDisplay + '</time><span>' + r.cardHeadline + '</span></a></li>';
-      }).join('') + '</ol>' + rels.map(function (r) { return zxCustReleaseArticle(r, { level: 3 }); }).join('')) +
+      }).join('') + '</ol>' + rels.map(function (r) { return zxCustReleaseArticle(r, { level: 3, collapse: true }); }).join('')) +
     renderSection({ id: 'media-kit', surface: 'subtle', className: 'zx-cust-kitsec' },
       renderSectionHead('Media resources', 'Logos, photos and boilerplate', 'Cleared for editorial use. For any other use, contact the media team.', { id: 'media-kit-title' }) +
       '<div class="zx-cust-kit">' +
         '<div class="zx-cust-kit__group"><h3 class="zx-cust-kit__title">Logos</h3><ul class="zx-cust-kit__list" role="list">' +
-          file('zynix-fill-horizontal.png', 'Zynix AI logo in full color', 1080, 1080, 'Zynix AI logo, full color', 'PNG · 1080 × 1080 · for light backgrounds', 'zx-cust-kit__item--logo') +
-          file('logo-horizontal.png', 'Zynix AI logo for dark backgrounds', 1080, 1080, 'Zynix AI logo, reversed', 'PNG · 1080 × 1080 · for dark backgrounds', 'zx-cust-kit__item--logo zx-cust-kit__item--dark') +
+          file('zynix-fill-horizontal.png', ['press/zynix-logo-color-preview.webp', 560, 315], 'Zynix AI logo in full color', 'Zynix AI logo, full color', 'PNG · 1080 × 1080 · for light backgrounds', 'zx-cust-kit__item--logo') +
+          file('logo-horizontal.png', ['press/zynix-logo-reversed-preview.webp', 560, 315], 'Zynix AI logo for dark backgrounds', 'Zynix AI logo, reversed', 'PNG · 1080 × 1080 · for dark backgrounds', 'zx-cust-kit__item--logo zx-cust-kit__item--dark') +
         '</ul></div>' +
         '<div class="zx-cust-kit__group"><h3 class="zx-cust-kit__title">Leadership photos</h3><ul class="zx-cust-kit__list" role="list">' +
-          file('headshot-jay.png', 'Jay Chowdappa, MD', 400, 400, SITE_FACTS.founder.name, SITE_FACTS.founder.title + ' · PNG', 'zx-cust-kit__item--photo') +
-          file('headshot-gautam.png', 'Gautamdev Chowdary', 300, 400, 'Gautamdev Chowdary', 'Co-founder and CTO · PNG', 'zx-cust-kit__item--photo') +
+          file('headshot-jay.png', ['press/headshot-jay-preview.webp', 400, 400], 'Jay Chowdappa, MD', SITE_FACTS.founder.name, SITE_FACTS.founder.title + ' · PNG', 'zx-cust-kit__item--photo') +
+          file('headshot-gautam.png', ['press/headshot-gautam-preview.webp', 300, 300], 'Gautamdev Chowdary', 'Gautamdev Chowdary', 'Co-founder and CTO · PNG', 'zx-cust-kit__item--photo') +
         '</ul></div>' +
         '<div class="zx-cust-kit__group zx-cust-kit__group--wide"><h3 class="zx-cust-kit__title">About Zynix AI</h3><p class="zx-cust-kit__boiler">' + boiler + '</p></div>' +
       '</div>') +
@@ -7613,17 +7615,29 @@ var PRESS_RELEASES_BY_SLUG = (function () {
 
 // One release as an article: a meta rail (date, dateline, outlet, source link, customer story) beside the verbatim text.
 // opts.level = the headline's level (3 on /press under the section H2; 2 on a detail page under the hero H1).
+// opts.collapse (/press): below 768px everything after the first paragraph sits behind a "Read the full release" disclosure
+// (the shared initDisclosures contract: [data-zx-disclosure] button[aria-controls] + a [hidden] panel); from 768px up the
+// button is not shown and page:customers CSS always shows the panel. The article keeps its id, so /press#<slug> still lands.
+// The kicker labels the text as the release as distributed: its About paragraphs are each organization's own words [VERIFY].
 function zxCustReleaseArticle(r, opts) {
   opts = opts || {};
   var lvl = opts.level === 2 ? 2 : 3, tid = r.slug + '-title';
   var body = lvl === 2 ? r.bodyHtml.replace(/<h4 /g, '<h3 ').replace(/<\/h4>/g, '</h3>') : r.bodyHtml;
+  var cut = opts.collapse ? body.indexOf('</p>') : -1, rid = r.slug + '-full-text';
+  if (cut > -1 && (cut += 4) < body.length) {
+    body = body.slice(0, cut) +
+      '<div class="zx-cust-release__more" data-zx-disclosure><button type="button" class="zx-cust-release__toggle" aria-expanded="false" aria-controls="' + zxAttr(rid) + '">' +
+        'Read the full release<svg class="zx-cust-release__chev" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>' +
+      '<div class="zx-cust-release__rest" id="' + zxAttr(rid) + '" hidden>' + body.slice(cut) + '</div>';
+  }
   var story = r.ctaSecondary ? renderLinkArrow(r.ctaSecondary.label, r.ctaSecondary.href) : '';
   return '<article class="zx-cust-release" id="' + zxAttr(r.slug) + '" aria-labelledby="' + zxAttr(tid) + '">' +
     '<div class="zx-cust-release__meta"><p class="zx-cust-release__date"><time datetime="' + zxAttr(r.date) + '">' + r.dateDisplay + '</time></p>' +
       '<dl class="zx-cust-release__facts"><div><dt>Dateline</dt><dd>' + r.location + '</dd></div><div><dt>Distributed by</dt><dd>' + r.outlet + '</dd></div>' +
       '<div><dt>Type</dt><dd>' + r.category + '</dd></div></dl>' +
       '<p class="zx-cust-release__links">' + renderLinkArrow('Read on ' + r.outlet, r.outletUrl) + story + '</p></div>' +
-    '<div class="zx-cust-release__main"><h' + lvl + ' class="zx-cust-release__title" id="' + zxAttr(tid) + '">' + r.headline + '</h' + lvl + '>' +
+    '<div class="zx-cust-release__main"><p class="zx-cust-release__kicker">Full text of the ' + r.outlet + ' release</p>' +
+      '<h' + lvl + ' class="zx-cust-release__title" id="' + zxAttr(tid) + '">' + r.headline + '</h' + lvl + '>' +
       renderProse(body, { className: 'zx-cust-release__body' }) + '</div></article>';
 }
 
@@ -13565,11 +13579,16 @@ function renderDataAnalyticsV7() {
       footer: 'Analytics flags the change; the care manager decides what happens next.' }
   };
 
-  // Hub and segment cards: segment, name, what they run, logo when one exists. No metrics (DECISIONS 16).
+  // Hub and segment cards: segment, name, what they run, and a mark in a fixed 40px slot. No metrics (DECISIONS 16).
+  // Logos use the logo row's optical height classes (CUSTOMERS[id].logo.h, 20-40px; page:customers sets them 1.3x larger for the
+  // card, capped at the slot), so a round seal and a long wordmark carry the same visual weight; a customer with no logo on file gets its name set as a text wordmark in the same slot (decorative,
+  // like the logos' empty alt: the card title names the organization).
   function zxCustCard(id) {
     var c = zxCustomer(id), s = ZX_CUST_STORIES[id], g = c && ZX_CUST_SEGS[c.segment];
     if (!c || !s || !c.caseStudy) return '';
-    var logo = c.logo ? '<img class="zx-cust-card__logo" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + zxAttr(c.logo.w) + '" height="' + zxAttr(c.logo.h) + '" loading="lazy" decoding="async">' : '';
+    var h = c.logo && [20, 24, 28, 32, 36, 40].indexOf(c.logo.h) > -1 ? c.logo.h : 28;
+    var logo = c.logo ? '<img class="zx-cust-card__logo zx-cust-card__logo--h' + h + '" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + zxAttr(c.logo.w) + '" height="' + zxAttr(c.logo.h) + '" loading="lazy" decoding="async">' :
+      '<span class="zx-cust-card__wordmark" aria-hidden="true">' + c.name + '</span>';
     return '<a class="zynix-card zynix-card--link zx-cust-card" href="' + zxAttr(c.caseStudy) + '">' +
       '<span class="zx-cust-card__logo-slot">' + logo + '</span><span class="zynix-card__eyebrow">' + (g ? g.one : c.segmentLabel) + '</span>' +
       '<h3 class="zynix-card__title">' + c.name + '</h3><p class="zynix-card__body">' + s.card + '</p>' +
