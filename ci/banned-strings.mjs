@@ -335,7 +335,7 @@ export function countScopes(src) {
 
 // The ratchet decision. baseline = ci/baseline.json object; phase overrides baseline.phase.
 export function judge(src, baseline, phase) {
-  const { counts, hits, scopes, warnings, exempted, exempt, exemptByKind, exemptProblems, exemptNotes } = countScopes(src);
+  const { counts, hits, scopes, warnings, exempted, exempt, exemptByKind, exemptProblems, exemptNotes, reach } = countScopes(src);
   const base = baseline.bannedStrings || {}; const ph = phase === undefined || phase === null || phase === '' ? (+baseline.phase || 0) : +phase;
   const zeroLists = baseline.mustBeZeroByPhase || {};
   const mustZero = new Set(); let all = false;
@@ -347,7 +347,7 @@ export function judge(src, baseline, phase) {
     if ((all || mustZero.has(s)) && n > 0) zeroFails.push({ scope: s, count: n });
   }
   for (const [s, b] of Object.entries(base)) { const n = counts[s] || 0; if (n < b) lower.push({ scope: s, count: n, baseline: b }); }
-  return { phase: ph, counts, hits, scopes, warnings, exempted, exempt, exemptByKind, exemptProblems, exemptNotes, rises, zeroFails, lower, mustZero: all ? ['*'] : [...mustZero] };
+  return { phase: ph, counts, hits, scopes, warnings, exempted, exempt, exemptByKind, exemptProblems, exemptNotes, reach, rises, zeroFails, lower, mustZero: all ? ['*'] : [...mustZero] };
 }
 
 const lineOf = (src, i) => src.slice(0, i).split('\n').length;

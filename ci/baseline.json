@@ -6,7 +6,7 @@
     "  Preview a later phase without editing this file: node ci/static-checks.mjs --phase 1",
     "bannedStrings: hits per scope (absent = 0; c95cc03 counts ratcheted down after each phase; 2026-09-29 final QA round 1: every scope 0, the last hit (\"(bundle)\" 1, the slug ZX_BLOG_AGENTS_OPS) was fixed by S3). A PR fails if any scope rises. Owning streams lower their",
     "  own scopes with: node ci/banned-strings.mjs --write-baseline (never raises). Inspect: node ci/banned-strings.mjs --hits <scope>",
-    "styleAttributes: max count of style=\" in the bundle (2,196 at c95cc03; 1,229 after Phase 3; 1,017 after the Phase 3 integration merge of rd/h, a447c24, 2026-09-29); lower it after each phase.",
+    "styleAttributes: max count of style=\" in the bundle (2,196 at c95cc03; 1,229 after Phase 3; 1,017 after the Phase 3 integration merge of rd/h, a447c24, 2026-09-29); 1,016 after final QA round 3 (bb6a765, 2026-09-30); node ci/launch.mjs --write-weight lowers it together with the weight ceilings.",
     "undefinedVars: var(--z*) names used without a fallback and defined nowhere at c95cc03; S1's token block defines them,",
     "  then remove them here. Any other undefined name fails.",
     "smokeOverflow390: ci/smoke.mjs rect-overflow ratchet, outermost offending elements per page at 390px (c95cc03 counts on production;",
@@ -24,6 +24,7 @@
     "  builtCeilings (final QA round 2): the same ratchet on the deploy build (ci/build.mjs, whitespace-only minification; 347,120 B brotli-4 at 851218d + 2,048). --write-weight lowers",
     "  both sets and adds builtCeilings.cssBr4 on its first run after the last merge of round 2. When a round's accepted growth passes a ceiling, the orchestrator runs",
     "  node ci/launch.mjs --remeasure-weight --reason \"…\" after that round's last merge: every ceiling = measured + 2,048, up or down, logged in weight.log with the reason.",
+    "  Final QA polish round (2026-09-30, Q): --write-weight run on rd/final bb6a765 after round 3's last merge (cssBr4 61,166, totalBr4 410,610, cssImports 0; built totalBr4 346,360, cssBr4 42,370; styleAttributes 1,016); it now also lowers styleAttributes and logs each run in weight.log. Re-run it after the polish round's last merge.",
     "launchSignoffs: orchestrator decisions on open launch items (ci/launch.mjs), keyed by item id, e.g. \"dead-code\": {\"by\": \"orchestrator\", \"date\": \"…\", \"note\": \"…\"}.",
     "  Every open item prints as a LAUNCH line in ci/static-checks.mjs; node ci/static-checks.mjs --launch fails while an item is open and not signed off (launch precondition 6)."
   ],
@@ -53,7 +54,7 @@
       "*"
     ]
   },
-  "styleAttributes": 1017,
+  "styleAttributes": 1016,
   "undefinedVars": [],
   "smokeOverflow390": {
     "/": 0,
@@ -65,12 +66,13 @@
   "bannedStrings": {},
   "weight": {
     "ceilings": {
-      "cssBr4": 69070,
-      "totalBr4": 412698,
-      "cssImports": 1
+      "cssBr4": 61166,
+      "totalBr4": 410610,
+      "cssImports": 0
     },
     "builtCeilings": {
-      "totalBr4": 349168
+      "totalBr4": 346360,
+      "cssBr4": 42370
     },
     "targets": {
       "cssBr4": 30720,
@@ -100,6 +102,34 @@
           }
         },
         "reason": "Final QA round 2 (Q), by hand: totalBr4 = 410,650 measured at 851218d + 2,048. The d3cd1fe ceiling was set on the base while ten round-1 branches were in flight; their a11y, form-validation and link fixes grew the bundle by S2 +9,084, S3 +7,823, P6 +5,529, P1 +4,928, P4 +2,267 B raw (each within DESIGN_SPEC 7.4's 15 KB per stream). cssBr4 left at 69,070 so in-flight round-2 CSS is not failed. builtCeilings.totalBr4 added for the new deploy build (ci/build.mjs): 347,120 + 2,048."
+      },
+      {
+        "date": "2026-09-30",
+        "commit": "bb6a765",
+        "from": {
+          "ceilings": {
+            "cssBr4": 69070,
+            "totalBr4": 412698,
+            "cssImports": 1
+          },
+          "builtCeilings": {
+            "totalBr4": 349168
+          },
+          "styleAttributes": 1017
+        },
+        "to": {
+          "ceilings": {
+            "cssBr4": 61166,
+            "totalBr4": 410610,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 346360,
+            "cssBr4": 42370
+          },
+          "styleAttributes": 1016
+        },
+        "reason": "Final QA polish round (Q): ratchet down on rd/final bb6a765 after round 3's last merge (final_suite_r3 issue 1): locks in round 3's measured sizes, removes the @import allowance and adds builtCeilings.cssBr4"
       }
     ]
   },

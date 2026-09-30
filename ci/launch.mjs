@@ -2,7 +2,8 @@
 //
 //   node ci/launch.mjs                  print the checklist (the LAUNCH lines ci/static-checks.mjs prints) and the weights
 //   node ci/launch.mjs --json           the same as JSON
-//   node ci/launch.mjs --write-weight   ratchet the weight ceilings in ci/baseline.json DOWN to measured + headroom (never raises)
+//   node ci/launch.mjs --write-weight   ratchet the weight ceilings in ci/baseline.json DOWN to measured + headroom, and styleAttributes
+//                                       down to the measured style=" count (never raises; logged in weight.log; optional --reason)
 //   node ci/launch.mjs --build-plan     the ordered steps of launch item "build" (final QA round 3) with this tree's state, and
 //                                       the workflow edit of step A as a diff (printed for the orchestrator, never applied)
 //   node ci/launch.mjs --verify-build-live [--base https://www.zynix.ai] [--cdn <jsDelivr @main URL>] [--pages /,/platform]
@@ -50,6 +51,7 @@ import zlib from 'node:zlib';
 import crypto from 'node:crypto';
 import { extractFunction } from './extract-function.mjs';
 import { build, distState, DIST, SRC } from './build.mjs';
+import { reachability, lex, matchBrace, DEAD_FUNCTIONS } from './banned-strings.mjs';
 
 // Visible defects in the A2P-frozen renderers (ci/a2p-freeze.json) that are not banned strings. An entry applies while every
 // listed function still hashes to its pinned SHA-256; when one changes, the item says so (verify the fix, then delete the entry).
@@ -58,13 +60,46 @@ export const A2P_ITEMS = [
     fns: { renderSMSProgram: 'fc361125b8d4cccefa9867b928b051aa6239adb5e8f2fac86f04a2b3eeb8a88e', renderPrivacyV7: '564abd893045071f60fc604fe2d2a292386b63436f6a01f3d14691dbb48f131f', renderTermsV7: 'c578f5d5771ef575ad97a20df4dc6abd9fd1ff0992832e11803f3330642af226' },
     since: '2026-09-29', owner: 'A2P workstream',
     problem: 'the supported-carrier lists name "Sprint", which merged into T-Mobile in 2020 (final QA claims issue 11)',
-    fix: 'drop "Sprint" from the carrier lists in the bundle renderers and the native Webflow pages together, after the campaign decision; re-pin ci/a2p-freeze.json; then delete this entry' },
+    fix: 'drop "Sprint" from the carrier lists in the bundle renderers and the native Webflow pages together, after the campaign decision; re-pin ci/a2p-freeze.json; in the same session apply the A2P-held section (`held`) of the dashboard job list (tools/rd_checks.mjs --jobs), which the one-publish job leaves out during carrier review; then delete this entry' },
   { id: 'sms-consent-fine-print', text: 'By checking the box above and submitting', pages: ['/sms-consent'],
     fns: { renderSMSConsent: '3dc0b6c16d9d7abcb29a800638c8f50341011b3c1cbbb96802d6b2b5bdcc52c2' },
     since: '2026-09-29', owner: 'A2P workstream',
     problem: 'the SMS fine print and its Privacy Policy link are #94A3B8 on white at 11px (2.56:1), and the bold STOP and HELP are 11px: below WCAG AA contrast and the 12px floor (DESIGN_SPEC §7.2, §7.3). tools/gate.mjs exempts it as "sms-consent-fine-print"',
-    fix: 'darken the fine print to at least --zx-text-muted (#646C7E) at 12px or more in renderSMSConsent and the native /sms-consent page together, after the campaign decision; re-pin ci/a2p-freeze.json; then delete this entry and the gate exemption' }
+    fix: 'darken the fine print to at least --zx-text-muted (#646C7E) at 12px or more in renderSMSConsent and the native /sms-consent page together, after the campaign decision; re-pin ci/a2p-freeze.json; in the same session apply the A2P-held section (`held`) of the dashboard job list (tools/rd_checks.mjs --jobs); then delete this entry and the gate exemption' }
 ];
+
+// Claim figures and extended claim patterns in the copy of unreachable functions (the dead-code item; final QA polish round).
+// The patterns follow the EXT list of redesign-2026-09/tools/rd_checks.mjs (numbers: N%, Nx, N+, N million, $N, numeric ranges;
+// plus agent counts, triage, hallucination, real-time and superlatives). Only string literals and template text are scanned, with
+// HTML tags and style attributes removed (so "width:100%" is not a figure), and numbers that appear in SITE_FACTS strings
+// (registry facts: 30+, 300+, 1M+ …) are allowed, as in rd_checks.
+const FIGURES = [
+  /(?<![\w.#-])\d+(?:\.\d+)?\s?%\+?/gi, /(?<![\w.$#])\d+(?:\.\d+)?x\b/gi, /(?<![\w.])\d[\d,]*\+/g, /\b\d+(?:\.\d+)?\s*(?:million|billion)\b/gi,
+  /\$\d[\d,.]*(?:\s?(?:[MBK]\b|million|billion))?\+?/gi, /\b\d[\d,]*\s?[-–]\s?\d[\d,]*\s?(?:hours?|days?|weeks?|months?)\b/gi
+];
+const PATTERNS = [
+  /\b(?:\d+|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)\s+(?:more\s+)?(?:AI\s+|purpose-built\s+|specialized\s+|autonomous\s+)?agents\b/gi,
+  /\btriage\b/gi, /\bhallucinat\w*/gi, /\breal[- ]time\b/gi, /\b(?:the only|industry[- ]leading|best[- ]in[- ]class|world[- ]class|unmatched)\b/gi
+];
+const normFig = t => t.replace(/\s+/g, '').toLowerCase();
+export function deadFigures(js, reach) {
+  let R = reach; if (!R) { try { R = reachability(js); } catch { R = null; } }
+  if (!R || !R.ok) return { unreachable: 0, rows: [], error: R ? R.error : 'reachability failed' };
+  const { literals } = lex(js); const text = (a, b) => literals.filter(([s, e]) => s >= a && e <= b).map(([s, e]) => js.slice(s, e)).join('\n');
+  const visible = t => t.replace(/\bstyle\s*=\s*\\?(["'])[\s\S]*?\\?\1/g, ' ').replace(/<[^>]*>/g, ' ').replace(/&[a-z]+;|&#\d+;/gi, ' ');
+  const allow = new Set(); const f0 = js.search(/\bvar SITE_FACTS\s*=\s*\{/);
+  if (f0 > -1) { const open = js.indexOf('{', f0), close = matchBrace(js, open); const facts = visible(text(open, close + 1)); for (const re of FIGURES) for (const m of facts.matchAll(re)) allow.add(normFig(m[0])); }
+  const rows = [];
+  for (const fn of R.unreachable) {
+    const decl = R.fns.filter(f => f.name === fn || f.name.startsWith(fn + '#')); if (!decl.length) continue;
+    const t = visible(decl.map(d => text(d.start, d.end)).join('\n')); const hits = [];
+    for (const re of FIGURES) for (const m of t.matchAll(re)) if (!allow.has(normFig(m[0]))) hits.push(m[0].trim());
+    for (const re of PATTERNS) for (const m of t.matchAll(re)) hits.push(m[0].trim());
+    const uniq = [...new Set(hits)]; if (uniq.length) rows.push({ fn, listed: DEAD_FUNCTIONS.includes(fn), hits: uniq });
+  }
+  rows.sort((a, b) => (a.listed - b.listed) || (b.hits.length - a.hits.length));
+  return { unreachable: R.unreachable.length, rows };
+}
 
 const brotli4 = buf => zlib.brotliCompressSync(buf, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 4, [zlib.constants.BROTLI_PARAM_SIZE_HINT]: buf.length } }).length;
 const sha = t => crypto.createHash('sha256').update(t).digest('hex');
@@ -111,12 +146,20 @@ export function remeasureWeight(baseline, w, reason, commit) {
   baseline.weight = { ...W, ceilings, builtCeilings, log: [...(W.log || []), entry] }; return entry;
 }
 
-export function writeWeight(baseline, w) {
+// --write-weight (final QA polish round): also ratchets styleAttributes (the style=" count, ci/redesign-checks.mjs check 3) down to
+// the measured count, and logs every run that changed something in weight.log (date, commit, from, to, reason), so one command
+// after the LAST merge of a round locks in both ratchets. Never raises anything.
+export const styleCount = js => (js.match(/style="/g) || []).length;
+export function writeWeight(baseline, w, { styles, commit = null, reason = 'ratchet down after the last merge of the round (node ci/launch.mjs --write-weight)' } = {}) {
   const lower = (C, want) => { const next = { ...C }; for (const [k, v] of Object.entries(want)) if (C[k] === undefined || v < C[k]) next[k] = v; return next; };
   const W = baseline.weight || {};
   const next = lower(W.ceilings || {}, { cssBr4: w.cssBr4 + HEADROOM, totalBr4: w.totalBr4 + HEADROOM, cssImports: w.cssImports });
   const nextBuilt = w.built && !w.built.problems.length ? lower(W.builtCeilings || {}, { cssBr4: w.built.cssBr4 + HEADROOM, totalBr4: w.built.totalBr4 + HEADROOM }) : (W.builtCeilings || {});
-  baseline.weight = { ...W, ceilings: next, builtCeilings: nextBuilt }; return { ceilings: next, builtCeilings: nextBuilt };
+  const fromStyles = baseline.styleAttributes, toStyles = typeof styles === 'number' && (fromStyles === undefined || styles < fromStyles) ? styles : fromStyles;
+  const same = JSON.stringify([W.ceilings || {}, W.builtCeilings || {}, fromStyles]) === JSON.stringify([next, nextBuilt, toStyles]);
+  const log = same ? (W.log || []) : [...(W.log || []), { date: new Date().toISOString().slice(0, 10), commit, from: { ceilings: W.ceilings || {}, builtCeilings: W.builtCeilings || {}, styleAttributes: fromStyles }, to: { ceilings: next, builtCeilings: nextBuilt, styleAttributes: toStyles }, reason }];
+  baseline.weight = { ...W, ceilings: next, builtCeilings: nextBuilt, log }; baseline.styleAttributes = toStyles;
+  return { ceilings: next, builtCeilings: nextBuilt, styleAttributes: toStyles, changed: !same };
 }
 
 // Every open item. `judged` = judge() from ci/banned-strings.mjs on the same source.
@@ -135,13 +178,20 @@ export function launchChecklist({ js, css, baseline, judged, weight, workflow = 
     add(`verify:${e.text}`, 'claims (precondition 6)', e.owner,
       `"${e.text}" [${e.label}] renders on ${e.page} from ${e.where} (JS:${lineOf(h.index)}), not counted since ${e.since} only while its pinned sentence is unchanged: ${e.why}`, e.fix); }
   const dead = judged.exempt.filter(x => x.kind === 'dead');
-  if (dead.length) {
+  // final QA polish round (claims r3 #8): the banned list alone named 13 functions, but every unreachable function ships in the
+  // public bundle (and dist/), and several carry claim figures that were never registered (renderZynScribe "40%", renderZynFax
+  // "90%+" …). The item now names EVERY unreachable function whose copy carries a claim figure or an extended claim pattern.
+  const figs = deadFigures(js, judged.reach);
+  if (dead.length || figs.rows.length) {
     const per = new Map();
     for (const h of dead) { const n = (h.entry && h.entry.fn) || '(unknown)'; const e = per.get(n) || { n: 0, labels: new Set() }; e.n++; e.labels.add(h.label); per.set(n, e); }
     const list = [...per].sort((a, b) => b[1].n - a[1].n).map(([n, e]) => `${n} ${e.n} (${[...e.labels].slice(0, 3).join(', ')})`).join('; ');
+    const figList = figs.rows.map(r => `${r.fn}${r.listed ? '' : ' [not in DEAD_FUNCTIONS]'} (${r.hits.slice(0, 6).join(', ')}${r.hits.length > 6 ? `, +${r.hits.length - 6}` : ''})`).join('; ');
     add('dead-code', 'claims (precondition 6)', 'orchestrator (sign-off) or an ownership exception to DESIGN_SPEC §6/§8.1',
-      `${dead.length} banned-claim hits ship in the public bundle inside ${per.size} unreachable functions (reachability verified on every run, so no visitor sees them, but anyone reading the bundle does): ${list}`,
-      'either record an explicit sign-off of the dead-code exemption in ci/baseline.json launchSignoffs["dead-code"], or grant the ownership exception to delete these functions together with their shadowed routes keys (also shrinks the bundle); then remove them from DEAD_FUNCTIONS');
+      `${figs.unreachable} functions are unreachable (reachability verified on every run, so no visitor sees them) but ship in the public bundle and dist/, where anyone reading the source does. ` +
+      (dead.length ? `${dead.length} banned-claim hits sit inside ${per.size} of them (DEAD_FUNCTIONS, exempt from the ratchet): ${list}. ` : '') +
+      (figs.rows.length ? `${figs.rows.length} of them carry claim figures or extended claim patterns that are not registry facts (${figs.rows.filter(r => !r.listed).length} not in DEAD_FUNCTIONS, so no other check names them): ${figList}` : ''),
+      `either record an explicit sign-off in ci/baseline.json launchSignoffs["dead-code"] that covers all ${figs.unreachable} unreachable functions and the figures listed here, or grant the ownership exception to delete all ${figs.unreachable} (node ci/banned-strings.mjs --dead lists them) together with their shadowed routes keys (also shrinks the bundle); then remove them from DEAD_FUNCTIONS`);
   }
   // A2P-frozen visible defects that are not banned strings
   for (const x of A2P_ITEMS) {
@@ -299,7 +349,12 @@ if (process.argv[1] && process.argv[1].endsWith('launch.mjs')) {
   const js = fs.readFileSync('zynix-site-scripts-unminified.js', 'utf8'), css = fs.readFileSync('zynix-site-styles.deployed.css', 'utf8');
   const baseline = JSON.parse(fs.readFileSync('ci/baseline.json', 'utf8'));
   const w = measureWeight(js, css);
-  if (process.argv.includes('--write-weight')) { const next = writeWeight(baseline, w); fs.writeFileSync('ci/baseline.json', JSON.stringify(baseline, null, 2) + '\n'); console.log('weight ceilings: ' + JSON.stringify(next)); process.exit(0); }
+  if (process.argv.includes('--write-weight')) {
+    let commit = null; try { const { execSync } = await import('node:child_process'); commit = execSync('git rev-parse --short HEAD', { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim(); } catch {}
+    const at = process.argv.indexOf('--reason'), reason = at > -1 ? String(process.argv[at + 1] || '').trim() : undefined;
+    const next = writeWeight(baseline, w, { styles: styleCount(js), commit, ...(reason ? { reason } : {}) });
+    fs.writeFileSync('ci/baseline.json', JSON.stringify(baseline, null, 2) + '\n');
+    console.log('weight ceilings (and styleAttributes): ' + JSON.stringify(next) + (next.changed ? ' (logged in ci/baseline.json weight.log)' : ' (nothing to lower)')); process.exit(0); }
   if (process.argv.includes('--remeasure-weight')) {
     const at = process.argv.indexOf('--reason'), reason = at > -1 ? String(process.argv[at + 1] || '').trim() : '';
     if (reason.length < 20) { console.log('refused: --remeasure-weight needs --reason "<why the growth is accepted, per stream>" (20+ characters)'); process.exit(1); }

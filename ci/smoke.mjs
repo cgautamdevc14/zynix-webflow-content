@@ -23,6 +23,12 @@ const results = []; const check = (name, ok, detail = '') => { results.push({ na
 
 const prof = fs.mkdtempSync(path.join(os.tmpdir(), 'zx-smoke-'));
 const chrome = spawn(CHROME, ['--headless=new', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage', '--no-first-run', `--remote-debugging-port=${PORT}`, `--user-data-dir=${prof}`, 'about:blank'], { stdio: 'ignore' });
+// Remove the throwaway Chrome profile on every exit (final QA polish round, 2026-09-30: every run used to leave its profile in
+// the OS temp dir; 2,000+ of them, about 126 GB, filled the disk). SIGINT/SIGTERM exit through process.exit so this runs.
+process.on('exit', () => { try { if (chrome) chrome.kill('SIGKILL'); } catch {} try { fs.rmSync(prof, { recursive: true, force: true, maxRetries: 3 }); } catch {}
+  // Chrome's helper processes can still write for a moment after the browser dies: finish the job from a detached shell
+  try { if (fs.existsSync(prof)) spawn('/bin/sh', ['-c', 'sleep 3; rm -rf -- "$0"', prof], { detached: true, stdio: 'ignore' }).unref(); } catch {} });
+for (const sig of ['SIGINT', 'SIGTERM']) process.on(sig, () => process.exit(130));
 let wsUrl; for (let i = 0; i < 80; i++) { try { wsUrl = (await (await fetch(`http://127.0.0.1:${PORT}/json/version`)).json()).webSocketDebuggerUrl; break; } catch { await sleep(250); } }
 if (!wsUrl) { console.log('INCONCLUSIVE: Chrome did not start (' + CHROME + ')'); process.exit(2); }
 const ws = new WebSocket(wsUrl); await new Promise(r => ws.addEventListener('open', r)); let id = 0; const pend = new Map(); const hs = new Map();
