@@ -9467,11 +9467,11 @@ function renderDataAnalyticsV7() {
       <!-- Right: In-house hero image — desktop + iPad only -->
       <div class="hero-visual">
         <img
-          src="https://242472215.fs1.hubspotusercontent-na2.net/hubfs/242472215/Blog1%20hero%20image.png"
+          src="https://242472215.fs1.hubspotusercontent-na2.net/hub/242472215/hubfs/Blog1%20hero%20image.png?width=1000"
           alt="AI and healthcare cost — value-based care execution framework by Zynix AI"
           loading="eager"
-          width="1672"
-          height="941"
+          width="1000"
+          height="562"
         >
       </div>
 
@@ -10341,7 +10341,7 @@ function renderDataAnalyticsV7() {
             viewBox="0 0 760 270"
             xmlns="http://www.w3.org/2000/svg"
             overflow="hidden"
-            width="100%" height="auto"
+            width="100%"
             style="display:block; border-radius:16px;"
             role="img"
             aria-label="Diagram: Point solutions on the left transition via agentic AI to end-to-end workflow execution on the right"
