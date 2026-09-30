@@ -56,7 +56,9 @@
         { id: 'instagram', label: 'Zynix AI on Instagram', href: 'https://www.instagram.com/zynixai/' }
       ]
     },
-    brand: { logo: 'brand/zynix-logo-color.png', logoInverse: 'brand/zynix-logo-inverse.png', logoRatio: 2.625, symbol: 'logo-symbol.png' },
+    // symbol: the colour Z (blue and orange) from the colour lockup, trimmed to its alpha box and centred on a 64x64 transparent
+    // square, so it fills the 20x20 slot in the zynix-ui bar on white. (logo-symbol.png is light artwork for dark surfaces.)
+    brand: { logo: 'brand/zynix-logo-color.png', logoInverse: 'brand/zynix-logo-inverse.png', logoRatio: 2.625, symbol: 'brand/zynix-symbol-color.png' },
     demo: { label: 'Request a demo', href: CALENDLY, length: '30 minutes' },
     stats: {
       patients:     { value: '1M+',  label: 'value-based care patients onboarded',       sentence: '1M+ value-based care patients onboarded', source: 'Zynix, September 2026' },
@@ -159,14 +161,18 @@
       logo: { file: 'logos/central-florida-aco.svg', source: 'central-florida-aco-logo.svg', h: 24, w: 104 }, caseStudy: '/case-studies-central-florida-aco', metrics: [] },
     nexthealthcare: { name: 'NEXT Healthcare Solutions', segment: null, segmentLabel: null, logoRow: 7,   // [VERIFY] segment
       logo: { file: 'logos/next-healthcare.svg', source: 'next-healthcare.svg', h: 28, w: 79 }, caseStudy: null, metrics: [] },
-    goldencareaco: { name: 'GoldenCare ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: 8,
-      logo: { file: 'logos/goldencare-aco.webp', source: 'goldencare-aco.png', h: 32, w: 80 }, caseStudy: null, metrics: [] },
+    // GoldenCare, Sunflower and Professional Radiology are thin, light marks that vanish under the rows' grayscale filter, so their
+    // `file` is a monochrome ink rendition (light colours darkened, white removed, 2026-09-29); the colour trims stay in
+    // images/logos/<name>.webp for any colour context. GoldenCare's script still reads lighter than the other marks, so it is
+    // out of the default row and CLSC (now on a transparent background) takes slot 8.
+    goldencareaco: { name: 'GoldenCare ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: null,
+      logo: { file: 'logos/goldencare-aco-ink.webp', source: 'goldencare-aco.png', h: 36, w: 90 }, caseStudy: null, metrics: [] },
     sunfloweraco: { name: 'Sunflower ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: null,
-      logo: { file: 'logos/sunflower-aco.webp', source: 'sunflower-aco.png', h: 36, w: 63 }, caseStudy: null, metrics: [] },
+      logo: { file: 'logos/sunflower-aco-ink.webp', source: 'sunflower-aco.png', h: 40, w: 70 }, caseStudy: null, metrics: [] },
     professionalradiology: { name: 'Professional Radiology', segment: null, segmentLabel: null, logoRow: null,
-      logo: { file: 'logos/professional-radiology.webp', source: 'professional-radiology.png', h: 36, w: 60 }, caseStudy: null, metrics: [] },
-    clsc: { name: 'CLSC', segment: null, segmentLabel: null, logoRow: null,   // [VERIFY] full name
-      logo: { file: 'logos/clsc.webp', source: 'clscfl.png', h: 24, w: 86 }, caseStudy: null, metrics: [] },
+      logo: { file: 'logos/professional-radiology-ink.webp', source: 'professional-radiology.png', h: 40, w: 67 }, caseStudy: null, metrics: [] },
+    clsc: { name: 'CLSC', segment: null, segmentLabel: null, logoRow: 8,   // [VERIFY] full name
+      logo: { file: 'logos/clsc-alpha.webp', source: 'clscfl.png', h: 24, w: 85 }, caseStudy: null, metrics: [] },
     apolloclinic: { name: 'Apollo Clinic Network', segment: 'practice', segmentLabel: 'Physician group', logoRow: null, logo: null, caseStudy: '/case-studies/apollo-clinic', metrics: [   // [VERIFY] segment
       { value: 'Under 14%', label: 'No-show rate', baseline: '22%', period: 'first quarter of deployment', n: null, source: 'Reported by Apollo Clinic Network', approved: null }   // P4, DECISIONS 16 [VERIFY]
     ] },
@@ -358,7 +364,7 @@
     care: GH + 'zynix-aco-quality.png',                 // Quality metrics — care plans, ACOs
     scribe: GH + 'zynix-quality-measures.png',          // Quality measures — ZynScribe
     patients: GH + 'zynix-provider-view.png',           // Provider view — FQHCs, About
-    enterprise: GH + 'zynix-aco-risk.png',              // Risk stratification — Zynix OS
+    enterprise: GH + 'zynix-aco-risk.png',
     mesh: GH + 'zynix-chatbot.png',                     // AI chatbot — ZynixLLM
     // Aliases used by blog posts
     platform: GH + 'zynix-aco-dashboard.png',           // ACO dashboard for blog posts
@@ -1775,23 +1781,65 @@
     }).join('') + '</div>';
   }
 
-  // Binds button.zynix-faq-q and [data-zx-disclosure] buttons in root once. With aria-controls it toggles the panel's `hidden`
-  // (grid-rows reveal); legacy markup toggles .open on the closest .zynix-faq-item.
+  // Binds every .zynix-faq-q and [data-zx-disclosure] button in root once. Markup that ships aria-controls (renderFaqList,
+  // data-zx-disclosure) toggles the panel's `hidden` (grid-rows reveal). Legacy markup toggles .open on the closest
+  // .zynix-faq-item, which the CSS uses to show the sibling .zynix-faq-a; its question gets aria-controls pointing at that answer.
+  // Legacy non-button questions (<h3 class="zynix-faq-q"> in the flat /blog-* renderers, until the Phase 4 codemod) keep their
+  // heading: the question text is wrapped in a span with role="button", tabindex="0" and aria-expanded (Enter/Space toggle),
+  // and a click anywhere on the heading toggles too. The text is unchanged, so FAQPage JSON-LD (built from textContent) is too.
+  var zxDisclosureSeq = 0;
   function initDisclosures(root) {
     root = root || document;
     if (!root.querySelectorAll) return;
     var reduce = function () { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
-    var btns = root.querySelectorAll('button.zynix-faq-q, [data-zx-disclosure] button[aria-controls]');
-    Array.prototype.forEach.call(btns, function (btn) {
-      if (btn.__zxDisclosure) return;
-      btn.__zxDisclosure = true;
-      btn.addEventListener('click', function () {
-        var item = btn.closest('.zynix-faq-item');
-        var id = btn.getAttribute('aria-controls');
+    var answerOf = function (q, item) {
+      var a = q.nextElementSibling;
+      if (a && a.classList.contains('zynix-faq-a')) return a;
+      return item ? item.querySelector('.zynix-faq-a') : null;
+    };
+    var els = root.querySelectorAll('.zynix-faq-q, [data-zx-disclosure] button[aria-controls]');
+    Array.prototype.forEach.call(els, function (q) {
+      if (q.__zxDisclosure) return;
+      q.__zxDisclosure = true;
+      var managed = !!q.getAttribute('aria-controls');   // captured before a legacy question gets aria-controls below
+      var item = q.closest('.zynix-faq-item') || (managed ? null : q.parentElement);
+      var btn = q;                                         // the element that carries the button role and aria-expanded
+      var chevron = null;                                  // legacy heading only: its state is drawn on the path (no CSS needed)
+      if (!managed) {
+        if (q.tagName !== 'BUTTON') {
+          btn = document.createElement('span');
+          btn.className = 'zynix-faq-q__label';
+          btn.setAttribute('role', 'button');
+          btn.tabIndex = 0;
+          while (q.firstChild) btn.appendChild(q.firstChild);
+          q.appendChild(btn);
+          if (!q.querySelector('.zynix-faq-q__icon')) {    // the heading is a flex row (.zynix-faq-q); the chevron sits at its end
+            q.insertAdjacentHTML('beforeend', ZX_FAQ_CHEVRON);
+            chevron = q.lastElementChild && q.lastElementChild.querySelector('path');
+          }
+          btn.addEventListener('keydown', function (e) {
+            var k = e.key;
+            if (k !== 'Enter' && k !== ' ' && k !== 'Spacebar') return;
+            e.preventDefault();
+            toggle();
+          });
+        }
+        btn.setAttribute('aria-expanded', item && item.classList.contains('open') ? 'true' : 'false');
+        if (chevron && btn.getAttribute('aria-expanded') === 'true') chevron.setAttribute('transform', 'rotate(180 10 10)');
+        var ans = answerOf(q, item);
+        if (ans) {
+          if (!ans.id) { var aid; do { aid = 'zx-faq-a-' + (++zxDisclosureSeq); } while (document.getElementById(aid)); ans.id = aid; }
+          btn.setAttribute('aria-controls', ans.id);
+        }
+      }
+      q.addEventListener('click', function () { toggle(); });
+      function toggle() {
+        var id = managed ? btn.getAttribute('aria-controls') : null;
         var panel = id ? document.getElementById(id) : null;
         var open = btn.getAttribute('aria-expanded') !== 'true';
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         if (item) item.classList.toggle('open', open);
+        if (chevron) { if (open) chevron.setAttribute('transform', 'rotate(180 10 10)'); else chevron.removeAttribute('transform'); }
         if (!panel) return;  // legacy markup: the .open class drives the answer
         if (panel.__zxTimer) { clearTimeout(panel.__zxTimer); panel.__zxTimer = null; }
         if (open) {
@@ -1808,7 +1856,87 @@
           panel.addEventListener('transitionend', done);
           panel.__zxTimer = setTimeout(done, 320);  // no transition (no CSS yet, or zero duration): close anyway
         }
+      }
+    });
+  }
+
+  // ── Filter chip group (single select): the one filter contract for /use-cases, the customer hub and the blog hub ──
+  // <div class="zynix-filter [zynix-filter--stack]" role="group" aria-labelledby="{id}-label" data-zx-filter="{id}" data-zx-filter-scope="{selector}">
+  //   <p class="zynix-filter__label" id="{id}-label">Show workflows for</p>
+  //   <div class="zynix-filter__chips">
+  //     <button type="button" class="zynix-filter__chip" aria-pressed="true" data-zx-filter-value="all">All organizations<span class="zynix-filter__count">30</span></button> …
+  //   </div>
+  //   <p class="zx-visually-hidden" aria-live="polite" data-zx-filter-status></p>
+  // </div>
+  // Items inside the scope (default: the page) carry data-zx-filter-tags="aco fqhc" (space-separated values). An element marked
+  // data-zx-filter-group is hidden when none of its items is visible. The value 'all' shows everything. Selected state is
+  // aria-pressed="true" (S1: blue-50 fill, blue-600 border, blue-700 text; pill geometry shared by every family).
+  // opts: { id, label, labelHidden:false, options:[{ value, label, count }], selected:'all', scope:'#css-selector',
+  //         noun:['use case', 'use cases'], stack:false (vertical list at >=1024 for a sidebar), className }
+  function renderFilter(opts) {
+    opts = opts || {};
+    var id = opts.id || 'filter', sel = opts.selected || 'all';
+    var options = (opts.options || []).filter(function (o) { return o && o.value && o.label; });
+    if (!options.length) return '';
+    var noun = opts.noun || ['item', 'items'];
+    return '<div class="zynix-filter' + (opts.stack ? ' zynix-filter--stack' : '') + zxCls(opts.className) + '" role="group" aria-labelledby="' + zxAttr(id + '-label') + '"' +
+      ' data-zx-filter="' + zxAttr(id) + '"' + (opts.scope ? ' data-zx-filter-scope="' + zxAttr(opts.scope) + '"' : '') +
+      ' data-zx-filter-noun="' + zxAttr(noun[0]) + '|' + zxAttr(noun[1] || noun[0]) + '">' +
+      '<p class="zynix-filter__label' + (opts.labelHidden ? ' zx-visually-hidden' : '') + '" id="' + zxAttr(id + '-label') + '">' + (opts.label || 'Filter') + '</p>' +
+      '<div class="zynix-filter__chips">' + options.map(function (o) {
+        var on = String(o.value) === String(sel);
+        return '<button type="button" class="zynix-filter__chip" aria-pressed="' + (on ? 'true' : 'false') + '" data-zx-filter-value="' + zxAttr(o.value) + '">' + o.label +
+          (o.count != null ? '<span class="zynix-filter__count">' + zxAttr(o.count) + '</span>' : '') + '</button>';
+      }).join('') + '</div>' +
+      '<p class="zx-visually-hidden" aria-live="polite" data-zx-filter-status></p></div>';
+  }
+  // Applies a group's value to its scope; returns the number of visible items. Fires 'zx:filter' (bubbles) on the group with
+  // detail { id, value, shown } so a page can add its own behaviour (for example a "show all" pager) without a second listener.
+  function zxApplyFilter(group, value, announce) {
+    var sel = group.getAttribute('data-zx-filter-scope');
+    var scope = (sel && document.querySelector(sel)) || document;
+    var shown = 0;
+    Array.prototype.forEach.call(scope.querySelectorAll('[data-zx-filter-tags]'), function (el) {
+      var on = value === 'all' || (' ' + el.getAttribute('data-zx-filter-tags') + ' ').indexOf(' ' + value + ' ') > -1;
+      el.hidden = !on; if (on) shown++;
+    });
+    Array.prototype.forEach.call(scope.querySelectorAll('[data-zx-filter-group]'), function (g) {
+      var any = Array.prototype.some.call(g.querySelectorAll('[data-zx-filter-tags]'), function (el) { return !el.hidden; });
+      g.hidden = !any;
+    });
+    var st = group.querySelector('[data-zx-filter-status]');
+    if (st && announce) {
+      var n = (group.getAttribute('data-zx-filter-noun') || 'item|items').split('|');
+      var lbl = '';
+      Array.prototype.forEach.call(group.querySelectorAll('.zynix-filter__chip'), function (c) {
+        if (c.getAttribute('data-zx-filter-value') !== value) return;
+        var t = c.cloneNode(true), cnt = t.querySelector('.zynix-filter__count'); if (cnt) cnt.parentNode.removeChild(cnt);
+        lbl = t.textContent.replace(/\s+/g, ' ').trim();
       });
+      st.textContent = value === 'all' ? 'Showing all ' + shown + ' ' + (shown === 1 ? n[0] : n[1]) :
+        'Showing ' + shown + ' ' + (shown === 1 ? n[0] : n[1]) + (lbl ? ': ' + lbl : '');
+    }
+    try { group.dispatchEvent(new CustomEvent('zx:filter', { bubbles: true, detail: { id: group.getAttribute('data-zx-filter'), value: value, shown: shown } })); } catch (e) {}
+    return shown;
+  }
+  var zxFiltersBound = false;
+  function initFilters(root) {
+    root = root || document;
+    if (typeof document === 'undefined' || !root.querySelectorAll) return;
+    if (!zxFiltersBound) {   // one delegated listener for every group, present or rendered later
+      zxFiltersBound = true;
+      document.addEventListener('click', function (e) {
+        var chip = e.target && e.target.closest ? e.target.closest('.zynix-filter__chip') : null;
+        var group = chip && chip.closest('[data-zx-filter]');
+        if (!group) return;
+        Array.prototype.forEach.call(group.querySelectorAll('.zynix-filter__chip'), function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
+        zxApplyFilter(group, chip.getAttribute('data-zx-filter-value'), true);
+      });
+    }
+    Array.prototype.forEach.call(root.querySelectorAll('[data-zx-filter]'), function (group) {   // a preselected value applies on load, silently
+      var on = group.querySelector('.zynix-filter__chip[aria-pressed="true"]');
+      var v = on ? on.getAttribute('data-zx-filter-value') : 'all';
+      if (v !== 'all') zxApplyFilter(group, v, false);
     });
   }
 
@@ -13894,6 +14022,7 @@ function renderDataAnalyticsV7() {
       })();
       // FAQ and other disclosures (native <button>s; hidden-attribute panels; legacy .open markup still works)
       initDisclosures(document);
+      initFilters(document);   // shared filter chip groups (renderFilter); a no-op on pages without one
       // Handle hash scrolling after page render
       var hash = window.location.hash;
       if (hash) {
@@ -14217,7 +14346,7 @@ function renderDataAnalyticsV7() {
       // still get the right preview image, title, and description. Every
       // page falls back to IMG.hero even if it's not in PAGE_SEO.
       var ogTitle = s.title || document.title || 'Zynix AI';
-      var ogDesc = s.desc || 'Zynix AI — the AI operating system for value-based healthcare.';
+      var ogDesc = s.desc || 'Zynix AI — AI infrastructure and workflows for value-based care.';
       var ogImg = s.img || (typeof IMG !== 'undefined' && IMG.hero) || '';
       setMetaByAttr('property', 'og:title', ogTitle);
       setMetaByAttr('property', 'og:description', ogDesc);
