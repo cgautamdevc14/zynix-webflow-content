@@ -109,7 +109,7 @@
 
 ## Company
 
-- [About Zynix AI](https://www.zynix.ai/about): Healthcare AI company founded in 2023, headquartered in Trinity, Florida.
+- [About Zynix AI](https://www.zynix.ai/about): Healthcare AI company founded in 2024, headquartered in Trinity, Florida.
 - [Careers](https://www.zynix.ai/careers)
 - [Press & Announcements](https://www.zynix.ai/press)
 - [Contact](https://www.zynix.ai/contact)

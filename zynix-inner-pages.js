@@ -188,7 +188,7 @@
       contactPoint:{'@type':'ContactPoint',email:'info@zynix.ai',contactType:'sales'},
       areaServed:{'@type':'Country',name:'United States'},
       numberOfEmployees:{'@type':'QuantitativeValue',value:'50-100'},
-      foundingDate:'2023',
+      foundingDate:'2024',
       sameAs:['https://www.linkedin.com/company/zynix-ai']
     };
     var schemas = [orgSchema];
