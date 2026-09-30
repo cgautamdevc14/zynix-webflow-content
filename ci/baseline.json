@@ -160,5 +160,36 @@
       }
     ]
   },
-  "launchSignoffs": {}
+  "launchSignoffs": {
+    "dated:renderPrivacyV7": {
+      "by": "orchestrator (launch step D; Gautamdev asked for the changes to be made)",
+      "date": "2026-09-30",
+      "note": "Status quo: A2P-frozen text, identical to production today. All three campaigns are FAILED as of 2026-09-30 (SMS Service round 6: 30882 Terms and Conditions), so the A2P workstream reworks these pages next; reword \"SOC 2 Type II certification\" to \"audit\" there, in the bundle and the native page together, then delete this entry."
+    },
+    "verify:$936,988,750": {
+      "by": "orchestrator (launch step D; Gautamdev asked for the changes to be made)",
+      "date": "2026-09-30",
+      "note": "Kept: verbatim \"About PBACO\" boilerplate inside the reprinted Apr 14 2026 Business Wire release, already live on production. [VERIFY] Gautamdev: keep verbatim or trim and link to Business Wire."
+    },
+    "dead-code": {
+      "by": "orchestrator (launch step D; Gautamdev asked for the changes to be made)",
+      "date": "2026-09-30",
+      "note": "All unreachable functions (35) and every figure the item lists are signed off for launch: reachability is verified on every run, so no visitor sees them, and production ships the same code today. Follow-up: delete them with their shadowed routes keys (ownership exception) in a separate PR."
+    },
+    "a2p:carrier-sprint": {
+      "by": "orchestrator (launch step D; Gautamdev asked for the changes to be made)",
+      "date": "2026-09-30",
+      "note": "Status quo: A2P-frozen text, identical to production. Drop \"Sprint\" with the A2P workstream's next rework (campaigns FAILED 2026-09-30), bundle + native pages together."
+    },
+    "a2p:sms-consent-fine-print": {
+      "by": "orchestrator (launch step D; Gautamdev asked for the changes to be made)",
+      "date": "2026-09-30",
+      "note": "Status quo: A2P-frozen styling, identical to production. Darken to #646C7E at >=12px with the A2P workstream's next rework, bundle + native page together; remove the gate exemption then."
+    },
+    "weight": {
+      "by": "orchestrator (launch step D; Gautamdev asked for the changes to be made)",
+      "date": "2026-09-30",
+      "note": "Agreed: the deploy build is 345,994 B br4, 16 KB under production, and measured faster than production (FCP 112-260 ms, home LCP 6.98 s -> 3.6 s). Cutting the stylesheet toward 30,720 B br4 stays a follow-up."
+    }
+  }
 }
