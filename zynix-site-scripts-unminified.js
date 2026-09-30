@@ -3837,6 +3837,11 @@
         link('zynix-mobile-link', NAV_ACTIONS.contact.href, NAV_ACTIONS.contact.label, NAV_ACTIONS.contact.label) +
         '<p class="zynix-mobile-menu__contact"><a href="mailto:' + zxAttr(co.email) + '" data-z-anchor-fixed="1">' + co.email + '</a> · ' +
           '<a href="' + zxAttr(co.phoneHref) + '" data-z-anchor-fixed="1">' + co.phone + '</a></p>' +
+        // the three registry compliance chips (SITE_FACTS.compliance, DECISIONS 17) close the sheet; static, not links,
+        // so every menu link stays a NAV target with its NAV label (final QA m-S3a: the sheet ended in ~237px of blank).
+        // The small group label is visual only: the list already carries aria-label "Security and compliance".
+        '<p class="zynix-mobile-section__group zynix-mobile-menu__trust-label" aria-hidden="true">Security &amp; compliance</p>' +
+        renderTrustRow(null, { className: 'zynix-mobile-menu__trust' }) +
       '</div></div>';
 
     // ── Announcement bar (§3.4): one line, no emoji, remembered dismissal, not on the SMS pages ──
@@ -4027,6 +4032,10 @@
     if (!burger || !menu || menu.getAttribute('data-zx-menu-ready')) return;
     menu.setAttribute('data-zx-menu-ready', '1');
     var BEHIND = '.zynix-injected, .zynix-announcement-bar, #zynix-chat-widget';
+    // One orange primary per view (DECISIONS 21, final QA n1): while the sheet is open its own full-width "Request a
+    // demo" is the view's primary, so the bar's button is hidden in place (visibility keeps the bar layout still; the
+    // link is data-z-anchor-fixed with an aria-label, so the Webflow anchor-text head scripts skip it, §3.10).
+    var navCta = nav.querySelector('.zynix-nav-cta');
     var isOpen = function () { return burger.getAttribute('aria-expanded') === 'true'; };
     var setInert = function (on) {
       [].forEach.call(document.querySelectorAll(BEHIND), function (el) { if (on) el.setAttribute('inert', ''); else el.removeAttribute('inert'); });
@@ -4040,6 +4049,7 @@
       burger.setAttribute('aria-expanded', 'true');
       burger.setAttribute('aria-label', 'Close menu');
       document.documentElement.classList.add('zx-menu-open');
+      if (navCta) navCta.style.visibility = 'hidden';
       setInert(true);
       var first = menu.querySelector('.zynix-mobile-section-trigger, a[href]');
       if (first) first.focus();
@@ -4051,6 +4061,7 @@
       burger.setAttribute('aria-expanded', 'false');
       burger.setAttribute('aria-label', 'Open menu');
       document.documentElement.classList.remove('zx-menu-open');
+      if (navCta) { navCta.style.visibility = ''; if (!navCta.getAttribute('style')) navCta.removeAttribute('style'); }
       setInert(false);
       if (returnFocus) burger.focus();
     }
@@ -14362,15 +14373,18 @@ function renderDataAnalyticsV7() {
     if (!document.body || document.getElementById('zynix-chat-widget')) return;
     if (['/sms', '/sms-program', '/sms-consent'].indexOf(zxPath()) > -1) return;   // A2P pages stay single-purpose
     // One step: organization type → three recommendations. Every href is a NAV target or a customer story.
+    // Final QA O1: the NAV use-case pages these flows linked (HCC, TCM, after-hours) are ACO-titled, so the MSO,
+    // health-system and FQHC flows use audience-neutral NAV targets or their own customer story instead (the §3.6 rule
+    // "NAV target or customer story" is unchanged; only the literal's targets moved).
     var CHAT_FLOWS = {
       start: { msg: 'What best describes your organization?', options: [
         { label: 'ACO', next: 'aco' }, { label: 'MSO, IPA or physician group', next: 'mso' }, { label: 'Health plan', next: 'plan' },
         { label: 'Health system', next: 'hs' }, { label: 'FQHC or community health center', next: 'fqhc' }, { label: 'Just exploring', next: 'explore' } ] },
       aco:     { msg: 'Good places to start for ACO teams:', recs: ['/audience-segments/acos-msos', '/use-cases/post-discharge-tcm-readmission', '/case-studies/pbaco'] },
-      mso:     { msg: 'Good places to start for physician organizations:', recs: ['/audience-segments/independent-group-practices', '/use-cases/hcc-gap-raf-optimization', '/care-plans'] },
+      mso:     { msg: 'Good places to start for physician organizations:', recs: ['/audience-segments/independent-group-practices', '/zynix-data-analytics', '/care-plans'] },
       plan:    { msg: 'Good places to start for health plans:', recs: ['/audience-segments/health-plans', '/use-cases/hedis-stars-quality-improvement', '/case-studies-eternal-health'] },
-      hs:      { msg: 'Good places to start for health systems:', recs: ['/audience-segments/health-systems', '/use-cases/post-discharge-tcm-readmission', '/integrations'] },
-      fqhc:    { msg: 'Good places to start for community health centers:', recs: ['/audience-segments/fqhcs', '/use-cases/after-hours-ed-diversion', '/case-studies/amistad'] },
+      hs:      { msg: 'Good places to start for health systems:', recs: ['/audience-segments/health-systems', '/integrations', '/case-studies/nhs'] },
+      fqhc:    { msg: 'Good places to start for community health centers:', recs: ['/audience-segments/fqhcs', '/agents#operational-efficiency', '/case-studies/amistad'] },
       explore: { msg: 'A quick tour of Zynix:', recs: ['/platform', '/agents', '/resources-case-studies'] }
     };
     var TITLE = 'Find the right starting point';
