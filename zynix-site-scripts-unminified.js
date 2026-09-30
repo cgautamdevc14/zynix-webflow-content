@@ -3632,10 +3632,7 @@
   function renderCaseStudies() {
     // Customer hub (owner P4; DESIGN_SPEC §6 case-study template, COPY_DECK §4 and §5.5). No metric on any card
     // (DECISIONS 16): attributed customer figures appear only on that customer's own story page.
-    var featured = [
-      ['pbaco', 'Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding), one of the nation’s largest risk-bearing ACOs, partnered with Zynix in April 2026, starting with outreach for post-discharge follow-up and annual wellness visits.'],
-      ['eternalhealth', 'eternalHealth, a Medicare Advantage plan serving members in Massachusetts and Arizona, has used Zynix outreach and care management workflows since January 1, 2026.']
-    ];
+    var featured = ['pbaco', 'eternalhealth'];   // context lines: zxCustContext (shared with the segment pages)
     var others = ['goldencareaco', 'sunfloweraco', 'nexthealthcare', 'professionalradiology', 'clsc', 'incentivecareipa', 'advancedmanagement'];
     return renderHero({ preset: 'resource', eyebrow: 'Customers', title: 'How value-based care teams use Zynix',
         lead: 'ACOs, health plans, health systems, FQHCs and physician groups in 30 states. See what each one runs, and what their leaders have said on the record.',
@@ -3645,7 +3642,7 @@
       renderSection({ id: 'on-the-record', surface: 'subtle' },
         renderSectionHead('On the record', 'Partnerships, announced in their own words',
           'Palm Beach ACO and eternalHealth announced their work with Zynix in releases published on Business Wire.', { id: 'on-the-record-title' }) +
-        '<div class="zx-cust-featured">' + featured.map(function (f) { return zxCustFeatured(f[0], f[1]); }).join('') + '</div>') +
+        '<div class="zx-cust-featured">' + featured.map(function (id) { return zxCustFeatured(id, zxCustContext(id)); }).join('') + '</div>') +
       renderSection({ id: 'stories', className: 'zx-cust-stories' },
         renderSectionHead('Customer stories', 'What each organization runs on Zynix',
           'Pick an organization type, or read them all. Each story names the workflows, who does what, and what changed.', { id: 'stories-title' }) +
@@ -3661,7 +3658,8 @@
       renderRelatedLinks({ groups: [   // names, descriptors and icons from S3's link data (zxLinkItem)
         { label: 'Built for', items: ['/audience-segments/acos-msos', '/audience-segments/health-plans', '/audience-segments/health-systems'].map(zxLinkItem) },
         { label: 'Explore more', items: ['/platform', '/agents', '/press'].map(zxLinkItem) } ] }) +
-      renderCTA(null, null, null, { secondary: { label: 'Model the impact on your population', href: '/roi-calculator' } }) +
+      renderCTA('See the workflows behind these stories', 'Book 30 minutes with our team. We’ll walk through the outreach, follow-up and documentation workflows these organizations run, on sample data, and map them to your programs.', null,
+        { secondary: { label: 'Model the impact on your population', href: '/roi-calculator' } }) +
       renderFooter();
   }
 
@@ -7865,14 +7863,22 @@ function renderPressV7() {
     return '<li class="zx-cust-kit__item' + (cls ? ' ' + cls : '') + '"><span class="zx-cust-kit__preview"><img src="' + zxAttr(zxImg(thumb[0])) + '" alt="' + zxAttr(alt) + '" width="' + thumb[1] + '" height="' + thumb[2] + '" loading="lazy" decoding="async"></span>' +
       '<span class="zx-cust-kit__name">' + label + '</span><span class="zx-cust-kit__meta">' + meta + '</span>' + renderLinkArrow('Open the file', zxImg(src), { ariaLabel: 'Open the file: ' + label }) + '</li>';
   };
+  // The two latest releases (date + headline, each a jump to its full text) fill the hero's right column (final QA: the first
+  // screen was half empty). With more than two releases, the full index also opens the releases section.
+  var latest = rels.slice(0, 2);
   return renderHero({ preset: 'company', eyebrow: 'Newsroom', title: 'News and announcements from Zynix AI',
       lead: 'Partnership announcements, company news and media resources. For press inquiries, contact our media team.',
-      primary: rels.length ? { label: 'Read the latest release', href: '#' + rels[0].slug } : null, secondary: { label: 'Media contact', href: '#media-contact' } }) +
+      primary: null, secondary: { label: 'Media contact', href: '#media-contact' },
+      media: latest.length ? { type: 'glance', title: 'Latest releases', label: 'Latest press releases',
+        items: latest.map(function (r) {
+          return { label: '<time datetime="' + zxAttr(r.date) + '">' + r.dateDisplay + '</time>',
+            value: '<a class="zx-cust-glance__link" href="#' + zxAttr(r.slug) + '">' + (r.shortHeadline || r.cardHeadline) + '</a>' };
+        }), link: { label: 'Logos, photos and boilerplate', href: '#media-kit' } } : null }) +
     renderSection({ id: 'releases', className: 'zx-cust-news' },
       renderSectionHead('Press releases', 'Announcements', 'Official announcements from Zynix AI, as distributed on Business Wire. Full text below.', { id: 'releases-title' }) +
-      '<ol class="zx-cust-news__index" role="list">' + rels.map(function (r) {
+      (rels.length > latest.length ? '<ol class="zx-cust-news__index" role="list">' + rels.map(function (r) {
         return '<li><a class="zx-cust-news__jump" href="#' + zxAttr(r.slug) + '"><time datetime="' + zxAttr(r.date) + '">' + r.dateDisplay + '</time><span>' + r.cardHeadline + '</span></a></li>';
-      }).join('') + '</ol>' + rels.map(function (r) { return zxCustReleaseArticle(r, { level: 3, collapse: true }); }).join('')) +
+      }).join('') + '</ol>' : '') + rels.map(function (r) { return zxCustReleaseArticle(r, { level: 3, collapse: true }); }).join('')) +
     renderSection({ id: 'media-kit', surface: 'subtle', className: 'zx-cust-kitsec' },
       renderSectionHead('Media resources', 'Logos, photos and boilerplate', 'Cleared for editorial use. For any other use, contact the media team.', { id: 'media-kit-title' }) +
       '<div class="zx-cust-kit">' +
@@ -7906,7 +7912,7 @@ function renderPressV7() {
 // PRESS RELEASES: data for the newsroom (owner P4). Text is verbatim from the Business Wire releases; markup is class-based
 // (no inline styles). Each release renders inline on /press under id = slug; the per-release media-contact lines are left
 // to the original release (linked), so the page has one media contact (DESIGN_SPEC §6). Required fields: slug, date,
-// dateDisplay, location, outlet, outletUrl, category, headline, cardHeadline, excerpt, bodyHtml.
+// dateDisplay, location, outlet, outletUrl, category, headline, cardHeadline, excerpt, bodyHtml (optional: shortHeadline, for the hero list).
 // ============================================================================
 function zxCustReleaseQuote(text, name, role) {
   return '<figure class="zynix-quote zx-cust-release__quote"><blockquote class="zynix-quote__text"><p>“' + text + '”</p></blockquote>' +
@@ -7923,6 +7929,7 @@ var PRESS_RELEASES = [
     category: 'Partnership',
     headline: 'eternalHealth, Zynix AI, and nirvanaHealth Announce Integrated Partnership to Scale AI-Enabled Care Management and Member Engagement',
     cardHeadline: 'eternalHealth, Zynix AI and nirvanaHealth partner to scale AI-enabled care management and member engagement',
+    shortHeadline: 'eternalHealth, Zynix AI and nirvanaHealth announce an integrated partnership',   // the /press hero's latest-releases list
     excerpt: 'eternalHealth, a Medicare Advantage plan serving Massachusetts and Arizona, partners with Zynix AI and nirvanaHealth to scale AI-enabled care management and member engagement.',
     seoTitle: 'eternalHealth, Zynix AI and nirvanaHealth partnership | Zynix AI',
     seoDesc: 'eternalHealth partners with Zynix AI and nirvanaHealth to scale AI-enabled care management and member engagement for Medicare Advantage members in Massachusetts and Arizona.',
@@ -7960,7 +7967,8 @@ var PRESS_RELEASES = [
     category: 'Partnership',
     headline: 'Zynix AI Announces Strategic Partnership with Palm Beach Accountable Care Organization and Affiliated Entities (PBACO Holding) to Scale AI-Driven Patient Outreach, Documentation, and Workflow Automation Across Value-Based Care Network',
     cardHeadline: 'Zynix AI and PBACO Holding announce a strategic partnership to scale AI-driven patient outreach',
-    excerpt: 'Zynix AI partners with Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding), one of the nation’s largest risk-bearing ACOs, to deploy AI-driven patient outreach and workflow automation across its affiliated provider network.',
+    shortHeadline: 'Zynix AI and PBACO Holding announce a strategic partnership',
+    excerpt: 'Zynix AI partners with Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding), which the release describes as one of the nation’s largest and most successful risk-bearing accountable care organizations, to deploy AI-driven patient outreach and workflow automation across its affiliated provider network.',
     seoTitle: 'Zynix AI and PBACO Holding partnership | Zynix AI',
     seoDesc: 'Zynix AI announces a strategic partnership with Palm Beach Accountable Care Organization (PBACO Holding) to scale AI-driven patient outreach and workflow automation.',
     ctaSecondary: { href: '/case-studies/pbaco', label: 'Read the Palm Beach ACO story' },
@@ -13729,7 +13737,7 @@ function renderDataAnalyticsV7() {
   var ZX_CUST_STORIES = {
     pbaco: { short: 'PBACO', team: 'PBACO team', panel: 'episode',
       h1: 'How Palm Beach ACO scales patient follow-up',
-      lead: 'PBACO Holding, one of the nation’s largest risk-bearing ACOs, uses Zynix for post-discharge follow-up and annual wellness visit outreach by voice and SMS across its affiliated provider network.',
+      lead: 'PBACO Holding uses Zynix for post-discharge follow-up and annual wellness visit outreach by voice and SMS.' + zxCustSizeLine('pbaco', 'April 2026 partnership release', 'it'),
       card: 'Post-discharge follow-up and annual wellness visit outreach by voice and SMS across PBACO Holding’s affiliated provider network.',
       facts: [['Segment', 'Risk-bearing ACO'], ['Region', 'South Florida'], ['Workflows', 'Post-discharge follow-up, wellness visits'], ['Announced', 'April 14, 2026']],
       challengeTitle: 'Every discharge starts a clock',
@@ -13992,16 +14000,16 @@ function renderDataAnalyticsV7() {
 
   // Hub and segment cards: segment, name, what they run, and a mark in a fixed 40px slot. No metrics (DECISIONS 16).
   // Logos use the logo row's optical height classes (CUSTOMERS[id].logo.h, 20-40px; page:customers sets them 1.3x larger for the
-  // card, capped at the slot), so a round seal and a long wordmark carry the same visual weight; a customer with no logo on file gets its name set as a text wordmark in the same slot (decorative,
-  // like the logos' empty alt: the card title names the organization).
+  // card, capped at the slot), so a round seal and a long wordmark carry the same visual weight. A customer with no logo on file
+  // gets no mark at all (final QA: a text wordmark only repeated the card title below it): alone or stacked its text starts at the
+  // top of the card, and in a row page:customers keeps the slot's height so its segment and title line up with the cards beside it.
   function zxCustCard(id) {
     var c = zxCustomer(id), s = ZX_CUST_STORIES[id], g = c && ZX_CUST_SEGS[c.segment];
     if (!c || !s || !c.caseStudy) return '';
     var h = c.logo && [20, 24, 28, 32, 36, 40].indexOf(c.logo.h) > -1 ? c.logo.h : 28;
-    var logo = c.logo ? '<img class="zx-cust-card__logo zx-cust-card__logo--h' + h + '" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + zxAttr(c.logo.w) + '" height="' + zxAttr(c.logo.h) + '" loading="lazy" decoding="async">' :
-      '<span class="zx-cust-card__wordmark" aria-hidden="true">' + c.name + '</span>';
-    return '<a class="zynix-card zynix-card--link zx-cust-card" href="' + zxAttr(c.caseStudy) + '">' +
-      '<span class="zx-cust-card__logo-slot">' + logo + '</span><span class="zynix-card__eyebrow">' + (g ? g.one : c.segmentLabel) + '</span>' +
+    var slot = c.logo ? '<span class="zx-cust-card__logo-slot"><img class="zx-cust-card__logo zx-cust-card__logo--h' + h + '" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + zxAttr(c.logo.w) + '" height="' + zxAttr(c.logo.h) + '" loading="lazy" decoding="async"></span>' : '';
+    return '<a class="zynix-card zynix-card--link zx-cust-card' + (c.logo ? '' : ' zx-cust-card--nologo') + '" href="' + zxAttr(c.caseStudy) + '">' +
+      slot + '<span class="zynix-card__eyebrow">' + (g ? g.one : c.segmentLabel) + '</span>' +
       '<h3 class="zynix-card__title">' + c.name + '</h3><p class="zynix-card__body">' + s.card + '</p>' +
       '<span class="zynix-card__cta">Read the story<span aria-hidden="true"> →</span></span></a>';
   }
@@ -14028,6 +14036,20 @@ function renderDataAnalyticsV7() {
       Object.keys(ZX_CUST_SEGS).filter(function (k) { return k !== current; }).map(function (k) {
         return '<li>' + renderLinkArrow(ZX_CUST_SEGS[k].label, ZX_CUST_SEGS[k].path) + '</li>';
       }).join('') + '</ul></nav>';
+  }
+  // A customer's size descriptor is its release's own wording (CUSTOMERS[id].sizeNote), so it is always quoted as the release's
+  // description, with a link to the release (DECISIONS 15; final QA). Used by the PBACO story lead and the context lines below.
+  function zxCustSizeLine(id, linkText, subject) {
+    var c = zxCustomer(id);
+    return c && c.sizeNote && c.release ? ' The <a href="' + zxAttr(c.release.href) + '">' + linkText + '</a> describes ' + subject + ' as ' + c.sizeNote + '.' : '';
+  }
+  // The context line under a featured release quote (hub and segment pages).
+  function zxCustContext(id) {
+    var c = zxCustomer(id);
+    if (id === 'pbaco' && c) return c.legalName + ' partnered with Zynix in April 2026, starting with outreach for post-discharge follow-up and annual wellness visits.' +
+      zxCustSizeLine(id, 'partnership release', 'PBACO Holding');
+    if (id === 'eternalhealth') return 'eternalHealth, a Medicare Advantage plan serving members in Massachusetts and Arizona, has used Zynix outreach and care management workflows since January 1, 2026.';
+    return '';
   }
   // A published release quote with its context and both links (hub and segment pages).
   function zxCustFeatured(id, context) {
@@ -14118,8 +14140,6 @@ function renderDataAnalyticsV7() {
     if (!g) return renderCaseStudies();
     var ids = ZX_CUST_ORDER.filter(function (id) { return CUSTOMERS[id] && CUSTOMERS[id].segment === segId; });
     var q = g.quote ? zxCustomer(g.quote) : null;
-    var ctx = { pbaco: 'Palm Beach Accountable Care Organization and affiliated entities (PBACO Holding), one of the nation’s largest risk-bearing ACOs, partnered with Zynix in April 2026, starting with outreach for post-discharge follow-up and annual wellness visits.',
-      eternalhealth: 'eternalHealth, a Medicare Advantage plan serving members in Massachusetts and Arizona, has used Zynix outreach and care management workflows since January 1, 2026.' };
     return renderHero({ preset: 'resource', eyebrow: 'Customer stories', title: g.h1, lead: g.lead,
         primary: { label: SITE_FACTS.demo.label, href: SITE_FACTS.demo.href }, secondary: { label: 'All customer stories', href: '/resources-case-studies' } }) +
       renderSection({ id: 'stories', className: 'zx-cust-stories zx-cust-stories--first' },
@@ -14127,7 +14147,7 @@ function renderDataAnalyticsV7() {
         zxCustMethodNote(ids) + zxCustSegNav(segId)) +
       (q ? renderSection({ id: 'on-the-record', surface: 'subtle' },
         renderSectionHead('On the record', 'In their own words', null, { id: 'on-the-record-title' }) +
-        '<div class="zx-cust-featured zx-cust-featured--one">' + zxCustFeatured(g.quote, ctx[g.quote] || '') + '</div>') : '') +
+        '<div class="zx-cust-featured zx-cust-featured--one">' + zxCustFeatured(g.quote, zxCustContext(g.quote)) + '</div>') : '') +
       renderSection({ id: 'workflows', rule: true, className: 'zx-cust-segflows' },
         renderSplit(renderSectionHead(g.label + ' on Zynix', g.title, g.what, { id: 'workflows-title', action: { label: g.audienceLabel, href: g.audience } }),
           '<p class="zx-cust-uc__label">Workflows, step by step</p><ol class="zx-cust-uc" role="list">' + g.uc.map(function (u) {
