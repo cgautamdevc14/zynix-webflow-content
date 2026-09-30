@@ -4,9 +4,9 @@
     "phase: 3 since 2026-09-29 (Phase 3 integration, Q fix round 1); the orchestrator sets it to 1, 2, 3 after each phase merges. A scope listed in",
     "  mustBeZeroByPhase[p] for every p <= phase must have zero banned-string hits ('*' = every scope).",
     "  Preview a later phase without editing this file: node ci/static-checks.mjs --phase 1",
-    "bannedStrings: hits per scope at c95cc03 (absent = 0). A PR fails if any scope rises. Owning streams lower their",
+    "bannedStrings: hits per scope (absent = 0; c95cc03 counts ratcheted down after each phase; 2026-09-29 at a447c24: only \"(bundle)\" 1 = the top-level slug ZX_BLOG_AGENTS_OPS, 0 after S3's slug fix). A PR fails if any scope rises. Owning streams lower their",
     "  own scopes with: node ci/banned-strings.mjs --write-baseline (never raises). Inspect: node ci/banned-strings.mjs --hits <scope>",
-    "styleAttributes: max count of style=\" in the bundle (2,196 at c95cc03; 1,229 after Phase 3, 2026-09-29); lower it after each phase.",
+    "styleAttributes: max count of style=\" in the bundle (2,196 at c95cc03; 1,229 after Phase 3; 1,017 after the Phase 3 integration merge of rd/h, a447c24, 2026-09-29); lower it after each phase.",
     "undefinedVars: var(--z*) names used without a fallback and defined nowhere at c95cc03; S1's token block defines them,",
     "  then remove them here. Any other undefined name fails.",
     "smokeOverflow390: ci/smoke.mjs rect-overflow ratchet, outermost offending elements per page at 390px on production",
@@ -41,7 +41,7 @@
       "*"
     ]
   },
-  "styleAttributes": 1229,
+  "styleAttributes": 1017,
   "undefinedVars": [],
   "smokeOverflow390": {
     "/": 3,
@@ -51,6 +51,6 @@
     "/compare-zynix-vs-navina": 1
   },
   "bannedStrings": {
-    "(bundle)": 47
+    "(bundle)": 1
   }
 }
