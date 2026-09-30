@@ -4605,6 +4605,7 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 .zx-co-timeline__item { display:grid; grid-template-columns:minmax(0,8.5rem) minmax(0,1fr); gap:var(--zx-space-6); margin:0; padding:var(--zx-space-5) 0; border-bottom:1px solid var(--zx-border); }
 .zx-co-timeline__when { margin:0; padding-top:2px; font:var(--zx-fw-semibold) var(--zx-fs-sm)/1.5 var(--zx-font-sans); font-variant-numeric:tabular-nums; color:var(--zx-blue-600); }
 .zx-co-timeline__text { margin:0; max-width:64ch; font-size:17px; line-height:1.55; color:var(--zx-text); }
+.zx-co-timeline__text + .zx-co-timeline__text { margin-top:var(--zx-space-3); }
 .zx-co-timeline__body .zynix-link-arrow { margin-top:var(--zx-space-2); }
 @media (max-width:479.98px) { .zx-co-timeline__item { grid-template-columns:minmax(0,1fr); gap:var(--zx-space-1); } }
 

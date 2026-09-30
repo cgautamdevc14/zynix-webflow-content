@@ -3138,8 +3138,8 @@
     var form = '<div class="zx-co-form" id="form">' +
       '<h2 class="zx-co-form__title" id="form-title">Send a message</h2>' +
       '<p class="zx-co-form__intro">Tell us about your organization and what you’d like to see.</p>' +
-      '<p class="zx-co-form__legend" aria-hidden="true">* Required</p>' +
       '<form class="zynix-contact-form" id="zynix-demo-form" aria-labelledby="form-title" onsubmit="event.preventDefault();var f=this;var b=f.querySelector(\'[type=submit]\');if(b){b.disabled=true;b.classList.add(\'is-loading\');b.textContent=\'Sending…\'}var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'phone\',value:f.querySelector(\'[name=phone]\').value},{name:\'company\',value:f.querySelector(\'[name=company]\').value},{name:\'healthcare_segment\',value:f.querySelector(\'[name=segment]\').value},{name:\'message\',value:f.querySelector(\'[name=message]\').value},{name:\'sms_consent\',value:\'No\'}],context:{pageUri:location.href,pageName:document.title}};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(r){if(!r.ok){throw new Error(r.status)}f.innerHTML=\'<div class=zx-co-form__done role=status tabindex=-1><p class=zx-co-form__done-title>Thanks. Your message is on its way.</p><p>We reply by email, usually within one business day.</p></div>\';var s=f.querySelector(\'.zx-co-form__done\');if(s)s.focus()}).catch(function(){if(b){b.disabled=false;b.classList.remove(\'is-loading\');b.textContent=\'Send message\'}var m=f.querySelector(\'.zx-form-err\');if(!m){m=document.createElement(\'p\');m.className=\'zx-form-err\';m.setAttribute(\'role\',\'alert\');f.appendChild(m)}m.textContent=\'We could not send your message. Please email info@zynix.ai or call (727) 261-1297.\'})">' +
+        '<p class="zx-co-form__legend" aria-hidden="true">* Required</p>' +   // inside the form, so the success swap removes it
         '<div class="zx-co-form__row">' +
           renderField({ id: 'zx-co-firstname', name: 'firstname', label: 'First name', required: true, autocomplete: 'given-name' }) +
           renderField({ id: 'zx-co-lastname', name: 'lastname', label: 'Last name', required: true, autocomplete: 'family-name' }) +
@@ -7289,14 +7289,16 @@ function renderAboutV7() {
     }).join('') + '</ol>');
 
   // Leadership: one bio set, one crop and tone. Titles and bios [VERIFY] (COPY_DECK §5.6).
+  // Photos: images/team/*.webp, cut from the press-kit originals to one 4:5 head-and-shoulder line (crown 4%, chin 74%)
+  // at 2x the 264x330 display size; the press kit keeps the full-size PNGs.
   var people = [
-    { name: 'Jay Chowdappa, MD', first: 'Jay', title: F.founder.title, img: 'headshot-jay.png', w: 400, h: 400,
+    { name: 'Jay Chowdappa, MD', first: 'Jay', title: F.founder.title, img: 'team/jay-chowdappa.webp', w: 528, h: 660,
       bio: 'Physician executive in internal medicine and managed care. The ACOs he led generated $300M+ in shared savings.',
       linkedin: 'https://www.linkedin.com/in/jayadeva-jay-chowdappa-m-d-6b221616/' },
-    { name: 'Gautamdev Chowdary', first: 'Gautamdev', title: 'Co-founder and CTO', img: 'headshot-gautam.png', w: 300, h: 400,
+    { name: 'Gautamdev Chowdary', first: 'Gautamdev', title: 'Co-founder and CTO', img: 'team/gautamdev-chowdary.webp', w: 528, h: 660,
       bio: 'Leads engineering, data and AI across the Zynix platform.',
       linkedin: 'https://www.linkedin.com/in/cgautamdevc/' },
-    { name: 'David McDonald', first: 'David', title: 'Vice President, Sales', img: 'headshot-david.jpg', w: 300, h: 400,
+    { name: 'David McDonald', first: 'David', title: 'Vice President, Sales', img: 'team/david-mcdonald.webp', w: 528, h: 660,
       bio: 'Leads go-to-market for ACOs, health plans and health systems.',
       linkedin: 'https://www.linkedin.com/in/mcdonalddavidl/' }
   ];
@@ -7313,19 +7315,22 @@ function renderAboutV7() {
       '</article>';
     }, { className: 'zx-co-people' }));
 
-  // Milestones: registry facts and published releases only (COPY_DECK §5.6). Founding year held [VERIFY].
+  // Milestones: registry facts and published releases and posts only (COPY_DECK §5.6), oldest first, one "Today" row.
+  // Founding year 2023 = the Organization JSON-LD foundingDate [VERIFY]; the ACCESS approval date stays held [VERIFY].
   var milestones = [
+    { when: '2023', text: 'Zynix AI founded to close the gap between knowing and doing in <span class="zx-co-nowrap">value-based</span> care' },
+    { when: 'March 2026', text: F.stats.patients.sentence + ' at ' + F.stats.states.sentence, href: '/resources-blog-1m-patients', link: 'Read the announcement' },
     { when: 'April 2026', text: 'Strategic partnership with PBACO Holding announced', href: pb.release.href, link: 'Read the release' },
     { when: 'June 2026', text: 'Partnership with eternalHealth and nirvanaHealth announced', href: eh.release.href, link: 'Read the release' },
-    { when: '2026', text: F.stats.patients.sentence + ' at ' + F.stats.states.sentence },
-    { when: 'Today', text: zxAccessLine() },
-    { when: 'Today', text: F.compliance.soc2.badge + ' audited. ' + F.compliance.hitrust.prose + '.' }   // a period, not a semicolon: HITRUST's "certification" must not read as SOC 2's
+    { when: 'Today', text: [zxAccessLine(),
+      F.compliance.soc2.badge + ' audited. ' + F.compliance.hitrust.prose + '.'] }   // a period, not a semicolon: HITRUST's "certification" must not read as SOC 2's
   ];
   html += renderSection({ id: 'milestones', rule: true, className: 'zx-co-milestones' },
     renderSplit(
       renderSectionHead('Timeline', 'Milestones', '', { id: 'milestones-title' }),
       '<ol class="zx-co-timeline" role="list">' + milestones.map(function (m) {
-        return '<li class="zx-co-timeline__item"><p class="zx-co-timeline__when">' + m.when + '</p><div class="zx-co-timeline__body"><p class="zx-co-timeline__text">' + m.text + '</p>' +
+        return '<li class="zx-co-timeline__item"><p class="zx-co-timeline__when">' + m.when + '</p><div class="zx-co-timeline__body">' +
+          [].concat(m.text).map(function (t) { return '<p class="zx-co-timeline__text">' + t + '</p>'; }).join('') +
           (m.href ? renderLinkArrow(m.link, m.href) : '') + '</div></li>';
       }).join('') + '</ol>',
       { ratio: '4-8' }));
