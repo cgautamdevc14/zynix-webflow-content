@@ -2173,6 +2173,21 @@ body:has(> #zynix-chat-widget) .zynix-footer .zynix-footer-bottom.zynix-containe
 }
 .zx-plat-follow { margin-bottom:var(--zx-space-12); }
 
+/* /platform hero panel (final polish): one sample patient across the four layers. The kit's time column carries the layer
+   name, so it is wider here. Below 768px the layer name sits above its step. Below 480px all four layers stay visible (the
+   hero frame trims other panels after the third step), and to keep the hero within 1.2 screens there the two data-detail
+   lines (layers 1 and 2) are dropped; the agent and care-team owner lines (layers 3 and 4) stay. */
+.zx-plat-xlayer .zynix-ui__step { grid-template-columns:112px minmax(0,1fr) auto; }
+.zx-plat-xlayer .zynix-ui__step-time { color:var(--zx-blue-600); font-variant-numeric:normal; }
+@media (max-width:767.98px) {
+  .zx-plat-xlayer .zynix-ui__step { grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"time status" "main main"; min-height:0; padding:6px 0; }
+  .zx-plat-xlayer .zynix-ui__step-time { padding-top:0; }
+}
+@media (max-width:479.98px) {
+  .zx-plat-frame--hero .zx-plat-xlayer .zynix-ui__step:nth-child(n+4) { display:grid; }
+  .zx-plat-xlayer .zynix-ui__step:nth-child(-n+2) .zynix-ui__step-owner { display:none; }
+}
+
 /* Proof module (final QA): the head and one line of registry facts beside a case-study card or a one-sentence release pull,
    then the logo row. */
 .zx-plat-proof__grid { margin-bottom:var(--zx-space-12); }
