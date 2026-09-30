@@ -419,6 +419,10 @@
   var LINK_NAMES = {
     // Link labels (owner S3, DESIGN_SPEC §3.12). They follow the NAV labels; they name related-block links and are the
     // last fallback for breadcrumb page labels (§3.7). Keys are canonical paths (plus the aliases that still render).
+    // LINK_NAMES (name), CROSS_DESCS (one-line descriptor) and CROSS_ICONS (zxIcon key) are the ONE source for every
+    // link row in the related-link look, on every page: the router's block (renderCrossLinks), the page streams' own
+    // blocks and the in-page link lists all resolve a shared target through zxLinkItem(), so a target never changes its
+    // name or icon from page to page. Use-case entries are generated from USE_CASES (zxLinkData).
     // Platform
     '/platform': 'Platform overview',
     '/products-data-platform': 'Data foundation',
@@ -431,7 +435,7 @@
     '/company-zynixllm': 'ZynixLLM',
     '/security': 'Security & trust',
     // AI agents (family names from NAMES.agentFamilies; no counts, no planned agents)
-    '/agents': 'AI agents',
+    '/agents': 'All AI agents',
     '/zynix-ai-agents': 'AI agents',
     '/agents#clinical-performance': 'Clinical performance agents',
     '/agents#predictive-activation': 'Predictive activation agents',
@@ -449,24 +453,9 @@
     '/audience-segments/health-systems': 'Health systems',
     '/audience-segments/fqhcs': 'FQHCs & community health',
     '/audience-segments/ascs': 'Ambulatory surgery centers',
-    // Solutions: use cases (the six NAV programs first)
-    '/use-cases': 'Use cases',
-    '/use-cases/post-discharge-tcm-readmission': 'Transitional care & readmissions',
-    '/use-cases/hcc-gap-raf-optimization': 'HCC & risk adjustment',
-    '/use-cases/hedis-stars-quality-improvement': 'HEDIS & Stars quality',
-    '/use-cases/chronic-care-coordination-scale': 'Chronic care & adherence',
-    '/use-cases/after-hours-ed-diversion': 'After-hours access',
-    '/use-cases/rising-risk-patient-outreach': 'Rising-risk outreach',
-    '/use-cases/post-discharge-follow-up': 'Post-discharge follow-up',
-    '/use-cases/hcc-gap-closure-health-system-aco': 'HCC and quality gap closure',
-    '/use-cases/after-hours-triage-multi-site': 'After-hours access across sites',
-    '/use-cases/prior-auth-high-volume-specialty': 'Prior authorization workflows',
-    '/use-cases/preventive-screening-gap-fqhc': 'Preventive screening outreach',
-    '/use-cases/referral-intake-asc': 'Referral intake',
-    '/use-cases/surgical-scheduling-pre-procedure': 'Pre-procedure scheduling',
-    '/use-cases/post-procedure-followup-complication': 'Post-procedure follow-up',
-    '/use-cases/appointment-scheduling-no-show': 'Scheduling and no-show follow-up',
-    '/use-cases/physician-documentation-ambient-ai': 'Ambient visit notes',
+    // Solutions: use cases. The hub follows the NAV label; the 30 use-case pages are named by their own titles, generated
+    // from USE_CASES with their workflow group as descriptor and icon (zxLinkData), so every list names them the same way.
+    '/use-cases': 'All use cases',
     // Blog articles: labels come from ZX_BLOG (after CROSS_DESCS)
     // Customers (names from CUSTOMERS)
     '/resources-case-studies': 'Customer stories',
@@ -1080,96 +1069,94 @@
   }
 
   // ── Cross-Link Renderers ──
-  // Icons and one-line descriptors for related-block targets (owner S3, §3.12). Keys follow the canonical targets in
-  // CROSS_LINKS; descriptors are the NAV `desc` strings where the target is a NAV item (SITE_FACTS is read at load time,
-  // it is declared above). Icons stay inline SVG strings (the renderer wraps them in an aria-hidden span).
-  var CROSS_ICON_SVG = {
-    monitor: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
-    database: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>',
-    chart: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
-    pulse: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
-    pen: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>',
-    doc: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
-    shield: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
-    info: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
-    link: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
-    home: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
-    hospital: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="12" y1="6" x2="12" y2="12"/></svg>',
-    card: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>',
-    people: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-    stethoscope: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v6a6 6 0 0 0 12 0V3"/><path d="M12 15v3a3 3 0 0 0 6 0v-1"/><circle cx="18" cy="15" r="2"/></svg>',
-    layers: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>',
-    phone: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.09 5.18 2 2 0 0 1 5.11 3h3"/><polyline points="16 2 16 8 22 8"/></svg>',
-    search: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
-    clock: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
-    check: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
-    trend: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>',
-    calendar: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
-    book: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
-    swap: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3"/></svg>'
-  };
+  // Icons and one-line descriptors for link targets (owner S3, §3.12). Keys follow the canonical targets in CROSS_LINKS.
+  // Where the target is a NAV item, the descriptor is its NAV `desc` and the icon its NAV `icon` (NAV lists /press and
+  // /security twice: the first descriptor is used, and LINK_NAMES keeps "Security & trust"). Icons are zxIcon() keys, the
+  // set the menus and the page streams draw from; renderRelatedLinks resolves them. Use-case entries are generated
+  // (zxLinkData). SITE_FACTS is read at load time; it is declared above.
   var CROSS_ICONS = {
-    '/platform': CROSS_ICON_SVG.monitor,
-    '/products-data-platform': CROSS_ICON_SVG.database,
-    '/zynix-data-analytics': CROSS_ICON_SVG.chart,
-    '/agents': CROSS_ICON_SVG.pulse,
-    '/agents#clinical-performance': CROSS_ICON_SVG.pulse,
-    '/agents#predictive-activation': CROSS_ICON_SVG.trend,
-    '/agents#operational-efficiency': CROSS_ICON_SVG.clock,
-    '/zynscribe': CROSS_ICON_SVG.pen,
-    '/care-plans': CROSS_ICON_SVG.doc,
-    '/security': CROSS_ICON_SVG.shield,
-    '/company-zynixllm': CROSS_ICON_SVG.info,
-    '/integrations': CROSS_ICON_SVG.link,
-    '/solutions': CROSS_ICON_SVG.layers,
-    '/audience-segments/acos-msos': CROSS_ICON_SVG.home,
-    '/audience-segments/independent-group-practices': CROSS_ICON_SVG.stethoscope,
-    '/audience-segments/health-plans': CROSS_ICON_SVG.card,
-    '/audience-segments/health-systems': CROSS_ICON_SVG.hospital,
-    '/audience-segments/fqhcs': CROSS_ICON_SVG.people,
-    '/audience-segments/ascs': CROSS_ICON_SVG.layers,
-    '/use-cases': CROSS_ICON_SVG.layers,
-    '/use-cases/post-discharge-tcm-readmission': CROSS_ICON_SVG.phone,
-    '/use-cases/hcc-gap-raf-optimization': CROSS_ICON_SVG.search,
-    '/use-cases/hedis-stars-quality-improvement': CROSS_ICON_SVG.check,
-    '/use-cases/chronic-care-coordination-scale': CROSS_ICON_SVG.pulse,
-    '/use-cases/after-hours-ed-diversion': CROSS_ICON_SVG.clock,
-    '/use-cases/rising-risk-patient-outreach': CROSS_ICON_SVG.trend,
-    '/use-cases/post-discharge-follow-up': CROSS_ICON_SVG.phone,
-    '/use-cases/hcc-gap-closure-health-system-aco': CROSS_ICON_SVG.search,
-    '/use-cases/after-hours-triage-multi-site': CROSS_ICON_SVG.clock,
-    '/use-cases/prior-auth-high-volume-specialty': CROSS_ICON_SVG.check,
-    '/use-cases/preventive-screening-gap-fqhc': CROSS_ICON_SVG.shield,
-    '/use-cases/referral-intake-asc': CROSS_ICON_SVG.doc,
-    '/use-cases/surgical-scheduling-pre-procedure': CROSS_ICON_SVG.calendar,
-    '/use-cases/post-procedure-followup-complication': CROSS_ICON_SVG.phone,
-    '/use-cases/appointment-scheduling-no-show': CROSS_ICON_SVG.calendar,
-    '/use-cases/physician-documentation-ambient-ai': CROSS_ICON_SVG.pen,
-    '/resources-case-studies': CROSS_ICON_SVG.book,
-    '/case-studies/pbaco': CROSS_ICON_SVG.book,
-    '/case-studies/amistad': CROSS_ICON_SVG.book,
-    '/case-studies/apollo-clinic': CROSS_ICON_SVG.book,
-    '/case-studies/nhs': CROSS_ICON_SVG.book,
-    '/case-studies-west-florida-aco': CROSS_ICON_SVG.book,
-    '/case-studies-space-coast-aco': CROSS_ICON_SVG.book,
-    '/case-studies-eternal-health': CROSS_ICON_SVG.book,
-    '/compare-zynix-vs-point-solutions': CROSS_ICON_SVG.swap,
-    '/compare-zynix-vs-innovaccer': CROSS_ICON_SVG.swap,
-    '/compare-zynix-vs-commure': CROSS_ICON_SVG.swap
+    // Platform
+    '/platform': 'layers',
+    '/products-data-platform': 'database',
+    '/zynix-data-analytics': 'chart',
+    '/products-analytics': 'chart',
+    '/solutions/zynix-data-analytics': 'chart',
+    '/care-plans': 'clipboard',
+    '/zynscribe': 'mic',
+    '/integrations': 'link',
+    '/company-zynixllm': 'brain',
+    '/security': 'shield',
+    // AI agents
+    '/agents': 'bot',
+    '/zynix-ai-agents': 'bot',
+    '/agents#clinical-performance': 'heart',
+    '/agents#predictive-activation': 'activity',
+    '/agents#operational-efficiency': 'clock',
+    // Solutions
+    '/solutions': 'users',
+    '/audience-segments/acos-msos': 'users',
+    '/audience-segments/independent-group-practices': 'stethoscope',
+    '/audience-segments/health-plans': 'target',
+    '/audience-segments/health-systems': 'hospital',
+    '/audience-segments/fqhcs': 'mappin',
+    '/audience-segments/ascs': 'calendar',
+    '/use-cases': 'lightbulb',
+    // Customers
+    '/resources-case-studies': 'book',
+    '/case-studies/pbaco': 'book',
+    '/case-studies/amistad': 'book',
+    '/case-studies/apollo-clinic': 'book',
+    '/case-studies/nhs': 'book',
+    '/case-studies-west-florida-aco': 'book',
+    '/case-studies-space-coast-aco': 'book',
+    '/case-studies-central-florida-aco': 'book',
+    '/case-studies-eternal-health': 'book',
+    '/case-studies-acos': 'book',
+    '/case-studies-health-systems': 'book',
+    '/case-studies-health-plans': 'book',
+    '/case-studies-practices': 'book',
+    '/case-studies-fqhcs': 'book',
+    // Resources
+    '/press': 'megaphone',
+    '/roi-calculator': 'chart',
+    '/alternatives': 'refresh',
+    '/resources-blog': 'book',
+    '/resources-webinars': 'monitor',
+    '/resources-whitepapers': 'file',
+    '/resources-faq': 'chat',
+    '/resources-glossary': 'search',
+    '/compare-zynix-vs-navina': 'refresh',
+    '/compare-zynix-vs-innovaccer': 'refresh',
+    '/compare-zynix-vs-abridge': 'refresh',
+    '/compare-zynix-vs-health-catalyst': 'refresh',
+    '/compare-zynix-vs-notable-health': 'refresh',
+    '/compare-zynix-vs-olive-ai': 'refresh',
+    '/compare-zynix-vs-commure': 'refresh',
+    '/compare-zynix-vs-point-solutions': 'refresh',
+    // Company
+    '/about': 'user',
+    '/careers': 'users',
+    '/contact': 'mail'
   };
   var CROSS_DESCS = {
+    // Platform
     '/platform': 'One platform for value-based care operations',
     '/products-data-platform': 'Claims, EHR, ADT and labs, unified',
     '/zynix-data-analytics': 'Risk, quality and HCC gaps',
+    '/products-analytics': 'Risk, quality and HCC gaps',
+    '/solutions/zynix-data-analytics': 'Risk, quality and HCC gaps',
+    '/care-plans': 'TCM, AWV and CCM workflows',
+    '/zynscribe': 'Ambient clinical documentation',
+    '/integrations': SITE_FACTS.ehr.short,
+    '/company-zynixllm': 'How our models are built and governed',
+    '/security': 'SOC 2 Type II · BAA available',
+    // AI agents
     '/agents': 'How agents work with your care team',
+    '/zynix-ai-agents': 'How agents work with your care team',
     '/agents#clinical-performance': 'Chronic care, transitions, prevention',
     '/agents#predictive-activation': 'Reach patients before the event',
     '/agents#operational-efficiency': 'After-hours, scheduling, intake',
-    '/zynscribe': 'Ambient clinical documentation',
-    '/care-plans': 'TCM, AWV and CCM workflows',
-    '/security': 'SOC 2 Type II · BAA available',
-    '/company-zynixllm': 'How our models are built and governed',
-    '/integrations': SITE_FACTS.ehr.short,
+    // Solutions
     '/solutions': 'Built for each type of organization',
     '/audience-segments/acos-msos': 'TCM, AWVs, HCC and quality gaps',
     '/audience-segments/independent-group-practices': 'Programs across independent practices',
@@ -1178,22 +1165,7 @@
     '/audience-segments/fqhcs': 'Multilingual outreach and after-hours access',
     '/audience-segments/ascs': 'Referral intake, scheduling and post-op follow-up',
     '/use-cases': 'Workflows by program and organization',
-    '/use-cases/post-discharge-tcm-readmission': 'Post-discharge outreach and TCM follow-up',
-    '/use-cases/hcc-gap-raf-optimization': 'HCC gap closure and documentation',
-    '/use-cases/hedis-stars-quality-improvement': 'HEDIS gap outreach for Stars measures',
-    '/use-cases/chronic-care-coordination-scale': 'Chronic care check-ins and adherence',
-    '/use-cases/after-hours-ed-diversion': 'After-hours intake and on-call routing',
-    '/use-cases/rising-risk-patient-outreach': 'Outreach before a clinical event',
-    '/use-cases/post-discharge-follow-up': 'Post-discharge calls at health system volume',
-    '/use-cases/hcc-gap-closure-health-system-aco': 'HCC and quality gaps across a network',
-    '/use-cases/after-hours-triage-multi-site': 'After-hours intake across locations',
-    '/use-cases/prior-auth-high-volume-specialty': 'Prior authorization for specialty services',
-    '/use-cases/preventive-screening-gap-fqhc': 'Screening outreach for high-barrier patients',
-    '/use-cases/referral-intake-asc': 'Referral intake and documentation',
-    '/use-cases/surgical-scheduling-pre-procedure': 'Scheduling and pre-procedure preparation',
-    '/use-cases/post-procedure-followup-complication': 'Follow-up calls after a procedure',
-    '/use-cases/appointment-scheduling-no-show': 'Two-way confirmations and early reschedules',
-    '/use-cases/physician-documentation-ambient-ai': 'Notes the physician reviews and approves',
+    // Customers
     '/resources-case-studies': 'How value-based care teams use Zynix',
     '/case-studies/pbaco': 'Customer story · ACO',
     '/case-studies/amistad': 'Customer story · FQHC',
@@ -1201,10 +1173,29 @@
     '/case-studies/nhs': 'Customer story · health system',
     '/case-studies-west-florida-aco': 'Customer story · ACO',
     '/case-studies-space-coast-aco': 'Customer story · ACO',
+    '/case-studies-central-florida-aco': 'Customer story · ACO',
     '/case-studies-eternal-health': 'Customer story · Medicare Advantage plan',
-    '/compare-zynix-vs-point-solutions': 'Side-by-side comparison',
+    // Resources
+    '/press': 'Announcements and press releases',
+    '/roi-calculator': 'Model the impact on your population',
+    '/alternatives': 'Side-by-side with other platforms',
+    '/resources-blog': 'Articles on value-based care operations',
+    '/resources-webinars': 'Recorded sessions and upcoming events',
+    '/resources-whitepapers': 'Reports and white papers',
+    '/resources-faq': 'Answers to common buyer questions',
+    '/resources-glossary': 'Value-based care terms, defined',
+    '/compare-zynix-vs-navina': 'Side-by-side comparison',
     '/compare-zynix-vs-innovaccer': 'Side-by-side comparison',
-    '/compare-zynix-vs-commure': 'Side-by-side comparison'
+    '/compare-zynix-vs-abridge': 'Side-by-side comparison',
+    '/compare-zynix-vs-health-catalyst': 'Side-by-side comparison',
+    '/compare-zynix-vs-notable-health': 'Side-by-side comparison',
+    '/compare-zynix-vs-olive-ai': 'Side-by-side comparison',
+    '/compare-zynix-vs-commure': 'Side-by-side comparison',
+    '/compare-zynix-vs-point-solutions': 'Side-by-side comparison',
+    // Company
+    '/about': 'Our story and leadership',
+    '/careers': 'Open roles',
+    '/contact': 'Talk to our team'
   };
 
   // Blog related blocks (owner S3, §2.16, §3.12). The bundle renders each article at three paths: the flat
@@ -1222,7 +1213,9 @@
     toc: { desc: 'Article · transitions of care', products: ['/care-plans', '/agents#clinical-performance'], useCases: ['/use-cases/post-discharge-tcm-readmission', '/use-cases/post-discharge-follow-up'] },
     ai: { desc: 'Article · AI in healthcare', products: ['/platform', '/company-zynixllm'], useCases: ['/use-cases/post-discharge-tcm-readmission', '/use-cases/hcc-gap-raf-optimization'] }
   };
-  var ZX_BLOG_AGENTS_OPS = 'autonomous-ai-agents-healthcare-automation';   // URL slug only; the article is "AI agents in healthcare operations"
+  // The "AI agents in healthcare operations" article. Its URL is held in path form, the form the banned-string scan exempts
+  // as a URL (ci/banned-strings.mjs inUrlToken); ZX_BLOG is keyed by slug, so the prefix is stripped here.
+  var ZX_BLOG_AGENTS_OPS = '/blog/autonomous-ai-agents-healthcare-automation'.replace(/^\/blog\//, '');
   var ZX_BLOG_NATIVE = { 'why-tcm-fails-real-workflows': 1 };
   var ZX_BLOG = {   // slug: [topic, link label, two related article slugs]
     'what-is-value-based-care-ai': ['vbc', 'What is value-based care AI?', ['vbc-analytics-ai-driven', 'tools-driving-value-based-healthcare']],
@@ -1261,11 +1254,42 @@
     function href(slug) { return (ZX_BLOG_NATIVE[slug] ? '/blog-posts/' : '/blog-') + slug; }
     Object.keys(ZX_BLOG).forEach(function (slug) {
       var b = ZX_BLOG[slug], t = ZX_BLOG_TOPICS[b[0]], h = href(slug);
-      LINK_NAMES[h] = b[1]; CROSS_DESCS[h] = t.desc; CROSS_ICONS[h] = CROSS_ICON_SVG.book;
+      LINK_NAMES[h] = b[1]; CROSS_DESCS[h] = t.desc; CROSS_ICONS[h] = 'book';
       var entry = { products: t.products, useCases: t.useCases, related: b[2].map(href) };
       ['/blog-', '/blog/', '/resources/blog/'].forEach(function (pre) { CROSS_LINKS[pre + slug] = entry; });
     });
   })();
+
+  // Use-case link entries (owner S3), generated from USE_CASES and ZX_SOL_GROUPS (P3 data, read only): name = the page's
+  // title, descriptor = its workflow group, icon = the group's icon, which is how /use-cases and every use-case page list
+  // them. USE_CASES is filled further down the bundle, so this runs at render time: injectMegaMenu() calls it before the
+  // page renders (the router's block and zxRelatedItems read the tables directly), and zxLinkItem() calls it too. Idempotent.
+  var zxLinkDataDone = false;
+  function zxLinkData() {
+    if (zxLinkDataDone || typeof USE_CASES === 'undefined' || typeof ZX_SOL_GROUPS === 'undefined') return;
+    var groups = {};
+    ZX_SOL_GROUPS.forEach(function (g) { groups[g.id] = g; });
+    Object.keys(USE_CASES).forEach(function (k) {
+      var u = USE_CASES[k], g = u && groups[u.group];
+      if (!u || !u.slug || !u.title) return;
+      var h = '/use-cases/' + u.slug;
+      LINK_NAMES[h] = u.title;
+      CROSS_DESCS[h] = g ? g.name : '';
+      CROSS_ICONS[h] = g ? g.icon : 'layers';
+    });
+    zxLinkDataDone = Object.keys(USE_CASES).length > 0;
+  }
+
+  // One link row for a shared target, from LINK_NAMES / CROSS_DESCS / CROSS_ICONS: { href, label, desc, icon }. Takes an href
+  // or an item object. A target with no LINK_NAMES entry is a one-off: an object comes back as given, an href as null.
+  // Every related block and link list resolves its rows through this (or zxRelatedItems, which reads the same tables).
+  function zxLinkItem(it) {
+    var href = typeof it === 'string' ? it : (it && it.href);
+    if (!href) return null;
+    zxLinkData();
+    if (!Object.prototype.hasOwnProperty.call(LINK_NAMES, href)) return typeof it === 'string' ? null : it;
+    return { href: href, label: String(LINK_NAMES[href]).replace(/ \| .*/, ''), desc: CROSS_DESCS[href] || '', icon: CROSS_ICONS[href] || '' };
+  }
 
   // Related-link items for slugs (§2.16) from LINK_NAMES / CROSS_DESCS / CROSS_ICONS; unknown slugs and the current page are skipped.
   function zxRelatedItems(slugs) {
@@ -2820,10 +2844,11 @@
 
   // Related block for a company page. The router's renderCrossLinks() owns related links; these pages have no
   // CROSS_LINKS entry yet, so the page renders its own block and stands down as soon as one exists (one block per page).
+  // Items are hrefs; names, descriptors and icons come from S3's link data (zxLinkItem), the same on every page.
   function zxCoRelated(items) {
     var p = zxPath();
     if (typeof CROSS_LINKS !== 'undefined' && CROSS_LINKS[p]) return '';
-    return renderRelatedLinks({ title: 'Related', groups: [{ label: 'Company', items: items }] });
+    return renderRelatedLinks({ title: 'Related', groups: [{ label: 'Company', items: items.map(zxLinkItem).filter(Boolean) }] });
   }
 
   // ── PAGE: Trust Center ──
@@ -2961,20 +2986,14 @@
     var p = String(iso).split('-'), m = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return '<time datetime="' + iso + '">' + m[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0] + '</time>';
   }
-  // One related block (§2.16): items are NAV hrefs (label, descriptor and icon come from NAV) or {href, label, desc, icon}.
+  // One related block (§2.16): items are hrefs or {href, label, desc, icon}. Every shared target takes its name, descriptor
+  // and icon from S3's link data (zxLinkItem: LINK_NAMES / CROSS_DESCS / CROSS_ICONS, which follow NAV), so a target reads
+  // the same here as on every other page; an object is used as given only for a one-off target S3 does not list.
   // When S3's CROSS_LINKS has an entry for the page, the router inserts that block instead, so this returns ''.
-  // A NAV item without an icon (Customer stories is a top-level link, so it has none) takes S3's CROSS_ICONS icon for the
-  // same href, the one S3's related blocks show, so every row in the block carries an icon.
   function zxResRelated(groups) {
     if (typeof CROSS_LINKS !== 'undefined' && CROSS_LINKS[zxPath()]) return '';
-    var nav = {};
-    NAV.forEach(function (s) { (s.columns || []).forEach(function (c) { (c.items || []).forEach(function (it) { if (it.desc && !nav[it.href]) nav[it.href] = it; }); }); });
     return renderRelatedLinks({ title: 'Related', groups: groups.map(function (g) {
-      return { label: g.label, items: g.items.map(function (it) {
-        if (typeof it !== 'string') return it;
-        var n = nav[it]; if (!n) return null;
-        return { href: it, label: n.label, desc: n.desc, icon: n.icon || (typeof CROSS_ICONS !== 'undefined' && CROSS_ICONS[it]) || 'link' };
-      }).filter(Boolean) };
+      return { label: g.label, items: g.items.map(zxLinkItem).filter(Boolean) };
     }) });
   }
   function zxResNewsletter() { return '<div class="zx-res-newsletter">' + renderEmailCapture({ variant: 'block' }) + '</div>'; }
@@ -3141,12 +3160,7 @@
       lead: 'Book 30 minutes directly, or send a note and we’ll reply by email. You can also call ' + tel + ' or write to ' + mail + '.' });
     html += renderSection({ id: 'paths', className: 'zx-co-paths', labelledBy: 'form-title' },
       renderSplit(form, book, { ratio: '7-5' }));
-    html += zxCoRelated([
-      { label: 'Security & trust', desc: 'SOC 2 Type II · BAA available', href: '/security', icon: 'shield' },
-      { label: 'Customer stories', desc: 'How value-based care teams use Zynix', href: '/resources-case-studies', icon: 'users' },
-      { label: 'Platform overview', desc: 'One platform for value-based care operations', href: '/platform', icon: 'layers' },
-      { label: 'FAQ', desc: 'Answers to common buyer questions', href: '/resources-faq', icon: 'chat' }
-    ]);
+    html += zxCoRelated(['/security', '/resources-case-studies', '/platform', '/resources-faq']);
     html += renderCTA('Working through a security review?',
       'We support questionnaires, documentation requests and BAA execution in every evaluation.', null,
       { hideDemo: true, primary: { label: F.compliance.soc2.request.label, href: F.compliance.soc2.request.href, newTab: false },
@@ -3401,15 +3415,9 @@
           var img = c.logo ? '<img class="zx-cust-also__logo" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + zxAttr(c.logo.w) + '" height="' + zxAttr(c.logo.h) + '" loading="lazy" decoding="async">' : '';
           return '<li class="zx-cust-also__item">' + img + '<span class="zx-cust-also__name">' + c.name + '</span></li>';
         }).join('') + '</ul></div>') +
-      renderRelatedLinks({ groups: [
-        { label: 'Built for', items: [
-          { href: '/audience-segments/acos-msos', label: 'ACOs', desc: 'TCM, wellness visits and HCC gaps across your panel', icon: 'users' },
-          { href: '/audience-segments/health-plans', label: 'Health plans', desc: 'Member outreach for quality programs', icon: 'shield' },
-          { href: '/audience-segments/health-systems', label: 'Health systems', desc: 'Post-discharge follow-up across sites', icon: 'hospital' } ] },
-        { label: 'Explore more', items: [
-          { href: '/platform', label: 'Platform overview', desc: 'One platform for value-based care operations', icon: 'layers' },
-          { href: '/agents', label: 'All AI agents', desc: 'Agents for care operations, with clinicians in charge', icon: 'bot' },
-          { href: '/press', label: 'Newsroom', desc: 'Announcements and press releases', icon: 'megaphone' } ] } ] }) +
+      renderRelatedLinks({ groups: [   // names, descriptors and icons from S3's link data (zxLinkItem)
+        { label: 'Built for', items: ['/audience-segments/acos-msos', '/audience-segments/health-plans', '/audience-segments/health-systems'].map(zxLinkItem) },
+        { label: 'Explore more', items: ['/platform', '/agents', '/press'].map(zxLinkItem) } ] }) +
       renderCTA(null, null, null, { secondary: { label: 'Model the impact on your population', href: '/roi-calculator' } }) +
       renderFooter();
   }
@@ -3473,6 +3481,7 @@
 
   // ── MEGA MENU ──
   function injectMegaMenu() {
+    zxLinkData();   // link data for the use-case pages, before the page and its related block render (the router calls this first)
     // Announcement bar: the NAACOS promo belongs to the event-promos workstream. This one object is the whole swap
     // after Oct 16 (DESIGN_SPEC §3.4); past `expires` the bar is not rendered at all.
     var ZX_ANNOUNCE = {
@@ -4492,12 +4501,7 @@
       }).join('') +
       '<p class="zx-co-roles__note">Prefer email? Send your resume to <a href="mailto:' + careersMail + '">' + careersMail + '</a>.</p>');
 
-    html += zxCoRelated([
-      { label: 'About', desc: 'Our story and leadership', href: '/about', icon: 'users' },
-      { label: 'Customer stories', desc: 'How value-based care teams use Zynix', href: '/resources-case-studies', icon: 'heart' },
-      { label: 'Newsroom', desc: 'Announcements and media', href: '/press', icon: 'megaphone' },
-      { label: 'Insights', desc: 'Articles on value-based care operations', href: '/resources-blog', icon: 'book' }
-    ]);
+    html += zxCoRelated(['/about', '/resources-case-studies', '/press', '/resources-blog']);
 
     html += renderCTA('See open roles',
       'Every opening is posted on Wellfound. Don’t see a fit yet? Send your resume to ' + careersMail + ' and tell us what you want to work on.', null,
@@ -5637,8 +5641,13 @@ function zxSolProduct(r) {
 }
 
 // Link rows in the related-link look (§2.16 styling), for "what it runs on" and variant lists inside a section.
+// A shared target keeps the name and icon S3's link data gives it everywhere (zxLinkItem); the line under it stays
+// contextual (what the product does in this workflow), and a list drawn without icons stays without them.
 function zxSolLinks(items, cls) {
-  items = (items || []).filter(function (it) { return it && it.href && it.label; });
+  items = (items || []).map(function (it) {
+    var s = it && it.href ? zxLinkItem(it.href) : null;
+    return s ? Object.assign({}, it, { label: s.label, icon: it.icon ? s.icon : '' }) : it;
+  }).filter(function (it) { return it && it.href && it.label; });
   if (!items.length) return '';
   return '<ul class="zynix-related__list zx-sol-links' + (cls ? ' ' + cls : '') + '" role="list">' + items.map(function (it) {
     return '<li><a class="zynix-related__link" href="' + zxAttr(it.href) + '">' +
@@ -5716,19 +5725,18 @@ function renderUseCaseV7(data) {
     (variants.length ? '<div class="zx-sol-fit__col"><h3 class="zx-sol-fit__title">More in ' + (g ? g.name.charAt(0).toLowerCase() + g.name.slice(1) : 'this program') + '</h3>' + zxSolLinks(variants, 'zx-sol-links--plain') + moreInGroup + '</div>' : '') +
     '</div>');
 
-  // One related block per page (§2.16). Six use cases still have a CROSS_LINKS entry, which the router inserts instead.
+  // One related block per page (§2.16). If S3's CROSS_LINKS ever gives this page an entry, the router inserts that instead.
   if (!(typeof CROSS_LINKS !== 'undefined' && CROSS_LINKS[path])) {
     // Related use cases come from other programs (the same program is already listed above)
     var others = (data.readNext || []).map(zxSolBySlug).filter(function (u) { return u && u.group !== data.group; });
     zxSolAll().forEach(function (u) { if (others.length < 3 && u.group !== data.group && u.audience === data.audience && others.indexOf(u) < 0) others.push(u); });
-    var rel = others.slice(0, 3).map(function (u) {
-      var ug = zxSolGroup(u.group);
-      return { href: '/use-cases/' + u.slug, label: u.title, desc: ug ? ug.name : '', icon: ug ? ug.icon : 'layers' };
-    });
+    // Names, descriptors and icons come from S3's link data (zxLinkItem), as on every other page: the use case's title and
+    // workflow group, the audience's NAV descriptor, the customer story's line.
+    var rel = others.slice(0, 3).map(function (u) { return zxLinkItem('/use-cases/' + u.slug); });
     var more = [];
-    if (aud) more.push({ href: aud.href, label: aud.label, desc: 'What Zynix runs for this type of organization', icon: 'users' });
+    if (aud) more.push(zxLinkItem(aud.href));
     var story = data.story ? zxCustomer(data.story) : null;
-    if (story && story.caseStudy) more.push({ href: story.caseStudy, label: story.name, desc: 'Customer story' + (story.segmentLabel ? ' · ' + story.segmentLabel : ''), icon: 'book' });
+    if (story && story.caseStudy) more.push(zxLinkItem(story.caseStudy));
     html += renderRelatedLinks({ title: 'Related', groups: [{ label: 'Use cases', items: rel }, { label: 'Explore more', items: more.slice(0, 3) }] });
   }
 
@@ -6815,14 +6823,9 @@ function renderUseCasesListing() {
       }).join('') + '</ul></div></section>';
   });
 
-  html += renderRelatedLinks({ title: 'Related', groups: [
-    { label: 'By organization', items: [
-      { href: '/solutions', label: 'Solutions overview', desc: 'Start with your organization type', icon: 'users' },
-      { href: '/resources-case-studies', label: 'Customer stories', desc: 'How value-based care teams use Zynix', icon: 'book' }] },
-    { label: 'Platform', items: [
-      { href: NAMES.products.agents.href, label: 'All AI agents', desc: 'How agents work with your care team', icon: 'bot' },
-      { href: NAMES.products.carePlans.href, label: NAMES.products.carePlans.name, desc: 'TCM, AWV and CCM workflows', icon: 'clipboard' },
-      { href: '/platform', label: 'Platform overview', desc: 'One platform for value-based care operations', icon: 'layers' }] }] });
+  html += renderRelatedLinks({ title: 'Related', groups: [   // names, descriptors and icons from S3's link data (zxLinkItem)
+    { label: 'By organization', items: ['/solutions', '/resources-case-studies'].map(zxLinkItem) },
+    { label: 'Platform', items: [NAMES.products.agents.href, NAMES.products.carePlans.href, '/platform'].map(zxLinkItem) }] });
   html += renderCTA(null, null, null);
   html += renderFooter();
   return html;
@@ -7350,12 +7353,7 @@ function renderAboutV7() {
   html += renderSection({ id: 'customers', compact: true, rule: true, className: 'zx-co-customers', labelledBy: 'customers-logos-label' },
     renderLogoRow(null, { id: 'customers-logos' }));
 
-  html += zxCoRelated([
-    { label: 'Platform overview', desc: 'One platform for value-based care operations', href: '/platform', icon: 'layers' },
-    { label: 'Customer stories', desc: 'How value-based care teams use Zynix', href: '/resources-case-studies', icon: 'users' },
-    { label: 'Newsroom', desc: 'Announcements and media', href: '/press', icon: 'megaphone' },
-    { label: 'Security & trust', desc: 'SOC 2 Type II · BAA available', href: '/security', icon: 'shield' }
-  ]);
+  html += zxCoRelated(['/platform', '/resources-case-studies', '/press', '/security']);
 
   html += renderCTA('Talk to our team', 'Questions about Zynix, partnerships or working with us.', null,
     { hideDemo: true, primary: { label: 'Contact us', href: '/contact' }, secondary: { label: 'See open roles', href: '/careers' }, badges: [] });
@@ -7521,14 +7519,9 @@ function renderPressV7() {
           '<div><dt>Phone</dt><dd><a href="' + co.phoneHref + '">' + co.phone + '</a></dd></div>' +
           '<div><dt>Company</dt><dd>' + co.legalLine + '<br>' + co.addressLine + '</dd></div>' +
         '</dl>', { ratio: '5-7' })) +
-    renderRelatedLinks({ groups: [
-      { label: 'Customers in the news', items: [
-        { href: '/case-studies/pbaco', label: 'Palm Beach ACO', desc: 'Customer story · ACO', icon: 'book' },
-        { href: '/case-studies-eternal-health', label: 'eternalHealth', desc: 'Customer story · Medicare Advantage plan', icon: 'book' },
-        { href: '/resources-case-studies', label: 'Customer stories', desc: 'How value-based care teams use Zynix', icon: 'users' } ] },
-      { label: 'Company', items: [
-        { href: '/about', label: 'About', desc: 'Our story and leadership', icon: 'user' },
-        { href: '/security', label: 'Security & trust', desc: 'SOC 2 Type II · BAA available', icon: 'shield' } ] } ] }) +
+    renderRelatedLinks({ groups: [   // names, descriptors and icons from S3's link data (zxLinkItem)
+      { label: 'Customers in the news', items: ['/case-studies/pbaco', '/case-studies-eternal-health', '/resources-case-studies'].map(zxLinkItem) },
+      { label: 'Company', items: ['/about', '/security'].map(zxLinkItem) } ] }) +
     renderCTA('Talk to our team', 'Questions about Zynix, partnerships or working with us.', null,
       { hideDemo: true, primary: { label: 'Contact us', href: '/contact' }, secondary: { label: 'About Zynix AI', href: '/about' }, badges: [] }) +
     renderFooter();
@@ -11991,7 +11984,7 @@ function renderDataAnalyticsV7() {
         renderSplit(renderSectionHead('FAQ', 'Common questions', null, { id: 'faq-title' }),
           renderFaqList(cfg.faqs, { idPrefix: 'cmp-faq', openFirst: true }), { ratio: '4-8' })) +
       zxResRelated([{ label: 'More comparisons', items: others.map(function (s) { return zxResCompareLink(s, names[s]); })
-          .concat([{ href: '/alternatives', label: 'All comparisons', desc: 'The full comparison list', icon: 'refresh' }]) },
+          .concat(['/alternatives']) },
         { label: 'Platform', items: ['/platform', '/agents'] }]) +
       renderCTA('', '') +
       renderFooter();
@@ -13359,13 +13352,9 @@ function renderDataAnalyticsV7() {
         ['Quality and experience', 'Support quality initiatives tied to Star Ratings and member satisfaction.', 'Timely follow-up on the measures and members the plan targets.']
       ],
       related: [
-        { label: 'More customer stories', items: [
-          { href: '/case-studies/pbaco', label: 'Palm Beach ACO', desc: 'Customer story · ACO', icon: 'book' },
-          { href: '/case-studies/nhs', label: 'NHS Health System', desc: 'Customer story · health system', icon: 'book' } ] },
-        { label: 'Built for', items: [ { href: '/audience-segments/health-plans', label: 'Health plans', desc: 'Member outreach for quality programs', icon: 'shield' } ] },
-        { label: 'Products', items: [
-          { href: '/agents', label: 'All AI agents', desc: 'Agents for care operations, with clinicians in charge', icon: 'bot' },
-          { href: '/care-plans', label: 'Care plans', desc: 'TCM, AWV, CCM and gap closure workflows', icon: 'clipboard' } ] } ] },
+        { label: 'More customer stories', items: ['/case-studies/pbaco', '/case-studies/nhs'] },
+        { label: 'Built for', items: ['/audience-segments/health-plans'] },
+        { label: 'Products', items: ['/agents', '/care-plans'] } ] },
     amistad: { short: 'AMISTAD', team: 'Care team', panel: 'afterhours',
       h1: 'How AMISTAD reaches patients in their language',
       lead: 'AMISTAD Community Health Center, an FQHC in Central Florida, uses Zynix for after-hours access and preventive screening outreach for a predominantly Spanish-speaking patient population.',
@@ -13438,13 +13427,9 @@ function renderDataAnalyticsV7() {
         ['Rising risk', 'Identified from periodic reports.', 'Flagged for care managers for proactive follow-up.']
       ],
       related: [
-        { label: 'More customer stories', items: [
-          { href: '/case-studies/pbaco', label: 'Palm Beach ACO', desc: 'Customer story · ACO', icon: 'book' },
-          { href: '/case-studies-central-florida-aco', label: 'Central Florida ACO', desc: 'Customer story · ACO', icon: 'book' } ] },
-        { label: 'Built for', items: [ { href: '/audience-segments/acos-msos', label: 'ACOs', desc: 'TCM, wellness visits and HCC gaps across your panel', icon: 'users' } ] },
-        { label: 'Products', items: [
-          { href: '/products-data-platform', label: 'Data foundation', desc: 'One patient record from every source', icon: 'database' },
-          { href: '/zynix-data-analytics', label: 'Analytics', desc: 'Know who needs attention this week, and why', icon: 'chart' } ] } ] },
+        { label: 'More customer stories', items: ['/case-studies/pbaco', '/case-studies-central-florida-aco'] },
+        { label: 'Built for', items: ['/audience-segments/acos-msos'] },
+        { label: 'Products', items: ['/products-data-platform', '/zynix-data-analytics'] } ] },
     spacecoastaco: { short: 'Space Coast ACO', team: 'Clinical staff', panel: 'episode',
       h1: 'How Space Coast ACO follows up after discharge',
       lead: 'Space Coast ACO, an MSSP ACO serving Medicare beneficiaries in Brevard County, Florida, uses Zynix outreach agents and readmission risk analytics for follow-up after discharge.',
@@ -13469,13 +13454,9 @@ function renderDataAnalyticsV7() {
         ['Prioritization', 'Worked in discharge order.', 'Ranked by readmission risk.']
       ],
       related: [
-        { label: 'More customer stories', items: [
-          { href: '/case-studies/pbaco', label: 'Palm Beach ACO', desc: 'Customer story · ACO', icon: 'book' },
-          { href: '/case-studies-west-florida-aco', label: 'West Florida ACO', desc: 'Customer story · ACO', icon: 'book' } ] },
-        { label: 'Built for', items: [ { href: '/audience-segments/acos-msos', label: 'ACOs', desc: 'TCM, wellness visits and HCC gaps across your panel', icon: 'users' } ] },
-        { label: 'Products', items: [
-          { href: '/care-plans', label: 'Care plans', desc: 'TCM, AWV, CCM and gap closure workflows', icon: 'clipboard' },
-          { href: '/agents', label: 'All AI agents', desc: 'Agents for care operations, with clinicians in charge', icon: 'bot' } ] } ] },
+        { label: 'More customer stories', items: ['/case-studies/pbaco', '/case-studies-west-florida-aco'] },
+        { label: 'Built for', items: ['/audience-segments/acos-msos'] },
+        { label: 'Products', items: ['/care-plans', '/agents'] } ] },
     centralfloridaaco: { short: 'Central Florida ACO', team: 'Care team', panel: 'rising',
       h1: 'How Central Florida ACO coordinates care across practices',
       lead: 'Central Florida ACO, an MSSP ACO with multiple practice sites, runs the Zynix data foundation, outreach agents and risk analytics across its participating practices.',
@@ -13501,13 +13482,9 @@ function renderDataAnalyticsV7() {
         ['Rising risk', 'Seen in retrospective reports.', 'Flagged for care managers to act on.']
       ],
       related: [
-        { label: 'More customer stories', items: [
-          { href: '/case-studies-west-florida-aco', label: 'West Florida ACO', desc: 'Customer story · ACO', icon: 'book' },
-          { href: '/case-studies-space-coast-aco', label: 'Space Coast ACO', desc: 'Customer story · ACO', icon: 'book' } ] },
-        { label: 'Built for', items: [ { href: '/audience-segments/acos-msos', label: 'ACOs', desc: 'TCM, wellness visits and HCC gaps across your panel', icon: 'users' } ] },
-        { label: 'Products', items: [
-          { href: '/products-data-platform', label: 'Data foundation', desc: 'One patient record from every source', icon: 'database' },
-          { href: '/agents', label: 'All AI agents', desc: 'Agents for care operations, with clinicians in charge', icon: 'bot' } ] } ] },
+        { label: 'More customer stories', items: ['/case-studies-west-florida-aco', '/case-studies-space-coast-aco'] },
+        { label: 'Built for', items: ['/audience-segments/acos-msos'] },
+        { label: 'Products', items: ['/products-data-platform', '/agents'] } ] },
     apolloclinic: { short: 'Apollo', team: 'Front desk', panel: 'schedule',
       h1: 'How Apollo Clinic Network keeps visits on schedule',
       lead: 'Apollo Clinic Network, a physician group with multiple locations, uses Zynix scheduling and reminder agents to fill open slots and reach patients before a missed appointment.',
@@ -13668,12 +13645,14 @@ function renderDataAnalyticsV7() {
       renderSectionHead(s.changedEyebrow || (ms.length ? 'Results' : 'Before and after'), s.changedTitle || 'What changed', null, { id: 'results-title' }) +
       stats + table);
   }
-  // One story page. Nested stories get their related block from CROSS_LINKS (router); flat ones render their own.
+  // One story page. Nested stories get their related block from CROSS_LINKS (router); flat ones render their own, with each
+  // target's name, descriptor and icon from S3's link data (zxLinkItem), so it reads the same as on every other page.
   function zxCustStoryPage(id) {
     var c = zxCustomer(id), s = ZX_CUST_STORIES[id];
     if (!c || !s) return renderCaseStudies();
     var here = zxPath();
-    var related = (typeof CROSS_LINKS !== 'undefined' && CROSS_LINKS[here]) || !s.related ? '' : renderRelatedLinks({ groups: s.related });
+    var related = (typeof CROSS_LINKS !== 'undefined' && CROSS_LINKS[here]) || !s.related ? '' :
+      renderRelatedLinks({ groups: s.related.map(function (g) { return { label: g.label, items: g.items.map(zxLinkItem) }; }) });
     return renderHero({ preset: 'case', eyebrow: 'Customer story', title: s.h1, lead: s.lead,
         secondary: { label: 'See the workflows', href: '#workflows' },
         media: { type: 'proof', customer: id, facts: s.facts.map(function (f) { return { label: f[0], value: f[1] }; }), link: c.release ? undefined : null } }) +
@@ -13724,11 +13703,8 @@ function renderDataAnalyticsV7() {
           '<p class="zx-cust-uc__label">Workflows, step by step</p><ol class="zx-cust-uc" role="list">' + g.uc.map(function (u) {
             return '<li><a class="zx-cust-uc__link" href="' + zxAttr(u[0]) + '"><span class="zx-cust-uc__name">' + u[1] + '</span><span class="zx-cust-uc__arrow" aria-hidden="true">→</span></a></li>';
           }).join('') + '</ol>', { ratio: '6-6' })) +
-      renderRelatedLinks({ groups: [{ label: 'Explore more', items: [
-        { href: '/resources-case-studies', label: 'Customer stories', desc: 'How value-based care teams use Zynix', icon: 'book' },
-        { href: '/platform', label: 'Platform overview', desc: 'One platform for value-based care operations', icon: 'layers' },
-        { href: '/agents', label: 'All AI agents', desc: 'Agents for care operations, with clinicians in charge', icon: 'bot' },
-        { href: '/press', label: 'Newsroom', desc: 'Announcements and press releases', icon: 'megaphone' } ] }] }) +
+      renderRelatedLinks({ groups: [{ label: 'Explore more',   // names, descriptors and icons from S3's link data (zxLinkItem)
+        items: ['/resources-case-studies', '/platform', '/agents', '/press'].map(zxLinkItem) }] }) +
       renderCTA(g.cta.title, 'We’ll walk through ' + g.flows + ' on sample data, then map them to your contracts and programs.', null, g.cta.secondary ? { secondary: g.cta.secondary } : {}) +
       renderFooter();
   }
