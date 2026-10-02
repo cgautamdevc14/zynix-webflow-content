@@ -43,12 +43,9 @@ import crypto from 'node:crypto';
 
 // Dead renderers (finding 1 of the Phase 3 integration review, 2026-09-29). Each one is shadowed in the routes table by a
 // later key for the same path, redirected away by REDIRECTS, or never referenced; reachability() proves it on every run.
-export const DEAD_FUNCTIONS = [
-  'renderZynixOS', 'renderCarePlans', 'renderZynixLLM', 'renderTrustCenter',                     // P1 legacy (spec §6 "Dead")
-  'renderZynAfterHours', 'renderPostDischarge', 'renderMedRec', 'renderZynReminder',             // P2 legacy agent pages
-  'renderUseCaseTCM', 'renderUseCaseGapClosure', 'renderUseCaseAfterHours', 'renderUseCaseReadmission', // P3 legacy use cases
-  'renderPrivacy'                                                                                // legacy privacy (no route)
-];
+// Empty since 2026-09-30: all 35 unreachable functions (the 13 listed here and 22 legacy helpers and pages) were deleted
+// together with their 26 shadowed or redirected routes keys (ownership exception to DESIGN_SPEC §6/§8.1).
+export const DEAD_FUNCTIONS = [];
 
 // Dated exemptions: a banned string that is visible on the site but may not be edited yet. Each entry names the function, the
 // claims label, the exact text, the function's pinned SHA-256 (ci/a2p-freeze.json at the time of the entry), the date, the
