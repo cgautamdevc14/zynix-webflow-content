@@ -3147,6 +3147,343 @@
   }
   // ==== ZX:END platform ====
 
+  // ==== ZX:BEGIN pillars (owner P9) ====
+  // The four pillar pages (V9_SPEC §5): /population-intelligence, /predictive-risk, /embedded-care-management and
+  // /ai-patient-engagement. ONE renderer, renderPillarPage(id), driven by PILLARS (names, slugs, promises, accents, icons,
+  // the four predictions and the use cases; facts block) and PILLAR_PAGES below (page copy only). It composes S9's v9 helpers
+  // (renderV9Eyebrow / Loop / Proof / Chips / Cta / Predict / Chat) and S2's components (renderFaqList, renderSplit, buttons),
+  // and adds zx-pil-* markup styled only in the stylesheet block page:pillars. No inline style attributes.
+  // Every page, in order (§5): 1 hero (ink; "Pillar 0N · AI operating layer", H1 = the pillar name, the expanded promise, a
+  // glass sample card) · 2 what it does (zx9-cards) · 3 the pillar's spotlight (§5.3) · 4 how it connects (#loop, the current
+  // pillar highlighted, the other nodes link to their pages) · 5 programs and proof (zx9-chips + the 1M+ / 30 states numerals)
+  // · 6 FAQ (4 questions, .zynix-faq-item, so injectSEO writes the FAQPage JSON-LD) and 7 go deeper (live pages of §1.2 only,
+  // checked against the AEO link catalog), side by side · 8 the closing CTA (zx9-cta).
+  // Claims (V9_SPEC §1.1): registry numbers only (1M+, 30 states, 30+ EHR systems · 300+ instances); no accuracy, AUC or
+  // outcome numbers; illustrative UI is labelled "Sample data" / "Sample conversation", role labels only; wherever agents touch
+  // patients the human/agent split is visible (DECISIONS 17b). FAQ answers: 40–80 words, no numbers but registry facts.
+  // Crawler-facing strings (titles, descriptions, FAQ answers) avoid the rd_checks review patterns ("every patient",
+  // "triage", "real-time" …); the visible split says "triage clinically" in body copy, as §5 asks.
+
+  // SEO (V9_SPEC §5 table; titles and descriptions written to each target query). WebPage + FAQPage JSON-LD come from
+  // injectSEO (schema 'WebPage' adds no product block); the canonical is the page itself.
+  var PILLAR_SEO = {
+    'population-intelligence': { title: 'Population Intelligence for value-based care | Zynix AI', img: IMG.analytics,
+      desc: 'Population health intelligence for value-based care: one live picture of who needs what, from claims, EHR, ADT, lab and pharmacy data, down to the visit.' },
+    'predictive-risk': { title: 'Predictive Risk: readmission, mortality, utilization | Zynix AI', img: IMG.doctor,
+      desc: 'Predictive risk for healthcare teams: readmission, mortality, disease progression and utilization, with drivers shown and a next step clinicians review.' },
+    'embedded-care-management': { title: 'Embedded Care Management Platform | Zynix AI', img: IMG.care,
+      desc: 'A care management platform inside your team’s workflow: care plans for TCM, CCM and AWVs, tasks with owners and deadlines, escalation by rule and a record.' },
+    'ai-patient-engagement': { title: 'AI Patient Engagement: voice and text agents | Zynix AI', img: IMG.patient,
+      desc: 'AI patient engagement and outreach: voice and text agents for post-discharge calls, AWV and gap outreach, scheduling and after-hours calls. Clinicians decide.' }
+  };
+  PILLARS.forEach(function (p) {
+    var s = PILLAR_SEO[p.id];
+    if (s) zxSeo(p.slug, { title: s.title, desc: s.desc, img: s.img, schema: 'WebPage' });
+  });
+
+  // Page copy per pillar. hero.viz is the glass sample card (rows: title, sub, tag [label, tone ok|info|warn|muted]).
+  // cards: 3–4 "what it does" cards. faq: 4 buyer questions. deeper: §1.2's pages (labels and descriptions from LINK_NAMES /
+  // CROSS_DESCS through zxLinkItem, unless an entry gives its own). programs: PROGRAMS ids. cta: the closing panel's title.
+  var PILLAR_PAGES = {
+    'population-intelligence': {
+      lead: 'One live picture of who needs what, across your whole population. Every source resolves into one record per patient, and what matters shows up at the visit.',
+      viz: { icon: 'users', title: 'Who needs what · today', meta: 'Attributed population · one record per patient',
+        rows: [['Pt 1042 · Post-discharge follow-up', 'Discharged yesterday · from ADT', ['Due', 'warn']],
+               ['Pt 2218 · Annual wellness visit', 'Not seen this year · from claims', ['Open', 'info']],
+               ['Pt 3307 · A1c check and a late refill', 'From lab and pharmacy data', ['Open', 'info']]],
+        foot: 'One record per patient, from every source you connect.' },
+      what: { title: 'Know who needs what, and why', lead: null },
+      cards: [
+        { icon: 'eye', title: 'One live picture', body: 'Who needs care, and what kind, updated as new data arrives.' },
+        { icon: 'database', title: 'One record per patient', body: 'Claims, EHR, ADT, lab and pharmacy data, with identities resolved.' },
+        { icon: 'users', title: 'Attribution and cohorts', body: 'Who you are accountable for, grouped by need, with quality and HCC context.' },
+        { icon: 'stethoscope', title: 'Point-of-care intelligence', body: 'At the visit, the clinician sees open gaps, risk drivers and care-plan tasks.' }
+      ],
+      spot: { eyebrow: 'How the picture is built', title: 'Every source. One record. The right cohort.',
+        lead: 'Data sources are the inputs. What your team sees is who needs care next, and why.' },
+      programs: ['mssp', 'lead', 'awv'],
+      faq: [
+        { q: 'What is population health intelligence?',
+          a: 'It is a live, patient-level view of who needs care and why, built from every data source you have. In Zynix it is where the operating layer starts: it resolves claims, EHR, ADT, lab and pharmacy data into one record per patient, then feeds Predictive Risk and your care plans, so the picture leads to action rather than a report.' },
+        { q: 'Which data sources does Population Intelligence use?',
+          a: 'Claims, EHR, ADT, lab and pharmacy data. Zynix connects to 30+ EHR systems across 300+ connected instances, brings in admissions and discharges from ADT feeds as they happen, and resolves identities so each patient has one record. Attribution, quality measures and HCC context sit on that record as inputs to prediction and care management.' },
+        { q: 'How is this different from a population health dashboard?',
+          a: 'A dashboard shows totals and leaves the follow-up to someone else. Population Intelligence works at the patient level and connects to the rest of the operating layer: Predictive Risk flags who needs care next, the Embedded Care Management Platform gives the next step an owner and a deadline, and AI Patient Engagement reaches the patient.' },
+        { q: 'What does the clinician see at the point of care?',
+          a: 'The patient’s open care gaps, the drivers behind their risk and the care-plan tasks that are due, so a gap can be closed in the visit that is already happening. If the practice uses ZynScribe, it drafts the visit note from the conversation, and the note stays a draft until the physician reviews and approves it.' }
+      ],
+      deeper: ['/products-data-platform', '/zynix-data-analytics', '/integrations'],
+      cta: 'See your <span class="zx9-grad-text">live picture</span>'
+    },
+    'predictive-risk': {
+      lead: 'Know who is heading for a readmission, a decline or an ED visit before it happens. Each prediction shows its drivers and starts a next step, and clinicians review before acting.',
+      viz: { icon: 'activity', title: 'Who needs care next', meta: 'This week · drivers shown for each patient',
+        rows: [['Pt 1042 · Readmission risk: high', 'Drivers: CHF, 2 admissions in 90 days', ['Plan created', 'info']],
+               ['Pt 2218 · Utilization rising', 'Drivers: 3 ED visits this year, no primary care visit', ['Outreach queued', 'info']],
+               ['Pt 4471 · Disease progression', 'Drivers: A1c and weight trending up', ['CCM offered', 'muted']]],
+        foot: 'Clinicians review before acting.' },
+      what: { title: 'From a risk score to the next step', lead: null },
+      cards: [
+        { icon: 'activity', title: 'Four predictions', body: 'Readmission, mortality, disease progression and utilization, from each patient’s live record.' },
+        { icon: 'search', title: 'Drivers you can read', body: 'Every prediction lists the reasons behind it, so a clinician can check it against what they know.' },
+        { icon: 'clipboard', title: 'A next step, not just a score', body: 'Each prediction starts a care-plan task or outreach. Clinicians review before acting.' }
+      ],
+      spot: { eyebrow: 'The four predictions', title: 'Every prediction comes with a next step', lead: null,
+        note: 'Every prediction shows its drivers. Clinicians review before acting.' },
+      programs: ['tcm', 'ccm', 'mssp', 'lead'],
+      faq: [
+        { q: 'What does Predictive Risk predict?',
+          a: 'Four things: readmission, mortality, disease progression and utilization. Each prediction is built from the patient’s record across claims, EHR, ADT, lab and pharmacy data, shows the drivers behind it, and comes with a next step, such as a post-discharge care plan, enrollment in chronic care management or outreach before an avoidable ED visit.' },
+        { q: 'How is a mortality prediction used?',
+          a: 'It flags patients who may benefit from a clinician-led serious-illness conversation, advance care planning and a palliative-care review. The flag goes to your clinical team, who decide whether and how to act. It is a prompt for clinicians, never an automated decision, and nothing happens for the patient until a clinician has reviewed it.' },
+        { q: 'How is this different from a risk score?',
+          a: 'A risk score ranks patients and stops there. Predictive Risk names what is likely to happen, shows the drivers for each patient and starts the next step: a care plan, an outreach call or a referral, with an owner and a deadline in the Embedded Care Management Platform. Clinicians review each prediction before acting on it.' },
+        { q: 'What data does Predictive Risk need?',
+          a: 'It works from the record that Population Intelligence builds: claims, EHR, ADT, lab and pharmacy data, resolved into one record per patient. The more sources you connect, the more complete the drivers. Zynix connects to 30+ EHR systems, and ADT feeds bring in admissions and discharges as they happen, so recent events are part of the picture.' }
+      ],
+      deeper: ['/use-cases/rising-risk-patient-outreach', '/use-cases/post-discharge-tcm-readmission'],
+      cta: 'See who needs <span class="zx9-grad-text">care next</span>'
+    },
+    'embedded-care-management': {
+      lead: 'The next step lands in your team’s workflow with an owner, a deadline and a record. Care plans sequence the work of agents and your care team, and document it as it happens.',
+      viz: { icon: 'clipboard', title: 'My tasks · Care manager, RN', meta: 'Today · from active care plans',
+        rows: [['TCM interactive contact · Pt 1042', 'Post-discharge plan · due in 2 business days', ['Due', 'warn']],
+               ['Symptom question · Pt 2218', 'Routed by rule from a voice call', ['Escalated', 'warn']],
+               ['CCM check-in review · Pt 3307', 'Agent call complete, notes attached', ['Review', 'info']],
+               ['Visit note · Pt 1042', 'ZynScribe draft for physician approval', ['Draft', 'muted']]],
+        foot: 'Each task has an owner, a deadline and a record.' },
+      what: { title: 'Care coordination is the work. This is the platform.',
+        lead: 'Coordination tools hand your team a list. This platform runs the work: it opens the plan, assigns each step, escalates by rule and keeps the record.' },
+      cards: [
+        { icon: 'clipboard', title: 'Sequenced care plans', body: 'TCM, CCM, AWV and gap-closure plans order the steps for agents and your care team.' },
+        { icon: 'clock', title: 'Owners and deadlines', body: 'Every task has an owner and a due date. Missed steps escalate by rule.' },
+        { icon: 'file', title: 'Documented as it happens', body: 'Each contact is recorded on the plan, which closes only when every step is done.' },
+        { icon: 'mic', title: 'ZynScribe drafts the note', body: 'Ambient documentation at the visit. Notes stay drafts until a physician approves them.' }
+      ],
+      spot: { eyebrow: 'A care plan, step by step', title: 'Every step has an owner',
+        lead: 'A sample post-discharge TCM plan, from the discharge to the documented visit.' },
+      programs: ['tcm', 'ccm', 'awv', 'access'],
+      faq: [
+        { q: 'What is an embedded care management platform?',
+          a: 'Care management software that runs inside your team’s existing workflow instead of beside it. In Zynix, each risk or open gap becomes a care plan with tasks, owners and deadlines. AI agents handle outreach and scheduling, your clinicians handle the clinical work, and each step is documented on the plan as it happens, so the record is complete when the plan closes.' },
+        { q: 'How is this different from care coordination software?',
+          a: 'Care coordination is the work: the calls, follow-ups and handoffs. Most coordination tools give your team a list to work through. The Embedded Care Management Platform opens the plan from an event such as a discharge or a prediction, assigns each step to an agent or a person, escalates by rule and keeps the record, so nothing depends on someone remembering.' },
+        { q: 'Which programs do the care plans cover?',
+          a: 'Transitional care management, chronic care management, annual wellness visits and care-gap closure. Care plans come as templates your team configures: the steps, owners, timing and escalation rules. In a TCM plan, agents reach the patient and book the follow-up visit, and clinical staff make the interactive contact, as the program requires.' },
+        { q: 'How does ZynScribe fit in?',
+          a: 'ZynScribe is ambient documentation at the point of care. It drafts a structured note from the visit conversation, and the note stays a draft until a physician reviews and approves it. Nothing is filed before that approval. The physician spends the visit with the patient, and the care plan moves on once the visit is documented.' }
+      ],
+      deeper: ['/care-plans', '/zynscribe', '/use-cases/chronic-care-coordination-scale'],
+      cta: 'Follow one plan <span class="zx9-grad-text">end to end</span>'
+    },
+    'ai-patient-engagement': {
+      lead: 'Voice and text agents reach every patient, book the visit and hand clinical questions to your team. They work within the rules and hours your team sets, and clinicians make every clinical decision.',
+      viz: { icon: 'chat', title: 'Today’s outreach', meta: 'Voice and text · all practices',
+        rows: [['Post-discharge call · Pt 1042', 'Reached · follow-up booked Thu 10:30', ['Booked', 'ok']],
+               ['AWV outreach by text · Pt 5120', 'Replied in Spanish · visit booked', ['Booked', 'ok']],
+               ['After-hours call · Pt 2218', 'Symptom question · routed to the on-call clinician by rule', ['Escalated', 'warn']]],
+        foot: 'Agents work within the rules and hours your team sets.' },
+      what: { title: 'The outreach your team has no time for', lead: null },
+      cards: [
+        { icon: 'phone', title: 'Reach patients', body: 'Voice calls and two-way texts in the patient’s language, at the hours your team sets.' },
+        { icon: 'calendar', title: 'Book the visit', body: 'Scheduling, reminders and no-show recovery, booked in the same conversation.' },
+        { icon: 'clock', title: 'Answer after hours', body: 'Calls answered, the reason captured and routine visits booked.' },
+        { icon: 'stethoscope', title: 'Hand clinical questions over', body: 'Symptom questions go to the on-call clinician by rule.' }
+      ],
+      spot: { eyebrow: 'Sample post-discharge call', title: 'Agents reach out. <span class="zx9-grad-text">Clinicians decide.</span>' },
+      split: {
+        agents: ['Outreach, scheduling, reminders and documentation prep', 'Work within the rules and hours your team sets',
+                 'Route symptom questions to the on-call clinician by rule', 'Never diagnose, triage clinically or recommend treatment'],
+        team: ['Make every clinical decision', 'Clinical staff make the TCM interactive contact', 'Answer the questions agents hand over']
+      },
+      programs: ['tcm', 'awv', 'ccm'],
+      faq: [
+        { q: 'What do AI voice and text agents do for patients?',
+          a: 'They take on the outreach care teams rarely have time for: post-discharge follow-up calls, care-gap and annual wellness visit outreach, scheduling, reminders and no-show recovery, after-hours calls and outreach in the patient’s language. Agents book the visit and note what the patient says, and they hand anything clinical to your team by rule.' },
+        { q: 'Do the agents give medical advice?',
+          a: 'No. Agents never diagnose or recommend treatment. When a patient mentions a symptom or asks a clinical question, the agent routes it to the on-call clinician by rule. Clinicians make every clinical decision, and in transitional care management the interactive contact is made by clinical staff, while the agent handles the reminders and the booking around it.' },
+        { q: 'Who sets the rules the agents follow?',
+          a: 'Your team does. You choose the outreach programs, the hours agents work and the escalation rules, including which topics go straight to a person. Agents work within the rules and hours your team sets, and each escalation goes to the clinician or staff member those rules name, so a patient reaches a person whenever the conversation needs one.' },
+        { q: 'How do agents work with our care team day to day?',
+          a: 'Agents take the high-volume outreach, scheduling and reminders. Your care team works from the same care plans: they pick up escalations, make clinical contacts such as the TCM interactive contact, and follow up with the patients agents could not reach. The split stays the same in every program: agents handle the routine work, clinicians keep the judgment.' }
+      ],
+      deeper: ['/agents', '/zynix-ai-agents', '/use-cases/after-hours-ed-diversion', '/use-cases/appointment-scheduling-no-show'],
+      deeperText: {
+        '/agents': { desc: 'The agent families and what each agent does' },
+        '/zynix-ai-agents': { label: 'How agents work with your care team', desc: 'Who does what, and how one agent run works' }
+      },
+      cta: 'Hear an agent <span class="zx9-grad-text">make the call</span>'
+    }
+  };
+
+  // ── Page-local parts ──
+  // A section with the v9 rhythm; cls adds a band (zx9-band--tint …) or a page class. The H2 inside carries id + '-title'.
+  function zxPilSection(id, cls, inner) {
+    return '<section class="zx9-section' + zxCls(cls) + '" id="' + zxAttr(id) + '" aria-labelledby="' + zxAttr(id) + '-title">' +
+      '<div class="zynix-container">' + inner + '</div></section>';
+  }
+  // A section head: optional eyebrow pill, H2, optional lead. split: the lead sits beside the heading at >= 1024 (zx9-head--split).
+  function zxPilHead(id, eyebrow, title, lead, cls, split) {
+    var h = renderV9Eyebrow(eyebrow) + '<h2 class="zx9-h2" id="' + zxAttr(id) + '-title">' + title + '</h2>';
+    if (split && lead) return '<header class="zx9-head zx9-head--split zx-pil-head' + zxCls(cls) + '"><div>' + h + '</div><p class="zx9-lead">' + lead + '</p></header>';
+    return '<header class="zx9-head zx-pil-head' + zxCls(cls) + '">' + h + zxEl('p', 'zx9-lead', lead) + '</header>';
+  }
+  // The hero's glass sample card (§5.1: "the pillar's own illustrative visual (glass card, 'Sample data')"). Role labels only.
+  function zxPilViz(v, accent) {
+    var tones = { ok: 1, info: 1, warn: 1, muted: 1 };
+    return '<div class="zx-pil-viz' + accent + '" role="group" aria-label="' + zxAttr(v.title.replace(/<[^>]*>/g, '') + ', sample data') + '" data-zx-sample>' +
+      '<div class="zx-pil-viz__head"><span class="zx-pil-viz__icon" aria-hidden="true">' + zxIcon(v.icon) + '</span>' +
+        '<div class="zx-pil-viz__heading"><p class="zx-pil-viz__title">' + v.title + '</p>' + zxEl('p', 'zx-pil-viz__meta', v.meta) + '</div>' +
+        '<span class="zx-pil-viz__chip">Sample data</span></div>' +
+      '<ul class="zx-pil-viz__rows" role="list">' + v.rows.map(function (r) {
+        var t = r[2] || null, tone = t && tones[t[1]] ? t[1] : 'muted';
+        return '<li class="zx-pil-viz__row"><div class="zx-pil-viz__main"><p class="zx-pil-viz__row-title">' + r[0] + '</p>' +
+          zxEl('p', 'zx-pil-viz__row-sub', r[1]) + '</div>' + (t ? '<span class="zx-pil-viz__tag zx-pil-viz__tag--' + tone + '">' + t[0] + '</span>' : '') + '</li>';
+      }).join('') + '</ul>' + zxEl('p', 'zx-pil-viz__foot', v.foot) + '</div>';
+  }
+  // "What it does": 3–4 zx9-cards (title + 1–2 sentences).
+  function zxPilCards(cards, pre) {
+    return '<ul class="zx-pil-cards" role="list" data-count="' + cards.length + '">' + cards.map(function (c, i) {
+      var tid = pre + '-card-' + (i + 1);
+      return '<li><article class="zx9-card zx-pil-card" aria-labelledby="' + tid + '"><span class="zx9-card__icon" aria-hidden="true">' + zxIcon(c.icon) + '</span>' +
+        '<h3 class="zx9-card__title" id="' + tid + '">' + c.title + '</h3><p class="zx9-card__body">' + c.body + '</p></article></li>';
+    }).join('') + '</ul>';
+  }
+
+  // Spotlight, Population Intelligence (§5.3): sources → one record → cohorts, then point-of-care intelligence (sample data).
+  function zxPilFlow() {
+    var tags = function (list) { return '<ul class="zx-pil-flow__tags" role="list">' + list.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>'; };
+    var stage = function (n, step, title, body) {
+      return '<li class="zx-pil-flow__stage"><p class="zx-pil-flow__step"><span class="zx-pil-flow__n" aria-hidden="true">' + zx9Num(n) + '</span>' + step + '</p>' +
+        '<h3 class="zx-pil-flow__title">' + title + '</h3>' + body + '</li>';
+    };
+    var record = '<dl class="zx-pil-flow__record">' + [['Patient', 'Pt 1042 · 72'], ['Conditions', 'CHF, type 2 diabetes'], ['Latest event', 'Discharged yesterday'],
+      ['Attribution', 'Primary care practice']].map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>'; }).join('') + '</dl>';
+    return '<div class="zx-pil-flow" role="group" aria-label="From data sources to one record to cohorts, sample data" data-zx-sample>' +
+      '<ol class="zx-pil-flow__list" role="list">' +
+        stage(1, 'Sources', 'Every source you have', tags(['Claims', 'EHR', 'ADT', 'Lab', 'Pharmacy']) +
+          '<p class="zx-pil-flow__note">' + SITE_FACTS.ehr.short + '</p>') +
+        stage(2, 'One record', 'One record per patient', record + '<p class="zx-pil-flow__note">Identities resolved across sources</p>') +
+        stage(3, 'Cohorts', 'Grouped by what they need', tags(['Recently discharged', 'Rising risk', 'AWV due', 'Open quality gaps', 'HCC to recapture']) +
+          '<p class="zx-pil-flow__note">Quality and HCC context as inputs</p>') +
+      '</ol>' +
+      '<div class="zx-pil-flow__poc"><span class="zx-pil-flow__poc-icon" aria-hidden="true">' + zxIcon('stethoscope') + '</span>' +
+        '<p class="zx-pil-flow__poc-text"><strong>At the visit:</strong> the clinician sees open gaps, risk drivers and care-plan tasks for the patient in front of them.</p>' +
+        '<span class="zx-pil-flow__chip">Sample data</span></div></div>';
+  }
+
+  // Spotlight, Embedded Care Management (§5.3): a care-plan timeline (sample post-discharge TCM plan; role labels only).
+  function zxPilPlan() {
+    var steps = [
+      { when: 'Hour 0', what: 'Discharge matched, plan opened', who: 'Zynix platform', icon: 'layers', status: 'Done' },
+      { when: 'Day 1', what: 'Check-in call: reached, visit booked', who: 'AI voice agent', icon: 'bot', status: 'Done' },
+      { when: 'Day 2', what: 'Interactive TCM contact', who: NAMES.roles.rn, icon: 'user', status: 'Done' },
+      { when: 'Day 7', what: 'Visit kept, ZynScribe note approved', who: NAMES.roles.physician, icon: 'stethoscope', status: 'Approved' },
+      { when: 'Close', what: 'Plan closed and documented', who: 'Zynix platform', icon: 'check', status: 'Closed', end: true }
+    ];
+    return '<figure class="zx-pil-plan" aria-labelledby="zx-pil-plan-title" data-zx-sample>' +
+      '<div class="zx-pil-plan__head"><span class="zx-pil-plan__icon" aria-hidden="true">' + zxIcon('clipboard') + '</span>' +
+        '<div class="zx-pil-plan__heading"><p class="zx-pil-plan__title" id="zx-pil-plan-title">Post-discharge TCM plan · Pt 1042</p>' +
+        '<p class="zx-pil-plan__meta">Opened by an ADT discharge message</p></div><span class="zx-pil-plan__chip">Sample data</span></div>' +
+      '<ol class="zx-pil-plan__steps" role="list">' + steps.map(function (s) {
+        return '<li class="zx-pil-plan__step' + (s.end ? ' zx-pil-plan__step--end' : '') + '"><span class="zx-pil-plan__dot" aria-hidden="true">' + zxIcon('check') + '</span>' +
+          '<p class="zx-pil-plan__when">' + s.when + '</p><p class="zx-pil-plan__what">' + s.what + '</p>' +
+          '<p class="zx-pil-plan__who"><span class="zx-pil-plan__who-icon" aria-hidden="true">' + zxIcon(s.icon) + '</span>' + s.who + '</p>' +
+          '<span class="zx-pil-plan__status">' + s.status + '</span></li>';
+      }).join('') + '</ol>' +
+      '<figcaption class="zx-pil-plan__caption">The interactive TCM contact is made by clinical staff. The plan closes only when each step is documented.</figcaption></figure>';
+  }
+
+  // Spotlight, AI Patient Engagement (§5.3): the use cases, the human/agent split (DECISIONS 17b) and the sample call.
+  function zxPilEngage(p, c, id) {
+    var li = function (t) { return '<li>' + t + '</li>'; };
+    var col = function (key, title, icon, items) {
+      return '<div class="zx-pil-split__col zx-pil-split__col--' + key + '"><h3 class="zx-pil-split__title"><span class="zx-pil-split__icon" aria-hidden="true">' +
+        zxIcon(icon) + '</span>' + title + '</h3><ul class="zx-pil-split__list" role="list">' + items.map(li).join('') + '</ul></div>';
+    };
+    var text = renderV9Eyebrow(c.spot.eyebrow) + '<h2 class="zx9-h2" id="' + id + '-title">' + c.spot.title + '</h2>' +
+      '<ul class="zx-pil-pills' + zx9Accent(p) + '" role="list" aria-label="Use cases">' + p.useCases.map(li).join('') + '</ul>' +
+      '<div class="zx-pil-split" role="group" aria-label="Who does what">' + col('agents', 'Agents', 'bot', c.split.agents) +
+        col('team', 'Your clinical team', 'stethoscope', c.split.team) + '</div>';
+    return renderSplit(text, renderV9Chat({ id: 'zx-pil-chat' }), { ratio: '5-7', center: true, className: 'zx-pil-engage' });
+  }
+
+  // Go deeper: link cards to live deeper pages (§1.2), resolved through zxLinkItem (LINK_NAMES, CROSS_DESCS, CROSS_ICONS).
+  function zxPilDeeper(c) {
+    var items = (c.deeper || []).map(function (h) {
+      var it = zxLinkItem(h), o = (c.deeperText || {})[h] || {};
+      return it ? { href: h, label: o.label || it.label, desc: o.desc || it.desc, icon: it.icon || 'layers' } : null;
+    }).filter(Boolean);
+    return '<ul class="zx-pil-deeper__list" role="list">' + items.map(function (it) {
+      return '<li><a class="zx-pil-deeper__link" href="' + zxAttr(it.href) + '"><span class="zx-pil-deeper__icon" aria-hidden="true">' + zxIconHtml(it.icon) + '</span>' +
+        '<span class="zx-pil-deeper__text"><span class="zx-pil-deeper__name">' + it.label + '</span>' + zxEl('span', 'zx-pil-deeper__desc', it.desc) + '</span>' +
+        '<span class="zx-pil-deeper__arrow" aria-hidden="true">→</span></a></li>';
+    }).join('') + '</ul>';
+  }
+
+  // ── renderPillarPage(id): one of the four pillar pages, by PILLARS id ──
+  function renderPillarPage(id) {
+    var p = zx9Pillar(id), c = PILLAR_PAGES[id];
+    if (!p || !c) return render404();
+    var acc = zx9Accent(p);
+
+    // 1. Hero (ink): eyebrow, H1 = the pillar name, the expanded promise, demo + "How the four pillars connect" (#loop), glass card
+    var hero = '<section class="zx9-section zx9-band--ink zx-pil-hero" id="hero" aria-labelledby="hero-title"><div class="zynix-container">' +
+      renderSplit(
+        renderV9Eyebrow('Pillar ' + zx9Num(p.n) + ' · AI operating layer') +
+        '<h1 class="zx9-display zx-pil-hero__title" id="hero-title">' + p.name + '</h1>' +
+        '<p class="zx9-lead">' + c.lead + '</p>' +
+        '<div class="zx9-actions">' + renderDemoButton({ size: 'lg' }) +
+          renderButton('How the four pillars connect', '#loop', { variant: 'secondary', size: 'lg', className: 'zx9-btn-glass' }) + '</div>',
+        zxPilViz(c.viz, acc), { ratio: '7-5', center: true, className: 'zx-pil-hero__grid' }) +
+      '</div></section>';
+
+    // 2. What it does
+    var what = zxPilSection('what', 'zx-pil-what', zxPilHead('what', 'What it does', c.what.title, c.what.lead, null, true) +
+      zxPilCards(c.cards, 'what'));
+
+    // 3. Spotlight (§5.3)
+    var spot;
+    if (id === 'predictive-risk') {
+      spot = zxPilSection('spotlight', 'zx9-band--tint zx-pil-spot', zxPilHead('spotlight', c.spot.eyebrow, c.spot.title, c.spot.lead) +
+        renderV9Predict({ id: 'spotlight-title', note: c.spot.note }));
+    } else if (id === 'ai-patient-engagement') {
+      spot = '<section class="zx9-section zx9-band--ink zx-pil-spot" id="spotlight" aria-labelledby="spotlight-title"><div class="zynix-container">' +
+        zxPilEngage(p, c, 'spotlight') + '</div></section>';
+    } else {
+      spot = zxPilSection('spotlight', 'zx9-band--tint zx-pil-spot', zxPilHead('spotlight', c.spot.eyebrow, c.spot.title, c.spot.lead, null, true) +
+        (id === 'population-intelligence' ? zxPilFlow() : zxPilPlan()));
+    }
+
+    // 4. How it connects (#loop): the closed loop, this pillar highlighted, the other pillars linked
+    var loop = zxPilSection('loop', 'zx-pil-loop', zxPilHead('loop', null, 'How the four pillars connect', SITE_FACTS.differentiator, 'zx9-head--center') +
+      renderV9Loop({ id: 'loop-title', current: p.id }));
+
+    // 5. Programs and proof: the relevant program chips, then the 1M+ / 30 states numerals
+    var st = SITE_FACTS.stats;
+    var programs = zxPilSection('programs', 'zx9-section--compact zx-pil-programs',
+      renderSplit(
+        zxPilHead('programs', null, 'Built to run the programs you’re measured on', null) +
+          renderV9Chips(c.programs, { id: 'programs-title' }),
+        renderV9Proof({ items: [{ value: st.patients.value, label: st.patients.label }, { value: st.states.value, label: st.states.label }] }),
+        { ratio: '7-5', center: true, className: 'zx-pil-programs__grid' }));
+
+    // 6. FAQ (4 questions; .zynix-faq-item feeds the FAQPage JSON-LD) and 7. Go deeper, side by side on one band
+    var more = '<div class="zx9-section zx9-band--tint zx-pil-more"><div class="zynix-container zx-pil-more__grid">' +
+      '<section class="zx-pil-faq" id="faq" aria-labelledby="faq-title">' + zxPilHead('faq', null, 'Common questions', null) +
+        renderFaqList(c.faq, { idPrefix: 'pil-faq' }) + '</section>' +
+      '<section class="zx-pil-deeper" id="go-deeper" aria-labelledby="go-deeper-title">' + zxPilHead('go-deeper', null, 'Go deeper', null) +
+        zxPilDeeper(c) + '</section>' +
+      '</div></div>';
+
+    // 8. CTA
+    var cta = renderV9Cta({ title: c.cta,
+      lead: 'Book ' + SITE_FACTS.demo.length + ' with our team. We’ll run one of your workflows on sample data.' });
+
+    return '<div class="zx-pil zx-pil--' + zxAttr(p.id) + acc + '">' + hero + what + spot + loop + programs + more + cta + '</div>' + renderFooter();
+  }
+  // ==== ZX:END pillars ====
+
   // ── PAGE: Analytics ──
   function renderAnalytics() {
     // /products-analytics is a duplicate of /zynix-data-analytics; it renders the same page until its 301 exists (§6).
@@ -11220,6 +11557,11 @@ function renderDataAnalyticsV7() {
     // V7: Platform
     '/platform': renderPlatformHub,
     '/solutions/zynix-data-analytics': renderDataAnalyticsV7,
+    // V9: the four pillar pages (owner P9; renderPillarPage in the `pillars` block; V9_SPEC §5)
+    '/population-intelligence': function () { return renderPillarPage('population-intelligence'); },
+    '/predictive-risk': function () { return renderPillarPage('predictive-risk'); },
+    '/embedded-care-management': function () { return renderPillarPage('embedded-care-management'); },
+    '/ai-patient-engagement': function () { return renderPillarPage('ai-patient-engagement'); },
     // V7: AI Agents
     '/agents': renderAgentsHub,
     '/agents/chronic-care-management': renderChronicCareAgent,
