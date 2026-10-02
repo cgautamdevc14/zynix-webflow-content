@@ -905,7 +905,7 @@
       logo:{'@type':'ImageObject',url:IMG.logo,width:400,height:80},
       description:'Zynix AI builds ' + SITE_FACTS.category.inline + '. The Zynix platform connects claims, EHR and ADT data, identifies patients and care gaps that need attention, and helps care teams follow through with care plans, agents and ambient documentation. It serves ACOs, health plans, MSOs, IPAs and health systems, with ' +
         SITE_FACTS.stats.patients.sentence + ', ' + SITE_FACTS.stats.states.sentence + ' and ' + SITE_FACTS.ehr.line + '.',
-      slogan:'Turn your data into completed follow-up.',
+      slogan:'Predict who needs care. Make sure it happens.',
       telephone:'+1-727-261-1297',
       email:'info@zynix.ai',
       address:{'@type':'PostalAddress',streetAddress:'3535 Little Rd',addressLocality:'Trinity',addressRegion:'FL',postalCode:'34655',addressCountry:'US'},
@@ -2627,135 +2627,6 @@
     });
   }
   // ==== ZX:END components ====
-
-  // ==== ZX:BEGIN v9-kit (owner S9) ====
-  // V9-KIT: remove before merge (this block and its '/v9-kit' routes entry). A review page for the v9 system: every v9 helper
-  // with V9_SPEC content on light and dark bands, so the orchestrator can review it in a preview. noindex; not in NAV or sitemap.
-  function renderV9Kit() {
-    zxSeo('/v9-kit', { title: 'V9 system kit (review) | Zynix AI', noindex: true,
-      desc: 'Review page for the Zynix V9 visual system: bands, eyebrow, pillar cards, the closed loop, the pillar explorer, proof, program chips, predictions, a sample conversation and the closing CTA.' });
-    var pi = zx9Pillar('population-intelligence'), ecm = zx9Pillar('embedded-care-management'), ape = zx9Pillar('ai-patient-engagement');
-    var head = function (eyebrow, title, lead, id, center) {
-      return '<header class="zx9-head' + (center ? ' zx9-head--center' : '') + '">' + renderV9Eyebrow(eyebrow) +
-        '<h2 class="zx9-h2" id="' + id + '-title">' + title + '</h2>' + (lead ? '<p class="zx9-lead">' + lead + '</p>' : '') + '</header>';
-    };
-    var sec = function (cls, id, inner, label) {
-      return '<section class="zx9-section' + (cls ? ' ' + cls : '') + '" id="' + id + '"' + (label ? ' aria-label="' + zxAttr(label) + '"' : ' aria-labelledby="' + id + '-title"') +
-        '><div class="zynix-container">' + inner + '</div></section>';
-    };
-    var sub = function (id, text) { return '<div class="zx9-head"><h3 class="zx9-h3" id="' + id + '">' + text + '</h3></div>'; };
-    var gap = '<div class="zx9-section--compact" aria-hidden="true"></div>';
-    var li = function (t) { return '<li>' + t + '</li>'; };
-
-    // 1. Hero (ink): eyebrow, display H1 with gradient words, lead, orange + glass actions, a glass card stack (sample)
-    var heroSteps = [
-      { p: 'predictive-risk', k: '01 · Predictive Risk', t: 'Readmission risk: high', b: 'Drivers: CHF, 2 admissions in 90 days' },
-      { p: 'embedded-care-management', k: '02 · Care plan created', t: 'Post-discharge TCM', b: 'Owner: Care manager, RN · due in 2 business days' },
-      { p: 'ai-patient-engagement', k: '03 · AI voice agent', t: 'Outreach call: reached', b: 'Follow-up visit booked Thu 10:30' },
-      { p: 'population-intelligence', k: '04 · Documented', t: 'Visit kept', b: 'Plan closed' }
-    ];
-    var stack = '<div role="group" aria-label="Sample workspace, illustrative data" data-zx-sample><ol class="zx9-stack" role="list">' + heroSteps.map(function (s) {
-        var p = zx9Pillar(s.p);
-        return '<li><div class="zx9-card zx9-card--glass' + zx9Accent(p) + '"><span class="zx9-card__icon" aria-hidden="true">' + zxIcon(p.icon) + '</span>' +
-          '<p class="zx9-card__kicker">' + s.k + '</p><p class="zx9-card__title">' + s.t + '</p><p class="zx9-card__body">' + s.b + '</p></div></li>';
-      }).join('') + '</ol><p class="zx9-note">' + renderChip('Sample workspace · illustrative data', 'sample') + '</p></div>';
-    var hero = '<section class="zx9-section zx9-band--ink" id="v9-hero" aria-labelledby="v9-hero-title"><div class="zynix-container">' + renderSplit(
-        renderV9Eyebrow(SITE_FACTS.category.long) +
-        '<h1 class="zx9-display" id="v9-hero-title">Predict who needs care. <span class="zx9-grad-text">Make sure it happens.</span></h1>' +
-        '<p class="zx9-lead">Zynix predicts risk, embeds care management in your team’s day and reaches patients by AI voice and text, so every insight ends in an intervention, not a dashboard.</p>' +
-        '<div class="zx9-actions">' + renderDemoButton({ size: 'lg' }) +
-          renderButton('See the four pillars', '#v9-pillars', { variant: 'secondary', size: 'lg', className: 'zx9-btn-glass' }) + '</div>',
-        stack, { ratio: '7-5', center: true }) + '</div></section>';
-
-    // 2. Proof (light) · 3. Loop (tint) · 4. Pillars (white)
-    var proof = sec('', 'v9-proof', head('Proof, under the pillars', 'Running in value-based care today', null, 'v9-proof') +
-      renderV9Proof({ id: 'v9-proof-title' }) +
-      '<p class="zx9-body">Built by ACO operators: ' + SITE_FACTS.founder.savings + '.</p>' +
-      '<p class="zx9-note">' + renderChip('CMS ACCESS Model', 'brand') + ' ' + zxAccessLine() + '</p>');
-    var loop = sec('zx9-band--tint', 'v9-loop', head('Why it isn’t another analytics company', SITE_FACTS.differentiator,
-      'Most platforms stop at the dashboard. Zynix closes the loop from insight to intervention, and records the outcome.', 'v9-loop', true) +
-      renderV9Loop({ id: 'v9-loop-title' }));
-    var pillars = sec('', 'v9-pillars', head('The four pillars', 'Four capabilities. One operating layer.', SITE_FACTS.definition, 'v9-pillars') +
-      renderV9Pillars({ id: 'v9-pillars-title' }));
-
-    // 5. Pillar explorer (.zx9-tabs; markup per initV9's contract), mini visuals from the existing sample UI kit
-    var visuals = {
-      'population-intelligence': renderUiPanel({ brand: 'Population Intelligence', title: 'One record per patient', meta: 'Sources resolved · sample cohort',
-        rows: [{ title: 'Claims', sub: 'Attribution, cost and utilization history', status: { tone: 'success', label: 'Connected' } },
-               { title: 'EHR', sub: 'Problems, labs, vitals and notes', status: { tone: 'success', label: 'Connected' } },
-               { title: 'ADT feed', sub: 'Admissions and discharges as they happen', status: { tone: 'success', label: 'Connected' } },
-               { title: 'Pharmacy', sub: 'Fills and adherence gaps', status: { tone: 'brand', label: 'Syncing' } }],
-        footer: 'Identities resolved into one record, with attribution and cohorts on top.' }),
-      'predictive-risk': renderUiPanel({ brand: 'Predictive Risk', title: 'Who needs care next', meta: 'This week · drivers shown',
-        rows: [{ title: 'Pt 1042 · 72 · CHF', sub: 'Readmission risk: high · 2 admissions in 90 days', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'brand', label: 'Plan created' } },
-               { title: 'Pt 2218 · 66 · COPD', sub: 'Utilization rising · 3 ED visits this year', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'neutral', label: 'Queued' } },
-               { title: 'Pt 3307 · 81', sub: 'Mortality risk flagged for clinician review', owner: { type: 'staff', label: 'Physician lead' }, status: { tone: 'warning', label: 'Review' } }],
-        footer: 'Clinicians review every prediction before acting.' }),
-      'embedded-care-management': renderUiPanel({ brand: 'Care management', title: 'Post-discharge TCM plan', meta: 'Pt 1042 · sample episode',
-        steps: [{ time: 'Hour 0', title: 'Discharge matched, plan opened', owner: 'Zynix platform', status: { tone: 'success', label: 'Completed' } },
-                { time: 'Day 1', title: 'Outreach call reached the patient', owner: 'Outreach agent', status: { tone: 'success', label: 'Reached' } },
-                { time: 'Day 2', title: 'Interactive contact made', owner: 'Care manager, RN', status: { tone: 'success', label: 'Completed' } },
-                { time: 'Day 7', title: 'Visit kept, note drafted', owner: 'Physician lead', status: { tone: 'brand', label: 'Review' } }] }),
-      'ai-patient-engagement': renderUiPanel({ brand: 'Patient engagement', title: 'Today’s outreach', meta: 'Voice and text · all practices',
-        rows: [{ title: 'Pt 1042 · post-discharge call', sub: 'Reached · follow-up booked Thu 10:30', owner: { type: 'agent', label: 'Voice agent' }, status: { tone: 'success', label: 'Booked' } },
-               { title: 'Pt 5120 · AWV outreach', sub: 'Text reply received, in Spanish', owner: { type: 'agent', label: 'Text agent' }, status: { tone: 'brand', label: 'In progress' } },
-               { title: 'Pt 2218 · symptom question', sub: 'Routed to on-call clinician by rule', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'warning', label: 'Escalated' } }] })
-    };
-    var tabs = '<div class="zx9-tabs" data-zx9-tabs><div class="zx9-tabs__list" role="tablist" aria-label="The four pillars">' + PILLARS.map(function (p, i) {
-        return '<button type="button" class="zx9-tabs__tab' + zx9Accent(p) + '" role="tab" id="v9-tab-' + p.id + '" aria-selected="' + (i ? 'false' : 'true') +
-          '" aria-controls="v9-panel-' + p.id + '" tabindex="' + (i ? '-1' : '0') + '"><span class="zx9-tabs__num" aria-hidden="true">' + zx9Num(p.n) + '</span>' +
-          '<span class="zx9-tabs__label">' + p.short + '</span></button>';
-      }).join('') + '</div>' + PILLARS.map(function (p, i) {
-        return '<div class="zx9-tabs__panel' + zx9Accent(p) + '" role="tabpanel" id="v9-panel-' + p.id + '" aria-labelledby="v9-tab-' + p.id + '" tabindex="0"' + (i ? ' hidden' : '') + '>' +
-          '<div class="zx9-tabs__text"><h3 class="zx9-h3">' + p.promise + '</h3><ul class="zx9-ticks" role="list">' + p.bullets.map(li).join('') + '</ul>' +
-          '<p class="zx9-body"><a class="zx9-link" href="' + p.slug + '">Explore ' + p.name + '<span aria-hidden="true">→</span></a></p></div>' +
-          '<div class="zx9-tabs__visual">' + visuals[p.id] + '</div></div>';
-      }).join('') + '</div>';
-    var explorer = sec('zx9-band--tint', 'v9-explorer', head('The pillar explorer', 'Four capabilities. One operating layer.', null, 'v9-explorer') + tabs);
-
-    // 6. AI Patient Engagement spotlight (ink): use cases, fine print, the sample call
-    var engage = sec('zx9-band--ink', 'v9-engage', renderSplit(
-      renderV9Eyebrow(ape.name) + '<h2 class="zx9-h2" id="v9-engage-title">Voice and text agents that <span class="zx9-grad-text">reach every patient</span></h2>' +
-        '<p class="zx9-lead">' + ape.promise + '</p>' +
-        '<ul class="zx9-ticks' + zx9Accent(ape) + '" role="list">' + ape.useCases.map(li).join('') + '</ul>' +
-        '<p class="zx9-note">Agents work within the rules and hours your team sets. Clinicians make every clinical decision.</p>' +
-        '<p class="zx9-body"><a class="zx9-link" href="' + ape.slug + '">Explore ' + ape.name + '<span aria-hidden="true">→</span></a></p>',
-      renderV9Chat({ id: 'v9-chat' }), { ratio: '5-7', center: true }));
-
-    // 7. Predictive Risk (white) · 8. Embedded care management (warm) · 9. Programs (white, compact)
-    var predict = sec('', 'v9-predict', head('Predictive Risk', 'Predictive Risk, not just risk scores', null, 'v9-predict') +
-      renderV9Predict({ id: 'v9-predict-title', note: 'Every prediction shows its drivers. Clinicians review before acting.' }));
-    var cards = [
-      { icon: 'clipboard', p: ecm, title: 'The plan runs itself', body: 'Care plans, owners, deadlines and escalations by rule, with documentation as the work happens.' },
-      { icon: 'stethoscope', p: pi, title: 'Intelligence at the point of care', body: 'At the visit, the clinician sees risk drivers, open gaps and tasks. ZynScribe drafts the note for physician approval.' }
-    ];
-    var embedded = sec('zx9-band--warm', 'v9-embedded', head('Embedded Care Management', 'Care management embedded where the work happens', null, 'v9-embedded') +
-      renderGrid(cards, function (c) {
-        return '<article class="zx9-card' + zx9Accent(c.p) + '"><span class="zx9-card__icon" aria-hidden="true">' + zxIcon(c.icon) + '</span>' +
-          '<h3 class="zx9-card__title">' + c.title + '</h3><p class="zx9-card__body">' + c.body + '</p></article>';
-      }) + gap + renderV9Chat({ id: 'v9-chat-text', channel: 'text', title: 'AI text agent · Annual wellness visit outreach',
-        items: [{ from: 'agent', text: 'Hi, this is an automated assistant for your care team. You’re due for your annual wellness visit. Would you like to book it?' },
-                { from: 'patient', text: 'Yes, next week if possible.' },
-                { from: 'agent', text: 'I can offer Tuesday at 9:00 or Wednesday at 2:30. Which works better?' },
-                { from: 'patient', text: 'Wednesday, please.' },
-                { event: 'booked', text: 'Annual wellness visit booked · Wed 2:30' }],
-        caption: 'Sample text conversation on a light band. Agents work within the rules and hours your team sets.' }));
-    var programs = sec('zx9-section--compact', 'v9-programs', head('CMS program execution', 'Built to run the programs you’re measured on', null, 'v9-programs') +
-      renderV9Chips(null, { id: 'v9-programs-title' }));
-
-    // 10. Dark-band variants: proof, loop as a pillar page sees it, chips with names, glass pillar cards
-    var dark = sec('zx9-band--ink', 'v9-dark', head('Dark-band variants', 'The same components on ink', 'Proof, the loop with the current pillar highlighted (as on /predictive-risk), program chips with their names, and glass pillar cards.', 'v9-dark') +
-      sub('v9-dark-proof', 'Proof row') + renderV9Proof({ id: 'v9-dark-proof' }) + gap +
-      sub('v9-dark-loop', 'Closed loop, current pillar: Predictive Risk') + renderV9Loop({ id: 'v9-dark-loop', current: 'predictive-risk' }) + gap +
-      sub('v9-dark-chips', 'Program chips with names') + renderV9Chips(['tcm', 'ccm', 'awv', 'mssp', 'lead', 'access', 'wiser'], { id: 'v9-dark-chips', names: true }) + gap +
-      sub('v9-dark-pillars', 'Glass pillar cards, current pillar: AI Patient Engagement') + renderV9Pillars({ id: 'v9-dark-pillars', glass: true, current: 'ai-patient-engagement' }));
-
-    return hero + proof + loop + pillars + explorer + engage + predict + embedded + programs + dark +
-      renderV9Cta({ eyebrow: 'Next step', title: 'See the operating layer run on <span class="zx9-grad-text">your workflows</span>',
-        lead: 'Book ' + SITE_FACTS.demo.length + ' with our team. We’ll walk through a workflow you run today, on sample data.' }) +
-      renderFooter();
-  }
-  // ==== ZX:END v9-kit ====
 
   // ── Footer (§3.5): columns from NAV, brand from SITE_FACTS.company; /sms-program stays in the bottom bar (A2P) ──
   function renderFooter() {
@@ -4974,86 +4845,97 @@
   }
 
   // ==== ZX:BEGIN home (owner H) ====
-  // Homepage (DESIGN_SPEC §5, COPY_DECK §3). The four protected assets (DECISIONS 11) are rebuilt, never removed: hero
-  // widget, How-It-Works explorer, data flow (P1 reuses it) and logo row. Facts only from SITE_FACTS, CUSTOMERS, NAMES.
+  // Homepage, V9 (V9_SPEC §4; stream H9): 12 sections in the spec's order, built on the v9 class contract (stylesheet
+  // block `v9`) and its helpers (renderV9*); this block adds only what is homepage-specific (prefix zx-home-). The four
+  // protected assets (DECISIONS 11) are rebuilt, never removed: the hero widget is the insight → intervention card stack
+  // (with its pause control), the data flow is the closed loop (.zx9-loop), the How-It-Works explorer is the pillar tabs
+  // (#how-it-works, .zx9-tabs) and the logo row stays in the hero. Facts only from SITE_FACTS, CUSTOMERS, PILLARS, PROGRAMS.
+  // Claims (§1.1): registry numbers only; no agent counts, ROI or % outcomes; illustrative UI is labelled; the human/agent
+  // split is visible wherever agents touch patients (hero stack, engagement spotlight, care-plan timeline, FAQ).
 
-  // §5.2 The only hero-widget data. Counts are coherent (6 escalations in Outreach = 6 in Care team; AWV 540 >= 318 >=
-  // 212 >= 131); tab labels <= 9 characters so all four fit at 390; the booked visit matches the episode and the plan.
-  var HERO_WIDGET = {
-    brand: 'Care operations',
-    badge: 'Demo',                                             // a demo workspace, never labelled as a production feed
-    chip: 'Sample workspace · illustrative data',              // DECISIONS 11; always visible at every width
-    label: 'Sample workspace, illustrative data',              // accessible name of the widget
-    autoplayMs: 6000,
-    tabs: [
-      { id: 'gaps', label: 'Care gaps', layer: 'intelligence',
-        heading: 'Open care gaps', meta: 'This week · all practices',
-        tiles: [ { value: '312', label: 'Open gaps' }, { value: '128', label: 'Queued for outreach' }, { value: '46', label: 'Closed this week' } ],
-        rows: [
-          { title: 'Annual wellness visit due', sub: '64 patients', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'brand', label: 'In progress' } },
-          { title: 'HbA1c test overdue', sub: '38 patients', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'neutral', label: 'Queued' } },
-          { title: 'HCC recapture review', sub: '21 charts', owner: { type: 'staff', label: 'Physician lead' }, status: { tone: 'neutral', label: 'In review' } },
-          { title: 'Part D statin adherence', sub: '12 patients', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'warning', label: 'Escalated' } }
-        ],
-        footer: 'Gaps are ranked by due date and reachability. Your care team sets the rules.' },
-      { id: 'outreach', label: 'Outreach', layer: 'agents',
-        heading: 'Outreach queue', meta: 'Today',
-        tiles: [ { value: '84', label: 'Calls queued' }, { value: '51', label: 'Patients reached' }, { value: '6', label: 'Escalated to RN' } ],
-        rows: [
-          { title: 'Post-discharge check-in', sub: 'Day 1 after discharge', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Reached' } },
-          { title: 'Medication question', sub: 'Raised during the call', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'warning', label: 'Escalated' } },
-          { title: 'Follow-up visit booked', sub: 'Patient picked from 3 time slots', owner: { type: 'agent', label: 'Scheduling agent' }, status: { tone: 'success', label: 'Booked' } },
-          { title: 'No answer', sub: 'Second attempt at 4 pm', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'neutral', label: 'Retry scheduled' } }
-        ],
-        footer: 'Clinical questions go to the care team by rule.' },
-      { id: 'awv', label: 'AWVs', layer: 'care-plans',
-        heading: 'Annual wellness visit program', meta: 'This quarter',
-        tiles: [ { value: '540', label: 'Due' }, { value: '212', label: 'Scheduled' }, { value: '131', label: 'Completed' } ],
-        pipeline: [ { label: 'Identified', value: 540 }, { label: 'Contacted', value: 318 }, { label: 'Scheduled', value: 212 }, { label: 'Completed', value: 131 } ],
-        footer: 'A visit counts only when it is completed and documented.' },
-      { id: 'team', label: 'Care team', layer: 'people',
-        heading: 'Care team', meta: 'Today',
-        tiles: [ { value: '6', label: 'Escalations' }, { value: '4', label: 'Resolved' }, { value: '17', label: 'Open tasks' } ],
-        rows: [
-          { title: 'Care manager, RN', sub: 'Interactive TCM contacts · 3 open', owner: { type: 'staff', label: 'Clinical staff' }, status: { tone: 'brand', label: 'In progress' } },
-          { title: 'Outreach agent', sub: '84 calls queued · 6 handed to the RN', owner: { type: 'agent', label: 'AI agent' }, status: { tone: 'success', label: 'Running' } },
-          { title: 'Physician lead', sub: 'HCC reviews · 2 awaiting sign-off', owner: { type: 'staff', label: 'Clinical staff' }, status: { tone: 'neutral', label: 'In review' } },
-          { title: 'Care coordinator', sub: 'Scheduling tasks · 9 open', owner: { type: 'staff', label: 'Staff' }, status: { tone: 'brand', label: 'In progress' } }
-        ],
-        footer: 'Agents do the outreach and scheduling. Licensed staff own clinical judgment and the billable TCM contact.' }
+  // §4.1 The hero card stack: the only hero-widget data. Sample data, role labels only (no personal names).
+  var HOME_STACK = {
+    chip: 'Sample workspace · illustrative data',                         // DECISIONS 11; visible at every width
+    label: 'Sample workspace, illustrative data: from insight to intervention',
+    stepMs: 2200, holdMs: 4400,   // one step every 2.2 s; the closed plan stays up twice as long before the stack starts again
+    steps: [
+      { pillar: 'predictive-risk', kicker: 'Predictive Risk', title: 'Readmission risk: high', detail: 'Drivers: CHF, 2 admissions in 90 days' },
+      { pillar: 'embedded-care-management', kicker: 'Care plan created', title: 'Post-discharge TCM', detail: 'Owner: Care manager, RN · due in 2 business days' },
+      { pillar: 'ai-patient-engagement', kicker: 'AI voice agent', title: 'Outreach call: reached', detail: 'Follow-up visit booked Thu 10:30' },
+      { outcome: true, kicker: 'Documented', title: 'Visit kept', detail: 'Plan closed' }
     ]
   };
 
-  // §5.4 How-It-Works explorer: the four product layers, numbered 01–04 (the data flow tags steps with the same layers).
-  // No intelligence product names while NAMES.intelligence[*].showName is false; no agent count.
-  var HOME_LAYERS = [
-    { n: 1, id: 'data-foundation', name: 'Data foundation', short: 'Every source, one patient record',
-      tagline: 'Claims, EHR, ADT, lab and pharmacy data, matched to one patient record.',
-      body: 'Zynix brings in Medicare claims, HL7 ADT feeds, labs, pharmacy fills and SDoH screens, standardizes ICD-10, CPT, SNOMED and LOINC codes, and resolves patient identity across sources.',
-      chipsLabel: 'Sources it connects', chips: ['Claims (CCLF, BCDA)', 'EHR (Epic, Oracle Health, athenahealth and more)', 'ADT feeds', 'Labs and pharmacy', 'SDoH screening'],
-      links: [ { label: 'Data foundation', href: '/products-data-platform' }, { label: 'Integrations', href: '/integrations' } ] },
-    { n: 2, id: 'intelligence', name: 'Intelligence', short: 'What needs attention, and why',
-      tagline: 'Ranks the patients, gaps and risks that need action, and shows why.',
-      body: 'It checks clinical diagnoses against current-year claims to find HCC and quality gaps, flags admission and readmission risk, and gives program leaders population and quality views.',
-      chipsLabel: 'What it surfaces', chips: NAMES.intelligence.map(function (p) { return p.showName ? p.name + ': ' + p.capability : p.capability; }),
-      links: [ { label: 'Analytics', href: '/zynix-data-analytics' } ] },
-    { n: 3, id: 'agents', name: 'Agents', short: 'Outreach, scheduling and follow-up',
-      tagline: 'Handle outreach, scheduling, intake and <span class="zx-home-nowrap">follow-up</span>, and hand clinical questions to your team.',
-      body: 'Agents run the operational steps of each program. Clinical questions and clinical decisions stay with your care team, and agents escalate to it by rule.',
-      // concrete jobs, each linked to its agent family on /agents
-      chipsLabel: 'What agents handle', chips: [ ['Post-discharge calls', 0], ['AWV scheduling', 0], ['Reminders', 0], ['After-hours intake', 2], ['Fax routing', 2] ]
-        .map(function (c) { var f = NAMES.agentFamilies[c[1]]; return f ? { label: c[0], href: f.href } : c[0]; }),
-      links: [ { label: 'AI agents', href: '/agents' } ] },
-    { n: 4, id: 'care-plans', name: 'Care plans', short: 'Each episode, seen through',
-      tagline: 'Sequence agents and people around one goal, and keep the episode open until it’s documented.',
-      body: 'Templates cover post-discharge TCM, HCC gap closure, medication adherence and preventive screening. Every step has an owner, an agent or a named role, and a plan closes only when each step is complete.',
-      chipsLabel: 'Example care plans', chips: NAMES.carePlans.slice(0, 4),
-      links: [ { label: 'Care plans', href: '/care-plans' } ] }
+  // §4.4 The pillar tabs' mini visuals (sample UI kit, renderUiPanel): three rows each, role labels only.
+  var HOME_PILLAR_UI = {
+    'population-intelligence': { brand: 'Population Intelligence', title: 'One record per patient', meta: 'Sources resolved',
+      rows: [ { title: 'Claims', sub: 'Attribution, cost and utilization history', status: { tone: 'success', label: 'Connected' } },
+              { title: 'EHR', sub: 'Problems, labs, vitals and notes', status: { tone: 'success', label: 'Connected' } },
+              { title: 'ADT feed', sub: 'Admissions and discharges as they happen', status: { tone: 'brand', label: 'Syncing' } } ] },
+    'predictive-risk': { brand: 'Predictive Risk', title: 'Who needs care next', meta: 'Drivers shown',
+      rows: [ { title: 'Pt 1042 · CHF', sub: 'Readmission risk: high · 2 admissions in 90 days', status: { tone: 'brand', label: 'Plan created' } },
+              { title: 'Pt 2218 · COPD', sub: 'Utilization rising · 3 ED visits this year', status: { tone: 'neutral', label: 'Queued' } },
+              { title: 'Pt 3307', sub: 'Mortality risk flagged for clinician review', status: { tone: 'warning', label: 'Review' } } ] },
+    'embedded-care-management': { brand: 'Care management', title: 'Post-discharge TCM plan', meta: 'Pt 1042',
+      steps: [ { time: 'Hour 0', title: 'Discharge matched, plan opened', owner: 'Zynix platform', status: { tone: 'success', label: 'Done' } },
+               { time: 'Day 1', title: 'Outreach call reached the patient', owner: 'Outreach agent', status: { tone: 'success', label: 'Reached' } },
+               { time: 'Day 1', title: 'Interactive TCM contact made', owner: 'Care manager, RN', status: { tone: 'success', label: 'Done' } } ] },
+    'ai-patient-engagement': { brand: 'Patient engagement', title: 'Today’s outreach', meta: 'Voice and text',
+      rows: [ { title: 'Post-discharge call', sub: 'Reached · follow-up booked Thu 10:30', status: { tone: 'success', label: 'Booked' } },
+              { title: 'AWV outreach', sub: 'Text reply received, in Spanish', status: { tone: 'brand', label: 'In progress' } },
+              { title: 'Symptom question', sub: 'Routed to on-call clinician by rule', status: { tone: 'warning', label: 'Escalated' } } ] }
+  };
+
+  // §4.5 The sample post-discharge call (V9_SPEC: greet and verify, new shortness of breath, hand-off, escalation, booking).
+  var HOME_CALL = [
+    { from: 'agent', text: 'Hi, I’m an automated assistant calling for your care team after your hospital stay. First, I need to confirm I’m speaking with the right person.' },
+    { event: 'info', text: 'Identity verified' },
+    { from: 'agent', text: 'How have you been feeling since you got home?' },
+    { from: 'patient', text: 'Mostly fine, but I’ve been short of breath since last night.' },
+    { from: 'agent', text: 'Thank you for telling me. I’ll connect you with your care team now.' },
+    { event: 'escalate', text: 'Routed to on-call clinician by rule' },
+    { event: 'booked', text: 'Follow-up visit booked · Thu 10:30' }
   ];
 
-  // §5.5 Data flow "From source data to a documented outcome": Ingest → Normalize → Reason → Surface → Execute.
-  // summary <= 6 words, detail <= 20 words, tags <= 6, so every step stays complete at 390. No EHR write-back claim.
-  // Reason names capabilities, not ZynixLLM, while governance.dataUse is on hold [VERIFY]; Execute lists concrete jobs.
+  // §4.7 The 48 hours after discharge (HOME_EPISODE, rebuilt as four rows). Licensed staff make the TCM interactive contact
+  // (DECISIONS 17b); the agent's call is operational and its clinical question goes to the RN by rule.
+  var HOME_EPISODE = [
+    { time: 'Hour 0', owner: 'system', who: 'Zynix platform', text: 'ADT discharge matched; the post-discharge TCM plan opens' },
+    { time: 'Day 1', owner: 'agent', who: 'Outreach agent', text: 'Check-in call; a medication question is escalated by rule' },
+    { time: 'Day 1', owner: 'staff', who: 'Care manager, RN', text: 'Interactive TCM contact; the question is answered' },
+    { time: 'Day 2', owner: 'agent', who: 'Scheduling agent', text: 'Follow-up visit booked and reminders set' }
+  ];
+  // §4.7 What the clinician sees at the visit (sample).
+  var HOME_POC = [
+    { label: 'Risk drivers', text: 'CHF · 2 admissions in 90 days' },
+    { label: 'Open gaps', text: 'HbA1c overdue · AWV due' },
+    { label: 'Tasks', text: 'Medication reconciliation' },
+    { label: 'Visit note', text: 'ZynScribe draft, awaiting physician approval' }
+  ];
+
+  // §4.11 Five questions, written to the V9 positioning. No numbers except registry facts (§1.1); no outcome claims.
+  var HOME_FAQ = [
+    { q: 'What is an AI operating layer?',
+      a: 'It’s the layer between your data and your care team’s daily work. Zynix predicts which patients need care, puts the next step into your team’s workflow with an owner and a deadline, and reaches patients by AI voice and text. Clinicians make every clinical decision.' },
+    { q: 'How is Zynix different from a population health analytics platform?',
+      a: 'Analytics tells you who needs attention. Zynix makes sure something happens: each prediction becomes a care-plan task with an owner and a deadline, agents handle the outreach and scheduling, and the outcome is documented. If you already use an analytics platform, ask us how Zynix works alongside it.' },
+    { q: 'What does Predictive Risk predict?',
+      a: 'Readmission, mortality, disease progression and utilization. Each prediction shows the drivers behind it and leads to a next step, such as a post-discharge care plan, a clinician-led serious-illness conversation, chronic care management enrollment or outreach before an avoidable ED visit. Clinicians review every prediction before acting.' },
+    { q: 'How do AI voice and text agents work with our care team?',
+      a: 'Agents handle outreach, scheduling, reminders and documentation prep, within the rules and hours your team sets, and route symptom questions to the on-call clinician by rule. Clinicians make every clinical decision, clinical staff make the TCM interactive contact, and ZynScribe notes stay drafts until a physician approves them.' },
+    { q: 'Which EHRs and data sources does Zynix connect to?',
+      a: 'Zynix connects to ' + SITE_FACTS.ehr.line + ', including ' + SITE_FACTS.ehr.named.slice(0, -1).join(', ') + ' and ' + SITE_FACTS.ehr.named.slice(-1)[0] +
+         ', along with Medicare and payer claims, ADT feeds, labs and pharmacy data. Connections use FHIR, HL7, C-CDA and X12 standards.' }
+  ];
+
+  // Homepage title and description (V9_SPEC §1: the category line leads; never claims analytics or care gaps first). Set
+  // here, never by editing the PAGE_SEO table. Title 54 characters; description 152.
+  zxSeo('', { title: 'The AI operating layer for value-based care | Zynix AI',
+    desc: 'Zynix predicts which patients need care, embeds the next step in your care team’s workflow and reaches patients by AI voice and text. For ACOs and health plans.' });
+
+  // ── §5.5 Data flow: P1's /platform renders it (zxPlatFlow), every step open; the homepage now shows the closed loop ──
+  // opts: { id, eyebrow, title, lead, className, fact } — fact:false drops the EHR line under the sources.
+  // From source data to a documented outcome: Ingest → Normalize → Reason → Surface → Execute. No EHR write-back claim.
   var HOME_FLOW = {
     eyebrow: 'Data flow', title: 'From source data to a documented outcome',
     lead: 'Every signal takes the same path: in from your systems, cleaned and matched, read in context, ranked into work and carried through to a documented result.',
@@ -5087,183 +4969,33 @@
                { icon: 'chart', label: 'Population and quality reporting' }, { icon: 'bot', label: 'Agent outreach tasks' },
                { icon: 'file', label: 'Documentation for physician review' } ]   // no EHR write-back claim until confirmed per EHR [VERIFY]
   };
-
-  // §5.6 The 48 hours after discharge. Licensed staff make the billable TCM contact for every patient (DECISIONS 17b);
-  // the escalated question is answered inside it. The agent's call is operational and never reviews clinical content.
-  var HOME_EPISODE = {
-    caption: 'Example episode · sample data',
-    without: [ 'The discharge shows up in a report days later.', 'Nobody owns the patient yet.',
-               'A voicemail, then nothing.', 'The TCM contact window closes unnoticed.' ],
-    steps: [
-      { time: 'Hour 0', owner: 'system', ownerLabel: 'Zynix platform',   text: 'The ADT discharge message arrives, the patient is matched to their record and a post-discharge care plan opens.' },
-      { time: 'Hour 1', owner: 'system', ownerLabel: 'Zynix platform',   text: 'The patient joins today’s TCM worklist, ranked by risk.' },
-      { time: 'Day 1',  owner: 'agent',  ownerLabel: 'Outreach agent',   text: 'The outreach agent calls, confirms the patient is home with their discharge paperwork, and notes a question about a new medication.' },
-      { time: 'Day 1',  owner: 'staff',  ownerLabel: 'Care manager, RN', text: 'The care manager, RN makes the interactive TCM contact and answers the medication question the agent escalated by rule.', escalation: true },
-      { time: 'Day 2',  owner: 'agent',  ownerLabel: 'Scheduling agent', text: 'The follow-up visit is booked inside the 7- or 14-day window and reminders are set.' }
-    ],
-    note: 'Your care plan sets the steps, owners and escalation rules. The plan stays open until the visit is documented.',
-    // plan-facing line: no numbers, care-team oversight stated (DECISIONS 17b)
-    plans: 'Health plans can run the same pattern for HEDIS and Stars gaps: ranked member lists, agent outreach, <span class="zx-home-nowrap">care-team</span> escalation.',
-    // CMS-1 (COPY_DECK §0.3); the MLN booklet answered 200 on 2026-09-29.
-    rule: { text: 'For TCM, CMS requires an interactive contact with the patient or caregiver within 2 business days of discharge.',
-            label: 'CMS: Transitional Care Management Services (PDF)',
-            href: 'https://www.cms.gov/files/document/mln908628-transitional-care-management-services.pdf' }
-  };
-
-  // §5.7 Capabilities. media: 'capture' (an admissible screenshot, §2.9) | 'panel' | 'text'; switching is a data change.
-  // Until two captures pass §2.9 the fallback ships: connect and document 'text', act 'panel' [VERIFY launch dependency],
-  // rendered as one list in story order beside the single panel. Once a capture exists, every row gets its own split.
-  var HOME_CAPABILITIES = [
-    { id: 'connect', media: 'text', capture: null, eyebrow: 'Data foundation · Intelligence', title: 'See who needs attention this week, and why',
-      body: 'Zynix ranks discharges, care gaps and risk into worklists and shows why each patient is on them, so teams start where the window is closing.',
-      links: [ { label: 'Explore analytics', href: '/zynix-data-analytics' }, { label: 'See the data foundation', href: '/products-data-platform' } ],
-      caption: 'A post-discharge worklist, ranked by priority, with an owner on every row.',
-      panel: { label: 'Sample worklist, illustrative data', brand: 'Care management', title: 'Post-discharge worklist', meta: 'Today · 4 practices',
-        tiles: [ { value: '18', label: 'Discharges' }, { value: '12', label: 'High priority' }, { value: '9', label: 'Reached' } ],
-        rows: [
-          { title: 'Pt 1042 · 72 · CHF',      sub: 'Discharged yesterday · high priority', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Reached' } },
-          { title: 'Pt 2317 · 68 · COPD',     sub: 'Discharged yesterday',                 owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'brand', label: 'Calling' } },
-          { title: 'Pt 0896 · 81 · CKD',      sub: 'Discharged 2 days ago',                owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'warning', label: 'Escalated' } },
-          { title: 'Pt 3350 · 59 · Diabetes', sub: 'AWV due · HbA1c gap open',             owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'neutral', label: 'Queued' } } ] },
-      callouts: [ { title: 'Ranked by risk and deadline', body: 'Discharges and gaps are sorted so the team starts where the window is closing.' },
-                  { title: 'An owner on every row', body: 'Each patient shows whether an agent or a named role has the next step.' },
-                  { title: 'Why each patient is on the list', body: 'The discharge, the open gap and its deadline show on the row.' } ] },
-    { id: 'act', media: 'panel', capture: null, eyebrow: 'Agents · Care plans', title: 'A plan with an owner for every step',
-      body: 'Care plans sequence agents and people around one goal, such as a discharge or a wellness visit. Agents make the calls, send the texts and book visits; your care team takes escalations and clinical decisions.',
-      links: [ { label: 'See how agents work', href: '/agents' }, { label: 'Browse care plans', href: '/care-plans' } ],
-      caption: 'A post-discharge care plan: each step belongs to an agent or a person.',
-      panel: { label: 'Sample care plan, illustrative data', brand: 'Care plans', title: 'Post-discharge TCM', meta: 'Pt 1042 · started Day 0',
-        steps: [
-          { time: 'Day 0', title: 'Discharge detected',        owner: { type: 'system', label: 'Zynix platform' },   status: { tone: 'success', label: 'Done' } },
-          { time: 'Day 1', title: 'Check-in call',             owner: { type: 'agent',  label: 'Outreach agent' },   status: { tone: 'success', label: 'Reached' } },
-          { time: 'Day 1', title: 'Interactive TCM contact',   owner: { type: 'staff',  label: 'Care manager, RN' }, status: { tone: 'success', label: 'Completed' } },
-          { time: 'Day 2', title: 'Follow-up visit booked',    owner: { type: 'agent',  label: 'Scheduling agent' }, status: { tone: 'success', label: 'Booked' } },   // matches HOME_EPISODE
-          { time: 'Day 7', title: 'Visit and documentation',   owner: { type: 'staff',  label: 'Physician' },        status: { tone: 'neutral', label: 'Scheduled' } } ] },
-      callouts: [ { title: 'One plan, several agents', body: 'A post-discharge plan sequences the check-in call, the visit booking and the reminders.' },
-                  { title: 'People where judgment is needed', body: 'The interactive TCM contact and every clinical question stay with licensed staff.' },
-                  { title: 'Closes only when complete', body: 'The plan stays open until the follow-up visit is documented.' } ] },
-    { id: 'document', media: 'text', capture: null, eyebrow: 'ZynScribe', title: 'Notes drafted during the visit, approved by the physician',
-      body: 'ZynScribe listens to the visit and drafts a structured SOAP note in the physician’s workflow. The physician reviews, edits and approves it before anything is filed or used for billing.',
-      links: [ { label: 'Explore ZynScribe', href: '/zynscribe' } ],
-      caption: 'A visit note drafted by ZynScribe, waiting for physician review.',
-      panel: { label: 'Sample visit note, illustrative data', brand: 'ZynScribe', title: 'Visit note draft', meta: 'Follow-up visit · sample',
-        note: { sections: [ { label: 'Subjective', text: 'Breathing better since discharge; no new symptoms.' },
-                            { label: 'Assessment', text: 'Heart failure, stable on current regimen.' },
-                            { label: 'Plan', text: 'Continue medications; daily weights; follow up in 2 weeks.' } ] },
-        footer: 'Draft · waiting for physician review and sign-off.' },
-      callouts: [ { title: 'Drafted during the visit', body: 'ZynScribe turns the visit conversation into a structured SOAP note draft.' },
-                  { title: 'Physician reviews every note', body: 'Nothing is filed or used for billing until the physician approves it.' } ] }
-  ];
-
-  // /roi-calculator shows unsourced figures today (DECISIONS 15), so its link waits for P6's rebuild (editable assumptions,
-  // "illustrative estimate"); P6 sets { label: 'Model the impact on your population', href: '/roi-calculator' } then.
-  var HOME_ROI_LINK = null;
-
-  // §5.12 Five questions; no numbers in the answers; none repeats the proof band's "What is Zynix AI?".
-  var HOME_FAQ = [
-    { q: 'Which organizations use Zynix?',
-      a: 'ACOs, health plans, MSOs, IPAs and physician groups, health systems and FQHCs use Zynix to run programs such as transitional care, annual wellness visits, chronic care management and quality gap closure. Palm Beach ACO and eternalHealth have announced their partnerships with Zynix in published releases, and our customer stories cover others.' },
-    { q: 'How is Zynix different from a population health analytics platform?',
-      a: 'Analytics tells you who needs attention. Zynix also covers the work that follows: care plans that give each step an owner, agents that handle outreach and scheduling, and documentation that closes the loop. If you already use an analytics platform, ask us how Zynix works alongside it.' },
-    { q: 'How do AI agents work with our care team?',
-      a: 'Agents handle operational work: outreach calls and texts, scheduling, reminders, after-hours intake and fax routing. They follow the escalation rules your team sets and hand clinical questions to a nurse or physician. Agents don’t diagnose, prescribe or make treatment decisions. Unlike a chatbot, which answers questions, an agent completes a task inside your workflow.' },
-    { q: 'Which EHRs and data sources does Zynix connect to?',
-      a: 'Zynix connects to Epic, Oracle Health (Cerner), athenahealth, eClinicalWorks, NextGen, Allscripts, Greenway, DrChrono and other EHRs, along with Medicare and payer claims, ADT feeds, labs and pharmacy data. Connections use FHIR, HL7, C-CDA and X12 standards. The integrations page has the detail.' },
-    { q: 'How does Zynix protect patient data?',
-      a: 'Zynix is SOC 2 Type II audited, and the report is available on request through our trust portal. We maintain HIPAA-aligned safeguards, and a Business Associate Agreement is available. HITRUST CSF certification is in progress.' }
-  ];
-
-  // Homepage title and description (§5.0 SEO; COPY_DECK §6): set here, never by editing the PAGE_SEO table.
-  zxSeo('', { title: 'Value-based care AI for ACOs and health plans | Zynix AI',
-    desc: 'Connect claims, EHR and ADT data, flag discharges, care gaps and AWVs due, and give care teams AI outreach agents. For ACOs, health plans, MSOs and IPAs.' });
-
-  // ── Home helpers ──
-  function zxHomeOwner(o) {
-    var type = o && (o.type === 'agent' || o.type === 'staff' || o.type === 'system') ? o.type : 'system';
-    return '<span class="zynix-ui__owner zynix-ui__owner--' + type + '">' + zxIcon({ agent: 'bot', staff: 'user', system: 'layers' }[type]) + ' ' + o.label + '</span>';
-  }
-  function zxHomeStatus(st) {
-    if (!st) return '';
-    var tone = ['brand', 'success', 'warning', 'danger'].indexOf(st.tone) > -1 ? ' zynix-chip--' + st.tone : '';
-    return '<span class="zynix-chip' + tone + ' zynix-ui__status">' + st.label + '</span>';
-  }
-  function zxHomeMq(q) { try { return window.matchMedia ? window.matchMedia(q) : null; } catch (e) { return null; } }
-  function zxHomeOnChange(mq, fn) { if (!mq) return; if (mq.addEventListener) mq.addEventListener('change', fn); else if (mq.addListener) mq.addListener(fn); }
-  function zxHomeLabel(text, id) { return '<p class="zx-home-label"' + zxA('id', id) + '>' + text + '</p>'; }
-
-  // ── §5.2 Hero widget: one responsive HTML widget with real tabs (tablist, roving tabindex, one panel per tab) ──
-  var ZX_HW_PAUSE = '<svg class="zx-hw__icon zx-hw__icon--pause" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16"><rect x="4" y="3" width="2.75" height="10" rx="1" fill="currentColor"/><rect x="9.25" y="3" width="2.75" height="10" rx="1" fill="currentColor"/></svg>' +
-    '<svg class="zx-hw__icon zx-hw__icon--play" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16"><path d="M5 3.3v9.4a.6.6 0 0 0 .9.5l7.3-4.7a.6.6 0 0 0 0-1L5.9 2.8a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>';
-  // The shared colour symbol, rendered like every other zynix-ui bar (renderUiPanel), so the chrome matches site-wide.
-  var ZX_HW_MARK = SITE_FACTS.brand.symbol;
-  function renderHeroWidget(model) {
-    model = model || HERO_WIDGET;
-    var tabs = model.tabs || [];
-    var tablist = tabs.map(function (t, i) {
-      return '<button type="button" class="zx-hw__tab" role="tab" id="zx-hw-tab-' + t.id + '" aria-controls="zx-hw-panel-' + t.id + '" aria-selected="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? '-1' : '0') + '">' + t.label + '</button>';
-    }).join('');
-    var panels = tabs.map(function (t, i) {
-      // a tab with a pipeline shows it alone (its tiles would repeat the stage counts)
-      var tiles = (t.tiles || []).length && !(t.pipeline || []).length ? '<dl class="zynix-ui__tiles">' + t.tiles.map(function (x) {
-        return '<div class="zynix-ui__tile"><dt class="zynix-ui__tile-label">' + x.label + '</dt><dd class="zynix-ui__tile-value">' + x.value + '</dd></div>'; }).join('') + '</dl>' : '';
-      var rows = (t.rows || []).length ? '<ul class="zynix-ui__rows" role="list">' + t.rows.map(function (r) {
-        return '<li class="zynix-ui__row"><div class="zynix-ui__row-main"><p class="zynix-ui__row-title">' + r.title + '</p>' + zxEl('p', 'zynix-ui__row-sub', r.sub) + '</div>' +
-          (r.owner ? zxHomeOwner(r.owner) : '') + zxHomeStatus(r.status) + '</li>'; }).join('') + '</ul>' : '';
-      var max = 0; (t.pipeline || []).forEach(function (p) { if (+p.value > max) max = +p.value; });
-      var pipeline = (t.pipeline || []).length ? '<ol class="zynix-ui__pipeline">' + t.pipeline.map(function (p) {
-        return '<li class="zynix-ui__stage" style="--zx-bar:' + (max ? Math.round(+p.value / max * 100) / 100 : 0) + '"><span class="zynix-ui__stage-label">' + p.label +
-          '</span><span class="zynix-ui__stage-bar" aria-hidden="true"></span><span class="zynix-ui__stage-value">' + p.value + '</span></li>'; }).join('') + '</ol>' : '';
-      return '<div class="zx-hw__panel zynix-ui__body" role="tabpanel" id="zx-hw-panel-' + t.id + '" aria-labelledby="zx-hw-tab-' + t.id + '" tabindex="0"' + (i ? ' hidden' : '') + '>' +
-        '<div class="zynix-ui__head"><p class="zynix-ui__title">' + t.heading + '</p>' + zxEl('p', 'zynix-ui__meta', t.meta) + '</div>' +
-        tiles + rows + pipeline + zxEl('p', 'zynix-ui__footer', t.footer) + '</div>';
-    }).join('');
-    return '<div class="zx-hw zynix-ui" data-zx-hw data-zx-sample role="group" aria-label="' + zxAttr(model.label) + '">' +
-      '<div class="zynix-ui__bar"><span class="zynix-ui__brand"><img src="' + zxAttr(zxImg(ZX_HW_MARK)) + '" alt="" width="20" height="20"> ' + model.brand + '</span>' +
-        '<span class="zynix-ui__badge">' + model.badge + '</span><span class="zynix-chip zynix-chip--sample">' + model.chip + '</span></div>' +
-      '<div class="zx-hw__tabbar"><div class="zx-hw__tabs" role="tablist" aria-label="Sample workspace views" data-zx-allow-overflow>' + tablist + '</div>' +
-        '<button type="button" class="zx-hw__pause" aria-pressed="false" aria-label="Pause the sample rotation" hidden>' + ZX_HW_PAUSE + '</button></div>' +
-      '<div class="zx-hw__panels">' + panels + '</div></div>';
-  }
-
-  // ── §5.5 Data flow (P1 reuses it on /platform with opts.expanded; H owns it) ──
-  // opts: { id, expanded, eyebrow, title, lead, className, fact } — fact:false drops the EHR line under the sources.
+  // Always the expanded form (every step open at every width; the step tabs went with the old homepage). P1 calls it with
+  // { expanded: true }; the markup is unchanged for that call.
   function renderDataFlow(model, opts) {
     model = model || HOME_FLOW; opts = opts || {};
-    var id = opts.id || 'data-flow', tid = id + '-title', expanded = !!opts.expanded;
+    var id = opts.id || 'data-flow', tid = id + '-title';
     var layerOf = {}; NAMES.layers.forEach(function (l) { layerOf[l.id] = l; });
     var flowOf = {}; NAMES.flow.forEach(function (f) { flowOf[f.id] = f; });
     var item = function (it) {
       return '<li class="zx-flow__item"><span class="zx-flow__icon" aria-hidden="true">' + zxIcon(it.icon) + '</span><span class="zx-flow__item-text">' +
         '<span class="zx-flow__item-label">' + it.label + '</span>' + zxEl('span', 'zx-flow__item-detail', it.detail) + '</span></li>';
     };
-    var steps = (model.steps || []).map(function (s, i) {
-      var f = flowOf[s.id] || { name: s.id, layers: [] };
-      var layers = (f.layers || []).map(function (k) { return layerOf[k]; }).filter(Boolean);
-      return { id: s.id, n: i + 1, name: f.name, layers: layers, summary: s.summary, detail: s.detail, tags: s.tags || [] };
-    });
-    // No step numerals; layer tags carry the How-It-Works 01–04. Nodes print their summary (the path reads without a
-    // click); the selected panel adds the detail and tags.
     var lnum = function (l) { return '<span class="zx-flow__lnum">' + (l.n < 10 ? '0' : '') + l.n + '</span>'; };
-    var nodes = steps.map(function (s, i) {
-      return '<button type="button" class="zx-flow__node" role="tab" id="zx-flow-tab-' + s.id + '" aria-controls="zx-flow-step-' + s.id + '" aria-selected="' + (i ? 'false' : 'true') + '" tabindex="' + (i ? '-1' : '0') + '">' +
-        '<span class="zx-flow__node-name">' + s.name + '</span><span class="zx-flow__node-summary">' + s.summary + '</span>' +
-        s.layers.map(function (l) { return '<span class="zx-flow__node-layer">' + lnum(l) + l.name + '</span>'; }).join('') + '</button>';
-    }).join('');
-    var panels = steps.map(function (s, i) {
-      return '<div class="zx-flow__step" id="zx-flow-step-' + s.id + '"' + (expanded ? '' : ' role="tabpanel" aria-labelledby="zx-flow-tab-' + s.id + '" tabindex="0"' + (i ? ' hidden' : '')) + '>' +
-        '<div class="zx-flow__step-head"><span class="zx-flow__dot" aria-hidden="true"></span><h3 class="zx-flow__step-title">' + s.name + '</h3>' +
-          '<span class="zx-flow__layer-links">' + s.layers.map(function (l) { return '<a class="zx-flow__layer-link" href="' + zxAttr(l.href) + '">' + lnum(l) + l.name + '</a>'; }).join('<span aria-hidden="true"> · </span>') + '</span></div>' +
+    var panels = (model.steps || []).map(function (s) {
+      var f = flowOf[s.id] || { name: s.id, layers: [] };
+      var layers = (f.layers || []).map(function (k) { return layerOf[k]; }).filter(Boolean), tags = s.tags || [];
+      return '<div class="zx-flow__step" id="zx-flow-step-' + s.id + '">' +
+        '<div class="zx-flow__step-head"><span class="zx-flow__dot" aria-hidden="true"></span><h3 class="zx-flow__step-title">' + f.name + '</h3>' +
+          '<span class="zx-flow__layer-links">' + layers.map(function (l) { return '<a class="zx-flow__layer-link" href="' + zxAttr(l.href) + '">' + lnum(l) + l.name + '</a>'; }).join('<span aria-hidden="true"> · </span>') + '</span></div>' +
         '<p class="zx-flow__summary">' + s.summary + '</p><p class="zx-flow__detail">' + s.detail + '</p>' +
-        (s.tags.length ? '<ul class="zx-flow__tags" role="list">' + s.tags.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' : '') +
+        (tags.length ? '<ul class="zx-flow__tags" role="list">' + tags.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' : '') +
       '</div>';
     }).join('');
-    var flow = '<div class="zx-flow' + (expanded ? ' zx-flow--expanded' : '') + '" data-zx-flow' + (expanded ? ' data-zx-flow-expanded' : '') + '>' +
+    var flow = '<div class="zx-flow zx-flow--expanded" data-zx-flow data-zx-flow-expanded>' +
       '<div class="zx-flow__col zx-flow__sources"><p class="zx-flow__col-label" id="' + id + '-sources">' + model.sourcesLabel + '</p>' +
         '<ul class="zx-flow__list" role="list" aria-labelledby="' + id + '-sources">' + (model.sources || []).map(item).join('') + '</ul>' +
         (opts.fact === false ? '' : '<p class="zx-flow__fact">' + SITE_FACTS.ehr.short + '</p>') + '</div>' +
-      '<div class="zx-flow__main">' +
-        (expanded ? '' : '<div class="zx-flow__nodes" role="tablist" aria-label="Data flow steps">' + nodes + '</div>') +
-        '<div class="zx-flow__steps">' + panels + '</div></div>' +
+      '<div class="zx-flow__main"><div class="zx-flow__steps">' + panels + '</div></div>' +
       '<div class="zx-flow__col zx-flow__outputs"><p class="zx-flow__col-label" id="' + id + '-outputs">' + model.outputsLabel + '</p>' +
         '<ul class="zx-flow__list" role="list" aria-labelledby="' + id + '-outputs">' + (model.outputs || []).map(item).join('') + '</ul></div>' +
     '</div>';
@@ -5271,154 +5003,111 @@
     return renderSection({ id: id, surface: 'inverse', className: 'zx-flow-section' + (opts.className ? ' ' + opts.className : '') }, head + flow);
   }
 
-  // ── §5.4 How-It-Works explorer: interleaved headings and panels (disclosures below 1024, selectors at 1024+) ──
-  var ZX_HIW_CHEVRON = '<svg class="zx-hiw__chev" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  function zxHomeExplorer(layers) {
-    return '<div class="zx-hiw" data-zx-hiw role="group" aria-label="Platform layers">' + layers.map(function (l, i) {
-      var num = (l.n < 10 ? '0' : '') + l.n, open = i === 0, next = layers[i + 1];
-      var chips = (l.chips || []).map(function (c) {
-        return '<li>' + (typeof c === 'object' ? renderChip(c.label, 'brand', { href: c.href }) : renderChip(c, 'neutral')) + '</li>';
-      }).join('');
-      var go = next ? '<button type="button" class="zynix-link-arrow zx-hiw__next" data-zx-hiw-go="' + next.n + '">Next: ' + next.name + '<span class="zynix-link-arrow__icon" aria-hidden="true">→</span></button>'
-        : '<a class="zynix-link-arrow zx-hiw__next" href="#data-flow">See the data flow<span class="zynix-link-arrow__icon" aria-hidden="true">↓</span></a>';
-      return '<h3 class="zx-hiw__heading" data-n="' + l.n + '"><button type="button" class="zx-hiw__tab" data-n="' + l.n + '" id="zx-hiw-tab-' + l.n + '" aria-expanded="' + (open ? 'true' : 'false') + '" aria-controls="zx-hiw-panel-' + l.n + '">' +
-          '<span class="zx-hiw__num" aria-hidden="true">' + num + '</span><span class="zx-hiw__name">' + l.name + '</span><span class="zx-hiw__short">' + l.short + '</span>' + ZX_HIW_CHEVRON + '</button></h3>' +
-        '<div class="zx-hiw__panel" data-n="' + l.n + '" id="zx-hiw-panel-' + l.n + '" role="region" aria-labelledby="zx-hiw-tab-' + l.n + '"' + (open ? '' : ' hidden') + '>' +
-          '<p class="zynix-eyebrow">Layer ' + l.n + '</p>' +
-          '<p class="zx-hiw__tagline">' + l.tagline + '</p><p class="zx-hiw__body">' + l.body + '</p>' +
-          '<p class="zx-hiw__chips-label" id="zx-hiw-chips-' + l.n + '">' + l.chipsLabel + '</p><ul class="zx-hiw__chips" role="list" aria-labelledby="zx-hiw-chips-' + l.n + '">' + chips + '</ul>' +
-          '<div class="zx-hiw__footer">' + go + (l.links || []).map(function (k) { return renderLinkArrow(k.label, k.href); }).join('') + '</div>' +
-        '</div>';
-    }).join('') + '</div>';
+  // ── Home helpers ──
+  function zxHomeMq(q) { try { return window.matchMedia ? window.matchMedia(q) : null; } catch (e) { return null; } }
+  function zxHomeOnChange(mq, fn) { if (!mq) return; if (mq.addEventListener) mq.addEventListener('change', fn); else if (mq.addListener) mq.addListener(fn); }
+  function zxHomeLink(label, href, cls) {
+    return '<a class="zx9-link' + zxCls(cls) + '" href="' + zxAttr(href) + '"' + zxNewTab(href) + '>' + label + '<span aria-hidden="true">→</span></a>';
+  }
+  // A v9 section; its H2 (id + '-title') names it, unless opts.label is given (aria-label).
+  function zxHomeSection(id, cls, inner, label) {
+    return '<section class="zx9-section zx-home-sec' + zxCls(cls) + '" id="' + zxAttr(id) + '"' +
+      (label ? ' aria-label="' + zxAttr(label) + '"' : ' aria-labelledby="' + zxAttr(id) + '-title"') + '><div class="zynix-container">' + inner + '</div></section>';
+  }
+  // Section head: eyebrow + H2, then one of three layouts: stacked (lead and link below), opts.split (the lead and link beside
+  // the H2 at ≥1024) or opts.row (the link at the end of the H2's row, the lead below).
+  function zxHomeHead(o) {
+    var title = renderV9Eyebrow(o.eyebrow) + '<h2 class="zx9-h2" id="' + zxAttr(o.id) + '">' + o.title + '</h2>';
+    var link = o.link ? zxHomeLink(o.link.label, o.link.href, 'zx-home-head__link') : '';
+    if (o.split) return '<header class="zx9-head zx9-head--split zx-home-head"><div class="zx-home-head__main">' + title + '</div>' +
+      '<div class="zx-home-head__aside">' + zxEl('p', 'zx9-lead', o.lead) + link + '</div></header>';
+    if (o.row) return '<header class="zx9-head zx-home-head zx-home-head--row"><div class="zx-home-head__row">' + title + link + '</div>' + zxEl('p', 'zx9-lead', o.lead) + '</header>';
+    return '<header class="zx9-head zx-home-head">' + title + zxEl('p', 'zx9-lead', o.lead) + link + '</header>';
+  }
+  // A role label with its icon (agent, staff or the platform), as in the sample UI kit.
+  function zxHomeOwner(type, label) {
+    type = type === 'agent' || type === 'staff' ? type : 'system';
+    return '<span class="zx-home-owner zx-home-owner--' + type + '">' + zxIcon({ agent: 'bot', staff: 'user', system: 'layers' }[type]) + label + '</span>';
   }
 
-  // ── §5.6 Example episode (a diagram, not a product mock: no bar, no "Demo" badge) ──
-  function zxHomeEpisode(ep) {
-    return '<figure class="zx-ep" data-zx-sample>' +
-      '<div class="zx-ep__head"><span class="zynix-chip zynix-chip--sample">' + ep.caption + '</span></div>' +
-      '<ol class="zx-ep__steps">' + ep.steps.map(function (s) {
-        return '<li class="zx-ep__step' + (s.escalation ? ' zx-ep__step--escalation' : '') + '"><div class="zx-ep__when"><span class="zx-ep__time">' + s.time + '</span>' +
-          zxHomeOwner({ type: s.owner, label: s.ownerLabel }) + (s.escalation ? '<span class="zynix-chip zynix-chip--warning zx-ep__flag">Escalated by rule</span>' : '') + '</div>' +
-          '<div class="zx-ep__main"><p class="zx-ep__text">' + s.text + '</p></div></li>';
-      }).join('') + '</ol>' +
-      '<figcaption class="zx-ep__note">' + ep.note + '</figcaption></figure>';
+  // ── §4.1 Hero card stack (rebuild of the protected hero widget): one glass panel, four steps from insight to the documented
+  // outcome. initHeroStack() lights them one by one (data-active) with the old widget's autoplay rules and its pause control.
+  // Without JS, under reduced motion and below 1024 every step shows as done. ──
+  var ZX_HW_PAUSE = '<svg class="zx-hw__icon zx-hw__icon--pause" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16"><rect x="4" y="3" width="2.75" height="10" rx="1" fill="currentColor"/><rect x="9.25" y="3" width="2.75" height="10" rx="1" fill="currentColor"/></svg>' +
+    '<svg class="zx-hw__icon zx-hw__icon--play" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16"><path d="M5 3.3v9.4a.6.6 0 0 0 .9.5l7.3-4.7a.6.6 0 0 0 0-1L5.9 2.8a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>';
+  function renderHeroStack(model) {
+    model = model || HOME_STACK;
+    var steps = model.steps.map(function (s, i) {
+      var p = s.pillar ? zx9Pillar(s.pillar) : null;
+      return '<li class="zx-home-stack__step' + (s.outcome ? ' zx-home-stack__step--outcome' : zx9Accent(p)) + '" data-step="' + (i + 1) + '">' +
+        '<span class="zx-home-stack__icon" aria-hidden="true">' + zxIcon(s.outcome ? PILLAR_OUTCOME.icon : p.icon) + '</span>' +
+        '<div class="zx-home-stack__text"><p class="zx-home-stack__kicker"><span class="zx-home-stack__num" aria-hidden="true">' + zx9Num(i + 1) + '</span>' + s.kicker + '</p>' +
+          '<p class="zx-home-stack__title">' + s.title + '</p><p class="zx-home-stack__detail">' + s.detail + '</p></div></li>';
+    }).join('');
+    return '<div class="zx-home-stack" data-zx-hw data-zx-sample role="group" aria-label="' + zxAttr(model.label) + '">' +
+      '<div class="zx-home-stack__bar"><span class="zynix-chip zynix-chip--sample zx-home-stack__chip">' + model.chip + '</span>' +
+        '<button type="button" class="zx-home-stack__pause" aria-pressed="false" aria-label="Pause the sample rotation" hidden>' + ZX_HW_PAUSE + '</button></div>' +
+      '<ol class="zx-home-stack__list" role="list">' + steps + '</ol></div>';
   }
 
-  // ── §5.7 Capabilities: rows by media mode ──
-  // No capture (the §5.7 fallback): one list in story order; the panel follows its row in the DOM, beside the list at
-  // >= 1024. With a capture: media rows are 5/7 splits with callouts beneath; text rows share a two-column band.
-  function zxHomePoints(items, cls) {
-    items = (items || []).filter(function (it) { return it && it.title; });
-    return items.length ? '<ul class="zx-home-points' + zxCls(cls) + '" role="list">' + items.map(function (it) {
-      return '<li class="zx-home-points__item"><p class="zx-home-points__title">' + it.title + '</p>' + zxEl('p', 'zx-home-points__body', it.body) + '</li>';
-    }).join('') + '</ul>' : '';
-  }
-  function zxHomeCapMode(row) { return row.media === 'capture' && row.capture && row.capture.src ? 'capture' : (row.media === 'panel' && row.panel ? 'panel' : 'text'); }
-  function zxHomeCapText(row) {
-    return '<p class="zynix-eyebrow">' + row.eyebrow + '</p><h3 class="zx-home-cap__title">' + row.title + '</h3>' +
-      '<p class="zx-home-cap__body">' + row.body + '</p>' +
-      '<div class="zx-home-cap__links">' + (row.links || []).map(function (l) { return renderLinkArrow(l.label, l.href); }).join('') + '</div>';
-  }
-  // §5.0 fallback 1 (the 390 height budget): the compact panel variant at every width, no tiles and 3 rows. The care
-  // plan keeps its trigger, the agent's call and the RN's TCM contact (platform, agent and person); the booked visit is
-  // in the episode above.
-  function zxHomeCompact(p) {
-    return Object.assign({}, p, { chip: null, tiles: null, rows: p.rows ? p.rows.slice(0, 3) : null, steps: p.steps ? p.steps.slice(0, 3) : null });
-  }
-  function zxHomeCapFrame(row, mode) {
-    return mode === 'capture'
-      ? renderProductFrame({ src: row.capture.src, alt: row.capture.alt, caption: row.capture.caption || row.caption, sample: true, sampleLabel: 'Sample data' })
-      : renderProductFrame({ html: renderUiPanel(zxHomeCompact(row.panel)), sample: true, sampleLabel: 'Sample data', caption: row.caption });
-  }
-  function zxHomeCapabilities(rows) {
-    var modes = rows.map(zxHomeCapMode);
-    if (modes.indexOf('capture') < 0) {
-      return '<div class="zx-home-caplist">' + rows.map(function (row, i) {
-        return '<div class="zx-home-caplist__item">' + zxHomeCapText(row) + '</div>' +
-          (modes[i] === 'panel' ? '<div class="zx-home-caplist__media">' + zxHomeCapFrame(row, 'panel') + '</div>' : '');
-      }).join('') + '</div>';
-    }
-    var out = [], band = null, k = 0;
-    rows.forEach(function (row, i) {
-      if (modes[i] === 'text') {
-        var item = '<div class="zx-home-cap__col">' + zxHomeCapText(row) + zxHomePoints((row.callouts || []).slice(0, 2)) + '</div>';
-        if (band) { band.push(item); return; }
-        band = [item]; out.push(band); return;
-      }
-      out.push('<div class="zx-home-cap">' + renderSplit(zxHomeCapText(row), zxHomeCapFrame(row, modes[i]), { ratio: '5-7', reverse: k++ % 2 === 0, center: true }) +
-        zxHomePoints(row.callouts, 'zx-home-points--row') + '</div>');
-    });
-    return '<div class="zx-home-caps__rows">' + out.map(function (x) {
-      return typeof x === 'string' ? x : '<div class="zx-home-cap zx-home-cap--text" data-count="' + x.length + '">' + x.join('') + '</div>';
-    }).join('') + '</div>';
+  // ── §4.4 Pillar tabs (rebuild of the protected How-It-Works explorer): the ARIA tabs contract of initV9 ──
+  function zxHomeTabs() {
+    var tabs = PILLARS.map(function (p, i) {
+      return '<button type="button" class="zx9-tabs__tab' + zx9Accent(p) + '" role="tab" id="hiw-tab-' + p.id + '" aria-selected="' + (i ? 'false' : 'true') +
+        '" aria-controls="hiw-panel-' + p.id + '" tabindex="' + (i ? '-1' : '0') + '"><span class="zx9-tabs__num" aria-hidden="true">' + zx9Num(p.n) + '</span>' +
+        '<span class="zx9-tabs__label">' + p.short + '</span></button>';
+    }).join('');
+    var panels = PILLARS.map(function (p, i) {
+      var ui = HOME_PILLAR_UI[p.id];
+      return '<div class="zx9-tabs__panel' + zx9Accent(p) + '" role="tabpanel" id="hiw-panel-' + p.id + '" aria-labelledby="hiw-tab-' + p.id + '" tabindex="0"' + (i ? ' hidden' : '') + '>' +
+        '<div class="zx9-tabs__text"><h3 class="zx9-h3">' + p.promise + '</h3>' +
+          '<ul class="zx9-ticks" role="list">' + p.bullets.map(function (b) { return '<li>' + b + '</li>'; }).join('') + '</ul>' +
+          '<p class="zx-home-tabs__more">' + zxHomeLink('Explore ' + p.name, p.slug) + '</p></div>' +
+        (ui ? '<div class="zx9-tabs__visual">' + renderUiPanel(Object.assign({ badge: null, className: 'zx-home-ui' }, ui)) + '</div>' : '') + '</div>';
+    }).join('');
+    return '<div class="zx9-tabs zx-home-tabs" data-zx9-tabs><div class="zx9-tabs__list" role="tablist" aria-label="The four pillars">' + tabs + '</div>' + panels + '</div>';
   }
 
-  // ── Init (§5.15): each idempotent, early return without its root, listeners registered once ──
+  // ── §4.7 The plan card's episode timeline (four rows) and the point-of-care card's sample view ──
+  function zxHomeEpisode(rows) {
+    return '<ol class="zx-home-tl" role="list" aria-label="Sample post-discharge episode">' + rows.map(function (r) {
+      return '<li class="zx-home-tl__row zx-home-tl__row--' + r.owner + '"><span class="zx-home-tl__time">' + r.time + '</span>' +
+        '<div class="zx-home-tl__main"><p class="zx-home-tl__text">' + r.text + '</p>' + zxHomeOwner(r.owner, r.who) + '</div></li>';
+    }).join('') + '</ol>';
+  }
+  function zxHomePoc(rows) {
+    return '<div class="zx-home-poc" role="group" aria-label="Sample visit view, illustrative data"><dl class="zx-home-poc__list">' + rows.map(function (r) {
+      return '<div class="zx-home-poc__row"><dt class="zx-home-poc__label">' + r.label + '</dt><dd class="zx-home-poc__text">' + r.text + '</dd></div>';
+    }).join('') + '</dl></div>';
+  }
+
+  // ── Init: each idempotent, early return without its root ──
   function initHomepage() {
-    [[initHeroWidget, '[data-zx-hw]'], [initHowItWorks, '[data-zx-hiw]'], [initDataFlow, '[data-zx-flow]'], [zxHomeAnchors, '.zynix-injected']].forEach(function (x) {
-      try { x[0](document.querySelector(x[1])); } catch (e) { try { console.warn('[zx] home init', e); } catch (e2) {} }
-    });
+    try { initHeroStack(document.querySelector('[data-zx-hw]')); } catch (e) { try { console.warn('[zx] home init', e); } catch (e2) {} }
   }
 
-  // Same-page links land below the fixed chrome (Webflow's anchor scroll ignores the bundle's fixed nav).
-  function zxHomeAnchors(root) {
-    if (!root || root.__zxHomeAnchors) return;
-    root.__zxHomeAnchors = true;
-    [].forEach.call(root.querySelectorAll('.zx-home-hero a[href^="#"], .zx-hiw a[href^="#"]'), function (a) {
-      a.addEventListener('click', function (e) {
-        var id = a.getAttribute('href').slice(1), el = id ? document.getElementById(id) : null;
-        if (!el) return;
-        e.preventDefault(); e.stopPropagation();
-        var chrome = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--zx-chrome-h')) || 0;
-        var still = zxHomeMq('(prefers-reduced-motion: reduce)');
-        window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - chrome), behavior: still && still.matches ? 'auto' : 'smooth' });
-        try { history.pushState(null, '', '#' + id); } catch (err) {}
-        if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
-        el.focus({ preventScroll: true });   // keyboard users continue from the section they jumped to
-      });
-    });
-  }
-
-  // Autoplay runs only when all are true: >= 1024px, no reduced motion, >= 50% visible, tab visible, pointer not over it,
-  // focus not inside it, no manual tab choice this page view, not paused. setInterval is cleared whenever one turns false.
-  function initHeroWidget(root) {
+  // The old widget's autoplay rules: it runs only when all are true: >= 1024px, no reduced motion, >= 50% visible, tab visible,
+  // pointer not over it, focus not inside it, not paused. The timer is cleared whenever one turns false; the pause button shows
+  // only while autoplay is possible. Pausing (or hovering) keeps the current step; when autoplay is impossible every step shows.
+  function initHeroStack(root) {
     if (!root || root.dataset.zxInit) return;
     root.dataset.zxInit = '1';
-    var tabs = [].slice.call(root.querySelectorAll('[role="tab"]'));
-    if (!tabs.length) return;
-    var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
-    var pause = root.querySelector('.zx-hw__pause');
-    var ms = +HERO_WIDGET.autoplayMs || 6000;
+    var n = root.querySelectorAll('.zx-home-stack__step').length;
+    var pause = root.querySelector('.zx-home-stack__pause');
     var desk = zxHomeMq('(min-width:1024px)'), still = zxHomeMq('(prefers-reduced-motion: reduce)');
-    var st = { inView: !window.IntersectionObserver, hover: false, focus: false, manual: false, paused: false };
+    var st = { inView: !window.IntersectionObserver, hover: false, focus: false, paused: false };
     var cur = 0, timer = null;
-    tabs.forEach(function (t, k) { if (t.getAttribute('aria-selected') === 'true') cur = k; });
-    function select(i, focus) {
-      cur = (i + tabs.length) % tabs.length;
-      tabs.forEach(function (t, k) {
-        var on = k === cur;
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-        t.tabIndex = on ? 0 : -1;
-        if (panels[k]) panels[k].hidden = !on;
-      });
-      if (focus) tabs[cur].focus();
-    }
-    function possible() { return !!(desk && desk.matches) && !(still && still.matches) && !st.manual; }
-    function progress() { root.classList.remove('is-playing'); void root.offsetWidth; root.classList.add('is-playing'); }
+    function show(k) { cur = k; if (k) root.setAttribute('data-active', String(k)); else root.removeAttribute('data-active'); }
+    function possible() { return n > 1 && !!(desk && desk.matches) && !(still && still.matches); }
+    function next() { timer = null; show(cur >= n ? 1 : cur + 1); update(); }
     function update() {
       if (pause) pause.hidden = !possible();
-      var go = possible() && !st.paused && st.inView && !st.hover && !st.focus && document.visibilityState !== 'hidden';
-      if (go && !timer) { progress(); timer = setInterval(function () { select(cur + 1); progress(); }, ms); }
-      else if (!go) { if (timer) { clearInterval(timer); timer = null; } root.classList.remove('is-playing'); }
+      if (!possible()) { if (timer) { clearTimeout(timer); timer = null; } show(0); return; }
+      var go = !st.paused && st.inView && !st.hover && !st.focus && document.visibilityState !== 'hidden';
+      if (go && !timer) { if (!cur) show(1); timer = setTimeout(next, cur >= n ? HOME_STACK.holdMs : HOME_STACK.stepMs); }
+      else if (!go && timer) { clearTimeout(timer); timer = null; }
+      if (!cur) show(n);
     }
-    tabs.forEach(function (t, k) {
-      t.addEventListener('click', function () { st.manual = true; select(k); update(); });
-    });
-    root.querySelector('[role="tablist"]').addEventListener('keydown', function (e) {
-      var k = e.key, to = k === 'ArrowRight' ? cur + 1 : k === 'ArrowLeft' ? cur - 1 : k === 'Home' ? 0 : k === 'End' ? tabs.length - 1 : null;
-      if (to === null) return;
-      e.preventDefault(); st.manual = true; select(to, true); update();
-    });
     if (pause) pause.addEventListener('click', function () {
       st.paused = !st.paused;
       pause.setAttribute('aria-pressed', st.paused ? 'true' : 'false');
@@ -5436,231 +5125,126 @@
     }
     update();
   }
-
-  function initHowItWorks(root) {
-    if (!root || root.dataset.zxInit) return;
-    root.dataset.zxInit = '1';
-    var btns = [].slice.call(root.querySelectorAll('.zx-hiw__tab'));
-    var panels = btns.map(function (b) { return document.getElementById(b.getAttribute('aria-controls')); });
-    var desk = zxHomeMq('(min-width:1024px)'), cur = 0;
-    function isDesk() { return !!(desk && desk.matches); }
-    function select(i) {   // >= 1024: exactly one layer shown; the shown layer's button carries aria-current
-      cur = i;
-      btns.forEach(function (b, k) {
-        b.removeAttribute('aria-expanded');
-        if (k === i) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
-        if (panels[k]) panels[k].hidden = k !== i;
-      });
-    }
-    function toggle(i, open) {   // < 1024: independent disclosures
-      if (!panels[i]) return;
-      if (open == null) open = panels[i].hidden;
-      panels[i].hidden = !open;
-      btns[i].setAttribute('aria-expanded', open ? 'true' : 'false');
-    }
-    function mode() {
-      if (isDesk()) {
-        var first = -1;
-        panels.forEach(function (p, k) { if (first < 0 && p && !p.hidden) first = k; });
-        select(first < 0 ? cur : first);
-      } else {
-        btns.forEach(function (b, k) { b.removeAttribute('aria-current'); b.setAttribute('aria-expanded', panels[k] && !panels[k].hidden ? 'true' : 'false'); });
-      }
-    }
-    btns.forEach(function (b, k) {
-      b.addEventListener('click', function () { if (isDesk()) { if (k !== cur) select(k); } else toggle(k); });
-      b.addEventListener('keydown', function (e) {
-        if (!isDesk()) return;
-        var key = e.key, to = key === 'ArrowDown' ? k + 1 : key === 'ArrowUp' ? k - 1 : key === 'Home' ? 0 : key === 'End' ? btns.length - 1 : null;
-        if (to === null) return;
-        e.preventDefault(); btns[(to + btns.length) % btns.length].focus();
-      });
-    });
-    [].forEach.call(root.querySelectorAll('[data-zx-hiw-go]'), function (g) {
-      g.addEventListener('click', function () {
-        var i = +g.getAttribute('data-zx-hiw-go') - 1;
-        if (!btns[i]) return;
-        if (isDesk()) select(i); else toggle(i, true);
-        btns[i].focus();
-      });
-    });
-    mode();
-    // Phones (< 480): all layers start collapsed (a four-row summary); the data flow below carries the detail.
-    var phone = zxHomeMq('(max-width:479.98px)');
-    if (phone && phone.matches && !isDesk()) toggle(0, false);
-    zxHomeOnChange(desk, mode);
-  }
-
-  function initDataFlow(root) {
-    if (!root || root.dataset.zxInit) return;
-    root.dataset.zxInit = '1';
-    var nodes = [].slice.call(root.querySelectorAll('.zx-flow__node'));
-    var steps = [].slice.call(root.querySelectorAll('.zx-flow__step'));
-    var wrap = root.querySelector('.zx-flow__steps');
-    var desk = zxHomeMq('(min-width:1024px)'), cur = 0;
-    var expanded = root.hasAttribute('data-zx-flow-expanded') || !nodes.length;
-    function tabs() {   // >= 1024: a tablist of the five steps, only the selected step shown
-      if (wrap) wrap.removeAttribute('role');
-      steps.forEach(function (s, k) {
-        s.setAttribute('role', 'tabpanel'); s.setAttribute('aria-labelledby', nodes[k].id); s.tabIndex = 0; s.hidden = k !== cur;
-      });
-      nodes.forEach(function (n, k) { n.setAttribute('aria-selected', k === cur ? 'true' : 'false'); n.tabIndex = k === cur ? 0 : -1; });
-    }
-    function list() {   // < 1024 (and the expanded variant): every step open, a plain list
-      if (wrap) wrap.setAttribute('role', 'list');
-      steps.forEach(function (s) { s.setAttribute('role', 'listitem'); s.removeAttribute('aria-labelledby'); s.removeAttribute('tabindex'); s.hidden = false; });
-    }
-    function mode() { if (!expanded && desk && desk.matches) tabs(); else list(); }
-    nodes.forEach(function (n, k) {
-      n.addEventListener('click', function () { cur = k; tabs(); });
-      n.addEventListener('keydown', function (e) {
-        var key = e.key, to = key === 'ArrowRight' ? cur + 1 : key === 'ArrowLeft' ? cur - 1 : key === 'Home' ? 0 : key === 'End' ? nodes.length - 1 : null;
-        if (to === null) return;
-        e.preventDefault(); cur = (to + nodes.length) % nodes.length; tabs(); nodes[cur].focus();
-      });
-    });
-    mode();
-    zxHomeOnChange(desk, mode);
-  }
   // ==== ZX:END home ====
 
-  // ── PAGE: Homepage (owner H; DESIGN_SPEC §5, COPY_DECK §3): 11 sections plus the footer ──
+  // ── PAGE: Homepage (owner H9; V9_SPEC §4): 12 sections plus the footer ──
   function renderHomepage() {
-    var C = SITE_FACTS.compliance;
-    var soc2Short = C.soc2.prose.split(',')[0];   // "SOC 2 Type II audited"
+    var C = SITE_FACTS.compliance, ape = zx9Pillar('ai-patient-engagement');
 
-    // 1. Hero (§5.1) with the hero widget (protected, §5.2) and the real logo row (protected, §5.14) at the fold
-    // data-zx-chat-avoid: keeps the chat launcher off the first screen below 1280 (request to S3, §7.3)
-    var hero = '<section class="zx-home-hero" id="hero" aria-labelledby="hero-title" data-zx-chat-avoid><div class="zynix-container">' +
+    // 1. Hero (ink): text left (top-aligned), the card stack right, the logo row underneath on the dark band
+    var hero = '<section class="zx9-section zx9-band--ink zx-home-hero" id="hero" aria-labelledby="hero-title"><div class="zynix-container">' +
       '<div class="zx-home-hero__grid"><div class="zx-home-hero__text">' +
-        '<p class="zynix-eyebrow"><span class="zx-home-hero__eyebrow-long">' + SITE_FACTS.category.long + '</span><span class="zx-home-hero__eyebrow-short">' + SITE_FACTS.category.short + '</span></p>' +
-        '<h1 class="zx-home-hero__title" id="hero-title">Turn your data into completed follow-up.</h1>' +
-        '<p class="zx-home-hero__lead">For ACOs, health plans, MSOs, IPAs and health systems: Zynix connects claims, EHR and ADT data, flags discharges, care gaps and AWVs due, and gives care teams AI outreach agents.</p>' +
-        '<div class="zx-home-hero__actions">' + renderDemoButton({ size: 'lg' }) + renderButton('See how it works', '#how-it-works', { variant: 'secondary', size: 'lg' }) + '</div>' +
-        // quiet text, hairline separators (§5.1)
-        '<ul class="zx-home-hero__proof" role="list" aria-label="Zynix at a glance">' + [SITE_FACTS.ehr.short, soc2Short, C.hipaa.prose].map(function (x) {
-          return '<li>' + x + '</li>'; }).join('') + '</ul>' +
-      '</div><div class="zx-home-hero__media">' + renderHeroWidget(HERO_WIDGET) + '</div></div>' +
-      renderLogoRow(null, { eager: true, id: 'hero-logos', label: 'Used by ACOs, health plans and provider organizations', link: { label: 'Customer stories', href: '/resources-case-studies' } }) +
+        renderV9Eyebrow('<span class="zx-home-hero__eb-long">' + SITE_FACTS.category.long + '</span><span class="zx-home-hero__eb-short">' + SITE_FACTS.category.short + '</span>') +
+        '<h1 class="zx9-display zx-home-hero__title" id="hero-title">Predict who needs care. <span class="zx9-grad-text">Make sure it happens.</span></h1>' +
+        '<p class="zx9-lead zx-home-hero__lead">Zynix predicts risk, embeds care management in your team’s day and reaches patients by AI voice and text, so every insight ends in an intervention, not a dashboard.</p>' +
+        '<div class="zx9-actions">' + renderDemoButton({ size: 'lg' }) +
+          renderButton('See the four pillars', '#how-it-works', { variant: 'secondary', size: 'lg', className: 'zx9-btn-glass' }) + '</div>' +
+      '</div><div class="zx-home-hero__media">' + renderHeroStack(HOME_STACK) + '</div></div>' +
+      renderLogoRow(null, { eager: true, inverse: true, id: 'hero-logos', className: 'zx-home-logos', label: 'Used by ACOs, health plans and provider organizations',
+        link: { label: 'Customer stories', href: '/resources-case-studies' } }) +
     '</div></section>';
 
-    // 2. Proof band (§5.3): the visible definition, two registry stats, the CMS ACCESS Model line with its clause
-    var access = zxAccessLine().replace(SITE_FACTS.access.line, '<span class="zx-home-proof__access-line">' + SITE_FACTS.access.line + '</span>');
-    var proof = renderSection({ id: 'proof', surface: 'subtle', compact: true, className: 'zx-home-proof' }, renderSplit(
-      '<h2 class="zx-home-proof__title" id="proof-title">What is Zynix AI?</h2>' +
-      '<p class="zx-home-proof__def">Zynix AI is AI infrastructure and workflows for value-based care. The Zynix platform ranks the patients and care gaps that need attention and carries the follow-up through care plans, outreach agents and ambient documentation. Clinicians make the clinical decisions.</p>',
-      renderStatRow([{ fact: 'patients' }, { fact: 'states' }]) + '<p class="zx-home-proof__access">' + access + '</p>',
-      { ratio: '5-7' }));
+    // 2. Proof band (light, directly under the hero): registry numerals; the founder line as body text; the ACCESS line
+    var proof = zxHomeSection('proof', 'zx9-section--compact zx-home-proof',
+      '<div class="zx-home-proof__grid">' + renderV9Proof() +
+      '<div class="zx-home-proof__side"><p class="zx9-body">Built by ACO operators: ' + SITE_FACTS.founder.savings + '.</p>' +
+        '<p class="zx9-note zx-home-proof__access">' + renderChip('CMS ACCESS Model', 'brand') + ' ' + zxAccessLine() + '</p></div></div>', 'Zynix at a glance');
 
-    // 3. Platform chapter, part 1 (§5.4): the How-It-Works explorer (protected)
-    var hiw = renderSection({ id: 'how-it-works', className: 'zx-home-hiw' },
-      renderSectionHead('How it works', 'Knowing who needs care isn’t the hard part. Getting it done is.',
-        'The Zynix platform has four layers, and each one feeds the next. A flagged patient becomes a task with an owner, not a line in a report.', { id: 'how-it-works-title' }) +
-      zxHomeExplorer(HOME_LAYERS));
+    // 3. Why it isn't another analytics company (tint): the closed loop (rebuild of the protected data flow)
+    var loop = zxHomeSection('loop', 'zx9-band--tint zx-home-loop',
+      zxHomeHead({ id: 'loop-title', title: 'Analytics tells you who. Zynix makes sure something happens.', split: true,
+        lead: 'Most platforms stop at the dashboard. Zynix closes the loop from insight to intervention, and records the outcome.' }) +
+      renderV9Loop({ id: 'loop-title' }));
 
-    // 3b. Platform chapter, part 2 (§5.5): the data flow (protected), the page's one dark band
-    var flow = renderDataFlow(HOME_FLOW, { id: 'data-flow', className: 'zx-home-flow', fact: false });
+    // 4. The four pillars (#how-it-works): the tabs (rebuild of the protected How-It-Works explorer)
+    var pillars = zxHomeSection('how-it-works', 'zx-home-pillars',
+      zxHomeHead({ id: 'how-it-works-title', eyebrow: 'The four pillars', title: 'Four capabilities. One operating layer.' }) + zxHomeTabs());
 
-    // 4. Agents at work (§5.6): the 48 hours after discharge
-    var ep = HOME_EPISODE;
-    // A chapter (eyebrow) whose head stays in the §5.6 split (stacked, it cost ~250px at 1440).
-    var agents = renderSection({ id: 'agents-at-work', className: 'zx-home-agents' }, renderSplit(
-      renderSectionHead('Agents at work', 'What happens in the 48 hours after discharge',
-        'Same patient, same discharge. The difference is who does the follow-up, and whether anyone knows it happened.', { id: 'agents-at-work-title' }) +
-      zxHomeLabel('Without a follow-through layer', 'zx-home-without-label') +
-      '<ul class="zx-home-without" role="list" aria-labelledby="zx-home-without-label">' + ep.without.map(function (w) { return '<li>' + w + '</li>'; }).join('') + '</ul>' +
-      '<p class="zx-home-cms">' + ep.rule.text + ' <a class="zx-home-cms__link" href="' + zxAttr(ep.rule.href) + '"' + zxNewTab(ep.rule.href) + '>' + ep.rule.label + '</a></p>' +
-      '<p class="zx-home-plans">' + ep.plans + '</p>',
-      zxHomeEpisode(ep), { ratio: '5-7' }));
+    // 5. AI Patient Engagement (ink, the page's second dark band): use cases, the sample call, the human/agent split
+    var engage = zxHomeSection('patient-engagement', 'zx9-band--ink zx-home-engage', renderSplit(
+      renderV9Eyebrow(ape.name) +
+      '<h2 class="zx9-h2" id="patient-engagement-title">Voice and text agents that <span class="zx9-grad-text">reach every patient</span></h2>' +
+      '<ul class="zx9-ticks' + zx9Accent(ape) + '" role="list">' + ape.useCases.map(function (u) { return '<li>' + u + '</li>'; }).join('') + '</ul>' +
+      '<p class="zx9-note zx-home-engage__fine">Agents work within the rules and hours your team sets. Clinicians make every clinical decision.</p>' +
+      '<p class="zx-home-engage__more">' + zxHomeLink('Explore ' + ape.name, ape.slug) + '</p>',
+      renderV9Chat({ id: 'engage-chat', items: HOME_CALL }), { ratio: '4-8', center: true, className: 'zx-home-engage__split' }));
 
-    // 5. Capabilities (§5.7): the H2 names the three jobs (it no longer echoes the H1)
-    var caps = renderSection({ id: 'capabilities', surface: 'subtle', className: 'zx-home-caps' },
-      renderSectionHead('What the platform does', 'See the work, assign it and document it', null,
-        { id: 'capabilities-title', action: { label: 'Watch the recorded webinar', href: '/resources-webinars' } }) +
-      zxHomeCapabilities(HOME_CAPABILITIES));
+    // 6. Predictive Risk (light): the four predictions and the next step each one triggers
+    var predict = zxHomeSection('predictive-risk', 'zx-home-predict',
+      zxHomeHead({ id: 'predictive-risk-title', title: 'Predictive Risk, not just risk scores', row: true,
+        link: { label: 'Explore Predictive Risk', href: zx9Pillar('predictive-risk').slug } }) +
+      // below 768 the four tiles scroll sideways (one row, snap): the wrapper keeps them out of the page-overflow checks
+      '<div class="zx-home-predict__wrap" data-zx-allow-overflow>' +
+      renderV9Predict({ id: 'predictive-risk-title', note: 'Every prediction shows its drivers. Clinicians review before acting.' }) + '</div>');
 
-    // 6. Interoperability (§5.8): the EHR line as text, named EHRs as text wordmarks, standards as chips
-    var interop = renderSection({ id: 'interoperability', className: 'zx-home-interop' }, renderSplit(
-      renderSectionHead(null, 'Works with the systems you already run',
-        'Zynix connects to ' + SITE_FACTS.ehr.line + ', plus claims, ADT, lab and pharmacy feeds. For a network of independent practices, that means one record and one worklist, even when every practice runs a different EHR.',
-        { id: 'interoperability-title', action: { label: 'See all integrations', href: '/integrations' } }),
-      zxHomeLabel('EHR systems we connect to include', 'zx-home-ehr-label') +   // no plural acronym under the uppercase label ("EHRS")
-      '<ul class="zx-home-ehr" role="list" aria-labelledby="zx-home-ehr-label">' + SITE_FACTS.ehr.named.map(function (e) {
-        var m = /^(.*?)\s*(\([^)]*\))$/.exec(e);   // "Oracle Health (Cerner)": the former name is a muted second line
-        return '<li>' + (m ? m[1] + ' <span class="zx-home-ehr__aka">' + m[2] + '</span>' : e) + '</li>'; }).join('') + '</ul>' +
-      zxHomeLabel('Standards we work with', 'zx-home-std-label') +
-      '<ul class="zx-home-standards" role="list" aria-labelledby="zx-home-std-label">' + SITE_FACTS.ehr.standards.map(function (s) { return '<li>' + renderChip(s, 'neutral') + '</li>'; }).join('') + '</ul>',
-      { ratio: '5-7' }));
+    // 7. Embedded care management + point of care (warm): two cards; the plan card carries the 48-hour episode (4 rows)
+    var ecm = zx9Pillar('embedded-care-management'), pin = zx9Pillar('population-intelligence');
+    var card = function (p, icon, id, title, body, extra) {
+      return '<article class="zx9-card zx-home-cm__card' + zx9Accent(p) + '" aria-labelledby="' + id + '"><div class="zx-home-cm__top">' +
+        '<span class="zx9-card__icon" aria-hidden="true">' + zxIcon(icon) + '</span><h3 class="zx9-card__title" id="' + id + '">' + title + '</h3>' +
+        renderChip('Sample data', 'sample') + '</div><p class="zx9-card__body">' + body + '</p>' + extra + '</article>';
+    };
+    var care = zxHomeSection('care-management', 'zx9-band--warm zx-home-cm',
+      zxHomeHead({ id: 'care-management-title', title: 'Care management embedded where the work happens', row: true,
+        link: { label: 'Explore ' + ecm.short, href: ecm.slug } }) +
+      // below 768 the two cards scroll sideways (one row, snap): the wrapper keeps them out of the page-overflow checks
+      '<div class="zx-home-cm__wrap" data-zx-allow-overflow><div class="zx-home-cm__grid">' +
+        card(ecm, 'clipboard', 'cm-plan-title', 'The plan runs itself', 'Care plans, owners, deadlines and escalations by rule, with documentation as the work happens.', zxHomeEpisode(HOME_EPISODE)) +
+        card(pin, 'stethoscope', 'cm-poc-title', 'Intelligence at the point of care', 'At the visit, the clinician sees risk drivers, open gaps and tasks. ZynScribe drafts the note for physician approval.', zxHomePoc(HOME_POC)) +
+      '</div></div>');
 
-    // 7. Customers (§5.9): one verbatim release quote, two cards (no numbers), the stories link (ROI link: HOME_ROI_LINK)
+    // 8. CMS program execution (light, compact): every chip links to its page or post
+    var programs = zxHomeSection('programs', 'zx9-section--compact zx-home-programs',
+      '<div class="zx-home-programs__grid"><h2 class="zx9-h2 zx-home-programs__title" id="programs-title">Built to run the programs you’re measured on</h2>' +
+      renderV9Chips(null, { id: 'programs-title' }) + '</div>');
+
+    // 9. Customers (light): the PBACO release quote (verbatim excerpt) and the eternalHealth card, as .zx9-card s
     var pb = zxCustomer('pbaco');
     // PBACO's size in the release's words, attributed to the release: the same helper and wording as /care-plans (DECISIONS 15)
     var pbSize = typeof zxPlatPbacoSize === 'function' ? zxPlatPbacoSize() : 'PBACO Holding';
     // A verbatim excerpt: the release quote from "We believe…" to the end; the full quote stays on the case study and /press.
     var pbQuote = pb && pb.quote && pb.quote.text ? pb.quote.text.replace(/^[^.]*\.\s+(?=We believe)/, '') : null;
-    var card = function (id, line) {
-      var c = zxCustomer(id); if (!c) return '';
-      var logo = c.logo ? '<img class="zx-home-customers__logo zx-home-customers__logo--h' + c.logo.h + '" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + c.logo.w + '" height="' + c.logo.h + '" loading="lazy" decoding="async">' : '';
-      return renderCard({ href: c.caseStudy, media: logo, eyebrow: c.segmentLabel, title: c.name, body: line, cta: 'Read the case study', className: 'zx-home-customers__card' });
-    };
     // The attribution opens with a PBACO lockup (seal + name as text, so the image is decorative), not a floating seal.
     var pbOrg = pb && pb.logo ? '<span class="zx-home-quote__org"><img class="zx-home-quote__mark" src="' + zxAttr(zxImg(pb.logo.file)) + '" alt="" width="' + pb.logo.w + '" height="' + pb.logo.h + '" loading="lazy" decoding="async">' + pb.name + '</span>' : '';
-    var customers = renderSection({ id: 'customers', surface: 'subtle', className: 'zx-home-customers' },
-      renderSectionHead('Customer stories', 'Customers, on the record',
-        'Palm Beach ACO and eternalHealth announced their partnerships with Zynix in published releases.<span class="zx-home-customers__more"> ' +
-          pbSize + (pbSize === 'PBACO Holding' ? '' : ',') + ' started with outreach for post-discharge follow-up and annual wellness visits.</span>', { id: 'customers-title' }) +
-      renderSplit(
-        renderQuote({ customer: 'pbaco', variant: 'large', href: null, text: pbQuote, logo: null }).replace('__cite">', '__cite">' + pbOrg).replace('</figcaption>', '<span class="zx-home-quote__links">' +
-          (pb && pb.release ? renderLinkArrow('Read the announcement', pb.release.href) : '') + (pb && pb.caseStudy ? renderLinkArrow('Read the case study', pb.caseStudy) : '') + '</span></figcaption>'),
-        '<div class="zx-home-customers__cards">' +
-          card('eternalhealth', 'Outreach and care management workflows for members in Massachusetts and Arizona, in use since January 1, 2026.') +
-          card('amistad', 'After-hours access and preventive outreach for a multilingual patient population.') + '</div>',
-        { ratio: '7-5' }) +
-      '<div class="zx-home-customers__links">' + renderLinkArrow('All customer stories', '/resources-case-studies') +
-        (HOME_ROI_LINK ? renderLinkArrow(HOME_ROI_LINK.label, HOME_ROI_LINK.href) : '') + '</div>');
+    var quote = renderQuote({ customer: 'pbaco', variant: 'large', href: null, text: pbQuote, logo: null }).replace('__cite">', '__cite">' + pbOrg).replace('</figcaption>', '<span class="zx-home-quote__links">' +
+      (pb && pb.release ? renderLinkArrow('Read the announcement', pb.release.href) : '') + (pb && pb.caseStudy ? renderLinkArrow('Read the case study', pb.caseStudy) : '') + '</span></figcaption>');
+    var eh = zxCustomer('eternalhealth');
+    var ehCard = eh ? '<a class="zx9-card zx-home-cust" href="' + zxAttr(eh.caseStudy) + '">' +
+      (eh.logo ? '<img class="zx-home-cust__logo" src="' + zxAttr(zxImg(eh.logo.file)) + '" alt="" width="' + eh.logo.w + '" height="' + eh.logo.h + '" loading="lazy" decoding="async">' : '') +
+      '<p class="zx9-card__kicker">' + eh.segmentLabel + '</p><h3 class="zx9-card__title">' + eh.name + '</h3>' +
+      '<p class="zx9-card__body">Outreach and care management workflows for members in Massachusetts and Arizona, in use since January 1, 2026.</p>' +
+      '<span class="zx-home-cust__cta">Read the case study<span aria-hidden="true"> →</span></span></a>' : '';
+    var customers = zxHomeSection('customers', 'zx9-band--tint zx-home-customers',
+      zxHomeHead({ id: 'customers-title', title: 'Customers, on the record', row: true,
+        lead: 'Palm Beach ACO and eternalHealth announced their partnerships with Zynix in published releases.<span class="zx-home-customers__more"> ' +
+          pbSize + (pbSize === 'PBACO Holding' ? '' : ',') + ' started with outreach for post-discharge follow-up and annual wellness visits.</span>',
+        link: { label: 'All customer stories', href: '/resources-case-studies' } }) +
+      '<div class="zx-home-customers__grid"><div class="zx9-card zx-home-quote">' + quote + '</div>' + ehCard + '</div>');
 
-    // 8. Security and governance (§5.10): registry compliance strings; only confirmed governance statements render
-    var secRows = [
-      { icon: 'shield', title: C.soc2.prose, text: 'The audit report and supporting documentation are shared through our Drata trust portal.' },
-      { icon: 'lock', title: C.hipaa.prose, text: 'A Business Associate Agreement is available for customers handling PHI.' },
-      { icon: 'clock', title: C.hitrust.prose, text: 'Readiness assessment completed.' }
+    // 10. Trust + interoperability strip (one row; replaces the old interoperability and governance sections)
+    var trustItems = [
+      { icon: 'shield', text: C.soc2.prose.split(',')[0] },   // "SOC 2 Type II audited"
+      { icon: 'lock', text: C.hipaa.prose },
+      { icon: 'clock', text: C.hitrust.prose },
+      { icon: 'link', text: SITE_FACTS.stats.ehrSystems.value + ' EHRs' }   // "30+ EHRs" (V9_SPEC §4.10)
     ];
-    var gov = zxGovernance(['escalation', 'review', 'auditTrail', 'dataUse']);
-    var security = renderSection({ id: 'security', className: 'zx-home-security' }, renderSplit(
-      renderSectionHead(null, 'Built to be governed',
-        'Security reviews are part of every evaluation. Here is where we stand, and how agents are kept in check.', { id: 'security-title' }) +
-      '<div class="zx-home-sec__actions">' + renderButton(C.soc2.request.label, C.soc2.request.href, { variant: 'secondary' }) + renderLinkArrow('Security and trust', '/security') + '</div>',
-      renderTrustRow(['soc2', 'hipaa', 'hitrust'], { className: 'zx-home-sec__badges' }) +
-      '<ul class="zx-home-sec" role="list">' + secRows.map(function (r) {
-        return '<li class="zx-home-sec__row"><span class="zx-home-sec__icon" aria-hidden="true">' + zxIcon(r.icon) + '</span><div><h3 class="zx-home-sec__title">' + r.title + '</h3><p class="zx-home-sec__text">' + r.text + '</p></div></li>';
+    var trust = zxHomeSection('trust', 'zx9-section--compact zx-home-trust',
+      '<div class="zx-home-trust__row"><h2 class="zx-visually-hidden" id="trust-title">Security and interoperability</h2>' +
+      '<ul class="zx-home-trust__list" role="list">' + trustItems.map(function (t) {
+        return '<li class="zx-home-trust__item"><span class="zx-home-trust__icon" aria-hidden="true">' + zxIcon(t.icon) + '</span>' + t.text + '</li>';
       }).join('') + '</ul>' +
-      (gov.length ? '<div class="zx-home-gov"><h3 class="zx-home-gov__title">How agents are governed</h3><ul class="zx-home-sec zx-home-sec--gov" role="list">' + gov.map(function (g) {
-        var icon = { escalation: 'users', review: 'file', auditTrail: 'clipboard', dataUse: 'database' }[g.id] || 'check';
-        return '<li class="zx-home-sec__row"><span class="zx-home-sec__icon" aria-hidden="true">' + zxIcon(icon) + '</span><div><h4 class="zx-home-sec__title">' + g.title + '</h4><p class="zx-home-sec__text">' + g.text + '</p></div></li>';
-      }).join('') + '</ul></div>' : ''),
-      { ratio: '5-7' }));
+      '<p class="zx-home-trust__links">' + zxHomeLink('Security', '/security') + zxHomeLink('Integrations', '/integrations') + '</p></div>');
 
-    // 9. Who we serve (§5.11): the five NAV audiences as linked rows (no ASCs)
-    var sol = NAV.filter(function (s) { return s.id === 'solutions'; })[0];
-    var orgs = sol ? ((sol.columns || []).filter(function (c) { return c.heading === 'By organization'; })[0] || { items: [] }).items : [];
-    var audiences = renderSection({ id: 'audiences', surface: 'subtle', compact: true, className: 'zx-home-audiences' }, renderSplit(
-      renderSectionHead(null, 'Built for organizations accountable for cost and quality', null,
-        { id: 'audiences-title', action: { label: 'Solutions overview', href: '/solutions' } }),
-      renderGrid(orgs, function (it) { return renderCard({ variant: 'row', title: it.label, body: it.desc, href: it.href, icon: it.icon }); }, { className: 'zx-home-audiences__list' }),
-      { ratio: '5-7' }));
+    // 11. FAQ: .zynix-faq-item markup feeds the FAQPage JSON-LD
+    var faq = zxHomeSection('faq', 'zx-home-faq', '<div class="zx-home-faq__grid">' +
+      zxHomeHead({ id: 'faq-title', title: 'Questions buyers ask first', link: { label: 'More questions', href: '/resources-faq' } }) +
+      renderFaqList(HOME_FAQ, { idPrefix: 'faq-home' }) + '</div>');
 
-    // 10. FAQ (§5.12): .zynix-faq-item markup feeds the FAQPage JSON-LD
-    var faq = renderSection({ id: 'faq', className: 'zx-home-faq' }, renderSplit(
-      renderSectionHead(null, 'Questions buyers ask first', null, { id: 'faq-title', action: { label: 'More questions', href: '/resources-faq' } }),
-      renderFaqList(HOME_FAQ, { idPrefix: 'faq-home' }), { ratio: '4-8' }));
+    // 12. Closing CTA (.zx9-cta)
+    var cta = renderV9Cta({ title: 'See the operating layer run on <span class="zx9-grad-text">your workflows</span>' });
 
-    // 11. Final CTA (§5.13)
-    var cta = renderCTA('See Zynix on a workflow you run today',
-      'Book 30 minutes with our team. We’ll walk through post-discharge <span class="zx-home-nowrap">follow-up</span>, care gap closure or wellness visit outreach on sample data, and map it to your programs.',
-      null, { surface: 'subtle', id: 'final-cta', secondary: { label: 'Contact us', href: '/contact' }, badges: [] });
-
-    // The closing band keeps the homepage's section rhythm (page:home CSS sets the padding through .zx-home-end).
-    return hero + proof + hiw + flow + agents + caps + interop + customers + security + audiences + faq + '<div class="zx-home-end">' + cta + '</div>' + renderFooter();
+    // The closing band keeps the homepage's rhythm (page:home CSS sets its padding through .zx-home-end).
+    return hero + proof + loop + pillars + engage + predict + care + programs + customers + trust + faq + '<div class="zx-home-end">' + cta + '</div>' + renderFooter();
   }
 
   // ── 301 REDIRECT MAP (v7 rebuild) ──
@@ -11468,7 +11052,6 @@ function renderDataAnalyticsV7() {
     '/solutions': renderSolutionsOverview,
     '/zynix-data-analytics': renderDataAnalyticsV7,
     '/zynix-ai-agents': renderAIAgents,
-    '/v9-kit': renderV9Kit,   // V9-KIT: remove before merge (S9 review page)
     // Solutions - By Org Type
     '/solutions-acos': renderACOs,
     '/solutions-health-systems': renderHealthSystems,
