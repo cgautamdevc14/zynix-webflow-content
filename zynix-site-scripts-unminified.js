@@ -986,6 +986,8 @@
         if (segments.length > 2) {
           crumbs.push({'@type':'ListItem',position:3,name:seo.title.split('|')[0].trim().replace(/ \| Zynix AI$/,''),item:'https://www.zynix.ai/' + topSegment + '/' + segments[1]});
         }
+      } else if (typeof PILLARS !== 'undefined' && PILLARS.some(function (x) { return x.slug === pagePath; })) {
+        crumbs.push({'@type':'ListItem',position:2,name:'Platform',item:'https://www.zynix.ai/platform'});   // V9 pillar pages: Home › Platform › <pillar>
       } else if (sectionMapLegacy[legacySeg[0]]) {
         crumbs.push({'@type':'ListItem',position:2,name:sectionMapLegacy[legacySeg[0]],item:'https://www.zynix.ai/' + legacySeg[0] + '-' + (legacySeg[0]==='products'?'zynix-os':legacySeg[0]==='solutions'?'acos':legacySeg[0]==='company'?'about':legacySeg[0]==='resources'?'blog':'')});
       }
@@ -3169,7 +3171,7 @@
   var PILLAR_SEO = {
     'population-intelligence': { title: 'Population Intelligence for value-based care | Zynix AI', img: IMG.analytics,
       desc: 'Population health intelligence for value-based care: one live picture of who needs what, from claims, EHR, ADT, lab and pharmacy data, down to the visit.' },
-    'predictive-risk': { title: 'Predictive Risk: readmission, mortality, utilization | Zynix AI', img: IMG.doctor,
+    'predictive-risk': { title: 'Predictive Risk: readmission, mortality, ED use | Zynix AI', img: IMG.doctor,
       desc: 'Predictive risk for healthcare teams: readmission, mortality, disease progression and utilization, with drivers shown and a next step clinicians review.' },
     'embedded-care-management': { title: 'Embedded Care Management Platform | Zynix AI', img: IMG.care,
       desc: 'A care management platform inside your team’s workflow: care plans for TCM, CCM and AWVs, tasks with owners and deadlines, escalation by rule and a record.' },
