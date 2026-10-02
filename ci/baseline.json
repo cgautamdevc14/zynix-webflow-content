@@ -66,13 +66,13 @@
   "bannedStrings": {},
   "weight": {
     "ceilings": {
-      "cssBr4": 62576,
-      "totalBr4": 391009,
+      "cssBr4": 69407,
+      "totalBr4": 408581,
       "cssImports": 0
     },
     "builtCeilings": {
-      "totalBr4": 325145,
-      "cssBr4": 42740
+      "totalBr4": 337937,
+      "cssBr4": 48798
     },
     "targets": {
       "cssBr4": 30720,
@@ -186,6 +186,33 @@
           "styleAttributes": 985
         },
         "reason": "Dead-code deletion (rd/deadcode, 2026-09-30): 35 unreachable functions and 26 shadowed or redirected routes keys removed; bundle 1,483,577 -> 1,386,049 B raw, deploy build 345,994 -> 323,097 B brotli-4. No open PRs at the time of the run."
+      },
+      {
+        "date": "2026-10-02",
+        "commit": "f2be41f",
+        "from": {
+          "ceilings": {
+            "cssBr4": 62576,
+            "totalBr4": 391009,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 325145,
+            "cssBr4": 42740
+          }
+        },
+        "to": {
+          "ceilings": {
+            "cssBr4": 69407,
+            "totalBr4": 408581,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 337937,
+            "cssBr4": 48798
+          }
+        },
+        "reason": "V9 repositioning (Gautamdev, 2026-10-01): AI operating layer homepage, 4 pillar pages, v9 visual system (tokens, gradients, components) and NAV. Deploy build 323,097 -> 335,889 B br4 (+12,792, within the 25 KB V9 budget; still 26 KB under production's c95cc03 total of 362,039); the old homepage CSS shrank 56.8 -> 31.3 KB raw."
       }
     ]
   },
