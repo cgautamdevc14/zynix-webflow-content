@@ -2360,32 +2360,6 @@
     return '<' + tag + ' class="zx9-eyebrow' + zxCls(opts.className) + '"' + zxA('id', opts.id) + '>' + text + '</' + tag + '>';
   }
 
-  // ── renderV9Pillars(opts) → <ul class="zx9-pillars">: one .zx9-card.zx9-pillar per pillar, in PILLARS order ──
-  //   Each card: icon, number badge, name, promise, 3 bullets and "Explore →" (accessible name "Explore <pillar name>").
-  //   opts  { id: id of the heading that names the list (aria-labelledby) and prefix of the card-title ids (default 'pillars'),
-  //           only: [pillar ids] (a subset, still in PILLARS order), current: pillar id ("You are here" instead of the link),
-  //           glass: true for the dark-band variant (.zx9-card--glass), level: heading level of the names (default 3),
-  //           cta: the link text (default 'Explore') }
-  function renderV9Pillars(opts) {
-    opts = opts || {};
-    var pre = opts.id || 'pillars', lvl = opts.level || 3, cta = opts.cta || 'Explore';
-    var list = PILLARS.filter(function (p) { return !opts.only || opts.only.indexOf(p.id) > -1; });
-    if (!list.length) return '';
-    return '<ul class="zx9-pillars" role="list" data-count="' + list.length + '"' + zxA('aria-labelledby', opts.id) + '>' + list.map(function (p) {
-      var tid = pre + '-' + p.id, cur = opts.current === p.id;
-      return '<li class="zx9-pillars__item"><article class="zx9-card zx9-pillar' + (opts.glass ? ' zx9-card--glass' : '') + zx9Accent(p) + (cur ? ' is-current' : '') +
-        '" aria-labelledby="' + zxAttr(tid) + '">' +
-        '<div class="zx9-pillar__top"><span class="zx9-pillar__icon" aria-hidden="true">' + zxIcon(p.icon) + '</span>' +
-          '<span class="zx9-pillar__num"><span class="zx-visually-hidden">Pillar </span>' + zx9Num(p.n) + '</span></div>' +
-        '<h' + lvl + ' class="zx9-pillar__name" id="' + zxAttr(tid) + '">' + p.name + '</h' + lvl + '>' +
-        '<p class="zx9-pillar__promise">' + p.promise + '</p>' +
-        '<ul class="zx9-pillar__list" role="list">' + p.bullets.map(function (b) { return '<li>' + b + '</li>'; }).join('') + '</ul>' +
-        (cur ? '<p class="zx9-pillar__here">You are here</p>'
-             : '<a class="zx9-pillar__link" href="' + zxAttr(p.slug) + '">' + cta + '<span class="zx-visually-hidden"> ' + p.name + '</span>' +
-               '<span class="zx9-pillar__arrow" aria-hidden="true">→</span></a>') +
-        '</article></li>';
-    }).join('') + '</ul>';
-  }
 
   // ── renderV9Loop(opts) → the closed loop (.zx9-loop; rebuild of the protected data-flow asset): the four pillars and
   // "Outcome documented", joined by a connector with a gradient dash (it runs only on screen, never under reduced motion),
