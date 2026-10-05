@@ -5,7 +5,7 @@
   "reference_commit": "this change (a2p-legal-consistency, 2026-09-22)",
   "functions": {
     "renderSMSProgram": "fc361125b8d4cccefa9867b928b051aa6239adb5e8f2fac86f04a2b3eeb8a88e",
-    "renderSMSConsent": "3dc0b6c16d9d7abcb29a800638c8f50341011b3c1cbbb96802d6b2b5bdcc52c2",
+    "renderSMSConsent": "6df2269e4c899df71026e630ea099dc471e9b8f357bdeeb849f1edd60685e9a2",
     "renderPrivacyV7": "564abd893045071f60fc604fe2d2a292386b63436f6a01f3d14691dbb48f131f",
     "renderTermsV7": "c578f5d5771ef575ad97a20df4dc6abd9fd1ff0992832e11803f3330642af226"
   },
@@ -40,6 +40,12 @@
       "commit": "a2p-final-polish",
       "date": "2026-09-23",
       "why": "Audit F3: the two section headings on the registered T&C page showed STOP and HELP without <strong>; Twilio asks for the opt-out instructions in bold. Text unchanged."
+    },
+    {
+      "function": "renderSMSConsent",
+      "commit": "telnyx-optional-checkbox",
+      "date": "2026-10-05",
+      "why": "Telnyx rejected campaign C5B5WPZ: the live /sms-consent form had BOTH the mobile number field and the SMS checkbox required, which carriers treat as forced opt-in. The checkbox is no longer required: an unchecked submission is recorded with sms_consent No and shows a no-texts confirmation. Label text unchanged; the native Webflow checkbox was changed to match."
     }
   ]
 }
