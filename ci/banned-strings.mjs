@@ -91,7 +91,9 @@ export const CLAIMS = [
   ['$150M', /\$150M\b/gi],
   ['10+ ACOs', /(?<![\w.])10\+ ACOs\b/gi],
   ['documented back to the EHR', /\bdocumented back to the EHR\b/gi],
-  ['self-care guidance', /\bself-care guidance\b/gi]
+  ['self-care guidance', /\bself-care guidance\b/gi],
+  ['NHS (not a client)', /\bNHS\b/g],
+  ['Union (never named)', /\bUnion (Health|Hospital)\b/gi]
 ];
 // Extended_Pictographic minus typographic symbols that share the property (© ® ‼ ⁉ ™ ℹ ↔–↙ ↩ ↪).
 const NOT_EMOJI = new Set([0xA9, 0xAE, 0x203C, 0x2049, 0x2122, 0x2139, 0x2194, 0x2195, 0x2196, 0x2197, 0x2198, 0x2199, 0x21A9, 0x21AA]);

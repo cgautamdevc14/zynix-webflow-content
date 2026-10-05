@@ -168,7 +168,7 @@
       logo: { file: 'logos/space-coast-aco.svg', source: 'space-coast-aco.svg', h: 20, w: 114 }, caseStudy: '/case-studies-space-coast-aco', metrics: [] },
     centralfloridaaco: { name: 'Central Florida ACO', segment: 'aco', segmentLabel: 'ACO', logoRow: 6,
       logo: { file: 'logos/central-florida-aco.svg', source: 'central-florida-aco-logo.svg', h: 24, w: 104 }, caseStudy: '/case-studies-central-florida-aco', metrics: [] },
-    nexthealthcare: { name: 'NEXT Healthcare Solutions', segment: null, segmentLabel: null, logoRow: 7,   // [VERIFY] segment
+    nexthealthcare: { name: 'NEXT Healthcare Solutions', segment: 'practice', segmentLabel: 'MSO', logoRow: 7,   // an MSO (Gautamdev, 2026-10-05); 'practice' is the MSO, IPA and physician-group segment (ZX_CUST_SEGS)
       logo: { file: 'logos/next-healthcare.svg', source: 'next-healthcare.svg', h: 28, w: 79 }, caseStudy: null, metrics: [] },
     // GoldenCare, Sunflower and Professional Radiology are thin, light marks that vanish under the rows' grayscale filter, so their
     // `file` is a monochrome ink rendition (light colours darkened, white removed, 2026-09-29); the colour trims stay in
@@ -185,7 +185,9 @@
     apolloclinic: { name: 'Apollo Clinic Network', segment: 'practice', segmentLabel: 'Physician group', logoRow: null, logo: null, caseStudy: '/case-studies/apollo-clinic', metrics: [   // [VERIFY] segment
       { value: 'Under 14%', label: 'No-show rate', baseline: '22%', period: 'first quarter of deployment', n: null, source: 'Reported by Apollo Clinic Network', approved: null }   // P4, DECISIONS 16 [VERIFY]
     ] },
-    nhs: { name: 'NHS Health System', segment: 'health-system', segmentLabel: 'Health system', logoRow: null, logo: null, caseStudy: '/case-studies/nhs', metrics: [] },
+    // Zynix's one health-system client is never named (Gautamdev, 2026-10-05): no name, logo, metrics, quote, release or story
+    // page, and never a plural. `anonymous` is the only name it may show: zxCustomer() returns nothing else from this record.
+    hospitalsystem: { anonymous: 'A hospital system', segment: 'health-system', segmentLabel: 'Health system', logoRow: null, logo: null, caseStudy: null, metrics: [] },
     advancedmanagement: { name: 'Advanced Management', segment: null, segmentLabel: null, logoRow: null, logo: null, caseStudy: null, metrics: [] },
     incentivecareipa: { name: 'IncentiveCare IPA', segment: 'ipa', segmentLabel: 'IPA', logoRow: null, logo: null, caseStudy: null, metrics: [] }
   };
@@ -529,7 +531,6 @@
     '/case-studies/pbaco': 'Palm Beach ACO',
     '/case-studies/amistad': 'AMISTAD Community Health Center',
     '/case-studies/apollo-clinic': 'Apollo Clinic Network',
-    '/case-studies/nhs': 'NHS Health System',
     '/case-studies-west-florida-aco': 'West Florida ACO',
     '/case-studies-space-coast-aco': 'Space Coast ACO',
     '/case-studies-central-florida-aco': 'Central Florida ACO',
@@ -539,12 +540,12 @@
     '/case-studies/central-florida-aco': 'Central Florida ACO',
     '/case-studies/eternal-health': 'eternalHealth',
     '/case-studies-acos': 'ACOs',
-    '/case-studies-health-systems': 'Health systems',
+    '/case-studies-health-systems': 'How a hospital system uses Zynix',
     '/case-studies-health-plans': 'Health plans',
     '/case-studies-practices': 'Physician groups',
     '/case-studies-fqhcs': 'FQHCs',
     '/case-studies/acos': 'ACOs',
-    '/case-studies/health-systems': 'Health systems',
+    '/case-studies/health-systems': 'How a hospital system uses Zynix',
     '/case-studies/health-plans': 'Health plans',
     '/case-studies/practices': 'Physician groups',
     '/case-studies/fqhcs': 'FQHCs',
@@ -592,7 +593,7 @@
     '/audience-segments/acos-msos': { products: ['/care-plans','/agents','/zynix-data-analytics'], useCases: ['/use-cases/post-discharge-tcm-readmission','/use-cases/hcc-gap-raf-optimization'], related: ['/case-studies/pbaco'] },
     '/audience-segments/independent-group-practices': { products: ['/zynscribe','/agents','/care-plans'], useCases: ['/use-cases/hcc-gap-raf-optimization','/use-cases/chronic-care-coordination-scale'], related: ['/case-studies/apollo-clinic'] },
     '/audience-segments/health-plans': { products: ['/zynix-data-analytics','/care-plans','/agents'], useCases: ['/use-cases/hedis-stars-quality-improvement','/use-cases/chronic-care-coordination-scale'], related: ['/case-studies-eternal-health'] },
-    '/audience-segments/health-systems': { products: ['/zynscribe','/agents','/integrations'], useCases: ['/use-cases/post-discharge-tcm-readmission','/use-cases/after-hours-ed-diversion'], related: ['/case-studies/nhs'] },
+    '/audience-segments/health-systems': { products: ['/zynscribe','/agents','/integrations'], useCases: ['/use-cases/post-discharge-tcm-readmission','/use-cases/after-hours-ed-diversion'], related: ['/case-studies-health-systems'] },
     '/audience-segments/fqhcs': { products: ['/agents#operational-efficiency','/zynix-data-analytics'], useCases: ['/use-cases/after-hours-ed-diversion','/use-cases/preventive-screening-gap-fqhc'], related: ['/case-studies/amistad'] },
     '/audience-segments/ascs': { products: ['/agents#operational-efficiency'], useCases: ['/use-cases/referral-intake-asc','/use-cases/surgical-scheduling-pre-procedure','/use-cases/post-procedure-followup-complication'], related: ['/audience-segments/health-systems'] },
     // Use cases: none. renderUseCaseV7 (P3) renders each use case's one related block itself; its "Where it fits" section
@@ -604,9 +605,8 @@
     '/compare-zynix-vs-commure': { products: ['/platform','/agents','/integrations'], solutions: ['/audience-segments/health-systems','/audience-segments/acos-msos'], related: ['/compare-zynix-vs-point-solutions'] },
     // Customer stories
     '/case-studies/pbaco': { products: ['/agents','/care-plans'], solutions: ['/audience-segments/acos-msos'], related: ['/case-studies-west-florida-aco','/case-studies-space-coast-aco','/resources-case-studies'] },
-    '/case-studies/amistad': { products: ['/agents#operational-efficiency','/care-plans'], solutions: ['/audience-segments/fqhcs'], related: ['/case-studies/nhs','/resources-case-studies'] },
-    '/case-studies/apollo-clinic': { products: ['/agents','/zynscribe'], solutions: ['/audience-segments/independent-group-practices'], related: ['/case-studies/pbaco','/resources-case-studies'] },
-    '/case-studies/nhs': { products: ['/platform','/agents','/zynscribe'], solutions: ['/audience-segments/health-systems'], related: ['/case-studies/pbaco','/case-studies/amistad'] }
+    '/case-studies/amistad': { products: ['/agents#operational-efficiency','/care-plans'], solutions: ['/audience-segments/fqhcs'], related: ['/case-studies/pbaco','/resources-case-studies'] },
+    '/case-studies/apollo-clinic': { products: ['/agents','/zynscribe'], solutions: ['/audience-segments/independent-group-practices'], related: ['/case-studies/pbaco','/resources-case-studies'] }
   };
 
   // ── SEO Data ──
@@ -646,7 +646,7 @@
     '/resources-blog-agentic-ai-healthcare-digital-workforce': { title: 'Agentic AI in healthcare: beyond copilots | Zynix AI', desc: 'Agentic AI in healthcare is moving beyond copilots. For ACOs, the opportunity is governed agents that run care operations with clinicians in charge.', img: IMG.hero, schema: 'Article', datePublished: '2026-07-02' },
     '/resources-blog-aco-lead-model-execution-infrastructure-2027': { title: 'ACO LEAD Model: executing between visits | Zynix AI', desc: 'The ACO LEAD Model launches in 2027. Most ACOs can already see who needs attention. The question is whether they can follow through at scale.', img: IMG.hero, schema: 'Article', datePublished: '2026-07-02' },
     '/resources-blog-1m-patients': { title: '1M+ value-based care patients onboarded | Zynix AI', desc: 'Zynix AI marks 1M+ value-based care patients onboarded, with customer organizations in 30 states. Read about the milestone.', img: IMG.hero, schema: 'Article' },
-    '/resources-case-studies': { title: 'Customer stories | Zynix AI', desc: 'How ACOs, health plans, health systems, FQHCs and physician groups use Zynix, with what their leaders have said on the record.', img: IMG.care, schema: 'Organization' },
+    '/resources-case-studies': { title: 'Customer stories | Zynix AI', desc: 'How ACOs, MSOs, health plans, FQHCs, physician groups and a hospital system use Zynix, with what their leaders have said on the record.', img: IMG.care, schema: 'Organization' },
     '/resources-glossary': { title: 'Value-based care and healthcare AI glossary | Zynix AI', desc: 'Plain definitions of ACO, Medicare Advantage and care management terms, from ADT and AWV to HCC, HEDIS and TCM.', img: IMG.hero, schema: 'Organization' },
     '/resources-webinars': { title: 'Webinars and events | Zynix AI', desc: 'Recorded sessions on ACO operating models, patient engagement and CMS programs, plus where to meet the Zynix team.', img: IMG.hero, schema: 'Organization', noindex: true },
     '/resources-whitepapers': { title: 'Research and reports | Zynix AI', desc: 'Reports on annual wellness visits, post-discharge follow-up and care management operations for ACO and health plan leaders.', img: IMG.hero, schema: 'Organization' },
@@ -740,7 +740,6 @@
     '/use-cases/hcc-gap-closure-health-system-aco': { title: 'HCC gap closure for health systems | Zynix AI', desc: 'Outreach to unscheduled patients with open HCC gaps and pre-visit briefs for scheduled encounters, so gaps are addressed at the visit.', img: IMG.agents, schema: 'Article' },
     '/use-cases/after-hours-triage-multi-site': { title: 'After-hours access across sites | Zynix AI', desc: 'After-hours calls answered across your sites, routine visits booked and symptom questions routed to the on-call clinician by rule.', img: IMG.agents, schema: 'Article' },
     '/use-cases/post-discharge-follow-up': { title: 'Post-discharge follow-up | Zynix AI', desc: 'Follow-up calls after discharge that review medications, schedule the follow-up visit and route clinical questions to your care team.', img: IMG.agents, schema: 'Article' },
-    '/case-studies/nhs': { title: 'NHS Health System customer story | Zynix AI', desc: 'How NHS Health System uses the Zynix platform for care gap outreach, after-hours access and documentation support across its sites.', img: IMG.care, schema: 'Article' },
     '/case-studies/apollo-clinic': { title: 'Apollo Clinic Network customer story | Zynix AI', desc: 'How Apollo Clinic Network uses scheduling, reminders and outreach agents to keep patients on track between visits.', img: IMG.care, schema: 'Article' },
     '/case-studies/amistad': { title: 'AMISTAD Community Health Center story | Zynix AI', desc: 'How AMISTAD Community Health Center uses multilingual outreach and after-hours access to reach patients and close preventive care gaps.', img: IMG.care, schema: 'Article' },
     // Use-case pages get their entries from USE_CASE_SEO at load time.
@@ -903,7 +902,7 @@
       legalName:'Zynix Inc',
       url:'https://www.zynix.ai',
       logo:{'@type':'ImageObject',url:IMG.logo,width:400,height:80},
-      description:'Zynix AI builds ' + SITE_FACTS.category.inline + '. The Zynix platform connects claims, EHR and ADT data, identifies patients and care gaps that need attention, and helps care teams follow through with care plans, agents and ambient documentation. It serves ACOs, health plans, MSOs, IPAs and health systems, with ' +
+      description:'Zynix AI builds ' + SITE_FACTS.category.inline + '. The Zynix platform connects claims, EHR and ADT data, identifies patients and care gaps that need attention, and helps care teams follow through with care plans, agents and ambient documentation. It serves ACOs, MSOs, IPAs, health plans and FQHCs, with ' +
         SITE_FACTS.stats.patients.sentence + ', ' + SITE_FACTS.stats.states.sentence + ' and ' + SITE_FACTS.ehr.line + '.',
       slogan:'Predict who needs care. Make sure it happens.',
       telephone:'+1-727-261-1297',
@@ -1110,7 +1109,7 @@
       // The questions and answers renderFAQ renders on /resources-faq (keep the two in step).
       mainEntity = [
         {'@type':'Question',name:'What is Zynix AI?',acceptedAnswer:{'@type':'Answer',text:'Zynix AI is AI infrastructure and workflows for value-based care. The Zynix platform connects claims, EHR and ADT data into one patient record, ranks the patients and care gaps that need attention, and carries the follow-up through care plans, outreach agents and ambient documentation. Clinicians make the clinical decisions.'}},
-        {'@type':'Question',name:'What types of healthcare organizations use Zynix?',acceptedAnswer:{'@type':'Answer',text:'ACOs, MSOs, health systems, FQHCs, health plans, independent practices, and ASCs. Any organization accountable for patient outcomes and operational efficiency.'}},
+        {'@type':'Question',name:'What types of healthcare organizations use Zynix?',acceptedAnswer:{'@type':'Answer',text:'ACOs, MSOs, FQHCs, health plans, independent practices, and ASCs. Any organization accountable for patient outcomes and operational efficiency.'}},
         {'@type':'Question',name:'What products are included in the Zynix platform?',acceptedAnswer:{'@type':'Answer',text:'The Zynix platform includes a data foundation, analytics, AI agents in three families (clinical performance, predictive activation and operational efficiency), care plans, ZynScribe for ambient clinical documentation, and ZynixLLM, the platform\u2019s language model layer.'}},
         {'@type':'Question',name:'How long does implementation take?',acceptedAnswer:{'@type':'Answer',text:'Timelines depend on your data sources and scope; we set one with you during scoping.'}},
         {'@type':'Question',name:'How does Zynix protect patient data?',acceptedAnswer:{'@type':'Answer',text:'Zynix is SOC 2 Type II audited, report available on request through our trust portal. We maintain HIPAA-aligned safeguards, and a Business Associate Agreement (BAA) is available. HITRUST CSF certification is in progress.'}},
@@ -1241,7 +1240,6 @@
     '/case-studies/pbaco': 'book',
     '/case-studies/amistad': 'book',
     '/case-studies/apollo-clinic': 'book',
-    '/case-studies/nhs': 'book',
     '/case-studies-west-florida-aco': 'book',
     '/case-studies-space-coast-aco': 'book',
     '/case-studies-central-florida-aco': 'book',
@@ -1305,7 +1303,6 @@
     '/case-studies/pbaco': 'Customer story · ACO',
     '/case-studies/amistad': 'Customer story · FQHC',
     '/case-studies/apollo-clinic': 'Customer story · physician group',
-    '/case-studies/nhs': 'Customer story · health system',
     '/case-studies-west-florida-aco': 'Customer story · ACO',
     '/case-studies-space-coast-aco': 'Customer story · ACO',
     '/case-studies-central-florida-aco': 'Customer story · ACO',
@@ -1465,7 +1462,7 @@
     });
     if (!label && cur.item) label = cur.item.label;
     if (!label) Object.keys(CUSTOMERS).some(function (k) {
-      var c = CUSTOMERS[k]; if (c && c.caseStudy && (c.caseStudy === q || c.caseStudy === p)) { label = c.name; return true; } return false;
+      var c = zxCustomer(k); if (c && c.caseStudy && (c.caseStudy === q || c.caseStudy === p)) { label = c.name; return true; } return false;
     });
     if (!label) label = LINK_NAMES[q] || LINK_NAMES[p] || '';
     if (!label) return '';
@@ -1638,7 +1635,12 @@
   function zxSeo(path, fields) { PAGE_SEO[path] = Object.assign({}, PAGE_SEO[path] || {}, fields); }
 
   // ── Facts readers (§4) ──
-  function zxCustomer(id) { return id && Object.prototype.hasOwnProperty.call(CUSTOMERS, id) ? CUSTOMERS[id] : null; }
+  // An anonymous record (CUSTOMERS.hospitalsystem) comes back as its unnamed phrasing only: never another name, a logo, a link,
+  // a quote, a release or a metric, whatever else the record holds.
+  function zxCustomer(id) {
+    var c = id && Object.prototype.hasOwnProperty.call(CUSTOMERS, id) ? CUSTOMERS[id] : null;
+    return c && c.anonymous ? { name: String(c.anonymous), anonymous: true, segment: c.segment, segmentLabel: c.segmentLabel, logoRow: null, logo: null, caseStudy: null, metrics: [] } : c;
+  }
   function zxFact(key) { return key && Object.prototype.hasOwnProperty.call(SITE_FACTS.stats, key) ? SITE_FACTS.stats[key] : null; }
   function zxAccessLine() { var a = SITE_FACTS.access; return a.line + ', ' + a.clause + '. ' + a.through; }
   function zxComplianceProse() { var c = SITE_FACTS.compliance; return [c.soc2.prose, c.hipaa.prose, c.hitrust.prose].join(' · '); }
@@ -2358,32 +2360,6 @@
     return '<' + tag + ' class="zx9-eyebrow' + zxCls(opts.className) + '"' + zxA('id', opts.id) + '>' + text + '</' + tag + '>';
   }
 
-  // ── renderV9Pillars(opts) → <ul class="zx9-pillars">: one .zx9-card.zx9-pillar per pillar, in PILLARS order ──
-  //   Each card: icon, number badge, name, promise, 3 bullets and "Explore →" (accessible name "Explore <pillar name>").
-  //   opts  { id: id of the heading that names the list (aria-labelledby) and prefix of the card-title ids (default 'pillars'),
-  //           only: [pillar ids] (a subset, still in PILLARS order), current: pillar id ("You are here" instead of the link),
-  //           glass: true for the dark-band variant (.zx9-card--glass), level: heading level of the names (default 3),
-  //           cta: the link text (default 'Explore') }
-  function renderV9Pillars(opts) {
-    opts = opts || {};
-    var pre = opts.id || 'pillars', lvl = opts.level || 3, cta = opts.cta || 'Explore';
-    var list = PILLARS.filter(function (p) { return !opts.only || opts.only.indexOf(p.id) > -1; });
-    if (!list.length) return '';
-    return '<ul class="zx9-pillars" role="list" data-count="' + list.length + '"' + zxA('aria-labelledby', opts.id) + '>' + list.map(function (p) {
-      var tid = pre + '-' + p.id, cur = opts.current === p.id;
-      return '<li class="zx9-pillars__item"><article class="zx9-card zx9-pillar' + (opts.glass ? ' zx9-card--glass' : '') + zx9Accent(p) + (cur ? ' is-current' : '') +
-        '" aria-labelledby="' + zxAttr(tid) + '">' +
-        '<div class="zx9-pillar__top"><span class="zx9-pillar__icon" aria-hidden="true">' + zxIcon(p.icon) + '</span>' +
-          '<span class="zx9-pillar__num"><span class="zx-visually-hidden">Pillar </span>' + zx9Num(p.n) + '</span></div>' +
-        '<h' + lvl + ' class="zx9-pillar__name" id="' + zxAttr(tid) + '">' + p.name + '</h' + lvl + '>' +
-        '<p class="zx9-pillar__promise">' + p.promise + '</p>' +
-        '<ul class="zx9-pillar__list" role="list">' + p.bullets.map(function (b) { return '<li>' + b + '</li>'; }).join('') + '</ul>' +
-        (cur ? '<p class="zx9-pillar__here">You are here</p>'
-             : '<a class="zx9-pillar__link" href="' + zxAttr(p.slug) + '">' + cta + '<span class="zx-visually-hidden"> ' + p.name + '</span>' +
-               '<span class="zx9-pillar__arrow" aria-hidden="true">→</span></a>') +
-        '</article></li>';
-    }).join('') + '</ul>';
-  }
 
   // ── renderV9Loop(opts) → the closed loop (.zx9-loop; rebuild of the protected data-flow asset): the four pillars and
   // "Outcome documented", joined by a connector with a gradient dash (it runs only on screen, never under reduced motion),
@@ -3778,7 +3754,7 @@
     var groups = [
       { id: 'faq-platform', title: 'The platform', items: [
         { q: 'What is Zynix AI?', a: 'Zynix AI builds AI infrastructure and workflows for value-based care. The Zynix platform connects claims, EHR and ADT data, identifies the patients and care gaps that need attention, and helps care teams act on them with care plans, outreach agents and ambient documentation. Clinicians make the clinical decisions.' },
-        { q: 'Which organizations use Zynix?', a: 'ACOs, health plans, MSOs, IPAs and physician groups, health systems and FQHCs use Zynix to run programs such as transitional care, annual wellness visits, chronic care management and quality gap closure. Palm Beach ACO and eternalHealth have announced their partnerships with Zynix in published releases, and our ' + link('customer stories', '/resources-case-studies') + ' cover others.' },
+        { q: 'Which organizations use Zynix?', a: 'ACOs, MSOs, IPAs and physician groups, health plans and FQHCs use Zynix to run programs such as transitional care, annual wellness visits, chronic care management and quality gap closure. Palm Beach ACO and eternalHealth have announced their partnerships with Zynix in published releases, and our ' + link('customer stories', '/resources-case-studies') + ' cover others.' },
         { q: 'What does the Zynix platform include?', a: 'Four layers that work as one: a data foundation that builds one patient record from claims, EHR, ADT, lab and pharmacy data; intelligence that ranks the patients and gaps that need attention; agents that handle outreach, scheduling, reminders and intake; and care plans that see each episode through until it is documented. ZynScribe adds ambient clinical documentation.' },
         { q: 'How is Zynix different from a population health analytics platform?', a: 'Analytics tells you who needs attention. Zynix also covers the work that follows: care plans that give each step an owner, agents that handle outreach and scheduling, and documentation that closes the loop. If you already use an analytics platform, ask us how Zynix works alongside it.' }
       ] },
@@ -3878,7 +3854,7 @@
     // platform wording) and the "all 50 states" line are gone; the 50-word boilerplate closes the post.
     var named = SITE_FACTS.ehr.named;
     var html =
-      '<p class="zx-res-article__lede"><strong>Trinity, FL.</strong> Zynix AI, which builds AI infrastructure and workflows for value-based care, announced a milestone for the Zynix platform: ' + SITE_FACTS.stats.patients.sentence + ', with customer ' + SITE_FACTS.stats.states.sentence + '. Those organizations include ACOs, health systems, FQHCs and physician groups.</p>' +
+      '<p class="zx-res-article__lede"><strong>Trinity, FL.</strong> Zynix AI, which builds AI infrastructure and workflows for value-based care, announced a milestone for the Zynix platform: ' + SITE_FACTS.stats.patients.sentence + ', with customer ' + SITE_FACTS.stats.states.sentence + '. Those organizations include ACOs, FQHCs and physician groups.</p>' +
       renderStatRow([{ fact: 'patients' }, { fact: 'states' }, { fact: 'ehrSystems' }, { fact: 'ehrInstances' }], { className: 'zx-res-article__stats' }) +
       '<h2>From fragmented data to finished follow-up</h2>' +
       '<p>Value-based care teams already have more data than they can act on. Discharge notices arrive by fax or in weekly files, gap lists grow faster than coordinators can call, and documentation takes time away from patients.</p>' +
@@ -3890,7 +3866,7 @@
       '<h2>What comes next</h2>' +
       '<p>Zynix will keep adding care plans, agents and EHR connections, with clinicians in charge of every clinical decision. To see the workflows on sample data, <a href="' + zxAttr(SITE_FACTS.demo.href) + '"' + zxNewTab(SITE_FACTS.demo.href) + '>request a demo</a> or <a href="/contact">contact our team</a>.</p>' +
       '<h2>About Zynix AI</h2>' +
-      '<p>Zynix AI builds AI infrastructure and workflows for value-based care. The Zynix platform connects claims, EHR and ADT data, identifies patients and care gaps that need attention, and helps care teams follow through with care plans, agents and ambient documentation. It serves ACOs, health plans, MSOs, IPAs and health systems.</p>';
+      '<p>Zynix AI builds AI infrastructure and workflows for value-based care. The Zynix platform connects claims, EHR and ADT data, identifies patients and care gaps that need attention, and helps care teams follow through with care plans, agents and ambient documentation. It serves ACOs, MSOs, IPAs, health plans and FQHCs.</p>';
     return zxResArticle({ eyebrow: 'Company news', title: 'Zynix AI reaches 1M+ value-based care patients onboarded',
         lead: 'Customer organizations in 30 states now run value-based care programs on the Zynix platform.',
         date: '2026-03-15', read: '3 min read', html: html }) +
@@ -3995,7 +3971,7 @@
     var featured = ['pbaco', 'eternalhealth'];   // context lines: zxCustContext (shared with the segment pages)
     var others = ['goldencareaco', 'sunfloweraco', 'nexthealthcare', 'professionalradiology', 'clsc', 'incentivecareipa', 'advancedmanagement'];
     return renderHero({ preset: 'resource', eyebrow: 'Customers', title: 'How value-based care teams use Zynix',
-        lead: 'ACOs, health plans, health systems, FQHCs and physician groups in 30 states. See what each one runs, and what their leaders have said on the record.',
+        lead: 'ACOs, MSOs, health plans, FQHCs, physician groups and a hospital system, in 30 states. See what each one runs, and what their leaders have said on the record.',
         primary: { label: SITE_FACTS.demo.label, href: SITE_FACTS.demo.href }, secondary: { label: 'Read the latest release', href: '/press' } }) +
       renderSection({ id: 'customer-logos', compact: true, className: 'zynix-section--flush-top zx-cust-logos' },
         renderLogoRow(null, { id: 'zx-cust-logos', label: 'Organizations working with Zynix include', link: null, eager: true })) +
@@ -4009,7 +3985,7 @@
         zxCustFilter() + zxCustGrid(ZX_CUST_ORDER) +
         zxCustMethodNote(ZX_CUST_ORDER) + zxCustSegNav('')) +
       renderSection({ id: 'more-customers', compact: true, rule: true },
-        '<div class="zx-cust-also">' + renderSectionHead(null, 'Also working with Zynix', 'ACOs, IPAs and provider organizations beyond the stories above.', { id: 'more-customers-title' }) +
+        '<div class="zx-cust-also">' + renderSectionHead(null, 'Also working with Zynix', 'ACOs, MSOs, IPAs and provider organizations beyond the stories above.', { id: 'more-customers-title' }) +
         // Names only, A to Z: several of these organizations have no logo on file, and the thin marks that exist read unevenly.
         '<ul class="zx-cust-also__list" role="list">' + others.map(zxCustomer).filter(Boolean)
           .sort(function (a, b) { return a.name.localeCompare(b.name); }).map(function (c) {
@@ -4027,19 +4003,18 @@
   // Titles <= 60 and descriptions <= 155 characters (COPY_DECK §6 for the hub and /press). The flat story and segment pages had
   // no PAGE_SEO entry, so Webflow's page-settings strings (with removed metrics) showed through; these entries replace them.
   // Story pages carry dateModified = the rewrite date (the Article default, 2026-03-01, predates the eternalHealth release it cites).
-  zxSeo('/resources-case-studies', { title: 'Customer stories | Zynix AI', desc: 'How ACOs, health plans, health systems, FQHCs and physician groups use Zynix, with what their leaders have said on the record.' });
+  zxSeo('/resources-case-studies', { title: 'Customer stories | Zynix AI', desc: 'How ACOs, MSOs, health plans, FQHCs, physician groups and a hospital system use Zynix, with what their leaders have said on the record.' });
   zxSeo('/press', { title: 'Newsroom and press releases | Zynix AI', desc: 'Zynix AI announcements, including partnerships with PBACO Holding and with eternalHealth and nirvanaHealth, plus media resources.' });
   zxSeo('/case-studies/pbaco', { title: 'Palm Beach ACO customer story | Zynix AI', desc: 'How Palm Beach ACO (PBACO Holding) runs post-discharge follow-up and annual wellness visit outreach by voice and SMS across its provider network.', dateModified: '2026-09-29' });
   zxSeo('/case-studies/amistad', { title: 'AMISTAD Community Health Center story | Zynix AI', desc: 'How AMISTAD Community Health Center answers after-hours calls and runs preventive screening outreach in the languages its patients speak.', dateModified: '2026-09-29' });
   zxSeo('/case-studies/apollo-clinic', { title: 'Apollo Clinic Network customer story | Zynix AI', desc: 'How Apollo Clinic Network uses scheduling and reminder agents to fill open slots and reach patients before a missed appointment.', dateModified: '2026-09-29' });
-  zxSeo('/case-studies/nhs', { title: 'NHS Health System customer story | Zynix AI', desc: 'How NHS Health System runs post-discharge outreach, after-hours access and physician-reviewed documentation across its sites.', dateModified: '2026-09-29' });
   zxSeo('/case-studies-west-florida-aco', { title: 'West Florida ACO customer story | Zynix AI', desc: 'How West Florida ACO uses the Zynix data foundation, outreach agents and risk analytics to find care gaps sooner and work them across its practices.', img: IMG.care, schema: 'Article', dateModified: '2026-09-29' });
   zxSeo('/case-studies-space-coast-aco', { title: 'Space Coast ACO customer story | Zynix AI', desc: 'How Space Coast ACO, an MSSP ACO in Brevard County, Florida, follows up with patients after discharge using outreach agents and risk analytics.', img: IMG.care, schema: 'Article', dateModified: '2026-09-29' });
   zxSeo('/case-studies-central-florida-aco', { title: 'Central Florida ACO customer story | Zynix AI', desc: 'How Central Florida ACO runs post-discharge follow-up, gap outreach and wellness visit scheduling across its participating practices.', img: IMG.care, schema: 'Article', dateModified: '2026-09-29' });
   zxSeo('/case-studies-eternal-health', { title: 'eternalHealth customer story | Zynix AI', desc: 'How eternalHealth, a Medicare Advantage plan in Massachusetts and Arizona, uses Zynix outreach and care management workflows for its members.', img: IMG.care, schema: 'Article', dateModified: '2026-09-29' });
   zxSeo('/case-studies-acos', { title: 'ACO customer stories | Zynix AI', desc: 'How Palm Beach ACO, West Florida ACO, Space Coast ACO and Central Florida ACO run follow-up, wellness visits and gap work on Zynix.', img: IMG.care, schema: 'Organization' });
   zxSeo('/case-studies-health-plans', { title: 'Health plan customer stories | Zynix AI', desc: 'How eternalHealth, a Medicare Advantage plan, uses Zynix for member outreach and care management, with its leaders on the record.', img: IMG.care, schema: 'Organization' });
-  zxSeo('/case-studies-health-systems', { title: 'Health system customer stories | Zynix AI', desc: 'How NHS Health System runs post-discharge outreach, after-hours access and physician-reviewed documentation across its sites with Zynix.', img: IMG.care, schema: 'Organization' });
+  zxSeo('/case-studies-health-systems', { title: 'How a hospital system uses Zynix | Zynix AI', desc: 'A hospital system runs post-discharge follow-up, after-hours call handling and ambient documentation on Zynix, with a physician approving each note.', img: IMG.care, schema: 'Organization' });
   zxSeo('/case-studies-fqhcs', { title: 'FQHC and community health stories | Zynix AI', desc: 'How AMISTAD Community Health Center uses Zynix for after-hours access and preventive outreach in the languages its patients speak.', img: IMG.care, schema: 'Organization' });
   zxSeo('/case-studies-practices', { title: 'Physician group customer stories | Zynix AI', desc: 'How Apollo Clinic Network, a multi-site physician group, uses Zynix scheduling and reminder agents to keep visits on schedule.', img: IMG.care, schema: 'Organization' });
   // ==== ZX:END seo ====
@@ -4632,7 +4607,7 @@
       ] }
     ];
     var work = [
-      { title: 'Software that runs in care programs', body: 'What you build is used by care teams at ACOs, health plans and health systems to reach patients between visits.' },
+      { title: 'Software that runs in care programs', body: 'What you build is used by care teams at ACOs, MSOs, health plans and FQHCs to reach patients between visits.' },
       { title: 'Problems with real constraints', body: 'Messy claims and clinical data, CMS program rules, multilingual patients and clinicians who need to trust what they use.' },
       { title: 'Physician-led, engineer-driven', body: 'Our CEO is a physician who ran value-based care organizations. Product decisions start from how care programs actually run.' },
       { title: 'Small teams, clear ownership', body: 'Teams in Tampa, Seattle and Bengaluru own their work from design to production.' }
@@ -4640,7 +4615,7 @@
     var html = '';
 
     html += renderHero({ preset: 'company', eyebrow: 'Careers', title: 'Help care teams finish the work',
-      lead: 'We build software that ACOs, health plans and health systems use to reach patients between visits. See open roles in engineering, product, design, operations and sales.',
+      lead: 'We build software that ACOs, MSOs, health plans and FQHCs use to reach patients between visits. See open roles in engineering, product, design, operations and sales.',
       primary: { label: 'See open roles', href: '#roles' }, secondary: { label: 'About Zynix AI', href: '/about' } });
 
     html += renderSection({ id: 'work', rule: true, className: 'zx-co-work' },
@@ -5346,6 +5321,7 @@
 
     // Case studies
     '/case-studies/palm-beach-aco': '/case-studies/pbaco',
+    '/case-studies/nhs': '/audience-segments/health-systems',   // not a Zynix client (Gautamdev, 2026-10-05); the story page is gone
 
     // ── SEMrush-flagged legacy 4XX URLs (Apr 2026 audit) ──
     // Legacy /blog-<slug> → new CMS path /blog-posts/<slug>
@@ -5778,7 +5754,7 @@ USE_CASES.UC01 = {
     { p: 'carePlans', note: 'The post-discharge TCM plan sets the steps, owners and escalation rules.' },
     { p: 'dataFoundation', note: 'ADT feeds from each hospital open the episode.' }],
   readNext: ['after-hours-triage-multi-site', 'physician-documentation-ambient-ai', 'hcc-gap-closure-health-system-aco'],
-  story: 'nhs', cta: 'post-discharge follow-up',
+  cta: 'post-discharge follow-up',
   seo: { title: 'Post-discharge follow-up for health systems | Zynix AI',
     desc: 'ADT-triggered outreach after every discharge, follow-up visits booked inside the TCM window and clinical questions routed to your nurses by rule.', schema: 'HowTo' }
 };
@@ -5944,7 +5920,7 @@ USE_CASES.UC03 = {
     { p: 'agents', family: 'operational-efficiency', note: 'ZynSchedule books the visit.' },
     { p: 'carePlans', note: 'The HCC gap closure sprint sets the steps and the deadline.' }],
   readNext: ['post-discharge-follow-up', 'physician-documentation-ambient-ai', 'chronic-care-coordination-scale'],
-  story: 'nhs', cta: 'HCC gap closure',
+  cta: 'HCC gap closure',
   seo: { title: 'HCC gap closure for health systems | Zynix AI',
     desc: 'Pre-visit gap summaries for scheduled patients and outreach to bring in the ones with no visit booked, so HCC gaps close at documented visits.', schema: 'HowTo' }
 };
@@ -6259,7 +6235,7 @@ USE_CASES.UC02 = {
     { p: 'dataFoundation', note: 'One patient record across your sites.' },
     { p: 'integrations', note: 'Works with the EHR each site runs.' }],
   readNext: ['post-discharge-follow-up', 'hcc-gap-closure-health-system-aco', 'physician-documentation-ambient-ai'],
-  story: 'nhs', cta: 'after-hours call handling',
+  cta: 'after-hours call handling',
   seo: { title: 'After-hours call handling across sites | Zynix AI',
     desc: 'One after-hours process for every site: calls answered, routine visits booked and symptom questions routed to your on-call clinician by rule.', schema: 'HowTo' }
 };
@@ -6688,7 +6664,7 @@ USE_CASES.UC05 = {
   runsOn: [{ p: 'scribe', note: 'Drafts the note from the visit conversation.' },
     { p: 'llm', note: 'The language model layer, with physician review on every note.' }],
   readNext: ['post-discharge-follow-up', 'hcc-gap-closure-health-system-aco', 'after-hours-triage-multi-site'],
-  story: 'nhs', cta: 'ambient documentation',
+  cta: 'ambient documentation',
   seo: { title: 'Ambient clinical documentation with ZynScribe | Zynix AI',
     desc: 'ZynScribe drafts structured visit notes from the conversation for physician review. Nothing is filed or used for billing until the physician approves it.', schema: 'HowTo' }
 };
@@ -6847,8 +6823,9 @@ function renderWhoWeServeHealthSystems() {
         { title: 'Pt 5518 · Hospital A · COPD', sub: 'New inhaler question', owner: { type: 'staff', label: 'Care manager, RN' }, status: { tone: 'warning', label: 'Escalated' } },
         { title: 'Pt 7730 · Hospital D · pneumonia', sub: 'Second call at 4 pm', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'neutral', label: 'Queued' } }],
       footer: 'The TCM contact stays with your clinical staff.' },
-    proof: { card: { href: '/case-studies/nhs', eyebrow: 'Customer story · Health system', title: 'NHS Health System',
-      body: 'The Zynix platform with after-hours access, transitions-of-care outreach and ZynScribe.', cta: 'Read the story', icon: 'hospital' } },
+    // One hospital system, never named and never linked (CUSTOMERS.hospitalsystem): the three workflows it runs, nothing else.
+    proof: { card: { eyebrow: 'Customer · Health system', title: 'A hospital system',
+      body: 'Runs post-discharge follow-up, after-hours call handling and ambient documentation on the Zynix platform. ZynScribe notes stay drafts until a physician approves them.', icon: 'hospital' } },
     workflows: { title: 'What we run for health systems',
       lead: 'Your teams know which patients need follow-up. Zynix carries the volume across every hospital and clinic, and keeps clinical decisions with your clinicians.',
       items: [
@@ -6878,7 +6855,7 @@ function renderWhoWeServeHealthSystems() {
       link: { label: 'Security and trust', href: '/security' } },
     cta: { title: 'See what Zynix runs for health systems',
       sub: 'We’ll walk through post-discharge follow-up, after-hours access and ambient documentation on sample data, then map them to your contracts and programs.',
-      secondary: { label: 'Read the NHS Health System story', href: '/case-studies/nhs' } }
+      secondary: { label: 'How a hospital system uses Zynix', href: '/case-studies-health-systems' } }
   });
 }
 
@@ -7418,7 +7395,7 @@ function renderPressV7() {
   // Releases render inline under their slug ids (the /press/<slug> URLs 301 to /press); one media contact for the page.
   var rels = PRESS_RELEASES.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
   var co = SITE_FACTS.company, st = SITE_FACTS.stats;
-  var boiler = 'Zynix AI builds ' + SITE_FACTS.category.inline + '. The Zynix platform connects claims, EHR and ADT data, identifies patients and care gaps that need attention, and helps care teams follow through with care plans, outreach agents and ambient documentation, while clinicians make clinical decisions. Zynix serves ACOs, health plans, MSOs, IPAs and health systems, with ' +
+  var boiler = 'Zynix AI builds ' + SITE_FACTS.category.inline + '. The Zynix platform connects claims, EHR and ADT data, identifies patients and care gaps that need attention, and helps care teams follow through with care plans, outreach agents and ambient documentation, while clinicians make clinical decisions. Zynix serves ACOs, MSOs, IPAs, health plans and FQHCs, with ' +
     st.states.sentence + ', ' + st.patients.sentence + ' and ' + SITE_FACTS.ehr.line + '. Zynix is ' + SITE_FACTS.compliance.soc2.prose + '. ' + co.legalLine + ' is physician-led and based in Trinity, Florida.';
   // The preview is a right-sized WebP (images/press/, about 2x its displayed size: 560x315 logo crops, 400/300px square photos);
   // the link opens the full-size file, which is never loaded by the page itself.
@@ -8541,8 +8518,8 @@ function renderZynScribeV7() {
       { title: 'Care teams', body: 'Approved notes join the patient’s record in the Zynix platform, so open gaps and care plans reflect the visit.' }
     ], { split: true }), { rule: true });
 
-  html += zxPlatProof({ title: 'ZynScribe at NHS Health System',
-    lead: 'NHS Health System runs ZynScribe alongside post-discharge outreach and after-hours access, on the same platform and patient record.', story: 'nhs' });
+  html += zxPlatProof({ title: 'ZynScribe at a hospital system',   // never named, no story card (CUSTOMERS.hospitalsystem)
+    lead: 'A hospital system runs ZynScribe alongside post-discharge follow-up and after-hours call handling on the Zynix platform. Every note stays a draft until a physician approves it.' });
   html += zxPlatStack();
 
   html += renderCTA('See ZynScribe in a 30-minute demo', 'A visit, a drafted note and the physician’s review, start to finish.', null,
@@ -8626,9 +8603,9 @@ function renderCarePlansV7() {
 function renderSolutionsOverview() {
   var orgs = [
     { aud: 'aco', icon: 'users', line: 'TCM, wellness visits, HCC and quality gaps across your attributed panel.', proof: 'Palm Beach ACO · West Florida ACO · Space Coast ACO', cta: 'For ACOs' },
-    { aud: 'mso', icon: 'stethoscope', line: 'One data layer and one set of workflows across independent practices.', proof: 'IncentiveCare IPA · Apollo Clinic Network', cta: 'For MSOs and IPAs' },
+    { aud: 'mso', icon: 'stethoscope', line: 'One data layer and one set of workflows across independent practices.', proof: 'IncentiveCare IPA · Apollo Clinic Network · NEXT Healthcare Solutions', cta: 'For MSOs and IPAs' },
     { aud: 'plan', icon: 'target', line: 'Member outreach for HEDIS gaps, adherence and post-discharge follow-up.', proof: 'eternalHealth', cta: 'For health plans' },
-    { aud: 'system', icon: 'hospital', line: 'Post-discharge follow-up and ambient documentation across your sites.', proof: 'NHS Health System', cta: 'For health systems' },
+    { aud: 'system', icon: 'hospital', line: 'Post-discharge follow-up and ambient documentation across your sites.', proof: 'A hospital system', cta: 'For health systems' },
     { aud: 'fqhc', icon: 'mappin', line: 'Multilingual outreach and after-hours access for high-barrier populations.', proof: 'AMISTAD Community Health Center', cta: 'For FQHCs' }
   ];
   var flows = [
@@ -11142,7 +11119,6 @@ function renderDataAnalyticsV7() {
     '/case-studies/palm-beach-aco': renderCaseStudyPalmBeach,
     '/case-studies/amistad': renderCaseStudyAmistad,
     '/case-studies/apollo-clinic': renderCaseStudyApollo,
-    '/case-studies/nhs': renderCaseStudyNHS,
     // V7: Platform
     '/platform': renderPlatformHub,
     '/solutions/zynix-data-analytics': renderDataAnalyticsV7,
@@ -11692,7 +11668,7 @@ function renderDataAnalyticsV7() {
     ] });
     var faqs = [
       { q: 'Which Innovaccer alternative fits an ACO?', a: 'It depends on what you need after the analytics. If your team already knows who needs attention and the problem is follow-through (TCM contacts, wellness visits, HCC gap outreach), compare how each platform runs that work. Zynix pairs a data foundation with care plans and outreach agents. ' + pb.name + ', which its April 2026 release describes as ' + pb.sizeNote + ', announced its partnership with Zynix AI in that release.' },
-      { q: 'Is there a Health Catalyst alternative for smaller organizations?', a: 'Zynix works with ACOs, health plans, MSOs, IPAs and physician groups, health systems and FQHCs, not only large health systems with analytics teams. The data foundation brings in claims, EHR, ADT, lab and pharmacy data, standardizes the codes and resolves identity, so every worklist starts from the same record.' },
+      { q: 'Is there a Health Catalyst alternative for smaller organizations?', a: 'Zynix works with ACOs, MSOs, IPAs and physician groups, health plans and FQHCs, not only large organizations with their own analytics teams. The data foundation brings in claims, EHR, ADT, lab and pharmacy data, standardizes the codes and resolves identity, so every worklist starts from the same record.' },
       { q: 'Is ZynScribe an alternative to Abridge?', a: 'For ambient documentation, yes. ZynScribe drafts a structured note from the visit conversation, and nothing is filed or used for billing until the physician reviews and approves it. The difference is what surrounds the note: care gaps before the visit, and the care plans and follow-up after it.' },
       { q: 'How long does a move from another platform take?', a: 'Timelines depend on your data sources and scope; we set one with you during scoping.' },
       { q: 'Can we use Zynix alongside the tools we already have?', a: 'Yes. Zynix connects to ' + SITE_FACTS.ehr.line + ' and takes claims, ADT, lab and pharmacy feeds, so it can run follow-up work next to an existing analytics or documentation tool. Each comparison covers where that fits.' }
@@ -11790,7 +11766,7 @@ function renderDataAnalyticsV7() {
       ZX_DOCS: 'ZynScribe drafts a structured note from the visit conversation. Nothing is filed or used for billing until the physician reviews and approves it.',
       ZX_TIME: 'Timelines depend on your data sources and scope; we set one with you during scoping.',
       ZX_FOCUS: 'Value-based care operations for ACOs, health plans, MSOs, IPAs, health systems and FQHCs: one patient record, ranked worklists, care plans and outreach agents.',
-      ZX_CUSTOMERS: 'ACOs, health plans, health systems, FQHCs and physician groups, with organizations in 30 states. Palm Beach ACO and eternalHealth announced their partnerships in published releases.',
+      ZX_CUSTOMERS: 'ACOs, MSOs, health plans, FQHCs and physician groups, with organizations in 30 states. Palm Beach ACO and eternalHealth announced their partnerships in published releases.',
       ZX_PRICE: 'Pricing depends on products and population; we’ll scope it with you.'
     };
     var name = cfg.name, label = cfg.label || name;
@@ -11904,7 +11880,7 @@ function renderDataAnalyticsV7() {
     faqs: [
       { q: 'Is Zynix a replacement for Olive AI?', a: 'For value-based care operations, Zynix covers post-discharge follow-up, wellness visits, HCC and quality gap closure, scheduling, after-hours intake and fax routing. Olive’s clearinghouse, patient-access and prior-authorization units went to Waystar and Humata Health, so compare those products for revenue cycle work.' },
       { q: 'How quickly can we move to Zynix?', a: 'Timelines depend on your data sources and scope; we set one with you during scoping. Zynix connects to Epic, Oracle Health (Cerner), athenahealth, eClinicalWorks and NextGen, among ' + SITE_FACTS.stats.ehrSystems.sentence + '.' },
-      { q: 'Who uses Zynix today?', a: 'ACOs, health plans, health systems, FQHCs and physician groups. Palm Beach ACO, which its April 2026 release describes as ' + zxCustomer('pbaco').sizeNote + ', and eternalHealth have announced partnerships with Zynix in published releases.' }
+      { q: 'Who uses Zynix today?', a: 'ACOs, MSOs, health plans, FQHCs and physician groups. Palm Beach ACO, which its April 2026 release describes as ' + zxCustomer('pbaco').sizeNote + ', and eternalHealth have announced partnerships with Zynix in published releases.' }
     ]
   }); }
 
@@ -13113,7 +13089,7 @@ function renderDataAnalyticsV7() {
   // DECISIONS 17b) → what changed (attributed metrics only from CUSTOMERS[id].metrics, DECISIONS 16) → release quote only →
   // related → CTA. Facts, products and before/after lines come from the pre-redesign story copy with every unverified number
   // removed; each story's product lines are [VERIFY] (COPY_DECK §5.5). Illustrative panels carry a sample chip and a caption.
-  var ZX_CUST_ORDER = ['pbaco', 'eternalhealth', 'amistad', 'nhs', 'westfloridaaco', 'spacecoastaco', 'centralfloridaaco', 'apolloclinic'];
+  var ZX_CUST_ORDER = ['pbaco', 'eternalhealth', 'amistad', 'westfloridaaco', 'spacecoastaco', 'centralfloridaaco', 'apolloclinic', 'hospitalsystem'];
   var ZX_CUST_SEGS = {
     'aco': { label: 'ACOs', one: 'ACO', path: '/case-studies-acos', audience: '/audience-segments/acos-msos', audienceLabel: 'See Zynix for ACOs',
       uc: [['/use-cases/post-discharge-tcm-readmission', 'Post-discharge outreach and TCM follow-up'], ['/use-cases/hcc-gap-raf-optimization', 'HCC gap closure and documentation'], ['/use-cases/rising-risk-patient-outreach', 'Outreach before a clinical event']],
@@ -13127,9 +13103,11 @@ function renderDataAnalyticsV7() {
       cta: { title: 'See what Zynix runs for health plans', secondary: { label: 'Read the eternalHealth announcement', href: '/press#eternalhealth-zynix-ai-nirvanahealth-partnership' } } },
     'health-system': { label: 'Health systems', one: 'Health system', path: '/case-studies-health-systems', audience: '/audience-segments/health-systems', audienceLabel: 'See Zynix for health systems',
       uc: [['/use-cases/post-discharge-follow-up', 'Post-discharge calls at health system volume'], ['/use-cases/after-hours-triage-multi-site', 'After-hours intake across locations'], ['/use-cases/physician-documentation-ambient-ai', 'Ambient documentation with physician review']],
-      h1: 'How health systems use Zynix', lead: 'NHS Health System runs post-discharge outreach, after-hours access and physician-reviewed documentation on the Zynix platform across its sites.',
-      title: 'What health systems run on Zynix', what: 'Post-discharge follow-up, after-hours access and ambient documentation across hospitals and clinics. Agents handle outreach and intake; physicians approve every note.', flows: 'post-discharge follow-up, after-hours access and ambient documentation', quote: null,
-      cta: { title: 'See what Zynix runs for health systems', secondary: { label: 'Read the NHS Health System story', href: '/case-studies/nhs' } } },
+      // One hospital system, never named (CUSTOMERS.hospitalsystem): the three workflows it runs, no story page, never a plural.
+      h1: 'How a hospital system uses Zynix', lead: 'A hospital system runs post-discharge follow-up, after-hours call handling and ambient documentation on the Zynix platform. ZynScribe notes stay drafts until a physician approves them.',
+      listTitle: 'Health system customer', kicker: 'On the Zynix platform',
+      title: 'What a hospital system runs on Zynix', what: 'Post-discharge follow-up, after-hours call handling and ambient documentation, on one platform and patient record. A physician approves every ZynScribe note before it is filed.', flows: 'post-discharge follow-up, after-hours call handling and ambient documentation', quote: null,
+      cta: { title: 'See what Zynix runs for health systems', secondary: null } },
     'fqhc': { label: 'FQHCs', one: 'FQHC', path: '/case-studies-fqhcs', audience: '/audience-segments/fqhcs', audienceLabel: 'See Zynix for community health centers',
       uc: [['/use-cases/preventive-screening-gap-fqhc', 'Screening outreach for high-barrier patients'], ['/use-cases/after-hours-triage-multilingual-fqhc', 'After-hours intake in the patient’s language'], ['/use-cases/post-discharge-followup-fqhc', 'Post-discharge follow-up for health center patients']],
       h1: 'How community health centers use Zynix', lead: 'AMISTAD Community Health Center uses Zynix for after-hours access and preventive screening outreach in the languages its patients speak.',
@@ -13192,7 +13170,7 @@ function renderDataAnalyticsV7() {
         ['Quality and experience', 'Support quality initiatives tied to Star Ratings and member satisfaction.', 'Timely follow-up on the measures and members the plan targets.']
       ],
       related: [
-        { label: 'More customer stories', items: ['/case-studies/pbaco', '/case-studies/nhs'] },
+        { label: 'More customer stories', items: ['/case-studies/pbaco', '/case-studies/amistad'] },
         { label: 'Built for', items: ['/audience-segments/health-plans'] },
         { label: 'Products', items: ['/agents', '/care-plans'] } ] },
     amistad: { short: 'AMISTAD', team: 'Care team', panel: 'afterhours',
@@ -13215,31 +13193,6 @@ function renderDataAnalyticsV7() {
       changed: [
         ['After-hours calls', 'An English-only answering service.', 'Answered in the caller’s language: routine visits booked, symptom questions routed to the on-call clinician.'],
         ['Screening reminders', 'Outreach in one language.', 'Outreach in each patient’s preferred language, with the visit booked during the call.']
-      ],
-      related: null },
-    nhs: { short: 'NHS Health System', team: 'Clinical staff', panel: 'note',
-      h1: 'How NHS Health System standardizes follow-up across sites',
-      lead: 'NHS Health System runs the Zynix platform across its sites for post-discharge outreach, after-hours access and ambient documentation that physicians review before anything is filed.',
-      card: 'The Zynix platform with after-hours access, transitions-of-care outreach and ZynScribe.',
-      facts: [['Segment', 'Health system'], ['Scope', 'System-wide, multiple sites'], ['Workflows', 'Transitions of care, after-hours access, documentation']],
-      challengeTitle: 'Every site did follow-up its own way',
-      challenge: 'NHS Health System manages population health across multiple sites. Each site handled after-hours calls differently, care coordination and risk adjustment needed more capacity than manual workflows could deliver, and physicians carried a heavy documentation load.',
-      cite: null,
-      runsTitle: 'What NHS Health System runs on Zynix',
-      runsLead: 'One platform across every site: shared data, the same outreach and after-hours rules, and documentation that stays with the physician.',
-      runs: [
-        { name: 'Transitions of care', auto: 'Contacts patients after discharge, confirms the follow-up plan and books the visit.',
-          team: 'Clinical staff make the TCM interactive contact and take every clinical question.', link: ['Transitions of care agent', '/agents#clinical-performance'] },
-        { name: 'After-hours access', auto: 'Answers after-hours calls the same way at every site, captures the reason for the call and books routine visits.',
-          team: 'Symptom questions go to the on-call clinician by rule; callers describing an emergency are told to call 911.', link: ['ZynAfterHours', '/agents#operational-efficiency'] },
-        { name: 'Ambient documentation', autoLabel: 'ZynScribe', auto: 'Drafts a structured note from the visit conversation.',
-          team: 'The physician reviews and approves every note before it is filed.', link: ['ZynScribe', '/zynscribe'] }
-      ],
-      next: null,
-      changed: [
-        ['After-hours calls', 'Handled differently at each site.', 'One process at every site, with symptom questions routed to the on-call clinician.'],
-        ['Post-discharge follow-up', 'Manual, limited by staff capacity.', 'A system-wide outreach attempt after each discharge.'],
-        ['Visit notes', 'Written from scratch by the physician.', 'Drafted from the visit conversation; the physician reviews and approves.']
       ],
       related: null },
     westfloridaaco: { short: 'West Florida ACO', team: 'ACO team', panel: 'gaps',
@@ -13347,7 +13300,9 @@ function renderDataAnalyticsV7() {
         ['Cancellations', 'Waitlist worked by hand.', 'Open slots offered to waitlisted patients.'],
         ['Booking requests', 'Taken during office hours.', 'Taken by phone or text at any hour.']
       ],
-      related: null }
+      related: null },
+    // Card line only: the hospital system is never named and has no story page (CUSTOMERS.hospitalsystem, zxCustCard)
+    hospitalsystem: { card: 'Runs post-discharge follow-up, after-hours call handling and ambient documentation on the Zynix platform. ZynScribe notes stay drafts until a physician approves them.' }
   };
 
   // Illustrative panels (§2.9 kit): role labels, sample identifiers and statuses only; no names, %, $ or outcomes.
@@ -13383,12 +13338,6 @@ function renderDataAnalyticsV7() {
         { title: 'Pt 2410 · Needs a ride to the visit', sub: 'Barrier reported', owner: { type: 'staff', label: 'Front desk' }, status: { tone: 'neutral', label: 'Review' } },
         { title: 'Pt 1966 · New patient request', sub: 'Booked by text', owner: { type: 'agent', label: 'Scheduling agent' }, status: { tone: 'success', label: 'Booked' } } ],
       footer: 'Open slots go to the waitlist; barriers go to the front desk.' },
-    note: { label: 'Sample draft visit note, illustrative data', brand: 'ZynScribe', title: 'Draft visit note', meta: 'Follow-up visit · awaiting physician review',
-      note: { sections: [
-        { label: 'Subjective', text: 'Breathing better since discharge. No chest pain. Taking medications as prescribed.' },
-        { label: 'Assessment', text: 'Heart failure, stable on the current regimen.' },
-        { label: 'Plan', text: 'Continue current medications. Recheck labs in two weeks. Follow up in one month.' } ] },
-      footer: 'Nothing is filed until the physician reviews and approves the note.' },
     gaps: { label: 'Sample care gap worklist, illustrative data', brand: 'Care management', title: 'Open care gaps', meta: 'All practices · updated today',
       rows: [
         { title: 'Pt 1042 · Annual wellness visit due', sub: 'Practice 3', owner: { type: 'agent', label: 'Outreach agent' }, status: { tone: 'success', label: 'Booked' } },
@@ -13412,6 +13361,8 @@ function renderDataAnalyticsV7() {
   // top of the card, and in a row page:customers keeps the slot's height so its segment and title line up with the cards beside it.
   function zxCustCard(id) {
     var c = zxCustomer(id), s = ZX_CUST_STORIES[id], g = c && ZX_CUST_SEGS[c.segment];
+    if (c && c.anonymous && s) return '<div class="zynix-card zx-cust-card zx-cust-card--nologo"><span class="zynix-card__eyebrow">' + (g ? g.one : c.segmentLabel) + '</span>' +
+      '<h3 class="zynix-card__title">' + c.name + '</h3><p class="zynix-card__body">' + s.card + '</p></div>';   // never a mark or a link
     if (!c || !s || !c.caseStudy) return '';
     var h = c.logo && [20, 24, 28, 32, 36, 40].indexOf(c.logo.h) > -1 ? c.logo.h : 28;
     var slot = c.logo ? '<span class="zx-cust-card__logo-slot"><img class="zx-cust-card__logo zx-cust-card__logo--h' + h + '" src="' + zxAttr(zxImg(c.logo.file)) + '" alt="" width="' + zxAttr(c.logo.w) + '" height="' + zxAttr(c.logo.h) + '" loading="lazy" decoding="async"></span>' : '';
@@ -13534,7 +13485,6 @@ function renderDataAnalyticsV7() {
 
   function renderCaseStudyAmistad() { return zxCustStoryPage('amistad'); }
   function renderCaseStudyApollo() { return zxCustStoryPage('apolloclinic'); }
-  function renderCaseStudyNHS() { return zxCustStoryPage('nhs'); }
   function renderCaseStudyPalmBeach() { return zxCustStoryPage('pbaco'); }
   function renderCaseStudyWestFlorida() { return zxCustStoryPage('westfloridaaco'); }
   function renderCaseStudySpaceCoast() { return zxCustStoryPage('spacecoastaco'); }
@@ -13550,13 +13500,13 @@ function renderDataAnalyticsV7() {
     return renderHero({ preset: 'resource', eyebrow: 'Customer stories', title: g.h1, lead: g.lead,
         primary: { label: SITE_FACTS.demo.label, href: SITE_FACTS.demo.href }, secondary: { label: 'All customer stories', href: '/resources-case-studies' } }) +
       renderSection({ id: 'stories', className: 'zx-cust-stories zx-cust-stories--first' },
-        renderSectionHead(null, g.one + ' customer ' + (ids.length > 1 ? 'stories' : 'story'), null, { id: 'stories-title' }) + zxCustGrid(ids) +
+        renderSectionHead(null, g.listTitle || g.one + ' customer ' + (ids.length > 1 ? 'stories' : 'story'), null, { id: 'stories-title' }) + zxCustGrid(ids) +
         zxCustMethodNote(ids) + zxCustSegNav(segId)) +
       (q ? renderSection({ id: 'on-the-record', surface: 'subtle' },
         renderSectionHead('On the record', 'In their own words', null, { id: 'on-the-record-title' }) +
         '<div class="zx-cust-featured zx-cust-featured--one">' + zxCustFeatured(g.quote, zxCustContext(g.quote)) + '</div>') : '') +
       renderSection({ id: 'workflows', rule: true, className: 'zx-cust-segflows' },
-        renderSplit(renderSectionHead(g.label + ' on Zynix', g.title, g.what, { id: 'workflows-title', action: { label: g.audienceLabel, href: g.audience } }),
+        renderSplit(renderSectionHead(g.kicker || g.label + ' on Zynix', g.title, g.what, { id: 'workflows-title', action: { label: g.audienceLabel, href: g.audience } }),
           '<p class="zx-cust-uc__label">Workflows, step by step</p><ol class="zx-cust-uc" role="list">' + g.uc.map(function (u) {
             return '<li><a class="zx-cust-uc__link" href="' + zxAttr(u[0]) + '"><span class="zx-cust-uc__name">' + u[1] + '</span><span class="zx-cust-uc__arrow" aria-hidden="true">→</span></a></li>';
           }).join('') + '</ol>', { ratio: '6-6' })) +
@@ -13865,7 +13815,7 @@ function renderDataAnalyticsV7() {
       aco:     { msg: 'Good places to start for ACO teams:', recs: ['/audience-segments/acos-msos', '/use-cases/post-discharge-tcm-readmission', '/case-studies/pbaco'] },
       mso:     { msg: 'Good places to start for physician organizations:', recs: ['/audience-segments/independent-group-practices', '/population-intelligence', '/embedded-care-management'] },
       plan:    { msg: 'Good places to start for health plans:', recs: ['/audience-segments/health-plans', '/use-cases/hedis-stars-quality-improvement', '/case-studies-eternal-health'] },
-      hs:      { msg: 'Good places to start for health systems:', recs: ['/audience-segments/health-systems', '/integrations', '/case-studies/nhs'] },
+      hs:      { msg: 'Good places to start for health systems:', recs: ['/audience-segments/health-systems', '/integrations', '/zynscribe'] },
       fqhc:    { msg: 'Good places to start for community health centers:', recs: ['/audience-segments/fqhcs', '/ai-patient-engagement', '/case-studies/amistad'] },
       explore: { msg: 'A quick tour of Zynix:', recs: ['/platform', '/predictive-risk', '/ai-patient-engagement'] }
     };
@@ -13873,7 +13823,7 @@ function renderDataAnalyticsV7() {
     // Rec name and description: the CUSTOMERS record ("Customer story: <name>") or the NAV item (label, desc)
     var recs = {};
     Object.keys(CUSTOMERS).forEach(function (k) {
-      var c = CUSTOMERS[k];
+      var c = zxCustomer(k);
       if (c && c.caseStudy) recs[c.caseStudy] = { name: 'Customer story: ' + c.name, desc: c.segmentLabel || '' };
     });
     NAV.forEach(function (s) {
