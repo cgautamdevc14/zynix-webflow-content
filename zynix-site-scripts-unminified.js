@@ -3597,6 +3597,7 @@
     { id: 'news', name: 'Company news' }, { id: 'general', name: 'Healthcare AI' }
   ];
   var ZX_RES_POSTS = [
+    ['cms-access-model-explained', '2026-10-06', 'cms', 'What is the CMS ACCESS Model? A guide for practices and ACOs', 'What the CMS ACCESS Model is, who can take part, its four initial tracks, how outcome-aligned payments work and the key dates, from the CMS source pages.'],
     ['after-hours-patient-calls-hidden-care-gap-acos', '2026-07-30', 'ops', 'After-Hours Patient Calls: The Hidden Care Gap ACOs Cannot Ignore', 'How after-hours calls shape access, escalation, continuity of care and patient trust for ACOs, and how to handle them as part of the care model.'],
     ['acos-scalable-care-capacity-annual-wellness-visits', '2026-07-30', 'quality', 'Annual Wellness Visits: How ACOs Can Build the First Layer of Scalable Care Capacity', 'Why the annual wellness visit is where prevention, care planning and quality work begin, and how ACOs can build the capacity to complete more of them.'],
     ['rural-health-transformation-program-care-capacity', '2026-07-30', 'cms', 'Rural Health Transformation Program: How Rural Networks Can Turn Funding Into Care Capacity', 'What rural networks need to turn new funding into care capacity: outreach, prevention, coordination, after-hours access and follow-through.'],
