@@ -840,13 +840,13 @@
     setMeta('name','ICBM','28.1856, -82.6800');
     setMeta('property','og:title', seo.title);
     setMeta('property','og:description', seo.desc);
-    var card = zxOgCard(seo);   // og:image / twitter:image only from a real 1200x630 card; otherwise the page's own tags stay
+    var card = zxOgCard(seo, pagePath);   // og:image / twitter:image only from a real 1200x630 card; otherwise the page's own tags stay
     if (card) {
       setMeta('property','og:image', card.url);
       setMeta('property','og:image:width', '1200');
       setMeta('property','og:image:height', '630');
       if (card.type) setMeta('property','og:image:type', card.type);
-      setMeta('property','og:image:alt', card.alt || seo.title);
+      if (!card.legacy) setMeta('property','og:image:alt', card.alt || seo.title);
     }
     setMeta('property','og:url', canonical);
     setMeta('property','og:type', (seo.schema === 'Article' || seo.schema === 'NewsArticle') ? 'article' : 'website');
@@ -1632,7 +1632,13 @@
   // Link-preview image for a route (SEO audit 2026-10-08, ZX-35/ZX-63): only a real 1200x630 card given as
   // seo.ogCard = { url, width: 1200, height: 630, type, alt }. No route has one yet, so the bundle leaves og:image and
   // twitter:image to the page's own Webflow settings (the homepage's card stays) and never declares a size it has not got.
-  function zxOgCard(seo) { var c = seo && seo.ogCard; return c && c.url && c.width === 1200 && c.height === 630 ? c : null; }
+  // The A2P-held pages keep their rendered head exactly as it was, legacy preview image included, until the carrier verdicts
+  // (ZX-16; reviewers read these pages): for them this returns the old value, marked legacy.
+  var ZX_A2P_HELD_PATHS = ['/privacy-policy', '/sms-consent', '/terms-of-service', '/sms-program', '/sms'];
+  function zxOgCard(seo, path) {
+    if (path && ZX_A2P_HELD_PATHS.indexOf(path) > -1) return { url: (seo && seo.img) || IMG.hero, width: 1200, height: 630, type: 'image/png', legacy: true };
+    var c = seo && seo.ogCard; return c && c.url && c.width === 1200 && c.height === 630 ? c : null;
+  }
 
   // ── Facts readers (§4) ──
   // An anonymous record (CUSTOMERS.hospitalsystem) comes back as its unnamed phrasing only: never another name, a logo, a link,
@@ -13976,7 +13982,7 @@ function renderDataAnalyticsV7() {
       // og:image is never overwritten (SEO audit 2026-10-08, ZX-35/ZX-63).
       var ogTitle = s.title || document.title || 'Zynix AI';
       var ogDesc = s.desc || 'Zynix AI — AI infrastructure and workflows for value-based care.';
-      var ogCard = zxOgCard(s), ogImg = ogCard ? ogCard.url : '';
+      var ogCard = zxOgCard(s, p), ogImg = ogCard ? ogCard.url : '';
       setMetaByAttr('property', 'og:title', ogTitle);
       setMetaByAttr('property', 'og:description', ogDesc);
       setMetaByAttr('property', 'og:type', 'website');
