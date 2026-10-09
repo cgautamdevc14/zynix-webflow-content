@@ -801,23 +801,18 @@
    ['/ascs', '/solutions-ascs'],
    ['/acos-msos', '/solutions-acos'],
    ['/independent-group-practices', '/solutions-independent-practices'],
+   // Legacy static blog twins (SEO audit 2026-10-08, ZX-09 part A): only the three sitemap twins Google indexes keep a row
+   // here (robots 'index, follow', as their raw HTML) until their server 301s land (Appendix B 1b). The other ten rows were
+   // removed: those pages are raw noindex, and the P7 seo block below now gives them noindex in JS as well.
    ['/blog-what-is-value-based-care-ai', '/blog/what-is-value-based-care-ai', { img: IMG.analytics, schema: 'Article' }],
    ['/blog-how-ai-closes-care-gaps', '/blog/how-ai-closes-care-gaps', { img: IMG.care, schema: 'Article' }],
-   ['/blog-ai-agents-vs-chatbots-healthcare', '/blog/ai-agents-vs-chatbots-healthcare', { img: IMG.doctor, schema: 'Article' }],
-   ['/blog-ehr-not-broken-never-built-to-think', '/blog/ehr-not-broken-never-built-to-think', { img: IMG.platform, schema: 'Article' }],
-   ['/blog-hcc-risk-adjustment-cms-changes', '/blog/hcc-risk-adjustment-cms-changes', { img: IMG.analytics, schema: 'Article' }],
-   ['/blog-aco-year-end-gap-closure', '/blog/aco-year-end-gap-closure', { img: IMG.care, schema: 'Article' }],
-   ['/blog-predictive-analytics-population-health', '/blog/predictive-analytics-population-health', { img: IMG.data, schema: 'Article' }],
-   ['/blog-generative-ai-trust-safety-healthcare', '/blog/generative-ai-trust-safety-healthcare', { img: IMG.platform, schema: 'Article' }],
-   ['/blog-vbc-analytics-ai-driven', '/blog/vbc-analytics-ai-driven', { img: IMG.analytics, schema: 'Article' }],
-   ['/blog-innovative-patient-recovery-satisfaction', '/blog/innovative-patient-recovery-satisfaction', { img: IMG.patient, schema: 'Article' }],
-   ['/blog-strategies-coordinating-patient-care', '/blog/strategies-coordinating-patient-care', { img: IMG.care, schema: 'Article' }],
-   ['/blog-documentation-crisis-physician-burnout', '/blog/documentation-crisis-physician-burnout', { img: IMG.scribe, schema: 'Article' }],
-   ['/blog-essential-ai-tools-medical-professionals', '/blog/essential-ai-tools-medical-professionals', { img: IMG.doctor, schema: 'Article' }]].forEach(function (a) {
+   ['/blog-vbc-analytics-ai-driven', '/blog/vbc-analytics-ai-driven', { img: IMG.analytics, schema: 'Article' }]].forEach(function (a) {
     var s = PAGE_SEO[a[1]];
     PAGE_SEO[a[0]] = a[2] ? Object.assign({ title: s.title, desc: s.desc }, a[2]) : Object.assign({}, s);
   });
-  // Set outside the table because this URL slug trips the claims ratchet (the copy itself is claims-clean).
+  // Set outside the table because this URL slug trips the claims ratchet (the copy itself is claims-clean). Kept (ZX-09
+  // review): the /blog/ path answers 404 on the server, and this entry is what the P7 seo block copies to the flat
+  // /blog-autonomous-… page with noindex; without it that page would fall back to its Webflow title and description.
   zxSeo('/blog/autonomous-ai-agents-healthcare-automation', { title: 'AI agents in healthcare operations | Zynix AI', desc: 'How AI agents handle healthcare workflows such as scheduling, patient communication and follow-up, with escalation to staff by rule.', img: IMG.agents, schema: 'Article', datePublished: '2026-03-03' });
 
   // ── SEO Injection ──
