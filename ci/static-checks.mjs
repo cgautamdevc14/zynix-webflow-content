@@ -32,6 +32,20 @@ if (FREEZE.active) {
   }
   check(`A2P freeze since ${FREEZE.since}: SMS/legal renderers unchanged since ${FREEZE.reference_commit}`, changed.length === 0, changed.length ? `changed: ${changed.join(', ')}. ${FREEZE.reason} ${FREEZE.to_unfreeze}` : 'frozen');
 } else console.log('INFO  A2P freeze inactive (ci/a2p-freeze.json)');
+// Every other tracked text file (llms.txt, robots.txt, sitemap.xml, docs, legacy assets) carries no banned string
+// (ci/banned-strings.mjs textFileHits; SEO audit 2026-10-08, ZX-01/ZX-06/ZX-18). The file list is `git ls-files`.
+{
+  const { textFileHits, bundleReviewHits } = await import('./banned-strings.mjs'); const { execFileSync } = await import('node:child_process');
+  let files = null; try { files = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' }).split('\0').filter(Boolean); } catch (e) { files = null; }
+  if (!files) check('banned strings: tracked text files outside the bundle', false, 'git ls-files failed');
+  else { const hits = textFileHits(files, f => fs.readFileSync(f, 'utf8'));
+    check('banned strings: tracked text files outside the bundle (llms.txt, robots.txt, sitemap.xml, docs, legacy assets) are clean', hits.length === 0,
+      hits.length ? hits.slice(0, 8).map(h => `${h.file}:${h.line} ${h.label} "${h.text}"`).join('; ') + (hits.length > 8 ? ` … ${hits.length} hits` : '') : hits.scanned + ' files checked');
+    // Review list (ci/banned-strings.mjs REVIEW; ZX-18 action b): printed for a person to read, never a failure.
+    const rv = bundleReviewHits(js).map(h => ({ file: JS, ...h })).concat(hits.review);
+    console.log(rv.length ? `WARN  banned strings, review list (not a failure): ${rv.length} hit(s) to read: ` + rv.slice(0, 8).map(h => `${h.file}:${h.line} ${h.label} "${h.text}"`).join('; ') + (rv.length > 8 ? ' …' : '')
+      : `INFO  banned strings, review list (clinical triage, symptom assessment, EHR filing; warnings only): 0 hits in the bundle and ${hits.scanned} tracked text files`); }
+}
 // Redesign guards (DESIGN_SPEC §8.2 Q; ci/redesign-checks.mjs): CSS lint of ZX blocks, token definitions, inline-style and
 // banned-string ratchets against ci/baseline.json, and the /contact SMS disclosure. `--phase N` (or env ZX_PHASE) previews
 // the must-be-zero list of a later phase without editing ci/baseline.json.

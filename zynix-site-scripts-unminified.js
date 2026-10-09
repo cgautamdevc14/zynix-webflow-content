@@ -238,7 +238,7 @@
       { id: 'operational-efficiency', name: 'Operational efficiency', href: '/agents#operational-efficiency',
         agents: ['ZynAfterHours', 'ZynSchedule', 'Referral management', 'ZynFax'], held: ['Prior authorization'] }   // the ZynAuth page is archived
     ],
-    carePlans: ['Post-discharge TCM', 'HCC gap closure sprint', 'Medication safety and adherence', 'High-utilizer ED diversion',
+    carePlans: ['Post-discharge TCM', 'HCC gap closure sprint', 'Medication safety and adherence', 'High-utilizer outreach',
                 'Chronic condition visit readiness', 'Preventive screening program'],
     roles: { agent: 'Outreach agent', rn: 'Care manager, RN', physician: 'Physician lead', coordinator: 'Care coordinator', scheduler: 'Scheduler' },
     // Retired names that must not appear in visible copy are listed in DECISIONS.md item 2 and COPY_DECK.md section 7 (and the chat's invented product names)
@@ -302,7 +302,7 @@
   ];
   // The loop's fifth node (V9_SPEC §4.3: "Outcome documented (feeds back)").
   var PILLAR_OUTCOME = { id: 'outcome', name: 'Outcome documented', short: 'Outcome documented', icon: 'check',
-    loop: 'The kept visit and the closed plan are documented, and feed back into the patient record.' };
+    loop: 'The kept visit and the closed plan are documented, and feed back into the patient’s record in the Zynix platform.' };   // the platform record, not an EHR write-back (SEO audit ZX-37)
   // Program chips (V9_SPEC §4.8; renderV9Chips). label is HTML-ready; name is the spelled-out program (screen readers, opts.names);
   // ACCESS carries its one explaining clause (DECISIONS 17). Targets are existing pages or posts.
   var PROGRAMS = [
@@ -311,7 +311,7 @@
     { id: 'awv', label: 'AWV', name: 'Annual wellness visits', href: '/blog-posts/how-to-improve-awv-completion-rates' },
     { id: 'mssp', label: 'MSSP', name: 'Medicare Shared Savings Program', href: '/audience-segments/acos-msos' },
     { id: 'lead', label: 'ACO REACH <span aria-hidden="true">→</span><span class="zx-visually-hidden"> to</span> LEAD 2027', name: 'ACO REACH to the LEAD Model in 2027',
-      href: '/resources-blog-aco-lead-model-execution-infrastructure-2027' },
+      href: '/blog-posts/aco-lead-model-execution-infrastructure-2027' },
     { id: 'access', label: 'CMS ACCESS Model', name: SITE_FACTS.access.clause.charAt(0).toUpperCase() + SITE_FACTS.access.clause.slice(1), href: '/audience-segments/acos-msos#access' },
     { id: 'wiser', label: 'WISeR', name: 'The CMS WISeR prior authorization model', href: '/blog-posts/wiser-model-cms-prior-authorization-acos-2026' }
   ];
@@ -401,7 +401,7 @@
     title: 'ACO LEAD Model: Why 2027 rewards ACOs that execute between visits',
     body: 'Most ACOs can already see who needs attention. The question is whether they can follow through at scale.',
     cta: 'Read the article',
-    href: '/resources-blog-aco-lead-model-execution-infrastructure-2027'
+    href: '/blog-posts/aco-lead-model-execution-infrastructure-2027'
   };
 
   var NAV_ACTIONS = {
@@ -428,7 +428,8 @@
   var GHG = GH + 'gifs/';
   var GHS = GH + 'screenshots/';
   var IMG = {
-    // Real product screenshots — used for OG meta images, social previews, and inline showcases
+    // Product screenshots for inline showcases. Not preview images (SEO audit 2026-10-08, ZX-35/ZX-63): they are portrait or
+    // 1200x747/732, show sample patient rows and unlabeled percentages; og:image comes only from a 1200x630 card (zxOgCard).
     hero: GH + 'zynix-aco-dashboard.png',               // ACO dashboard — homepage OG fallback
     doctor: GH + 'zynix-predictive-analytics.png',      // Risk/AI view — agents, triage pages
     patient: GH + 'zynix-provider-view.png',            // Provider dashboard — scheduling, engagement
@@ -766,8 +767,8 @@
    ['/who-we-serve/fqhcs', '/solutions-fqhcs', { schema: 'Product' }],
    ['/company/zynixllm', '/company-zynixllm', { schema: 'Product' }],
    ['/security', '/company-trust-center', { schema: 'Organization' }],
-   ['/press', '/company-press', { img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' }],
-   ['/newsroom', '/company-press', { img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' }],
+   ['/press', '/company-press', { img: IMG.hero, schema: 'CollectionPage' }],     // the release listing: no NewsArticle (SEO audit ZX-34)
+   ['/newsroom', '/company-press', { img: IMG.hero, schema: 'CollectionPage' }],
    ['/careers', '/company-careers', { schema: 'Organization', noindex: true }],
    ['/resources/blog', '/resources-blog', { schema: 'Organization' }],
    ['/resources/faq', '/resources-faq', { schema: 'FAQPage' }],
@@ -783,7 +784,7 @@
    ['/faq', '/resources-faq'],
    ['/privacy-policy', '/company-privacy'],
    ['/trust-center', '/company-trust-center'],
-   ['/resources/blog/1m-patients', '/resources-blog-1m-patients', { img: IMG.hero, schema: 'Article', datePublished: '2026-01-15' }],
+   ['/resources/blog/1m-patients', '/resources-blog-1m-patients', { img: IMG.hero, schema: 'Article' }],
    ['/resources/blog/what-is-value-based-care-ai', '/blog/what-is-value-based-care-ai'],
    ['/resources/blog/how-ai-closes-care-gaps', '/blog/how-ai-closes-care-gaps'],
    ['/resources/blog/ai-agents-vs-chatbots-healthcare', '/blog/ai-agents-vs-chatbots-healthcare'],
@@ -800,23 +801,18 @@
    ['/ascs', '/solutions-ascs'],
    ['/acos-msos', '/solutions-acos'],
    ['/independent-group-practices', '/solutions-independent-practices'],
+   // Legacy static blog twins (SEO audit 2026-10-08, ZX-09 part A): only the three sitemap twins Google indexes keep a row
+   // here (robots 'index, follow', as their raw HTML) until their server 301s land (Appendix B 1b). The other ten rows were
+   // removed: those pages are raw noindex, and the P7 seo block below now gives them noindex in JS as well.
    ['/blog-what-is-value-based-care-ai', '/blog/what-is-value-based-care-ai', { img: IMG.analytics, schema: 'Article' }],
    ['/blog-how-ai-closes-care-gaps', '/blog/how-ai-closes-care-gaps', { img: IMG.care, schema: 'Article' }],
-   ['/blog-ai-agents-vs-chatbots-healthcare', '/blog/ai-agents-vs-chatbots-healthcare', { img: IMG.doctor, schema: 'Article' }],
-   ['/blog-ehr-not-broken-never-built-to-think', '/blog/ehr-not-broken-never-built-to-think', { img: IMG.platform, schema: 'Article' }],
-   ['/blog-hcc-risk-adjustment-cms-changes', '/blog/hcc-risk-adjustment-cms-changes', { img: IMG.analytics, schema: 'Article' }],
-   ['/blog-aco-year-end-gap-closure', '/blog/aco-year-end-gap-closure', { img: IMG.care, schema: 'Article' }],
-   ['/blog-predictive-analytics-population-health', '/blog/predictive-analytics-population-health', { img: IMG.data, schema: 'Article' }],
-   ['/blog-generative-ai-trust-safety-healthcare', '/blog/generative-ai-trust-safety-healthcare', { img: IMG.platform, schema: 'Article' }],
-   ['/blog-vbc-analytics-ai-driven', '/blog/vbc-analytics-ai-driven', { img: IMG.analytics, schema: 'Article' }],
-   ['/blog-innovative-patient-recovery-satisfaction', '/blog/innovative-patient-recovery-satisfaction', { img: IMG.patient, schema: 'Article' }],
-   ['/blog-strategies-coordinating-patient-care', '/blog/strategies-coordinating-patient-care', { img: IMG.care, schema: 'Article' }],
-   ['/blog-documentation-crisis-physician-burnout', '/blog/documentation-crisis-physician-burnout', { img: IMG.scribe, schema: 'Article' }],
-   ['/blog-essential-ai-tools-medical-professionals', '/blog/essential-ai-tools-medical-professionals', { img: IMG.doctor, schema: 'Article' }]].forEach(function (a) {
+   ['/blog-vbc-analytics-ai-driven', '/blog/vbc-analytics-ai-driven', { img: IMG.analytics, schema: 'Article' }]].forEach(function (a) {
     var s = PAGE_SEO[a[1]];
     PAGE_SEO[a[0]] = a[2] ? Object.assign({ title: s.title, desc: s.desc }, a[2]) : Object.assign({}, s);
   });
-  // Set outside the table because this URL slug trips the claims ratchet (the copy itself is claims-clean).
+  // Set outside the table because this URL slug trips the claims ratchet (the copy itself is claims-clean). Kept (ZX-09
+  // review): the /blog/ path answers 404 on the server, and this entry is what the P7 seo block copies to the flat
+  // /blog-autonomous-… page with noindex; without it that page would fall back to its Webflow title and description.
   zxSeo('/blog/autonomous-ai-agents-healthcare-automation', { title: 'AI agents in healthcare operations | Zynix AI', desc: 'How AI agents handle healthcare workflows such as scheduling, patient communication and follow-up, with escalation to staff by rule.', img: IMG.agents, schema: 'Article', datePublished: '2026-03-03' });
 
   // ── SEO Injection ──
@@ -839,17 +835,21 @@
     setMeta('name','ICBM','28.1856, -82.6800');
     setMeta('property','og:title', seo.title);
     setMeta('property','og:description', seo.desc);
-    setMeta('property','og:image', seo.img || IMG.hero);
-    setMeta('property','og:image:width', '1200');
-    setMeta('property','og:image:height', '630');
-    setMeta('property','og:image:type', 'image/png');
+    var card = zxOgCard(seo, pagePath);   // og:image / twitter:image only from a real 1200x630 card; otherwise the page's own tags stay
+    if (card) {
+      setMeta('property','og:image', card.url);
+      setMeta('property','og:image:width', '1200');
+      setMeta('property','og:image:height', '630');
+      if (card.type) setMeta('property','og:image:type', card.type);
+      if (!card.legacy) setMeta('property','og:image:alt', card.alt || seo.title);
+    }
     setMeta('property','og:url', canonical);
     setMeta('property','og:type', (seo.schema === 'Article' || seo.schema === 'NewsArticle') ? 'article' : 'website');
     setMeta('property','og:site_name','Zynix AI');
     setMeta('property','og:locale','en_US');
     // Article-specific OG meta
     if (seo.schema === 'Article') {
-      setMeta('property','article:published_time', seo.datePublished || '2026-01-15');
+      if (seo.datePublished) setMeta('property','article:published_time', seo.datePublished);   // no placeholder date (SEO audit ZX-34)
       setMeta('property','article:author', 'Zynix AI');
       setMeta('property','article:section', 'Healthcare AI');
     }
@@ -866,8 +866,10 @@
     setMeta('name','twitter:creator','@zynixai_');
     setMeta('name','twitter:title', seo.title);
     setMeta('name','twitter:description', seo.desc);
-    setMeta('name','twitter:image', seo.img || IMG.hero);
-    setMeta('name','twitter:image:alt', seo.title);
+    if (card) {
+      setMeta('name','twitter:image', card.url);
+      setMeta('name','twitter:image:alt', card.alt || seo.title);
+    }
     setMeta('name','author','Zynix AI');
     setMeta('name','copyright','Zynix Inc');
     // Canonical URL
@@ -914,16 +916,14 @@
         {'@type':'ContactPoint',email:'info@zynix.ai',contactType:'customer support',areaServed:'US'}
       ],
       areaServed:{'@type':'Country',name:'United States'},
-      numberOfEmployees:{'@type':'QuantitativeValue',minValue:50,maxValue:100},
       foundingDate:'2024',
       naics:'541511',
-      knowsAbout:['Value-Based Care','Healthcare Artificial Intelligence','Population Health Management','Care Gap Closure','Transitional Care Management','HCC Risk Adjustment','HEDIS Quality Measures','ACO Management','Medicare Shared Savings Program','HIPAA Compliance','Healthcare Workflow Automation','Clinical Documentation','AI Voice Agents for Healthcare','Patient Outreach Automation','Care Coordination Software'],
+      knowsAbout:['Value-Based Care','Healthcare Artificial Intelligence','Population Health Management','Care Gap Closure','Transitional Care Management','HCC Risk Adjustment','HEDIS Quality Measures','ACO Management','Medicare Shared Savings Program','Healthcare Workflow Automation','Clinical Documentation','AI Voice Agents for Healthcare','Patient Outreach Automation','Care Coordination Software'],
       hasOfferCatalog:{'@type':'OfferCatalog',name:'Healthcare AI Platform',itemListElement:[
         {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'Zynix platform',description:'Data foundation, intelligence, agents and care plans for value-based care operations.'}},
         {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynAfterHours',description:'After-hours call handling with escalation to on-call clinicians.'}},
         {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynSchedule',description:'Patient scheduling by phone, text and web.'}},
-        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynScribe',description:'Ambient clinical documentation with physician review before anything is filed.'}},
-        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynAuth',description:'Prior authorization workflow support.'}}
+        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynScribe',description:'Ambient clinical documentation with physician review before anything is filed.'}}
       ]},
       sameAs:['https://www.linkedin.com/company/zynix/','https://x.com/zynixai_','https://www.instagram.com/zynixai/'],
       founder:[
@@ -948,14 +948,15 @@
       schemas.push({
         '@context':'https://schema.org','@type':'SoftwareApplication',
         name:'Zynix AI Platform',
-        description:'The Zynix platform connects claims, EHR and ADT data, ranks the patients and care gaps that need attention, and helps care teams follow through with care plans, outreach agents and ambient documentation.',
+        description:zxDefinition(),   // the /platform hero lead (SEO audit ZX-11)
         applicationCategory:'HealthcareApplication',
         applicationSubCategory:'Value-Based Care Software',
         operatingSystem:'Web Browser',
         publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
         audience:{'@type':'Audience',audienceType:'Healthcare Organizations — ACOs, Health Systems, Health Plans, FQHCs, Independent Practices'},
         featureList:['SOC 2 Type II audited','HIPAA-aligned safeguards · BAA available','Epic EHR integration','athenahealth integration','ADT feed processing','Voice and SMS outreach agents','Care gap closure','TCM follow-up','AWV outreach'],
-        screenshot:IMG.hero,
+        // no screenshot until a claims-checked 1200x630 card exists (SEO audit ZX-63 review: IMG.hero is the portrait
+        // dashboard with unlabeled outcome percentages and '$ XX,XXX' placeholders)
         url:'https://www.zynix.ai/platform'
       });
       // SiteNavigationElement
@@ -977,20 +978,25 @@
       var crumbs = [{'@type':'ListItem',position:1,name:'Home',item:'https://www.zynix.ai'}];
       var segments = pagePath.replace(/^\//,'').split('/').filter(function(s) { return s; });
       var topSegment = segments[0];
-      var sectionMapV7 = {'who-we-serve':'Who We Serve','agents':'AI Agents','platform':'Platform','company':'Company','resources':'Resources','solutions':'Solutions','case-studies':'Case Studies','blog':'Blog'};
+      // Section parents (SEO audit 2026-10-08, ZX-34): every parent is a live page that answers 200 (was /case-studies 404,
+      // /products-zynix-os and /solutions-acos 301, /company-about a JS-redirected legacy page, /agents/<family> 301).
+      // A page that shows a breadcrumb gets that trail (renderBreadcrumb's zxBreadcrumbTrail: its NAV section and its label);
+      // the maps below cover only pages without one (ZX-34 review: the markup must not name a parent the page does not show).
+      var trail = typeof zxBreadcrumbTrail === 'function' ? zxBreadcrumbTrail(pagePath) : null;
+      var ldText = function (h) { return String(h).replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim(); };
+      var sectionMapV7 = {'who-we-serve':['Solutions','/solutions'],'agents':['AI Agents','/agents'],'platform':['Platform','/platform'],'company':['Company','/about'],'resources':['Resources','/resources-blog'],'solutions':['Solutions','/solutions'],'case-studies':['Customers','/resources-case-studies'],'blog':['Blog','/resources-blog'],'use-cases':['Use cases','/use-cases']};
       var legacySeg = pagePath.replace(/^\//,'').split('-');
-      var sectionMapLegacy = {products:'Products',solutions:'Solutions',company:'Company',resources:'Resources'};
-      if (sectionMapV7[topSegment] && segments.length > 1) {
-        crumbs.push({'@type':'ListItem',position:2,name:sectionMapV7[topSegment],item:'https://www.zynix.ai/' + topSegment});
-        if (segments.length > 2) {
-          crumbs.push({'@type':'ListItem',position:3,name:seo.title.split('|')[0].trim().replace(/ \| Zynix AI$/,''),item:'https://www.zynix.ai/' + topSegment + '/' + segments[1]});
-        }
+      var sectionMapLegacy = {products:['Platform','/platform'],solutions:['Solutions','/solutions'],company:['Company','/about'],resources:['Resources','/resources-blog']};
+      if (trail) {
+        crumbs.push({'@type':'ListItem',position:2,name:ldText(trail.section.label),item:'https://www.zynix.ai' + trail.section.href});
+      } else if (sectionMapV7[topSegment] && segments.length > 1) {
+        crumbs.push({'@type':'ListItem',position:2,name:sectionMapV7[topSegment][0],item:'https://www.zynix.ai' + sectionMapV7[topSegment][1]});
       } else if (typeof PILLARS !== 'undefined' && PILLARS.some(function (x) { return x.slug === pagePath; })) {
         crumbs.push({'@type':'ListItem',position:2,name:'Platform',item:'https://www.zynix.ai/platform'});   // V9 pillar pages: Home › Platform › <pillar>
-      } else if (sectionMapLegacy[legacySeg[0]]) {
-        crumbs.push({'@type':'ListItem',position:2,name:sectionMapLegacy[legacySeg[0]],item:'https://www.zynix.ai/' + legacySeg[0] + '-' + (legacySeg[0]==='products'?'zynix-os':legacySeg[0]==='solutions'?'acos':legacySeg[0]==='company'?'about':legacySeg[0]==='resources'?'blog':'')});
+      } else if (sectionMapLegacy[legacySeg[0]] && sectionMapLegacy[legacySeg[0]][1] !== pagePath) {
+        crumbs.push({'@type':'ListItem',position:2,name:sectionMapLegacy[legacySeg[0]][0],item:'https://www.zynix.ai' + sectionMapLegacy[legacySeg[0]][1]});
       }
-      crumbs.push({'@type':'ListItem',position:crumbs.length+1,name:seo.title.split('|')[0].trim(),item:'https://www.zynix.ai' + pagePath});
+      crumbs.push({'@type':'ListItem',position:crumbs.length+1,name:trail ? ldText(trail.label) : seo.title.split('|')[0].trim(),item:'https://www.zynix.ai' + pagePath});
       schemas.push({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:crumbs});
     }
 
@@ -1039,11 +1045,11 @@
         '@context':'https://schema.org','@type':'Article',
         headline:seo.title.split('|')[0].trim(),
         description:seo.desc,
-        image:{'@type':'ImageObject',url:seo.img||IMG.hero,width:1200,height:630},
+        image:zxOgCard(seo) ? {'@type':'ImageObject',url:zxOgCard(seo).url,width:1200,height:630} : undefined,
         author:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
         publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization',name:'Zynix AI',logo:{'@type':'ImageObject',url:IMG.logo}},
-        datePublished:seo.datePublished||'2026-01-15',
-        dateModified:seo.dateModified||seo.datePublished||'2026-03-01',
+        datePublished:seo.datePublished||undefined,                    // no placeholder dates (SEO audit ZX-34): omitted
+        dateModified:seo.dateModified||seo.datePublished||undefined,   // without a real value (JSON.stringify drops undefined)
         mainEntityOfPage:{'@type':'WebPage','@id':'https://www.zynix.ai'+pagePath},
         speakable:{'@type':'SpeakableSpecification',cssSelector:['h1','h2','p:first-of-type']},
         about:[{'@type':'Thing',name:'Healthcare AI'},{'@type':'Thing',name:'Value-Based Care'},{'@type':'Thing',name:'AI Agents for Healthcare'}],
@@ -1060,7 +1066,7 @@
         headline:'Zynix AI Announces Strategic Partnership with Palm Beach Accountable Care Organization and Affiliated Entities (PBACO Holding)',
         alternativeHeadline:'Partnership scales AI-driven patient outreach, documentation, and workflow automation across value-based care network',
         description:seo.desc,
-        image:{'@type':'ImageObject',url:seo.img||IMG.hero,width:1200,height:630},
+        image:zxOgCard(seo) ? {'@type':'ImageObject',url:zxOgCard(seo).url,width:1200,height:630} : undefined,
         author:{'@type':'Organization','@id':'https://www.zynix.ai/#organization',name:'Zynix AI'},
         publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization',name:'Zynix AI',logo:{'@type':'ImageObject',url:IMG.logo,width:600,height:60}},
         datePublished:seo.datePublished||'2026-04-14',
@@ -1080,22 +1086,8 @@
         keywords:'Zynix AI, PBACO, Palm Beach ACO, value-based care, ACO, AI patient outreach, ambient documentation, MSSP, Medicare Shared Savings Program, healthcare AI, partnership announcement'
       });
     }
-    if (seo.schema === 'HowTo') {
-      schemas.push({
-        '@context':'https://schema.org','@type':'HowTo',
-        name:seo.title.split('|')[0].trim(),
-        description:seo.desc,
-        image:{'@type':'ImageObject',url:seo.img||IMG.hero,width:1200,height:630},
-        supply:[{'@type':'HowToSupply',name:'Zynix AI Platform'},{'@type':'HowToSupply',name:'EHR or Data Feed'}],
-        tool:[{'@type':'HowToTool',name:'AI Agents'},{'@type':'HowToTool',name:'Care Plan Templates'}],
-        step:[
-          {'@type':'HowToStep',position:1,name:'Connect your clinical data',text:'Connect claims, EHR, ADT and SDoH data into one patient record.',url:'https://www.zynix.ai/products-data-platform'},
-          {'@type':'HowToStep',position:2,name:'Configure AI agents and care plans',text:'Choose care plans and agents from the agent families for TCM, CCM, AWV and gap closure.',url:'https://www.zynix.ai/agents'},
-          {'@type':'HowToStep',position:3,name:'Launch outreach',text:'Agents begin outreach and scheduling; clinical questions go to your team.',url:'https://www.zynix.ai/platform'},
-          {'@type':'HowToStep',position:4,name:'Monitor outcomes and optimize',text:'Track contacts, visits and closed gaps in shared worklists.',url:'https://www.zynix.ai/zynix-data-analytics'}
-        ]
-      });
-    }
+    // No HowTo node (SEO audit 2026-10-08, ZX-34): the use cases' schema: 'HowTo' gave all 30 pages one generic step set that
+    // none of them shows. Their entries keep the field; it no longer emits anything.
 
     // FAQPage: from the DOM, else the /resources-faq list below
     var faqEls = document.querySelectorAll('.zynix-faq-item');
@@ -1334,8 +1326,10 @@
   // /blog-<slug> (a Webflow page: HTTP 200, self-canonical, in the sitemap) and /blog/<slug> and /resources/blog/<slug>
   // (both 404 on the server, and the head link-rewrite script turns links to them into /blog-<slug>). Every form gets
   // the same one block: two products and two use cases for the article's topic, and two articles on the same topic.
-  // Article links point at the flat URL, or at the native post where the flat URL redirects to it (ZX_BLOG_NATIVE,
-  // mirroring REDIRECTS and the server 301). Labels are the articles' SEO titles, shortened.
+  // Article links point at the flat URL, or at the native CMS post (ZX_BLOG_NATIVE: slug -> 1 when the CMS slug is the same,
+  // else the CMS slug) where the flat URL redirects to it (REDIRECTS, server 301) or is a sitemap twin of a CMS post that is
+  // to be 301'd to it (SEO audit 2026-10-08 ZX-09: links point at the keeper now; the 301s are a dashboard job).
+  // Labels are the articles' SEO titles, shortened.
   var ZX_BLOG_TOPICS = {
     vbc: { desc: 'Article · value-based care', products: ['/zynix-data-analytics', '/platform'], useCases: ['/use-cases/rising-risk-patient-outreach', '/use-cases/hcc-gap-raf-optimization'] },
     gaps: { desc: 'Article · care gaps and risk adjustment', products: ['/zynix-data-analytics', '/care-plans'], useCases: ['/use-cases/hcc-gap-raf-optimization', '/use-cases/hedis-stars-quality-improvement'] },
@@ -1348,7 +1342,11 @@
   // The "AI agents in healthcare operations" article. Its URL is held in path form, the form the banned-string scan exempts
   // as a URL (ci/banned-strings.mjs inUrlToken); ZX_BLOG is keyed by slug, so the prefix is stripped here.
   var ZX_BLOG_AGENTS_OPS = '/blog/autonomous-ai-agents-healthcare-automation'.replace(/^\/blog\//, '');
-  var ZX_BLOG_NATIVE = { 'why-tcm-fails-real-workflows': 1 };
+  var ZX_BLOG_NATIVE = { 'why-tcm-fails-real-workflows': 1,
+    'what-is-value-based-care-ai': 1, 'how-ai-closes-care-gaps': 1,
+    'rising-risk-patients-ai': 'using-ai-identify-rising-risk-patients-before-they-deteriorate',
+    'eligibility-verification-automation': 'eligibility-verification-automation-front-door-faster-prior-auth',
+    'vbc-analytics-ai-driven': 'transforming-healthcare-ai-driven-value-based-care-analytics' };
   var ZX_BLOG = {   // slug: [topic, link label, two related article slugs]
     'what-is-value-based-care-ai': ['vbc', 'What is value-based care AI?', ['vbc-analytics-ai-driven', 'tools-driving-value-based-healthcare']],
     'vbc-analytics-ai-driven': ['vbc', 'Analytics for value-based care', ['predictive-analytics-population-health', 'what-is-value-based-care-ai']],
@@ -1383,7 +1381,7 @@
   };
   ZX_BLOG[ZX_BLOG_AGENTS_OPS] = ['agents', 'AI agents in healthcare operations', ['ai-agents-vs-chatbots-healthcare', 'essential-ai-tools-medical-professionals']];
   (function () {
-    function href(slug) { return (ZX_BLOG_NATIVE[slug] ? '/blog-posts/' : '/blog-') + slug; }
+    function href(slug) { var n = ZX_BLOG_NATIVE[slug]; return n ? '/blog-posts/' + (typeof n === 'string' ? n : slug) : '/blog-' + slug; }
     Object.keys(ZX_BLOG).forEach(function (slug) {
       var b = ZX_BLOG[slug], t = ZX_BLOG_TOPICS[b[0]], h = href(slug);
       LINK_NAMES[h] = b[1]; CROSS_DESCS[h] = t.desc; CROSS_ICONS[h] = 'book';
@@ -1449,12 +1447,23 @@
   // item, else CUSTOMERS (case studies), else LINK_NAMES. A use-case page is named by its own title (its H1) wherever it
   // is listed (zxLinkData), so the six that also sit in the Solutions menu use that title here too, not their shorter
   // menu label (final QA r1). Not rendered on the homepage, the section landing pages, the SMS and legal pages or the
-  // 404. No JSON-LD (schema unchanged).
+  // 404. injectJSONLD builds its BreadcrumbList from the same trail (zxBreadcrumbTrail), so the markup names the parent the
+  // page shows (SEO audit 2026-10-08, ZX-34 review); pages without a visible breadcrumb keep its static section map.
   function renderBreadcrumb(pagePath) {
+    var t = zxBreadcrumbTrail(pagePath);
+    if (!t) return '';
+    var crumb = function (href, text) { return '<li><a href="' + zxAttr(href) + '" data-z-anchor-fixed="1" aria-label="' + zxAttr(text) + '">' + text + '</a></li>'; };
+    return '<nav class="zynix-breadcrumb" aria-label="Breadcrumb"><div class="zynix-container"><ol class="zynix-breadcrumb__list">' +
+      crumb('/', 'Home') + crumb(t.section.href, t.section.label) +
+      '<li><span aria-current="page">' + t.label + '</span></li></ol></div></nav>';
+  }
+  // The visible trail for a path: { section: { label, href }, label } (labels as HTML-ready text), or null where the page
+  // shows no breadcrumb.
+  function zxBreadcrumbTrail(pagePath) {
     var p = String(pagePath == null ? zxPath() : pagePath).replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
-    if (!p || ['/sms', '/sms-program', '/sms-consent', '/privacy-policy', '/terms-of-service'].indexOf(p) > -1) return '';
+    if (!p || ['/sms', '/sms-program', '/sms-consent', '/privacy-policy', '/terms-of-service'].indexOf(p) > -1) return null;
     var cur = zxNavCurrent(p);
-    if (!cur.section || cur.landing) return '';
+    if (!cur.section || cur.landing) return null;
     var q = cur.navPath, label = '';
     var uc = typeof USE_CASES !== 'undefined' ? /^\/use-cases\/([a-z0-9-]+)$/.exec(q) : null;
     if (uc) Object.keys(USE_CASES).some(function (k) {
@@ -1465,11 +1474,8 @@
       var c = zxCustomer(k); if (c && c.caseStudy && (c.caseStudy === q || c.caseStudy === p)) { label = c.name; return true; } return false;
     });
     if (!label) label = LINK_NAMES[q] || LINK_NAMES[p] || '';
-    if (!label) return '';
-    var crumb = function (href, text) { return '<li><a href="' + zxAttr(href) + '" data-z-anchor-fixed="1" aria-label="' + zxAttr(text) + '">' + text + '</a></li>'; };
-    return '<nav class="zynix-breadcrumb" aria-label="Breadcrumb"><div class="zynix-container"><ol class="zynix-breadcrumb__list">' +
-      crumb('/', 'Home') + crumb(cur.section.href, cur.section.label) +
-      '<li><span aria-current="page">' + label + '</span></li></ol></div></nav>';
+    if (!label) return null;
+    return { section: { label: cur.section.label, href: cur.section.href }, label: label };
   }
 
   // ── Helpers ──
@@ -1633,6 +1639,16 @@
   }
   function zxPath() { return (location.pathname || '/').replace(/\/$/, '').toLowerCase(); }   // '' for the homepage
   function zxSeo(path, fields) { PAGE_SEO[path] = Object.assign({}, PAGE_SEO[path] || {}, fields); }
+  // Link-preview image for a route (SEO audit 2026-10-08, ZX-35/ZX-63): only a real 1200x630 card given as
+  // seo.ogCard = { url, width: 1200, height: 630, type, alt }. No route has one yet, so the bundle leaves og:image and
+  // twitter:image to the page's own Webflow settings (the homepage's card stays) and never declares a size it has not got.
+  // The A2P-held pages keep their rendered head exactly as it was, legacy preview image included, until the carrier verdicts
+  // (ZX-16; reviewers read these pages): for them this returns the old value, marked legacy.
+  var ZX_A2P_HELD_PATHS = ['/privacy-policy', '/sms-consent', '/terms-of-service', '/sms-program', '/sms'];
+  function zxOgCard(seo, path) {
+    if (path && ZX_A2P_HELD_PATHS.indexOf(path) > -1) return { url: (seo && seo.img) || IMG.hero, width: 1200, height: 630, type: 'image/png', legacy: true };
+    var c = seo && seo.ogCard; return c && c.url && c.width === 1200 && c.height === 630 ? c : null;
+  }
 
   // ── Facts readers (§4) ──
   // An anonymous record (CUSTOMERS.hospitalsystem) comes back as its unnamed phrasing only: never another name, a logo, a link,
@@ -1644,6 +1660,19 @@
   function zxFact(key) { return key && Object.prototype.hasOwnProperty.call(SITE_FACTS.stats, key) ? SITE_FACTS.stats[key] : null; }
   function zxAccessLine() { var a = SITE_FACTS.access; return a.line + ', ' + a.clause + '. ' + a.through; }
   function zxComplianceProse() { var c = SITE_FACTS.compliance; return [c.soc2.prose, c.hipaa.prose, c.hitrust.prose].join(' · '); }
+  // The V9 one-line definition of Zynix (SEO audit 2026-10-08, ZX-11): the registry category (SITE_FACTS.category) and the four
+  // pillar names in NAV order (PILLARS), closed with SITE_FACTS.definition's own clause. Used where a page says what Zynix is.
+  function zxDefinition() {
+    var n = PILLARS.map(function (p) { return p.name; });
+    return 'Zynix is ' + SITE_FACTS.category.inline + ': four pillars (' + n.slice(0, -1).join(', ') + ' and ' + n[n.length - 1] +
+      ') that work as one, so every insight ends in an intervention.';
+  }
+  // The CMS source for the TCM timing rule (interactive contact within 2 business days, visit within 7 or 14 days), linked
+  // where a page states the rule (SEO audit 2026-10-08, ZX-31; the audit matched the rule on this booklet, MLN908628).
+  function zxTcmSource(label) {
+    var u = 'https://www.cms.gov/files/document/mln908628-transitional-care-management-services.pdf';
+    return '<a href="' + zxAttr(u) + '"' + zxNewTab(u) + '>' + (label || 'Transitional Care Management Services') + '</a>';
+  }
   // Confirmed governance entries in the order asked (default: declaration order); a 'hold' entry never comes back.
   function zxGovernance(keys) {
     var g = SITE_FACTS.governance, out = [];
@@ -3587,8 +3616,9 @@
   }
   // Article library for /resources-blog: [canonical path or /blog-posts slug, ISO date, topic, title, excerpt?].
   // Titles are as published, except five whose published titles use retired or unverified wording (listed for a CMS retitle
-  // so the post H1s can match). Left out: the native duplicate of the 1M post (in favour of /resources-blog-1m-patients) and
-  // three posts built around wording DECISIONS 4 and 17b retire, until they are rewritten (P6 hand-off notes).
+  // so the post H1s can match). Every article links its CMS post, including the 1M milestone post (the static
+  // /resources-blog-1m-patients twin is to be 301'd to it, SEO audit ZX-09). Left out: three posts built around wording
+  // DECISIONS 4 and 17b retire, until they are rewritten (P6 hand-off notes).
   var ZX_RES_TOPICS = [
     { id: 'toc', name: 'Transitions of care' }, { id: 'quality', name: 'Quality and risk adjustment' },
     { id: 'cms', name: 'CMS models and policy' }, { id: 'ops', name: 'Care operations and agents' },
@@ -3597,6 +3627,7 @@
     { id: 'news', name: 'Company news' }, { id: 'general', name: 'Healthcare AI' }
   ];
   var ZX_RES_POSTS = [
+    ['cms-access-model-explained', '2026-10-06', 'cms', 'What is the CMS ACCESS Model? A guide for practices and ACOs', 'What the CMS ACCESS Model is, who can take part, its four initial tracks, how outcome-aligned payments work and the key dates, from the CMS source pages.'],
     ['after-hours-patient-calls-hidden-care-gap-acos', '2026-07-30', 'ops', 'After-Hours Patient Calls: The Hidden Care Gap ACOs Cannot Ignore', 'How after-hours calls shape access, escalation, continuity of care and patient trust for ACOs, and how to handle them as part of the care model.'],
     ['acos-scalable-care-capacity-annual-wellness-visits', '2026-07-30', 'quality', 'Annual Wellness Visits: How ACOs Can Build the First Layer of Scalable Care Capacity', 'Why the annual wellness visit is where prevention, care planning and quality work begin, and how ACOs can build the capacity to complete more of them.'],
     ['rural-health-transformation-program-care-capacity', '2026-07-30', 'cms', 'Rural Health Transformation Program: How Rural Networks Can Turn Funding Into Care Capacity', 'What rural networks need to turn new funding into care capacity: outreach, prevention, coordination, after-hours access and follow-through.'],
@@ -3956,7 +3987,7 @@
         lead: 'LEAD replaces ACO REACH on January 1, 2027, with 10-year benchmarks, CARA for specialists and a 1.5% administrative add-on. Here is what changes and how to prepare.',
         date: '2026-04-13', read: '10 min read', html: html }) +
       zxResRelated([{ label: 'Keep reading', items: [
-        { href: '/resources-blog-aco-lead-model-execution-infrastructure-2027', label: 'ACO LEAD Model: executing between visits', desc: 'Why 2027 rewards follow-through', icon: 'book' },
+        { href: '/blog-posts/aco-lead-model-execution-infrastructure-2027', label: 'ACO LEAD Model: executing between visits', desc: 'Why 2027 rewards follow-through', icon: 'book' },
         '/audience-segments/acos-msos', '/care-plans', '/zynix-data-analytics', '/resources-blog'] }]) +
       (naacos ? renderCTA('Meet us at NAACOS Fall 2026', 'Find Zynix AI at the NAACOS Fall Conference (October 14–16, Washington, DC) to talk through LEAD readiness and see the workflows on sample data.', '',
           { primary: { label: 'Book a meeting', href: SITE_FACTS.demo.href } }) :
@@ -4681,7 +4712,7 @@
       ['risk-stratification', 'Risk stratification', 'Sorting patients into groups by their likelihood of a hospitalization, an emergency visit or rising costs, using clinical, claims, social and utilization data, so care management effort goes where it helps most.', 'Stratification is only useful when each tier has a defined next step and an owner.', ['Rising-risk outreach', '/use-cases/rising-risk-patient-outreach']],
       ['sdoh', 'Social determinants of health (SDOH)', 'The non-medical conditions that shape health, such as income, housing, food access, transportation and social support. They are documented with ICD-10 Z codes and screened for in a growing number of quality programs.', 'A missed ride or an unstable address can undo a care plan, so outreach needs to know about them.', ['SDOH screening and navigation', '/use-cases/sdoh-screening-care-navigation']],
       ['star-ratings', 'Star Ratings (Medicare Advantage)', 'The CMS 1-to-5-star quality ratings for Medicare Advantage and Part D plans, built from HEDIS measures, member experience surveys, pharmacy measures and operational performance. Plans rated 4 stars or higher qualify for quality bonus payments.', 'Star Ratings affect plan revenue and enrollment, so gap closure and member outreach are year-round work.'],
-      ['tcm', 'Transitional care management (TCM)', 'A Medicare service for the 30 days after a discharge from a hospital or certain other facilities. CMS requires an interactive contact with the patient or caregiver within 2 business days of discharge, and a face-to-face visit within 7 days (CPT 99496) or 14 days (CPT 99495). The interactive contact is made by the billing practitioner or clinical staff.', 'The 2-business-day window is where most programs fall short, which makes discharge notification and outreach capacity the constraint.', ['Post-discharge and TCM', '/use-cases/post-discharge-tcm-readmission']],
+      ['tcm', 'Transitional care management (TCM)', 'A Medicare service for the 30 days after a discharge from a hospital or certain other facilities. CMS requires an interactive contact with the patient or caregiver within 2 business days of discharge, and a face-to-face visit within 7 days (CPT 99496) or 14 days (CPT 99495). The interactive contact is made by the billing practitioner or clinical staff.', 'The 2-business-day window is where most programs fall short, which makes discharge notification and outreach capacity the constraint.', ['Post-discharge and TCM', '/use-cases/post-discharge-tcm-readmission'], 'CMS, ' + zxTcmSource()],
       ['value-based-care', 'Value-based care', 'Payment models that reward providers for the quality and cost of care rather than the volume of services, including shared savings programs, bundled payments and capitation.', 'Under value-based contracts, what happens between visits (follow-up, prevention and chronic care) drives both outcomes and revenue.', ['Solutions by organization', '/solutions']]
     ];
     T.sort(function (a, b) { return a[1].toLowerCase() < b[1].toLowerCase() ? -1 : 1; });
@@ -4694,7 +4725,8 @@
       return '<div class="zx-res-gloss__group" id="letter-' + l.toLowerCase() + '" data-zx-res-gloss-group><h2 class="zx-res-gloss__letter">' + l + '</h2><div class="zx-res-gloss__terms">' +
         groups[l].map(function (t) {
           return '<article class="zx-res-term" id="term-' + t[0] + '" data-zx-res-term><h3 class="zx-res-term__name">' + t[1] + '</h3><p class="zx-res-term__def">' + t[2] + '</p>' +
-            '<p class="zx-res-term__why"><strong>Why it matters.</strong> ' + t[3] + '</p>' + (t[4] ? renderLinkArrow(t[4][0], t[4][1], { className: 'zx-res-term__link' }) : '') + '</article>';
+            '<p class="zx-res-term__why"><strong>Why it matters.</strong> ' + t[3] + '</p>' + (t[5] ? '<p class="zx-res-cite">Source: ' + t[5] + '</p>' : '') +
+            (t[4] ? renderLinkArrow(t[4][0], t[4][1], { className: 'zx-res-term__link' }) : '') + '</article>';
         }).join('') + '</div></div>';
     }).join('');
     var tools = '<div class="zx-res-gloss__tools">' +
@@ -4959,13 +4991,14 @@
       return '<li class="zx-flow__item"><span class="zx-flow__icon" aria-hidden="true">' + zxIcon(it.icon) + '</span><span class="zx-flow__item-text">' +
         '<span class="zx-flow__item-label">' + it.label + '</span>' + zxEl('span', 'zx-flow__item-detail', it.detail) + '</span></li>';
     };
-    var lnum = function (l) { return '<span class="zx-flow__lnum">' + (l.n < 10 ? '0' : '') + l.n + '</span>'; };
+    // Layer tags carry the layer's name only (SEO audit ZX-11): numbered 01-04 they read as a second four-part model next to
+    // the four pillars on /platform, the one page that renders this flow.
     var panels = (model.steps || []).map(function (s) {
       var f = flowOf[s.id] || { name: s.id, layers: [] };
       var layers = (f.layers || []).map(function (k) { return layerOf[k]; }).filter(Boolean), tags = s.tags || [];
       return '<div class="zx-flow__step" id="zx-flow-step-' + s.id + '">' +
         '<div class="zx-flow__step-head"><span class="zx-flow__dot" aria-hidden="true"></span><h3 class="zx-flow__step-title">' + f.name + '</h3>' +
-          '<span class="zx-flow__layer-links">' + layers.map(function (l) { return '<a class="zx-flow__layer-link" href="' + zxAttr(l.href) + '">' + lnum(l) + l.name + '</a>'; }).join('<span aria-hidden="true"> · </span>') + '</span></div>' +
+          '<span class="zx-flow__layer-links">' + layers.map(function (l) { return '<a class="zx-flow__layer-link" href="' + zxAttr(l.href) + '">' + l.name + '</a>'; }).join('<span aria-hidden="true"> · </span>') + '</span></div>' +
         '<p class="zx-flow__summary">' + s.summary + '</p><p class="zx-flow__detail">' + s.detail + '</p>' +
         (tags.length ? '<ul class="zx-flow__tags" role="list">' + tags.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' : '') +
       '</div>';
@@ -5401,8 +5434,6 @@
 
     // Apr 19, 2026 — Webflow CMS /blog-posts/* template URLs → canonical /blog/* paths
     // Fixes: SEMrush non-canonical sitemap entries + hreflang conflict (no self-referencing)
-    '/blog-posts/essential-ai-tools-medical-professionals': '/blog/essential-ai-tools-medical-professionals',
-    '/blog-posts/documentation-crisis-physician-burnout': '/blog/documentation-crisis-physician-burnout',
 
     // Archived/legacy pages → canonical destinations
     '/zz-archived-products-ai-agents-zynauth': '/agents',
@@ -5558,7 +5589,8 @@ function renderUseCaseV7(data) {
   }).join('');
   html += renderSection({ id: 'problem', className: 'zx-sol-problem', rule: true }, renderSplit(
     renderSectionHead('The problem', data.problem.title, '', { id: 'problem-title' }) +
-      '<div class="zx-sol-prose">' + data.problem.body.map(function (p) { return '<p>' + p + '</p>'; }).join('') + '</div>',
+      '<div class="zx-sol-prose">' + data.problem.body.map(function (p) { return '<p>' + p + '</p>'; }).join('') + '</div>' +
+      (data.problem.cite ? '<p class="zx-cust-cite">' + data.problem.cite + '</p>' : ''),   // a cited CMS rule (ZX-31), same line as the case studies
     gaps ? '<aside class="zx-sol-gaps" aria-labelledby="gaps-title"><p class="zx-sol-gaps__label" id="gaps-title">Where today’s tools stop</p><ul class="zx-sol-gaps__list" role="list">' + gaps + '</ul></aside>' : '',
     { ratio: '7-5' }));
 
@@ -5730,7 +5762,7 @@ USE_CASES.UC01 = {
   title: 'Post-discharge follow-up across your hospitals',
   teaser: 'ADT-triggered calls after every discharge across your hospitals, with nurses taking the clinical questions and the TCM contact.',
   lead: 'Discharges arrive around the clock from every hospital. Zynix starts outreach from the ADT message, books the follow-up visit and routes clinical questions to your nurses by rule.',
-  problem: { title: 'The follow-up gap is a volume problem',
+  problem: { title: 'The follow-up gap is a volume problem', cite: 'TCM timing: CMS, ' + zxTcmSource() + '.',
     body: ['Every discharge opens the same short window. For transitional care management, CMS expects an interactive contact within 2 business days and a face-to-face visit within 7 or 14 days. Patients go home with new medications, half-remembered instructions and a follow-up visit that may not be booked.',
       'Coordinators call the patients who were flagged at discharge first. The patient who looked stable, whose medication change wasn’t flagged and whose visit was never confirmed, is the one who waits, and too often the one who comes back through the ED.'] },
   gaps: [{ tool: 'Reminder and notification tools', text: 'They send instructions and appointment reminders. They don’t confirm the patient is home, collect the medication list or put a worrying answer in front of a nurse.' },
@@ -6419,7 +6451,7 @@ USE_CASES.UC13 = {
   runsOn: [{ p: 'analytics', note: 'Admission and readmission risk flags rising utilization.' },
     { p: 'agents', family: 'predictive-activation', note: 'The rising-risk outreach agent reaches newly flagged members.' },
     { p: 'agents', family: 'clinical-performance', note: 'The chronic care management agent keeps the monthly contact.' },
-    { p: 'carePlans', note: 'The high-utilizer ED diversion plan sets the steps.' }],
+    { p: 'carePlans', note: 'The high-utilizer outreach plan sets the steps.' }],
   readNext: ['medication-adherence-chronic-populations', 'post-discharge-ma-members', 'hcc-risk-adjustment-ma'],
   story: 'eternalhealth', cta: 'high-utilizer outreach',
   seo: { title: 'High-utilizer member outreach | Zynix AI',
@@ -7136,7 +7168,7 @@ function renderAboutV7() {
   factKeys.forEach(function (k) { if (factSources.indexOf(F.stats[k].source) < 0) factSources.push(F.stats[k].source); });
   var hero = renderHero({ preset: 'company', eyebrow: 'About Zynix AI',
     title: 'Physician-led, built by <span class="zx-co-nowrap">value-based</span> care operators',
-    lead: 'Our co-founder and CEO, Jay Chowdappa, MD, led ACOs that generated $300M+ in shared savings. We built Zynix to close the gap between knowing and doing.',
+    lead: zxDefinition() + ' Our co-founder and CEO, Jay Chowdappa, MD, led ACOs that generated $300M+ in shared savings. We built Zynix to close the gap between knowing and doing.',
     primary: { label: 'Meet the leadership', href: '#leadership' },
     secondary: { label: 'Contact us', href: '/contact' },
     media: { type: 'glance', title: 'At a glance', label: 'Zynix AI at a glance',
@@ -7208,7 +7240,7 @@ function renderAboutV7() {
   // Founding year 2024 = the Organization JSON-LD foundingDate (confirmed by Gautamdev 2026-09-30; not 2023); the ACCESS approval date stays held [VERIFY].
   var milestones = [
     { when: '2024', text: 'Zynix AI founded to close the gap between knowing and doing in <span class="zx-co-nowrap">value-based</span> care' },
-    { when: 'March 2026', text: F.stats.patients.sentence + ' at ' + F.stats.states.sentence, href: '/resources-blog-1m-patients', link: 'Read the announcement' },
+    { when: 'March 2026', text: F.stats.patients.sentence + ' at ' + F.stats.states.sentence, href: '/blog-posts/zynix-ai-surpasses-1-million-vbc-patients', link: 'Read the announcement' },
     { when: 'April 2026', text: 'Strategic partnership with PBACO Holding announced', href: pb.release.href, link: 'Read the release' },
     { when: 'June 2026', text: 'Partnership with eternalHealth and nirvanaHealth announced', href: eh.release.href, link: 'Read the release' },
     { when: 'Today', text: [zxAccessLine(),
@@ -8036,34 +8068,37 @@ function renderAgentPageV7(data) {
 
 
 function renderPlatformHub() {
-  // Platform overview (§6, COPY_DECK §5.2, final QA round 1): the hero carries one patient across the four layers (final
-  // polish, m-P1b: a cross-layer panel, so the first screen no longer mirrors the /agents outreach queue), one "Built for"
-  // link line, the data flow in expanded form, the four layers, proof (a one-sentence release pull, not the full quote), how
-  // a deployment runs, security, CTA. Pt 1042 · 72 · CHF is the same sample patient as on /, /agents and /care-plans.
+  // Platform overview (§6, COPY_DECK §5.2, final QA round 1). One model on the page (SEO audit 2026-10-08, ZX-11): the hero
+  // lead is the V9 definition and the panel beside it carries one patient across the four pillars (PILLARS, in NAV order);
+  // then one "Built for" link line, the data flow in expanded form, the four pillars, what they are built on (data
+  // foundation, AI agents, care plans: the NAV's "Built on" column), proof (a one-sentence release pull, not the full quote),
+  // how a deployment runs, security, CTA. The panel's step copy is the earlier cross-layer panel's, with the Predictive Risk
+  // step from the homepage card stack (HOME_STACK). Pt 1042 · 72 · CHF is the same sample patient as on /, /agents and /care-plans.
   var solutions = NAV.filter(function (s) { return s.id === 'solutions'; })[0];
-  var layerName = {};
-  NAMES.layers.forEach(function (l) { layerName[l.id] = l.name; });
-  var xlayer = [
-    ['data-foundation', 'Discharge matched to one patient record', 'ADT message, claims and EHR history', { tone: 'success', label: 'Matched' }],
-    ['intelligence', 'Ranked first on today’s worklist', 'TCM contact due · two open care gaps', { tone: 'brand', label: 'Ranked' }],
-    ['agents', 'Check-in call made, follow-up visit booked', NAMES.roles.agent, { tone: 'success', label: 'Booked' }],
-    ['care-plans', 'TCM plan open until the visit is documented', NAMES.roles.rn + ' · interactive contact', { tone: 'neutral', label: 'Open' }]
-  ];
-  var audiences = solutions ? solutions.columns[0].items : [];
-  var layerCopy = {
-    'data-foundation': ['Claims, EHR, ADT, lab and pharmacy data, matched to one patient record.', 'See the data foundation'],
-    intelligence: ['Ranks the patients, gaps and risks that need action, and shows why.', 'Explore analytics'],
-    agents: ['Handle outreach, scheduling, intake and follow-up, and hand clinical questions to your team.', 'See how agents work'],
-    'care-plans': ['Sequence agents and people around one goal, and keep the episode open until it’s documented.', 'Browse care plans']
+  var xpillar = {
+    'population-intelligence': ['Discharge matched to one patient record', 'ADT message, claims and EHR history', { tone: 'success', label: 'Matched' }],
+    'predictive-risk': ['Readmission risk: high', 'Drivers: CHF, 2 admissions in 90 days', { tone: 'brand', label: 'Ranked' }],
+    'embedded-care-management': ['TCM plan open until the visit is documented', NAMES.roles.rn + ' · interactive contact', { tone: 'neutral', label: 'Open' }],
+    'ai-patient-engagement': ['Check-in call made, follow-up visit booked', NAMES.roles.agent, { tone: 'success', label: 'Booked' }]
   };
+  var audiences = solutions ? solutions.columns[0].items : [];
+  var layerOf = {};
+  NAMES.layers.forEach(function (l) { layerOf[l.id] = l; });
+  var builtOn = [   // the earlier layer cards' copy; the pillars cover the intelligence layer
+    { href: layerOf['data-foundation'].href, title: layerOf['data-foundation'].name, body: 'Claims, EHR, ADT, lab and pharmacy data, matched to one patient record.', cta: 'See the data foundation' },
+    { href: NAMES.products.agents.href, title: NAMES.products.agents.name, body: 'Handle outreach, scheduling, intake and follow-up, and hand clinical questions to your team.', cta: 'See how agents work' },
+    { href: layerOf['care-plans'].href, title: layerOf['care-plans'].name, body: 'Sequence agents and people around one goal, and keep the episode open until it’s documented.', cta: 'Browse care plans' }
+  ];
   var html = renderHero({ preset: 'product', eyebrow: 'Platform', title: 'The Zynix platform for <span class="zx-plat-nowrap">value-based</span> care operations',
-    lead: 'Four layers that work as one: a data foundation, intelligence that ranks the work, agents that handle outreach and scheduling, and care plans that see each episode through.',
+    lead: zxDefinition(),
     secondary: { label: 'See the data flow', href: '#data-flow' },
-    media: { type: 'product', frame: zxPlatPanel({ label: 'Sample patient path across the four layers, illustrative data', brand: 'Zynix platform',
-      className: 'zx-plat-xlayer', title: 'One discharge, four layers', meta: 'Pt 1042 · 72 · CHF',
-      steps: xlayer.map(function (s) { return { time: layerName[s[0]] || s[0], title: s[1], owner: s[2], status: s[3] }; }),
+    media: { type: 'product', frame: zxPlatPanel({ label: 'Sample patient path across the four pillars, illustrative data', brand: 'Zynix platform',
+      className: 'zx-plat-xlayer', title: 'One discharge, four pillars', meta: 'Pt 1042 · 72 · CHF',
+      steps: PILLARS.filter(function (p) { return xpillar[p.id]; }).map(function (p) {
+        var s = xpillar[p.id]; return { time: p.short, title: s[0], owner: s[1], status: s[2] };
+      }),
       footer: 'Clinical questions go to licensed staff by rule.' },
-      'One discharge through every layer: matched, ranked, worked by an agent and carried by a care plan · sample data') } });
+      'One discharge through every pillar: matched, ranked by risk, put on a care plan and followed up by an agent · sample data') } });
 
   html += '<div class="zx-plat-for"><div class="zynix-container"><div class="zx-plat-lede__for"><p class="zx-plat-lede__label" id="zx-plat-for">Built for</p>' +
     '<ul class="zx-plat-lede__links" role="list" aria-labelledby="zx-plat-for">' +
@@ -8071,13 +8106,16 @@ function renderPlatformHub() {
 
   html += zxPlatFlow();
 
-  html += renderSection({ id: 'layers', className: 'zx-plat-layers' },
-    renderSectionHead('Layers', 'Four layers, one platform',
-      'Every layer reads the same patient record, so the discharge analytics flags is the one the agent calls about and the care plan follows to a documented visit.', { id: 'layers-title' }) +
-    renderGrid(NAMES.layers, function (l) {
-      var c = layerCopy[l.id] || ['', 'Learn about ' + l.name];
-      return renderCard({ href: l.href, eyebrow: 'Layer ' + l.n, title: l.name, body: c[0], cta: c[1] });
+  html += renderSection({ id: 'pillars', className: 'zx-plat-layers' },
+    renderSectionHead('Pillars', 'Four pillars, one platform',
+      'Every pillar reads the same patient record, so the discharge Predictive Risk flags is the one the agent calls about and the care plan follows to a documented visit.', { id: 'pillars-title' }) +
+    renderGrid(PILLARS, function (p) {
+      return renderCard({ href: p.slug, eyebrow: 'Pillar ' + p.n, title: p.name, body: p.promise, cta: 'Explore ' + p.name });
     }));
+
+  html += renderSection({ id: 'built-on', rule: true, className: 'zx-plat-layers' },
+    renderSectionHead('Built on', 'What the four pillars are built on', null, { id: 'built-on-title' }) +
+    renderGrid(builtOn, function (b) { return renderCard(b); }));
 
   html += zxPlatProof({ title: 'In use at Palm Beach ACO and eternalHealth',
     lead: 'Both announced their partnerships with Zynix in published releases: Palm Beach ACO in April 2026, starting with post-discharge follow-up and annual wellness visit outreach, and eternalHealth in June 2026, for member outreach and care management.',
@@ -8536,7 +8574,7 @@ function renderCarePlansV7() {
     'Post-discharge TCM': ['An ADT discharge message for an attributed patient', 'A check-in call and discharge-instruction review by an agent; the interactive contact by clinical staff; the 7- or 14-day visit booked; reminders', 'The follow-up visit is documented'],
     'HCC gap closure sprint': ['Suspected HCCs not yet recaptured this year', 'Patients ranked by RAF impact and closure window; visits booked; open gaps shown to the physician before the visit', 'The physician assesses each condition at a visit'],
     'Medication safety and adherence': ['A medication change at discharge, or a gap in pharmacy refills', 'The medication list collected by phone or text; discrepancies and adherence barriers routed to a pharmacist, nurse or prescriber', 'A clinician reviews each flag'],
-    'High-utilizer ED diversion': ['Repeat ED visits in claims or ADT data', 'Outreach to connect the patient with primary care and after-hours options; a primary care visit booked; care manager review', 'The primary care visit is completed'],
+    'High-utilizer outreach': ['Repeat ED visits in claims or ADT data', 'Outreach to connect the patient with primary care and after-hours options; a primary care visit booked; care manager review', 'The primary care visit is completed'],
     'Chronic condition visit readiness': ['An upcoming visit for a patient with diabetes, CHF or COPD', 'Reminders, pre-visit labs and open gaps prepared for the care team', 'The visit is completed'],
     'Preventive screening program': ['A patient is due for a screening, vaccination or annual wellness visit', 'Invitations by voice or SMS, booking, two-way reminders and tracking to completion', 'The screening or visit is completed']
   };
@@ -11517,8 +11555,8 @@ function renderDataAnalyticsV7() {
     // Internal 404/redirected URLs that still appear in page links, rewritten to canonical 200 destinations.
     // Exact keys only: the lookup is INT_FIXES[path].
     var INT_FIXES = {
-      '/blog-1m-patients': '/resources-blog-1m-patients',
-      '/blog/1m-patients': '/resources-blog-1m-patients',
+      '/blog-1m-patients': '/blog-posts/zynix-ai-surpasses-1-million-vbc-patients',
+      '/blog/1m-patients': '/blog-posts/zynix-ai-surpasses-1-million-vbc-patients',
       // Audience pages: canonical /audience-segments/<slug> (DECISIONS 7, 9)
       '/who-we-serve/acos-msos': '/audience-segments/acos-msos',
       '/who-we-serve/ascs': '/audience-segments/ascs',
@@ -11690,6 +11728,51 @@ function renderDataAnalyticsV7() {
       renderFooter();
   }
 
+  // Competitor citations on the comparison pages, linked to the exact pages they cite (SEO audit 2026-10-08, ZX-31). Every
+  // quote was matched on these pages on 2026-10-09 (audit evidence CLAIMS/source_match.json, 25/25) and every URL answered 200
+  // (or a redirect to 200; Innovaccer's news and blog moved to innovaccer.ai, linked at their final URLs); the Innovaccer
+  // voice-agent and Navina case-study pages were re-checked on 2026-10-09 and carry that date. The Commure Agents
+  // release links the GlobeNewswire original (commure.com no longer hosts it). Link text keeps the citation as it read; the
+  // "accessed" dates are unchanged. A row whose source equals the panel's (themSrc) shows no second citation.
+  var ZX_CMP_SRC = (function () {
+    var a = function (t, u) { return '<a href="' + zxAttr(u) + '"' + zxNewTab(u) + '>' + t + '</a>'; };
+    var acc = ', accessed 19 Sep 2026';
+    var x = {
+      innoAgents: a('Innovaccer news release, 17 Feb 2025', 'https://innovaccer.ai/news/innovaccer-launches-agents-of-care-to-transform-healthcare-operations-enhance-care-delivery'),
+      innoSite: a('innovaccer.com', 'https://innovaccer.com/') + acc,
+      innoVoice: a('innovaccer.com/voice-agents', 'https://innovaccer.com/voice-agents/') + ', accessed 9 Oct 2026',   // inbound and outbound calls (review of ZX-31)
+      innoSlm: a('Innovaccer blog, 23 Apr 2026', 'https://innovaccer.ai/blogs/small-language-models-healthcare'),
+      innoTcm: 'Innovaccer news releases, ' + a('21 Jul 2025', 'https://innovaccer.ai/news/innovaccer-launches-ai-powered-readmissions-management-solution-to-effectively-manage-cost-of-care-and-improve-care-outcomes') +
+        ' and ' + a('22 Apr 2025', 'https://innovaccer.ai/news/innovaccer-launches-copilots-agents-care-management-reducing-documentation-time-boosting-patient-engagement'),
+      innoGravity: a('Innovaccer news release, 22 May 2025', 'https://innovaccer.ai/news/innovaccer-launches-gravity-healthcare-intelligence-platform-accelerate-ai-driven-transformation'),
+      commRaise: a('Commure news release, 19 May 2026', 'https://www.commure.com/press-releases/commure-raises-70m-at-7b-valuation-to-transform-healthcare-operations-using-ai'),
+      commAgents: a('Commure news release, 25 Jun 2025', 'https://www.globenewswire.com/news-release/2025/06/25/3105122/0/en/Commure-Launches-Commure-Agents-AI-Assistants-That-Fully-Automate-Physician-Workflows.html'),
+      commSite: a('commure.com', 'https://www.commure.com/') + acc,
+      commEngage: a('commure.com/engage', 'https://www.commure.com/engage') + acc,
+      commBlog: a('Commure blog, 31 Oct 2025', 'https://www.commure.com/blog/commure-uncharted-lessons-from-large-scale-healthcare-ai-implementations'),
+      hcCeo: a('Health Catalyst news release, 18 Feb 2026', 'https://www.healthcatalyst.com/news/health-catalyst-appoints-ben-albert-as-chief-executive-officer'),
+      hcProducts: 'healthcatalyst.com (' + a('Upfront', 'https://www.healthcatalyst.com/products/upfront-by-health-catalyst') + ', ' +
+        a('Twistle', 'https://www.healthcatalyst.com/offerings/twistle-by-health-catalyst') + ')' + acc,
+      hcSite: a('healthcatalyst.com', 'https://www.healthcatalyst.com/') + acc,
+      abrKeynote: a('Abridge news release, 11 Jun 2026', 'https://www.abridge.com/press-release/patient-centered-clinician-intelligence-platform-keynote'),
+      abrRcm: a('abridge.com/platform/revenue-cycle', 'https://www.abridge.com/platform/revenue-cycle') + acc,
+      abrSite: a('abridge.com', 'https://www.abridge.com/') + acc,
+      navSite: a('navina.ai', 'https://www.navina.ai/') + acc,
+      navCases: a('navina.ai/case-studies', 'https://www.navina.ai/case-studies') + ', accessed 9 Oct 2026',
+      olvDive: a('Healthcare Dive, 1 Nov 2023', 'https://www.healthcaredive.com/news/olive-ai-shuts-down/698455/'),
+      olvHitc: a('HIT Consultant, 31 Oct 2023', 'https://hitconsultant.net/2023/10/31/olive-shutters-business-after-sale-to-waystar-and-humata-health/'),
+      notSite: a('notablehealth.com', 'https://www.notablehealth.com/') + acc,
+      notVbc: a('notablehealth.com/use-case/value-based-care', 'https://www.notablehealth.com/use-case/value-based-care') + acc,
+      notFlows: a('Notable announcement, 24 Oct 2024', 'https://www.notablehealth.com/blog/notable-ai-platform-flow-builder-announcement')
+    };
+    x.innoThem = x.innoAgents + '; ' + x.innoSite;
+    x.abrBoth = 'Abridge news releases, ' + a('11 Jun 2026', 'https://www.abridge.com/press-release/patient-centered-clinician-intelligence-platform-keynote') +
+      ' and ' + a('13 Feb 2024', 'https://www.abridge.com/press-release/abridge-inside-emory');
+    x.hcThem = x.hcCeo + '; ' + x.hcProducts;
+    x.olvThem = x.olvDive + '; ' + x.olvHitc;
+    return x;
+  })();
+
   // ── PAGE: Compare — Zynix vs Point Solutions ──
   function renderComparePointSolutions() { return renderCompareVs({
     slug: 'point-solutions', name: 'point solutions', title: 'Zynix AI vs point solutions', label: 'A point-solution stack',
@@ -11717,13 +11800,13 @@ function renderDataAnalyticsV7() {
   function renderCompareInnovaccer() { return renderCompareVs({
     slug: 'innovaccer', name: 'Innovaccer',
     them: 'Innovaccer provides a data platform (Gravity), analytics and care-management software. In February 2025 it launched a suite of AI agents it calls “Agents of Care”.',
-    themSrc: 'Innovaccer news release, 17 Feb 2025; innovaccer.com, accessed 19 Sep 2026',
+    themSrc: ZX_CMP_SRC.innoThem,
     rows: [
-      { label: 'Data and analytics', them: 'A data platform (Gravity) with analytics and care-management software.', src: 'innovaccer.com, accessed 19 Sep 2026', us: 'A data foundation that builds one patient record from claims, EHR, ADT, lab and pharmacy data, and analytics that rank patients by risk and open HCC and quality gaps.' },
-      { label: 'AI agents', them: '“Agents of Care”, described as “a suite of pre-trained AI Agents”, plus voice AI agents for inbound and outbound patient calls.', src: 'Innovaccer news release, 17 Feb 2025; innovaccer.com, accessed 19 Sep 2026', us: 'ZX_AGENTS' },
-      { label: 'Language models', them: '“Sara SLMs”, described as “12 fine-tuned models purpose-built to power administrative and clinical workflows across healthcare”.', src: 'Innovaccer blog, 23 Apr 2026', us: 'ZynixLLM is the language model layer of the Zynix platform. Agents work within the escalation rules your team sets.' },
-      { label: 'Post-discharge and TCM', them: '“Out-of-the-box care management workflows purpose-built for TCM” and an “ED Follow-up Agent designed to automate post-discharge care coordination”.', src: 'Innovaccer news releases, 21 Jul 2025 and 22 Apr 2025', us: 'ZX_TCM' },
-      { label: 'Deployment', them: 'Innovaccer says Gravity “reduces deployment timelines from months to weeks”.', src: 'Innovaccer news release, 22 May 2025', us: 'ZX_TIME' }
+      { label: 'Data and analytics', them: 'A data platform (Gravity) with analytics and care-management software.', src: ZX_CMP_SRC.innoSite, us: 'A data foundation that builds one patient record from claims, EHR, ADT, lab and pharmacy data, and analytics that rank patients by risk and open HCC and quality gaps.' },
+      { label: 'AI agents', them: '“Agents of Care”, described as “a suite of pre-trained AI Agents”, plus voice AI agents for inbound and outbound patient calls.', src: ZX_CMP_SRC.innoAgents + '; ' + ZX_CMP_SRC.innoVoice, us: 'ZX_AGENTS' },
+      { label: 'Language models', them: '“Sara SLMs”, described as “12 fine-tuned models purpose-built to power administrative and clinical workflows across healthcare”.', src: ZX_CMP_SRC.innoSlm, us: 'ZynixLLM is the language model layer of the Zynix platform. Agents work within the escalation rules your team sets.' },
+      { label: 'Post-discharge and TCM', them: '“Out-of-the-box care management workflows purpose-built for TCM” and an “ED Follow-up Agent designed to automate post-discharge care coordination”.', src: ZX_CMP_SRC.innoTcm, us: 'ZX_TCM' },
+      { label: 'Deployment', them: 'Innovaccer says Gravity “reduces deployment timelines from months to weeks”.', src: ZX_CMP_SRC.innoGravity, us: 'ZX_TIME' }
     ],
     fitThem: ['An enterprise data platform and analytics program is your first priority.', 'You want one suite across data, analytics and care management.'],
     fitUs: ['Your team already knows who needs attention, and the gap is follow-through.', 'You want care plans and outreach agents working the lists, with clinicians making the clinical decisions.', 'You run value-based contracts across practices on different EHRs.'],
@@ -11739,14 +11822,14 @@ function renderDataAnalyticsV7() {
   function renderCompareCommure() { return renderCompareVs({
     slug: 'commure', name: 'Commure',
     them: 'Commure describes itself as delivering “next-generation AI infrastructure for health systems, integrating ambient workflows, agentic AI, and revenue cycle automation on a single platform”.',
-    themSrc: 'Commure news release, 19 May 2026',
+    themSrc: ZX_CMP_SRC.commRaise,
     rows: [
-      { label: 'Focus', them: 'Ambient workflows, agentic AI and revenue cycle automation for health systems.', src: 'Commure news release, 19 May 2026', us: 'ZX_FOCUS' },
-      { label: 'Agents', them: 'Commure Agents, launched in June 2025, “[h]andle routine tasks such as answering calls, scheduling appointments, providing patient updates”; its product line also lists Call Center Agents.', src: 'Commure news release, 25 Jun 2025; commure.com, accessed 19 Sep 2026', us: 'ZX_AGENTS' },
-      { label: 'Documentation', them: 'Ambient AI is part of a product line that also includes Strongline, RCM, Engage and Call Center Agents.', src: 'commure.com, accessed 19 Sep 2026', us: 'ZX_DOCS' },
-      { label: 'Patient engagement', them: 'Commure Engage delivers care journeys through automated outreach, with pathways that include post-discharge recovery and symptom monitoring.', src: 'commure.com/engage, accessed 19 Sep 2026', us: 'Care plans for TCM, CCM, wellness visits and gap closure sequence agent outreach and care team tasks, and close only when each step is documented.' },
-      { label: 'Deployment', them: 'Commure has written that deployment planning “can be completed in about thirty days” in the best case and “can take up to four months” in more complex cases.', src: 'Commure blog, 31 Oct 2025', us: 'ZX_TIME' },
-      { label: 'Customers', them: 'More than 130 large health systems “use the platform alongside thousands of physician-owned practices”.', src: 'Commure news release, 19 May 2026', us: 'ZX_CUSTOMERS' }
+      { label: 'Focus', them: 'Ambient workflows, agentic AI and revenue cycle automation for health systems.', src: ZX_CMP_SRC.commRaise, us: 'ZX_FOCUS' },
+      { label: 'Agents', them: 'Commure Agents, launched in June 2025, “[h]andle routine tasks such as answering calls, scheduling appointments, providing patient updates”; its product line also lists Call Center Agents.', src: ZX_CMP_SRC.commAgents + '; ' + ZX_CMP_SRC.commSite, us: 'ZX_AGENTS' },
+      { label: 'Documentation', them: 'Ambient AI is part of a product line that also includes Strongline, RCM, Engage and Call Center Agents.', src: ZX_CMP_SRC.commSite, us: 'ZX_DOCS' },
+      { label: 'Patient engagement', them: 'Commure Engage delivers care journeys through automated outreach, with pathways that include post-discharge recovery and symptom monitoring.', src: ZX_CMP_SRC.commEngage, us: 'Care plans for TCM, CCM, wellness visits and gap closure sequence agent outreach and care team tasks, and close only when each step is documented.' },
+      { label: 'Deployment', them: 'Commure has written that deployment planning “can be completed in about thirty days” in the best case and “can take up to four months” in more complex cases.', src: ZX_CMP_SRC.commBlog, us: 'ZX_TIME' },
+      { label: 'Customers', them: 'More than 130 large health systems “use the platform alongside thousands of physician-owned practices”.', src: ZX_CMP_SRC.commRaise, us: 'ZX_CUSTOMERS' }
     ],
     fitThem: ['You are a health system consolidating ambient documentation, revenue cycle and call-center work with one vendor.'],
     fitUs: ['Your contracts reward follow-up between visits: TCM, wellness visits, HCC and quality gaps.', 'You need the same workflows across practices on different EHRs.', 'You want clinicians approving documentation and taking every clinical escalation.'],
@@ -11774,7 +11857,7 @@ function renderDataAnalyticsV7() {
     var list = function (items) { return '<ul class="zx-res-fit__list">' + items.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>'; };
     var glance = '<div class="zx-res-glance">' +
       '<div class="zx-res-glance__panel"><p class="zx-res-glance__who">' + label.charAt(0).toUpperCase() + label.slice(1) + '</p><p class="zx-res-glance__text">' + cfg.them + '</p>' + cite(cfg.themSrc) + '</div>' +
-      '<div class="zx-res-glance__panel zx-res-glance__panel--us"><p class="zx-res-glance__who">Zynix AI</p><p class="zx-res-glance__text">The Zynix platform connects claims, EHR and ADT data, ranks the patients and care gaps that need attention, and carries the follow-up through care plans, outreach agents and ambient documentation, with clinicians making the clinical decisions.</p></div>' +
+      '<div class="zx-res-glance__panel zx-res-glance__panel--us"><p class="zx-res-glance__who">Zynix AI</p><p class="zx-res-glance__text">' + zxDefinition() + ' Agents follow the escalation rules your team sets, and clinicians make the clinical decisions.</p></div>' +
     '</div>';
     var table = renderCompareTable({ caption: 'Side by side', captionHidden: true,
       columns: [{ label: 'Capability' }, { label: label.charAt(0).toUpperCase() + label.slice(1) }, { label: 'Zynix AI', highlight: true }],
@@ -11791,7 +11874,7 @@ function renderDataAnalyticsV7() {
       renderSection({ id: 'comparison', compact: true, rule: true, className: 'zx-res-compare' },
         renderSectionHead('At a glance', 'Two different starting points', null, { id: 'comparison-title' }) + glance +
         '<h3 class="zx-res-compare__sub">Capability by capability</h3>' + table +
-        (cfg.themSrc ? '<p class="zx-res-compare__note">' + label + ' details come from ' + cfg.themSrc + ', unless a row cites another source. Tell us if something has changed.</p>' : '')) +
+        (cfg.themSrc ? '<p class="zx-res-compare__note">' + label + ' details come from ' + cfg.themSrc.replace(/<[^>]*>/g, '') + ', unless a row cites another source. Tell us if something has changed.</p>' : '')) +
       renderSection({ id: 'fit', surface: 'subtle', className: 'zx-res-fit-section' },
         renderSectionHead('Which fits your team', 'Choosing between them', null, { id: 'fit-title' }) + fit) +
       renderSection({ id: 'faq', className: 'zx-res-compare-faq' },
@@ -11808,11 +11891,11 @@ function renderDataAnalyticsV7() {
   function renderCompareHealthCatalyst() { return renderCompareVs({
     slug: 'health-catalyst', name: 'Health Catalyst',
     them: 'Health Catalyst describes itself as a provider of “data and analytics technology and services”. Its products include Upfront, a patient engagement platform, and Twistle, which automates patient communication by SMS, patient portal and IVR.',
-    themSrc: 'Health Catalyst news release, 18 Feb 2026; healthcatalyst.com, accessed 19 Sep 2026',
+    themSrc: ZX_CMP_SRC.hcThem,
     rows: [
-      { label: 'Focus', them: '“Data and analytics technology and services”.', src: 'Health Catalyst news release, 18 Feb 2026', us: 'ZX_FOCUS' },
-      { label: 'Patient engagement', them: 'Upfront, which Health Catalyst says can “Automate scheduling, referrals, and care transitions”, and Twistle for patient communication by SMS, patient portal and IVR.', src: 'healthcatalyst.com, accessed 19 Sep 2026', us: 'ZX_AGENTS' },
-      { label: 'Pricing', them: 'No public pricing on the pages we reviewed.', src: 'healthcatalyst.com, accessed 19 Sep 2026', us: 'ZX_PRICE' }
+      { label: 'Focus', them: '“Data and analytics technology and services”.', src: ZX_CMP_SRC.hcCeo, us: 'ZX_FOCUS' },
+      { label: 'Patient engagement', them: 'Upfront, which Health Catalyst says can “Automate scheduling, referrals, and care transitions”, and Twistle for patient communication by SMS, patient portal and IVR.', src: ZX_CMP_SRC.hcProducts, us: 'ZX_AGENTS' },
+      { label: 'Pricing', them: 'No public pricing on the pages we reviewed.', src: ZX_CMP_SRC.hcSite, us: 'ZX_PRICE' }
     ],
     fitThem: ['You want an enterprise analytics program supported by professional services.', 'Your analytics needs reach well beyond value-based care programs.'],
     fitUs: ['You need the lists worked, not only reported: TCM contacts, wellness visits and gap outreach.', 'You want care plans and outreach agents on the same patient record as your analytics.', 'You serve ACO, Medicare Advantage or MSSP populations across several EHRs.'],
@@ -11826,13 +11909,13 @@ function renderDataAnalyticsV7() {
   function renderCompareAbridge() { return renderCompareVs({
     slug: 'abridge', name: 'Abridge',
     them: 'Abridge provides ambient clinical documentation and, in June 2026, announced a clinician intelligence platform that extends before, during and after the visit.',
-    themSrc: 'Abridge news release, 11 Jun 2026',
+    themSrc: ZX_CMP_SRC.abrKeynote,
     rows: [
-      { label: 'Scope', them: 'Pre-charted notes and summaries before the visit, clinical decision support during it, and “billing codes, and orders for clinician review” afterwards.', src: 'Abridge news release, 11 Jun 2026', us: 'ZynScribe for ambient documentation, inside a platform that also runs care plans, outreach agents and worklists for value-based care.' },
-      { label: 'Documentation', them: 'Ambient clinical documentation.', src: 'Abridge news release, 11 Jun 2026', us: 'ZX_DOCS' },
-      { label: 'EHR integration', them: '“Deeply integrated across leading EHRs, including Epic, Oracle Health, and athenahealth”; “Abridge Inside” is embedded in Epic workflows.', src: 'Abridge news releases, 11 Jun 2026 and 13 Feb 2024', us: SITE_FACTS.ehr.line + ', including Epic, Oracle Health (Cerner), athenahealth, eClinicalWorks and NextGen.' },
-      { label: 'Value-based care', them: 'Documentation support for risk adjustment and care gaps as part of its revenue-cycle offering.', src: 'abridge.com/platform/revenue-cycle, accessed 19 Sep 2026', us: 'Point-of-care gap prompts before the visit, and care plans and outreach between visits for TCM, wellness visits and HCC and quality gaps.' },
-      { label: 'Pricing', them: 'No public pricing was found on the Abridge pages reviewed.', src: 'abridge.com, accessed 19 Sep 2026', us: 'ZX_PRICE' }
+      { label: 'Scope', them: 'Pre-charted notes and summaries before the visit, clinical decision support during it, and “billing codes, and orders for clinician review” afterwards.', src: ZX_CMP_SRC.abrKeynote, us: 'ZynScribe for ambient documentation, inside a platform that also runs care plans, outreach agents and worklists for value-based care.' },
+      { label: 'Documentation', them: 'Ambient clinical documentation.', src: ZX_CMP_SRC.abrKeynote, us: 'ZX_DOCS' },
+      { label: 'EHR integration', them: '“Deeply integrated across leading EHRs, including Epic, Oracle Health, and athenahealth”; “Abridge Inside” is embedded in Epic workflows.', src: ZX_CMP_SRC.abrBoth, us: SITE_FACTS.ehr.line + ', including Epic, Oracle Health (Cerner), athenahealth, eClinicalWorks and NextGen.' },
+      { label: 'Value-based care', them: 'Documentation support for risk adjustment and care gaps as part of its revenue-cycle offering.', src: ZX_CMP_SRC.abrRcm, us: 'Point-of-care gap prompts before the visit, and care plans and outreach between visits for TCM, wellness visits and HCC and quality gaps.' },
+      { label: 'Pricing', them: 'No public pricing was found on the Abridge pages reviewed.', src: ZX_CMP_SRC.abrSite, us: 'ZX_PRICE' }
     ],
     fitThem: ['Ambient documentation is the problem you’re solving right now, and Abridge is a strong choice for it.'],
     fitUs: ['You want documentation connected to the care gaps, care plans and follow-up around the visit.', 'Your programs depend on work between visits: outreach, scheduling and post-discharge follow-up.'],
@@ -11847,12 +11930,12 @@ function renderDataAnalyticsV7() {
   function renderCompareNavina() { return renderCompareVs({
     slug: 'navina', name: 'Navina',
     them: 'Navina describes itself as “The clinician-first AI copilot for value-based success”, with Clinician Copilot, Risk Adjustment, Quality Management and Analytics products.',
-    themSrc: 'navina.ai, accessed 19 Sep 2026',
+    themSrc: ZX_CMP_SRC.navSite,
     rows: [
-      { label: 'Where it works', them: 'At the point of care, as a copilot for the clinician.', src: 'navina.ai, accessed 19 Sep 2026', us: 'Between visits and at the point of care: ranked worklists, care plans and outreach agents, plus point-of-care gap prompts and ZynScribe documentation.' },
-      { label: 'Risk adjustment and quality', them: 'Risk Adjustment and Quality Management products.', src: 'navina.ai, accessed 19 Sep 2026', us: 'HCC and quality gap detection that feeds outreach, scheduling and pre-visit prep, with each gap tracked until the visit is completed and documented.' },
-      { label: 'Documentation', them: 'Clinician Copilot supports the clinician during the visit.', src: 'navina.ai, accessed 19 Sep 2026', us: 'ZX_DOCS' },
-      { label: 'Customer evidence', them: 'Navina publishes customer results at navina.ai/case-studies.', src: 'navina.ai, accessed 19 Sep 2026', us: 'Customer stories at zynix.ai, and partnership releases from Palm Beach ACO and eternalHealth.' }
+      { label: 'Where it works', them: 'At the point of care, as a copilot for the clinician.', src: ZX_CMP_SRC.navSite, us: 'Between visits and at the point of care: ranked worklists, care plans and outreach agents, plus point-of-care gap prompts and ZynScribe documentation.' },
+      { label: 'Risk adjustment and quality', them: 'Risk Adjustment and Quality Management products.', src: ZX_CMP_SRC.navSite, us: 'HCC and quality gap detection that feeds outreach, scheduling and pre-visit prep, with each gap tracked until the visit is completed and documented.' },
+      { label: 'Documentation', them: 'Clinician Copilot supports the clinician during the visit.', src: ZX_CMP_SRC.navSite, us: 'ZX_DOCS' },
+      { label: 'Customer evidence', them: 'Navina publishes customer results at navina.ai/case-studies.', src: ZX_CMP_SRC.navCases, us: 'Customer stories at zynix.ai, and partnership releases from Palm Beach ACO and eternalHealth.' }
     ],
     fitThem: ['Your priority is visit-level HCC capture and chart summaries for clinicians.', 'You want a clinician-first copilot with risk adjustment, quality and analytics products from one vendor.'],
     fitUs: ['You need the work between visits done: outreach, scheduling, post-discharge follow-up and gap closure.', 'You want point-of-care prompts and follow-up running from the same list of gaps.'],
@@ -11869,11 +11952,11 @@ function renderDataAnalyticsV7() {
     cta: { title: 'Replacing Olive AI? See Zynix on your own workflows', sub: 'Book 30 minutes with our team. We’ll walk through one of your value-based care programs on sample data and map it to your systems.' },
     lead: 'Olive AI wound down in 2023. For teams re-evaluating automation, here is where its products went and where Zynix fits, cited to news coverage of the wind-down.',
     them: 'Olive AI announced its wind-down on 31 October 2023. It sold its clearinghouse and patient-access units to Waystar and its prior-authorization unit to Humata Health.',
-    themSrc: 'Healthcare Dive, 1 Nov 2023; HIT Consultant, 31 Oct 2023',
+    themSrc: ZX_CMP_SRC.olvThem,
     rows: [
-      { label: 'Status', them: 'Wound down in October 2023.', src: 'Healthcare Dive, 1 Nov 2023', us: 'ZX_CUSTOMERS' },
-      { label: 'Where its products went', them: 'Clearinghouse and patient access to Waystar; prior authorization to Humata Health.', src: 'HIT Consultant, 31 Oct 2023', us: 'Zynix is not a clearinghouse. Ask us about prior authorization support for your organization.' },
-      { label: 'Focus', them: 'Revenue cycle automation, including clearinghouse, patient-access and prior-authorization products.', src: 'HIT Consultant, 31 Oct 2023', us: 'Value-based care operations: post-discharge follow-up, wellness visits, HCC and quality gap closure, scheduling, after-hours intake and fax routing.' }
+      { label: 'Status', them: 'Wound down in October 2023.', src: ZX_CMP_SRC.olvDive, us: 'ZX_CUSTOMERS' },
+      { label: 'Where its products went', them: 'Clearinghouse and patient access to Waystar; prior authorization to Humata Health.', src: ZX_CMP_SRC.olvHitc, us: 'Zynix is not a clearinghouse. Ask us about prior authorization support for your organization.' },
+      { label: 'Focus', them: 'Revenue cycle automation, including clearinghouse, patient-access and prior-authorization products.', src: ZX_CMP_SRC.olvHitc, us: 'Value-based care operations: post-discharge follow-up, wellness visits, HCC and quality gap closure, scheduling, after-hours intake and fax routing.' }
     ],
     fitThem: ['For clearinghouse, patient-access or prior-authorization products, compare the Waystar and Humata Health offerings that took over Olive’s units.'],
     fitUs: ['You are re-evaluating automation for value-based care programs, not only the revenue cycle.', 'You want outreach, scheduling and follow-up tied to one patient record and one worklist.'],
@@ -11887,12 +11970,12 @@ function renderDataAnalyticsV7() {
   function renderCompareNotableHealth() { return renderCompareVs({
     slug: 'notable-health', name: 'Notable',
     them: 'Notable describes its platform as covering “Access, Revenue Cycle Management, Care Operations, and more”, and lists value-based care among its use cases.',
-    themSrc: 'notablehealth.com, accessed 19 Sep 2026',
+    themSrc: ZX_CMP_SRC.notSite,
     rows: [
-      { label: 'Focus', them: '“Access, Revenue Cycle Management, Care Operations, and more”.', src: 'notablehealth.com, accessed 19 Sep 2026', us: 'ZX_FOCUS' },
-      { label: 'Value-based care', them: 'AI agents that “identify and engage patients to schedule screenings and close care gaps”, and chart review “to capture complete diagnoses and HCCs”.', src: 'notablehealth.com/use-case/value-based-care, accessed 19 Sep 2026', us: 'Ranked worklists for TCM, wellness visits and HCC and quality gaps, with care plans and outreach agents working them.' },
-      { label: 'Agent workflows', them: 'Patient registration, scheduling, referrals, authorizations, coding, and care gap identification and closure.', src: 'Notable news release, 24 Oct 2024', us: 'ZX_AGENTS' },
-      { label: 'Customers', them: 'Names health systems among its customers.', src: 'notablehealth.com, accessed 19 Sep 2026', us: 'ZX_CUSTOMERS' }
+      { label: 'Focus', them: '“Access, Revenue Cycle Management, Care Operations, and more”.', src: ZX_CMP_SRC.notSite, us: 'ZX_FOCUS' },
+      { label: 'Value-based care', them: 'AI agents that “identify and engage patients to schedule screenings and close care gaps”, and chart review “to capture complete diagnoses and HCCs”.', src: ZX_CMP_SRC.notVbc, us: 'Ranked worklists for TCM, wellness visits and HCC and quality gaps, with care plans and outreach agents working them.' },
+      { label: 'Agent workflows', them: 'Patient registration, scheduling, referrals, authorizations, coding, and care gap identification and closure.', src: ZX_CMP_SRC.notFlows, us: 'ZX_AGENTS' },
+      { label: 'Customers', them: 'Names health systems among its customers.', src: ZX_CMP_SRC.notSite, us: 'ZX_CUSTOMERS' }
     ],
     fitThem: ['Front-office automation such as registration and check-in is the priority.'],
     fitUs: ['Your success is measured in shared savings, Star Ratings and HCC capture.', 'You need TCM, wellness visit and gap-closure programs run end to end, with clinicians taking every clinical question.'],
@@ -12910,7 +12993,7 @@ function renderDataAnalyticsV7() {
 
     '<div class="zynix-page-faq" style="margin:48px 0 0">' +
     '<h2 style="font-size:28px;font-weight:700;margin:0 0 32px;color:var(--z-text)">Frequently Asked Questions</h2>' +
-    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">Can AI make clinical decisions autonomously?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>AI in healthcare is designed to support clinical decision-making, not replace it. AI systems surface recommendations, flag risks, and present data-driven insights, but the physician retains authority over all clinical decisions. Regulatory frameworks and clinical best practices require human oversight for diagnostic and treatment decisions. AI excels at ensuring physicians have the right information at the right time to make informed choices.</p></div></div>' +
+    '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">Can AI make clinical decisions on its own?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>AI in healthcare is designed to support clinical decision-making, not replace it. AI systems surface recommendations, flag risks, and present data-driven insights, but the physician retains authority over all clinical decisions. Regulatory frameworks and clinical best practices require human oversight for diagnostic and treatment decisions. AI excels at ensuring physicians have the right information at the right time to make informed choices.</p></div></div>' +
     '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">How do predictive risk models handle data bias?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Responsible AI platforms address bias through diverse training data, regular model auditing, and transparency in how risk scores are calculated. The best platforms allow organizations to review the features driving predictions and adjust models for their specific patient populations. Whatever the model, ask for performance results broken out by demographic group.</p></div></div>' +
     '<div class="zynix-faq-item" style="border-bottom:1px solid #e5e7eb;padding:20px 0"><h3 class="zynix-faq-q" style="font-size:17px;font-weight:600;cursor:pointer;color:var(--z-text);margin:0">What data sources does AI use for healthcare decision support?</h3><div class="zynix-faq-a" style="font-size:15px;line-height:1.7;color:var(--z-text-secondary);margin-top:12px"><p>Comprehensive AI decision support platforms integrate data from electronic health records, claims and billing systems, ADT feeds from hospitals, pharmacy benefit managers, laboratory information systems, and social determinants of health databases. The power of AI decision-making comes from unifying these traditionally siloed data sources into a complete patient picture that no single system provides alone.</p></div></div>' +
     '</div>' +
@@ -13127,7 +13210,7 @@ function renderDataAnalyticsV7() {
       facts: [['Segment', 'Risk-bearing ACO'], ['Region', 'South Florida'], ['Workflows', 'Post-discharge follow-up, wellness visits'], ['Announced', 'April 14, 2026']],
       challengeTitle: 'Every discharge starts a clock',
       challenge: 'PBACO Holding supports provider organizations in value-based care across its affiliated network. For transitional care management, CMS expects an interactive contact with the patient within 2 business days of discharge and a visit within 7 or 14 days. Coordinators were calling patients one at a time, and annual wellness visit outreach competed with everything else on their lists.',
-      cite: 'TCM timing: CMS, Transitional Care Management Services.',
+      cite: 'TCM timing: CMS, ' + zxTcmSource() + '.',
       runsTitle: 'What PBACO runs on Zynix',
       runsLead: 'The first phase of the partnership covers outreach for transitional and preventive care. Agents make the calls and texts; PBACO’s care teams keep every clinical conversation.',
       runs: [
@@ -13230,7 +13313,7 @@ function renderDataAnalyticsV7() {
       facts: [['Segment', 'ACO'], ['Program', 'Medicare Shared Savings Program'], ['Region', 'Brevard County, Florida'], ['Workflows', 'Post-discharge follow-up, patient callbacks']],
       challengeTitle: 'Too few patients reached inside the TCM window',
       challenge: 'For transitional care management, CMS expects an interactive contact within 2 business days of discharge. Manual outreach reached too few of Space Coast ACO’s discharged patients inside that window, so the ACO could not bill TCM for many discharges, and patients without follow-up were more likely to return to the emergency department.',
-      cite: 'TCM timing: CMS, Transitional Care Management Services.',
+      cite: 'TCM timing: CMS, ' + zxTcmSource() + '.',
       runsTitle: 'What Space Coast ACO runs on Zynix',
       runsLead: 'Outreach after every discharge, ranked by readmission risk, with clinical staff keeping every clinical conversation.',
       runs: [
@@ -13545,46 +13628,6 @@ function renderDataAnalyticsV7() {
       renderFooter();
   }
 
-  function renderBlogPostFromData(post) {
-    // Style the raw CMS HTML to match design system
-    var body = (post.b || '')
-      .replace(/<h2>/g, '<h2 style="font-size:26px;font-weight:700;margin:40px 0 14px;color:var(--z-text);letter-spacing:-0.3px">')
-      .replace(/<\/h2>/g, '</h2>')
-      .replace(/<h3>/g, '<h3 style="font-size:20px;font-weight:600;margin:32px 0 10px;color:var(--z-text)">')
-      .replace(/<p>/g, '<p style="font-size:16px;line-height:1.85;color:var(--z-text-secondary);margin:0 0 18px">')
-      .replace(/<ul>/g, '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 18px">')
-      .replace(/<ol>/g, '<ol style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 18px">')
-      .replace(/<li>/g, '<li style="margin-bottom:8px">')
-      .replace(/<blockquote>/g, '<blockquote style="border-left:3px solid var(--z-accent);padding:16px 20px;margin:28px 0;background:var(--z-peach);border-radius:0 8px 8px 0">')
-      .replace(/<a /g, '<a style="color:var(--z-blue);font-weight:500;text-decoration:underline" ');
-
-    var blogHero = '<section style="background:var(--z-bg);padding:64px 24px 48px;border-bottom:1px solid var(--z-border)">' +
-      '<div style="max-width:800px;margin:0 auto">' +
-      '<a href="/resources-blog" style="display:inline-flex;align-items:center;gap:6px;color:var(--z-text-secondary);font-size:13px;font-weight:500;text-decoration:none;margin-bottom:24px;letter-spacing:0.3px">' +
-      '\u2190 Back to Blog</a>' +
-      '<div style="display:inline-block;background:var(--z-blue-light);color:var(--z-blue);font-size:11px;font-weight:700;letter-spacing:1.5px;padding:4px 10px;border-radius:4px;margin-bottom:16px">' + (post.c || 'INSIGHTS').toUpperCase() + '</div>' +
-      '<h1 style="font-size:clamp(26px,4vw,38px);font-weight:800;color:var(--z-text);line-height:1.2;letter-spacing:-1px;margin:0 0 20px">' + (post.t || '') + '</h1>' +
-      '<div style="display:flex;align-items:center;gap:12px">' +
-      '<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--z-blue),#4f46e5);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#fff;font-weight:700;font-size:14px">' + (post.a || 'Z').charAt(0).toUpperCase() + '</span></div>' +
-      '<div><span style="font-size:14px;font-weight:600;color:var(--z-text)">' + (post.a || 'Zynix AI') + '</span>' +
-      '<span style="font-size:13px;color:var(--z-text-secondary);margin-left:8px">' + (post.d || '') + '</span></div>' +
-      '</div>' +
-      '</div></section>';
-
-    return blogHero +
-      '<section style="background:var(--z-bg-alt);padding:48px 24px 80px">' +
-      '<div style="max-width:800px;margin:0 auto">' +
-      '<p style="font-size:18px;line-height:1.85;color:var(--z-text);margin:0 0 40px;font-style:italic;padding-bottom:32px;border-bottom:1px solid var(--z-border)">' + (post.s || '') + '</p>' +
-      '<article>' + body + '</article>' +
-      '<div style="margin-top:56px;padding-top:32px;border-top:1px solid var(--z-border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">' +
-      '<a href="/resources-blog" style="color:var(--z-blue);font-size:15px;font-weight:500;text-decoration:none">\u2190 Back to Blog</a>' +
-      '<a href="/contact" style="background:var(--z-accent);color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none">Request a Demo</a>' +
-      '</div>' +
-      '</div></section>' +
-      renderCTA('Transform Your Healthcare Operations', 'Join 1M+ VBC patients managed on the Zynix AI platform.', 'Get a Demo') +
-      renderFooter();
-  }
-
 
   if (routes[path]) {
     var doInject = function() {
@@ -13712,69 +13755,6 @@ function renderDataAnalyticsV7() {
       document.addEventListener('DOMContentLoaded', doInject);
     } else {
       doInject();
-    }
-  } else if (path.startsWith('/blog-posts/') || path === '/blog-posts') {
-    // Webflow CMS blog post — client-side render from zynix-blog-data.js
-    var doBlogPost = function() {
-      var slug = path.replace(/^\/blog-posts\/?/, '');
-      injectMegaMenu();
-      var nukeStyle = document.createElement('style');
-      nukeStyle.textContent = 'body>*:not(.zynix-announcement-bar):not(.zynix-mega-nav):not(.zynix-injected):not(.zynix-mobile-menu){display:none!important}';
-      document.head.appendChild(nukeStyle);
-      var zaf = document.getElementById('zaf');
-      if (zaf) zaf.remove();
-      document.documentElement.style.opacity = '1';
-      document.documentElement.classList.remove('js-loading');
-      if (window.__antiFlickerTimeout) clearTimeout(window.__antiFlickerTimeout);
-
-      function renderPostFromData(post) {
-        document.title = post.t + ' | Zynix AI';
-        var metaDesc = document.querySelector('meta[name="description"]');
-        if (!metaDesc) { metaDesc = document.createElement('meta'); metaDesc.name = 'description'; document.head.appendChild(metaDesc); }
-        metaDesc.content = post.s || '';
-        // Fix hreflang: add self-referencing en + x-default (fixes SEMrush "no self-referencing hreflang" error)
-        var postCanonical = 'https://www.zynix.ai' + path;
-        var cnl=document.querySelector('link[rel="canonical"]');
-        if(!cnl){cnl=document.createElement('link');cnl.rel='canonical';document.head.appendChild(cnl);}
-        cnl.href=postCanonical;
-        var hrel=document.querySelector('link[hreflang="en"]');
-        if(!hrel){hrel=document.createElement('link');hrel.rel='alternate';hrel.hreflang='en';document.head.appendChild(hrel);}
-        hrel.href=postCanonical;
-        var xdef=document.querySelector('link[hreflang="x-default"]');
-        if(!xdef){xdef=document.createElement('link');xdef.rel='alternate';xdef.hreflang='x-default';document.head.appendChild(xdef);}
-        xdef.href=postCanonical;
-        var sc = document.createElement('script');
-        sc.type = 'application/ld+json';
-        sc.textContent = JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':post.t,'description':post.s,'author':{'@type':'Person','name':post.a || 'Zynix AI'},'publisher':{'@type':'Organization','name':'Zynix AI','url':'https://www.zynix.ai'},'datePublished':post.d,'mainEntityOfPage':{'@type':'WebPage','@id':'https://www.zynix.ai' + path}});
-        document.head.appendChild(sc);
-        var bc = document.createElement('script');
-        bc.type = 'application/ld+json';
-        bc.textContent = JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':'https://www.zynix.ai'},{'@type':'ListItem','position':2,'name':'Blog','item':'https://www.zynix.ai/resources-blog'},{'@type':'ListItem','position':3,'name':post.t,'item':'https://www.zynix.ai' + path}]});
-        document.head.appendChild(bc);
-        injectAfterNav(renderBlogPostFromData(post));
-        initAnimations();
-      }
-
-      if (window.ZYNIX_BLOG_DATA) {
-        var post = window.ZYNIX_BLOG_DATA[slug];
-        if (post) { renderPostFromData(post); }
-        else { injectAfterNav(render404()); initAnimations(); }
-      } else {
-        var s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@d91d451/zynix-blog-data.js';
-        s.onload = function() {
-          var post = window.ZYNIX_BLOG_DATA ? window.ZYNIX_BLOG_DATA[slug] : null;
-          if (post) { renderPostFromData(post); }
-          else { injectAfterNav(render404()); initAnimations(); }
-        };
-        s.onerror = function() { injectAfterNav(render404()); initAnimations(); };
-        document.head.appendChild(s);
-      }
-    };
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', doBlogPost);
-    } else {
-      doBlogPost();
     }
   } else {
     // 404 — unmatched route: show branded 404 page
@@ -14025,11 +14005,12 @@ function renderDataAnalyticsV7() {
       // ── Social meta fallback ──
       // Inject og:* and twitter:* at parse time so scrapers that don't
       // execute injectSEO() (Facebook, LinkedIn, Slack, SEMrush crawlers)
-      // still get the right preview image, title, and description. Every
-      // page falls back to IMG.hero even if it's not in PAGE_SEO.
+      // still get the right title and description. The preview image is set only
+      // from a real 1200x630 card (zxOgCard; none yet), so the page's own
+      // og:image is never overwritten (SEO audit 2026-10-08, ZX-35/ZX-63).
       var ogTitle = s.title || document.title || 'Zynix AI';
       var ogDesc = s.desc || 'Zynix AI — AI infrastructure and workflows for value-based care.';
-      var ogImg = s.img || (typeof IMG !== 'undefined' && IMG.hero) || '';
+      var ogCard = zxOgCard(s, p), ogImg = ogCard ? ogCard.url : '';
       setMetaByAttr('property', 'og:title', ogTitle);
       setMetaByAttr('property', 'og:description', ogDesc);
       setMetaByAttr('property', 'og:type', 'website');
@@ -14039,7 +14020,7 @@ function renderDataAnalyticsV7() {
         setMetaByAttr('property', 'og:image', ogImg);
         setMetaByAttr('property', 'og:image:width', '1200');
         setMetaByAttr('property', 'og:image:height', '630');
-        setMetaByAttr('property', 'og:image:type', 'image/png');
+        if (ogCard.type) setMetaByAttr('property', 'og:image:type', ogCard.type);
       }
       setMetaByAttr('name', 'twitter:card', 'summary_large_image');
       setMetaByAttr('name', 'twitter:title', ogTitle);

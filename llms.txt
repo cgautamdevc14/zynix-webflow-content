@@ -1,82 +1,193 @@
 # Zynix AI
 
-> Zynix AI is a healthcare intelligence platform that unifies clinical, claims, and operational data to power autonomous AI agents for value-based care organizations — ACOs, health systems, health plans, FQHCs, independent practices, and ASCs. The platform closes care gaps, surfaces rising-risk patients, automates prior authorization and eligibility, improves HCC risk adjustment, and reduces readmissions.
+> Zynix AI (Zynix Inc., d/b/a Zynix AI) is the AI operating layer for value-based healthcare. It predicts which patients
+> need care, embeds the next step in the care team's workflow, and reaches patients by AI voice and text, so every insight
+> ends in an intervention. Four pillars: Population Intelligence, Predictive Risk (readmission, mortality, disease
+> progression, utilization), the Embedded Care Management Platform and AI Patient Engagement. It is built for ACOs,
+> MSOs/IPAs and physician groups, Medicare Advantage health plans, FQHCs and hospital systems.
 
-Zynix AI (legal entity Zynix Inc, dba Zyncare for patient SMS) is headquartered in Trinity, Florida. Founded in 2024 by Jayadeva (Jay) Chowdappa, M.D. — a practicing physician who founded six ACOs generating $300M+ in MSSP savings before Zynix. The platform serves 1M+ value-based care patients across 30+ U.S. states and 16+ organizations. HIPAA-compliant, SOC 2 Type II certified, HITRUST in progress. Deployable via Cloud, Private Cloud, On-Premises, or Hybrid.
+Last updated: 2026-10-09
+
+Key facts (as of September 2026, from Zynix):
+- 1M+ value-based care patients onboarded; customer organizations in 30 states.
+- 30+ EHR systems across 300+ connected instances (including Epic, Oracle Health (Cerner), athenahealth, eClinicalWorks,
+  NextGen, Allscripts, Greenway and DrChrono), using FHIR, HL7 v2, C-CDA, X12, Medicare CCLF and BCDA, and NCPDP.
+- Security: SOC 2 Type II audited (report available on request); HIPAA-aligned safeguards, BAA available; HITRUST CSF
+  certification in progress.
+- Approved participant in the CMS ACCESS Model, a voluntary CMS Innovation Center model in Original Medicare for
+  technology-supported chronic-condition care.
+- How the agents work: agents handle outreach, scheduling, reminders and documentation prep within the rules and hours a
+  care team sets. Licensed clinicians make clinical decisions and own the billable interactive contact for TCM. Agents
+  route clinical questions to the care team; they do not diagnose or recommend treatment. ZynScribe notes stay drafts
+  until a physician reviews and approves them.
+- Founded 2024. Co-founder and CEO: Jay Chowdappa, MD (ACOs led by him generated $300M+ in shared savings). Co-founder and
+  CTO: Gautamdev Chowdary.
+- Zynix Inc., 3535 Little Rd, Trinity, FL 34655 · info@zynix.ai · (727) 261-1297
+- Announcements: strategic partnership with PBACO Holding (Business Wire, Apr 14 2026); partnership with eternalHealth and
+  nirvanaHealth (Business Wire, Jun 2 2026). Press: https://www.zynix.ai/press
+
+## The AI operating layer: four pillars
+
+- [Population Intelligence for value-based care](https://www.zynix.ai/population-intelligence): Population health intelligence for value-based care: one live picture of who needs what, from claims, EHR, ADT, lab and pharmacy data, down to the visit.
+- [Predictive Risk: readmission, mortality, ED use](https://www.zynix.ai/predictive-risk): Know who is heading for a readmission, a decline or an ED visit before it happens.
+- [Embedded Care Management Platform](https://www.zynix.ai/embedded-care-management): A care management platform inside your team’s workflow: care plans for TCM, CCM and AWVs, tasks with owners and deadlines, escalation by rule and a record.
+- [AI Patient Engagement: voice and text agents](https://www.zynix.ai/ai-patient-engagement): AI patient engagement and outreach: voice and text agents for post-discharge calls, AWV and gap outreach, scheduling and after-hours calls. Clinicians decide.
 
 ## Platform
 
-- [Platform Overview](https://www.zynix.ai/platform): Four-layer unified intelligence platform for value-based care
-- [Data Platform](https://www.zynix.ai/products-data-platform): Real-time EHR, claims, ADT, labs, and SDoH ingestion with 97%+ patient matching
-- [Analytics](https://www.zynix.ai/products-analytics): Risk stratification, HCC coding, HEDIS/Stars tracking, and financial modeling
-- [AI Agents Hub](https://www.zynix.ai/agents): Twelve specialized autonomous agents for care, ops, and revenue
-- [ZynScribe](https://www.zynix.ai/zynscribe): Ambient AI clinical documentation — 70% reduction in physician documentation time
-- [Care Plans](https://www.zynix.ai/care-plans): Deployable TCM, CCM, AWV, HCC, and HEDIS care plan templates executed by AI agents
-- [ZynixLLM](https://www.zynix.ai/company-zynixllm): Healthcare-native language model with lower hallucination rates
-- [Security & Compliance](https://www.zynix.ai/security): HIPAA, SOC 2 Type II, HITRUST, and AWS GovCloud
+- [The Zynix platform for value-based care](https://www.zynix.ai/platform): One platform to connect claims, EHR and ADT data, rank the patients who need attention, and run follow-up with care plans, agents and your care team.
+- [Healthcare data foundation: one patient record](https://www.zynix.ai/products-data-platform): Bring claims, EHR, ADT, lab and pharmacy data into one patient record. Codes standardized, identities resolved, ready for worklists. 30+ EHR systems.
+- [Population health analytics for VBC](https://www.zynix.ai/zynix-data-analytics): Risk, quality and HCC gap analytics on your claims and clinical data, ranked into worklists your care team can act on this week.
+- [Care plans for TCM, CCM, AWVs and gap closure](https://www.zynix.ai/care-plans): Pre-built care plans sequence agents and care team tasks for TCM, CCM, wellness visits and gap closure, and close only when each step is documented.
+- [ZynScribe ambient clinical documentation](https://www.zynix.ai/zynscribe): ZynScribe drafts structured SOAP notes from the visit conversation. Nothing is filed or used for billing until the physician reviews and approves it.
+- [EHR integrations: Epic, Oracle Health, athena](https://www.zynix.ai/integrations): Zynix connects to 30+ EHR systems across 300+ connected instances, plus claims, ADT, lab and pharmacy feeds, over FHIR, HL7 v2, C-CDA and X12.
+- [Security and compliance](https://www.zynix.ai/security): SOC 2 Type II audited, HIPAA-aligned safeguards with a BAA available, and HITRUST CSF certification in progress. Request the SOC 2 report.
+- [ZynixLLM: how Zynix AI works safely](https://www.zynix.ai/company-zynixllm): How ZynixLLM supports value-based care workflows, when clinicians step in, and how agents stay within the escalation rules your team sets.
 
-## AI Agents
+## AI agents
 
-- [ZynAfterHours](https://www.zynix.ai/products-ai-agents-zynafterhours): 24/7 AI voice triage in 15+ languages, 97.3% clinical accuracy, 20-30% ER diversion
-- [ZynSchedule](https://www.zynix.ai/products-ai-agents-zynschedule): AI scheduling automation with 40% no-show reduction
-- [Post-Discharge Follow-Up](https://www.zynix.ai/products-ai-agents-post-discharge): Automated TCM outreach achieving 85%+ contact rates
-- [Medication Reconciliation](https://www.zynix.ai/products-ai-agents-med-rec): Discharge and transition-of-care medication review
-- [ZynReminder](https://www.zynix.ai/products-ai-agents-zynreminder): Personalized multi-channel appointment reminders
-- [ZynFax](https://www.zynix.ai/products-ai-agents-zynfax): Intelligent fax classification, extraction, and routing
-- [ZynAuth](https://www.zynix.ai/products-ai-agents-zynauth): AI prior authorization with 60% turnaround reduction
+- [AI agents for care operations](https://www.zynix.ai/agents): Agents for post-discharge outreach, chronic care, wellness visits, after-hours calls, scheduling and fax intake, with clinician escalation by rule.
+- [How AI agents work with your care team](https://www.zynix.ai/zynix-ai-agents): Agents handle outreach, scheduling, reminders and after-hours intake in three families. Clinical questions go to your care team by rule.
 
-## Who We Serve
+## Who it serves
 
-- [ACOs & MSOs](https://www.zynix.ai/audience-segments/acos-msos): MSSP, ACO REACH, and commercial value-based care organizations
-- [Health Systems](https://www.zynix.ai/audience-segments/health-systems): Multi-facility networks reducing readmissions and unifying engagement
-- [Health Plans](https://www.zynix.ai/audience-segments/health-plans): Medicare Advantage Stars, HEDIS gap closure, and member engagement
-- [FQHCs](https://www.zynix.ai/audience-segments/fqhcs): Multilingual outreach, UDS quality reporting, and preventive screening
-- [Independent & Group Practices](https://www.zynix.ai/audience-segments/independent-group-practices): After-hours coverage, documentation, and quality tracking
-- [Ambulatory Surgery Centers](https://www.zynix.ai/audience-segments/ascs): Prior auth automation and post-operative follow-up
+- [AI for ACOs: TCM, AWVs and HCC gaps](https://www.zynix.ai/audience-segments/acos-msos): TCM, wellness visits, HCC and quality gaps across your attributed panel, worked by agents and your care team, with clinicians making clinical decisions.
+- [For MSOs, IPAs and physician groups](https://www.zynix.ai/audience-segments/independent-group-practices): Run wellness visits, transitions of care, chronic care and quality programs across independent practices, whatever EHR each one runs.
+- [AI for Medicare Advantage plans](https://www.zynix.ai/audience-segments/health-plans): Member outreach for HEDIS gaps, medication adherence and post-discharge follow-up, with your care managers setting the scripts and taking escalations.
+- [AI for health systems: post-discharge care](https://www.zynix.ai/audience-segments/health-systems): ADT-triggered outreach, follow-up scheduling, after-hours access and ambient documentation that work with your EHR across hospitals and clinics.
+- [AI for FQHCs and community health](https://www.zynix.ai/audience-segments/fqhcs): Multilingual outreach, after-hours access and preventive screening follow-up for high-barrier populations, with care team escalation built in.
+- [AI for ambulatory surgery centers](https://www.zynix.ai/audience-segments/ascs): Referral intake, pre-procedure scheduling and post-op follow-up calls handled by agents, with your staff taking every exception.
+- [Solutions for value-based care organizations](https://www.zynix.ai/solutions): Workflows for ACOs, MSOs and IPAs, health plans, health systems and FQHCs: transitions of care, risk adjustment, quality, chronic care and access.
 
-## Use Cases
+## Use cases
 
-- [Post-Discharge Follow-Up (TCM)](https://www.zynix.ai/use-cases/post-discharge-follow-up): 85%+ contact rates, 25% readmission reduction
-- [HCC Gap Closure](https://www.zynix.ai/use-cases/hcc-gap-closure-health-system-aco): Continuous HCC recapture and RAF optimization
-- [After-Hours Triage](https://www.zynix.ai/use-cases/after-hours-triage-multi-site): 24/7 AI voice triage across multi-site networks
-- [Prior Authorization](https://www.zynix.ai/use-cases/prior-auth-high-volume-specialty): High-volume specialty auth automation
-- [Preventive Screening](https://www.zynix.ai/use-cases/preventive-screening-gap-fqhc): HEDIS gap closure for underserved populations
-- [Readmission Prevention](https://www.zynix.ai/use-cases/post-discharge-tcm-readmission): Post-discharge TCM bundle
-- [Preventive Screening Gap Closure](https://www.zynix.ai/use-cases/preventive-screening-gap-fqhc): Preventive screening and wellness-visit outreach
-- [Chronic Care Management](https://www.zynix.ai/use-cases/chronic-care-coordination-scale): CCM workflow automation
-- [Rising-Risk Patient Outreach](https://www.zynix.ai/use-cases/rising-risk-patient-outreach): Proactive outreach to rising-risk patients
-- [SDoH Screening](https://www.zynix.ai/use-cases/sdoh-screening-care-navigation): Social determinants screening and navigation
-- [Ambient Documentation](https://www.zynix.ai/use-cases/physician-documentation-ambient-ai): ZynScribe physician documentation
-- [HCC RAF Optimization](https://www.zynix.ai/use-cases/hcc-gap-raf-optimization): Continuous RAF accuracy
-- [After-Hours ED Diversion](https://www.zynix.ai/use-cases/after-hours-ed-diversion): Avoidable ER visit reduction
+- [Value-based care use cases](https://www.zynix.ai/use-cases): Workflows by program: transitions of care, risk adjustment and quality, chronic care, after-hours access, care navigation and front-office work.
+- [After-hours calls for group practices](https://www.zynix.ai/use-cases/after-hours-call-handling-group-practices): After-hours calls answered for independent practices, with next-morning visits booked and symptom questions routed to the physician on call by rule.
+- [After-hours access for ACO patients](https://www.zynix.ai/use-cases/after-hours-ed-diversion): After-hours calls answered for attributed patients: routine visits booked, symptom questions routed to your on-call clinician, emergencies sent to 911.
+- [After-hours call handling across sites](https://www.zynix.ai/use-cases/after-hours-triage-multi-site): One after-hours process for every site: calls answered, routine visits booked and symptom questions routed to your on-call clinician by rule.
+- [After-hours access for FQHCs](https://www.zynix.ai/use-cases/after-hours-triage-multilingual-fqhc): After-hours calls answered in the caller’s preferred language, with next-day visits booked and symptom questions routed to your on-call clinician.
+- [Appointment scheduling and no-show follow-up](https://www.zynix.ai/use-cases/appointment-scheduling-no-show): Two-way confirmations that ask what is in the way, reschedule early and offer freed slots to your waitlist, with exceptions routed to front-desk staff.
+- [CCM check-ins for independent practices](https://www.zynix.ai/use-cases/ccm-billing-chronic-care): Monthly chronic care check-ins for enrolled patients, with clinical questions routed to the practice and CCM time reviewed by the billing provider.
+- [Chronic care management for ACOs](https://www.zynix.ai/use-cases/chronic-care-coordination-scale): Monthly chronic care check-ins across your attributed panel, with symptom and adherence changes routed to care managers and CCM time reviewed by providers.
+- [Inbound fax routing](https://www.zynix.ai/use-cases/fax-inbound-document-routing): Every inbound fax read, classified, matched to the patient and routed to the right staff queue, with missing pages and urgent items flagged for review.
+- [HCC gap closure for health systems](https://www.zynix.ai/use-cases/hcc-gap-closure-health-system-aco): Pre-visit gap summaries for scheduled patients and outreach to bring in the ones with no visit booked, so HCC gaps close at documented visits.
+- [HCC gap closure for ACOs](https://www.zynix.ai/use-cases/hcc-gap-raf-optimization): Rank open HCC gaps, prepare clinicians before scheduled visits and invite patients with no visit booked, so conditions are documented before year-end.
+- [Risk adjustment outreach for MA plans](https://www.zynix.ai/use-cases/hcc-risk-adjustment-ma): Invite Medicare Advantage members with undocumented chronic conditions to a visit, and give providers the open gaps before the member arrives.
+- [HEDIS gap outreach for health plans](https://www.zynix.ai/use-cases/hedis-stars-quality-improvement): Two-way member outreach for open HEDIS measures: find the barrier, book the screening, lab or visit, and route clinical questions to care managers.
+- [High-utilizer member outreach](https://www.zynix.ai/use-cases/high-utilizer-member-management): Keep routine contact going with high-utilizer members between case management calls, and flag rising utilization before the next admission.
+- [Medication adherence outreach for MA plans](https://www.zynix.ai/use-cases/medication-adherence-chronic-populations): Find out why members stopped filling diabetes, blood pressure or statin medications, and route side effects, cost and access questions to the right team.
+- [Adherence check-ins for FQHC patients](https://www.zynix.ai/use-cases/medication-adherence-complex-chronic): Two-way medication check-ins for patients on complex regimens, in their preferred language, with side effects and cost barriers routed to your team.
+- [Ambient clinical documentation with ZynScribe](https://www.zynix.ai/use-cases/physician-documentation-ambient-ai): ZynScribe drafts structured visit notes from the conversation for physician review. Nothing is filed or used for billing until the physician approves it.
+- [Post-discharge follow-up for health systems](https://www.zynix.ai/use-cases/post-discharge-follow-up): ADT-triggered outreach after every discharge, follow-up visits booked inside the TCM window and clinical questions routed to your nurses by rule.
+- [Post-discharge follow-up for FQHCs](https://www.zynix.ai/use-cases/post-discharge-followup-fqhc): Outreach after a hospital stay in the patient’s preferred language, with barriers routed to your care team and the follow-up visit booked at your center.
+- [Post-discharge follow-up for MA members](https://www.zynix.ai/use-cases/post-discharge-ma-members): ADT-triggered outreach for Medicare Advantage members after a hospital stay, with care managers setting the scripts and taking every clinical question.
+- [Post-discharge TCM for ACOs](https://www.zynix.ai/use-cases/post-discharge-tcm-readmission): ADT-triggered outreach for attributed patients, nurse-led TCM contacts inside the 2-business-day window and follow-up visits booked with primary care.
+- [Post-procedure follow-up calls for ASCs](https://www.zynix.ai/use-cases/post-procedure-followup-complication): Follow-up calls after outpatient surgery on the schedule your surgeons set, with wound, pain and medication concerns routed to your clinical team.
+- [Preventive screening outreach for FQHCs](https://www.zynix.ai/use-cases/preventive-screening-gap-fqhc): Outreach for open screening orders that asks what is in the way, books the visit and routes transportation or cost barriers to your care team.
+- [Prior authorization paperwork for specialty care](https://www.zynix.ai/use-cases/prior-auth-high-volume-specialty): Payer responses for specialty authorizations read, matched and routed to the right person, with approved cases scheduled while your staff own each request.
+- [Authorization paperwork for surgery centers](https://www.zynix.ai/use-cases/prior-auth-surgical-procedures): Payer responses for surgical cases read, matched and routed to the right person, with approved cases confirmed while your staff own every request.
+- [Prior authorization paperwork for practices](https://www.zynix.ai/use-cases/prior-auth-workflow-management): Payer responses read, matched and routed to the right person, and approved visits booked, while practice staff keep ownership of every request.
+- [Referral tracking and leakage prevention](https://www.zynix.ai/use-cases/referral-coordination-leakage): Follow each referral until the specialist visit happens and the result returns to the referring provider, with stalled referrals routed to your team.
+- [Referral intake for surgery centers](https://www.zynix.ai/use-cases/referral-intake-asc): Referral packets and faxes read, matched to the patient and case, checked for missing items and routed to your intake team before scheduling.
+- [Rising-risk patient outreach for ACOs](https://www.zynix.ai/use-cases/rising-risk-patient-outreach): Turn risk flags into check-ins and booked visits before an admission, with new symptoms and barriers routed to your care team by rule.
+- [SDoH screening and care navigation](https://www.zynix.ai/use-cases/sdoh-screening-care-navigation): Capture transportation, food, housing and cost barriers during patient outreach and route them to coordinators, so a screening answer leads to follow-up.
+- [Pre-procedure preparation for surgery centers](https://www.zynix.ai/use-cases/surgical-scheduling-pre-procedure): Two-way outreach before each case confirms labs, medication holds, fasting and transportation, with incomplete items routed to your staff early.
 
-## Case Studies
+## Customers
 
-- [Palm Beach ACO](https://www.zynix.ai/case-studies-pbaco): Flagship 600K+ VBC lives, $936M+ cumulative MSSP savings
-- [West Florida ACO](https://www.zynix.ai/case-studies-west-florida-aco): Value-based care transformation
-- [Space Coast ACO](https://www.zynix.ai/case-studies-space-coast-aco): Care coordination at scale
-- [Central Florida ACO](https://www.zynix.ai/case-studies-central-florida-aco): Shared savings generation
-- [AMISTAD Community Health Center](https://www.zynix.ai/case-studies-amistad): FQHC quality and UDS reporting
-- [eternalHealth](https://www.zynix.ai/case-studies-eternal-health): Medicare Advantage plan
+- [Customer stories](https://www.zynix.ai/resources-case-studies): How ACOs, MSOs, health plans, FQHCs, physician groups and a hospital system use Zynix, with what their leaders have said on the record.
+- [Palm Beach ACO customer story](https://www.zynix.ai/case-studies/pbaco): How Palm Beach ACO (PBACO Holding) runs post-discharge follow-up and annual wellness visit outreach by voice and SMS across its provider network.
+- [AMISTAD Community Health Center story](https://www.zynix.ai/case-studies/amistad): How AMISTAD Community Health Center answers after-hours calls and runs preventive screening outreach in the languages its patients speak.
+- [Apollo Clinic Network customer story](https://www.zynix.ai/case-studies/apollo-clinic): How Apollo Clinic Network uses scheduling and reminder agents to fill open slots and reach patients before a missed appointment.
 
-## Resources
+## Comparisons
 
-- [Blog](https://www.zynix.ai/blog): Research on value-based care AI, HCC, prior auth, and care gaps
-- [Whitepapers](https://www.zynix.ai/whitepapers): AWV automation, AI adoption, and outcomes research
-- [FAQ](https://www.zynix.ai/resources-faq): Frequently asked questions about the platform
-- [ROI Calculator](https://www.zynix.ai/roi-calculator): Value-based care savings estimator
+- [Zynix alternatives and comparisons](https://www.zynix.ai/alternatives): How Zynix compares with Innovaccer, Health Catalyst, Navina, Abridge, Commure, Notable and point solutions, with competitor claims cited to source.
+- [Zynix AI vs Abridge: ambient documentation](https://www.zynix.ai/compare-zynix-vs-abridge): Comparing Abridge and ZynScribe for ambient clinical documentation, and how ZynScribe fits inside the Zynix platform for value-based care.
+- [Zynix AI vs Commure: a Commure alternative](https://www.zynix.ai/compare-zynix-vs-commure): A side-by-side look at Commure and Zynix AI for value-based care teams: data, documentation, care plans and outreach agents.
+- [Zynix AI vs Health Catalyst](https://www.zynix.ai/compare-zynix-vs-health-catalyst): A side-by-side look at Health Catalyst and Zynix AI: data platforms, analytics, and how each supports the follow-up work in value-based care.
+- [Zynix AI vs Innovaccer: an Innovaccer alternative](https://www.zynix.ai/compare-zynix-vs-innovaccer): Comparing Innovaccer and Zynix AI for value-based care: data and analytics, care plans, outreach agents and the work that follows a flagged gap.
+- [Zynix AI vs Navina: a Navina alternative](https://www.zynix.ai/compare-zynix-vs-navina): Navina focuses on chart summaries at the point of care. Zynix AI covers the follow-up: care plans, outreach agents and worklists for value-based care.
+- [Zynix AI vs Notable: a Notable alternative](https://www.zynix.ai/compare-zynix-vs-notable-health): A side-by-side look at Notable and Zynix AI for ACOs and value-based care teams: TCM, HCC gap closure, care plans and outreach agents.
+- [Zynix AI vs Olive AI: an Olive AI alternative](https://www.zynix.ai/compare-zynix-vs-olive-ai): For teams replacing Olive AI: how Zynix AI supports value-based care operations for ACOs, health plans and FQHCs, from data to outreach agents.
+- [Zynix AI vs point solutions](https://www.zynix.ai/compare-zynix-vs-point-solutions): One platform for data, worklists, care plans and outreach agents, compared with a separate point solution for each workflow.
 
-## Company
+## Blog
 
-- [About](https://www.zynix.ai/about): Leadership, mission, and background
-- [Careers](https://www.zynix.ai/careers): Open roles in engineering, clinical, and GTM
-- [Press](https://www.zynix.ai/press): Announcements and newsroom
-- [Contact](https://www.zynix.ai/contact): Request a demo
-- [Privacy Policy](https://www.zynix.ai/privacy-policy): Data handling, HIPAA, and CCPA
-- [Terms of Service](https://www.zynix.ai/terms-of-service): Platform terms and SMS program disclosures
+- [Why ACOs Are Losing Millions to Claim Denials—And How Agentic AI Fixes the Revenue Cycle](https://www.zynix.ai/blog-posts/aco-claim-denial-agentic-ai-revenue-cycle-automation): Claim denials cost ACOs revenue and distort the data behind benchmarks. How agentic AI fixes the revenue cycle with pre-submission checks and denial analytics.
+- [ACO LEAD Model: Why 2027 Will Reward ACOs That Can Execute Between Visits](https://www.zynix.ai/blog-posts/aco-lead-model-execution-infrastructure-2027): The ACO LEAD Model starts in 2027 and rewards ACOs that execute between visits: identifying, prioritizing, reaching, documenting and escalating at scale.
+- [ACOs: A Consistent 30-Day Post-Discharge Program](https://www.zynix.ai/blog-posts/acos-consistent-30-day-post-discharge-program): How ACOs run a consistent 30-day post-discharge program: timely ADT alerts, a clinician’s TCM contact within two business days, agent outreach and check-ins.
+- [Annual Wellness Visits: How ACOs Can Build the First Layer of Scalable Care Capacity](https://www.zynix.ai/blog-posts/acos-scalable-care-capacity-annual-wellness-visits): Annual Wellness Visits give ACOs a first layer of scalable care capacity when run as a workflow: eligibility, outreach, scheduling, prep and follow-up.
+- [After-Hours Patient Calls: The Hidden Care Gap ACOs Cannot Ignore](https://www.zynix.ai/blog-posts/after-hours-patient-calls-hidden-care-gap-acos): After-hours patient calls are a hidden care gap for ACOs. Treat them as a workflow: capture the reason, route by rule, book visits and own next-day follow-up.
+- [Agentic AI in Healthcare: From Copilots to Digital Workforce for Care Operations](https://www.zynix.ai/blog-posts/agentic-ai-healthcare-digital-workforce): Agentic AI in healthcare moves beyond copilots to governed agents that run outreach, scheduling and follow-up for ACOs, with clinicians in charge.
+- [AI Is Changing Decision-Making in Healthcare](https://www.zynix.ai/blog-posts/ai-changing-decision-making-healthcare): AI is changing decision-making in healthcare by ranking risk, surfacing care gaps and guiding operations, while clinicians keep every clinical decision.
+- [AI Medical Scribes Reduce Physician Burnout](https://www.zynix.ai/blog-posts/ai-medical-scribes-reduce-physician-burnout): AI medical scribes reduce physician burnout by drafting visit notes from the conversation, cutting EHR and after-hours work while physicians approve each note.
+- [AI Use Cases in Population Health Management](https://www.zynix.ai/blog-posts/ai-use-cases-population-health): AI use cases in population health management, from risk stratification and gap closure to post-discharge outreach, and how agents and clinicians share the work.
+- [How AI Transforms Value-Based Care: Population Health, Risk Stratification, and Care Gap Closure](https://www.zynix.ai/blog-posts/ai-value-based-care-population-health-risk-stratification): How AI transforms value-based care through risk stratification and care gap closure, and how Zynix AI compares with Epic, Oracle Health and Innovaccer.
+- [Arcadia Healthcare Platform Alternative: Execution-First AI for VBC](https://www.zynix.ai/blog-posts/arcadia-healthcare-platform-alternative): Arcadia alternative for value-based care: Arcadia centers on unified data and analytics, while Zynix AI runs the outreach and follow-up work. Who each fits.
+- [AI Agents in Healthcare: Automating Scheduling, Patient Communication, and Follow-Ups](https://www.zynix.ai/blog-posts/autonomous-ai-agents-healthcare-scheduling-communication-followups): AI agents in healthcare automate scheduling, patient communication and follow-ups within rules your team sets, and route clinical questions to licensed staff.
+- [ZynScribe vs Suki vs Nabla vs Abridge: Comparing AI Medical Scribes for Outpatient Clinics in 2026](https://www.zynix.ai/blog-posts/best-ai-medical-scribes-comparison-2026): Ambient AI scribe comparison for physicians: ZynScribe, Suki, Nabla, Abridge, DeepScribe and Sunoh by specialty focus, EHR connections, pricing and scope.
+- [Best AI Tools for Healthcare Operations in 2026](https://www.zynix.ai/blog-posts/best-ai-tools-healthcare-operations-2026): The best AI tools for healthcare operations in 2026, and how an ACO should choose an AI platform: data, risk, follow-through, guardrails and vendor fit.
+- [Beyond Chatbots: AI Agents in Healthcare](https://www.zynix.ai/blog-posts/beyond-chatbots-autonomous-ai-agents-healthcare): AI agents in healthcare go beyond chatbots: they run outreach, scheduling, reminders and follow-up within your rules and route clinical questions to staff.
+- [What is the CMS ACCESS Model? A guide for practices and ACOs](https://www.zynix.ai/blog-posts/cms-access-model-explained): The CMS ACCESS Model is a voluntary 10-year Original Medicare model that pays for technology-supported chronic care tied to outcomes. Tracks, payment, dates.
+- [The CMS LEAD Model: Why Your ACO's Data Infrastructure Will Decide If You Win](https://www.zynix.ai/blog-posts/cms-lead-model-rfa-aco-data-infrastructure): CMS's LEAD model runs from 2027 to 2036 without benchmark rebasing. What the RFA set out, where LEAD stands now, and the data infrastructure ACOs need.
+- [The CMS LEAD Model RFA Window Has Closed: What ACOs Must Get Right Before 2027](https://www.zynix.ai/blog-posts/cms-lead-model-rfa-acos-47-days): The CMS LEAD Model's first application window closed May 17, 2026. What ACOs need to get right before performance year 2027 starts on January 1, 2027.
+- [CMS WISeR Is Live in 6 States: What the AI Prior Auth Pilot Means for Your Revenue Cycle — and How to Reach Gold Card Status Before June 2026](https://www.zynix.ai/blog-posts/cms-wiser-prior-authorization-gold-card-2026): CMS WISeR requires prior authorization or pre-payment review for 13 Medicare service categories in six states. Clean documentation earns a gold card.
+- [The Documentation Crisis and Physician Burnout](https://www.zynix.ai/blog-posts/documentation-crisis-physician-burnout): The documentation crisis drives physician burnout through EHR time and after-hours charting. How ambient AI documentation with physician review eases it.
+- [Eligibility Verification Automation: The Front Door to Faster Prior Authorization and Fewer Denials](https://www.zynix.ai/blog-posts/eligibility-verification-automation-front-door-faster-prior-auth): Eligibility verification automation confirms coverage before the visit, flags services that need prior authorization and prevents avoidable claim denials.
+- [Essential AI Tools for Medical Professionals](https://www.zynix.ai/blog-posts/essential-ai-tools-medical-professionals): Essential AI tools for medical professionals: ambient documentation, scheduling, prior authorization, care management, analytics and patient outreach.
+- [Generative AI in Healthcare: Enhancing Outcomes While Ensuring Trust and Safety](https://www.zynix.ai/blog-posts/generative-ai-healthcare-enhancing-outcomes-ensuring-trust-safety): Generative AI in healthcare is safe when clinicians review what affects care, models are checked for bias and patient data is protected. A practical framework.
+- [Harnessing Generative AI Applications for Healthcare Innovation](https://www.zynix.ai/blog-posts/harnessing-generative-ai-applications-for-healthcare-innovation): Generative AI applications in healthcare work best where the model drafts and a person approves: visit notes, patient outreach and intake summaries.
+- [Harnessing Generative AI in Healthcare](https://www.zynix.ai/blog-posts/harnessing-generative-ai-in-healthcare): Harnessing generative AI in healthcare means drafting notes and patient messages at scale, with physician review, approved templates and privacy safeguards.
+- [Health Catalyst Alternative: AI Execution vs Analytics Dashboards](https://www.zynix.ai/blog-posts/health-catalyst-alternative-zynix-ai): Health Catalyst alternative for value-based care: compare its data and analytics platform with Zynix AI agents and care plans that run follow-up work.
+- [Healthcare EHR Integrations: Epic, athenahealth, Cerner, FHIR & HL7](https://www.zynix.ai/blog-posts/healthcare-ehr-integrations-epic-athenahealth-fhir-hl7): A guide to healthcare EHR integrations: how Zynix connects to Epic, athenahealth, Oracle Health (Cerner) and eClinicalWorks over FHIR, HL7 v2 and C-CDA.
+- [How ACOs Actually Make Money: Shared Savings Mechanics and Where AI Moves the Needle](https://www.zynix.ai/blog-posts/how-acos-make-money-shared-savings-ai-impact): How ACOs make money in MSSP: the benchmark, minimum savings rate and quality gates, where savings come from, and where AI helps ACOs earn shared savings.
+- [How AI Closes Care Gaps: From Identification to Resolution](https://www.zynix.ai/blog-posts/how-ai-closes-care-gaps): AI closes care gaps by finding them as data arrives, ranking them by impact, running outreach and tracking each gap until the visit or screening is done.
+- [How Artificial Intelligence is Transforming the Medical Field](https://www.zynix.ai/blog-posts/how-ai-transforming-medical-field): How AI is transforming the medical field: decision support, administrative automation, population health and revenue cycle, with clinicians in charge.
+- [How To Automate Care Management With AI Agents](https://www.zynix.ai/blog-posts/how-to-automate-care-management): How to automate care management with AI agents: hand outreach, scheduling, reminders and tracking to agents, and keep clinical judgment with care managers.
+- [How To Improve AWV Completion Rates With AI-Powered Outreach](https://www.zynix.ai/blog-posts/how-to-improve-awv-completion-rates): How to improve Annual Wellness Visit completion rates in an ACO: work the 12-month due list, explain the no-cost visit, book it in one call and rebook no-shows.
+- [How To Reduce Patient No-Shows in Healthcare With AI Scheduling](https://www.zynix.ai/blog-posts/how-to-reduce-patient-no-shows-healthcare): How to reduce patient no-shows in healthcare: reminder sequences, two-way confirmation, barrier routing and waitlist backfill, measured against your baseline.
+- [How To Safely Roll Out AI Medical Scribes Across a Multi-Site Practice](https://www.zynix.ai/blog-posts/how-to-safely-roll-out-ai-medical-scribes-multi-site-practice): How to roll out AI medical scribes safely across a multi-site practice: pilot one site, configure by specialty, expand in waves and keep physician review.
+- [How To Scale ACO Operations With the Care Team You Already Have](https://www.zynix.ai/blog-posts/how-to-scale-aco-operations): How to scale ACO operations without adding headcount: unify data, prioritize risk and gaps, let AI agents run outreach, and keep clinicians on clinical work.
+- [Innovaccer Alternative: When ACOs Should Consider Zynix AI](https://www.zynix.ai/blog-posts/innovaccer-alternative-zynix-ai): Innovaccer alternative for ACOs: how Innovaccer's broad data and AI agent platform compares with Zynix AI's focus on value-based care follow-up, and who fits.
+- [Innovative Approaches to Enhance Patient Recovery and Satisfaction](https://www.zynix.ai/blog-posts/innovative-approaches-patient-recovery-satisfaction): Patient recovery and satisfaction improve when care continues after discharge: prompt follow-up, clinician-reviewed medication checks and preventive outreach.
+- [Integrating AI into EHR Workflows: A Technical Guide for Epic, Cerner, and Athenahealth](https://www.zynix.ai/blog-posts/integrating-ai-into-ehr-workflows-epic-cerner-athenahealth): Integrating AI into EHR workflows for Epic, Oracle Health (Cerner) and athenahealth: standards, physician-approved scribe notes, scheduling and security.
+- [Multi-Agent AI Is Outperforming Monolithic Models — Here's What That Means for ACOs](https://www.zynix.ai/blog-posts/multi-agent-ai-outperforming-monolithic-models-acos): Multi-agent AI splits clinical work among specialized agents. What the Mount Sinai study found, and what it means for ACOs choosing AI for care gap work.
+- [The New Era of HCC Risk Adjustment: What CMS Changes Mean for Providers](https://www.zynix.ai/blog-posts/new-era-hcc-risk-adjustment-cms-changes-providers): CMS finished moving HCC risk adjustment from v24 to v28 in 2026. What the v28 model changes for risk scores, documentation and audits, and how providers adapt.
+- [Notable Health AI Alternative: AI Agents Built for Value-Based Care](https://www.zynix.ai/blog-posts/notable-health-ai-alternative-zynix-ai): Notable Health AI alternative: Notable automates access, revenue cycle and care operations; Zynix AI is built around value-based care follow-up. Who fits.
+- [Olive AI Alternative: Next-Generation Healthcare AI for Care Execution](https://www.zynix.ai/blog-posts/olive-ai-alternative-healthcare): Olive AI alternative: Olive shut down in 2023 after selling its units to Waystar and Humata Health. How to pick a replacement for revenue cycle or care work.
+- [Post-Discharge Readmission Reduction: How AI Agents Help ACOs Stop Losing Shared Savings](https://www.zynix.ai/blog-posts/post-discharge-readmission-reduction-ai-agents-acos): Post-discharge readmission reduction for ACOs: where follow-up fails, what CMS changed in HRRP, and how AI agents and nurses share the work after discharge.
+- [Predictive Analytics in Healthcare AI](https://www.zynix.ai/blog-posts/predictive-analytics-healthcare-ai-population-health-management): Predictive analytics in healthcare AI ranks patients by risk so care teams act before avoidable events. How it works, how to check for bias and how to act.
+- [Prior Auth Transparency Is Live Today — Here's What It Means for Your ACO](https://www.zynix.ai/blog-posts/prior-auth-transparency-live-what-it-means-for-acos): Payers now publish prior authorization metrics under CMS-0057-F. What the data shows, how WISeR and the 2027 API rule fit, and what ACOs should do now.
+- [Prior Authorization Bottlenecks](https://www.zynix.ai/blog-posts/prior-authorization-bottlenecks-ai-automation-helps-providers): Prior authorization bottlenecks form in scattered documentation, payer rules and manual status checks. How automation clears them while staff own each request.
+- [Prior Authorization Delays: What They Actually Cost And How to Fix Them](https://www.zynix.ai/blog-posts/prior-authorization-delays-what-they-actually-cost-and-how-to-fix-them): Prior authorization delays cost practices staff time, denial rework, cash flow and patient outcomes. What CMS now requires and a practical plan to fix them.
+- [Reducing Hospital Readmissions With AI Post-Discharge Programs](https://www.zynix.ai/blog-posts/reduce-readmissions-post-discharge-programs): Reduce hospital readmissions with AI post-discharge programs that detect discharges from ADT feeds, reach patients early and keep TCM follow-up on schedule.
+- [Reducing No-Shows with AI Scheduling Agents](https://www.zynix.ai/blog-posts/reducing-no-shows-behaviorally-intelligent-ai-scheduling-agents): AI scheduling agents reduce no-shows by confirming visits two ways, rescheduling early, refilling freed slots and routing patient barriers to staff.
+- [Revolutionizing Healthcare: The Role of AI](https://www.zynix.ai/blog-posts/revolutionizing-healthcare-the-role-of-ai): The role of AI in healthcare: supporting clinical decisions, automating administrative work and powering value-based care analytics, with people in charge.
+- [Revolutionizing Healthcare with AI Breakthroughs in Medicine](https://www.zynix.ai/blog-posts/revolutionizing-healthcare-with-ai-breakthroughs-in-medicine): AI breakthroughs in medicine span diagnostic imaging, predictive risk models and care operations. Here is how they work, who stays in charge and where to start.
+- [Rural Health Transformation Program: How Rural Networks Can Turn Funding Into Care Capacity](https://www.zynix.ai/blog-posts/rural-health-transformation-program-care-capacity): The Rural Health Transformation Program builds lasting care capacity when rural networks fund outreach, follow-up, after-hours routing and shared patient lists.
+- [Strategies for Coordinating Better Patient Care Systems](https://www.zynix.ai/blog-posts/strategies-coordinating-better-patient-care-systems): Strategies for coordinating better patient care systems: unified data, care plans with owners, AI agents for outreach and scheduling, and clinicians in charge.
+- [The TEAM Model Now Covers 716 Hospitals: What It Means for ACO Surgical Costs](https://www.zynix.ai/blog-posts/team-model-741-hospitals-aco-surgical-costs): CMS’s TEAM model makes hospitals in 188 markets accountable for five surgical episodes. What it means for ACO surgical costs, post-acute care and readmissions.
+- [Tools Driving the Shift to Value-Based Healthcare](https://www.zynix.ai/blog-posts/tools-driving-shift-value-based-healthcare): The tools driving the shift to value-based healthcare: data integration, analytics, AI care management agents, quality tracking and patient engagement.
+- [Transforming HCC Risk Adjustment: From Q4 Scramble to Year-Round Success](https://www.zynix.ai/blog-posts/transforming-hcc-risk-adjustment-q4-scramble-year-round-success): Year-round HCC risk adjustment replaces the Q4 coding scramble: document chronic conditions at visits all year, with AI surfacing gaps for clinicians.
+- [Transforming Healthcare with AI-Driven Value-Based Care Analytics](https://www.zynix.ai/blog-posts/transforming-healthcare-ai-driven-value-based-care-analytics): Value-based care analytics turn claims and clinical data into current views of quality, cost and risk, and pay off when each insight triggers owned follow-up.
+- [Using AI To Identify Rising-Risk Patients Before They Deteriorate](https://www.zynix.ai/blog-posts/using-ai-identify-rising-risk-patients-before-they-deteriorate): AI identifies rising-risk patients before they deteriorate by tracking labs, visits, prescriptions and ED use, then triggers outreach with clinicians in charge.
+- [What Is Value-Based Care AI? A Complete Guide for 2026](https://www.zynix.ai/blog-posts/what-is-value-based-care-ai): Value-based care AI connects claims, EHR and ADT data, ranks patients by risk and open gaps, and gives care teams agents for outreach while clinicians decide.
+- [Why ACOs Still Miss HEDIS Measures -- And How AI Agents Close the Gap Before Year-End](https://www.zynix.ai/blog-posts/why-acos-miss-hedis-measures-ai-agents-close-gap): ACOs miss HEDIS measures because gap reports go stale, data is scattered and closure is never confirmed. How AI agent workflows close care gaps before year-end.
+- [Why TCM Fails in Real Workflows](https://www.zynix.ai/blog-posts/why-tcm-fails-real-workflows): How to automate TCM outreach and why TCM fails: ADT discharge alerts, clinician contact within 2 business days, and a face-to-face visit in 7 or 14 days.
+- [Will AI Make Healthcare More Expensive? Only If It Optimizes the Wrong Workflows](https://www.zynix.ai/blog-posts/will-ai-make-healthcare-more-expensive): Will AI make healthcare more expensive? In fee-for-service it can. In accountable care it lowers avoidable cost when it completes the follow-up work ACOs miss.
+- [CMS's WISeR Model Is Live: What 511 MSSP ACOs Must Do Right Now to Protect Shared Savings](https://www.zynix.ai/blog-posts/wiser-model-cms-prior-authorization-acos-2026): CMS's WISeR model adds AI-assisted prior authorization for 13 service groups in six states through 2031. What MSSP ACOs should do now to protect shared savings.
+- [Year-End ACO Gap Closure: How ACOs Can Close Gaps Faster With Zynix AI](https://www.zynix.ai/blog-posts/year-end-aco-gap-closure-close-gaps-faster-zynix-ai): Year-end ACO gap closure: prioritize the quality and care gaps that can still close, reach patients by phone and text, and close more before December 31.
+- [Your EHR Is Not Broken. It Was Just Never Built to Think.](https://www.zynix.ai/blog-posts/your-ehr-is-not-broken-it-was-just-never-built-to-think): Your EHR was built to document, not to think. How an AI layer connects to the EHR you already have, flags patients who need care and runs the follow-up.
+- [Zynix AI Surpasses 1 Million VBC Patients](https://www.zynix.ai/blog-posts/zynix-ai-surpasses-1-million-vbc-patients): Zynix AI has passed 1M+ value-based care patients onboarded, with customer organizations in 30 states. Here is what the milestone means for care teams.
 
-## Optional
+## Company and resources
 
-- [Sitemap](https://www.zynix.ai/sitemap.xml): Machine-readable URL list
-- [SMS Program](https://www.zynix.ai/sms-program): Zyncare patient-facing SMS program disclosures
-- [Comparisons](https://www.zynix.ai/alternatives): Zynix AI vs. Innovaccer, Commure, Abridge, Navina, and others
+- [About Zynix AI: physician-led VBC infrastructure](https://www.zynix.ai/about): Zynix AI builds AI infrastructure and workflows for value-based care. Physician-led, based in Trinity, Florida, with organizations in 30 states.
+- [Newsroom and press releases](https://www.zynix.ai/press): Zynix AI announcements, including partnerships with PBACO Holding and with eternalHealth and nirvanaHealth, plus media resources.
+- [Careers](https://www.zynix.ai/careers): Help ACOs, health plans and health systems reach patients between visits. See open roles in engineering, product, design, operations and sales.
+- [Contact Zynix AI | Request a demo](https://www.zynix.ai/contact): Book 30 minutes with our team or send a message. Zynix AI, 3535 Little Rd, Trinity, FL 34655. info@zynix.ai · (727) 261-1297.
+- [FAQ](https://www.zynix.ai/resources-faq): Answers on the Zynix platform, agents, data sources, EHR integrations, security, HIPAA-aligned safeguards and working with our team.
+- [Value-based care and healthcare AI glossary](https://www.zynix.ai/resources-glossary): Plain definitions of ACO, Medicare Advantage and care management terms, from ADT and AWV to HCC, HEDIS and TCM.
+- [Webinars and events](https://www.zynix.ai/resources-webinars): Recorded sessions on ACO operating models, patient engagement and CMS programs, plus where to meet the Zynix team.
+- [Research and reports](https://www.zynix.ai/resources-whitepapers): Reports on annual wellness visits, post-discharge follow-up and care management operations for ACO and health plan leaders.
