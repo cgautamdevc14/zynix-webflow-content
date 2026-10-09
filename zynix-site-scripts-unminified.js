@@ -1650,6 +1650,13 @@
   function zxFact(key) { return key && Object.prototype.hasOwnProperty.call(SITE_FACTS.stats, key) ? SITE_FACTS.stats[key] : null; }
   function zxAccessLine() { var a = SITE_FACTS.access; return a.line + ', ' + a.clause + '. ' + a.through; }
   function zxComplianceProse() { var c = SITE_FACTS.compliance; return [c.soc2.prose, c.hipaa.prose, c.hitrust.prose].join(' · '); }
+  // The V9 one-line definition of Zynix (SEO audit 2026-10-08, ZX-11): the registry category (SITE_FACTS.category) and the four
+  // pillar names in NAV order (PILLARS), closed with SITE_FACTS.definition's own clause. Used where a page says what Zynix is.
+  function zxDefinition() {
+    var n = PILLARS.map(function (p) { return p.name; });
+    return 'Zynix is ' + SITE_FACTS.category.inline + ': four pillars (' + n.slice(0, -1).join(', ') + ' and ' + n[n.length - 1] +
+      ') that work as one, so every insight ends in an intervention.';
+  }
   // Confirmed governance entries in the order asked (default: declaration order); a 'hold' entry never comes back.
   function zxGovernance(keys) {
     var g = SITE_FACTS.governance, out = [];
@@ -7142,7 +7149,7 @@ function renderAboutV7() {
   factKeys.forEach(function (k) { if (factSources.indexOf(F.stats[k].source) < 0) factSources.push(F.stats[k].source); });
   var hero = renderHero({ preset: 'company', eyebrow: 'About Zynix AI',
     title: 'Physician-led, built by <span class="zx-co-nowrap">value-based</span> care operators',
-    lead: 'Our co-founder and CEO, Jay Chowdappa, MD, led ACOs that generated $300M+ in shared savings. We built Zynix to close the gap between knowing and doing.',
+    lead: zxDefinition() + ' Our co-founder and CEO, Jay Chowdappa, MD, led ACOs that generated $300M+ in shared savings. We built Zynix to close the gap between knowing and doing.',
     primary: { label: 'Meet the leadership', href: '#leadership' },
     secondary: { label: 'Contact us', href: '/contact' },
     media: { type: 'glance', title: 'At a glance', label: 'Zynix AI at a glance',
@@ -8063,7 +8070,7 @@ function renderPlatformHub() {
     'care-plans': ['Sequence agents and people around one goal, and keep the episode open until it’s documented.', 'Browse care plans']
   };
   var html = renderHero({ preset: 'product', eyebrow: 'Platform', title: 'The Zynix platform for <span class="zx-plat-nowrap">value-based</span> care operations',
-    lead: 'Four layers that work as one: a data foundation, intelligence that ranks the work, agents that handle outreach and scheduling, and care plans that see each episode through.',
+    lead: zxDefinition(),
     secondary: { label: 'See the data flow', href: '#data-flow' },
     media: { type: 'product', frame: zxPlatPanel({ label: 'Sample patient path across the four layers, illustrative data', brand: 'Zynix platform',
       className: 'zx-plat-xlayer', title: 'One discharge, four layers', meta: 'Pt 1042 · 72 · CHF',
@@ -11780,7 +11787,7 @@ function renderDataAnalyticsV7() {
     var list = function (items) { return '<ul class="zx-res-fit__list">' + items.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>'; };
     var glance = '<div class="zx-res-glance">' +
       '<div class="zx-res-glance__panel"><p class="zx-res-glance__who">' + label.charAt(0).toUpperCase() + label.slice(1) + '</p><p class="zx-res-glance__text">' + cfg.them + '</p>' + cite(cfg.themSrc) + '</div>' +
-      '<div class="zx-res-glance__panel zx-res-glance__panel--us"><p class="zx-res-glance__who">Zynix AI</p><p class="zx-res-glance__text">The Zynix platform connects claims, EHR and ADT data, ranks the patients and care gaps that need attention, and carries the follow-up through care plans, outreach agents and ambient documentation, with clinicians making the clinical decisions.</p></div>' +
+      '<div class="zx-res-glance__panel zx-res-glance__panel--us"><p class="zx-res-glance__who">Zynix AI</p><p class="zx-res-glance__text">' + zxDefinition() + ' Agents follow the escalation rules your team sets, and clinicians make the clinical decisions.</p></div>' +
     '</div>';
     var table = renderCompareTable({ caption: 'Side by side', captionHidden: true,
       columns: [{ label: 'Capability' }, { label: label.charAt(0).toUpperCase() + label.slice(1) }, { label: 'Zynix AI', highlight: true }],
