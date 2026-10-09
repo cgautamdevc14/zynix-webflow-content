@@ -4974,13 +4974,14 @@
       return '<li class="zx-flow__item"><span class="zx-flow__icon" aria-hidden="true">' + zxIcon(it.icon) + '</span><span class="zx-flow__item-text">' +
         '<span class="zx-flow__item-label">' + it.label + '</span>' + zxEl('span', 'zx-flow__item-detail', it.detail) + '</span></li>';
     };
-    var lnum = function (l) { return '<span class="zx-flow__lnum">' + (l.n < 10 ? '0' : '') + l.n + '</span>'; };
+    // Layer tags carry the layer's name only (SEO audit ZX-11): numbered 01-04 they read as a second four-part model next to
+    // the four pillars on /platform, the one page that renders this flow.
     var panels = (model.steps || []).map(function (s) {
       var f = flowOf[s.id] || { name: s.id, layers: [] };
       var layers = (f.layers || []).map(function (k) { return layerOf[k]; }).filter(Boolean), tags = s.tags || [];
       return '<div class="zx-flow__step" id="zx-flow-step-' + s.id + '">' +
         '<div class="zx-flow__step-head"><span class="zx-flow__dot" aria-hidden="true"></span><h3 class="zx-flow__step-title">' + f.name + '</h3>' +
-          '<span class="zx-flow__layer-links">' + layers.map(function (l) { return '<a class="zx-flow__layer-link" href="' + zxAttr(l.href) + '">' + lnum(l) + l.name + '</a>'; }).join('<span aria-hidden="true"> · </span>') + '</span></div>' +
+          '<span class="zx-flow__layer-links">' + layers.map(function (l) { return '<a class="zx-flow__layer-link" href="' + zxAttr(l.href) + '">' + l.name + '</a>'; }).join('<span aria-hidden="true"> · </span>') + '</span></div>' +
         '<p class="zx-flow__summary">' + s.summary + '</p><p class="zx-flow__detail">' + s.detail + '</p>' +
         (tags.length ? '<ul class="zx-flow__tags" role="list">' + tags.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' : '') +
       '</div>';
@@ -8049,34 +8050,37 @@ function renderAgentPageV7(data) {
 
 
 function renderPlatformHub() {
-  // Platform overview (§6, COPY_DECK §5.2, final QA round 1): the hero carries one patient across the four layers (final
-  // polish, m-P1b: a cross-layer panel, so the first screen no longer mirrors the /agents outreach queue), one "Built for"
-  // link line, the data flow in expanded form, the four layers, proof (a one-sentence release pull, not the full quote), how
-  // a deployment runs, security, CTA. Pt 1042 · 72 · CHF is the same sample patient as on /, /agents and /care-plans.
+  // Platform overview (§6, COPY_DECK §5.2, final QA round 1). One model on the page (SEO audit 2026-10-08, ZX-11): the hero
+  // lead is the V9 definition and the panel beside it carries one patient across the four pillars (PILLARS, in NAV order);
+  // then one "Built for" link line, the data flow in expanded form, the four pillars, what they are built on (data
+  // foundation, AI agents, care plans: the NAV's "Built on" column), proof (a one-sentence release pull, not the full quote),
+  // how a deployment runs, security, CTA. The panel's step copy is the earlier cross-layer panel's, with the Predictive Risk
+  // step from the homepage card stack (HOME_STACK). Pt 1042 · 72 · CHF is the same sample patient as on /, /agents and /care-plans.
   var solutions = NAV.filter(function (s) { return s.id === 'solutions'; })[0];
-  var layerName = {};
-  NAMES.layers.forEach(function (l) { layerName[l.id] = l.name; });
-  var xlayer = [
-    ['data-foundation', 'Discharge matched to one patient record', 'ADT message, claims and EHR history', { tone: 'success', label: 'Matched' }],
-    ['intelligence', 'Ranked first on today’s worklist', 'TCM contact due · two open care gaps', { tone: 'brand', label: 'Ranked' }],
-    ['agents', 'Check-in call made, follow-up visit booked', NAMES.roles.agent, { tone: 'success', label: 'Booked' }],
-    ['care-plans', 'TCM plan open until the visit is documented', NAMES.roles.rn + ' · interactive contact', { tone: 'neutral', label: 'Open' }]
-  ];
-  var audiences = solutions ? solutions.columns[0].items : [];
-  var layerCopy = {
-    'data-foundation': ['Claims, EHR, ADT, lab and pharmacy data, matched to one patient record.', 'See the data foundation'],
-    intelligence: ['Ranks the patients, gaps and risks that need action, and shows why.', 'Explore analytics'],
-    agents: ['Handle outreach, scheduling, intake and follow-up, and hand clinical questions to your team.', 'See how agents work'],
-    'care-plans': ['Sequence agents and people around one goal, and keep the episode open until it’s documented.', 'Browse care plans']
+  var xpillar = {
+    'population-intelligence': ['Discharge matched to one patient record', 'ADT message, claims and EHR history', { tone: 'success', label: 'Matched' }],
+    'predictive-risk': ['Readmission risk: high', 'Drivers: CHF, 2 admissions in 90 days', { tone: 'brand', label: 'Ranked' }],
+    'embedded-care-management': ['TCM plan open until the visit is documented', NAMES.roles.rn + ' · interactive contact', { tone: 'neutral', label: 'Open' }],
+    'ai-patient-engagement': ['Check-in call made, follow-up visit booked', NAMES.roles.agent, { tone: 'success', label: 'Booked' }]
   };
+  var audiences = solutions ? solutions.columns[0].items : [];
+  var layerOf = {};
+  NAMES.layers.forEach(function (l) { layerOf[l.id] = l; });
+  var builtOn = [   // the earlier layer cards' copy; the pillars cover the intelligence layer
+    { href: layerOf['data-foundation'].href, title: layerOf['data-foundation'].name, body: 'Claims, EHR, ADT, lab and pharmacy data, matched to one patient record.', cta: 'See the data foundation' },
+    { href: NAMES.products.agents.href, title: NAMES.products.agents.name, body: 'Handle outreach, scheduling, intake and follow-up, and hand clinical questions to your team.', cta: 'See how agents work' },
+    { href: layerOf['care-plans'].href, title: layerOf['care-plans'].name, body: 'Sequence agents and people around one goal, and keep the episode open until it’s documented.', cta: 'Browse care plans' }
+  ];
   var html = renderHero({ preset: 'product', eyebrow: 'Platform', title: 'The Zynix platform for <span class="zx-plat-nowrap">value-based</span> care operations',
     lead: zxDefinition(),
     secondary: { label: 'See the data flow', href: '#data-flow' },
-    media: { type: 'product', frame: zxPlatPanel({ label: 'Sample patient path across the four layers, illustrative data', brand: 'Zynix platform',
-      className: 'zx-plat-xlayer', title: 'One discharge, four layers', meta: 'Pt 1042 · 72 · CHF',
-      steps: xlayer.map(function (s) { return { time: layerName[s[0]] || s[0], title: s[1], owner: s[2], status: s[3] }; }),
+    media: { type: 'product', frame: zxPlatPanel({ label: 'Sample patient path across the four pillars, illustrative data', brand: 'Zynix platform',
+      className: 'zx-plat-xlayer', title: 'One discharge, four pillars', meta: 'Pt 1042 · 72 · CHF',
+      steps: PILLARS.filter(function (p) { return xpillar[p.id]; }).map(function (p) {
+        var s = xpillar[p.id]; return { time: p.short, title: s[0], owner: s[1], status: s[2] };
+      }),
       footer: 'Clinical questions go to licensed staff by rule.' },
-      'One discharge through every layer: matched, ranked, worked by an agent and carried by a care plan · sample data') } });
+      'One discharge through every pillar: matched, ranked by risk, put on a care plan and followed up by an agent · sample data') } });
 
   html += '<div class="zx-plat-for"><div class="zynix-container"><div class="zx-plat-lede__for"><p class="zx-plat-lede__label" id="zx-plat-for">Built for</p>' +
     '<ul class="zx-plat-lede__links" role="list" aria-labelledby="zx-plat-for">' +
@@ -8084,13 +8088,16 @@ function renderPlatformHub() {
 
   html += zxPlatFlow();
 
-  html += renderSection({ id: 'layers', className: 'zx-plat-layers' },
-    renderSectionHead('Layers', 'Four layers, one platform',
-      'Every layer reads the same patient record, so the discharge analytics flags is the one the agent calls about and the care plan follows to a documented visit.', { id: 'layers-title' }) +
-    renderGrid(NAMES.layers, function (l) {
-      var c = layerCopy[l.id] || ['', 'Learn about ' + l.name];
-      return renderCard({ href: l.href, eyebrow: 'Layer ' + l.n, title: l.name, body: c[0], cta: c[1] });
+  html += renderSection({ id: 'pillars', className: 'zx-plat-layers' },
+    renderSectionHead('Pillars', 'Four pillars, one platform',
+      'Every pillar reads the same patient record, so the discharge Predictive Risk flags is the one the agent calls about and the care plan follows to a documented visit.', { id: 'pillars-title' }) +
+    renderGrid(PILLARS, function (p) {
+      return renderCard({ href: p.slug, eyebrow: 'Pillar ' + p.n, title: p.name, body: p.promise, cta: 'Explore ' + p.name });
     }));
+
+  html += renderSection({ id: 'built-on', rule: true, className: 'zx-plat-layers' },
+    renderSectionHead('Built on', 'What the four pillars are built on', null, { id: 'built-on-title' }) +
+    renderGrid(builtOn, function (b) { return renderCard(b); }));
 
   html += zxPlatProof({ title: 'In use at Palm Beach ACO and eternalHealth',
     lead: 'Both announced their partnerships with Zynix in published releases: Palm Beach ACO in April 2026, starting with post-discharge follow-up and annual wellness visit outreach, and eternalHealth in June 2026, for member outreach and care management.',

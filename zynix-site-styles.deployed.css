@@ -2170,7 +2170,6 @@ html:not(.wf-native) {
 .zx-flow__item-label { display:block; font:var(--zx-fw-semibold) 14px/1.35 var(--zx-font-sans); color:var(--zx-text-inverse); }
 .zx-flow__item-detail { display:block; margin-top:2px; font-size:12px; line-height:1.4; color:var(--zx-text-inverse-muted); }
 .zx-flow__fact { margin:12px 0 0; font-size:var(--zx-fs-xs); line-height:1.45; color:var(--zx-text-inverse-secondary); }
-.zx-flow__lnum { margin-right:6px; font-variant-numeric:tabular-nums; opacity:.72; }
 .zx-flow__dot { display:none; }
 .zx-flow__steps { display:grid; }
 .zx-flow__step { min-width:0; }
@@ -2301,10 +2300,10 @@ html:not(.wf-native) {
 }
 .zx-plat-follow { margin-bottom:var(--zx-space-12); }
 
-/* /platform hero panel (final polish): one sample patient across the four layers. The kit's time column carries the layer
-   name, so it is wider here. Below 768px the layer name sits above its step. Below 480px all four layers stay visible (the
-   hero frame trims other panels after the third step), and to keep the hero within 1.2 screens there the two data-detail
-   lines (layers 1 and 2) are dropped; the agent and care-team owner lines (layers 3 and 4) stay. */
+/* /platform hero panel (final polish; SEO audit ZX-11): one sample patient across the four pillars. The kit's time column
+   carries the pillar name, so it is wider here. Below 768px the pillar name sits above its step. Below 480px all four pillars
+   stay visible (the hero frame trims other panels after the third step), and to keep the hero within 1.2 screens there the
+   two data-detail lines (pillars 1 and 2) are dropped; the care-team and agent owner lines (pillars 3 and 4) stay. */
 .zx-plat-xlayer .zynix-ui__step { grid-template-columns:112px minmax(0,1fr) auto; }
 .zx-plat-xlayer .zynix-ui__step-time { color:var(--zx-blue-600); font-variant-numeric:normal; }
 @media (max-width:767.98px) {
@@ -2376,7 +2375,7 @@ html:not(.wf-native) {
 .zx-plat-steps__meta dt { margin:0; font:var(--zx-fw-semibold) var(--zx-fs-xs)/1.3 var(--zx-font-sans); letter-spacing:var(--zx-tr-eyebrow); text-transform:uppercase; color:var(--zx-text-muted); }
 .zx-plat-steps__meta dd { margin:2px 0 0; font-size:14px; line-height:1.5; color:var(--zx-text); }
 
-/* /platform layer cards */
+/* /platform pillar and built-on cards */
 .zx-plat-layers .zynix-card__eyebrow { color:var(--zx-blue-600); }
 
 /* /security compliance status cards */
