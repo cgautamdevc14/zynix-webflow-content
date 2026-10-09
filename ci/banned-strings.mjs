@@ -77,7 +77,7 @@ export const CLAIMS = [
   ['2.5x', /(?<![\w.])2\.5x\b/gi],
   ['85%+', /(?<![\w.])85%\+/gi],
   ['73%', /(?<![\w.])73%/gi],
-  ['40% ', /(?<![\w.])40%\s/gi],
+  ['40%', /(?<![\w.])40%(?=[\s.,;:)]|$)/gi],         // also '40%.' / '40%,' at a clause end (SEO audit 2026-10-08, ZX-18)
   ['Twelve', /\btwelve\b/gi],
   ['12 agents', /\b12 agents\b/gi],
   ['12 purpose-built', /\b12 purpose-built\b/gi],
@@ -86,14 +86,27 @@ export const CLAIMS = [
   ['LIVE', /\bLIVE\b/g],
   ['Zynix OS', /\bZynix OS\b/gi],
   ['operating system', /\boperating system\b/gi],
-  ['autonomous', /\bautonomous\b/gi],
+  ['autonomous', /\bautonomous(?:ly)?\b/gi],         // 'autonomously' too (ZX-18)
   ['$936M', /\$936(?:M\b|,\d{3})/gi],               // "$936M" and the spelled-out "$936,988,750" (final QA round 1)
   ['$150M', /\$150M\b/gi],
   ['10+ ACOs', /(?<![\w.])10\+ ACOs\b/gi],
   ['documented back to the EHR', /\bdocumented back to the EHR\b/gi],
   ['self-care guidance', /\bself-care guidance\b/gi],
   ['NHS (not a client)', /\bNHS\b/g],
-  ['Union (never named)', /\bUnion (Health|Hospital)\b/gi]
+  ['Union (never named)', /\bUnion (Health|Hospital)\b/gi],
+  // Extended patterns (SEO audit 2026-10-08, ZX-18): wording the audit found in the no-JS layer and llms.txt that the list
+  // above missed. Each one has 0 hits in the bundle at d0847ec + this branch. Left out on purpose (they would flag compliant
+  // or industry copy, or need a copy decision first): bare 'certified' ('board-certified radiologists'), 'autonomy',
+  // 'HIPAA compliance' as a topic heading, bare 'triage', 'real-time' (ZX-36) and generic percentages.
+  ['Union (bare)', /\bUnion\b/g],
+  ['integrated OS', /\bintegrated OS\b/gi],
+  ['EHR write-back', /\bwrites? (?:documentation |notes? |data )?back\b|\bwritten back\b|\bwrite[- ]back (?:to|into)\b|\b(?:uploaded|pushed|written|filed|synced) (?:directly )?(?:back )?(?:in)?to the EHR\b/gi],
+  ['clinical triage', /\bclinical(?:ly)?[ -]triag\w*|\btriage logic\b/gi],
+  ['symptom assessment', /\bsymptom[ -]assess\w*/gi],
+  ['HITRUST/HIPAA certified', /\b(?:HITRUST|HIPAA)\b[^.\n]{0,40}\bcertified\b/gi],
+  ['HITRUST Ready', /\bHITRUST(?: CSF)? Ready\b/gi],
+  ['founded 2023', /\bfound(?:ed|ing)\b[^.\n]{0,40}\b2023\b/gi],
+  ['Zyncare (retired brand)', /\bzyncare\b/gi]
 ];
 // Extended_Pictographic minus typographic symbols that share the property (© ® ‼ ⁉ ™ ℹ ↔–↙ ↩ ↪).
 const NOT_EMOJI = new Set([0xA9, 0xAE, 0x203C, 0x2049, 0x2122, 0x2139, 0x2194, 0x2195, 0x2196, 0x2197, 0x2198, 0x2199, 0x21A9, 0x21AA]);
@@ -314,6 +327,23 @@ function extractFunction(src, name) {
     if (c === '{') depth++; else if (c === '}') { depth--; if (depth === 0) break; }
   }
   return src.slice(i, k + 1);
+}
+
+// Every other tracked text file (SEO audit 2026-10-08, ZX-01/ZX-06/ZX-18): llms.txt, robots.txt, sitemap.xml, the redirect
+// lists, docs and any legacy asset still in the repo are public on GitHub and jsDelivr and read by crawlers, so they carry
+// no banned string either. Same CLAIMS list and the same URL-token exemption; no scopes, no exemption lists, no baseline:
+// any hit fails. Not scanned here: the bundle (scoped above), dist/ (its deploy build, which ci/static-checks.mjs proves
+// equal to a fresh build of the bundle), ci/ (these patterns) and binary assets.
+export const TEXT_FILE_EXT = /\.(?:txt|md|xml|csv|html?|js|mjs|cjs|css|json|ya?ml|svg)$/i;
+export const TEXT_FILE_SKIP = [/^ci\//, /^dist\//, /^\.github\//, /^images\/(?!.*\.svg$)/, /^zynix-site-scripts-unminified\.js$/];
+export function textFileHits(files, read) {
+  const out = []; out.scanned = 0;
+  for (const f of files) {
+    if (!TEXT_FILE_EXT.test(f) || TEXT_FILE_SKIP.some(re => re.test(f))) continue;
+    const src = read(f); out.scanned++;
+    for (const h of findHits(src)) { if (inUrlToken(src, h.index, h.text.length)) continue; out.push({ file: f, line: src.slice(0, h.index).split('\n').length, label: h.label, text: h.text }); }
+  }
+  return out;
 }
 
 export function countScopes(src) {
