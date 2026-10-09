@@ -1667,6 +1667,12 @@
     return 'Zynix is ' + SITE_FACTS.category.inline + ': four pillars (' + n.slice(0, -1).join(', ') + ' and ' + n[n.length - 1] +
       ') that work as one, so every insight ends in an intervention.';
   }
+  // The CMS source for the TCM timing rule (interactive contact within 2 business days, visit within 7 or 14 days), linked
+  // where a page states the rule (SEO audit 2026-10-08, ZX-31; the audit matched the rule on this booklet, MLN908628).
+  function zxTcmSource(label) {
+    var u = 'https://www.cms.gov/files/document/mln908628-transitional-care-management-services.pdf';
+    return '<a href="' + zxAttr(u) + '"' + zxNewTab(u) + '>' + (label || 'Transitional Care Management Services') + '</a>';
+  }
   // Confirmed governance entries in the order asked (default: declaration order); a 'hold' entry never comes back.
   function zxGovernance(keys) {
     var g = SITE_FACTS.governance, out = [];
@@ -4706,7 +4712,7 @@
       ['risk-stratification', 'Risk stratification', 'Sorting patients into groups by their likelihood of a hospitalization, an emergency visit or rising costs, using clinical, claims, social and utilization data, so care management effort goes where it helps most.', 'Stratification is only useful when each tier has a defined next step and an owner.', ['Rising-risk outreach', '/use-cases/rising-risk-patient-outreach']],
       ['sdoh', 'Social determinants of health (SDOH)', 'The non-medical conditions that shape health, such as income, housing, food access, transportation and social support. They are documented with ICD-10 Z codes and screened for in a growing number of quality programs.', 'A missed ride or an unstable address can undo a care plan, so outreach needs to know about them.', ['SDOH screening and navigation', '/use-cases/sdoh-screening-care-navigation']],
       ['star-ratings', 'Star Ratings (Medicare Advantage)', 'The CMS 1-to-5-star quality ratings for Medicare Advantage and Part D plans, built from HEDIS measures, member experience surveys, pharmacy measures and operational performance. Plans rated 4 stars or higher qualify for quality bonus payments.', 'Star Ratings affect plan revenue and enrollment, so gap closure and member outreach are year-round work.'],
-      ['tcm', 'Transitional care management (TCM)', 'A Medicare service for the 30 days after a discharge from a hospital or certain other facilities. CMS requires an interactive contact with the patient or caregiver within 2 business days of discharge, and a face-to-face visit within 7 days (CPT 99496) or 14 days (CPT 99495). The interactive contact is made by the billing practitioner or clinical staff.', 'The 2-business-day window is where most programs fall short, which makes discharge notification and outreach capacity the constraint.', ['Post-discharge and TCM', '/use-cases/post-discharge-tcm-readmission']],
+      ['tcm', 'Transitional care management (TCM)', 'A Medicare service for the 30 days after a discharge from a hospital or certain other facilities. CMS requires an interactive contact with the patient or caregiver within 2 business days of discharge, and a face-to-face visit within 7 days (CPT 99496) or 14 days (CPT 99495). The interactive contact is made by the billing practitioner or clinical staff.', 'The 2-business-day window is where most programs fall short, which makes discharge notification and outreach capacity the constraint.', ['Post-discharge and TCM', '/use-cases/post-discharge-tcm-readmission'], 'CMS, ' + zxTcmSource()],
       ['value-based-care', 'Value-based care', 'Payment models that reward providers for the quality and cost of care rather than the volume of services, including shared savings programs, bundled payments and capitation.', 'Under value-based contracts, what happens between visits (follow-up, prevention and chronic care) drives both outcomes and revenue.', ['Solutions by organization', '/solutions']]
     ];
     T.sort(function (a, b) { return a[1].toLowerCase() < b[1].toLowerCase() ? -1 : 1; });
@@ -4719,7 +4725,8 @@
       return '<div class="zx-res-gloss__group" id="letter-' + l.toLowerCase() + '" data-zx-res-gloss-group><h2 class="zx-res-gloss__letter">' + l + '</h2><div class="zx-res-gloss__terms">' +
         groups[l].map(function (t) {
           return '<article class="zx-res-term" id="term-' + t[0] + '" data-zx-res-term><h3 class="zx-res-term__name">' + t[1] + '</h3><p class="zx-res-term__def">' + t[2] + '</p>' +
-            '<p class="zx-res-term__why"><strong>Why it matters.</strong> ' + t[3] + '</p>' + (t[4] ? renderLinkArrow(t[4][0], t[4][1], { className: 'zx-res-term__link' }) : '') + '</article>';
+            '<p class="zx-res-term__why"><strong>Why it matters.</strong> ' + t[3] + '</p>' + (t[5] ? '<p class="zx-res-cite">Source: ' + t[5] + '</p>' : '') +
+            (t[4] ? renderLinkArrow(t[4][0], t[4][1], { className: 'zx-res-term__link' }) : '') + '</article>';
         }).join('') + '</div></div>';
     }).join('');
     var tools = '<div class="zx-res-gloss__tools">' +
@@ -5582,7 +5589,8 @@ function renderUseCaseV7(data) {
   }).join('');
   html += renderSection({ id: 'problem', className: 'zx-sol-problem', rule: true }, renderSplit(
     renderSectionHead('The problem', data.problem.title, '', { id: 'problem-title' }) +
-      '<div class="zx-sol-prose">' + data.problem.body.map(function (p) { return '<p>' + p + '</p>'; }).join('') + '</div>',
+      '<div class="zx-sol-prose">' + data.problem.body.map(function (p) { return '<p>' + p + '</p>'; }).join('') + '</div>' +
+      (data.problem.cite ? '<p class="zx-cust-cite">' + data.problem.cite + '</p>' : ''),   // a cited CMS rule (ZX-31), same line as the case studies
     gaps ? '<aside class="zx-sol-gaps" aria-labelledby="gaps-title"><p class="zx-sol-gaps__label" id="gaps-title">Where today’s tools stop</p><ul class="zx-sol-gaps__list" role="list">' + gaps + '</ul></aside>' : '',
     { ratio: '7-5' }));
 
@@ -5754,7 +5762,7 @@ USE_CASES.UC01 = {
   title: 'Post-discharge follow-up across your hospitals',
   teaser: 'ADT-triggered calls after every discharge across your hospitals, with nurses taking the clinical questions and the TCM contact.',
   lead: 'Discharges arrive around the clock from every hospital. Zynix starts outreach from the ADT message, books the follow-up visit and routes clinical questions to your nurses by rule.',
-  problem: { title: 'The follow-up gap is a volume problem',
+  problem: { title: 'The follow-up gap is a volume problem', cite: 'TCM timing: CMS, ' + zxTcmSource() + '.',
     body: ['Every discharge opens the same short window. For transitional care management, CMS expects an interactive contact within 2 business days and a face-to-face visit within 7 or 14 days. Patients go home with new medications, half-remembered instructions and a follow-up visit that may not be booked.',
       'Coordinators call the patients who were flagged at discharge first. The patient who looked stable, whose medication change wasn’t flagged and whose visit was never confirmed, is the one who waits, and too often the one who comes back through the ED.'] },
   gaps: [{ tool: 'Reminder and notification tools', text: 'They send instructions and appointment reminders. They don’t confirm the patient is home, collect the medication list or put a worrying answer in front of a nurse.' },
@@ -13202,7 +13210,7 @@ function renderDataAnalyticsV7() {
       facts: [['Segment', 'Risk-bearing ACO'], ['Region', 'South Florida'], ['Workflows', 'Post-discharge follow-up, wellness visits'], ['Announced', 'April 14, 2026']],
       challengeTitle: 'Every discharge starts a clock',
       challenge: 'PBACO Holding supports provider organizations in value-based care across its affiliated network. For transitional care management, CMS expects an interactive contact with the patient within 2 business days of discharge and a visit within 7 or 14 days. Coordinators were calling patients one at a time, and annual wellness visit outreach competed with everything else on their lists.',
-      cite: 'TCM timing: CMS, Transitional Care Management Services.',
+      cite: 'TCM timing: CMS, ' + zxTcmSource() + '.',
       runsTitle: 'What PBACO runs on Zynix',
       runsLead: 'The first phase of the partnership covers outreach for transitional and preventive care. Agents make the calls and texts; PBACO’s care teams keep every clinical conversation.',
       runs: [
@@ -13305,7 +13313,7 @@ function renderDataAnalyticsV7() {
       facts: [['Segment', 'ACO'], ['Program', 'Medicare Shared Savings Program'], ['Region', 'Brevard County, Florida'], ['Workflows', 'Post-discharge follow-up, patient callbacks']],
       challengeTitle: 'Too few patients reached inside the TCM window',
       challenge: 'For transitional care management, CMS expects an interactive contact within 2 business days of discharge. Manual outreach reached too few of Space Coast ACO’s discharged patients inside that window, so the ACO could not bill TCM for many discharges, and patients without follow-up were more likely to return to the emergency department.',
-      cite: 'TCM timing: CMS, Transitional Care Management Services.',
+      cite: 'TCM timing: CMS, ' + zxTcmSource() + '.',
       runsTitle: 'What Space Coast ACO runs on Zynix',
       runsLead: 'Outreach after every discharge, ranked by readmission risk, with clinical staff keeping every clinical conversation.',
       runs: [
