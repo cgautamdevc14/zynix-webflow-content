@@ -979,17 +979,23 @@
       var topSegment = segments[0];
       // Section parents (SEO audit 2026-10-08, ZX-34): every parent is a live page that answers 200 (was /case-studies 404,
       // /products-zynix-os and /solutions-acos 301, /company-about a JS-redirected legacy page, /agents/<family> 301).
-      var sectionMapV7 = {'who-we-serve':['Solutions','/solutions'],'agents':['AI Agents','/agents'],'platform':['Platform','/platform'],'company':['Company','/about'],'resources':['Resources','/resources-blog'],'solutions':['Solutions','/solutions'],'case-studies':['Customer stories','/resources-case-studies'],'blog':['Blog','/resources-blog'],'use-cases':['Use cases','/use-cases']};
+      // A page that shows a breadcrumb gets that trail (renderBreadcrumb's zxBreadcrumbTrail: its NAV section and its label);
+      // the maps below cover only pages without one (ZX-34 review: the markup must not name a parent the page does not show).
+      var trail = typeof zxBreadcrumbTrail === 'function' ? zxBreadcrumbTrail(pagePath) : null;
+      var ldText = function (h) { return String(h).replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim(); };
+      var sectionMapV7 = {'who-we-serve':['Solutions','/solutions'],'agents':['AI Agents','/agents'],'platform':['Platform','/platform'],'company':['Company','/about'],'resources':['Resources','/resources-blog'],'solutions':['Solutions','/solutions'],'case-studies':['Customers','/resources-case-studies'],'blog':['Blog','/resources-blog'],'use-cases':['Use cases','/use-cases']};
       var legacySeg = pagePath.replace(/^\//,'').split('-');
       var sectionMapLegacy = {products:['Platform','/platform'],solutions:['Solutions','/solutions'],company:['Company','/about'],resources:['Resources','/resources-blog']};
-      if (sectionMapV7[topSegment] && segments.length > 1) {
+      if (trail) {
+        crumbs.push({'@type':'ListItem',position:2,name:ldText(trail.section.label),item:'https://www.zynix.ai' + trail.section.href});
+      } else if (sectionMapV7[topSegment] && segments.length > 1) {
         crumbs.push({'@type':'ListItem',position:2,name:sectionMapV7[topSegment][0],item:'https://www.zynix.ai' + sectionMapV7[topSegment][1]});
       } else if (typeof PILLARS !== 'undefined' && PILLARS.some(function (x) { return x.slug === pagePath; })) {
         crumbs.push({'@type':'ListItem',position:2,name:'Platform',item:'https://www.zynix.ai/platform'});   // V9 pillar pages: Home › Platform › <pillar>
       } else if (sectionMapLegacy[legacySeg[0]] && sectionMapLegacy[legacySeg[0]][1] !== pagePath) {
         crumbs.push({'@type':'ListItem',position:2,name:sectionMapLegacy[legacySeg[0]][0],item:'https://www.zynix.ai' + sectionMapLegacy[legacySeg[0]][1]});
       }
-      crumbs.push({'@type':'ListItem',position:crumbs.length+1,name:seo.title.split('|')[0].trim(),item:'https://www.zynix.ai' + pagePath});
+      crumbs.push({'@type':'ListItem',position:crumbs.length+1,name:trail ? ldText(trail.label) : seo.title.split('|')[0].trim(),item:'https://www.zynix.ai' + pagePath});
       schemas.push({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:crumbs});
     }
 
@@ -1440,12 +1446,23 @@
   // item, else CUSTOMERS (case studies), else LINK_NAMES. A use-case page is named by its own title (its H1) wherever it
   // is listed (zxLinkData), so the six that also sit in the Solutions menu use that title here too, not their shorter
   // menu label (final QA r1). Not rendered on the homepage, the section landing pages, the SMS and legal pages or the
-  // 404. No JSON-LD (schema unchanged).
+  // 404. injectJSONLD builds its BreadcrumbList from the same trail (zxBreadcrumbTrail), so the markup names the parent the
+  // page shows (SEO audit 2026-10-08, ZX-34 review); pages without a visible breadcrumb keep its static section map.
   function renderBreadcrumb(pagePath) {
+    var t = zxBreadcrumbTrail(pagePath);
+    if (!t) return '';
+    var crumb = function (href, text) { return '<li><a href="' + zxAttr(href) + '" data-z-anchor-fixed="1" aria-label="' + zxAttr(text) + '">' + text + '</a></li>'; };
+    return '<nav class="zynix-breadcrumb" aria-label="Breadcrumb"><div class="zynix-container"><ol class="zynix-breadcrumb__list">' +
+      crumb('/', 'Home') + crumb(t.section.href, t.section.label) +
+      '<li><span aria-current="page">' + t.label + '</span></li></ol></div></nav>';
+  }
+  // The visible trail for a path: { section: { label, href }, label } (labels as HTML-ready text), or null where the page
+  // shows no breadcrumb.
+  function zxBreadcrumbTrail(pagePath) {
     var p = String(pagePath == null ? zxPath() : pagePath).replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
-    if (!p || ['/sms', '/sms-program', '/sms-consent', '/privacy-policy', '/terms-of-service'].indexOf(p) > -1) return '';
+    if (!p || ['/sms', '/sms-program', '/sms-consent', '/privacy-policy', '/terms-of-service'].indexOf(p) > -1) return null;
     var cur = zxNavCurrent(p);
-    if (!cur.section || cur.landing) return '';
+    if (!cur.section || cur.landing) return null;
     var q = cur.navPath, label = '';
     var uc = typeof USE_CASES !== 'undefined' ? /^\/use-cases\/([a-z0-9-]+)$/.exec(q) : null;
     if (uc) Object.keys(USE_CASES).some(function (k) {
@@ -1456,11 +1473,8 @@
       var c = zxCustomer(k); if (c && c.caseStudy && (c.caseStudy === q || c.caseStudy === p)) { label = c.name; return true; } return false;
     });
     if (!label) label = LINK_NAMES[q] || LINK_NAMES[p] || '';
-    if (!label) return '';
-    var crumb = function (href, text) { return '<li><a href="' + zxAttr(href) + '" data-z-anchor-fixed="1" aria-label="' + zxAttr(text) + '">' + text + '</a></li>'; };
-    return '<nav class="zynix-breadcrumb" aria-label="Breadcrumb"><div class="zynix-container"><ol class="zynix-breadcrumb__list">' +
-      crumb('/', 'Home') + crumb(cur.section.href, cur.section.label) +
-      '<li><span aria-current="page">' + label + '</span></li></ol></div></nav>';
+    if (!label) return null;
+    return { section: { label: cur.section.label, href: cur.section.href }, label: label };
   }
 
   // ── Helpers ──
