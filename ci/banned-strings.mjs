@@ -3,6 +3,7 @@
 //   node ci/banned-strings.mjs                    counts per scope vs ci/baseline.json (non-zero scopes only)
 //   node ci/banned-strings.mjs --hits [scope]     every hit with line number, pattern and context (optionally one scope)
 //   node ci/banned-strings.mjs --exempt           every EXEMPT hit with its reason (facts data, dead code, URL slug, dated)
+//   node ci/banned-strings.mjs --review           every REVIEW-list hit in the bundle (warnings only; SEO audit ZX-18 action b)
 //   node ci/banned-strings.mjs --dead             the reachability report: routes, the dead list, and every unreachable function
 //   node ci/banned-strings.mjs --phase 1          also show which scopes would fail if that phase's must-be-zero list applied
 //   node ci/banned-strings.mjs --write-baseline   ratchet DOWN: lower each scope's baseline to its current count (never raises;
@@ -68,6 +69,9 @@ export const VERIFY_EXEMPTIONS = [
     fix: 'Gautamdev chooses: keep the release verbatim under a "Full text of the Business Wire release" label (then record the decision here), or trim the About-PBACO paragraph and link to Business Wire (then delete this entry)' }
 ];
 
+// A negation within a few words before a match (same clause): 'no', 'not', 'never', 'nothing', 'none', 'without', 'cannot'
+// and any "n't" / "n’t" contraction. Used as a lookbehind prefix by the extended patterns below.
+export const ZX_NEG = String.raw`(?<!\b(?:no|not|never|nothing|none|without|cannot|\w+n['’]t)\b[^.;:!?\n]{0,30})`;
 export const CLAIMS = [
   ['HIPAA Compliant', /\bHIPAA[\s ]+compliant\b/gi],
   ['HIPAA-compliant', /\bHIPAA-compliant\b/gi],
@@ -94,19 +98,38 @@ export const CLAIMS = [
   ['self-care guidance', /\bself-care guidance\b/gi],
   ['NHS (not a client)', /\bNHS\b/g],
   ['Union (never named)', /\bUnion (Health|Hospital)\b/gi],
-  // Extended patterns (SEO audit 2026-10-08, ZX-18): wording the audit found in the no-JS layer and llms.txt that the list
-  // above missed. Each one has 0 hits in the bundle at d0847ec + this branch. Left out on purpose (they would flag compliant
-  // or industry copy, or need a copy decision first): bare 'certified' ('board-certified radiologists'), 'autonomy',
-  // 'HIPAA compliance' as a topic heading, bare 'triage', 'real-time' (ZX-36) and generic percentages.
-  ['Union (bare)', /\bUnion\b/g],
+  // Extended patterns (SEO audit 2026-10-08, ZX-18; narrowed in review): wording the audit found in the no-JS layer and
+  // llms.txt that the list above missed, in the forms that are never compliant. Each one has 0 hits in the bundle and the
+  // tracked text files. A negation a few words before the match is not a hit (ZX_NEG: 'does not write notes back to your
+  // EHR', 'not yet HITRUST certified'). Wording that compliant safety copy also uses ('agents never do clinical triage',
+  // 'nothing is filed to the EHR until a physician approves it', 'no symptom assessment') is on REVIEW below: printed as a
+  // warning, never a failure (ZX-18 action b). Left out entirely (they would flag compliant or industry copy, or need a copy
+  // decision first): bare 'certified' ('board-certified radiologists'), 'autonomy', 'HIPAA compliance' as a topic heading,
+  // bare 'triage', 'real-time' (ZX-36) and generic percentages.
+  ['Union (bare)', /(?<!\b(?:[Ee]uropean|[Cc]redit|[Ll]abou?r|[Tt]rade) )\bUnion\b/g],   // not 'European Union', 'credit union'
   ['integrated OS', /\bintegrated OS\b/gi],
-  ['EHR write-back', /\bwrites? (?:documentation |notes? |data )?back\b|\bwritten back\b|\bwrite[- ]back (?:to|into)\b|\b(?:uploaded|pushed|written|filed|synced) (?:directly )?(?:back )?(?:in)?to the EHR\b/gi],
+  ['EHR write-back', new RegExp(ZX_NEG + String.raw`\b(?:writes? (?:(?:documentation|notes?|data) )?back\b|write[- ]back (?:to|into)\b)`, 'gi')],
+  ['HITRUST/HIPAA certified', new RegExp(ZX_NEG + String.raw`\b(?:HITRUST|HIPAA)\b[^.\n]{0,40}\bcertified\b`, 'gi')],
+  ['HITRUST Ready', /\bHITRUST(?: CSF)? Ready\b/gi],
+  // A Zynix founding year other than 2024, in Zynix's own context only ('Olive AI, founded in 2012, shut down in 2023' and
+  // other companies' dates pass): 'Zynix was founded in 2023', 'Zynix AI, founded in 2023', 'We were founded in 2023', a
+  // 'Founded: 2023' facts line, a sentence opening 'Founded in 2023', and foundingDate "2023" in JSON-LD.
+  ['founded 2023 (Zynix)', new RegExp([
+    String.raw`\b(?:Zynix(?: AI| Inc\.?)?|we)(?: (?:was|were|is|are|has been|have been))? (?:founded|established|started)\b[^.,;\n]{0,12}\b2023\b`,
+    String.raw`\bZynix(?: AI| Inc\.?)?, (?:founded|established)\b[^.,;\n]{0,12}\b2023\b`,
+    String.raw`^[ \t>*-]*(?:year )?found(?:ed|ing year):?[ \t]+(?:in[ \t]+)?2023\b`,
+    String.raw`(?<=[.!?][ \t]+)founded (?:in )?2023\b`,
+    String.raw`\bfoundingDate['"]?\s*:\s*['"]2023`
+  ].join('|'), 'gim')],
+  ['Zyncare (retired brand)', /\bzyncare\b/gi]
+];
+// Review list (ZX-18 action b): wording that is a banned claim in one sentence and compliant safety copy in the next. Never a
+// failure; ci/static-checks.mjs prints every hit (bundle and tracked text files) as a WARN line for a person to read, and
+// `node ci/banned-strings.mjs --review` lists them with context.
+export const REVIEW = [
   ['clinical triage', /\bclinical(?:ly)?[ -]triag\w*|\btriage logic\b/gi],
   ['symptom assessment', /\bsymptom[ -]assess\w*/gi],
-  ['HITRUST/HIPAA certified', /\b(?:HITRUST|HIPAA)\b[^.\n]{0,40}\bcertified\b/gi],
-  ['HITRUST Ready', /\bHITRUST(?: CSF)? Ready\b/gi],
-  ['founded 2023', /\bfound(?:ed|ing)\b[^.\n]{0,40}\b2023\b/gi],
-  ['Zyncare (retired brand)', /\bzyncare\b/gi]
+  ['EHR filing', /\bwritten back\b|\b(?:uploaded|pushed|written|filed|synced) (?:directly )?(?:back )?(?:in)?to (?:the|your|their) EHR\b/gi]
 ];
 // Extended_Pictographic minus typographic symbols that share the property (© ® ‼ ⁉ ™ ℹ ↔–↙ ↩ ↪).
 const NOT_EMOJI = new Set([0xA9, 0xAE, 0x203C, 0x2049, 0x2122, 0x2139, 0x2194, 0x2195, 0x2196, 0x2197, 0x2198, 0x2199, 0x21A9, 0x21AA]);
@@ -121,6 +144,13 @@ export function findHits(src) {
   const cur = /\\u\{([0-9a-fA-F]{4,6})\}/g; while ((m = cur.exec(src))) { const cp = parseInt(m[1], 16); if (cp <= 0x10FFFF && isEmoji(cp)) hits.push({ index: m.index, label: 'emoji (escape)', text: m[0] }); }
   const bmp = /\\u(2[0-9a-fA-F]{3})/g; while ((m = bmp.exec(src))) { const cp = parseInt(m[1], 16); if (isEmoji(cp)) hits.push({ index: m.index, label: 'emoji (escape)', text: m[0] }); }
   const ent = /&#(?:x([0-9a-fA-F]{2,6})|(\d{2,7}));/g; while ((m = ent.exec(src))) { const cp = m[1] ? parseInt(m[1], 16) : parseInt(m[2], 10); if (cp <= 0x10FFFF && isEmoji(cp)) hits.push({ index: m.index, label: 'emoji (entity)', text: m[0] }); }
+  return hits.sort((a, b) => a.index - b.index);
+}
+
+// Review-list hits (REVIEW above): same shape as findHits, never counted in any scope.
+export function findReview(src) {
+  const hits = [];
+  for (const [label, re] of REVIEW) { re.lastIndex = 0; let m; while ((m = re.exec(src))) { hits.push({ index: m.index, label, text: m[0] }); if (!m[0].length) re.lastIndex++; } }
   return hits.sort((a, b) => a.index - b.index);
 }
 
@@ -337,13 +367,18 @@ function extractFunction(src, name) {
 export const TEXT_FILE_EXT = /\.(?:txt|md|xml|csv|html?|js|mjs|cjs|css|json|ya?ml|svg)$/i;
 export const TEXT_FILE_SKIP = [/^ci\//, /^dist\//, /^\.github\//, /^images\/(?!.*\.svg$)/, /^zynix-site-scripts-unminified\.js$/];
 export function textFileHits(files, read) {
-  const out = []; out.scanned = 0;
+  const out = []; out.scanned = 0; out.review = [];
   for (const f of files) {
     if (!TEXT_FILE_EXT.test(f) || TEXT_FILE_SKIP.some(re => re.test(f))) continue;
     const src = read(f); out.scanned++;
     for (const h of findHits(src)) { if (inUrlToken(src, h.index, h.text.length)) continue; out.push({ file: f, line: src.slice(0, h.index).split('\n').length, label: h.label, text: h.text }); }
+    for (const h of findReview(src)) { if (inUrlToken(src, h.index, h.text.length)) continue; out.review.push({ file: f, line: src.slice(0, h.index).split('\n').length, label: h.label, text: h.text }); }
   }
   return out;
+}
+// Review-list hits in the bundle (URL tokens skipped; comments included, like the claims scan): [{ line, label, text }].
+export function bundleReviewHits(src) {
+  return findReview(src).filter(h => !inUrlToken(src, h.index, h.text.length)).map(h => ({ line: src.slice(0, h.index).split('\n').length, label: h.label, text: h.text }));
 }
 
 export function countScopes(src) {
@@ -392,6 +427,10 @@ if (process.argv[1] && process.argv[1].endsWith('banned-strings.mjs')) {
   if (argv.includes('--hits')) {
     const only = arg('--hits'); const sc = only && !only.startsWith('--') ? r.scopes.find(s => s.name === only) : null;
     for (const h of r.hits) { if (sc && !(h.index >= sc.start && h.index < sc.end)) continue; const s = innermost(r.scopes, h.index); console.log(`L${lineOf(src, h.index)}\t${h.label}\t${s ? s.name : '(top level)'}\t${ctx(h.index)}`); }
+  } else if (argv.includes('--review')) {
+    const rv = bundleReviewHits(src);
+    for (const h of rv) { const at = src.split('\n').slice(0, h.line - 1).join('\n').length + 1; const i = src.indexOf(h.text, at); const s = innermost(r.scopes, i); console.log(`L${h.line}\treview\t${h.label}\t${s ? s.name : '(top level)'}\t${ctx(i)}`); }
+    console.log(`\n${rv.length} review-list hit(s) in the bundle (warnings, not failures; ci/static-checks.mjs also lists the tracked text files)`);
   } else if (argv.includes('--exempt')) {
     for (const h of r.exempt) { const s = innermost(r.scopes, h.index); console.log(`L${lineOf(src, h.index)}\t${h.kind}\t${h.label}\t${s ? s.name : '(top level)'}\t${ctx(h.index)}`); }
     console.log(`\n${r.exempted} exempt hit(s): ` + Object.entries(r.exemptByKind).map(([k, n]) => `${k} ${n}`).join(', '));
