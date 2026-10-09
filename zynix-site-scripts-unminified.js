@@ -13545,46 +13545,6 @@ function renderDataAnalyticsV7() {
       renderFooter();
   }
 
-  function renderBlogPostFromData(post) {
-    // Style the raw CMS HTML to match design system
-    var body = (post.b || '')
-      .replace(/<h2>/g, '<h2 style="font-size:26px;font-weight:700;margin:40px 0 14px;color:var(--z-text);letter-spacing:-0.3px">')
-      .replace(/<\/h2>/g, '</h2>')
-      .replace(/<h3>/g, '<h3 style="font-size:20px;font-weight:600;margin:32px 0 10px;color:var(--z-text)">')
-      .replace(/<p>/g, '<p style="font-size:16px;line-height:1.85;color:var(--z-text-secondary);margin:0 0 18px">')
-      .replace(/<ul>/g, '<ul style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 18px">')
-      .replace(/<ol>/g, '<ol style="font-size:16px;line-height:1.8;color:var(--z-text-secondary);padding-left:24px;margin:0 0 18px">')
-      .replace(/<li>/g, '<li style="margin-bottom:8px">')
-      .replace(/<blockquote>/g, '<blockquote style="border-left:3px solid var(--z-accent);padding:16px 20px;margin:28px 0;background:var(--z-peach);border-radius:0 8px 8px 0">')
-      .replace(/<a /g, '<a style="color:var(--z-blue);font-weight:500;text-decoration:underline" ');
-
-    var blogHero = '<section style="background:var(--z-bg);padding:64px 24px 48px;border-bottom:1px solid var(--z-border)">' +
-      '<div style="max-width:800px;margin:0 auto">' +
-      '<a href="/resources-blog" style="display:inline-flex;align-items:center;gap:6px;color:var(--z-text-secondary);font-size:13px;font-weight:500;text-decoration:none;margin-bottom:24px;letter-spacing:0.3px">' +
-      '\u2190 Back to Blog</a>' +
-      '<div style="display:inline-block;background:var(--z-blue-light);color:var(--z-blue);font-size:11px;font-weight:700;letter-spacing:1.5px;padding:4px 10px;border-radius:4px;margin-bottom:16px">' + (post.c || 'INSIGHTS').toUpperCase() + '</div>' +
-      '<h1 style="font-size:clamp(26px,4vw,38px);font-weight:800;color:var(--z-text);line-height:1.2;letter-spacing:-1px;margin:0 0 20px">' + (post.t || '') + '</h1>' +
-      '<div style="display:flex;align-items:center;gap:12px">' +
-      '<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--z-blue),#4f46e5);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#fff;font-weight:700;font-size:14px">' + (post.a || 'Z').charAt(0).toUpperCase() + '</span></div>' +
-      '<div><span style="font-size:14px;font-weight:600;color:var(--z-text)">' + (post.a || 'Zynix AI') + '</span>' +
-      '<span style="font-size:13px;color:var(--z-text-secondary);margin-left:8px">' + (post.d || '') + '</span></div>' +
-      '</div>' +
-      '</div></section>';
-
-    return blogHero +
-      '<section style="background:var(--z-bg-alt);padding:48px 24px 80px">' +
-      '<div style="max-width:800px;margin:0 auto">' +
-      '<p style="font-size:18px;line-height:1.85;color:var(--z-text);margin:0 0 40px;font-style:italic;padding-bottom:32px;border-bottom:1px solid var(--z-border)">' + (post.s || '') + '</p>' +
-      '<article>' + body + '</article>' +
-      '<div style="margin-top:56px;padding-top:32px;border-top:1px solid var(--z-border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">' +
-      '<a href="/resources-blog" style="color:var(--z-blue);font-size:15px;font-weight:500;text-decoration:none">\u2190 Back to Blog</a>' +
-      '<a href="/contact" style="background:var(--z-accent);color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none">Request a Demo</a>' +
-      '</div>' +
-      '</div></section>' +
-      renderCTA('Transform Your Healthcare Operations', 'Join 1M+ VBC patients managed on the Zynix AI platform.', 'Get a Demo') +
-      renderFooter();
-  }
-
 
   if (routes[path]) {
     var doInject = function() {
@@ -13712,69 +13672,6 @@ function renderDataAnalyticsV7() {
       document.addEventListener('DOMContentLoaded', doInject);
     } else {
       doInject();
-    }
-  } else if (path.startsWith('/blog-posts/') || path === '/blog-posts') {
-    // Webflow CMS blog post — client-side render from zynix-blog-data.js
-    var doBlogPost = function() {
-      var slug = path.replace(/^\/blog-posts\/?/, '');
-      injectMegaMenu();
-      var nukeStyle = document.createElement('style');
-      nukeStyle.textContent = 'body>*:not(.zynix-announcement-bar):not(.zynix-mega-nav):not(.zynix-injected):not(.zynix-mobile-menu){display:none!important}';
-      document.head.appendChild(nukeStyle);
-      var zaf = document.getElementById('zaf');
-      if (zaf) zaf.remove();
-      document.documentElement.style.opacity = '1';
-      document.documentElement.classList.remove('js-loading');
-      if (window.__antiFlickerTimeout) clearTimeout(window.__antiFlickerTimeout);
-
-      function renderPostFromData(post) {
-        document.title = post.t + ' | Zynix AI';
-        var metaDesc = document.querySelector('meta[name="description"]');
-        if (!metaDesc) { metaDesc = document.createElement('meta'); metaDesc.name = 'description'; document.head.appendChild(metaDesc); }
-        metaDesc.content = post.s || '';
-        // Fix hreflang: add self-referencing en + x-default (fixes SEMrush "no self-referencing hreflang" error)
-        var postCanonical = 'https://www.zynix.ai' + path;
-        var cnl=document.querySelector('link[rel="canonical"]');
-        if(!cnl){cnl=document.createElement('link');cnl.rel='canonical';document.head.appendChild(cnl);}
-        cnl.href=postCanonical;
-        var hrel=document.querySelector('link[hreflang="en"]');
-        if(!hrel){hrel=document.createElement('link');hrel.rel='alternate';hrel.hreflang='en';document.head.appendChild(hrel);}
-        hrel.href=postCanonical;
-        var xdef=document.querySelector('link[hreflang="x-default"]');
-        if(!xdef){xdef=document.createElement('link');xdef.rel='alternate';xdef.hreflang='x-default';document.head.appendChild(xdef);}
-        xdef.href=postCanonical;
-        var sc = document.createElement('script');
-        sc.type = 'application/ld+json';
-        sc.textContent = JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':post.t,'description':post.s,'author':{'@type':'Person','name':post.a || 'Zynix AI'},'publisher':{'@type':'Organization','name':'Zynix AI','url':'https://www.zynix.ai'},'datePublished':post.d,'mainEntityOfPage':{'@type':'WebPage','@id':'https://www.zynix.ai' + path}});
-        document.head.appendChild(sc);
-        var bc = document.createElement('script');
-        bc.type = 'application/ld+json';
-        bc.textContent = JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':'https://www.zynix.ai'},{'@type':'ListItem','position':2,'name':'Blog','item':'https://www.zynix.ai/resources-blog'},{'@type':'ListItem','position':3,'name':post.t,'item':'https://www.zynix.ai' + path}]});
-        document.head.appendChild(bc);
-        injectAfterNav(renderBlogPostFromData(post));
-        initAnimations();
-      }
-
-      if (window.ZYNIX_BLOG_DATA) {
-        var post = window.ZYNIX_BLOG_DATA[slug];
-        if (post) { renderPostFromData(post); }
-        else { injectAfterNav(render404()); initAnimations(); }
-      } else {
-        var s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@d91d451/zynix-blog-data.js';
-        s.onload = function() {
-          var post = window.ZYNIX_BLOG_DATA ? window.ZYNIX_BLOG_DATA[slug] : null;
-          if (post) { renderPostFromData(post); }
-          else { injectAfterNav(render404()); initAnimations(); }
-        };
-        s.onerror = function() { injectAfterNav(render404()); initAnimations(); };
-        document.head.appendChild(s);
-      }
-    };
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', doBlogPost);
-    } else {
-      doBlogPost();
     }
   } else {
     // 404 — unmatched route: show branded 404 page
