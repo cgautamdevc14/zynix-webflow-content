@@ -311,7 +311,7 @@
     { id: 'awv', label: 'AWV', name: 'Annual wellness visits', href: '/blog-posts/how-to-improve-awv-completion-rates' },
     { id: 'mssp', label: 'MSSP', name: 'Medicare Shared Savings Program', href: '/audience-segments/acos-msos' },
     { id: 'lead', label: 'ACO REACH <span aria-hidden="true">→</span><span class="zx-visually-hidden"> to</span> LEAD 2027', name: 'ACO REACH to the LEAD Model in 2027',
-      href: '/resources-blog-aco-lead-model-execution-infrastructure-2027' },
+      href: '/blog-posts/aco-lead-model-execution-infrastructure-2027' },
     { id: 'access', label: 'CMS ACCESS Model', name: SITE_FACTS.access.clause.charAt(0).toUpperCase() + SITE_FACTS.access.clause.slice(1), href: '/audience-segments/acos-msos#access' },
     { id: 'wiser', label: 'WISeR', name: 'The CMS WISeR prior authorization model', href: '/blog-posts/wiser-model-cms-prior-authorization-acos-2026' }
   ];
@@ -401,7 +401,7 @@
     title: 'ACO LEAD Model: Why 2027 rewards ACOs that execute between visits',
     body: 'Most ACOs can already see who needs attention. The question is whether they can follow through at scale.',
     cta: 'Read the article',
-    href: '/resources-blog-aco-lead-model-execution-infrastructure-2027'
+    href: '/blog-posts/aco-lead-model-execution-infrastructure-2027'
   };
 
   var NAV_ACTIONS = {
@@ -1334,8 +1334,10 @@
   // /blog-<slug> (a Webflow page: HTTP 200, self-canonical, in the sitemap) and /blog/<slug> and /resources/blog/<slug>
   // (both 404 on the server, and the head link-rewrite script turns links to them into /blog-<slug>). Every form gets
   // the same one block: two products and two use cases for the article's topic, and two articles on the same topic.
-  // Article links point at the flat URL, or at the native post where the flat URL redirects to it (ZX_BLOG_NATIVE,
-  // mirroring REDIRECTS and the server 301). Labels are the articles' SEO titles, shortened.
+  // Article links point at the flat URL, or at the native CMS post (ZX_BLOG_NATIVE: slug -> 1 when the CMS slug is the same,
+  // else the CMS slug) where the flat URL redirects to it (REDIRECTS, server 301) or is a sitemap twin of a CMS post that is
+  // to be 301'd to it (SEO audit 2026-10-08 ZX-09: links point at the keeper now; the 301s are a dashboard job).
+  // Labels are the articles' SEO titles, shortened.
   var ZX_BLOG_TOPICS = {
     vbc: { desc: 'Article · value-based care', products: ['/zynix-data-analytics', '/platform'], useCases: ['/use-cases/rising-risk-patient-outreach', '/use-cases/hcc-gap-raf-optimization'] },
     gaps: { desc: 'Article · care gaps and risk adjustment', products: ['/zynix-data-analytics', '/care-plans'], useCases: ['/use-cases/hcc-gap-raf-optimization', '/use-cases/hedis-stars-quality-improvement'] },
@@ -1348,7 +1350,11 @@
   // The "AI agents in healthcare operations" article. Its URL is held in path form, the form the banned-string scan exempts
   // as a URL (ci/banned-strings.mjs inUrlToken); ZX_BLOG is keyed by slug, so the prefix is stripped here.
   var ZX_BLOG_AGENTS_OPS = '/blog/autonomous-ai-agents-healthcare-automation'.replace(/^\/blog\//, '');
-  var ZX_BLOG_NATIVE = { 'why-tcm-fails-real-workflows': 1 };
+  var ZX_BLOG_NATIVE = { 'why-tcm-fails-real-workflows': 1,
+    'what-is-value-based-care-ai': 1, 'how-ai-closes-care-gaps': 1,
+    'rising-risk-patients-ai': 'using-ai-identify-rising-risk-patients-before-they-deteriorate',
+    'eligibility-verification-automation': 'eligibility-verification-automation-front-door-faster-prior-auth',
+    'vbc-analytics-ai-driven': 'transforming-healthcare-ai-driven-value-based-care-analytics' };
   var ZX_BLOG = {   // slug: [topic, link label, two related article slugs]
     'what-is-value-based-care-ai': ['vbc', 'What is value-based care AI?', ['vbc-analytics-ai-driven', 'tools-driving-value-based-healthcare']],
     'vbc-analytics-ai-driven': ['vbc', 'Analytics for value-based care', ['predictive-analytics-population-health', 'what-is-value-based-care-ai']],
@@ -1383,7 +1389,7 @@
   };
   ZX_BLOG[ZX_BLOG_AGENTS_OPS] = ['agents', 'AI agents in healthcare operations', ['ai-agents-vs-chatbots-healthcare', 'essential-ai-tools-medical-professionals']];
   (function () {
-    function href(slug) { return (ZX_BLOG_NATIVE[slug] ? '/blog-posts/' : '/blog-') + slug; }
+    function href(slug) { var n = ZX_BLOG_NATIVE[slug]; return n ? '/blog-posts/' + (typeof n === 'string' ? n : slug) : '/blog-' + slug; }
     Object.keys(ZX_BLOG).forEach(function (slug) {
       var b = ZX_BLOG[slug], t = ZX_BLOG_TOPICS[b[0]], h = href(slug);
       LINK_NAMES[h] = b[1]; CROSS_DESCS[h] = t.desc; CROSS_ICONS[h] = 'book';
@@ -3587,8 +3593,9 @@
   }
   // Article library for /resources-blog: [canonical path or /blog-posts slug, ISO date, topic, title, excerpt?].
   // Titles are as published, except five whose published titles use retired or unverified wording (listed for a CMS retitle
-  // so the post H1s can match). Left out: the native duplicate of the 1M post (in favour of /resources-blog-1m-patients) and
-  // three posts built around wording DECISIONS 4 and 17b retire, until they are rewritten (P6 hand-off notes).
+  // so the post H1s can match). Every article links its CMS post, including the 1M milestone post (the static
+  // /resources-blog-1m-patients twin is to be 301'd to it, SEO audit ZX-09). Left out: three posts built around wording
+  // DECISIONS 4 and 17b retire, until they are rewritten (P6 hand-off notes).
   var ZX_RES_TOPICS = [
     { id: 'toc', name: 'Transitions of care' }, { id: 'quality', name: 'Quality and risk adjustment' },
     { id: 'cms', name: 'CMS models and policy' }, { id: 'ops', name: 'Care operations and agents' },
@@ -3597,6 +3604,7 @@
     { id: 'news', name: 'Company news' }, { id: 'general', name: 'Healthcare AI' }
   ];
   var ZX_RES_POSTS = [
+    ['cms-access-model-explained', '2026-10-06', 'cms', 'What is the CMS ACCESS Model? A guide for practices and ACOs', 'What the CMS ACCESS Model is, who can take part, its four initial tracks, how outcome-aligned payments work and the key dates, from the CMS source pages.'],
     ['after-hours-patient-calls-hidden-care-gap-acos', '2026-07-30', 'ops', 'After-Hours Patient Calls: The Hidden Care Gap ACOs Cannot Ignore', 'How after-hours calls shape access, escalation, continuity of care and patient trust for ACOs, and how to handle them as part of the care model.'],
     ['acos-scalable-care-capacity-annual-wellness-visits', '2026-07-30', 'quality', 'Annual Wellness Visits: How ACOs Can Build the First Layer of Scalable Care Capacity', 'Why the annual wellness visit is where prevention, care planning and quality work begin, and how ACOs can build the capacity to complete more of them.'],
     ['rural-health-transformation-program-care-capacity', '2026-07-30', 'cms', 'Rural Health Transformation Program: How Rural Networks Can Turn Funding Into Care Capacity', 'What rural networks need to turn new funding into care capacity: outreach, prevention, coordination, after-hours access and follow-through.'],
@@ -3956,7 +3964,7 @@
         lead: 'LEAD replaces ACO REACH on January 1, 2027, with 10-year benchmarks, CARA for specialists and a 1.5% administrative add-on. Here is what changes and how to prepare.',
         date: '2026-04-13', read: '10 min read', html: html }) +
       zxResRelated([{ label: 'Keep reading', items: [
-        { href: '/resources-blog-aco-lead-model-execution-infrastructure-2027', label: 'ACO LEAD Model: executing between visits', desc: 'Why 2027 rewards follow-through', icon: 'book' },
+        { href: '/blog-posts/aco-lead-model-execution-infrastructure-2027', label: 'ACO LEAD Model: executing between visits', desc: 'Why 2027 rewards follow-through', icon: 'book' },
         '/audience-segments/acos-msos', '/care-plans', '/zynix-data-analytics', '/resources-blog'] }]) +
       (naacos ? renderCTA('Meet us at NAACOS Fall 2026', 'Find Zynix AI at the NAACOS Fall Conference (October 14–16, Washington, DC) to talk through LEAD readiness and see the workflows on sample data.', '',
           { primary: { label: 'Book a meeting', href: SITE_FACTS.demo.href } }) :
@@ -5401,8 +5409,6 @@
 
     // Apr 19, 2026 — Webflow CMS /blog-posts/* template URLs → canonical /blog/* paths
     // Fixes: SEMrush non-canonical sitemap entries + hreflang conflict (no self-referencing)
-    '/blog-posts/essential-ai-tools-medical-professionals': '/blog/essential-ai-tools-medical-professionals',
-    '/blog-posts/documentation-crisis-physician-burnout': '/blog/documentation-crisis-physician-burnout',
 
     // Archived/legacy pages → canonical destinations
     '/zz-archived-products-ai-agents-zynauth': '/agents',
@@ -7208,7 +7214,7 @@ function renderAboutV7() {
   // Founding year 2024 = the Organization JSON-LD foundingDate (confirmed by Gautamdev 2026-09-30; not 2023); the ACCESS approval date stays held [VERIFY].
   var milestones = [
     { when: '2024', text: 'Zynix AI founded to close the gap between knowing and doing in <span class="zx-co-nowrap">value-based</span> care' },
-    { when: 'March 2026', text: F.stats.patients.sentence + ' at ' + F.stats.states.sentence, href: '/resources-blog-1m-patients', link: 'Read the announcement' },
+    { when: 'March 2026', text: F.stats.patients.sentence + ' at ' + F.stats.states.sentence, href: '/blog-posts/zynix-ai-surpasses-1-million-vbc-patients', link: 'Read the announcement' },
     { when: 'April 2026', text: 'Strategic partnership with PBACO Holding announced', href: pb.release.href, link: 'Read the release' },
     { when: 'June 2026', text: 'Partnership with eternalHealth and nirvanaHealth announced', href: eh.release.href, link: 'Read the release' },
     { when: 'Today', text: [zxAccessLine(),
@@ -11517,8 +11523,8 @@ function renderDataAnalyticsV7() {
     // Internal 404/redirected URLs that still appear in page links, rewritten to canonical 200 destinations.
     // Exact keys only: the lookup is INT_FIXES[path].
     var INT_FIXES = {
-      '/blog-1m-patients': '/resources-blog-1m-patients',
-      '/blog/1m-patients': '/resources-blog-1m-patients',
+      '/blog-1m-patients': '/blog-posts/zynix-ai-surpasses-1-million-vbc-patients',
+      '/blog/1m-patients': '/blog-posts/zynix-ai-surpasses-1-million-vbc-patients',
       // Audience pages: canonical /audience-segments/<slug> (DECISIONS 7, 9)
       '/who-we-serve/acos-msos': '/audience-segments/acos-msos',
       '/who-we-serve/ascs': '/audience-segments/ascs',
