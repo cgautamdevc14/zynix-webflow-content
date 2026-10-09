@@ -766,8 +766,8 @@
    ['/who-we-serve/fqhcs', '/solutions-fqhcs', { schema: 'Product' }],
    ['/company/zynixllm', '/company-zynixllm', { schema: 'Product' }],
    ['/security', '/company-trust-center', { schema: 'Organization' }],
-   ['/press', '/company-press', { img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' }],
-   ['/newsroom', '/company-press', { img: IMG.hero, schema: 'NewsArticle', datePublished: '2026-04-14' }],
+   ['/press', '/company-press', { img: IMG.hero, schema: 'CollectionPage' }],     // the release listing: no NewsArticle (SEO audit ZX-34)
+   ['/newsroom', '/company-press', { img: IMG.hero, schema: 'CollectionPage' }],
    ['/careers', '/company-careers', { schema: 'Organization', noindex: true }],
    ['/resources/blog', '/resources-blog', { schema: 'Organization' }],
    ['/resources/faq', '/resources-faq', { schema: 'FAQPage' }],
@@ -783,7 +783,7 @@
    ['/faq', '/resources-faq'],
    ['/privacy-policy', '/company-privacy'],
    ['/trust-center', '/company-trust-center'],
-   ['/resources/blog/1m-patients', '/resources-blog-1m-patients', { img: IMG.hero, schema: 'Article', datePublished: '2026-01-15' }],
+   ['/resources/blog/1m-patients', '/resources-blog-1m-patients', { img: IMG.hero, schema: 'Article' }],
    ['/resources/blog/what-is-value-based-care-ai', '/blog/what-is-value-based-care-ai'],
    ['/resources/blog/how-ai-closes-care-gaps', '/blog/how-ai-closes-care-gaps'],
    ['/resources/blog/ai-agents-vs-chatbots-healthcare', '/blog/ai-agents-vs-chatbots-healthcare'],
@@ -849,7 +849,7 @@
     setMeta('property','og:locale','en_US');
     // Article-specific OG meta
     if (seo.schema === 'Article') {
-      setMeta('property','article:published_time', seo.datePublished || '2026-01-15');
+      if (seo.datePublished) setMeta('property','article:published_time', seo.datePublished);   // no placeholder date (SEO audit ZX-34)
       setMeta('property','article:author', 'Zynix AI');
       setMeta('property','article:section', 'Healthcare AI');
     }
@@ -914,16 +914,14 @@
         {'@type':'ContactPoint',email:'info@zynix.ai',contactType:'customer support',areaServed:'US'}
       ],
       areaServed:{'@type':'Country',name:'United States'},
-      numberOfEmployees:{'@type':'QuantitativeValue',minValue:50,maxValue:100},
       foundingDate:'2024',
       naics:'541511',
-      knowsAbout:['Value-Based Care','Healthcare Artificial Intelligence','Population Health Management','Care Gap Closure','Transitional Care Management','HCC Risk Adjustment','HEDIS Quality Measures','ACO Management','Medicare Shared Savings Program','HIPAA Compliance','Healthcare Workflow Automation','Clinical Documentation','AI Voice Agents for Healthcare','Patient Outreach Automation','Care Coordination Software'],
+      knowsAbout:['Value-Based Care','Healthcare Artificial Intelligence','Population Health Management','Care Gap Closure','Transitional Care Management','HCC Risk Adjustment','HEDIS Quality Measures','ACO Management','Medicare Shared Savings Program','Healthcare Workflow Automation','Clinical Documentation','AI Voice Agents for Healthcare','Patient Outreach Automation','Care Coordination Software'],
       hasOfferCatalog:{'@type':'OfferCatalog',name:'Healthcare AI Platform',itemListElement:[
         {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'Zynix platform',description:'Data foundation, intelligence, agents and care plans for value-based care operations.'}},
         {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynAfterHours',description:'After-hours call handling with escalation to on-call clinicians.'}},
         {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynSchedule',description:'Patient scheduling by phone, text and web.'}},
-        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynScribe',description:'Ambient clinical documentation with physician review before anything is filed.'}},
-        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynAuth',description:'Prior authorization workflow support.'}}
+        {'@type':'Offer',itemOffered:{'@type':'SoftwareApplication',name:'ZynScribe',description:'Ambient clinical documentation with physician review before anything is filed.'}}
       ]},
       sameAs:['https://www.linkedin.com/company/zynix/','https://x.com/zynixai_','https://www.instagram.com/zynixai/'],
       founder:[
@@ -977,18 +975,17 @@
       var crumbs = [{'@type':'ListItem',position:1,name:'Home',item:'https://www.zynix.ai'}];
       var segments = pagePath.replace(/^\//,'').split('/').filter(function(s) { return s; });
       var topSegment = segments[0];
-      var sectionMapV7 = {'who-we-serve':'Who We Serve','agents':'AI Agents','platform':'Platform','company':'Company','resources':'Resources','solutions':'Solutions','case-studies':'Case Studies','blog':'Blog'};
+      // Section parents (SEO audit 2026-10-08, ZX-34): every parent is a live page that answers 200 (was /case-studies 404,
+      // /products-zynix-os and /solutions-acos 301, /company-about a JS-redirected legacy page, /agents/<family> 301).
+      var sectionMapV7 = {'who-we-serve':['Solutions','/solutions'],'agents':['AI Agents','/agents'],'platform':['Platform','/platform'],'company':['Company','/about'],'resources':['Resources','/resources-blog'],'solutions':['Solutions','/solutions'],'case-studies':['Customer stories','/resources-case-studies'],'blog':['Blog','/resources-blog'],'use-cases':['Use cases','/use-cases']};
       var legacySeg = pagePath.replace(/^\//,'').split('-');
-      var sectionMapLegacy = {products:'Products',solutions:'Solutions',company:'Company',resources:'Resources'};
+      var sectionMapLegacy = {products:['Platform','/platform'],solutions:['Solutions','/solutions'],company:['Company','/about'],resources:['Resources','/resources-blog']};
       if (sectionMapV7[topSegment] && segments.length > 1) {
-        crumbs.push({'@type':'ListItem',position:2,name:sectionMapV7[topSegment],item:'https://www.zynix.ai/' + topSegment});
-        if (segments.length > 2) {
-          crumbs.push({'@type':'ListItem',position:3,name:seo.title.split('|')[0].trim().replace(/ \| Zynix AI$/,''),item:'https://www.zynix.ai/' + topSegment + '/' + segments[1]});
-        }
+        crumbs.push({'@type':'ListItem',position:2,name:sectionMapV7[topSegment][0],item:'https://www.zynix.ai' + sectionMapV7[topSegment][1]});
       } else if (typeof PILLARS !== 'undefined' && PILLARS.some(function (x) { return x.slug === pagePath; })) {
         crumbs.push({'@type':'ListItem',position:2,name:'Platform',item:'https://www.zynix.ai/platform'});   // V9 pillar pages: Home › Platform › <pillar>
-      } else if (sectionMapLegacy[legacySeg[0]]) {
-        crumbs.push({'@type':'ListItem',position:2,name:sectionMapLegacy[legacySeg[0]],item:'https://www.zynix.ai/' + legacySeg[0] + '-' + (legacySeg[0]==='products'?'zynix-os':legacySeg[0]==='solutions'?'acos':legacySeg[0]==='company'?'about':legacySeg[0]==='resources'?'blog':'')});
+      } else if (sectionMapLegacy[legacySeg[0]] && sectionMapLegacy[legacySeg[0]][1] !== pagePath) {
+        crumbs.push({'@type':'ListItem',position:2,name:sectionMapLegacy[legacySeg[0]][0],item:'https://www.zynix.ai' + sectionMapLegacy[legacySeg[0]][1]});
       }
       crumbs.push({'@type':'ListItem',position:crumbs.length+1,name:seo.title.split('|')[0].trim(),item:'https://www.zynix.ai' + pagePath});
       schemas.push({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:crumbs});
@@ -1042,8 +1039,8 @@
         image:{'@type':'ImageObject',url:seo.img||IMG.hero,width:1200,height:630},
         author:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
         publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization',name:'Zynix AI',logo:{'@type':'ImageObject',url:IMG.logo}},
-        datePublished:seo.datePublished||'2026-01-15',
-        dateModified:seo.dateModified||seo.datePublished||'2026-03-01',
+        datePublished:seo.datePublished||undefined,                    // no placeholder dates (SEO audit ZX-34): omitted
+        dateModified:seo.dateModified||seo.datePublished||undefined,   // without a real value (JSON.stringify drops undefined)
         mainEntityOfPage:{'@type':'WebPage','@id':'https://www.zynix.ai'+pagePath},
         speakable:{'@type':'SpeakableSpecification',cssSelector:['h1','h2','p:first-of-type']},
         about:[{'@type':'Thing',name:'Healthcare AI'},{'@type':'Thing',name:'Value-Based Care'},{'@type':'Thing',name:'AI Agents for Healthcare'}],
@@ -1080,22 +1077,8 @@
         keywords:'Zynix AI, PBACO, Palm Beach ACO, value-based care, ACO, AI patient outreach, ambient documentation, MSSP, Medicare Shared Savings Program, healthcare AI, partnership announcement'
       });
     }
-    if (seo.schema === 'HowTo') {
-      schemas.push({
-        '@context':'https://schema.org','@type':'HowTo',
-        name:seo.title.split('|')[0].trim(),
-        description:seo.desc,
-        image:{'@type':'ImageObject',url:seo.img||IMG.hero,width:1200,height:630},
-        supply:[{'@type':'HowToSupply',name:'Zynix AI Platform'},{'@type':'HowToSupply',name:'EHR or Data Feed'}],
-        tool:[{'@type':'HowToTool',name:'AI Agents'},{'@type':'HowToTool',name:'Care Plan Templates'}],
-        step:[
-          {'@type':'HowToStep',position:1,name:'Connect your clinical data',text:'Connect claims, EHR, ADT and SDoH data into one patient record.',url:'https://www.zynix.ai/products-data-platform'},
-          {'@type':'HowToStep',position:2,name:'Configure AI agents and care plans',text:'Choose care plans and agents from the agent families for TCM, CCM, AWV and gap closure.',url:'https://www.zynix.ai/agents'},
-          {'@type':'HowToStep',position:3,name:'Launch outreach',text:'Agents begin outreach and scheduling; clinical questions go to your team.',url:'https://www.zynix.ai/platform'},
-          {'@type':'HowToStep',position:4,name:'Monitor outcomes and optimize',text:'Track contacts, visits and closed gaps in shared worklists.',url:'https://www.zynix.ai/zynix-data-analytics'}
-        ]
-      });
-    }
+    // No HowTo node (SEO audit 2026-10-08, ZX-34): the use cases' schema: 'HowTo' gave all 30 pages one generic step set that
+    // none of them shows. Their entries keep the field; it no longer emits anything.
 
     // FAQPage: from the DOM, else the /resources-faq list below
     var faqEls = document.querySelectorAll('.zynix-faq-item');
