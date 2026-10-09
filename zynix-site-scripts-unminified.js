@@ -948,14 +948,15 @@
       schemas.push({
         '@context':'https://schema.org','@type':'SoftwareApplication',
         name:'Zynix AI Platform',
-        description:'The Zynix platform connects claims, EHR and ADT data, ranks the patients and care gaps that need attention, and helps care teams follow through with care plans, outreach agents and ambient documentation.',
+        description:zxDefinition(),   // the /platform hero lead (SEO audit ZX-11)
         applicationCategory:'HealthcareApplication',
         applicationSubCategory:'Value-Based Care Software',
         operatingSystem:'Web Browser',
         publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
         audience:{'@type':'Audience',audienceType:'Healthcare Organizations — ACOs, Health Systems, Health Plans, FQHCs, Independent Practices'},
         featureList:['SOC 2 Type II audited','HIPAA-aligned safeguards · BAA available','Epic EHR integration','athenahealth integration','ADT feed processing','Voice and SMS outreach agents','Care gap closure','TCM follow-up','AWV outreach'],
-        screenshot:IMG.hero,
+        // no screenshot until a claims-checked 1200x630 card exists (SEO audit ZX-63 review: IMG.hero is the portrait
+        // dashboard with unlabeled outcome percentages and '$ XX,XXX' placeholders)
         url:'https://www.zynix.ai/platform'
       });
       // SiteNavigationElement
