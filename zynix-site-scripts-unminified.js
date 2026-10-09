@@ -11703,6 +11703,48 @@ function renderDataAnalyticsV7() {
       renderFooter();
   }
 
+  // Competitor citations on the comparison pages, linked to the exact pages they cite (SEO audit 2026-10-08, ZX-31). Every
+  // quote was matched on these pages on 2026-10-09 (audit evidence CLAIMS/source_match.json, 25/25) and every URL answered 200
+  // (or a redirect to 200; Innovaccer's news and blog moved to innovaccer.ai, linked at their final URLs). The Commure Agents
+  // release links the GlobeNewswire original (commure.com no longer hosts it). Link text keeps the citation as it read; the
+  // "accessed" dates are unchanged. A row whose source equals the panel's (themSrc) shows no second citation.
+  var ZX_CMP_SRC = (function () {
+    var a = function (t, u) { return '<a href="' + zxAttr(u) + '"' + zxNewTab(u) + '>' + t + '</a>'; };
+    var acc = ', accessed 19 Sep 2026';
+    var x = {
+      innoAgents: a('Innovaccer news release, 17 Feb 2025', 'https://innovaccer.ai/news/innovaccer-launches-agents-of-care-to-transform-healthcare-operations-enhance-care-delivery'),
+      innoSite: a('innovaccer.com', 'https://innovaccer.com/') + acc,
+      innoSlm: a('Innovaccer blog, 23 Apr 2026', 'https://innovaccer.ai/blogs/small-language-models-healthcare'),
+      innoTcm: 'Innovaccer news releases, ' + a('21 Jul 2025', 'https://innovaccer.ai/news/innovaccer-launches-ai-powered-readmissions-management-solution-to-effectively-manage-cost-of-care-and-improve-care-outcomes') +
+        ' and ' + a('22 Apr 2025', 'https://innovaccer.ai/news/innovaccer-launches-copilots-agents-care-management-reducing-documentation-time-boosting-patient-engagement'),
+      innoGravity: a('Innovaccer news release, 22 May 2025', 'https://innovaccer.ai/news/innovaccer-launches-gravity-healthcare-intelligence-platform-accelerate-ai-driven-transformation'),
+      commRaise: a('Commure news release, 19 May 2026', 'https://www.commure.com/press-releases/commure-raises-70m-at-7b-valuation-to-transform-healthcare-operations-using-ai'),
+      commAgents: a('Commure news release, 25 Jun 2025', 'https://www.globenewswire.com/news-release/2025/06/25/3105122/0/en/Commure-Launches-Commure-Agents-AI-Assistants-That-Fully-Automate-Physician-Workflows.html'),
+      commSite: a('commure.com', 'https://www.commure.com/') + acc,
+      commEngage: a('commure.com/engage', 'https://www.commure.com/engage') + acc,
+      commBlog: a('Commure blog, 31 Oct 2025', 'https://www.commure.com/blog/commure-uncharted-lessons-from-large-scale-healthcare-ai-implementations'),
+      hcCeo: a('Health Catalyst news release, 18 Feb 2026', 'https://www.healthcatalyst.com/news/health-catalyst-appoints-ben-albert-as-chief-executive-officer'),
+      hcProducts: 'healthcatalyst.com (' + a('Upfront', 'https://www.healthcatalyst.com/products/upfront-by-health-catalyst') + ', ' +
+        a('Twistle', 'https://www.healthcatalyst.com/offerings/twistle-by-health-catalyst') + ')' + acc,
+      hcSite: a('healthcatalyst.com', 'https://www.healthcatalyst.com/') + acc,
+      abrKeynote: a('Abridge news release, 11 Jun 2026', 'https://www.abridge.com/press-release/patient-centered-clinician-intelligence-platform-keynote'),
+      abrRcm: a('abridge.com/platform/revenue-cycle', 'https://www.abridge.com/platform/revenue-cycle') + acc,
+      abrSite: a('abridge.com', 'https://www.abridge.com/') + acc,
+      navSite: a('navina.ai', 'https://www.navina.ai/') + acc,
+      olvDive: a('Healthcare Dive, 1 Nov 2023', 'https://www.healthcaredive.com/news/olive-ai-shuts-down/698455/'),
+      olvHitc: a('HIT Consultant, 31 Oct 2023', 'https://hitconsultant.net/2023/10/31/olive-shutters-business-after-sale-to-waystar-and-humata-health/'),
+      notSite: a('notablehealth.com', 'https://www.notablehealth.com/') + acc,
+      notVbc: a('notablehealth.com/use-case/value-based-care', 'https://www.notablehealth.com/use-case/value-based-care') + acc,
+      notFlows: a('Notable announcement, 24 Oct 2024', 'https://www.notablehealth.com/blog/notable-ai-platform-flow-builder-announcement')
+    };
+    x.innoThem = x.innoAgents + '; ' + x.innoSite;
+    x.abrBoth = 'Abridge news releases, ' + a('11 Jun 2026', 'https://www.abridge.com/press-release/patient-centered-clinician-intelligence-platform-keynote') +
+      ' and ' + a('13 Feb 2024', 'https://www.abridge.com/press-release/abridge-inside-emory');
+    x.hcThem = x.hcCeo + '; ' + x.hcProducts;
+    x.olvThem = x.olvDive + '; ' + x.olvHitc;
+    return x;
+  })();
+
   // ── PAGE: Compare — Zynix vs Point Solutions ──
   function renderComparePointSolutions() { return renderCompareVs({
     slug: 'point-solutions', name: 'point solutions', title: 'Zynix AI vs point solutions', label: 'A point-solution stack',
@@ -11730,13 +11772,13 @@ function renderDataAnalyticsV7() {
   function renderCompareInnovaccer() { return renderCompareVs({
     slug: 'innovaccer', name: 'Innovaccer',
     them: 'Innovaccer provides a data platform (Gravity), analytics and care-management software. In February 2025 it launched a suite of AI agents it calls “Agents of Care”.',
-    themSrc: 'Innovaccer news release, 17 Feb 2025; innovaccer.com, accessed 19 Sep 2026',
+    themSrc: ZX_CMP_SRC.innoThem,
     rows: [
-      { label: 'Data and analytics', them: 'A data platform (Gravity) with analytics and care-management software.', src: 'innovaccer.com, accessed 19 Sep 2026', us: 'A data foundation that builds one patient record from claims, EHR, ADT, lab and pharmacy data, and analytics that rank patients by risk and open HCC and quality gaps.' },
-      { label: 'AI agents', them: '“Agents of Care”, described as “a suite of pre-trained AI Agents”, plus voice AI agents for inbound and outbound patient calls.', src: 'Innovaccer news release, 17 Feb 2025; innovaccer.com, accessed 19 Sep 2026', us: 'ZX_AGENTS' },
-      { label: 'Language models', them: '“Sara SLMs”, described as “12 fine-tuned models purpose-built to power administrative and clinical workflows across healthcare”.', src: 'Innovaccer blog, 23 Apr 2026', us: 'ZynixLLM is the language model layer of the Zynix platform. Agents work within the escalation rules your team sets.' },
-      { label: 'Post-discharge and TCM', them: '“Out-of-the-box care management workflows purpose-built for TCM” and an “ED Follow-up Agent designed to automate post-discharge care coordination”.', src: 'Innovaccer news releases, 21 Jul 2025 and 22 Apr 2025', us: 'ZX_TCM' },
-      { label: 'Deployment', them: 'Innovaccer says Gravity “reduces deployment timelines from months to weeks”.', src: 'Innovaccer news release, 22 May 2025', us: 'ZX_TIME' }
+      { label: 'Data and analytics', them: 'A data platform (Gravity) with analytics and care-management software.', src: ZX_CMP_SRC.innoSite, us: 'A data foundation that builds one patient record from claims, EHR, ADT, lab and pharmacy data, and analytics that rank patients by risk and open HCC and quality gaps.' },
+      { label: 'AI agents', them: '“Agents of Care”, described as “a suite of pre-trained AI Agents”, plus voice AI agents for inbound and outbound patient calls.', src: ZX_CMP_SRC.innoThem, us: 'ZX_AGENTS' },
+      { label: 'Language models', them: '“Sara SLMs”, described as “12 fine-tuned models purpose-built to power administrative and clinical workflows across healthcare”.', src: ZX_CMP_SRC.innoSlm, us: 'ZynixLLM is the language model layer of the Zynix platform. Agents work within the escalation rules your team sets.' },
+      { label: 'Post-discharge and TCM', them: '“Out-of-the-box care management workflows purpose-built for TCM” and an “ED Follow-up Agent designed to automate post-discharge care coordination”.', src: ZX_CMP_SRC.innoTcm, us: 'ZX_TCM' },
+      { label: 'Deployment', them: 'Innovaccer says Gravity “reduces deployment timelines from months to weeks”.', src: ZX_CMP_SRC.innoGravity, us: 'ZX_TIME' }
     ],
     fitThem: ['An enterprise data platform and analytics program is your first priority.', 'You want one suite across data, analytics and care management.'],
     fitUs: ['Your team already knows who needs attention, and the gap is follow-through.', 'You want care plans and outreach agents working the lists, with clinicians making the clinical decisions.', 'You run value-based contracts across practices on different EHRs.'],
@@ -11752,14 +11794,14 @@ function renderDataAnalyticsV7() {
   function renderCompareCommure() { return renderCompareVs({
     slug: 'commure', name: 'Commure',
     them: 'Commure describes itself as delivering “next-generation AI infrastructure for health systems, integrating ambient workflows, agentic AI, and revenue cycle automation on a single platform”.',
-    themSrc: 'Commure news release, 19 May 2026',
+    themSrc: ZX_CMP_SRC.commRaise,
     rows: [
-      { label: 'Focus', them: 'Ambient workflows, agentic AI and revenue cycle automation for health systems.', src: 'Commure news release, 19 May 2026', us: 'ZX_FOCUS' },
-      { label: 'Agents', them: 'Commure Agents, launched in June 2025, “[h]andle routine tasks such as answering calls, scheduling appointments, providing patient updates”; its product line also lists Call Center Agents.', src: 'Commure news release, 25 Jun 2025; commure.com, accessed 19 Sep 2026', us: 'ZX_AGENTS' },
-      { label: 'Documentation', them: 'Ambient AI is part of a product line that also includes Strongline, RCM, Engage and Call Center Agents.', src: 'commure.com, accessed 19 Sep 2026', us: 'ZX_DOCS' },
-      { label: 'Patient engagement', them: 'Commure Engage delivers care journeys through automated outreach, with pathways that include post-discharge recovery and symptom monitoring.', src: 'commure.com/engage, accessed 19 Sep 2026', us: 'Care plans for TCM, CCM, wellness visits and gap closure sequence agent outreach and care team tasks, and close only when each step is documented.' },
-      { label: 'Deployment', them: 'Commure has written that deployment planning “can be completed in about thirty days” in the best case and “can take up to four months” in more complex cases.', src: 'Commure blog, 31 Oct 2025', us: 'ZX_TIME' },
-      { label: 'Customers', them: 'More than 130 large health systems “use the platform alongside thousands of physician-owned practices”.', src: 'Commure news release, 19 May 2026', us: 'ZX_CUSTOMERS' }
+      { label: 'Focus', them: 'Ambient workflows, agentic AI and revenue cycle automation for health systems.', src: ZX_CMP_SRC.commRaise, us: 'ZX_FOCUS' },
+      { label: 'Agents', them: 'Commure Agents, launched in June 2025, “[h]andle routine tasks such as answering calls, scheduling appointments, providing patient updates”; its product line also lists Call Center Agents.', src: ZX_CMP_SRC.commAgents + '; ' + ZX_CMP_SRC.commSite, us: 'ZX_AGENTS' },
+      { label: 'Documentation', them: 'Ambient AI is part of a product line that also includes Strongline, RCM, Engage and Call Center Agents.', src: ZX_CMP_SRC.commSite, us: 'ZX_DOCS' },
+      { label: 'Patient engagement', them: 'Commure Engage delivers care journeys through automated outreach, with pathways that include post-discharge recovery and symptom monitoring.', src: ZX_CMP_SRC.commEngage, us: 'Care plans for TCM, CCM, wellness visits and gap closure sequence agent outreach and care team tasks, and close only when each step is documented.' },
+      { label: 'Deployment', them: 'Commure has written that deployment planning “can be completed in about thirty days” in the best case and “can take up to four months” in more complex cases.', src: ZX_CMP_SRC.commBlog, us: 'ZX_TIME' },
+      { label: 'Customers', them: 'More than 130 large health systems “use the platform alongside thousands of physician-owned practices”.', src: ZX_CMP_SRC.commRaise, us: 'ZX_CUSTOMERS' }
     ],
     fitThem: ['You are a health system consolidating ambient documentation, revenue cycle and call-center work with one vendor.'],
     fitUs: ['Your contracts reward follow-up between visits: TCM, wellness visits, HCC and quality gaps.', 'You need the same workflows across practices on different EHRs.', 'You want clinicians approving documentation and taking every clinical escalation.'],
@@ -11804,7 +11846,7 @@ function renderDataAnalyticsV7() {
       renderSection({ id: 'comparison', compact: true, rule: true, className: 'zx-res-compare' },
         renderSectionHead('At a glance', 'Two different starting points', null, { id: 'comparison-title' }) + glance +
         '<h3 class="zx-res-compare__sub">Capability by capability</h3>' + table +
-        (cfg.themSrc ? '<p class="zx-res-compare__note">' + label + ' details come from ' + cfg.themSrc + ', unless a row cites another source. Tell us if something has changed.</p>' : '')) +
+        (cfg.themSrc ? '<p class="zx-res-compare__note">' + label + ' details come from ' + cfg.themSrc.replace(/<[^>]*>/g, '') + ', unless a row cites another source. Tell us if something has changed.</p>' : '')) +
       renderSection({ id: 'fit', surface: 'subtle', className: 'zx-res-fit-section' },
         renderSectionHead('Which fits your team', 'Choosing between them', null, { id: 'fit-title' }) + fit) +
       renderSection({ id: 'faq', className: 'zx-res-compare-faq' },
@@ -11821,11 +11863,11 @@ function renderDataAnalyticsV7() {
   function renderCompareHealthCatalyst() { return renderCompareVs({
     slug: 'health-catalyst', name: 'Health Catalyst',
     them: 'Health Catalyst describes itself as a provider of “data and analytics technology and services”. Its products include Upfront, a patient engagement platform, and Twistle, which automates patient communication by SMS, patient portal and IVR.',
-    themSrc: 'Health Catalyst news release, 18 Feb 2026; healthcatalyst.com, accessed 19 Sep 2026',
+    themSrc: ZX_CMP_SRC.hcThem,
     rows: [
-      { label: 'Focus', them: '“Data and analytics technology and services”.', src: 'Health Catalyst news release, 18 Feb 2026', us: 'ZX_FOCUS' },
-      { label: 'Patient engagement', them: 'Upfront, which Health Catalyst says can “Automate scheduling, referrals, and care transitions”, and Twistle for patient communication by SMS, patient portal and IVR.', src: 'healthcatalyst.com, accessed 19 Sep 2026', us: 'ZX_AGENTS' },
-      { label: 'Pricing', them: 'No public pricing on the pages we reviewed.', src: 'healthcatalyst.com, accessed 19 Sep 2026', us: 'ZX_PRICE' }
+      { label: 'Focus', them: '“Data and analytics technology and services”.', src: ZX_CMP_SRC.hcCeo, us: 'ZX_FOCUS' },
+      { label: 'Patient engagement', them: 'Upfront, which Health Catalyst says can “Automate scheduling, referrals, and care transitions”, and Twistle for patient communication by SMS, patient portal and IVR.', src: ZX_CMP_SRC.hcProducts, us: 'ZX_AGENTS' },
+      { label: 'Pricing', them: 'No public pricing on the pages we reviewed.', src: ZX_CMP_SRC.hcSite, us: 'ZX_PRICE' }
     ],
     fitThem: ['You want an enterprise analytics program supported by professional services.', 'Your analytics needs reach well beyond value-based care programs.'],
     fitUs: ['You need the lists worked, not only reported: TCM contacts, wellness visits and gap outreach.', 'You want care plans and outreach agents on the same patient record as your analytics.', 'You serve ACO, Medicare Advantage or MSSP populations across several EHRs.'],
@@ -11839,13 +11881,13 @@ function renderDataAnalyticsV7() {
   function renderCompareAbridge() { return renderCompareVs({
     slug: 'abridge', name: 'Abridge',
     them: 'Abridge provides ambient clinical documentation and, in June 2026, announced a clinician intelligence platform that extends before, during and after the visit.',
-    themSrc: 'Abridge news release, 11 Jun 2026',
+    themSrc: ZX_CMP_SRC.abrKeynote,
     rows: [
-      { label: 'Scope', them: 'Pre-charted notes and summaries before the visit, clinical decision support during it, and “billing codes, and orders for clinician review” afterwards.', src: 'Abridge news release, 11 Jun 2026', us: 'ZynScribe for ambient documentation, inside a platform that also runs care plans, outreach agents and worklists for value-based care.' },
-      { label: 'Documentation', them: 'Ambient clinical documentation.', src: 'Abridge news release, 11 Jun 2026', us: 'ZX_DOCS' },
-      { label: 'EHR integration', them: '“Deeply integrated across leading EHRs, including Epic, Oracle Health, and athenahealth”; “Abridge Inside” is embedded in Epic workflows.', src: 'Abridge news releases, 11 Jun 2026 and 13 Feb 2024', us: SITE_FACTS.ehr.line + ', including Epic, Oracle Health (Cerner), athenahealth, eClinicalWorks and NextGen.' },
-      { label: 'Value-based care', them: 'Documentation support for risk adjustment and care gaps as part of its revenue-cycle offering.', src: 'abridge.com/platform/revenue-cycle, accessed 19 Sep 2026', us: 'Point-of-care gap prompts before the visit, and care plans and outreach between visits for TCM, wellness visits and HCC and quality gaps.' },
-      { label: 'Pricing', them: 'No public pricing was found on the Abridge pages reviewed.', src: 'abridge.com, accessed 19 Sep 2026', us: 'ZX_PRICE' }
+      { label: 'Scope', them: 'Pre-charted notes and summaries before the visit, clinical decision support during it, and “billing codes, and orders for clinician review” afterwards.', src: ZX_CMP_SRC.abrKeynote, us: 'ZynScribe for ambient documentation, inside a platform that also runs care plans, outreach agents and worklists for value-based care.' },
+      { label: 'Documentation', them: 'Ambient clinical documentation.', src: ZX_CMP_SRC.abrKeynote, us: 'ZX_DOCS' },
+      { label: 'EHR integration', them: '“Deeply integrated across leading EHRs, including Epic, Oracle Health, and athenahealth”; “Abridge Inside” is embedded in Epic workflows.', src: ZX_CMP_SRC.abrBoth, us: SITE_FACTS.ehr.line + ', including Epic, Oracle Health (Cerner), athenahealth, eClinicalWorks and NextGen.' },
+      { label: 'Value-based care', them: 'Documentation support for risk adjustment and care gaps as part of its revenue-cycle offering.', src: ZX_CMP_SRC.abrRcm, us: 'Point-of-care gap prompts before the visit, and care plans and outreach between visits for TCM, wellness visits and HCC and quality gaps.' },
+      { label: 'Pricing', them: 'No public pricing was found on the Abridge pages reviewed.', src: ZX_CMP_SRC.abrSite, us: 'ZX_PRICE' }
     ],
     fitThem: ['Ambient documentation is the problem you’re solving right now, and Abridge is a strong choice for it.'],
     fitUs: ['You want documentation connected to the care gaps, care plans and follow-up around the visit.', 'Your programs depend on work between visits: outreach, scheduling and post-discharge follow-up.'],
@@ -11860,12 +11902,12 @@ function renderDataAnalyticsV7() {
   function renderCompareNavina() { return renderCompareVs({
     slug: 'navina', name: 'Navina',
     them: 'Navina describes itself as “The clinician-first AI copilot for value-based success”, with Clinician Copilot, Risk Adjustment, Quality Management and Analytics products.',
-    themSrc: 'navina.ai, accessed 19 Sep 2026',
+    themSrc: ZX_CMP_SRC.navSite,
     rows: [
-      { label: 'Where it works', them: 'At the point of care, as a copilot for the clinician.', src: 'navina.ai, accessed 19 Sep 2026', us: 'Between visits and at the point of care: ranked worklists, care plans and outreach agents, plus point-of-care gap prompts and ZynScribe documentation.' },
-      { label: 'Risk adjustment and quality', them: 'Risk Adjustment and Quality Management products.', src: 'navina.ai, accessed 19 Sep 2026', us: 'HCC and quality gap detection that feeds outreach, scheduling and pre-visit prep, with each gap tracked until the visit is completed and documented.' },
-      { label: 'Documentation', them: 'Clinician Copilot supports the clinician during the visit.', src: 'navina.ai, accessed 19 Sep 2026', us: 'ZX_DOCS' },
-      { label: 'Customer evidence', them: 'Navina publishes customer results at navina.ai/case-studies.', src: 'navina.ai, accessed 19 Sep 2026', us: 'Customer stories at zynix.ai, and partnership releases from Palm Beach ACO and eternalHealth.' }
+      { label: 'Where it works', them: 'At the point of care, as a copilot for the clinician.', src: ZX_CMP_SRC.navSite, us: 'Between visits and at the point of care: ranked worklists, care plans and outreach agents, plus point-of-care gap prompts and ZynScribe documentation.' },
+      { label: 'Risk adjustment and quality', them: 'Risk Adjustment and Quality Management products.', src: ZX_CMP_SRC.navSite, us: 'HCC and quality gap detection that feeds outreach, scheduling and pre-visit prep, with each gap tracked until the visit is completed and documented.' },
+      { label: 'Documentation', them: 'Clinician Copilot supports the clinician during the visit.', src: ZX_CMP_SRC.navSite, us: 'ZX_DOCS' },
+      { label: 'Customer evidence', them: 'Navina publishes customer results at navina.ai/case-studies.', src: ZX_CMP_SRC.navSite, us: 'Customer stories at zynix.ai, and partnership releases from Palm Beach ACO and eternalHealth.' }
     ],
     fitThem: ['Your priority is visit-level HCC capture and chart summaries for clinicians.', 'You want a clinician-first copilot with risk adjustment, quality and analytics products from one vendor.'],
     fitUs: ['You need the work between visits done: outreach, scheduling, post-discharge follow-up and gap closure.', 'You want point-of-care prompts and follow-up running from the same list of gaps.'],
@@ -11882,11 +11924,11 @@ function renderDataAnalyticsV7() {
     cta: { title: 'Replacing Olive AI? See Zynix on your own workflows', sub: 'Book 30 minutes with our team. We’ll walk through one of your value-based care programs on sample data and map it to your systems.' },
     lead: 'Olive AI wound down in 2023. For teams re-evaluating automation, here is where its products went and where Zynix fits, cited to news coverage of the wind-down.',
     them: 'Olive AI announced its wind-down on 31 October 2023. It sold its clearinghouse and patient-access units to Waystar and its prior-authorization unit to Humata Health.',
-    themSrc: 'Healthcare Dive, 1 Nov 2023; HIT Consultant, 31 Oct 2023',
+    themSrc: ZX_CMP_SRC.olvThem,
     rows: [
-      { label: 'Status', them: 'Wound down in October 2023.', src: 'Healthcare Dive, 1 Nov 2023', us: 'ZX_CUSTOMERS' },
-      { label: 'Where its products went', them: 'Clearinghouse and patient access to Waystar; prior authorization to Humata Health.', src: 'HIT Consultant, 31 Oct 2023', us: 'Zynix is not a clearinghouse. Ask us about prior authorization support for your organization.' },
-      { label: 'Focus', them: 'Revenue cycle automation, including clearinghouse, patient-access and prior-authorization products.', src: 'HIT Consultant, 31 Oct 2023', us: 'Value-based care operations: post-discharge follow-up, wellness visits, HCC and quality gap closure, scheduling, after-hours intake and fax routing.' }
+      { label: 'Status', them: 'Wound down in October 2023.', src: ZX_CMP_SRC.olvDive, us: 'ZX_CUSTOMERS' },
+      { label: 'Where its products went', them: 'Clearinghouse and patient access to Waystar; prior authorization to Humata Health.', src: ZX_CMP_SRC.olvHitc, us: 'Zynix is not a clearinghouse. Ask us about prior authorization support for your organization.' },
+      { label: 'Focus', them: 'Revenue cycle automation, including clearinghouse, patient-access and prior-authorization products.', src: ZX_CMP_SRC.olvHitc, us: 'Value-based care operations: post-discharge follow-up, wellness visits, HCC and quality gap closure, scheduling, after-hours intake and fax routing.' }
     ],
     fitThem: ['For clearinghouse, patient-access or prior-authorization products, compare the Waystar and Humata Health offerings that took over Olive’s units.'],
     fitUs: ['You are re-evaluating automation for value-based care programs, not only the revenue cycle.', 'You want outreach, scheduling and follow-up tied to one patient record and one worklist.'],
@@ -11900,12 +11942,12 @@ function renderDataAnalyticsV7() {
   function renderCompareNotableHealth() { return renderCompareVs({
     slug: 'notable-health', name: 'Notable',
     them: 'Notable describes its platform as covering “Access, Revenue Cycle Management, Care Operations, and more”, and lists value-based care among its use cases.',
-    themSrc: 'notablehealth.com, accessed 19 Sep 2026',
+    themSrc: ZX_CMP_SRC.notSite,
     rows: [
-      { label: 'Focus', them: '“Access, Revenue Cycle Management, Care Operations, and more”.', src: 'notablehealth.com, accessed 19 Sep 2026', us: 'ZX_FOCUS' },
-      { label: 'Value-based care', them: 'AI agents that “identify and engage patients to schedule screenings and close care gaps”, and chart review “to capture complete diagnoses and HCCs”.', src: 'notablehealth.com/use-case/value-based-care, accessed 19 Sep 2026', us: 'Ranked worklists for TCM, wellness visits and HCC and quality gaps, with care plans and outreach agents working them.' },
-      { label: 'Agent workflows', them: 'Patient registration, scheduling, referrals, authorizations, coding, and care gap identification and closure.', src: 'Notable news release, 24 Oct 2024', us: 'ZX_AGENTS' },
-      { label: 'Customers', them: 'Names health systems among its customers.', src: 'notablehealth.com, accessed 19 Sep 2026', us: 'ZX_CUSTOMERS' }
+      { label: 'Focus', them: '“Access, Revenue Cycle Management, Care Operations, and more”.', src: ZX_CMP_SRC.notSite, us: 'ZX_FOCUS' },
+      { label: 'Value-based care', them: 'AI agents that “identify and engage patients to schedule screenings and close care gaps”, and chart review “to capture complete diagnoses and HCCs”.', src: ZX_CMP_SRC.notVbc, us: 'Ranked worklists for TCM, wellness visits and HCC and quality gaps, with care plans and outreach agents working them.' },
+      { label: 'Agent workflows', them: 'Patient registration, scheduling, referrals, authorizations, coding, and care gap identification and closure.', src: ZX_CMP_SRC.notFlows, us: 'ZX_AGENTS' },
+      { label: 'Customers', them: 'Names health systems among its customers.', src: ZX_CMP_SRC.notSite, us: 'ZX_CUSTOMERS' }
     ],
     fitThem: ['Front-office automation such as registration and check-in is the priority.'],
     fitUs: ['Your success is measured in shared savings, Star Ratings and HCC capture.', 'You need TCM, wellness visit and gap-closure programs run end to end, with clinicians taking every clinical question.'],
