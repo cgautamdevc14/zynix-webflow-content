@@ -428,7 +428,8 @@
   var GHG = GH + 'gifs/';
   var GHS = GH + 'screenshots/';
   var IMG = {
-    // Real product screenshots — used for OG meta images, social previews, and inline showcases
+    // Product screenshots for inline showcases. Not preview images (SEO audit 2026-10-08, ZX-35/ZX-63): they are portrait or
+    // 1200x747/732, show sample patient rows and unlabeled percentages; og:image comes only from a 1200x630 card (zxOgCard).
     hero: GH + 'zynix-aco-dashboard.png',               // ACO dashboard — homepage OG fallback
     doctor: GH + 'zynix-predictive-analytics.png',      // Risk/AI view — agents, triage pages
     patient: GH + 'zynix-provider-view.png',            // Provider dashboard — scheduling, engagement
@@ -839,10 +840,14 @@
     setMeta('name','ICBM','28.1856, -82.6800');
     setMeta('property','og:title', seo.title);
     setMeta('property','og:description', seo.desc);
-    setMeta('property','og:image', seo.img || IMG.hero);
-    setMeta('property','og:image:width', '1200');
-    setMeta('property','og:image:height', '630');
-    setMeta('property','og:image:type', 'image/png');
+    var card = zxOgCard(seo);   // og:image / twitter:image only from a real 1200x630 card; otherwise the page's own tags stay
+    if (card) {
+      setMeta('property','og:image', card.url);
+      setMeta('property','og:image:width', '1200');
+      setMeta('property','og:image:height', '630');
+      if (card.type) setMeta('property','og:image:type', card.type);
+      setMeta('property','og:image:alt', card.alt || seo.title);
+    }
     setMeta('property','og:url', canonical);
     setMeta('property','og:type', (seo.schema === 'Article' || seo.schema === 'NewsArticle') ? 'article' : 'website');
     setMeta('property','og:site_name','Zynix AI');
@@ -866,8 +871,10 @@
     setMeta('name','twitter:creator','@zynixai_');
     setMeta('name','twitter:title', seo.title);
     setMeta('name','twitter:description', seo.desc);
-    setMeta('name','twitter:image', seo.img || IMG.hero);
-    setMeta('name','twitter:image:alt', seo.title);
+    if (card) {
+      setMeta('name','twitter:image', card.url);
+      setMeta('name','twitter:image:alt', card.alt || seo.title);
+    }
     setMeta('name','author','Zynix AI');
     setMeta('name','copyright','Zynix Inc');
     // Canonical URL
@@ -1036,7 +1043,7 @@
         '@context':'https://schema.org','@type':'Article',
         headline:seo.title.split('|')[0].trim(),
         description:seo.desc,
-        image:{'@type':'ImageObject',url:seo.img||IMG.hero,width:1200,height:630},
+        image:zxOgCard(seo) ? {'@type':'ImageObject',url:zxOgCard(seo).url,width:1200,height:630} : undefined,
         author:{'@type':'Organization','@id':'https://www.zynix.ai/#organization'},
         publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization',name:'Zynix AI',logo:{'@type':'ImageObject',url:IMG.logo}},
         datePublished:seo.datePublished||undefined,                    // no placeholder dates (SEO audit ZX-34): omitted
@@ -1057,7 +1064,7 @@
         headline:'Zynix AI Announces Strategic Partnership with Palm Beach Accountable Care Organization and Affiliated Entities (PBACO Holding)',
         alternativeHeadline:'Partnership scales AI-driven patient outreach, documentation, and workflow automation across value-based care network',
         description:seo.desc,
-        image:{'@type':'ImageObject',url:seo.img||IMG.hero,width:1200,height:630},
+        image:zxOgCard(seo) ? {'@type':'ImageObject',url:zxOgCard(seo).url,width:1200,height:630} : undefined,
         author:{'@type':'Organization','@id':'https://www.zynix.ai/#organization',name:'Zynix AI'},
         publisher:{'@type':'Organization','@id':'https://www.zynix.ai/#organization',name:'Zynix AI',logo:{'@type':'ImageObject',url:IMG.logo,width:600,height:60}},
         datePublished:seo.datePublished||'2026-04-14',
@@ -1622,6 +1629,10 @@
   }
   function zxPath() { return (location.pathname || '/').replace(/\/$/, '').toLowerCase(); }   // '' for the homepage
   function zxSeo(path, fields) { PAGE_SEO[path] = Object.assign({}, PAGE_SEO[path] || {}, fields); }
+  // Link-preview image for a route (SEO audit 2026-10-08, ZX-35/ZX-63): only a real 1200x630 card given as
+  // seo.ogCard = { url, width: 1200, height: 630, type, alt }. No route has one yet, so the bundle leaves og:image and
+  // twitter:image to the page's own Webflow settings (the homepage's card stays) and never declares a size it has not got.
+  function zxOgCard(seo) { var c = seo && seo.ogCard; return c && c.url && c.width === 1200 && c.height === 630 ? c : null; }
 
   // ── Facts readers (§4) ──
   // An anonymous record (CUSTOMERS.hospitalsystem) comes back as its unnamed phrasing only: never another name, a logo, a link,
@@ -13960,11 +13971,12 @@ function renderDataAnalyticsV7() {
       // ── Social meta fallback ──
       // Inject og:* and twitter:* at parse time so scrapers that don't
       // execute injectSEO() (Facebook, LinkedIn, Slack, SEMrush crawlers)
-      // still get the right preview image, title, and description. Every
-      // page falls back to IMG.hero even if it's not in PAGE_SEO.
+      // still get the right title and description. The preview image is set only
+      // from a real 1200x630 card (zxOgCard; none yet), so the page's own
+      // og:image is never overwritten (SEO audit 2026-10-08, ZX-35/ZX-63).
       var ogTitle = s.title || document.title || 'Zynix AI';
       var ogDesc = s.desc || 'Zynix AI — AI infrastructure and workflows for value-based care.';
-      var ogImg = s.img || (typeof IMG !== 'undefined' && IMG.hero) || '';
+      var ogCard = zxOgCard(s), ogImg = ogCard ? ogCard.url : '';
       setMetaByAttr('property', 'og:title', ogTitle);
       setMetaByAttr('property', 'og:description', ogDesc);
       setMetaByAttr('property', 'og:type', 'website');
@@ -13974,7 +13986,7 @@ function renderDataAnalyticsV7() {
         setMetaByAttr('property', 'og:image', ogImg);
         setMetaByAttr('property', 'og:image:width', '1200');
         setMetaByAttr('property', 'og:image:height', '630');
-        setMetaByAttr('property', 'og:image:type', 'image/png');
+        if (ogCard.type) setMetaByAttr('property', 'og:image:type', ogCard.type);
       }
       setMetaByAttr('name', 'twitter:card', 'summary_large_image');
       setMetaByAttr('name', 'twitter:title', ogTitle);
