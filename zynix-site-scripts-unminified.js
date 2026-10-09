@@ -238,7 +238,7 @@
       { id: 'operational-efficiency', name: 'Operational efficiency', href: '/agents#operational-efficiency',
         agents: ['ZynAfterHours', 'ZynSchedule', 'Referral management', 'ZynFax'], held: ['Prior authorization'] }   // the ZynAuth page is archived
     ],
-    carePlans: ['Post-discharge TCM', 'HCC gap closure sprint', 'Medication safety and adherence', 'High-utilizer ED diversion',
+    carePlans: ['Post-discharge TCM', 'HCC gap closure sprint', 'Medication safety and adherence', 'High-utilizer outreach',
                 'Chronic condition visit readiness', 'Preventive screening program'],
     roles: { agent: 'Outreach agent', rn: 'Care manager, RN', physician: 'Physician lead', coordinator: 'Care coordinator', scheduler: 'Scheduler' },
     // Retired names that must not appear in visible copy are listed in DECISIONS.md item 2 and COPY_DECK.md section 7 (and the chat's invented product names)
@@ -302,7 +302,7 @@
   ];
   // The loop's fifth node (V9_SPEC §4.3: "Outcome documented (feeds back)").
   var PILLAR_OUTCOME = { id: 'outcome', name: 'Outcome documented', short: 'Outcome documented', icon: 'check',
-    loop: 'The kept visit and the closed plan are documented, and feed back into the patient record.' };
+    loop: 'The kept visit and the closed plan are documented, and feed back into the patient’s record in the Zynix platform.' };   // the platform record, not an EHR write-back (SEO audit ZX-37)
   // Program chips (V9_SPEC §4.8; renderV9Chips). label is HTML-ready; name is the spelled-out program (screen readers, opts.names);
   // ACCESS carries its one explaining clause (DECISIONS 17). Targets are existing pages or posts.
   var PROGRAMS = [
@@ -6426,7 +6426,7 @@ USE_CASES.UC13 = {
   runsOn: [{ p: 'analytics', note: 'Admission and readmission risk flags rising utilization.' },
     { p: 'agents', family: 'predictive-activation', note: 'The rising-risk outreach agent reaches newly flagged members.' },
     { p: 'agents', family: 'clinical-performance', note: 'The chronic care management agent keeps the monthly contact.' },
-    { p: 'carePlans', note: 'The high-utilizer ED diversion plan sets the steps.' }],
+    { p: 'carePlans', note: 'The high-utilizer outreach plan sets the steps.' }],
   readNext: ['medication-adherence-chronic-populations', 'post-discharge-ma-members', 'hcc-risk-adjustment-ma'],
   story: 'eternalhealth', cta: 'high-utilizer outreach',
   seo: { title: 'High-utilizer member outreach | Zynix AI',
@@ -8543,7 +8543,7 @@ function renderCarePlansV7() {
     'Post-discharge TCM': ['An ADT discharge message for an attributed patient', 'A check-in call and discharge-instruction review by an agent; the interactive contact by clinical staff; the 7- or 14-day visit booked; reminders', 'The follow-up visit is documented'],
     'HCC gap closure sprint': ['Suspected HCCs not yet recaptured this year', 'Patients ranked by RAF impact and closure window; visits booked; open gaps shown to the physician before the visit', 'The physician assesses each condition at a visit'],
     'Medication safety and adherence': ['A medication change at discharge, or a gap in pharmacy refills', 'The medication list collected by phone or text; discrepancies and adherence barriers routed to a pharmacist, nurse or prescriber', 'A clinician reviews each flag'],
-    'High-utilizer ED diversion': ['Repeat ED visits in claims or ADT data', 'Outreach to connect the patient with primary care and after-hours options; a primary care visit booked; care manager review', 'The primary care visit is completed'],
+    'High-utilizer outreach': ['Repeat ED visits in claims or ADT data', 'Outreach to connect the patient with primary care and after-hours options; a primary care visit booked; care manager review', 'The primary care visit is completed'],
     'Chronic condition visit readiness': ['An upcoming visit for a patient with diabetes, CHF or COPD', 'Reminders, pre-visit labs and open gaps prepared for the care team', 'The visit is completed'],
     'Preventive screening program': ['A patient is due for a screening, vaccination or annual wellness visit', 'Invitations by voice or SMS, booking, two-way reminders and tracking to completion', 'The screening or visit is completed']
   };
