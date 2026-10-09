@@ -497,7 +497,6 @@
     '/platform': 'Platform overview',
     '/products-data-platform': 'Data foundation',
     '/zynix-data-analytics': 'Analytics',
-    '/products-analytics': 'Analytics',
     '/solutions/zynix-data-analytics': 'Analytics',
     '/care-plans': 'Care plans',
     '/zynscribe': 'ZynScribe',
@@ -580,7 +579,6 @@
     '/platform': { products: ['/products-data-platform','/zynix-data-analytics','/agents','/care-plans'], useCases: ['/use-cases/post-discharge-tcm-readmission','/use-cases/hcc-gap-raf-optimization'] },
     '/products-data-platform': { products: ['/zynix-data-analytics','/integrations','/platform'], solutions: ['/audience-segments/acos-msos','/audience-segments/health-systems','/audience-segments/health-plans'] },
     '/zynix-data-analytics': { useCases: ['/use-cases/hcc-gap-raf-optimization','/use-cases/hedis-stars-quality-improvement','/use-cases/rising-risk-patient-outreach'], related: ['/products-data-platform','/care-plans','/platform'] },
-    '/products-analytics': { useCases: ['/use-cases/hcc-gap-raf-optimization','/use-cases/hedis-stars-quality-improvement','/use-cases/rising-risk-patient-outreach'], related: ['/products-data-platform','/care-plans','/platform'] },
     '/solutions/zynix-data-analytics': { useCases: ['/use-cases/hcc-gap-raf-optimization','/use-cases/hedis-stars-quality-improvement','/use-cases/rising-risk-patient-outreach'], related: ['/products-data-platform','/care-plans','/platform'] },
     '/care-plans': { useCases: ['/use-cases/post-discharge-tcm-readmission','/use-cases/chronic-care-coordination-scale','/use-cases/hcc-gap-raf-optimization'], related: ['/agents','/zynix-data-analytics','/platform'] },
     '/zynscribe': { related: ['/care-plans','/agents','/security'], solutions: ['/audience-segments/health-systems','/audience-segments/independent-group-practices'] },
@@ -615,7 +613,7 @@
   var PAGE_SEO = {
     '': { title: 'Value-based care AI for ACOs and health plans | Zynix AI', desc: 'Connect claims, EHR and ADT data, flag discharges, care gaps and AWVs due, and give care teams outreach agents. For ACOs, health plans, MSOs and IPAs.', img: IMG.hero, schema: 'Organization' },
     '/products-data-platform': { title: 'Healthcare data foundation: one patient record | Zynix AI', desc: 'Bring claims, EHR, ADT, lab and pharmacy data into one patient record. Codes standardized, identities resolved, ready for worklists. 30+ EHR systems.', img: IMG.data, schema: 'Product' },
-    '/products-analytics': { title: 'Population health analytics for VBC | Zynix AI', desc: 'Risk, quality and HCC gap analytics on your claims and clinical data, ranked into worklists your care team can act on this week.', img: IMG.analytics, schema: 'Product' },
+    '/zynix-data-analytics': { title: 'Population health analytics for VBC | Zynix AI', desc: 'Risk, quality and HCC gap analytics on your claims and clinical data, ranked into worklists your care team can act on this week.', img: IMG.analytics, schema: 'Product' },
     '/company-zynixllm': { title: 'ZynixLLM: how Zynix AI works safely | Zynix AI', desc: 'How ZynixLLM supports value-based care workflows, when clinicians step in, and how agents stay within the escalation rules your team sets.', img: IMG.mesh, schema: 'Product' },
     '/products-ai-agents-zynafterhours': { title: 'ZynAfterHours after-hours call handling | Zynix AI', desc: 'After-hours calls answered: the reason captured, routine visits booked and symptom questions routed to your on-call clinician by rule.', img: IMG.doctor, schema: 'Product' },
     '/products-ai-agents-zynschedule': { title: 'ZynSchedule patient scheduling | Zynix AI', desc: 'Patient scheduling by phone, text and web, with confirmations, reschedules and exceptions handed to your front-office staff.', img: IMG.patient, schema: 'Product' },
@@ -753,12 +751,12 @@
   // Aliases (legacy slugs, nested twins): [path, source] copies the source entry; [path, source, fields] takes its title and
   // description and sets its own other fields. Each alias gets its own copy at load time.
   [['/products-zynixllm', '/company-zynixllm'],
-   ['/zynix-data-analytics', '/products-analytics'],
+   ['/products-analytics', '/zynix-data-analytics'],   // ZX-26: a Draft with a server 301 to /zynix-data-analytics (REDIRECTS too)
    ['/roi-calculator', '/roi', { img: IMG.hero }],
    ['/agents/operational-efficiency/zynafterhours-triage', '/products-ai-agents-zynafterhours', { schema: 'Product' }],
    ['/agents/operational-efficiency/zynschedule', '/products-ai-agents-zynschedule', { schema: 'Product' }],
    ['/agents/preventive-quality-activation/zynreminder', '/products-ai-agents-zynreminder', { schema: 'Product' }],
-   ['/solutions/zynix-data-analytics', '/products-analytics', { schema: 'Product' }],
+   ['/solutions/zynix-data-analytics', '/zynix-data-analytics', { schema: 'Product' }],
    ['/who-we-serve/health-systems', '/solutions-health-systems', { schema: 'Product' }],
    ['/who-we-serve/acos-msos', '/solutions-acos', { schema: 'Product' }],
    ['/who-we-serve/health-plans', '/solutions-health-plans', { schema: 'Product' }],
@@ -1205,7 +1203,6 @@
     '/platform': 'layers',
     '/products-data-platform': 'database',
     '/zynix-data-analytics': 'chart',
-    '/products-analytics': 'chart',
     '/solutions/zynix-data-analytics': 'chart',
     '/care-plans': 'clipboard',
     '/zynscribe': 'mic',
@@ -1268,7 +1265,6 @@
     '/platform': 'One platform for value-based care operations',
     '/products-data-platform': 'Claims, EHR, ADT and labs, unified',
     '/zynix-data-analytics': 'Risk, quality and HCC gaps',
-    '/products-analytics': 'Risk, quality and HCC gaps',
     '/solutions/zynix-data-analytics': 'Risk, quality and HCC gaps',
     '/care-plans': 'TCM, AWV and CCM workflows',
     '/zynscribe': 'Ambient clinical documentation',
@@ -2806,7 +2802,7 @@
      'One platform to connect claims, EHR and ADT data, rank the patients who need attention, and run follow-up with care plans, agents and your care team.'],
    [['/products-data-platform'], 'Healthcare data foundation: one patient record | Zynix AI',
      'Bring claims, EHR, ADT, lab and pharmacy data into one patient record. Codes standardized, identities resolved, ready for worklists. 30+ EHR systems.'],
-   [['/zynix-data-analytics', '/products-analytics', '/solutions/zynix-data-analytics'], 'Population health analytics for VBC | Zynix AI',
+   [['/zynix-data-analytics', '/solutions/zynix-data-analytics'], 'Population health analytics for VBC | Zynix AI',
      'Risk, quality and HCC gap analytics on your claims and clinical data, ranked into worklists your care team can act on this week.'],
    [['/care-plans'], 'Care plans for TCM, CCM, AWVs and gap closure | Zynix AI',
      'Pre-built care plans sequence agents and care team tasks for TCM, CCM, wellness visits and gap closure, and close only when each step is documented.'],
@@ -3361,12 +3357,6 @@
     return '<div class="zx-pil zx-pil--' + zxAttr(p.id) + acc + '">' + hero + what + spot + loop + programs + more + cta + '</div>' + renderFooter();
   }
   // ==== ZX:END pillars ====
-
-  // ── PAGE: Analytics ──
-  function renderAnalytics() {
-    // /products-analytics is a duplicate of /zynix-data-analytics; it renders the same page until its 301 exists (§6).
-    return renderDataAnalyticsV7();
-  }
 
   // ── PAGE: AI Agents ──
   function renderAIAgents() {
@@ -4507,12 +4497,12 @@
   }
 
   // Where a path sits in NAV (§3.2 section matching, §3.7): { path, navPath, section, item, landing }.
-  // navPath resolves the aliases that still render (e.g. /products-analytics → /zynix-data-analytics). When a page is
+  // navPath resolves the aliases that still render (e.g. /solutions/zynix-data-analytics → /zynix-data-analytics). When a page is
   // in two sections, the one whose item is also in the footer wins (/security → Company, /press → Resources).
   function zxNavCurrent(path) {
     var p = String(path == null ? zxPath() : path).replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
     var ALIAS = {
-      '/zynix-ai-agents': '/agents', '/products-analytics': '/zynix-data-analytics', '/solutions/zynix-data-analytics': '/zynix-data-analytics',
+      '/zynix-ai-agents': '/agents', '/solutions/zynix-data-analytics': '/zynix-data-analytics',
       '/company/zynixllm': '/company-zynixllm', '/products-zynixllm': '/company-zynixllm', '/company-trust-center': '/security', '/trust-center': '/security',
       '/company-about': '/about', '/company-careers': '/careers', '/company-press': '/press', '/newsroom': '/press',
       '/roi': '/roi-calculator', '/case-studies': '/resources-case-studies', '/blog': '/resources-blog',
@@ -5276,7 +5266,8 @@
     // Products → Platform / Solutions (old /products-* → new canonical paths)
     '/products-zynix-os': '/platform',
     '/platform-legacy': '/platform',
-    // removed self-redirect no-ops for /products-data-platform and /products-analytics
+    // removed the self-redirect no-op for /products-data-platform
+    '/products-analytics': '/zynix-data-analytics',   // SEO audit ZX-26: the page is a Draft with a server 301 (release 2026-10-09)
     '/products-ai-agents': '/agents',
     '/products-zynscribe': '/zynscribe',
     '/products-care-plans': '/care-plans',
@@ -5336,8 +5327,8 @@
     '/untitled-22': '/solutions',
     '/untitled-26': '/solutions',
     '/untitled-29': '/agents',
-    '/untitled-27': '/products-analytics',
-    '/untitled-28': '/products-analytics',
+    '/untitled-27': '/zynix-data-analytics',
+    '/untitled-28': '/zynix-data-analytics',
     '/untitled-30': '/resources-blog-lead-model-cms',
     '/untitled-31': '/resources-blog-lead-model-cms',
 
@@ -5420,8 +5411,8 @@
     '/deprecated-trust-center': '/security',
     '/untitled-22': '/solutions',
     '/untitled-26': '/solutions',
-    '/untitled-27': '/products-analytics',
-    '/untitled-28': '/products-analytics',
+    '/untitled-27': '/zynix-data-analytics',
+    '/untitled-28': '/zynix-data-analytics',
     '/untitled-29': '/agents',
     '/untitled-30': '/resources-blog',
     '/untitled-31': '/resources-blog',
@@ -11068,7 +11059,6 @@ function renderDataAnalyticsV7() {
     '': renderHomepage,
     // Products - Platform
     '/products-data-platform': renderDataPlatform,
-    '/products-analytics': renderAnalytics,
     '/agents': renderAIAgents,
     '/company-zynixllm': renderZynixLLMV7,
     '/solutions': renderSolutionsOverview,
@@ -11597,7 +11587,8 @@ function renderDataAnalyticsV7() {
       '/agents/operational-efficiency/zynschedule': '/agents#operational-efficiency',
       // Solutions / misc
       '/solutions/zyngap': '/zynix-data-analytics',
-      '/solutions/zynix-data-analytics': '/zynix-data-analytics'
+      '/solutions/zynix-data-analytics': '/zynix-data-analytics',
+      '/products-analytics': '/zynix-data-analytics'   // ZX-26 (Draft + server 301)
     };
     // Prefix rules, checked only when no exact key matched; first match wins. The original fragment is dropped and
     // the query kept, so every remaining /agents/* link lands on a family anchor or the hub (§3.12).
