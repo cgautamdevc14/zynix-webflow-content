@@ -11722,7 +11722,8 @@ function renderDataAnalyticsV7() {
 
   // Competitor citations on the comparison pages, linked to the exact pages they cite (SEO audit 2026-10-08, ZX-31). Every
   // quote was matched on these pages on 2026-10-09 (audit evidence CLAIMS/source_match.json, 25/25) and every URL answered 200
-  // (or a redirect to 200; Innovaccer's news and blog moved to innovaccer.ai, linked at their final URLs). The Commure Agents
+  // (or a redirect to 200; Innovaccer's news and blog moved to innovaccer.ai, linked at their final URLs); the Innovaccer
+  // voice-agent and Navina case-study pages were re-checked on 2026-10-09 and carry that date. The Commure Agents
   // release links the GlobeNewswire original (commure.com no longer hosts it). Link text keeps the citation as it read; the
   // "accessed" dates are unchanged. A row whose source equals the panel's (themSrc) shows no second citation.
   var ZX_CMP_SRC = (function () {
@@ -11731,6 +11732,7 @@ function renderDataAnalyticsV7() {
     var x = {
       innoAgents: a('Innovaccer news release, 17 Feb 2025', 'https://innovaccer.ai/news/innovaccer-launches-agents-of-care-to-transform-healthcare-operations-enhance-care-delivery'),
       innoSite: a('innovaccer.com', 'https://innovaccer.com/') + acc,
+      innoVoice: a('innovaccer.com/voice-agents', 'https://innovaccer.com/voice-agents/') + ', accessed 9 Oct 2026',   // inbound and outbound calls (review of ZX-31)
       innoSlm: a('Innovaccer blog, 23 Apr 2026', 'https://innovaccer.ai/blogs/small-language-models-healthcare'),
       innoTcm: 'Innovaccer news releases, ' + a('21 Jul 2025', 'https://innovaccer.ai/news/innovaccer-launches-ai-powered-readmissions-management-solution-to-effectively-manage-cost-of-care-and-improve-care-outcomes') +
         ' and ' + a('22 Apr 2025', 'https://innovaccer.ai/news/innovaccer-launches-copilots-agents-care-management-reducing-documentation-time-boosting-patient-engagement'),
@@ -11748,6 +11750,7 @@ function renderDataAnalyticsV7() {
       abrRcm: a('abridge.com/platform/revenue-cycle', 'https://www.abridge.com/platform/revenue-cycle') + acc,
       abrSite: a('abridge.com', 'https://www.abridge.com/') + acc,
       navSite: a('navina.ai', 'https://www.navina.ai/') + acc,
+      navCases: a('navina.ai/case-studies', 'https://www.navina.ai/case-studies') + ', accessed 9 Oct 2026',
       olvDive: a('Healthcare Dive, 1 Nov 2023', 'https://www.healthcaredive.com/news/olive-ai-shuts-down/698455/'),
       olvHitc: a('HIT Consultant, 31 Oct 2023', 'https://hitconsultant.net/2023/10/31/olive-shutters-business-after-sale-to-waystar-and-humata-health/'),
       notSite: a('notablehealth.com', 'https://www.notablehealth.com/') + acc,
@@ -11792,7 +11795,7 @@ function renderDataAnalyticsV7() {
     themSrc: ZX_CMP_SRC.innoThem,
     rows: [
       { label: 'Data and analytics', them: 'A data platform (Gravity) with analytics and care-management software.', src: ZX_CMP_SRC.innoSite, us: 'A data foundation that builds one patient record from claims, EHR, ADT, lab and pharmacy data, and analytics that rank patients by risk and open HCC and quality gaps.' },
-      { label: 'AI agents', them: '“Agents of Care”, described as “a suite of pre-trained AI Agents”, plus voice AI agents for inbound and outbound patient calls.', src: ZX_CMP_SRC.innoThem, us: 'ZX_AGENTS' },
+      { label: 'AI agents', them: '“Agents of Care”, described as “a suite of pre-trained AI Agents”, plus voice AI agents for inbound and outbound patient calls.', src: ZX_CMP_SRC.innoAgents + '; ' + ZX_CMP_SRC.innoVoice, us: 'ZX_AGENTS' },
       { label: 'Language models', them: '“Sara SLMs”, described as “12 fine-tuned models purpose-built to power administrative and clinical workflows across healthcare”.', src: ZX_CMP_SRC.innoSlm, us: 'ZynixLLM is the language model layer of the Zynix platform. Agents work within the escalation rules your team sets.' },
       { label: 'Post-discharge and TCM', them: '“Out-of-the-box care management workflows purpose-built for TCM” and an “ED Follow-up Agent designed to automate post-discharge care coordination”.', src: ZX_CMP_SRC.innoTcm, us: 'ZX_TCM' },
       { label: 'Deployment', them: 'Innovaccer says Gravity “reduces deployment timelines from months to weeks”.', src: ZX_CMP_SRC.innoGravity, us: 'ZX_TIME' }
@@ -11924,7 +11927,7 @@ function renderDataAnalyticsV7() {
       { label: 'Where it works', them: 'At the point of care, as a copilot for the clinician.', src: ZX_CMP_SRC.navSite, us: 'Between visits and at the point of care: ranked worklists, care plans and outreach agents, plus point-of-care gap prompts and ZynScribe documentation.' },
       { label: 'Risk adjustment and quality', them: 'Risk Adjustment and Quality Management products.', src: ZX_CMP_SRC.navSite, us: 'HCC and quality gap detection that feeds outreach, scheduling and pre-visit prep, with each gap tracked until the visit is completed and documented.' },
       { label: 'Documentation', them: 'Clinician Copilot supports the clinician during the visit.', src: ZX_CMP_SRC.navSite, us: 'ZX_DOCS' },
-      { label: 'Customer evidence', them: 'Navina publishes customer results at navina.ai/case-studies.', src: ZX_CMP_SRC.navSite, us: 'Customer stories at zynix.ai, and partnership releases from Palm Beach ACO and eternalHealth.' }
+      { label: 'Customer evidence', them: 'Navina publishes customer results at navina.ai/case-studies.', src: ZX_CMP_SRC.navCases, us: 'Customer stories at zynix.ai, and partnership releases from Palm Beach ACO and eternalHealth.' }
     ],
     fitThem: ['Your priority is visit-level HCC capture and chart summaries for clinicians.', 'You want a clinician-first copilot with risk adjustment, quality and analytics products from one vendor.'],
     fitUs: ['You need the work between visits done: outreach, scheduling, post-discharge follow-up and gap closure.', 'You want point-of-care prompts and follow-up running from the same list of gaps.'],
