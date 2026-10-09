@@ -29,7 +29,7 @@ Key facts (as of September 2026, from Zynix):
 ## The AI operating layer: four pillars
 
 - [Population Intelligence for value-based care](https://www.zynix.ai/population-intelligence): Population health intelligence for value-based care: one live picture of who needs what, from claims, EHR, ADT, lab and pharmacy data, down to the visit.
-- [Predictive Risk: readmission, mortality, ED use](https://www.zynix.ai/predictive-risk): Predictive risk for healthcare teams: readmission, mortality, disease progression and utilization, with drivers shown and a next step clinicians review.
+- [Predictive Risk: readmission, mortality, ED use](https://www.zynix.ai/predictive-risk): Know who is heading for a readmission, a decline or an ED visit before it happens.
 - [Embedded Care Management Platform](https://www.zynix.ai/embedded-care-management): A care management platform inside your team’s workflow: care plans for TCM, CCM and AWVs, tasks with owners and deadlines, escalation by rule and a record.
 - [AI Patient Engagement: voice and text agents](https://www.zynix.ai/ai-patient-engagement): AI patient engagement and outreach: voice and text agents for post-discharge calls, AWV and gap outreach, scheduling and after-hours calls. Clinicians decide.
 
