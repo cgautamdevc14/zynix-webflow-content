@@ -67,27 +67,36 @@ jobs:
       PURGE: https://purge.jsdelivr.net/gh/${{ github.repository }}@main
     steps:
       - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
       - name: Purge jsDelivr @main
         run: |
           for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css dist/zynix-site-scripts.deployed.js dist/zynix-site-styles.deployed.css; do
             echo "purging $f"; curl -fsS --retry 3 "$PURGE/$f" | head -c 400; echo
           done
-      - name: Prove the CDN serves this commit
+      - name: Prove the CDN serves this commit (br, gzip and identity, each decoded)
         run: |
-          for i in $(seq 1 40); do
-            ok=1
-            for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css dist/zynix-site-scripts.deployed.js dist/zynix-site-styles.deployed.css; do
-              want=$(sha256sum "$f" | cut -d' ' -f1)
-              got=$(curl -fsS --retry 2 "$CDN/$f" | sha256sum | cut -d' ' -f1)
-              if [ "$want" != "$got" ]; then ok=0; echo "attempt $i: $f not current yet"; fi
-            done
-            if [ "$ok" = "1" ]; then break; fi
-            if [ $((i % 10)) = 0 ]; then for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css dist/zynix-site-scripts.deployed.js dist/zynix-site-styles.deployed.css; do curl -fsS "$PURGE/$f" >/dev/null || true; done; fi
-            sleep 15
+          # jsDelivr caches each Content-Encoding separately: on 2026-10-09 a purge refreshed gzip/identity while browsers
+          # (Accept-Encoding: br) kept getting the old brotli copy. ci/cdn-verify.mjs checks all three; on a stale copy, purge
+          # again and back off (15, 30, 60, 120, 240 s), then fail.
+          ok=0
+          for i in 1 2 3 4 5 6; do
+            if out=$(node ci/cdn-verify.mjs "$CDN" zynix-site-scripts-unminified.js zynix-site-styles.deployed.css dist/zynix-site-scripts.deployed.js dist/zynix-site-styles.deployed.css); then ok=1; echo "$out"; break; fi
+            echo "$out"
+            if [ "$i" = 6 ]; then break; fi
+            wait=$((15 << (i - 1)))
+            echo "attempt $i: not current in every encoding; purging again, next check in ${wait}s"
+            for f in zynix-site-scripts-unminified.js zynix-site-styles.deployed.css dist/zynix-site-scripts.deployed.js dist/zynix-site-styles.deployed.css; do curl -fsS --retry 3 "$PURGE/$f" >/dev/null || echo "purge of $f failed"; done
+            sleep "$wait"
           done
-          if [ "$ok" != "1" ]; then echo "::error::jsDelivr @main still serves old bytes after 10 minutes"; exit 1; fi
+          if [ "$ok" != "1" ]; then
+            echo "$out" | grep -E '^(STALE|FAIL)' | sed 's/^/::error::/' || true
+            echo "::error::jsDelivr @main still serves old bytes after 5 re-purges (~8 minutes). Browsers send Accept-Encoding: br, so a stale br copy means visitors get the old build."
+            exit 1
+          fi
           {
-            echo "### Deployed ${GITHUB_SHA::7} to jsDelivr @main"
+            echo "### Deployed ${GITHUB_SHA::7} to jsDelivr @main (br, gzip and identity verified)"
             echo ""
             echo "| file | sha256 |"
             echo "|---|---|"
