@@ -5432,13 +5432,7 @@
     // Archived/legacy pages → canonical destinations
     '/zz-archived-products-ai-agents-zynauth': '/agents',
 
-    // Flat audience-segment slugs → canonical /audience-segments/* CMS paths
-    '/acos-msos': '/audience-segments/acos-msos',
-    '/health-systems': '/audience-segments/health-systems',
-    '/health-plans': '/audience-segments/health-plans',
-    '/fqhcs': '/audience-segments/fqhcs',
-    '/ascs': '/audience-segments/ascs',
-    '/independent-group-practices': '/audience-segments/independent-group-practices',
+    // Flat audience-segment slugs → /audience-segments/*: server 301s since 2026-10-11 (ZX-08, Webflow dashboard), no client entries
     // Soft-404 fix, client side (S3, §3.12); the server 301 is a Webflow-dashboard job
     '/case-study-awv-acos': '/resources-whitepapers'
   };
