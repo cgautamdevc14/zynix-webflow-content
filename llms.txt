@@ -6,7 +6,7 @@
 > progression, utilization), the Embedded Care Management Platform and AI Patient Engagement. It is built for ACOs,
 > MSOs/IPAs and physician groups, Medicare Advantage health plans, FQHCs and hospital systems.
 
-Last updated: 2026-10-09
+Last updated: 2026-10-11
 
 Key facts (as of September 2026, from Zynix):
 - 1M+ value-based care patients onboarded; customer organizations in 30 states.
@@ -109,7 +109,6 @@ Key facts (as of September 2026, from Zynix):
 - [Zynix AI vs Innovaccer: an Innovaccer alternative](https://www.zynix.ai/compare-zynix-vs-innovaccer): Comparing Innovaccer and Zynix AI for value-based care: data and analytics, care plans, outreach agents and the work that follows a flagged gap.
 - [Zynix AI vs Navina: a Navina alternative](https://www.zynix.ai/compare-zynix-vs-navina): Navina focuses on chart summaries at the point of care. Zynix AI covers the follow-up: care plans, outreach agents and worklists for value-based care.
 - [Zynix AI vs Notable: a Notable alternative](https://www.zynix.ai/compare-zynix-vs-notable-health): A side-by-side look at Notable and Zynix AI for ACOs and value-based care teams: TCM, HCC gap closure, care plans and outreach agents.
-- [Zynix AI vs Olive AI: an Olive AI alternative](https://www.zynix.ai/compare-zynix-vs-olive-ai): For teams replacing Olive AI: how Zynix AI supports value-based care operations for ACOs, health plans and FQHCs, from data to outreach agents.
 - [Zynix AI vs point solutions](https://www.zynix.ai/compare-zynix-vs-point-solutions): One platform for data, worklists, care plans and outreach agents, compared with a separate point solution for each workflow.
 
 ## Blog
@@ -120,16 +119,16 @@ Key facts (as of September 2026, from Zynix):
 - [Annual Wellness Visits: How ACOs Can Build the First Layer of Scalable Care Capacity](https://www.zynix.ai/blog-posts/acos-scalable-care-capacity-annual-wellness-visits): Annual Wellness Visits give ACOs a first layer of scalable care capacity when run as a workflow: eligibility, outreach, scheduling, prep and follow-up.
 - [After-Hours Patient Calls: The Hidden Care Gap ACOs Cannot Ignore](https://www.zynix.ai/blog-posts/after-hours-patient-calls-hidden-care-gap-acos): After-hours patient calls are a hidden care gap for ACOs. Treat them as a workflow: capture the reason, route by rule, book visits and own next-day follow-up.
 - [Agentic AI in Healthcare: From Copilots to Digital Workforce for Care Operations](https://www.zynix.ai/blog-posts/agentic-ai-healthcare-digital-workforce): Agentic AI in healthcare moves beyond copilots to governed agents that run outreach, scheduling and follow-up for ACOs, with clinicians in charge.
+- [AI Agents in Healthcare: Automating Scheduling, Patient Communication, and Follow-Ups](https://www.zynix.ai/blog-posts/ai-agents-healthcare-scheduling-communication-followups): AI agents in healthcare automate scheduling, patient communication and follow-ups within rules your team sets, and route clinical questions to licensed staff.
 - [AI Is Changing Decision-Making in Healthcare](https://www.zynix.ai/blog-posts/ai-changing-decision-making-healthcare): AI is changing decision-making in healthcare by ranking risk, surfacing care gaps and guiding operations, while clinicians keep every clinical decision.
 - [AI Medical Scribes Reduce Physician Burnout](https://www.zynix.ai/blog-posts/ai-medical-scribes-reduce-physician-burnout): AI medical scribes reduce physician burnout by drafting visit notes from the conversation, cutting EHR and after-hours work while physicians approve each note.
 - [AI voice and text agents vs a call center for patient outreach](https://www.zynix.ai/blog-posts/ai-patient-outreach-agents-vs-call-center): AI voice and text agents vs a call center: agents take scripted outreach, booking and reminders within your rules; staff keep complex and clinical calls.
 - [AI Use Cases in Population Health Management](https://www.zynix.ai/blog-posts/ai-use-cases-population-health): AI use cases in population health management, from risk stratification and gap closure to post-discharge outreach, and how agents and clinicians share the work.
 - [How AI Transforms Value-Based Care: Population Health, Risk Stratification, and Care Gap Closure](https://www.zynix.ai/blog-posts/ai-value-based-care-population-health-risk-stratification): How AI transforms value-based care through risk stratification and care gap closure, and how Zynix AI compares with Epic, Oracle Health and Innovaccer.
 - [Arcadia Healthcare Platform Alternative: Execution-First AI for VBC](https://www.zynix.ai/blog-posts/arcadia-healthcare-platform-alternative): Arcadia alternative for value-based care: Arcadia centers on unified data and analytics, while Zynix AI runs the outreach and follow-up work. Who each fits.
-- [AI Agents in Healthcare: Automating Scheduling, Patient Communication, and Follow-Ups](https://www.zynix.ai/blog-posts/autonomous-ai-agents-healthcare-scheduling-communication-followups): AI agents in healthcare automate scheduling, patient communication and follow-ups within rules your team sets, and route clinical questions to licensed staff.
 - [ZynScribe vs Suki vs Nabla vs Abridge: Comparing AI Medical Scribes for Outpatient Clinics in 2026](https://www.zynix.ai/blog-posts/best-ai-medical-scribes-comparison-2026): Ambient AI scribe comparison for physicians: ZynScribe, Suki, Nabla, Abridge, DeepScribe and Sunoh by specialty focus, EHR connections, pricing and scope.
 - [Best AI Tools for Healthcare Operations in 2026](https://www.zynix.ai/blog-posts/best-ai-tools-healthcare-operations-2026): The best AI tools for healthcare operations in 2026, and how an ACO should choose an AI platform: data, risk, follow-through, guardrails and vendor fit.
-- [Beyond Chatbots: AI Agents in Healthcare](https://www.zynix.ai/blog-posts/beyond-chatbots-autonomous-ai-agents-healthcare): AI agents in healthcare go beyond chatbots: they run outreach, scheduling, reminders and follow-up within your rules and route clinical questions to staff.
+- [Beyond Chatbots: AI Agents in Healthcare](https://www.zynix.ai/blog-posts/beyond-chatbots-ai-agents-healthcare): AI agents in healthcare go beyond chatbots: they run outreach, scheduling, reminders and follow-up within your rules and route clinical questions to staff.
 - [What is the CMS ACCESS Model? A guide for practices and ACOs](https://www.zynix.ai/blog-posts/cms-access-model-explained): The CMS ACCESS Model is a voluntary 10-year Original Medicare model that pays for technology-supported chronic care tied to outcomes. Tracks, payment, dates.
 - [The CMS LEAD Model: Why Your ACO's Data Infrastructure Will Decide If You Win](https://www.zynix.ai/blog-posts/cms-lead-model-rfa-aco-data-infrastructure): CMS's LEAD model runs from 2027 to 2036 without benchmark rebasing. What the RFA set out, where LEAD stands now, and the data infrastructure ACOs need.
 - [The CMS LEAD Model RFA Window Has Closed: What ACOs Must Get Right Before 2027](https://www.zynix.ai/blog-posts/cms-lead-model-rfa-acos-47-days): The CMS LEAD Model's first application window closed May 17, 2026. What ACOs need to get right before performance year 2027 starts on January 1, 2027.
@@ -192,5 +191,4 @@ Key facts (as of September 2026, from Zynix):
 - [Contact Zynix AI | Request a demo](https://www.zynix.ai/contact): Book 30 minutes with our team or send a message. Zynix AI, 3535 Little Rd, Trinity, FL 34655. info@zynix.ai · (727) 261-1297.
 - [FAQ](https://www.zynix.ai/resources-faq): Answers on the Zynix platform, agents, data sources, EHR integrations, security, HIPAA-aligned safeguards and working with our team.
 - [Value-based care and healthcare AI glossary](https://www.zynix.ai/resources-glossary): Plain definitions of ACO, Medicare Advantage and care management terms, from ADT and AWV to HCC, HEDIS and TCM.
-- [Webinars and events](https://www.zynix.ai/resources-webinars): Recorded sessions on ACO operating models, patient engagement and CMS programs, plus where to meet the Zynix team.
 - [Research and reports](https://www.zynix.ai/resources-whitepapers): Reports on annual wellness visits, post-discharge follow-up and care management operations for ACO and health plan leaders.
