@@ -767,7 +767,7 @@
    ['/security', '/company-trust-center', { schema: 'Organization' }],
    ['/press', '/company-press', { img: IMG.hero, schema: 'CollectionPage' }],     // the release listing: no NewsArticle (SEO audit ZX-34)
    ['/newsroom', '/company-press', { img: IMG.hero, schema: 'CollectionPage' }],
-   ['/careers', '/company-careers', { schema: 'Organization', noindex: true }],
+   ['/careers', '/company-careers', { schema: 'Organization' }],   // ZX-27 (2026-10-10): indexable, like its raw HTML
    ['/resources/blog', '/resources-blog', { schema: 'Organization' }],
    ['/resources/faq', '/resources-faq', { schema: 'FAQPage' }],
    ['/resources/glossary', '/resources-glossary', { schema: 'Organization' }],
@@ -3654,7 +3654,7 @@
     ['arcadia-healthcare-platform-alternative', '2026-03-21', 'compare', 'Arcadia Healthcare Platform Alternative: Execution-First AI for VBC'],
     ['olive-ai-alternative-healthcare', '2026-03-20', 'compare', 'Olive AI Alternative: Next-Generation Healthcare AI for Care Execution'],
     ['healthcare-ehr-integrations-epic-athenahealth-fhir-hl7', '2026-03-19', 'data', 'Healthcare EHR Integrations: Epic, athenahealth, Cerner, FHIR and HL7'],
-    ['/blog-posts/beyond-chatbots-autonomous-ai-agents-healthcare', '2026-03-17', 'ops', 'Beyond Chatbots: AI Agents in Healthcare'],
+    ['/blog-posts/beyond-chatbots-ai-agents-healthcare', '2026-03-17', 'ops', 'Beyond Chatbots: AI Agents in Healthcare'],
     ['zynix-ai-surpasses-1-million-vbc-patients', '2026-03-15', 'news', 'Zynix AI Reaches 1M+ Value-Based Care Patients Onboarded'],
     ['prior-authorization-delays-what-they-actually-cost-and-how-to-fix-them', '2026-03-02', 'rcm', 'Prior Authorization Delays: What They Actually Cost and How to Fix Them'],
     ['your-ehr-is-not-broken-it-was-just-never-built-to-think', '2026-03-02', 'data', 'Your EHR Is Not Broken. It Was Just Never Built to Think.'],
@@ -3674,7 +3674,7 @@
     ['transforming-healthcare-ai-driven-value-based-care-analytics', '2025-11-20', 'data', 'AI-Driven Value-Based Care Analytics'],
     ['revolutionizing-healthcare-the-role-of-ai', '2025-11-16', 'general', 'Revolutionizing Healthcare: The Role of AI'],
     ['generative-ai-healthcare-enhancing-outcomes-ensuring-trust-safety', '2025-11-14', 'general', 'Generative AI in Healthcare: Enhancing Outcomes While Ensuring Trust and Safety'],
-    ['/blog-posts/autonomous-ai-agents-healthcare-scheduling-communication-followups', '2025-11-14', 'ops', 'AI Agents in Healthcare: Automating Scheduling, Patient Communication, and Follow-Ups'],
+    ['/blog-posts/ai-agents-healthcare-scheduling-communication-followups', '2025-11-14', 'ops', 'AI Agents in Healthcare: Automating Scheduling, Patient Communication, and Follow-Ups'],
     ['predictive-analytics-healthcare-ai-population-health-management', '2025-11-08', 'data', 'Predictive Analytics in Healthcare AI'],
     ['ai-medical-scribes-reduce-physician-burnout', '2025-11-02', 'docs', 'AI Medical Scribes Reduce Physician Burnout'],
     ['innovative-approaches-patient-recovery-satisfaction', '2025-10-26', 'general', 'Innovative Approaches to Enhance Patient Recovery and Satisfaction'],
@@ -5329,8 +5329,8 @@
     '/untitled-29': '/agents',
     '/untitled-27': '/zynix-data-analytics',
     '/untitled-28': '/zynix-data-analytics',
-    '/untitled-30': '/resources-blog-lead-model-cms',
-    '/untitled-31': '/resources-blog-lead-model-cms',
+    '/untitled-30': '/resources-blog',
+    '/untitled-31': '/resources-blog',
 
     // Legal aliases
     '/company-privacy': '/privacy-policy',
@@ -5352,7 +5352,7 @@
 
     // ── SEMrush-flagged legacy 4XX URLs (Apr 2026 audit) ──
     // Legacy /blog-<slug> → new CMS path /blog-posts/<slug>
-    '/blog-beyond-chatbots-autonomous-ai-agents-healthcare': '/blog-posts/beyond-chatbots-autonomous-ai-agents-healthcare',
+    '/blog-beyond-chatbots-autonomous-ai-agents-healthcare': '/blog-posts/beyond-chatbots-ai-agents-healthcare',
     '/blog-prior-authorization-bottlenecks-ai-automation-helps-providers': '/blog-posts/prior-authorization-bottlenecks-ai-automation-helps-providers',
     '/blog-predictive-analytics-healthcare-ai-population-health-management': '/blog-posts/predictive-analytics-healthcare-ai-population-health-management',
     '/blog-ai-changing-decision-making-healthcare': '/blog-posts/ai-changing-decision-making-healthcare',
@@ -5423,7 +5423,7 @@
     '/blog-commure-alternative-zynix-ai': '/compare-zynix-vs-commure',
     '/blog-abridge-alternative-zynix-ai': '/compare-zynix-vs-abridge',
     '/blog-navina-alternative-zynix-ai': '/compare-zynix-vs-navina',
-    '/blog-olive-ai-alternative-zynix-ai': '/compare-zynix-vs-olive-ai',
+    '/blog-olive-ai-alternative-zynix-ai': '/blog-posts/olive-ai-alternative-healthcare',
     '/blog-notable-health-alternative-zynix-ai': '/compare-zynix-vs-notable-health',
 
     // Apr 19, 2026 — Webflow CMS /blog-posts/* template URLs → canonical /blog/* paths
