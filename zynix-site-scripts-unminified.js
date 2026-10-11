@@ -267,7 +267,7 @@
       promise: 'Know who is heading for a readmission, a decline or an ED visit before it happens.',
       bullets: ['Readmission, mortality, disease progression and utilization',
                 'Risk drivers explained for every patient',
-                'Each prediction triggers a next step; clinicians review before acting'],
+                'Each prediction starts a next step; clinicians make every clinical decision'],
       loop: 'Predicts readmission, mortality, disease progression and utilization, and shows the drivers.',
       accent: 'violet-500', icon: 'activity',
       predictions: [
@@ -767,7 +767,7 @@
    ['/security', '/company-trust-center', { schema: 'Organization' }],
    ['/press', '/company-press', { img: IMG.hero, schema: 'CollectionPage' }],     // the release listing: no NewsArticle (SEO audit ZX-34)
    ['/newsroom', '/company-press', { img: IMG.hero, schema: 'CollectionPage' }],
-   ['/careers', '/company-careers', { schema: 'Organization', noindex: true }],
+   ['/careers', '/company-careers', { schema: 'Organization' }],   // ZX-27 (2026-10-10): indexable, like its raw HTML
    ['/resources/blog', '/resources-blog', { schema: 'Organization' }],
    ['/resources/faq', '/resources-faq', { schema: 'FAQPage' }],
    ['/resources/glossary', '/resources-glossary', { schema: 'Organization' }],
@@ -2488,7 +2488,7 @@
   // each with its "Signal" and "What happens next", from PILLARS[1].predictions (no other predictions, no numbers) ──
   //   opts  { id: id of the heading that names it (aria-labelledby; else aria-label 'What Predictive Risk predicts') and prefix
   //           of the tile-title ids (default 'predict'), level: heading level of the tile names (default 3),
-  //           note: one line under the grid (e.g. 'Every prediction shows its drivers. Clinicians review before acting.') }
+  //           note: one line under the grid (e.g. 'Every prediction shows its drivers. Clinicians make every clinical decision.') }
   function renderV9Predict(opts) {
     opts = opts || {};
     var pr = zx9Pillar('predictive-risk'), list = pr && pr.predictions || [];
@@ -3044,7 +3044,7 @@
     'population-intelligence': { title: 'Population Intelligence for value-based care | Zynix AI', img: IMG.analytics,
       desc: 'Population health intelligence for value-based care: one live picture of who needs what, from claims, EHR, ADT, lab and pharmacy data, down to the visit.' },
     'predictive-risk': { title: 'Predictive Risk: readmission, mortality, ED use | Zynix AI', img: IMG.doctor,
-      desc: 'Predictive risk for healthcare teams: readmission, mortality, disease progression and utilization, with drivers shown and a next step clinicians review.' },
+      desc: 'Predictive risk for healthcare teams: readmission, mortality, disease progression and utilization, with drivers shown and a next step. Clinicians decide.' },
     'embedded-care-management': { title: 'Embedded Care Management Platform | Zynix AI', img: IMG.care,
       desc: 'A care management platform inside your team’s workflow: care plans for TCM, CCM and AWVs, tasks with owners and deadlines, escalation by rule and a record.' },
     'ai-patient-engagement': { title: 'AI Patient Engagement: voice and text agents | Zynix AI', img: IMG.patient,
@@ -3090,20 +3090,20 @@
       cta: 'See your <span class="zx9-grad-text">live picture</span>'
     },
     'predictive-risk': {
-      lead: 'Know who is heading for a readmission, a decline or an ED visit before it happens. Each prediction shows its drivers and starts a next step, and clinicians review before acting.',
+      lead: 'Know who is heading for a readmission, a decline or an ED visit before it happens. Each prediction shows its drivers and starts a next step, and clinicians make every clinical decision.',
       viz: { icon: 'activity', title: 'Who needs care next', meta: 'This week · drivers shown for each patient',
         rows: [['Pt 1042 · Readmission risk: high', 'Drivers: CHF, 2 admissions in 90 days', ['Plan created', 'info']],
                ['Pt 2218 · Utilization rising', 'Drivers: 3 ED visits this year, no primary care visit', ['Outreach queued', 'info']],
                ['Pt 4471 · Disease progression', 'Drivers: A1c and weight trending up', ['CCM offered', 'muted']]],
-        foot: 'Clinicians review before acting.' },
+        foot: 'Clinicians make every clinical decision.' },
       what: { title: 'From a risk score to the next step', lead: null },
       cards: [
         { icon: 'activity', title: 'Four predictions', body: 'Readmission, mortality, disease progression and utilization, from each patient’s live record.' },
         { icon: 'search', title: 'Drivers you can read', body: 'Every prediction lists the reasons behind it, so a clinician can check it against what they know.' },
-        { icon: 'clipboard', title: 'A next step, not just a score', body: 'Each prediction starts a care-plan task or outreach. Clinicians review before acting.' }
+        { icon: 'clipboard', title: 'A next step, not just a score', body: 'Each prediction starts a care-plan task or outreach within the rules your team sets. Clinicians make the clinical decisions.' }
       ],
       spot: { eyebrow: 'The four predictions', title: 'Every prediction comes with a next step', lead: null,
-        note: 'Every prediction shows its drivers. Clinicians review before acting.' },
+        note: 'Every prediction shows its drivers. Clinicians make every clinical decision.' },
       programs: ['tcm', 'ccm', 'mssp', 'lead'],
       faq: [
         { q: 'What does Predictive Risk predict?',
@@ -3111,7 +3111,7 @@
         { q: 'How is a mortality prediction used?',
           a: 'It flags patients who may benefit from a clinician-led serious-illness conversation, advance care planning and a palliative-care review. The flag goes to your clinical team, who decide whether and how to act. It is a prompt for clinicians, never an automated decision, and nothing happens for the patient until a clinician has reviewed it.' },
         { q: 'How is this different from a risk score?',
-          a: 'A risk score ranks patients and stops there. Predictive Risk names what is likely to happen, shows the drivers for each patient and starts the next step: a care plan, an outreach call or a referral, with an owner and a deadline in the Embedded Care Management Platform. Clinicians review each prediction before acting on it.' },
+          a: 'A risk score ranks patients and stops there. Predictive Risk names what is likely to happen, shows the drivers for each patient and starts the next step: a care plan, an outreach call or a referral, with an owner and a deadline in the Embedded Care Management Platform. Clinicians make every clinical decision.' },
         { q: 'What data does Predictive Risk need?',
           a: 'It works from the record that Population Intelligence builds: claims, EHR, ADT, lab and pharmacy data, resolved into one record per patient. The more sources you connect, the more complete the drivers. Zynix connects to 30+ EHR systems, and ADT feeds bring in admissions and discharges as they happen, so recent events are part of the picture.' }
       ],
@@ -3654,7 +3654,7 @@
     ['arcadia-healthcare-platform-alternative', '2026-03-21', 'compare', 'Arcadia Healthcare Platform Alternative: Execution-First AI for VBC'],
     ['olive-ai-alternative-healthcare', '2026-03-20', 'compare', 'Olive AI Alternative: Next-Generation Healthcare AI for Care Execution'],
     ['healthcare-ehr-integrations-epic-athenahealth-fhir-hl7', '2026-03-19', 'data', 'Healthcare EHR Integrations: Epic, athenahealth, Cerner, FHIR and HL7'],
-    ['/blog-posts/beyond-chatbots-autonomous-ai-agents-healthcare', '2026-03-17', 'ops', 'Beyond Chatbots: AI Agents in Healthcare'],
+    ['/blog-posts/beyond-chatbots-ai-agents-healthcare', '2026-03-17', 'ops', 'Beyond Chatbots: AI Agents in Healthcare'],
     ['zynix-ai-surpasses-1-million-vbc-patients', '2026-03-15', 'news', 'Zynix AI Reaches 1M+ Value-Based Care Patients Onboarded'],
     ['prior-authorization-delays-what-they-actually-cost-and-how-to-fix-them', '2026-03-02', 'rcm', 'Prior Authorization Delays: What They Actually Cost and How to Fix Them'],
     ['your-ehr-is-not-broken-it-was-just-never-built-to-think', '2026-03-02', 'data', 'Your EHR Is Not Broken. It Was Just Never Built to Think.'],
@@ -3674,7 +3674,7 @@
     ['transforming-healthcare-ai-driven-value-based-care-analytics', '2025-11-20', 'data', 'AI-Driven Value-Based Care Analytics'],
     ['revolutionizing-healthcare-the-role-of-ai', '2025-11-16', 'general', 'Revolutionizing Healthcare: The Role of AI'],
     ['generative-ai-healthcare-enhancing-outcomes-ensuring-trust-safety', '2025-11-14', 'general', 'Generative AI in Healthcare: Enhancing Outcomes While Ensuring Trust and Safety'],
-    ['/blog-posts/autonomous-ai-agents-healthcare-scheduling-communication-followups', '2025-11-14', 'ops', 'AI Agents in Healthcare: Automating Scheduling, Patient Communication, and Follow-Ups'],
+    ['/blog-posts/ai-agents-healthcare-scheduling-communication-followups', '2025-11-14', 'ops', 'AI Agents in Healthcare: Automating Scheduling, Patient Communication, and Follow-Ups'],
     ['predictive-analytics-healthcare-ai-population-health-management', '2025-11-08', 'data', 'Predictive Analytics in Healthcare AI'],
     ['ai-medical-scribes-reduce-physician-burnout', '2025-11-02', 'docs', 'AI Medical Scribes Reduce Physician Burnout'],
     ['innovative-approaches-patient-recovery-satisfaction', '2025-10-26', 'general', 'Innovative Approaches to Enhance Patient Recovery and Satisfaction'],
@@ -4682,7 +4682,7 @@
     // claims and no unsourced industry figures inside definitions (DECISIONS 18).
     var T = [
       ['aco', 'Accountable care organization (ACO)', 'A group of physicians, hospitals and other providers that takes shared responsibility for the cost and quality of care for a defined population. In Medicare, ACOs take part through programs such as the Medicare Shared Savings Program and ACO REACH, and earn shared savings when spending comes in below a benchmark while quality standards are met.', 'The attributed population defines who needs outreach, which gaps count and where savings come from.', ['Zynix for ACOs', '/audience-segments/acos-msos']],
-      ['adt', 'ADT (admit, discharge, transfer) notifications', 'Real-time or near-real-time electronic messages that tell care teams when a patient is admitted to a hospital, discharged or transferred. They use the HL7 v2 standard and usually arrive through a health information exchange or a direct hospital interface. Under the CMS Interoperability and Patient Access final rule (CMS-9115-F), hospitals with capable EHRs must send them to the patient’s primary care practitioner or practice and to applicable post-acute providers.', 'A discharge notice starts the transitional care clock, so the sooner it arrives, the more of the follow-up window is left.', ['The data foundation', '/products-data-platform']],
+      ['adt', 'ADT (admit, discharge, transfer) notifications', 'Electronic messages that tell care teams when a patient is admitted to a hospital, discharged or transferred. They use the HL7 v2 standard and usually arrive through a health information exchange or a direct hospital interface. Under the CMS Interoperability and Patient Access final rule (CMS-9115-F), hospitals with capable EHRs must send them to the patient’s primary care practitioner or practice and to applicable post-acute providers.', 'A discharge notice starts the transitional care clock, so the sooner it arrives, the more of the follow-up window is left.', ['The data foundation', '/products-data-platform']],
       ['ai-agent', 'AI agent', 'Software that completes a defined operational task inside a workflow, such as an outreach call, a text reminder, a booking or routing a fax, rather than only answering questions the way a chatbot does. In healthcare, agents follow the rules the care team sets and hand clinical questions to a licensed clinician.', 'Agents take repeatable work off coordinators and nurses. Governance decides what they may do and when a person takes over.', ['How Zynix agents work', '/agents']],
       ['ambient-documentation', 'Ambient clinical documentation', 'Technology that listens to the conversation between a clinician and a patient and drafts a structured clinical note, so the clinician doesn’t have to type during the visit. The clinician reviews, edits and approves the note.', 'Documentation time competes with patient time. The review step keeps the clinician responsible for what is filed.', ['ZynScribe', '/zynscribe']],
       ['awv', 'Annual wellness visit (AWV)', 'A Medicare-covered preventive visit to create or update a personalized prevention plan, including a health risk assessment, cognitive screening and a review of functional ability and safety. It is not a head-to-toe physical, and beneficiaries pay no cost sharing for it.', 'The AWV is a natural moment to recapture chronic conditions, close quality gaps and update care plans, which makes completion a core ACO program.', ['AWV research', '/resources-whitepapers']],
@@ -4924,7 +4924,7 @@
     { q: 'How is Zynix different from a population health analytics platform?',
       a: 'Analytics tells you who needs attention. Zynix makes sure something happens: each prediction becomes a care-plan task with an owner and a deadline, agents handle the outreach and scheduling, and the outcome is documented. If you already use an analytics platform, ask us how Zynix works alongside it.' },
     { q: 'What does Predictive Risk predict?',
-      a: 'Readmission, mortality, disease progression and utilization. Each prediction shows the drivers behind it and leads to a next step, such as a post-discharge care plan, a clinician-led serious-illness conversation, chronic care management enrollment or outreach before an avoidable ED visit. Clinicians review every prediction before acting.' },
+      a: 'Readmission, mortality, disease progression and utilization. Each prediction shows the drivers behind it and leads to a next step, such as a post-discharge care plan, a clinician-led serious-illness conversation, chronic care management enrollment or outreach before an avoidable ED visit. Clinicians make every clinical decision.' },
     { q: 'How do AI voice and text agents work with our care team?',
       a: 'Agents handle outreach, scheduling, reminders and documentation prep, within the rules and hours your team sets, and route symptom questions to the on-call clinician by rule. Clinicians make every clinical decision, clinical staff make the TCM interactive contact, and ZynScribe notes stay drafts until a physician approves them.' },
     { q: 'Which EHRs and data sources does Zynix connect to?',
@@ -5180,7 +5180,7 @@
         link: { label: 'Explore Predictive Risk', href: zx9Pillar('predictive-risk').slug } }) +
       // below 768 the four tiles scroll sideways (one row, snap): the wrapper keeps them out of the page-overflow checks
       '<div class="zx-home-predict__wrap" data-zx-allow-overflow>' +
-      renderV9Predict({ id: 'predictive-risk-title', note: 'Every prediction shows its drivers. Clinicians review before acting.' }) + '</div>');
+      renderV9Predict({ id: 'predictive-risk-title', note: 'Every prediction shows its drivers. Clinicians make every clinical decision.' }) + '</div>');
 
     // 7. Embedded care management + point of care (warm): two cards; the plan card carries the 48-hour episode (4 rows)
     var ecm = zx9Pillar('embedded-care-management'), pin = zx9Pillar('population-intelligence');
@@ -5194,7 +5194,7 @@
         link: { label: 'Explore ' + ecm.short, href: ecm.slug } }) +
       // below 768 the two cards scroll sideways (one row, snap): the wrapper keeps them out of the page-overflow checks
       '<div class="zx-home-cm__wrap" data-zx-allow-overflow><div class="zx-home-cm__grid">' +
-        card(ecm, 'clipboard', 'cm-plan-title', 'The plan runs itself', 'Care plans, owners, deadlines and escalations by rule, with documentation as the work happens.', zxHomeEpisode(HOME_EPISODE)) +
+        card(ecm, 'clipboard', 'cm-plan-title', 'Every step has an owner', 'Care plans, owners, deadlines and escalations by rule, with documentation as the work happens.', zxHomeEpisode(HOME_EPISODE)) +
         card(pin, 'stethoscope', 'cm-poc-title', 'Intelligence at the point of care', 'At the visit, the clinician sees risk drivers, open gaps and tasks. ZynScribe drafts the note for physician approval.', zxHomePoc(HOME_POC)) +
       '</div></div>');
 
@@ -5329,8 +5329,8 @@
     '/untitled-29': '/agents',
     '/untitled-27': '/zynix-data-analytics',
     '/untitled-28': '/zynix-data-analytics',
-    '/untitled-30': '/resources-blog-lead-model-cms',
-    '/untitled-31': '/resources-blog-lead-model-cms',
+    '/untitled-30': '/resources-blog',
+    '/untitled-31': '/resources-blog',
 
     // Legal aliases
     '/company-privacy': '/privacy-policy',
@@ -5352,7 +5352,7 @@
 
     // ── SEMrush-flagged legacy 4XX URLs (Apr 2026 audit) ──
     // Legacy /blog-<slug> → new CMS path /blog-posts/<slug>
-    '/blog-beyond-chatbots-autonomous-ai-agents-healthcare': '/blog-posts/beyond-chatbots-autonomous-ai-agents-healthcare',
+    '/blog-beyond-chatbots-autonomous-ai-agents-healthcare': '/blog-posts/beyond-chatbots-ai-agents-healthcare',
     '/blog-prior-authorization-bottlenecks-ai-automation-helps-providers': '/blog-posts/prior-authorization-bottlenecks-ai-automation-helps-providers',
     '/blog-predictive-analytics-healthcare-ai-population-health-management': '/blog-posts/predictive-analytics-healthcare-ai-population-health-management',
     '/blog-ai-changing-decision-making-healthcare': '/blog-posts/ai-changing-decision-making-healthcare',
@@ -5423,7 +5423,7 @@
     '/blog-commure-alternative-zynix-ai': '/compare-zynix-vs-commure',
     '/blog-abridge-alternative-zynix-ai': '/compare-zynix-vs-abridge',
     '/blog-navina-alternative-zynix-ai': '/compare-zynix-vs-navina',
-    '/blog-olive-ai-alternative-zynix-ai': '/compare-zynix-vs-olive-ai',
+    '/blog-olive-ai-alternative-zynix-ai': '/blog-posts/olive-ai-alternative-healthcare',
     '/blog-notable-health-alternative-zynix-ai': '/compare-zynix-vs-notable-health',
 
     // Apr 19, 2026 — Webflow CMS /blog-posts/* template URLs → canonical /blog/* paths
@@ -13229,7 +13229,7 @@ function renderDataAnalyticsV7() {
       challenge: 'eternalHealth focuses on preventive and chronic care management for older adults. Its care managers wanted to reach more members, and the right members at the right time, for preventive care, chronic condition management and timely follow-up, and to know whom to contact first when resources are constrained.',
       cite: 'Source: joint announcement by eternalHealth, Zynix AI and nirvanaHealth, June 2, 2026.',
       runsTitle: 'What eternalHealth runs on Zynix',
-      runsLead: 'Zynix outreach and care management workflows run alongside nirvanaHealth, which keeps member and operational information centralized with real-time connectivity.',
+      runsLead: 'Zynix outreach and care management workflows run alongside nirvanaHealth, which keeps member and operational information centralized.',
       runs: [
         { name: 'Prioritized worklists', autoLabel: 'Zynix', auto: 'Ranks members by open care needs, so care managers know whom to contact first.',
           team: 'Care managers decide the plan for each member and own every clinical conversation.', link: ['Analytics', '/zynix-data-analytics'] },
