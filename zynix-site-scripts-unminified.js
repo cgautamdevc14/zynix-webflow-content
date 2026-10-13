@@ -3617,6 +3617,7 @@
     { id: 'news', name: 'Company news' }, { id: 'general', name: 'Healthcare AI' }
   ];
   var ZX_RES_POSTS = [
+    ['ai-for-value-based-care', '2026-10-12', 'general', 'AI for Value-Based Care: What It Actually Does', 'What AI for value-based care actually does: unify claims, EHR and ADT data, predict readmission, mortality, disease progression and utilization early, rank care gaps and run routine outreach, with clinicians keeping every clinical decision.'],
     ['pre-visit-planning-value-based-care', '2026-10-09', 'quality', 'Pre-visit planning for value-based care: what to prepare', 'A pre-visit planning checklist for value-based care: what to prepare for each visit, who owns it, what the clinician summary should show, and the CMS rules that shape it.'],
     ['how-to-evaluate-care-management-platform-acos-msos', '2026-10-09', 'ops', 'How to evaluate a care management platform for ACOs and MSOs', 'A criteria-first checklist for choosing a care management platform across multiple EHRs: what to ask about data, risk, care plans, outreach, CMS rules and security, plus a demo script and a scoring rubric.'],
     ['ai-patient-outreach-agents-vs-call-center', '2026-10-09', 'ops', 'AI voice and text agents vs a call center for patient outreach', 'How AI voice and text agents compare with a staffed call center for patient outreach: what each handles, how an agent call works and hands off, what stays with licensed staff, and how to run both.'],
