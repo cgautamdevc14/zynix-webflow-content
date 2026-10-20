@@ -3030,7 +3030,9 @@ html:not(.wf-native) {
 @media (min-width:768px) {
   .zx-co-people.zynix-cgrid { grid-template-columns:repeat(3, minmax(0,1fr)); }
   .zx-co-people.zynix-cgrid > :last-child { grid-column:auto; }
+  .zx-co-people.zynix-cgrid[data-count="4"] { grid-template-columns:repeat(2, minmax(0,1fr)); }
 }
+@media (min-width:1024px) { .zx-co-people.zynix-cgrid[data-count="4"] { grid-template-columns:repeat(4, minmax(0,1fr)); } }   /* four people: one row on desktop, 2x2 on tablet */
 .zx-co-person { margin:0; }
 .zx-co-person__photo { display:block; width:100%; max-width:264px; height:auto; aspect-ratio:4 / 5; object-fit:cover; object-position:50% 22%;
   margin:0 0 var(--zx-space-5); border-radius:var(--zx-radius-lg); background:var(--zx-surface-sunken); filter:grayscale(1) contrast(1.04); }

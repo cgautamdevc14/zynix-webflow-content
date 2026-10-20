@@ -7208,9 +7208,12 @@ function renderAboutV7() {
     { name: 'Gautamdev Chowdary', first: 'Gautamdev', title: 'Co-founder and CTO', img: 'team/gautamdev-chowdary.webp', w: 528, h: 660,
       bio: 'Leads engineering, data and AI across the Zynix platform.',
       linkedin: 'https://www.linkedin.com/in/cgautamdevc/' },
-    { name: 'David McDonald', first: 'David', title: 'Vice President, Sales', img: 'team/david-mcdonald.webp', w: 528, h: 660,
-      bio: 'Leads go-to-market for ACOs, health plans and health systems.',
-      linkedin: 'https://www.linkedin.com/in/mcdonalddavidl/' }
+    { name: 'Jay Reeser', first: 'Jay Reeser', title: 'Director, Strategic Partnerships', img: 'team/jay-reeser.webp', w: 528, h: 660,
+      bio: 'Leads strategic partnerships with ACOs, health plans and provider organizations. Background in managed care, network development and alternative payment models.',
+      linkedin: 'https://www.linkedin.com/in/jay-reeser-941b2410/' },
+    { name: 'Michael McCabe', first: 'Michael', title: 'Strategic Advisor, Growth', img: 'team/michael-mccabe.webp', w: 528, h: 660,
+      bio: 'Managed care executive who has led Medicaid, Medicare and commercial health plans. Advises Zynix on growth with health plans and provider-led organizations.',
+      linkedin: 'https://www.linkedin.com/in/michael-mccabe-6999b916/' }
   ];
   html += renderSection({ id: 'leadership', className: 'zx-co-leadership' },
     renderSectionHead('Our team', 'Leadership',
@@ -9431,7 +9434,7 @@ function renderDataAnalyticsV7() {
 <!-- ============================================================
      CTA BLOCK — ZynBlue #20449B
      Headline and body copy: change per blog topic
-     Button text and link: fixed ("Schedule a Quick Call" → David's Calendly)
+     Button text and link: fixed ("Schedule a Quick Call" → CALENDLY)
      ============================================================ -->
 <section class="cta-block" aria-labelledby="cta-heading">
   <div class="container">
