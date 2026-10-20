@@ -57,7 +57,7 @@ import { reachability, lex, matchBrace, DEAD_FUNCTIONS } from './banned-strings.
 // listed function still hashes to its pinned SHA-256; when one changes, the item says so (verify the fix, then delete the entry).
 export const A2P_ITEMS = [
   { id: 'carrier-sprint', text: 'Sprint', pages: ['/sms-program', '/privacy-policy', '/terms-of-service'],
-    fns: { renderSMSProgram: 'fc361125b8d4cccefa9867b928b051aa6239adb5e8f2fac86f04a2b3eeb8a88e', renderPrivacyV7: '564abd893045071f60fc604fe2d2a292386b63436f6a01f3d14691dbb48f131f', renderTermsV7: 'c578f5d5771ef575ad97a20df4dc6abd9fd1ff0992832e11803f3330642af226' },
+    fns: { renderSMSProgram: 'fc361125b8d4cccefa9867b928b051aa6239adb5e8f2fac86f04a2b3eeb8a88e', renderPrivacyV7: '2f0aa4891b1542db2cd8a27b4d18dd631cbb7e1669aea348a0f1271d61b42eb3', renderTermsV7: 'c578f5d5771ef575ad97a20df4dc6abd9fd1ff0992832e11803f3330642af226' },
     since: '2026-09-29', owner: 'A2P workstream',
     problem: 'the supported-carrier lists name "Sprint", which merged into T-Mobile in 2020 (final QA claims issue 11)',
     fix: 'drop "Sprint" from the carrier lists in the bundle renderers and the native Webflow pages together, after the campaign decision; re-pin ci/a2p-freeze.json; in the same session apply the A2P-held section (`held`) of the dashboard job list (tools/rd_checks.mjs --jobs), which the one-publish job leaves out during carrier review; then delete this entry' },

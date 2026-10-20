@@ -7778,7 +7778,7 @@ function renderPrivacyV7() {
     IMG.hero, 'Zynix AI Privacy Policy');
 
   html += '<section class="zynix-legal-section"><div class="zynix-container"><div class="zynix-legal-content">' +
-    '<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> September 21, 2026</p>' +
+    '<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> October 19, 2026</p>' +
 
     '<h2>1. Who This Policy Applies To</h2>' +
     '<p>This policy applies to:</p>' +
@@ -7827,19 +7827,28 @@ function renderPrivacyV7() {
     '</ul>' +
     '<p style="border-left:4px solid #20449B;padding:12px 16px;background:#EEF2FB;margin:20px 0"><strong>We do not sell personal information.</strong> No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>' +
 
-    '<h2>5. Cookies and Analytics</h2>' +
-    '<p>We use cookies and similar technologies for website functionality and analytics.</p>' +
+    '<h2>5. Cookies, Analytics and Advertising</h2>' +
+    '<p>We use first-party cookies and similar technologies, such as pixels and tags, on our website. Some are strictly necessary for the site to work, such as the cookie that remembers your privacy choices. Others are used for analytics and for advertising, as described below.</p>' +
+    '<p><strong>Analytics.</strong> We use Google Analytics to understand how visitors use our website, such as pages viewed, time on page, and referral source, so we can improve our content.</p>' +
+    '<p><strong>Advertising and measurement.</strong> We use the following tools to measure the results of our ads and to show Zynix AI ads on other websites and platforms to people who have visited our website:</p>' +
     '<ul>' +
-    '<li>We use analytics tools to understand website performance and improve our content.</li>' +
-    '<li>We do not currently run consumer-targeted advertising campaigns. If this changes, we will update this policy and provide applicable choices where required.</li>' +
+    '<li>Google Ads (Google)</li>' +
+    '<li>LinkedIn Insight Tag (LinkedIn)</li>' +
+    '<li>ChatGPT Ads pixel (OpenAI)</li>' +
+    '<li>Clay visitor identification (Clay), which may identify the company, and in some cases the business contact, associated with a website visit</li>' +
     '</ul>' +
-    '<p>You can manage cookie preferences through your browser settings. Note that disabling certain cookies may affect website functionality.</p>' +
+    '<p>These providers may collect information such as your IP address, browser and device information, the pages you visit, and cookie or advertising identifiers, and they handle that information under their own privacy policies. We do not sell personal information for money. However, some US state privacy laws treat allowing advertising providers to collect information through their tags on our website as a \u201csale\u201d or \u201csharing\u201d of personal information.</p>' +
+    '<p><strong>Your choices.</strong> When you first visit our website, a banner lets you choose Accept, Reject non-essential, or Preferences. Analytics and advertising are on by default until you choose otherwise. You can change your choices at any time with the <a href="#privacy-choices" onclick="if(window.zxConsent){window.zxConsent.open();return false}">Your Privacy Choices</a> link in the website footer, where you can turn Analytics and Advertising on or off separately. Turning Advertising off opts you out of the sale or sharing of personal information. When you turn a category off, we delete the cookies those tools set on our website\u2019s domain; cookies stored on a provider\u2019s own domain can be cleared in your browser settings.</p>' +
+    '<p><strong>Global Privacy Control.</strong> If your browser sends a Global Privacy Control (GPC) signal, we treat it as a request to opt out of the sale or sharing of personal information, and advertising tools stay off.</p>' +
+    '<p><strong>Pages without advertising tags.</strong> No advertising tags run on our SMS opt-in, SMS program, Privacy Policy, or Terms of Service pages. Google Analytics is also turned off on these pages.</p>' +
+    '<p><strong>How we store your choices.</strong> We store your choices in a first-party cookie named zx_consent, and in your browser\u2019s local storage, for 12 months. If you clear your cookies or use a different browser or device, we will ask again.</p>' +
+    '<p>You can also block or delete cookies through your browser settings. Blocking strictly necessary cookies may affect how the website works.</p>' +
 
     '<h2>6. Data Retention</h2>' +
     '<p>We retain information for as long as reasonably necessary to fulfill the purposes described in this policy, unless a longer retention period is required or permitted by applicable law. When information is no longer needed, we take reasonable steps to securely delete or anonymize it.</p>' +
 
     '<h2>7. Data Security</h2>' +
-    '<p>Zynix AI maintains administrative, technical, and organizational measures designed to protect the information we hold. These measures are aligned with industry standards for B2B software and healthcare-adjacent services, including our SOC 2 Type II certification.</p>' +
+    '<p>Zynix AI maintains administrative, technical, and organizational measures designed to protect the information we hold. These measures are aligned with industry standards for B2B software and healthcare-adjacent services, including our SOC 2 Type II audit.</p>' +
     '<p>No method of electronic transmission or storage is completely risk-free. For more detail on our security program, visit our <a href="/security">Security Overview</a> page.</p>' +
 
     '<h2>8. Your Rights and Choices</h2>' +

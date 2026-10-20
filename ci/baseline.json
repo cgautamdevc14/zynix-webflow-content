@@ -12,7 +12,7 @@
     "smokeOverflow390: ci/smoke.mjs rect-overflow ratchet, outermost offending elements per page at 390px (c95cc03 counts on production;",
     "  every page 0 since the final QA round 1, 2026-09-29, when all five measured 0). Fails when a page gets worse; from phase 3 every count must be 0 (launch precondition 6).",
     "Exempt hits (not counted; ci/banned-strings.mjs header): facts data, DEAD_FUNCTIONS (verified unreachable on every run),",
-    "  URL/path tokens, DATED_EXEMPTIONS (renderPrivacyV7 'SOC 2 Type II certification', A2P-frozen) and VERIFY_EXEMPTIONS ('$936,988,750' on /press, [VERIFY]).",
+    "  URL/path tokens, DATED_EXEMPTIONS (empty since 2026-10-19: the renderPrivacyV7 SOC 2 wording was fixed) and VERIFY_EXEMPTIONS ('$936,988,750' on /press, [VERIFY]).",
     "  List them: node ci/banned-strings.mjs --exempt; reachability report: node ci/banned-strings.mjs --dead",
     "weight (final QA round 1, 2026-09-29; ci/launch.mjs): ceilings = failing ratchet on brotli-4 bytes of the SOURCE stylesheet and of bundle + stylesheet (what production loads today),",
     "  and on @import rules in the stylesheet (measured + 2,048 B headroom at d3cd1fe; lower with node ci/launch.mjs --write-weight, never raise without a reason in the PR). targets = the launch item",
@@ -66,13 +66,13 @@
   "bannedStrings": {},
   "weight": {
     "ceilings": {
-      "cssBr4": 69407,
-      "totalBr4": 408581,
+      "cssBr4": 69459,
+      "totalBr4": 410619,
       "cssImports": 0
     },
     "builtCeilings": {
-      "totalBr4": 337937,
-      "cssBr4": 48798
+      "totalBr4": 338285,
+      "cssBr4": 48799
     },
     "targets": {
       "cssBr4": 30720,
@@ -213,15 +213,37 @@
           }
         },
         "reason": "V9 repositioning (Gautamdev, 2026-10-01): AI operating layer homepage, 4 pillar pages, v9 visual system (tokens, gradients, components) and NAV. Deploy build 323,097 -> 335,889 B br4 (+12,792, within the 25 KB V9 budget; still 26 KB under production's c95cc03 total of 362,039); the old homepage CSS shrank 56.8 -> 31.3 KB raw."
+      },
+      {
+        "date": "2026-10-20",
+        "commit": "747d03d",
+        "from": {
+          "ceilings": {
+            "cssBr4": 69407,
+            "totalBr4": 408581,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 337937,
+            "cssBr4": 48798
+          }
+        },
+        "to": {
+          "ceilings": {
+            "cssBr4": 69459,
+            "totalBr4": 410619,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 338285,
+            "cssBr4": 48799
+          }
+        },
+        "reason": "Privacy Policy section 5 now describes cookies, analytics and advertising (consent layer live 2026-10-20): +~250 B br4 of required legal text on /privacy-policy (Gautamdev to approve with the PR)."
       }
     ]
   },
   "launchSignoffs": {
-    "dated:renderPrivacyV7": {
-      "by": "orchestrator (launch step D; Gautamdev asked for the changes to be made)",
-      "date": "2026-09-30",
-      "note": "Status quo: A2P-frozen text, identical to production today. All three campaigns are FAILED as of 2026-09-30 (SMS Service round 6: 30882 Terms and Conditions), so the A2P workstream reworks these pages next; reword \"SOC 2 Type II certification\" to \"audit\" there, in the bundle and the native page together, then delete this entry."
-    },
     "verify:$936,988,750": {
       "by": "orchestrator (launch step D; Gautamdev asked for the changes to be made)",
       "date": "2026-09-30",
