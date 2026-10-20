@@ -3028,7 +3028,7 @@ html:not(.wf-native) {
 /* ── /about: leadership (one crop and one tone for every headshot) ── */
 .zx-co-people.zynix-cgrid { row-gap:var(--zx-space-10); }
 @media (min-width:768px) {
-  .zx-co-people.zynix-cgrid { grid-template-columns:repeat(3, minmax(0,1fr)); }
+  .zx-co-people.zynix-cgrid { grid-template-columns:repeat(3, minmax(0,1fr)); max-width:none; }   /* a one-person row (Advisors) keeps the leadership column width */
   .zx-co-people.zynix-cgrid > :last-child { grid-column:auto; }
 }
 .zx-co-person { margin:0; }
