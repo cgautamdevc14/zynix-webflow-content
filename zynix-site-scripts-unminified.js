@@ -3617,6 +3617,7 @@
     { id: 'news', name: 'Company news' }, { id: 'general', name: 'Healthcare AI' }
   ];
   var ZX_RES_POSTS = [
+    ['navina-alternatives-acos', '2026-10-20', 'compare', 'Navina Alternatives for ACOs and Value-Based Care Groups in 2026', 'Navina alternatives for ACOs: what Navina, Innovaccer, Arcadia, Health Catalyst, Guidehealth and Zynix AI are each known for, a checklist for choosing, and which gap each one fits.'],
     ['ai-for-value-based-care', '2026-10-12', 'general', 'AI for Value-Based Care: What It Actually Does', 'What AI for value-based care actually does: unify claims, EHR and ADT data, predict readmission, mortality, disease progression and utilization early, rank care gaps and run routine outreach, with clinicians keeping every clinical decision.'],
     ['pre-visit-planning-value-based-care', '2026-10-09', 'quality', 'Pre-visit planning for value-based care: what to prepare', 'A pre-visit planning checklist for value-based care: what to prepare for each visit, who owns it, what the clinician summary should show, and the CMS rules that shape it.'],
     ['how-to-evaluate-care-management-platform-acos-msos', '2026-10-09', 'ops', 'How to evaluate a care management platform for ACOs and MSOs', 'A criteria-first checklist for choosing a care management platform across multiple EHRs: what to ask about data, risk, care plans, outreach, CMS rules and security, plus a demo script and a scoring rubric.'],
