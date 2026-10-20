@@ -52,10 +52,6 @@ export const DEAD_FUNCTIONS = [];
 // claims label, the exact text, the function's pinned SHA-256 (ci/a2p-freeze.json at the time of the entry), the date, the
 // owner and the fix. The exemption applies only while the function hashes to `sha256`.
 export const DATED_EXEMPTIONS = [
-  { fn: 'renderPrivacyV7', label: 'SOC 2 ... certified', text: 'including our SOC 2 Type II certification',
-    sha256: '564abd893045071f60fc604fe2d2a292386b63436f6a01f3d14691dbb48f131f', since: '2026-09-29', owner: 'A2P workstream',
-    why: 'renderPrivacyV7 is hash-frozen (ci/a2p-freeze.json) while the A2P campaign is decided; DECISIONS 17 says SOC 2 is audited, never certified',
-    fix: "reword to 'including our SOC 2 Type II audit' in renderPrivacyV7 and the native Webflow /privacy-policy page together, after the campaign decision; then delete this entry" }
 ];
 
 // Verify exemptions: a banned string a reviewer escalated to Gautamdev ([VERIFY]) instead of assigning a rewrite. Each entry
