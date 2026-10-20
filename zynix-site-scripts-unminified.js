@@ -7208,22 +7208,31 @@ function renderAboutV7() {
     { name: 'Gautamdev Chowdary', first: 'Gautamdev', title: 'Co-founder and CTO', img: 'team/gautamdev-chowdary.webp', w: 528, h: 660,
       bio: 'Leads engineering, data and AI across the Zynix platform.',
       linkedin: 'https://www.linkedin.com/in/cgautamdevc/' },
-    { name: 'David McDonald', first: 'David', title: 'Vice President, Sales', img: 'team/david-mcdonald.webp', w: 528, h: 660,
-      bio: 'Leads go-to-market for ACOs, health plans and health systems.',
-      linkedin: 'https://www.linkedin.com/in/mcdonalddavidl/' }
+    { name: 'Jay Reeser', first: 'Jay Reeser', title: 'Director, Strategic Partnerships', img: 'team/jay-reeser.webp', w: 528, h: 660,
+      bio: 'Leads strategic partnerships with ACOs, health plans and provider organizations. Background in managed care, network development and alternative payment models.',
+      linkedin: 'https://www.linkedin.com/in/jay-reeser-941b2410/' }
   ];
+  // Advisors are listed apart from the leadership team: they advise Zynix and are not employees.
+  var advisors = [
+    { name: 'Michael McCabe', first: 'Michael', title: 'Strategic Advisor, Growth', img: 'team/michael-mccabe.webp', w: 528, h: 660,
+      bio: 'Managed care executive who has led Medicaid, Medicare and commercial health plans. Advises Zynix on growth with health plans and provider-led organizations.',
+      linkedin: 'https://www.linkedin.com/in/michael-mccabe-6999b916/' }
+  ];
+  function renderPerson(p) {
+    return '<article class="zx-co-person">' +
+      '<img class="zx-co-person__photo" src="' + zxAttr(zxImg(p.img)) + '" alt="' + zxAttr(p.name) + '" width="' + p.w + '" height="' + p.h + '" loading="lazy" decoding="async">' +
+      '<h3 class="zx-co-person__name">' + p.name + '</h3>' +
+      '<p class="zx-co-person__title">' + p.title + '</p>' +
+      '<p class="zx-co-person__bio">' + p.bio + '</p>' +
+      renderLinkArrow(p.first + ' on LinkedIn', p.linkedin, { newTab: true }) +
+    '</article>';
+  }
   html += renderSection({ id: 'leadership', className: 'zx-co-leadership' },
     renderSectionHead('Our team', 'Leadership',
       'Operators and builders who have been accountable for the problems the Zynix platform is designed to solve.', { id: 'leadership-title' }) +
-    renderGrid(people, function (p) {
-      return '<article class="zx-co-person">' +
-        '<img class="zx-co-person__photo" src="' + zxAttr(zxImg(p.img)) + '" alt="' + zxAttr(p.name) + '" width="' + p.w + '" height="' + p.h + '" loading="lazy" decoding="async">' +
-        '<h3 class="zx-co-person__name">' + p.name + '</h3>' +
-        '<p class="zx-co-person__title">' + p.title + '</p>' +
-        '<p class="zx-co-person__bio">' + p.bio + '</p>' +
-        renderLinkArrow(p.first + ' on LinkedIn', p.linkedin, { newTab: true }) +
-      '</article>';
-    }, { className: 'zx-co-people' }));
+    renderGrid(people, renderPerson, { className: 'zx-co-people' }) +
+    '<h3 class="zx-co-beliefs__title" id="advisors-title">Advisors</h3>' +
+    renderGrid(advisors, renderPerson, { className: 'zx-co-people' }));
 
   // Milestones: registry facts and published releases and posts only (COPY_DECK §5.6), oldest first, one "Today" row.
   // Founding year 2024 = the Organization JSON-LD foundingDate (confirmed by Gautamdev 2026-09-30; not 2023); the ACCESS approval date stays held [VERIFY].
@@ -9431,7 +9440,7 @@ function renderDataAnalyticsV7() {
 <!-- ============================================================
      CTA BLOCK — ZynBlue #20449B
      Headline and body copy: change per blog topic
-     Button text and link: fixed ("Schedule a Quick Call" → David's Calendly)
+     Button text and link: fixed ("Schedule a Quick Call" → CALENDLY)
      ============================================================ -->
 <section class="cta-block" aria-labelledby="cta-heading">
   <div class="container">
