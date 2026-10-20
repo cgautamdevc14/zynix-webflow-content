@@ -3617,6 +3617,7 @@
     { id: 'news', name: 'Company news' }, { id: 'general', name: 'Healthcare AI' }
   ];
   var ZX_RES_POSTS = [
+    ['ai-for-value-based-care', '2026-10-12', 'general', 'AI for Value-Based Care: What It Actually Does', 'What AI for value-based care actually does: unify claims, EHR and ADT data, predict readmission, mortality, disease progression and utilization early, rank care gaps and run routine outreach, with clinicians keeping every clinical decision.'],
     ['pre-visit-planning-value-based-care', '2026-10-09', 'quality', 'Pre-visit planning for value-based care: what to prepare', 'A pre-visit planning checklist for value-based care: what to prepare for each visit, who owns it, what the clinician summary should show, and the CMS rules that shape it.'],
     ['how-to-evaluate-care-management-platform-acos-msos', '2026-10-09', 'ops', 'How to evaluate a care management platform for ACOs and MSOs', 'A criteria-first checklist for choosing a care management platform across multiple EHRs: what to ask about data, risk, care plans, outreach, CMS rules and security, plus a demo script and a scoring rubric.'],
     ['ai-patient-outreach-agents-vs-call-center', '2026-10-09', 'ops', 'AI voice and text agents vs a call center for patient outreach', 'How AI voice and text agents compare with a staffed call center for patient outreach: what each handles, how an agent call works and hands off, what stays with licensed staff, and how to run both.'],
@@ -3641,7 +3642,7 @@
     ['how-acos-make-money-shared-savings-ai-impact', '2026-04-01', 'cms', 'How ACOs Actually Make Money: Shared Savings Mechanics and Where AI Moves the Needle'],
     ['multi-agent-ai-outperforming-monolithic-models-acos', '2026-04-01', 'ops', 'Multi-Agent AI Is Outperforming Monolithic Models: Here’s What That Means for ACOs'],
     ['how-to-improve-awv-completion-rates', '2026-03-31', 'quality', 'How To Improve AWV Completion Rates With Proactive Outreach'],
-    ['prior-auth-transparency-live-what-it-means-for-acos', '2026-03-31', 'rcm', 'Prior Auth Transparency Is Live Today: Here’s What It Means for Your ACO'],
+    ['prior-auth-transparency-live-what-it-means-for-acos', '2026-03-31', 'rcm', 'Prior Auth Transparency Is Live: Here’s What It Means for Your ACO'],
     ['how-to-reduce-patient-no-shows-healthcare', '2026-03-30', 'ops', 'How To Reduce Patient No-Shows in Healthcare With AI Scheduling'],
     ['best-ai-tools-healthcare-operations-2026', '2026-03-29', 'ops', 'Best AI Tools for Healthcare Operations in 2026'],
     ['how-to-automate-care-management', '2026-03-28', 'ops', 'How To Automate Care Management With AI Agents'],
