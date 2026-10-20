@@ -3642,7 +3642,7 @@
     ['how-acos-make-money-shared-savings-ai-impact', '2026-04-01', 'cms', 'How ACOs Actually Make Money: Shared Savings Mechanics and Where AI Moves the Needle'],
     ['multi-agent-ai-outperforming-monolithic-models-acos', '2026-04-01', 'ops', 'Multi-Agent AI Is Outperforming Monolithic Models: Here’s What That Means for ACOs'],
     ['how-to-improve-awv-completion-rates', '2026-03-31', 'quality', 'How To Improve AWV Completion Rates With Proactive Outreach'],
-    ['prior-auth-transparency-live-what-it-means-for-acos', '2026-03-31', 'rcm', 'Prior Auth Transparency Is Live Today: Here’s What It Means for Your ACO'],
+    ['prior-auth-transparency-live-what-it-means-for-acos', '2026-03-31', 'rcm', 'Prior Auth Transparency Is Live: Here’s What It Means for Your ACO'],
     ['how-to-reduce-patient-no-shows-healthcare', '2026-03-30', 'ops', 'How To Reduce Patient No-Shows in Healthcare With AI Scheduling'],
     ['best-ai-tools-healthcare-operations-2026', '2026-03-29', 'ops', 'Best AI Tools for Healthcare Operations in 2026'],
     ['how-to-automate-care-management', '2026-03-28', 'ops', 'How To Automate Care Management With AI Agents'],

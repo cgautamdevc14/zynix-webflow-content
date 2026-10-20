@@ -6,7 +6,7 @@
 > progression, utilization), the Embedded Care Management Platform and AI Patient Engagement. It is built for ACOs,
 > MSOs/IPAs and physician groups, Medicare Advantage health plans, FQHCs and hospital systems.
 
-Last updated: 2026-10-13
+Last updated: 2026-10-19
 
 Key facts (as of September 2026, from Zynix):
 - 1M+ value-based care patients onboarded; customer organizations in 30 states.
@@ -137,9 +137,9 @@ Key facts (as of September 2026, from Zynix):
 - [How ACOs Actually Make Money: Shared Savings Mechanics and Where AI Moves the Needle](https://www.zynix.ai/blog-posts/how-acos-make-money-shared-savings-ai-impact): How ACOs make money in MSSP: the benchmark, minimum savings rate and quality gates, where savings come from, and where AI helps ACOs earn shared savings.
 - [Multi-Agent AI Is Outperforming Monolithic Models — Here's What That Means for ACOs](https://www.zynix.ai/blog-posts/multi-agent-ai-outperforming-monolithic-models-acos): Multi-agent AI splits clinical work among specialized agents. What the Mount Sinai study found, and what it means for ACOs choosing AI for care gap work.
 - [The CMS LEAD Model: Why Your ACO's Data Infrastructure Will Decide If You Win](https://www.zynix.ai/blog-posts/cms-lead-model-rfa-aco-data-infrastructure): What ACOs need to know about the CMS LEAD model: 2027 to 2036 dates, risk options, the December 2026 alignment notice and the data infrastructure to win.
-- [CMS WISeR Is Live in 6 States: What the AI Prior Auth Pilot Means for Your Revenue Cycle — and How to Reach Gold Card Status Before June 2026](https://www.zynix.ai/blog-posts/cms-wiser-prior-authorization-gold-card-2026): CMS WISeR requires prior authorization or pre-payment review for 13 Medicare service categories in six states. Clean documentation earns a gold card.
+- [CMS WISeR Is Live in 6 States: What the AI Prior Auth Pilot Means for Your Revenue Cycle — and How to Reach Gold Card Status](https://www.zynix.ai/blog-posts/cms-wiser-prior-authorization-gold-card-2026): CMS WISeR requires prior authorization or pre-payment review for 13 Medicare service categories in six states. Clean documentation earns a gold card.
 - [The CMS LEAD Model RFA Window Has Closed: What ACOs Must Get Right Before 2027](https://www.zynix.ai/blog-posts/cms-lead-model-rfa-acos-47-days): The CMS LEAD Model's first application window closed May 17, 2026. What ACOs need to get right before performance year 2027 starts on January 1, 2027.
-- [Prior Auth Transparency Is Live Today — Here's What It Means for Your ACO](https://www.zynix.ai/blog-posts/prior-auth-transparency-live-what-it-means-for-acos): Payers now publish prior authorization metrics under CMS-0057-F. What the data shows, how WISeR and the 2027 API rule fit, and what ACOs should do now.
+- [Prior Auth Transparency Is Live — Here's What It Means for Your ACO](https://www.zynix.ai/blog-posts/prior-auth-transparency-live-what-it-means-for-acos): Payers now publish prior authorization metrics under CMS-0057-F. What the data shows, how WISeR and the 2027 API rule fit, and what ACOs should do now.
 - [Healthcare EHR Integrations: Epic, athenahealth, Cerner, FHIR & HL7](https://www.zynix.ai/blog-posts/healthcare-ehr-integrations-epic-athenahealth-fhir-hl7): A guide to healthcare EHR integrations: how Zynix connects to Epic, athenahealth, Oracle Health (Cerner) and eClinicalWorks over FHIR, HL7 v2 and C-CDA.
 - [Olive AI Alternative: Next-Generation Healthcare AI for Care Execution](https://www.zynix.ai/blog-posts/olive-ai-alternative-healthcare): Olive AI alternative: Olive shut down in 2023 after selling its units to Waystar and Humata Health. How to pick a replacement for revenue cycle or care work.
 - [Arcadia Healthcare Platform Alternative: Execution-First AI for VBC](https://www.zynix.ai/blog-posts/arcadia-healthcare-platform-alternative): Arcadia alternative for value-based care: Arcadia centers on unified data and analytics, while Zynix AI runs the outreach and follow-up work. Who each fits.
