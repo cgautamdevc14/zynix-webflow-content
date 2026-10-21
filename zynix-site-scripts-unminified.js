@@ -3617,6 +3617,7 @@
     { id: 'news', name: 'Company news' }, { id: 'general', name: 'Healthcare AI' }
   ];
   var ZX_RES_POSTS = [
+    ['navina-alternatives-acos', '2026-10-20', 'compare', 'Navina Alternatives for ACOs and Value-Based Care Groups in 2026', 'Navina alternatives for ACOs: what Navina, Innovaccer, Arcadia, Health Catalyst, Guidehealth and Zynix AI are each known for, a checklist for choosing, and which gap each one fits.'],
     ['ai-for-value-based-care', '2026-10-12', 'general', 'AI for Value-Based Care: What It Actually Does', 'What AI for value-based care actually does: unify claims, EHR and ADT data, predict readmission, mortality, disease progression and utilization early, rank care gaps and run routine outreach, with clinicians keeping every clinical decision.'],
     ['pre-visit-planning-value-based-care', '2026-10-09', 'quality', 'Pre-visit planning for value-based care: what to prepare', 'A pre-visit planning checklist for value-based care: what to prepare for each visit, who owns it, what the clinician summary should show, and the CMS rules that shape it.'],
     ['how-to-evaluate-care-management-platform-acos-msos', '2026-10-09', 'ops', 'How to evaluate a care management platform for ACOs and MSOs', 'A criteria-first checklist for choosing a care management platform across multiple EHRs: what to ask about data, risk, care plans, outreach, CMS rules and security, plus a demo script and a scoring rubric.'],
@@ -3631,7 +3632,7 @@
     ['wiser-model-cms-prior-authorization-acos-2026', '2026-04-12', 'rcm', 'CMS’s WISeR Model Is Live: What 511 MSSP ACOs Must Do Right Now to Protect Shared Savings'],
     ['aco-claim-denial-agentic-ai-revenue-cycle-automation', '2026-04-08', 'rcm', 'Why ACOs Are Losing Millions to Claim Denials, and How Agentic AI Fixes the Revenue Cycle'],
     ['best-ai-medical-scribes-comparison-2026', '2026-04-06', 'docs', 'ZynScribe vs Suki vs Nabla vs Abridge: Comparing AI Medical Scribes for Outpatient Clinics in 2026'],
-    ['integrating-ai-into-ehr-workflows-epic-cerner-athenahealth', '2026-04-06', 'data', 'Integrating AI into EHR Workflows: A Technical Guide for Epic, Cerner and athenahealth'],
+    ['integrating-ai-into-ehr-workflows-epic-cerner-athenahealth', '2026-04-06', 'data', 'Integrating AI into EHR Workflows: A Technical Guide for Epic, Oracle Health (Cerner) and athenahealth'],
     ['ai-value-based-care-population-health-risk-stratification', '2026-04-06', 'data', 'How AI Supports Value-Based Care: Population Health, Risk Stratification and Care Gap Closure'],
     ['team-model-741-hospitals-aco-surgical-costs', '2026-04-06', 'cms', 'The TEAM Model Now Covers 716 Hospitals: What It Means for ACO Surgical Costs'],
     ['post-discharge-readmission-reduction-ai-agents-acos', '2026-04-03', 'toc', 'Post-Discharge Readmission Reduction: How AI Agents Help ACOs Stop Losing Shared Savings'],
@@ -3685,7 +3686,7 @@
     ['ai-changing-decision-making-healthcare', '2025-10-01', 'general', 'AI Is Changing Decision-Making in Healthcare'],
     ['tools-driving-shift-value-based-healthcare', '2025-10-01', 'general', 'Tools Driving the Shift to Value-Based Healthcare'],
     ['acos-consistent-30-day-post-discharge-program', '2025-09-14', 'toc', 'ACOs: A Consistent 30-Day Post-Discharge Program'],
-    ['why-tcm-fails-real-workflows', '2025-09-07', 'toc', 'Why TCM Fails in Real Workflows'],
+    ['why-tcm-fails-real-workflows', '2025-09-07', 'toc', 'Why TCM Fails in Real Workflows, and How to Automate TCM Outreach'],
     ['documentation-crisis-physician-burnout', '2025-08-31', 'docs', 'The Documentation Crisis and Physician Burnout']
   ];
 
