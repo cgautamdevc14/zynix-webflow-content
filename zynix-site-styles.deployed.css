@@ -3645,3 +3645,67 @@ html:not(.wf-native) {
 @media (prefers-reduced-motion:reduce) { .zx-pil-deeper__link, .zx-pil-deeper__arrow { transition:none; transform:none; } }
 @media (max-width:1023.98px) { .zx-pil-more__grid { grid-template-columns:minmax(0,1fr); } }
 /* ════ ZX:END page:pillars ════ */
+
+/* ════ ZX:BEGIN page:rural (owner RH) ════ */
+/* /rural-health (renderRuralHealthPage, JS block `rural`). The page sits in <div class="zx-pil zx-rh">, so it takes the pillar
+   pages' rhythm, hero, cards, split, FAQ and go-deeper styles; the form card is /contact's .zx-co-form. Only the parts below are
+   new. v9 tokens only; every text pair passes AA; no motion. */
+.zx-rh .zx-pil-hero__title { max-width:18ch; }
+
+/* ── The program in brief: a fact grid, then the sources line ── */
+.zx-rh-facts { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--zx9-gap); margin:0; }
+.zx-rh-facts__item { box-sizing:border-box; min-width:0; margin:0; padding:clamp(20px, 16px + .8vw, 26px); border:1px solid var(--zx9-line); border-radius:var(--zx9-radius); background-color:var(--zx9-surface); box-shadow:var(--zx9-shadow-1); }
+.zx-rh-facts dt { margin:0 0 8px; font:600 13px/1.3 var(--zx9-font); letter-spacing:.04em; text-transform:uppercase; color:var(--zx9-blue-600); }
+.zx-rh-facts dd { margin:0; font-size:16px; line-height:1.55; color:var(--zx9-text); }
+.zx-rh-facts--stack { grid-template-columns:minmax(0,1fr); margin-top:28px; }
+.zx-rh-sources { margin:24px 0 0; font-size:14px; line-height:1.6; color:var(--zx9-text-2); }
+.zx-rh-sources a { color:var(--zx9-blue-600); text-decoration:underline; text-underline-offset:2px; }
+@media (max-width:1023.98px) { .zx-rh-facts { grid-template-columns:repeat(2, minmax(0,1fr)); } .zx-rh-facts--stack { grid-template-columns:minmax(0,1fr); } }
+@media (max-width:599.98px) { .zx-rh-facts { grid-template-columns:minmax(0,1fr); } }
+
+/* ── Solutions: pillar cards are links; the "can support" line ── */
+.zx-rh .zx-rh-sol { color:inherit; text-decoration:none; }
+.zx-rh .zx-rh-sol .zx9-card__icon { color:var(--zx9-accent-ink); background-color:var(--zx9-accent-soft); }
+.zx-rh .zx-rh-sol:hover, .zx-rh .zx-rh-sol:focus-visible { box-shadow:var(--zx9-shadow-2); }
+.zx-rh-sol__fit { grid-column:1 / -1; margin:14px 0 0; padding-top:14px; border-top:1px solid var(--zx9-line); font-size:14px; line-height:1.5; color:var(--zx9-text-2); }
+
+/* ── Care coordination (ink): the who-does-what split at full width ── */
+.zx-rh-split { margin-top:0; gap:var(--zx9-gap); }
+.zx-rh-split .zx-pil-split__col { padding:clamp(18px, 14px + 1vw, 28px); }
+.zx-rh-split .zx-pil-split__list > li { font-size:16px; }
+@media (max-width:767.98px) { .zx-rh-split { grid-template-columns:minmax(0,1fr); } }
+
+/* ── EMR and HIE integration: the security card ── */
+.zx-rh-trust { box-sizing:border-box; padding:clamp(22px, 16px + 1vw, 32px); border:1px solid var(--zx9-line); border-radius:var(--zx9-radius-lg); background-color:var(--zx9-surface); box-shadow:var(--zx9-shadow-1); }
+.zx-rh-trust .zynix-trust-row { margin-top:16px; }
+
+/* ── Partnership: the two role columns, the note and the four steps ── */
+.zx-rh-roles { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:var(--zx9-gap); }
+.zx-rh-roles__col { box-sizing:border-box; min-width:0; padding:clamp(22px, 16px + 1vw, 32px); border:1px solid var(--zx9-line); border-radius:var(--zx9-radius-lg); background-color:var(--zx9-surface); box-shadow:var(--zx9-shadow-1); }
+.zx-rh-roles__col--zynix { border-top:3px solid var(--zx9-blue-500); }
+.zx-rh-roles__col--you { border-top:3px solid var(--zx9-orange-500); }
+.zx-rh-roles__list { display:grid; gap:10px; margin:16px 0 0; padding:0; list-style:none; }
+.zx-rh-roles__list > li { position:relative; margin:0; padding-left:20px; font-size:16px; line-height:1.5; color:var(--zx9-text-2); }
+.zx-rh-roles__list > li::before { content:""; position:absolute; left:2px; top:.6em; width:7px; height:7px; border-radius:50%; background-color:var(--zx9-blue-500); }
+.zx-rh-roles__col--you .zx-rh-roles__list > li::before { background-color:var(--zx9-orange-600); }
+.zx-rh-note { margin:var(--zx9-gap) 0 0; padding:18px 22px; border-left:4px solid var(--zx9-orange-500); border-radius:var(--zx9-radius-sm); background-color:var(--zx9-orange-50); font-size:16px; line-height:1.55; color:var(--zx9-text); }
+.zx-rh-steps { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:var(--zx9-gap); margin:clamp(32px, 24px + 1.6vw, 48px) 0 0; padding:0; list-style:none; counter-reset:none; }
+.zx-rh-steps__item { min-width:0; margin:0; padding-top:16px; border-top:2px solid var(--zx9-line-strong); }
+.zx-rh-steps__n { display:block; font:600 14px/1 var(--zx9-font); letter-spacing:.06em; color:var(--zx9-blue-600); }
+.zx-rh-steps__title { margin:10px 0 0; font:600 18px/1.3 var(--zx9-font); color:var(--zx9-text); }
+.zx-rh-steps__body { margin:8px 0 0; font-size:15px; line-height:1.55; color:var(--zx9-text-2); }
+@media (max-width:1023.98px) { .zx-rh-steps { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+@media (max-width:767.98px) { .zx-rh-roles { grid-template-columns:minmax(0,1fr); } }
+@media (max-width:479.98px) { .zx-rh-steps { grid-template-columns:minmax(0,1fr); } }
+
+/* ── The proof row and logo row together ── */
+.zx-rh-proof .zynix-logo-row { margin-top:28px; }
+
+/* ── The inquiry form: what happens next, the honeypot ── */
+.zx-rh-partner .zx-co-form__submit { width:100%; margin-top:8px; }
+.zx-rh-next { padding-top:clamp(0px, 4vw - 16px, 24px); }
+.zx-rh-next__list { display:grid; gap:14px; margin:16px 0 24px; padding-left:22px; font-size:16px; line-height:1.55; color:var(--zx9-text-2); }
+.zx-rh-next__list > li::marker { font-weight:600; color:var(--zx9-blue-600); }
+.zx-rh-next .zx9-note a { color:var(--zx9-blue-600); }
+.zx-rh-hp { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }
+/* ════ ZX:END page:rural ════ */

@@ -346,7 +346,8 @@
           { label: 'MSOs, IPAs & physician groups', desc: 'Programs across independent practices', href: '/audience-segments/independent-group-practices', icon: 'stethoscope' },
           { label: 'Health plans', desc: 'Stars, HEDIS gaps and member outreach', href: '/audience-segments/health-plans', icon: 'target' },
           { label: 'Health systems', desc: 'Post-discharge follow-up and documentation', href: '/audience-segments/health-systems', icon: 'hospital' },
-          { label: 'FQHCs & community health', desc: 'Multilingual outreach and after-hours access', href: '/audience-segments/fqhcs', icon: 'mappin' }
+          { label: 'FQHCs & community health', desc: 'Multilingual outreach and after-hours access', href: '/audience-segments/fqhcs', icon: 'mappin' },
+          { label: 'Rural health & grants', desc: 'Rural Health Transformation partnerships', href: '/rural-health', icon: 'hospital' }
         ] },
         { heading: 'By program', items: [   // label-only on purpose (compact column; no desc field)
           { label: 'Transitional care & readmissions', href: '/use-cases/post-discharge-tcm-readmission', footer: false },
@@ -521,6 +522,7 @@
     '/audience-segments/health-plans': 'Health plans',
     '/audience-segments/health-systems': 'Health systems',
     '/audience-segments/fqhcs': 'FQHCs & community health',
+    '/rural-health': 'Rural health & grants',
     '/audience-segments/ascs': 'Ambulatory surgery centers',
     // Solutions: use cases. The hub follows the NAV label; the 30 use-case pages are named by their own titles, generated
     // from USE_CASES with their workflow group as descriptor and icon (zxLinkData), so every list names them the same way.
@@ -1222,6 +1224,7 @@
     '/audience-segments/health-plans': 'target',
     '/audience-segments/health-systems': 'hospital',
     '/audience-segments/fqhcs': 'mappin',
+    '/rural-health': 'hospital',
     '/audience-segments/ascs': 'calendar',
     '/use-cases': 'lightbulb',
     // Customers
@@ -1284,6 +1287,7 @@
     '/audience-segments/health-plans': 'Stars, HEDIS gaps and member outreach',
     '/audience-segments/health-systems': 'Post-discharge follow-up and documentation',
     '/audience-segments/fqhcs': 'Multilingual outreach and after-hours access',
+    '/rural-health': 'Rural Health Transformation partnerships',
     '/audience-segments/ascs': 'Referral intake, scheduling and post-op follow-up',
     '/use-cases': 'Workflows by program and organization',
     // Customers
@@ -3357,6 +3361,303 @@
     return '<div class="zx-pil zx-pil--' + zxAttr(p.id) + acc + '">' + hero + what + spot + loop + programs + more + cta + '</div>' + renderFooter();
   }
   // ==== ZX:END pillars ====
+
+  // ==== ZX:BEGIN rural (owner RH) ====
+  // /rural-health: Rural Health & Grants (Jay Chowdappa, MD, GTM meeting 2026-10-26). One renderer, renderRuralHealthPage(),
+  // composed from the pillar-page parts (zxPilSection, zxPilHead, zxPilViz, zxPilCards, zxPilDeeper) and the v9 helpers,
+  // plus zx-rh-* markup styled only in the stylesheet block page:rural. No inline style attributes.
+  // Claims: program facts come only from the CMS and USDA sources in RH.sources (checked on RH.checked); Zynix facts only from
+  // SITE_FACTS and PILLARS. No rural customer, partnership, award or outcome is claimed, and the page says plainly that the
+  // eligible organization applies and that working with Zynix guarantees no eligibility, award or amount.
+  // The form posts to the site's HubSpot form (the /contact GUID, as /naacos-drawing does), so the contact's conversion reads
+  // "Rural Health & Grants | Partnership inquiry: Website Contact Us form", the message carries every answer, the campaign and
+  // the UTMs, and the OpenAI pixel's lead_created fires as it does for /contact. ?test=1 marks a submission [TEST].
+  var RH = {
+    path: '/rural-health',
+    page: 'Rural Health & Grants | Partnership inquiry',   // HubSpot pageName: the conversion's name
+    campaign: 'Rural Health & Grants',
+    owner: '169953981',   // HubSpot contact owner for these leads (m.mccabe@zynix.ai) [VERIFY] Gautamdev
+    checked: 'October 26, 2026',
+    sources: [
+      ['Medicaid.gov: Rural Health Transformation Program', 'https://www.medicaid.gov/resources-for-states/rural-health'],
+      ['CMS press release, December 29, 2025', 'https://www.cms.gov/newsroom/press-releases/cms-announces-50-billion-awards-strengthen-rural-health-all-50-states'],
+      ['CMS applicant webinar transcript (PDF)', 'https://www.cms.gov/files/document/rht-program-applicants-webinar-transcript.pdf'],
+      ['CMS state spotlights', 'https://www.medicaid.gov/resources-for-states/rural-health-transformation-rht-program/state-spotlights'],
+      ['USDA ERS: rural population', 'https://www.ers.usda.gov/topics/rural-economy-population/population-migration']
+    ],
+    // healthcare_segment values the /contact form sends (renderContact)
+    seg: { cah: 'Health System', hospital: 'Health System', rhc: 'Independent Practice', fqhc: 'FQHC', network: 'Other', state: 'Other', other: 'Other' }
+  };
+  zxSeo(RH.path, { title: 'Rural Health Transformation & Grants Partner | Zynix AI', img: IMG.care, schema: 'WebPage',
+    desc: 'AI care coordination, predictive risk and patient outreach for rural hospitals, CAHs, clinics and FQHCs, plus proposal and implementation support for grants.' });
+
+  function zxRhList(items, cls) {
+    return '<ul class="' + cls + '" role="list">' + items.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>';
+  }
+  function zxRhOptions(list) { return list.map(function (o) { return { value: o[0], label: o[1] }; }); }
+
+  // The inquiry form (#partner) and what happens next. Field markup from renderField, card styles from /contact (.zx-co-form).
+  function zxRhForm() {
+    var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
+      'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+      'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio',
+      'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia',
+      'Washington', 'West Virginia', 'Wisconsin', 'Wyoming', 'Multiple states', 'Other'].map(function (s) { return [s, s]; });
+    var row = function (a, b) { return '<div class="zx-co-form__row">' + a + b + '</div>'; };
+    var form = '<div class="zx-co-form zx-rh-form">' +
+      '<h2 class="zx-co-form__title" id="partner-title">Schedule a rural health partnership discussion</h2>' +
+      '<p class="zx-co-form__intro">Tell us about your organization, your state’s program and what you want to achieve.</p>' +
+      '<form class="zynix-contact-form" id="zx-rh-form" aria-labelledby="partner-title">' +
+        '<p class="zx-co-form__legend" aria-hidden="true">* Required</p>' +
+        row(renderField({ id: 'zx-rh-firstname', name: 'firstname', label: 'First name', required: true, autocomplete: 'given-name' }),
+            renderField({ id: 'zx-rh-lastname', name: 'lastname', label: 'Last name', required: true, autocomplete: 'family-name' })) +
+        row(renderField({ id: 'zx-rh-email', name: 'email', type: 'email', label: 'Work email', required: true, autocomplete: 'email' }),
+            renderField({ id: 'zx-rh-phone', name: 'phone', type: 'tel', label: 'Phone', autocomplete: 'tel' })) +
+        row(renderField({ id: 'zx-rh-company', name: 'company', label: 'Organization', required: true, autocomplete: 'organization' }),
+            renderField({ id: 'zx-rh-jobtitle', name: 'jobtitle', label: 'Role', required: true, autocomplete: 'organization-title' })) +
+        row(renderField({ id: 'zx-rh-orgtype', name: 'orgtype', type: 'select', label: 'Organization type', required: true, options: zxRhOptions([
+              ['', 'Select a type'], ['cah', 'Critical access hospital'], ['hospital', 'Rural hospital'], ['rhc', 'Rural health clinic'],
+              ['fqhc', 'FQHC or community health center'], ['network', 'Rural health network or association'], ['state', 'State agency or office'], ['other', 'Other']]) }),
+            renderField({ id: 'zx-rh-state', name: 'state', type: 'select', label: 'State', required: true, autocomplete: 'address-level1',
+              options: zxRhOptions([['', 'Select a state']].concat(states)) })) +
+        row(renderField({ id: 'zx-rh-program', name: 'program', type: 'select', label: 'Program of interest', required: true, options: zxRhOptions([
+              ['', 'Select a program'], ['rhtp', 'Rural Health Transformation Program'], ['federal', 'Another federal grant'], ['state', 'A state or foundation grant'],
+              ['none', 'Not grant-funded'], ['unsure', 'Not sure yet']]) }),
+            renderField({ id: 'zx-rh-stage', name: 'stage', type: 'select', label: 'Where you are', options: zxRhOptions([
+              ['', 'Select a stage'], ['exploring', 'Exploring options'], ['applying', 'Preparing a proposal'], ['awarded', 'Funded, planning implementation'], ['other', 'Other']]) })) +
+        renderField({ id: 'zx-rh-message', name: 'message', type: 'textarea', label: 'Partnership requirements', rows: 4,
+          hint: 'What you want to achieve, the sites involved, your EHR and your timeline.' }) +
+        '<div class="zx-rh-hp" aria-hidden="true"><label for="zx-rh-website">Website</label><input id="zx-rh-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>' +
+        '<button type="submit" class="zynix-btn zynix-btn--primary zynix-btn--lg zx-co-form__submit">Request a discussion</button>' +
+        '<p class="zx-co-form__note">We use your details only to respond to your request. This form does not sign you up for text messages. <a href="/privacy-policy">Privacy Policy</a></p>' +
+      '</form></div>';
+    var next = '<div class="zx-rh-next"><h3 class="zx9-h3">What happens next</h3>' +
+      '<ol class="zx-rh-next__list" role="list">' +
+        '<li>We reply by email, usually within one business day.</li>' +
+        '<li>A 30-minute discussion: your goals, your state’s process and timeline, and where Zynix fits.</li>' +
+        '<li>If there’s a fit, we prepare the technical and implementation material your team needs.</li></ol>' +
+      '<p class="zx9-body">Prefer to pick a time?</p>' +
+      '<div class="zx9-actions">' + renderButton('Book 30 minutes', SITE_FACTS.demo.href, { variant: 'secondary', size: 'lg', cta: 'demo', newTab: true }) + '</div>' +
+      '<p class="zx9-note">Or write to <a href="mailto:' + zxAttr(SITE_FACTS.company.email) + '">' + SITE_FACTS.company.email + '</a>.</p></div>';
+    return renderSplit(form, next, { ratio: '7-5', className: 'zx-rh-partner__grid' });
+  }
+
+  function renderRuralHealthPage() {
+    var gov = zxGovernance(['escalation']), st = SITE_FACTS.stats, e = SITE_FACTS.ehr;
+    var pil = function (k) { return zx9Pillar(k); };
+
+    // 1. Hero (ink)
+    var hero = '<section class="zx9-section zx9-band--ink zx-pil-hero" id="hero" aria-labelledby="hero-title"><div class="zynix-container">' +
+      renderSplit(
+        renderV9Eyebrow('Rural health & grants') +
+        '<h1 class="zx9-display zx-pil-hero__title" id="hero-title">AI-powered transformation for rural healthcare</h1>' +
+        '<p class="zx9-lead">Zynix helps rural hospitals, critical access hospitals, clinics and FQHCs turn new funding into care their teams can sustain: who needs care next, a plan with an owner, and voice and text outreach that reaches patients across long distances.</p>' +
+        '<div class="zx9-actions">' + renderButton('Schedule a partnership discussion', '#partner', { variant: 'primary', size: 'lg', cta: 'primary' }) +
+          renderButton('How grant support works', '#grant-support', { variant: 'secondary', size: 'lg', className: 'zx9-btn-glass' }) + '</div>',
+        zxPilViz({ icon: 'hospital', title: 'Rural network · this week', meta: 'A critical access hospital and two clinics',
+          rows: [['Pt 1042 · Discharged yesterday', 'Follow-up visit booked by the voice agent', ['Booked', 'ok']],
+                 ['Pt 2218 · Readmission risk: high', 'Drivers: CHF, 2 admissions in 90 days', ['Plan created', 'info']],
+                 ['Pt 3307 · Wellness visit due', 'Text sent in Spanish, visit at the clinic', ['Outreach queued', 'info']],
+                 ['Pt 4471 · Symptom question after hours', 'Routed to the on-call nurse by rule', ['Escalated', 'warn']]],
+          foot: 'Clinicians make every clinical decision.' }, zx9Accent(pil('population-intelligence'))),
+        { ratio: '7-5', center: true, className: 'zx-pil-hero__grid' }) +
+      '</div></section>';
+
+    // 2. Challenges and opportunities
+    var need = zxPilSection('challenges', 'zx-rh-need', zxPilHead('challenges', 'Challenges and opportunities', 'Rural care is a capacity problem first',
+        '46.2 million people, 14% of U.S. residents, live in nonmetro counties (USDA ERS, July 2024). New federal funding is a chance to add capacity, if it becomes work that gets done every day.', null, true) +
+      zxPilCards([
+        { icon: 'mappin', title: 'Distance', body: 'Patients travel far for care, so a missed follow-up or screening is hard to recover.' },
+        { icon: 'users', title: 'Small teams', body: 'A few nurses and coordinators carry outreach, scheduling and after-hours calls on top of care.' },
+        { icon: 'database', title: 'Scattered data', body: 'Claims, EHR and discharge data sit in separate systems, and follow-up depends on someone noticing.' },
+        { icon: 'chart', title: 'Thin margins', body: 'Every kept visit and every avoided readmission matters to a rural budget.' }
+      ], 'need'));
+
+    // 3. The Rural Health Transformation Program (facts from RH.sources only)
+    var facts = [
+      ['What it is', 'A $50 billion CMS program created by Section 71401 of Public Law 119-21: $10 billion a year for fiscal years 2026 through 2030.'],
+      ['Who receives the funds', 'States. CMS announced awards for all 50 states on December 29, 2025, with first-year awards from $147 million to $281 million.'],
+      ['How funds reach providers', 'Each state decides on subawards and subcontracts, for example to facilities, health systems, provider groups and vendors, and tells CMS how it selects them.'],
+      ['What funds can pay for', 'States use at least three approved uses. Several involve technology: consumer-facing tools for chronic disease, technical assistance for technology-enabled care (including remote monitoring and artificial intelligence), IT advances, and innovative care models, including value-based care.'],
+      ['Limits to know', 'Among others, provider payments are capped at 15% per budget period, capital and infrastructure at 20% of a state’s award, and replacing an existing certified EHR at 5%.'],
+      ['One example', 'Illinois is investing more than $30 million of its funding in technology upgrades for rural hospitals, including critical access hospitals.']
+    ];
+    var program = zxPilSection('program', 'zx9-band--tint zx-rh-program', zxPilHead('program', 'Rural Health Transformation Program', 'The program in brief',
+        'Each state runs its own process and timeline, so start with your state’s Rural Health Transformation office.', null, true) +
+      '<dl class="zx-rh-facts">' + facts.map(function (f) { return '<div class="zx-rh-facts__item"><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('') + '</dl>' +
+      '<p class="zx-rh-sources">Sources, checked ' + RH.checked + ': ' + RH.sources.map(function (s) {
+        return '<a href="' + zxAttr(s[1]) + '"' + zxNewTab(s[1]) + '>' + s[0] + '</a>'; }).join(' · ') + '.</p>');
+
+    // 4. Solutions: the four pillars, each with where it can fit in a state plan
+    var fit = { 'population-intelligence': 'Can support: prevention and chronic disease, regional collaboration',
+      'predictive-risk': 'Can support: prevention and chronic disease, innovative care models',
+      'embedded-care-management': 'Can support: technology-enabled care, innovative care models',
+      'ai-patient-engagement': 'Can support: consumer-facing tools for chronic disease, access' };
+    var solutions = zxPilSection('solutions', 'zx-rh-solutions', zxPilHead('solutions', 'Zynix for rural providers', 'One operating layer, four parts',
+        'Use one part or all four. Your state decides which uses it funds and what counts toward each.', null, true) +
+      '<ul class="zx-pil-cards" role="list" data-count="4">' + PILLARS.map(function (p, i) {
+        var tid = 'sol-card-' + (i + 1);
+        return '<li><a class="zx9-card zx-pil-card zx-rh-sol' + zx9Accent(p) + '" href="' + zxAttr(p.slug) + '" aria-labelledby="' + tid + '">' +
+          '<span class="zx9-card__icon" aria-hidden="true">' + zxIcon(p.icon) + '</span><h3 class="zx9-card__title" id="' + tid + '">' + p.name + '</h3>' +
+          '<p class="zx9-card__body">' + p.promise + '</p><p class="zx-rh-sol__fit">' + fit[p.id] + '</p></a></li>';
+      }).join('') + '</ul>');
+
+    // 5. Care coordination and patient engagement (ink): who does what
+    var col = function (key, title, icon, items) {
+      return '<div class="zx-pil-split__col zx-pil-split__col--' + key + '"><h3 class="zx-pil-split__title"><span class="zx-pil-split__icon" aria-hidden="true">' +
+        zxIcon(icon) + '</span>' + title + '</h3>' + zxRhList(items, 'zx-pil-split__list') + '</div>';
+    };
+    var engage = '<section class="zx9-section zx9-band--ink zx-rh-engage' + zx9Accent(pil('ai-patient-engagement')) + '" id="engagement" aria-labelledby="engagement-title"><div class="zynix-container">' +
+      zxPilHead('engagement', 'Care coordination and patient engagement', 'More follow-through from the same team',
+        'Care plans give every step an owner and a deadline. Voice and text agents take the repeatable outreach, and your team keeps the clinical work.' +
+        (gov.length ? ' ' + gov[0].text : ''), null, true) +
+      '<div class="zx-pil-split zx-rh-split" role="group" aria-label="Who does what">' +
+        col('agents', 'Agents handle', 'bot', ['Post-discharge calls after a hospital stay', 'Wellness visit, screening and care-gap outreach',
+          'Scheduling, reminders and no-show follow-up', 'After-hours calls: answer, capture the reason, book routine visits', 'Multilingual outreach by voice and text']) +
+        col('team', 'Your team owns', 'stethoscope', ['Clinical judgment, diagnosis and treatment', 'The TCM interactive contact',
+          'Symptom questions, routed to the on-call clinician by rule', 'Patients the agents could not reach', 'Sign-off on clinical documentation']) +
+      '</div></div></section>';
+
+    // 6. Population health and predictive risk
+    var risk = zxPilSection('risk', 'zx-rh-risk', zxPilHead('risk', 'Population health and predictive risk', 'Know who needs care next, across every site',
+        'One record per patient from claims, EHR, ADT, lab and pharmacy data. Predictive Risk flags four things and shows the drivers behind each.', null, true) +
+      renderV9Predict({ id: 'risk-title', note: 'Every prediction shows its drivers. Clinicians make every clinical decision.' }));
+
+    // 7. EMR and HIE integration
+    var interop = zxPilSection('interop', 'zx9-band--tint zx-rh-interop', renderSplit(
+      zxPilHead('interop', 'EMR and HIE integration', 'Works with the systems you already run',
+        'Zynix connects to ' + e.line + ', including ' + e.named.slice(0, 5).join(', ') + '.') +
+        '<dl class="zx-rh-facts zx-rh-facts--stack">' +
+          '<div class="zx-rh-facts__item"><dt>Standards</dt><dd>' + e.standards.join(', ') + '</dd></div>' +
+          '<div class="zx-rh-facts__item"><dt>Hospital events</dt><dd>HL7 v2 ADT admission and discharge messages, from a hospital EHR or an HIE that sends them, can open a follow-up plan.</dd></div>' +
+          '<div class="zx-rh-facts__item"><dt>Getting started</dt><dd>Where an interface isn’t ready yet, work can start from secure file exchange while it is built.</dd></div>' +
+        '</dl>',
+      '<div class="zx-rh-trust"><h3 class="zx9-h3">Security for a grant-funded project</h3>' +
+        renderTrustRow(['soc2', 'hipaa'], { href: '/security' }) +
+        '<p class="zx9-body">' + SITE_FACTS.compliance.soc2.prose + '. ' + SITE_FACTS.compliance.hitrust.prose + '.</p>' +
+        '<div class="zx9-actions">' + renderButton('See integrations', '/integrations', { variant: 'secondary' }) + '</div></div>',
+      { ratio: '7-5', className: 'zx-rh-interop__grid' }));
+
+    // 8. Partnership and grant implementation support: who does what, the disclaimer, how a partnership runs
+    var steps = [['Discovery', 'Your goals, your state’s program and timeline, and where Zynix fits.'],
+      ['Proposal support', 'A technical approach, an implementation plan and pricing for your team to use.'],
+      ['Implementation', 'If your project goes ahead: integration, care plans, outreach and training, on the plan you submitted.'],
+      ['Measure and report', 'Agreed measures tracked from day one, with the data for the reports you owe.']];
+    var grant = zxPilSection('grant-support', 'zx-rh-grant', zxPilHead('grant-support', 'Partnership and grant implementation support', 'We support your proposal. You lead the application.',
+        'Zynix works with eligible organizations as a technology and implementation partner. The roles stay clear from the first call.', null, true) +
+      '<div class="zx-rh-roles">' +
+        '<div class="zx-rh-roles__col zx-rh-roles__col--zynix"><h3 class="zx9-h3">What Zynix provides</h3>' + zxRhList([
+          'A technical approach and solution description your team can adapt',
+          'An implementation plan, timeline and staffing assumptions',
+          'Integration scoping for your EHR, ADT feeds and data',
+          'Pricing for the technology lines of your budget',
+          'Security documents: SOC 2 Type II report on request and a BAA',
+          'Measures to track, and the data for your reports',
+          'Configuration, training and go-live support'], 'zx-rh-roles__list') + '</div>' +
+        '<div class="zx-rh-roles__col zx-rh-roles__col--you"><h3 class="zx9-h3">What your organization owns</h3>' + zxRhList([
+          'Confirming eligibility, your state’s process and its deadlines',
+          'Writing, signing and submitting the application',
+          'The budget, any match, and procurement under state and federal rules',
+          'Program staffing and every clinical decision',
+          'Compliance and reporting to the state or funding agency'], 'zx-rh-roles__list') + '</div>' +
+      '</div>' +
+      '<p class="zx-rh-note" role="note"><strong>Please note:</strong> Zynix doesn’t apply for, administer or award grant funding. Working with Zynix doesn’t guarantee eligibility, an award or any amount of funding; those decisions rest with the state and the funding agency.</p>' +
+      '<ol class="zx-rh-steps" role="list">' + steps.map(function (s, i) {
+        return '<li class="zx-rh-steps__item"><span class="zx-rh-steps__n" aria-hidden="true">' + zx9Num(i + 1) + '</span><h3 class="zx-rh-steps__title">' + s[0] +
+          '</h3><p class="zx-rh-steps__body">' + s[1] + '</p></li>';
+      }).join('') + '</ol>');
+
+    // 9. Verified outcomes: registry numbers and the customer logo row only
+    var proof = zxPilSection('outcomes', 'zx9-section--compact zx-pil-programs zx-rh-proof', renderSplit(
+      zxPilHead('outcomes', 'Verified outcomes', 'What we can show today', 'We publish only results our customers have confirmed. Ask us for references that match your setting.') +
+        '<div class="zx9-actions">' + renderButton('Read customer stories', '/resources-case-studies', { variant: 'secondary' }) + '</div>',
+      renderV9Proof() + renderLogoRow(null, { id: 'rh-logos', max: 6, label: 'Used by ACOs, health plans and provider organizations' }),
+      { ratio: '5-7', center: true, className: 'zx-pil-programs__grid' }));
+
+    // 10. FAQ (.zynix-faq-item feeds the FAQPage JSON-LD) and go deeper, side by side
+    var faq = [
+      { q: 'Can Zynix apply for Rural Health Transformation Program funding?',
+        a: 'No. CMS awards the funding to states, and each state decides on subawards and contracts under its own process. Zynix works with eligible organizations as a technology and implementation partner: we help describe the technical approach, plan the implementation and price the technology. Your organization prepares and submits any application.' },
+      { q: 'Does partnering with Zynix guarantee funding?',
+        a: 'No. Working with Zynix doesn’t guarantee eligibility, an award or any amount of funding. Those decisions rest with the state and the funding agency. What we commit to is the work: a clear technical approach, a realistic implementation plan and support if your project goes ahead.' },
+      { q: 'Which uses of Rural Health Transformation funds can Zynix support?',
+        a: 'States choose at least three approved uses. Zynix fits most naturally in plans for technology-enabled care, consumer-facing tools for chronic disease, IT advances and innovative care models, including value-based care. Your state decides what it funds and how it scores each initiative.' },
+      { q: 'Do we need a full EHR integration to start?',
+        a: 'Not always. Zynix connects to ' + e.line + ' and works with HL7 v2 ADT messages, FHIR and C-CDA. Where an interface isn’t ready yet, work can start from secure file exchange while the integration is built, so outreach and care plans don’t wait for it.' }
+    ];
+    var deeper = { deeper: ['/audience-segments/fqhcs', '/ai-patient-engagement', '/integrations'], deeperText: {} };
+    var more = '<div class="zx9-section zx9-band--tint zx-pil-more"><div class="zynix-container zx-pil-more__grid">' +
+      '<section class="zx-pil-faq" id="faq" aria-labelledby="faq-title">' + zxPilHead('faq', null, 'Common questions', null) +
+        renderFaqList(faq, { idPrefix: 'rh-faq' }) + '</section>' +
+      '<section class="zx-pil-deeper" id="go-deeper" aria-labelledby="go-deeper-title">' + zxPilHead('go-deeper', null, 'Go deeper', null) +
+        zxPilDeeper(deeper).replace('<ul class="zx-pil-deeper__list" role="list">', '<ul class="zx-pil-deeper__list" role="list"><li><a class="zx-pil-deeper__link" href="/blog-posts/rural-health-transformation-program-care-capacity">' +
+          '<span class="zx-pil-deeper__icon" aria-hidden="true">' + zxIcon('book') + '</span><span class="zx-pil-deeper__text"><span class="zx-pil-deeper__name">Turning rural funding into care capacity</span>' +
+          '<span class="zx-pil-deeper__desc">Insight by Jay Chowdappa, MD</span></span><span class="zx-pil-deeper__arrow" aria-hidden="true">→</span></a></li>') + '</section>' +
+      '</div></div>';
+
+    // 11. The inquiry form, then 12. the closing CTA
+    var partner = zxPilSection('partner', 'zx-rh-partner', zxRhForm());
+    var cta = renderV9Cta({ title: 'Turn rural funding into <span class="zx9-grad-text">care capacity</span>',
+      lead: 'A 30-minute conversation with our team about your goals and your state’s program, with no commitment.',
+      primary: { label: 'Schedule a partnership discussion', href: '#partner' }, secondary: { label: 'Book 30 minutes', href: SITE_FACTS.demo.href } });
+
+    return '<div class="zx-pil zx-rh">' + hero + need + program + solutions + engage + risk + interop + grant + proof + more + partner + cta + '</div>' + renderFooter();
+  }
+
+  // The inquiry form's submit (initPage calls it on every page; a no-op without #zx-rh-form). The browser's constraints and
+  // initFieldValidation run first, so this runs only on a valid form.
+  function initRuralHealthForm(root) {
+    var f = (root || document).querySelector('#zx-rh-form');
+    if (!f || f.__zxRh) return;
+    f.__zxRh = true;
+    var q = new URLSearchParams(location.search), test = q.get('test') === '1', tag = test ? '[TEST] ' : '';
+    var v = function (n) { var el = f.elements[n]; return el && typeof el.value === 'string' ? el.value.trim() : ''; };
+    var label = function (n) { var el = f.elements[n]; return el && el.selectedIndex > 0 ? el.options[el.selectedIndex].text : ''; };
+    var done = function () {
+      f.innerHTML = '<div class="zx-co-form__done" role="status" tabindex="-1"><p class="zx-co-form__done-title">Thanks. Your request is in.</p>' +
+        '<p>We reply by email, usually within one business day, to set up the discussion.</p></div>';
+      var s = f.querySelector('.zx-co-form__done'); if (s) s.focus();
+    };
+    f.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var b = f.querySelector('[type=submit]');
+      if (!b || b.disabled) return;
+      if (v('website')) { done(); return; }   // honeypot
+      var utm = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].map(function (k) { return q.get(k) ? k.slice(4) + '=' + q.get(k) : ''; }).filter(Boolean).join(', ');
+      var ref = document.referrer && document.referrer.split('/')[2];
+      var msg = [tag + RH.page, 'Campaign: ' + RH.campaign, 'Role: ' + v('jobtitle'), 'Organization type: ' + label('orgtype'), 'State: ' + v('state'),
+        'Program of interest: ' + label('program'), 'Stage: ' + (label('stage') || 'Not given'), 'Partnership requirements: ' + (v('message') || 'Not given'),
+        'Source: ' + RH.path + (utm ? ' (' + utm + ')' : '') + (ref && ref !== location.host ? ', referrer ' + ref : '')].join('\n');
+      var base = [['firstname', v('firstname')], ['lastname', v('lastname')], ['email', v('email')], ['phone', v('phone')], ['company', v('company')],
+        ['healthcare_segment', RH.seg[v('orgtype')] || 'Other'], ['message', msg], ['sms_consent', 'No']];
+      var extra = [['jobtitle', v('jobtitle')], ['state', v('state')], ['hubspot_owner_id', RH.owner]];
+      var hutk = (document.cookie.match(/(?:^|;\s*)hubspotutk=([^;]+)/) || [])[1];
+      var post = function (fields) {
+        var context = { pageUri: location.href, pageName: tag + RH.page };
+        if (hutk) context.hutk = hutk;
+        return fetch('https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3', { method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fields: fields.filter(function (p) { return p[1]; }).map(function (p) { return { name: p[0], value: p[1] }; }), context: context }) })
+          .then(function (r) { if (!r.ok) throw new Error('HubSpot ' + r.status); });
+      };
+      var err = f.querySelector('.zx-form-err');
+      if (err) err.parentNode.removeChild(err);
+      b.disabled = true; b.classList.add('is-loading'); b.textContent = 'Sending…';
+      post(base.concat(extra))
+        .catch(function () { return post(base); })   // a field HubSpot refuses must never lose the lead: retry with the /contact fields
+        .then(function () {
+          if (!test && window.gtag) window.gtag('event', 'generate_lead', { form_name: 'rural_health_grants', lead_source: RH.campaign,
+            org_type: v('orgtype'), program: v('program'), state: v('state') });
+          done();
+        }, function () {
+          b.disabled = false; b.classList.remove('is-loading'); b.textContent = 'Request a discussion';
+          var m = document.createElement('p'); m.className = 'zx-form-err'; m.setAttribute('role', 'alert');
+          m.innerHTML = 'We couldn’t send that. Please try again, or email <a href="mailto:info@zynix.ai">info@zynix.ai</a>.';
+          b.parentNode.insertBefore(m, b.nextSibling);
+        });
+    });
+  }
+  // ==== ZX:END rural ====
 
   // ── PAGE: AI Agents ──
   function renderAIAgents() {
@@ -11166,6 +11467,8 @@ function renderDataAnalyticsV7() {
     '/predictive-risk': function () { return renderPillarPage('predictive-risk'); },
     '/embedded-care-management': function () { return renderPillarPage('embedded-care-management'); },
     '/ai-patient-engagement': function () { return renderPillarPage('ai-patient-engagement'); },
+    // Rural Health & Grants (owner RH; renderRuralHealthPage in the `rural` block)
+    '/rural-health': renderRuralHealthPage,
     // V7: AI Agents
     '/agents': renderAgentsHub,
     '/agents/chronic-care-management': renderChronicCareAgent,
@@ -13730,6 +14033,7 @@ function renderDataAnalyticsV7() {
       // FAQ and other disclosures (native <button>s; hidden-attribute panels; legacy .open markup still works)
       initDisclosures(document);
       initV9(document);   // v9 components (loop highlight, ARIA tabs); a no-op on pages without v9 markup
+      initRuralHealthForm(document);   // the /rural-health inquiry form; a no-op elsewhere
       // renderField forms (/contact): text errors with aria-invalid and aria-describedby instead of the browser's bubbles
       Array.prototype.forEach.call(document.querySelectorAll('form'), function(f) { if (f.querySelector('.zynix-field__error')) initFieldValidation(f); });
       initFilters(document);   // shared filter chip groups (renderFilter); a no-op on pages without one

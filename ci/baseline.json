@@ -66,13 +66,13 @@
   "bannedStrings": {},
   "weight": {
     "ceilings": {
-      "cssBr4": 69459,
-      "totalBr4": 410619,
+      "cssBr4": 70549,
+      "totalBr4": 419673,
       "cssImports": 0
     },
     "builtCeilings": {
-      "totalBr4": 338285,
-      "cssBr4": 48799
+      "totalBr4": 345192,
+      "cssBr4": 49459
     },
     "targets": {
       "cssBr4": 30720,
@@ -240,6 +240,33 @@
           }
         },
         "reason": "Privacy Policy section 5 now describes cookies, analytics and advertising (consent layer live 2026-10-20): +~250 B br4 of required legal text on /privacy-policy (Gautamdev to approve with the PR)."
+      },
+      {
+        "date": "2026-10-26",
+        "commit": "40901ec",
+        "from": {
+          "ceilings": {
+            "cssBr4": 69459,
+            "totalBr4": 410619,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 338285,
+            "cssBr4": 48799
+          }
+        },
+        "to": {
+          "ceilings": {
+            "cssBr4": 70549,
+            "totalBr4": 419673,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 345192,
+            "cssBr4": 49459
+          }
+        },
+        "reason": "PR rural-health (2026-10-26): new /rural-health page (Rural Health & Grants, requested by Jay Chowdappa MD), JS block rural + CSS block page:rural; +4.9 KB br4 on the deploy build"
       }
     ]
   },
