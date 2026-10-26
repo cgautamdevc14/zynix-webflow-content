@@ -6,7 +6,7 @@
 > progression, utilization), the Embedded Care Management Platform and AI Patient Engagement. It is built for ACOs,
 > MSOs/IPAs and physician groups, Medicare Advantage health plans, FQHCs and hospital systems.
 
-Last updated: 2026-10-21
+Last updated: 2026-10-26
 
 Key facts (as of September 2026, from Zynix):
 - 1M+ value-based care patients onboarded; customer organizations in 30 states.
@@ -56,6 +56,7 @@ Key facts (as of September 2026, from Zynix):
 - [AI for Medicare Advantage plans](https://www.zynix.ai/audience-segments/health-plans): Member outreach for HEDIS gaps, medication adherence and post-discharge follow-up, with your care managers setting the scripts and taking escalations.
 - [AI for health systems: post-discharge care](https://www.zynix.ai/audience-segments/health-systems): ADT-triggered outreach, follow-up scheduling, after-hours access and ambient documentation that work with your EHR across hospitals and clinics.
 - [AI for FQHCs and community health](https://www.zynix.ai/audience-segments/fqhcs): Multilingual outreach, after-hours access and preventive screening follow-up for high-barrier populations, with care team escalation built in.
+- [Rural Health Transformation & Grants Partner](https://www.zynix.ai/rural-health): AI care coordination, predictive risk and patient outreach for rural hospitals, CAHs, clinics and FQHCs, plus proposal and implementation support for grants.
 - [AI for ambulatory surgery centers](https://www.zynix.ai/audience-segments/ascs): Referral intake, pre-procedure scheduling and post-op follow-up calls handled by agents, with your staff taking every exception.
 - [Solutions for value-based care organizations](https://www.zynix.ai/solutions): Workflows for ACOs, MSOs and IPAs, health plans, health systems and FQHCs: transitions of care, risk adjustment, quality, chronic care and access.
 
