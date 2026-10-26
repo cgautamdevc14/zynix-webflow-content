@@ -3376,7 +3376,7 @@
     path: '/rural-health',
     page: 'Rural Health & Grants | Partnership inquiry',   // HubSpot pageName: the conversion's name
     campaign: 'Rural Health & Grants',
-    owner: '169953981',   // HubSpot contact owner for these leads (m.mccabe@zynix.ai) [VERIFY] Gautamdev
+    owner: '169953981',   // HubSpot contact owner for these leads: Michael McCabe, m.mccabe@zynix.ai (Gautamdev, 2026-10-26)
     checked: 'October 26, 2026',
     sources: [
       ['Medicaid.gov: Rural Health Transformation Program', 'https://www.medicaid.gov/resources-for-states/rural-health'],
