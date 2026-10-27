@@ -3918,6 +3918,7 @@
     { id: 'news', name: 'Company news' }, { id: 'general', name: 'Healthcare AI' }
   ];
   var ZX_RES_POSTS = [
+    ['ai-patient-outreach-fqhcs', '2026-10-27', 'ops', 'AI Patient Outreach for FQHCs: What It Can Do, What Stays With Your Team, and How to Start', 'AI patient outreach for FQHCs: what voice and text agents can handle, what stays with your care team, and how to start with one workflow and UDS measures.'],
     ['navina-alternatives-acos', '2026-10-20', 'compare', 'Navina Alternatives for ACOs and Value-Based Care Groups in 2026', 'Navina alternatives for ACOs: what Navina, Innovaccer, Arcadia, Health Catalyst, Guidehealth and Zynix AI are each known for, a checklist for choosing, and which gap each one fits.'],
     ['ai-for-value-based-care', '2026-10-12', 'general', 'AI for Value-Based Care: What It Actually Does', 'What AI for value-based care actually does: unify claims, EHR and ADT data, predict readmission, mortality, disease progression and utilization early, rank care gaps and run routine outreach, with clinicians keeping every clinical decision.'],
     ['pre-visit-planning-value-based-care', '2026-10-09', 'quality', 'Pre-visit planning for value-based care: what to prepare', 'A pre-visit planning checklist for value-based care: what to prepare for each visit, who owns it, what the clinician summary should show, and the CMS rules that shape it.'],
