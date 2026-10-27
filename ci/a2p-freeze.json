@@ -6,7 +6,7 @@
   "functions": {
     "renderSMSProgram": "fc361125b8d4cccefa9867b928b051aa6239adb5e8f2fac86f04a2b3eeb8a88e",
     "renderSMSConsent": "6df2269e4c899df71026e630ea099dc471e9b8f357bdeeb849f1edd60685e9a2",
-    "renderPrivacyV7": "2f0aa4891b1542db2cd8a27b4d18dd631cbb7e1669aea348a0f1271d61b42eb3",
+    "renderPrivacyV7": "36cf35885f8cc46cbbfddd05ab7d314338df96ef8f33361f4934e8146c817b55",
     "renderTermsV7": "c578f5d5771ef575ad97a20df4dc6abd9fd1ff0992832e11803f3330642af226"
   },
   "to_unfreeze": "After Twilio's verdict, set active to false in its own pull request (or update a hash deliberately, with the matching native Webflow page and the registered campaign).",
@@ -52,6 +52,12 @@
       "commit": "privacy-cookies-ads",
       "date": "2026-10-19",
       "why": "Cookie consent layer went live 2026-10-20 (US opt-out, GPC, Google Ads, LinkedIn Insight Tag, ChatGPT Ads pixel, Clay). Section 5 said we run no advertising; it is now \"Cookies, Analytics and Advertising\" and describes the tools, the banner and Your Privacy Choices link, GPC, the ad-free SMS/legal pages and the zx_consent cookie. Section 7: \"SOC 2 Type II certification\" -> \"SOC 2 Type II audit\" (the dated banned-string exemption lapsed with this change; DECISIONS 17). Last Updated -> October 19, 2026. No SMS wording changed; section numbers unchanged; the native Webflow page carries the same text."
+    },
+    {
+      "function": "renderPrivacyV7",
+      "commit": "privacy-hashed-leads",
+      "date": "2026-10-27",
+      "why": "ChatGPT Ads pixel 1.0.4 sends OpenAI SHA-256 hashes of the email address and name from the demo and Rural Health discussion forms (never phone numbers, never the SMS opt-in form or newsletter signup), for conversion matching. Section 5 gains a 'Hashed contact details' paragraph saying so; Last Updated -> October 27, 2026. Phone numbers are excluded on purpose so Section 4's carrier line ('No mobile information will be shared with third parties or affiliates for marketing or promotional purposes') stays true. No SMS wording changed; section numbers unchanged; the native Webflow page carries the same text."
     }
   ]
 }
