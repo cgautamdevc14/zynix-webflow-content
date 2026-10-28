@@ -3709,3 +3709,104 @@ html:not(.wf-native) {
 .zx-rh-next .zx9-note a { color:var(--zx9-blue-600); }
 .zx-rh-hp { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }
 /* ════ ZX:END page:rural ════ */
+
+/* ════ ZX:BEGIN native:blog (owner LA) ════ */
+/* CMS blog posts (/blog-posts/*) are rendered by Webflow: html.wf-native, the bundle stands down, and none of the v9 tokens
+   or chrome reach them. The template had fallen back to Arial 14px on 1,150px lines, a text "Zynix AI" logo, a hero image
+   squeezed to 60% (Webflow's .w-richtext figure default), a dark-blue "Explore More Insights" heading on a dark-blue band and
+   a footer whose fifth column wrapped onto its own row. These rules restyle the template's own markup (.navbar,
+   .hero-section, .section > .zx-post-body, .cta-section, .footer) to the site's look. Every selector starts with
+   html.wf-native:has(.zx-post-body), so no other native page changes. v9 values are written out because the v9 tokens are
+   only declared on bundle pages. Text pairs pass AA. 2026-10-28. */
+html.wf-native:has(.zx-post-body) body { margin:0; background-color:#FFFFFF; color:#1A1F2E; font-family:'Funnel Sans', 'Funnel Sans Fallback', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+html.wf-native:has(.zx-post-body) :is(h1, h2, h3, h4, p, li, a, em, strong, td, th, blockquote, button) { font-family:inherit; }
+html.wf-native:has(.zx-post-body) .container { box-sizing:border-box; }
+
+/* ── Nav: the logo instead of the words, v9 link and button styles, the dropdowns open on hover and keyboard focus ── */
+html.wf-native:has(.zx-post-body) .navbar { position:sticky; top:0; z-index:100; padding:0; border-bottom:1px solid rgba(10,20,48,.08); background-color:rgba(255,255,255,.94); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); }
+html.wf-native:has(.zx-post-body) .nav-container { box-sizing:border-box; max-width:1200px; min-height:64px; margin:0 auto; padding:0 24px; gap:16px; }
+html.wf-native:has(.zx-post-body) .nav-container > .nav-link { flex:none; display:block; width:84px; height:32px; padding:0; overflow:hidden; white-space:nowrap; text-indent:110%; color:transparent;
+  background:url(https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@main/images/brand/zynix-logo-color.png) no-repeat left center / contain; }
+/* the nav items reuse Webflow class names (inline-div-3, -6) that other pages style as 2-column grids, which pushed them apart */
+@media (min-width:992px) {
+  html.wf-native:has(.zx-post-body) #zy-nav-links { justify-content:flex-end; gap:4px; }
+  html.wf-native:has(.zx-post-body) .zy-nav-item { display:block; max-width:none; margin:0; }
+}
+html.wf-native:has(.zx-post-body) .zy-nav-item > a { gap:6px; padding:10px 12px; border-radius:8px; color:#1A1F2E; font-size:15px; font-weight:500; }
+html.wf-native:has(.zx-post-body) .zy-nav-item > a:hover { background-color:#F4F7FF; color:#2556D9; }
+html.wf-native:has(.zx-post-body) .zy-nav-item:is(:hover, :focus-within) > .zy-dd { display:block; }
+html.wf-native:has(.zx-post-body) .zy-dd { padding:8px; border:1px solid rgba(10,20,48,.08); border-radius:12px; box-shadow:0 12px 32px rgba(10,20,48,.12); }
+html.wf-native:has(.zx-post-body) .zy-dd::before { content:""; position:absolute; left:0; right:0; top:-12px; height:12px; }
+html.wf-native:has(.zx-post-body) .zy-dd > a { padding:9px 12px; border-radius:8px; color:#1A1F2E; font-size:14px; }
+html.wf-native:has(.zx-post-body) .zy-dd > a:hover { background-color:#F4F7FF; color:#2556D9; }
+html.wf-native:has(.zx-post-body) #zy-nav-links > div:last-child > a:first-child { padding:10px 12px; color:#1A1F2E; font-size:15px; font-weight:500; }
+html.wf-native:has(.zx-post-body) #zy-nav-links > div:last-child > a:last-child { padding:11px 18px; border-radius:8px; background-color:#C44B16; color:#FFFFFF; font-size:15px; font-weight:600; }
+html.wf-native:has(.zx-post-body) #zy-nav-links > div:last-child > a:last-child:hover { background-color:#A63E11; }
+html.wf-native:has(.zx-post-body) .navbar a:focus-visible { outline:2px solid #2F6BFF; outline-offset:2px; }
+
+/* ── Hero: the ink band, the title and date aligned to the article column ── */
+html.wf-native:has(.zx-post-body) .hero-section { padding:clamp(48px, 32px + 4vw, 96px) 0 clamp(40px, 28px + 3vw, 72px); text-align:left; background-color:#0A1430;
+  background-image:radial-gradient(1100px 520px at 85% -10%, rgba(47,107,255,.42), transparent 60%), linear-gradient(160deg, #0A1430 0%, #11214D 100%); }
+html.wf-native:has(.zx-post-body) :is(.hero-section, .section) > .container { max-width:768px; padding:0 24px; }
+html.wf-native:has(.zx-post-body) .hero-section > .container::before { content:"Insights"; display:inline-block; margin:0 0 18px; padding:5px 12px; border:1px solid rgba(185,196,228,.35); border-radius:999px; color:#B9C4E4; font-size:13px; font-weight:600; letter-spacing:.04em; line-height:1.2; }
+html.wf-native:has(.zx-post-body) .hero-title { max-width:none; margin:0 0 16px; color:#F4F7FF; font-size:clamp(32px, 22px + 2.4vw, 50px); font-weight:700; line-height:1.1; letter-spacing:-.02em; text-align:left; text-wrap:balance; }
+html.wf-native:has(.zx-post-body) .hero-subtitle { max-width:none; margin:0; color:#B9C4E4; font-size:15px; line-height:1.5; text-align:left; }
+
+/* ── The article: a 720px measure, 18px type, v9 headings, lists, links, tables and quotes ── */
+html.wf-native:has(.zx-post-body) .hero-section + .section { padding:clamp(36px, 24px + 3vw, 64px) 0 clamp(56px, 40px + 3vw, 96px); }
+html.wf-native:has(.zx-post-body) .zx-post-body { color:#2B3245; font-size:18px; line-height:1.7; overflow-wrap:break-word; }
+html.wf-native:has(.zx-post-body) .zx-post-body > :first-child { margin-top:0; }
+html.wf-native:has(.zx-post-body) .zx-post-body :is(p, ul, ol) { margin:0 0 1.15em; }
+html.wf-native:has(.zx-post-body) .zx-post-body :is(ul, ol) { padding-left:1.35em; }
+html.wf-native:has(.zx-post-body) .zx-post-body li { margin:0 0 .5em; padding-left:.2em; }
+html.wf-native:has(.zx-post-body) .zx-post-body li::marker { color:#2556D9; font-weight:600; }
+html.wf-native:has(.zx-post-body) .zx-post-body h2 { margin:2.1em 0 .6em; color:#0A1430; font-size:clamp(24px, 20px + 1vw, 30px); font-weight:700; line-height:1.25; letter-spacing:-.01em; }
+html.wf-native:has(.zx-post-body) .zx-post-body h3 { margin:1.7em 0 .5em; color:#0A1430; font-size:21px; font-weight:600; line-height:1.35; }
+html.wf-native:has(.zx-post-body) .zx-post-body h4 { margin:1.5em 0 .4em; color:#0A1430; font-size:18px; font-weight:600; line-height:1.4; }
+html.wf-native:has(.zx-post-body) .zx-post-body strong { color:#1A1F2E; font-weight:600; }
+html.wf-native:has(.zx-post-body) .zx-post-body a { color:#2556D9; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px; }
+html.wf-native:has(.zx-post-body) .zx-post-body a:hover { color:#20449B; }
+html.wf-native:has(.zx-post-body) .zx-post-body figure { width:100%; max-width:100%; margin:0 0 28px; }
+html.wf-native:has(.zx-post-body) .zx-post-body figure img { display:block; width:100%; height:auto; border-radius:16px; }
+html.wf-native:has(.zx-post-body) .zx-post-body > :is(p:first-child, figure:first-child + p) > em:first-child { display:block; padding-bottom:20px; border-bottom:1px solid rgba(10,20,48,.08); color:#4A5368; font-size:15px; font-style:normal; line-height:1.5; }
+html.wf-native:has(.zx-post-body) .zx-post-body blockquote { margin:1.6em 0; padding:4px 0 4px 20px; border-left:4px solid #F26B2C; color:#1A1F2E; font-size:20px; line-height:1.55; }
+html.wf-native:has(.zx-post-body) .zx-post-body .rich-text-table-wrapper { margin:28px 0; border:1px solid rgba(10,20,48,.08); border-radius:12px; }
+html.wf-native:has(.zx-post-body) .zx-post-body table { margin:0 !important; font-size:16px; line-height:1.5; }
+html.wf-native:has(.zx-post-body) .zx-post-body th { background-color:#F4F7FF; color:#0A1430; }
+html.wf-native:has(.zx-post-body) .zx-post-body tr:last-child > td { border-bottom:0 !important; }
+/* the closing call-to-action panel in each post's body (inline styles from the CMS, hence !important) */
+html.wf-native:has(.zx-post-body) .zx-post-body > div[style*="text-align:center"] { margin-top:56px !important; padding:clamp(24px, 16px + 2vw, 40px) !important; border:1px solid rgba(47,107,255,.14); border-radius:16px !important; background:linear-gradient(180deg, #F4F7FF 0, #FFFFFF 100%) !important; }
+html.wf-native:has(.zx-post-body) .zx-post-body > div[style*="text-align:center"] h3 { margin:0 0 10px !important; font-size:24px; }
+html.wf-native:has(.zx-post-body) .zx-post-body a[style*="background"] { padding:14px 24px !important; background:#C44B16 !important; color:#FFFFFF !important; text-decoration:none !important; }
+html.wf-native:has(.zx-post-body) .zx-post-body a[style*="background"]:hover { background:#A63E11 !important; }
+
+/* ── "Explore More Insights": readable on the ink band ── */
+html.wf-native:has(.zx-post-body) .cta-section { padding:clamp(48px, 32px + 3vw, 80px) 0; background-color:#0A1430; background-image:radial-gradient(900px 420px at 15% 120%, rgba(242,107,44,.22), transparent 60%), linear-gradient(160deg, #0A1430 0%, #11214D 100%); }
+html.wf-native:has(.zx-post-body) .cta-section .section-title { margin:0 0 20px; color:#F4F7FF; font-size:clamp(24px, 20px + 1vw, 32px); }
+html.wf-native:has(.zx-post-body) .cta-section .btn-white { padding:13px 26px; border-radius:8px; color:#0A1430; font-size:15px; }
+
+/* ── Footer: brand column + four link columns on one row, the inverse logo, no underlines ── */
+html.wf-native:has(.zx-post-body) .footer { padding:clamp(48px, 32px + 3vw, 72px) 0 32px; background-color:#060B1A; color:#B9C4E4; }
+html.wf-native:has(.zx-post-body) .footer > .container { max-width:1200px; padding:0 24px; }
+html.wf-native:has(.zx-post-body) .footer-grid { grid-template-columns:minmax(0,1.5fr) repeat(4, minmax(0,1fr)); gap:32px; margin-bottom:40px; }
+html.wf-native:has(.zx-post-body) .footer-grid > div:first-child > h3 { width:84px; height:32px; margin:0 0 16px; overflow:hidden; white-space:nowrap; text-indent:110%; color:transparent;
+  background:url(https://cdn.jsdelivr.net/gh/cgautamdevc14/zynix-webflow-content@main/images/brand/zynix-logo-inverse.png) no-repeat left center / contain; }
+html.wf-native:has(.zx-post-body) .footer .card-text { color:#B9C4E4; font-size:14px; line-height:1.6; }
+html.wf-native:has(.zx-post-body) .footer-grid > div:first-child > .card-text { max-width:34ch; }
+html.wf-native:has(.zx-post-body) .zx-footer-col { display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+html.wf-native:has(.zx-post-body) .zx-footer-col a { margin:0; padding:0; text-decoration:none; }
+html.wf-native:has(.zx-post-body) .zx-footer-col .zx-choices-link { margin-left:0 !important; }   /* the consent script indents it inline */
+html.wf-native:has(.zx-post-body) .zx-footer-col a:hover { color:#FFFFFF; text-decoration:underline; text-underline-offset:3px; }
+html.wf-native:has(.zx-post-body) .zx-footer-label { margin:0 0 6px; color:#F4F7FF; font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+html.wf-native:has(.zx-post-body) .footer > .container > p.card-text { margin:0; padding-top:24px; border-top:1px solid rgba(185,196,228,.16); font-size:13px; }
+
+@media (max-width:991.98px) {
+  html.wf-native:has(.zx-post-body) .footer-grid { grid-template-columns:repeat(2, minmax(0,1fr)); }
+  html.wf-native:has(.zx-post-body) .footer-grid > div:first-child { grid-column:1 / -1; }
+}
+@media (max-width:599.98px) {
+  html.wf-native:has(.zx-post-body) .zx-post-body { font-size:17px; }
+  html.wf-native:has(.zx-post-body) #zy-nav-links > div:last-child > a:last-child { padding:10px 14px; font-size:14px; }
+  html.wf-native:has(.zx-post-body) .footer-grid { gap:28px 20px; }
+}
+/* ════ ZX:END native:blog ════ */
