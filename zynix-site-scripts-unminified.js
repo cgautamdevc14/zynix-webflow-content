@@ -3,23 +3,25 @@
  * Mega menu, 41 pages, full content from docs, Calendly CTAs.
  * Loaded externally from Webflow Footer custom code.
  */
-/* CD: production loads this file and the stylesheet from jsDelivr @main. jsDelivr tells browsers to
-   cache those URLs for 7 days, so revalidate both in the background (a 304 when nothing changed).
-   A returning visitor is then at most one page view behind a deploy. No-op for commit-pinned URLs. */
+/* CD: jsDelivr tells browsers to cache @main URLs for 7 days, so revalidate whichever of this file and the
+   stylesheet is loaded from @main in the background (a 304 when nothing changed). A returning visitor is then at
+   most one page view behind a deploy. Commit-pinned URLs are skipped; the JS has been pinned since 2026-10-11 while
+   the stylesheet stayed on @main, and returning visitors kept a week-old stylesheet (2026-10-28, /rural-health). */
 (function () {
   try {
     var cs = document.currentScript, js = cs && cs.src;
-    if (!js || js.indexOf('@main/') === -1 || !window.fetch) return;
+    var css = document.querySelector('link[rel="stylesheet"][href*="zynix-site-styles.deployed.css"]');
+    var urls = [];
+    if (js && js.indexOf('@main/') !== -1) urls.push(js);
+    if (css && css.href.indexOf('@main/') !== -1) urls.push(css.href);
+    if (!urls.length || !window.fetch) return;
     var KEY = 'zx_asset_check', now = Date.now(), last = 0;
     try { last = +localStorage.getItem(KEY) || 0; } catch (e) {}
     if (now - last < 6e5) return;
     try { localStorage.setItem(KEY, String(now)); } catch (e) {}
-    var css = document.querySelector('link[rel="stylesheet"][href*="zynix-site-styles.deployed.css"]');
-    var urls = [js];
-    if (css && css.href.indexOf('@main/') !== -1) urls.push(css.href);
     var go = function () {
       urls.forEach(function (u) {
-        try { fetch(u, { cache: 'no-cache', mode: 'no-cors', credentials: 'omit' }).catch(function () {}); } catch (e) {}
+        try { fetch(u, { cache: 'no-cache', mode: 'no-cors', credentials: 'include' }).catch(function () {}); } catch (e) {}
       });
     };
     if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 8000 }); else setTimeout(go, 4000);

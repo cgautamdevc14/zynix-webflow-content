@@ -66,13 +66,13 @@
   "bannedStrings": {},
   "weight": {
     "ceilings": {
-      "cssBr4": 70549,
-      "totalBr4": 419673,
+      "cssBr4": 73016,
+      "totalBr4": 422100,
       "cssImports": 0
     },
     "builtCeilings": {
-      "totalBr4": 345192,
-      "cssBr4": 49459
+      "totalBr4": 346813,
+      "cssBr4": 51158
     },
     "targets": {
       "cssBr4": 30720,
@@ -267,6 +267,33 @@
           }
         },
         "reason": "PR rural-health (2026-10-26): new /rural-health page (Rural Health & Grants, requested by Jay Chowdappa MD), JS block rural + CSS block page:rural; +4.9 KB br4 on the deploy build"
+      },
+      {
+        "date": "2026-10-28",
+        "commit": "a9db2f7",
+        "from": {
+          "ceilings": {
+            "cssBr4": 70549,
+            "totalBr4": 419673,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 345192,
+            "cssBr4": 49459
+          }
+        },
+        "to": {
+          "ceilings": {
+            "cssBr4": 73016,
+            "totalBr4": 422100,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 346813,
+            "cssBr4": 51158
+          }
+        },
+        "reason": "Layout audit 2026-10-28: new CSS block native:blog restyles the Webflow-rendered blog post template (Arial 14px on 1,150px lines, text logo, unreadable CTA heading); +~1.4 KB br4 on the deploy build. Bundle: the background revalidation now also covers a @main stylesheet when the JS is SHA-pinned."
       }
     ]
   },
