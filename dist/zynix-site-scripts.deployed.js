@@ -1,4 +1,4 @@
-/* BUILT by ci/build.mjs v1 from zynix-site-scripts-unminified.js (sha256 d38107c3e61717ec): whitespace-only minification. Do not edit; edit zynix-site-scripts-unminified.js and run node ci/build.mjs. */
+/* BUILT by ci/build.mjs v1 from zynix-site-scripts-unminified.js (sha256 2ba535986e8b3853): whitespace-only minification. Do not edit; edit zynix-site-scripts-unminified.js and run node ci/build.mjs. */
 (function(){try{var cs=document.currentScript,js=cs&&cs.src;var css=document.querySelector('link[rel="stylesheet"][href*="zynix-site-styles.deployed.css"]');var urls=[];if(js&&js.indexOf('@main/')!==-1)urls.push(js);if(css&&css.href.indexOf('@main/')!==-1)urls.push(css.href);if(!urls.length||!window.fetch)return;var KEY='zx_asset_check',now=Date.now(),last=0;try{last=+localStorage.getItem(KEY)||0;}catch(e){}
 if(now-last<6e5)return;try{localStorage.setItem(KEY,String(now));}catch(e){}
 var go=function(){urls.forEach(function(u){try{fetch(u,{cache:'no-cache',mode:'no-cors',credentials:'include'}).catch(function(){});}catch(e){}});};if('requestIdleCallback'in window)requestIdleCallback(go,{timeout:8000});else setTimeout(go,4000);}catch(e){}})();(function(){'use strict';var __zxNative=location.pathname.replace(/\/$/,'').toLowerCase();if(window.__ZX_WF_NATIVE||__zxNative==='/blog-posts'||__zxNative.indexOf('/blog-posts/')===0){return;}
@@ -1506,7 +1506,7 @@ function renderSMSConsent(){var html='';html+='<section class="zynix-inner-hero"
 '</form></div>'+
 '</div></section>';html+=renderFooter();return html;}
 function renderPrivacyV7(){var html='';html+=renderInnerHero('ZYNIX INC. (D/B/A ZYNIX AI)','Privacy Policy','This policy explains how Zynix AI collects, uses, and protects information when you visit our website or contact us about our services.',IMG.hero,'Zynix AI Privacy Policy');html+='<section class="zynix-legal-section"><div class="zynix-container"><div class="zynix-legal-content">'+
-'<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> October 27, 2026</p>'+
+'<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> October 30, 2026</p>'+
 '<h2>1. Who This Policy Applies To</h2>'+
 '<p>This policy applies to:</p>'+
 '<ul>'+
@@ -1559,6 +1559,7 @@ function renderPrivacyV7(){var html='';html+=renderInnerHero('ZYNIX INC. (D/B/A 
 '<li>LinkedIn Insight Tag (LinkedIn)</li>'+
 '<li>ChatGPT Ads pixel (OpenAI)</li>'+
 '<li>Clay visitor identification (Clay), which may identify the company, and in some cases the business contact, associated with a website visit</li>'+
+'<li>Apollo website visitor tracking (Apollo.io), which may identify the company, and in some cases the business contact, associated with a website visit</li>'+
 '</ul>'+
 '<p>These providers may collect information such as your IP address, browser and device information, the pages you visit, and cookie or advertising identifiers, and they handle that information under their own privacy policies. We do not sell personal information for money. However, some US state privacy laws treat allowing advertising providers to collect information through their tags on our website as a \u201csale\u201d or \u201csharing\u201d of personal information.</p>'+
 '<p><strong>Hashed contact details.</strong> When you submit a demo or discussion request form on our website and Advertising is on, we send OpenAI a hashed version of the email address and name you entered, so OpenAI can tell us whether the request followed a click on one of our ChatGPT ads. Hashing (SHA-256) turns these details into a one-way code in your browser before they are sent, so OpenAI does not receive the original values. We do not send these details from our SMS opt-in form or our newsletter signup, and we do not send phone numbers.</p>'+
