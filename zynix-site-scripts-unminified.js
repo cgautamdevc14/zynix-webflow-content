@@ -8085,7 +8085,7 @@ function renderPrivacyV7() {
     IMG.hero, 'Zynix AI Privacy Policy');
 
   html += '<section class="zynix-legal-section"><div class="zynix-container"><div class="zynix-legal-content">' +
-    '<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> October 27, 2026</p>' +
+    '<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> October 30, 2026</p>' +
 
     '<h2>1. Who This Policy Applies To</h2>' +
     '<p>This policy applies to:</p>' +
@@ -8143,6 +8143,7 @@ function renderPrivacyV7() {
     '<li>LinkedIn Insight Tag (LinkedIn)</li>' +
     '<li>ChatGPT Ads pixel (OpenAI)</li>' +
     '<li>Clay visitor identification (Clay), which may identify the company, and in some cases the business contact, associated with a website visit</li>' +
+    '<li>Apollo website visitor tracking (Apollo.io), which may identify the company, and in some cases the business contact, associated with a website visit</li>' +
     '</ul>' +
     '<p>These providers may collect information such as your IP address, browser and device information, the pages you visit, and cookie or advertising identifiers, and they handle that information under their own privacy policies. We do not sell personal information for money. However, some US state privacy laws treat allowing advertising providers to collect information through their tags on our website as a \u201csale\u201d or \u201csharing\u201d of personal information.</p>' +
     '<p><strong>Hashed contact details.</strong> When you submit a demo or discussion request form on our website and Advertising is on, we send OpenAI a hashed version of the email address and name you entered, so OpenAI can tell us whether the request followed a click on one of our ChatGPT ads. Hashing (SHA-256) turns these details into a one-way code in your browser before they are sent, so OpenAI does not receive the original values. We do not send these details from our SMS opt-in form or our newsletter signup, and we do not send phone numbers.</p>' +
