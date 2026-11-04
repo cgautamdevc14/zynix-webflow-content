@@ -124,6 +124,9 @@
     'screenshots/zynpostdischarge.png': [1920, 1066], 'screenshots/zynschedule.png': [1920, 1066],
     'screenshots/zynscribe-extension.png': [1920, 1066], 'screenshots/zynscribe-mobile.png': [480, 1066],
     'screenshots/zynscribe-soap.png': [1920, 1066],
+    'screenshots/roles/priority-worklist.webp': [1200, 873], 'screenshots/roles/hcc-evidence.webp': [640, 1169],
+    'screenshots/roles/zynscribe-note.webp': [640, 1169], 'screenshots/roles/performance-by-care-manager.webp': [1200, 724],
+    'screenshots/roles/agent-call-log.webp': [1200, 681],   // paid-ad landing pages (block `roles`): the screen each ad shows
     // Legacy root images, still referenced through IMG (measured 2026-09-29). Sizes only, so frames
     // reserve their space; several are on the §2.9 blocked list and page streams replace them.
     'zynix-aco-dashboard.png': [806, 1600], 'zynix-provider-view.png': [1174, 1600], 'zynix-quality-measures.png': [916, 1200],
@@ -3661,6 +3664,218 @@
   }
   // ==== ZX:END rural ====
 
+  // ==== ZX:BEGIN roles (owner LP) ====
+  // Paid-ad landing pages, one per audience (Gautamdev 2026-11-04: "separate landing pages based on who lands on the website
+  // through ads"). Each page answers one ad's promise for one role: Meta role ads A–E, Meta Video 2, the Google "VBC & ACO
+  // platform" ad group and ChatGPT Ads 5/8 (map: zynix-webflow/ads-optimization/LANDING_PAGES_2026-11-04.md).
+  //   - noindex (PAGE_SEO), left out of NAV, the sitemap, llms.txt, LINK_NAMES and CROSS_LINKS, so they never compete with the
+  //     SEO pages they overlap; injectMegaMenu shows a light nav (logo + "Request a demo") on these paths.
+  //   - One primary CTA, the Calendly demo (SITE_FACTS.demo): the site script zynixbooking opens it on the page and fires GA4
+  //     generate_lead + ChatGPT lead_created on a booking; the visit's UTMs reach Calendly.
+  //   - Claims: the only figure is SITE_FACTS.stats.patients (1M+ VBC patients onboarded). Copy is reused from the live
+  //     product and use-case pages (UC07, UC19, /zynscribe, the pillars) and the ad copy in
+  //     ads-2026-10-30-meta-roles/META_ROLE_TARGETING_AND_ADS.md §4. No outcome percentages, no compliance claims, no customer
+  //     named. Screens are real product screens with sample data, labelled so; the hero screen is the one the ad shows.
+  var ZX_ROLE_PATHS = ['/for-care-managers', '/for-risk-adjustment', '/for-physicians', '/for-practice-administrators', '/for-aco-leaders'];
+  var ZX_SHOT = 'Product screen · sample data';
+  var ROLE_PAGES = {
+    '/for-care-managers': {
+      pillar: 'embedded-care-management', eyebrow: 'For care managers and care coordinators',
+      title: 'Know who to call first, every morning',
+      lead: 'Recent discharges without a follow-up visit, overdue wellness visits and rising-risk patients, ranked in one worklist. Zynix brings claims, EHR and ADT data together, and AI agents can make the routine follow-up calls.',
+      seo: { title: 'For care managers: one ranked worklist | Zynix AI',
+        desc: 'Care managers start each day with one ranked worklist of discharges, overdue wellness visits and rising-risk patients, and AI agents make the routine calls.' },
+      shot: { src: 'screenshots/roles/priority-worklist.webp', alt: 'Zynix priority patients worklist: recent discharges with no appointment and overdue wellness visits, with who made the last contact and how the call ended' },
+      work: { eyebrow: 'Your day with Zynix', title: 'From a ranked list to a closed loop',
+        lead: 'The repeatable outreach moves to agents and care plans, so your time goes to the patients who need a person.' },
+      cards: [
+        { icon: 'target', title: 'A ranked worklist each morning', body: 'Patients are ordered by need, from discharges with no follow-up booked to rising risk, with the reason each one is on the list.' },
+        { icon: 'hospital', title: 'Discharges caught early', body: 'An ADT discharge message opens a follow-up plan, so a hospital stay doesn’t wait for a claim to show up.' },
+        { icon: 'phone', title: 'Routine calls made by agents', body: 'Post-discharge check-ins, wellness visit reminders and scheduling run by voice and text, with clinical questions routed to you by rule.' },
+        { icon: 'clipboard', title: 'Care plans with an owner', body: 'TCM, CCM and wellness visit plans give every step an owner and a due date, and close only when the step is documented.' }],
+      screen: { eyebrow: 'Inside the platform', title: 'Your whole panel in one view',
+        src: 'screenshots/care-management.png', alt: 'Zynix care coordination view: attributed patients, active care plans, tasks and priority patients, filtered by cohort',
+        callouts: [
+          { title: 'Cohorts and programs', body: 'Filter by cohort, such as CHF, COPD or diabetes, or by program, such as transitional care.' },
+          { title: 'Who contacted the patient', body: 'Each row shows whether an agent or a team member made the last contact, and how the call ended.' },
+          { title: 'Outreach in one step', body: 'Select patients and hand the follow-up calls to an AI agent.' }] },
+      split: { title: 'Agents take the routine. You keep the judgment.', a: 'Agents handle', b: 'You own',
+        agents: ['Post-discharge check-in calls', 'Wellness visit, screening and care-gap reminders', 'Scheduling, reminders and no-show follow-up', 'Outreach in the patient’s language by voice and text'],
+        team: ['Clinical judgment and every clinical decision', 'The TCM interactive contact', 'Symptom questions, routed to you by rule', 'Patients the agents could not reach'] },
+      faq: [
+        { q: 'Do the agents replace care managers?', a: 'No. Agents take the repeatable outreach: reminders, scheduling and routine check-ins. Care managers keep the clinical work, make the TCM interactive contact and follow up with the patients the agents could not reach.' },
+        { q: 'Where does the worklist come from?', a: 'Zynix matches claims, EHR, ADT, lab and pharmacy data into one record per patient. The worklist is built from that record, so a recent discharge or an overdue wellness visit shows up without a manual report.' },
+        { q: 'Which programs can it run?', a: 'Transitional care management, chronic care management, annual wellness visits and care gap closure each run as a care plan, with the steps and escalation rules your team sets.' }],
+      cta: { title: 'See tomorrow’s worklist, <span class="zx9-grad-text">ranked</span>', lead: 'A 30-minute walkthrough with our team: the worklist, a post-discharge plan and an agent’s call, on sample data.' }
+    },
+    '/for-risk-adjustment': {
+      pillar: 'predictive-risk', eyebrow: 'For coding, quality and risk adjustment teams',
+      title: 'HCC gap closure, year-round',
+      lead: 'See each suspected condition with the claim, lab or note behind it before the visit. Providers accept, reject or hold each gap in one step, so closing gaps happens all year instead of in a Q4 scramble.',
+      seo: { title: 'For risk adjustment teams: HCC gaps, year-round | Zynix AI',
+        desc: 'Suspected HCCs with the claim, lab or note behind them, ranked before the visit. Providers accept, reject or hold each gap, so gaps close all year.' },
+      shot: { src: 'screenshots/roles/hcc-evidence.webp', alt: 'Zynix suspected condition review: the condition, the date and source it was last submitted, and accept, reject or hold for the provider', phone: true },
+      work: { eyebrow: 'How the year runs', title: 'Open gaps found, prepared and closed',
+        lead: 'Zynix finds the gaps and gets the visits on the calendar. Clinicians decide what to document.' },
+      cards: [
+        { icon: 'search', title: 'Suspected conditions, with evidence', body: 'Recorded diagnoses are checked against current-year claims, and each suspected HCC shows the claim, lab or note it came from.' },
+        { icon: 'chart', title: 'Ranked by impact and deadline', body: 'Open gaps are ranked by impact and by the time left in the year, by practice and by provider.' },
+        { icon: 'file', title: 'A summary before each visit', body: 'Point-of-care prompts show the clinician which conditions are still open for the patient on the schedule.' },
+        { icon: 'calendar', title: 'Unscheduled patients invited', body: 'Agents reach out by voice or text and book the visit, so a gap doesn’t stay open because the patient was never seen.' }],
+      screen: { eyebrow: 'Inside the platform', title: 'Captured and yet to be captured, side by side',
+        src: 'screenshots/predictive-analytics.png', alt: 'Zynix patients-at-risk list: chronic conditions, RAF based on captured HCCs, RAF yet to be captured and predicted risk for each patient',
+        callouts: [
+          { title: 'RAF captured and still open', body: 'Each patient shows the RAF from captured HCCs next to what is yet to be captured this year.' },
+          { title: 'Filter by plan and timeline', body: 'Narrow the list by line of business, plan and date range.' },
+          { title: 'Risk alongside the gaps', body: 'Predicted admission and readmission risk sit beside the coding picture, so outreach starts with the right patients.' }] },
+      split: { title: 'Zynix prepares. Clinicians and coders decide.', a: 'Zynix handles', b: 'Clinicians and coders own',
+        agents: ['Checking recorded diagnoses against current-year claims', 'Ranking open gaps by impact and deadline', 'Pre-visit summaries for scheduled patients', 'Outreach and booking for patients with no visit'],
+        team: ['Assessing and documenting each condition at a visit', 'Accepting, rejecting or holding each suspected gap', 'Code selection and coding review', 'Your coding and compliance policies'] },
+      faq: [
+        { q: 'Does Zynix add diagnosis codes?', a: 'No. Zynix shows suspected conditions with their evidence. A condition counts for the year only when the treating clinician assesses and documents it at a visit, and your coders review the codes.' },
+        { q: 'What counts as evidence?', a: 'The claim, lab result or note the suspected condition came from, with the date it was last submitted, so the provider can judge it before the visit.' },
+        { q: 'What about patients who aren’t scheduled?', a: 'Agents invite them by voice or text, ask what is in the way, offer times and book the visit at the patient’s own practice.' }],
+      cta: { title: 'See HCC gaps with <span class="zx9-grad-text">the evidence attached</span>', lead: 'A 30-minute walkthrough: suspected conditions, the pre-visit summary and outreach to unscheduled patients, on sample data.' }
+    },
+    '/for-physicians': {
+      pillar: 'ai-patient-engagement', eyebrow: 'For physicians, NPs and PAs',
+      title: 'Ambient notes you approve',
+      lead: 'ZynScribe listens to the visit and drafts a structured SOAP note. Nothing is filed or used for billing until you review and approve it. Spend the visit with your patient, not your keyboard.',
+      seo: { title: 'For physicians: ambient notes you approve | Zynix AI',
+        desc: 'ZynScribe drafts a structured SOAP note from the visit conversation. Nothing is filed or used for billing until you review and approve it.' },
+      shot: { src: 'screenshots/roles/zynscribe-note.webp', alt: 'ZynScribe mobile app: a drafted note with chief complaint, history of present illness, physical examination and assessment, beside the transcript tab', phone: true },
+      work: { eyebrow: 'Before, during and after the visit', title: 'A draft to review instead of a blank note',
+        lead: 'ZynScribe drafts. You decide what goes in the record.' },
+      cards: [
+        { icon: 'eye', title: 'Before the visit', body: 'A pre-visit review shows the patient’s open HCC and quality gaps, so they can be addressed in the encounter.' },
+        { icon: 'mic', title: 'During the visit', body: 'ZynScribe listens to the conversation, separates the speakers and drafts a structured SOAP note.' },
+        { icon: 'check', title: 'After the visit', body: 'Review and edit the draft and the suggested ICD-10 and CPT codes, then approve it.' },
+        { icon: 'monitor', title: 'Browser or phone', body: 'ZynScribe works in the browser alongside your EHR, and in a mobile app for bedside and telehealth visits.' }],
+      screen: { eyebrow: 'Inside the workflow', title: 'Open gaps in view before you start',
+        src: 'screenshots/zynscribe-extension.png', alt: 'ZynScribe beside an EHR patient lookup: today’s appointment, the patient’s open HCC and quality gaps, a pre-visit review and a start recording button',
+        callouts: [
+          { title: 'Beside the EHR', body: 'ZynScribe opens next to the schedule in the EHR you already use.' },
+          { title: 'Open gaps for this patient', body: 'HCC and quality gaps are listed before the encounter, so they can be addressed in the visit.' },
+          { title: 'One tap to start', body: 'Start recording when the visit starts. The draft is waiting when it ends.' }] },
+      split: { title: 'ZynScribe drafts. You decide.', a: 'ZynScribe drafts', b: 'You decide',
+        agents: ['A structured SOAP note from the visit conversation', 'Suggested ICD-10 and CPT codes for your review', 'The patient’s open gaps, before the visit'],
+        team: ['What goes in the note', 'Which codes are used', 'When the note is approved'] },
+      faq: [
+        { q: 'Is anything filed without my approval?', a: 'No. ZynScribe notes stay drafts until a physician reviews and approves them. Nothing is filed or used for billing before approval.' },
+        { q: 'Does it work with my EHR?', a: 'ZynScribe works in the browser alongside your EHR, and in a mobile app for bedside and telehealth visits.' },
+        { q: 'What does the demo cover?', a: 'A visit, a drafted note and the review, start to finish, on sample data. It takes 30 minutes.' }],
+      cta: { title: 'See a note drafted <span class="zx9-grad-text">and approved</span>', lead: 'A 30-minute demo: a visit, a drafted note and the review, start to finish, on sample data.' }
+    },
+    '/for-practice-administrators': {
+      pillar: 'ai-patient-engagement', eyebrow: 'For practice administrators and managers',
+      title: 'Monthly CCM check-ins, handled',
+      lead: 'AI agents make the monthly chronic care management check-in calls and hand clinical questions to your licensed clinicians. Your team works the exceptions, not the call list.',
+      seo: { title: 'For practice administrators: CCM check-ins, handled | Zynix AI',
+        desc: 'AI agents make the monthly chronic care management check-in calls and hand clinical questions to your clinicians, so your team works the exceptions.' },
+      shot: { src: 'screenshots/roles/agent-call-log.webp', alt: 'Zynix call log: each patient’s priority, number of attempts, the AI agent that called and how the call ended' },
+      work: { eyebrow: 'What moves off your team’s plate', title: 'The monthly touchpoint, for every enrolled patient',
+        lead: 'Agents handle the routine contact. Your clinical staff handle the clinical work and what counts toward CCM time.' },
+      cards: [
+        { icon: 'calendar', title: 'Patients due this month', body: 'Enrolled patients due for this month’s touchpoint are listed by practice.' },
+        { icon: 'phone', title: 'The check-in call', body: 'Symptoms, medications and upcoming visits, with the care plan reinforced and the contact recorded.' },
+        { icon: 'stethoscope', title: 'Clinical questions to the practice', body: 'Changes in symptoms or adherence go to the practice nurse by rule.' },
+        { icon: 'clipboard', title: 'The provider reviews', body: 'The billing provider reviews the record and decides what counts toward CCM time.' }],
+      screen: { eyebrow: 'Inside the platform', title: 'Choose the patients, assign the agent',
+        src: 'screenshots/ai-agent-selection.png', alt: 'Zynix care management worklist with the Assign AI agent dialog open and a list of agents to choose from',
+        callouts: [
+          { title: 'Pick the patients', body: 'Select patients from a worklist or a cohort.' },
+          { title: 'Assign an AI agent', body: 'Choose the agent for the job, such as post-discharge follow-up or outbound outreach.' },
+          { title: 'See how each call ended', body: 'Answered, no answer, voicemail, escalated or scheduled: the call log shows the outcome and the attempts.' }] },
+      split: { title: 'Agents make the calls. Your team handles the exceptions.', a: 'Agents handle', b: 'Your team owns',
+        agents: ['Monthly CCM check-in calls', 'Wellness visit and screening reminders', 'Scheduling, rescheduling and no-show follow-up', 'After-hours calls: answer, capture the reason, book routine visits'],
+        team: ['Clinical questions and symptom changes', 'What counts toward CCM time', 'Patients the agents could not reach', 'Every clinical decision'] },
+      faq: [
+        { q: 'Do the agents give medical advice?', a: 'No. Agents never diagnose or recommend treatment. When a patient mentions a symptom or asks a clinical question, the agent routes it to your clinical staff by rule.' },
+        { q: 'Who decides what counts toward CCM time?', a: 'The billing provider. Agents handle the routine contact and record it; the provider reviews the record and decides what counts.' },
+        { q: 'Do our practices have to change EHRs?', a: 'No. Each practice keeps the EHR it runs today, and Zynix keeps one record per patient across them.' }],
+      cta: { title: 'Take the call list <span class="zx9-grad-text">off your team</span>', lead: 'A 30-minute walkthrough: a monthly check-in, an escalation to the practice nurse and the call log, on sample data.' }
+    },
+    '/for-aco-leaders': {
+      pillar: 'population-intelligence', eyebrow: 'For ACO, MSO and value-based care leaders',
+      title: 'Readmissions, ED visits and care gaps, in one view',
+      lead: 'See readmissions, ED visits, care-gap closure and patient engagement by care manager and by cohort. Then act on it: predictive risk, care plans and AI outreach run on the same platform.',
+      seo: { title: 'For ACO and MSO leaders: the AI operating layer | Zynix AI',
+        desc: 'See readmissions, ED visits, care-gap closure and engagement by care manager and cohort, then act on it with predictive risk, care plans and AI outreach.' },
+      shot: { src: 'screenshots/roles/performance-by-care-manager.webp', alt: 'Zynix performance overview: ED visit, readmission, admission, medication adherence and SNF admission measures compared by care coordinator' },
+      secondary: { label: 'Model the impact', href: '/roi-calculator' },
+      work: { eyebrow: 'One operating layer', title: 'From insight to intervention, on one platform',
+        lead: 'Four parts that work as one, so every insight ends in an intervention.' },
+      screen: null,
+      faq: [
+        { q: 'Who is Zynix built for?', a: 'ACOs, MSOs, IPAs, health plans, FQHCs and provider groups accountable for the cost and quality of care.' },
+        { q: 'Can we model the impact first?', a: 'Yes. The <a href="/roi-calculator">ROI calculator</a> takes your own panel size, discharges, open gaps and assumptions. It is an illustrative estimate, not a guarantee.' },
+        { q: 'How long does onboarding take?', a: 'Timelines depend on your data sources and scope; we set one with you during scoping.' }],
+      cta: { title: 'See your population <span class="zx9-grad-text">in one view</span>', lead: 'A 30-minute walkthrough with our team: performance by care manager and cohort, predictive risk and the outreach behind it, on sample data.' }
+    }
+  };
+  ZX_ROLE_PATHS.forEach(function (p) { zxSeo(p, { title: ROLE_PAGES[p].seo.title, desc: ROLE_PAGES[p].seo.desc, img: IMG.hero, noindex: true }); });
+
+  function renderRolePage(path) {
+    var c = ROLE_PAGES[path];
+    if (!c) return render404();
+    var acc = zx9Accent(zx9Pillar(c.pillar)), st = SITE_FACTS.stats;
+    var frame = function (s, eager) {
+      return renderProductFrame({ src: s.src, alt: s.alt, eager: eager, sampleLabel: ZX_SHOT,
+        className: 'zx-role-shot' + (s.phone ? ' zx-role-shot--phone' : ''), ratio: s.ratio, crop: s.crop });
+    };
+
+    // 1. Hero (ink): the ad's promise, the one primary CTA, and the screen the ad showed
+    var hero = '<section class="zx9-section zx9-band--ink zx-pil-hero zx-role-hero" id="hero" aria-labelledby="hero-title"><div class="zynix-container">' +
+      renderSplit(
+        renderV9Eyebrow(c.eyebrow) +
+        '<h1 class="zx9-display zx-pil-hero__title" id="hero-title">' + c.title + '</h1>' +
+        '<p class="zx9-lead">' + c.lead + '</p>' +
+        '<div class="zx9-actions">' + renderDemoButton({ size: 'lg' }) +
+          renderButton((c.secondary || {}).label || 'See how it works', (c.secondary || {}).href || '#workflow', { variant: 'secondary', size: 'lg', className: 'zx9-btn-glass' }) + '</div>' +
+        '<p class="zx-role-hero__proof"><strong>' + st.patients.value + '</strong> ' + st.patients.label + '</p>',
+        frame(c.shot, true), { ratio: '6-6', center: true, className: 'zx-pil-hero__grid zx-role-hero__grid' }) +
+      '</div></section>';
+
+    // 2. The role's workflow: 4 cards (the ACO page shows the four pillars instead)
+    var cards = c.cards || PILLARS.map(function (p) { return { icon: p.icon, title: p.name, body: p.promise }; });
+    var work = zxPilSection('workflow', 'zx-role-work', zxPilHead('workflow', c.work.eyebrow, c.work.title, c.work.lead, null, true) + zxPilCards(cards, 'work'));
+
+    // 3. A second real screen with numbered callouts (the ACO page shows the four predictions)
+    var screen = c.screen ? zxPilSection('screen', 'zx9-band--tint zx-role-screen', renderSplit(
+        zxPilHead('screen', c.screen.eyebrow, c.screen.title, null) + renderCallouts(c.screen.callouts),
+        frame({ src: c.screen.src, alt: c.screen.alt, ratio: '16x10', crop: 'top' }), { ratio: '5-7', center: true, className: 'zx-role-screen__grid' }))
+      : zxPilSection('screen', 'zx9-band--tint zx-role-screen', zxPilHead('screen', 'Predictive Risk', 'Know who needs care next, across the network',
+          'One record per patient from claims, EHR, ADT, lab and pharmacy data. Predictive Risk flags four things and shows the drivers behind each.', null, true) +
+        renderV9Predict({ id: 'screen-title', note: 'Every prediction shows its drivers. Clinicians make every clinical decision.' }));
+
+    // 4. Who does what (ink)
+    var col = function (key, title, icon, items) {
+      return '<div class="zx-pil-split__col zx-pil-split__col--' + key + '"><h3 class="zx-pil-split__title"><span class="zx-pil-split__icon" aria-hidden="true">' +
+        zxIcon(icon) + '</span>' + title + '</h3><ul class="zx-pil-split__list" role="list">' + items.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></div>';
+    };
+    var split = c.split ? '<section class="zx9-section zx9-band--ink zx-role-split" id="who-does-what" aria-labelledby="who-does-what-title"><div class="zynix-container">' +
+      zxPilHead('who-does-what', 'Who does what', c.split.title, null) +
+      '<div class="zx-pil-split zx-rh-split" role="group" aria-label="Who does what">' +
+        col('agents', c.split.a, 'bot', c.split.agents) + col('team', c.split.b, 'stethoscope', c.split.team) +
+      '</div></div></section>' : '';
+
+    // 5. Proof: the one approved figure and the customer logo row
+    var proof = zxPilSection('proof', 'zx9-section--compact zx-pil-programs zx-role-proof', renderSplit(
+      zxPilHead('proof', null, 'Built for value-based care teams', 'ACOs, MSOs, health plans and provider organizations run their between-visit work on Zynix.'),
+      renderV9Proof({ items: [{ value: st.patients.value, label: st.patients.label }] }) + renderLogoRow(null, { id: 'role-logos', max: 6, link: null }),
+      { ratio: '5-7', center: true, className: 'zx-pil-programs__grid' }));
+
+    // 6. Three objections answered (.zynix-faq-item; the page is noindex, so its FAQPage JSON-LD stays out of search)
+    var faq = '<section class="zx9-section zx9-band--tint zx-role-faq" id="faq" aria-labelledby="faq-title"><div class="zynix-container">' +
+      zxPilHead('faq', null, 'Common questions', null) + renderFaqList(c.faq, { idPrefix: 'role-faq' }) + '</div></section>';
+
+    // 7. CTA: the same single action, no secondary
+    var cta = renderV9Cta({ title: c.cta.title, lead: c.cta.lead, secondary: null });
+
+    return '<div class="zx-pil zx-role' + acc + '">' + hero + work + screen + split + proof + faq + cta + '</div>' + renderFooter();
+  }
+  // ==== ZX:END roles ====
+
   // ── PAGE: AI Agents ──
   function renderAIAgents() {
     // /zynix-ai-agents: the explainer until its 301 to /agents exists (DESIGN_SPEC §6; smoke needs >= 500 words). Every
@@ -4368,6 +4583,8 @@
     var path = zxPath();
     var cur = zxNavCurrent(path);
     var isSms = ['/sms', '/sms-program', '/sms-consent'].indexOf(path) > -1;
+    // Paid-ad landing pages (block `roles`): a light nav, logo + the one primary CTA, so the visitor stays on the page's offer.
+    var isLp = ZX_ROLE_PATHS.indexOf(path) > -1;
     var plain = function (s) { return String(s == null ? '' : s).replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim(); };
     var here = function (href) { return !!path && href === path; };
     var link = function (cls, href, inner, label, extra) {
@@ -4438,16 +4655,16 @@
     }
 
     var nav = document.createElement('nav');
-    nav.className = 'zynix-mega-nav';
+    nav.className = 'zynix-mega-nav' + (isLp ? ' zynix-mega-nav--lp' : '');
     nav.setAttribute('aria-label', 'Main');
     nav.innerHTML = '<div class="zynix-container zynix-mega-nav__inner">' +
       '<a class="zynix-nav-logo" href="/" aria-label="Zynix AI home" data-z-anchor-fixed="1"' + (path ? '' : ' aria-current="page"') + '>' +
         '<img class="zynix-nav-logo__img" src="' + zxAttr(zxImg(SITE_FACTS.brand.logo)) + '" alt="" width="84" height="32" decoding="async"></a>' +
-      '<ul class="zynix-nav-items" role="list">' + NAV.map(navItem).join('') + '</ul>' +
+      (isLp ? '' : '<ul class="zynix-nav-items" role="list">' + NAV.map(navItem).join('') + '</ul>') +
       '<div class="zynix-nav-actions">' +
-        link('zynix-nav-contact', NAV_ACTIONS.contact.href, NAV_ACTIONS.contact.label, NAV_ACTIONS.contact.label) +
+        (isLp ? '' : link('zynix-nav-contact', NAV_ACTIONS.contact.href, NAV_ACTIONS.contact.label, NAV_ACTIONS.contact.label)) +
         renderButton(NAV_ACTIONS.demo.label, NAV_ACTIONS.demo.href, { variant: 'primary', cta: 'demo', className: 'zynix-nav-cta', ariaLabel: plain(NAV_ACTIONS.demo.label), anchorFixed: true }) +
-        '<button type="button" class="zynix-nav-hamburger" aria-expanded="false" aria-controls="zx-mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>' +
+        (isLp ? '' : '<button type="button" class="zynix-nav-hamburger" aria-expanded="false" aria-controls="zx-mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>') +
       '</div></div>';
 
     // ── Mobile menu (<1024px, §3.3): the same six sections as accordions, no descriptors ──
@@ -11473,6 +11690,12 @@ function renderDataAnalyticsV7() {
     '/ai-patient-engagement': function () { return renderPillarPage('ai-patient-engagement'); },
     // Rural Health & Grants (owner RH; renderRuralHealthPage in the `rural` block)
     '/rural-health': renderRuralHealthPage,
+    // Paid-ad landing pages, one per audience (owner LP; renderRolePage in the `roles` block; noindex, light nav)
+    '/for-care-managers': function () { return renderRolePage('/for-care-managers'); },
+    '/for-risk-adjustment': function () { return renderRolePage('/for-risk-adjustment'); },
+    '/for-physicians': function () { return renderRolePage('/for-physicians'); },
+    '/for-practice-administrators': function () { return renderRolePage('/for-practice-administrators'); },
+    '/for-aco-leaders': function () { return renderRolePage('/for-aco-leaders'); },
     // V7: AI Agents
     '/agents': renderAgentsHub,
     '/agents/chronic-care-management': renderChronicCareAgent,

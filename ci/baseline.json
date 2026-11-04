@@ -66,13 +66,13 @@
   "bannedStrings": {},
   "weight": {
     "ceilings": {
-      "cssBr4": 73016,
-      "totalBr4": 422100,
+      "cssBr4": 73396,
+      "totalBr4": 428088,
       "cssImports": 0
     },
     "builtCeilings": {
-      "totalBr4": 346813,
-      "cssBr4": 51158
+      "totalBr4": 351764,
+      "cssBr4": 51333
     },
     "targets": {
       "cssBr4": 30720,
@@ -294,6 +294,33 @@
           }
         },
         "reason": "Layout audit 2026-10-28: new CSS block native:blog restyles the Webflow-rendered blog post template (Arial 14px on 1,150px lines, text logo, unreadable CTA heading); +~1.4 KB br4 on the deploy build. Bundle: the background revalidation now also covers a @main stylesheet when the JS is SHA-pinned."
+      },
+      {
+        "date": "2026-11-04",
+        "commit": "ce9b58c",
+        "from": {
+          "ceilings": {
+            "cssBr4": 73016,
+            "totalBr4": 422100,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 346813,
+            "cssBr4": 51158
+          }
+        },
+        "to": {
+          "ceilings": {
+            "cssBr4": 73396,
+            "totalBr4": 428088,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 351764,
+            "cssBr4": 51333
+          }
+        },
+        "reason": "2026-11-04 paid-ad landing pages /for-* (5 role pages, block roles + page:roles; Gautamdev: separate landing pages per ad audience)"
       }
     ]
   },

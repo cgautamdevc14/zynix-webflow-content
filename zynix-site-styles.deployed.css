@@ -3710,6 +3710,25 @@ html:not(.wf-native) {
 .zx-rh-hp { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }
 /* ════ ZX:END page:rural ════ */
 
+/* ════ ZX:BEGIN page:roles (owner LP) ════ */
+/* Paid-ad landing pages (/for-*, renderRolePage, JS block `roles`). They sit in <div class="zx-pil zx-role">, so they take the
+   pillar pages' rhythm, hero, cards, split, proof and FAQ styles, and the who-does-what split of page:rural (.zx-rh-split).
+   New here: the light nav, the hero screen (a real product screen, labelled sample data; phone screens get a phone width),
+   the proof line under the hero actions and the FAQ at full width. v9 tokens only; no motion. */
+.zynix-mega-nav--lp .zynix-nav-actions { margin-left:auto; }
+@media (max-width:359.98px) { .zynix-mega-nav--lp .zynix-nav-actions .zynix-nav-cta { display:inline-flex; } }
+.zx-role .zx-pil-hero__title { max-width:20ch; }
+.zx-role-hero__proof { margin:20px 0 0; font-size:15px; line-height:1.5; color:var(--zx9-text-on-dark-2); }
+.zx-role-hero__proof strong { font-weight:700; color:var(--zx9-text-on-dark); }
+.zx-role-shot { width:100%; }
+.zx-role-shot .zynix-product-frame__media img { display:block; width:100%; height:auto; }
+.zx-role-hero .zx-role-shot { border-color:var(--zx9-glass-border); box-shadow:0 30px 60px -30px rgba(0,0,0,.55); }
+.zx-role-shot--phone { max-width:340px; margin-inline:auto; border-radius:28px; }
+@media (max-width:767.98px) { .zx-role-shot--phone { max-width:300px; } .zx-role-hero .zx-role-shot { margin-top:8px; } }
+.zx-role-screen .zynix-callouts { margin-top:24px; }
+.zx-role-faq .zynix-faq-list, .zx-role-faq .zynix-faq { max-width:820px; }
+/* ════ ZX:END page:roles ════ */
+
 /* ════ ZX:BEGIN native:blog (owner LA) ════ */
 /* CMS blog posts (/blog-posts/*) are rendered by Webflow: html.wf-native, the bundle stands down, and none of the v9 tokens
    or chrome reach them. The template had fallen back to Arial 14px on 1,150px lines, a text "Zynix AI" logo, a hero image
