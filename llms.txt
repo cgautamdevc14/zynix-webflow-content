@@ -115,6 +115,7 @@ Key facts (as of September 2026, from Zynix):
 ## Blog
 
 - [Post-Discharge Follow-Up for ACOs: How AI Agents Reduce Readmissions](https://www.zynix.ai/blog-posts/post-discharge-follow-up-ai-agents-acos-readmissions): Learn how AI agents automate post-discharge TCM outreach in ACOs, close the care gap within 72 hours, and reduce readmissions through structured follow-up.
+- [AI Agents for Care Coordination in ACOs: Deploy Guide](https://www.zynix.ai/blog-posts/ai-agents-for-care-coordination-acos): AI agents for ACO care coordination: post-discharge TCM outreach, AWV scheduling, chronic care gap closure, and a four-stage deployment framework.
 - [How To Evaluate an AI Platform for Your ACO: A 10-Criteria Framework](https://www.zynix.ai/blog-posts/how-to-evaluate-ai-platform-acos): A 10-criteria framework for evaluating AI platforms for ACO performance management: data integration, workflow automation, risk stratification, and more.
 - [HCC Gap Closure Software for ACOs: What It Should Do and How to Evaluate It](https://www.zynix.ai/blog-posts/hcc-gap-closure-software-acos): HCC gap closure software for ACOs should find suspect and recapture gaps, prep clinicians with evidence, book visits and confirm closure on claims. A scorecard.
 - [Zynix AI vs Innovaccer: How They Differ, Who Each Fits, and Why Zynix AI Is Not Zynx Health](https://www.zynix.ai/blog-posts/zynix-ai-vs-innovaccer): Zynix AI vs Innovaccer: separate companies, not partners. Innovaccer is a broad healthcare AI suite; Zynix AI runs value-based care follow-up. Not Zynx Health.
