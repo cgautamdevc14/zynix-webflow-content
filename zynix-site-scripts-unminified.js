@@ -4155,6 +4155,8 @@
     { id: 'news', name: 'Company news' }, { id: 'general', name: 'Healthcare AI' }
   ];
   var ZX_RES_POSTS = [
+    ['post-discharge-follow-up-ai-agents-acos-readmissions', '2026-11-04', 'toc', 'Post-Discharge Follow-Up for ACOs: How AI Agents Reduce Readmissions', 'Learn how AI agents automate post-discharge TCM outreach in ACOs, close the care gap within 72 hours, and reduce readmissions through structured follow-up.'],
+    ['how-to-evaluate-ai-platform-acos', '2026-11-04', 'ops', 'How To Evaluate an AI Platform for Your ACO: A 10-Criteria Framework', 'A 10-criteria framework for evaluating AI platforms for ACO performance management: data integration, workflow automation, risk stratification, and more.'],
     ['navina-alternatives-acos', '2026-10-20', 'compare', 'Navina Alternatives for ACOs and Value-Based Care Groups in 2026', 'Navina alternatives for ACOs: what Navina, Innovaccer, Arcadia, Health Catalyst, Guidehealth and Zynix AI are each known for, a checklist for choosing, and which gap each one fits.'],
     ['ai-for-value-based-care', '2026-10-12', 'general', 'AI for Value-Based Care: What It Actually Does', 'What AI for value-based care actually does: unify claims, EHR and ADT data, predict readmission, mortality, disease progression and utilization early, rank care gaps and run routine outreach, with clinicians keeping every clinical decision.'],
     ['pre-visit-planning-value-based-care', '2026-10-09', 'quality', 'Pre-visit planning for value-based care: what to prepare', 'A pre-visit planning checklist for value-based care: what to prepare for each visit, who owns it, what the clinician summary should show, and the CMS rules that shape it.'],
