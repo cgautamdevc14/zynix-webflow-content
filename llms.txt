@@ -6,7 +6,7 @@
 > progression, utilization), the Embedded Care Management Platform and AI Patient Engagement. It is built for ACOs,
 > MSOs/IPAs and physician groups, Medicare Advantage health plans, FQHCs and hospital systems.
 
-Last updated: 2026-11-04
+Last updated: 2026-11-05
 
 Key facts (as of September 2026, from Zynix):
 - 1M+ value-based care patients onboarded; customer organizations in 30 states.
@@ -114,6 +114,8 @@ Key facts (as of September 2026, from Zynix):
 
 ## Blog
 
+- [Post-Discharge Follow-Up for ACOs: How AI Agents Reduce Readmissions](https://www.zynix.ai/blog-posts/post-discharge-follow-up-ai-agents-acos-readmissions): Learn how AI agents automate post-discharge TCM outreach in ACOs, close the care gap within 72 hours, and reduce readmissions through structured follow-up.
+- [How To Evaluate an AI Platform for Your ACO: A 10-Criteria Framework](https://www.zynix.ai/blog-posts/how-to-evaluate-ai-platform-acos): A 10-criteria framework for evaluating AI platforms for ACO performance management: data integration, workflow automation, risk stratification, and more.
 - [HCC Gap Closure Software for ACOs: What It Should Do and How to Evaluate It](https://www.zynix.ai/blog-posts/hcc-gap-closure-software-acos): HCC gap closure software for ACOs should find suspect and recapture gaps, prep clinicians with evidence, book visits and confirm closure on claims. A scorecard.
 - [Zynix AI vs Innovaccer: How They Differ, Who Each Fits, and Why Zynix AI Is Not Zynx Health](https://www.zynix.ai/blog-posts/zynix-ai-vs-innovaccer): Zynix AI vs Innovaccer: separate companies, not partners. Innovaccer is a broad healthcare AI suite; Zynix AI runs value-based care follow-up. Not Zynx Health.
 - [APCM Billing Guide: HCPCS G0556, G0557 and G0558 Requirements for 2026](https://www.zynix.ai/blog-posts/apcm-billing-g0556-g0557-g0558): APCM billing for 2026: what G0556, G0557 and G0558 cover, the consent, initiating visit and quality rules, and what cannot be billed in the same month.
