@@ -3367,6 +3367,27 @@
   }
   // ==== ZX:END pillars ====
 
+  // ==== ZX:BEGIN leads (owner LT) ====
+  // One place that reports a real lead from a site form to Google (2026-11-05, zynix-webflow/ads-optimization/
+  // CONVERSION_DIAGNOSIS_2026-11-05.md): GA4 generate_lead (also imported into Google Ads, as a Secondary action) and the Google
+  // Ads conversion "Demo request (booking or form)", which is the Primary lead action. The Google Ads hit goes only when
+  // advertising consent allows (window.__zxConsent, head code); GA4 follows analytics consent through Consent Mode.
+  // ChatGPT lead_created for these forms comes from the OpenAI pixel's fetch hook (registered script openaipixel), and Calendly
+  // bookings are reported by the registered script zynixbooking, so neither is sent here.
+  var ZX_GADS_LEAD = 'AW-18519469086/4kpJCPP-47IdEJ7Y4v5E';
+  function zxLeadEvent(formName, params) {
+    try {
+      if (!window.gtag || /[?&]test=1(&|$)/.test(location.search)) return;
+      var p = { form_name: formName, page_path: location.pathname };
+      Object.keys(params || {}).forEach(function (k) { if (params[k]) p[k] = params[k]; });
+      window.gtag('event', 'generate_lead', p);
+      var c = window.__zxConsent;
+      if (!c || c.ads) window.gtag('event', 'conversion', { send_to: ZX_GADS_LEAD, transaction_id: 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8) });
+    } catch (e) {}
+  }
+  window.zxLeadEvent = zxLeadEvent;   // the /contact form's inline handler calls it
+  // ==== ZX:END leads ====
+
   // ==== ZX:BEGIN rural (owner RH) ====
   // /rural-health: Rural Health & Grants (Jay Chowdappa, MD, GTM meeting 2026-10-26). One renderer, renderRuralHealthPage(),
   // composed from the pillar-page parts (zxPilSection, zxPilHead, zxPilViz, zxPilCards, zxPilDeeper) and the v9 helpers,
@@ -3651,8 +3672,7 @@
       post(base.concat(extra))
         .catch(function () { return post(base); })   // a field HubSpot refuses must never lose the lead: retry with the /contact fields
         .then(function () {
-          if (!test && window.gtag) window.gtag('event', 'generate_lead', { form_name: 'rural_health_grants', lead_source: RH.campaign,
-            org_type: v('orgtype'), program: v('program'), state: v('state') });
+          if (!test) zxLeadEvent('rural_health_grants', { lead_source: RH.campaign, org_type: v('orgtype'), program: v('program'), state: v('state') });
           done();
         }, function () {
           b.disabled = false; b.classList.remove('is-loading'); b.textContent = 'Request a discussion';
@@ -4259,7 +4279,7 @@
     var form = '<div class="zx-co-form" id="form">' +
       '<h2 class="zx-co-form__title" id="form-title">Send a message</h2>' +
       '<p class="zx-co-form__intro">Tell us about your organization and what you’d like to see.</p>' +
-      '<form class="zynix-contact-form" id="zynix-demo-form" aria-labelledby="form-title" onsubmit="event.preventDefault();var f=this;var b=f.querySelector(\'[type=submit]\');if(b){b.disabled=true;b.classList.add(\'is-loading\');b.textContent=\'Sending…\'}var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'phone\',value:f.querySelector(\'[name=phone]\').value},{name:\'company\',value:f.querySelector(\'[name=company]\').value},{name:\'healthcare_segment\',value:f.querySelector(\'[name=segment]\').value},{name:\'message\',value:f.querySelector(\'[name=message]\').value},{name:\'sms_consent\',value:\'No\'}],context:{pageUri:location.href,pageName:document.title}};fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(r){if(!r.ok){throw new Error(r.status)}f.innerHTML=\'<div class=zx-co-form__done role=status tabindex=-1><p class=zx-co-form__done-title>Thanks. Your message is on its way.</p><p>We reply by email, usually within one business day.</p></div>\';var s=f.querySelector(\'.zx-co-form__done\');if(s)s.focus()}).catch(function(){if(b){b.disabled=false;b.classList.remove(\'is-loading\');b.textContent=\'Send message\'}var m=f.querySelector(\'.zx-form-err\');if(!m){m=document.createElement(\'p\');m.className=\'zx-form-err\';m.setAttribute(\'role\',\'alert\');f.appendChild(m)}m.textContent=\'We could not send your message. Please email info@zynix.ai or call (727) 261-1297.\'})">' +
+      '<form class="zynix-contact-form" id="zynix-demo-form" aria-labelledby="form-title" onsubmit="event.preventDefault();var f=this;var hp=f.querySelector(\'[name=website]\');if(hp&&hp.value){f.innerHTML=\'<div class=zx-co-form__done role=status tabindex=-1><p class=zx-co-form__done-title>Thanks. Your message is on its way.</p><p>We reply by email, usually within one business day.</p></div>\';return}var b=f.querySelector(\'[type=submit]\');if(b){b.disabled=true;b.classList.add(\'is-loading\');b.textContent=\'Sending…\'}var d={fields:[{name:\'firstname\',value:f.querySelector(\'[name=firstname]\').value},{name:\'lastname\',value:f.querySelector(\'[name=lastname]\').value},{name:\'email\',value:f.querySelector(\'[name=email]\').value},{name:\'phone\',value:f.querySelector(\'[name=phone]\').value},{name:\'company\',value:f.querySelector(\'[name=company]\').value},{name:\'healthcare_segment\',value:f.querySelector(\'[name=segment]\').value},{name:\'message\',value:f.querySelector(\'[name=message]\').value},{name:\'sms_consent\',value:\'No\'}],context:{pageUri:location.href,pageName:document.title}};var k=(document.cookie.match(/(?:^|;\\s*)hubspotutk=([^;]+)/)||[])[1];if(k)d.context.hutk=k;fetch(\'https://api.hsforms.com/submissions/v3/integration/submit/242472215/66a6d29e-8c74-4f74-8235-0205ed4d6ed3\',{method:\'POST\',headers:{\'Content-Type\':\'application/json\'},body:JSON.stringify(d)}).then(function(r){if(!r.ok){throw new Error(r.status)}f.innerHTML=\'<div class=zx-co-form__done role=status tabindex=-1><p class=zx-co-form__done-title>Thanks. Your message is on its way.</p><p>We reply by email, usually within one business day.</p></div>\';var s=f.querySelector(\'.zx-co-form__done\');if(s)s.focus();if(window.zxLeadEvent)window.zxLeadEvent(\'contact_demo\',{org_type:d.fields[5].value})}).catch(function(){if(b){b.disabled=false;b.classList.remove(\'is-loading\');b.textContent=\'Send message\'}var m=f.querySelector(\'.zx-form-err\');if(!m){m=document.createElement(\'p\');m.className=\'zx-form-err\';m.setAttribute(\'role\',\'alert\');f.appendChild(m)}m.textContent=\'We could not send your message. Please email info@zynix.ai or call (727) 261-1297.\'})">' +
         '<p class="zx-co-form__legend" aria-hidden="true">* Required</p>' +   // inside the form, so the success swap removes it
         '<div class="zx-co-form__row">' +
           renderField({ id: 'zx-co-firstname', name: 'firstname', label: 'First name', required: true, autocomplete: 'given-name' }) +
@@ -4272,6 +4292,7 @@
         '</div>' +
         renderField({ id: 'zx-co-segment', name: 'segment', type: 'select', label: 'Organization type', options: segments }) +
         renderField({ id: 'zx-co-message', name: 'message', type: 'textarea', label: 'What would you like to discuss?', rows: 4 }) +
+        '<div class="zx-rh-hp" aria-hidden="true"><label for="zx-co-website">Website</label><input id="zx-co-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>' +   // honeypot (shares the /rural-health rule)
         '<button type="submit" class="zynix-btn zynix-btn--quiet zynix-btn--lg zx-co-form__submit">Send message</button>' +
         '<p class="zx-co-form__note">We use your details only to respond to your demo request. This form does not sign you up for text messages; to receive SMS notifications, use our <a href="/sms-consent">SMS opt-in form</a>. <a href="/privacy-policy">Privacy Policy</a></p>' +
       '</form>' +
