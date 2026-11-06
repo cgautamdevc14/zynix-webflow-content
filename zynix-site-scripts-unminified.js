@@ -126,7 +126,7 @@
     'screenshots/zynscribe-soap.png': [1920, 1066],
     'screenshots/roles/priority-worklist.webp': [1200, 873], 'screenshots/roles/hcc-evidence.webp': [640, 1169],
     'screenshots/roles/zynscribe-note.webp': [640, 1169], 'screenshots/roles/performance-by-care-manager.webp': [1200, 724],
-    'screenshots/roles/agent-call-log.webp': [1200, 681],   // paid-ad landing pages (block `roles`): the screen each ad shows
+    'screenshots/roles/agent-call-log.webp': [1200, 681], 'screenshots/roles/after-hours-log.webp': [1200, 656],   // paid-ad landing pages (block `roles`): the screen each ad shows
     // Legacy root images, still referenced through IMG (measured 2026-09-29). Sizes only, so frames
     // reserve their space; several are on the §2.9 blocked list and page streams replace them.
     'zynix-aco-dashboard.png': [806, 1600], 'zynix-provider-view.png': [1174, 1600], 'zynix-quality-measures.png': [916, 1200],
@@ -3696,7 +3696,7 @@
   //     product and use-case pages (UC07, UC19, /zynscribe, the pillars) and the ad copy in
   //     ads-2026-10-30-meta-roles/META_ROLE_TARGETING_AND_ADS.md §4. No outcome percentages, no compliance claims, no customer
   //     named. Screens are real product screens with sample data, labelled so; the hero screen is the one the ad shows.
-  var ZX_ROLE_PATHS = ['/for-care-managers', '/for-risk-adjustment', '/for-physicians', '/for-practice-administrators', '/for-aco-leaders'];
+  var ZX_ROLE_PATHS = ['/for-care-managers', '/for-risk-adjustment', '/for-physicians', '/for-practice-administrators', '/for-aco-leaders', '/for-after-hours'];
   var ZX_SHOT = 'Product screen · sample data';
   var ROLE_PAGES = {
     '/for-care-managers': {
@@ -3815,6 +3815,32 @@
         { q: 'Do our practices have to change EHRs?', a: 'No. Each practice keeps the EHR it runs today, and Zynix keeps one record per patient across them.' }],
       cta: { title: 'Take the call list <span class="zx9-grad-text">off your team</span>', lead: 'A 30-minute walkthrough: a monthly check-in, an escalation to the practice nurse and the call log, on sample data.' }
     },
+    '/for-after-hours': {
+      // Google ad group "AI after-hours & scheduling" (2026-11-06). Copy reused from the ZynAfterHours use cases (UC02, UC09,
+      // UC16, UC26) and the /faq answer; the hero is the ZynAfterHours interaction log, cropped below the app's tab bar (it shows a retired brand).
+      pillar: 'ai-patient-engagement', eyebrow: 'AI after-hours answering for practices',
+      title: 'After-hours calls, answered and routed',
+      lead: 'When your office closes, ZynAfterHours answers the phone. It verifies the caller, captures the reason for the call, handles routine requests and sends symptom questions to your on-call clinician by the rules your team sets.',
+      seo: { title: 'AI after-hours answering for practices | Zynix AI',
+        desc: 'ZynAfterHours answers after-hours calls, verifies the caller, handles routine requests and routes symptom questions to your on-call clinician by rule.' },
+      shot: { src: 'screenshots/roles/after-hours-log.webp', alt: 'ZynAfterHours interaction log: after-hours calls with the issue, its classification as emergency, urgent or routine, the action taken and the clinician the call was escalated to' },
+      work: { eyebrow: 'What happens after hours', title: 'Every call answered, sorted and routed',
+        lead: 'ZynAfterHours does the intake. Your on-call clinician gets the calls that need a clinician.' },
+      cards: [
+        { icon: 'phone', title: 'Answered and verified', body: 'The call is answered, the caller verified and the reason for the call captured. Callers who describe an emergency are told to call 911.' },
+        { icon: 'stethoscope', title: 'Symptom questions to the on-call clinician', body: 'Symptom and medication questions are routed by the rules your clinicians approve, with a summary of the call attached.' },
+        { icon: 'calendar', title: 'Routine requests handled', body: 'Appointment and refill requests are booked or logged for the office, following your rules, instead of waiting on a voicemail.' },
+        { icon: 'clock', title: 'Waiting when you open', body: 'Every call is logged with its classification and the action taken, and calls that need follow-up are flagged for the morning.' }],
+      screen: false,
+      split: { title: 'ZynAfterHours takes the intake. Your clinicians take the clinical calls.', a: 'ZynAfterHours handles', b: 'Your clinicians own',
+        agents: ['Answering after-hours calls', 'Verifying the caller and capturing the reason', 'Booking or logging routine requests', 'Calls in the patient’s preferred language'],
+        team: ['Every symptom and medication question', 'Every clinical decision', 'The escalation rules ZynAfterHours follows', 'Follow-up on flagged calls'] },
+      faq: [
+        { q: 'Does ZynAfterHours give medical advice?', a: 'No. It never diagnoses or recommends treatment. Symptom and medication questions go to your on-call clinician by your rules, and callers who describe an emergency are told to call 911.' },
+        { q: 'How is it different from an answering service?', a: 'An answering service takes a message and promises a callback. ZynAfterHours verifies the caller, classifies the call as emergency, urgent or routine, routes clinical questions to your on-call clinician and logs every call with the action taken.' },
+        { q: 'Do our practices have to change EHRs?', a: 'No. Each practice keeps the EHR it runs today, and Zynix keeps one record per patient across them.' }],
+      cta: { title: 'See an after-hours night, <span class="zx9-grad-text">call by call</span>', lead: 'A 30-minute walkthrough: an after-hours call, an escalation to the on-call clinician and the morning log, on sample data.' }
+    },
     '/for-aco-leaders': {
       pillar: 'population-intelligence', eyebrow: 'For ACO, MSO and value-based care leaders',
       title: 'Readmissions, ED visits and care gaps, in one view',
@@ -3861,7 +3887,7 @@
     var work = zxPilSection('workflow', 'zx-role-work', zxPilHead('workflow', c.work.eyebrow, c.work.title, c.work.lead, null, true) + zxPilCards(cards, 'work'));
 
     // 3. A second real screen with numbered callouts (the ACO page shows the four predictions)
-    var screen = c.screen ? zxPilSection('screen', 'zx9-band--tint zx-role-screen', renderSplit(
+    var screen = c.screen === false ? '' : c.screen ? zxPilSection('screen', 'zx9-band--tint zx-role-screen', renderSplit(
         zxPilHead('screen', c.screen.eyebrow, c.screen.title, null) + renderCallouts(c.screen.callouts),
         frame({ src: c.screen.src, alt: c.screen.alt, ratio: '16x10', crop: 'top' }), { ratio: '5-7', center: true, className: 'zx-role-screen__grid' }))
       : zxPilSection('screen', 'zx9-band--tint zx-role-screen', zxPilHead('screen', 'Predictive Risk', 'Know who needs care next, across the network',
@@ -11720,6 +11746,7 @@ function renderDataAnalyticsV7() {
     '/for-physicians': function () { return renderRolePage('/for-physicians'); },
     '/for-practice-administrators': function () { return renderRolePage('/for-practice-administrators'); },
     '/for-aco-leaders': function () { return renderRolePage('/for-aco-leaders'); },
+    '/for-after-hours': function () { return renderRolePage('/for-after-hours'); },
     // V7: AI Agents
     '/agents': renderAgentsHub,
     '/agents/chronic-care-management': renderChronicCareAgent,
