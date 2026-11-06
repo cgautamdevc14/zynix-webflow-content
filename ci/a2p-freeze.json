@@ -6,7 +6,7 @@
   "functions": {
     "renderSMSProgram": "fc361125b8d4cccefa9867b928b051aa6239adb5e8f2fac86f04a2b3eeb8a88e",
     "renderSMSConsent": "6df2269e4c899df71026e630ea099dc471e9b8f357bdeeb849f1edd60685e9a2",
-    "renderPrivacyV7": "80862f7478be6e6b0199438674f99d5cc1a16940b2690e54700f875f7b8b36d7",
+    "renderPrivacyV7": "ab077b75955e07e792c5c50ec30682d7b02f222249f289803247e32356c5809d",
     "renderTermsV7": "c578f5d5771ef575ad97a20df4dc6abd9fd1ff0992832e11803f3330642af226"
   },
   "to_unfreeze": "After Twilio's verdict, set active to false in its own pull request (or update a hash deliberately, with the matching native Webflow page and the registered campaign).",
@@ -64,6 +64,12 @@
       "commit": "privacy-apollo",
       "date": "2026-10-30",
       "why": "Apollo.io website visitor tracker added site-wide (Webflow registered script behind the same Advertising consent check as Clay; off on the SMS and legal pages and when Advertising is off or GPC is sent). Section 5 lists it next to Clay visitor identification; Last Updated -> October 30, 2026. No SMS wording changed; section numbers unchanged; the native Webflow page carries the same text."
+    },
+    {
+      "function": "renderPrivacyV7",
+      "commit": "privacy-meta",
+      "date": "2026-11-06",
+      "why": "Meta Pixel to be added site-wide via ZynixAdTags (head consent code loads it only with Advertising consent; never on the SMS and legal pages, after Reject, or under GPC). Section 5 lists 'Meta Pixel (Meta, for Facebook and Instagram ads)' and gains an 'Advertising audiences from business contact lists' paragraph (hashed work emails uploaded to Meta, Google and LinkedIn for matching; never phone numbers, so Section 4's carrier line stays true; opt-out by email). Last Updated -> November 6, 2026. No SMS wording changed; section numbers unchanged; the native Webflow page must carry the same text before this goes live."
     }
   ]
 }

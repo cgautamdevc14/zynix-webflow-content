@@ -67,11 +67,11 @@
   "weight": {
     "ceilings": {
       "cssBr4": 73396,
-      "totalBr4": 428088,
+      "totalBr4": 430252,
       "cssImports": 0
     },
     "builtCeilings": {
-      "totalBr4": 351764,
+      "totalBr4": 353556,
       "cssBr4": 51333
     },
     "targets": {
@@ -321,6 +321,33 @@
           }
         },
         "reason": "2026-11-04 paid-ad landing pages /for-* (5 role pages, block roles + page:roles; Gautamdev: separate landing pages per ad audience)"
+      },
+      {
+        "date": "2026-11-06",
+        "commit": "062d65d",
+        "from": {
+          "ceilings": {
+            "cssBr4": 73396,
+            "totalBr4": 428088,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 351764,
+            "cssBr4": 51333
+          }
+        },
+        "to": {
+          "ceilings": {
+            "cssBr4": 73396,
+            "totalBr4": 430252,
+            "cssImports": 0
+          },
+          "builtCeilings": {
+            "totalBr4": 353556,
+            "cssBr4": 51333
+          }
+        },
+        "reason": "Privacy §5 discloses the Meta Pixel and hashed business-contact audience uploads (+~120 B br4); Meta Lead in zxLeadEvent"
       }
     ]
   },
