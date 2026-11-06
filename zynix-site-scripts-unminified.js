@@ -3373,7 +3373,8 @@
   // Ads conversion "Demo request (booking or form)", which is the Primary lead action. The Google Ads hit goes only when
   // advertising consent allows (window.__zxConsent, head code); GA4 follows analytics consent through Consent Mode.
   // ChatGPT lead_created for these forms comes from the OpenAI pixel's fetch hook (registered script openaipixel), and Calendly
-  // bookings are reported by the registered script zynixbooking, so neither is sent here.
+  // bookings are reported by the registered script zynixbooking, so neither is sent here. Meta gets a Lead too when its pixel
+  // is loaded (see below).
   var ZX_GADS_LEAD = 'AW-18519469086/4kpJCPP-47IdEJ7Y4v5E';
   function zxLeadEvent(formName, params) {
     try {
@@ -3381,8 +3382,11 @@
       var p = { form_name: formName, page_path: location.pathname };
       Object.keys(params || {}).forEach(function (k) { if (params[k]) p[k] = params[k]; });
       window.gtag('event', 'generate_lead', p);
-      var c = window.__zxConsent;
-      if (!c || c.ads) window.gtag('event', 'conversion', { send_to: ZX_GADS_LEAD, transaction_id: 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8) });
+      var c = window.__zxConsent, id = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+      if (!c || c.ads) window.gtag('event', 'conversion', { send_to: ZX_GADS_LEAD, transaction_id: id });
+      // Meta Lead (2026-11-06, ads-optimization/META_ADS_AUDIT_2026-11-06.md): fbq exists only when the head code loaded the
+      // Meta pixel, i.e. a pixel ID is set in ZynixAdTags and advertising consent allows it.
+      if (window.fbq && (!c || c.ads)) window.fbq('track', 'Lead', { content_name: formName }, { eventID: id });
     } catch (e) {}
   }
   window.zxLeadEvent = zxLeadEvent;   // the /contact form's inline handler calls it
