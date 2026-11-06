@@ -8356,7 +8356,7 @@ function renderPrivacyV7() {
     IMG.hero, 'Zynix AI Privacy Policy');
 
   html += '<section class="zynix-legal-section"><div class="zynix-container"><div class="zynix-legal-content">' +
-    '<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> October 30, 2026</p>' +
+    '<p><strong>Effective Date:</strong> March 22, 2026 &nbsp;|&nbsp; <strong>Last Updated:</strong> November 6, 2026</p>' +
 
     '<h2>1. Who This Policy Applies To</h2>' +
     '<p>This policy applies to:</p>' +
@@ -8413,11 +8413,13 @@ function renderPrivacyV7() {
     '<li>Google Ads (Google)</li>' +
     '<li>LinkedIn Insight Tag (LinkedIn)</li>' +
     '<li>ChatGPT Ads pixel (OpenAI)</li>' +
+    '<li>Meta Pixel (Meta, for Facebook and Instagram ads)</li>' +
     '<li>Clay visitor identification (Clay), which may identify the company, and in some cases the business contact, associated with a website visit</li>' +
     '<li>Apollo website visitor tracking (Apollo.io), which may identify the company, and in some cases the business contact, associated with a website visit</li>' +
     '</ul>' +
     '<p>These providers may collect information such as your IP address, browser and device information, the pages you visit, and cookie or advertising identifiers, and they handle that information under their own privacy policies. We do not sell personal information for money. However, some US state privacy laws treat allowing advertising providers to collect information through their tags on our website as a \u201csale\u201d or \u201csharing\u201d of personal information.</p>' +
     '<p><strong>Hashed contact details.</strong> When you submit a demo or discussion request form on our website and Advertising is on, we send OpenAI a hashed version of the email address and name you entered, so OpenAI can tell us whether the request followed a click on one of our ChatGPT ads. Hashing (SHA-256) turns these details into a one-way code in your browser before they are sent, so OpenAI does not receive the original values. We do not send these details from our SMS opt-in form or our newsletter signup, and we do not send phone numbers.</p>' +
+    '<p><strong>Advertising audiences from business contact lists.</strong> We may upload business contact details we hold, such as work email addresses, of people at organizations that may be interested in Zynix AI to advertising platforms (Meta, Google and LinkedIn), so those platforms can show our ads to matching users of their services. The details are hashed (SHA-256) before the platform receives them and are used only to find matches. We do not upload phone numbers. To ask us not to include you, email <a href="mailto:info@zynix.ai">info@zynix.ai</a>.</p>' +
     '<p><strong>Your choices.</strong> When you first visit our website, a banner lets you choose Accept, Reject non-essential, or Preferences. Analytics and advertising are on by default until you choose otherwise. You can change your choices at any time with the <a href="#privacy-choices" onclick="if(window.zxConsent){window.zxConsent.open();return false}">Your Privacy Choices</a> link in the website footer, where you can turn Analytics and Advertising on or off separately. Turning Advertising off opts you out of the sale or sharing of personal information. When you turn a category off, we delete the cookies those tools set on our website\u2019s domain; cookies stored on a provider\u2019s own domain can be cleared in your browser settings.</p>' +
     '<p><strong>Global Privacy Control.</strong> If your browser sends a Global Privacy Control (GPC) signal, we treat it as a request to opt out of the sale or sharing of personal information, and advertising tools stay off.</p>' +
     '<p><strong>Pages without advertising tags.</strong> No advertising tags run on our SMS opt-in, SMS program, Privacy Policy, or Terms of Service pages. Google Analytics is also turned off on these pages.</p>' +
