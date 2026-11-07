@@ -1,3 +1,7 @@
+> # ⚠️ This repository has moved
+> **The website source, CI/CD and deploys now live in [Medvise/zynixai-website-webflow](https://github.com/Medvise/zynixai-website-webflow)** (private, full history, same commit SHAs) since 2026-11-06.
+> www.zynix.ai loads its stylesheet, bundle and images from that repo's GitHub Pages site. This repo is archived (read-only) and kept public only so old jsDelivr URLs keep resolving. Do not open pull requests here.
+
 # zynix-webflow-content
 
 ## Deployment (continuous, from `main`)
